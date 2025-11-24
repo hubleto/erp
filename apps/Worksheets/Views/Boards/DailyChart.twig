@@ -56,7 +56,7 @@
                     href="{{ hubleto.env().projectUrl }}/tasks/{{ task.id }}"
                     target="_blank"
                   >
-                    [{{ task.identifier }}] {{ task.title }}
+                    [{{ task.identifier }}] [{{ task.PROJECTS[0].title }}] {{ task.title }}
                   </a>
                 {% endfor %}
               </div></td>

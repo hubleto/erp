@@ -45,6 +45,7 @@ class DailyChart extends \Hubleto\Erp\Controller
 
     $activities = $mActivity->record->prepareReadQuery()
       ->where("date_worked", ">=", $dateStart . " 00:00:00")
+      ->with("TASK.PROJECTS")
     ;
 
     if (!empty($employeeEmail) && (
@@ -72,17 +73,17 @@ class DailyChart extends \Hubleto\Erp\Controller
 
     $activities = $activities->get();
 
-    foreach ($activities as $workTime) {
-      $year = date("Y", strtotime($workTime->date_worked));
-      $month = date("F", strtotime($workTime->date_worked));
-      $date = date("Y-m-d", strtotime($workTime->date_worked));
+    foreach ($activities as $activity) {
+      $year = date("Y", strtotime($activity->date_worked));
+      $month = date("F", strtotime($activity->date_worked));
+      $date = date("Y-m-d", strtotime($activity->date_worked));
 
-      $sortedWorkDays[$year][$month][$date]["tasks"][$workTime->TASK->id] = $workTime->TASK->toArray();
+      $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id] = $activity->TASK->toArray();
 
       if (isset($sortedWorkDays[$year][$month][$date]["hours"])) {
-        $sortedWorkDays[$year][$month][$date]["hours"] += (float) $workTime->worked_hours;
+        $sortedWorkDays[$year][$month][$date]["hours"] += (float) $activity->worked_hours;
       } else {
-        $sortedWorkDays[$year][$month][$date]["hours"] = (float) $workTime->worked_hours;
+        $sortedWorkDays[$year][$month][$date]["hours"] = (float) $activity->worked_hours;
       }
     }
 

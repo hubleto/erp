@@ -7,7 +7,7 @@ class Browse extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'documents/browse', 'content' => $this->translate('Browse') ],
+      [ 'url' => 'documents/browse', 'content' => $this->translate('Document Browser') ],
     ]);
   }
 

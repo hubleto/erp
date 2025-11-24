@@ -35,7 +35,7 @@ export default class TableDocuments extends HubletoTable<TableDocumentsProps, Ta
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'centered small';
+    params.type = 'right';
     return params;
   }
 
@@ -60,7 +60,7 @@ export default class TableDocuments extends HubletoTable<TableDocumentsProps, Ta
       return super.renderCell(columnName, column, data, options);
     }
   }
-  
+
   renderForm(): JSX.Element {
     let formProps: FormDocumentProps = this.getFormProps();
     return <FormDocument {...formProps}/>;

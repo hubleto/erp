@@ -133,7 +133,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
               }
             }}
           >
-            <span className="text">{item.name}</span>
+            <span className="text">{item.name} {isLast ? <i className='fa fa-chevron-down'></i> : <></>}</span>
           </button>;
         })}
         <button
@@ -194,9 +194,19 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             modal={this.refFolderPropertiesModal}
             uid='create_sub_folder_form'
             model='Hubleto/App/Community/Documents/Models/Folder'
-            customEndpointParams={{idParentFolder: this.state.folderContent.folder.id}}
+            isInlineEditing={true}
+            customEndpointParams={{idParentFolder: this.state.folderContent.folder.id, noSelfParent: true}}
             id={this.state.showFolderProperties}
-            onSaveCallback={() => {this.loadData(); this.setState({showFolderProperties: 0});}}
+            onSaveCallback={(form, saveResponse, customSaveOptions) => {
+              //if the folder is being moved to another parent folder
+              if (saveResponse.originalRecord.id_parent_folder != saveResponse.savedRecord.id_parent_folder) {
+                this.changeFolder("_ROOT_", []);
+              } else {
+                this.loadData();
+              }
+
+              this.setState({showFolderProperties: 0});
+            }}
             onClose={() => { this.setState({showFolderProperties: 0}); }}
             onDeleteCallback={() => {
               const secondLastIndex = this.state.path.length - 2;

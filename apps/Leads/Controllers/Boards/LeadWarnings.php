@@ -42,6 +42,7 @@ class LeadWarnings extends \Hubleto\Erp\Controller
 
     $warnings['open-leads-without-future-plan'] = [
       "title" => $this->translate('Open leads without future plan'),
+      "titleCssClass" => "bg-red-400 p-2 text-white",
       "items" => $items,
     ];
     //

@@ -12,9 +12,10 @@
 
 {% macro showWarnings(warnings, viewParams, user) %}
   {% set title = warnings.title %}
+  {% set titleCssClass = warnings.titleCssClass %}
   {% set items = warnings.items %}
 
-  <b>{{ title }}</b>
+  <div class="{{ titleCssClass }}">{{ title }}</div>
   {% if items|length > 0 %}
     <div class="list mt-2">
       {% for item in items %}

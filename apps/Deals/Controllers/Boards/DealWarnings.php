@@ -42,6 +42,7 @@ class DealWarnings extends \Hubleto\Erp\Controller
 
     $warnings['open-deals-without-future-plan'] = [
       "title" => $this->translate('Open deals without future plan'),
+      "titleCssClass" => "bg-red-400 p-2 text-white",
       "items" => $items,
     ];
     //

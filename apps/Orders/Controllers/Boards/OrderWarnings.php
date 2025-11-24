@@ -40,6 +40,7 @@ class OrderWarnings extends \Hubleto\Erp\Controller
 
     $warnings['open-orders-without-future-plan'] = [
       "title" => $this->translate('Open orders without future plan'),
+      "titleCssClass" => "bg-red-400 p-2 text-white",
       "items" => $items,
     ];
     //

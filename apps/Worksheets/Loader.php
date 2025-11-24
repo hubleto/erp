@@ -19,11 +19,22 @@ class Loader extends \Hubleto\Framework\App
       '/^worksheets\/?$/' => Controllers\Activities::class,
       '/^worksheets(\/(?<recordId>\d+))?\/?$/' => Controllers\Activities::class,
       '/^worksheets\/add\/?$/' => ['controller' => Controllers\Activities::class, 'vars' => ['recordId' => -1]],
-      // '/^worksheets\/activities\/?$/' => Controllers\Activities::class,
+
       '/^worksheets\/activity-types\/?$/' => Controllers\ActivityTypes::class,
 
+      '/^worksheets\/boards\/daily-chart\/?$/' => Controllers\Boards\DailyChart::class,
       '/^worksheets\/api\/daily-activity-chart\/?$/' => Controllers\Api\DailyActivityChart::class,
     ]);
+
+    /** @var \Hubleto\App\Community\Dashboards\Manager $dashboardsApp */
+    $dashboardsApp = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
+    if ($dashboardsApp) {
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('Daily chart'),
+        'worksheets/boards/daily-chart'
+      );
+    }
 
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'worksheets', $this->translate('Worksheets'), 'fas fa-user-clock');

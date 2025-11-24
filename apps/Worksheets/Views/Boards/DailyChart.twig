@@ -1,0 +1,70 @@
+{% if viewParams.employee %}
+  {% if viewParams.employee == "N/A" %}
+    <div class="text-center">
+      Employee could not be found. Defaulting to your data.
+    </div>
+  {% else %}
+  <div style="text-align: center"><h2>Viewing work tables for: {{ viewParams.employee }}</h2></div>
+  {% endif %}
+{% endif %}
+
+{% for year, months in viewParams.worksheet %}
+  {% for month, days in months %}
+    <div class="mb-2 overflow-hidden" style="border-style: solid; border-width: 1px; border-color: var(--color-slate-200); border-radius: 4px;">
+      <h2 class="p-2">{{ month ~ " " ~ year }}</h2>
+      <table id="work-table" class="hubleto component table">
+        <tr>
+          <th style="width: 100px;">Date</th>
+          <th>Worked Hours</th>
+        </tr>
+        {% for day, dayInfo in days %}
+          <tr {% if dayInfo.weekend == true %} style="background-color: #e5e5e5;" {% endif %}>
+            <td class="px-1">{{ day|date("d. m. Y") }}</td>
+            <td>
+              <div class="flex">
+                {% if ((dayInfo.hours / viewParams.quota) * 100) > 0 %}
+                  <div class="px-1" style="
+                    width: {{ ((dayInfo.hours / viewParams.quota) * 100) }}%;
+                    {% if dayInfo.weekend == true %}
+                      background-color: #41c50d;
+                    {% else %}
+                      background-color: #4780bf;
+                    {% endif %}
+                    color: white;
+                    white-space: nowrap;
+                    overflow: hidden;"
+                  >{{ dayInfo.hours }} h</div>
+                {% endif %}
+                {% if ((dayInfo.hours / viewParams.quota) * 100) < 100 %}
+                  <div class="px-1" style="
+                    width: {{ 100 - ((dayInfo.hours / viewParams.quota) * 100) }}%;
+                    background-color: #e5e5e5;
+                    color: black;
+                    white-space: nowrap;
+                    overflow: hidden;"
+                  >{{ viewParams.quota - dayInfo.hours }} h</div>
+                {% endif %}
+                </div>
+            </td>
+          </tr>
+          {% if dayInfo.tasks|length > 0 %}
+            <tr {% if dayInfo.weekend == true %} style="background-color: #e5e5e5;" {% endif %}>
+              <td></td>
+              <td><div class="flex gap-2">
+                {% for task in dayInfo.tasks %}
+                  <a
+                    class="badge badge-small"
+                    href="{{ hubleto.env().projectUrl }}/tasks/{{ task.id }}"
+                    target="_blank"
+                  >
+                    #{{ task.identifier }} {{ task.title }}
+                  </a>
+                {% endfor %}
+              </div></td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </table>
+    </div>
+  {% endfor %}
+{% endfor %}

@@ -8,7 +8,7 @@
       </tr>
       {% for day, dayInfo in days %}
         <tr {% if dayInfo.weekend == true %} style="color: #e5e5e5;" {% endif %}>
-          <td class="px-1 text-nowrap">{{ day|date(hubleto.locale().getDateShortFormat()) }}</td>
+          <td class="px-1 text-nowrap font-bold">{{ day|date(hubleto.locale().getDateShortFormat()) }}</td>
           <td>
             <div class="flex">
               {% if ((dayInfo.hours / viewParams.quota) * 100) > 0 %}

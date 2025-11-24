@@ -28,6 +28,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader';
   translationContextInner: string = 'Components\\FormInvoice';
 
+  idOrderInputs: Array<any>;
+
   constructor(props: FormInvoiceProps) {
     super(props);
   }
@@ -84,16 +86,6 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     return 'invoices/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  // renderTopMenu(): JSX.Element {
-  //   return <>
-  //     {super.renderTopMenu()}
-  //     {this.state.id <= 0 ? null : <>
-  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-  //       {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2'})}
-  //     </>}
-  //   </>
-  // }
-
   renderTitle(): JSX.Element {
     const r = this.state.record;
     return <>
@@ -142,11 +134,11 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
           </div>
           <div className="flex flex-col flex-5 gap-2 mt-2">
             <div className='flex-1'>
+              {this.inputWrapper('type', {uiStyle: 'buttons'})}
               {this.inputWrapper('id_profile', {uiStyle: 'buttons'})}
               {this.inputWrapper('id_customer')}
-              {this.inputWrapper('type')}
-              {this.inputWrapper('id_currency')}
               {this.state.id == -1 ? null : <>
+                {this.inputWrapper('id_currency')}
                 <div className='flex gap-2'>
                   <div className='grow'>
                     {this.inputWrapper('vs')}
@@ -162,16 +154,15 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 {this.inputWrapper('id_issued_by')}
               </>}
             </div>
-            <div className='card flex-2'>
-              <div className='card-header'>Items</div>
-              <div className='card-body'>
-                {this.state.id <= 0 ? <div className='alert alert-info'>{this.translate('Create invoice before adding items.')}</div>
-                : <>
+            {this.state.id <= 0 ? null :
+              <div className='card flex-2'>
+                <div className='card-header'>Items</div>
+                <div className='card-body'>
                   <table className='table-default dense not-striped'>
                     <thead>
                       <tr>
-                        <th colSpan={3}>Order</th>
-                        <th colSpan={4}>Product</th>
+                        <th colSpan={1} style={{width: '50%'}}>Order</th>
+                        <th colSpan={6}>Product</th>
                       </tr>
                       <tr>
                         <th>Item</th>
@@ -185,12 +176,11 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                     </thead>
                     <tbody>
                       {R && R.ITEMS ? R.ITEMS.map((item, key) => {
-                        console.log(item, key);
                         const rowBgClass = (key % 2 == 0 ? 'bg-white' : 'bg-gray-50');
 
                         return <>
                           <tr key={key + '1'} className={item._toBeDeleted_ ? 'border border-red-400' : ''}>
-                            <td colSpan={3} className={rowBgClass}>
+                            <td colSpan={1} style={{width: '50%'}} className={rowBgClass}>
                               {InputFactory({
                                 value: item.id_order,
                                 cssClass: 'bg-white min-w-64',
@@ -198,13 +188,17 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   type: 'lookup',
                                   model: 'Hubleto/App/Community/Orders/Models/Order'
                                 },
-                                onChange: (e) => {
-                                  R.ITEMS[key].id_order = e.state.value;
+                                onInit: (input) => {
+                                  this.idOrderInputs[key] = input;
+                                },
+                                onChange: (input, value) => {
+                                  R.ITEMS[key].id_order = input.state.value;
+                                  R.ITEMS[key].item = input.refInput.current.getValue()[0]?._LOOKUP;
                                   this.updateRecord(R);
                                 }
                               })}
                             </td>
-                            <td colSpan={4} className={rowBgClass}>
+                            <td colSpan={6} className={rowBgClass}>
                               {InputFactory({
                                 value: item.id_order_product,
                                 cssClass: 'bg-white min-w-64',
@@ -213,15 +207,14 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   model: 'Hubleto/App/Community/Orders/Models/OrderProduct',
                                 },
                                 customEndpointParams: { idOrder: item.id_order },
-                                onChange: (e) => {
+                                onChange: (input) => {
 
                                   request.post('orders/api/get-product',
-                                    {idOrderProduct: e.state.value},
+                                    {idOrderProduct: input.state.value},
                                     {},
                                     (data: any) => {
-                                      console.log('dat', data);
                                       const P = data.orderProduct;
-                                      R.ITEMS[key].id_order_product = e.state.value;
+                                      R.ITEMS[key].id_order_product = input.state.value;
                                       R.ITEMS[key].item = P?.title ?? '';
                                       R.ITEMS[key].unit_price = P?.sales_price ?? 0;
                                       R.ITEMS[key].amount = P?.amount ?? 0;
@@ -325,9 +318,9 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                     <span className='icon'><i className='fas fa-plus'></i></span>
                     <span className='text'>Add item</span>
                   </button>
-                </>}
+                </div>
               </div>
-            </div>
+            }
           </div>
         </div>;
       break;

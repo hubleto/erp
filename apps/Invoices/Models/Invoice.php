@@ -75,7 +75,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON)->setRequired(),
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired(),
-      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setRequired(),
+      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
@@ -83,7 +83,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
       'date_due' => (new Date($this, $this->translate('Due')))->setDefaultVisible(),
       'date_payment' => (new Date($this, $this->translate('Paid')))->setDefaultVisible(),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setRequired(),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
       'total_excl_vat' => new Decimal($this, $this->translate('Total excl. VAT'))->setReadonly(),
       'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
@@ -124,6 +124,7 @@ class Invoice extends \Hubleto\Erp\Model {
     $description->defaultValues = [
       'id_issued_by' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
       'issued' => date('Y-m-d H:i:s'),
+      'type' => self::TYPE_STANDARD,
     ];
     return $description;
   }
@@ -168,23 +169,36 @@ class Invoice extends \Hubleto\Erp\Model {
   public function onBeforeCreate(array $record): array
   {
 
+    /** @var Profile */
     $mProfile = $this->getService(Profile::class);
 
-    $invoicesThisYear = (array) $this->record->whereYear('date_delivery', date('Y'))->get()->toArray();
+    $invoicesThisYear = (array) $this->record
+      ->whereYear('date_delivery', date('Y'))
+      ->where('id_profile', $record['id_profile'])
+      ->get()->toArray()
+    ;
     $profile = $mProfile->record->where('id', $record['id_profile'])->first();
 
-    $record['number'] = (string) ($profile->numbering_pattern ?? '{YYYY}{NNNN}');
-    $record['number'] = str_replace('{YY}', date('y'), $record['number']);
-    $record['number'] = str_replace('{YYYY}', date('Y'), $record['number']);
-    $record['number'] = str_replace('{NN}', str_pad((string) (count($invoicesThisYear) + 1), 2, '0', STR_PAD_LEFT), $record['number']);
-    $record['number'] = str_replace('{NNN}', str_pad((string) (count($invoicesThisYear) + 1), 3, '0', STR_PAD_LEFT), $record['number']);
-    $record['number'] = str_replace('{NNNN}', str_pad((string) (count($invoicesThisYear) + 1), 4, '0', STR_PAD_LEFT), $record['number']);
+    $dueDays = $profile['due_days'] ?? 14;
+    if ($dueDays < 0) $dueDays = 0;
 
-    $record['vs'] = $record['number'];
-    $record['cs'] = "0308";
-    $record['date_issue'] = date("Y-m-d");
-    $record['date_delivery'] = date("Y-m-d");
-    $record['date_due'] = date("Y-m-d", strtotime("+14 days"));
+    $record['number'] = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
+    $record['number'] = str_replace('YYYY', date('Y'), $record['number']);
+    $record['number'] = str_replace('YY', date('y'), $record['number']);
+    $record['number'] = str_replace('MM', date('m'), $record['number']);
+    $record['number'] = str_replace('DD', date('d'), $record['number']);
+    $record['number'] = str_replace('NNNNNN', str_pad((string) (count($invoicesThisYear) + 1), 6, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NNNNN', str_pad((string) (count($invoicesThisYear) + 1), 5, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NNNN', str_pad((string) (count($invoicesThisYear) + 1), 4, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NNN', str_pad((string) (count($invoicesThisYear) + 1), 3, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NN', str_pad((string) (count($invoicesThisYear) + 1), 2, '0', STR_PAD_LEFT), $record['number']);
+
+    $record['id_currency'] = $profile['id_currency'] ?? 0;
+    $record['vs'] = preg_replace('/[^0-9]/', '', $record['number']);
+    $record['cs'] = '0308';
+    $record['date_issue'] = date('Y-m-d');
+    $record['date_delivery'] = date('Y-m-d');
+    $record['date_due'] = date('Y-m-d', strtotime('+' . $dueDays . ' days'));
 
     return $record;
   }

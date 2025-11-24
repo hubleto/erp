@@ -37,6 +37,7 @@ class Loader extends \Hubleto\Framework\App
     if ($round == 1) {
       $this->getModel(Models\Campaign::class)->dropTableIfExists()->install();
       $this->getModel(Models\Recipient::class)->dropTableIfExists()->install();
+      $this->getModel(Models\RecipientStatus::class)->dropTableIfExists()->install();
       $this->getModel(Models\CampaignTask::class)->dropTableIfExists()->install();
       $this->getModel(Models\Click::class)->dropTableIfExists()->install();
     }

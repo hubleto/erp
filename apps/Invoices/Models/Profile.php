@@ -6,6 +6,8 @@ use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Settings\Models\Currency;
+use Hubleto\Framework\Db\Column\Integer;
 
 class Profile extends \Hubleto\Erp\Model
 {
@@ -31,7 +33,18 @@ class Profile extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name'))),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class)),
-      'numbering_pattern' => (new Varchar($this, $this->translate('Numbering pattern'))),
+      'numbering_pattern' => (new Varchar($this, $this->translate('Numbering pattern')))
+        ->setDescription($this->translate('YYYY - 4-digit year, YY - 2-digit year, MM - 2-digit month, DD - 2-digit day, N(repeated) - incremental invoice number'))
+        ->setPredefinedValues([
+          'YYYYNNNN',
+          'YYNNNNNN',
+          'YYMMDDNNNN',
+          'YYYY/NNNN',
+          '11-YYYY-NN',
+        ])
+      ,
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
+      'due_days' => (new Integer($this, $this->translate('Due days'))),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
     ]);
   }

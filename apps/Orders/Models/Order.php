@@ -30,6 +30,8 @@ class Order extends \Hubleto\Erp\Model
   public string $table = 'orders';
   public string $recordManagerClass = RecordManagers\Order::class;
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
+  public ?string $lookupUrlAdd = 'orders/add';
+  public ?string $lookupUrlDetail = 'orders/{%ID%}';
 
   public array $relations = [
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id','id_customer'],

@@ -8,7 +8,7 @@ class RecipientStatuses extends \Hubleto\Erp\Controller
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'campaign/recipients', 'content' => $this->translate('Recipients') ],
-      [ 'url' => 'campaign/recipients/statuses', 'content' => $this->translate('Statuses') ]
+      [ 'url' => '', 'content' => $this->translate('Statuses') ]
     ]);
   }
 

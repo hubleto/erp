@@ -32,7 +32,7 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
     const R = this.state.record;
 
     return <>
-      {this.inputWrapper('id_deal', {readonly: true})}
+      {this.inputWrapper('id_deal', {readonly: R.id > 0})}
       <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps('id_contact')}
           model='Hubleto/App/Community/Contacts/Models/Contact'

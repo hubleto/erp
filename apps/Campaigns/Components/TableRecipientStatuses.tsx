@@ -59,7 +59,7 @@ export default class TableRecipientStatuses extends HubletoTable<TableRecipientS
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/recipients/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/recipients/statuses/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

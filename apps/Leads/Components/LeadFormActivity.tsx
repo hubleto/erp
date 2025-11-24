@@ -37,7 +37,7 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
     const R = this.state.record;
 
     return <>
-      {this.inputWrapper('id_lead', {readonly: true})}
+      {this.inputWrapper('id_lead', {readonly: R.id > 0})}
       <FormInput title={this.translate("Contact")}>
         <Lookup {...this.getInputProps('id_contact')}
           model='Hubleto/App/Community/Contacts/Models/Contact'

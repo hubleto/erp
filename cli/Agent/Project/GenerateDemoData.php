@@ -133,8 +133,8 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "id_role" => \Hubleto\App\Community\Auth\Models\UserRole::ROLE_EXTERNAL,
     ]);
 
-    $mInvoiceProfile = $this->getModel(\Hubleto\App\Community\Settings\Models\InvoiceProfile::class);
-    $mInvoiceProfile->record->recordCreate(['name' => 'Test Profile 1']);
+    $mProfile = $this->getModel(\Hubleto\App\Community\Invoices\Models\Profile::class);
+    $mProfile->record->recordCreate(['name' => 'Test Profile 1']);
 
     //Documents
     $mDocuments = $this->getModel(\Hubleto\App\Community\Documents\Models\Document::class);
@@ -197,9 +197,9 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
   public function generateInvoiceProfiles(): void
   {
-    $mInvoiceProfile = $this->getModel(\Hubleto\App\Community\Settings\Models\InvoiceProfile::class);
-    $mInvoiceProfile->install();
-    $mInvoiceProfile = $mInvoiceProfile->record->recordCreate([
+    $mProfile = $this->getModel(\Hubleto\App\Community\Invoices\Models\Profile::class);
+    $mProfile->install();
+    $mProfile->record->recordCreate([
       "name" => "Test Invoice Profile"
     ]);
   }

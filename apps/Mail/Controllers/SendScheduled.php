@@ -15,7 +15,7 @@ class SendScheduled extends \Hubleto\Erp\Controller
 
   public function prepareView(): void
   {
-    $maxMailsToSend = $this->router()->urlParamAsInteger('maxMailsToSend', 3);
+    $maxMailsToSend = $this->router()->urlParamAsInteger('maxMailsToSend', 10);
     if ($maxMailsToSend > 30) $maxMailsToSend = 30;
 
     parent::prepareView();

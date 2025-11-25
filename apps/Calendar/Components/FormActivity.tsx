@@ -53,8 +53,8 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
     </>;
   }
 
-  renderCustomInputs(): JSX.Element {
-    return <></>;
+  renderCustomInputs(): JSX.Element|null {
+    return null;
   }
 
   renderContent(): JSX.Element {

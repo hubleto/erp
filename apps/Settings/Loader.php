@@ -385,4 +385,44 @@ class Loader extends \Hubleto\Framework\App
     }
   }
 
+  /**
+   * [Description for assignPermissionsToRoles]
+   *
+   * @return void
+   * 
+   */
+  public function assignPermissionsToRoles(): void
+  {
+
+    /** @var \Hubleto\Framework\Models\UserRole */
+    $mUserRole = $this->permissionsManager()->createUserRoleModel();
+
+    /** @var \Hubleto\Framework\Models\RolePermission */
+    $mRolePermission = $this->permissionsManager()->createRolePermissionModel();
+
+    $userRoles = $mUserRole->record->get()->toArray();
+    foreach ($userRoles as $role) {
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Framework/Controllers/Api/Table/Describe');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Framework/Controllers/Api/Form/Describe');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Framework/Controllers/Api/Record/Get');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Framework/Controllers/Api/Record/Delete');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Framework/Controllers/Api/Record/GetList');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Framework/Controllers/Api/Record/Lookup');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Framework/Controllers/Api/Record/Save');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Erp/Core/Api/GetTableColumnsCustomize');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Erp/Core/Api/SaveTableColumnsCustomize');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/Erp/Core/Api/GetTemplateChartData');
+      $mRolePermission->grantPermissionByString($role['id'], 'Hubleto/App/Community/Settings/Controllers/MyAccount');
+    }
+
+    // $controllerClasses = $this->getAvailableControllerClasses();
+    // foreach ($controllerClasses as $controllerClass) {
+    //   $cObj = $this->getController($controllerClass);
+    //   foreach ($userRoles as $role) {
+    //     $mRolePermission->grantPermissionByString($role['id'], $cObj->fullName);
+    //   }
+    // }
+
+  }
+
 }

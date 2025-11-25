@@ -197,6 +197,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                     ></Lookup>
                   </> : <>
                     {R.DEALS ? R.DEALS.map((item, key) => {
+                      if (!item.DEAL) return null;
                       return (item.DEAL ? <a
                         key={key}
                         className='badge'

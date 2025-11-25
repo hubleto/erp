@@ -23,15 +23,13 @@ class RolePermission extends \Hubleto\Erp\Model
     ]);
   }
 
+
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-
-    $description->ui['title'] = 'Role Permissions';
-    $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
-    $description->ui['showFooter'] = false;
-
+    $description->ui['addButtonText'] = 'Assign permission to role';
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
     return $description;
   }
 

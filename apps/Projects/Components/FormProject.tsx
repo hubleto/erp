@@ -117,6 +117,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                   ></Lookup>
                 </> : <>
                   {R.ORDERS ? R.ORDERS.map((item, key) => {
+                    if (!item.ORDER) return null;
                     return (item.ORDER ? <a
                       key={key}
                       className='badge'

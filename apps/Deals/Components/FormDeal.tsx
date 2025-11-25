@@ -226,6 +226,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               ></Lookup>
             </> : <>
               {R.LEADS ? R.LEADS.map((item, key) => {
+                if (!item.LEAD) return null;
                 return (item.LEAD ? <a
                   key={key}
                   className='badge'

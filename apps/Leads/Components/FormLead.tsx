@@ -87,17 +87,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     };
   }
 
-  getHeaderButtons()
-  {
-    return [
-      ...super.getHeaderButtons(),
-      {
-        title: 'Close lead',
-        onClick: () => { }
-      }
-    ]
-  }
-
   getRecordFormUrl(): string {
     return 'leads/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
@@ -199,6 +188,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
             <div className='grow'>
               <FormInput title={"Campaign"}>
                 {R.CAMPAIGNS ? R.CAMPAIGNS.map((item, key) => {
+                  if (!item.CAMPAIGN) return null;
                   return <a
                     key={key}
                     className='badge'

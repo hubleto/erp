@@ -251,6 +251,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               && this.state.campaignWarnings.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
               <b>Recently contacted</b>
               {this.state.campaignWarnings.recentlyContacted.map((item, key) => {
+                if (!item.CONTACT) return null;
                 return <div key={key}>
                   <code>
                     {item.CONTACT.first_name}&nbsp;{item.CONTACT.last_name}

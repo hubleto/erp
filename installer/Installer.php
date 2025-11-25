@@ -300,8 +300,8 @@ class Installer extends \Hubleto\Framework\Core
   public function installDefaultPermissions(): void
   {
     $apps = $this->appManager()->getEnabledApps();
-    array_walk($apps, function ($apps) {
-      $apps->installDefaultPermissions();
+    array_walk($apps, function ($app) {
+      $app->installDefaultPermissions();
     });
   }
 

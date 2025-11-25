@@ -124,20 +124,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     };
   }
 
-  onAfterSaveRecord(saveResponse: any): void {
-    let params = this.getEndpointParams() as any;
-    let isArchived = saveResponse.savedRecord.is_archived;
-
-    if (params.showArchive == false && isArchived == true) {
-      this.props.onClose();
-      this.props.parentTable.loadData();
-    }
-    else if (params.showArchive == true && isArchived == false) {
-      this.props.onClose();
-      this.props.parentTable.loadData();
-    } else super.onAfterSaveRecord(saveResponse);
-  }
-
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'bg-slate-100' : '';
@@ -209,12 +195,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     switch (tabUid) {
       case 'default':
         return <>
-          {R.is_archived == 1 ?
-            <div className='alert-warning mt-2 mb-1'>
-              <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
-              <span className='text'>{this.translate("This lead is archived.")}</span>
-            </div>
-          : null}
           <div className='card card-body flex flex-row gap-2'>
             <div className='grow'>
               <FormInput title={"Campaign"}>
@@ -227,12 +207,11 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   >{item.CAMPAIGN.name}</a>;
                 }) : null}
               </FormInput>
-              {/* {this.inputWrapper('identifier', {readonly: R.is_archived})} */}
               <FormInput title={"Contact"} required={true}>
                 <Lookup {...this.getInputProps('id_contact')}
                   model='Hubleto/App/Community/Contacts/Models/Contact'
                   customEndpointParams={{idCustomer: R.id_customer}}
-                  readonly={R.is_archived}
+                  readonly={R.is_closed}
                   value={R.id_contact}
                   urlAdd='contacts/add'
                   onChange={(input: any, value: any) => {
@@ -249,28 +228,28 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   return <div key={key}>{item.value}</div>;
                 })}
               </div> : null}
-              {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_archived})}
-              {/* {this.inputWrapper('id_level', {readonly: R.is_archived, uiStyle: 'buttons'})}
-              {this.inputWrapper('status', {readonly: R.is_archived, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})} */}
-              {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_archived})}
-              {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
+              {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})}
+              {/* {this.inputWrapper('id_level', {readonly: R.is_closed, uiStyle: 'buttons'})}
+              {this.inputWrapper('status', {readonly: R.is_closed, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})} */}
+              {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_closed})}
+              {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_closed}): null}
             </div>
             <div className='border-l border-gray-200'></div>
             <div className='grow'>
               <div className='flex flex-row *:w-1/2'>
-                {this.inputWrapper('price', { cssClass: 'text-2xl', readonly: R.is_archived ? true : false })}
+                {this.inputWrapper('price', { cssClass: 'text-2xl', readonly: R.is_closed ? true : false })}
                 {this.inputWrapper('id_currency')}
               </div>
-              {this.inputWrapper('score', {readonly: R.is_archived})}
-              {this.inputWrapper('id_owner', {readonly: R.is_archived})}
-              {this.inputWrapper('id_manager', {readonly: R.is_archived})}
-              {this.inputWrapper('id_team', {readonly: R.is_archived})}
-              {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
-              {this.inputWrapper('source_channel', {readonly: R.is_archived})}
+              {this.inputWrapper('score', {readonly: R.is_closed})}
+              {this.inputWrapper('id_owner', {readonly: R.is_closed})}
+              {this.inputWrapper('id_manager', {readonly: R.is_closed})}
+              {this.inputWrapper('id_team', {readonly: R.is_closed})}
+              {this.inputWrapper('date_expected_close', {readonly: R.is_closed})}
+              {this.inputWrapper('source_channel', {readonly: R.is_closed})}
               <FormInput title='Tags'>
                 <InputTags2 {...this.getInputProps('tags_input')}
                   value={this.state.record.TAGS}
-                  readonly={R.is_archived}
+                  readonly={R.is_closed}
                   model='Hubleto/App/Community/Leads/Models/Tag'
                   targetColumn='id_lead'
                   sourceColumn='id_tag'
@@ -288,7 +267,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                 <Lookup {...this.getInputProps('id_customer')}
                   model='Hubleto/App/Community/Customers/Models/Customer'
                   urlAdd='customers/add'
-                  readonly={R.is_archived}
+                  readonly={R.is_closed}
                   value={R.id_customer}
                   onChange={(input: any, value: any) => {
                     this.updateRecord({ id_customer: value, id_contact: null });
@@ -299,9 +278,8 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   }}
                 ></Lookup>
               </FormInput>
-              {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+              {this.inputWrapper('shared_folder', {readonly: R.is_closed})}
               {this.inputWrapper('date_created')}
-              {this.inputWrapper('is_archived')}
             </div>
           </div>
         </>
@@ -311,7 +289,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         //@ts-ignore
         const tmpCalendarSmall = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
+          readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
@@ -387,7 +365,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
         //@ts-ignore
         const tmpCalendarLarge = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
+          readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}

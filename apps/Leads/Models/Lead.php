@@ -142,7 +142,7 @@ class Lead extends \Hubleto\Erp\Model
         7 => "Other",
       ]),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
+      // 'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql',"
           SELECT
@@ -206,16 +206,7 @@ class Lead extends \Hubleto\Erp\Model
       ],
     ];
 
-    if ($this->router()->urlParamAsBool("showArchive")) {
-      $description->permissions = [
-        "canCreate" => false,
-        "canUpdate" => false,
-        "canRead" => true,
-        "canDelete" => $this->getService(PermissionsManager::class)->granted($this->fullName . ':Delete')
-      ];
-    } else {
-      $description->ui['addButtonText'] = $this->translate('Add lead');
-    }
+    $description->ui['addButtonText'] = $this->translate('Add lead');
 
     return $description;
   }

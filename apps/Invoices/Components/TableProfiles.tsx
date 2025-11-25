@@ -4,11 +4,9 @@ import FormProfile, { FormProfileProps } from './FormProfile';
 
 interface TableProfilesProps extends HubletoTableProps {
   idCustomer?: number,
-  showArchive?: boolean,
 }
 
 interface TableProfilesState extends HubletoTableState {
-  showArchive: boolean,
 }
 
 export default class TableProfiles extends HubletoTable<TableProfilesProps, TableProfilesState> {
@@ -32,7 +30,6 @@ export default class TableProfiles extends HubletoTable<TableProfilesProps, Tabl
   getStateFromProps(props: TableProfilesProps) {
     return {
       ...super.getStateFromProps(props),
-      showArchive: props.showArchive ?? false,
     }
   }
 
@@ -45,7 +42,6 @@ export default class TableProfiles extends HubletoTable<TableProfilesProps, Tabl
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      showArchive: this.props.showArchive ? 1 : 0,
       idCustomer: this.props.idCustomer,
     }
   }

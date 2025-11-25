@@ -124,20 +124,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     return description;
   }
 
-  onAfterSaveRecord(saveResponse: any): void {
-    let params = this.getEndpointParams() as any;
-    let isArchived = saveResponse.savedRecord.is_archived;
-
-    if (params.showArchive == false && isArchived == true) {
-      this.props.onClose();
-      this.props.parentTable.loadData();
-    }
-    else if (params.showArchive == true && isArchived == false) {
-      this.props.onClose();
-      this.props.parentTable.loadData();
-    } else super.onAfterSaveRecord(saveResponse);
-  }
-
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'bg-slate-100' : '';
@@ -208,10 +194,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             }
           );
         }
-      },
-      {
-        title: 'Close deal',
-        onClick: () => { }
       }
     ]
   }
@@ -261,15 +243,15 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               </button>
             </>}
           </FormInput>
-          {this.inputWrapper('identifier', {cssClass: 'text-2xl', readonly: R.is_archived})}
-          {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_archived})}
+          {this.inputWrapper('identifier', {cssClass: 'text-2xl', readonly: R.is_closed})}
+          {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})}
           {this.inputWrapper('version')}
           <FormInput title={"Customer"}>
             <Lookup {...this.getInputProps("id_customer")}
               model='Hubleto/App/Community/Customers/Models/Customer'
               urlAdd='customers/add'
               value={R.id_customer}
-              readonly={R.is_archived}
+              readonly={R.is_closed}
               onChange={(input: any, value: any) => {
                 this.updateRecord({ id_customer: value, id_contact: null });
                 if (R.id_customer == 0) {
@@ -285,7 +267,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               customEndpointParams={{idCustomer: R.id_customer}}
               value={R.id_contact}
               urlAdd='contacts/add'
-              readonly={R.is_archived}
+              readonly={R.is_closed}
               onChange={(input: any, value: any) => {
                 this.updateRecord({ id_contact: value })
                 if (R.id_contact == 0) {
@@ -303,13 +285,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           <div className='flex flex-row *:w-1/2'>
             {this.inputWrapper('price_excl_vat', {
               cssClass: 'text-2xl',
-              readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
+              readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) ? true : false,
             })}
             {this.input('id_currency')}
           </div>
           <div className='flex flex-row *:w-1/2 items-center'>
             {this.inputWrapper('price_incl_vat', {
-              readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) || R.is_archived ? true : false,
+              readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) ? true : false,
             })}
             {this.state.isInlineEditing && (R.PRODUCTS && R.PRODUCTS.length > 0) ?
               <div className='badge badge-warning'>
@@ -318,10 +300,10 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               </div>
             : <></>}
           </div>
-          {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
-          {this.inputWrapper('customer_order_number', {readonly: R.is_archived})}
-          {this.inputWrapper('id_template_quotation', {readonly: R.is_archived})}
-          {this.inputWrapper('date_expected_close', {readonly: R.is_archived})}
+          {this.inputWrapper('shared_folder', {readonly: R.is_closed})}
+          {this.inputWrapper('customer_order_number', {readonly: R.is_closed})}
+          {this.inputWrapper('id_template_quotation', {readonly: R.is_closed})}
+          {this.inputWrapper('date_expected_close', {readonly: R.is_closed})}
           {this.inputWrapper('date_created')}
         </>;
 
@@ -337,18 +319,18 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               </div>
             : null}
           </div> : null}
-          {this.inputWrapper('id_owner', {readonly: R.is_archived})}
-          {this.inputWrapper('id_manager', {readonly: R.is_archived})}
+          {this.inputWrapper('id_owner', {readonly: R.is_closed})}
+          {this.inputWrapper('id_manager', {readonly: R.is_closed})}
           <div className="flex gap-2">
-            {this.inputWrapper('source_channel', {readonly: R.is_archived})}
-            {this.inputWrapper('is_new_customer', {readonly: R.is_archived, onChange: (input: any, value: any) => {
+            {this.inputWrapper('source_channel', {readonly: R.is_closed})}
+            {this.inputWrapper('is_new_customer', {readonly: R.is_closed, onChange: (input: any, value: any) => {
               if (this.state.record.is_new_customer) {
                 this.updateRecord({business_type: 1 /* New */});
               }
             }})}
           </div>
           <div className="flex gap-2">
-            {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_archived, onChange: (input: any, value: any) => {
+            {this.inputWrapper('business_type', {uiStyle: 'buttons', readonly: R.is_closed, onChange: (input: any, value: any) => {
               if (this.state.record.business_type == 2 /* Existing */) {
                 this.updateRecord({is_new_customer: false});
               }
@@ -356,24 +338,18 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             {this.inputWrapper("deal_result",
               {
                 uiStyle: 'buttons',
-                readonly: R.is_archived,
+                readonly: R.is_closed,
                 onChange: (input: any, value: any) => {
                   this.updateRecord({lost_reason: null});
                 }
               }
             )}
           </div>
-          {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_archived})}
-          {this.state.record.deal_result == 2 ? this.inputWrapper('lost_reason', {readonly: R.is_archived}): null}
+          {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_closed})}
+          {this.state.record.deal_result == 2 ? this.inputWrapper('lost_reason', {readonly: R.is_closed}): null}
         </>;
 
         return <>
-          {R.is_archived == 1 ?
-            <div className='alert-warning mt-2 mb-1'>
-              <span className='icon mr-2'><i className='fas fa-triangle-exclamation'></i></span>
-              <span className='text'>{this.translate("This deal is archived")}</span>
-            </div>
-          : null}
           <div className='flex gap-2 flex-col md:flex-row'>
             <div className='flex-2'>
               <div className='card card-body flex flex-col md:flex-row gap-2'>
@@ -405,7 +381,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               parentForm={this}
               idDeal={R.id}
               descriptionSource='both'
-              readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+              readonly={!this.state.isInlineEditing}
             ></TableDealProducts>
           </div>
         </>;
@@ -416,7 +392,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         //@ts-ignore
         const tmpCalendarSmall = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
+          readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
@@ -492,7 +468,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         //@ts-ignore
         const tmpCalendarLarge = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
+          readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
@@ -580,7 +556,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             junctionSourceColumn='id_deal'
             junctionDestinationColumn='id_document'
             junctionSourceRecordId={R.id}
-            readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+            readonly={!this.state.isInlineEditing}
           />
         </>
       break;

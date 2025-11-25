@@ -109,7 +109,6 @@ class Deal extends \Hubleto\Erp\Model
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(false),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(self::ENUM_DEAL_RESULTS)
         ->setEnumCssClasses([
@@ -165,16 +164,7 @@ class Deal extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    if ($this->router()->urlParamAsBool("showArchive")) {
-      $description->permissions = [
-        "canCreate" => false,
-        "canUpdate" => false,
-        "canRead" => true,
-        "canDelete" => $this->getService(PermissionsManager::class)->granted($this->fullName . ':Delete')
-      ];
-    } else {
-      $description->ui['addButtonText'] = $this->translate('Add Deal');
-    }
+    $description->ui['addButtonText'] = $this->translate('Add Deal');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     $description->ui['filters'] = [
@@ -195,7 +185,6 @@ class Deal extends \Hubleto\Erp\Model
     unset($description->columns['note']);
     unset($description->columns['id_contact']);
     unset($description->columns['source_channel']);
-    unset($description->columns['is_archived']);
     unset($description->columns['id_lead']);
     unset($description->columns['id_workflow']);
     unset($description->columns['shared_folder']);

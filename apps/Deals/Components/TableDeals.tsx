@@ -5,11 +5,9 @@ import request from '@hubleto/react-ui/core/Request';
 
 interface TableDealsProps extends HubletoTableProps {
   idCustomer?: number,
-  showArchive?: boolean,
 }
 
 interface TableDealsState extends HubletoTableState {
-  showArchive: boolean,
 }
 
 export default class TableDeals extends HubletoTable<TableDealsProps, TableDealsState> {
@@ -37,7 +35,6 @@ export default class TableDeals extends HubletoTable<TableDealsProps, TableDeals
   getStateFromProps(props: TableDealsProps) {
     return {
       ...super.getStateFromProps(props),
-      showArchive: props.showArchive ?? false,
     }
   }
 
@@ -50,7 +47,6 @@ export default class TableDeals extends HubletoTable<TableDealsProps, TableDeals
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      showArchive: this.props.showArchive ? 1 : 0,
       idCustomer: this.props.idCustomer,
     }
   }
@@ -82,7 +78,6 @@ export default class TableDeals extends HubletoTable<TableDealsProps, TableDeals
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormDealProps;
     formProps.customEndpointParams.idCustomer = this.props.idCustomer;
-    formProps.customEndpointParams.showArchive = this.props.showArchive ?? false;
     return <FormDeal {...formProps}/>;
   }
 }

@@ -8,6 +8,7 @@ interface FormWorkflowProps extends HubletoFormProps {}
 
 interface FormWorkflowState extends HubletoFormState {
   tablesKey: number,
+  newStepId: number,
 }
 
 export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, FormWorkflowState> {
@@ -27,6 +28,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
     this.state = {
       ...this.getStateFromProps(props),
       tablesKey: 0,
+      newStepId: -1,
     };
   }
 
@@ -78,10 +80,11 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
             onClick={() => {
               if (!R.STEPS) R.STEPS = [];
               R.STEPS.push({
+                id: this.state.newStepId,
                 id_workflow: { _useMasterRecordId_: true },
               });
               this.updateRecord(R, () => {
-                this.setState({ isInlineEditing: true});
+                this.setState({ isInlineEditing: true, newStepId: this.state.newStepId-1});
               });
             }}
           >
@@ -101,6 +104,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
             onRowClick={() => this.setState({isInlineEditing: true})}
             onChange={(table: TableWorkflowSteps) => {
               this.updateRecord({ STEPS: table.state.data?.data });
+              this.setState({updatingRecord: true});
             }}
             description={{
               ui: {

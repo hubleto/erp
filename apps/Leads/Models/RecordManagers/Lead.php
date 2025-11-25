@@ -143,7 +143,7 @@ class Lead extends \Hubleto\Erp\RecordManager
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,
-      $filters['fLeadWorkflowStep'] ?? []
+      (array) ($filters['fLeadWorkflowStep'] ?? [])
     );
 
     if (isset($filters["fLeadArchive"]) && $filters["fLeadArchive"] > 0) {

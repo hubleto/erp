@@ -33,6 +33,7 @@ class Campaign extends \Hubleto\Erp\Model
     'LAUNCHED_BY' => [ self::BELONGS_TO, User::class, 'id_launched_by', 'id' ],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow' ],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step' ],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
 
     // 'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_deal', 'id' ],
     'TASKS' => [ self::HAS_MANY, CampaignTask::class, 'id_deal', 'id' ],
@@ -65,6 +66,7 @@ class Campaign extends \Hubleto\Erp\Model
       'reply_to' => (new Varchar($this, $this->translate('Reply to'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
@@ -92,6 +94,7 @@ class Campaign extends \Hubleto\Erp\Model
 
     $description->ui['filters'] = [
       'fCampaignWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),
+      'fCampaignOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
       'fCampaignClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [

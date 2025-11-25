@@ -30,6 +30,10 @@ class Loader extends \Hubleto\Framework\App
       '/^campaigns\/click-tracker\/?$/' => Controllers\ClickTracker::class,
     ]);
 
+    /** @var \Hubleto\App\Community\Workflow\Manager */
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflow($this, 'campaigns', Workflow::class);
+
   }
 
   public function installTables(int $round): void

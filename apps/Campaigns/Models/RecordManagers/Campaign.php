@@ -24,6 +24,12 @@ class Campaign extends \Hubleto\Erp\RecordManager
   }
 
   /** @return BelongsTo<User, covariant Lead> */
+  public function OWNER(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_owner', 'id');
+  }
+
+  /** @return BelongsTo<User, covariant Lead> */
   public function LAUNCHED_BY(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_launched_by', 'id');
@@ -78,6 +84,17 @@ class Campaign extends \Hubleto\Erp\RecordManager
       $query,
       (array) ($filters['fCampaignWorkflowStep'] ?? [])
     );
+
+    if (isset($filters["fCampaignOwnership"])) {
+      /** @var \Hubleto\Framework\AuthProvider */
+      $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
+      $idUser = $authProvider->getUserId();
+
+      switch ($filters["fCampaignOwnership"]) {
+        case 1: $query = $query->where("campaigns.id_owner", $idUser); break;
+        case 2: $query = $query->where("campaigns.id_manager", $idUser); break;
+      }
+    }
 
     if (isset($filters["fCampaignClosed"])) {
       if ($filters["fCampaignClosed"] == 0) $query = $query->where("campaigns.is_closed", false);

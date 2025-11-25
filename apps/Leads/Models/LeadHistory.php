@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Leads\Models;
 
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Text;
 
 class LeadHistory extends \Hubleto\Erp\Model
 {
@@ -21,7 +21,7 @@ class LeadHistory extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'change_date' => (new Date($this, $this->translate('Change Date')))->setRequired(),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setRequired(),
-      'description' => (new Varchar($this, $this->translate('Description')))->setRequired(),
+      'description' => (new Text($this, $this->translate('Description')))->setRequired(),
     ]);
   }
 

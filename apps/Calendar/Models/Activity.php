@@ -29,6 +29,7 @@ class Activity extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired(),
       'location' => (new Varchar($this, $this->translate('Location'))),
+      'online_meeting_link' => (new Varchar($this, $this->translate('Online meeting link')))->setReactComponent('InputHyperlink'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_activity_type' => (new Lookup($this, $this->translate('Activity type'), ActivityType::class, 'SET NULL')),
       'date_start' => (new Date($this, $this->translate('Start date')))->setRequired(),

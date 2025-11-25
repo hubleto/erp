@@ -109,6 +109,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
         <div className='grow'>
           {this.inputWrapper('subject', {cssClass: 'text-primary text-2xl'})}
           {this.inputWrapper('id_activity_type')}
+          {this.inputWrapper('online_meeting_link')}
         </div>
         <div className='grow'>
           {this.inputWrapper('location')}

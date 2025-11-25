@@ -23,7 +23,6 @@ class RolePermission extends \Hubleto\Erp\Model
     ]);
   }
 
-
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();

@@ -240,15 +240,10 @@ class Renderer extends \Hubleto\Framework\Renderer
       exit;
       return '';
     } catch (\Exception $e) {
-      $error = error_get_last();
-
-      $return = $this->renderFatal($e, true);
+      // $error = error_get_last();
+      $return = $this->renderFatal(new GeneralException($e->getMessage(), 9436), true);
 
       return $return;
-
-//      if (php_sapi_name() !== 'cli') {
-//        header('HTTP/1.1 400 Bad Request', true, 400);
-//      }
     }
   }
 

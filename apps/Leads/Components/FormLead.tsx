@@ -140,20 +140,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     return <small>{this.translate('Lead')}</small>;
   }
 
-  moveToArchive(recordId: number) {
-    request.get(
-      'leads/api/move-to-archive',
-      {recordId: recordId},
-      (data: any) => {
-        if (data.status == "success") {
-          this.props.parentTable.setState({recordId: null}, () => {
-            this.props.parentTable.loadData();
-          });
-        }
-      }
-    );
-  }
-
   logCompletedActivity() {
     request.get(
       'leads/api/log-activity',

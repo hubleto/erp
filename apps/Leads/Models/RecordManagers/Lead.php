@@ -146,10 +146,6 @@ class Lead extends \Hubleto\Erp\RecordManager
       (array) ($filters['fLeadWorkflowStep'] ?? [])
     );
 
-    if (isset($filters["fLeadArchive"]) && $filters["fLeadArchive"] > 0) {
-      $query = $query->where("leads.is_archived", $filters["fLeadArchive"]);
-    }
-
     if (isset($filters["fLeadOwnership"])) {
       switch ($filters["fLeadOwnership"]) {
         case 1: $query = $query->where("leads.id_owner", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());

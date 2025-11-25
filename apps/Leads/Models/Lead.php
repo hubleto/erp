@@ -142,7 +142,6 @@ class Lead extends \Hubleto\Erp\Model
         7 => "Other",
       ]),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      // 'is_archived' => (new Boolean($this, $this->translate('Archived')))->setDefaultValue(0),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql',"
           SELECT

@@ -18,7 +18,6 @@ class LeadWarnings extends \Hubleto\Erp\Controller
     $mLead = $this->getModel(Lead::class);
 
     $myLeads = $mLead->record->prepareReadQuery()
-      ->where($mLead->table . ".is_archived", 0)
       ->where($mLead->table . ".is_closed", 0)
       ->get()
       ->toArray()

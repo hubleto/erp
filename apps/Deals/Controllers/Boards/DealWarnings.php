@@ -18,7 +18,6 @@ class DealWarnings extends \Hubleto\Erp\Controller
     $mDeal = $this->getModel(Deal::class);
 
     $myDeals = $mDeal->record->prepareReadQuery()
-      ->where($mDeal->table . ".is_archived", 0)
       ->orderBy('price_excl_vat', 'desc')
       ->get()
       ->toArray()

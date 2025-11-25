@@ -250,7 +250,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
         //@ts-ignore
         const tmpCalendarSmall = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
@@ -349,11 +348,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                       </div>
                     }
                   </div>
-                  {this.inputWrapper('shared_folder', {readonly: R.is_archived})}
+                  {this.inputWrapper('shared_folder')}
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
-                  {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_archived})}
+                  {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600'})}
                   {this.inputWrapper("vat_id")}
                   {this.inputWrapper("tax_id")}
                   {this.inputWrapper("date_created")}
@@ -407,7 +406,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
         //@ts-ignore
         const tmpCalendarLarge = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
@@ -440,7 +438,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             junctionSourceColumn='id_customer'
             junctionDestinationColumn='id_document'
             junctionSourceRecordId={R.id}
-            readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+            readonly={!this.state.isInlineEditing}
           />
           {this.state.showIdDocument != 0 ? this.renderDocumentForm() : null}
         </>

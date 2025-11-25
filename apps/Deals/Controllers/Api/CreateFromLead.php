@@ -51,7 +51,6 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
         "id_owner" => $lead->id_owner,
         "shared_folder" => $lead->shared_folder,
         "source_channel" => $lead->source_channel,
-        "is_archived" => false,
         "id_lead" => $lead->id,
         "deal_result" => $mDeal::RESULT_UNKNOWN,
         "id_workflow" => $idWorkflow,

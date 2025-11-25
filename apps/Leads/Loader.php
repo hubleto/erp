@@ -17,7 +17,6 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^leads\/api\/move-to-archive\/?$/' => Controllers\Api\MoveToArchive::class,
       '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^leads\/api\/save-bulk-status-change\/?$/' => Controllers\Api\SaveBulkStatusChange::class,
 

@@ -16,7 +16,6 @@ class MostValuableDeals extends \Hubleto\Erp\Controller
     $mDeal = $this->getModel(Deal::class);
 
     $mostValuableDeals = $mDeal->record->prepareReadQuery()
-      ->where($mDeal->table . ".is_archived", 0)
       ->with('CURRENCY')
       ->orderBy("price", "desc")
       ->offset(0)

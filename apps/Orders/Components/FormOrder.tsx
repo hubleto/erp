@@ -243,7 +243,6 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
         //@ts-ignore
         const tmpCalendarSmall = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
@@ -319,7 +318,6 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
         //@ts-ignore
         const tmpCalendarLarge = <Calendar
           onCreateCallback={() => this.loadRecord()}
-          readonly={R.is_archived}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
@@ -394,7 +392,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           // junctionSourceColumn='id_order'
           // junctionSourceRecordId={R.id}
           // junctionDestinationColumn='id_product'
-          readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+          readonly={!this.state.isInlineEditing}
         />;
 
       break;
@@ -409,7 +407,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           junctionSourceColumn='id_order'
           junctionSourceRecordId={R.id}
           junctionDestinationColumn='id_document'
-          readonly={R.is_archived == true ? false : !this.state.isInlineEditing}
+          readonly={!this.state.isInlineEditing}
         />;
 
       break;

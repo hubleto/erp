@@ -119,7 +119,7 @@ class Customer extends Model
     $description->hide(['footer']);
 
     $description->ui['filters'] = [
-      'fArchive' => [ 'title' => $this->translate('Archive'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Archived') ] ],
+      'fCustomerActive' => [ 'title' => $this->translate('Active'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Non-active') ] ],
     ];
 
     return $description;

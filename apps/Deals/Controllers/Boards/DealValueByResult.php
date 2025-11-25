@@ -18,7 +18,6 @@ class DealValueByResult extends \Hubleto\Erp\Controller
 
     $deals = $mDeal->record->prepareReadQuery()
       ->selectRaw("`{$mDeal->table}`.`deal_result`, SUM(`{$mDeal->table}`.`price_excl_vat`) as price")
-      ->where($mDeal->table . ".is_archived", 0)
       ->where($mDeal->table . ".id_owner", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ->with('CURRENCY')
       ->groupBy($mDeal->table . '.deal_result')

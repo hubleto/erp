@@ -38,11 +38,11 @@
               <td colspan="2"><div class="m-2 list text-xs">
                 {% for task in dayInfo.tasks %}
                   <a
-                    class="btn btn-list-item btn-transparent p-1 h-auto"
+                    class="btn btn-list-item btn-transparent p-1"
                     href="{{ hubleto.env().projectUrl }}/tasks/{{ task.id }}"
                     target="_blank"
                   >
-                    <span class="text p-0 max-h-auto">
+                    <span class="text p-0 max-h-none">
                       <div class="bg-primary" style="display:block;height:2px;width:{{ task._WORKED_HOURS/2 }}em"></div>
                       <b>{{ task._WORKED_HOURS }} h</b>
                       <b>{{ task.PROJECTS[0].identifier }} {{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}

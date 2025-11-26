@@ -132,14 +132,18 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
               </div>}
               {this.props.parentForm.state.isInlineEditing ?
                 <button
-                  className="btn btn-danger"
+                  className={'btn ' + (item._toBeDeleted_ ? 'btn-primary' : 'btn-danger')}
                   onClick={() => {
                     let newValues = this.state.data.data;
-                    newValues[key]._toBeDeleted_ = !newValues[key]._toBeDeleted_;
+                    if (newValues[key].id < 0) {
+                      newValues.splice(Number(key), 1);
+                    } else {
+                      newValues[key]._toBeDeleted_ = !newValues[key]._toBeDeleted_;
+                    }
                     this.props.parentForm.updateRecord({ VALUES: newValues });
                   }}
                 >
-                  <span className="icon"><i className="fas fa-trash-can"></i></span>
+                  <span className="icon"><i className={'fas ' + (item._toBeDeleted_ ? 'fa-times' : 'fa-trash-can')}></i></span>
                 </button>
               : null}
             </div>;

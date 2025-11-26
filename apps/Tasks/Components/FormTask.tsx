@@ -202,7 +202,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                               }}
                             >
                               <span className='icon'>
-                                <i className={'fas ' + (item._toBeDeleted_ ? 'fa-rotate-right' : 'fa-trash-can')}></i>
+                                <i className={'fas ' + (item._toBeDeleted_ ? 'fa-times' : 'fa-trash-can')}></i>
                               </span>
                             </button>
                           }

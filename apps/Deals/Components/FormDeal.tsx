@@ -20,12 +20,9 @@ import TableOrders from '@hubleto/apps/Orders/Components/TableOrders';
 // import TableProjects from '@hubleto/apps/Projects/Components/TableProjects';
 import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 
-export interface FormDealProps extends HubletoFormProps {
-  newEntryId?: number,
-}
+export interface FormDealProps extends HubletoFormProps {}
 
 export interface FormDealState extends HubletoFormState {
-  newEntryId?: number,
   showIdActivity: number,
   activityTime: string,
   activityDate: string,
@@ -67,7 +64,6 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
     this.state = {
       ...this.getStateFromProps(props),
-      newEntryId: this.props.newEntryId ?? -1,
       showIdActivity: 0,
       activityTime: '',
       activityDate: '',

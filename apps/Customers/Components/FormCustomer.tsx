@@ -352,6 +352,8 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                 </div>
                 <div className='border-l border-gray-200'></div>
                 <div className="w-1/2">
+                  {this.inputWrapper("id_owner")}
+                  {this.inputWrapper("id_manager")}
                   {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600'})}
                   {this.inputWrapper("vat_id")}
                   {this.inputWrapper("tax_id")}
@@ -374,8 +376,6 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                       }}
                     />
                   </FormInput>
-                  {this.inputWrapper("id_owner")}
-                  {this.inputWrapper("id_manager")}
                 </div>
               </div>
             </div>

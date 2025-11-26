@@ -29,7 +29,7 @@ class LeadWarnings extends \Hubleto\Erp\Controller
     foreach ($myLeads as $lead) {
       $futureActivities = 0;
       foreach ($lead['ACTIVITIES'] as $activity) {
-        if (strtotime($activity['date_start']) > time()) {
+        if (strtotime($activity['date_start'] . ' ' . $activity['time_start']) > time()) {
           $futureActivities++;
         }
       }

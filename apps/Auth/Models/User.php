@@ -117,6 +117,7 @@ class User extends \Hubleto\Framework\Models\User
       'phone_2' => (new Varchar($this, $this->translate('Phone number #2'))),
       'photo' => (new Image($this, $this->translate('Photo'))),
       'language' => (new Varchar($this, $this->translate('Language')))->setEnumValues(self::ENUM_LANGUAGES)->setRequired(),
+      'timezone' => (new Varchar($this, $this->translate('Timezone')))->setPredefinedValues($this->locale()->getTimezones()),
       'id_default_company' => (new Lookup($this, $this->translate("Default company"), Company::class)),
       'apps' => (new Json($this, $this->translate('Apps'))),
     ]);

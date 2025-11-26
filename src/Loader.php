@@ -26,6 +26,7 @@ class Loader extends \Hubleto\Framework\Loader
     DependencyInjection::setServiceProviders([
       \Hubleto\Framework\Renderer::class => Renderer::class,
       \Hubleto\Framework\Env::class => Env::class,
+      \Hubleto\Framework\Locale::class => Locale::class,
 
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \Hubleto\App\Community\Desktop\Controllers\Desktop::class,
@@ -53,10 +54,10 @@ class Loader extends \Hubleto\Framework\Loader
    */
   public function init(): void
   {
-    date_default_timezone_set($this->locale()->getTimezone());
-
     try {
       parent::init();
+
+      date_default_timezone_set($this->locale()->getTimezone());
 
       // set user language
       $setLanguage = $this->router()->urlParamAsString('set-language');

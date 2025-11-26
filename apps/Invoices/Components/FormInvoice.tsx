@@ -101,7 +101,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       case 'default':
         const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
         return <div className='flex gap-2'>
-          <div className='flex flex-1 flex-col gap-2 w-full'>
+          <div className='gap-2 w-56'>
             <div className='p-2 grow'>
               {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-4xl'})}
             </div>
@@ -119,16 +119,16 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 <div className='text-sm'>incl. VAT</div>
               </div>
             </div>
-            <div className={'border-t border-t-4 border-t-blue-400 p-2 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+            <div className={'border-t border-t-4 border-t-blue-400 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_delivery', {wrapperCssClass: 'block'})}
             </div>
-            <div className={'border-t border-t-4 border-t-orange-300 p-2 grow ' + (R.date_issue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+            <div className={'border-t border-t-4 border-t-orange-300 grow ' + (R.date_issue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_issue', {wrapperCssClass: 'block'})}
             </div>
-            <div className={'border-t border-t-4 border-t-green-400 p-2 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+            <div className={'border-t border-t-4 border-t-green-400 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_due', {wrapperCssClass: 'block'})}
             </div>
-            <div className={'border-t border-t-4 border-t-green-600 p-2 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+            <div className={'border-t border-t-4 border-t-green-600 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
               {this.inputWrapper('date_payment', {wrapperCssClass: 'block'})}
             </div>
           </div>

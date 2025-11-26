@@ -42,10 +42,17 @@ class Renderer extends \Hubleto\Framework\Renderer
     $this->appManager()->onBeforeRender();
   }
 
+  /**
+   * [Description for render]
+   *
+   * @param string $route
+   * @param array $params
+   * 
+   * @return string
+   * 
+   */
   public function render(string $route = '', array $params = []): string
   {
-
-    /** @var Controller $controllerObject */
 
     try {
 

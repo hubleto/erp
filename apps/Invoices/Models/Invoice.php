@@ -171,27 +171,46 @@ class Invoice extends \Hubleto\Erp\Model {
 
     /** @var Profile */
     $mProfile = $this->getService(Profile::class);
+    $profile = $mProfile->record->where('id', $record['id_profile'])->first();
 
-    $invoicesThisYear = (array) $this->record
+    $numberingPattern = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
+
+    $invoicesThisYear = $this->record
       ->whereYear('date_delivery', date('Y'))
       ->where('id_profile', $record['id_profile'])
-      ->get()->toArray()
+      ->get()
     ;
-    $profile = $mProfile->record->where('id', $record['id_profile'])->first();
+
+    $nPositionStart = -1;
+    $nPositionEnd = -1;
+    for ($n = 0; $n < strlen($numberingPattern); $n++) {
+      $c = $numberingPattern[$n];
+      if ($c == 'N' && $nPositionStart == -1) {
+        $nPositionStart = $n;
+      } else if ($c != 'N' && $nPositionStart >= 0) {
+        $nPositionEnd = $n;
+      }
+    }
+    if ($nPositionEnd == -1) $nPositionEnd = $n;
+
+    $maxNumber = 0;
+    foreach ($invoicesThisYear as $invoice) {
+      $maxNumber = max($maxNumber, (int) substr($invoice->number, $nPositionStart, $nPositionEnd));
+    }
 
     $dueDays = $profile['due_days'] ?? 14;
     if ($dueDays < 0) $dueDays = 0;
 
-    $record['number'] = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
+    $record['number'] = $numberingPattern;
     $record['number'] = str_replace('YYYY', date('Y'), $record['number']);
     $record['number'] = str_replace('YY', date('y'), $record['number']);
     $record['number'] = str_replace('MM', date('m'), $record['number']);
     $record['number'] = str_replace('DD', date('d'), $record['number']);
-    $record['number'] = str_replace('NNNNNN', str_pad((string) (count($invoicesThisYear) + 1), 6, '0', STR_PAD_LEFT), $record['number']);
-    $record['number'] = str_replace('NNNNN', str_pad((string) (count($invoicesThisYear) + 1), 5, '0', STR_PAD_LEFT), $record['number']);
-    $record['number'] = str_replace('NNNN', str_pad((string) (count($invoicesThisYear) + 1), 4, '0', STR_PAD_LEFT), $record['number']);
-    $record['number'] = str_replace('NNN', str_pad((string) (count($invoicesThisYear) + 1), 3, '0', STR_PAD_LEFT), $record['number']);
-    $record['number'] = str_replace('NN', str_pad((string) (count($invoicesThisYear) + 1), 2, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NNNNNN', str_pad((string) ($maxNumber + 1), 6, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NNNNN', str_pad((string) ($maxNumber + 1), 5, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NNNN', str_pad((string) ($maxNumber + 1), 4, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NNN', str_pad((string) ($maxNumber + 1), 3, '0', STR_PAD_LEFT), $record['number']);
+    $record['number'] = str_replace('NN', str_pad((string) ($maxNumber + 1), 2, '0', STR_PAD_LEFT), $record['number']);
 
     $record['id_currency'] = $profile['id_currency'] ?? 0;
     $record['vs'] = preg_replace('/[^0-9]/', '', $record['number']);

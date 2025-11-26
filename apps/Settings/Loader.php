@@ -53,7 +53,6 @@ class Loader extends \Hubleto\Framework\App
     $this->addSetting($this, ['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
     $this->addSetting($this, ['title' => $this->translate('Countries'), 'icon' => 'fas fa-globe', 'url' => 'settings/countries']);
     $this->addSetting($this, ['title' => $this->translate('Currencies'), 'icon' => 'fas fa-dollar-sign', 'url' => 'settings/currencies']);
-    $this->addSetting($this, ['title' => $this->translate('Invoice profiles'), 'icon' => 'fas fa-user-tie', 'url' => 'settings/invoice-profiles']);
     $this->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
     $this->addSetting($this, ['title' => $this->translate('Sidebar'), 'icon' => 'fas fa-bars', 'url' => 'settings/sidebar']);
     $this->addSetting($this, ['title' => $this->translate('Teams'), 'icon' => 'fas fa-users', 'url' => 'settings/teams']);

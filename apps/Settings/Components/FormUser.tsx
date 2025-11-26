@@ -89,6 +89,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                 {this.inputWrapper('phone_1')}
                 {this.inputWrapper('phone_2')}
                 {this.inputWrapper('language')}
+                {this.inputWrapper('timezone')}
                 {this.inputWrapper('id_default_company')}
 
                 {this.divider('Access to Hubleto')}

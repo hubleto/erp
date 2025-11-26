@@ -42,6 +42,9 @@
                   target="_blank"
                 >
                   <span class="text p-0">
+                    <div
+                      class="bg-primary/10 p-0.5" style="display:inline-block;width:{{ task._WORKED_HOURS/2 }}em"
+                    >{{ task._WORKED_HOURS }} h</div>
                     <b>{{ task.PROJECTS[0].identifier }} {{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}
                   </span>
                 </a>

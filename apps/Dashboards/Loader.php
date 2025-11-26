@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Framework\App
     parent::init();
 
     $this->router()->get([
-      '/^dashboards\/api\/save-panel-order\/?$/' => Controllers\Api\SavePanelOrder::class,
+      '/^dashboards\/api\/sort-panels\/?$/' => Controllers\Api\SortPanels::class,
       '/^dashboards\/api\/set-panel-width\/?$/' => Controllers\Api\SetPanelWidth::class,
 
       '/^dashboards(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboards::class,

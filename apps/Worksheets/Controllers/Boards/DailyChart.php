@@ -78,7 +78,11 @@ class DailyChart extends \Hubleto\Erp\Controller
       $month = date("F", strtotime($activity->date_worked));
       $date = date("Y-m-d", strtotime($activity->date_worked));
 
-      $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id] = $activity->TASK->toArray();
+      if (!isset($sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id])) {
+        $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id] = $activity->TASK->toArray();
+        $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id]['_WORKED_HOURS'] = 0;
+      }
+      $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id]['_WORKED_HOURS'] += (float) $activity->worked_hours;
 
       if (isset($sortedWorkDays[$year][$month][$date]["hours"])) {
         $sortedWorkDays[$year][$month][$date]["hours"] += (float) $activity->worked_hours;

@@ -24,7 +24,7 @@ class Panel extends \Hubleto\Erp\RecordManager
       $query = $query->where($this->table . '.id_dashboard', $hubleto->router()->urlParamAsInteger("idDashboard"));
     }
 
-    $query->orderBy('order', 'asc');
+    $query->orderBy('position', 'asc');
 
     return $query;
   }

@@ -20,7 +20,7 @@ class Dashboard extends \Hubleto\Erp\RecordManager
   /** @return HasMany<Panel, covariant Panel> */
   public function PANELS(): HasMany
   {
-    return $this->hasMany(Panel::class, 'id_dashboard', 'id')->orderBy('order', 'asc');
+    return $this->hasMany(Panel::class, 'id_dashboard', 'id')->orderBy('position', 'asc');
   }
 
 }

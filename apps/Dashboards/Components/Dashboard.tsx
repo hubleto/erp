@@ -142,10 +142,10 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     e.preventDefault();
 
     request.get(
-      'dashboards/api/save-panel-order',
+      'dashboards/api/sort-panels',
       {
         idDashboard: this.props.idDashboard,
-        panelOrder: this.state.panels.map((item: Panel) => item.id),
+        idPanelsSorted: this.state.panels.map((item: Panel) => item.id),
       },
       (html: any) => {
         this.setState({ draggedIdPanel: null, hidePanelsWhileDragging: false });

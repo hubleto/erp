@@ -27,7 +27,7 @@ class Panel extends \Hubleto\Erp\Model
       'width' => (new Integer($this, $this->translate('Width')))->setDefaultVisible()->setDefaultValue(1)->setEnumValues(
         [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6]
       ),
-      'order' => (new Integer($this, $this->translate('Order')))->setDefaultVisible(),
+      'position' => (new Integer($this, $this->translate('Position')))->setDefaultVisible(),
       'configuration' => (new Json($this, $this->translate('Configuration'))),
     ]);
   }

@@ -1,60 +1,63 @@
-<table id="work-table" class="hubleto component table">
-  {% for year, months in viewParams.worksheet %}
-    {% for month, days in months %}
-      <tr>
-        <td colspan="2">
-          <div class="border-t border-primary text-primary bg-primary/10 p-1">{{ month ~ " " ~ year }} {{ viewParams.employee }}</div>
-        </td>
-      </tr>
-      {% for day, dayInfo in days %}
-        <tr {% if dayInfo.weekend == true %} style="color: #e5e5e5;" {% endif %}>
-          <td class="px-1 text-nowrap font-bold">{{ day|date(hubleto.locale().getDateShortFormat()) }}</td>
-          <td>
-            <div class="flex">
-              {% if ((dayInfo.hours / viewParams.quota) * 100) > 0 %}
-                <div class="px-1" style="
-                  width: {{ ((dayInfo.hours / viewParams.quota) * 100) }}%;
-                  background-color: #4780bf;
-                  color: white;
-                  white-space: nowrap;
-                  overflow: hidden;"
-                >{{ dayInfo.hours }} h</div>
-              {% endif %}
-              {% if ((dayInfo.hours / viewParams.quota) * 100) < 100 %}
-                <div class="px-1" style="
-                  width: {{ 100 - ((dayInfo.hours / viewParams.quota) * 100) }}%;
-                  background-color: #e5e5e5;
-                  color: black;
-                  white-space: nowrap;
-                  overflow: hidden;"
-                ></div>
-              {% endif %}
-            </div>
+<div class="w-full overflow-hidden">
+  <table id="work-table" class="w-full">
+    {% for year, months in viewParams.worksheet %}
+      {% for month, days in months %}
+        <tr>
+          <td colspan="2">
+            <div class="border-t border-primary text-primary bg-primary/10 p-1">{{ month ~ " " ~ year }} {{ viewParams.employee }}</div>
           </td>
         </tr>
-        {% if dayInfo.tasks|length > 0 %}
+        {% for day, dayInfo in days %}
           <tr {% if dayInfo.weekend == true %} style="color: #e5e5e5;" {% endif %}>
-            <td colspan="2"><div class="m-2 list text-xs">
-              {% for task in dayInfo.tasks %}
-                <a
-                  class="btn btn-list-item btn-transparent p-1"
-                  href="{{ hubleto.env().projectUrl }}/tasks/{{ task.id }}"
-                  target="_blank"
-                >
-                  <span class="text p-0">
-                    <div class="bg-primary" style="display:block;height:2px;width:{{ task._WORKED_HOURS/2 }}em"></div>
-                    <b>{{ task._WORKED_HOURS }} h</b>
-                    <b>{{ task.PROJECTS[0].identifier }} {{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}
-                    {% for d in task._DESCRIPTIONS %}
-                      <div class="text-gray-400 pl-2">• {{ d }}</div>
-                    {% endfor %}
-                  </span>
-                </a>
-              {% endfor %}
-            </div></td>
+            <td class="px-1 text-nowrap font-bold">{{ day|date(hubleto.locale().getDateShortFormat()) }}</td>
+            <td>
+              <div class="flex">
+                {% if ((dayInfo.hours / viewParams.quota) * 100) > 0 %}
+                  <div class="px-1" style="
+                    width: {{ ((dayInfo.hours / viewParams.quota) * 100) }}%;
+                    background-color: #4780bf;
+                    color: white;
+                    white-space: nowrap;
+                    overflow: hidden;"
+                  >{{ dayInfo.hours }} h</div>
+                {% endif %}
+                {% if ((dayInfo.hours / viewParams.quota) * 100) < 100 %}
+                  <div class="px-1" style="
+                    width: {{ 100 - ((dayInfo.hours / viewParams.quota) * 100) }}%;
+                    background-color: #e5e5e5;
+                    color: black;
+                    white-space: nowrap;
+                    overflow: hidden;"
+                  ></div>
+                {% endif %}
+              </div>
+            </td>
           </tr>
-        {% endif %}
+          {% if dayInfo.tasks|length > 0 %}
+            <tr {% if dayInfo.weekend == true %} style="color: #e5e5e5;" {% endif %}>
+              <td colspan="2"><div class="m-2 list text-xs">
+                {% for task in dayInfo.tasks %}
+                  <a
+                    class="btn btn-list-item btn-transparent p-1 h-auto"
+                    href="{{ hubleto.env().projectUrl }}/tasks/{{ task.id }}"
+                    target="_blank"
+                  >
+                    <span class="text p-0">
+                      <div class="bg-primary" style="display:block;height:2px;width:{{ task._WORKED_HOURS/2 }}em"></div>
+                      <b>{{ task._WORKED_HOURS }} h</b>
+                      <b>{{ task.PROJECTS[0].identifier }} {{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}
+                      {% for d in task._DESCRIPTIONS %}
+                        <div class="text-gray-400">{{ d }}</div>
+                      {% endfor %}
+                      </ul>
+                    </span>
+                  </a>
+                {% endfor %}
+              </div></td>
+            </tr>
+          {% endif %}
+        {% endfor %}
       {% endfor %}
     {% endfor %}
-  {% endfor %}
-</table>
+  </table>
+</div>

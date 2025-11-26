@@ -45,6 +45,9 @@
                     <div class="bg-primary" style="display:block;height:2px;width:{{ task._WORKED_HOURS/2 }}em"></div>
                     <b>{{ task._WORKED_HOURS }} h</b>
                     <b>{{ task.PROJECTS[0].identifier }} {{ task.PROJECTS[0].title }}</b> [{{ task.identifier }}] {{ task.title }}
+                    {% for d in task._DESCRIPTIONS %}
+                      <div class="text-gray-400 pl-2">• {{ d }}</div>
+                    {% endfor %}
                   </span>
                 </a>
               {% endfor %}

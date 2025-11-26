@@ -81,14 +81,15 @@ class DailyChart extends \Hubleto\Erp\Controller
       if (!isset($sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id])) {
         $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id] = $activity->TASK->toArray();
         $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id]['_WORKED_HOURS'] = 0;
+        $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id]['_DESCRIPTIONS'] = [];
       }
       $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id]['_WORKED_HOURS'] += (float) $activity->worked_hours;
+      $sortedWorkDays[$year][$month][$date]["tasks"][$activity->TASK->id]['_DESCRIPTIONS'][] = $activity->description;
 
-      if (isset($sortedWorkDays[$year][$month][$date]["hours"])) {
-        $sortedWorkDays[$year][$month][$date]["hours"] += (float) $activity->worked_hours;
-      } else {
-        $sortedWorkDays[$year][$month][$date]["hours"] = (float) $activity->worked_hours;
+      if (!isset($sortedWorkDays[$year][$month][$date]["hours"])) {
+        $sortedWorkDays[$year][$month][$date]["hours"] = 0;
       }
+      $sortedWorkDays[$year][$month][$date]["hours"] += (float) $activity->worked_hours;
     }
 
     $this->viewParams["worksheet"] = $sortedWorkDays;

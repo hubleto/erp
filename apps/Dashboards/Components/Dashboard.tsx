@@ -4,6 +4,7 @@ import { ProgressBar } from 'primereact/progressbar';
 import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import FormPanel from "./FormPanel";
+import FormDashboard from './FormDashboard';
 
 export interface Panel {
   id: number,
@@ -19,11 +20,13 @@ export interface DesktopDashboardProps {
   idDashboard: number,
   panels: Array<Panel>,
   showAddNewPanelButton?: boolean,
+  redirectUrl?: string,
 }
 
 export interface DesktopDashboardState {
   panels: Array<Panel>,
   showIdPanel: number,
+  showIdDashboard: number,
   draggedIdPanel: number,
   hidePanelsWhileDragging: boolean,
 }
@@ -37,15 +40,18 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
   translationContextInner: string = 'Components\\Dashboard';
 
   refPanelModal: any;
+  refForm: any
 
   constructor(props: DesktopDashboardProps) {
     super(props);
 
     this.refPanelModal = React.createRef();
+    this.refForm = React.createRef();
 
     this.state = {
       panels: this.props.panels,
       showIdPanel: 0,
+      showIdDashboard: 0,
       draggedIdPanel: 0,
       hidePanelsWhileDragging: false,
     }
@@ -204,7 +210,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
       </div>
       {this.state.hidePanelsWhileDragging ?
         <div className="card-body bg-gray-50 p-4"></div>
-      : (panel.contentLoaded ? 
+      : (panel.contentLoaded ?
         <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
       :
         <div className="card-body">
@@ -222,20 +228,29 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     const panels = this.state.panels;
 
     return <div className='flex flex-col gap-2'>
-      <div className='block gap-2 md:grid md:grid-cols-6'>
-        {panels.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
-      </div>
       {this.props.showAddNewPanelButton ?
-        <div>
+        <div className='flex flex-row justify-between'>
+          <div>
+            <button
+              className='btn btn-add mt-2'
+              onClick={() => { this.setState({showIdPanel: -1}); }}
+            >
+              <span className='icon'><i className='fas fa-plus'></i></span>
+              <span className='text'>{this.translate('Add new panel')}</span>
+            </button>
+          </div>
           <button
-            className='btn btn-add mt-2'
-            onClick={() => { this.setState({showIdPanel: -1}); }}
+            className='btn btn-transparent'
+            onClick={() => {this.setState({showIdDashboard: this.props.idDashboard})}}
           >
-            <span className='icon'><i className='fas fa-plus'></i></span>
-            <span className='text'>{this.translate('Add new panel')}</span>
+            <span className="icon"><i className="fas fa-cog"></i></span>
+            <span className="text text-nowrap">Configure this dashboard</span>
           </button>
         </div>
       : null}
+      <div className='block gap-2 md:grid md:grid-cols-6'>
+        {panels.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
+      </div>
       {this.state.showIdPanel != 0 ?
         <ModalForm
           ref={this.refPanelModal}
@@ -249,6 +264,38 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
             customEndpointParams={{idDashboard: this.props.idDashboard}}
             id={this.state.showIdPanel}
             onClose={() => { this.setState({showIdPanel: 0}); }}
+            onSaveCallback={() => {
+              this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
+              : window.location.reload();
+            }}
+            onDeleteCallback={() => {
+              this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
+              : window.location.reload()
+            }}
+          />
+        </ModalForm>
+      : <></>}
+      {this.state.showIdDashboard != 0 ?
+        <ModalForm
+          ref={this.refPanelModal}
+          uid='edit_dashboard_modal'
+          isOpen={true}
+          type='right'
+        >
+          <FormDashboard
+            modal={this.refPanelModal}
+            ref={this.refForm}
+            uid='edit_dashboard_modal_form'
+            id={this.props.idDashboard}
+            onClose={() => { this.setState({showIdDashboard: 0}); }}
+            onSaveCallback={() => {
+              this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
+              : window.location.assign(globalThis.main.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
+            }}
+            onDeleteCallback={() => {
+              this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
+              : window.location.assign(globalThis.main.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
+            }}
           />
         </ModalForm>
       : <></>}

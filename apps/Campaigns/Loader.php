@@ -21,6 +21,8 @@ class Loader extends \Hubleto\Framework\App
       '/^campaigns\/api\/get-campaign-warnings\/?$/' => Controllers\Api\GetCampaignWarnings::class,
       '/^campaigns\/api\/send-test-email\/?$/' => Controllers\Api\SendTestEmail::class,
       '/^campaigns\/api\/launch\/?$/' => Controllers\Api\Launch::class,
+      '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
+
       '/^campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
       '/^campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],
       '/^campaigns\/recipients(\/(?<recordId>\d+))?\/?$/' => Controllers\Recipients::class,
@@ -29,6 +31,10 @@ class Loader extends \Hubleto\Framework\App
       '/^campaigns\/recipients\/statuses\/add?\/?$/' => ['controller' => Controllers\RecipientStatuses::class, 'vars' => [ 'recordId' => -1 ]],
       '/^campaigns\/click-tracker\/?$/' => Controllers\ClickTracker::class,
     ]);
+
+    /** @var \Hubleto\App\Community\Calendar\Manager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
+    $calendarManager->addCalendar($this, 'campaigns', $this->configAsString('calendarColor'), Calendar::class);
 
     /** @var \Hubleto\App\Community\Workflow\Manager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);

@@ -10,8 +10,8 @@ class LeadsApp extends HubletoApp {
 
     // register react components
     globalThis.main.registerReactComponent('LeadsTableLeads', TableLeads);
-    globalThis.main.registerReactComponent('LeadsFormActivity', LeadFormActivity);
     globalThis.main.registerReactComponent('LeadsTableLevels', TableLevels);
+    globalThis.main.registerReactComponent('LeadFormActivity', LeadFormActivity);
 
     // miscellaneous
     globalThis.main.getApp('Hubleto/App/Community/Campaigns').addCustomFormTab({

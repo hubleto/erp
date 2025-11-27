@@ -16,12 +16,9 @@ import TableLeadHistory from './TableLeadHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 
-export interface FormLeadProps extends HubletoFormProps {
-  newEntryId?: number,
-}
+export interface FormLeadProps extends HubletoFormProps {}
 
 export interface FormLeadState extends HubletoFormState {
-  newEntryId?: number,
   showIdDocument: number,
   showIdActivity: number,
   activityTime: string,
@@ -58,7 +55,6 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
 
     this.state = {
       ...this.getStateFromProps(props),
-      newEntryId: this.props.newEntryId ?? -1,
       showIdDocument: 0,
       showIdActivity: 0,
       activityTime: '',

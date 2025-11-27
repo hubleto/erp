@@ -28,7 +28,9 @@ class Dashboard extends \Hubleto\Erp\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setDefaultVisible(),
       'color' => (new Color($this, $this->translate('Color')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
-      'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible(),
+      'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible()
+        ->setDescription($this->translate("By turning this on you will change the dashboard shown on the Homepage"))
+      ,
     ]);
   }
 
@@ -41,6 +43,22 @@ class Dashboard extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     return $description;
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    if ((int) $record["is_default"] == 1) {
+      $this->record->where("id_owner", $record["id_owner"])->update(["is_default" => 0]);
+    }
+    return parent::onBeforeCreate($record);
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    if ((int) $record["is_default"] == 1) {
+      $this->record->where("id_owner", $record["id_owner"])->update(["is_default" => 0]);
+    }
+    return parent::onBeforeUpdate($record);
   }
 
 }

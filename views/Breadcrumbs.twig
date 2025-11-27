@@ -16,7 +16,7 @@
       <button
         class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %} btn-primary"
         {% if viewParams.appMenu|length == 0 %}
-          onclick="location.href='{{ viewParams.activatedApp.manifest.rootUrlSlug }}';"
+          onclick="location.href='{{ config.projectUrl }}/{{ viewParams.activatedApp.manifest.rootUrlSlug }}';"
         {% endif %}
       >
         <span class="icon"><i class="{{ viewParams.activatedApp.manifest.icon }}"></i></span>

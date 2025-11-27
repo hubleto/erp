@@ -9,7 +9,7 @@ class Loader extends \Hubleto\Framework\App
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -19,17 +19,17 @@ class Loader extends \Hubleto\Framework\App
       '/^dashboards\/api\/sort-panels\/?$/' => Controllers\Api\SortPanels::class,
       '/^dashboards\/api\/set-panel-width\/?$/' => Controllers\Api\SetPanelWidth::class,
 
-      '/^dashboards(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboards::class,
-      '/^dashboards\/manage\/?$/' => Controllers\Settings::class,
+      '/^dashboards\/?$/' => Controllers\Dashboards::class,
+      '/^dashboards\/manage(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\DashboardsManage::class,
     ]);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    $settingsApp->addSetting($this, [
-      'title' => $this->translate('Dashboards'),
-      'icon' => 'fas fa-table',
-      'url' => 'dashboards/manage',
-    ]);
+    // $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    // $settingsApp->addSetting($this, [
+    //   'title' => $this->translate('Dashboards'),
+    //   'icon' => 'fas fa-table',
+    //   'url' => 'dashboards/manage',
+    // ]);
 
   }
 

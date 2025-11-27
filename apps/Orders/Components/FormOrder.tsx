@@ -17,7 +17,6 @@ export interface FormOrderProps extends HubletoFormProps {
 }
 
 export interface FormOrderState extends HubletoFormState {
-  newEntryId: number,
   showIdActivity: number,
   activityTime: string,
   activityDate: string,
@@ -53,7 +52,6 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
     this.state = {
       ...this.getStateFromProps(props),
-      newEntryId: -1,
       showIdActivity: 0,
       activityTime: '',
       activityDate: '',
@@ -380,7 +378,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           }
         </>;
       break;
-      
+
       case 'products':
         return <TableOrderProducts
           tag={"table_order_product"}

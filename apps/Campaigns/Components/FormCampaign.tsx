@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent } from 'react';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
 import TableRecipients from '@hubleto/apps/Campaigns/Components/TableRecipients';
 import TableClicks from '@hubleto/apps/Campaigns/Components/TableClicks';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
-import WorkflowSelector, { updateFormWorkflowByTag } from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 import request from '@hubleto/react-ui/core/Request';
 import InputJsonKeyValue from "@hubleto/react-ui/core/Inputs/JsonKeyValue";
+import ModalForm from '@hubleto/react-ui/core/ModalForm';
+import CampaignFormActivity, { CampaignFormActivityProps, CampaignFormActivityState } from './CampaignFormActivity';
+import moment, { Moment } from "moment";
+import Calendar from '../../Calendar/Components/Calendar';
 
 export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
@@ -15,6 +18,11 @@ export interface FormCampaignState extends HubletoFormState {
   launchResult?: any,
   campaignWarnings?: any,
   recipients?: any,
+  showIdActivity: number,
+  activityTime: string,
+  activityDate: string,
+  activitySubject: string,
+  activityAllDay: boolean,
 }
 
 export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, FormCampaignState> {
@@ -33,18 +41,28 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   parentApp: string = 'Hubleto/App/Community/Campaigns';
 
   refTestEmailRecipientInput: any;
+  refLogActivityInput: any;
+  refActivityModal: any;
 
   constructor(props: FormCampaignProps) {
     super(props);
     this.state = this.getStateFromProps(props);
     this.refTestEmailRecipientInput = React.createRef();
+    this.refLogActivityInput = React.createRef();
+    this.refActivityModal = React.createRef();
   }
 
   getStateFromProps(props: FormCampaignProps) {
     return {
       ...super.getStateFromProps(props),
+      showIdActivity: 0,
+      activityTime: '',
+      activityDate: '',
+      activitySubject: '',
+      activityAllDay: false,
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
+        { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'contacts', title: this.translate('Contacts') },
         { uid: 'recipients', title: this.translate('Recipients') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
@@ -98,6 +116,30 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   //   </>
   // }
 
+  logCompletedActivity() {
+    request.get(
+      'campaigns/api/log-activity',
+      {
+        idCampaign: this.state.record.id,
+        activity: this.refLogActivityInput.current.value,
+      },
+      (result: any) => {
+        this.loadRecord();
+        this.refLogActivityInput.current.value = '';
+      }
+    );
+  }
+
+  scheduleActivity() {
+    this.setState({
+      showIdActivity: -1,
+      activityDate: moment().add(1, 'week').format('YYYY-MM-DD'),
+      activityTime: moment().add(1, 'week').format('H:00:00'),
+      activitySubject: this.refLogActivityInput.current.value,
+      activityAllDay: false,
+    } as FormCampaignState);
+  }
+
   renderTab(tabUid: string) {
     const R = this.state.record;
 
@@ -128,12 +170,156 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               {this.inputWrapper('id_owner')}
               {this.inputWrapper('id_manager')}
               {this.inputWrapper('color')}
+              {this.inputWrapper('shared_folder')}
               {this.inputWrapper('datetime_created')}
               {this.inputWrapper('uid')}
             </div>
           </div>
         </>;
       break
+
+      case 'calendar':
+        //@ts-ignore
+        const tmpCalendarSmall = <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_closed}
+          initialView='dayGridMonth'
+          headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
+          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormCampaignState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormCampaignState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>;
+
+        const recentActivitiesAndCalendar = <div className='card card-body flex flex-col gap-2'>
+          <div>
+            {tmpCalendarSmall}
+          </div>
+          <div>
+            <div className="hubleto component input"><div className="input-element w-full flex gap-2">
+              <input
+                className="w-full bg-blue-50 border border-blue-800 p-1 text-blue-800 placeholder-blue-300"
+                placeholder={this.translate('Type recent activity here')}
+                ref={this.refLogActivityInput}
+                onKeyUp={(event: any) => {
+                  if (event.keyCode == 13) {
+                    if (event.shiftKey) {
+                      this.scheduleActivity();
+                    } else {
+                      this.logCompletedActivity();
+                    }
+                  }
+                }}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  this.refLogActivityInput.current.value = event.target.value;
+                }}
+              />
+            </div></div>
+            <div className='mt-2'>
+              <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
+                <span className="icon"><i className="fas fa-check"></i></span>
+                <span className="text">{this.translate('Log completed activity')}</span>
+                <span className="shortcut">{this.translate('Enter')}</span>
+              </button>
+              <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
+                <span className="icon"><i className="fas fa-clock"></i></span>
+                <span className="text">{this.translate('Schedule activity')}</span>
+                <span className="shortcut">{this.translate('Shift+Enter')}</span>
+              </button>
+            </div>
+            {this.divider(this.translate('Most recent activities'))}
+            {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+              return <>
+                <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
+                  onClick={() => this.setState({showIdActivity: item.id} as FormCampaignState)}
+                >
+                  <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
+                  <span className="text">
+                    {item.subject}
+                    {item.completed ? null : <div className="text-red-800">{this.translate('Not completed yet')}</div>}
+                  </span>
+                </button>
+              </>
+            })}</div> : null}
+          </div>
+        </div>;
+
+        //@ts-ignore
+        const tmpCalendarLarge = <Calendar
+          onCreateCallback={() => this.loadRecord()}
+          readonly={R.is_closed}
+          initialView='timeGridWeek'
+          views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
+          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
+          onDateClick={(date, time, info) => {
+            this.setState({
+              activityDate: date,
+              activityTime: time,
+              activityAllDay: false,
+              showIdActivity: -1,
+            } as FormCampaignState);
+          }}
+          onEventClick={(info) => {
+            this.setState({
+              showIdActivity: parseInt(info.event.id),
+            } as FormCampaignState);
+            info.jsEvent.preventDefault();
+          }}
+        ></Calendar>;
+
+        return <>
+          <div className='flex gap-2 mt-2'>
+            <div className='flex-2 w-2/3'>
+              {tmpCalendarLarge}
+            </div>
+            <div className='flex-1 w-1/3'>
+              {this.state.id > 0 ? recentActivitiesAndCalendar : null}
+            </div>
+          </div>
+          {this.state.showIdActivity == 0 ? null :
+            <ModalForm
+              ref={this.refActivityModal}
+              uid='activity_form'
+              isOpen={true}
+              type='right'
+            >
+              <CampaignFormActivity
+                modal={this.refActivityModal}
+                id={this.state.showIdActivity}
+                isInlineEditing={true}
+                description={{
+                  defaultValues: {
+                    id_campaign: R.id,
+                    date_start: this.state.activityDate,
+                    time_start: this.state.activityTime == "00:00:00" ? null : this.state.activityTime,
+                    date_end: this.state.activityDate,
+                    all_day: this.state.activityAllDay,
+                    subject: this.state.activitySubject,
+                  }
+                }}
+                idCustomer={R.id_customer}
+                onClose={() => { this.setState({ showIdActivity: 0 } as FormCampaignState) }}
+                onSaveCallback={(form: CampaignFormActivity<CampaignFormActivityProps, CampaignFormActivityState>, saveResponse: any) => {
+                  if (saveResponse.status == "success") {
+                    this.setState({ showIdActivity: 0 } as FormCampaignState);
+                  }
+                }}
+              ></CampaignFormActivity>
+            </ModalForm>
+          }
+        </>;
+      break;
 
       case 'contacts':
         return <div>

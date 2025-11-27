@@ -8,7 +8,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     "title" => "Leads",
     "addNewActivityButtonText" => "Add new activity linked to lead",
     "icon" => "fas fa-people-arrows",
-    "formComponent" => "LeadsFormActivity"
+    "formComponent" => "LeadFormActivity"
   ];
 
   public function loadEvent(int $id): array

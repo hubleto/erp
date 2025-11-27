@@ -3,6 +3,8 @@
 namespace Hubleto\App\Community\Projects\Models;
 
 
+use Hubleto\App\Community\Projects\Loader as ProjectsApp;
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -138,7 +140,15 @@ class Project extends \Hubleto\Erp\Model
     $savedRecord['id_workflow_step'] = $idWorkflowStep;
 
     if (empty($savedRecord['identifier'])) {
-      $savedRecord["identifier"] = $savedRecord["id"];
+
+      $identifier = $this->config()->forApp(ProjectsApp::class)->getAsString('numberingPattern', 'P{YY}-{#}');
+      $identifier = str_replace('{YYYY}', date('Y'), $identifier);
+      $identifier = str_replace('{YY}', date('y'), $identifier);
+      $identifier = str_replace('{MM}', date('m'), $identifier);
+      $identifier = str_replace('{DD}', date('d'), $identifier);
+      $identifier = str_replace('{#}', $savedRecord['id'], $identifier);
+
+      $savedRecord["identifier"] = $identifier;
       $this->record->recordUpdate($savedRecord);
     }
 

@@ -127,14 +127,14 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
               {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
               {this.inputWrapper('title', {cssClass: 'text-2xl'})}
               {this.inputWrapper('description')}
-              {this.inputWrapper('id_developer')}
-              {this.inputWrapper('id_tester')}
               {this.inputWrapper('shared_folder')}
               {this.inputWrapper('hours_estimation')}
             </div>
             <div className='flex-1'>
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('id_contact')}
+              {this.inputWrapper('id_developer')}
+              {this.inputWrapper('id_tester')}
               {this.inputWrapper('priority')}
               {this.inputWrapper('duration_days')}
               {this.inputWrapper('date_start')}

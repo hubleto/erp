@@ -15,9 +15,23 @@
   {% endif %}
   <div class="m-8 dark:text-white">
     <h1 class="app-main-title">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
-    <b>{{ user.DEFAULT_COMPANY.name }}</b><br/>
-    {{ user.email }}
-    <a href="settings/my-account" class="text-primary">{{ translate('Edit profile') }}</a><br/>
+    <div class="flex">
+      {% if user.photo %}
+        <div class="mr-8">
+          <img
+            src="{{ config.uploadUrl }}/{{ user.photo }}"
+            class='max-w-48 max-h-24 rounded-4xl'
+          />
+        </div>
+      {% endif %}
+      <div>
+        <div><b>{{ user.first_name }} {{ user.last_name }}</b></div>
+        <div><b>{{ user.DEFAULT_COMPANY.name }}</b></div>
+        <div class="badge">{{ user.position }}</div>
+        <div class="mt-2">{{ user.email }}</div>
+        <div><a href="settings/my-account" class="text-primary">{{ translate('Edit profile') }}</a></div>
+      </div>
+    </div>
   </div>
 </div>
 

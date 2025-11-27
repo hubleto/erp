@@ -3,6 +3,8 @@
 namespace Hubleto\App\Community\Deals\Models;
 
 
+use Hubleto\App\Community\Deals\Loader as DealsApp;
+
 use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
@@ -238,10 +240,17 @@ class Deal extends \Hubleto\Erp\Model
       "description" => $this->translate("Deal created")
     ]);
 
-    $newDeal = $savedRecord;
-    if (empty($newDeal['identifier'])) {
-      $newDeal["identifier"] = $newDeal["id"];
-      $this->record->recordUpdate($newDeal);
+    if (empty($savedRecord['identifier'])) {
+
+      $identifier = $this->config()->forApp(DealsApp::class)->getAsString('numberingPattern', 'D{YY}-{#}');
+      $identifier = str_replace('{YYYY}', date('Y'), $identifier);
+      $identifier = str_replace('{YY}', date('y'), $identifier);
+      $identifier = str_replace('{MM}', date('m'), $identifier);
+      $identifier = str_replace('{DD}', date('d'), $identifier);
+      $identifier = str_replace('{#}', $savedRecord['id'], $identifier);
+
+      $savedRecord["identifier"] = $identifier;
+      $this->record->recordUpdate($savedRecord);
     }
 
     return $savedRecord;

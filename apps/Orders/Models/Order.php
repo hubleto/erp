@@ -4,6 +4,8 @@ namespace Hubleto\App\Community\Orders\Models;
 
 use DateTimeImmutable;
 
+use Hubleto\App\Community\Orders\Loader as OrdersApp;
+
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -184,6 +186,19 @@ class Order extends \Hubleto\Erp\Model
         "price_excl_vat" => $totalExclVat,
         "price_incl_vat" => $totalInclVat,
       ]);
+    }
+
+    if (empty($savedRecord['identifier'])) {
+
+      $identifier = $this->config()->forApp(OrdersApp::class)->getAsString('numberingPattern', 'O{YY}-{#}');
+      $identifier = str_replace('{YYYY}', date('Y'), $identifier);
+      $identifier = str_replace('{YY}', date('y'), $identifier);
+      $identifier = str_replace('{MM}', date('m'), $identifier);
+      $identifier = str_replace('{DD}', date('d'), $identifier);
+      $identifier = str_replace('{#}', $savedRecord['id'], $identifier);
+
+      $savedRecord["identifier"] = $identifier;
+      $this->record->recordUpdate($savedRecord);
     }
 
     return $savedRecord;

@@ -15,15 +15,6 @@ class GetTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
       $columnsConfig = $allColumnsConfig[$this->router()->urlParamAsString("tag")] ?? [];
       $transformedColumns = [];
 
-      // TODO: There needs to be developed a way to get ALL the virtual columns
-      // either by inicializing them beforehand in describeTable() of the model or somehow else
-      // $descriptionColumns = $model->describeTable();
-      // $descriptionColumns = $methodColumns->columns;
-      // foreach ($methodColumns as $colName => $column) {
-      //   var_dump(!is_array($column) ? $column->getTitle() : $column["title"]);
-      // }
-      // exit;
-
       if (!empty($columnsConfig)) {
         foreach ($columnsConfig as $colName => $is_hidden) {
           $originalColName = $columns[$colName]->getTitle();
@@ -33,7 +24,7 @@ class GetTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
       } else {
         foreach ($columns as $colName => $column) {
           $transformedColumns[$colName]["title"] = $column->getTitle();
-          $transformedColumns[$colName]["is_hidden"] = $columnsConfig ? 0 : (int) !$column->getProperty("defaultVisibility");
+          $transformedColumns[$colName]["is_hidden"] = (int) !$column->getVisibility();
         }
       }
 

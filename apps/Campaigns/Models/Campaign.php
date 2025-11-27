@@ -57,6 +57,7 @@ class Campaign extends \Hubleto\Erp\Model
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
+      'shared_folder' => new Varchar($this, "Online document folder")->setReactComponent('InputHyperlink'),
       // 'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
       'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'id_mail_account' => (new Lookup($this, $this->translate('Mail account to send email from'), Account::class)),

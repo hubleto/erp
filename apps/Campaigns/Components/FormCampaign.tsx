@@ -170,6 +170,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
               {this.inputWrapper('id_owner')}
               {this.inputWrapper('id_manager')}
               {this.inputWrapper('color')}
+              {this.inputWrapper('shared_folder')}
               {this.inputWrapper('datetime_created')}
               {this.inputWrapper('uid')}
             </div>

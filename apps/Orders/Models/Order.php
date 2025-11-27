@@ -188,19 +188,6 @@ class Order extends \Hubleto\Erp\Model
       ]);
     }
 
-    if (empty($savedRecord['identifier'])) {
-
-      $identifier = $this->config()->forApp(OrdersApp::class)->getAsString('numberingPattern', 'O{YY}-{#}');
-      $identifier = str_replace('{YYYY}', date('Y'), $identifier);
-      $identifier = str_replace('{YY}', date('y'), $identifier);
-      $identifier = str_replace('{MM}', date('m'), $identifier);
-      $identifier = str_replace('{DD}', date('d'), $identifier);
-      $identifier = str_replace('{#}', $savedRecord['id'], $identifier);
-
-      $savedRecord["identifier"] = $identifier;
-      $this->record->recordUpdate($savedRecord);
-    }
-
     return $savedRecord;
   }
 
@@ -229,8 +216,16 @@ class Order extends \Hubleto\Erp\Model
     $order = $this->record->find($savedRecord["id"]);
 
     if (empty($savedRecord['identifier'])) {
-      $order->identifier = $order->id;
-      $order->save();
+
+      $identifier = $this->config()->forApp(OrdersApp::class)->getAsString('numberingPattern', 'O{YY}-{#}');
+      $identifier = str_replace('{YYYY}', date('Y'), $identifier);
+      $identifier = str_replace('{YY}', date('y'), $identifier);
+      $identifier = str_replace('{MM}', date('m'), $identifier);
+      $identifier = str_replace('{DD}', date('d'), $identifier);
+      $identifier = str_replace('{#}', $savedRecord['id'], $identifier);
+
+      $savedRecord["identifier"] = $identifier;
+      $this->record->recordUpdate($savedRecord);
     }
 
     $mHistory = $this->getService(History::class);

@@ -66,6 +66,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 310 ],
       \Hubleto\App\Community\Orders\Loader::class => [ 'sidebarOrder' => 320 ],
+      \Hubleto\App\Community\Shops\Loader::class => [ 'sidebarOrder' => 410 ],
     ],
     'finance' => [
       // \Hubleto\App\Community\Billing\Loader::class => [ 'sidebarOrder' => 400 ],
@@ -410,7 +411,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     // 'core' is always installed
     $packagesToInstall = array_merge(['core'], explode(',', (string) $packagesToInstall));
-    
+
     foreach ($packagesToInstall as $package) {
       $package = trim((string) $package);
 

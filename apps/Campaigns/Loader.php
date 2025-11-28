@@ -9,7 +9,7 @@ class Loader extends \Hubleto\Framework\App
    * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -49,6 +49,7 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\Recipient::class)->dropTableIfExists()->install();
       $this->getModel(Models\RecipientStatus::class)->dropTableIfExists()->install();
       $this->getModel(Models\CampaignTask::class)->dropTableIfExists()->install();
+      $this->getModel(Models\CampaignActivity::class)->dropTableIfExists()->install();
       $this->getModel(Models\Click::class)->dropTableIfExists()->install();
     }
   }

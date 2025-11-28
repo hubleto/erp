@@ -47,11 +47,25 @@ export default class Calendar extends Component {
   }
 
   renderCell = (eventInfo) => {
+    let color = "";
+
+    //choose the correct color based on the current view and the calendar color config
+    if (eventInfo.view.type == "dayGridMonth" && eventInfo.event.allDay) {
+      color = ""
+    } else if (eventInfo.view.type == "dayGridMonth" || eventInfo.view.type == "listYear") {
+      color = eventInfo.event.backgroundColor;
+    }
+
     return <>
-      {eventInfo.event.extendedProps.icon ? <i className={"ml-2 " + eventInfo.event.extendedProps.icon}></i> : null}
+      {eventInfo.event.extendedProps.icon ?
+        <i
+          style={{color: color}}
+          className={"ml-2 " + eventInfo.event.extendedProps.icon}
+        ></i>
+      : null}
       <b className="ml-2">{eventInfo.timeText}</b>
       <span className="ml-2">{eventInfo.event.title}</span>
-      {eventInfo.event.extendedProps.details ? 
+      {eventInfo.event.extendedProps.details ?
         <div className="ml-2"><small>
           <i>{eventInfo.event.extendedProps.details}</i>
         </small></div>

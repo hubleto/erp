@@ -19,8 +19,8 @@ class Loader extends \Hubleto\Framework\App
       '/^dashboards\/api\/sort-panels\/?$/' => Controllers\Api\SortPanels::class,
       '/^dashboards\/api\/set-panel-width\/?$/' => Controllers\Api\SetPanelWidth::class,
 
-      '/^dashboards\/?$/' => Controllers\Dashboards::class,
-      '/^dashboards\/manage(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\DashboardsManage::class,
+      '/^dashboards(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboards::class,
+      '/^dashboards\/manage?\/?$/' => Controllers\DashboardsManage::class,
     ]);
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */

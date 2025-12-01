@@ -1,7 +1,80 @@
-<h1 class="app-main-title">{{ translate('Dashboards') }}</h1>
+<h1 class="app-main-title">{{ translate('Preview Dashboards') }}</h1>
 
-<app-dashboards-table-dashboards
-  string:tag="table-dashboards"
-  int:record-id="{{ viewParams.recordId }}"
-  json:filters='{{ viewParams.filters|json_encode }}'
-></app-dashboards-table-dashboards>
+{% if viewParams.dashboardSlug == '' %}
+  <div class="flex gap-2">
+    <div class="card">
+      <div class="card-body flex gap-2">
+        {% for d in viewParams.dashboards %}
+          <a
+            class="btn btn-square btn-extra-large btn-primary-outline"
+            style="border: 1px solid {{ d.color }};border-left-width:1em"
+            href="{{ config.projectUrl }}/dashboards/manage/{{ d.slug }}"
+          >
+            <span class="icon"><i class="fas fa-table-columns"></i></span>
+            <span class="text">{{ d.title }}</span>
+            {% if d.is_default %} <span class="text-sm text-gray-500">Active</span> {% endif %}
+          </a>
+        {% endfor %}
+        <a
+          class="btn btn-square btn-extra-large btn-add-outline"
+          target="_blank"
+          href="{{ config.projectUrl }}/dashboards?recordId=-1"
+        >
+          <span class="icon"><i class="fas fa-plus"></i></span>
+          <span class="text">{{ translate('Add dashboard') }}</span>
+          <span class="text">{{ d.title }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="mt-4">
+    {% for d in viewParams.dashboards %}
+      {% if d.slug == viewParams.dashboardSlug %}
+        <h2>{{ d.title }}</h2>
+        <app-dashboards-dashboard
+          int:id-dashboard='{{ d.id }}'
+          bool:show-add-new-panel-button='true'
+          json:panels='{{ d.PANELS|json_encode|raw }}'
+        ></app-dashboards-dashboard>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{# <div class="flex gap-2 justify-between card card-body flex-row">
+  <div class="flex gap-2">
+    {% for d in viewParams.dashboards %}
+      <a
+        class="btn btn-primary-outline"
+        href="{{ config.projectUrl }}/dashboards/{{ d.slug }}"
+        style="border: 1px solid {{ d.color }};border-left-width:1em"
+      >
+        <span class="text">{{ d.title }}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <a
+    class="btn btn-add-outline"
+    href="{{ config.projectUrl }}/settings/dashboards"
+  >
+    <span class="icon"><i class="fas fa-cog"></i></span>
+    <span class="text">{{ translate('Manage dashboards') }}</span>
+  </a>
+
+</div>
+
+{% if viewParams.dashboardSlug != '' %}
+  <div class="mt-4">
+    {% for d in viewParams.dashboards %}
+      {% if d.slug == viewParams.dashboardSlug %}
+        <h2>{{ d.title }}</h2>
+        <app-dashboards-dashboard
+          int:id-dashboard='{{ d.id }}'
+          json:panels='{{ d.PANELS|json_encode|raw }}'
+        ></app-dashboards-dashboard>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %} #}

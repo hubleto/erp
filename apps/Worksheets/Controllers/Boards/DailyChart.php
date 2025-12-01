@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Worksheets\Controllers\Boards;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Worksheets\Models\Activity;
 
-class DailyChart extends \Hubleto\Erp\Controller
+class DailyChart extends \Hubleto\App\Community\Dashboards\Controller
 {
   public bool $hideDefaultDesktop = true;
 

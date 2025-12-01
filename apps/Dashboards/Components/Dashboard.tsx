@@ -65,7 +65,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
     let panels = this.state.panels;
 
     for (let i in panels) {
-      let configuration = {};
+      let configuration: any = {};
 
       try {
         configuration = JSON.parse(panels[i].configuration ?? '');
@@ -73,10 +73,13 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
         configuration = {};
       }
 
+      configuration.idPanel = panels[i].id;
+
       if (!panels[i].contentLoaded) {
-        request.get(
+        request.post(
           panels[i].board_url_slug,
           configuration ?? {},
+          {},
           (html: any) => {
             try {
               this.state.panels[i].contentLoaded = true;

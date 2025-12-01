@@ -1,4 +1,12 @@
-<div class="w-full overflow-hidden">
+<button
+  class="btn btn-transparent btn-small"
+  onclick="
+    $('.{{ viewParams.idPanel }}--worksheets-daily-chart').toggle();
+  "
+>
+  <span class="text">Show/Hide details</span>  
+</button>
+<div class="w-full overflow-hidden mt-2">
   <table id="work-table" class="w-full">
     {% for year, months in viewParams.worksheet %}
       {% for month, days in months %}
@@ -34,7 +42,10 @@
             </td>
           </tr>
           {% if dayInfo.tasks|length > 0 %}
-            <tr {% if dayInfo.weekend == true %} style="color: #e5e5e5;" {% endif %}>
+            <tr
+              class="{{ viewParams.idPanel }}--worksheets-daily-chart"
+              {% if dayInfo.weekend == true %} style="color: #e5e5e5;" {% endif %}
+            >
               <td colspan="2"><div class="m-2 list text-xs">
                 {% for task in dayInfo.tasks %}
                   <a

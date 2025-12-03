@@ -84,7 +84,7 @@ class Loader extends \Hubleto\Framework\App
       $qTasks = $qTasks->where(function($q) use ($e) {
         $q->orHaving('tasks.identifier', 'like', '%' . $e . '%');
         $q->orHaving('tasks.title', 'like', '%' . $e . '%');
-        $q->orHaving('virt_related_to', 'like', '%' . $e . '%');
+        // $q->orHaving('virt_related_to', 'like', '%' . $e . '%');
       })
       ->where('tasks.is_closed', false);
     }

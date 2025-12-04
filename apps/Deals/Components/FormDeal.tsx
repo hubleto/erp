@@ -40,6 +40,24 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     icon: 'fas fa-handshake',
     model: 'Hubleto/App/Community/Deals/Models/Deal',
     renderWorkflowUi: true,
+    timeline: [
+      {
+        data: (thisForm) => thisForm.state.record.ACTIVITIES,
+        icon: 'fas fa-calendar',
+        color: '#32678fff',
+        timestampFormatter: (entry) => entry.date_start,
+        valueFormatter: (entry) => entry.subject,
+        userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
+      },
+      { 
+        data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
+        icon: 'fas fa-timeline',
+        color: '#8f3248ff',
+        timestampFormatter: (entry) => entry.datetime_change,
+        valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
+        userNameFormatter: (entry) => entry.USER?.nick,
+      },
+    ],
   };
 
   props: FormDealProps;

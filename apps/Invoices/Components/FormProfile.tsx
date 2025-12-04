@@ -15,7 +15,6 @@ export default class FormProfile extends HubletoForm<FormProfileProps, FormProfi
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     },
-    renderWorkflowUi: true,
   }
 
   props: FormProfileProps;

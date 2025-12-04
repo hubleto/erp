@@ -30,6 +30,7 @@ class GetWorkflows extends \Hubleto\Erp\Controllers\ApiController
         ->with(['USER' => function ($query) {
           $query->select('id', 'nick');
         }])
+        ->with('WORKFLOW_STEP')
         ->where('model', $model)
         ->where('record_id', $recordId)
         ->orderBy('datetime_change', 'desc')

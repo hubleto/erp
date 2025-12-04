@@ -52,6 +52,7 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
       },
       {},
       (data: any) => {
+        this.props.parentForm.updateRecord({...this.props.parentForm.state.record, WORKFLOW_HISTORY: data.history})
         this.setState({ workflows: data.workflows, history: data.history });
         if (onSuccess) onSuccess();
       }

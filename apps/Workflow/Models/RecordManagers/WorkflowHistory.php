@@ -14,4 +14,9 @@ class WorkflowHistory extends \Hubleto\Erp\RecordManager
   {
     return $this->belongsTo(User::class, 'id_user', 'id');
   }
+
+  public function WORKFLOW_STEP(): BelongsTo
+  {
+    return $this->belongsTo(WorkflowStep::class, 'id_workflow_step', 'id');
+  }
 }

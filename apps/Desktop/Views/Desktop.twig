@@ -23,14 +23,6 @@
       <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
       <span class="text">{{ app.manifest.nameTranslated }}</span>
     </a>
-    {% if app.isActivated and app.hasCustomSettings %}
-      <a
-        class="btn btn-active flex-1"
-        href="{{ config.projectUrl }}/{{ app.manifest.rootUrlSlug }}/settings"
-      >
-        <span class="icon text-xs p-0 m-0"><i class="fas fa-cog"></i></span>
-      </a>
-    {% endif %}
   </div>
 {% endmacro %}
 

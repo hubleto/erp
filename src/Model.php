@@ -24,6 +24,7 @@ class Model extends \Hubleto\Framework\Model
    * onBeforeCreate
    * @param array<string, mixed> $record
    * @return array<string, mixed>
+   * @throws \Hubleto\Framework\Exceptions\RecordSaveException
    */
   public function onBeforeCreate(array $record): array
   {

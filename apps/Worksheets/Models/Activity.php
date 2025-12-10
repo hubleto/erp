@@ -3,6 +3,9 @@
 namespace Hubleto\App\Community\Worksheets\Models;
 
 
+use Hubleto\App\Community\Worksheets\Loader as WorksheetsApp;
+use Hubleto\Framework\Exceptions\RecordSaveException;
+
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Decimal;
@@ -91,6 +94,28 @@ class Activity extends \Hubleto\Erp\Model
     ]);
     
     return $description;
+  }
+
+  public function validateDateDiff(array $record): void
+  {
+    $days = date_diff(new \DateTimeImmutable($record['date_worked']), new \DateTimeImmutable())->days;
+    $daysDiffMax = $this->config()->forApp(WorksheetsApp::class)->getAsInteger('activityDaysDiffMax', 5);
+
+    if ($days > $daysDiffMax) {
+      throw new RecordSaveException('You may not create or modify activity more than ' . $daysDiffMax . ' days after it has been performed.');
+    }
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $this->validateDateDiff($record);
+    return parent::onBeforeCreate($record);
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    $this->validateDateDiff($record);
+    return parent::onBeforeUpdate($record);
   }
 
 }

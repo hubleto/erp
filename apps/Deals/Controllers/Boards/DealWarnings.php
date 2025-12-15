@@ -29,7 +29,7 @@ class DealWarnings extends \Hubleto\Erp\Controller
     foreach ($myDeals as $deal) {
       $futureActivities = 0;
       foreach ($deal['ACTIVITIES'] as $activity) {
-        if (strtotime($activity['date_start']) > time()) {
+        if (strtotime($activity['date_start'] . ' ' . $activity['time_start']) > time()) {
           $futureActivities++;
         }
       }

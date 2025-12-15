@@ -28,7 +28,7 @@ class OrderWarnings extends \Hubleto\Erp\Controller
     foreach ($myOrders as $order) {
       $futureActivities = 0;
       foreach ($order['ACTIVITIES'] as $activity) {
-        if (strtotime($activity['date_start']) > time()) {
+        if (strtotime($activity['date_start'] . ' ' . $activity['time_start']) > time()) {
           $futureActivities++;
         }
       }

@@ -10,6 +10,7 @@ import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import CampaignFormActivity, { CampaignFormActivityProps, CampaignFormActivityState } from './CampaignFormActivity';
 import moment, { Moment } from "moment";
 import Calendar from '../../Calendar/Components/Calendar';
+import { updateFormWorkflowByTag } from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 
 export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
@@ -30,24 +31,6 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
     ...HubletoForm.defaultProps,
     model: 'Hubleto/App/Community/Campaigns/Models/Campaign',
     renderWorkflowUi: true,
-    timeline: [
-      {
-        data: (thisForm) => thisForm.state.record.ACTIVITIES,
-        icon: 'fas fa-calendar',
-        color: '#32678fff',
-        timestampFormatter: (entry) => entry.date_start,
-        valueFormatter: (entry) => entry.subject,
-        userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
-      },
-      { 
-        data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
-        icon: 'fas fa-timeline',
-        color: '#8f3248ff',
-        timestampFormatter: (entry) => entry.datetime_change,
-        valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
-        userNameFormatter: (entry) => entry.USER?.nick,
-      },
-    ],
   };
 
   props: FormCampaignProps;
@@ -87,6 +70,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
         { uid: 'test', title: this.translate('Test') },
         { uid: 'launch', title: this.translate('Launch') },
         { uid: 'clicks', title: this.translate('Clicks') },
+        { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
       ]
     };
@@ -533,6 +517,27 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
           uid={this.props.uid + "_table_campaign_click"}
           idCampaign={R.id}
         />;
+      break;
+
+      case 'timeline':
+        return this.renderTimeline([
+          {
+            data: (thisForm) => thisForm.state.record.ACTIVITIES,
+            icon: 'fas fa-calendar',
+            color: '#32678fff',
+            timestampFormatter: (entry) => entry.date_start,
+            valueFormatter: (entry) => entry.subject,
+            userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
+          },
+          { 
+            data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
+            icon: 'fas fa-timeline',
+            color: '#8f3248ff',
+            timestampFormatter: (entry) => entry.datetime_change,
+            valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
+            userNameFormatter: (entry) => entry.USER?.nick,
+          },
+        ]);
       break;
 
       default:

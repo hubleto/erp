@@ -20,24 +20,6 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
     icon: 'fas fa-diagram-project',
     model: 'Hubleto/App/Community/Projects/Models/Team',
     renderWorkflowUi: true,
-    timeline: [
-      {
-        data: (thisForm) => thisForm.state.record.ACTIVITIES,
-        icon: 'fas fa-calendar',
-        color: '#32678fff',
-        timestampFormatter: (entry) => entry.date_start,
-        valueFormatter: (entry) => entry.subject,
-        userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
-      },
-      { 
-        data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
-        icon: 'fas fa-timeline',
-        color: '#8f3248ff',
-        timestampFormatter: (entry) => entry.datetime_change,
-        valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
-        userNameFormatter: (entry) => entry.USER?.nick,
-      },
-    ],
   }
 
   props: FormProjectProps;
@@ -59,6 +41,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'worksheet', title: this.translate('Worksheet') },
         { uid: 'statistics', title: this.translate('Statistics') },
+        { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
       ]
     }
@@ -194,6 +177,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
           </div>
         </>;
       break;
+
       case 'tasks':
         try {
           return <>
@@ -277,6 +261,27 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
         } else {
           return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
         }
+      break;
+
+      case 'timeline':
+        return this.renderTimeline([
+          {
+            data: (thisForm) => thisForm.state.record.ACTIVITIES,
+            icon: 'fas fa-calendar',
+            color: '#32678fff',
+            timestampFormatter: (entry) => entry.date_start,
+            valueFormatter: (entry) => entry.subject,
+            userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
+          },
+          { 
+            data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
+            icon: 'fas fa-timeline',
+            color: '#8f3248ff',
+            timestampFormatter: (entry) => entry.datetime_change,
+            valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
+            userNameFormatter: (entry) => entry.USER?.nick,
+          },
+        ]);
       break;
 
       default:

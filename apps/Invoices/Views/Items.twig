@@ -1,0 +1,7 @@
+<h1 class='app-main-title'>{{ translate('Invoices') }} > {{ translate('Items') }}</h1>
+
+<app-table
+  string:model="Hubleto/App/Community/Invoices/Models/Item"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></app-table>

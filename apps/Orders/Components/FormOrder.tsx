@@ -3,6 +3,7 @@ import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
 import TableOrderProducts from '@hubleto/apps/Orders/Components/TableOrderProducts';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
+import TablePayments from './TablePayments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
 import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
@@ -68,6 +69,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
         { uid: 'calendar', title: this.translate('Calendar') },
+        { uid: 'payments', title: this.translate('Payments') },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
@@ -392,6 +394,16 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           // junctionSourceRecordId={R.id}
           // junctionDestinationColumn='id_product'
           readonly={!this.state.isInlineEditing}
+        />;
+
+      break;
+
+      case 'payments':
+        return <TablePayments
+          key={"table_order_payment"}
+          parentForm={this}
+          uid={this.props.uid + "_table_order_payment"}
+          idOrder={R.id}
         />;
 
       break;

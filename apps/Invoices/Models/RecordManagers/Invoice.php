@@ -49,9 +49,9 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     return $this->hasOne(WorkflowStep::class, 'id', 'id_workflow_step');
   }
 
-  /** @return HasMany<InvoiceItem, covariant Invoice> */
+  /** @return HasMany<Item, covariant Invoice> */
   public function ITEMS(): HasMany {
-    return $this->HasMany(InvoiceItem::class, 'id_invoice');
+    return $this->HasMany(Item::class, 'id_invoice');
   }
 
   /**

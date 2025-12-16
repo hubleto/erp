@@ -17,7 +17,7 @@
         "Payment": "Paiement",
         "Notes": "Notes"
     },
-    "models.invoiceItem": {
+    "models.Item": {
         "Invoice": "Facture",
         "Item": "Article",
         "Unit price": "Prix unitaire",

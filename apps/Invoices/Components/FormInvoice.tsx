@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui/ext/HubletoForm";
-import TableInvoiceItems from './TableInvoiceItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
 import request from '@hubleto/react-ui/core/Request';

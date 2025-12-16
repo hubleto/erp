@@ -23,6 +23,8 @@ class Loader extends \Hubleto\Framework\App
       '/^invoices\/profiles\/add?\/?$/' => ['controller' => Controllers\Profiles::class, 'vars' => [ 'recordId' => -1 ]],
       '/^invoices\/payments(\/(?<recordId>\d+))?\/?$/' => Controllers\Payments::class,
       '/^invoices\/payments\/add?\/?$/' => ['controller' => Controllers\Payments::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^invoices\/items(\/(?<recordId>\d+))?\/?$/' => Controllers\Items::class,
+      '/^invoices\/items\/add?\/?$/' => ['controller' => Controllers\Items::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
@@ -36,9 +38,8 @@ class Loader extends \Hubleto\Framework\App
     if ($round == 1) {
       $this->getModel(Models\Invoice::class)->dropTableIfExists()->install();
       $this->getModel(Models\Profile::class)->dropTableIfExists()->install();
-      $this->getModel(Models\InvoiceItem::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Item::class)->dropTableIfExists()->install();
       $this->getModel(Models\InvoiceDocument::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Payment::class)->dropTableIfExists()->install();
     }
   }
 

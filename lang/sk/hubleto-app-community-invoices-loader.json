@@ -45,7 +45,7 @@
         "Items": "Položky",
         "Print invoice": "Vytlačiť faktúru"
     },
-    "Models\\InvoiceItem": {
+    "Models\\Item": {
         "Invoice": "Faktúra",
         "Item": "Položka",
         "Unit price": "Jednotková cena",

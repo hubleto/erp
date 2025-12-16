@@ -17,7 +17,7 @@
         "Payment": "Zwrot kosztów",
         "Notes": "Notatki"
     },
-    "models.invoiceItem": {
+    "models.Item": {
         "Invoice": "Faktura",
         "Item": "Przedmiot",
         "Unit price": "Cena jednostkowa",

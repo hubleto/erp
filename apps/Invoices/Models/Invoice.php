@@ -59,7 +59,7 @@ class Invoice extends \Hubleto\Erp\Model {
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
 
-    'ITEMS' => [ self::HAS_MANY, InvoiceItem::class, "id_invoice", "id" ],
+    'ITEMS' => [ self::HAS_MANY, Item::class, "id_invoice", "id" ],
   ];
 
   /**
@@ -144,8 +144,8 @@ class Invoice extends \Hubleto\Erp\Model {
     $totalExclVat = 0;
     $totalInclVat = 0;
 
-    $mInvoiceItem = $this->getService(InvoiceItem::class);
-    $items = $mInvoiceItem->record->where('id_invoice', $idInvoice)->get();
+    $mItem = $this->getService(Item::class);
+    $items = $mItem->record->where('id_invoice', $idInvoice)->get();
 
     foreach ($items as $item) {
       $totalExclVat += $item->price_excl_vat;

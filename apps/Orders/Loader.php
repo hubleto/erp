@@ -24,6 +24,7 @@ class Loader extends \Hubleto\Framework\App
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
       '/^orders\/api\/set-parent-deal\/?$/' => Controllers\Api\SetParentDeal::class,
       '/^orders\/api\/get-product\/?$/' => Controllers\Api\GetProduct::class,
+      '/^orders\/api\/prepare-payment-for-invoice\/?$/' => Controllers\Api\PreparePaymentForInvoice::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 
@@ -64,6 +65,7 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Payment::class)->dropTableIfExists()->install();
       $this->getModel(Models\History::class)->dropTableIfExists()->install();
     }
 

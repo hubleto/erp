@@ -20,7 +20,7 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
   props: FormPaymentProps;
   state: FormPaymentState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\FormPayment';
 
   constructor(props: FormPaymentProps) {
@@ -31,7 +31,7 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Invoice')}</b> },
+        { uid: 'default', title: <b>{this.translate('Order Payment')}</b> },
         ...this.getCustomTabs()
       ],
     };
@@ -44,7 +44,7 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
   }
 
   getRecordFormUrl(): string {
-    return 'invoices/paymentss/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+    return 'orderss/paymentss/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {
@@ -63,9 +63,15 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
         return <>
           <div className="flex gap-2 mt-2">
             <div className='flex-1'>
-              {this.inputWrapper('id_invoice')}
-              {this.inputWrapper('date_payment')}
+              {this.inputWrapper('id_order')}
+              {this.inputWrapper('title')}
+              {this.inputWrapper('date_due')}
+              {this.inputWrapper('unit_price')}
               {this.inputWrapper('amount')}
+              {this.inputWrapper('discount')}
+              {this.inputWrapper('vat')}
+              {this.inputWrapper('notes')}
+              {this.inputWrapper('id_invoice_item')}
             </div>
           </div>
         </>;

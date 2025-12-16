@@ -38,11 +38,29 @@ class Calendar extends \Hubleto\Framework\Core
     return $this->color;
   }
 
+  /**
+   * Loads specified event info.
+   *
+   * @param int $id
+   * 
+   * @return array
+   * 
+   */
   public function loadEvent(int $id): array
   {
     return [];
   }
 
+  /**
+   * Loads event from calendar between dateStart and dateEnd.
+   *
+   * @param string $dateStart
+   * @param string $dateEnd
+   * @param array $filter
+   * 
+   * @return array
+   * 
+   */
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     return [];

@@ -113,11 +113,12 @@ class Calendar extends \Hubleto\Erp\Calendar
         $events[$eventKey]['allDay'] = ($activity['all_day'] ?? 0) == 1 || $tStart == null ? true : false || $longerThanDay;
         $events[$eventKey]['title'] = (string) ($activity['subject'] ?? '');
         $events[$eventKey]['backColor'] = (string) ($activity['color'] ?? '');
-        $events[$eventKey]['color'] = $this->color;
+        $events[$eventKey]['color'] = $activity['completed'] ? '#DDDDDD' : $this->color;
         $events[$eventKey]['type'] = (int) ($activity['activity_type'] ?? 0);
         $events[$eventKey]['source'] = $source; //'customers';
         $events[$eventKey]['details'] = $detailsCallback($activity);
         $events[$eventKey]['id_owner'] = $activity['id_owner'] ?? 0;
+        $events[$eventKey]['completed'] = $activity['completed'] ?? 0;
         $events[$eventKey]['owner'] = $activity['_LOOKUP[id_owner]'] ?? '';
         $eventKey++;
       }

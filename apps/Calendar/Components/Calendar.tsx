@@ -103,7 +103,6 @@ export default class Calendar extends Component {
           //select={handleDateSelect}
           viewDidMount={(data: any) => {
             request.post('calendar/api/set-initial-view', {initialView: data.view.type});
-            console.log('view mounted', data);
           }}
           dateClick={(info) => {
             if (this.props.readonly) return;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui/ext/HubletoForm";
-import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
+// import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
+import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
 import request from '@hubleto/react-ui/core/Request';
 import TableItems from './TableItems';
@@ -32,8 +33,12 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
 
   idOrderInputs: Array<any>;
 
+  refPreview: any;
+
   constructor(props: FormInvoiceProps) {
     super(props);
+
+    this.refPreview = React.createRef();
   }
 
   getStateFromProps(props: FormInvoiceProps) {
@@ -41,7 +46,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     
     if (this.props.id > 0) {
       tabs.push({ uid: 'default', title: <b>{this.translate('Invoice')}</b> });
-      tabs.push({ uid: 'documents', title: this.translate('Documents') });
+      tabs.push({ uid: 'preview', title: this.translate('Preview') });
+      // tabs.push({ uid: 'documents', title: this.translate('Documents') });
       tabs.push({ uid: 'payments', title: this.translate('Payments') });
     }
     tabs = [...tabs, ...this.getCustomTabs()];
@@ -60,33 +66,56 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     }
   }
 
-  getHeaderButtons()
-  {
-    let buttons = super.getHeaderButtons();
-    if (this.state.id > 0) {
-      buttons.push(
-        {
-          title: 'Print to PDF',
-          onClick: () => {
-            request.post(
-              'invoices/api/generate-pdf',
-              {idInvoice: this.state.record.id},
-              {},
-              (result: any) => {
-                if (result.idDocument) {
-                  window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
-                }
-              }
-            );
-          }
-        }
-      );
-    }
-    return buttons;
-  }
+  // getHeaderButtons()
+  // {
+  //   let buttons = super.getHeaderButtons();
+  //   if (this.state.id > 0) {
+  //     buttons.push(
+  //       {
+  //         title: 'Print to PDF',
+  //         onClick: () => {
+  //           request.post(
+  //             'invoices/api/generate-pdf',
+  //             {idInvoice: this.state.record.id},
+  //             {},
+  //             (result: any) => {
+  //               if (result.idDocument) {
+  //                 window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+  //               }
+  //             }
+  //           );
+  //         }
+  //       }
+  //     );
+  //   }
+  //   return buttons;
+  // }
 
   getRecordFormUrl(): string {
     return 'invoices/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
+  onTabChange() {
+    const tabUid = this.state.activeTabUid;
+    switch (tabUid) {
+      case 'preview':
+        this.updatePreview(this.state.record.id_template);
+      break;
+    }
+  }
+
+  updatePreview(idTemplate: number) {
+    request.post(
+      'invoices/api/get-preview-html',
+      {
+        idInvoice: this.state.record.id,
+        idTemplate: idTemplate,
+      },
+      {},
+      (result: any) => {
+        this.refPreview.current.setState({content: result.html});
+      }
+    );
   }
 
   renderTitle(): JSX.Element {
@@ -103,7 +132,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     switch (tabUid) {
       case 'default':
         const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
-        return<>
+        return <>
           <div className='flex gap-2'>
             <div className='gap-2 w-56'>
               <div className='p-2 grow'>
@@ -400,19 +429,60 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
         </>;
       break;
 
-      case 'documents':
-        return <>
-          <TableDocuments
-            uid={this.props.uid + "_table_invoice_documents"}
-            tag={'table_invoice_documents'}
-            parentForm={this}
-            junctionModel='Hubleto\App\Community\Invoices\Models\InvoiceDocument'
-            junctionSourceColumn='id_invoice'
-            junctionDestinationColumn='id_document'
-            junctionSourceRecordId={R.id}
-          />
-        </>
+      case 'preview':
+        return <div className='flex gap-2 h-full'>
+          <div className='flex-1 w-72 flex flex-col gap-2'>
+            <div className='grow'>
+              {this.inputWrapper('id_template', {
+                onChange: (input: any) => {
+                  this.updatePreview(input.state.value);
+                }
+              })}
+            </div>
+            <div className='grow'>
+              <button
+                className='btn btn-transparent btn-large mb-4'
+                onClick={() => {
+                  request.post(
+                    'invoices/api/generate-pdf',
+                    {idInvoice: this.state.record.id},
+                    {},
+                    (result: any) => {
+                      if (result.idDocument) {
+                        window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+                      }
+                    }
+                  );
+                }}
+              >
+                <span className='icon'><i className='fas fa-print'></i></span>
+                <span className='text'>Export to PDF</span>
+              </button>
+              {this.inputWrapper('id_document')}
+            </div>
+          </div>
+          <div className="flex-3 gap-2 h-full card card-body">
+            <HtmlFrame
+              ref={this.refPreview}
+              className='w-full h-full'
+            />
+          </div>
+        </div>;
       break;
+
+      // case 'documents':
+      //   return <>
+      //     <TableDocuments
+      //       uid={this.props.uid + "_table_invoice_documents"}
+      //       tag={'table_invoice_documents'}
+      //       parentForm={this}
+      //       junctionModel='Hubleto\App\Community\Invoices\Models\InvoiceDocument'
+      //       junctionSourceColumn='id_invoice'
+      //       junctionDestinationColumn='id_document'
+      //       junctionSourceRecordId={R.id}
+      //     />
+      //   </>
+      // break;
 
       case 'payments':
         return <TablePayments

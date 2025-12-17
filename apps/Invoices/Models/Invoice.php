@@ -18,6 +18,7 @@ use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Models\Document;
 use Hubleto\Framework\Helper;
 
 class Invoice extends \Hubleto\Erp\Model {
@@ -58,6 +59,8 @@ class Invoice extends \Hubleto\Erp\Model {
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
+    'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
+    'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
 
     'ITEMS' => [ self::HAS_MANY, Item::class, "id_invoice", "id" ],
   ];
@@ -89,6 +92,8 @@ class Invoice extends \Hubleto\Erp\Model {
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, "CASCADE"))->setRequired(),
     ]);
   }
 
@@ -332,6 +337,38 @@ class Invoice extends \Hubleto\Erp\Model {
     return $idInvoice;
   }
 
+  public function getPreviewVars(int $idInvoice): array
+  {
+    /** @var Invoice */
+    $mInvoice = $this->getModel(Invoice::class);
+
+    $invoice = $mInvoice->record->prepareReadQuery()->where('invoices.id', $idInvoice)->first();
+    if (!$invoice) throw new \Exception('Invoice was not found.');
+
+    $vars = $invoice->toArray();
+    $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
+
+    return $vars;
+
+  }
+
+  public function getPreviewHtml(int $idInvoice): string
+  {
+
+    $vars = $this->getPreviewVars($idInvoice);
+
+    /** @var Template */
+    $mTemplate = $this->getService(Template::class);
+
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
+    if (!$template) throw new \Exception('Template was not found.');
+
+
+    /** @var Generator */
+    $generator = $this->getService(Generator::class);
+    return $generator->renderTemplate($vars['id_template'], $vars);
+  }
+
   /**
    * Generates PDF document from given invoice and returns ID of generated document
    *
@@ -351,7 +388,7 @@ class Invoice extends \Hubleto\Erp\Model {
     /** @var Template */
     $mTemplate = $this->getService(Template::class);
 
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $invoice->PROFILE->id_template)->first();
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $invoice->id_template)->first();
     if (!$template) throw new \Exception('Template was not found.');
 
     $vars = $invoice->toArray();
@@ -367,9 +404,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
     if ($idDocument > 0) {
       /** @var InvoiceDocument */
-      $mInvoiceDocument = $this->getService(InvoiceDocument::class);
-      $mInvoiceDocument->record->recordCreate([
-        'id_invoice' => $idInvoice,
+      $mInvoice->record->find($idInvoice)->update([
         'id_document' => $idDocument,
       ]);
     }

@@ -10,6 +10,8 @@ class Template extends \Hubleto\Erp\Model
   public string $table = 'documents_templates';
   public string $recordManagerClass = RecordManagers\Template::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlAdd = 'documents/templates/add';
+  public ?string $lookupUrlDetail = 'documents/templates/{%ID%}';
 
   public function describeColumns(): array
   {

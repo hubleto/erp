@@ -11,6 +11,8 @@ class Document extends \Hubleto\Erp\Model
   public string $table = 'documents';
   public string $recordManagerClass = RecordManagers\Document::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlAdd = 'documents/add';
+  public ?string $lookupUrlDetail = 'documents/{%ID%}';
 
   public function describeColumns(): array
   {

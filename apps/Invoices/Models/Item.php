@@ -32,25 +32,29 @@ class Item extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON)->setRequired(),
-      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class)),
-      'id_order_product' => (new Lookup($this, $this->translate('Order Product'), OrderProduct::class)),
-      'item' => (new Varchar($this, $this->translate('Item')))->setRequired(),
-      'unit_price' => new Decimal($this, $this->translate('Unit price')),
-      'amount' => new Decimal($this, $this->translate('Amount')),
-      'discount' => new Decimal($this, $this->translate('Discount')),
-      'vat' => new Decimal($this, $this->translate('VAT'))->setUnit('%'),
+      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setDefaultVisible(),
+      'id_order_product' => (new Lookup($this, $this->translate('Order Product'), OrderProduct::class))->setDefaultVisible(),
+      'item' => (new Varchar($this, $this->translate('Item')))->setRequired()->setDefaultVisible(),
+      'unit_price' => new Decimal($this, $this->translate('Unit price'))->setDefaultVisible(),
+      'amount' => new Decimal($this, $this->translate('Amount'))->setDefaultVisible(),
+      'discount' => new Decimal($this, $this->translate('Discount'))->setDefaultVisible(),
+      'vat' => new Decimal($this, $this->translate('VAT'))->setUnit('%')->setDefaultVisible(),
       'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setReadonly(),
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setReadonly(),
     ]);
   }
 
-  public function updates() {
-    // ALTER TABLE `invoice_items` DROP FOREIGN KEY `fk_8a5dbd71fda9248d8ece4f8146fc29af`; ALTER TABLE `invoice_items` ADD CONSTRAINT `fk_8a5dbd71fda9248d8ece4f8146fc29af` FOREIGN KEY (`id_order`) REFERENCES `orders`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  public function upgrades(): array {
+    return [
+      1 => "ALTER TABLE `invoice_items` DROP FOREIGN KEY `fk_8a5dbd71fda9248d8ece4f8146fc29af`",
+      2 => "ALTER TABLE `invoice_items` ADD CONSTRAINT `fk_8a5dbd71fda9248d8ece4f8146fc29af` FOREIGN KEY (`id_order`) REFERENCES `orders`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT",
+    ];
   }
 
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
+
     $description->ui['title'] = ''; //$this->translate('Customers');
     $description->ui['addButtonText'] = $this->translate('Add invoice item');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);

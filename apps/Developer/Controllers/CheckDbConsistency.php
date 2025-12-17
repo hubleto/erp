@@ -2,13 +2,13 @@
 
 namespace Hubleto\App\Community\Developer\Controllers;
 
-class DbUpdates extends \Hubleto\Erp\Controller
+class CheckDbConsistency extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'developer', 'content' => $this->translate('Developer') ],
-      [ 'url' => 'db-updater', 'content' => $this->translate('DB Updater') ],
+      [ 'url' => 'developer', 'content' => $this->translate('Developer tools') ],
+      [ 'url' => '', 'content' => $this->translate('Check DB consistency') ],
     ]);
   }
 
@@ -114,7 +114,7 @@ class DbUpdates extends \Hubleto\Erp\Controller
     $this->viewParams['necessaryUpdates'] = $necessaryUpdates;
     $this->viewParams['runLog'] = $runLog;
 
-    $this->setView('@Hubleto:App:Community:Developer/DbUpdates.twig');
+    $this->setView('@Hubleto:App:Community:Developer/CheckDbConsistency.twig');
   }
 
 }

@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate('Developer tools') }} > {{ translate('Upgrade models') }}</h1>
+
+{% if viewParams.logs|length > 0 %}
+  <pre class="bg-yellow-50 p-2 mb-2">{{ viewParams.logs|join('\n') }}</pre>
+{% else %}
+  <div class="alert alert-info">No upgrades found.</div>
+{% endif %}

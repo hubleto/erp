@@ -3,10 +3,12 @@ import Table, { TableProps, TableState, TableDescription } from '@hubleto/react-
 
 interface TableItemsProps extends TableProps {
   idInvoice: any,
+  idCustomer: any,
 }
 
 interface TableItemsState extends TableState {
   idInvoice: any,
+  idCustomer: any,
 }
 
 export default class TableItems extends Table<TableItemsProps, TableItemsState> {
@@ -35,6 +37,7 @@ export default class TableItems extends Table<TableItemsProps, TableItemsState> 
     return {
       ...super.getStateFromProps(props),
       idInvoice: props.idInvoice,
+      idCustomer: props.idCustomer,
     }
   }
 
@@ -48,6 +51,7 @@ export default class TableItems extends Table<TableItemsProps, TableItemsState> 
     return {
       ...super.getEndpointParams(),
       idInvoice: this.state.idInvoice,
+      idCustomer: this.state.idCustomer,
     }
   }
 

@@ -45,6 +45,9 @@ class Item extends \Hubleto\Erp\RecordManager {
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
+    $idCustomer = $hubleto->router()->urlParamAsInteger('idCustomer');
+    if ($idCustomer > 0) $query->where('invoice_items.id_customer', $idCustomer);
+
     $filters = $hubleto->router()->urlParamAsArray("filters");
     if (isset($filters["fStatus"])) {
       if ($filters["fStatus"] == 1) {

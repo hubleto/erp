@@ -20,6 +20,7 @@ class Payment extends \Hubleto\Erp\Model
 
   public array $relations = [
     'ORDER' => [ self::BELONGS_TO, Order::class, "id_order" ],
+    'INVOICE_ITEM' => [ self::BELONGS_TO, Item::class, "id_invoice_item" ],
   ];
 
   /**

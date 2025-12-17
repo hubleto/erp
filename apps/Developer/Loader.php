@@ -17,7 +17,8 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^developer\/?$/' => Controllers\Dashboard::class,
-      '/^developer\/db-updates\/?$/' => Controllers\DbUpdates::class,
+      '/^developer\/check-db-consistency\/?$/' => Controllers\CheckDbConsistency::class,
+      '/^developer\/upgrade-models\/?$/' => Controllers\UpgradeModels::class,
       '/^developer\/form-designer\/?$/' => Controllers\FormDesigner::class,
     ]);
 

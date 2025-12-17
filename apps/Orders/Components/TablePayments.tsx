@@ -53,7 +53,8 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "id_invoice_item") {
-      if (!data['id_invoice_item']) {
+      console.log(data);
+      if (!data['INVOICE_ITEM']) {
         return <button
           className='btn btn-transparent btn-small'
           onClick={() => {

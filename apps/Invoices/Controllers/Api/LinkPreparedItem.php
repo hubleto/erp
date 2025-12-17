@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Invoices\Controllers\Api;
 use Hubleto\App\Community\Invoices\Models\Invoice;
 use Hubleto\App\Community\Invoices\Models\Item;
 
-class UnlinkNotInvoicedItem extends \Hubleto\Erp\Controllers\ApiController
+class LinkPreparedItem extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
@@ -15,10 +15,10 @@ class UnlinkNotInvoicedItem extends \Hubleto\Erp\Controllers\ApiController
     /** @var Item */
     $mItem = $this->getModel(Item::class);
 
-    $mItem->record
-      ->where('id_invoice', $idInvoice)
+    $item = $mItem->record
+      ->whereNull('id_invoice')
       ->where('id', $idItem)
-      ->update(['id_invoice' => null]);
+      ->update(['id_invoice' => $idInvoice]);
 
     return [
       'status' => 'success',

@@ -11,7 +11,7 @@ interface FormInvoiceProps extends HubletoFormProps {
 }
 
 interface FormInvoiceState extends HubletoFormState {
-  linkNotInvoicedItem: boolean;
+  linkPreparedItem: boolean;
 }
 
 export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoiceState> {
@@ -49,7 +49,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     return {
       ...super.getStateFromProps(props),
       tabs: tabs,
-      linkNotInvoicedItem: false,
+      linkPreparedItem: false,
     };
   }
 
@@ -136,7 +136,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 {this.inputWrapper('date_payment', {wrapperCssClass: 'block'})}
               </div>
             </div>
-            <div className="flex flex-col flex-5 gap-2 mt-2">
+            <div className="flex flex-5 gap-2 mt-2">
               <div className='flex-1'>
                 {this.inputWrapper('type', {uiStyle: 'buttons'})}
                 {this.inputWrapper('id_profile', {uiStyle: 'buttons'})}
@@ -238,14 +238,14 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                     className='btn btn-warning'
                                     onClick={() => {
                                       request.post(
-                                        'invoices/api/unlink-not-invoiced-item',
+                                        'invoices/api/unlink-prepared-item',
                                         {
                                           idInvoice: R.id,
                                           idItem: item.id
                                         },
                                         {},
                                         (result: any) => {
-                                          this.reload();
+                                          this.loadRecord();
                                         }
                                       );
                                     }}
@@ -346,11 +346,11 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                       <button
                         className='btn btn-add mt-2'
                         onClick={() => {
-                          this.setState({linkNotInvoicedItem: true})
+                          this.setState({linkPreparedItem: true})
                         }}
                       >
                         <span className='icon'><i className='fas fa-link'></i></span>
-                        <span className='text'>Link not-invoiced item</span>
+                        <span className='text'>Link prepared item</span>
                       </button>
                     </div>
                   </div>
@@ -358,17 +358,17 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               }
             </div>
           </div>
-          {this.state.linkNotInvoicedItem ? <>
+          {this.state.linkPreparedItem ? <>
             <ModalSimple
               uid={this.props.uid + '_modal_table_link_not_invoiced_items'}
               isOpen={true}
               type='centered'
               showHeader={true}
               title={<>
-                <h2>Link not invoiced items</h2>
+                <h2>Link prepared item</h2>
               </>}
               onClose={(modal: ModalSimple) => {
-                this.setState({linkNotInvoicedItem: false});
+                this.setState({linkPreparedItem: false});
               }}
             >
               <TableItems
@@ -381,15 +381,15 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 readonly={true}
                 onRowClick={(table: any, row: any) => {
                   request.post(
-                    'invoices/api/link-not-invoiced-item',
+                    'invoices/api/link-prepared-item',
                     {
                       idInvoice: R.id,
                       idItem: row.id
                     },
                     {},
                     (result: any) => {
-                      this.setState({linkNotInvoicedItem: false}, () => {
-                        this.reload();
+                      this.setState({linkPreparedItem: false}, () => {
+                        this.loadRecord();
                       });
                     }
                   );

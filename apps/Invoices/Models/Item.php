@@ -64,7 +64,7 @@ class Item extends \Hubleto\Erp\Model
       'title' => $this->translate('Status'),
       'options' => [
         0 => $this->translate('All'),
-        1 => $this->translate('Not invoiced'),
+        1 => $this->translate('Prepared'),
         2 => $this->translate('Invoiced')
       ]
     ]);

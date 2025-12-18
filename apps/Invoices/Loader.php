@@ -37,6 +37,14 @@ class Loader extends \Hubleto\Framework\App
 
   }
 
+  /**
+   * [Description for installTables]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installTables(int $round): void
   {
     if ($round == 1) {
@@ -45,6 +53,36 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\Profile::class)->dropTableIfExists()->install();
       $this->getModel(Models\Item::class)->dropTableIfExists()->install();
     }
+  }
+
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   * 
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices">
+          <span class="icon"><i class="fas fa-file-invoice"></i></span>
+          <span class="text">' . $this->translate('Invoices') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items?filters[fStatus]=1">
+          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="text">' . $this->translate('Prepared items') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payments">
+          <span class="icon"><i class="fas fa-euro-sign"></i></span>
+          <span class="text">' . $this->translate('Payments') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/profiles">
+          <span class="icon"><i class="fas fa-address-card"></i></span>
+          <span class="text">' . $this->translate('Profiles') . '</span>
+        </a>
+      </div>
+    ';
   }
 
 }

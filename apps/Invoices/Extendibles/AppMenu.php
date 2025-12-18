@@ -21,15 +21,15 @@ class AppMenu extends \Hubleto\Framework\Extendible
       ],
       [
         'app' => $this->app,
-        'url' => 'invoices/profiles',
-        'title' => $this->app->translate('Profiles'),
-        'icon' => 'fas fa-address-card',
-      ],
-      [
-        'app' => $this->app,
         'url' => 'invoices/payments',
         'title' => $this->app->translate('Payments'),
         'icon' => 'fas fa-euro-sign',
+      ],
+      [
+        'app' => $this->app,
+        'url' => 'invoices/profiles',
+        'title' => $this->app->translate('Profiles'),
+        'icon' => 'fas fa-address-card',
       ],
     ];
   }

@@ -118,6 +118,20 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     );
   }
 
+  showPreviewVars() {
+    request.post(
+      'invoices/api/get-preview-vars',
+      {
+        idInvoice: this.state.record.id,
+        idTemplate: this.state.record.id_template,
+      },
+      {},
+      (vars: any) => {
+        this.refPreview.current.setState({content: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
+      }
+    );
+  }
+
   renderTitle(): JSX.Element {
     const r = this.state.record;
     return <>
@@ -167,9 +181,11 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             </div>
             <div className="flex flex-5 gap-2 mt-2">
               <div className='flex-1'>
-                {this.inputWrapper('type', {uiStyle: 'buttons'})}
-                {this.inputWrapper('id_profile', {uiStyle: 'buttons'})}
                 {this.inputWrapper('id_customer')}
+                <div className='flex gap-2'>
+                  {this.inputWrapper('type', {uiStyle: 'buttons-vertical'})}
+                  {this.inputWrapper('id_profile', {uiStyle: 'buttons-vertical'})}
+                </div>
                 {this.state.id == -1 ? null : <>
                   {this.inputWrapper('id_currency')}
                   <div className='flex gap-2'>
@@ -434,10 +450,17 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
           <div className='flex-1 w-72 flex flex-col gap-2'>
             <div className='grow'>
               {this.inputWrapper('id_template', {
+                uiStyle: 'buttons-vertical',
                 onChange: (input: any) => {
                   this.updatePreview(input.state.value);
                 }
               })}
+              <a
+                href='#'
+                onClick={() => {
+                  this.showPreviewVars();
+                }}
+              >Show variables used in preview</a>
             </div>
             <div className='grow'>
               <button
@@ -448,9 +471,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                     {idInvoice: this.state.record.id},
                     {},
                     (result: any) => {
-                      if (result.idDocument) {
-                        window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
-                      }
+                      // if (result.idDocument) {
+                      //   window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+                      // }
+                      this.reload();
                     }
                   );
                 }}
@@ -458,7 +482,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 <span className='icon'><i className='fas fa-print'></i></span>
                 <span className='text'>Export to PDF</span>
               </button>
-              {this.inputWrapper('id_document')}
+              {this.inputWrapper('pdf', {readonly: true})}
             </div>
           </div>
           <div className="flex-3 gap-2 h-full card card-body">

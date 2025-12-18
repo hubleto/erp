@@ -257,7 +257,7 @@ class Order extends \Hubleto\Erp\Model
     if (!$template) throw new \Exception('Template was not found.');
 
     $generator = $this->getService(Generator::class);
-    $idDocument = $generator->generatePdfFromTemplate(
+    $idDocument = $generator->createPdfFromTemplate(
       $template->id,
       'order-' . $order->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf',
       $order->toArray()

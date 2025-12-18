@@ -21,7 +21,7 @@ final class GenerateDocumentTest extends TestCase
     ]);
 
     $generator = $hubleto->getService(Generator::class);
-    $generator->generatePdfFromTemplate(
+    $generator->createPdfFromTemplate(
       $template['id'],
       'test-create-template.pdf',
       ['time' => new \DateTimeImmutable()->format('Y-m-d H:I:s')]

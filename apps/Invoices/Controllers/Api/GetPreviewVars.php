@@ -4,19 +4,18 @@ namespace Hubleto\App\Community\Invoices\Controllers\Api;
 
 use Hubleto\App\Community\Invoices\Models\Invoice;
 
-class GeneratePdf extends \Hubleto\Erp\Controllers\ApiController
+class GetPreviewVars extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
     $idInvoice = $this->router()->urlParamAsInteger('idInvoice');
+    $idTemplate = $this->router()->urlParamAsInteger('idTemplate');
 
     /** @var Invoice */
     $mInvoice = $this->getModel(Invoice::class);
 
-    $pdfFile = $mInvoice->generatePdf($idInvoice);
-
     return [
-      'pdfFile' => $pdfFile
+      'vars' => $mInvoice->getPreviewVars($idInvoice)
     ];
   }
 }

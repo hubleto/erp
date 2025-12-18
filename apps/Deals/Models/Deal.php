@@ -391,7 +391,7 @@ class Deal extends \Hubleto\Erp\Model
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
     $generator = $this->getService(Generator::class);
-    $idDocument = $generator->generatePdfFromTemplate(
+    $idDocument = $generator->createPdfFromTemplate(
       $template->id,
       'quotation-' . Helper::str2url($deal->identifier) . ($deal->version ? '-v' . $deal->version : '') . '-' . date('YmdHis') . '.pdf',
       $vars

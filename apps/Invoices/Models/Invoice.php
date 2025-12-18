@@ -9,6 +9,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\File;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 
@@ -60,7 +61,6 @@ class Invoice extends \Hubleto\Erp\Model {
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
-    'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id' ],
 
     'ITEMS' => [ self::HAS_MANY, Item::class, "id_invoice", "id" ],
   ];
@@ -93,7 +93,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
-      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class, "CASCADE"))->setRequired(),
+      'pdf' => (new File($this, $this->translate('PDF'))),
     ]);
   }
 
@@ -348,6 +348,28 @@ class Invoice extends \Hubleto\Erp\Model {
     $vars = $invoice->toArray();
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
+    unset($vars['CUSTOMER']['CONTACTS']);
+    unset($vars['CUSTOMER']['OWNER']);
+    unset($vars['CUSTOMER']['MANAGER']);
+    unset($vars['CUSTOMER']['ACTIVITIES']);
+    unset($vars['CUSTOMER']['DOCUMENTS']);
+    unset($vars['CUSTOMER']['TAGS']);
+    unset($vars['CUSTOMER']['LEADS']);
+    unset($vars['CUSTOMER']['DEALS']);
+    unset($vars['PROFILE']['COMPANY']);
+    unset($vars['PROFILE']['TEMPLATE']);
+    unset($vars['ISSUED_BY']['ROLES']);
+    unset($vars['ISSUED_BY']['TEAMS']);
+    unset($vars['ISSUED_BY']['DEFAULT_COMPANY']);
+    unset($vars['WORKFLOW']);
+    unset($vars['WORKFLOW_STEP']);
+    unset($vars['TEMPLATE']);
+
+    foreach ($vars['ITEMS'] as $key => $item) {
+      unset($vars['ITEMS'][$key]['INVOICE']);
+      unset($vars['ITEMS'][$key]['CUSTOMER']);
+    }
+
     return $vars;
 
   }
@@ -374,10 +396,10 @@ class Invoice extends \Hubleto\Erp\Model {
    *
    * @param int $idInvoice Invoice for which the PDF should be generated.
    * 
-   * @return int ID of generated document.
+   * @return int Output filename.
    * 
    */
-  public function generatePdf(int $idInvoice): int
+  public function generatePdf(int $idInvoice): string
   {
     /** @var Invoice */
     $mInvoice = $this->getModel(Invoice::class);
@@ -394,22 +416,21 @@ class Invoice extends \Hubleto\Erp\Model {
     $vars = $invoice->toArray();
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
+    $invoiceOutputFilename = 'invoice-' . Helper::str2url($invoice->number) . '.pdf';
+
     /** @var Generator */
     $generator = $this->getService(Generator::class);
-    $idDocument = $generator->generatePdfFromTemplate(
+    $generator->generatePdfFromTemplate(
       $template->id,
-      'invoice-' . Helper::str2url($invoice->number) . '.pdf',
+      $invoiceOutputFilename,
       $vars
     );
 
-    if ($idDocument > 0) {
-      /** @var InvoiceDocument */
-      $mInvoice->record->find($idInvoice)->update([
-        'id_document' => $idDocument,
-      ]);
-    }
+    $mInvoice->record->find($idInvoice)->update([
+      'pdf' => $invoiceOutputFilename,
+    ]);
 
-    return $idDocument;
+    return $invoiceOutputFilename;
   }
 
 }

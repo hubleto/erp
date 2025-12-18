@@ -17,7 +17,7 @@ class GeneratePdfFromTemplate extends \Hubleto\Erp\Controllers\ApiController
     $template = $mTemplate->record->prepareReadQuery()->where('id', $idTemplate)->get();
 
     $generator = $this->getService(Generator::class);
-    $idDocument = $generator->generatePdfFromTemplate(
+    $idDocument = $generator->createPdfFromTemplate(
       $template->id,
       $outpuFilename,
       $vars

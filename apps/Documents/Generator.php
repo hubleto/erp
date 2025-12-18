@@ -11,29 +11,6 @@ class Generator extends \Hubleto\Framework\Core
 {
 
   /**
-   * Creates a document in upload folder with a given content and returns ID of created document.
-   *
-   * @param string $content Content of the document
-   * @param string $outputFilename Name of the output file
-   * 
-   * @return int ID of generated document
-   * 
-   */
-  public function saveFromString(string $content, string $outputFilename): int
-  {
-    @file_put_contents($this->env()->uploadFolder . '/' . $outputFilename, $content);
-    
-    $mDocument = $this->getModel(Models\Document::class);
-    $document = $mDocument->record->recordCreate([
-      'id_folder' => 0,
-      'name' => $outputFilename,
-      'file' => $outputFilename,
-    ]);
-
-    return (int) $document['id'];
-  }
-
-  /**
    * [Description for renderTemplate]
    *
    * @param int $idTemplate
@@ -87,10 +64,10 @@ class Generator extends \Hubleto\Framework\Core
    * @param string $outputFilename Name of the file to be generated.
    * @param array $vars Variable values to be replaced in template.
    * 
-   * @return int ID of generated document
+   * @return int ID of generated document (0 if $createDocumentEntry == false)
    * 
    */
-  public function generatePdfFromTemplate(int $idTemplate, string $outputFilename, array $vars): int
+  public function generatePdfFromTemplate(int $idTemplate, string $outputFilename, array $vars, bool $createDocumentEntry = false): int
   {
     $pdfGeneratorEndpoint = $this->config()->getAsString('pdfGeneratorEndpoint');
 
@@ -124,8 +101,37 @@ class Generator extends \Hubleto\Framework\Core
       $pdfString = $dompdf->output();
     }
 
-    $idDocument = $this->saveFromString($pdfString, $outputFilename);
-    return $idDocument;
+    @file_put_contents(
+      $this->env()->uploadFolder . '/' . $outputFilename,
+      $pdfString
+    );
+
+    if ($createDocumentEntry) {
+      $mDocument = $this->getModel(Models\Document::class);
+      $document = $mDocument->record->recordCreate([
+        'id_folder' => 0,
+        'name' => $outputFilename,
+        'file' => $outputFilename,
+      ]);
+
+      return (int) $document['id'];
+    } else {
+      return 0;
+    }
   }
 
+  /**
+   * Shorthand for generatePdfFromTemplate with $createDocumentEntry set to true.
+   *
+   * @param int $idTemplate
+   * @param string $outputFilename
+   * @param array $vars
+   * 
+   * @return int
+   * 
+   */
+  public function createPdfFromTemplate(int $idTemplate, string $outputFilename, array $vars): int
+  {
+    return $this->generatePdfFromTemplate($idTemplate, $outputFilename, $vars, true);
+  }
 }

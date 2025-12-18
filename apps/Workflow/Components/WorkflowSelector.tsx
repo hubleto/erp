@@ -117,38 +117,48 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
         </div> : <div className='flex gap-2'>
           <div className='flex flex-col'>
             <div className='flex items-center'>
-              {steps && steps.length > 0 ? 
-                steps.map((s, i) => {
-                  if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
-                  else if (s.id == R.id_workflow_step) stepBtnClass = "btn-primary";
-                  
-                  return <button
-                    key={i}
-                    onClick={() => this.onWorkflowStepChange(s.id, s)}
-                    className={`btn btn-small ${stepBtnClass} border-none rounded-none`}
-                  >
-                    <div
-                      className="icon p-0"
-                      style={{
-                        borderTop: '1em solid transparent',
-                        borderBottom: '1em solid transparent',
-                        borderLeft: '1em solid ' + s.color
-                      }}
+              {steps && steps.length > 0 ? <>
+                <div>
+                  {steps.map((s, i) => {
+                    if (stepBtnClass == "btn-primary") stepBtnClass = "btn-transparent";
+                    else if (s.id == R.id_workflow_step) stepBtnClass = "btn-primary";
+                    
+                    return <button
+                      key={i}
+                      onClick={() => this.onWorkflowStepChange(s.id, s)}
+                      className={`btn btn-small ${stepBtnClass} border-none rounded-none`}
                     >
-                    </div>
-                    <div className='text'>
-                      {s.name}
-                      {/* {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null} */}
-                    </div>
-                  </button>;
-                })
-              : <p className='w-full text-center'>Workflow has no steps.</p>}
-            </div>
-            <div className='text-xs text-gray-400 flex gap-2'>
-              {history[0] ? <>Last update: {history[0].datetime_change} by {history[0].USER?.nick ?? 'unknown'}</> : null}
-              <a href='#' onClick={() => { this.setState({changeWorkflow: true}); }}>
-                <span className="text">Change workflow</span>
-              </a>
+                      <div
+                        className="icon p-0"
+                        style={{
+                          borderTop: '1em solid transparent',
+                          borderBottom: '1em solid transparent',
+                          borderLeft: '1em solid ' + s.color
+                        }}
+                      >
+                      </div>
+                      <div className='text'>
+                        {s.name}
+                        {/* {s.probability ? <small className='whitespace-nowrap ml-2'>({s.probability} %)</small> : null} */}
+                      </div>
+                    </button>;
+                  })}
+                </div>
+                <div className='text-xs text-gray-400 flex gap-2'>
+                  {history[0] ? <>Last update: {history[0].datetime_change} by {history[0].USER?.nick ?? 'unknown'}</> : null}
+                  <a href='#' onClick={() => { this.setState({changeWorkflow: true}); }}>
+                    <span className="text">Change workflow</span>
+                  </a>
+                </div>
+              </> : <div>
+                <button
+                  className='btn btn-primary-outline btn-small'
+                  onClick={() => { this.setState({changeWorkflow: true}); }}
+                >
+                  <span className='icon'><i className='fas fa-timeline'></i></span>
+                  <span className="text">Change workflow</span>
+                </button>
+              </div>}
             </div>
           </div>
         </div>}

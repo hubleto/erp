@@ -10,7 +10,6 @@ use Hubleto\App\Community\Invoices\Models\RecordManagers\Profile;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
-use Hubleto\App\Community\Documents\Models\RecordManagers\Document;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -56,12 +55,6 @@ class Invoice extends \Hubleto\Erp\RecordManager {
   public function TEMPLATE(): HasOne
   {
     return $this->hasOne(Template::class, 'id', 'id_template');
-  }
-
-  /** @return BelongsTo<Document, covariant CustomerDocument> */
-  public function DOCUMENT(): BelongsTo
-  {
-    return $this->belongsTo(Document::class, 'id_document', 'id');
   }
 
   /** @return HasMany<Item, covariant Invoice> */

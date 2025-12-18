@@ -18,6 +18,7 @@ class Loader extends \Hubleto\Framework\App
     $this->router()->get([
       '/^invoices\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
       '/^invoices\/api\/get-preview-html\/?$/' => Controllers\Api\GetPreviewHtml::class,
+      '/^invoices\/api\/get-preview-vars\/?$/' => Controllers\Api\GetPreviewVars::class,
       '/^invoices\/api\/link-prepared-item\/?$/' => Controllers\Api\LinkPreparedItem::class,
       '/^invoices\/api\/unlink-prepared-item\/?$/' => Controllers\Api\UnlinkPreparedItem::class,
       '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,

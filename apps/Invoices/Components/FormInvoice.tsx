@@ -455,12 +455,6 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   this.updatePreview(input.state.value);
                 }
               })}
-              <a
-                href='#'
-                onClick={() => {
-                  this.showPreviewVars();
-                }}
-              >Show variables used in preview</a>
             </div>
             <div className='grow'>
               <button
@@ -490,6 +484,12 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               ref={this.refPreview}
               className='w-full h-full'
             />
+            <a
+              href='#'
+              onClick={() => {
+                this.showPreviewVars();
+              }}
+            >Show variables which can be used in template</a>
           </div>
         </div>;
       break;

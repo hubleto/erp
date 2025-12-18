@@ -13,6 +13,7 @@ import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import Calendar from '../../Calendar/Components/Calendar';
 import moment, { Moment } from "moment";
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 
 export interface FormOrderProps extends HubletoFormProps {
 }
@@ -39,6 +40,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
   refLogActivityInput: any;
   refActivityModal: any;
+  refActivityForm: any;
+  refPreview: any;
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\FormOrder';
@@ -50,6 +53,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
 
     this.refLogActivityInput = React.createRef();
     this.refActivityModal = React.createRef();
+    this.refActivityForm = React.createRef();
+    this.refPreview = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -68,6 +73,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
         { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
+        { uid: 'preview', title: this.translate('Preview') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'payments', title: this.translate('Payments') },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
@@ -86,9 +92,46 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
+  onTabChange() {
+    const tabUid = this.state.activeTabUid;
+    switch (tabUid) {
+      case 'preview':
+        this.updatePreview(this.state.record.id_template);
+      break;
+    }
+  }
+
+  updatePreview(idTemplate: number) {
+    request.post(
+      'orders/api/get-preview-html',
+      {
+        idOrder: this.state.record.id,
+        idTemplate: idTemplate,
+      },
+      {},
+      (result: any) => {
+        this.refPreview.current.setState({content: result.html});
+      }
+    );
+  }
+
+  showPreviewVars() {
+    request.post(
+      'orders/api/get-preview-vars',
+      {
+        idOrder: this.state.record.id,
+        idTemplate: this.state.record.id_template,
+      },
+      {},
+      (vars: any) => {
+        this.refPreview.current.setState({content: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
+      }
+    );
+  }
+
   renderTitle(): JSX.Element {
     return <>
-      <small>Order</small>
+      <small>{this.state.record.purchase_sales == 1 ? 'Purchase Order' : 'Sales Order'}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>
     </>;
   }
@@ -130,32 +173,32 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     } as FormOrderState);
   }
 
-  getHeaderButtons()
-  {
-    return [
-      ...super.getHeaderButtons(),
-      {
-        title: 'Generate PDF',
-        onClick: () => {
-          request.post(
-            'orders/api/generate-pdf',
-            {idOrder: this.state.record.id},
-            {},
-            (result: any) => {
-              console.log(result);
-              if (result.idDocument) {
-                window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
-              }
-            }
-          );
-        }
-      },
-      {
-        title: 'Close order',
-        onClick: () => { }
-      }
-    ]
-  }
+  // getHeaderButtons()
+  // {
+  //   return [
+  //     ...super.getHeaderButtons(),
+  //     {
+  //       title: 'Generate PDF',
+  //       onClick: () => {
+  //         request.post(
+  //           'orders/api/generate-pdf',
+  //           {idOrder: this.state.record.id},
+  //           {},
+  //           (result: any) => {
+  //             console.log(result);
+  //             if (result.idDocument) {
+  //               window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+  //             }
+  //           }
+  //         );
+  //       }
+  //     },
+  //     {
+  //       title: 'Close order',
+  //       onClick: () => { }
+  //     }
+  //   ]
+  // }
 
   // renderTopMenu(): JSX.Element {
   //   const R = this.state.record;
@@ -226,28 +269,77 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                     </FormInput>
                   </div>
                 </div>
-                {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
-                {this.inputWrapper('identifier_external')}
-                {this.inputWrapper('title', {cssClass: 'text-2xl'})}
-                {<div className='flex flex-row *:w-1/2'>
+                <div className='flex gap-2'>
+                  <div className='grow'>
+                    {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
+                    {this.inputWrapper('title', {cssClass: 'text-2xl'})}
                     {this.inputWrapper('price_excl_vat')}
                     {this.inputWrapper('price_incl_vat')}
                     {this.inputWrapper('id_currency')}
-                </div>}
-                {this.inputWrapper('note')}
-                {this.inputWrapper('id_owner')}
-                {this.inputWrapper('id_manager')}
-                {this.inputWrapper('date_order')}
-                {this.inputWrapper('required_delivery_date')}
-                {this.inputWrapper('shared_folder')}
-                {this.inputWrapper('shipping_info')}
-                {this.inputWrapper('id_template')}
+                    {this.inputWrapper('date_order')}
+                    {this.inputWrapper('required_delivery_date')}
+                    {this.inputWrapper('shared_folder')}
+                  </div>
+                  <div className='grow'>
+                    {this.inputWrapper('identifier_external')}
+                    {this.inputWrapper('note')}
+                    {this.inputWrapper('id_owner')}
+                    {this.inputWrapper('id_manager')}
+                    {this.inputWrapper('shipping_info')}
+                    {this.inputWrapper('id_template')}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </>;
       break;
 
+      case 'preview':
+        return <div className='flex gap-2 h-full'>
+          <div className='flex-1 w-72 flex flex-col gap-2'>
+            <div className='grow'>
+              {this.inputWrapper('id_template', {
+                uiStyle: 'buttons-vertical',
+                onChange: (input: any) => {
+                  this.updatePreview(input.state.value);
+                }
+              })}
+            </div>
+            <div className='grow'>
+              <button
+                className='btn btn-transparent btn-large mb-4'
+                onClick={() => {
+                  request.post(
+                    'orders/api/generate-pdf',
+                    {idOrder: this.state.record.id},
+                    {},
+                    (result: any) => {
+                      this.reload();
+                    }
+                  );
+                }}
+              >
+                <span className='icon'><i className='fas fa-print'></i></span>
+                <span className='text'>Export to PDF</span>
+              </button>
+              {this.inputWrapper('pdf', {readonly: true})}
+            </div>
+          </div>
+          <div className="flex-3 gap-2 h-full card card-body">
+            <HtmlFrame
+              ref={this.refPreview}
+              className='w-full h-full'
+            />
+            <a
+              href='#'
+              onClick={() => {
+                this.showPreviewVars();
+              }}
+            >Show variables which can be used in template</a>
+          </div>
+        </div>;
+      break;
 
       case 'calendar':
         //@ts-ignore
@@ -356,14 +448,16 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
               {this.state.id > 0 ? recentActivitiesAndCalendar : null}
             </div>
           </div>
-          {this.state.showIdActivity == 0 ? null :
+          {/* {this.state.showIdActivity == 0 ? null :
             <ModalForm
               ref={this.refActivityModal}
+              form={this.refActivityForm}
               uid='activity_form'
               isOpen={true}
               type='right'
             >
               <OrdersFormActivity
+                ref={this.refActivityForm}
                 modal={this.refActivityModal}
                 id={this.state.showIdActivity}
                 isInlineEditing={true}
@@ -387,7 +481,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 }}
               ></OrdersFormActivity>
             </ModalForm>
-          }
+          } */}
         </>;
       break;
 
@@ -499,12 +593,14 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       {this.state.showIdActivity == 0 ? <></> :
         <ModalForm
           ref={this.refActivityModal}
+          form={this.refActivityForm}
           uid='activity_form'
           isOpen={true}
           type='right'
         >
           <OrdersFormActivity
             id={this.state.showIdActivity}
+            ref={this.refActivityForm}
             modal={this.refActivityModal}
             isInlineEditing={true}
             description={{

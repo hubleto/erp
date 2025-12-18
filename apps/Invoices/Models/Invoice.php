@@ -413,8 +413,7 @@ class Invoice extends \Hubleto\Erp\Model {
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $invoice->id_template)->first();
     if (!$template) throw new \Exception('Template was not found.');
 
-    $vars = $invoice->toArray();
-    $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
+    $vars = $this->getPreviewVars($idInvoice);
 
     $invoiceOutputFilename = 'invoice-' . Helper::str2url($invoice->number) . '.pdf';
 

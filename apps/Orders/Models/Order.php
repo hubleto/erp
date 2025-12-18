@@ -12,6 +12,7 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Products\Models\Product;
@@ -70,8 +71,8 @@ class Order extends \Hubleto\Erp\Model
         self::PURCHASE_ORDER => $this->translate('Purchase order'),
         self::SALES_ORDER => $this->translate('Sales order'),
       ])->setEnumCssClasses([
-        self::PURCHASE_ORDER => 'bg-lime-50',
-        self::SALES_ORDER => 'bg-yellow-50',
+        self::PURCHASE_ORDER => 'bg-lime-50 text-slate-700',
+        self::SALES_ORDER => 'bg-yellow-50 text-slate-700',
       ])->setDefaultValue(self::PURCHASE_ORDER)->setDefaultVisible(),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
       'identifier_external' => (new Varchar($this, $this->translate('Identifier external')))->setDefaultVisible(),
@@ -94,6 +95,7 @@ class Order extends \Hubleto\Erp\Model
         ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
       ,
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
+      'pdf' => (new File($this, $this->translate('PDF'))),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
     ]);
   }
@@ -262,6 +264,58 @@ class Order extends \Hubleto\Erp\Model
     return $savedRecord;
   }
 
+  public function getPreviewVars(int $idOrder): array
+  {
+    /** @var Order */
+    $mOrder = $this->getModel(Order::class);
+
+    $order = $mOrder->record->prepareReadQuery()->where('Orders.id', $idOrder)->first();
+    if (!$order) throw new \Exception('Order was not found.');
+
+    $vars = $order->toArray();
+    $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
+
+    unset($vars['CUSTOMER']['CONTACTS']);
+    unset($vars['CUSTOMER']['OWNER']);
+    unset($vars['CUSTOMER']['MANAGER']);
+    unset($vars['CUSTOMER']['ACTIVITIES']);
+    unset($vars['CUSTOMER']['DOCUMENTS']);
+    unset($vars['CUSTOMER']['TAGS']);
+    unset($vars['CUSTOMER']['LEADS']);
+    unset($vars['CUSTOMER']['DEALS']);
+    unset($vars['PROFILE']['COMPANY']);
+    unset($vars['PROFILE']['TEMPLATE']);
+    unset($vars['OWNER']['ROLES']);
+    unset($vars['OWNER']['TEAMS']);
+    unset($vars['OWNER']['DEFAULT_COMPANY']);
+    unset($vars['MANAGER']['ROLES']);
+    unset($vars['MANAGER']['TEAMS']);
+    unset($vars['MANAGER']['DEFAULT_COMPANY']);
+    unset($vars['WORKFLOW']);
+    unset($vars['WORKFLOW_STEP']);
+    unset($vars['TEMPLATE']);
+
+    return $vars;
+
+  }
+
+  public function getPreviewHtml(int $idOrder): string
+  {
+
+    $vars = $this->getPreviewVars($idOrder);
+
+    /** @var Template */
+    $mTemplate = $this->getService(Template::class);
+
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
+    if (!$template) throw new \Exception('Template was not found.');
+
+
+    /** @var Generator */
+    $generator = $this->getService(Generator::class);
+    return $generator->renderTemplate($vars['id_template'], $vars);
+  }
+
   /**
    * Generates PDF document from given order and returns ID of generated document
    *
@@ -280,20 +334,20 @@ class Order extends \Hubleto\Erp\Model
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $order->id_template)->first();
     if (!$template) throw new \Exception('Template was not found.');
 
+    $vars = $this->getPreviewVars($idOrder);
+
+    $orderOutputFilename = 'order-' . $order->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
+
     $generator = $this->getService(Generator::class);
     $idDocument = $generator->createPdfFromTemplate(
       $template->id,
-      'order-' . $order->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf',
-      $order->toArray()
+      $orderOutputFilename,
+      $vars
     );
 
-    if ($idDocument > 0) {
-      $mOrderDocument = $this->getService(OrderDocument::class);
-      $mOrderDocument->record->recordCreate([
-        'id_order' => $idOrder,
-        'id_document' => $idDocument,
-      ]);
-    }
+    $mOrder->record->find($idOrder)->update([
+      'pdf' => $orderOutputFilename,
+    ]);
 
     return $idDocument;
   }

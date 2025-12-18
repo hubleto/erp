@@ -12,6 +12,7 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\App\Community\Settings\Models\Currency;
@@ -25,10 +26,13 @@ use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Invoices\Models\Invoice;
 use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
 use Hubleto\App\Community\Auth\Models\User;
-
+use Hubleto\App\Community\Suppliers\Models\Supplier;
 
 class Order extends \Hubleto\Erp\Model
 {
+  const PURCHASE_ORDER = 1;
+  const SALES_ORDER = 2;
+
   public string $table = 'orders';
   public string $recordManagerClass = RecordManagers\Order::class;
   public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.identifier, ""), " ", ifnull({%TABLE%}.title, ""))';
@@ -62,10 +66,18 @@ class Order extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'purchase_sales' => (new Integer($this, $this->translate('Order type')))->setEnumValues([
+        self::PURCHASE_ORDER => $this->translate('Purchase order'),
+        self::SALES_ORDER => $this->translate('Sales order'),
+      ])->setEnumCssClasses([
+        self::PURCHASE_ORDER => 'bg-lime-50',
+        self::SALES_ORDER => 'bg-yellow-50',
+      ])->setDefaultValue(self::PURCHASE_ORDER)->setDefaultVisible(),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
-      'identifier_customer' => (new Varchar($this, $this->translate('Identifier at customer')))->setDefaultVisible(),
+      'identifier_external' => (new Varchar($this, $this->translate('Identifier external')))->setDefaultVisible(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
@@ -117,6 +129,18 @@ class Order extends \Hubleto\Erp\Model
         'default' => 0,
       ],
     ];
+
+    $view = $this->router()->urlParamAsString("view");
+
+    $description->addFilter('fPurchaseSales', [
+      'title' => $this->translate('fPurchaseSales'),
+      'options' => [
+        0 => $this->translate('All'),
+        self::PURCHASE_ORDER => $this->translate('Purchase orders'),
+        self::SALES_ORDER => $this->translate('Sales orders'),
+      ],
+      'default' => ($view == 'purchaseOrders' ? self::PURCHASE_ORDER : ($view == 'salesOrders' ? self::SALES_ORDER : 0)),
+    ]);
 
     $fCustomerOptions = [];
     foreach ($this->record->groupBy('id_customer')->with('CUSTOMER')->get() as $value) {

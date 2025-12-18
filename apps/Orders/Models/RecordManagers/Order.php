@@ -103,6 +103,7 @@ class Order extends \Hubleto\Erp\RecordManager
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
+    $view = $hubleto->router()->urlParamAsString("view");
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
@@ -114,6 +115,13 @@ class Order extends \Hubleto\Erp\RecordManager
       if ($filters["fOrderClosed"] == 0) $query = $query->where("orders.is_closed", false);
       if ($filters["fOrderClosed"] == 1) $query = $query->where("orders.is_closed", true);
     }
+
+    if (isset($filters["fPurchaseSales"]) && $filters["fPurchaseSales"] > 0) {
+      $query = $query->where("orders.purchase_sales", $filters["fPurchaseSales"]);
+    }
+
+    if ($view == 'purchaseOrders') $query = $query->where("orders.purchase_sales", 1);
+    if ($view == 'salesOrders') $query = $query->where("orders.purchase_sales", 2);
 
     return $query;
   }

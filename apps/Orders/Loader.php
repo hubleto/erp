@@ -56,6 +56,14 @@ class Loader extends \Hubleto\Framework\App
     $dashboardManager->addBoard($this, $this->translate('Order warnings'), 'orders/boards/order-warnings');
   }
 
+  /**
+   * [Description for installTables]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installTables(int $round): void
   {
     if ($round == 1) {
@@ -81,6 +89,38 @@ class Loader extends \Hubleto\Framework\App
     }
   }
 
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   * 
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders">
+          <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
+          <span class="text">' . $this->translate('All orders') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders?view=purchaseOrders">
+          <span class="icon"><i class="fas fa-cart-shopping"></i></span>
+          <span class="text">' . $this->translate('Purchase orders') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders?view=salesOrders">
+          <span class="icon"><i class="fas fa-euro-sign"></i></span>
+          <span class="text">' . $this->translate('Sales orders') . '</span>
+        </a>
+      </div>
+    ';
+  }
+
+  /**
+   * [Description for generateDemoData]
+   *
+   * @return void
+   * 
+   */
   public function generateDemoData(): void
   {
     $mCustomer = $this->getModel(\Hubleto\App\Community\Customers\Models\Customer::class);

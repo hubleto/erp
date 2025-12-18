@@ -174,52 +174,61 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     switch (tabUid) {
       case 'default':
         return <>
+          {this.inputWrapper('purchase_sales', { uiStyle: 'buttons' })}
           <div className='card'>
             <div className='card-body flex flex-row gap-2'>
               <div className='grow'>
-                <FormInput title={"Deal"}>
-                  {this.state.selectParentDeal ? <>
-                    <Lookup
-                      model='Hubleto/App/Community/Deals/Models/Deal'
-                      cssClass='font-bold'
-                      onChange={(input: any, value: any) => {
-                        request.post(
-                          'orders/api/set-parent-deal',
-                          {
-                            idOrder: this.state.record.id,
-                            idDeal: value,
-                          },
-                          {},
-                          (data: any) => {
-                            this.setState({selectParentDeal: false}, () => this.reload());
-                          }
-                        )
-                      }}
-                    ></Lookup>
-                  </> : <>
-                    {R.DEALS ? R.DEALS.map((item, key) => {
-                      if (!item.DEAL) return null;
-                      return (item.DEAL ? <a
-                        key={key}
-                        className='badge'
-                        href={globalThis.main.config.projectUrl + '/deals/' + item.DEAL.id}
-                        target='_blank'
-                      >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
-                    }) : null}
-                    <button
-                      className='btn btn-small btn-transparent'
-                      onClick={() => {
-                        this.setState({selectParentDeal: true});
-                      }}
-                    >
-                      <span className='text'>Select parent deal</span>
-                    </button>
-                  </>}
-                </FormInput>
+                <div className='flex gap-2'>
+                  <div className='grow'>
+                    {R.purchase_sales == 1 ?
+                      this.inputWrapper('id_customer')
+                    : this.inputWrapper('id_supplier')}
+                  </div>
+                  <div>
+                    <FormInput title={"Deal"}>
+                      {this.state.selectParentDeal ? <>
+                        <Lookup
+                          model='Hubleto/App/Community/Deals/Models/Deal'
+                          cssClass='font-bold'
+                          onChange={(input: any, value: any) => {
+                            request.post(
+                              'orders/api/set-parent-deal',
+                              {
+                                idOrder: this.state.record.id,
+                                idDeal: value,
+                              },
+                              {},
+                              (data: any) => {
+                                this.setState({selectParentDeal: false}, () => this.reload());
+                              }
+                            )
+                          }}
+                        ></Lookup>
+                      </> : <>
+                        {R.DEALS ? R.DEALS.map((item, key) => {
+                          if (!item.DEAL) return null;
+                          return (item.DEAL ? <a
+                            key={key}
+                            className='badge'
+                            href={globalThis.main.config.projectUrl + '/deals/' + item.DEAL.id}
+                            target='_blank'
+                          >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
+                        }) : null}
+                        <button
+                          className='btn btn-small btn-transparent'
+                          onClick={() => {
+                            this.setState({selectParentDeal: true});
+                          }}
+                        >
+                          <span className='text'>Select parent deal</span>
+                        </button>
+                      </>}
+                    </FormInput>
+                  </div>
+                </div>
                 {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
-                {this.inputWrapper('identifier_customer')}
+                {this.inputWrapper('identifier_external')}
                 {this.inputWrapper('title', {cssClass: 'text-2xl'})}
-                {this.inputWrapper('id_customer')}
                 {<div className='flex flex-row *:w-1/2'>
                     {this.inputWrapper('price_excl_vat')}
                     {this.inputWrapper('price_incl_vat')}

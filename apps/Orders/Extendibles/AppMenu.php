@@ -25,6 +25,12 @@ class AppMenu extends \Hubleto\Framework\Extendible
         'title' => $this->app->translate('Sales orders'),
         'icon' => 'fas fa-euro-sign',
       ],
+      [
+        'app' => $this->app,
+        'url' => 'orders/payments',
+        'title' => $this->app->translate('Payments'),
+        'icon' => 'fas fa-euro-sign',
+      ],
     ];
   }
 

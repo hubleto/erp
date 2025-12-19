@@ -30,8 +30,8 @@ class Loader extends \Hubleto\Framework\App
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 
-      '/^orders\/?$/' => Controllers\Orders::class,
-      '/^orders\/(?<recordId>\d+)\/?$/' => Controllers\Orders::class,
+      '/^orders(\/(?<recordId>\d+))?\/?$/' => Controllers\Orders::class,
+      '/^orders\/payments(\/(?<recordId>\d+))?\/?$/' => Controllers\Payments::class,
 
       '/^orders\/states\/?$/' => Controllers\States::class,
     ]);
@@ -112,6 +112,10 @@ class Loader extends \Hubleto\Framework\App
         <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=salesOrders">
           <span class="icon"><i class="fas fa-euro-sign"></i></span>
           <span class="text">' . $this->translate('Sales orders') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/payments">
+          <span class="icon"><i class="fas fa-euro-sign"></i></span>
+          <span class="text">' . $this->translate('Payments') . '</span>
         </a>
       </div>
     ';

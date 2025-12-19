@@ -87,7 +87,7 @@ class Invoice extends \Hubleto\Erp\Model {
       ])->setDefaultValue(self::INBOUND_INVOICE)->setDefaultVisible(),
       'id_profile' => (new Lookup($this, $this->translate('Invoicing profile'), Profile::class))->setDefaultVisible()->setRequired(),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON)->setRequired(),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired(),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),

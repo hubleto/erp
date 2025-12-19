@@ -217,7 +217,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     switch (tabUid) {
       case 'default':
         return <>
-          {this.inputWrapper('purchase_sales', { uiStyle: 'buttons' })}
+          {this.input('purchase_sales', { uiStyle: 'buttons' })}
           <div className='card'>
             <div className='card-body flex flex-row gap-2'>
               <div className='grow'>

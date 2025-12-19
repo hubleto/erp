@@ -40,7 +40,8 @@ class Order extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'orders/{%ID%}';
 
   public array $relations = [
-    'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id','id_customer'],
+    'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id', 'id_customer'],
+    'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id', 'id_supplier'],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
@@ -134,7 +135,7 @@ class Order extends \Hubleto\Erp\Model
     $view = $this->router()->urlParamAsString("view");
 
     $description->addFilter('fPurchaseSales', [
-      'title' => $this->translate('fPurchaseSales'),
+      'title' => $this->translate('Purchase / Sales'),
       'options' => [
         0 => $this->translate('All'),
         self::PURCHASE_ORDER => $this->translate('Purchase orders'),

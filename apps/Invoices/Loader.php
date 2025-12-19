@@ -67,8 +67,17 @@ class Loader extends \Hubleto\Framework\App
       <div class="flex flex-col gap-2">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices">
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
-          <span class="text">' . $this->translate('Invoices') . '</span>
+          <span class="text">' . $this->translate('All invoices') . '</span>
         </a>
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?view=outboundInvoices">
+          <span class="icon"><i class="fas fa-cart-shopping"></i></span>
+          <span class="text">' . $this->translate('Outbound invoices') . '</span>
+        </a>
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?view=inboundInvoices">
+          <span class="icon"><i class="fas fa-euro-sign"></i></span>
+          <span class="text">' . $this->translate('Inbound invoices') . '</span>
+        </a>
+        <br/>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items?filters[fStatus]=1">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Prepared items') . '</span>

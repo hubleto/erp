@@ -19,7 +19,7 @@ use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Documents\Models\Template;
-use Hubleto\App\Community\Documents\Models\Document;
+use Hubleto\App\Community\Suppliers\Models\Supplier;
 use Hubleto\Framework\Helper;
 
 class Invoice extends \Hubleto\Erp\Model {
@@ -38,6 +38,9 @@ class Invoice extends \Hubleto\Erp\Model {
     5 => 'Debit Note',
   ];
 
+  const INBOUND_INVOICE = 1;
+  const OUTBOUND_INVOICE = 2;
+
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '
     concat(
@@ -55,6 +58,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],
+    'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id', 'id_supplier'],
     'PROFILE' => [ self::BELONGS_TO, Profile::class, "id_profile" ],
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
@@ -74,9 +78,17 @@ class Invoice extends \Hubleto\Erp\Model {
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'inbound_outbound' => (new Integer($this, $this->translate('Invoice type')))->setEnumValues([
+        self::INBOUND_INVOICE => $this->translate('Inbound invoice'),
+        self::OUTBOUND_INVOICE => $this->translate('Outbound invoice'),
+      ])->setEnumCssClasses([
+        self::INBOUND_INVOICE => 'bg-lime-50 text-slate-700',
+        self::OUTBOUND_INVOICE => 'bg-yellow-50 text-slate-700',
+      ])->setDefaultValue(self::INBOUND_INVOICE)->setDefaultVisible(),
       'id_profile' => (new Lookup($this, $this->translate('Invoicing profile'), Profile::class))->setDefaultVisible()->setRequired(),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON)->setRequired(),
+      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired(),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
@@ -113,6 +125,18 @@ class Invoice extends \Hubleto\Erp\Model {
     $description->ui['filters'] = [
       'fInvoiceWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
     ];
+
+    $view = $this->router()->urlParamAsString("view");
+
+    $description->addFilter('fInboundOutbound', [
+      'title' => $this->translate('Inbound / Outbound'),
+      'options' => [
+        0 => $this->translate('All'),
+        self::INBOUND_INVOICE => $this->translate('Inbound invoices'),
+        self::OUTBOUND_INVOICE => $this->translate('Outbound invoices'),
+      ],
+      'default' => ($view == 'inboundInvoices' ? self::INBOUND_INVOICE : ($view == 'outboundInvoices' ? self::OUTBOUND_INVOICE : 0)),
+    ]);
 
     return $description;
   }

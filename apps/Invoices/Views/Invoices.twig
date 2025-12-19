@@ -2,6 +2,7 @@
 
 <app-invoices-table-invoices
   string:tag="table-invoices"
+  string:view="{{ viewParams.view }}"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
 ></app-invoices-table-invoices>

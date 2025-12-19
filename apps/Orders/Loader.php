@@ -105,11 +105,11 @@ class Loader extends \Hubleto\Framework\App
           <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
           <span class="text">' . $this->translate('All orders') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders?view=purchaseOrders">
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=purchaseOrders">
           <span class="icon"><i class="fas fa-cart-shopping"></i></span>
           <span class="text">' . $this->translate('Purchase orders') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders?view=salesOrders">
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=salesOrders">
           <span class="icon"><i class="fas fa-euro-sign"></i></span>
           <span class="text">' . $this->translate('Sales orders') . '</span>
         </a>

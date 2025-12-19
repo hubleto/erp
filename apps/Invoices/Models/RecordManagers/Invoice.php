@@ -10,7 +10,7 @@ use Hubleto\App\Community\Invoices\Models\RecordManagers\Profile;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
-
+use Hubleto\App\Community\Suppliers\Models\RecordManagers\Supplier;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -21,6 +21,11 @@ class Invoice extends \Hubleto\Erp\RecordManager {
   /** @return BelongsTo<Customer, covariant Invoice> */
   public function CUSTOMER(): BelongsTo {
     return $this->BelongsTo(Customer::class, 'id_customer');
+  }
+
+  /** @return BelongsTo<Customer, covariant Invoice> */
+  public function SUPPLIER(): BelongsTo {
+    return $this->BelongsTo(Supplier::class, 'id_supplier');
   }
 
   /** @return BelongsTo<Profile, covariant Invoice> */
@@ -76,6 +81,8 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     $query = parent::prepareReadQuery($query, $level);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+    $view = $hubleto->router()->urlParamAsString("view");
 
     $idCustomer = $hubleto->router()->urlParamAsInteger('idCustomer');
     if ($idCustomer > 0) $query->where('id_customer', $idCustomer);
@@ -83,10 +90,17 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     $idProfile = $hubleto->router()->urlParamAsInteger('idProfile');
     if ($idProfile > 0) $query->where('id_profile', $idProfile);
 
+    if (isset($filters["fInboundOutbound"]) && $filters["fInboundOutbound"] > 0) {
+      $query = $query->where("invoices.inbound_outbound", $filters["fInboundOutbound"]);
+    }
+
+    if ($view == 'inboundInvoices') $query = $query->where("invoices.inbound_outbound", 1);
+    if ($view == 'outboundInvoices') $query = $query->where("invoices.inbound_outbound", 2);
+
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,
-      $filters['fInvoiceWorkflowStep'] ?? []
+      (array) ($filters['fInvoiceWorkflowStep'] ?? [])
     );
 
     if ($hubleto->router()->urlParamNotEmpty('number')) $query->where('number', 'like', '%' . $hubleto->router()->urlParamAsString('number') . '%');

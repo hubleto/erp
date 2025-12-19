@@ -8,6 +8,7 @@ use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
 use Hubleto\App\Community\Projects\Models\RecordManagers\ProjectOrder;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
+use Hubleto\App\Community\Suppliers\Models\RecordManagers\Supplier;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -82,6 +83,11 @@ class Order extends \Hubleto\Erp\RecordManager
   public function CUSTOMER(): HasOne
   {
     return $this->hasOne(Customer::class, 'id', 'id_customer');
+  }
+
+  /** @return BelongsTo<Customer, covariant Invoice> */
+  public function SUPPLIER(): BelongsTo {
+    return $this->BelongsTo(Supplier::class, 'id_supplier');
   }
 
   /** @return hasOne<Currency, covariant Lead> */

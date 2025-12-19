@@ -135,7 +135,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   renderTitle(): JSX.Element {
     const r = this.state.record;
     return <>
-      <small>{this.translate('Invoice')}</small>
+      <small>{this.state.record.inbound_outbound == 1 ? 'Inbound Invoice' : 'Outbound Invoice'}</small>
       <h2>{r.number ? r.number : '---'}</h2>
     </>;
   }
@@ -147,6 +147,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       case 'default':
         const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
         return <>
+          {this.input('inbound_outbound', { uiStyle: 'buttons' })}
           <div className='flex gap-2'>
             <div className='gap-2 w-56'>
               <div className='p-2 grow'>
@@ -181,7 +182,11 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             </div>
             <div className="flex flex-5 gap-2 mt-2">
               <div className='flex-1'>
-                {this.inputWrapper('id_customer')}
+                <div className='grow'>
+                  {R.inbound_outbound == 1 ?
+                    this.inputWrapper('id_customer')
+                  : this.inputWrapper('id_supplier')}
+                </div>
                 <div className='flex gap-2'>
                   {this.inputWrapper('type', {uiStyle: 'buttons-vertical'})}
                   {this.inputWrapper('id_profile', {uiStyle: 'buttons-vertical'})}

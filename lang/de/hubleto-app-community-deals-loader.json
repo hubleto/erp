@@ -99,7 +99,7 @@
         "Deal": "Handeln",
         "Tag": "Etikett"
     },
-    "Models\\DealProduct": {
+    "Models\\Item": {
         "Deal": "Handeln",
         "Product": "Produkt",
         "Unit Price": "Stückpreis",

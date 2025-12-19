@@ -15,7 +15,7 @@ class ProjectDeal extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Project::class, 'id_project', 'id');
   }
 
-  /** @return BelongsTo<Product, covariant OrderProduct> */
+  /** @return BelongsTo<Product, covariant Item> */
   public function DEAL(): BelongsTo
   {
     return $this->belongsTo(Deal::class, 'id_deal', 'id');

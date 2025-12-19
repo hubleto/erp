@@ -41,7 +41,7 @@
         "Code": "Kódovať",
         "Color": "Farba"
     },
-    "Models\\OrderProduct": {
+    "Models\\Item": {
         "Order": "Objednávka",
         "Title": "Názov",
         "Product": "Produkt",
@@ -49,7 +49,7 @@
         "Amount": "Výška",
         "Discount": "Zľavu",
         "Vat": "Kov",
-        "Add product": "Pridať produkt",
+        "Add item": "Pridať produkt",
         "Sales price": "Predajná cena",
         "Price excl. VAT": "Suma bez DPH",
         "Price incl. VAT": "Suma s DPH"

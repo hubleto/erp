@@ -58,7 +58,7 @@ class Task extends \Hubleto\Erp\RecordManager
     return $this->hasMany(Todo::class, 'id_task', 'id');
   }
 
-  // /** @return HasMany<DealProduct, covariant Deal> */
+  // /** @return HasMany<Item, covariant Deal> */
   // public function DEALS(): HasMany
   // {
   //   return $this->hasMany(DealTask::class, 'id_task', 'id');
@@ -94,7 +94,7 @@ class Task extends \Hubleto\Erp\RecordManager
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,
-      $filters['fTaskWorkflowStep'] ?? []
+      (array) ($filters['fTaskWorkflowStep'] ?? [])
     );
 
     if (isset($filters["fTaskClosed"])) {

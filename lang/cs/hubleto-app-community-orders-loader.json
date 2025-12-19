@@ -36,7 +36,7 @@
         "Template": "Šablona",
         "Closed": "Uzavřeno"
     },
-    "Models\\OrderProduct": {
+    "Models\\Item": {
         "Order": "Objednávka",
         "Title": "Název",
         "Product": "Produkt",
@@ -44,7 +44,7 @@
         "Amount": "Množství",
         "Discount": "Sleva",
         "Vat": "DPH",
-        "Add product": "Přidat produkt",
+        "Add item": "Přidat produkt",
         "Sales price": "Prodejní cena",
         "Price excl. VAT": "Cena bez DPH",
         "Price incl. VAT": "Cena s DPH"

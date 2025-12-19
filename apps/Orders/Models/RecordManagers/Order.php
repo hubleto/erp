@@ -48,10 +48,10 @@ class Order extends \Hubleto\Erp\RecordManager
     return $this->hasOne(WorkflowStep::class, 'id', 'id_workflow_step');
   }
 
-  /** @return HasMany<OrderProduct, covariant Order> */
-  public function PRODUCTS(): HasMany
+  /** @return HasMany<Item, covariant Order> */
+  public function ITEMS(): HasMany
   {
-    return $this->hasMany(OrderProduct::class, 'id_order', 'id');
+    return $this->hasMany(Item::class, 'id_order', 'id');
   }
 
   /** @return HasMany<OrderDocument, covariant Order> */

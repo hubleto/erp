@@ -1,39 +1,49 @@
 <?php
 
-namespace Hubleto\App\Community\Deals\Models;
+namespace Hubleto\App\Community\Orders\Models;
 
+use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\Framework\Db\Column\Text;
-use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
 use Hubleto\App\Community\Products\Models\Product;
+use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
 
-class DealProduct extends \Hubleto\Erp\Model
+class Item extends \Hubleto\Erp\Model
 {
-  public string $table = 'deal_products';
-  public string $recordManagerClass = RecordManagers\DealProduct::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.id_product';
+  public string $table = 'orders_items';
+  public string $recordManagerClass = RecordManagers\Item::class;
+  public ?string $lookupSqlValue = '{%TABLE%}.title';
 
   public array $relations = [
-    'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id' ],
-    'DEAL' => [ self::BELONGS_TO, Deal::class, 'id_deal', 'id' ],
+    'ORDER' => [ self::BELONGS_TO, Order::class, 'id_order', 'id'],
+    'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id'],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
-      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate("CASCADE")->setFkOnDelete("SET NULL")->setRequired()->setDefaultVisible(),
-      'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
-      'description' => (new Text($this, $this->translate('Description')))->setDefaultVisible(),
-      'sales_price' => (new Decimal($this, $this->translate('Sales Price')))->setRequired()->setDefaultVisible(),
-      'amount' => (new Decimal($this, $this->translate('Amount')))->setRequired()->setDefaultVisible(),
-      'vat' => (new Decimal($this, $this->translate('Vat')))->setUnit("%")->setDefaultVisible(),
-      'discount' => (new Decimal($this, $this->translate('Discount')))->setUnit("%")->setDefaultVisible(),
+      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
+      'position' => (new Integer($this, $this->translate('Position')))->setRequired()->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible(),
+      'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setDefaultVisible(),
+      'amount' => (new Integer($this, $this->translate('Amount')))->setRequired()->setDefaultVisible(),
+      'discount' => (new Integer($this, $this->translate('Discount')))->setUnit('%')->setDefaultVisible(),
+      'vat' => (new Integer($this, $this->translate('Vat')))->setUnit('%')->setDefaultVisible(),
       'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setDefaultVisible(),
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setDefaultVisible(),
     ]);
+  }
+
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+
+    $description->ui['title'] = 'Order Items';
+    $description->ui["addButtonText"] = $this->translate("Add item");
+
+    return $description;
   }
 
   public function onBeforeCreate(array $record): array

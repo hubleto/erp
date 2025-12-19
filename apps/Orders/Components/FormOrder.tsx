@@ -1,7 +1,7 @@
 import React, { Component, createRef, useRef, ChangeEvent } from 'react';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
-import TableOrderProducts from '@hubleto/apps/Orders/Components/TableOrderProducts';
+import TableItems from './TableItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TablePayments from './TablePayments';
 import request from "@hubleto/react-ui/core/Request";
@@ -72,7 +72,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
-        { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
+        { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
         { uid: 'preview', title: this.translate('Preview') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'payments', title: this.translate('Payments') },
@@ -136,13 +136,13 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
     </>;
   }
 
-  getSumPrice(recordProducts: any) {
+  getSumPrice(recordItems: any) {
     var sumPrice = 0;
-    recordProducts.map((product, index) => {
-      if (product.unit_price && product.amount && product._toBeDeleted_ != true) {
-        var sum = product.unit_price * product.amount;
-        if (product.vat) sum = sum + (sum * (product.vat / 100));
-        if (product.discount) sum = sum - (sum * (product.discount / 100));
+    recordItems.map((item, index) => {
+      if (item.unit_price && item.amount && item._toBeDeleted_ != true) {
+        var sum = item.unit_price * item.amount;
+        if (item.vat) sum = sum + (sum * (item.vat / 100));
+        if (item.discount) sum = sum - (sum * (item.discount / 100));
         sumPrice += sum;
       }
     });
@@ -485,17 +485,17 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
         </>;
       break;
 
-      case 'products':
-        return <TableOrderProducts
-          tag={"table_order_product"}
+      case 'items':
+        return <TableItems
+          tag={"table_order_item"}
           parentForm={this}
-          uid={this.props.uid + "_table_order_product"}
+          uid={this.props.uid + "_table_order_item"}
           idOrder={R.id}
           // junctionTitle='Order'
-          // junctionModel='Hubleto/App/Community/Orders/Models/OrderProduct'
+          // junctionModel='Hubleto/App/Community/Orders/Models/Item'
           // junctionSourceColumn='id_order'
           // junctionSourceRecordId={R.id}
-          // junctionDestinationColumn='id_product'
+          // junctionDestinationColumn='id_item'
           readonly={!this.state.isInlineEditing}
         />;
 

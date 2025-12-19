@@ -9,7 +9,7 @@ class LeadCampaign extends \Hubleto\Erp\RecordManager
 {
   public $table = 'leads_campaigns';
 
-  /** @return BelongsTo<Product, covariant OrderProduct> */
+  /** @return BelongsTo<Product, covariant Lead> */
   public function LEAD(): BelongsTo
   {
     return $this->belongsTo(Lead::class, 'id_lead', 'id');

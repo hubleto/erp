@@ -12,7 +12,7 @@ import DealFormActivity, { DealFormActivityProps, DealFormActivityState } from '
 import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import Hyperlink from '@hubleto/react-ui/core/Inputs/Hyperlink';
 import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
-import TableDealProducts from './TableDealProducts';
+import TableItems from './TableItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TableDealHistory from './TableDealHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
@@ -28,7 +28,7 @@ export interface FormDealState extends HubletoFormState {
   activityDate: string,
   activitySubject: string,
   activityAllDay: boolean,
-  tableDealProductsDescription: any,
+  tableItemsDescription: any,
   tableDealDocumentsDescription: any,
   tablesKey: number,
   selectParentLead?: boolean,
@@ -50,6 +50,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
   refLogActivityInput: any;
   refProductsLookup: any;
   refActivityModal: any;
+  refActivityForm: any;
 
 
   translationContext: string = 'Hubleto\\App\\Community\\Deals\\Loader';
@@ -61,6 +62,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     this.refLogActivityInput = React.createRef();
     this.refProductsLookup = React.createRef();
     this.refActivityModal = React.createRef();
+    this.refActivityForm = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -69,7 +71,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       activityDate: '',
       activitySubject: '',
       activityAllDay: false,
-      tableDealProductsDescription: null,
+      tableItemsDescription: null,
       tableDealDocumentsDescription: null,
       tablesKey: 0,
       selectParentLead: false,
@@ -82,7 +84,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Deal')}</b> },
-        { uid: 'products', title: this.translate('Products'), showCountFor: 'PRODUCTS' },
+        { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
@@ -100,11 +102,11 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
     request.get(
       'api/table/describe',
       {
-        model: 'Hubleto/App/Community/Deals/Models/DealProduct',
+        model: 'Hubleto/App/Community/Deals/Models/Item',
         idDeal: this.state.id,
       },
       (description: any) => {
-        this.setState({tableDealProductsDescription: description} as any);
+        this.setState({tableItemsDescription: description} as any);
       }
     );
     request.get(
@@ -283,18 +285,18 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           <div className='flex flex-row *:w-1/2'>
             {this.inputWrapper('price_excl_vat', {
               cssClass: 'text-2xl',
-              readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) ? true : false,
+              readonly: (R.ITEMS && R.ITEMS.length > 0) ? true : false,
             })}
             {this.input('id_currency')}
           </div>
           <div className='flex flex-row *:w-1/2 items-center'>
             {this.inputWrapper('price_incl_vat', {
-              readonly: (R.PRODUCTS && R.PRODUCTS.length > 0) ? true : false,
+              readonly: (R.ITEMS && R.ITEMS.length > 0) ? true : false,
             })}
-            {this.state.isInlineEditing && (R.PRODUCTS && R.PRODUCTS.length > 0) ?
+            {this.state.isInlineEditing && (R.ITEMS && R.ITEMS.length > 0) ?
               <div className='badge badge-warning'>
                 <span className='icon mr-2'><i className='fas fa-warning'></i></span>
-                <span className='text'>Price is calculated from products.</span>
+                <span className='text'>Price is calculated from items.</span>
               </div>
             : <></>}
           </div>
@@ -360,7 +362,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         </>
       break;
 
-      case 'products':
+      case 'items':
 
         var lookupData;
 
@@ -372,15 +374,15 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
 
         return <>
           <div className='w-full h-full overflow-x-auto'>
-            <TableDealProducts
-              key={"products_"+this.state.tablesKey}
-              uid={this.props.uid + "_table_deal_products"}
-              tag={"deal_products"}
+            <TableItems
+              key={"items_" + this.state.tablesKey}
+              uid={this.props.uid + "_table_deal_items"}
+              tag={"deal_items"}
               parentForm={this}
               idDeal={R.id}
               descriptionSource='both'
               readonly={!this.state.isInlineEditing}
-            ></TableDealProducts>
+            ></TableItems>
           </div>
         </>;
 
@@ -495,14 +497,16 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
               {this.state.id > 0 ? recentActivitiesAndCalendar : null}
             </div>
           </div>
-          {this.state.showIdActivity == 0 ? null :
+          {/* {this.state.showIdActivity == 0 ? null :
             <ModalForm
               ref={this.refActivityModal}
+              form={this.refActivityForm}
               uid='activity_form'
               isOpen={true}
               type='right'
             >
               <DealFormActivity
+                ref={this.refActivityForm}
                 modal={this.refActivityModal}
                 id={this.state.showIdActivity}
                 isInlineEditing={true}
@@ -526,7 +530,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 }}
               ></DealFormActivity>
             </ModalForm>
-          }
+          } */}
         </>;
       break;
 
@@ -653,11 +657,13 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
       {this.state.showIdActivity == 0 ? <></> :
         <ModalForm
           ref={this.refActivityModal}
+          form={this.refActivityForm}
           uid='activity_form'
           isOpen={true}
           type='right'
         >
           <DealFormActivity
+            ref={this.refActivityForm}
             modal={this.refActivityModal}
             id={this.state.showIdActivity}
             isInlineEditing={true}

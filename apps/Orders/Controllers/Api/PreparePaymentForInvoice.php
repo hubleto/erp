@@ -27,7 +27,7 @@ class PreparePaymentForInvoice extends \Hubleto\Erp\Controllers\ApiController
         'id_invoice' => 0,
         'id_customer' => $payment->ORDER->id_customer,
         'id_order' => $idOrder,
-        'id_order_product' => 0,
+        'id_order_item' => 0,
         'item' => $payment['title'],
         'unit_price' => $payment['unit_price'],
         'amount' => $payment['amount'],

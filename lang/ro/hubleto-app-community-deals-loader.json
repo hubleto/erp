@@ -60,7 +60,7 @@
         "Deal": "",
         "Tag": ""
     },
-    "Models\\DealProduct": {
+    "Models\\Item": {
         "Deal": "",
         "Product": "",
         "Unit Price": "",

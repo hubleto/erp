@@ -79,10 +79,10 @@ class Deal extends \Hubleto\Erp\RecordManager
     return $this->hasMany(DealTag::class, 'id_deal', 'id');
   }
 
-  /** @return HasMany<DealProduct, covariant Deal> */
-  public function PRODUCTS(): HasMany
+  /** @return HasMany<Item, covariant Deal> */
+  public function ITEMS(): HasMany
   {
-    return $this->hasMany(DealProduct::class, 'id_deal', 'id');
+    return $this->hasMany(Item::class, 'id_deal', 'id');
   }
 
   /** @return HasMany<DealTask, covariant Deal> */
@@ -91,7 +91,7 @@ class Deal extends \Hubleto\Erp\RecordManager
     return $this->hasMany(DealTask::class, 'id_deal', 'id');
   }
 
-  // /** @return HasMany<DealProduct, covariant Deal> */
+  // /** @return HasMany<Item, covariant Deal> */
   // public function ORDERS(): HasMany
   // {
   //   return $this->hasMany(OrderDeal::class, 'id_deal', 'id');
@@ -145,7 +145,7 @@ class Deal extends \Hubleto\Erp\RecordManager
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,
-      $filters['fDealWorkflowStep'] ?? []
+      (array) ($filters['fDealWorkflowStep'] ?? [])
     );
 
     if (isset($filters["fDealSourceChannel"]) && $filters["fDealSourceChannel"] > 0) {

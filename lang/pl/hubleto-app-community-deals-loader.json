@@ -79,7 +79,7 @@
         "Deal": "Umowa",
         "Tag": "Etykietka"
     },
-    "Models\\DealProduct": {
+    "Models\\Item": {
         "Deal": "Umowa",
         "Product": "Produkt",
         "Unit Price": "Cena jednostkowa",

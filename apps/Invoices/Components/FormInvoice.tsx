@@ -211,7 +211,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                       <thead>
                         <tr>
                           <th colSpan={1} style={{width: '50%'}}>Order</th>
-                          <th colSpan={6}>Product</th>
+                          <th colSpan={6}>Order item</th>
                         </tr>
                         <tr>
                           <th>Item</th>
@@ -249,21 +249,21 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                               </td>
                               <td colSpan={6} className={rowBgClass}>
                                 {InputFactory({
-                                  value: item.id_order_product,
+                                  value: item.id_order_item,
                                   cssClass: 'bg-white min-w-64',
                                   description: {
                                     type: 'lookup',
-                                    model: 'Hubleto/App/Community/Orders/Models/OrderProduct',
+                                    model: 'Hubleto/App/Community/Orders/Models/Item',
                                   },
                                   customEndpointParams: { idOrder: item.id_order },
                                   onChange: (input) => {
 
-                                    request.post('orders/api/get-product',
-                                      {idOrderProduct: input.state.value},
+                                    request.post('orders/api/get-item',
+                                      {idItem: input.state.value},
                                       {},
                                       (data: any) => {
-                                        const P = data.orderProduct;
-                                        R.ITEMS[key].id_order_product = input.state.value;
+                                        const P = data.item;
+                                        R.ITEMS[key].id_order_item = input.state.value;
                                         R.ITEMS[key].item = P?.title ?? '';
                                         R.ITEMS[key].unit_price = P?.sales_price ?? 0;
                                         R.ITEMS[key].amount = P?.amount ?? 0;

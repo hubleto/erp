@@ -78,7 +78,7 @@ class Loader extends \Hubleto\Framework\App
       $mCrossDealTag = $this->getModel(Models\DealTag::class);
       $mDealLead = $this->getModel(Models\DealLead::class);
       $mDealTask = $this->getModel(Models\DealTask::class);
-      $mDealProduct = $this->getModel(Models\DealProduct::class);
+      $mItem = $this->getModel(Models\Item::class);
       $mDealActivity = $this->getModel(Models\DealActivity::class);
       $mDealDocument = $this->getModel(Models\DealDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
@@ -90,7 +90,7 @@ class Loader extends \Hubleto\Framework\App
       $mDealLead->dropTableIfExists()->install();
       $mDealTask->dropTableIfExists()->install();
       $mCrossDealTag->dropTableIfExists()->install();
-      $mDealProduct->dropTableIfExists()->install();
+      $mItem->dropTableIfExists()->install();
       $mDealActivity->dropTableIfExists()->install();
       $mDealDocument->dropTableIfExists()->install();
 

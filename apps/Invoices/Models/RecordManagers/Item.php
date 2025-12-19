@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Invoices\Models\RecordManagers;
 
 use Hubleto\App\Community\Orders\Models\RecordManagers\Order;
-use Hubleto\App\Community\Orders\Models\RecordManagers\OrderProduct;
+use Hubleto\App\Community\Orders\Models\RecordManagers\Item as OrderItem;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -26,8 +26,8 @@ class Item extends \Hubleto\Erp\RecordManager {
   }
 
   /** @return BelongsTo<Invoice, covariant Item> */
-  public function ORDER_PRODUCT(): BelongsTo {
-    return $this->BelongsTo(OrderProduct::class, 'id_order_product');
+  public function ORDER_ITEM(): BelongsTo {
+    return $this->BelongsTo(OrderItem::class, 'id_order_Item');
   }
 
   /**

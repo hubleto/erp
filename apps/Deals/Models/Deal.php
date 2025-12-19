@@ -17,7 +17,6 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Leads\Models\Lead;
-use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
@@ -72,7 +71,7 @@ class Deal extends \Hubleto\Erp\Model
 
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
-    'PRODUCTS' => [ self::HAS_MANY, DealProduct::class, 'id_deal', 'id' ],
+    'ITEMS' => [ self::HAS_MANY, Item::class, 'id_deal', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, DealActivity::class, 'id_deal', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, DealDocument::class, 'id_deal', 'id'],
     'LEADS' => [ self::HAS_MANY, DealLead::class, 'id_deal', 'id'],
@@ -282,14 +281,14 @@ class Deal extends \Hubleto\Erp\Model
     $totalExclVat = 0;
     $totalInclVat = 0;
 
-    $mDealProduct = $this->getService(DealProduct::class);
-    $allProducts = $mDealProduct->record->where('id_deal', $savedRecord['id'])->get()->toArray();
+    $mItem = $this->getService(Item::class);
+    $allITems = $mItem->record->where('id_deal', $savedRecord['id'])->get()->toArray();
 
-    if (!empty($allProducts)) {
-      foreach ($allProducts as $product) {
-        if (!isset($product["_toBeDeleted_"])) {
-          $totalExclVat += $product['price_excl_vat'];
-          $totalInclVat += $product['price_incl_vat'];
+    if (!empty($allItems)) {
+      foreach ($allItems as $item) {
+        if (!isset($item["_toBeDeleted_"])) {
+          $totalExclVat += $item['price_excl_vat'];
+          $totalInclVat += $item['price_incl_vat'];
         }
       }
 

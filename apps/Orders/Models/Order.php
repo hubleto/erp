@@ -15,7 +15,6 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\App\Community\Customers\Models\Customer;
-use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Settings\Models\Setting;
 
@@ -49,7 +48,7 @@ class Order extends \Hubleto\Erp\Model
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
 
-    'PRODUCTS' => [ self::HAS_MANY, OrderProduct::class, 'id_order', 'id' ],
+    'ITEMS' => [ self::HAS_MANY, Item::class, 'id_order', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, OrderDocument::class, 'id_order', 'id' ],
     'HISTORY' => [ self::HAS_MANY, History::class, 'id_order', 'id' ],
     'DEALS' => [ self::HAS_MANY, OrderDeal::class, 'id_order', 'id' ],
@@ -197,14 +196,14 @@ class Order extends \Hubleto\Erp\Model
     $totalExclVat = 0;
     $totalInclVat = 0;
 
-    $mOrderProduct = $this->getService(OrderProduct::class);
-    $allProducts = $mOrderProduct->record->where('id_order', $savedRecord['id'])->get()->toArray();
+    $mItem = $this->getService(Item::class);
+    $allItems = $mItem->record->where('id_order', $savedRecord['id'])->get()->toArray();
 
-    if (!empty($allProducts)) {
-      foreach ($allProducts as $product) {
-        if (!isset($product["_toBeDeleted_"])) {
-          $totalExclVat += $product['price_excl_vat'];
-          $totalInclVat += $product['price_incl_vat'];
+    if (!empty($allItems)) {
+      foreach ($allItems as $item) {
+        if (!isset($item["_toBeDeleted_"])) {
+          $totalExclVat += $item['price_excl_vat'];
+          $totalInclVat += $item['price_incl_vat'];
         }
       }
 

@@ -9,7 +9,7 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\App\Community\Customers\Models\Customer;
 
-use Hubleto\App\Community\Orders\Models\OrderProduct;
+use Hubleto\App\Community\Orders\Models\Item as OrderItem;
 
 class Item extends \Hubleto\Erp\Model
 {
@@ -24,7 +24,7 @@ class Item extends \Hubleto\Erp\Model
     'INVOICE' => [ self::BELONGS_TO, Invoice::class, "id_invoice" ],
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],
     'ORDER' => [ self::BELONGS_TO, Order::class, "id_order" ],
-    'ORDER_PRODUCT' => [ self::BELONGS_TO, OrderProduct::class, "id_order_product" ],
+    'ORDER_ITEM' => [ self::BELONGS_TO, OrderItem::class, "id_order_item" ],
   ];
 
   public function describeColumns(): array
@@ -33,7 +33,7 @@ class Item extends \Hubleto\Erp\Model
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setRequired(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON)->setRequired(),
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setDefaultVisible(),
-      'id_order_product' => (new Lookup($this, $this->translate('Order Product'), OrderProduct::class))->setDefaultVisible(),
+      'id_order_item' => (new Lookup($this, $this->translate('Order Item'), OrderItem::class))->setDefaultVisible(),
       'item' => (new Varchar($this, $this->translate('Item')))->setRequired()->setDefaultVisible(),
       'unit_price' => new Decimal($this, $this->translate('Unit price'))->setDefaultVisible(),
       'amount' => new Decimal($this, $this->translate('Amount'))->setDefaultVisible(),

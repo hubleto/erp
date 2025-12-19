@@ -25,7 +25,7 @@ class Loader extends \Hubleto\Framework\App
       '/^orders\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
       '/^orders\/api\/set-parent-deal\/?$/' => Controllers\Api\SetParentDeal::class,
-      '/^orders\/api\/get-product\/?$/' => Controllers\Api\GetProduct::class,
+      '/^orders\/api\/get-item\/?$/' => Controllers\Api\GetItem::class,
       '/^orders\/api\/prepare-payment-for-invoice\/?$/' => Controllers\Api\PreparePaymentForInvoice::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
@@ -71,7 +71,7 @@ class Loader extends \Hubleto\Framework\App
     if ($round == 1) {
       $this->getModel(Models\State::class)->dropTableIfExists()->install();
       $this->getModel(Models\Order::class)->dropTableIfExists()->install();
-      $this->getModel(Models\OrderProduct::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Item::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();
@@ -133,7 +133,7 @@ class Loader extends \Hubleto\Framework\App
 
     $mOrder = $this->getModel(Models\Order::class);
     $mHistory = $this->getModel(Models\History::class);
-    $mOrderProduct = $this->getModel(Models\OrderProduct::class);
+    $mItem = $this->getModel(Models\Item::class);
     $mTemplate = $this->getModel(Template::class);
 
     $idTemplate = $mTemplate->record->recordCreate([
@@ -161,7 +161,7 @@ class Loader extends \Hubleto\Framework\App
       $mHistory->record->recordCreate([ 'id_order' => $idOrder, 'short_description' => 'Order created', 'date_time' => date('Y-m-d H:i:s') ]);
 
       // for ($j = 0; $j <= rand(0, 3); $j++) {
-      //   $mOrderProduct->record->recordCreate([
+      //   $mItem->record->recordCreate([
       //     'id_order' => $idOrder,
       //     'id_product' => rand(1, 5),
       //     'title' => 'Item #' . $i . '.' . $j,

@@ -6,17 +6,17 @@ use Hubleto\App\Community\Products\Models\RecordManagers\Product;
 use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DealProduct extends \Hubleto\Erp\RecordManager
+class Item extends \Hubleto\Erp\RecordManager
 {
-  public $table = 'deal_products';
+  public $table = 'deal_items';
 
-  /** @return BelongsTo<Deal, covariant DealProduct> */
+  /** @return BelongsTo<Deal, covariant Item> */
   public function DEAL(): BelongsTo
   {
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
 
-  /** @return BelongsTo<Product, covariant DealProduct> */
+  /** @return BelongsTo<Product, covariant Item> */
   public function PRODUCT(): BelongsTo
   {
     return $this->belongsTo(Product::class, 'id_product', 'id');

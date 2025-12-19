@@ -1,30 +1,30 @@
 import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
 
-interface TableOrderProductsProps extends HubletoTableProps {
+interface TableItemsProps extends HubletoTableProps {
   idOrder: number
 }
 
-interface TableOrderProductsState extends HubletoTableState {}
+interface TableItemsState extends HubletoTableState {}
 
-export default class TableOrderProducts extends HubletoTable<TableOrderProductsProps, TableOrderProductsState> {
+export default class TableItems extends HubletoTable<TableItemsProps, TableItemsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    model: 'Hubleto/App/Community/Orders/Models/OrderProduct',
+    model: 'Hubleto/App/Community/Orders/Models/Item',
   }
 
-  props: TableOrderProductsProps;
-  state: TableOrderProductsState;
+  props: TableItemsProps;
+  state: TableItemsState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
-  translationContextInner: string = 'Components\\TableOrderProducts';
+  translationContextInner: string = 'Components\\TableItems';
 
-  constructor(props: TableOrderProductsProps) {
+  constructor(props: TableItemsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableOrderProductsProps) {
+  getStateFromProps(props: TableItemsProps) {
     return {
       ...super.getStateFromProps(props)
     }

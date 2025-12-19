@@ -23,20 +23,20 @@
       <td style="width:10%"><b>Zľava</b></td>
       <td style="width:10%"><b>Cena</b></td>
     </tr>
-    {% for product in PRODUCTS %}
+    {% for item in ITEMS %}
       <tr>
         <td style="width:60%">
-          {{ product.PRODUCT.name }}
-          {% if product.description %}
+          {{ item.PRODUCT.name }}
+          {% if item.description %}
             <div style="color:#666666">
-              {{ product.description }}
+              {{ item.description }}
             </div>
           {% endif %}
         </td>
-        <td style="width:10%">{{ product.unit_price|number_format(2, ",", " ") }} €</td>
-        <td style="width:10%">{{ product.amount|number_format(2, ",", " ") }} </td>
-        <td style="width:10%">{{ product.discount|number_format(0, ",", " ") }} %</td>
-        <td style="width:10%"><b>{{ product.price_excl_vat }}|number_format(2, ",", " ") €</b></td>
+        <td style="width:10%">{{ item.unit_price|number_format(2, ",", " ") }} €</td>
+        <td style="width:10%">{{ item.amount|number_format(2, ",", " ") }} </td>
+        <td style="width:10%">{{ item.discount|number_format(0, ",", " ") }} %</td>
+        <td style="width:10%"><b>{{ item.price_excl_vat }}|number_format(2, ",", " ") €</b></td>
       </tr>
     {% endfor %}
   </table>

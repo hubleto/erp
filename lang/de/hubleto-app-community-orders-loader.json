@@ -41,7 +41,7 @@
         "Code": "Code",
         "Color": "Farbe"
     },
-    "Models\\OrderProduct": {
+    "Models\\Item": {
         "Order": "Befehl",
         "Title": "Titel",
         "Product": "Produkt",
@@ -49,7 +49,7 @@
         "Amount": "Menge",
         "Discount": "Rabatt",
         "Vat": "Mehrwertsteuer",
-        "Add product": "Produkt hinzufügen",
+        "Add item": "Produkt hinzufügen",
         "Item order": "",
         "Sales price": "",
         "Price excl. VAT": "",

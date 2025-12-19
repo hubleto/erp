@@ -134,7 +134,7 @@
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otvoriť deal"
     },
-    "Models\\DealProduct": {
+    "Models\\Item": {
         "Deal": "Deal",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",

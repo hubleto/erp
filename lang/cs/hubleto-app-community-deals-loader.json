@@ -93,7 +93,7 @@
         "Deal": "Obchod",
         "Tag": "Štítek"
     },
-    "Models\\DealProduct": {
+    "Models\\Item": {
         "Deal": "Obchod",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",

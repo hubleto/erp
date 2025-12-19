@@ -26,6 +26,7 @@ class Loader extends \Hubleto\Framework\App
       '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
       '/^projects\/add?\/?$/' => ['controller' => Controllers\Projects::class, 'vars' => [ 'recordId' => -1 ]],
       '/^projects\/phases\/?$/' => Controllers\Phases::class,
+      '/^projects\/monthly-summary\/?$/' => Controllers\MonthlySummary::class,
     ]);
 
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */

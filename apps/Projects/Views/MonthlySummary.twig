@@ -1,0 +1,22 @@
+<h1 class="app-main-title">{{ translate('Projects') }} > {{ translate('Monthly summary') }}</h1>
+
+<div class="flex gap-2">
+  {% for project in viewParams.summary %}
+    <div class="card w-72">
+      <div class="card-header flex-col items-start">
+        <div class="text-sm text-slate-400 font-normal">{{ project.customer_name }}</div>
+        {{ project.project_title }}
+      </div>
+      <div class="card-body">
+        {% for year, yearlySummary in project.summary %}
+          <div class="list">
+            <div class="list-item p-1 bg-slate-50"><b>{{ year }}</b></div>
+            {% for month, totalHours in yearlySummary %}
+              <div class="list-item p-1 pl-4"><b>{{ year }}-{{ month }}</b> {{ totalHours|number_format(2, ",", " ") }} hours</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>

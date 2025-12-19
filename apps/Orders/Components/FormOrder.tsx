@@ -273,6 +273,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                   <div className='grow'>
                     {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
                     {this.inputWrapper('title', {cssClass: 'text-2xl'})}
+                    {this.divider(null)}
                     <div className='flex gap-2'>
                       <div>
                         {this.inputWrapper('price_excl_vat')}
@@ -280,20 +281,31 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                       </div>
                       <div>
                         {this.inputWrapper('id_currency', {wrapperCssClass: 'flex gap-2', uiStyle: 'select'})}
-                        {this.inputWrapper('price_period', {wrapperCssClass: 'flex gap-2'})}
+                        {this.inputWrapper('payment_period', {wrapperCssClass: 'flex gap-2'})}
                       </div>
                     </div>
+                    {this.divider(null)}
                     {this.inputWrapper('date_order')}
                     {this.inputWrapper('required_delivery_date')}
+                    {this.divider(null)}
                     {this.inputWrapper('shared_folder')}
                   </div>
                   <div className='grow'>
-                    {this.inputWrapper('identifier_external')}
-                    {this.inputWrapper('note')}
+                    {this.inputWrapper('identifier_external', {wrapperCssClass: 'flex gap-2'})}
+                    <div className='flex gap-2 items-center w-full'>
+                      <div className='grow'>
+                        {this.inputWrapper('prepaid_working_hours', {wrapperCssClass: 'flex gap-2'})}
+                      </div>
+                      <div className='grow'>
+                        {this.input('prepaid_working_hours_period')}
+                      </div>
+                    </div>
+                    {this.inputWrapper('note', {cssClass: 'bg-yellow-50 border-none'})}
+                    {this.divider(null)}
                     {this.inputWrapper('id_owner', {wrapperCssClass: 'flex gap-2'})}
                     {this.inputWrapper('id_manager', {wrapperCssClass: 'flex gap-2'})}
+                    {this.divider(null)}
                     {this.inputWrapper('shipping_info')}
-                    {this.inputWrapper('id_template')}
                   </div>
                 </div>
               </div>

@@ -85,8 +85,18 @@ class Order extends \Hubleto\Erp\Model
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'price_excl_vat' => (new Decimal($this, $this->translate('Price excl. VAT')))->setDefaultValue(0)->setDefaultVisible(),
       'price_incl_vat' => (new Decimal($this, $this->translate('Price incl. VAT')))->setDefaultValue(0)->setDefaultVisible(),
-      'price_period' => (new Integer($this, $this->translate('Price period')))->setEnumValues([
+      'payment_period' => (new Integer($this, $this->translate('Payment period')))->setEnumValues([
         0 => $this->translate('One-time payment'),
+        1 => $this->translate('Monthly'),
+        2 => $this->translate('Bi-Monthly'),
+        3 => $this->translate('Quarterly'),
+        6 => $this->translate('Each 6 months'),
+        12 => $this->translate('Yearly'),
+        24 => $this->translate('Each 2 years'),
+      ]),
+      'prepaid_working_hours' => (new Integer($this, $this->translate('Prepaid working hours')))->setUnit('hours'),
+      'prepaid_working_hours_period' => (new Integer($this, $this->translate('Prepaid working hours - period')))->setEnumValues([
+        0 => $this->translate('No working hours recurrence'),
         1 => $this->translate('Monthly'),
         2 => $this->translate('Bi-Monthly'),
         3 => $this->translate('Quarterly'),

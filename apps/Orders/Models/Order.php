@@ -269,7 +269,7 @@ class Order extends \Hubleto\Erp\Model
     /** @var Order */
     $mOrder = $this->getModel(Order::class);
 
-    $order = $mOrder->record->prepareReadQuery()->where('Orders.id', $idOrder)->first();
+    $order = $mOrder->record->prepareReadQuery()->where('orders.id', $idOrder)->first();
     if (!$order) throw new \Exception('Order was not found.');
 
     $vars = $order->toArray();

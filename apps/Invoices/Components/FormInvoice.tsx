@@ -216,11 +216,15 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                     <table className='table-default dense not-striped'>
                       <thead>
                         <tr>
-                          <th colSpan={1} style={{width: '50%'}}>Order</th>
-                          <th colSpan={6}>Order item</th>
+                          <td rowSpan={3} className='align-top'>#</td>
+                          <th colSpan={3} style={{width: '50%'}}>Order</th>
+                          <th colSpan={4}>Order item</th>
+                          <td rowSpan={3}>&nbsp;</td>
                         </tr>
                         <tr>
-                          <th>Item</th>
+                          <th colSpan={7}>Item</th>
+                        </tr>
+                        <tr>
                           <th>Unit price</th>
                           <th>Amount</th>
                           <th>Discount</th>
@@ -235,7 +239,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
 
                           return <>
                             <tr key={key + '1'} className={item._toBeDeleted_ ? 'border border-red-400' : ''}>
-                              <td colSpan={1} style={{width: '50%'}} className={rowBgClass}>
+                              <td rowSpan={3} className={'align-top ' + rowBgClass}>
+                                <div className='badge'>{key + 1}</div>
+                              </td>
+                              <td colSpan={3} style={{width: '50%'}} className={rowBgClass}>
                                 {InputFactory({
                                   value: item.id_order,
                                   cssClass: 'bg-white min-w-64',
@@ -253,7 +260,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   }
                                 })}
                               </td>
-                              <td colSpan={6} className={rowBgClass}>
+                              <td colSpan={4} className={rowBgClass}>
                                 {InputFactory({
                                   value: item.id_order_item,
                                   cssClass: 'bg-white min-w-64',
@@ -283,7 +290,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   }
                                 })}
                               </td>
-                              <td rowSpan={2} className={rowBgClass}>
+                              <td rowSpan={3} className={rowBgClass}>
                                 <div className='flex gap-2'>
                                   <button
                                     className='btn btn-warning'
@@ -316,7 +323,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                               </td>
                             </tr>
                             <tr key={key + '2'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
-                              <td className={rowBgClass}>
+                              <td className={rowBgClass} colSpan={6}>
                                 {InputFactory({
                                   value: item.item,
                                   cssClass: 'bg-white',
@@ -327,6 +334,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   }
                                 })}
                               </td>
+                            </tr>
+                            <tr key={key + '3'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
                               <td className={rowBgClass}>
                                 {InputFactory({
                                   value: item.unit_price,
@@ -387,7 +396,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                         className='btn btn-add mt-2'
                         onClick={() => {
                           if (!R.ITEMS) R.ITEMS = [];
-                          R.ITEMS.push({id_invoice: this.state.id});
+                          R.ITEMS.push({
+                            id_invoice: this.state.id,
+                            id_customer: R.id_customer,
+                          });
                           this.updateRecord(R);
                         }}
                       >
@@ -395,7 +407,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                         <span className='text'>Add new item</span>
                       </button>
                       <button
-                        className='btn btn-add mt-2'
+                        className='btn btn-add-outline mt-2'
                         onClick={() => {
                           this.setState({linkPreparedItem: true})
                         }}

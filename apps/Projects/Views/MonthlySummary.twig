@@ -1,22 +1,45 @@
 <h1 class="app-main-title">{{ translate('Projects') }} > {{ translate('Monthly summary') }}</h1>
 
-<div class="flex gap-2">
-  {% for project in viewParams.summary %}
-    <div class="card w-72">
-      <div class="card-header flex-col items-start">
-        <div class="text-sm text-slate-400 font-normal">{{ project.customer_name }}</div>
-        {{ project.project_title }}
+<form action="" method="get">
+  <div class="flex gap-2 w-full">
+    <input
+      class="text-lg w-full"
+      name="fulltextSearch"
+      value="{{ viewParams.fulltextSearch }}"
+      placeholder="{{ translate('Search project') }}"
+    >
+    <button class="btn btn-primary text-nowrap" type="submit">
+      <span class="icon"><i class="fas fa-magnifying-glass"></i></span>
+      <span class="text">{{ translate('Search project') }}</span>
+    </button>
+  </div>
+</form>
+
+{% if viewParams.summary|length == 0 %}
+  <div class="alert alert-info mt-2">
+    <p>No project found.</p>
+  </div>
+{% else %}
+  <div class="mt-2 font-bold">{{ viewParams.summary|length }} projects found</div>
+  <div class="flex flex-wrap gap-2 mt-2">
+    {% for project in viewParams.summary %}
+      <div class="card w-72">
+        <div class="card-header flex-col items-start">
+          <div class="text-sm text-slate-400 font-normal">{{ project.customer_name }}</div>
+          <div>{{ project.project_title }}</div>
+          <div class="badge">{{ project.project_identifier }}</div>
+        </div>
+        <div class="card-body">
+          {% for year, yearlySummary in project.summary %}
+            <div class="list">
+              <div class="list-item p-1 bg-slate-50"><b>{{ year }}</b></div>
+              {% for month, totalHours in yearlySummary %}
+                <div class="list-item p-1 pl-4"><b>{{ year }}-{{ month }}</b> {{ totalHours|number_format(2, ",", " ") }} hours</div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
-      <div class="card-body">
-        {% for year, yearlySummary in project.summary %}
-          <div class="list">
-            <div class="list-item p-1 bg-slate-50"><b>{{ year }}</b></div>
-            {% for month, totalHours in yearlySummary %}
-              <div class="list-item p-1 pl-4"><b>{{ year }}-{{ month }}</b> {{ totalHours|number_format(2, ",", " ") }} hours</div>
-            {% endfor %}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% endfor %}
-</div>
+    {% endfor %}
+  </div>
+{% endif %}

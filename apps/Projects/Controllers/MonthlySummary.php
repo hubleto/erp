@@ -18,11 +18,14 @@ class MonthlySummary extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    $fFulltextSearch = $this->router()->urlParamAsString('fulltextSearch', '');
+
     /** @var Activity */
     $mWorksheet = $this->getModel(Activity::class);
     $worksheetSummary = $mWorksheet->record
       ->selectRaw('
         projects_tasks.id_project,
+        projects.identifier AS project_identifier,
         projects.title AS project_title,
         customers.name as customer_name,
         YEAR(date_worked) AS year,
@@ -36,8 +39,17 @@ class MonthlySummary extends \Hubleto\Erp\Controller
       ->groupByRaw('YEAR(date_worked), MONTH(date_worked), projects_tasks.id_project')
       ->whereNotNull('projects_tasks.id_project')
       ->orderBy('date_worked', 'desc')
-      ->get()
     ;
+
+    if ($fFulltextSearch !== '') {
+      $worksheetSummary = $worksheetSummary->where(function($query) use ($fFulltextSearch) {
+        $query->where('projects.title', 'LIKE', '%' . $fFulltextSearch . '%')
+          ->orWhere('projects.identifier', 'LIKE', '%' . $fFulltextSearch . '%')
+          ->orWhere('customers.name', 'LIKE', '%' . $fFulltextSearch . '%');
+      });
+    }
+
+    $worksheetSummary = $worksheetSummary->get();
 
     $summary = [];
     foreach ($worksheetSummary as $row) {
@@ -45,6 +57,7 @@ class MonthlySummary extends \Hubleto\Erp\Controller
       if (!isset($summary[$row->id_project])){
         $summary[$row->id_project] = [
           'project_title' => $row->project_title,
+          'project_identifier' => $row->project_identifier,
           'customer_name' => $row->customer_name,
           'summary' => [],
         ];

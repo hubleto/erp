@@ -192,7 +192,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   {this.inputWrapper('id_profile', {uiStyle: 'buttons-vertical'})}
                 </div>
                 {this.state.id == -1 ? null : <>
-                  {this.inputWrapper('id_currency')}
+                  {this.inputWrapper('id_currency', {wrapperCssClass: 'flex gap-2'})}
                   <div className='flex gap-2'>
                     <div className='grow'>
                       {this.inputWrapper('vs')}
@@ -205,8 +205,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                     </div>
                   </div>
                   {this.inputWrapper('notes')}
-                  {this.inputWrapper('number_external')}
-                  {this.inputWrapper('id_issued_by')}
+                  {this.inputWrapper('number_external', {wrapperCssClass: 'flex gap-2'})}
+                  {this.inputWrapper('id_issued_by', {wrapperCssClass: 'flex gap-2'})}
                 </>}
               </div>
               {this.state.id <= 0 ? null :

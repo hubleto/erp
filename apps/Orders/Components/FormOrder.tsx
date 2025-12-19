@@ -273,9 +273,16 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                   <div className='grow'>
                     {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
                     {this.inputWrapper('title', {cssClass: 'text-2xl'})}
-                    {this.inputWrapper('price_excl_vat')}
-                    {this.inputWrapper('price_incl_vat')}
-                    {this.inputWrapper('id_currency')}
+                    <div className='flex gap-2'>
+                      <div>
+                        {this.inputWrapper('price_excl_vat')}
+                        {this.inputWrapper('price_incl_vat')}
+                      </div>
+                      <div>
+                        {this.inputWrapper('id_currency', {wrapperCssClass: 'flex gap-2', uiStyle: 'select'})}
+                        {this.inputWrapper('price_period', {wrapperCssClass: 'flex gap-2'})}
+                      </div>
+                    </div>
                     {this.inputWrapper('date_order')}
                     {this.inputWrapper('required_delivery_date')}
                     {this.inputWrapper('shared_folder')}
@@ -283,8 +290,8 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                   <div className='grow'>
                     {this.inputWrapper('identifier_external')}
                     {this.inputWrapper('note')}
-                    {this.inputWrapper('id_owner')}
-                    {this.inputWrapper('id_manager')}
+                    {this.inputWrapper('id_owner', {wrapperCssClass: 'flex gap-2'})}
+                    {this.inputWrapper('id_manager', {wrapperCssClass: 'flex gap-2'})}
                     {this.inputWrapper('shipping_info')}
                     {this.inputWrapper('id_template')}
                   </div>
@@ -504,6 +511,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       case 'payments':
         return <TablePayments
           key={"table_order_payment"}
+          tag={"table_order_payment"}
           parentForm={this}
           uid={this.props.uid + "_table_order_payment"}
           idOrder={R.id}

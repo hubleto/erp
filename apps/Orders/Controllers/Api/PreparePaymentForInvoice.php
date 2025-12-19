@@ -19,7 +19,7 @@ class PreparePaymentForInvoice extends \Hubleto\Erp\Controllers\ApiController
       ->where($mPayment->table . '.id_order', $idOrder)
       ->with('ORDER')
       ->first();
-
+var_dump($payment);
     if ($payment) {
       /** @var Item */
       $mItem = $this->getModel(Item::class);

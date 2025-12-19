@@ -57,6 +57,15 @@ class Payment extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
+    $description->addFilter('fStatus', [
+      'title' => $this->translate('Status'),
+      'options' => [
+        0 => $this->translate('All'),
+        1 => $this->translate('Prepared to invoice'),
+        2 => $this->translate('Not-prepared to invoice'),
+      ]
+    ]);
+
     return $description;
   }
 

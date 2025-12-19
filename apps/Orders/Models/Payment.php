@@ -61,8 +61,8 @@ class Payment extends \Hubleto\Erp\Model
       'title' => $this->translate('Status'),
       'options' => [
         0 => $this->translate('All'),
-        1 => $this->translate('Prepared to invoice'),
-        2 => $this->translate('Not-prepared to invoice'),
+        1 => $this->translate('Not-prepared to invoice'),
+        2 => $this->translate('Prepared to invoice'),
       ]
     ]);
 

@@ -148,7 +148,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
         const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
         return <>
           {this.input('inbound_outbound', { uiStyle: 'buttons' })}
-          <div className='flex gap-2'>
+          <div className='flex gap-2 mt-2'>
             <div className='gap-2 w-56'>
               <div className='p-2 grow'>
                 {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-4xl'})}
@@ -184,8 +184,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               <div className='flex-1'>
                 <div className='grow'>
                   {R.inbound_outbound == 1 ?
-                    this.inputWrapper('id_customer')
-                  : this.inputWrapper('id_supplier')}
+                    this.inputWrapper('id_supplier')
+                  : this.inputWrapper('id_customer')}
                 </div>
                 <div className='flex gap-2'>
                   {this.inputWrapper('type', {uiStyle: 'buttons-vertical'})}
@@ -205,6 +205,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                     </div>
                   </div>
                   {this.inputWrapper('notes')}
+                  {this.inputWrapper('number_external')}
                   {this.inputWrapper('id_issued_by')}
                 </>}
               </div>

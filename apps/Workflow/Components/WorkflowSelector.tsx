@@ -116,7 +116,7 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
           </div>
         </div> : <div className='flex gap-2'>
           <div className='flex flex-col'>
-            <div className='flex items-center'>
+            <div className='flex items-center flex-col items-start'>
               {steps && steps.length > 0 ? <>
                 <div>
                   {steps.map((s, i) => {

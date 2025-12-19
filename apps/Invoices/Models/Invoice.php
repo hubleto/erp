@@ -91,6 +91,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired(),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
+      'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),

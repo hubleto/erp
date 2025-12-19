@@ -218,14 +218,14 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
       case 'default':
         return <>
           {this.input('purchase_sales', { uiStyle: 'buttons' })}
-          <div className='card'>
+          <div className='card mt-2'>
             <div className='card-body flex flex-row gap-2'>
               <div className='grow'>
                 <div className='flex gap-2'>
                   <div className='grow'>
                     {R.purchase_sales == 1 ?
-                      this.inputWrapper('id_customer')
-                    : this.inputWrapper('id_supplier')}
+                      this.inputWrapper('id_supplier')
+                    : this.inputWrapper('id_customer')}
                   </div>
                   <div>
                     <FormInput title={"Deal"}>

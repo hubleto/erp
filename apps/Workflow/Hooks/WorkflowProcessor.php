@@ -15,11 +15,11 @@ class WorkflowProcessor extends \Hubleto\Erp\Hook
 
       if (!$model || !$savedRecord) return;
 
-      $workflows = $this->config()->get('workflows', []);
+      $workflows = $this->config()->get('workflows');
+      if (is_string($workflows)) $workflows = @json_decode($workflows, true);
+      if (!is_array($workflows)) $workflows = [];
 
       foreach ($workflows as $workflow) {
-        if (is_string($workflow)) $workflow = @json_decode($workflow, true);
-        if (!is_array($workflow)) continue;
 
         $wModel = $workflow['model'] ?? '';
         $wModelObj = $this->getService($wModel);

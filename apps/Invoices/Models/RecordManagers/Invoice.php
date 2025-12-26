@@ -28,6 +28,11 @@ class Invoice extends \Hubleto\Erp\RecordManager {
     return $this->BelongsTo(Supplier::class, 'id_supplier');
   }
 
+  /** @return BelongsTo<Customer, covariant Invoice> */
+  public function PAYMENT_METHOD(): BelongsTo {
+    return $this->BelongsTo(PaymentMethod::class, 'id_payment_method');
+  }
+
   /** @return BelongsTo<Profile, covariant Invoice> */
   public function PROFILE(): BelongsTo {
     return $this->BelongsTo(Profile::class, 'id_profile');

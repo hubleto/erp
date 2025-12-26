@@ -40,6 +40,7 @@ class Item extends \Hubleto\Erp\Model
       'discount' => new Decimal($this, $this->translate('Discount'))->setDefaultVisible(),
       'vat' => new Decimal($this, $this->translate('VAT'))->setUnit('%')->setDefaultVisible(),
       'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setReadonly(),
+      'price_vat' => new Decimal($this, $this->translate('VAT'))->setReadonly(),
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setReadonly(),
     ]);
   }
@@ -84,6 +85,7 @@ class Item extends \Hubleto\Erp\Model
   {
     if ($idItem <= 0) return;
 
+    /** @var PriceCalculator */
     $calculator = $this->getService(PriceCalculator::class);
     $item = $this->record->where('invoice_items.id', $idItem)->first();
 
@@ -91,6 +93,10 @@ class Item extends \Hubleto\Erp\Model
       (float) $item->unit_price,
       (float) $item->amount,
       (float) $item->discount
+    );
+    $priceVat = $calculator->calculateVat(
+      $priceExclVat,
+      (float) $item->vat
     );
     $priceInclVat = $calculator->calculatePriceIncludingVat(
       (float) $item->unit_price,
@@ -101,6 +107,7 @@ class Item extends \Hubleto\Erp\Model
 
     $this->record->find($idItem)->update([
       "price_excl_vat" => $priceExclVat,
+      "price_vat" => $priceVat,
       "price_incl_vat" => $priceInclVat,
     ]);
   }

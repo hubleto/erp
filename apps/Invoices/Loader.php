@@ -27,6 +27,8 @@ class Loader extends \Hubleto\Framework\App
       '/^invoices\/profiles\/add?\/?$/' => ['controller' => Controllers\Profiles::class, 'vars' => [ 'recordId' => -1 ]],
       '/^invoices\/payments(\/(?<recordId>\d+))?\/?$/' => Controllers\Payments::class,
       '/^invoices\/payments\/add?\/?$/' => ['controller' => Controllers\Payments::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^invoices\/payment-methods(\/(?<recordId>\d+))?\/?$/' => Controllers\PaymentMethods::class,
+      '/^invoices\/payment-methods\/add?\/?$/' => ['controller' => Controllers\PaymentMethods::class, 'vars' => [ 'recordId' => -1 ]],
       '/^invoices\/items(\/(?<recordId>\d+))?\/?$/' => Controllers\Items::class,
       '/^invoices\/items\/add?\/?$/' => ['controller' => Controllers\Items::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
@@ -49,6 +51,7 @@ class Loader extends \Hubleto\Framework\App
   {
     if ($round == 1) {
       $this->getModel(Models\Payment::class)->dropTableIfExists()->install();
+      $this->getModel(Models\PaymentMethod::class)->dropTableIfExists()->install();
       $this->getModel(Models\Invoice::class)->dropTableIfExists()->install();
       $this->getModel(Models\Profile::class)->dropTableIfExists()->install();
       $this->getModel(Models\Item::class)->dropTableIfExists()->install();
@@ -85,6 +88,10 @@ class Loader extends \Hubleto\Framework\App
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payments">
           <span class="icon"><i class="fas fa-euro-sign"></i></span>
           <span class="text">' . $this->translate('Payments') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payment-methods">
+          <span class="icon"><i class="fas fa-wallet"></i></span>
+          <span class="text">' . $this->translate('Payment methods') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/profiles">
           <span class="icon"><i class="fas fa-address-card"></i></span>

@@ -59,6 +59,7 @@ class Invoice extends \Hubleto\Erp\Model {
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],
     'SUPPLIER' => [ self::HAS_ONE, Supplier::class, 'id', 'id_supplier'],
+    'PAYMENT_METHOD' => [ self::BELONGS_TO, PaymentMethod::class, "id_payment_method" ],
     'PROFILE' => [ self::BELONGS_TO, Profile::class, "id_profile" ],
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
@@ -87,8 +88,15 @@ class Invoice extends \Hubleto\Erp\Model {
       ])->setDefaultValue(self::INBOUND_INVOICE)->setDefaultVisible(),
       'id_profile' => (new Lookup($this, $this->translate('Invoicing profile'), Profile::class))->setDefaultVisible()->setRequired(),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
+      'id_payment_method' => (new Lookup($this, $this->translate('Payment method'), PaymentMethod::class)),
+
+      // used for outbound invoices
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+
+      // used for inbound invoices
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
+
+
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired(),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
       'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
@@ -371,6 +379,7 @@ class Invoice extends \Hubleto\Erp\Model {
     if (!$invoice) throw new \Exception('Invoice was not found.');
 
     $vars = $invoice->toArray();
+    $vars['hubleto'] = $this;
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
     unset($vars['CUSTOMER']['CONTACTS']);
@@ -381,7 +390,6 @@ class Invoice extends \Hubleto\Erp\Model {
     unset($vars['CUSTOMER']['TAGS']);
     unset($vars['CUSTOMER']['LEADS']);
     unset($vars['CUSTOMER']['DEALS']);
-    unset($vars['PROFILE']['COMPANY']);
     unset($vars['PROFILE']['TEMPLATE']);
     unset($vars['ISSUED_BY']['ROLES']);
     unset($vars['ISSUED_BY']['TEAMS']);

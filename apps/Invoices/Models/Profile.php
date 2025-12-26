@@ -43,6 +43,8 @@ class Profile extends \Hubleto\Erp\Model
           '11-YYYY-NN',
         ])
       ,
+      'iban' => (new Varchar($this, $this->translate('Bank account number (IBAN)'))),
+      'swift' => (new Varchar($this, $this->translate('Bank (SWIFT/BIC)'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
       'due_days' => (new Integer($this, $this->translate('Due days'))),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),

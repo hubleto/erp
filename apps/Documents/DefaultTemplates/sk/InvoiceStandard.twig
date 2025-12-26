@@ -1,53 +1,487 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style>
-  * { font-family: "Helvetica"; font-size: 12px; }
-</style>
+<div style="min-height: 0px; opacity: 1; height: 720px;">
+  <style>
+    .w_swi_invoices_template {
+      font-family: "Verdana";
+    }
 
-<div>
-  <div class="dtop">
-    <div style="font-size:24pt"><b>Faktúra - daňový doklad č. </b></div>
-    Deal: {{ identifier }} {{ title }}<br/>
-    {% if version %} Version {{ version }}<br/> {% endif %}
-    Generated on: {{ now }}<br/>
-    Customer: {{ CUSTOMER.name }}<br/>
-    Contact person: {{ CONTACT.first_name }} {{ CONTACT.last_name }}<br/>
-  </div>
-  <br/>
-  <br/>
+    .w_swi_invoices_template .fbigger {
+      font-size: 11pt;
+    }
 
-  <table style="width:100%">
-    <tr>
-      <td style="width:60%"><b>Product</b></td>
-      <td style="width:10%"><b>Unit price</b></td>
-      <td style="width:10%"><b>Amount</b></td>
-      <td style="width:10%"><b>Discount</b></td>
-      <td style="width:10%"><b>Subtotal</b></td>
-    </tr>
-    {% for item in ITEMS %}
-      <tr>
-        <td style="width:60%">
-          {{ item.PRODUCT.name }}
-          {% if item.description %}
-            <div style="color:#666666">
-              {{ item.description }}
+    .w_swi_invoices_template table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .w_swi_invoices_template table td {
+      vertical-align: top;
+    }
+
+    .w_swi_invoices_template .dtop {
+      padding: 0 2pt 8pt 2pt;
+    }
+
+    .w_swi_invoices_template .dtop .w_swi_invoices_template .dtop * {
+      font-size: 16pt;
+    }
+
+    .w_swi_invoices_template .dmain {
+      border: 0.2mm solid #000;
+    }
+
+    .w_swi_invoices_template .dcolumn {
+      width: 50%;
+      float: left;
+    }
+
+    .w_swi_invoices_template .content {
+      padding: 4pt;
+    }
+
+    .w_swi_invoices_template .odberatel {
+      border: 0.5mm solid #000;
+    }
+
+    .w_swi_invoices_template .dodavatel_popis {
+      padding-top: 4pt;
+      text-align: left
+    }
+
+    .w_swi_invoices_template .tlogo {
+      padding-bottom: 8pt;
+      padding-top: 8pt;
+    }
+
+    .w_swi_invoices_template .tlogo div {
+      text-align: left;
+    }
+
+    .w_swi_invoices_template .tlogo div img {
+      width: 100%;
+    }
+
+    .w_swi_invoices_template .dodod_info {
+      color: #777;
+      text-transform: uppercase;
+      padding-bottom: 2mm;
+      text-align: left;
+    }
+
+    .w_swi_invoices_template .dodod_info span {
+      border-bottom: 0.2mm solid #777;
+      font-size: 8pt;
+      font-style: italic;
+    }
+
+    .w_swi_invoices_template .faktura_info {
+      padding: 16pt 2pt 6pt 2pt;
+      text-align: left;
+    }
+
+    .w_swi_invoices_template table.w_swi_invoices_udaje tr.sep td {
+      width: 100%;
+      height: 4pt;
+    }
+
+    .w_swi_invoices_template table.w_swi_invoices_udaje td {
+      padding: 0.8pt;
+      vertical-align: middle;
+    }
+
+    .w_swi_invoices_template table.w_swi_invoices_template_polozky td {
+      padding: 0.8pt;
+      font-size: 9pt;
+      vertical-align: middle;
+    }
+
+    .w_swi_invoices_template table.w_swi_invoices_template_polozky tr.header td {
+      font-weight: bold;
+      border-bottom: 0px solid #777;
+    }
+
+    .w_swi_invoices_template table.w_swi_invoices_template_polozky tr.sep td {
+      width: 100%;
+      height: 4pt;
+    }
+
+    .w_swi_invoices_template .w_swi_invoices_template_sumar {
+      width: 100%;
+      float: right;
+    }
+
+    .w_swi_invoices_template .w_swi_invoices_template_sumar table td {
+      padding: 0.8pt;
+      vertical-align: middle;
+      font-size: 9pt;
+    }
+
+    .w_swi_invoices_template .w_swi_invoices_template_sumar table tr.sep td {
+      width: 100%;
+      height: 10pt;
+    }
+
+    .w_swi_invoices_template .w_swi_invoices_template_sumar table tr.suma td {
+      border-top: 0.2mm solid #777;
+      padding-top: 1mm;
+    }
+
+    .w_swi_invoices_template .podpisy {}
+
+    .w_swi_invoices_template .podpisy table td {
+      text-align: center;
+    }
+
+    .w_swi_invoices_template .podpisy .podpis_info {
+      border-top: 0.2mm dotted #777;
+    }
+
+    ._num {
+      text-align: left;
+    }
+
+    ._numr {
+      text-align: right;
+    }
+  </style>
+  <!-- FOOTER -->
+  <!--  -->
+  <div class="w_swi_invoices_template">
+    <!-- TOP -->
+    <div class="dtop"> Faktúra - daňový doklad č. {{ number }} </div>
+    <div class="dmain">
+      <!-- DODAVATEL -->
+      <div class="dcolumn">
+        <div class="content">
+          <div class="tlogo">
+            <div style="float:left; width:25%;">
+              <img src="{{ PROFILE.COMPANY.logo }}" style="max-width:80px;max-height:80px;margin:5px;">
+              <!-- <div></div> -->
+              <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
             </div>
-          {% endif %}
-        </td>
-        <td style="width:10%">{{ item.unit_price|number_format(2, ",", " ") }} €</td>
-        <td style="width:10%">{{ item.amount|number_format(2, ",", " ") }} </td>
-        <td style="width:10%">{{ item.discount|number_format(0, ",", " ") }} %</td>
-        <td style="width:10%"><b>{{ item.price_excl_vat }}|number_format(2, ",", " ") €</b></td>
-      </tr>
-    {% endfor %}
-  </table>
-
-  <div style="font-size:24px"><b>Total: {{ price_excl_vat }}|number_format(2, ",", " ") €</b></div>
-
-  Note: All prices are excluding value added tax.
-</div>
-
-<br/><br/><br/>
-<div>
-  <b><span style="color:#05b9e9">wai</span><span style="color:#58585a">blue</span></b><br/>
-  <span style="color:#58585a">software_engineering_experts</span><br/>
+            <div style="float:left; width:50%;font-size:10pt;">
+              <div style="padding-left:4pt;">{{ PROFILE.headline }}</div>
+            </div>
+            <div style="clear:both;"></div>
+            <br>
+          </div>
+          <div class="dodod_info">
+            <span>Dodávateľ</span>
+            <div></div>
+            <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
+          </div>
+          <div>
+            <table class="w_swi_invoices_udaje" style="width:100%">
+              <tbody>
+                <tr>
+                  <td colspan="2" style="width:100%;" class="fbigger">
+                    <b>{{ PROFILE.COMPANY.name }}</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="width:100%;"></td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="width:100%;">
+                    {{ PROFILE.COMPANY.street_1 }}<br/>
+                    {{ PROFILE.COMPANY.street_2 }}<br/>
+                    {{ PROFILE.COMPANY.zip }} {{ PROFILE.COMPANY.city }}<br/>
+                    {{ PROFILE.COMPANY.country }}
+                  </td>
+                </tr>
+                <tr class="sep">
+                  <td colspan="2">
+                    <div></div>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td style="width:30%" class="fsmaller">IČO:</td>
+                  <td style="width:70%" class="fsmaller">{{ PROFILE.COMPANY.registration_id }}</td>
+                </tr>
+                <tr class="">
+                  <td style="width:30%">DIČ:</td>
+                  <td style="width:70%">{{ PROFILE.COMPANY.tax_id }}</td>
+                </tr>
+                <tr class="">
+                  <td style="width:30%">IČDPH:</td>
+                  <td style="width:70%">{{ PROFILE.COMPANY.vat_id }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="dodavatel_popis">{{ PROFILE.COMPANY.business_register }}</div>
+            <br>
+            <div style="padding:5px;background:#EEEEEE;text-align:center" class="fbigger"> IBAN <br>
+              <b style="font-size:1.2em;">{{ PROFILE.COMPANY.iban }}</b>
+              <br>
+              <br> BIC/SWIFT <br>
+              <b style="font-size:1.2em;">{{ PROFILE.COMPANY.swift }}</b>
+              <br>
+            </div>
+            <br>
+            <div style="text-align:left">Faktúru vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.<br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ODBERATEL -->
+      <div class="dcolumn">
+        <div class="content odberatel">
+          <div class="dodod_info">
+            <span>Odberateľ</span>
+            <div></div>
+            <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
+          </div>
+          <table class="w_swi_invoices_udaje" style="width:100%">
+            <tbody>
+              <tr>
+                <td colspan="2" style="width:100%;" class="fbigger">
+                  <b>{{ CUSTOMER.name }}</b>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:100%;"></td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:100%;">{{ CUSTOMER.street_line_1 }}</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:100%;">{{ CUSTOMER.street_line_2 }}</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:100%;">{{ CUSTOMER.region }}</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:100%;">{{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:100%;">{{ CUSTOMER.country }}</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:100%;"></td>
+              </tr>
+              <tr class="sep">
+                <td colspan="2">
+                  <div></div>
+                </td>
+              </tr>
+              <tr class="">
+                <td style="width:30%">IČO:</td>
+                <td style="width:70%">{{ CUSTOMER.customer_id }}</td>
+              </tr>
+              <tr class="">
+                <td style="width:30%">DIČ:</td>
+                <td style="width:70%">{{ CUSTOMER.tax_id }}</td>
+              </tr>
+              <tr class="">
+                <td style="width:30%">IČDPH:</td>
+                <td style="width:70%">{{ CUSTOMER.vat_id }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="content">
+          <table class="w_swi_invoices_udaje">
+            <tbody>
+              <tr>
+                <td style="width:50%;">Variabilný symbol:</td>
+                <td style="width:50%;"><b>{{ vs }}</b></td>
+              </tr>
+              <tr>
+                <td style="width:50%;">Špecifický symbol:</td>
+                <td style="width:50%;">{{ ss }}</td>
+              </tr>
+              <tr>
+                <td style="width:50%;">Konštantný symbol:</td>
+                <td style="width:50%;">{{ cs }}</td>
+              </tr>
+              <tr class="sep">
+                <td colspan="2">
+                  <div></div>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:50%;">Forma úhrady:</td>
+                <td style="width:50%;">{{ PAYMENT_METHOD.name }}</td>
+              </tr>
+              <!-- <tr><td style='width:50%;'>Spôsob dodania:</td><td style='width:50%;'></td></tr> -->
+              <tr class="sep">
+                <td colspan="2">
+                  <div></div>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:50%;">Dátum vystavenia:</td>
+                <td style="width:50%;">{{ date_issue }}</td>
+              </tr>
+              <tr>
+                <td style="width:50%;">Dátum dodania:</td>
+                <td style="width:50%;">{{ date_delivery }}</td>
+              </tr>
+              <tr>
+                <td style="width:50%;">Dátum splatnosti:</td>
+                <td style="width:50%;"><b>{{ date_due }}</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+    <!-- FAKTURACNY TITUL -->
+    <div class="faktura_info fbigger"></div>
+    <!-- POLOZKY -->
+    <div class="dmain">
+      <div class="content">
+        <table class="w_swi_invoices_template_polozky">
+          <thead>
+            <tr class="header" style="background:#EEEEEE">
+              <td style="width:100%;padding:5pt 5pt 5pt 5pt">
+                <table style="width:100%">
+                  <tbody>
+                    <tr>
+                      <td style="width:70%">Položka</td>
+                      <td style="width:30%;text-align:right">Jednotková cena × Počet = Cena</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in ITEMS %}
+              <tr>
+                <td style="width:100%;">
+                  <table style="width:100%">
+                    <tbody>
+                      <tr>
+                        <td style="width:60%;color:blue">
+                          <i>{{ i.item }}</i>
+                        </td>
+                        <td style="width:40%;text-align:right">
+                          <span>{{ hubleto.locale().formatCurrency(i.unit_price, CURRENCY.symbol) }}</span>
+                          ×
+                          {{ i.amount }}
+                          = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> bez DPH</b>
+                          <div style="color:#888888">
+                            DPH {{ i.vat }} %: <span>{{ hubleto.locale().formatCurrency(i.price_vat, CURRENCY.symbol) }}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <br>
+    <table style="width:100%">
+      <tbody>
+        <tr>
+          <td style="width:50%">
+            <div style="padding-top:20mm;padding-left:5mm;">
+              <!-- PECIATKA a PODPIS -->
+              <div style="text-align:center;">
+                <div class="content podpisy" style="padding-top:0; padding-bottom:0;">
+                  <div style="page-break-inside:avoid; ">
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td style="width:50%;">
+                            {# peciatka <img src="#" style="max-width:220px;"> #}
+                          </td>
+                          <td style="width:50%;"></td>
+                        </tr>
+                        <tr>
+                          <td style="width:50%;">
+                            <span class="podpis_info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pečiatka&nbsp;a&nbsp;podpis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          </td>
+                          <td style="width:50%;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td style="width:50%">
+            <!-- SUMAR -->
+            <div style="padding-top:10mm;">
+              <div class="content">
+                <div class="w_swi_invoices_template_sumar">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Základ DPH 23 %</td>
+                        <td class="_num">
+                          <span>83,70 €</span>
+                        </td>
+                      </tr>
+                      <tr class="suma">
+                        <td class="fbigger">Spolu bez DPH</td>
+                        <td class="_num fbigger">
+                          <span>83,70 €</span>
+                        </td>
+                      </tr>
+                      <tr class="sep">
+                        <td colspan="2">
+                          <div></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>DPH 23 %</td>
+                        <td class="_num">
+                          <span>19,25 €</span>
+                        </td>
+                      </tr>
+                      <tr class="suma">
+                        <td class="fbigger">
+                          <b>Spolu s DPH</b>
+                        </td>
+                        <td class="_num fbigger">
+                          <b>
+                            <span>102,95 €</span>
+                          </b>
+                        </td>
+                      </tr>
+                      <tr class="sep">
+                        <td colspan="2">
+                          <div></div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="fbigger">Prijatá záloha dňa 16.12.2025</td>
+                        <td class="_num fbigger">
+                          <span>102,95 €</span>
+                        </td>
+                      </tr>
+                      <tr class="suma">
+                        <td class="fbigger">
+                          <b>K úhrade</b>
+                        </td>
+                        <td class="_num fbigger">
+                          <b>
+                            <span>0,00 €</span>
+                            <b></b>
+                          </b>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div style="clear:both;"></div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

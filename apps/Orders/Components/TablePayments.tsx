@@ -58,13 +58,12 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
           className='btn btn-success btn-small'
         >
           <span className='icon'><i className='fas fa-check'></i></span>
-          <span className='text'>Already pepared</span>
+          <span className='text'>Prepared for invoice</span>
         </button>;
       } else {
         return <button
           className='btn btn-yellow btn-small'
           onClick={() => {
-      console.log(data);
             return globalThis.main.showDialogConfirm(
               <>
                 <div>{data.ORDER?.identifier} ({data.ORDER?.title})</div>

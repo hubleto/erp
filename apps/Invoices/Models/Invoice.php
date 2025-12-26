@@ -31,11 +31,11 @@ class Invoice extends \Hubleto\Erp\Model {
   const TYPE_DEBIT_NOTE = 5;
 
   const TYPES = [
-    1 => 'Proforma',
-    2 => 'Advance',
-    3 => 'Standard',
-    4 => 'Credit Note',
-    5 => 'Debit Note',
+    self::TYPE_PROFORMA => 'Proforma',
+    self::TYPE_ADVANCE => 'Advance',
+    self::TYPE_STANDARD => 'Standard',
+    self::TYPE_CREDIT_NOTE => 'Credit Note',
+    self::TYPE_DEBIT_NOTE => 'Debit Note',
   ];
 
   const INBOUND_INVOICE = 1;
@@ -85,8 +85,8 @@ class Invoice extends \Hubleto\Erp\Model {
       ])->setEnumCssClasses([
         self::INBOUND_INVOICE => 'bg-lime-50 text-slate-700',
         self::OUTBOUND_INVOICE => 'bg-yellow-50 text-slate-700',
-      ])->setDefaultValue(self::INBOUND_INVOICE)->setDefaultVisible(),
-      'id_profile' => (new Lookup($this, $this->translate('Invoicing profile'), Profile::class))->setDefaultVisible()->setRequired(),
+      ])->setDefaultValue(self::OUTBOUND_INVOICE)->setDefaultVisible(),
+      'id_profile' => (new Lookup($this, $this->translate('Invoicing profile'), Profile::class))->setDefaultVisible(),
       'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
       'id_payment_method' => (new Lookup($this, $this->translate('Payment method'), PaymentMethod::class)),
 
@@ -97,7 +97,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
 
 
-      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired(),
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired()->setDefaultValue(3),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
       'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
@@ -209,13 +209,24 @@ class Invoice extends \Hubleto\Erp\Model {
 
     /** @var Profile */
     $mProfile = $this->getService(Profile::class);
-    $profile = $mProfile->record->where('id', $record['id_profile'])->first();
+
+    $idProfile = (int) ($record['id_profile'] ?? 0);
+    if ($idProfile <= 0) {
+      $idProfile = $mProfile->record->where('is_default', 1)->first()->id;
+    }
+    if ($idProfile <= 0) {
+      throw new \Exception('Invoice profile is required to create an invoice.');
+    }
+
+    $profile = $mProfile->record->where('id', $idProfile)->first();
+
+    $record['id_profile'] = $idProfile;
 
     $numberingPattern = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
 
     $invoicesThisYear = $this->record
       ->whereYear('date_delivery', date('Y'))
-      ->where('id_profile', $record['id_profile'])
+      ->where('id_profile', $idProfile)
       ->get()
     ;
 
@@ -370,6 +381,14 @@ class Invoice extends \Hubleto\Erp\Model {
     return $idInvoice;
   }
 
+  /**
+   * [Description for getPreviewVars]
+   *
+   * @param int $idInvoice
+   * 
+   * @return array
+   * 
+   */
   public function getPreviewVars(int $idInvoice): array
   {
     /** @var Invoice */
@@ -407,6 +426,14 @@ class Invoice extends \Hubleto\Erp\Model {
 
   }
 
+  /**
+   * [Description for getPreviewHtml]
+   *
+   * @param int $idInvoice
+   * 
+   * @return string
+   * 
+   */
   public function getPreviewHtml(int $idInvoice): string
   {
 

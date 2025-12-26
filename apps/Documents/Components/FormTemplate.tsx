@@ -52,7 +52,9 @@ export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,Fo
               {this.inputWrapper('notes')}
             </div>
           </div>
-          {this.inputWrapper('content', {cssStyle: {height: 'calc(100vh - 300px)'}})}
+          <div style={{height: 'calc(100vh - 260px)', overflowY: 'scroll'}}>
+            {this.inputWrapper('content', {wrapperCssClass: 'overflow-y-auto'})}
+          </div>
         </>;
       break;
     }

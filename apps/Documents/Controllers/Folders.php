@@ -7,8 +7,7 @@ class Folders extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      // [ 'url' => 'documents', 'content' => $this->translate('Documents') ],
-      [ 'url' => 'documents/folders', 'content' => $this->translate('Folders') ],
+      [ 'url' => '', 'content' => $this->translate('Folders') ],
     ]);
   }
 

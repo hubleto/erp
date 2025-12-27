@@ -22,7 +22,7 @@ class Loader extends \Hubleto\Framework\App
       '/^documents\/browse\/?$/' => Controllers\Browse::class,
       '/^documents\/list\/?$/' => Controllers\Documents::class,
 
-      '/^documents(\/(?<recordId>\d+))?\/?$/' => Controllers\Documents::class,
+      '/^documents\/(?<recordId>\d+)\/?$/' => Controllers\Documents::class,
       '/^documents\/add\/?$/' => ['controller' => Controllers\Documents::class, 'vars' => ['recordId' => -1]],
 
       '/^documents\/folders\/?$/' => Controllers\Folders::class,
@@ -76,8 +76,8 @@ class Loader extends \Hubleto\Framework\App
     ]);
 
     $idFolderMM = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => 'Marketing materials' ])['id'];
-    $idFolderMM1 = $mFolder->record->recordCreate(['id_parent_folder' => $idFolderMM, 'name' => 'LinkedIn'])['id'];
-    $idFolderMM2 = $mFolder->record->recordCreate(['id_parent_folder' => $idFolderMM, 'name' => 'GoogleAds'])['id'];
+    $idFolderMM1 = $mFolder->record->recordCreate([ 'id_parent_folder' => $idFolderMM, 'name' => 'LinkedIn' ])['id'];
+    $idFolderMM2 = $mFolder->record->recordCreate([ 'id_parent_folder' => $idFolderMM, 'name' => 'GoogleAds' ])['id'];
 
     $idFolderCU = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => 'Customer profiles' ])['id'];
 
@@ -115,6 +115,36 @@ class Loader extends \Hubleto\Framework\App
       }
     }
 
+  }
+
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   * 
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents">
+          <span class="icon"><i class="fas fa-file-invoice"></i></span>
+          <span class="text">' . $this->translate('Browse') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/list">
+          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="text">' . $this->translate('Show as list') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/folders">
+          <span class="icon"><i class="fas fa-folder"></i></span>
+          <span class="text">' . $this->translate('Manage folders') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/templates">
+          <span class="icon"><i class="fas fa-file"></i></span>
+          <span class="text">' . $this->translate('Templates') . '</span>
+        </a>
+      </div>
+    ';
   }
 
 }

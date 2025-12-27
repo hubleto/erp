@@ -11,6 +11,7 @@ use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
 use Hubleto\App\Community\Suppliers\Models\RecordManagers\Supplier;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -87,7 +88,6 @@ class Invoice extends \Hubleto\Erp\RecordManager {
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $filters = $hubleto->router()->urlParamAsArray("filters");
-    $view = $hubleto->router()->urlParamAsString("view");
 
     $idCustomer = $hubleto->router()->urlParamAsInteger('idCustomer');
     if ($idCustomer > 0) $query->where('id_customer', $idCustomer);
@@ -99,8 +99,13 @@ class Invoice extends \Hubleto\Erp\RecordManager {
       $query = $query->where("invoices.inbound_outbound", $filters["fInboundOutbound"]);
     }
 
-    if ($view == 'inboundInvoices') $query = $query->where("invoices.inbound_outbound", 1);
-    if ($view == 'outboundInvoices') $query = $query->where("invoices.inbound_outbound", 2);
+    if (!empty($filters['fInboundOutbound'])) {
+      $query = $query->where("invoices.inbound_outbound", $filters['fInboundOutbound']);
+    }
+
+    if (!empty($filters['fType'])) {
+      $query = $query->where("invoices.type", $filters['fType']);
+    }
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,

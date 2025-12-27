@@ -43,9 +43,24 @@ class Desktop extends \Hubleto\Erp\Controller
       return $aOrder <=> $bOrder;
     });
 
+    $sidebarGroups = $desktopApp->getSidebarGroups();
+    $activatedSidebarGroup = [];
+    $activatedSidebarGroupUrlSlug = '';
+    if ($activatedApp && !empty($activatedApp->manifest['sidebarGroup'])) {
+      foreach ($sidebarGroups as $gUrlSlug => $gData) {
+        if (in_array($gUrlSlug, explode(",", $activatedApp->manifest['sidebarGroup']))) {
+          $activatedSidebarGroup = $gData;
+          $activatedSidebarGroupUrlSlug = $gUrlSlug;
+          break;
+        }
+      }
+    }
+
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
     $this->viewParams['activatedApp'] = $activatedApp;
-    $this->viewParams['sidebarGroups'] = $desktopApp->getSidebarGroups();
+    $this->viewParams['activatedSidebarGroup'] = $activatedSidebarGroup;
+    $this->viewParams['activatedSidebarGroupUrlSlug'] = $activatedSidebarGroupUrlSlug;
+    $this->viewParams['sidebarGroups'] = $sidebarGroups;
     $this->viewParams['release'] = \Composer\InstalledVersions::getPrettyVersion('hubleto/erp');
 
     $this->viewParams['availableLanguages'] = $this->config()->getAsArray('availableLanguages', [

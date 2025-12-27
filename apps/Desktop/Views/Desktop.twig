@@ -101,14 +101,33 @@
       <div class="flex-1 ml-2 max-w-72">
         <app-search string:endpoint='api/search'></app-search>
       </div>
-      <div class="hidden sm:block ml-2">
-        <button class="btn btn-primary-outline" onclick="lchr(true);">
-          <span class="icon"><i class="fas fa-table-cells-large"></i></span>
-          {# <span class="text">Go to</span> #}
-        </button>
-      </div>
+      {% if viewParams.activatedSidebarGroup %}
+        <div class="ml-2 hidden md:block">
+          <a
+            class="btn btn-transparent"
+            style="border-left: 4px solid {{ viewParams.activatedSidebarGroup.color }}"
+            href="{{ config.projectUrl }}/~/{{ viewParams.activatedSidebarGroupUrlSlug }}"
+          >
+            <span class="icon"><i class="{{ viewParams.activatedSidebarGroup.icon }}"></i></span>
+            <span class="text">{{ viewParams.activatedSidebarGroup.title }}</span>
+          </a>
+        </div>
+        <div class="ml-2 hidden md:block">
+          <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+        </div>
+      {% endif %}
       <div class="hidden md:block flex-1">
-        {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+        {% if viewParams.activatedApp.manifest.namespace != "Hubleto\\App\\Community\\Desktop" %}
+          {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+        {% endif %}
+      </div>
+      <div class="hidden sm:block ml-2">
+        <button class="btn btn-transparent" onclick="lchr(true);">
+          <span class="icon"><i class="fas fa-table-cells-large"></i></span>
+          <span class="text">Apps</span>
+        </button>
       </div>
       <div class="md:block ml-2">
         <ul class="flex font-sm gap-1">

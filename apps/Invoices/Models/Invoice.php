@@ -79,9 +79,9 @@ class Invoice extends \Hubleto\Erp\Model {
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'inbound_outbound' => (new Integer($this, $this->translate('Invoice type')))->setEnumValues([
-        self::INBOUND_INVOICE => $this->translate('Inbound invoice'),
-        self::OUTBOUND_INVOICE => $this->translate('Outbound invoice'),
+      'inbound_outbound' => (new Integer($this, $this->translate('Inbound / outbound')))->setEnumValues([
+        self::INBOUND_INVOICE => $this->translate('Inbound'),
+        self::OUTBOUND_INVOICE => $this->translate('Outbound'),
       ])->setEnumCssClasses([
         self::INBOUND_INVOICE => 'bg-lime-50 text-slate-700',
         self::OUTBOUND_INVOICE => 'bg-yellow-50 text-slate-700',
@@ -97,7 +97,13 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
 
 
-      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired()->setDefaultValue(3),
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired()->setDefaultValue(3)->setDefaultVisible()->setEnumCssClasses([
+        self::TYPE_PROFORMA => 'bg-blue-50 text-slate-700',
+        self::TYPE_ADVANCE => 'bg-lime-50 text-slate-700',
+        self::TYPE_STANDARD => 'bg-green-50 text-slate-700',
+        self::TYPE_CREDIT_NOTE => 'bg-orange-50 text-slate-700',
+        self::TYPE_DEBIT_NOTE => 'bg-violet-50 text-slate-700',
+      ]),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
       'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
@@ -126,16 +132,21 @@ class Invoice extends \Hubleto\Erp\Model {
    */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
+    $filters = $this->router()->urlParamAsArray("filters");
+
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate("Add invoice");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
+    switch ($filters['fInboundOutbound'] ?? 0) {
+      case self::INBOUND_INVOICE: $description->hideColumns(['id_customer']); break;
+      case self::OUTBOUND_INVOICE: $description->hideColumns(['id_supplier']); break;
+    }
+
     $description->ui['filters'] = [
       'fInvoiceWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
     ];
-
-    $view = $this->router()->urlParamAsString("view");
 
     $description->addFilter('fInboundOutbound', [
       'title' => $this->translate('Inbound / Outbound'),
@@ -144,7 +155,16 @@ class Invoice extends \Hubleto\Erp\Model {
         self::INBOUND_INVOICE => $this->translate('Inbound invoices'),
         self::OUTBOUND_INVOICE => $this->translate('Outbound invoices'),
       ],
-      'default' => ($view == 'inboundInvoices' ? self::INBOUND_INVOICE : ($view == 'outboundInvoices' ? self::OUTBOUND_INVOICE : 0)),
+      'default' => $filters['fInboundOutbound'] ?? 0,
+    ]);
+
+    $description->addFilter('fType', [
+      'title' => $this->translate('Type'),
+      'options' => [
+        0 => $this->translate('All'),
+        ...self::TYPES,
+      ],
+      'default' => $filters['fType'] ?? 0,
     ]);
 
     return $description;
@@ -222,11 +242,16 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $record['id_profile'] = $idProfile;
 
+    if ($record['inbound_outbound'] <= 0) $record['inbound_outbound'] = self::INBOUND_INVOICE;
+    if ($record['type'] <= 0) $record['type'] = self::TYPE_STANDARD;
+
     $numberingPattern = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
 
     $invoicesThisYear = $this->record
       ->whereYear('date_delivery', date('Y'))
       ->where('id_profile', $idProfile)
+      ->where('inbound_outbound', $record['inbound_outbound'])
+      ->where('type', $record['type'])
       ->get()
     ;
 

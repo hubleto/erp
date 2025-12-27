@@ -7,7 +7,7 @@ class Templates extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'documents/templates', 'content' => $this->translate('Templates') ],
+      [ 'url' => '', 'content' => $this->translate('Templates') ],
     ]);
   }
 

@@ -10,26 +10,26 @@ class AppMenu extends \Hubleto\Framework\Extendible
       [
         'app' => $this->app,
         'url' => 'documents/browse',
-        'title' => $this->app->translate('Document Browser'),
+        'title' => $this->app->translate('Browse'),
         'icon' => 'fas fa-table',
       ],
       [
         'app' => $this->app,
         'url' => 'documents/list',
-        'title' => $this->app->translate('Documents Table'),
+        'title' => $this->app->translate('Show as list'),
         'icon' => 'fas fa-list',
       ],
       [
         'app' => $this->app,
         'url' => 'documents/folders',
-        'title' => $this->app->translate('Folders'),
+        'title' => $this->app->translate('Manage folders'),
         'icon' => 'fas fa-folder',
       ],
       [
         'app' => $this->app,
         'url' => 'documents/templates',
         'title' => $this->app->translate('Templates'),
-        'icon' => 'fas fa-list',
+        'icon' => 'fas fa-file',
       ],
     ];
   }

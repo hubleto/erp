@@ -71,17 +71,16 @@ class Loader extends \Hubleto\Framework\App
       <div class="flex flex-col gap-2">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices">
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
-          <span class="text">' . $this->translate('All invoices') . '</span>
+          <span class="text">' . $this->translate('Invoices') . '</span>
         </a>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?view=outboundInvoices">
-          <span class="icon"><i class="fas fa-cart-shopping"></i></span>
-          <span class="text">' . $this->translate('Outbound invoices') . '</span>
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=2">
+          <span class="icon"><i class="fas fa-arrow-right"></i></span>
+          <span class="text">' . $this->translate('Outbound') . '</span>
         </a>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?view=inboundInvoices">
-          <span class="icon"><i class="fas fa-euro-sign"></i></span>
-          <span class="text">' . $this->translate('Inbound invoices') . '</span>
+        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=1">
+          <span class="icon"><i class="fas fa-arrow-left"></i></span>
+          <span class="text">' . $this->translate('Inbound') . '</span>
         </a>
-        <br/>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items?filters[fStatus]=1">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Prepared items') . '</span>
@@ -90,14 +89,19 @@ class Loader extends \Hubleto\Framework\App
           <span class="icon"><i class="fas fa-euro-sign"></i></span>
           <span class="text">' . $this->translate('Payments') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payment-methods">
-          <span class="icon"><i class="fas fa-wallet"></i></span>
-          <span class="text">' . $this->translate('Payment methods') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/profiles">
-          <span class="icon"><i class="fas fa-address-card"></i></span>
-          <span class="text">' . $this->translate('Profiles') . '</span>
-        </a>
+        <div class="mt-4">
+          <b>Settings</b>
+          <div class="btn-group vertical mt-2 w-full">
+            <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payment-methods">
+              <span class="icon"><i class="fas fa-wallet"></i></span>
+              <span class="text">' . $this->translate('Payment methods') . '</span>
+            </a>
+            <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/profiles">
+              <span class="icon"><i class="fas fa-address-card"></i></span>
+              <span class="text">' . $this->translate('Invoicing profiles') . '</span>
+            </a>
+          </div>
+        </div>
       </div>
     ';
   }

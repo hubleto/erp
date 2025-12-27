@@ -118,8 +118,8 @@ class Order extends \Hubleto\Erp\RecordManager
     );
 
     if (isset($filters["fOrderClosed"])) {
-      if ($filters["fOrderClosed"] == 0) $query = $query->where("orders.is_closed", false);
-      if ($filters["fOrderClosed"] == 1) $query = $query->where("orders.is_closed", true);
+      if ($filters["fOrderClosed"] == 1) $query = $query->where("orders.is_closed", false);
+      if ($filters["fOrderClosed"] == 2) $query = $query->where("orders.is_closed", true);
     }
 
     if (isset($filters["fPurchaseSales"]) && $filters["fPurchaseSales"] > 0) {

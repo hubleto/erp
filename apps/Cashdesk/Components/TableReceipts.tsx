@@ -18,10 +18,6 @@ interface TableReceiptsState extends HubletoTableState {
 export default class TableReceipts extends HubletoTable<TableReceiptsProps, TableReceiptsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Cashdesk/Models/Receipt',
   }

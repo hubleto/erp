@@ -18,10 +18,6 @@ export interface TableLeadsState extends HubletoTableState {
 export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeadsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Leads/Models/Lead',
   }

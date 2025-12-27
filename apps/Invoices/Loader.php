@@ -67,23 +67,27 @@ class Loader extends \Hubleto\Framework\App
    */
   public function renderSecondSidebar(): string
   {
+    $mItem = $this->getModel(Models\Item::class);
+    $preparedItemsCount = $mItem->record->whereNull('id_invoice')->count();
+
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices">
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
           <span class="text">' . $this->translate('Invoices') . '</span>
         </a>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=2">
+        <!-- <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=2">
           <span class="icon"><i class="fas fa-arrow-right"></i></span>
           <span class="text">' . $this->translate('Outbound') . '</span>
         </a>
         <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=1">
           <span class="icon"><i class="fas fa-arrow-left"></i></span>
           <span class="text">' . $this->translate('Inbound') . '</span>
-        </a>
+        </a> -->
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items?filters[fStatus]=1">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Prepared items') . '</span>
+        ' . ($preparedItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $preparedItemsCount . '</span>' : '') . '
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payments">
           <span class="icon"><i class="fas fa-euro-sign"></i></span>

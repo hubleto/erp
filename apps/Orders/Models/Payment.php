@@ -56,13 +56,25 @@ class Payment extends \Hubleto\Erp\Model
     $description->ui['addButtonText'] = $this->translate("Add payment");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
+    $description->ui['orderBy'] = [
+      'field' => 'date_due',
+      'direction' => 'asc',
+    ];
 
     $description->addFilter('fStatus', [
       'title' => $this->translate('Status'),
       'options' => [
-        0 => $this->translate('All'),
         1 => $this->translate('Not-prepared to invoice'),
         2 => $this->translate('Prepared to invoice'),
+      ]
+    ]);
+
+    $description->addFilter('fDue', [
+      'title' => $this->translate('Due / Not due'),
+      'direction' => 'horizontal',
+      'options' => [
+        1 => $this->translate('Due'),
+        2 => $this->translate('Not due'),
       ]
     ]);
 

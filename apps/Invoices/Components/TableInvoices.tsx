@@ -3,9 +3,7 @@ import { setUrlParam, getUrlParam, deleteUrlParam } from '@hubleto/react-ui/core
 import { TableDescription } from '@hubleto/react-ui/core/Table';
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
 import FormInvoice from './FormInvoice';
-import InputLookup from '@hubleto/react-ui/core/Inputs/Lookup';
-import InputVarchar from '@hubleto/react-ui/core/Inputs/Varchar';
-import InputDateTime from '@hubleto/react-ui/core/Inputs/DateTime';
+import moment from "moment";
 
 interface TableInvoicesProps extends HubletoTableProps {
   idCustomer?: any,
@@ -102,98 +100,27 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
   }
 
   cellClassName(columnName: string, column: any, rowData: any) {
-    let cellClassName = super.cellClassName(columnName, column, rowData);
-    if (rowData['date_payment'] == '0000-00-00') cellClassName += ' bg-red-50';
-    return cellClassName;
+    const cellClassName = super.cellClassName(columnName, column, rowData);
+
+    if (columnName == 'date_due') {
+      const now = moment();
+      const daysDue = moment(now).diff(moment(rowData['date_due']), 'days');
+      console.log(rowData['date_due'], daysDue);
+      if (daysDue >= 0) return cellClassName + ' text-red-800';
+      else if (daysDue > -7) return cellClassName + ' text-yellow-800';
+      else return cellClassName;
+    } else {
+      return cellClassName;
+    }
   }
 
-  // _datetimeFilter(stateParamName: string, urlParamName: string): JSX.Element {
-  //   return <>
-  //     <InputDateTime
-  //       uid={this.props.uid + '_filter_' + urlParamName}
-  //       type='date'
-  //       value={this.state[stateParamName] ?? ''}
-  //       onChange={(value: any) => {
-  //         this.setState({[stateParamName]: value} as TableInvoicesState, () => { this.loadData(); });
-  //         if (value == null) deleteUrlParam(urlParamName);
-  //         else setUrlParam(urlParamName, value);
-  //       }}
-  //     ></InputDateTime>
-  //   </>;
-  // }
-
-  // renderFilter(): JSX.Element {
-  //   return <>
-  //     <div className="card">
-  //       <div className="card-body flex gap-1">
-  //         <div><i className="fas fa-filter text-2xl text-gray-200 mr-4"></i></div>
-  //         <div className={"p-1 flex-1" + (this.state.idCustomer > 0 || this.state.number != '' || this.state.vs != '' ? " bg-yellow-100" : "")}>
-  //           {this.props.idCustomer ? null : <div>
-  //             <b className="text-sm">{this.translate('Customer')}</b><br/>
-  //             <InputLookup
-  //               uid={this.props.uid + '_filter_customer'}
-  //               model='Hubleto/App/Community/Customers/Models/Customer'
-  //               value={this.state.idCustomer}
-  //               onChange={(value: any) => {
-  //                 this.setState({idCustomer: value} as TableInvoicesState, () => { this.loadData(); });
-  //                 if (value == 0) deleteUrlParam('id-customer');
-  //                 else setUrlParam('id-customer', value);
-  //               }}
-  //             ></InputLookup>
-  //           </div>}
-  //           <div>
-  //             <b className="text-sm">{this.translate('Number')}</b><br/>
-  //             <InputVarchar
-  //               uid={this.props.uid + '_filter_number'}
-  //               value={this.state.number}
-  //               onChange={(value: any) => {
-  //                 this.setState({number: value} as TableInvoicesState, () => { this.loadData(); });
-  //                 if (value == '') deleteUrlParam('number');
-  //                 else setUrlParam('number', value);
-  //               }}
-  //             ></InputVarchar>
-  //           </div>
-  //           <div>
-  //             <b className="text-sm">{this.translate('Variable symbol')}</b><br/>
-  //             <InputVarchar
-  //               uid={this.props.uid + '_filter_vs'}
-  //               value={this.state.vs}
-  //               onChange={(value: any) => {
-  //                 this.setState({vs: value} as TableInvoicesState, () => { this.loadData(); });
-  //                 if (value == '') deleteUrlParam('vs');
-  //                 else setUrlParam('vs', value);
-  //               }}
-  //             ></InputVarchar>
-  //           </div>
-  //         </div>
-  //         <div className={"p-1 flex-1" + (this.state.dateIssueFrom != '' || this.state.dateIssueTo != '' || this.state.dateDeliveryFrom != '' || this.state.dateDeliveryTo != '' || this.state.dateDueFrom != '' || this.state.dateDueTo != ''? " bg-yellow-100" : "")}>
-  //           <b className="text-sm">{this.translate('Issue')}</b><br/>
-  //           <div className="flex">
-  //             {this._datetimeFilter('dateIssueFrom', 'date-issue-from')}
-  //             {this._datetimeFilter('dateIssueTo', 'date-issue-to')}
-  //           </div>
-  //           <b className="text-sm">{this.translate('Delivery')}</b><br/>
-  //           <div className="flex">
-  //             {this._datetimeFilter('dateDeliveryFrom', 'date-delivery-from')}
-  //             {this._datetimeFilter('dateDeliveryTo', 'date-delivery-to')}
-  //           </div>
-  //           <b className="text-sm">{this.translate('Due')}</b><br/>
-  //           <div className="flex">
-  //             {this._datetimeFilter('dateDueFrom', 'date-due-from')}
-  //             {this._datetimeFilter('dateDueTo', 'date-due-to')}
-  //           </div>
-  //         </div>
-  //         <div className={"p-1 flex-1" + (this.state.datePaymentFrom != '' || this.state.datePaymentTo != '' ? " bg-yellow-100" : "")}>
-  //           <b className="text-sm">{this.translate('Payment')}</b><br/>
-  //           <div className="flex">
-  //             {this._datetimeFilter('datePaymentFrom', 'date-payment-from')}
-  //             {this._datetimeFilter('datePaymentTo', 'date-payment-to')}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </>;
-  // }
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "date_payment" && !data['date_payment']) {
+      return <div className='badge badge-danger'>Not paid</div>;
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
 
   renderFooter(): JSX.Element {
     let totalExclVat = 0;

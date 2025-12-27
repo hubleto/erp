@@ -18,10 +18,6 @@ interface TableCashRegistersState extends HubletoTableState {
 export default class TableCashRegisters extends HubletoTable<TableCashRegistersProps, TableCashRegistersState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Cashdesk/Models/CashRegister',
   }

@@ -10,10 +10,6 @@ interface TableHistoriesState extends TableState {}
 export default class TableHistories extends Table<TableHistoriesProps, TableHistoriesState> {
   static defaultProps = {
     ...Table.defaultProps,
-    orderBy: {
-      field: "date",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Orders/Models/History',
   }

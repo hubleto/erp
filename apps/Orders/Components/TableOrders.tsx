@@ -10,10 +10,6 @@ interface TableOrdersState extends HubletoTableState {
 export default class TableOrders extends HubletoTable<TableOrdersProps, TableOrdersState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Orders/Models/Order',
   }

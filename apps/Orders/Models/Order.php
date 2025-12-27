@@ -142,10 +142,10 @@ class Order extends \Hubleto\Erp\Model
       'fOrderWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'),
       'fOrderClosed' => [
         'title' => $this->translate('Open / Closed'),
+        'direction' => 'horizontal',
         'options' => [
-          0 => $this->translate('Open'),
-          1 => $this->translate('Closed'),
-          2 => $this->translate('All'),
+          1 => $this->translate('Open'),
+          2 => $this->translate('Closed'),
         ],
         'default' => 0,
       ],
@@ -155,8 +155,8 @@ class Order extends \Hubleto\Erp\Model
 
     $description->addFilter('fPurchaseSales', [
       'title' => $this->translate('Purchase / Sales'),
+      'direction' => 'horizontal',
       'options' => [
-        0 => $this->translate('All'),
         self::PURCHASE_ORDER => $this->translate('Purchase orders'),
         self::SALES_ORDER => $this->translate('Sales orders'),
       ],

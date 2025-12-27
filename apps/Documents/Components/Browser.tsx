@@ -23,10 +23,6 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     model: 'Hubleto/App/Community/Documents/Models/Document',
   }
 

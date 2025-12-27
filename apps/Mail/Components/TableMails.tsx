@@ -20,10 +20,6 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     model: 'Hubleto/App/Community/Mail/Models/Mail',
   }
 

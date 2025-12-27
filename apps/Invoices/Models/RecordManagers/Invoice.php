@@ -107,6 +107,16 @@ class Invoice extends \Hubleto\Erp\RecordManager {
       $query = $query->where("invoices.type", $filters['fType']);
     }
 
+    switch ($filters["fDue"] ?? 0) {
+      case 1: $query = $query->whereDate($this->table . ".date_due", "<=", date("Y-m-d")); break;
+      case 2: $query = $query->whereDate($this->table . ".date_due", ">", date("Y-m-d")); break;
+    }
+
+    switch ($filters["fPaid"] ?? 0) {
+      case 1: $query = $query->whereNotNull($this->table . ".date_payment"); break;
+      case 2: $query = $query->whereNull($this->table . ".date_payment"); break;
+    }
+
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,

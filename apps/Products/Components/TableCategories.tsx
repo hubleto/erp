@@ -10,10 +10,6 @@ export default class TableCategories extends HubletoTable<TableCategoriesProps, 
 
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "asc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Products/Models/Category',
   }

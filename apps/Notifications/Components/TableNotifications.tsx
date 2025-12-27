@@ -14,10 +14,6 @@ export default class TableNotifications extends Table<TableNotificationsProps, T
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     model: 'Hubleto/App/Community/Notifications/Models/Notification',
   }
 

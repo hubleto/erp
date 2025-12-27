@@ -17,10 +17,6 @@ interface TableContactsState extends HubletoTableState {
 export default class TableContacts extends HubletoTable<TableContactsProps, TableContactsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Contacts/Models/Contact',
   }

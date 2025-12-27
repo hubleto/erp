@@ -17,10 +17,6 @@ export default class ListFolder extends Table<ListFolderProps, ListFolderState> 
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     model: 'Hubleto/App/Community/Mail/Models/Mail',
   }
 

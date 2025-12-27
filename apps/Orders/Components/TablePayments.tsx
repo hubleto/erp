@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
 import FormPayment, { FormPaymentProps } from './FormPayment';
 import request from '@hubleto/react-ui/core/Request';
+import moment from "moment";
 
 interface TablePaymentsProps extends HubletoTableProps {
   idOrder?: number,
@@ -49,6 +50,21 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
 
   setRecordFormUrl(id: number) {
     window.history.pushState({}, "", globalThis.main.config.projectUrl + '/orders/payments/' + (id > 0 ? id : 'add'));
+  }
+
+  cellClassName(columnName: string, column: any, rowData: any) {
+    const cellClassName = super.cellClassName(columnName, column, rowData);
+
+    if (columnName == 'date_due') {
+      const now = moment();
+      const daysDue = moment(now).diff(moment(rowData['date_due']), 'days');
+      console.log(rowData['date_due'], daysDue);
+      if (daysDue >= 0) return cellClassName + ' text-red-800';
+      else if (daysDue > -7) return cellClassName + ' text-yellow-800';
+      else return cellClassName;
+    } else {
+      return cellClassName;
+    }
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {

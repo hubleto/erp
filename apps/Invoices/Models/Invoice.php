@@ -144,28 +144,39 @@ class Invoice extends \Hubleto\Erp\Model {
       case self::OUTBOUND_INVOICE: $description->hideColumns(['id_supplier']); break;
     }
 
-    $description->ui['filters'] = [
-      'fInvoiceWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
-    ];
-
     $description->addFilter('fInboundOutbound', [
       'title' => $this->translate('Inbound / Outbound'),
+      'direction' => 'horizontal',
       'options' => [
-        0 => $this->translate('All'),
-        self::INBOUND_INVOICE => $this->translate('Inbound invoices'),
-        self::OUTBOUND_INVOICE => $this->translate('Outbound invoices'),
-      ],
-      'default' => $filters['fInboundOutbound'] ?? 0,
+        self::INBOUND_INVOICE => $this->translate('Inbound'),
+        self::OUTBOUND_INVOICE => $this->translate('Outbound'),
+      ]
+    ]);
+
+    $description->addFilter('fDue', [
+      'title' => $this->translate('Due / Not due'),
+      'direction' => 'horizontal',
+      'options' => [
+        1 => $this->translate('Due'),
+        2 => $this->translate('Not due'),
+      ]
+    ]);
+
+    $description->addFilter('fPaid', [
+      'title' => $this->translate('Paid / Not paid'),
+      'direction' => 'horizontal',
+      'options' => [
+        1 => $this->translate('Paid'),
+        2 => $this->translate('Not paid'),
+      ]
     ]);
 
     $description->addFilter('fType', [
       'title' => $this->translate('Type'),
-      'options' => [
-        0 => $this->translate('All'),
-        ...self::TYPES,
-      ],
-      'default' => $filters['fType'] ?? 0,
+      'options' => self::TYPES
     ]);
+
+    $description->addFilter('fInvoiceWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Workflow step'));
 
     return $description;
   }

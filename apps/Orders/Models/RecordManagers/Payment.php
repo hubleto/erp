@@ -31,12 +31,15 @@ class Payment extends \Hubleto\Erp\RecordManager
     if ($idOrder > 0) $query = $query->where($this->table . '.id_order', $idOrder);
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
-    if (isset($filters["fStatus"])) {
-      if ($filters["fStatus"] == 1) {
-        $query = $query->whereNull($this->table . ".id_invoice_item");
-      } else {
-        $query = $query->where($this->table . ".id_invoice_item", ">", 0);
-      }
+
+    switch ($filters["fStatus"] ?? 0) {
+      case 1: $query = $query->whereNull($this->table . ".id_invoice_item"); break;
+      case 2: $query = $query->where($this->table . ".id_invoice_item", ">", 0); break;
+    }
+
+    switch ($filters["fDue"] ?? 0) {
+      case 1: $query = $query->whereDate($this->table . ".date_due", "<=", date("Y-m-d")); break;
+      case 2: $query = $query->whereDate($this->table . ".date_due", ">", date("Y-m-d")); break;
     }
 
     return $query;

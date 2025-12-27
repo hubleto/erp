@@ -99,6 +99,13 @@ class Loader extends \Hubleto\Framework\App
    */
   public function renderSecondSidebar(): string
   {
+  
+    $mPayment = $this->getModel(Models\Payment::class);
+    $duePaymentsCount = $mPayment->record
+      ->whereDate('date_due', '<', date("Y-m-d"))
+      ->whereNull('id_invoice_item')
+      ->count();
+
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders">
@@ -106,16 +113,17 @@ class Loader extends \Hubleto\Framework\App
           <span class="text">' . $this->translate('All orders') . '</span>
         </a>
         <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=purchaseOrders">
-          <span class="icon"><i class="fas fa-cart-shopping"></i></span>
+          <span class="icon"><i class="fas fa-arrow-left"></i></span>
           <span class="text">' . $this->translate('Purchase orders') . '</span>
         </a>
         <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=salesOrders">
-          <span class="icon"><i class="fas fa-euro-sign"></i></span>
+          <span class="icon"><i class="fas fa-arrow-right"></i></span>
           <span class="text">' . $this->translate('Sales orders') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/payments">
           <span class="icon"><i class="fas fa-euro-sign"></i></span>
           <span class="text">' . $this->translate('Payments') . '</span>
+          ' . ($duePaymentsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $duePaymentsCount . '</span>' : '') . '
         </a>
       </div>
     ';

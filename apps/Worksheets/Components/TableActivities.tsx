@@ -15,7 +15,6 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Worksheets/Models/Activity',
-    orderBy: {field: 'id', direction: 'desc'},
   }
 
   props: TableActivitiesProps;

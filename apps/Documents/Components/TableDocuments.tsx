@@ -9,10 +9,6 @@ export default class TableDocuments extends HubletoTable<TableDocumentsProps, Ta
   static defaultProps = {
     ...HubletoTable.defaultProps,
     formUseModalSimple: true,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     model: 'Hubleto/App/Community/Documents/Models/Document',
   }
 

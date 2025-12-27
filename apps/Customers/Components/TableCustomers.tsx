@@ -18,10 +18,6 @@ interface TableCustomersState extends HubletoTableState {
 export default class TableCustomers extends HubletoTable<TableCustomersProps, TableCustomersState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Customers/Models/Customer',
   }

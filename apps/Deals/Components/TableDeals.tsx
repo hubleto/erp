@@ -13,10 +13,6 @@ interface TableDealsState extends HubletoTableState {
 export default class TableDeals extends HubletoTable<TableDealsProps, TableDealsState> {
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "desc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Deals/Models/Deal',
   }

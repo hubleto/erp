@@ -10,10 +10,6 @@ export default class TableGroups extends HubletoTable<TableGroupsProps, TableGro
 
   static defaultProps = {
     ...HubletoTable.defaultProps,
-    orderBy: {
-      field: "id",
-      direction: "asc"
-    },
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Products/Models/Group',
   }

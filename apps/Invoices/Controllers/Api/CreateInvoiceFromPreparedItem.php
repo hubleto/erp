@@ -24,6 +24,8 @@ class CreateInvoiceFromPreparedItem extends \Hubleto\Erp\Controllers\ApiControll
 
     if ($item) {
 
+      $idItem = $item->id;
+
       $idInvoice = $mInvoice->record->recordCreate([
         'inbound_outbound' => Invoice::OUTBOUND_INVOICE,
         'type' => Invoice::TYPE_STANDARD,
@@ -39,7 +41,7 @@ class CreateInvoiceFromPreparedItem extends \Hubleto\Erp\Controllers\ApiControll
       return [
         'status' => 'success',
         'idInvoice' => $idInvoice,
-        'idItem' => $item->id,
+        'idItem' => $idItem,
       ];
     } else {
       return [

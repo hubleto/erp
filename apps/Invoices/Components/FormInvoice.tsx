@@ -223,15 +223,9 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                           <td rowSpan={3}>&nbsp;</td>
                         </tr>
                         <tr>
-                          <th colSpan={7}>Item</th>
-                        </tr>
-                        <tr>
+                          <th colSpan={4}>Item</th>
                           <th>Unit price</th>
                           <th>Amount</th>
-                          <th>Discount</th>
-                          <th>VAT</th>
-                          <th>Price excl. VAT</th>
-                          <th>Price incl. VAT</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -324,7 +318,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                               </td>
                             </tr>
                             <tr key={key + '2'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
-                              <td className={rowBgClass} colSpan={6}>
+                              <td className={rowBgClass} colSpan={4}>
                                 {InputFactory({
                                   value: item.item,
                                   cssClass: 'bg-white',
@@ -335,32 +329,32 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   }
                                 })}
                               </td>
-                            </tr>
-                            <tr key={key + '3'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
-                              <td className={rowBgClass}>
+                              <td className={rowBgClass + ' pr-4'}>
                                 {InputFactory({
                                   value: item.unit_price,
                                   cssClass: 'bg-white',
-                                  description: { type: 'number' },
+                                  description: { type: 'number', unit: currencySymbol + '/unit' },
                                   onChange: (e) => {
                                     R.ITEMS[key].unit_price = e.state.value;
                                     this.updateRecord(R);
                                   }
                                 })}
                               </td>
-                              <td className={rowBgClass}>
+                              <td className={rowBgClass + ' pr-4'}>
                                 {InputFactory({
                                   value: item.amount,
                                   cssClass: 'bg-white',
-                                  description: { type: 'number' },
+                                  description: { type: 'number', unit: 'units' },
                                   onChange: (e) => {
                                     R.ITEMS[key].amount = e.state.value;
                                     this.updateRecord(R);
                                   }
                                 })}
                               </td>
-                              <td className={rowBgClass}>
-                                {InputFactory({
+                            </tr>
+                            <tr key={key + '3'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
+                              <td className={rowBgClass}><div className='flex gap-2 items-center'>
+                                Discount: {InputFactory({
                                   value: item.discount,
                                   cssClass: 'bg-white',
                                   description: { type: 'number', unit: '%' },
@@ -369,9 +363,9 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                     this.updateRecord(R);
                                   }
                                 })}
-                              </td>
-                              <td className={rowBgClass}>
-                                {InputFactory({
+                              </div></td>
+                              <td className={rowBgClass}><div className='flex gap-2 items-center'>
+                                VAT: {InputFactory({
                                   value: item.vat,
                                   cssClass: 'bg-white',
                                   description: { type: 'number', unit: '%' },
@@ -380,12 +374,14 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                     this.updateRecord(R);
                                   }
                                 })}
-                              </td>
-                              <td className={rowBgClass}>
-                                {globalThis.main.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol}
-                              </td>
-                              <td className={rowBgClass}>
-                                {globalThis.main.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol}
+                              </div></td>
+                              <td className={rowBgClass + ' text-right'} colSpan={4}>
+                                <div>
+                                  {globalThis.main.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} excl. VAT
+                                </div>
+                                <div>
+                                  {globalThis.main.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} incl. VAT
+                                </div>
                               </td>
                             </tr>
                           </>;
@@ -440,7 +436,6 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 tag={"link_not_invoiced_items"}
                 parentForm={this}
                 idInvoice={0}
-                idCustomer={R.id_customer}
                 filters={{fStatus: 1}}
                 readonly={true}
                 onRowClick={(table: any, row: any) => {

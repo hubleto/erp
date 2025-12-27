@@ -67,7 +67,7 @@ class Order extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'purchase_sales' => (new Integer($this, $this->translate('Order type')))->setEnumValues([
+      'purchase_sales' => (new Integer($this, $this->translate('Purchase / Sales')))->setEnumValues([
         self::PURCHASE_ORDER => $this->translate('Purchase order'),
         self::SALES_ORDER => $this->translate('Sales order'),
       ])->setEnumCssClasses([

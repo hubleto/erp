@@ -26,7 +26,7 @@ class Customer extends Model
 
   public string $table = 'customers';
   public string $recordManagerClass = RecordManagers\Customer::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupSqlValue = 'if({%TABLE%}.identifier != "", {%TABLE%}.identifier, {%TABLE%}.name)';
   public ?string $lookupUrlDetail = 'customers/{%ID%}';
   public ?string $lookupUrlAdd = 'customers/add';
 
@@ -44,9 +44,9 @@ class Customer extends Model
 
   public function describeColumns(): array
   {
-    return array_merge(
-      [
+    return array_merge([
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
       'region' => (new Varchar($this, $this->translate('Region'))),

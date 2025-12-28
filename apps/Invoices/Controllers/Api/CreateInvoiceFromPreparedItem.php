@@ -38,6 +38,8 @@ class CreateInvoiceFromPreparedItem extends \Hubleto\Erp\Controllers\ApiControll
         ->where('id', $idItem)
         ->update(['id_invoice' => $idInvoice]);
 
+      $mInvoice->recalculateTotalsForInvoice($idInvoice);
+
       return [
         'status' => 'success',
         'idInvoice' => $idInvoice,

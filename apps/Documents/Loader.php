@@ -99,7 +99,7 @@ class Loader extends \Hubleto\Framework\App
       'en-invoice-debit-note' => ['name' => 'Debit note', 'file' => 'en/InvoiceDebitNote.twig'],
       'sk-invoice-proforma' => ['name' => 'Proforma faktúra', 'file' => 'sk/InvoiceProforma.twig'],
       'sk-invoice-advance' => ['name' => 'Zálohová faktúra', 'file' => 'sk/InvoiceAdvance.twig'],
-      'sk-invoice-standard' => ['name' => 'Faktúra', 'file' => 'sk/InvoiceStandard.twig'],
+      'sk-invoice-standard' => ['name' => 'Faktúra', 'file' => 'sk/VyuctovaciaFakturaSDph.twig'],
       'sk-invoice-credit-note' => ['name' => 'Dobropis', 'file' => 'sk/InvoiceCreditNote.twig'],
       'sk-invoice-debit-note' => ['name' => 'Ťarchopis', 'file' => 'sk/InvoiceDebitNote.twig'],
     ];

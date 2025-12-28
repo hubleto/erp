@@ -24,40 +24,26 @@
       <table class="table-default dense">
         <tbody>
           <tr>
-            <td>Default currency</td>
+            <td>Default currency and timezone</td>
             <td>
-              {{ hubleto.locale().getCurrencyIsoCode() }}
-              [{{ hubleto.locale().getCurrencySymbol() }}]
+              <div class="badge badge-info">{{ hubleto.locale().getCurrencyIsoCode() }} [{{ hubleto.locale().getCurrencySymbol() }}]</div>
+              <div class="badge badge-info">{{ hubleto.locale().getTimezone() }}</div>
             </td>
           </tr>
           <tr>
-            <td>Timezone</td>
-            <td>
-              {{ hubleto.locale().getTimezone() }}
+            <td>Date (short / long) and time formats</td>
+            <td class="flex gap-2">
+              <div class="badge badge-info">{{ hubleto.locale().getDateShortFormat() }}</div>
+              <div class="badge badge-info">{{ hubleto.locale().getDateLongFormat() }}</div>
+              <div class="badge badge-info">{{ hubleto.locale().getTimeFormat() }}</div>
+              <div class="badge badge-info">{{ hubleto.locale().getDatetimeFormat() }}</div>
             </td>
           </tr>
           <tr>
-            <td>Date format (short)</td>
+            <td>Decimals and thousands separator</td>
             <td>
-              {{ hubleto.locale().getDateShortFormat() }}
-            </td>
-          </tr>
-          <tr>
-            <td>Date format (long)</td>
-            <td>
-              {{ hubleto.locale().getDateLongFormat() }}
-            </td>
-          </tr>
-          <tr>
-            <td>Time format</td>
-            <td>
-              {{ hubleto.locale().getTimeFormat() }}
-            </td>
-          </tr>
-          <tr>
-            <td>Datetime format</td>
-            <td>
-              {{ hubleto.locale().getDatetimeFormat() }}
+              <div class="badge badge-info">{{ hubleto.locale().getDecimalsSeparator() }}</div>
+              <div class="badge badge-info">{{ hubleto.locale().getThousandsSeparator() }}</div>
             </td>
           </tr>
         </tbody>

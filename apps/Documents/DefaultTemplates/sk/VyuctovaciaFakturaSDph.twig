@@ -2,7 +2,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <style>
-    * { font-family: DejaVu Sans !important; }
+    * { font-family: DejaVu Sans !important; line-height: 0.95em }
 
     .w_swi_invoices_template {
       font-size: 10pt;
@@ -54,6 +54,7 @@
     .w_swi_invoices_template .tlogo {
       padding-bottom: 8pt;
       padding-top: 8pt;
+      height: 100px;
     }
 
     .w_swi_invoices_template .tlogo div {
@@ -175,44 +176,17 @@
               <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
             </div>
             <div>
-              <table class="w_swi_invoices_udaje" style="width:100%">
-                <tbody>
-                  <tr>
-                    <td colspan="2" style="width:100%;" class="fbigger">
-                      <b>{{ PROFILE.COMPANY.name }}</b>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" style="width:100%;"></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" style="width:100%;">
-                      {{ PROFILE.COMPANY.street_1 }}<br/>
-                      {{ PROFILE.COMPANY.street_2 }}<br/>
-                      {{ PROFILE.COMPANY.zip }} {{ PROFILE.COMPANY.city }}<br/>
-                      {{ PROFILE.COMPANY.country }}
-                    </td>
-                  </tr>
-                  <tr class="sep">
-                    <td colspan="2">
-                      <div></div>
-                    </td>
-                  </tr>
-                  <tr class="">
-                    <td style="width:30%" class="fsmaller">IČO:</td>
-                    <td style="width:70%" class="fsmaller">{{ PROFILE.COMPANY.registration_id }}</td>
-                  </tr>
-                  <tr class="">
-                    <td style="width:30%">DIČ:</td>
-                    <td style="width:70%">{{ PROFILE.COMPANY.tax_id }}</td>
-                  </tr>
-                  <tr class="">
-                    <td style="width:30%">IČDPH:</td>
-                    <td style="width:70%">{{ PROFILE.COMPANY.vat_id }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="dodavatel_popis">{{ PROFILE.COMPANY.business_register }}</div>
+              <b>{{ PROFILE.COMPANY.name }}</b><br/>
+              {{ PROFILE.COMPANY.street_1 }}<br/>
+              {% if street_2 %} {{ PROFILE.COMPANY.street_2 }}<br/> {% endif %}
+              {{ PROFILE.COMPANY.zip }} {{ PROFILE.COMPANY.city }}<br/>
+              {{ PROFILE.COMPANY.country }}<br/>
+              <br/>
+              IČO: {{ PROFILE.COMPANY.registration_id }}<br/>
+              DIČ: {{ PROFILE.COMPANY.tax_id }}<br/>
+              IČDPH: {{ PROFILE.COMPANY.vat_id }}<br/>
+              <br/>
+              {{ PROFILE.COMPANY.business_register }}<br/>
               <br>
               <div style="padding:5px;background:#EEEEEE;text-align:center" class="fbigger"> IBAN <br>
                 <b style="font-size:1.2em;">{{ PROFILE.iban }}</b>
@@ -222,8 +196,6 @@
                 <br>
               </div>
               <br>
-              <div style="text-align:left">Faktúru vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.<br>
-              </div>
             </div>
           </div>
         </div>
@@ -235,53 +207,16 @@
               <div></div>
               <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
             </div>
-            <table class="w_swi_invoices_udaje" style="width:100%">
-              <tbody>
-                <tr>
-                  <td colspan="2" style="width:100%;" class="fbigger">
-                    <b>{{ CUSTOMER.name }}</b>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="width:100%;"></td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="width:100%;">{{ CUSTOMER.street_line_1 }}</td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="width:100%;">{{ CUSTOMER.street_line_2 }}</td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="width:100%;">{{ CUSTOMER.region }}</td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="width:100%;">{{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}</td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="width:100%;">{{ CUSTOMER.country }}</td>
-                </tr>
-                <tr>
-                  <td colspan="2" style="width:100%;"></td>
-                </tr>
-                <tr class="sep">
-                  <td colspan="2">
-                    <div></div>
-                  </td>
-                </tr>
-                <tr class="">
-                  <td style="width:30%">IČO:</td>
-                  <td style="width:70%">{{ CUSTOMER.customer_id }}</td>
-                </tr>
-                <tr class="">
-                  <td style="width:30%">DIČ:</td>
-                  <td style="width:70%">{{ CUSTOMER.tax_id }}</td>
-                </tr>
-                <tr class="">
-                  <td style="width:30%">IČDPH:</td>
-                  <td style="width:70%">{{ CUSTOMER.vat_id }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <b>{{ CUSTOMER.name }}</b><br/>
+            {{ CUSTOMER.street_line_1 }}<br/>
+            {% if street_line_2 %} {{ CUSTOMER.street_line_2 }}<br/> {% endif %}
+            {{ CUSTOMER.region }}<br/>
+            {{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}<br/>
+            {{ CUSTOMER.country }}<br/>
+            <br/>
+            IČO: {{ CUSTOMER.customer_id }}<br/>
+            DIČ: {{ CUSTOMER.tax_id }}<br/>
+            IČDPH: {{ CUSTOMER.vat_id }}<br/>
           </div>
           <div class="content">
             <table class="w_swi_invoices_udaje">
@@ -315,15 +250,15 @@
                 </tr>
                 <tr>
                   <td style="width:50%;">Dátum vystavenia:</td>
-                  <td style="width:50%;">{{ hubleto.locale().formatDate(date_issue ?? '') }}</td>
+                  <td style="width:50%;">{{ hubleto.locale().formatDateShort(date_issue ?? '') }}</td>
                 </tr>
                 <tr>
                   <td style="width:50%;">Dátum dodania:</td>
-                  <td style="width:50%;">{{ hubleto.locale().formatDate(date_delivery ?? '') }}</td>
+                  <td style="width:50%;">{{ hubleto.locale().formatDateShort(date_delivery ?? '') }}</td>
                 </tr>
                 <tr>
                   <td style="width:50%;">Dátum splatnosti:</td>
-                  <td style="width:50%;"><b>{{ hubleto.locale().formatDate(date_due ?? '') }}</b></td>
+                  <td style="width:50%;"><b>{{ hubleto.locale().formatDateShort(date_due ?? '') }}</b></td>
                 </tr>
               </tbody>
             </table>
@@ -332,7 +267,11 @@
         <div style="clear:both;"></div>
       </div>
       <!-- FAKTURACNY TITUL -->
-      <div class="faktura_info fbigger"></div>
+      {% if description %}
+        <div style="text-align:left;margin:1em 0em">
+          Fakturujeme vám: {{ description }}
+        </div>
+      {% endif %}
       <!-- POLOZKY -->
       <div class="dmain">
         <div class="content">
@@ -367,10 +306,10 @@
                           <td style="width:50%;text-align:right">
                             <span>{{ hubleto.locale().formatCurrency(i.unit_price, CURRENCY.symbol) }}</span>
                             ×
-                            {{ i.amount }}
+                            {{ hubleto.locale().formatNumber(i.amount, 4) }}
                             = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> bez DPH</b>
                             <div style="color:#888888">
-                              DPH {{ i.vat }} % = <span>{{ hubleto.locale().formatCurrency(i.price_vat, CURRENCY.symbol) }}</span>
+                              DPH {{ i.vat|number_format(2, '.', '') }} % = <span>{{ hubleto.locale().formatCurrency(i.price_vat, CURRENCY.symbol) }}</span>
                             </div>
                           </td>
                         </tr>
@@ -423,40 +362,35 @@
                   <div class="w_swi_invoices_template_sumar">
                     <table>
                       <tbody>
-                        <tr class="suma">
+                        <tr>
                           <td class="fbigger">Spolu bez DPH</td>
-                          <td class="_num fbigger">
-                            <span>{{ hubleto.locale().formatCurrency(total_excl_vat, CURRENCY.symbol) }}</span>
-                          </td>
+                          <td class="_numr fbigger">{{ hubleto.locale().formatCurrency(total_excl_vat, CURRENCY.symbol) }}</td>
                         </tr>
                         <tr>
-                          <td>DPH 23 %</td>
-                          <td class="_num">
-                            <span>{{ hubleto.locale().formatCurrency(total_incl_vat - total_excl_vat, CURRENCY.symbol) }}</span>
-                          </td>
+                          <td>DPH</td>
+                          <td class="_numr">{{ hubleto.locale().formatCurrency(total_incl_vat - total_excl_vat, CURRENCY.symbol) }}</td>
                         </tr>
-                        <tr class="suma">
+                        <tr>
                           <td class="fbigger"><b>Spolu s DPH</b></td>
-                          <td class="_num fbigger">
-                            <b><span>{{ hubleto.locale().formatCurrency(total_incl_vat, CURRENCY.symbol) }}</span></b>
-                          </td>
+                          <td class="_numr"><b>{{ hubleto.locale().formatCurrency(total_incl_vat, CURRENCY.symbol) }}</b></td>
                         </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        {% set advance_payments_total = 0 %}
+                        {% if PAYMENTS %}
+                          {% for p in PAYMENTS %}
+                            {% if p.is_advance_payment %}
+                              <tr>
+                                <td class="fbigger">Prijatá záloha dňa {{ hubleto.locale().formatDateShort(p.date_payment ?? '') }}</td>
+                                <td class="_numr fbigger">{{ hubleto.locale().formatCurrency(p.amount, CURRENCY.symbol) }}</td>
+                              </tr>
+                              {% set advance_payments_total = advance_payments_total + p.amount %}
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                        <tr><td>&nbsp;</td></tr>
                         <tr>
-                          <td class="fbigger">Prijatá záloha dňa 16.12.2025</td>
-                          <td class="_num fbigger">
-                            <span>102,95 €</span>
-                          </td>
-                        </tr>
-                        <tr class="suma">
-                          <td class="fbigger">
-                            <b>K úhrade</b>
-                          </td>
-                          <td class="_num fbigger">
-                            <b>
-                              <span>0,00 €</span>
-                              <b></b>
-                            </b>
-                          </td>
+                          <td class="fbigger"><b>K úhrade</b></td>
+                          <td class="_numr"><b>{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b></td>
                         </tr>
                       </tbody>
                     </table>
@@ -468,6 +402,9 @@
           </tr>
         </tbody>
       </table>
+      <br/>
+      <br/>
+      Faktúru vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }} a vygeneroval ERP Hubleto.
     </div>
   </div>
 </body>

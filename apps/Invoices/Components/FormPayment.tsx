@@ -66,6 +66,7 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
               {this.inputWrapper('id_invoice')}
               {this.inputWrapper('date_payment')}
               {this.inputWrapper('amount')}
+              {this.inputWrapper('is_advance_payment')}
             </div>
           </div>
         </>;

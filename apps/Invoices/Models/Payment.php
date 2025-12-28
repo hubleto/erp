@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Invoices\Models;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Boolean;
 
 class Payment extends \Hubleto\Erp\Model
 {
@@ -30,6 +31,7 @@ class Payment extends \Hubleto\Erp\Model
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class)),
       'date_payment' => (new Date($this, $this->translate('Payment date')))->setDefaultVisible(),
       'amount' => (new Decimal($this, $this->translate('Amount')))->setDefaultVisible(),
+      'is_advance_payment' => (new Boolean($this, $this->translate('Is advance payment')))->setDefaultVisible(),
     ]);
   }
 

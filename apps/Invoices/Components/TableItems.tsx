@@ -76,7 +76,7 @@ export default class TableItems extends HubletoTable<TableItemsProps, TableItems
                   {},
                   (data: any) => {
                     if (!isNaN(data.idInvoice)) {
-                      window.location.href = globalThis.main.config.projectUrl + 'invoices/' + data.idInvoice;
+                      window.location.href = globalThis.main.config.projectUrl + '/invoices/' + data.idInvoice;
                     }
                   }
                 );

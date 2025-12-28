@@ -91,7 +91,18 @@ class Generator extends \Hubleto\Framework\Core
       }
     } else {
       $options = new Options();
-      $options->set('isRemoteEnabled', true);
+      // $options->setDebugPng(true);
+      $options->setChroot([$this->env()->uploadFolder]);
+
+      // replace all remote URLs to file URLs (to load images from uploads folder)
+      $htmlString = preg_replace_callback('/(src|href)=["\'](' . preg_quote($this->env()->uploadUrl, '/') . '\/(.*?)["\'])/i', function($matches) {
+        $filePath = $this->env()->uploadFolder . '/' . $matches[3];
+        if (file_exists($filePath)) {
+          return $matches[1] . '="file://' . str_replace('\\', '/', $filePath) . '"';
+        } else {
+          return $matches[0];
+        }
+      }, $htmlString);
 
       $dompdf = new Dompdf($options);
       $dompdf->loadHtml($htmlString, 'UTF-8');

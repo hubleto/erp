@@ -68,6 +68,7 @@ class Invoice extends \Hubleto\Erp\Model {
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
 
     'ITEMS' => [ self::HAS_MANY, Item::class, "id_invoice", "id" ],
+    'PAYMENTS' => [ self::HAS_MANY, Payment::class, "id_invoice", "id" ],
   ];
 
   /**
@@ -106,6 +107,7 @@ class Invoice extends \Hubleto\Erp\Model {
       ]),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
       'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
+      'description' => (new Varchar($this, $this->translate('Description of services/goods'))),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
@@ -238,10 +240,12 @@ class Invoice extends \Hubleto\Erp\Model {
   public function onBeforeCreate(array $record): array
   {
 
+    $idProfile = (int) ($record['id_profile'] ?? 0);
+    $idTemplate = (int) ($record['id_template'] ?? 0);
+
     /** @var Profile */
     $mProfile = $this->getService(Profile::class);
 
-    $idProfile = (int) ($record['id_profile'] ?? 0);
     if ($idProfile <= 0) {
       $idProfile = $mProfile->record->where('is_default', 1)->first()->id;
     }
@@ -255,6 +259,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
     if ($record['inbound_outbound'] <= 0) $record['inbound_outbound'] = self::INBOUND_INVOICE;
     if ($record['type'] <= 0) $record['type'] = self::TYPE_STANDARD;
+    if ($idTemplate <= 0) $record['id_template'] = (int) ($profile['id_template'] ?? 0);
 
     $numberingPattern = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
 
@@ -480,7 +485,6 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
     if (!$template) throw new \Exception('Template was not found.');
-
 
     /** @var Generator */
     $generator = $this->getService(Generator::class);

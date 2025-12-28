@@ -50,7 +50,7 @@ class Profile extends \Hubleto\Erp\Model
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setDefaultVisible(),
       'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible(),
       'due_days' => (new Integer($this, $this->translate('Due days')))->setDefaultVisible(),
-      'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
+      'id_template' => (new Lookup($this, $this->translate('Default invoice template'), Template::class)),
     ]);
   }
 

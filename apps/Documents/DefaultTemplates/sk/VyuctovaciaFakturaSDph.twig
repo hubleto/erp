@@ -1,410 +1,265 @@
+{% set advance_payments_total = 0 %}
+{% if PAYMENTS %}
+  {% for p in PAYMENTS %}
+    {% if p.is_advance_payment %}
+      {% set advance_payments_total = advance_payments_total + p.amount %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <style>
-    * { font-family: DejaVu Sans !important; line-height: 0.95em }
-
-    .w_swi_invoices_template {
-      font-size: 10pt;
-    }
-
-    .w_swi_invoices_template .fbigger {
-      font-size: 11pt;
-    }
-
-    .w_swi_invoices_template table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .w_swi_invoices_template table td {
-      vertical-align: top;
-    }
-
-    .w_swi_invoices_template .dtop {
-      padding: 0 2pt 8pt 2pt;
-    }
-
-    .w_swi_invoices_template .dtop .w_swi_invoices_template .dtop * {
-      font-size: 16pt;
-    }
-
-    .w_swi_invoices_template .dmain {
-      border: 0.2mm solid #000;
-    }
-
-    .w_swi_invoices_template .dcolumn {
-      width: 50%;
-      float: left;
-    }
-
-    .w_swi_invoices_template .content {
-      padding: 4pt;
-    }
-
-    .w_swi_invoices_template .odberatel {
-      border: 0.5mm solid #000;
-    }
-
-    .w_swi_invoices_template .dodavatel_popis {
-      padding-top: 4pt;
-      text-align: left
-    }
-
-    .w_swi_invoices_template .tlogo {
-      padding-bottom: 8pt;
-      padding-top: 8pt;
-      height: 100px;
-    }
-
-    .w_swi_invoices_template .tlogo div {
-      text-align: left;
-    }
-
-    .w_swi_invoices_template .tlogo div img {
-      width: 100%;
-    }
-
-    .w_swi_invoices_template .dodod_info {
-      color: #777;
-      text-transform: uppercase;
-      padding-bottom: 2mm;
-      text-align: left;
-    }
-
-    .w_swi_invoices_template .dodod_info span {
-      border-bottom: 0.2mm solid #777;
-      font-size: 8pt;
-      font-style: italic;
-    }
-
-    .w_swi_invoices_template .faktura_info {
-      padding: 16pt 2pt 6pt 2pt;
-      text-align: left;
-    }
-
-    .w_swi_invoices_template table.w_swi_invoices_udaje tr.sep td {
-      width: 100%;
-      height: 4pt;
-    }
-
-    .w_swi_invoices_template table.w_swi_invoices_udaje td {
-      padding: 0.8pt;
-      vertical-align: middle;
-    }
-
-    .w_swi_invoices_template table.w_swi_invoices_template_polozky td {
-      padding: 0.8pt;
-      font-size: 9pt;
-      vertical-align: middle;
-    }
-
-    .w_swi_invoices_template table.w_swi_invoices_template_polozky tr.header td {
-      font-weight: bold;
-      border-bottom: 0px solid #777;
-    }
-
-    .w_swi_invoices_template table.w_swi_invoices_template_polozky tr.sep td {
-      width: 100%;
-      height: 4pt;
-    }
-
-    .w_swi_invoices_template .w_swi_invoices_template_sumar {
-      width: 100%;
-      float: right;
-    }
-
-    .w_swi_invoices_template .w_swi_invoices_template_sumar table td {
-      padding: 0.8pt;
-      vertical-align: middle;
-      font-size: 9pt;
-    }
-
-    .w_swi_invoices_template .w_swi_invoices_template_sumar table tr.sep td {
-      width: 100%;
-      height: 10pt;
-    }
-
-    .w_swi_invoices_template .w_swi_invoices_template_sumar table tr.suma td {
-      border-top: 0.2mm solid #777;
-      padding-top: 1mm;
-    }
-
-    .w_swi_invoices_template .podpisy {}
-
-    .w_swi_invoices_template .podpisy table td {
-      text-align: center;
-    }
-
-    .w_swi_invoices_template .podpisy .podpis_info {
-      border-top: 0.2mm dotted #777;
-    }
-
-    ._num {
-      text-align: left;
-    }
-
-    ._numr {
-      text-align: right;
-    }
+    * { font-family: DejaVu Sans !important; line-height: 0.95em; font-size: 10pt; }
+    .fbigger { font-size: 12pt; }
+    table { width: 100%; border-collapse: collapse; }
+    table td { vertical-align: top; }
+    .dmain { border: 0.2mm solid #444444; margin-top: 0.5em; }
+    .dcolumn { width: 50%; float: left; }
+    .content { padding: 4pt; }
+    .odberatel { border: 0.5mm solid #444444; }
+    .tlogo { padding-bottom: 8pt; padding-top: 8pt; height: 100px; }
+    .tlogo div { text-align: left; }
+    .tlogo div img { width: 100%; }
+    .dodod_info { color: #777; text-transform: uppercase; padding-bottom: 2mm; text-align: left; }
+    .dodod_info span { border-bottom: 0.2mm solid #777; font-size: 8pt; font-style: italic; }
+    .faktura_info { padding: 16pt 2pt 6pt 2pt; text-align: left; }
+    table.polozky td { padding: 0.8pt; font-size: 9pt; vertical-align: middle; }
+    table.polozky tr.header td { font-weight: bold; border-bottom: 0px solid #777; }
+    table.polozky tr.sep td { width: 100%; height: 4pt; }
+    .sumar { width: 100%; float: right; }
+    .sumar table td { padding: 0.8pt; vertical-align: middle; font-size: 9pt; }
+    .sumar table tr.sep td { width: 100%; height: 10pt; }
+    .sumar table tr.suma td { border-top: 0.2mm solid #777; padding-top: 1mm; }
+    .podpisy table td { text-align: center; }
+    .podpisy .podpis_info { border-top: 0.2mm dotted #777; }
+    .text-right { text-align: right; }
   </style>
 </head>
 <body>
-  <div style="min-height: 0px; opacity: 1; height: 720px;">
-    <div class="w_swi_invoices_template">
-      <!-- TOP -->
-      <div class="dtop"> Faktúra - daňový doklad č. {{ number }} </div>
-      <div class="dmain">
-        <!-- DODAVATEL -->
-        <div class="dcolumn">
-          <div class="content">
-            <div class="tlogo">
-              <div style="float:left; width:25%;">
-                <img src="{{ config.uploadUrl }}/{{ PROFILE.COMPANY.logo }}" style="max-width:80px;max-height:80px;margin:5px;">
-                <!-- <div></div> -->
-                <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
-              </div>
-              <div style="float:left; width:50%;font-size:10pt;">
-                <div style="padding-left:4pt;">{{ PROFILE.headline }}</div>
-              </div>
-              <div style="clear:both;"></div>
-              <br>
-            </div>
-            <div class="dodod_info">
-              <span>Dodávateľ</span>
-              <div></div>
-              <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
-            </div>
-            <div>
-              <b>{{ PROFILE.COMPANY.name }}</b><br/>
-              {{ PROFILE.COMPANY.street_1 }}<br/>
-              {% if street_2 %} {{ PROFILE.COMPANY.street_2 }}<br/> {% endif %}
-              {{ PROFILE.COMPANY.zip }} {{ PROFILE.COMPANY.city }}<br/>
-              {{ PROFILE.COMPANY.country }}<br/>
-              <br/>
-              IČO: {{ PROFILE.COMPANY.registration_id }}<br/>
-              DIČ: {{ PROFILE.COMPANY.tax_id }}<br/>
-              IČDPH: {{ PROFILE.COMPANY.vat_id }}<br/>
-              <br/>
-              {{ PROFILE.COMPANY.business_register }}<br/>
-              <br>
-              <div style="padding:5px;background:#EEEEEE;text-align:center" class="fbigger"> IBAN <br>
-                <b style="font-size:1.2em;">{{ PROFILE.iban }}</b>
-                <br>
-                <br> BIC/SWIFT <br>
-                <b style="font-size:1.2em;">{{ PROFILE.swift }}</b>
-                <br>
-              </div>
-              <br>
-            </div>
+  <!-- TOP -->
+  <div>Faktúra - daňový doklad č. <b>{{ number }}</b></div>
+  <br/>
+  <div class="dmain">
+    <!-- DODAVATEL -->
+    <div class="dcolumn">
+      <div class="content">
+        <div class="tlogo">
+          <div style="float:left; width:25%;">
+            <img src="{{ config.uploadUrl }}/{{ PROFILE.COMPANY.logo }}" style="max-width:80px;max-height:80px;margin:5px;">
+            <!-- <div></div> -->
+            <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
           </div>
+          <div style="float:left; width:50%;font-size:10pt;">
+            <div style="padding-left:4pt;">{{ PROFILE.headline }}</div>
+          </div>
+          <div style="clear:both;"></div>
         </div>
-        <!-- ODBERATEL -->
-        <div class="dcolumn">
-          <div class="content odberatel">
-            <div class="dodod_info">
-              <span>Odberateľ</span>
-              <div></div>
-              <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
-            </div>
-            <b>{{ CUSTOMER.name }}</b><br/>
-            {{ CUSTOMER.street_line_1 }}<br/>
-            {% if street_line_2 %} {{ CUSTOMER.street_line_2 }}<br/> {% endif %}
-            {{ CUSTOMER.region }}<br/>
-            {{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}<br/>
-            {{ CUSTOMER.country }}<br/>
-            <br/>
-            IČO: {{ CUSTOMER.customer_id }}<br/>
-            DIČ: {{ CUSTOMER.tax_id }}<br/>
-            IČDPH: {{ CUSTOMER.vat_id }}<br/>
-          </div>
-          <div class="content">
-            <table class="w_swi_invoices_udaje">
-              <tbody>
-                <tr>
-                  <td style="width:50%;">Variabilný symbol:</td>
-                  <td style="width:50%;"><b>{{ vs }}</b></td>
-                </tr>
-                <tr>
-                  <td style="width:50%;">Špecifický symbol:</td>
-                  <td style="width:50%;">{{ ss }}</td>
-                </tr>
-                <tr>
-                  <td style="width:50%;">Konštantný symbol:</td>
-                  <td style="width:50%;">{{ cs }}</td>
-                </tr>
-                <tr class="sep">
-                  <td colspan="2">
-                    <div></div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="width:50%;">Forma úhrady:</td>
-                  <td style="width:50%;">{{ PAYMENT_METHOD.name }}</td>
-                </tr>
-                <!-- <tr><td style='width:50%;'>Spôsob dodania:</td><td style='width:50%;'></td></tr> -->
-                <tr class="sep">
-                  <td colspan="2">
-                    <div></div>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="width:50%;">Dátum vystavenia:</td>
-                  <td style="width:50%;">{{ hubleto.locale().formatDateShort(date_issue ?? '') }}</td>
-                </tr>
-                <tr>
-                  <td style="width:50%;">Dátum dodania:</td>
-                  <td style="width:50%;">{{ hubleto.locale().formatDateShort(date_delivery ?? '') }}</td>
-                </tr>
-                <tr>
-                  <td style="width:50%;">Dátum splatnosti:</td>
-                  <td style="width:50%;"><b>{{ hubleto.locale().formatDateShort(date_due ?? '') }}</b></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div>
+          <b>DODÁVATEĽ</b><br/>
+          <br/>
+          <b>{{ PROFILE.COMPANY.name }}</b><br/>
+          {{ PROFILE.COMPANY.street_1 }}<br/>
+          {% if street_2 %} {{ PROFILE.COMPANY.street_2 }}<br/> {% endif %}
+          {{ PROFILE.COMPANY.zip }} {{ PROFILE.COMPANY.city }}<br/>
+          {{ PROFILE.COMPANY.country }}<br/>
+          <br/>
+          IČO: {{ PROFILE.COMPANY.registration_id }}<br/>
+          DIČ: {{ PROFILE.COMPANY.tax_id }}<br/>
+          IČDPH: {{ PROFILE.COMPANY.vat_id }}<br/>
+          <br/>
+          {{ PROFILE.COMPANY.business_register }}<br/>
         </div>
-        <div style="clear:both;"></div>
       </div>
-      <!-- FAKTURACNY TITUL -->
-      {% if description %}
-        <div style="text-align:left;margin:1em 0em">
-          Fakturujeme vám: {{ description }}
-        </div>
-      {% endif %}
-      <!-- POLOZKY -->
-      <div class="dmain">
-        <div class="content">
-          <table class="w_swi_invoices_template_polozky">
-            <thead>
-              <tr class="header" style="background:#EEEEEE">
-                <td style="width:100%;padding:5pt 5pt 5pt 5pt">
-                  <table style="width:100%">
+    </div>
+    <!-- ODBERATEL -->
+    <div class="dcolumn">
+      <div class="content odberatel">
+        <b>ODBERATEĽ</b><br/>
+        <br/>
+        <b>{{ CUSTOMER.name }}</b><br/>
+        {{ CUSTOMER.street_line_1 }}<br/>
+        {% if street_line_2 %} {{ CUSTOMER.street_line_2 }}<br/> {% endif %}
+        {{ CUSTOMER.region }}<br/>
+        {{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}<br/>
+        {{ CUSTOMER.country }}<br/>
+        <br/>
+        IČO: {{ CUSTOMER.customer_id }}<br/>
+        DIČ: {{ CUSTOMER.tax_id }}<br/>
+        IČDPH: {{ CUSTOMER.vat_id }}<br/>
+      </div>
+      <div class="content">
+        <br/>
+        Variabilný symbol: <b>{{ vs }}</b><br/>
+        Špecifický symbol: <b>{{ ss }}</b><br/>
+        Konštantný symbol: <b>{{ cs }}</b><br/>
+        <br/>
+        Forma úhrady: <b>{{ PAYMENT_METHOD.name }}</b><br/>
+        <br/>
+        Dátum vystavenia: {{ hubleto.locale().formatDateShort(date_issue ?? '') }}<br/>
+        Dátum dodania: {{ hubleto.locale().formatDateShort(date_delivery ?? '') }}<br/>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+  <div class="dmain">
+    <div class="dcolumn">
+      <div style="padding:5px;background:#EEEEEE;text-align:center" class="fbigger"> IBAN <br>
+        <b style="font-size:1.2em;">{{ PROFILE.iban }}</b>
+        <br>
+        <br> BIC/SWIFT <br>
+        <b style="font-size:1.2em;">{{ PROFILE.swift }}</b>
+        <br>
+      </div>
+    </div>
+    <div class="dcolumn">
+      <div style="padding:5px;background:#EEEEEE;text-align:center" class="fbigger">
+        Suma k úhrade<br>
+        <b style="font-size:1.2em;">{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b><br/>
+        <br/>
+        Dátum splatnosti<br>
+        <b style="font-size:1.2em;">{{ hubleto.locale().formatDateShort(date_due ?? '') }}</b>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+  <!-- FAKTURACNY TITUL -->
+  {% if description %}
+    <div style="text-align:left;margin:1em 0em"> Fakturujeme vám: {{ description }} </div>
+  {% endif %}
+  <!-- POLOZKY -->
+  <div class="dmain">
+    <div class="content">
+      <table class="polozky">
+        <thead>
+          <tr class="header" style="background:#EEEEEE">
+            <td style="width:100%;padding:5pt 5pt 5pt 5pt">
+              <table style="width:100%">
+                <tbody>
+                  <tr>
+                    <td style="width:50%">Položka</td>
+                    <td style="width:50%;text-align:right">Jednotková cena × Počet = Cena</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in ITEMS %}
+            <tr>
+              <td style="width:100%;">
+                <table style="width:100%">
+                  <tbody>
+                    <tr>
+                      <td style="width:50%;color:blue">
+                        <i>{{ i.item }}</i>
+                      </td>
+                      <td style="width:50%;text-align:right">
+                        <span>{{ hubleto.locale().formatCurrency(i.unit_price, CURRENCY.symbol) }}</span>
+                        ×
+                        {{ hubleto.locale().formatNumber(i.amount, 4) }}
+                        = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> bez DPH</b>
+                        <div style="color:#888888">
+                          DPH {{ i.vat|number_format(2, '.', '') }} % = <span>{{ hubleto.locale().formatCurrency(i.price_vat, CURRENCY.symbol) }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <br>
+  <br>
+  <table style="width:100%">
+    <tbody>
+      <tr>
+        <td style="width:50%">
+          <div style="padding-top:20mm;padding-left:5mm;">
+            <!-- PECIATKA a PODPIS -->
+            <div style="text-align:center;">
+              <div class="content podpisy" style="padding-top:0; padding-bottom:0;">
+                <div style="page-break-inside:avoid; ">
+                  <table>
                     <tbody>
                       <tr>
-                        <td style="width:50%">Položka</td>
-                        <td style="width:50%;text-align:right">Jednotková cena × Počet = Cena</td>
+                        <td style="width:50%;">
+                          {# peciatka <img src="#" style="max-width:220px;"> #}
+                        </td>
+                        <td style="width:50%;"></td>
+                      </tr>
+                      <tr>
+                        <td style="width:50%;">
+                          <span class="podpis_info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pečiatka&nbsp;a&nbsp;podpis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        </td>
+                        <td style="width:50%;"></td>
                       </tr>
                     </tbody>
                   </table>
-                </td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-              </tr>
-            </thead>
-            <tbody>
-              {% for i in ITEMS %}
-                <tr>
-                  <td style="width:100%;">
-                    <table style="width:100%">
-                      <tbody>
-                        <tr>
-                          <td style="width:50%;color:blue">
-                            <i>{{ i.item }}</i>
-                          </td>
-                          <td style="width:50%;text-align:right">
-                            <span>{{ hubleto.locale().formatCurrency(i.unit_price, CURRENCY.symbol) }}</span>
-                            ×
-                            {{ hubleto.locale().formatNumber(i.amount, 4) }}
-                            = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> bez DPH</b>
-                            <div style="color:#888888">
-                              DPH {{ i.vat|number_format(2, '.', '') }} % = <span>{{ hubleto.locale().formatCurrency(i.price_vat, CURRENCY.symbol) }}</span>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <br>
-      <br>
-      <table style="width:100%">
-        <tbody>
-          <tr>
-            <td style="width:50%">
-              <div style="padding-top:20mm;padding-left:5mm;">
-                <!-- PECIATKA a PODPIS -->
-                <div style="text-align:center;">
-                  <div class="content podpisy" style="padding-top:0; padding-bottom:0;">
-                    <div style="page-break-inside:avoid; ">
-                      <table>
-                        <tbody>
-                          <tr>
-                            <td style="width:50%;">
-                              {# peciatka <img src="#" style="max-width:220px;"> #}
-                            </td>
-                            <td style="width:50%;"></td>
-                          </tr>
-                          <tr>
-                            <td style="width:50%;">
-                              <span class="podpis_info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pečiatka&nbsp;a&nbsp;podpis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                            </td>
-                            <td style="width:50%;"></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <br>
-                    </div>
-                  </div>
+                  <br>
                 </div>
               </div>
-            </td>
-            <td style="width:50%">
-              <!-- SUMAR -->
-              <div style="padding-top:10mm;">
-                <div class="content">
-                  <div class="w_swi_invoices_template_sumar">
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td class="fbigger">Spolu bez DPH</td>
-                          <td class="_numr fbigger">{{ hubleto.locale().formatCurrency(total_excl_vat, CURRENCY.symbol) }}</td>
-                        </tr>
-                        <tr>
-                          <td>DPH</td>
-                          <td class="_numr">{{ hubleto.locale().formatCurrency(total_incl_vat - total_excl_vat, CURRENCY.symbol) }}</td>
-                        </tr>
-                        <tr>
-                          <td class="fbigger"><b>Spolu s DPH</b></td>
-                          <td class="_numr"><b>{{ hubleto.locale().formatCurrency(total_incl_vat, CURRENCY.symbol) }}</b></td>
-                        </tr>
-                        <tr><td>&nbsp;</td></tr>
-                        {% set advance_payments_total = 0 %}
-                        {% if PAYMENTS %}
-                          {% for p in PAYMENTS %}
-                            {% if p.is_advance_payment %}
-                              <tr>
-                                <td class="fbigger">Prijatá záloha dňa {{ hubleto.locale().formatDateShort(p.date_payment ?? '') }}</td>
-                                <td class="_numr fbigger">{{ hubleto.locale().formatCurrency(p.amount, CURRENCY.symbol) }}</td>
-                              </tr>
-                              {% set advance_payments_total = advance_payments_total + p.amount %}
-                            {% endif %}
-                          {% endfor %}
+            </div>
+          </div>
+        </td>
+        <td style="width:50%">
+          <!-- SUMAR -->
+          <div style="padding-top:10mm;">
+            <div class="content">
+              <div class="sumar">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="fbigger">Spolu bez DPH</td>
+                      <td class="text-right fbigger">{{ hubleto.locale().formatCurrency(total_excl_vat, CURRENCY.symbol) }}</td>
+                    </tr>
+                    <tr>
+                      <td>DPH</td>
+                      <td class="text-right">{{ hubleto.locale().formatCurrency(total_incl_vat - total_excl_vat, CURRENCY.symbol) }}</td>
+                    </tr>
+                    <tr>
+                      <td class="fbigger"><b>Spolu s DPH</b></td>
+                      <td class="text-right"><b>{{ hubleto.locale().formatCurrency(total_incl_vat, CURRENCY.symbol) }}</b></td>
+                    </tr>
+                    <tr><td>&nbsp;</td></tr>
+                    {% if PAYMENTS %}
+                      {% for p in PAYMENTS %}
+                        {% if p.is_advance_payment %}
+                          <tr>
+                            <td class="fbigger">Prijatá záloha dňa {{ hubleto.locale().formatDateShort(p.date_payment ?? '') }}</td>
+                            <td class="text-right fbigger">{{ hubleto.locale().formatCurrency(p.amount, CURRENCY.symbol) }}</td>
+                          </tr>
                         {% endif %}
-                        <tr><td>&nbsp;</td></tr>
-                        <tr>
-                          <td class="fbigger"><b>K úhrade</b></td>
-                          <td class="_numr"><b>{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div style="clear:both;"></div>
-                </div>
+                      {% endfor %}
+                    {% endif %}
+                    <tr><td>&nbsp;</td></tr>
+                    <tr>
+                      <td class="fbigger"><b>K úhrade</b></td>
+                      <td class="text-right"><b>{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <br/>
-      <br/>
-      Faktúru vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }} a vygeneroval ERP Hubleto.
-    </div>
-  </div>
+              <div style="clear:both;"></div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <br/>
+  Faktúru vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.<br/>
+  <br/>
+  Vygenerované v ERP Hubleto.<br/>
+  https://www.hubleto.com<br/>
 </body>

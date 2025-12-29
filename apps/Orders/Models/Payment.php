@@ -81,4 +81,16 @@ class Payment extends \Hubleto\Erp\Model
     return $description;
   }
 
+  /**
+   * [Description for describeForm]
+   *
+   * @return \Hubleto\Framework\Description\Form
+   * 
+   */
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+    $description->show(['copyButton']);
+    return $description;
+  }
 }

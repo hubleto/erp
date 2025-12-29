@@ -212,6 +212,9 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     if ($idInvoice <= 0) return;
 
+    $invoice = $this->record->find($idInvoice);
+    if (!$invoice) return;
+
     $totalExclVat = 0;
     $totalInclVat = 0;
 
@@ -223,7 +226,7 @@ class Invoice extends \Hubleto\Erp\Model {
       $totalInclVat += $item->price_incl_vat;
     }
 
-    $this->record->find($idInvoice)->update([
+    $invoice->update([
       "total_excl_vat" => $totalExclVat,
       "total_incl_vat" => $totalInclVat,
     ]);

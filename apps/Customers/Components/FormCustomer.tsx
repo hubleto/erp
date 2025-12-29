@@ -328,11 +328,11 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   {this.inputWrapper("customer_id")}
                   {this.inputWrapper("street_line_1")}
                   {this.inputWrapper("street_line_2")}
+                  {this.inputWrapper("postal_code")}
                   {this.inputWrapper("city")}
                   {this.inputWrapper("region")}
                   {this.inputWrapper("id_country")}
                   <div className="flex justify-between">
-                    {this.inputWrapper("postal_code")}
                     {mapAddress == '' ? null :
                       <div>
                         <a
@@ -353,8 +353,8 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
                   {this.inputWrapper("id_owner")}
                   {this.inputWrapper("id_manager")}
                   {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600'})}
-                  {this.inputWrapper("vat_id")}
                   {this.inputWrapper("tax_id")}
+                  {this.inputWrapper("vat_id")}
                   {this.inputWrapper("date_created")}
                   {this.inputWrapper("is_active")}
                   <FormInput title="Tags">

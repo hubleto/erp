@@ -45,63 +45,74 @@ class Loader extends \Hubleto\Framework\App
   }
 
   /**
-   * [Description for getNotificationsCount]
+   * [Description for getSidebarBadgeNumber]
    *
    * @return int
    * 
    */
-  public function getNotificationsCount(): int
+  public function getSidebarBadgeNumber(): int
   {
-    $mNotification = $this->getModel(Models\Notification::class);
-    return $mNotification->record->prepareReadQuery()
-      ->where('id_to', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
-      ->whereNull('datetime_read')
-      ->count()
-    ;
+    return $this->getService(Counter::class)->myUnread();
   }
 
-  /**
-   * [Description for send]
-   *
-   * @param int $category
-   * @param array $tags
-   * @param int $idTo
-   * @param string $subject
-   * @param string $body
-   * @param string $color
-   * @param int $priority
-   * 
-   * @return array
-   * 
-   */
-  public function send(
-    int $category,
-    array $tags,
-    int $idTo,
-    string $subject,
-    string $body,
-    string $color = '',
-    int $priority = 0
-  ): array {
-    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
-    $idUser = $user['id'] ?? 0;
+  // /**
+  //  * [Description for getNotificationsCount]
+  //  *
+  //  * @return int
+  //  * 
+  //  */
+  // public function getNotificationsCount(): int
+  // {
+  //   $mNotification = $this->getModel(Models\Notification::class);
+  //   return $mNotification->record->prepareReadQuery()
+  //     ->where('id_to', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+  //     ->whereNull('datetime_read')
+  //     ->count()
+  //   ;
+  // }
 
-    if ($idTo > 0) {
-      $mNotification = $this->getModel(Models\Notification::class);
-      $notification = $mNotification->record->create([
-        'priority' => $priority,
-        'category' => $category,
-        'tags' => json_encode($tags),
-        'datetime_sent' => date('Y-m-d H:i:s'),
-        'id_from' => $idUser,
-        'id_to' => $idTo,
-        'subject' => $subject,
-        'body' => $body,
-        'color' => $color,
-      ])->toArray();
-    }
+  // /**
+  //  * [Description for send]
+  //  *
+  //  * @param int $category
+  //  * @param array $tags
+  //  * @param int $idTo
+  //  * @param string $subject
+  //  * @param string $body
+  //  * @param string $color
+  //  * @param int $priority
+  //  * 
+  //  * @return array
+  //  * 
+  //  */
+  // public function send(
+  //   int $category,
+  //   array $tags,
+  //   int $idTo,
+  //   string $subject,
+  //   string $body,
+  //   string $color = '',
+  //   int $priority = 0
+  // ): array {
+  //   $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+  //   $idUser = $user['id'] ?? 0;
 
-    return $notification;
-  }
+  //   if ($idTo > 0) {
+  //     $mNotification = $this->getModel(Models\Notification::class);
+  //     $notification = $mNotification->record->create([
+  //       'priority' => $priority,
+  //       'category' => $category,
+  //       'tags' => json_encode($tags),
+  //       'datetime_sent' => date('Y-m-d H:i:s'),
+  //       'id_from' => $idUser,
+  //       'id_to' => $idTo,
+  //       'subject' => $subject,
+  //       'body' => $body,
+  //       'color' => $color,
+  //     ])->toArray();
+  //   }
+
+  //   return $notification;
+  // }
 
 }

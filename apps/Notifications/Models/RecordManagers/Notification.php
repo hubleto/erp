@@ -42,23 +42,23 @@ class Notification extends \Hubleto\Erp\RecordManager
     return $query;
   }
 
-  public function recordCreate(array $record, $useProvidedRecordId = false): array
-  {
-    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+  // public function recordCreate(array $record, $useProvidedRecordId = false): array
+  // {
+  //   $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
-    $notificationsApp = $hubleto->appManager(\Hubleto\App\Community\Notifications\Loader::class);
+  //   /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
+  //   $notificationsApp = $hubleto->appManager(\Hubleto\App\Community\Notifications\Loader::class);
 
-    $message = $notificationsApp->send(
-      $record['id_to'] ?? '',
-      $record['subject'] ?? '',
-      $record['body'] ?? '',
-      $record['color'] ?? '',
-      (int) ($record['priority'] ?? 0),
-    );
+  //   $message = $notificationsApp->send(
+  //     $record['id_to'] ?? '',
+  //     $record['subject'] ?? '',
+  //     $record['body'] ?? '',
+  //     $record['color'] ?? '',
+  //     (int) ($record['priority'] ?? 0),
+  //   );
 
-    $record['id'] = $message['id'] ?? 0;
+  //   $record['id'] = $message['id'] ?? 0;
 
-    return $record;
-  }
+  //   return $record;
+  // }
 }

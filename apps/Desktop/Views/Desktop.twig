@@ -2,14 +2,8 @@
 {% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
 {% set isPremium = hubleto.env().isPremium() %}
 
-{% macro appBtn(app, inGroup) %}
-  {% set notificationsCount = 0 %}
+{% macro appBtn(app, inGroup, badgeNumber) %}
   <div class="flex gap-1">
-    {% if notificationsCount > 0 %}
-      <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
-        <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
-      </div>
-    {% endif %}
     <a
       type="button"
       class="
@@ -22,6 +16,9 @@
     >
       <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
       <span class="text">{{ app.manifest.nameTranslated }}</span>
+      {% if badgeNumber > 0 %}
+        <div class="badge badge-small badge-yellow ml-2">{{ badgeNumber }}</div>
+      {% endif %}
     </a>
   </div>
 {% endmacro %}
@@ -170,16 +167,16 @@
           {% endif %}
           {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Notifications') %}
             <li class="mr-2 hidden md:block">
-              {% if notificationsCount > 0 %}
-                <div style="position:relative;width:0;height:0;top:-0.5em;left:0em">
-                  <div class="badge badge-small badge-yellow px-1">{{ notificationsCount }}</div>
+              {% if viewParams.unreadNotifications > 0 %}
+                <div style="position:relative;width:0;height:0;top:-0.5em;left:1.5em">
+                  <div class="badge badge-yellow px-1">{{ viewParams.unreadNotifications }}</div>
                 </div>
               {% endif %}
               <a
-                class="btn btn-transparent"
+                class="btn btn-transparent {% if viewParams.unreadNotifications > 0 %} btn-warning {% endif %}"
                 href="{{ config.projectUrl }}/notifications"
               >
-                <span class="icon text-blue-500"><i class="fas fa-bell"></i></span>
+                <span class="icon"><i class="fas fa-bell"></i></span>
               </a>
             </li>
           {% endif %}
@@ -260,7 +257,7 @@
             {% set hasActivatedApp = false %}
             {% for app in viewParams.appsInSidebar %}
               {% if sidebarGroup in app.manifest.sidebarGroup|split(',') %}
-                {% set appBtns = appBtns|merge([_self.appBtn(app, true)]) %}
+                {% set appBtns = appBtns|merge([_self.appBtn(app, true, app.getSidebarBadgeNumber())]) %}
                 {% if app.isActivated %}
                   {% set hasActivatedApp = true %}
                 {% endif %}

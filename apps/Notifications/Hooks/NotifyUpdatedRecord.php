@@ -2,38 +2,50 @@
 
 namespace Hubleto\App\Community\Notifications\Hooks;
 
-
+use Hubleto\App\Community\Notifications\Sender;
 
 class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
 {
 
   public function run(string $event, array $args): void
   {
-    if (false && $event == 'model:record-updated') {
-      /** @var \Hubleto\App\Community\Notifications\Loader $notificationsApp */
-      $notificationsApp = $this->appManager()->getApp(\Hubleto\App\Community\Notifications\Loader::class);
+    if ($event == 'model:on-after-update') {
 
-      list($model, $originalRecord, $savedRecord) = $args;
+      $user = $this->authProvider()->getUser();
 
-      $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
-      if (isset($savedRecord['id_owner']) && $savedRecord['id_owner'] != $user['id']) {
-        $diff = $model->diffRecords($originalRecord, $savedRecord);
+      /** @var Sender */
+      $sender = $this->getService(Sender::class);
 
-        if (count($diff) > 0) {
+      $model = $args['model'] ?? '';
+      $originalRecord = $args['originalRecord'] ?? [];
+      $savedRecord = $args['savedRecord'] ?? [];
 
-          $body =
-            'User ' . $user['email'] . ' updated ' . $model->shortName . ":\n"
-            . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
-          ;
+      $diff = $model->diffRecords($originalRecord, $savedRecord);
 
-          $notificationsApp->send(
-            945, // category
-            [$model->shortName, $model->fullName],
-            (int) $savedRecord['id_owner'], // to
-            $model->shortName . ' updated', // subject
-            $body
-          );
-        }
+      if (count($diff) > 0) {
+
+        $body =
+          'User ' . $user['email'] . ' updated ' . $model->shortName . ":\n"
+          . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+        ;
+
+        $sender->send(
+          945, // category
+          [$model->shortName, $model->fullName],
+          (int) $savedRecord['id_owner'], // to
+          $model->shortName . ' updated', // subject
+          $body,
+          $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
+        );
+
+        $sender->send(
+          945, // category
+          [$model->shortName, $model->fullName],
+          (int) $savedRecord['id_manager'], // to
+          $model->shortName . ' updated', // subject
+          $body,
+          $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
+        );
       }
     }
   }

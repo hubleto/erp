@@ -6,6 +6,7 @@ namespace Hubleto\App\Community\Desktop\Controllers;
 use Hubleto\App\Community\Settings\PermissionsManager;
 
 use Hubleto\App\Community\Desktop\Loader;
+use Hubleto\App\Community\Notifications\Counter;
 
 class Desktop extends \Hubleto\Erp\Controller
 {
@@ -62,6 +63,9 @@ class Desktop extends \Hubleto\Erp\Controller
     $this->viewParams['activatedSidebarGroupUrlSlug'] = $activatedSidebarGroupUrlSlug;
     $this->viewParams['sidebarGroups'] = $sidebarGroups;
     $this->viewParams['release'] = \Composer\InstalledVersions::getPrettyVersion('hubleto/erp');
+
+    $notificationsCounter = $this->getService(Counter::class);
+    $this->viewParams['unreadNotifications'] = $notificationsCounter->myUnread();
 
     $this->viewParams['availableLanguages'] = $this->config()->getAsArray('availableLanguages', [
       "en" => [ "flagImage" => "en.jpg", "name" => "English" ],

@@ -40,6 +40,7 @@ export default class FormNotification<P, S> extends HubletoForm<FormNotification
         <div className='flex-3'>
           {this.inputWrapper('id_to')}
           {this.inputWrapper('subject')}
+          {this.inputWrapper('url')}
           {this.inputWrapper('body')}
         </div>
         <div className='flex-1'>

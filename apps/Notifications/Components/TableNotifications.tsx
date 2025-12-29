@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
 import Form, { FormProps } from '@hubleto/react-ui/core/Form';
 import FormNotification from './FormNotification';
 
-interface TableNotificationsProps extends TableProps {
+interface TableNotificationsProps extends HubletoTableProps {
   folder?: string,
 }
-interface TableNotificationsState extends TableState {
+interface TableNotificationsState extends HubletoTableState {
 }
 
-export default class TableNotifications extends Table<TableNotificationsProps, TableNotificationsState> {
+export default class TableNotifications extends HubletoTable<TableNotificationsProps, TableNotificationsState> {
   static defaultProps = {
-    ...Table.defaultProps,
+    ...HubletoTable.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Notifications/Models/Notification',
   }
@@ -45,18 +45,26 @@ export default class TableNotifications extends Table<TableNotificationsProps, T
 
   rowClassName(rowData: any): string {
     if (this.props.folder == 'inbox') {
-      return rowData.read ? '' : 'bg-yellow-50 text-yellow-800';
+      return rowData.datetime_read ? '' : 'bg-yellow-50 text-yellow-800';
     } else {
       return '';
+    }
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "url" && data.url) {
+      return <a href={data.url} target="_blank">{data.url}</a>;
+    } else {
+      return super.renderCell(columnName, column, data, options);
     }
   }
 
   renderActionsColumn(data: any, options: any) {
     const R = this.findRecordById(data.id);
     if (this.props.folder == 'inbox') {
-      if (R.read) {
+      if (R.datetime_read) {
         return <button
-          className="btn btn-small btn-transparent"
+          className="btn btn-small btn-transparent text-nowrap"
           onClick={(e) => {
             e.preventDefault();
             request.get( "notifications/api/mark-as-unread", { idNotification: data.id }, (response: any) => { this.loadData(); } )
@@ -67,10 +75,14 @@ export default class TableNotifications extends Table<TableNotificationsProps, T
         </button>
       } else {
         return <button
-          className="btn btn-small btn-transparent"
+          className="btn btn-small btn-transparent text-nowrap"
           onClick={(e) => {
             e.preventDefault();
-            request.get( "notifications/api/mark-as-read", { idNotification: data.id }, (response: any) => { this.loadData(); } )
+            request.get(
+              "notifications/api/mark-as-read",
+              { idNotification: data.id },
+              (response: any) => { this.reload(); }
+            )
           }}
         >
           <span className="icon"><i className="fas fa-eye"></i></span>

@@ -48,18 +48,25 @@ class Notification extends \Hubleto\Erp\Model
     $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
     return array_merge(parent::describeColumns(), [
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
-      'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(self::getCategories()),
-      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
-      'id_to' => (new Lookup($this, $this->translate('To'), User::class))->setReactComponent('InputUserSelect')->setRequired(),
-      'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold'),
+      'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultVisible(),
+      'id_to' => (new Lookup($this, $this->translate('To'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultVisible(),
+      'subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold')->setDefaultVisible(),
       'body' => (new Text($this, $this->translate('Body')))->setRequired(),
+      'url' => (new Varchar($this, $this->translate('URL')))->setReactComponent('InputHyperlink')->setDefaultVisible(),
+      'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(self::getCategories()),
       'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'tags' => (new Json($this, $this->translate('Tags'))),
-      'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
+      'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s'))->setDefaultVisible(),
       'datetime_read' => (new DateTime($this, $this->translate('Read'))),
     ]);
   }
 
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $folder = $this->router()->urlParamAsString('folder');
@@ -67,28 +74,21 @@ class Notification extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Send message';
-
-    unset($description->columns['body']);
-    unset($description->columns['color']);
-    unset($description->columns['priority']);
-    unset($description->columns['read']);
-
-    switch ($folder) {
-      case 'inbox':
-        unset($description->columns['id_to']);
-        break;
-      case 'sent':
-        unset($description->columns['id_from']);
-        break;
-    }
-
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+    $description->permissions['canCreate'] = false;
     $description->permissions['canDelete'] = false;
     $description->permissions['canUpdate'] = false;
 
     return $description;
   }
 
+  /**
+   * [Description for describeForm]
+   *
+   * @return \Hubleto\Framework\Description\Form
+   * 
+   */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();

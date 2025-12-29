@@ -34,23 +34,24 @@ class SidebarGroup extends \Hubleto\Erp\Controller
       }
     }
 
-    $boardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
-    $boards = [];
-    $iterCount = 0;
-    foreach ($boardManager->getBoards() as $board) {
-      if (($board['app']->manifest['sidebarGroup'] ?? "") === $this->viewParams['group']) {
-        $boards[] = [
-          "id" => ++$iterCount,
-          "id_dashboard" => -1,
-          "board_url_slug" => $board['boardUrlSlug'],
-          "title" => $board['title'],
-          "configuration" => ""
-        ];
-      }
-    }
+    // Boards temporarily disabled, some of the boards caused errors.
+    // $boardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
+    // $boards = [];
+    // $iterCount = 0;
+    // foreach ($boardManager->getBoards() as $board) {
+    //   if (($board['app']->manifest['sidebarGroup'] ?? "") === $this->viewParams['group']) {
+    //     $boards[] = [
+    //       "id" => ++$iterCount,
+    //       "id_dashboard" => -1,
+    //       "board_url_slug" => $board['boardUrlSlug'],
+    //       "title" => $board['title'],
+    //       "configuration" => ""
+    //     ];
+    //   }
+    // }
 
     $this->viewParams['apps'] = $apps;
-    $this->viewParams['boards'] = $boards;
+    // $this->viewParams['boards'] = $boards;
 
     $this->setView('@Hubleto:App:Community:Desktop/SidebarGroup.twig');
   }

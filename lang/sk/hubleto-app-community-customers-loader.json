@@ -28,7 +28,8 @@
         "Tags": "Značky",
         "Archive": "Archív",
         "Archived": "Archivovaný",
-        "Identifier": ""
+        "Identifier": "",
+        "Non-active": ""
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -122,5 +123,8 @@
         "Customer Tags": "Značky zákazníkov",
         "Customers": "Zákazníci",
         "Tags": "Značky"
+    },
+    "Components\\TableCustomers": {
+        "Hide filter": ""
     }
 }

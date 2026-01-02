@@ -67,17 +67,7 @@ class Desktop extends \Hubleto\Erp\Controller
     $notificationsCounter = $this->getService(Counter::class);
     $this->viewParams['unreadNotifications'] = $notificationsCounter->myUnread();
 
-    $this->viewParams['availableLanguages'] = $this->config()->getAsArray('availableLanguages', [
-      "en" => [ "flagImage" => "en.jpg", "name" => "English" ],
-      "de" => [ "flagImage" => "de.jpg", "name" => "Deutsch" ],
-      "es" => [ "flagImage" => "es.jpg", "name" => "Español" ],
-      "fr" => [ "flagImage" => "fr.jpg", "name" => "Francais" ],
-      "it" => [ "flagImage" => "it.jpg", "name" => "Italiano" ],
-      "pl" => [ "flagImage" => "pl.jpg", "name" => "Polski" ],
-      "ro" => [ "flagImage" => "ro.jpg", "name" => "Română" ],
-      "cs" => [ "flagImage" => "cs.jpg", "name" => "Česky" ],
-      "sk" => [ "flagImage" => "sk.jpg", "name" => "Slovensky" ],
-    ]);
+    $this->viewParams['availableLanguages'] = $this->locale()->getAvailableLanguages();
 
     $this->viewParams['appMenu'] = [];
     foreach ($desktopApp->appMenu as $item) {

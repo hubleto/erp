@@ -71,7 +71,10 @@
         "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Closed": "Uzavretý",
-        "Tags": ""
+        "Tags": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
     },
     "root": {
         "Lead statuses": "Stavy leadov",

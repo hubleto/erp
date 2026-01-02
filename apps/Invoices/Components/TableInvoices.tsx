@@ -129,9 +129,9 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
 
     for (let i in this.state.data?.data) {
       const row = this.state.data?.data[i];
-      totalExclVat += parseFloat(row['TOTAL_EXCLUDING_VAT']);
-      totalVat += parseFloat(row['TOTAL_VAT']);
-      totalInclVat += parseFloat(row['TOTAL_INCLUDING_VAT']);
+      totalExclVat += parseFloat(row['total_excl_vat']);
+      totalVat += parseFloat(row['total_incl_vat']) - parseFloat(row['total_excl_vat']);
+      totalInclVat += parseFloat(row['total_incl_vat']);
     }
 
     return <>

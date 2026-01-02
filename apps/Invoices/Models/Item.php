@@ -59,7 +59,7 @@ class Item extends \Hubleto\Erp\Model
     $description->ui['title'] = ''; //$this->translate('Customers');
     $description->ui['addButtonText'] = $this->translate('Add invoice item');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
-    $description->hide(['footer']);
+    $description->show(['footer']);
 
     $description->addFilter('fStatus', [
       'title' => $this->translate('Status'),
@@ -68,6 +68,23 @@ class Item extends \Hubleto\Erp\Model
         1 => $this->translate('Prepared'),
         2 => $this->translate('Invoiced')
       ]
+    ]);
+
+    $description->addFilter('fPeriod', [
+      'title' => $this->translate('Period'),
+      'options' => [
+        'all' => $this->translate('All'),
+        'today' => $this->translate('Today'),
+        'yesterday' => $this->translate('Yesterday'),
+        'last7Days' => $this->translate('Last 7 days'),
+        'last14Days' => $this->translate('Last 14 days'),
+        'thisMonth' => $this->translate('This month'),
+        'lastMonth' => $this->translate('Last month'),
+        'beforeLastMonth' => $this->translate('Month before last'),
+        'thisYear' => $this->translate('This year'),
+        'lastYear' => $this->translate('Last year'),
+      ],
+      'default' => 0,
     ]);
 
     return $description;

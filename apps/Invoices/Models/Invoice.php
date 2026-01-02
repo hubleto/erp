@@ -139,7 +139,7 @@ class Invoice extends \Hubleto\Erp\Model {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate("Add invoice");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
-    $description->hide(['footer']);
+    $description->show(['footer']);
 
     switch ($filters['fInboundOutbound'] ?? 0) {
       case self::INBOUND_INVOICE: $description->hideColumns(['id_customer']); break;

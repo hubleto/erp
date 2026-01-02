@@ -49,11 +49,25 @@ class Item extends \Hubleto\Erp\RecordManager {
     if ($idCustomer > 0) $query->where('invoice_items.id_customer', $idCustomer);
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
+
     if (isset($filters["fStatus"])) {
-      if ($filters["fStatus"] == 1) {
-        $query = $query->whereNull("invoice_items.id_invoice");
-      } else {
-        $query = $query->where("invoice_items.id_invoice", ">", 0);
+      switch ($filters["fStatus"]) {
+        case 1: $query = $query->whereNull("invoice_items.id_invoice"); break;
+        case 2: $query = $query->where("invoice_items.id_invoice", ">", 0); break;
+      }
+    }
+
+    if (isset($filters['fPeriod'])) {
+      switch ($filters['fPeriod']) {
+        case 'today': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereDate('invoices.date_due', date('Y-m-d')); }); break;
+        case 'yesterday': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereDate('date_due', date('Y-m-d', strtotime('-1 day'))); }); break;
+        case 'last7Days': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereDate('date_due', '>=', date('Y-m-d', strtotime('-7 days'))); }); break;
+        case 'last14Days': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereDate('date_due', '>=', date('Y-m-d', strtotime('-14 days'))); }); break;
+        case 'thisMonth': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereMonth('date_due', date('m')); }); break;
+        case 'lastMonth': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereMonth('date_due', date('m', strtotime('-1 month'))); }); break;
+        case 'beforeLastMonth': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereMonth('date_due', date('m', strtotime('-2 month'))); }); break;
+        case 'thisYear': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereYear('date_due', date('Y')); }); break;
+        case 'lastYear': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereYear('date_due', date('Y') - 1); }); break;
       }
     }
 

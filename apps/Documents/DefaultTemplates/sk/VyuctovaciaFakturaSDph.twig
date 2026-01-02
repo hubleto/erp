@@ -50,10 +50,10 @@
       <div class="content">
         <table>
           <tr>
-            <td>
+            <td style="padding-top:0.5em">
               <img src="{{ config.uploadUrl }}/{{ PROFILE.COMPANY.logo }}" style="max-width:80px;max-height:80px;">
             </td>
-            <td style="width:95%;padding-left:1em">
+            <td style="width:95%;padding-left:1em;padding-top:0.5em">
               {{ PROFILE.headline }}
             </td>
           </tr>
@@ -64,13 +64,13 @@
           <br/>
           <b>{{ PROFILE.COMPANY.name }}</b><br/>
           {{ PROFILE.COMPANY.street_1 }}<br/>
-          {% if street_2 %} {{ PROFILE.COMPANY.street_2 }}<br/> {% endif %}
+          {% if PROFILE.COMPANY.street_2 %} {{ PROFILE.COMPANY.street_2 }}<br/> {% endif %}
           {{ PROFILE.COMPANY.zip }} {{ PROFILE.COMPANY.city }}<br/>
-          {{ PROFILE.COMPANY.country }}<br/>
+          {% if PROFILE.COMPANY.country %} {{ PROFILE.COMPANY.country }}<br/> {% endif %}
           <br/>
-          IČO: {{ PROFILE.COMPANY.registration_id }}<br/>
-          DIČ: {{ PROFILE.COMPANY.tax_id }}<br/>
-          IČDPH: {{ PROFILE.COMPANY.vat_id }}<br/>
+          {% if PROFILE.COMPANY.registration_id %} IČO: {{ PROFILE.COMPANY.registration_id }}<br/> {% endif %}
+          {% if PROFILE.COMPANY.tax_id %} DIČ: {{ PROFILE.COMPANY.tax_id }}<br/> {% endif %}
+          {% if PROFILE.COMPANY.vat_id %} IČDPH: {{ PROFILE.COMPANY.vat_id }}<br/> {% endif %}
           <br/>
           {{ PROFILE.COMPANY.business_register }}<br/>
         </div>
@@ -83,14 +83,14 @@
         <br/>
         <b>{{ CUSTOMER.name }}</b><br/>
         {{ CUSTOMER.street_line_1 }}<br/>
-        {% if street_line_2 %} {{ CUSTOMER.street_line_2 }}<br/> {% endif %}
-        {{ CUSTOMER.region }}<br/>
+        {% if CUSTOMER.street_line_2 %} {{ CUSTOMER.street_line_2 }}<br/> {% endif %}
+        {% if CUSTOMER.region %} {{ CUSTOMER.region }}<br/> {% endif %}
         {{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}<br/>
-        {{ CUSTOMER.country }}<br/>
+        {% if CUSTOMER.country %} {{ CUSTOMER.country }}<br/> {% endif %}
         <br/>
-        IČO: {{ CUSTOMER.customer_id }}<br/>
-        DIČ: {{ CUSTOMER.tax_id }}<br/>
-        IČDPH: {{ CUSTOMER.vat_id }}<br/>
+        {% if CUSTOMER.customer_id %} IČO: {{ CUSTOMER.customer_id }}<br/> {% endif %}
+        {% if CUSTOMER.tax_id %} DIČ: {{ CUSTOMER.tax_id }}<br/> {% endif %}
+        {% if CUSTOMER.vat_id %} IČDPH: {{ CUSTOMER.vat_id }}<br/> {% endif %}
       </div>
       <div class="content">
         <br/>
@@ -106,19 +106,20 @@
     <div style="clear:both;"></div>
   </div>
   <div class="dmain">
-    <div class="dcolumn">
-      <div style="padding:5px;background:#EEEEEE;text-align:center"> IBAN <br>
-        <b style="font-size:1.2em;">{{ PROFILE.iban }}</b>
+    <div class="dcolumn" style="width:60%">
+      <div class="content" style="background:#EEEEEE;text-align:center">
+        IBAN <br>
+        <b style="font-size:1.4em;">{{ PROFILE.iban }}</b>
         <br>
         <br> BIC/SWIFT <br>
         <b style="font-size:1.4em;">{{ PROFILE.swift }}</b>
         <br>
       </div>
     </div>
-    <div class="dcolumn">
-      <div style="padding:5px;background:#EEEEEE;text-align:center">
+    <div class="dcolumn" style="width:40%">
+      <div class="content" style="background:#EEEEEE;text-align:center">
         Suma k úhrade<br>
-        <b style="font-size:1.2em;">{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b><br/>
+        <b style="font-size:1.4em;">{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b><br/>
         <br/>
         Dátum splatnosti<br>
         <b style="font-size:1.4em;">{{ hubleto.locale().formatDateShort(date_due ?? '') }}</b>

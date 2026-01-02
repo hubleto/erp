@@ -99,4 +99,25 @@ export default class TableItems extends HubletoTable<TableItemsProps, TableItems
     }
   }
 
+  renderFooter(): JSX.Element {
+    let totalExclVat = 0;
+    let totalVat = 0;
+    let totalInclVat = 0;
+
+    for (let i in this.state.data?.data) {
+      const row = this.state.data?.data[i];
+      totalExclVat += parseFloat(row['price_excl_vat']);
+      totalVat += parseFloat(row['price_incl_vat']) - parseFloat(row['price_excl_vat']);
+      totalInclVat += parseFloat(row['price_incl_vat']);
+    }
+
+    return <>
+      <div className="font-bold">
+        {this.translate('Total excl. VAT')}: {totalExclVat.toFixed(2)} €<br/>
+        {this.translate('Total VAT')}: {totalVat.toFixed(2)} €<br/>
+        {this.translate('Total incl. VAT')}: {totalInclVat.toFixed(2)} €
+      </div>
+    </>
+  }
+
 }

@@ -70,7 +70,50 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
               {this.inputWrapper('amount')}
               {this.inputWrapper('discount')}
               {this.inputWrapper('vat')}
+            </div>
+            <div className='flex-1'>
               {this.inputWrapper('notes')}
+              <div className='bg-slate-50 p-2'>
+                <b>Payment summary</b><br/>
+                <table className='table-default dense w-full'>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Without discount</th>
+                      <th>With discount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><b>{R.title}</b></td>
+                      <td className='text-nowrap'>
+                        <div className='flex gap-2'>
+                          <div>{globalThis.main.currencyFormat(R.unit_price, 4)}</div>
+                          <div>x</div>
+                          <div>{globalThis.main.numberFormat(R.amount, 4)}</div>
+                        </div>
+                      </td>
+                      <td className='text-nowrap'>
+                        <div className='flex gap-2'>
+                          <div>{globalThis.main.currencyFormat(R.unit_price * (1 - R.discount / 100), 4)}</div>
+                          <div>x</div>
+                          <div>{globalThis.main.numberFormat(R.amount, 4)}</div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Excluding VAT</td>
+                      <td className='text-nowrap'>{globalThis.main.currencyFormat(R.unit_price * R.amount, 4)}</td>
+                      <td className='text-nowrap'>{globalThis.main.currencyFormat(R.unit_price * R.amount * (1 - R.discount / 100), 4)}</td>
+                    </tr>
+                    <tr>
+                      <td>Including {globalThis.main.numberFormat(R.vat, 0)} % VAT</td>
+                      <td className='text-nowrap'>{globalThis.main.currencyFormat(R.unit_price * R.amount * (1 + R.vat / 100), 4)}</td>
+                      <td className='text-nowrap'>{globalThis.main.currencyFormat(R.unit_price * R.amount * (1 + R.vat / 100) * (1 - R.discount / 100), 4)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               {this.inputWrapper('id_invoice_item')}
             </div>
           </div>

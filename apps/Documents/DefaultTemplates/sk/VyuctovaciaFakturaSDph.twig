@@ -184,31 +184,11 @@
     <tbody>
       <tr>
         <td style="width:50%">
-          <div style="padding-top:20mm;padding-left:5mm;">
-            <!-- PECIATKA a PODPIS -->
-            <div style="text-align:center;">
-              <div class="content podpisy" style="padding-top:0; padding-bottom:0;">
-                <div style="page-break-inside:avoid; ">
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td style="width:50%;">
-                          {# peciatka <img src="#" style="max-width:220px;"> #}
-                        </td>
-                        <td style="width:50%;"></td>
-                      </tr>
-                      <tr>
-                        <td style="width:50%;">
-                          <span class="podpis_info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pečiatka&nbsp;a&nbsp;podpis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        </td>
-                        <td style="width:50%;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <br>
-                </div>
-              </div>
-            </div>
+          <div style="padding-left:5mm;text-align:center">
+            {% if PROFILE.stamp_and_signature %}
+              <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:220px;"><br/>
+              <br/>
+            {% endif %}
           </div>
         </td>
         <td style="width:50%">

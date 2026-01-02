@@ -48,7 +48,12 @@
       'idUser': {{ user.id ?? 0 }},
       'userEmail': '{{ user.email ?? '' }}',
       'isPremium': {% if isPremium %} true {% else %} false {% endif %},
-      'language': '{{ user.language ?: "en" }}'
+      'language': '{{ user.language ?: "en" }}',
+      'locale': {
+        'currencySymbol': '{{ hubleto.locale().getCurrencySymbol() }}',
+        'decimalsSeparator': '{{ hubleto.locale().getDecimalsSeparator() }}',
+        'thousandsSeparator': '{{ hubleto.locale().getThousandsSeparator() }}',
+      }
     }
   </script>
 

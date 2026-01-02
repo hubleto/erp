@@ -35,12 +35,12 @@ class Payment extends \Hubleto\Erp\Model
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class)),
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
-      'unit_price' => new Decimal($this, $this->translate('Unit price'))->setDefaultVisible(),
-      'amount' => new Decimal($this, $this->translate('Amount'))->setDefaultVisible(),
-      'discount' => new Decimal($this, $this->translate('Discount'))->setDefaultVisible(),
+      'unit_price' => new Decimal($this, $this->translate('Unit price'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
+      'amount' => new Decimal($this, $this->translate('Amount'))->setDefaultVisible()->setUnit('x'),
+      'discount' => new Decimal($this, $this->translate('Discount'))->setDefaultVisible()->setUnit('%'),
       'vat' => new Decimal($this, $this->translate('VAT'))->setUnit('%'),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
-      'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), Item::class))->setDefaultVisible(),
+      'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), Item::class))->setDefaultVisible()->setReadonly(),
     ]);
   }
 

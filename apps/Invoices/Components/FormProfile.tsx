@@ -64,11 +64,13 @@ export default class FormProfile extends HubletoForm<FormProfileProps, FormProfi
           <div className="flex gap-2 mt-2">
             <div className='flex-1'>
               {this.inputWrapper('name')}
+              {this.inputWrapper('headline')}
               {this.inputWrapper('id_company')}
               {this.inputWrapper('id_currency')}
               {this.inputWrapper('id_template')}
               {this.inputWrapper('due_days')}
               {this.inputWrapper('numbering_pattern')}
+              {this.inputWrapper('stamp_and_signature')}
             </div>
           </div>
         </>;

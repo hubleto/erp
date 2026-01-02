@@ -19,6 +19,8 @@ class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
       $model = $args['model'] ?? '';
       $originalRecord = $args['originalRecord'] ?? [];
       $savedRecord = $args['savedRecord'] ?? [];
+      $idOwner = (int) ($savedRecord['id_owner'] ?? 0);
+      $idManager = (int) ($savedRecord['id_manager'] ?? 0);
 
       $diff = $model->diffRecords($originalRecord, $savedRecord);
 
@@ -29,23 +31,27 @@ class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
           . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         ;
 
-        $sender->send(
-          945, // category
-          [$model->shortName, $model->fullName],
-          (int) $savedRecord['id_owner'], // to
-          $model->shortName . ' updated', // subject
-          $body,
-          $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
-        );
+        if ($idOwner > 0) {
+          $sender->send(
+            945, // category
+            [$model->shortName, $model->fullName],
+            $idOwner, // to
+            $model->shortName . ' updated', // subject
+            $body,
+            $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
+          );
+        }
 
-        $sender->send(
-          945, // category
-          [$model->shortName, $model->fullName],
-          (int) $savedRecord['id_manager'], // to
-          $model->shortName . ' updated', // subject
-          $body,
-          $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
-        );
+        if ($idManager > 0) {
+          $sender->send(
+            945, // category
+            [$model->shortName, $model->fullName],
+            $idManager, // to
+            $model->shortName . ' updated', // subject
+            $body,
+            $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
+          );
+        }
       }
     }
   }

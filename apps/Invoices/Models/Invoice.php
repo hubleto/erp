@@ -189,6 +189,16 @@ class Invoice extends \Hubleto\Erp\Model {
     return $description;
   }
 
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['ITEMS'];
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
+  }
+
   /**
    * [Description for recalculateTotalsForInvoice]
    *

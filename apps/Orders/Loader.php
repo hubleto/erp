@@ -102,7 +102,7 @@ class Loader extends \Hubleto\Framework\App
   
     $mPayment = $this->getModel(Models\Payment::class);
     $duePaymentsCount = $mPayment->record
-      ->whereDate('date_due', '<', date("Y-m-d"))
+      ->whereDate('date_due', '<=', date("Y-m-d"))
       ->whereNull('id_invoice_item')
       ->count();
 

@@ -147,7 +147,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       case 'default':
         const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
         return <>
-          {this.input('inbound_outbound', { uiStyle: 'buttons' })}
+          <div className='flex gap-2'>
+            {this.input('inbound_outbound', { cssClass: 'w-auto', uiStyle: 'buttons' })}
+            {this.input('type', { cssClass: 'w-auto', uiStyle: 'buttons' })}
+          </div>
           <div className='flex gap-2 mt-2'>
             <div className='gap-2 w-56'>
               <div className='p-2 grow'>
@@ -184,15 +187,12 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               <div className='flex-1'>
                 <div className='grow'>
                   {R.inbound_outbound == 1 ?
-                    this.inputWrapper('id_supplier')
-                  : this.inputWrapper('id_customer')}
-                </div>
-                <div className='flex gap-2'>
-                  {this.inputWrapper('type', {uiStyle: 'buttons-vertical'})}
-                  {this.inputWrapper('id_profile', {uiStyle: 'buttons-vertical'})}
-                  {this.inputWrapper('id_payment_method', {uiStyle: 'buttons-vertical'})}
+                    this.inputWrapper('id_supplier', {wrapperCssClass: 'flex gap-2'})
+                  : this.inputWrapper('id_customer', {wrapperCssClass: 'flex gap-2'})}
                 </div>
                 {this.state.id == -1 ? null : <>
+                  {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}                  
+                  {this.inputWrapper('id_payment_method', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}
                   {this.inputWrapper('id_currency', {wrapperCssClass: 'flex gap-2'})}
                   <div className='flex gap-2'>
                     <div className='grow'>

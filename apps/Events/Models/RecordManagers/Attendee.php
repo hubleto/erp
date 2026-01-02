@@ -8,9 +8,9 @@ class Attendee extends \Hubleto\Erp\RecordManager
 {
   public $table = 'events_attendees';
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     // Uncomment this line if you are going to use $hubleto.
     // $hubleto = \Hubleto\Erp\Loader::getGlobalApp();

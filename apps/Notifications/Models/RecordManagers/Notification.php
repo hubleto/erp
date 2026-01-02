@@ -23,11 +23,11 @@ class Notification extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(User::class, 'id_to', 'id');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $folder = $hubleto->router()->urlParamAsString('folder');
     $idUser = $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();

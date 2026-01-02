@@ -15,9 +15,9 @@ class Discussion extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(User::class, 'id_main_mod', 'id');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    return parent::prepareReadQuery($query, $level);
+    return parent::prepareReadQuery($query, $level, $includeRelations);
   }
 
 }

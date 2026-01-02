@@ -22,9 +22,9 @@ class Team extends \Hubleto\Erp\RecordManager
     return $this->hasMany(TeamMember::class, 'id_team', 'id');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
     $query = $query->with('MEMBERS.MEMBER');
     return $query;
   }

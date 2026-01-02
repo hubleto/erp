@@ -14,9 +14,9 @@ class Payment extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Invoice::class, 'id_invoice', 'id');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $idInvoice = $hubleto->router()->urlParamAsInteger("idInvoice");

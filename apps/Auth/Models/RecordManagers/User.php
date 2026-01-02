@@ -54,9 +54,9 @@ class User extends \Hubleto\Erp\RecordManager
     );
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
     $query = $query->with('ROLES')->with('TEAMS')->with('DEFAULT_COMPANY');
     return $query;
   }

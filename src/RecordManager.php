@@ -106,11 +106,11 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     return $permissions;
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $hubleto = \Hubleto\Framework\Loader::getGlobalApp();
 
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $hasIdOwner = $this->model->hasColumn('id_owner');
     $hasIdManager = $this->model->hasColumn('id_manager');

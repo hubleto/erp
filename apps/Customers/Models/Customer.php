@@ -125,6 +125,16 @@ class Customer extends Model
     return $description;
   }
 
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['TAGS'];
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
+  }
+
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);

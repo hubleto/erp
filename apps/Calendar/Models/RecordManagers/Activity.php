@@ -22,7 +22,7 @@ class Activity extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(ActivityType::class, 'id_activity_type', 'id');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     return parent::prepareReadQuery($query, $level)->orderBy('date_start')->orderBy('time_start');
   }

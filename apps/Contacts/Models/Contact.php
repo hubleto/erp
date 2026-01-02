@@ -100,6 +100,16 @@ class Contact extends \Hubleto\Erp\Model
     return $description;
   }
 
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['TAGS'];
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
+  }
+
   public function onBeforeCreate(array $record): array
   {
     $record['date_created'] = date('Y-m-d');

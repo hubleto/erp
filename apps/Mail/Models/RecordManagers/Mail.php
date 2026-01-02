@@ -19,7 +19,7 @@ class Mail extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Mailbox::class, 'id_mailbox', 'id');
   }
 
-  public function prepareReadQuery(mixed $query = null, int $level = 0): mixed
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $idAccount = $hubleto->router()->urlParamAsInteger('idAccount');
@@ -29,7 +29,7 @@ class Mail extends \Hubleto\Erp\RecordManager
     $showOnlyDrafts = $hubleto->router()->urlParamAsBool('showOnlyDrafts');
     $showOnlyTemplates = $hubleto->router()->urlParamAsBool('showOnlyTemplates');
 
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     if ($idAccount > 0) $query = $query->where('mails.id_account', $idAccount);
     if ($idMailbox > 0) $query = $query->where('mails.id_mailbox', $idMailbox);

@@ -42,18 +42,7 @@ class Invoice extends \Hubleto\Erp\Model {
   const OUTBOUND_INVOICE = 2;
 
   public string $table = 'invoices';
-  public ?string $lookupSqlValue = '
-    concat(
-      ifnull({%TABLE%}.number, ""),
-      " ",
-      ifnull(
-        (
-          select `c`.`name` from `customers` `c`
-          where `c`.`id` = {%TABLE%}.`id_customer`
-        ),
-        ""
-      )
-    )';
+  public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $recordManagerClass = RecordManagers\Invoice::class;
 
   public array $relations = [

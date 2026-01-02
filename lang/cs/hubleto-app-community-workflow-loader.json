@@ -32,5 +32,13 @@
     "Controllers\\Workflows": {
         "Settings": "Nastavení",
         "Workflows": "Workflows"
+    },
+    "Models\\WorkflowHistory": {
+        "Model": "",
+        "Record Id": "",
+        "Changed": "",
+        "User": "",
+        "Workflow": "",
+        "Workflow Step": ""
     }
 }

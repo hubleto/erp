@@ -165,5 +165,10 @@
         "Color": "",
         "Show in calendar": "",
         "Icon": ""
+    },
+    "Models\\Setting": {
+        "Key": "",
+        "Value": "",
+        "Only for user": ""
     }
 }

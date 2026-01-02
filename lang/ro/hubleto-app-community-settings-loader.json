@@ -88,5 +88,10 @@
         "Team color": "",
         "Description": "",
         "Manager": ""
+    },
+    "Models\\Setting": {
+        "Key": "",
+        "Value": "",
+        "Only for user": ""
     }
 }

@@ -29,5 +29,13 @@
         "Workflow": "Rurociąg",
         "Set result of a deal to": "Ustaw wynik umowy",
         "Tag": ""
+    },
+    "Models\\WorkflowHistory": {
+        "Model": "",
+        "Record Id": "",
+        "Changed": "",
+        "User": "",
+        "Workflow": "",
+        "Workflow Step": ""
     }
 }

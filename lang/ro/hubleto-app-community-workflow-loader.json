@@ -22,5 +22,13 @@
         "Workflow": "",
         "Set result of a deal to": "",
         "Tag": ""
+    },
+    "Models\\WorkflowHistory": {
+        "Model": "",
+        "Record Id": "",
+        "Changed": "",
+        "User": "",
+        "Workflow": "",
+        "Workflow Step": ""
     }
 }

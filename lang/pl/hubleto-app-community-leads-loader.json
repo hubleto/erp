@@ -75,7 +75,8 @@
         "Tags": "",
         "Open \/ Closed": "",
         "Open": "",
-        "All": ""
+        "All": "",
+        "Add Lead": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Utracony rozum"

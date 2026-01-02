@@ -45,7 +45,8 @@
         "Open \/ Closed": "",
         "Open": "",
         "All": "",
-        "Add lead": ""
+        "Add lead": "",
+        "Add Lead": ""
     },
     "Models\\LostReason": {
         "Lost Reason": ""
@@ -96,5 +97,8 @@
     },
     "Controllers\\Boards\\LeadWarnings": {
         "Open leads without future plan": ""
+    },
+    "Controllers\\Leads": {
+        "Leads": ""
     }
 }

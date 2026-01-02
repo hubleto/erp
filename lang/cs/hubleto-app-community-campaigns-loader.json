@@ -31,7 +31,10 @@
         "Reply to": "",
         "Owner": "",
         "Lanuched by": "",
-        "Launched": ""
+        "Launched": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
     },
     "Components\\FormCampaign": {
         "Leads": "Potencionální obchody",
@@ -55,5 +58,25 @@
         "Short meeting minutes": "",
         "Created by": "",
         "Campaign": ""
+    },
+    "Models\\CampaignTask": {
+        "Campaign": "",
+        "Task": ""
+    },
+    "Models\\Recipient": {
+        "Campaign": "",
+        "Contact": "",
+        "Email": "",
+        "First name": "",
+        "Last name": "",
+        "Salutation": "",
+        "Variables": "",
+        "Reference to mail sent": "",
+        "Status": ""
+    },
+    "Models\\RecipientStatus": {
+        "Email": "",
+        "Is opted-out": "",
+        "Is invalid": ""
     }
 }

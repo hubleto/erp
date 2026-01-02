@@ -34,5 +34,13 @@
         "Workflow": "Workflow",
         "Manage workflows": "Workflows verwalten",
         "Add deal": "Deal hinzufügen"
+    },
+    "Models\\WorkflowHistory": {
+        "Model": "",
+        "Record Id": "",
+        "Changed": "",
+        "User": "",
+        "Workflow": "",
+        "Workflow Step": ""
     }
 }

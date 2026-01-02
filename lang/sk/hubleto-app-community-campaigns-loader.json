@@ -41,7 +41,9 @@
         "First name": "Meno",
         "Last name": "Priezvisko",
         "Salutation": "Oslovenie",
-        "Reference to mail sent": "Odoslaný email"
+        "Reference to mail sent": "Odoslaný email",
+        "Variables": "",
+        "Status": ""
     },
     "Models\\CampaignTask": {
         "Campaign": "Kampaň",
@@ -54,7 +56,12 @@
         "Campaign": "Kampaň",
         "Add recipients from contacts": "Pridať príjemcu z kontaktov",
         "Tasks": "Úlohy",
-        "Launch": "Spustiť"
+        "Launch": "Spustiť",
+        "Calendar": "",
+        "Contacts": "",
+        "Recipients": "",
+        "Test": "",
+        "Clicks": ""
     },
     "Models\\Click": {
         "Campaign": "Kampaň",
@@ -79,5 +86,13 @@
         "Short meeting minutes": "",
         "Created by": "",
         "Campaign": ""
+    },
+    "Components\\TableCampaigns": {
+        "Hide filter": ""
+    },
+    "Models\\RecipientStatus": {
+        "Email": "",
+        "Is opted-out": "",
+        "Is invalid": ""
     }
 }

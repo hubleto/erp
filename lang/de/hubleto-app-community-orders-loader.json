@@ -55,7 +55,11 @@
         "Prepaid working hours": "",
         "Prepaid working hours - period": "",
         "No working hours recurrence": "",
-        "PDF": ""
+        "PDF": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "Purchase orders": "",
+        "Sales orders": ""
     },
     "Models\\State": {
         "Title": "Titel",
@@ -117,5 +121,16 @@
     },
     "Controllers\\Boards\\OrderWarnings": {
         "Open orders without future plan": ""
+    },
+    "Models\\Payment": {
+        "Order": "",
+        "Title": "",
+        "Due date": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount": "",
+        "VAT": "",
+        "Notes": "",
+        "Invoice item": ""
     }
 }

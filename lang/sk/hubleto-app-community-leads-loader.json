@@ -154,5 +154,8 @@
     "Models\\LeadTask": {
         "Lead": "Lead",
         "Task": "Úloha"
+    },
+    "Components\\TableLeads": {
+        "Hide filter": ""
     }
 }

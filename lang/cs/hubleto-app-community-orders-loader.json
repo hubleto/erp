@@ -57,7 +57,11 @@
         "No working hours recurrence": "",
         "Shared folder (online document storage)": "",
         "Link to shared folder (online storage) with related documents": "",
-        "PDF": ""
+        "PDF": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "Purchase orders": "",
+        "Sales orders": ""
     },
     "Models\\Item": {
         "Order": "Objednávka",
@@ -117,5 +121,16 @@
     },
     "Controllers\\Boards\\OrderWarnings": {
         "Open orders without future plan": "otevřené objednávky bez budoucího plánu"
+    },
+    "Models\\Payment": {
+        "Order": "",
+        "Title": "",
+        "Due date": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount": "",
+        "VAT": "",
+        "Notes": "",
+        "Invoice item": ""
     }
 }

@@ -54,13 +54,15 @@
         "Package volume": "",
         "Package mass": "",
         "Package discount": "",
-        "Package description": ""
+        "Package description": "",
+        "Type": ""
     },
     "Controllers\\Products": {
         "Products": "Produkte"
     },
     "Models\\Group": {
-        "Title": "Titel"
+        "Title": "Titel",
+        "Name": ""
     },
     "Models\\Supplier": {
         "Title": "Titel",
@@ -76,5 +78,18 @@
         "Company ID": "Firmen -ID",
         "VAT ID": "Mehrwertsteuer id",
         "Payment account number": "Zahlungskontonummer"
+    },
+    "Models\\Category": {
+        "Parent": "",
+        "Name": "",
+        "Color": "",
+        "Short description": "",
+        "Long description": "",
+        "Photo #1": "",
+        "Photo #2": "",
+        "Photo #3": "",
+        "Photo #4": "",
+        "Photo #5": "",
+        "URL slug": ""
     }
 }

@@ -60,10 +60,12 @@
         "Package volume": "",
         "Package mass": "",
         "Package discount": "",
-        "Package description": ""
+        "Package description": "",
+        "Type": ""
     },
     "Models\\Group": {
-        "Title": "Názov"
+        "Title": "Názov",
+        "Name": ""
     },
     "Models\\Supplier": {
         "Title": "Názov",
@@ -97,5 +99,21 @@
         "Products": "Produkty",
         "Product Groups": "Skupiny produktov",
         "Groups": "Skupiny"
+    },
+    "Models\\Category": {
+        "Parent": "",
+        "Name": "",
+        "Color": "",
+        "Short description": "",
+        "Long description": "",
+        "Photo #1": "",
+        "Photo #2": "",
+        "Photo #3": "",
+        "Photo #4": "",
+        "Photo #5": "",
+        "URL slug": ""
+    },
+    "Components\\TableProducts": {
+        "Hide filter": ""
     }
 }

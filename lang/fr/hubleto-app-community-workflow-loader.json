@@ -26,5 +26,13 @@
         "Tag": "",
         "Probability": "",
         "Set result of a deal to": ""
+    },
+    "Models\\WorkflowHistory": {
+        "Model": "",
+        "Record Id": "",
+        "Changed": "",
+        "User": "",
+        "Workflow": "",
+        "Workflow Step": ""
     }
 }

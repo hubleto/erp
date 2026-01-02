@@ -65,7 +65,12 @@
         "Link to shared folder (online storage) with related documents": "",
         "Template": "",
         "PDF": "",
-        "Closed": ""
+        "Closed": "",
+        "Add order": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "Purchase orders": "",
+        "Sales orders": ""
     },
     "Models\\Item": {
         "Order": "",
@@ -95,5 +100,19 @@
     },
     "Controllers\\Boards\\OrderWarnings": {
         "Open orders without future plan": ""
+    },
+    "Controllers\\Orders": {
+        "Orders": ""
+    },
+    "Models\\Payment": {
+        "Order": "",
+        "Title": "",
+        "Due date": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount": "",
+        "VAT": "",
+        "Notes": "",
+        "Invoice item": ""
     }
 }

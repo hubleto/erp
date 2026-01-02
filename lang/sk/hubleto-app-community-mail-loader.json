@@ -33,7 +33,8 @@
         "Draft": "Rozpísaná",
         "Template": "Šablóna",
         "Account": "",
-        "Scheduled to send": ""
+        "Scheduled to send": "",
+        "Reply to": ""
     },
     "Models\\Account": {
         "Name": "",

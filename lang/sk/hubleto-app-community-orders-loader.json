@@ -57,7 +57,9 @@
         "No working hours recurrence": "",
         "Shared folder (online document storage)": "",
         "Link to shared folder (online storage) with related documents": "",
-        "PDF": ""
+        "PDF": "",
+        "Purchase orders": "",
+        "Sales orders": ""
     },
     "Models\\State": {
         "Title": "Názov",
@@ -97,7 +99,14 @@
         "Enter": "Enter",
         "Schedule activity": "Naplánovať aktivitu",
         "Shift+Enter": "Shift+Enter",
-        "Most recent activities": "Posledné aktivity"
+        "Most recent activities": "Posledné aktivity",
+        "Items": "",
+        "Preview": "",
+        "Calendar": "",
+        "Payments": "",
+        "Select parent deal": "",
+        "unsaved changes": "",
+        "Save and close": ""
     },
     "Models\\OrderDocument": {
         "Order": "Objednávka",
@@ -128,5 +137,19 @@
     },
     "Controllers\\Boards\\OrderWarnings": {
         "Open orders without future plan": "Otvoriť objednávky bez plánu"
+    },
+    "Models\\Payment": {
+        "Order": "",
+        "Title": "",
+        "Due date": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount": "",
+        "VAT": "",
+        "Notes": "",
+        "Invoice item": ""
+    },
+    "Components\\TableOrders": {
+        "Hide filter": ""
     }
 }

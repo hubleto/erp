@@ -36,8 +36,6 @@
     .sumar table td { padding: 0.8pt; vertical-align: middle; }
     .sumar table tr.sep td { width: 100%; height: 10pt; }
     .sumar table tr.suma td { border-top: 0.2mm solid #777; padding-top: 1mm; }
-    .podpisy table td { text-align: center; }
-    .podpisy .podpis_info { border-top: 0.2mm dotted #777; }
     .text-right { text-align: right; }
   </style>
 </head>
@@ -188,9 +186,9 @@
     <tbody>
       <tr>
         <td style="width:50%">
-          <div style="padding-left:5mm;text-align:center">
+          <div style="padding-top:10mm;padding-left:5mm">
             {% if PROFILE.stamp_and_signature %}
-              <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:180px;"><br/>
+              <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:180px;max-height:180px;"><br/>
               <br/>
             {% endif %}
           </div>

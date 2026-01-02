@@ -68,6 +68,7 @@ export default class FormProfile extends HubletoForm<FormProfileProps, FormProfi
               {this.inputWrapper('id_company')}
               {this.inputWrapper('id_currency')}
               {this.inputWrapper('id_template')}
+              {this.inputWrapper('id_payment_method')}
               {this.inputWrapper('due_days')}
               {this.inputWrapper('numbering_pattern')}
               {this.inputWrapper('stamp_and_signature')}

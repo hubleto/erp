@@ -245,6 +245,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $idProfile = (int) ($record['id_profile'] ?? 0);
     $idTemplate = (int) ($record['id_template'] ?? 0);
+    $idPaymentMethod = (int) ($record['id_payment_method'] ?? 0);
 
     /** @var Profile */
     $mProfile = $this->getService(Profile::class);
@@ -263,6 +264,7 @@ class Invoice extends \Hubleto\Erp\Model {
     if ($record['inbound_outbound'] <= 0) $record['inbound_outbound'] = self::INBOUND_INVOICE;
     if ($record['type'] <= 0) $record['type'] = self::TYPE_STANDARD;
     if ($idTemplate <= 0) $record['id_template'] = (int) ($profile['id_template'] ?? 0);
+    if ($idPaymentMethod <= 0) $record['id_payment_method'] = (int) ($profile['id_payment_method'] ?? 0);
 
     $numberingPattern = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
 

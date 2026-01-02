@@ -54,6 +54,7 @@ class Profile extends \Hubleto\Erp\Model
       'due_days' => (new Integer($this, $this->translate('Due days')))->setDefaultVisible(),
       'stamp_and_signature' => (new Image($this, $this->translate('Stamp and signature'))),
       'id_template' => (new Lookup($this, $this->translate('Default invoice template'), Template::class)),
+      'id_payment_method' => (new Lookup($this, $this->translate('Default payment method'), PaymentMethod::class)),
     ]);
   }
 

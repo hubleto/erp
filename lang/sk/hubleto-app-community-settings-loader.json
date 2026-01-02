@@ -196,7 +196,12 @@
         "Street, line 2": "Ulica, riadok 2",
         "ZIP": "Zips",
         "City": "Mesto",
-        "Country": "Krajina"
+        "Country": "Krajina",
+        "Registration ID": "",
+        "Business register": "",
+        "Logo": "",
+        "Brand color - primary": "",
+        "Brand color - secondary": ""
     },
     "Controllers\\Sidebar": {
         "Settings": "Nastavenia",

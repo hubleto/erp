@@ -14,7 +14,12 @@
         "Default company": "Spoločnosť",
         "Apps": "Appky",
         "Roles": "Role",
-        "Teams": "Tímy"
+        "Teams": "Tímy",
+        "Position": "",
+        "Phone number #1": "",
+        "Phone number #2": "",
+        "Photo": "",
+        "Timezone": ""
     },
     "Models\\UserRole": {
         "Role": "Rola",

@@ -30,7 +30,13 @@
         "Completed": "Dokončená",
         "Created by": "Vytvorené",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",
@@ -64,7 +70,8 @@
         "Team": "Tím",
         "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
-        "Closed": "Uzavretý"
+        "Closed": "Uzavretý",
+        "Tags": ""
     },
     "root": {
         "Lead statuses": "Stavy leadov",

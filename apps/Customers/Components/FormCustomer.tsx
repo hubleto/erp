@@ -392,7 +392,7 @@ export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, F
             </> : null}
           </div>
           {customInputs.length > 0 ?
-            <div className="card mt-2"><div className="card-header">Custom data</div><div className="card-body">
+            <div className="card mt-2"><div className="card-header">{this.translate('Custom data')}</div><div className="card-body">
               {customInputs}
             </div></div>
           : <></>}

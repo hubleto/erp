@@ -17,7 +17,8 @@
         "Name": "Pomenovať",
         "Description": "Opis",
         "Type": "Typ",
-        "Group": "Skupiny"
+        "Group": "Skupiny",
+        "Order": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Pomenovať",

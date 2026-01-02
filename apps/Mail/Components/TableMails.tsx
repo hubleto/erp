@@ -74,7 +74,7 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
           }}
         >
           <span className="icon"><i className="fas fa-eye-slash"></i></span>
-          <span className="text">Mark as unread</span>
+          <span className="text">{this.translate('Mark as unread')}</span>
         </button>
       } else {
         return <button
@@ -85,7 +85,7 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
           }}
         >
           <span className="icon"><i className="fas fa-eye"></i></span>
-          <span className="text">Mark as read</span>
+          <span className="text">{this.translate('Mark as read')}</span>
         </button>
       }
     }

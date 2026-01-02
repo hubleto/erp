@@ -82,7 +82,7 @@ export default class FormRecipient<P, S> extends HubletoForm<FormRecipientProps,
             </div>
             <div className='flex-1'>
               <div className='card'>
-                <div className='card-header'>Mail preview</div>
+                <div className='card-header'>{this.translate('Mail preview')}</div>
                 <div className='card-body'>
                   {mailPreviewInfo && mailPreviewInfo.bodyHtml != '' ? <>
                     <div

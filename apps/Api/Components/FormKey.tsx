@@ -53,7 +53,7 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
 
   renderTitle(): JSX.Element {
     return <>
-      <small>API Key</small>
+      <small>{this.translate('API Key')}</small>
       <h2>{this.state.record.key ?? '-'}</h2>
     </>;
   }
@@ -89,27 +89,27 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
         return R.id > 0 ? <>
           <table className='table-default dense'>
             <thead>
-              <tr><th>Parameter</th><th>Value</th></tr>
+              <tr><th>{this.translate('Parameter')}</th><th>{this.translate('Value')}</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>Endpoint</td>
+                <td>{this.translate('Endpoint')}</td>
                 <td className='m-2'>{globalThis.main.config.projectUrl + '/api/call'}</td>
               </tr>
               <tr>
-                <td>Key</td>
+                <td>{this.translate('Key')}</td>
                 <td className='m-2'>{R.key}</td>
               </tr>
               <tr>
-                <td>App</td>
+                <td>{this.translate('App')}</td>
                 <td className='m-2'><Varchar uid='app' value='Hubleto\App\Community\Contacts' ref={this.refInputApp}></Varchar></td>
               </tr>
               <tr>
-                <td>Controller</td>
+                <td>{this.translate('Controller')}</td>
                 <td className='m-2'><Varchar uid='controller' value='GetContacts' ref={this.refInputController}></Varchar></td>
               </tr>
               <tr>
-                <td>Vars</td>
+                <td>{this.translate('Vars')}</td>
                 <td className='m-2'><Varchar uid='vars' value='{"idCustomer":0}' ref={this.refInputVars}></Varchar></td>
               </tr>
             </tbody>

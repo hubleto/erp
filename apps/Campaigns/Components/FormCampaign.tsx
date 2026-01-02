@@ -417,7 +417,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             }}
           >
             <span className="icon"><i className="fas fa-envelope"></i></span>
-            <span className="text">Send test email</span>
+            <span className="text">{this.translate('Send test email')}</span>
           </button>
           {this.state.testEmailSendResult && this.state.testEmailSendResult.status == 'success' ?
             <div className='alert alert-success mt-2'>Test email was sent to you.</div>
@@ -437,7 +437,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
           {this.state.campaignWarnings ? <>
             {this.state.campaignWarnings.recentlyContacted
               && this.state.campaignWarnings.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
-              <b>Recently contacted</b>
+              <b>{this.translate('Recently contacted')}</b>
               {this.state.campaignWarnings.recentlyContacted.map((item, key) => {
                 if (!item.CONTACT) return null;
                 return <div key={key}>

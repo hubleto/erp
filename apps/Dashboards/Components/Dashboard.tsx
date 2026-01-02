@@ -247,7 +247,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
             onClick={() => {this.setState({showIdDashboard: this.props.idDashboard})}}
           >
             <span className="icon"><i className="fas fa-cog"></i></span>
-            <span className="text text-nowrap">Configure this dashboard</span>
+            <span className="text text-nowrap">{this.translate('Configure this dashboard')}</span>
           </button>
         </div>
       : null}

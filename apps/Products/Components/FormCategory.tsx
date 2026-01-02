@@ -43,7 +43,7 @@ export default class FormCategory<P, S> extends HubletoForm<FormCategoryProps,Fo
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Category</small>
+      <small>{this.translate('Category')}</small>
       <h2>{this.state.record.title ?? '-'}</h2>
     </>;
   }

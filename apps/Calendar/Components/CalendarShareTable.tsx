@@ -136,7 +136,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
           { calendarObject[1].shared > 0 &&
             <button onClick={() => this.stopSharingConfirm(calendarObject[0])} className="btn btn-transparent btn-small">
               <span className="icon"><i className="fas fa-chain-broken"></i></span>
-              <span className="text">Stop sharing</span>
+              <span className="text">{this.translate('Stop sharing')}</span>
             </button>
           }
           <button onClick={() => this.shareCalendar(calendarObject[0])} className="btn btn-transparent btn-small">

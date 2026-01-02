@@ -18,7 +18,13 @@
         "All day": "Celodenná",
         "Completed": "Ukončená",
         "Created by": "Vytvoril",
-        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Zobraziť podrobnosti",

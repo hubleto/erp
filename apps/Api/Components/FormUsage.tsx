@@ -26,7 +26,7 @@ export default class FormUsage<P, S> extends HubletoForm<FormUsageProps, FormUsa
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Usage</small>
+      <small>{this.translate('Usage')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

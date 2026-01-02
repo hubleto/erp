@@ -21,7 +21,8 @@
         "Delete": "Zmazať",
         "Start typing to search...": "Začnite vyhľadávať...",
         "Search...": "Hľadať",
-        "No data.": "Žiadne údaje."
+        "No data.": "Žiadne údaje.",
+        "More options": "Nastavenia"
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Zostať prihlásený"

@@ -68,7 +68,7 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
         }}
       >
         <span className="icon"><i className="fas fa-plus"></i></span>
-        <span className="text">Add activity</span>
+        <span className="text">{this.translate('Add activity')}</span>
       </button>
     </>;
   }

@@ -29,7 +29,7 @@ export default class FormNotification<P, S> extends HubletoForm<FormNotification
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Notification</small>
+      <small>{this.translate('Notification')}</small>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
     </>;
   }

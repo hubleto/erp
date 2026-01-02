@@ -136,7 +136,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           <span className="text">{this.translate("New activity")}</span>
         </button>
 
-        <b>Calendars</b>
+        <b>{this.translate('Calendars')}</b>
         <div className="list">
           {Object.keys(this.props.configs).map((source: any) => {
             const calendar = this.props.configs[source];

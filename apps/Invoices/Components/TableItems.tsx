@@ -92,7 +92,7 @@ export default class TableItems extends HubletoTable<TableItemsProps, TableItems
         }}
       >
         <span className='icon'><i className='fas fa-euro-sign'></i></span>
-        <span className='text'>Create invoice</span>
+        <span className='text'>{this.translate('Create invoice')}</span>
       </button>;
     } else {
       return super.renderCell(columnName, column, data, options);

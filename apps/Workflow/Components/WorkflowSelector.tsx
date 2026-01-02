@@ -147,7 +147,7 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
                 <div className='text-xs text-gray-400 flex gap-2'>
                   {history[0] ? <>Last update: {history[0].datetime_change} by {history[0].USER?.nick ?? 'unknown'}</> : null}
                   <a href='#' onClick={() => { this.setState({changeWorkflow: true}); }}>
-                    <span className="text">Change workflow</span>
+                    <span className="text">{this.translate('Change workflow')}</span>
                   </a>
                 </div>
               </> : <div>
@@ -156,7 +156,7 @@ export default class WorkflowSelector<P, S> extends TranslatedComponent<Workflow
                   onClick={() => { this.setState({changeWorkflow: true}); }}
                 >
                   <span className='icon'><i className='fas fa-timeline'></i></span>
-                  <span className="text">Change workflow</span>
+                  <span className="text">{this.translate('Change workflow')}</span>
                 </button>
               </div>}
             </div>

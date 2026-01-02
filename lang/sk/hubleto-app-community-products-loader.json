@@ -2,7 +2,8 @@
     "manifest": {
         "Products": "Produkty",
         "Free product portfolio managment.": "Správa produktového portfólia zdarma.",
-        "Groups": "Skupiny"
+        "Groups": "Skupiny",
+        "Categories": ""
     },
     "root": {
         "Products": "Produkty",
@@ -44,7 +45,22 @@
         "VAT": "DPH",
         "Bar code": "Čiarový kód",
         "Data ": "Dáta",
-        "EAN": "EAN"
+        "EAN": "EAN",
+        "Group": "",
+        "Category": "",
+        "Image 1": "",
+        "Image 2": "",
+        "Image 3": "",
+        "Image 4": "",
+        "Image 5": "",
+        "Packaging unit": "",
+        "Package length": "",
+        "Package width": "",
+        "Package height": "",
+        "Package volume": "",
+        "Package mass": "",
+        "Package discount": "",
+        "Package description": ""
     },
     "Models\\Group": {
         "Title": "Názov"

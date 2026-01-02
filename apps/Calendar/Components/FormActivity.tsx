@@ -155,12 +155,12 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
                   this.updateRecord(newR);
                 }}
               >
-                <option value=''>Does not repeat</option>
-                <option value='day'>Configure custom recurrence</option>
+                <option value=''>{this.translate('Does not repeat')}</option>
+                <option value='day'>{this.translate('Configure custom recurrence')}</option>
               </select>
             : <>
               <div className='flex gap-1 items-center text-nowrap'>
-                <span>Repeat every</span>
+                <span>{this.translate('Repeat every')}</span>
                 <input
                   type='number'
                   value={recurrence.periodEvery}
@@ -184,15 +184,15 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,Fo
                     this.updateRecord(newR);
                   }}
                 >
-                  <option value=''>does not repeat</option>
-                  <option value='day'>day</option>
-                  <option value='week'>week</option>
-                  <option value='month'>month</option>
-                  <option value='year'>year</option>
+                  <option value=''>{this.translate('does not repeat')}</option>
+                  <option value='day'>{this.translate('day')}</option>
+                  <option value='week'>{this.translate('week')}</option>
+                  <option value='month'>{this.translate('month')}</option>
+                  <option value='year'>{this.translate('year')}</option>
                 </select>
               </div>
               <div className='flex gap-1 items-center text-nowrap'>
-                <span>End after</span>
+                <span>{this.translate('End after')}</span>
                 <input
                   type='number'
                   value={recurrence.periodCount}

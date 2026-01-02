@@ -40,7 +40,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
   renderTitle(): JSX.Element {
     let title = ((this.state.record.first_name ?? '') + ' ' + (this.state.record.middle_name ?? '') + ' ' + (this.state.record.last_name ?? '')).trim();
     return <>
-      <small>User</small>
+      <small>{this.translate('User')}</small>
       <h2>{title == '' ? '-' : title}</h2>
     </>;
   }
@@ -66,7 +66,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
             <br/>
             <a href={globalThis.main.config.projectUrl + '/cloud'} className="btn btn-primary">
               <span className="icon"><i className="fas fa-medal"></i></span>
-              <span className="text">Activate Premium account</span>
+              <span className="text">{this.translate('Activate Premium account')}</span>
             </a>
           </div>
         : <>

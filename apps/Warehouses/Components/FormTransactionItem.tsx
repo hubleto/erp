@@ -39,7 +39,7 @@ export default class FormTransactionItem<P, S> extends HubletoForm<FormTransacti
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Transaction item</small>
+      <small>{this.translate('Transaction item')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

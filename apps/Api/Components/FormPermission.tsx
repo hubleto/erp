@@ -26,7 +26,7 @@ export default class FormPermission<P, S> extends HubletoForm<FormPermissionProp
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Permission</small>
+      <small>{this.translate('Permission')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

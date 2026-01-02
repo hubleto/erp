@@ -213,20 +213,20 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               {this.state.id <= 0 ? null : <div>
                 {this.inputWrapper('description')}
                 <div className='card flex-2'>
-                  <div className='card-header'>Items</div>
+                  <div className='card-header'>{this.translate('Items')}</div>
                   <div className='card-body'>
                     <table className='table-default dense not-striped'>
                       <thead>
                         <tr>
                           <td rowSpan={3} className='align-top'>#</td>
-                          <th colSpan={3} style={{width: '50%'}}>Order</th>
-                          <th colSpan={4}>Order item</th>
+                          <th colSpan={3} style={{width: '50%'}}>{this.translate('Order')}</th>
+                          <th colSpan={4}>{this.translate('Order item')}</th>
                           <td rowSpan={3}>&nbsp;</td>
                         </tr>
                         <tr>
-                          <th colSpan={4}>Item</th>
-                          <th>Unit price</th>
-                          <th>Amount</th>
+                          <th colSpan={4}>{this.translate('Item')}</th>
+                          <th>{this.translate('Unit price')}</th>
+                          <th>{this.translate('Amount')}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -402,7 +402,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                         }}
                       >
                         <span className='icon'><i className='fas fa-plus'></i></span>
-                        <span className='text'>Add new item</span>
+                        <span className='text'>{this.translate('Add new item')}</span>
                       </button>
                       <button
                         className='btn btn-add-outline mt-2'
@@ -411,7 +411,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                         }}
                       >
                         <span className='icon'><i className='fas fa-link'></i></span>
-                        <span className='text'>Link prepared item</span>
+                        <span className='text'>{this.translate('Link prepared item')}</span>
                       </button>
                     </div>
                   </div>
@@ -426,7 +426,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               type='centered'
               showHeader={true}
               title={<>
-                <h2>Link prepared item</h2>
+                <h2>{this.translate('Link prepared item')}</h2>
               </>}
               onClose={(modal: ModalSimple) => {
                 this.setState({linkPreparedItem: false});
@@ -495,7 +495,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   }}
                 >
                   <span className='icon'><i className='fas fa-download'></i></span>
-                  <span className='text'>Export to PDF</span>
+                  <span className='text'>{this.translate('Export to PDF')}</span>
                 </button>
                 <button
                   className='btn btn-transparent mb-4'
@@ -511,7 +511,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   }}
                 >
                   <span className='icon'><i className='fas fa-print'></i></span>
-                  <span className='text'>Print</span>
+                  <span className='text'>{this.translate('Print')}</span>
                 </button>
               </div>
             </div>
@@ -529,7 +529,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   onClick={() => {
                     this.showPreviewVars();
                   }}
-                >Show variables which can be used in template</a>
+                >{this.translate('Show variables which can be used in template')}</a>
               </div>
             </div>
           </div>

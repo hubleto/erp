@@ -128,7 +128,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
     }
 
     return <>
-      <small>Lead</small>
+      <small>{this.translate('Lead')}</small>
       <h2>{values && values.length > 0 ? values.join(', ') : '-'}</h2>
     </>;
   }

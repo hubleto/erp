@@ -68,8 +68,8 @@ export default class TableRecipients extends HubletoTable<TableRecipientsProps, 
       const isOptedOut = status[0] == 'opted-out';
       const isInvalid = status[1] == 'invalid';
       return <>
-        {isOptedOut ? <div className='badge badge-danger'>Opted out</div> : null}
-        {isInvalid ? <div className='badge'>Invalid</div> : null}
+        {isOptedOut ? <div className='badge badge-danger'>{this.translate('Opted out')}</div> : null}
+        {isInvalid ? <div className='badge'>{this.translate('Invalid')}</div> : null}
       </>;
     } else {
       return super.renderCell(columnName, column, data, options);

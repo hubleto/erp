@@ -12,7 +12,8 @@
         "Slug": "URL cesta",
         "Color": "Farba",
         "Is default": "Východzí",
-        "Add dashboard": "Pridať dashboard"
+        "Add dashboard": "Pridať dashboard",
+        "By turning this on you will change the dashboard shown on the Homepage": ""
     },
     "Models\\Panel": {
         "Dashboard": "Dashboard",
@@ -21,10 +22,12 @@
         "Configuration": "Konfigurácia",
         "-- Select board to be displayed in panel --": "-- Zvoľte panel --",
         "Width": "Širka",
-        "Order": "Poradie"
+        "Order": "Poradie",
+        "Position": ""
     },
     "Components\\Dashboard": {
-        "Add new panel": "Pridať panel"
+        "Add new panel": "Pridať panel",
+        "Configure this dashboard": ""
     },
     "Controllers\\Dashboards": {
         "Dashboards": "Dashboardy",

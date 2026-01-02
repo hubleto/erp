@@ -162,11 +162,6 @@ class Invoice extends \Hubleto\Erp\Model {
       ]
     ]);
 
-    $description->addFilter('fType', [
-      'title' => $this->translate('Type'),
-      'options' => self::TYPES
-    ]);
-
     $description->addFilter('fIssued', [
       'title' => $this->translate('Issued'),
       'options' => [
@@ -182,6 +177,11 @@ class Invoice extends \Hubleto\Erp\Model {
         'lastYear' => $this->translate('Last year'),
       ],
       'default' => 0,
+    ]);
+
+    $description->addFilter('fType', [
+      'title' => $this->translate('Type'),
+      'options' => self::TYPES
     ]);
 
     $description->addFilter('fInvoiceWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Workflow step'));

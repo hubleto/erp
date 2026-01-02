@@ -64,7 +64,7 @@ export default class Messages extends HubletoTable<MessagesProps, MessagesState>
             <div>
               <div>
                 {message.id_from == globalThis.main.idUser || !message.FROM?.nick
-                  ? <span className="badge badge-blue">you</span>
+                  ? <span className="badge badge-blue">{this.translate('you')}</span>
                   : <span className="badge">{message.FROM?.nick}</span>
                 }
                 <small className="ml-2">{message.sent}</small><br/>

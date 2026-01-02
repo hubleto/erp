@@ -10,7 +10,9 @@
         "Email client": "Emailový klient",
         "Active Mail": "",
         "Templates": "",
-        "Accounts": ""
+        "Accounts": "",
+        "Scheduled to send": "",
+        "Sent from Hubleto": ""
     },
     "Models\\Mail": {
         "Mail Id": "ID správy",

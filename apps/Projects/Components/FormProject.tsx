@@ -74,7 +74,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Project</small>
+      <small>{this.translate('Project')}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>
     </>;
   }
@@ -132,7 +132,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                       this.setState({selectParentOrder: true});
                     }}
                   >
-                    <span className='text'>Select parent order</span>
+                    <span className='text'>{this.translate('Select parent order')}</span>
                   </button>
                 </>}
               </FormInput>
@@ -233,7 +233,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                   </tbody>
                   <tfoot>
                     <tr>
-                      <td className='bg-primary text-white p-2'>Total</td>
+                      <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
                       <td className='bg-primary text-white p-2'>{totalWorkedHours} hours</td>
                       <td className='bg-primary text-white p-2'>{globalThis.main.numberFormat(totalCosts, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
                     </tr>
@@ -243,7 +243,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
             </div>
 
             <div className='card'>
-              <div className='card-header'>Chargeable hours by month</div>
+              <div className='card-header'>{this.translate('Chargeable hours by month')}</div>
               <div className='card-body'>
                 <table className='table-default dense'>
                   <tbody>

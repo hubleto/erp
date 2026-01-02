@@ -23,7 +23,7 @@ export default class FormAgenda<P, S> extends HubletoForm<FormAgendaProps, FormA
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Agenda</small>
+      <small>{this.translate('Agenda')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

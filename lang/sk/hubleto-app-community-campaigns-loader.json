@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Campaigns": "Kampane",
-        "Management of marketing campaigns": "Správa marketingových kampaní"
+        "Management of marketing campaigns": "Správa marketingových kampaní",
+        "Recipients": "",
+        "Recipient statuses": ""
     },
     "Models\\Campaign": {
         "Name": "Meno",
@@ -24,9 +26,13 @@
         "Approved": "Schválená",
         "Closed": "Uzavretá",
         "Add Campaign": "Pridať kampaň",
-        "Open \/ Closed": "Otvorená / Zavretá",
+        "Open \/ Closed": "Otvorená \/ Zavretá",
         "Open": "Otvorená",
-        "All": "Všetky"
+        "All": "Všetky",
+        "Reply to": "",
+        "Owner": "",
+        "Lanuched by": "",
+        "Launched": ""
     },
     "Models\\Recipient": {
         "Campaign": "Kampaň",
@@ -55,5 +61,23 @@
         "Recipient": "Príjemca",
         "Url": "Url",
         "Clicked": "Kliknuté"
+    },
+    "Models\\CampaignActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Campaign": ""
     }
 }

@@ -46,7 +46,7 @@ export default class FormProduct<P, S> extends HubletoForm<FormProductProps,Form
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Product</small>
+      <small>{this.translate('Product')}</small>
       <h2>{this.state.record.ean ?? '-'} {this.state.record.name ?? '-'}</h2>
     </>;
   }

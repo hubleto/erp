@@ -74,13 +74,13 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
             <div className='flex-1'>
               {this.inputWrapper('notes')}
               <div className='bg-slate-50 p-2'>
-                <b>Payment summary</b><br/>
+                <b>{this.translate('Payment summary')}</b><br/>
                 <table className='table-default dense w-full'>
                   <thead>
                     <tr>
                       <th></th>
-                      <th>Without discount</th>
-                      <th>With discount</th>
+                      <th>{this.translate('Without discount')}</th>
+                      <th>{this.translate('With discount')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -102,7 +102,7 @@ export default class FormPayment extends HubletoForm<FormPaymentProps, FormPayme
                       </td>
                     </tr>
                     <tr>
-                      <td>Excluding VAT</td>
+                      <td>{this.translate('Excluding VAT')}</td>
                       <td className='text-nowrap'>{globalThis.main.currencyFormat(R.unit_price * R.amount, 4)}</td>
                       <td className='text-nowrap'>{globalThis.main.currencyFormat(R.unit_price * R.amount * (1 - R.discount / 100), 4)}</td>
                     </tr>

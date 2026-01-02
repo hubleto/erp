@@ -1,7 +1,11 @@
 {
     "manifest": {
         "Invoices": "Faktúry",
-        "Invoincing": "Fakturácia"
+        "Invoincing": "Fakturácia",
+        "Prepared items": "",
+        "Payments": "",
+        "Payment methods": "",
+        "Profiles": ""
     },
     "Models\\Invoice": {
         "Profile": "Profil",

@@ -80,9 +80,9 @@ export default class FormTransaction<P, S> extends HubletoForm<FormTransactionPr
             <table className='table-default dense mt-2'>
               <thead>
                 <tr>
-                  <th>Product</th>
+                  <th>{this.translate('Product')}</th>
                   <th>Qty.</th>
-                  <th>Purchase price</th>
+                  <th>{this.translate('Purchase price')}</th>
                 </tr>
               </thead>
               <tbody>

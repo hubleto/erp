@@ -45,7 +45,7 @@ export default class FormProjectTopMenu extends TranslatedComponent<P, S> {
             type='centered'
             showHeader={true}
             title={<>
-              <h2>Tasks</h2>
+              <h2>{this.translate('Tasks')}</h2>
               <small>Project: {R.title ? R.title : '-'}</small>
             </>}
             onClose={(modal: ModalSimple) => { this.setState({showTasks: false}); }}

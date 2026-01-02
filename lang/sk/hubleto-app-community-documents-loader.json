@@ -4,7 +4,9 @@
         "Free document management.": "Bezplatný manažment dokumentov.",
         "Browse": "Prehliadať",
         "List": "Zoznam",
-        "Templates": "Šablóny"
+        "Templates": "Šablóny",
+        "Show as list": "",
+        "Manage folders": ""
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",
@@ -35,7 +37,8 @@
     "Models\\Template": {
         "Name": "Názov",
         "Content": "Obsah",
-        "Notes": "Poznámky"
+        "Notes": "Poznámky",
+        "Used For": ""
     },
     "Controllers\\Browse": {
         "Documents": "Dokumenty"

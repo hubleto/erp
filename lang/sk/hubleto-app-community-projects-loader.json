@@ -2,7 +2,8 @@
     "manifest": {
         "Projects": "Projekty",
         "Project management": "Projektový manažment",
-        "Phases": "Fázy"
+        "Phases": "Fázy",
+        "Monthly summary": ""
     },
     "root": {
         "Projects": "Projekty",
@@ -29,7 +30,8 @@
         "Created": "Vytvorený",
         "Open \/ Closed": "Otvorené \/ Zatvorené",
         "Open": "Otvorené",
-        "All": "Všetky"
+        "All": "Všetky",
+        "Average hourly costs": ""
     },
     "Models\\Phase": {
         "Name": "Názov",

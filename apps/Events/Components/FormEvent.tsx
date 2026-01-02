@@ -25,7 +25,7 @@ export default class FormEvent<P, S> extends HubletoForm<FormEventProps, FormEve
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Event</small>
+      <small>{this.translate('Event')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

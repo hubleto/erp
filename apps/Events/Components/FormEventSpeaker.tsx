@@ -23,7 +23,7 @@ export default class FormEventSpeaker<P, S> extends HubletoForm<FormEventSpeaker
 
   renderTitle(): JSX.Element {
     return <>
-      <small>EventSpeaker</small>
+      <small>{this.translate('EventSpeaker')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

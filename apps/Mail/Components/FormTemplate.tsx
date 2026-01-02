@@ -34,7 +34,7 @@ export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,Fo
   renderTitle(): null|JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
-      <small>Template</small>
+      <small>{this.translate('Template')}</small>
     </>;
   }
 

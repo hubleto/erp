@@ -74,7 +74,7 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
           className='btn btn-success btn-small'
         >
           <span className='icon'><i className='fas fa-check'></i></span>
-          <span className='text'>Prepared for invoice</span>
+          <span className='text'>{this.translate('Prepared for invoice')}</span>
         </button>;
       } else {
         return <button
@@ -116,7 +116,7 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
           }}
         >
           <span className='icon'><i className='fas fa-euro-sign'></i></span>
-          <span className='text'>Prepare for invoice</span>
+          <span className='text'>{this.translate('Prepare for invoice')}</span>
         </button>;
       }
     } else {

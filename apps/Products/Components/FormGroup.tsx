@@ -31,7 +31,7 @@ export default class FormGroup<P, S> extends HubletoForm<FormGroupProps,FormGrou
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Group</small>
+      <small>{this.translate('Group')}</small>
       <h2>{this.state.record.title ?? '-'}</h2>
     </>;
   }

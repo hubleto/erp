@@ -36,7 +36,7 @@ export default class FormActivity<P, S> extends HubletoForm<FormActivityProps, F
   renderTitle(): JSX.Element {
     return <>
       <small></small>
-      <h2>Activity</h2>
+      <h2>{this.translate('Activity')}</h2>
     </>;
   }
 

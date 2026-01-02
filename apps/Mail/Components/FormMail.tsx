@@ -30,7 +30,7 @@ export default class FormMail<P, S> extends HubletoForm<FormMailProps,FormMailSt
   renderTitle(): null|JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
-      <small>Mail</small>
+      <small>{this.translate('Mail')}</small>
     </>;
   }
 

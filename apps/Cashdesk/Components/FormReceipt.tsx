@@ -81,7 +81,7 @@ export default class FormReceipt<P, S> extends HubletoForm<FormReceiptProps, For
             <table className='table-default dense mt-2'>
               <thead>
                 <tr>
-                  <th>Product</th>
+                  <th>{this.translate('Product')}</th>
                   <th>Qty.</th>
                   <th>Unit price incl. VAT (€)</th>
                   <th>VAT (%)</th>

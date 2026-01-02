@@ -1,18 +1,26 @@
 {
     "manifest": {
         "Notifications": "Notifikácie",
-        "Internal team notifications": ""
+        "Internal team notifications": "Tímové notifikácie"
     },
     "Models\\Notification": {
-        "Priority": "",
-        "Category": "",
-        "From": "",
-        "To": "",
-        "Subject": "",
-        "Body": "",
-        "Color": "",
-        "Tags": "",
-        "Sent": "",
-        "Read": ""
+        "Priority": "Priorita",
+        "Category": "Kategória",
+        "From": "Od",
+        "To": "Príjemca",
+        "Subject": "Predmet",
+        "Body": "Správa",
+        "Color": "Farba",
+        "Tags": "Značky",
+        "Sent": "Odoslané",
+        "Read": "Prečítané",
+        "URL": "URL"
+    },
+    "Controllers\\Notifications": {
+        "Notifications": "Notifikácie"
+    },
+    "Components\\TableNotifications": {
+        "Mark as unread": "Označiť ako neprečítané",
+        "Mark as read": "Označiť ako prečítané"
     }
 }

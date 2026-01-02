@@ -47,7 +47,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Workflow</small>
+      <small>{this.translate('Workflow')}</small>
       <h2>{this.state.record.name ?? '-'}</h2>
     </>;
   }
@@ -62,7 +62,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
 
     return <div className="flex gap-2" >
       <div>
-        <div className="card-header">Workflow</div>
+        <div className="card-header">{this.translate('Workflow')}</div>
         <div className="card-body">
           {this.inputWrapper("name")}
           {this.inputWrapper("order")}
@@ -72,7 +72,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
       </div>
 
       <div>
-        <div className="card-header">Steps</div>
+        <div className="card-header">{this.translate('Steps')}</div>
         <div className="card-body">
 
           <a
@@ -89,7 +89,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
             }}
           >
             <span className="icon"><i className="fas fa-add"></i></span>
-            <span className="text">Add step</span>
+            <span className="text">{this.translate('Add step')}</span>
           </a>
 
           <TableWorkflowSteps

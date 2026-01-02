@@ -263,7 +263,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                             this.setState({selectParentDeal: true});
                           }}
                         >
-                          <span className='text'>Select parent deal</span>
+                          <span className='text'>{this.translate('Select parent deal')}</span>
                         </button>
                       </>}
                     </FormInput>
@@ -340,7 +340,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                 }}
               >
                 <span className='icon'><i className='fas fa-print'></i></span>
-                <span className='text'>Export to PDF</span>
+                <span className='text'>{this.translate('Export to PDF')}</span>
               </button>
               {this.inputWrapper('pdf', {readonly: true})}
             </div>
@@ -355,7 +355,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
               onClick={() => {
                 this.showPreviewVars();
               }}
-            >Show variables which can be used in template</a>
+            >{this.translate('Show variables which can be used in template')}</a>
           </div>
         </div>;
       break;

@@ -24,7 +24,7 @@ export default class FormTeam<P, S> extends HubletoForm<FormTeamProps, FormTeamS
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Team</small>
+      <small>{this.translate('Team')}</small>
       <h2>{this.state.record.name ?? '-'}</h2>
     </>;
   }

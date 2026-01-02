@@ -23,7 +23,7 @@ export default class FormAttendee<P, S> extends HubletoForm<FormAttendeeProps, F
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Attendee</small>
+      <small>{this.translate('Attendee')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

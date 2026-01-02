@@ -239,7 +239,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                   this.setState({selectParentLead: true});
                 }}
               >
-                <span className='text'>Select parent lead</span>
+                <span className='text'>{this.translate('Select parent lead')}</span>
               </button>
             </>}
           </FormInput>

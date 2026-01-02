@@ -2,7 +2,10 @@
     "manifest": {
         "Api": "API",
         "Hubleto Api Key management": "Správa API kľúčov",
-        "API keys": "API kľúče"
+        "API keys": "API kľúče",
+        "Discussions": "",
+        "Members": "",
+        "Messages": ""
     },
     "Models\\Key": {
         "Key": "Kľúč",

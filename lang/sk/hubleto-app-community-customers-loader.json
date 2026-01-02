@@ -27,7 +27,8 @@
         "Manager": "Manažér",
         "Tags": "Značky",
         "Archive": "Archív",
-        "Archived": "Archivovaný"
+        "Archived": "Archivovaný",
+        "Identifier": ""
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -49,7 +50,13 @@
         "Start time": "Začiatok",
         "End date": "Dátum",
         "End time": "Čas",
-        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)"
+        "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",

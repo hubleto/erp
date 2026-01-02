@@ -61,7 +61,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Task</small>
+      <small>{this.translate('Task')}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>
     </>;
   }
@@ -150,7 +150,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                 <div className='card card-info'>
                   <div className='card-header'>
                     <div className="flex w-full justify-between">
-                      <div>Todo</div>
+                      <div>{this.translate('Todo')}</div>
                       <div className="text-sm">{this.translate("Press ENTER to add new Todo")}</div>
                     </div>
                   </div>
@@ -254,7 +254,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                       }}
                     >
                       <span className='icon'><i className='fas fa-plus'></i></span>
-                      <span className='text'>Add todo</span>
+                      <span className='text'>{this.translate('Add todo')}</span>
                     </button> */}
                   </div>
                 </div>

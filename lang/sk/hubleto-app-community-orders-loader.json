@@ -3,7 +3,11 @@
         "Orders": "Objednávky",
         "Free order managment.": "Správa objednávok zdarma.",
         "Order states": "Stavy objednávok",
-        "Order warnings": "Upozornenia na objednávky"
+        "Order warnings": "Upozornenia na objednávky",
+        "All orders": "",
+        "Purchase orders": "",
+        "Sales orders": "",
+        "Payments": ""
     },
     "root": {
         "Order states": "Stavy objednávok"
@@ -32,9 +36,28 @@
         "Price excl. VAT": "Suma bez DPH",
         "Price incl. VAT": "Suma s DPH",
         "Closed": "Uzavreté",
-        "Open \/ Closed": "Otvorené / Uzavreté",
+        "Open \/ Closed": "Otvorené \/ Uzavreté",
         "Open": "Otvorené",
-        "All": "Všetky"
+        "All": "Všetky",
+        "Purchase \/ Sales": "",
+        "Purchase order": "",
+        "Sales order": "",
+        "External identifier": "",
+        "Supplier": "",
+        "Payment period": "",
+        "One-time payment": "",
+        "Monthly": "",
+        "Bi-Monthly": "",
+        "Quarterly": "",
+        "Each 6 months": "",
+        "Yearly": "",
+        "Each 2 years": "",
+        "Prepaid working hours": "",
+        "Prepaid working hours - period": "",
+        "No working hours recurrence": "",
+        "Shared folder (online document storage)": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "PDF": ""
     },
     "Models\\State": {
         "Title": "Názov",
@@ -52,7 +75,8 @@
         "Add item": "Pridať produkt",
         "Sales price": "Predajná cena",
         "Price excl. VAT": "Suma bez DPH",
-        "Price incl. VAT": "Suma s DPH"
+        "Price incl. VAT": "Suma s DPH",
+        "Position": ""
     },
     "Models\\History": {
         "Order": "Objednávka",
@@ -90,7 +114,13 @@
         "Completed": "Ukončená",
         "Meeting minutes (link)": "Zápis zo stretnutia (odkaz na dokument)",
         "Created by": "Vytvoril",
-        "Order": "Objednávka"
+        "Order": "Objednávka",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\OrderDeal": {
         "Order": "Objednávka",

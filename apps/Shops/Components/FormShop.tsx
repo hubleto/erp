@@ -49,7 +49,7 @@ export default class FormShop<P, S> extends HubletoForm<FormShopProps, FormShopS
 
   renderTitle(): JSX.Element {
     return <>
-      <small>Shop</small>
+      <small>{this.translate('Shop')}</small>
       <h2>{this.state.record.address ?? '-'}</h2>
     </>;
   }

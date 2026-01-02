@@ -116,7 +116,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "date_payment" && !data['date_payment']) {
-      return <div className='badge badge-danger'>Not paid</div>;
+      return <div className='badge badge-danger'>{this.translate('Not paid')}</div>;
     } else {
       return super.renderCell(columnName, column, data, options);
     }

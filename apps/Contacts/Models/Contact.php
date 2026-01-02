@@ -102,7 +102,7 @@ class Contact extends \Hubleto\Erp\Model
 
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['TAGS'];
+    return ['TAGS', 'VALUES'];
   }
 
   public function getMaxReadLevelForLoadTableData(): int

@@ -12,8 +12,13 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Faktúra {{ PROFILE.COMPANY.name }} {{ number }}</title>
   <style>
-    * { font-family: DejaVu Sans !important; line-height: 0.95em; font-size: 10pt; }
+    {% if PDF_EXPORT %}
+      * { font-family: Dejavu Sans !important; line-height: 0.95em; font-size: 10pt; }
+    {% else %}
+      * { font-family: Verdana !important; font-size: 10pt; }
+    {% endif %} 
     .fbigger { font-size: 12pt; }
     table { width: 100%; border-collapse: collapse; }
     table td { vertical-align: top; }
@@ -45,15 +50,16 @@
     <!-- DODAVATEL -->
     <div class="dcolumn">
       <div class="content">
-        <div style="float:left; width:25%;">
-          <img src="{{ config.uploadUrl }}/{{ PROFILE.COMPANY.logo }}" style="max-width:80px;max-height:80px;margin:5px;">
-          <!-- <div></div> -->
-          <!-- Dusan 21.3.2018: mpdf6 pri pouziti s php7 ma nejaky bug a preto musi byt tento div tu -->
-        </div>
-        <div style="float:left; width:50%;font-size:10pt;">
-          <div style="padding-left:1em;">{{ PROFILE.headline }}</div>
-        </div>
-        <div style="clear:both;"></div>
+        <table>
+          <tr>
+            <td>
+              <img src="{{ config.uploadUrl }}/{{ PROFILE.COMPANY.logo }}" style="max-width:80px;max-height:80px;">
+            </td>
+            <td style="width:95%;padding-left:1em">
+              {{ PROFILE.headline }}
+            </td>
+          </tr>
+        </table>
         <br/>
         <div>
           <b>DODÁVATEĽ</b><br/>

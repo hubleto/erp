@@ -472,48 +472,65 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               })}
             </div>
           </div>
-          <div className='flex-3 card'>
-            <div className='card-header'>
-              <div className='w-full flex align-center justify-end gap-2'>
-                <div>
-                  {this.input('pdf', {readonly: true})}
-                </div>
-                <div>
-                  <button
-                    className='btn btn-transparent mb-4'
-                    onClick={() => {
-                      request.post(
-                        'invoices/api/generate-pdf',
-                        {idInvoice: this.state.record.id},
-                        {},
-                        (result: any) => {
-                          // if (result.idDocument) {
-                          //   window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
-                          // }
-                          this.reload();
-                        }
-                      );
-                    }}
-                  >
-                    <span className='icon'><i className='fas fa-print'></i></span>
-                    <span className='text'>Export to PDF</span>
-                  </button>
-                </div>
+          <div className='flex-3 flex flex-col'>
+            <div className='flex gap-2 align-center justify-end'>
+              <div>
+                {this.input('pdf', {readonly: true})}
+              </div>
+              <div className='flex gap-2'>
+                <button
+                  className='btn btn-transparent mb-4'
+                  onClick={() => {
+                    request.post(
+                      'invoices/api/generate-pdf',
+                      {idInvoice: this.state.record.id},
+                      {},
+                      (result: any) => {
+                        // if (result.idDocument) {
+                        //   window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+                        // }
+                        this.reload();
+                      }
+                    );
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-download'></i></span>
+                  <span className='text'>Export to PDF</span>
+                </button>
+                <button
+                  className='btn btn-transparent mb-4'
+                  onClick={() => {
+                    console.log(this.props.uid + '_invoice_preview');
+                    const iframe = window.frames[this.props.uid + '_invoice_preview'];
+                    const documentTitle = document.title;
+                    document.title = 'Invoice ' + R.PROFILE.COMPANY.name + ' ' + R.number;
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+
+                    document.title = documentTitle;
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-print'></i></span>
+                  <span className='text'>Print</span>
+                </button>
               </div>
             </div>
-            <div className="card-body">
-              <HtmlFrame
-                ref={this.refPreview}
-                className='w-full h-full'
-              />
-            </div>
-            <div className='card-footer'>
-              <a
-                href='#'
-                onClick={() => {
-                  this.showPreviewVars();
-                }}
-              >Show variables which can be used in template</a>
+            <div className='w-full h-full card mt-2'>
+              <div className="card-body">
+                <HtmlFrame
+                  ref={this.refPreview}
+                  className='w-full h-full'
+                  iframeId={this.props.uid + '_invoice_preview'}
+                />
+              </div>
+              <div className='card-footer'>
+                <a
+                  href='#'
+                  onClick={() => {
+                    this.showPreviewVars();
+                  }}
+                >Show variables which can be used in template</a>
+              </div>
             </div>
           </div>
         </div>;

@@ -71,6 +71,7 @@ class Generator extends \Hubleto\Framework\Core
   {
     $pdfGeneratorEndpoint = $this->config()->getAsString('pdfGeneratorEndpoint');
 
+    $vars['PDF_EXPORT'] = true;
     $htmlString = $this->renderTemplate($idTemplate, $vars);
     $pdfString = '';
 

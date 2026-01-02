@@ -1,7 +1,10 @@
 {
     "manifest": {
         "Contacts": "",
-        "Default customer management and addressbook.": ""
+        "Default customer management and addressbook.": "",
+        "Contact Categories": "",
+        "Contact Tags": "",
+        "Import contacts": ""
     },
     "root": {
         "Contact Categories": "",
@@ -18,7 +21,12 @@
         "Primary Contact": "",
         "Notes": "",
         "Date Created": "",
-        "Active": ""
+        "Active": "",
+        "Valid": "",
+        "Phone Numbers": "",
+        "Emails": "",
+        "Tags": "",
+        "Add contact": ""
     },
     "Models\\Value": {
         "Contact": "",
@@ -28,7 +36,9 @@
         "Number": "",
         "URL": "",
         "Other": "",
-        "Value": ""
+        "Value": "",
+        "Contacts": "",
+        "Add Customer": ""
     },
     "Models\\ContactTag": {
         "Contact": "",
@@ -40,5 +50,8 @@
     "Models\\Tag": {
         "Name": "",
         "Color": ""
+    },
+    "Controllers\\Contacts": {
+        "Contacts": ""
     }
 }

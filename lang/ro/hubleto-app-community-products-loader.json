@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Products": "",
-        "Free product portfolio managment.": ""
+        "Free product portfolio managment.": "",
+        "Categories": "",
+        "Groups": ""
     },
     "root": {
         "Products": "",
@@ -28,6 +30,29 @@
         "Set price after reweight?": "",
         "Needs reordering?": "",
         "Storage rules": "",
-        "Table": ""
+        "Table": "",
+        "EAN": "",
+        "Name": "",
+        "Group": "",
+        "Category": "",
+        "Invoicing policy": "",
+        "Image 1": "",
+        "Image 2": "",
+        "Image 3": "",
+        "Image 4": "",
+        "Image 5": "",
+        "Internal notes": "",
+        "Sales price": "",
+        "VAT": "",
+        "Data ": "",
+        "Packaging unit": "",
+        "Amount of items in package": "",
+        "Package length": "",
+        "Package width": "",
+        "Package height": "",
+        "Package volume": "",
+        "Package mass": "",
+        "Package discount": "",
+        "Package description": ""
     }
 }

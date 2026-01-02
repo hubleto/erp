@@ -3,7 +3,11 @@
         "Orders": "Objednávky",
         "Free order managment.": "Správa objednávek zdarma.",
         "Order states": "Stavy objednávek",
-        "Order warnings": "Upozornění objednávek"
+        "Order warnings": "Upozornění objednávek",
+        "All orders": "",
+        "Purchase orders": "",
+        "Sales orders": "",
+        "Payments": ""
     },
     "root": {
         "Order states": "Stavy objednávek"
@@ -34,7 +38,26 @@
         "Price excl. VAT": "Cena bez DPH",
         "Price incl. VAT": "Cena s DPH",
         "Template": "Šablona",
-        "Closed": "Uzavřeno"
+        "Closed": "Uzavřeno",
+        "Purchase \/ Sales": "",
+        "Purchase order": "",
+        "Sales order": "",
+        "External identifier": "",
+        "Supplier": "",
+        "Payment period": "",
+        "One-time payment": "",
+        "Monthly": "",
+        "Bi-Monthly": "",
+        "Quarterly": "",
+        "Each 6 months": "",
+        "Yearly": "",
+        "Each 2 years": "",
+        "Prepaid working hours": "",
+        "Prepaid working hours - period": "",
+        "No working hours recurrence": "",
+        "Shared folder (online document storage)": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "PDF": ""
     },
     "Models\\Item": {
         "Order": "Objednávka",
@@ -47,7 +70,8 @@
         "Add item": "Přidat produkt",
         "Sales price": "Prodejní cena",
         "Price excl. VAT": "Cena bez DPH",
-        "Price incl. VAT": "Cena s DPH"
+        "Price incl. VAT": "Cena s DPH",
+        "Position": ""
     },
     "Models\\State": {
         "Title": "Název",
@@ -75,7 +99,13 @@
         "Completed": "Dokončeno",
         "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
         "Created by": "Vytvořeno",
-        "Order": "Objednávka"
+        "Order": "Objednávka",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\OrderDocument": {
         "Order": "Objednávka",

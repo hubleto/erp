@@ -4,5 +4,32 @@
     },
     "loader": {
         "Calendar": "Calendrier"
+    },
+    "manifest": {
+        "Calendar": "",
+        "Free calendar app.": "",
+        "Reminders": "",
+        "Share": ""
+    },
+    "Models\\Activity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": ""
+    },
+    "Controllers\\Boards\\Reminders": {
+        "reminders later": "",
+        "Later": ""
     }
 }

@@ -5,5 +5,26 @@
     },
     "controllers.home": {
         "Sales": "Ventes"
+    },
+    "manifest": {
+        "History": "",
+        "Workflow": "",
+        "Free sales workflow management.": "",
+        "Workflows": ""
+    },
+    "Models\\Workflow": {
+        "Name": "",
+        "Order": "",
+        "Description": "",
+        "Group": ""
+    },
+    "Models\\WorkflowStep": {
+        "Workflow": "",
+        "Name": "",
+        "Order": "",
+        "Color": "",
+        "Tag": "",
+        "Probability": "",
+        "Set result of a deal to": ""
     }
 }

@@ -14,7 +14,12 @@
     },
     "manifest": {
         "Leads": "Wskazówki",
-        "Management of leads, cold contacts. Convert leads to deals.": "Zarządzanie potencjalnymi klientami, zimnymi kontaktami. Konwertuj prowadzi do ofert."
+        "Management of leads, cold contacts. Convert leads to deals.": "Zarządzanie potencjalnymi klientami, zimnymi kontaktami. Konwertuj prowadzi do ofert.",
+        "Lead Levels": "",
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
     },
     "root": {
         "Lead Tags": "Tagi ołowiowe",
@@ -34,7 +39,13 @@
         "Created by": "Stworzone przez",
         "Lead": "Ołów",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Minuty spotkań (link)"
+        "Meeting minutes (link)": "Minuty spotkań (link)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Lead": {
         "Lead Identifier": "Identyfikator ołowiu",
@@ -53,7 +64,18 @@
         "Source channel": "Kanał źródłowy",
         "Archived": "Zarchiwizowane",
         "Add lead": "Dodaj ołów",
-        "Manager": "Menedżer"
+        "Manager": "Menedżer",
+        "Specific subject (if any)": "",
+        "Email": "",
+        "Phone number": "",
+        "Team": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Closed": "",
+        "Tags": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Utracony rozum"
@@ -86,5 +108,16 @@
     },
     "Controllers\\Leads": {
         "Leads": "Wskazówki"
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "",
+        "Campaign": ""
+    },
+    "Models\\LeadTask": {
+        "Lead": "",
+        "Task": ""
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Open leads without future plan": ""
     }
 }

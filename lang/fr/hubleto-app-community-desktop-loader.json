@@ -1,5 +1,40 @@
 {
     "loader": {
         "Home": "Page d'accueil"
+    },
+    "manifest": {
+        "Desktop": "",
+        "Default Hubleto desktop implementation.": "",
+        "CRM": "",
+        "Marketing": "",
+        "Sales": "",
+        "Retail": "",
+        "Productivity": "",
+        "E-Commerce": "",
+        "Finance": "",
+        "Custom": "",
+        "Maintenance": "",
+        "Help": "",
+        "Addressbook": "",
+        "Calendar": "",
+        "Documents": "",
+        "Communication": "",
+        "Workflow": "",
+        "Helpdesk": "",
+        "Events": "",
+        "Website": "",
+        "Reporting": ""
+    },
+    "Controllers\\Desktop": {
+        "Search app...": "",
+        "Help": "",
+        "Premium": "",
+        "Manage your user account": "",
+        "Manage cloud account": "",
+        "Sign out": ""
+    },
+    "Controllers\\Home": {
+        "Welcome": "",
+        "Edit profile": ""
     }
 }

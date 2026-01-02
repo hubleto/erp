@@ -7,7 +7,9 @@
         "Free document management.": "Kostenlose Dokumentverwaltung.",
         "Browse": "",
         "List": "",
-        "Templates": ""
+        "Templates": "",
+        "Show as list": "",
+        "Manage folders": ""
     },
     "root": {
         "Browse": "Durchsuchen",
@@ -31,7 +33,8 @@
         "Folder name": "Ordner Name"
     },
     "Controllers\\Browse": {
-        "Documents": "Dokumente"
+        "Documents": "Dokumente",
+        "Browse": ""
     },
     "Models\\Template": {
         "Name": "",

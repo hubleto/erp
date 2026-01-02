@@ -11,5 +11,90 @@
         "Sales": "Ventes",
         "Leads": "Clients potentiels",
         "Archive": "Archive"
+    },
+    "manifest": {
+        "Leads": "",
+        "Management of leads, cold contacts. Convert leads to deals.": "",
+        "Lead Levels": "",
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
+    },
+    "Models\\Lead": {
+        "Specific subject (if any)": "",
+        "Customer": "",
+        "Email": "",
+        "Phone number": "",
+        "Contact": "",
+        "Price": "",
+        "Currency": "",
+        "Score": "",
+        "Expected close date": "",
+        "Owner": "",
+        "Manager": "",
+        "Team": "",
+        "Created": "",
+        "Reason for Lost": "",
+        "Notes": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Source channel": "",
+        "Closed": "",
+        "Tags": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": "",
+        "Add lead": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": ""
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "",
+        "Lead": "",
+        "Description": ""
+    },
+    "Models\\LeadTag": {
+        "Lead": "",
+        "Tag": ""
+    },
+    "Models\\LeadActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Lead": "",
+        "Contact": ""
+    },
+    "Models\\LeadDocument": {
+        "Lead": "",
+        "Document": ""
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "",
+        "Campaign": ""
+    },
+    "Models\\LeadTask": {
+        "Lead": "",
+        "Task": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Open leads without future plan": ""
     }
 }

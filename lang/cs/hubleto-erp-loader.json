@@ -23,5 +23,9 @@
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Zůstat přihlášen"
+    },
+    "Model": {
+        "Export to CSV": "",
+        "Import from CSV": ""
     }
 }

@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Campaigns": "Kampaně",
-        "Management of marketing campaigns": "Řízení marketingových kampaní"
+        "Management of marketing campaigns": "Řízení marketingových kampaní",
+        "Recipients": "",
+        "Recipient statuses": ""
     },
     "Controllers\\Campaigns": {
         "Campaigns": "Kampaně"
@@ -25,11 +27,33 @@
         "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Approved": "Schváleno",
-        "Closed": "Uzavřeno"
+        "Closed": "Uzavřeno",
+        "Reply to": "",
+        "Owner": "",
+        "Lanuched by": "",
+        "Launched": ""
     },
     "Components\\FormCampaign": {
         "Leads": "Potencionální obchody",
         "Campaign": "Kampaň",
         "First create the campaign, then you will be prompted to create leads.": "Nejprve vytvořte kampaň a poté budete vyzváni k vytvoření potenciálních obchodu."
+    },
+    "Models\\CampaignActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Campaign": ""
     }
 }

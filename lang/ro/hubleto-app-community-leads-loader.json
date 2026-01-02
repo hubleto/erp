@@ -1,7 +1,12 @@
 {
     "manifest": {
         "Leads": "",
-        "Management of leads, cold contacts. Convert leads to deals.": ""
+        "Management of leads, cold contacts. Convert leads to deals.": "",
+        "Lead Levels": "",
+        "Lead Tags": "",
+        "Lead Lost Reasons": "",
+        "Active leads": "",
+        "Archived leads": ""
     },
     "root": {
         "Lead Tags": "",
@@ -21,7 +26,13 @@
         "Meeting minutes (link)": "",
         "Created by": "",
         "Lead": "",
-        "Contact": ""
+        "Contact": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Lead": {
         "Lead Identifier": "",
@@ -38,7 +49,20 @@
         "Reason for Lost": "",
         "Notes": "",
         "Source channel": "",
-        "Archived": ""
+        "Archived": "",
+        "Specific subject (if any)": "",
+        "Email": "",
+        "Phone number": "",
+        "Manager": "",
+        "Team": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Closed": "",
+        "Tags": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": "",
+        "Add lead": ""
     },
     "Models\\LostReason": {
         "Lost Reason": ""
@@ -68,5 +92,16 @@
     "Models\\Tag": {
         "Name": "",
         "Color": ""
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "",
+        "Campaign": ""
+    },
+    "Models\\LeadTask": {
+        "Lead": "",
+        "Task": ""
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Open leads without future plan": ""
     }
 }

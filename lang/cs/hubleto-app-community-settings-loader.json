@@ -68,7 +68,12 @@
         "Street, line 2": "Ulice, řádek 2",
         "ZIP": "PSČ",
         "City": "Město",
-        "Country": "Země"
+        "Country": "Země",
+        "Registration ID": "",
+        "Business register": "",
+        "Logo": "",
+        "Brand color - primary": "",
+        "Brand color - secondary": ""
     },
     "Models\\ActivityType": {
         "Type": "Typ",

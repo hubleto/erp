@@ -12,7 +12,8 @@
         "Name": "Název",
         "Description": "Popis",
         "Type": "Typ",
-        "Group": "Skupina"
+        "Group": "Skupina",
+        "Order": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Název",

@@ -16,7 +16,8 @@
         "Slug": "Slug",
         "Color": "Barva",
         "Is default": "Je výchozí",
-        "Add dashboard": "Přidat panel"
+        "Add dashboard": "Přidat panel",
+        "By turning this on you will change the dashboard shown on the Homepage": ""
     },
     "Models\\Panel": {
         "Dashboard": "Panel",
@@ -26,7 +27,8 @@
         "-- Select board to be displayed in panel --": "Vyberte tabuli, ktorá se zobrazí v panelu",
         "Add panel": "Přidat tabuli",
         "Width": "Šířka",
-        "Order": "Pořadí"
+        "Order": "Pořadí",
+        "Position": ""
     },
     "Controllers\\Settings": {
         "Dashboards": "Panely",

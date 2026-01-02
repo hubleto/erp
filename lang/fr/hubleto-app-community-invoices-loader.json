@@ -41,5 +41,13 @@
     },
     "formInvoice": {
         "Invoice": "Facture"
+    },
+    "manifest": {
+        "Invoices": "",
+        "Prepared items": "",
+        "Payments": "",
+        "Payment methods": "",
+        "Profiles": "",
+        "Invoincing": ""
     }
 }

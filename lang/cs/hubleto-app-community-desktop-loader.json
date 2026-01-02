@@ -20,10 +20,13 @@
         "Reporting": "Reporty",
         "Maintenance": "Údržba",
         "Help": "Pomoc",
-        "Custom": "Vlastní"
+        "Custom": "Vlastní",
+        "Retail": "",
+        "Productivity": ""
     },
     "Controllers\\Home": {
-        "Welcome": "Vítejte"
+        "Welcome": "Vítejte",
+        "Edit profile": ""
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",

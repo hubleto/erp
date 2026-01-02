@@ -3,7 +3,11 @@
         "Orders": "Bestellungen",
         "Free order managment.": "Kostenloses Bestellmanagement.",
         "Order states": "",
-        "Order warnings": ""
+        "Order warnings": "",
+        "All orders": "",
+        "Purchase orders": "",
+        "Sales orders": "",
+        "Payments": ""
     },
     "root": {
         "Order states": "Bestellstaaten"
@@ -34,7 +38,24 @@
         "Shared folder (online document storage)": "",
         "Link to shared folder (online storage) with related documents": "",
         "Template": "",
-        "Closed": ""
+        "Closed": "",
+        "Purchase \/ Sales": "",
+        "Purchase order": "",
+        "Sales order": "",
+        "External identifier": "",
+        "Supplier": "",
+        "Payment period": "",
+        "One-time payment": "",
+        "Monthly": "",
+        "Bi-Monthly": "",
+        "Quarterly": "",
+        "Each 6 months": "",
+        "Yearly": "",
+        "Each 2 years": "",
+        "Prepaid working hours": "",
+        "Prepaid working hours - period": "",
+        "No working hours recurrence": "",
+        "PDF": ""
     },
     "Models\\State": {
         "Title": "Titel",
@@ -53,7 +74,8 @@
         "Item order": "",
         "Sales price": "",
         "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Price incl. VAT": "",
+        "Position": ""
     },
     "Models\\History": {
         "Order": "Befehl",
@@ -77,7 +99,13 @@
         "Completed": "",
         "Meeting minutes (link)": "",
         "Created by": "",
-        "Order": ""
+        "Order": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\OrderDocument": {
         "Order": "",

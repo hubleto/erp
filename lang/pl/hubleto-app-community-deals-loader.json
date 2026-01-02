@@ -14,7 +14,12 @@
     },
     "manifest": {
         "Deals": "Oferty",
-        "Deal management. From deal to purchase.": "Zarządzanie transakcją. Od umowy do zakupu."
+        "Deal management. From deal to purchase.": "Zarządzanie transakcją. Od umowy do zakupu.",
+        "Deal Tags": "",
+        "Deal Lost Reasons": "",
+        "Deal warnings": "",
+        "Most valuable deals": "",
+        "Deal value by result": ""
     },
     "root": {
         "Deal Tags": "Tagi transakcji",
@@ -48,7 +53,19 @@
         "Business type": "Typ biznesu",
         "Link to shared folder (online storage) with related documents": "Link do folderu udostępnionego (przechowywanie online) z powiązanymi dokumentami",
         "Add Deal": "Dodaj ofertę",
-        "Manager": "Menedżer"
+        "Manager": "Menedżer",
+        "Version": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": "",
+        "Template for quotation": "",
+        "Customer's order number": "",
+        "Closed": "",
+        "Ownership": "",
+        "All": "",
+        "Owned by me": "",
+        "Managed by me": "",
+        "Open \/ Closed": "",
+        "Open": ""
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otwarta umowa"
@@ -65,7 +82,13 @@
         "Created by": "Stworzone przez",
         "Deal": "Umowa",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Minuty spotkań (link)"
+        "Meeting minutes (link)": "Minuty spotkań (link)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Utracony rozum"
@@ -86,7 +109,12 @@
         "Amount": "Kwota",
         "Vat": "Kadź",
         "Discount": "Rabat",
-        "Sum": "Suma"
+        "Sum": "Suma",
+        "Order": "",
+        "Description": "",
+        "Sales Price": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
     },
     "Models\\DealDocument": {
         "Deal": "Umowa",
@@ -97,6 +125,26 @@
         "Color": "Kolor"
     },
     "Controllers\\Boards\\DealWarnings": {
-        "Pending deals without future plan": "Oczekiwane oferty bez przyszłego planu"
+        "Pending deals without future plan": "Oczekiwane oferty bez przyszłego planu",
+        "Open deals without future plan": ""
+    },
+    "Models\\DealLead": {
+        "Deal": "",
+        "Lead": ""
+    },
+    "Models\\DealTask": {
+        "Deal": "",
+        "Task": ""
+    },
+    "Controllers\\Deals": {
+        "Deals": "",
+        "Open deals": "",
+        "Total value": ""
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "",
+        "Pending": "",
+        "Won": "",
+        "Lost": ""
     }
 }

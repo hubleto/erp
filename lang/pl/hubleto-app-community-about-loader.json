@@ -1,6 +1,8 @@
 {
     "manifest": {
         "Help": "Pomoc",
-        "Help and user guide for Hubleto.": "Podręcznik pomocy i użytkownika dla Hubleto."
+        "Help and user guide for Hubleto.": "Podręcznik pomocy i użytkownika dla Hubleto.",
+        "About": "",
+        "About your Hubleto": ""
     }
 }

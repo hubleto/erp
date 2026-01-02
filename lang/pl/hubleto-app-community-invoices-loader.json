@@ -38,5 +38,13 @@
         "Delivery": "Data dostawy",
         "Payment": "Zapłata",
         "Total VAT": "Całkowity podatek VAT"
+    },
+    "manifest": {
+        "Invoices": "",
+        "Prepared items": "",
+        "Payments": "",
+        "Payment methods": "",
+        "Profiles": "",
+        "Invoincing": ""
     }
 }

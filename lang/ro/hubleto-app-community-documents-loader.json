@@ -1,7 +1,11 @@
 {
     "manifest": {
         "Documents": "",
-        "Free document management.": ""
+        "Free document management.": "",
+        "Browse": "",
+        "Show as list": "",
+        "Manage folders": "",
+        "Templates": ""
     },
     "root": {
         "Browse": "",
@@ -13,6 +17,22 @@
         "Document name": "",
         "File": "",
         "File Link": "",
-        "Origin Link": ""
+        "Origin Link": "",
+        "Add Document": ""
+    },
+    "Models\\Template": {
+        "Name": "",
+        "Used For": "",
+        "Content": "",
+        "Notes": ""
+    },
+    "Controllers\\Browse": {
+        "Browse": "",
+        "Documents": ""
+    },
+    "Models\\Folder": {
+        "Uid": "",
+        "Parent folder": "",
+        "Folder name": ""
     }
 }

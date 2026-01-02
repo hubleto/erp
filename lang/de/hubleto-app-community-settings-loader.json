@@ -211,7 +211,9 @@
         "Country": "Land",
         "Logo": "",
         "Brand color - primary": "",
-        "Brand color - secondary": ""
+        "Brand color - secondary": "",
+        "Registration ID": "",
+        "Business register": ""
     },
     "Models\\ActivityType": {
         "Type": "Typ",

@@ -41,7 +41,8 @@
         "Used For": ""
     },
     "Controllers\\Browse": {
-        "Documents": "Dokumenty"
+        "Documents": "Dokumenty",
+        "Browse": ""
     },
     "Components\\Browser": {
         "Add folder": "Pridať priečinok",

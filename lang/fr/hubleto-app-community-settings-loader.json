@@ -109,5 +109,61 @@
     "controllers.users": {
         "Settings": "",
         "Users": ""
+    },
+    "Models\\RolePermission": {
+        "Permission": "",
+        "Role": ""
+    },
+    "manifest": {
+        "Settings": "",
+        "Settings and control panel for your Hubleto.": "",
+        "Users": "",
+        "Roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Activity types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Platform config": "",
+        "Sidebar": "",
+        "Teams": ""
+    },
+    "Models\\Country": {
+        "Country": "",
+        "Code": ""
+    },
+    "Models\\Currency": {
+        "Currency": "",
+        "Code": "",
+        "Symbol": ""
+    },
+    "Models\\Team": {
+        "Team name": "",
+        "Team color": "",
+        "Description": "",
+        "Manager": ""
+    },
+    "Models\\Company": {
+        "Company": "",
+        "Registration ID": "",
+        "Business register": "",
+        "Tax ID": "",
+        "VAT ID": "",
+        "Street, line 1": "",
+        "Street, line 2": "",
+        "ZIP": "",
+        "City": "",
+        "Country": "",
+        "Logo": "",
+        "Brand color - primary": "",
+        "Brand color - secondary": ""
+    },
+    "Models\\ActivityType": {
+        "Type": "",
+        "Color": "",
+        "Show in calendar": "",
+        "Icon": ""
     }
 }

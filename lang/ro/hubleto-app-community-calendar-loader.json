@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Calendar": "",
-        "Free calendar app.": ""
+        "Free calendar app.": "",
+        "Reminders": "",
+        "Share": ""
     },
     "root": {
         "Events for today": ""
@@ -16,12 +18,20 @@
         "All day": "",
         "Completed": "",
         "Meeting minutes (link)": "",
-        "Created by": ""
+        "Created by": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Controllers\\Boards\\Reminders": {
         "All-day": "",
         "Open event details": "",
         "events for tomorrow": "",
-        "events later": ""
+        "events later": "",
+        "reminders later": "",
+        "Later": ""
     }
 }

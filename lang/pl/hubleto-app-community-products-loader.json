@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Products": "Produkty",
-        "Free product portfolio managment.": "Darmowe zarządzanie portfelem produktów."
+        "Free product portfolio managment.": "Darmowe zarządzanie portfelem produktów.",
+        "Categories": "",
+        "Groups": ""
     },
     "root": {
         "Products": "Produkty",
@@ -28,6 +30,29 @@
         "Set price after reweight?": "Ustaw cenę po ponownej wadze?",
         "Needs reordering?": "Wymaga zmiany kolejności?",
         "Storage rules": "Zasady przechowywania",
-        "Table": "Tabela"
+        "Table": "Tabela",
+        "EAN": "",
+        "Name": "",
+        "Group": "",
+        "Category": "",
+        "Invoicing policy": "",
+        "Image 1": "",
+        "Image 2": "",
+        "Image 3": "",
+        "Image 4": "",
+        "Image 5": "",
+        "Internal notes": "",
+        "Sales price": "",
+        "VAT": "",
+        "Data ": "",
+        "Packaging unit": "",
+        "Amount of items in package": "",
+        "Package length": "",
+        "Package width": "",
+        "Package height": "",
+        "Package volume": "",
+        "Package mass": "",
+        "Package discount": "",
+        "Package description": ""
     }
 }

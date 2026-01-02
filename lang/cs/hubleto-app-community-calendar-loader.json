@@ -19,7 +19,13 @@
         "All day": "Celý den",
         "Completed": "Dokončeno",
         "Created by": "Vytvořeno",
-        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)"
+        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Controllers\\Boards\\Reminders": {
         "All-day": "Celý den",

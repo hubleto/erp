@@ -19,7 +19,13 @@
         "Created by": "Vytvořeno",
         "Customer": "Zákazník",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)"
+        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Customer": {
         "Name": "Jméno",
@@ -42,7 +48,9 @@
         "Shared folder (online document storage)": "Sdílená složka (online úložiště)",
         "Tags": "Štítky",
         "Archive": "Archív",
-        "Archived": "Archivováno"
+        "Archived": "Archivováno",
+        "Identifier": "",
+        "Non-active": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",

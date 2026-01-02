@@ -1,9 +1,99 @@
 {
     "manifest": {
         "Orders": "Święcenia",
-        "Free order managment.": "Zarządzanie wolnym zamówieniem."
+        "Free order managment.": "Zarządzanie wolnym zamówieniem.",
+        "All orders": "",
+        "Purchase orders": "",
+        "Sales orders": "",
+        "Payments": "",
+        "Order states": "",
+        "Order warnings": ""
     },
     "root": {
         "Order states": "Zamów stany"
+    },
+    "Models\\OrderActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Order": ""
+    },
+    "Models\\Order": {
+        "Purchase \/ Sales": "",
+        "Purchase order": "",
+        "Sales order": "",
+        "Identifier": "",
+        "External identifier": "",
+        "Title": "",
+        "Customer": "",
+        "Supplier": "",
+        "Owner": "",
+        "Manager": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": "",
+        "Payment period": "",
+        "One-time payment": "",
+        "Monthly": "",
+        "Bi-Monthly": "",
+        "Quarterly": "",
+        "Each 6 months": "",
+        "Yearly": "",
+        "Each 2 years": "",
+        "Prepaid working hours": "",
+        "Prepaid working hours - period": "",
+        "No working hours recurrence": "",
+        "Currency": "",
+        "Order date": "",
+        "Required delivery date": "",
+        "Shipping information": "",
+        "Notes": "",
+        "Shared folder (online document storage)": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "Template": "",
+        "PDF": "",
+        "Closed": ""
+    },
+    "Models\\Item": {
+        "Order": "",
+        "Position": "",
+        "Title": "",
+        "Product": "",
+        "Sales price": "",
+        "Amount": "",
+        "Discount": "",
+        "Vat": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
+    },
+    "Models\\OrderDocument": {
+        "Order": "",
+        "Document": ""
+    },
+    "Models\\History": {
+        "Order": "",
+        "Short Description": "",
+        "Long Description": "",
+        "Date Time": ""
+    },
+    "Models\\OrderDeal": {
+        "Order": "",
+        "Deal": ""
+    },
+    "Controllers\\Boards\\OrderWarnings": {
+        "Open orders without future plan": ""
     }
 }

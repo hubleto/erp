@@ -1,5 +1,15 @@
 {
     "loader": {
         "Upgrade": "Passer à PRO"
+    },
+    "manifest": {
+        "Cloud": "",
+        "Management of cloud Hubleto account.": ""
+    },
+    "Models\\Log": {
+        "Log datetime": "",
+        "Active users": "",
+        "Paid apps": "",
+        "Premium expected": ""
     }
 }

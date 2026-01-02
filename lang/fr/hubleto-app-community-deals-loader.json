@@ -11,5 +11,125 @@
         "Sales": "Ventes",
         "Deals": "Accords de vente",
         "Archive": "Archive"
+    },
+    "manifest": {
+        "Deals": "",
+        "Deal management. From deal to purchase.": "",
+        "Deal Tags": "",
+        "Deal Lost Reasons": "",
+        "Deal warnings": "",
+        "Most valuable deals": "",
+        "Deal value by result": ""
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "",
+        "Title": "",
+        "Customer": "",
+        "Contact": "",
+        "Lead": "",
+        "Version": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": "",
+        "Currency": "",
+        "Expected close date": "",
+        "Owner": "",
+        "Manager": "",
+        "Template for quotation": "",
+        "Customer's order number": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Notes": "",
+        "Source channel": "",
+        "Closed": "",
+        "Deal Result": "",
+        "Reason for Lost": "",
+        "Date of result update": "",
+        "New Customer": "",
+        "Business type": "",
+        "Created": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "Add Deal": "",
+        "Ownership": "",
+        "All": "",
+        "Owned by me": "",
+        "Managed by me": "",
+        "Open \/ Closed": "",
+        "Open": ""
+    },
+    "Models\\LostReason": {
+        "Lost Reason": ""
+    },
+    "Models\\DealHistory": {
+        "Change Date": "",
+        "Deal": "",
+        "Description": ""
+    },
+    "Models\\DealTag": {
+        "Deal": "",
+        "Tag": ""
+    },
+    "Models\\Item": {
+        "Deal": "",
+        "Product": "",
+        "Order": "",
+        "Description": "",
+        "Sales Price": "",
+        "Amount": "",
+        "Vat": "",
+        "Discount": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
+    },
+    "Models\\DealActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Deal": "",
+        "Contact": ""
+    },
+    "Models\\DealDocument": {
+        "Deal": "",
+        "Document": ""
+    },
+    "Models\\DealLead": {
+        "Deal": "",
+        "Lead": ""
+    },
+    "Models\\DealTask": {
+        "Deal": "",
+        "Task": ""
+    },
+    "Controllers\\Deals": {
+        "Deals": "",
+        "Open deals": "",
+        "Total value": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": ""
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Open deals without future plan": ""
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": ""
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "",
+        "Pending": "",
+        "Won": "",
+        "Lost": ""
     }
 }

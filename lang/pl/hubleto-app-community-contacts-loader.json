@@ -13,7 +13,9 @@
         "Active": "Aktywny",
         "Add contact": "Dodaj kontakt",
         "Emails": "E -maile",
-        "Phone Numbers": "Numery telefonów"
+        "Phone Numbers": "Numery telefonów",
+        "Valid": "",
+        "Tags": ""
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -23,7 +25,9 @@
         "Number": "Numer",
         "URL": "URL",
         "Other": "Inny",
-        "Value": "Wartość"
+        "Value": "Wartość",
+        "Contacts": "",
+        "Add Customer": ""
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
@@ -35,5 +39,15 @@
     "Models\\Tag": {
         "Name": "Nazwa",
         "Color": "Kolor"
+    },
+    "manifest": {
+        "Contacts": "",
+        "Default customer management and addressbook.": "",
+        "Contact Categories": "",
+        "Contact Tags": "",
+        "Import contacts": ""
+    },
+    "Controllers\\Contacts": {
+        "Contacts": ""
     }
 }

@@ -27,7 +27,13 @@
         "Created by": "Vytvořeno",
         "Lead": "Potenciální ochod",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)"
+        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Lead": {
         "Lead Identifier": "Identifikátor potenciálniho obchodu",
@@ -57,7 +63,11 @@
         "Add Lead": "Přidat potenciální obchod",
         "Workflow": "Workflow",
         "Workflow step": "Workflow krok",
-        "Closed": "Uzavření"
+        "Closed": "Uzavření",
+        "Tags": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Důvod ztracení"

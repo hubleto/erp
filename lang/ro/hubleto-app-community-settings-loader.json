@@ -24,7 +24,19 @@
     "manifest": {
         "Settings": "",
         "Settings and control panel for your Hubleto.": "",
-        "Settings and tools": ""
+        "Settings and tools": "",
+        "Users": "",
+        "Roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Activity types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Platform config": "",
+        "Sidebar": "",
+        "Teams": ""
     },
     "root": {
         "Users": "",
@@ -59,11 +71,22 @@
         "Street, line 2": "",
         "ZIP": "",
         "City": "",
-        "Country": ""
+        "Country": "",
+        "Registration ID": "",
+        "Business register": "",
+        "Logo": "",
+        "Brand color - primary": "",
+        "Brand color - secondary": ""
     },
     "Models\\Currency": {
         "Currency": "",
         "Code": "",
         "Symbol": ""
+    },
+    "Models\\Team": {
+        "Team name": "",
+        "Team color": "",
+        "Description": "",
+        "Manager": ""
     }
 }

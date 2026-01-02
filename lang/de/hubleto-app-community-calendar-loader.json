@@ -18,7 +18,13 @@
         "All day": "Den ganzen Tag",
         "Completed": "Vollendet",
         "Created by": "Erstellt von",
-        "Meeting minutes (link)": "Besprechungsminuten (Link)"
+        "Meeting minutes (link)": "Besprechungsminuten (Link)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalender"

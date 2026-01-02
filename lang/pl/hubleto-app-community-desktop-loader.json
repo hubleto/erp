@@ -4,9 +4,37 @@
     },
     "manifest": {
         "Desktop": "Desiktop",
-        "Default Hubleto desktop implementation.": "Domyślna implementacja Hubleto Desktop."
+        "Default Hubleto desktop implementation.": "Domyślna implementacja Hubleto Desktop.",
+        "CRM": "",
+        "Marketing": "",
+        "Sales": "",
+        "Retail": "",
+        "Productivity": "",
+        "E-Commerce": "",
+        "Finance": "",
+        "Custom": "",
+        "Maintenance": "",
+        "Help": "",
+        "Addressbook": "",
+        "Calendar": "",
+        "Documents": "",
+        "Communication": "",
+        "Workflow": "",
+        "Helpdesk": "",
+        "Events": "",
+        "Website": "",
+        "Reporting": ""
     },
     "Controllers\\Home": {
-        "Welcome": "Powitanie"
+        "Welcome": "Powitanie",
+        "Edit profile": ""
+    },
+    "Controllers\\Desktop": {
+        "Search app...": "",
+        "Help": "",
+        "Premium": "",
+        "Manage your user account": "",
+        "Manage cloud account": "",
+        "Sign out": ""
     }
 }

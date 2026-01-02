@@ -40,5 +40,9 @@
         "Manage cloud account": "Zarządzaj kontem w chmurze",
         "Sign out": "Wyloguj się",
         "Help": "Pomoc"
+    },
+    "Model": {
+        "Export to CSV": "",
+        "Import from CSV": ""
     }
 }

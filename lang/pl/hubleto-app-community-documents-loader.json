@@ -4,7 +4,11 @@
     },
     "manifest": {
         "Documents": "Dokumenty",
-        "Free document management.": "Darmowe zarządzanie dokumentami."
+        "Free document management.": "Darmowe zarządzanie dokumentami.",
+        "Browse": "",
+        "Show as list": "",
+        "Manage folders": "",
+        "Templates": ""
     },
     "root": {
         "Browse": "Przeglądać",
@@ -16,6 +20,22 @@
         "Document name": "Nazwa dokumentu",
         "File": "Plik",
         "File Link": "Link pliku",
-        "Origin Link": "Link pochodzenia"
+        "Origin Link": "Link pochodzenia",
+        "Add Document": ""
+    },
+    "Models\\Template": {
+        "Name": "",
+        "Used For": "",
+        "Content": "",
+        "Notes": ""
+    },
+    "Controllers\\Browse": {
+        "Browse": "",
+        "Documents": ""
+    },
+    "Models\\Folder": {
+        "Uid": "",
+        "Parent folder": "",
+        "Folder name": ""
     }
 }

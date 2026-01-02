@@ -40,5 +40,9 @@
         "Manage cloud account": "Cloud -Konto verwalten",
         "Help": "Helfen",
         "Personal": "Persönlich"
+    },
+    "Model": {
+        "Export to CSV": "",
+        "Import from CSV": ""
     }
 }

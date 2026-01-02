@@ -1,5 +1,37 @@
 {
     "loader": {
         "Documents": "Documents"
+    },
+    "manifest": {
+        "Browse": "",
+        "Show as list": "",
+        "Manage folders": "",
+        "Templates": "",
+        "Documents": "",
+        "Free document management.": ""
+    },
+    "Models\\Template": {
+        "Name": "",
+        "Used For": "",
+        "Content": "",
+        "Notes": ""
+    },
+    "Models\\Document": {
+        "Uid": "",
+        "Folder": "",
+        "Document name": "",
+        "File": "",
+        "File Link": "",
+        "Origin Link": "",
+        "Add Document": ""
+    },
+    "Controllers\\Browse": {
+        "Browse": "",
+        "Documents": ""
+    },
+    "Models\\Folder": {
+        "Uid": "",
+        "Parent folder": "",
+        "Folder name": ""
     }
 }

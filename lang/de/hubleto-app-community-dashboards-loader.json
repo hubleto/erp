@@ -16,7 +16,8 @@
         "Slug": "Slug",
         "Color": "Farbe",
         "Is default": "Voreinstellung",
-        "Add dashboard": "Panel hinzufügen"
+        "Add dashboard": "Panel hinzufügen",
+        "By turning this on you will change the dashboard shown on the Homepage": ""
     },
     "Models\\Panel": {
         "Dashboard": "Dashboard",
@@ -26,7 +27,8 @@
         "-- Select board to be displayed in panel --": "Brett auswählen, die in dem Panel angezeigt wird",
         "Add panel": "Panel hinzufügen",
         "Width": "",
-        "Order": ""
+        "Order": "",
+        "Position": ""
     },
     "Controllers\\Settings": {
         "Dashboards": "Dashboards",

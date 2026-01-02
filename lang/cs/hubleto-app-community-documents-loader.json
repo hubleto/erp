@@ -4,7 +4,9 @@
         "Free document management.": "Správa dokumentů zdarma.",
         "Browse": "Prohlížet",
         "List": "Seznam",
-        "Templates": "Šablony"
+        "Templates": "Šablony",
+        "Show as list": "",
+        "Manage folders": ""
     },
     "root": {
         "Browse": "Prohlížet",
@@ -25,7 +27,8 @@
         "Folder name": "Název složky"
     },
     "Controllers\\Browse": {
-        "Documents": "Dokumenty"
+        "Documents": "Dokumenty",
+        "Browse": ""
     },
     "Components\\Browser": {
         "Add document": "Přidat dokument",
@@ -37,6 +40,7 @@
     "Models\\Template": {
         "Name": "Název",
         "Content": "Obsah",
-        "Notes": "Poznámky"
+        "Notes": "Poznámky",
+        "Used For": ""
     }
 }

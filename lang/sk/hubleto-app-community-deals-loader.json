@@ -188,5 +188,8 @@
     "Models\\DealTask": {
         "Deal": "Deal",
         "Task": "Úloha"
+    },
+    "Components\\TableDeals": {
+        "Hide filter": ""
     }
 }

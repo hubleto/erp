@@ -1,14 +1,18 @@
 {
     "manifest": {
         "Workflow": "",
-        "Free sales workflow management.": ""
+        "Free sales workflow management.": "",
+        "History": "",
+        "Workflows": ""
     },
     "root": {
         "Workflows": ""
     },
     "Models\\Workflow": {
         "Name": "",
-        "Description": ""
+        "Description": "",
+        "Order": "",
+        "Group": ""
     },
     "Models\\WorkflowStep": {
         "Name": "",
@@ -16,6 +20,7 @@
         "Color": "",
         "Probability": "",
         "Workflow": "",
-        "Set result of a deal to": ""
+        "Set result of a deal to": "",
+        "Tag": ""
     }
 }

@@ -31,7 +31,13 @@
         "Created by": "Vytvořeno",
         "Deal": "Obchod",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisy z setkání (odkaz)"
+        "Meeting minutes (link)": "Zápisy z setkání (odkaz)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Deal": {
         "Deal Identifier": "Identifikátor obchodu",

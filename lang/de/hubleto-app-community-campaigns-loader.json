@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Campaigns": "Kampagnen",
-        "Management of marketing campaigns": "Verwaltung von Marketingkampagnen"
+        "Management of marketing campaigns": "Verwaltung von Marketingkampagnen",
+        "Recipients": "",
+        "Recipient statuses": ""
     },
     "Controllers\\Campaigns": {
         "Campaigns": "Kampagnen"
@@ -26,11 +28,32 @@
         "Workflow": "",
         "Workflow step": "",
         "Approved": "",
-        "Closed": ""
+        "Closed": "",
+        "Owner": "",
+        "Lanuched by": "",
+        "Launched": ""
     },
     "Components\\FormCampaign": {
         "Leads": "Leads",
         "Campaign": "Kampagne",
         "First create the campaign, then you will be prompted to create leads.": "Erstellen Sie zuerst eine Kampagne, anschließend werden Sie aufgefordert, Leads hinzuzufügen."
+    },
+    "Models\\CampaignActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Campaign": ""
     }
 }

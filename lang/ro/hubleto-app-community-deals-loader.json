@@ -1,7 +1,12 @@
 {
     "manifest": {
         "Deals": "",
-        "Deal management. From deal to purchase.": ""
+        "Deal management. From deal to purchase.": "",
+        "Deal Tags": "",
+        "Deal Lost Reasons": "",
+        "Deal warnings": "",
+        "Most valuable deals": "",
+        "Deal value by result": ""
     },
     "root": {
         "Deal Tags": "",
@@ -24,7 +29,13 @@
         "Meeting minutes (link)": "",
         "Created by": "",
         "Deal": "",
-        "Contact": ""
+        "Contact": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Deal": {
         "Deal Identifier": "",
@@ -46,7 +57,22 @@
         "Reason for Lost": "",
         "Date of result update": "",
         "New Customer": "",
-        "Business type": ""
+        "Business type": "",
+        "Version": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": "",
+        "Manager": "",
+        "Template for quotation": "",
+        "Customer's order number": "",
+        "Closed": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "Add Deal": "",
+        "Ownership": "",
+        "All": "",
+        "Owned by me": "",
+        "Managed by me": "",
+        "Open \/ Closed": "",
+        "Open": ""
     },
     "Models\\LostReason": {
         "Lost Reason": ""
@@ -67,7 +93,12 @@
         "Amount": "",
         "Vat": "",
         "Discount": "",
-        "Sum": ""
+        "Sum": "",
+        "Order": "",
+        "Description": "",
+        "Sales Price": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
     },
     "Models\\DealDocument": {
         "Deal": "",
@@ -78,9 +109,29 @@
         "Color": ""
     },
     "Controllers\\Boards\\DealWarnings": {
-        "Pending deals without future plan": ""
+        "Pending deals without future plan": "",
+        "Open deals without future plan": ""
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": ""
+    },
+    "Models\\DealLead": {
+        "Deal": "",
+        "Lead": ""
+    },
+    "Models\\DealTask": {
+        "Deal": "",
+        "Task": ""
+    },
+    "Controllers\\Deals": {
+        "Deals": "",
+        "Open deals": "",
+        "Total value": ""
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "",
+        "Pending": "",
+        "Won": "",
+        "Lost": ""
     }
 }

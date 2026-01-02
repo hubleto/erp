@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Customers": "",
-        "Free customer management and addressbook.": ""
+        "Free customer management and addressbook.": "",
+        "Customer Tags": ""
     },
     "root": {
         "Customer Tags": ""
@@ -18,7 +19,13 @@
         "Meeting minutes (link)": "",
         "Created by": "",
         "Customer": "",
-        "Contact": ""
+        "Contact": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Customer": {
         "Name": "",
@@ -34,7 +41,14 @@
         "Notes": "",
         "Date Created": "",
         "Active": "",
-        "Owner": ""
+        "Owner": "",
+        "Identifier": "",
+        "Manager": "",
+        "Shared folder (online document storage)": "",
+        "Tags": "",
+        "Link to shared folder (online storage) with related documents": "",
+        "Add Customer": "",
+        "Non-active": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "",
@@ -47,5 +61,8 @@
     "Models\\Tag": {
         "Name": "",
         "Color": ""
+    },
+    "Controllers\\Customers": {
+        "Customers": ""
     }
 }

@@ -23,7 +23,13 @@
         "Start time": "Startzeit",
         "End date": "Enddatum",
         "End time": "Endzeit",
-        "Meeting minutes (link)": "Meeting minutes (Link)"
+        "Meeting minutes (link)": "Meeting minutes (Link)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Controllers\\Customers": {
         "Customers": "Kunden"
@@ -49,7 +55,9 @@
         "Archive": "Archiv",
         "Archived": "Archiviert",
         "Manager": "Verwalter",
-        "Shared folder (online document storage)": "Geteilter Ordner"
+        "Shared folder (online document storage)": "Geteilter Ordner",
+        "Identifier": "",
+        "Non-active": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",

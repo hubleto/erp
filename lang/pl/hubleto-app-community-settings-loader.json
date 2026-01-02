@@ -134,7 +134,19 @@
     "manifest": {
         "Settings": "Ustawienia",
         "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania dla twojego Hubleto.",
-        "Settings and tools": "Ustawienia i narzędzia"
+        "Settings and tools": "Ustawienia i narzędzia",
+        "Users": "",
+        "Roles": "",
+        "Your companies": "",
+        "General settings": "",
+        "Permissions list": "",
+        "Role permissions": "",
+        "Activity types": "",
+        "Countries": "",
+        "Currencies": "",
+        "Platform config": "",
+        "Sidebar": "",
+        "Teams": ""
     },
     "root": {
         "Users": "Użytkownicy",
@@ -163,7 +175,12 @@
         "Street, line 2": "Ulica, linia 2",
         "ZIP": "ZAMEK BŁYSKAWICZNY",
         "City": "Miasto",
-        "Country": "Kraj"
+        "Country": "Kraj",
+        "Registration ID": "",
+        "Business register": "",
+        "Logo": "",
+        "Brand color - primary": "",
+        "Brand color - secondary": ""
     },
     "Models\\ActivityType": {
         "Type": "Typ",
@@ -175,5 +192,11 @@
         "Currency": "Waluta",
         "Code": "Kod",
         "Symbol": "Symbol"
+    },
+    "Models\\Team": {
+        "Team name": "",
+        "Team color": "",
+        "Description": "",
+        "Manager": ""
     }
 }

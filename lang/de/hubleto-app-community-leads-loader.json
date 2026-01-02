@@ -41,7 +41,13 @@
         "All day": "Den ganzen Tag",
         "Completed": "Vollendet",
         "Created by": "Erstellt von",
-        "Meeting minutes (link)": "Besprechungsminuten (Link)"
+        "Meeting minutes (link)": "Besprechungsminuten (Link)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Models\\Lead": {
         "Lead Identifier": "Lead -Kennung",
@@ -71,7 +77,11 @@
         "Team": "Team",
         "Workflow": "",
         "Workflow step": "",
-        "Closed": ""
+        "Closed": "",
+        "Tags": "",
+        "Open \/ Closed": "",
+        "Open": "",
+        "All": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Verlorener Vernunft"

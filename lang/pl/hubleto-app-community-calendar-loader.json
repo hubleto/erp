@@ -7,7 +7,9 @@
     },
     "manifest": {
         "Calendar": "Kalendarz",
-        "Free calendar app.": "Bezpłatna aplikacja kalendarza."
+        "Free calendar app.": "Bezpłatna aplikacja kalendarza.",
+        "Reminders": "",
+        "Share": ""
     },
     "root": {
         "Events for today": "Wydarzenia na dziś"
@@ -22,12 +24,20 @@
         "All day": "Cały dzień",
         "Completed": "Zakończony",
         "Created by": "Stworzone przez",
-        "Meeting minutes (link)": "Minuty spotkań (link)"
+        "Meeting minutes (link)": "Minuty spotkań (link)",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Recurrence": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": ""
     },
     "Controllers\\Boards\\Reminders": {
         "All-day": "Cały dzień",
         "Open event details": "Otwarte szczegóły wydarzenia",
         "events for tomorrow": "Wydarzenia na jutro",
-        "events later": "wydarzenia później"
+        "events later": "wydarzenia później",
+        "reminders later": "",
+        "Later": ""
     }
 }

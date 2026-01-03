@@ -113,6 +113,7 @@ class Activity extends \Hubleto\Erp\RecordManager
       if (in_array('project', $fGroupBy)) $query = $query->groupBy('virt_project');
       if (in_array('deal', $fGroupBy)) $query = $query->groupBy('virt_deal');
       if (in_array('worker', $fGroupBy)) $query = $query->groupBy('id_worker');
+      if (in_array('month', $fGroupBy)) $query = $query->groupBy('virt_month');
     }
 
     return $query;

@@ -52,6 +52,8 @@ class Payment extends \Hubleto\Erp\Model
    */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
+    $filters = $this->router()->urlParamAsArray("filters");
+
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate("Add payment");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
@@ -60,6 +62,26 @@ class Payment extends \Hubleto\Erp\Model
       'field' => 'date_due',
       'direction' => 'asc',
     ];
+
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
+
+      $showOnlyColumns = [];
+      if (in_array('order', $fGroupBy)) $showOnlyColumns[] = 'id_order';
+
+      $description->showOnlyColumns($showOnlyColumns);
+
+      $description->addColumn(
+        'total_amount_excl_vat',
+        (new Decimal($this, $this->translate('Total amount excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+      );
+
+      $description->addColumn(
+        'total_amount_incl_vat',
+        (new Decimal($this, $this->translate('Total amount incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+      );
+
+    }
 
     $description->addFilter('fStatus', [
       'title' => $this->translate('Status'),
@@ -75,6 +97,14 @@ class Payment extends \Hubleto\Erp\Model
       'options' => [
         1 => $this->translate('Due'),
         2 => $this->translate('Not due'),
+      ]
+    ]);
+
+    $description->addFilter('fGroupBy', [
+      'title' => $this->translate('Group by'),
+      'type' => 'multipleSelectButtons',
+      'options' => [
+        'order' => $this->translate('Order'),
       ]
     ]);
 

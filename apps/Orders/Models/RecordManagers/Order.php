@@ -102,6 +102,39 @@ class Order extends \Hubleto\Erp\RecordManager
     return $this->hasOne(Template::class, 'id', 'id_template');
   }
 
+  /**
+   * [Description for prepareSelectsForReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return array
+   * 
+   */
+  public function prepareSelectsForReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): array
+  {
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+    $selects = parent::prepareSelectsForReadQuery($query, $level, $includeRelations);
+
+    if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
+      $selects[] = 'sum(price_excl_vat) as total_price_excl_vat';
+    }
+
+    return $selects;
+  }
+
+  /**
+   * [Description for prepareReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return mixed
+   * 
+   */
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
@@ -128,6 +161,15 @@ class Order extends \Hubleto\Erp\RecordManager
 
     if ($view == 'purchaseOrders') $query = $query->where("orders.purchase_sales", 1);
     if ($view == 'salesOrders') $query = $query->where("orders.purchase_sales", 2);
+
+
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
+      if (in_array('customer', $fGroupBy)) $query = $query->groupBy('id_customer');
+      if (in_array('supplier', $fGroupBy)) $query = $query->groupBy('id_supplier');
+      if (in_array('manager', $fGroupBy)) $query = $query->groupBy('id_manager');
+      if (in_array('workflow_step', $fGroupBy)) $query = $query->groupBy('id_workflow_step');
+    }
 
     return $query;
   }

@@ -7,7 +7,7 @@ use Hubleto\App\Community\Worksheets\Loader as WorksheetsApp;
 use Hubleto\Framework\Exceptions\RecordSaveException;
 
 use Hubleto\Framework\Db\Column\Boolean;
-use Hubleto\Framework\Db\Column\Color;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\DateTime;
@@ -49,6 +49,18 @@ class Activity extends \Hubleto\Erp\Model
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultValue(date("Y-m-d H:i:s"))->setReadonly(true),
+      'virt_deal' => (new Virtual($this, $this->translate('Deal')))->setDefaultVisible()
+        ->setProperty('sql', "
+          SELECT `d`.`identifier` FROM `deals_tasks` `dt`
+          LEFT JOIN `deals` `d` ON `d`.`id` = `dt`.`id_deal`
+          WHERE `dt`.`id_task` = `worksheet_activities`.`id_task`
+        "),
+      'virt_project' => (new Virtual($this, $this->translate('Project')))->setDefaultVisible()
+        ->setProperty('sql', "
+          SELECT `p`.`identifier` FROM `projects_tasks` `pt`
+          LEFT JOIN `projects` `p` ON `p`.`id` = `pt`.`id_project`
+          WHERE `pt`.`id_task` = `worksheet_activities`.`id_task`
+        "),
     ]);
   }
 
@@ -66,6 +78,24 @@ class Activity extends \Hubleto\Erp\Model
       break;
     }
 
+    $filters = $this->router()->urlParamAsArray("filters");
+
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
+
+      $description->addColumn(
+        'total_worked_hours',
+        (new Integer($this, $this->translate('Total worked hours')))->setUnit('hours')->setDecimals(2)->setCssClass('badge badge-warning')
+      );
+      $description->hideColumns(['worked_hours']);
+
+      if (!in_array('task', $fGroupBy)) $description->hideColumns(['id_task']);
+      if (!in_array('type', $fGroupBy)) $description->hideColumns(['id_type']);
+      if (!in_array('project', $fGroupBy)) $description->hideColumns(['virt_project']);
+      if (!in_array('deal', $fGroupBy)) $description->hideColumns(['virt_deal']);
+      if (!in_array('worker', $fGroupBy)) $description->hideColumns(['id_worker']);
+    }
+
     $description->addFilter('fPeriod', [
       'title' => $this->translate('Period'),
       'options' => [
@@ -81,6 +111,18 @@ class Activity extends \Hubleto\Erp\Model
         'lastYear' => $this->translate('Last year'),
       ],
       'default' => 0,
+    ]);
+
+    $description->addFilter('fGroupBy', [
+      'title' => $this->translate('Group by'),
+      'type' => 'multipleSelectButtons',
+      'options' => [
+        'task' => $this->translate('Task'),
+        'type' => $this->translate('Type'),
+        'project' => $this->translate('Project'),
+        'deal' => $this->translate('Deal'),
+        'worker' => $this->translate('Worker'),
+      ]
     ]);
 
     $fUserOptions = [];

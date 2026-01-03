@@ -27,6 +27,39 @@ class Activity extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(ActivityType::class, 'id_type', 'id');
   }
 
+  /**
+   * [Description for prepareSelectsForReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return array
+   * 
+   */
+  public function prepareSelectsForReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): array
+  {
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+    $selects = parent::prepareSelectsForReadQuery($query, $level, $includeRelations);
+
+    if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
+      $selects[] = 'sum(worked_hours) as total_worked_hours';
+    }
+
+    return $selects;
+  }
+
+  /**
+   * [Description for prepareReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return mixed
+   * 
+   */
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
@@ -71,6 +104,15 @@ class Activity extends \Hubleto\Erp\RecordManager
 
     if (isset($filters['fWorker']) && is_array($filters['fWorker']) && count($filters['fWorker']) > 0) {
       $query = $query->whereIn($this->table . '.id_worker', $filters['fWorker']);
+    }
+
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
+      if (in_array('task', $fGroupBy)) $query = $query->groupBy('id_task');
+      if (in_array('type', $fGroupBy)) $query = $query->groupBy('id_type');
+      if (in_array('project', $fGroupBy)) $query = $query->groupBy('virt_project');
+      if (in_array('deal', $fGroupBy)) $query = $query->groupBy('virt_deal');
+      if (in_array('worker', $fGroupBy)) $query = $query->groupBy('id_worker');
     }
 
     return $query;

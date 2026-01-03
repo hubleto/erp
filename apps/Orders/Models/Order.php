@@ -129,29 +129,47 @@ class Order extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
+    $view = $this->router()->urlParamAsString("view");
+    $filters = $this->router()->urlParamAsArray("filters");
+
     $description->ui['title'] = ''; // 'Orders';
     $description->ui['addButtonText'] = $this->translate("Add order");
 
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
+    $description->hideColumns(['shipping_info', 'note']);
 
-    unset($description->columns["shipping_info"]);
-    unset($description->columns["note"]);
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
 
-    $description->ui['filters'] = [
-      'fOrderWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'),
-      'fOrderClosed' => [
-        'title' => $this->translate('Open / Closed'),
-        'direction' => 'horizontal',
-        'options' => [
-          1 => $this->translate('Open'),
-          2 => $this->translate('Closed'),
-        ],
-        'default' => 0,
+      $description->addColumn(
+        'total_price_excl_vat',
+        (new Integer($this, $this->translate('Total price excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+      );
+
+      $description->addColumn(
+        'total_price_incl_vat',
+        (new Integer($this, $this->translate('Total price incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+      );
+
+      $description->hideColumns(['price_excl_vat', 'price_incl_vat']);
+
+      if (!in_array('customer', $fGroupBy)) $description->hideColumns(['id_customer']);
+      if (!in_array('supplier', $fGroupBy)) $description->hideColumns(['id_supplier']);
+      if (!in_array('manager', $fGroupBy)) $description->hideColumns(['id_manager']);
+      if (!in_array('workflow_step', $fGroupBy)) $description->hideColumns(['id_workflow_step']);
+    }
+
+    $description->addFilter('fOrderWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'));
+    $description->addFilter('fOrderClosed', [
+      'title' => $this->translate('Open / Closed'),
+      'direction' => 'horizontal',
+      'options' => [
+        1 => $this->translate('Open'),
+        2 => $this->translate('Closed'),
       ],
-    ];
-
-    $view = $this->router()->urlParamAsString("view");
+      'default' => 0,
+    ]);
 
     $description->addFilter('fPurchaseSales', [
       'title' => $this->translate('Purchase / Sales'),
@@ -161,6 +179,17 @@ class Order extends \Hubleto\Erp\Model
         self::SALES_ORDER => $this->translate('Sales orders'),
       ],
       'default' => ($view == 'purchaseOrders' ? self::PURCHASE_ORDER : ($view == 'salesOrders' ? self::SALES_ORDER : 0)),
+    ]);
+
+    $description->addFilter('fGroupBy', [
+      'title' => $this->translate('Group by'),
+      'type' => 'multipleSelectButtons',
+      'options' => [
+        'customer' => $this->translate('Customer'),
+        'supplier' => $this->translate('Supplier'),
+        'manager' => $this->translate('Manager'),
+        'workflow_step' => $this->translate('Workflow step'),
+      ]
     ]);
 
     $fCustomerOptions = [];

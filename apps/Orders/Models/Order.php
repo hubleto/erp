@@ -142,6 +142,14 @@ class Order extends \Hubleto\Erp\Model
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];
 
+      $showOnlyColumns = [];
+      if (in_array('customer', $fGroupBy)) $showOnlyColumns[] = 'id_customer';
+      if (in_array('supplier', $fGroupBy)) $showOnlyColumns[] = 'id_supplier';
+      if (in_array('manager', $fGroupBy)) $showOnlyColumns[] = 'id_manager';
+      if (in_array('workflow_step', $fGroupBy)) $showOnlyColumns[] = 'id_workflow_step';
+
+      $description->showOnlyColumns($showOnlyColumns);
+
       $description->addColumn(
         'total_price_excl_vat',
         (new Integer($this, $this->translate('Total price excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
@@ -152,12 +160,6 @@ class Order extends \Hubleto\Erp\Model
         (new Integer($this, $this->translate('Total price incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
       );
 
-      $description->hideColumns(['price_excl_vat', 'price_incl_vat']);
-
-      if (!in_array('customer', $fGroupBy)) $description->hideColumns(['id_customer']);
-      if (!in_array('supplier', $fGroupBy)) $description->hideColumns(['id_supplier']);
-      if (!in_array('manager', $fGroupBy)) $description->hideColumns(['id_manager']);
-      if (!in_array('workflow_step', $fGroupBy)) $description->hideColumns(['id_workflow_step']);
     }
 
     $description->addFilter('fOrderWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'));

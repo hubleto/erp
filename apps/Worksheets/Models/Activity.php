@@ -83,17 +83,22 @@ class Activity extends \Hubleto\Erp\Model
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];
 
+      $showOnlyColumns = [];
+      if (in_array('task', $fGroupBy)) $showOnlyColumns[] = 'id_task';
+      if (in_array('type', $fGroupBy)) $showOnlyColumns[] = 'id_type';
+      if (in_array('project', $fGroupBy)) $showOnlyColumns[] = 'virt_project';
+      if (in_array('deal', $fGroupBy)) $showOnlyColumns[] = 'virt_deal';
+      if (in_array('worker', $fGroupBy)) $showOnlyColumns[] = 'id_worker';
+
+      $description->showOnlyColumns($showOnlyColumns);
+
+
       $description->addColumn(
         'total_worked_hours',
         (new Integer($this, $this->translate('Total worked hours')))->setUnit('hours')->setDecimals(2)->setCssClass('badge badge-warning')
       );
       $description->hideColumns(['worked_hours']);
 
-      if (!in_array('task', $fGroupBy)) $description->hideColumns(['id_task']);
-      if (!in_array('type', $fGroupBy)) $description->hideColumns(['id_type']);
-      if (!in_array('project', $fGroupBy)) $description->hideColumns(['virt_project']);
-      if (!in_array('deal', $fGroupBy)) $description->hideColumns(['virt_deal']);
-      if (!in_array('worker', $fGroupBy)) $description->hideColumns(['id_worker']);
     }
 
     $description->addFilter('fPeriod', [

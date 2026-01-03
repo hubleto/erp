@@ -49,6 +49,8 @@ class Activity extends \Hubleto\Erp\Model
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultValue(date("Y-m-d H:i:s"))->setReadonly(true),
+      'virt_month' => (new Virtual($this, $this->translate('Month')))->setDefaultVisible()
+        ->setProperty('sql', "concat(YEAR(`date_worked`), '-', LPAD(MONTH(`date_worked`), 2, '0'))"),
       'virt_deal' => (new Virtual($this, $this->translate('Deal')))->setDefaultVisible()
         ->setProperty('sql', "
           SELECT `d`.`identifier` FROM `deals_tasks` `dt`
@@ -89,9 +91,9 @@ class Activity extends \Hubleto\Erp\Model
       if (in_array('project', $fGroupBy)) $showOnlyColumns[] = 'virt_project';
       if (in_array('deal', $fGroupBy)) $showOnlyColumns[] = 'virt_deal';
       if (in_array('worker', $fGroupBy)) $showOnlyColumns[] = 'id_worker';
+      if (in_array('month', $fGroupBy)) $showOnlyColumns[] = 'virt_month';
 
       $description->showOnlyColumns($showOnlyColumns);
-
 
       $description->addColumn(
         'total_worked_hours',
@@ -127,6 +129,7 @@ class Activity extends \Hubleto\Erp\Model
         'project' => $this->translate('Project'),
         'deal' => $this->translate('Deal'),
         'worker' => $this->translate('Worker'),
+        'month' => $this->translate('Month'),
       ]
     ]);
 

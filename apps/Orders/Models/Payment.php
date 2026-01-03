@@ -72,13 +72,13 @@ class Payment extends \Hubleto\Erp\Model
       $description->showOnlyColumns($showOnlyColumns);
 
       $description->addColumn(
-        'total_amount_excl_vat',
-        (new Decimal($this, $this->translate('Total amount excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+        'total_price_excl_vat',
+        (new Decimal($this, $this->translate('Total price excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
       );
 
       $description->addColumn(
-        'total_amount_incl_vat',
-        (new Decimal($this, $this->translate('Total amount incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+        'total_price_incl_vat',
+        (new Decimal($this, $this->translate('Total price incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
       );
 
     }

@@ -38,8 +38,8 @@ class Payment extends \Hubleto\Erp\RecordManager
     $selects = parent::prepareSelectsForReadQuery($query, $level, $includeRelations);
 
     if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
-      $selects[] = 'sum(ifnull(orders_payments.amount, 0) * (1 - ifnull(orders_payments.discount, 0)/100)) as total_amount_excl_vat';
-      $selects[] = 'sum(ifnull(orders_payments.amount, 0) * (1 - ifnull(orders_payments.discount, 0)/100) * (1 + ifnull(orders_payments.vat, 0)/100)) as total_amount_incl_vat';
+      $selects[] = 'sum(ifnull(orders_payments.unit_price, 0) * ifnull(orders_payments.amount, 0) * (1 - ifnull(orders_payments.discount, 0)/100)) as total_price_excl_vat';
+      $selects[] = 'sum(ifnull(orders_payments.unit_price, 0) * ifnull(orders_payments.amount, 0) * (1 - ifnull(orders_payments.discount, 0)/100) * (1 + ifnull(orders_payments.vat, 0)/100)) as total_price_incl_vat';
     }
 
     return $selects;

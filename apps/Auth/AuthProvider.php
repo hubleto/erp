@@ -129,8 +129,8 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       $rolePermissions = [];
     }
 
-    $userPermissions['ownedRecordsModify'] = $userPermissions['ownedRecordsRead'] ?? ($rolePermissions['ownedRecordsRead'] ?? 'all');
-    $userPermissions['ownedRecordsRead'] = $userPermissions['ownedRecordsModify'] ?? ($rolePermissions['ownedRecordsModify'] ?? 'all');
+    $userPermissions['ownedRecordsRead'] = $userPermissions['ownedRecordsRead'] ?? ($rolePermissions['ownedRecordsRead'] ?? 'all');
+    $userPermissions['ownedRecordsModify'] = $userPermissions['ownedRecordsModify'] ?? ($rolePermissions['ownedRecordsModify'] ?? 'all');
 
     return $userPermissions;
   }

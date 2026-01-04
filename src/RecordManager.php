@@ -42,7 +42,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $idManager = $record['id_manager'] ?? 0;
     $idTeam = $record['id_team'] ?? 0;
 
-    $isOwner = $hasIdOwner ? $idManager > 0 && $idOwner == $idUser : true;
+    $isOwner = $hasIdOwner ? $idOwner > 0 && $idOwner == $idUser : true;
     $isManager = $hasIdManager ? $idManager > 0 && $idManager == $idUser : true;
     $isTeamMember = $hasIdTeam ? $idTeam > 0 && $authProvider->isTeamMember($idTeam) : true;
 

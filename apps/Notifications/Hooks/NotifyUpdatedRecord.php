@@ -17,8 +17,8 @@ class NotifyUpdatedRecord extends \Hubleto\Erp\Hook
       $sender = $this->getService(Sender::class);
 
       $model = $args['model'] ?? '';
-      $originalRecord = $args['originalRecord'] ?? [];
-      $savedRecord = $args['savedRecord'] ?? [];
+      $originalRecord = (array) $args['originalRecord'] ?? [];
+      $savedRecord = (array) $args['savedRecord'] ?? [];
       $idOwner = (int) ($savedRecord['id_owner'] ?? 0);
       $idManager = (int) ($savedRecord['id_manager'] ?? 0);
 

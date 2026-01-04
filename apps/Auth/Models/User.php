@@ -120,6 +120,7 @@ class User extends \Hubleto\Framework\Models\User
       'timezone' => (new Varchar($this, $this->translate('Timezone')))->setPredefinedValues($this->locale()->getTimezones()),
       'id_default_company' => (new Lookup($this, $this->translate("Default company"), Company::class)),
       'apps' => (new Json($this, $this->translate('Apps'))),
+      'permissions' => (new Json($this, $this->translate('Permissions'))),
     ]);
   }
 
@@ -206,6 +207,7 @@ class User extends \Hubleto\Framework\Models\User
       'is_active' => $description->columns['is_active'],
       'roles' => (new Varchar($this, $this->translate('Roles'))),
       'teams' => (new Varchar($this, $this->translate('Teams'))),
+      'permissions' => $description->columns['permissions'],
     ];
 
     return $description;

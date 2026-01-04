@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Auth\Models;
 
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Json;
 
 class UserRole extends \Hubleto\Erp\Model
 {
@@ -38,6 +39,7 @@ class UserRole extends \Hubleto\Erp\Model
       'grant_all' => (new Boolean($this, $this->translate("Grant all permissions (administrator role)"))),
       'description' => (new Varchar($this, $this->translate("Description"))),
       'is_default' => (new Boolean($this, $this->translate("Is default role (cannot be modified)"))),
+      'permissions' => (new Json($this, $this->translate('Permissions'))),
     ]);
   }
 

@@ -83,38 +83,67 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
   }
 
   /**
-   * Get user information from the session.
+   * [Description for normalizeUserProfile]
    *
-   * @return UserProfile
+   * @param array $user
+   * 
+   * @return array
    * 
    */
-  public function getUserFromSession(): array
+  public function normalizeUserProfile(array $user): array
   {
-    $tmp = $this->sessionManager()->get('userProfile') ?? [];
-    $apps = @json_decode($tmp['apps'] ?? '');
+    $apps = @json_decode($user['apps'] ?? '');
     if (!is_array($apps)) $apps = [];
 
     return [
-      'id' => (int) ($tmp['id'] ?? 0),
-      'type' => (int) ($tmp['type'] ?? 0),
-      'login' => (string) ($tmp['login'] ?? ''),
-      'email' => (string) ($tmp['email'] ?? ''),
-      'first_name' => (string) ($tmp['first_name'] ?? ''),
-      'last_name' => (string) ($tmp['last_name'] ?? ''),
-      'is_active' => (bool) ($tmp['is_active'] ?? false),
-      'language' => (string) ($tmp['language'] ?? false),
-      'timezone' => (string) ($tmp['timezone'] ?? false),
-      'position' => (string) ($tmp['position'] ?? false),
-      'photo' => (string) ($tmp['photo'] ?? false),
-      'apps' => (string) ($tmp['apps'] ?? ''),
+      'id' => (int) ($user['id'] ?? 0),
+      'type' => (int) ($user['type'] ?? 0),
+      'login' => (string) ($user['login'] ?? ''),
+      'email' => (string) ($user['email'] ?? ''),
+      'first_name' => (string) ($user['first_name'] ?? ''),
+      'last_name' => (string) ($user['last_name'] ?? ''),
+      'is_active' => (bool) ($user['is_active'] ?? false),
+      'language' => (string) ($user['language'] ?? false),
+      'timezone' => (string) ($user['timezone'] ?? false),
+      'position' => (string) ($user['position'] ?? false),
+      'photo' => (string) ($user['photo'] ?? false),
+      'permissions' => (string) ($user['permissions'] ?? false),
+      'apps' => (string) ($user['apps'] ?? ''),
       'APPS' => (array) $apps,
-      'ROLES' => (array) ($tmp['ROLES'] ?? []),
-      'TEAMS' => (array) ($tmp['TEAMS'] ?? []),
-      'DEFAULT_COMPANY' => (array) ($tmp['DEFAULT_COMPANY'] ?? []),
+      'ROLES' => (array) ($user['ROLES'] ?? []),
+      'TEAMS' => (array) ($user['TEAMS'] ?? []),
+      'DEFAULT_COMPANY' => (array) ($user['DEFAULT_COMPANY'] ?? []),
     ];
   }
 
-  public function isUserMemberOfTeam(int $idTeam): bool
+  public function getUserPermissions(): array
+  {
+    $tmp = $this->getUserFromDatabase();
+    $userPermissions = @json_decode($tmp['permissions'] ?? '', true);
+    if (!is_array($userPermissions)) $userPermissions = [];
+
+    $role = $tmp['ROLES'][0] ?? null;
+    if ($role !== null) {
+      $rolePermissions = @json_decode($role['permissions'] ?? '', true);
+    } else {
+      $rolePermissions = [];
+    }
+
+    $userPermissions['ownedRecordsModify'] = $userPermissions['ownedRecordsRead'] ?? ($rolePermissions['ownedRecordsRead'] ?? 'all');
+    $userPermissions['ownedRecordsRead'] = $userPermissions['ownedRecordsModify'] ?? ($rolePermissions['ownedRecordsModify'] ?? 'all');
+
+    return $userPermissions;
+  }
+
+  /**
+   * [Description for isTeamMember]
+   *
+   * @param int $idTeam
+   * 
+   * @return bool
+   * 
+   */
+  public function isTeamMember(int $idTeam): bool
   {
     $user = $this->getUser();
     foreach ($user['TEAMS'] as $team) {

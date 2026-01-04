@@ -48,6 +48,16 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
   renderContent(): JSX.Element {
     const R = this.state.record;
 
+    let permissions: any = {};
+
+    try {
+      permissions = JSON.parse(R.permissions);
+    } catch (ex) {
+      permissions = {};
+    }
+
+    if (!permissions) permissions = {};
+
     let uApps = [];
 
     try {
@@ -98,7 +108,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                 })}
                 {this.inputWrapper('password')}
 
-                {this.divider('Permissions')}
+                {this.divider('Roles')}
 
                 {this.state.id < 0 ?
                   <div className="badge badge-info">First create user, then you will be prompted to assign roles.</div>
@@ -111,6 +121,44 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                 }
               </div>
               <div className="flex-1 md:flex-row">
+                {this.divider('Permissions for records with designated owner or manager')}
+                <div className='list'>
+                  <div className='list-item'><div className='flex gap-2 justify-between p-1'>
+                    <div>Reading</div>
+                    <div>
+                      <select
+                        onChange={(event) => {
+                          console.log(event);
+                          permissions.ownedRecordsRead = event.currentTarget.value;
+                          console.log(permissions);
+                          this.updateRecord({permissions: JSON.stringify(permissions)});
+                        }}
+                        value={permissions.ownedRecordsRead ?? 'owned'}
+                      >
+                        <option value='owned'>Can read only owned records</option>
+                        <option value='owned-and-managed'>Can read only owned and managed records</option>
+                        <option value='all'>Can read all records</option>
+                      </select>
+                    </div>
+                  </div></div>
+                  <div className='list-item'><div className='flex gap-2 justify-between p-1'>
+                    <div>Modifying</div>
+                    <div>
+                      <select
+                        onChange={(event) => {
+                          console.log(event);
+                          permissions.ownedRecordsModify = event.currentTarget.value;
+                          this.updateRecord({permissions: JSON.stringify(permissions)});
+                        }}
+                        value={permissions.ownedRecordsModify ?? 'owned'}
+                      >
+                        <option value='owned'>Can modify only owned records</option>
+                        <option value='owned-and-managed'>Can modify only owned and managed records</option>
+                        <option value='all'>Can modify all records</option>
+                      </select>
+                    </div>
+                  </div></div>
+                </div>
                 {this.divider('Access to apps')}
                 <div className="list">
                   {this.state.appsInfo ? <>

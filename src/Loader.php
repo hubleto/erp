@@ -74,14 +74,14 @@ class Loader extends \Hubleto\Framework\Loader
         ;
         $authProvider->setUserLanguage($setLanguage);
 
-        if ($authProvider->isUserInSession()) {
-          $authProvider->updateUserInSession($authProvider->user);
-        }
-
         $date = date("D, d M Y H:i:s", strtotime('+1 year')) . 'GMT';
         header("Set-Cookie: language={$setLanguage}; EXPIRES{$date};");
         setcookie('incorrectLogin', '1');
         $this->router()->redirectTo('');
+      }
+
+      if ($authProvider->isUserInSession()) {
+        $authProvider->updateUserInSession($authProvider->getUserFromDatabase());
       }
 
       if (strlen($authProvider->getUserLanguage()) !== 2) {

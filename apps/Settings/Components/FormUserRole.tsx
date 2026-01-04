@@ -36,7 +36,16 @@ export default class FormUserRole<P, S> extends HubletoForm<FormUserRoleProps,Fo
 
   renderContent(): JSX.Element {
     const R = this.state.record;
-    const showAdditional = R.id > 0 ? true : false;
+
+    let permissions: any = {};
+
+    try {
+      permissions = JSON.parse(R.permissions);
+    } catch (ex) {
+      permissions = {};
+    }
+
+    if (!permissions) permissions = {};
 
     return <>
       <div className='card'>
@@ -45,6 +54,44 @@ export default class FormUserRole<P, S> extends HubletoForm<FormUserRoleProps,Fo
           {this.inputWrapper("description")}
           {this.inputWrapper("grant_all")}
         </div>
+      </div>
+      {this.divider('Permissions for records with designated owner, manager or team')}
+      <div className='list'>
+        <div className='list-item'><div className='flex gap-2 justify-between p-1'>
+          <div>Reading</div>
+          <div>
+            <select
+              onChange={(event) => {
+                console.log(event);
+                permissions.ownedRecordsRead = event.currentTarget.value;
+                console.log(permissions);
+                this.updateRecord({permissions: JSON.stringify(permissions)});
+              }}
+              value={permissions.ownedRecordsRead ?? 'owned'}
+            >
+              <option value='owned'>Can read only owned records</option>
+              <option value='owned-and-managed'>Can read only owned and managed records</option>
+              <option value='all'>Can read all records</option>
+            </select>
+          </div>
+        </div></div>
+        <div className='list-item'><div className='flex gap-2 justify-between p-1'>
+          <div>Modifying</div>
+          <div>
+            <select
+              onChange={(event) => {
+                console.log(event);
+                permissions.ownedRecordsModify = event.currentTarget.value;
+                this.updateRecord({permissions: JSON.stringify(permissions)});
+              }}
+              value={permissions.ownedRecordsModify ?? 'owned'}
+            >
+              <option value='owned'>Can modify only owned records</option>
+              <option value='owned-and-managed'>Can modify only owned and managed records</option>
+              <option value='all'>Can modify all records</option>
+            </select>
+          </div>
+        </div></div>
       </div>
       {R.grant_all || R.id <= 0 ? null :
         <Table

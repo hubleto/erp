@@ -31,7 +31,10 @@ class Loader extends \Hubleto\Framework\App
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 
       '/^orders(\/(?<recordId>\d+))?\/?$/' => Controllers\Orders::class,
+      '/^orders\/add\/?$/' => ['controller' => Controllers\Orders::class, 'vars' => ['recordId' => -1]],
+
       '/^orders\/payments(\/(?<recordId>\d+))?\/?$/' => Controllers\Payments::class,
+      '/^orders\/payments\/add\/?$/' => ['controller' => Controllers\Payments::class, 'vars' => ['recordId' => -1]],
 
       '/^orders\/states\/?$/' => Controllers\States::class,
     ]);

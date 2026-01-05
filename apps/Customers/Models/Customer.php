@@ -118,9 +118,11 @@ class Customer extends Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
-    $description->ui['filters'] = [
-      'fCustomerActive' => [ 'title' => $this->translate('Active'), 'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Non-active') ] ],
-    ];
+    $description->addFilter('fCustomerActive', [
+      'title' => $this->translate('Active'),
+      'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Non-active') ],
+      'default' => 0,
+    ]);
 
     return $description;
   }

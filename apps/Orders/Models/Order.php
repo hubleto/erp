@@ -170,7 +170,7 @@ class Order extends \Hubleto\Erp\Model
         1 => $this->translate('Open'),
         2 => $this->translate('Closed'),
       ],
-      'default' => 0,
+      'default' => 1,
     ]);
 
     $description->addFilter('fPurchaseSales', [

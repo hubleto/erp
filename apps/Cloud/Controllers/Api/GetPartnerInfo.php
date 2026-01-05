@@ -14,8 +14,11 @@ class GetPartnerInfo extends \Hubleto\Erp\Controllers\ApiController
       try {
         $partnerInfo = @json_decode($partnerInfoStr, true);
         if (!is_array($partnerInfo)) $partnerInfo = [];
-      } catch (\Throwable) {
-        $partnerInfo = [];
+      } catch (\Throwable $e) {
+        $partnerInfo = [
+          'status' => 'error',
+          'message' => $e->getMessage(),
+        ];
       }
     }
 

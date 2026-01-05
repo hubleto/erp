@@ -28,6 +28,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^cloud\/?$/' => Controllers\Dashboard::class,
+      '/^cloud\/api\/get-partner-info\/?$/' => Controllers\Api\GetPartnerInfo::class,
       '/^cloud\/api\/accept-legal-documents\/?$/' => Controllers\Api\AcceptLegalDocuments::class,
       '/^cloud\/api\/activate-premium-account\/?$/' => Controllers\Api\ActivatePremiumAccount::class,
       '/^cloud\/api\/charge-credit\/?$/' => Controllers\Api\ChargeCredit::class,

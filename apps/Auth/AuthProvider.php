@@ -116,6 +116,33 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
     ];
   }
 
+  /**
+   * [Description for getUserFromDatabase]
+   *
+   * @return array
+   * 
+   */
+  public function getUserFromDatabase(): array
+  {
+    $mUser = $this->createUserModel();
+
+    return $this->normalizeUserProfile(
+      $mUser->record
+        ->where($mUser->table . '.id', $this->getUserId())
+        ->with('ROLES')
+        ->with('TEAMS')
+        ->with('DEFAULT_COMPANY')
+        ->first()
+        ->toArray()
+    );
+  }
+
+  /**
+   * [Description for getUserPermissions]
+   *
+   * @return array
+   * 
+   */
   public function getUserPermissions(): array
   {
     $tmp = $this->getUserFromDatabase();

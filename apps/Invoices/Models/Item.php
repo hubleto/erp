@@ -54,6 +54,9 @@ class Item extends \Hubleto\Erp\Model
 
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
+    $view = $this->router()->urlParamAsString("view");
+    $filters = $this->router()->urlParamAsArray("filters");
+
     $description = parent::describeTable();
 
     $description->ui['title'] = ''; //$this->translate('Customers');
@@ -61,10 +64,31 @@ class Item extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->show(['footer']);
 
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
+
+      $showOnlyColumns = [];
+      if (in_array('customer', $fGroupBy)) $showOnlyColumns[] = 'id_customer';
+      if (in_array('order', $fGroupBy)) $showOnlyColumns[] = 'id_order';
+      if (in_array('invoice', $fGroupBy)) $showOnlyColumns[] = 'id_invoice';
+
+      $description->showOnlyColumns($showOnlyColumns);
+
+      $description->addColumn(
+        'total_price_excl_vat',
+        (new Decimal($this, $this->translate('Total price excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+      );
+
+      $description->addColumn(
+        'total_price_incl_vat',
+        (new Decimal($this, $this->translate('Total price incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+      );
+
+    }
+
     $description->addFilter('fStatus', [
       'title' => $this->translate('Status'),
       'options' => [
-        0 => $this->translate('All'),
         1 => $this->translate('Prepared'),
         2 => $this->translate('Invoiced')
       ]
@@ -73,7 +97,6 @@ class Item extends \Hubleto\Erp\Model
     $description->addFilter('fPeriod', [
       'title' => $this->translate('Period'),
       'options' => [
-        'all' => $this->translate('All'),
         'today' => $this->translate('Today'),
         'yesterday' => $this->translate('Yesterday'),
         'last7Days' => $this->translate('Last 7 days'),
@@ -87,7 +110,27 @@ class Item extends \Hubleto\Erp\Model
       'default' => 0,
     ]);
 
+    $description->addFilter('fGroupBy', [
+      'title' => $this->translate('Group by'),
+      'type' => 'multipleSelectButtons',
+      'options' => [
+        'customer' => $this->translate('Customer'),
+        'order' => $this->translate('Order'),
+        'invoice' => $this->translate('Invoice'),
+      ]
+    ]);
+
     return $description;
+  }
+
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['INVOICE'];
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
   }
 
   /**

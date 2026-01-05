@@ -15,8 +15,8 @@ class AppMenu extends \Hubleto\Framework\Extendible
       ],
       [
         'app' => $this->app,
-        'url' => 'invoices/items?filters[fStatus]=1',
-        'title' => $this->app->translate('Prepared items'),
+        'url' => 'invoices/items',
+        'title' => $this->app->translate('items'),
         'icon' => 'fas fa-list',
       ],
       [

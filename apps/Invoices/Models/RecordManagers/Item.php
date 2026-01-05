@@ -31,6 +31,30 @@ class Item extends \Hubleto\Erp\RecordManager {
   }
 
   /**
+   * [Description for prepareSelectsForReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return array
+   * 
+   */
+  public function prepareSelectsForReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): array
+  {
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+    $selects = parent::prepareSelectsForReadQuery($query, $level, $includeRelations);
+
+    if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
+      $selects[] = 'sum(invoice_items.price_excl_vat) as total_price_excl_vat';
+      $selects[] = 'sum(invoice_items.price_incl_vat) as total_price_incl_vat';
+    }
+
+    return $selects;
+  }
+
+  /**
    * [Description for prepareReadQuery]
    *
    * @param mixed|null $query
@@ -69,6 +93,13 @@ class Item extends \Hubleto\Erp\RecordManager {
         case 'thisYear': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereYear('date_due', date('Y')); }); break;
         case 'lastYear': $query = $query->whereHas('INVOICE', function ($q) { return $q->whereYear('date_due', date('Y') - 1); }); break;
       }
+    }
+
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
+      if (in_array('customer', $fGroupBy)) $query = $query->groupBy('id_customer');
+      if (in_array('order', $fGroupBy)) $query = $query->groupBy('id_order');
+      if (in_array('invoice', $fGroupBy)) $query = $query->groupBy('id_invoice');
     }
 
     return $query;

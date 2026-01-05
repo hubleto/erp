@@ -44,6 +44,8 @@ class Invoice extends \Hubleto\Erp\Model {
   public string $table = 'invoices';
   public ?string $lookupSqlValue = '{%TABLE%}.number';
   public string $recordManagerClass = RecordManagers\Invoice::class;
+  public ?string $lookupUrlAdd = 'invoices/add';
+  public ?string $lookupUrlDetail = 'invoices/{%ID%}';
 
   public array $relations = [
     'CUSTOMER' => [ self::BELONGS_TO, Customer::class, "id_customer" ],

@@ -152,12 +152,12 @@ class Order extends \Hubleto\Erp\Model
 
       $description->addColumn(
         'total_price_excl_vat',
-        (new Integer($this, $this->translate('Total price excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+        (new Decimal($this, $this->translate('Total price excl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
       );
 
       $description->addColumn(
         'total_price_incl_vat',
-        (new Integer($this, $this->translate('Total price incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
+        (new Decimal($this, $this->translate('Total price incl. VAT')))->setDecimals(2)->setCssClass('badge badge-warning')
       );
 
     }

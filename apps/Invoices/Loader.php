@@ -84,9 +84,9 @@ class Loader extends \Hubleto\Framework\App
           <span class="icon"><i class="fas fa-arrow-left"></i></span>
           <span class="text">' . $this->translate('Inbound') . '</span>
         </a> -->
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items?filters[fStatus]=1">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">
           <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('Prepared items') . '</span>
+          <span class="text">' . $this->translate('Items') . '</span>
         ' . ($preparedItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $preparedItemsCount . '</span>' : '') . '
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payments">

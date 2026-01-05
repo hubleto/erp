@@ -162,7 +162,6 @@ class Order extends \Hubleto\Erp\RecordManager
     if ($view == 'purchaseOrders') $query = $query->where("orders.purchase_sales", 1);
     if ($view == 'salesOrders') $query = $query->where("orders.purchase_sales", 2);
 
-
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];
       if (in_array('customer', $fGroupBy)) $query = $query->groupBy('id_customer');

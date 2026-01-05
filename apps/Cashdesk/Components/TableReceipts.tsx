@@ -36,7 +36,7 @@ export default class TableReceipts extends HubletoTable<TableReceiptsProps, Tabl
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/cashdesk/receipts/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/cashdesk/receipts/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

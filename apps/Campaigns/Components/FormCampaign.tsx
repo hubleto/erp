@@ -10,7 +10,7 @@ import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import CampaignFormActivity, { CampaignFormActivityProps, CampaignFormActivityState } from './CampaignFormActivity';
 import moment, { Moment } from "moment";
 import Calendar from '../../Calendar/Components/Calendar';
-import { updateFormWorkflowByTag } from '@hubleto/apps/Workflow/Components/WorkflowSelector';
+import { updateFormWorkflowByTag } from '@hubleto/react-ui/ext/WorkflowSelector';
 
 export interface FormCampaignProps extends HubletoFormProps {}
 export interface FormCampaignState extends HubletoFormState {
@@ -187,7 +187,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
           readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -263,7 +263,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
           readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -453,7 +453,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                     }) : null}
                   </code> in
                   campaign <a
-                    href={globalThis.main.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
+                    href={globalThis.hubleto.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
                     target='_blank'
                   >{item.CAMPAIGN.name}</a>.
                 </div>;

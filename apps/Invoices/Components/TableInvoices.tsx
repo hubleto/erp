@@ -96,7 +96,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/invoices/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/' + (id > 0 ? id : 'add'));
   }
 
   cellClassName(columnName: string, column: any, rowData: any) {
@@ -149,7 +149,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
       defaultValues: {
         id_klient: this.state.idCustomer,
         id_profil: 1,
-        id_vystavil: globalThis.main.idUser,
+        id_vystavil: globalThis.hubleto.idUser,
       },
       ui: { headerClassName: 'bg-indigo-50', },
     };

@@ -7,10 +7,10 @@ class MailApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('MailTableMails', TableMails);
-    globalThis.main.registerReactComponent('MailTableTemplates', TableTemplates);
+    globalThis.hubleto.registerReactComponent('MailTableMails', TableMails);
+    globalThis.hubleto.registerReactComponent('MailTableTemplates', TableTemplates);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Mail', new MailApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Mail', new MailApp());

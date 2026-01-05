@@ -1,7 +1,7 @@
 <script>
   function onFilterChange() {
     const fDealResult = document.getElementById("fDealResult").value;
-    const fOwner = globalThis.main.reactElements['fOwner'].state.value;
+    const fOwner = globalThis.hubleto.reactElements['fOwner'].state.value;
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);

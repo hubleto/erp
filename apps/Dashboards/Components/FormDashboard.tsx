@@ -55,7 +55,7 @@ export default class FormDashboard<P, S> extends HubletoForm<FormDashboardProps,
         <a
           className='btn btn-add px-2'
           target='_blank'
-          href={globalThis.main.config.projectUrl+"/dashboards/manage/"+this.state.record.slug}
+          href={globalThis.hubleto.config.projectUrl+"/dashboards/manage/"+this.state.record.slug}
         >
           {this.translate("Preview")}
         </a>

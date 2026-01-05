@@ -10,12 +10,12 @@ class OrdersApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('OrdersTableOrders', TableOrders);
-    globalThis.main.registerReactComponent('OrdersFormActivity', OrdersFormActivity);
-    globalThis.main.registerReactComponent('OrdersTablePayments', TablePayments);
+    globalThis.hubleto.registerReactComponent('OrdersTableOrders', TableOrders);
+    globalThis.hubleto.registerReactComponent('OrdersFormActivity', OrdersFormActivity);
+    globalThis.hubleto.registerReactComponent('OrdersTablePayments', TablePayments);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Deals').addCustomFormTab({
+    globalThis.hubleto.getApp('Hubleto/App/Community/Deals').addCustomFormTab({
       uid: 'orders',
       title: 'Orders',
       onRender: (form: any) => {
@@ -35,7 +35,7 @@ class OrdersApp extends HubletoApp {
       },
     });
 
-    globalThis.main.getApp('Hubleto/App/Community/Deals').addFormHeaderButton(
+    globalThis.hubleto.getApp('Hubleto/App/Community/Deals').addFormHeaderButton(
       'Create order',
       (form: any) => {
         request.get(
@@ -43,7 +43,7 @@ class OrdersApp extends HubletoApp {
           {idDeal: form.state.record.id},
           (data: any) => {
             if (data.status == "success") {
-              globalThis.window.open(globalThis.main.config.projectUrl + '/orders/' + data.idOrder);
+              globalThis.window.open(globalThis.hubleto.config.projectUrl + '/orders/' + data.idOrder);
             }
           }
         );
@@ -53,4 +53,4 @@ class OrdersApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Orders', new OrdersApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Orders', new OrdersApp());

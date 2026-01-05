@@ -49,7 +49,7 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/worksheets/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/worksheets/' + (id > 0 ? id : 'add'));
   }
 
   renderFooter(): JSX.Element {
@@ -61,7 +61,7 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
 
     return <>
       <div className="font-bold">
-        {this.translate('Worked total')}: {globalThis.main.numberFormat(workedTotal, 2, ",", " ")} {this.translate('hours')}<br/>
+        {this.translate('Worked total')}: {globalThis.hubleto.numberFormat(workedTotal, 2, ",", " ")} {this.translate('hours')}<br/>
       </div>
     </>
   }

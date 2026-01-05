@@ -5,7 +5,7 @@
 // import TableMyModel from "./Components/TableMyModel"
 
 // 2. Register the React Component into Hubleto framework
-// globalThis.main.registerReactComponent('WorksheetsTableMyModel', TableMyModel);
+// globalThis.hubleto.registerReactComponent('WorksheetsTableMyModel', TableMyModel);
 
 // 3. Use the component in any of your Twig views:
 // <app-worksheets-table-my-model string:some-property="some-value"></app-worksheets-table-my-model>
@@ -13,5 +13,5 @@
 import TableActivities from './Components/TableActivities';
 import TableActivityTypes from './Components/TableActivityTypes';
 
-globalThis.main.registerReactComponent('WorksheetsTableActivities', TableActivities);
-globalThis.main.registerReactComponent('WorksheetsTableActivityTypes', TableActivityTypes);
+globalThis.hubleto.registerReactComponent('WorksheetsTableActivities', TableActivities);
+globalThis.hubleto.registerReactComponent('WorksheetsTableActivityTypes', TableActivityTypes);

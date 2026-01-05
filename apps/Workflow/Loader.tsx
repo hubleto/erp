@@ -1,3 +1,3 @@
 import SettingsTableWorkflows from "./Components/TableWorkflows"
 
-globalThis.main.registerReactComponent('SettingsTableWorkflows', SettingsTableWorkflows);
+globalThis.hubleto.registerReactComponent('SettingsTableWorkflows', SettingsTableWorkflows);

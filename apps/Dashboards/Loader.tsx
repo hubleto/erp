@@ -7,10 +7,10 @@ class DashboardsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('DashboardsDashboard', Dashboard);
-    globalThis.main.registerReactComponent('DashboardsTableDashboards', TableDashboards);
+    globalThis.hubleto.registerReactComponent('DashboardsDashboard', Dashboard);
+    globalThis.hubleto.registerReactComponent('DashboardsTableDashboards', TableDashboards);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Dashboards', new DashboardsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Dashboards', new DashboardsApp());

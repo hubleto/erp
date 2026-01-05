@@ -9,12 +9,12 @@ class CampaignsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('CampaignsTableCampaigns', TableCampaigns);
-    globalThis.main.registerReactComponent('CampaignsTableRecipients', TableRecipients);
-    globalThis.main.registerReactComponent('CampaignsTableRecipientStatuses', TableRecipientStatuses);
-    globalThis.main.registerReactComponent('CampaignFormActivity', CampaignFormActivity);
+    globalThis.hubleto.registerReactComponent('CampaignsTableCampaigns', TableCampaigns);
+    globalThis.hubleto.registerReactComponent('CampaignsTableRecipients', TableRecipients);
+    globalThis.hubleto.registerReactComponent('CampaignsTableRecipientStatuses', TableRecipientStatuses);
+    globalThis.hubleto.registerReactComponent('CampaignFormActivity', CampaignFormActivity);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Campaigns', new CampaignsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Campaigns', new CampaignsApp());

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
-import WorkflowSelector from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 
@@ -99,7 +98,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                     return (item ? <a
                       key={key}
                       className='badge'
-                      href={globalThis.main.config.projectUrl + '/orders/' + item.id}
+                      href={globalThis.hubleto.config.projectUrl + '/orders/' + item.id}
                       target='_blank'
                     >{item.identifier}</a> : '#');
                   })}</FormInput>
@@ -109,7 +108,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                     return (item ? <a
                       key={key}
                       className='badge'
-                      href={globalThis.main.config.projectUrl + '/deals/' + item.id}
+                      href={globalThis.hubleto.config.projectUrl + '/deals/' + item.id}
                       target='_blank'
                     >{item.identifier}</a> : '#');
                   })}</FormInput>
@@ -119,7 +118,7 @@ export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskS
                     return (item ? <a
                       key={key}
                       className='badge'
-                      href={globalThis.main.config.projectUrl + '/projects/' + item.id}
+                      href={globalThis.hubleto.config.projectUrl + '/projects/' + item.id}
                       target='_blank'
                     >{item.identifier}</a> : '#');
                   })}</FormInput>

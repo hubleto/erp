@@ -46,7 +46,7 @@ export default class TableShops extends HubletoTable<TableShopsProps, TableShops
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/shops/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/shops/' + (id > 0 ? id : 'add'));
   }
 
   rowClassName(rowData: any): string {

@@ -5,7 +5,7 @@
 // import TableMyModel from "./Components/TableMyModel"
 
 // 2. Register the React Component into Hubleto framework
-// globalThis.main.registerReactComponent('EventsTableMyModel', TableMyModel);
+// globalThis.hubleto.registerReactComponent('EventsTableMyModel', TableMyModel);
 
 // 3. Use the component in any of your Twig views:
 // <app-events-table-my-model string:some-property="some-value"></app-events-table-my-model>
@@ -20,12 +20,12 @@ import TableAgendas from './Components/TableAgendas'
 import TableSpeakers from './Components/TableSpeakers'
 import TableEventSpeakers from './Components/TableEventSpeakers'
 
-globalThis.main.registerReactComponent('EventsTableEvents', TableEvents);
-globalThis.main.registerReactComponent('EventsTableTypes', TableTypes);
-globalThis.main.registerReactComponent('EventsTableVenues', TableVenues);
-globalThis.main.registerReactComponent('EventsTableAttendees', TableAttendees);
-globalThis.main.registerReactComponent('EventsTableEventAttendees', TableEventAttendees);
-globalThis.main.registerReactComponent('EventsTableEventVenues', TableEventVenues);
-globalThis.main.registerReactComponent('EventsTableAgendas', TableAgendas);
-globalThis.main.registerReactComponent('EventsTableSpeakers', TableSpeakers);
-globalThis.main.registerReactComponent('EventsTableEventSpeakers', TableEventSpeakers);
+globalThis.hubleto.registerReactComponent('EventsTableEvents', TableEvents);
+globalThis.hubleto.registerReactComponent('EventsTableTypes', TableTypes);
+globalThis.hubleto.registerReactComponent('EventsTableVenues', TableVenues);
+globalThis.hubleto.registerReactComponent('EventsTableAttendees', TableAttendees);
+globalThis.hubleto.registerReactComponent('EventsTableEventAttendees', TableEventAttendees);
+globalThis.hubleto.registerReactComponent('EventsTableEventVenues', TableEventVenues);
+globalThis.hubleto.registerReactComponent('EventsTableAgendas', TableAgendas);
+globalThis.hubleto.registerReactComponent('EventsTableSpeakers', TableSpeakers);
+globalThis.hubleto.registerReactComponent('EventsTableEventSpeakers', TableEventSpeakers);

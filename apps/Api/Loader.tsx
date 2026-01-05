@@ -8,11 +8,11 @@ class ApiApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('ApiTableKeys', TableKeys);
-    globalThis.main.registerReactComponent('ApiTablePermissions', TablePermissions);
-    globalThis.main.registerReactComponent('ApiTableUsages', TableUsages);
+    globalThis.hubleto.registerReactComponent('ApiTableKeys', TableKeys);
+    globalThis.hubleto.registerReactComponent('ApiTablePermissions', TablePermissions);
+    globalThis.hubleto.registerReactComponent('ApiTableUsages', TableUsages);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Api', new ApiApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Api', new ApiApp());

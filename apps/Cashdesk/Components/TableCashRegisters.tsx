@@ -36,7 +36,7 @@ export default class TableCashRegisters extends HubletoTable<TableCashRegistersP
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/cashdesk/cash-registers/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/cashdesk/cash-registers/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

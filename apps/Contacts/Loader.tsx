@@ -6,9 +6,9 @@ class ContactsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('ContactsTableContacts', TableContacts);
+    globalThis.hubleto.registerReactComponent('ContactsTableContacts', TableContacts);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Contacts', new ContactsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Contacts', new ContactsApp());

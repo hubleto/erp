@@ -48,7 +48,7 @@ export default class FormWarehouses extends HubletoTable<TableWarehousesProps, T
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/warehouses/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/warehouses/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

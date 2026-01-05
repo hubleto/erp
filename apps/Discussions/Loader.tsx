@@ -8,11 +8,11 @@ class DiscussionsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('DiscussionsTableMembers', TableMembers);
-    globalThis.main.registerReactComponent('DiscussionsTableDiscussions', TableDiscussions);
-    globalThis.main.registerReactComponent('DiscussionsTableMessages', TableMessages);
+    globalThis.hubleto.registerReactComponent('DiscussionsTableMembers', TableMembers);
+    globalThis.hubleto.registerReactComponent('DiscussionsTableDiscussions', TableDiscussions);
+    globalThis.hubleto.registerReactComponent('DiscussionsTableMessages', TableMessages);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Discussions', new DiscussionsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Discussions', new DiscussionsApp());

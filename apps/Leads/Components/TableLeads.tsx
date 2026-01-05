@@ -53,7 +53,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/leads/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/leads/' + (id > 0 ? id : 'add'));
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
@@ -88,7 +88,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
   onAfterLoadTableDescription(description: any) {
     description.columns['DEAL'] = {
       type: 'varchar',
-      title: globalThis.main.translate('Deal'),
+      title: globalThis.hubleto.translate('Deal'),
     };
 
     return description;

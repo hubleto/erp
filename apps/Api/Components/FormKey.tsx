@@ -94,7 +94,7 @@ export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyStat
             <tbody>
               <tr>
                 <td>{this.translate('Endpoint')}</td>
-                <td className='m-2'>{globalThis.main.config.projectUrl + '/api/call'}</td>
+                <td className='m-2'>{globalThis.hubleto.config.projectUrl + '/api/call'}</td>
               </tr>
               <tr>
                 <td>{this.translate('Key')}</td>

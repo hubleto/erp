@@ -175,7 +175,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
                   return <a
                     key={key}
                     className='badge'
-                    href={globalThis.main.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
+                    href={globalThis.hubleto.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
                     target='_blank'
                   >{item.CAMPAIGN.name}</a>;
                 }) : null}
@@ -265,7 +265,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -341,7 +341,7 @@ export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadSt
           readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

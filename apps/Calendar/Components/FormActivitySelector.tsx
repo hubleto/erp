@@ -65,7 +65,7 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
                       var newMoment = momentDateTime.add(30, 'minutes');
                     }
 
-                    this.setState({formSelected: globalThis.main.renderReactElement(calendarConfigs[item]["formComponent"],
+                    this.setState({formSelected: globalThis.hubleto.renderReactElement(calendarConfigs[item]["formComponent"],
                       {
                         description: {
                           defaultValues: {

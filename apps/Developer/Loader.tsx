@@ -5,7 +5,7 @@
 // import TableMyModel from "./Components/TableMyModel"
 
 // 2. Register the React Component into Hubleto framework
-// globalThis.main.registerReactComponent('DeveloperTableMyModel', TableMyModel);
+// globalThis.hubleto.registerReactComponent('DeveloperTableMyModel', TableMyModel);
 
 // 3. Use the component in any of your Twig views:
 // <app-developer-table-my-model string:some-property="some-value"></app-developer-table-my-model>

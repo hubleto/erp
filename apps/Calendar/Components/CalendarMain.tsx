@@ -87,7 +87,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
             this.setState({
               eventSource: '',
               eventId: 0,
-              activityFormComponent: globalThis.main.renderReactElement(event.SOURCEFORM,
+              activityFormComponent: globalThis.hubleto.renderReactElement(event.SOURCEFORM,
                 {
                   id: event.id,
                   modal: this.refActivityModal,
@@ -178,7 +178,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
 
         <a
           className="btn btn-primary-outline mt-2"
-          href={globalThis.main.config.projectUrl + "/calendar/share"}
+          href={globalThis.hubleto.config.projectUrl + "/calendar/share"}
         >
           <span className="icon"><i className="fa-solid fa-share-from-square"></i></span>
           <span className="text">{this.translate("Export calendar")}</span>
@@ -191,7 +191,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           height={this.props.height}
           initialView={this.props.initialView ?? "timeGridWeek"}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/' + this.getCalendarEventsEndpointUrl()}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/' + this.getCalendarEventsEndpointUrl()}
           onEventsLoaded={(events) => {
           }}
           onDateClick={(date, time, info) => {
@@ -211,7 +211,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
 
             this.setState({
               newActivity: false,
-              activityFormComponent: globalThis.main.renderReactElement(info.event.extendedProps.SOURCEFORM,
+              activityFormComponent: globalThis.hubleto.renderReactElement(info.event.extendedProps.SOURCEFORM,
                 {
                   id: info.event.id,
                   showInModal: true,

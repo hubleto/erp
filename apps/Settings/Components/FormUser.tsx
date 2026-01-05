@@ -70,11 +70,11 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
 
     return <>
       <div className='w-full flex gap-2'>
-        {this.state.id == -1 && !globalThis.main.isPremium ?
+        {this.state.id == -1 && !globalThis.hubleto.isPremium ?
           <div className="badge badge-warning text-lg w-full block p-8">
             You may add new users only in Premium account.<br/>
             <br/>
-            <a href={globalThis.main.config.projectUrl + '/cloud'} className="btn btn-primary">
+            <a href={globalThis.hubleto.config.projectUrl + '/cloud'} className="btn btn-primary">
               <span className="icon"><i className="fas fa-medal"></i></span>
               <span className="text">{this.translate('Activate Premium account')}</span>
             </a>
@@ -104,7 +104,7 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
 
                 {this.divider('Access to Hubleto')}
                 {this.inputWrapper('is_active', {
-                  readonly: this.state.id == globalThis.main.idUser,
+                  readonly: this.state.id == globalThis.hubleto.idUser,
                 })}
                 {this.inputWrapper('password')}
 

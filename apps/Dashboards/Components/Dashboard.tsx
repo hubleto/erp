@@ -225,7 +225,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
 
   render() {
     setTimeout(() => {
-      globalThis.main.renderReactElements();
+      globalThis.hubleto.renderReactElements();
     }, 100);
 
     const panels = this.state.panels;
@@ -293,11 +293,11 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
             onClose={() => { this.setState({showIdDashboard: 0}); }}
             onSaveCallback={() => {
               this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
-              : window.location.assign(globalThis.main.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
+              : window.location.assign(globalThis.hubleto.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
             }}
             onDeleteCallback={() => {
               this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
-              : window.location.assign(globalThis.main.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
+              : window.location.assign(globalThis.hubleto.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
             }}
           />
         </ModalForm>

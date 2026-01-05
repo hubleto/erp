@@ -40,7 +40,7 @@ export default class TablePermissions extends HubletoTable<TablePermissionsProps
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/api/permissions/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/api/permissions/' + (id > 0 ? id : 'add'));
   }
 
   getEndpointParams(): any {

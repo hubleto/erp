@@ -47,7 +47,7 @@ export default class TableKeys extends HubletoTable<TableKeysProps, TableKeysSta
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/api/keys/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/api/keys/' + (id > 0 ? id : 'add'));
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {

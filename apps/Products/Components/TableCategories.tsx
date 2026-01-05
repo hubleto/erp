@@ -44,7 +44,7 @@ export default class TableCategories extends HubletoTable<TableCategoriesProps, 
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/products/categories/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/products/categories/' + (id > 0 ? id : 'add'));
   }
 
   renderHeaderRight(): Array<JSX.Element> {

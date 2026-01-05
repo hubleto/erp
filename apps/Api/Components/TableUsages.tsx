@@ -48,7 +48,7 @@ export default class TableUsages extends HubletoTable<TableUsagesProps, TableUsa
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/api/usages/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/api/usages/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

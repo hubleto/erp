@@ -47,7 +47,7 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/invoices/payments/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/payments/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

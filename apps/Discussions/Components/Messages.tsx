@@ -63,7 +63,7 @@ export default class Messages extends HubletoTable<MessagesProps, MessagesState>
           return <div className="btn btn-list-item btn-transparent gap-2 p-2 justify-between  " key={index}>
             <div>
               <div>
-                {message.id_from == globalThis.main.idUser || !message.FROM?.nick
+                {message.id_from == globalThis.hubleto.idUser || !message.FROM?.nick
                   ? <span className="badge badge-blue">{this.translate('you')}</span>
                   : <span className="badge">{message.FROM?.nick}</span>
                 }

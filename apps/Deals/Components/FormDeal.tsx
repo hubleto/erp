@@ -188,7 +188,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
             {},
             (result: any) => {
               if (result.idDocument) {
-                window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+                window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
               }
             }
           );
@@ -229,7 +229,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
                 return (item.LEAD ? <a
                   key={key}
                   className='badge'
-                  href={globalThis.main.config.projectUrl + '/leads/' + item.LEAD.id}
+                  href={globalThis.hubleto.config.projectUrl + '/leads/' + item.LEAD.id}
                   target='_blank'
                 >#{item.LEAD.id}</a> : '#');
               }) : null}
@@ -310,12 +310,12 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
         const inputsColumnRight = <>
           {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
             <div className="badge badge-violet">
-              {this.translate("Deal value:")} {globalThis.main.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
+              {this.translate("Deal value:")} {globalThis.hubleto.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
             </div>
             {R.WORKFLOW_STEP && R.WORKFLOW_STEP.probability ?
               <div className="badge badge-violet">
                 {this.translate("Weighted profit")} ({R.WORKFLOW_STEP?.probability} %):
-                <strong> {globalThis.main.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
+                <strong> {globalThis.hubleto.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
               </div>
             : null}
           </div> : null}
@@ -395,7 +395,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -471,7 +471,7 @@ export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealSt
           readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

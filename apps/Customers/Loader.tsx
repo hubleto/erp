@@ -8,11 +8,11 @@ class CustomersApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('CustomersTableCustomers', CustomersTableCustomers);
-    globalThis.main.registerReactComponent('CustomersTableActivities', CustomersTableActivities);
-    globalThis.main.registerReactComponent('CustomersFormActivity', CustomersFormActivity);
+    globalThis.hubleto.registerReactComponent('CustomersTableCustomers', CustomersTableCustomers);
+    globalThis.hubleto.registerReactComponent('CustomersTableActivities', CustomersTableActivities);
+    globalThis.hubleto.registerReactComponent('CustomersFormActivity', CustomersFormActivity);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Customers', new CustomersApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Customers', new CustomersApp());

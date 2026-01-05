@@ -55,8 +55,8 @@ export default class FormSharedCalendar<P, S> extends HubletoForm<FormSharedCale
 
       { this.state.record.id > 0 &&
         <div className="flex gap-2 mt-4 input-element">
-          <input type="text" className={"flex-grow bg-muted"} value={globalThis.main.config.projectUrl + "/calendar/" + this.state.record.share_key + "/ics"} readOnly={true}/>
-          <button className="btn btn-primary px-2" onClick={() => navigator.clipboard.writeText(globalThis.main.config.projectUrl + "/calendar/" + this.state.record.share_key + "/ics")}>
+          <input type="text" className={"flex-grow bg-muted"} value={globalThis.hubleto.config.projectUrl + "/calendar/" + this.state.record.share_key + "/ics"} readOnly={true}/>
+          <button className="btn btn-primary px-2" onClick={() => navigator.clipboard.writeText(globalThis.hubleto.config.projectUrl + "/calendar/" + this.state.record.share_key + "/ics")}>
             Copy share link
           </button>
         </div>

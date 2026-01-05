@@ -49,7 +49,7 @@ export default class TableTemplates extends Table<TableTemplatesProps, TableTemp
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/mail/templates/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/mail/templates/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

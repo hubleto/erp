@@ -9,11 +9,11 @@ class ProjectsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('ProjectsTableProjects', TableProjects);
-    globalThis.main.registerReactComponent('ProjectsTablePhases', TablePhases);
+    globalThis.hubleto.registerReactComponent('ProjectsTableProjects', TableProjects);
+    globalThis.hubleto.registerReactComponent('ProjectsTablePhases', TablePhases);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Orders').addCustomFormTab({
+    globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addCustomFormTab({
       uid: 'projects',
       title: 'Projects',
       onRender: (form: any) => {
@@ -33,7 +33,7 @@ class ProjectsApp extends HubletoApp {
       },
     });
 
-    globalThis.main.getApp('Hubleto/App/Community/Orders').addFormHeaderButton(
+    globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addFormHeaderButton(
       'Create project',
       (form: any) => {
         request.get(
@@ -41,7 +41,7 @@ class ProjectsApp extends HubletoApp {
           {idOrder: form.state.record.id},
           (data: any) => {
             if (data.status == "success") {
-              globalThis.window.open(globalThis.main.config.projectUrl + '/projects/' + data.idProject);
+              globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/' + data.idProject);
             }
           }
         );
@@ -51,4 +51,4 @@ class ProjectsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Projects', new ProjectsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Projects', new ProjectsApp());

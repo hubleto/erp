@@ -187,7 +187,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
   //           (result: any) => {
   //             console.log(result);
   //             if (result.idDocument) {
-  //               window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+  //               window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
   //             }
   //           }
   //         );
@@ -253,7 +253,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
                           return (item.DEAL ? <a
                             key={key}
                             className='badge'
-                            href={globalThis.main.config.projectUrl + '/deals/' + item.DEAL.id}
+                            href={globalThis.hubleto.config.projectUrl + '/deals/' + item.DEAL.id}
                             target='_blank'
                           >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
                         }) : null}
@@ -366,7 +366,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           onCreateCallback={() => this.loadRecord()}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -441,7 +441,7 @@ export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrde
           onCreateCallback={() => this.loadRecord()}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.main.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

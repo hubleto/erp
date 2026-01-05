@@ -8,11 +8,11 @@ class DocumentsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('DocumentsTableDocuments', TableDocuments);
-    globalThis.main.registerReactComponent('DocumentsBrowser', Browser);
-    globalThis.main.registerReactComponent('DocumentsTableTemplates', TableTemplates);
+    globalThis.hubleto.registerReactComponent('DocumentsTableDocuments', TableDocuments);
+    globalThis.hubleto.registerReactComponent('DocumentsBrowser', Browser);
+    globalThis.hubleto.registerReactComponent('DocumentsTableTemplates', TableTemplates);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Documents', new DocumentsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Documents', new DocumentsApp());

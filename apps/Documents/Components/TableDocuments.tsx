@@ -36,7 +36,7 @@ export default class TableDocuments extends HubletoTable<TableDocumentsProps, Ta
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/documents/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/documents/' + (id > 0 ? id : 'add'));
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {

@@ -9,12 +9,12 @@ class LeadsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('LeadsTableLeads', TableLeads);
-    globalThis.main.registerReactComponent('LeadsTableLevels', TableLevels);
-    globalThis.main.registerReactComponent('LeadFormActivity', LeadFormActivity);
+    globalThis.hubleto.registerReactComponent('LeadsTableLeads', TableLeads);
+    globalThis.hubleto.registerReactComponent('LeadsTableLevels', TableLevels);
+    globalThis.hubleto.registerReactComponent('LeadFormActivity', LeadFormActivity);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Campaigns').addCustomFormTab({
+    globalThis.hubleto.getApp('Hubleto/App/Community/Campaigns').addCustomFormTab({
       uid: 'leads',
       title: 'Leads',
       onRender: (form: any) => {
@@ -34,4 +34,4 @@ class LeadsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Leads', new LeadsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Leads', new LeadsApp());

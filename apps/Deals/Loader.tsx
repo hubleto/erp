@@ -9,11 +9,11 @@ class DealsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('DealsTableDeals', TableDeals);
-    globalThis.main.registerReactComponent('DealsFormActivity', DealFormActivity);
+    globalThis.hubleto.registerReactComponent('DealsTableDeals', TableDeals);
+    globalThis.hubleto.registerReactComponent('DealsFormActivity', DealFormActivity);
 
     // miscellaneous
-    globalThis.main.getApp('Hubleto/App/Community/Leads').addCustomFormTab({
+    globalThis.hubleto.getApp('Hubleto/App/Community/Leads').addCustomFormTab({
       uid: 'deals',
       title: 'Deals',
       onRender: (form: any) => {
@@ -33,7 +33,7 @@ class DealsApp extends HubletoApp {
       },
     });
 
-    globalThis.main.getApp('Hubleto/App/Community/Leads').addFormHeaderButton(
+    globalThis.hubleto.getApp('Hubleto/App/Community/Leads').addFormHeaderButton(
       'Create deal',
       (form: any) => {
         request.get(
@@ -41,7 +41,7 @@ class DealsApp extends HubletoApp {
           {idLead: form.state.record.id},
           (data: any) => {
               if (data.status == "success") {
-              globalThis.window.open(globalThis.main.config.projectUrl + `/deals/${data.idDeal}`)
+              globalThis.window.open(globalThis.hubleto.config.projectUrl + `/deals/${data.idDeal}`)
               }
           }
         );
@@ -51,4 +51,4 @@ class DealsApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Deals', new DealsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Deals', new DealsApp());

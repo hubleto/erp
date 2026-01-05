@@ -37,7 +37,7 @@ export default class TableTemplates extends HubletoTable<TableTemplatesProps, Ta
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/documents/templates/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/documents/templates/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

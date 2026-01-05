@@ -9,11 +9,11 @@ class ProductsApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('ProductsTableCategories', TableCategories);
-    globalThis.main.registerReactComponent('ProductsTableGroups', TableGroups);
-    globalThis.main.registerReactComponent('ProductsTableProducts', TableProducts);
+    globalThis.hubleto.registerReactComponent('ProductsTableCategories', TableCategories);
+    globalThis.hubleto.registerReactComponent('ProductsTableGroups', TableGroups);
+    globalThis.hubleto.registerReactComponent('ProductsTableProducts', TableProducts);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Products', new ProductsApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Products', new ProductsApp());

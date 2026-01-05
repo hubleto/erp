@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
-import WorkflowSelector from '@hubleto/apps/Workflow/Components/WorkflowSelector';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import FormInput from '@hubleto/react-ui/core/FormInput';
@@ -122,7 +121,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                     return (item.ORDER ? <a
                       key={key}
                       className='badge'
-                      href={globalThis.main.config.projectUrl + '/orders/' + item.ORDER.id}
+                      href={globalThis.hubleto.config.projectUrl + '/orders/' + item.ORDER.id}
                       target='_blank'
                     >#{item.ORDER.identifier}&nbsp;{item.ORDER.title}</a> : '#');
                   }) : null}
@@ -227,7 +226,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                       return <tr key={key}>
                         <td>{item.year}-{item.month}</td>
                         <td>{item.worked_hours} hours</td>
-                        <td>{globalThis.main.numberFormat(item.costs, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
+                        <td>{globalThis.hubleto.numberFormat(item.costs, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
                       </tr>;
                     })}
                   </tbody>
@@ -235,7 +234,7 @@ export default class FormProject<P, S> extends HubletoForm<FormProjectProps, For
                     <tr>
                       <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
                       <td className='bg-primary text-white p-2'>{totalWorkedHours} hours</td>
-                      <td className='bg-primary text-white p-2'>{globalThis.main.numberFormat(totalCosts, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
+                      <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalCosts, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
                     </tr>
                   </tfoot>
                 </table>

@@ -12,15 +12,15 @@ class WarehousesApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('WarehousesTableWarehouses', TableWarehouses);
-    globalThis.main.registerReactComponent('WarehousesTableInventory', TableInventory);
-    globalThis.main.registerReactComponent('WarehousesTableLocations', TableLocations);
-    globalThis.main.registerReactComponent('WarehousesTableTransactions', TableTransactions);
-    globalThis.main.registerReactComponent('WarehousesTableTransactionItems', TableTransactionItems);
-    globalThis.main.registerReactComponent('WarehousesFormTransaction', FormTransaction);
+    globalThis.hubleto.registerReactComponent('WarehousesTableWarehouses', TableWarehouses);
+    globalThis.hubleto.registerReactComponent('WarehousesTableInventory', TableInventory);
+    globalThis.hubleto.registerReactComponent('WarehousesTableLocations', TableLocations);
+    globalThis.hubleto.registerReactComponent('WarehousesTableTransactions', TableTransactions);
+    globalThis.hubleto.registerReactComponent('WarehousesTableTransactionItems', TableTransactionItems);
+    globalThis.hubleto.registerReactComponent('WarehousesFormTransaction', FormTransaction);
 
     // custom tabs
-    globalThis.main.getApp('Hubleto/App/Community/Products').addCustomFormTab({
+    globalThis.hubleto.getApp('Hubleto/App/Community/Products').addCustomFormTab({
       uid: 'inventory',
       title: 'Inventory',
       onRender: (form: any) => {
@@ -34,7 +34,7 @@ class WarehousesApp extends HubletoApp {
       },
     });
 
-    globalThis.main.getApp('Hubleto/App/Community/Products').addCustomFormTab({
+    globalThis.hubleto.getApp('Hubleto/App/Community/Products').addCustomFormTab({
       uid: 'transactions',
       title: 'Transactions',
       onRender: (form: any) => {
@@ -51,4 +51,4 @@ class WarehousesApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Suppliers', new WarehousesApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Suppliers', new WarehousesApp());

@@ -75,7 +75,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
   }
 
   stopSharingConfirm(calendar: any) {
-    globalThis.main.showDialogConfirm(
+    globalThis.hubleto.showDialogConfirm(
       this.translate(
         'You are about to remove all shared access to the calendar "' + calendar + '". Do you want to continue?',
         'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'

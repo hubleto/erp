@@ -9,12 +9,12 @@ class InvoicesApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('InvoicesTableProfiles', TableProfiles);
-    globalThis.main.registerReactComponent('InvoicesTableInvoices', TableInvoices);
-    globalThis.main.registerReactComponent('InvoicesTableItems', TableItems);
-    globalThis.main.registerReactComponent('InvoicesTablePayments', TablePayments);
+    globalThis.hubleto.registerReactComponent('InvoicesTableProfiles', TableProfiles);
+    globalThis.hubleto.registerReactComponent('InvoicesTableInvoices', TableInvoices);
+    globalThis.hubleto.registerReactComponent('InvoicesTableItems', TableItems);
+    globalThis.hubleto.registerReactComponent('InvoicesTablePayments', TablePayments);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Invoices', new InvoicesApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Invoices', new InvoicesApp());

@@ -86,7 +86,7 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
     file_put_contents($app->srcFolder . '/Views/' . $view . '.twig', $this->renderer()->renderView('@snippets/ViewWithTable.twig.twig', $tplVars));
 
     $codeLoaderTsxLine1 = [ "import Table{$modelPluralForm} from './Components/Table{$modelPluralForm}';" ];
-    $codeLoaderTsxLine2 = [ "globalThis.main.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});" ];
+    $codeLoaderTsxLine2 = [ "globalThis.hubleto.registerReactComponent('{$appName}Table{$modelPluralForm}', Table{$modelPluralForm});" ];
     $codeRoute = [ "\$this->router()->get([ '/^{$app->manifest['rootUrlSlug']}\/" . strtolower($modelPluralFormKebab) . "(\/(?<recordId>\d+))?\/?$/' => Controllers\\{$controller}::class ]);" ];
     $codeButton = [
       "<a class='btn btn-large btn-square btn-transparent' href='{$app->manifest['rootUrlSlug']}/{$modelPluralFormKebab}'>",

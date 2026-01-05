@@ -7,4 +7,4 @@ class DesktopApp extends HubletoApp {
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Desktop', new DesktopApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Desktop', new DesktopApp());

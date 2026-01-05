@@ -173,16 +173,16 @@ export default class FormReceipt<P, S> extends HubletoForm<FormReceiptProps, For
                     <div className='text-blue-400'>{item.PRODUCT.ean ?? '-'}</div>
                     <div className='font-bold'>{item.PRODUCT.name}</div>
                     <div className='flex gap justify-between w-full'>
-                     <div>{globalThis.main.numberFormat(item.quantity, 2, ",", " ")}x</div>
-                     <div>{globalThis.main.numberFormat(item.unit_price_incl_vat, 2, ",", " ")} €</div>
-                     <div>{globalThis.main.numberFormat(item.vat_percent, 2, ",", " ")} %</div>
-                     <div>{globalThis.main.numberFormat(item.total_price_incl_vat, 2, ",", " ")} €</div>
+                     <div>{globalThis.hubleto.numberFormat(item.quantity, 2, ",", " ")}x</div>
+                     <div>{globalThis.hubleto.numberFormat(item.unit_price_incl_vat, 2, ",", " ")} €</div>
+                     <div>{globalThis.hubleto.numberFormat(item.vat_percent, 2, ",", " ")} %</div>
+                     <div>{globalThis.hubleto.numberFormat(item.total_price_incl_vat, 2, ",", " ")} €</div>
                     </div>
                   </div>;
                 }) : null}
               </div>
               <div className='p-2 mt-2 bg-gray-600 text-white text-3xl'>
-                TOTAL: {globalThis.main.numberFormat(R.total_price_incl_vat, 2, ",", " ")} €
+                TOTAL: {globalThis.hubleto.numberFormat(R.total_price_incl_vat, 2, ",", " ")} €
               </div>
               <div className='mt-4 p-2 text-center'>
                 {R.created}<br/>

@@ -49,7 +49,7 @@ export default class TableTransaction extends HubletoTable<TableTransactionsProp
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/warehouses/transactions/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/warehouses/transactions/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

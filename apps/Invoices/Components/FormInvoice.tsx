@@ -80,7 +80,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   //             {},
   //             (result: any) => {
   //               if (result.idDocument) {
-  //                 window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+  //                 window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
   //               }
   //             }
   //           );
@@ -159,13 +159,13 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               <div className='p-2 grow text-nowrap bg-slate-100 text-slate-800'>
                 <div>
                   <div className='text-4xl'>
-                    <b>{globalThis.main.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
+                    <b>{globalThis.hubleto.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
                   </div>
                   <div className='text-sm'>excl. VAT</div>
                 </div>
                 <div className='mt-2'>
                   <div className='text-4xl'>
-                    {globalThis.main.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
+                    {globalThis.hubleto.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
                   </div>
                   <div className='text-sm'>incl. VAT</div>
                 </div>
@@ -378,10 +378,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                               </div></td>
                               <td className={rowBgClass + ' text-right'} colSpan={4}>
                                 <div>
-                                  {globalThis.main.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} excl. VAT
+                                  {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} excl. VAT
                                 </div>
                                 <div>
-                                  {globalThis.main.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} incl. VAT
+                                  {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} incl. VAT
                                 </div>
                               </td>
                             </tr>
@@ -487,7 +487,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                       {},
                       (result: any) => {
                         // if (result.idDocument) {
-                        //   window.open(globalThis.main.config.projectUrl + '/documents/' + result.idDocument);
+                        //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
                         // }
                         this.reload();
                       }

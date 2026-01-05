@@ -47,7 +47,7 @@ export default class TableItems extends HubletoTable<TableItemsProps, TableItems
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/invoices/items/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/items/' + (id > 0 ? id : 'add'));
   }
 
   renderCell(columnName: string, column: any, data: any, options: any) {
@@ -55,7 +55,7 @@ export default class TableItems extends HubletoTable<TableItemsProps, TableItems
       return <button
         className='btn btn-yellow btn-small'
         onClick={() => {
-          return globalThis.main.showDialogConfirm(
+          return globalThis.hubleto.showDialogConfirm(
             <>
               <div className='font-bold'>{data.CUSTOMER.name}</div>
               <div className='font-bold'>{data.item}</div>
@@ -76,7 +76,7 @@ export default class TableItems extends HubletoTable<TableItemsProps, TableItems
                   {},
                   (data: any) => {
                     if (!isNaN(data.idInvoice)) {
-                      window.location.href = globalThis.main.config.projectUrl + '/invoices/' + data.idInvoice;
+                      window.location.href = globalThis.hubleto.config.projectUrl + '/invoices/' + data.idInvoice;
                     }
                   }
                 );

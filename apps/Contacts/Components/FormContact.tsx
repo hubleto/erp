@@ -83,7 +83,7 @@ export default class FormContact<P, S> extends HubletoForm<FormContactProps,Form
           if (response.result == true) {
             this.updateRecord({is_primary: 1})
           } else {
-            globalThis.main.showDialogDanger(
+            globalThis.hubleto.showDialogDanger(
               <>
                 <p className='text'>{response.error ?? "Unknown error"}</p>
                 <p className='text'>{response.names != null ? response.names : ""}</p>

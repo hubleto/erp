@@ -6,10 +6,10 @@ class BillingApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('BillingTableBillingAccountService', BillingTableBillingAccountService);
+    globalThis.hubleto.registerReactComponent('BillingTableBillingAccountService', BillingTableBillingAccountService);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Billing', new BillingApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Billing', new BillingApp());
 

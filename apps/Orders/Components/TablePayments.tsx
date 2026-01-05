@@ -49,7 +49,7 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/orders/payments/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/orders/payments/' + (id > 0 ? id : 'add'));
   }
 
   cellClassName(columnName: string, column: any, rowData: any) {
@@ -80,7 +80,7 @@ export default class TablePayments extends HubletoTable<TablePaymentsProps, Tabl
         return <button
           className='btn btn-yellow btn-small'
           onClick={() => {
-            return globalThis.main.showDialogConfirm(
+            return globalThis.hubleto.showDialogConfirm(
               <>
                 <div>{data.ORDER?.identifier} ({data.ORDER?.title})</div>
                 <div className='font-bold'>{data.title}</div>

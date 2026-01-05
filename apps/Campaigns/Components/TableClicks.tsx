@@ -60,7 +60,7 @@ export default class TableClicks extends HubletoTable<TableClicksProps, TableCli
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/campaigns/clicks/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/campaigns/clicks/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

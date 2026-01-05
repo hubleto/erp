@@ -51,7 +51,7 @@ export default class TableTasks extends HubletoTable<TableTasksProps, TableTasks
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/tasks/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/tasks/' + (id > 0 ? id : 'add'));
   }
 
   rowClassName(rowData: any): string {

@@ -9,13 +9,13 @@ class CalendarApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('CalendarShareTable', CalendarShareTable);
-    globalThis.main.registerReactComponent('CalendarMain', CalendarMain);
-    globalThis.main.registerReactComponent('CalendarActivityForm', CalendarActivityForm);
-    globalThis.main.registerReactComponent('SharedCalendarForm', FormSharedCalendar);
+    globalThis.hubleto.registerReactComponent('CalendarShareTable', CalendarShareTable);
+    globalThis.hubleto.registerReactComponent('CalendarMain', CalendarMain);
+    globalThis.hubleto.registerReactComponent('CalendarActivityForm', CalendarActivityForm);
+    globalThis.hubleto.registerReactComponent('SharedCalendarForm', FormSharedCalendar);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Calendar', new CalendarApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Calendar', new CalendarApp());
 

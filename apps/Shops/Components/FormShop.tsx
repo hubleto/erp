@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
-import WorkflowSelector from '@hubleto/apps/Workflow/Components/WorkflowSelector';
-import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
-import FormInput from '@hubleto/react-ui/core/FormInput';
 
 interface FormShopProps extends HubletoFormProps { }
 interface FormShopState extends HubletoFormState { }

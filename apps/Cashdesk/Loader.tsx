@@ -7,10 +7,10 @@ class CashdeskApp extends HubletoApp {
     super.init();
 
     // register react components
-    globalThis.main.registerReactComponent('CashdeskTableReceipts', TableReceipts);
-    globalThis.main.registerReactComponent('CashdeskTableCashRegisters', TableCashRegisters);
+    globalThis.hubleto.registerReactComponent('CashdeskTableReceipts', TableReceipts);
+    globalThis.hubleto.registerReactComponent('CashdeskTableCashRegisters', TableCashRegisters);
   }
 }
 
 // register app
-globalThis.main.registerApp('Hubleto/App/Community/Cashdesk', new CashdeskApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/Cashdesk', new CashdeskApp());

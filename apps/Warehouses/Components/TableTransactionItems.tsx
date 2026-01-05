@@ -49,7 +49,7 @@ export default class TableTransactionItems extends HubletoTable<TableTransaction
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/warehouses/transactions/items/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/warehouses/transactions/items/' + (id > 0 ? id : 'add'));
   }
 
   cellClassName(columnName: string, column: any, rowData: any) {

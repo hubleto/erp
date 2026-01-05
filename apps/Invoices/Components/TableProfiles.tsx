@@ -47,7 +47,7 @@ export default class TableProfiles extends HubletoTable<TableProfilesProps, Tabl
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.main.config.projectUrl + '/invoices/profiles/' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/profiles/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): JSX.Element {

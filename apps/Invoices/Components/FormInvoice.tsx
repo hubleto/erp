@@ -500,10 +500,9 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 <button
                   className='btn btn-transparent mb-4'
                   onClick={() => {
-                    console.log(this.props.uid + '_invoice_preview');
                     const iframe = window.frames[this.props.uid + '_invoice_preview'];
                     const documentTitle = document.title;
-                    document.title = 'Invoice ' + R.PROFILE.COMPANY.name + ' ' + R.number;
+                    document.title = 'Invoice ' + R.number + ' ' + R.CUSTOMER.name;
                     iframe.contentWindow.focus();
                     iframe.contentWindow.print();
 

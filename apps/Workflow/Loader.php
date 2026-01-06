@@ -21,6 +21,8 @@ class Loader extends \Hubleto\Framework\App
       '/^workflow\/api\/get-workflows\/?$/' => Controllers\Api\GetWorkflows::class,
       '/^workflow\/api\/get-workflow-step-by-tag\/?$/' => Controllers\Api\GetWorkflowStepByTag::class,
 
+      '/^workflow\/boards\/items-with-not-updated-step\/?$/' => Controllers\Boards\ItemsWithNotUpdatedStep::class,
+
       '/^workflow\/?$/' => Controllers\Workflow::class,
       '/^workflow(\/(?<idWorkflow>\d+))?\/?$/' => Controllers\Workflow::class,
       '/^workflow\/history\/?$/' => Controllers\History::class,
@@ -33,6 +35,14 @@ class Loader extends \Hubleto\Framework\App
       'icon' => 'fas fa-bars-progress',
       'url' => 'settings/workflows'
     ]);
+
+    /** @var \Hubleto\App\Community\Dashboards\Manager */
+    $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
+    $dashboardManager->addBoard(
+      $this,
+      $this->translate('Items with not updated step'),
+      'workflow/boards/items-with-not-updated-step'
+    );
   }
 
   /**

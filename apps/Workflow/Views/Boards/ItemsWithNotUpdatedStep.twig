@@ -1,0 +1,27 @@
+Model <b>{{ viewParams.model }}</b>.
+
+<div class="mt-2">
+  {% if viewParams.error != '' %}
+    <div class="alert alert-danger">{{ viewParams.error }}</div>
+  {% else %}
+
+    <table class="table-default dense">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Days without workflow update</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in viewParams.records %}
+          <tr>
+            <td>
+              <a href="{{ config.projectUrl }}/{{ r._URL_DETAIL }}" target="_blank">{{ r._LOOKUP }}</a>
+            </td>
+            <td>{{ r.last_change_before_days }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>

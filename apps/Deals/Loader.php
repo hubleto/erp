@@ -56,12 +56,6 @@ class Loader extends \Hubleto\Framework\App
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflow($this, 'deals', Workflow::class);
 
-    // /** @var \Hubleto\App\Community\Reports\Loader */
-    // $reportsApp = $this->appManager()->getApp(\Hubleto\App\Community\Reports\Loader::class);
-    // if ($reportsApp != null) {
-    //   $reportsApp->reportManager->addReport($this, Reports\MonthlyRevenue::class);
-    // }
-
     /** @var \Hubleto\App\Community\Dashboards\Manager */
     $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $dashboardManager->addBoard($this, $this->translate('Deal warnings'), 'deals/boards/deal-warnings');

@@ -72,10 +72,10 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       $canModify = true;
     }
 
-    if (is_array($sharedWith) && isset($sharedWith[$idUser])) {
-      if (!$canRead && $sharedWith[$idUser]['canRead']) $canRead = true;
-      if (!$canModify && $sharedWith[$idUser]['canModify']) $canModify = true;
-    }
+    // if (is_array($sharedWith) && isset($sharedWith[$idUser])) {
+    //   if (!$canRead && ($sharedWith[$idUser] == 'read' || $sharedWith[$idUser] == 'modify')) $canRead = true;
+    //   if (!$canModify && $sharedWith[$idUser] == 'modify') $canModify = true;
+    // }
 
     $permissions = [true, $canRead, $canModify, $canModify];
 

@@ -6,6 +6,7 @@ namespace Hubleto\App\Community\Deals\Models;
 use Hubleto\App\Community\Deals\Loader as DealsApp;
 
 use Hubleto\App\Community\Settings\PermissionsManager;
+use Hubleto\Framework\Db\Column\Json;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\DateTime;
@@ -102,6 +103,7 @@ class Deal extends \Hubleto\Erp\Model
       'date_expected_close' => (new Date($this, $this->translate('Expected close date'))),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'id_template_quotation' => (new Lookup($this, $this->translate('Template for quotation'), Template::class)),
       'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),

@@ -56,7 +56,7 @@ class Loader extends \Hubleto\Framework\App
     $mWorkflow = $this->getModel(Models\Workflow::class);
 
     $html = '';
-    foreach ($mWorkflow->record->orderBy('order')->get() as $workflow) {
+    foreach ($mWorkflow->record->where('show_in_kanban', true)->orderBy('order')->get() as $workflow) {
       $html .= '
         <a
           class="

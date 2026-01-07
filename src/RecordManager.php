@@ -41,6 +41,10 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $idOwner = $record['id_owner'] ?? 0;
     $idManager = $record['id_manager'] ?? 0;
     $idTeam = $record['id_team'] ?? 0;
+    $sharedWith = @json_decode($record['shared_with'] ?? '', true);
+
+    $canRead = false;
+    $canModify = false;
 
     $isOwner = $hasIdOwner ? $idOwner > 0 && $idOwner == $idUser : true;
     $isManager = $hasIdManager ? $idManager > 0 && $idManager == $idUser : true;
@@ -48,84 +52,30 @@ class RecordManager extends \Hubleto\Framework\RecordManager
 
     // enable permissions by certain criteria
 
-    if ($permissions['ownedRecordsRead'] == 'owned') {
+    if ($permissions['recordsRead'] == 'owned') {
       $canRead = $isOwner;
-    } elseif ($permissions['ownedRecordsRead'] == 'owned-and-managed') {
+    } elseif ($permissions['recordsRead'] == 'owned-and-managed') {
       $canRead = $isOwner || $isManager;
-    } else if ($permissions['ownedRecordsRead'] == 'owned-managed-and-team') {
+    } else if ($permissions['recordsRead'] == 'owned-managed-and-team') {
       $canRead = $isOwner || $isManager || $isTeamMember;
-    } else if ($permissions['ownedRecordsRead'] == 'all') {
+    } else {
       $canRead = true;
     }
 
-    if ($permissions['ownedRecordsModify'] == 'owned') {
+    if ($permissions['recordsModify'] == 'owned') {
       $canModify = $isOwner;
-    } elseif ($permissions['ownedRecordsModify'] == 'owned-and-managed') {
+    } elseif ($permissions['recordsModify'] == 'owned-and-managed') {
       $canModify = $isOwner || $isManager;
-    } else if ($permissions['ownedRecordsModify'] == 'owned-managed-and-team') {
+    } else if ($permissions['recordsModify'] == 'owned-managed-and-team') {
       $canModify = $isOwner || $isManager || $isTeamMember;
-    } else if ($permissions['ownedRecordsModify'] == 'all') {
+    } else {
       $canModify = true;
     }
 
-    // if ($authProvider->getUserType() == User::TYPE_ADMINISTRATOR) {
-    //   $canRead = true;
-    //   $canModify = true;
-    // } if ($authProvider->getUserType() == User::TYPE_CHIEF_OFFICER) {
-    //   // CxO can do anything except for modifying config and settings
-
-    //   $canRead = true;
-    //   $canModify = true;
-
-    //   if (str_starts_with($this->model->fullName, 'Hubleto/Core/Config')) {
-    //     $canModify = false;
-    //   }
-    // } elseif ($authProvider->getUserType() == User::TYPE_MANAGER) {
-    //   // Manager can:
-    //   //   - read only records where he/she is owner or manager
-    //   //   - modify only records where he/she is owner
-
-    //   $canRead = false;
-    //   $canModify = false;
-
-    //   if (!$hasIdManager && !$hasIdTeam && !$hasIdOwner) {
-    //     $canRead = true;
-    //     $canModify = true;
-    //   } else {
-    //     if ($hasIdManager && $isManager) {
-    //       $canRead = true;
-    //       $canModify = true;
-    //     }
-    //     if ($hasIdTeam && $isTeamMember) {
-    //       $canRead = true;
-    //     }
-
-    //     if ($hasIdOwner && $isOwner) {
-    //       $canRead = true;
-    //       $canModify = true;
-    //     }
-    //   }
-
-    //   $permissions = [$canRead, $canModify, $canModify, $canModify];
-    // } elseif ($authProvider->getUserType() == User::TYPE_EMPLOYEE) {
-    //   // Employee can:
-    //   //   - read/modify only records where he/she is owner
-
-    //   if ($hasIdOwner && $isOwner || !$hasIdOwner) {
-    //     $canRead = true;
-    //     $canModify = true;
-    //   }
-
-    // } elseif ($authProvider->getUserType() == User::TYPE_ASSISTANT) {
-    //   // Assistant can:
-    //   //   - read/modify only records where he/she is owner
-
-    //   if ($hasIdOwner && $isOwner || !$hasIdOwner) {
-    //     $canRead = true;
-    //   }
-    // } elseif ($authProvider->getUserType() == User::TYPE_EXTERNAL) {
-    //   // Externals cannot do anything by default
-    // }
+    if (is_array($sharedWith) && isset($sharedWith[$idUser])) {
+      if (!$canRead && $sharedWith[$idUser]['canRead']) $canRead = true;
+      if (!$canModify && $sharedWith[$idUser]['canModify']) $canModify = true;
+    }
 
     $permissions = [true, $canRead, $canModify, $canModify];
 

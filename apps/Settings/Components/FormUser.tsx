@@ -128,12 +128,10 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                     <div>
                       <select
                         onChange={(event) => {
-                          console.log(event);
-                          permissions.ownedRecordsRead = event.currentTarget.value;
-                          console.log(permissions);
+                          permissions.recordsRead = event.currentTarget.value;
                           this.updateRecord({permissions: JSON.stringify(permissions)});
                         }}
-                        value={permissions.ownedRecordsRead ?? 'owned'}
+                        value={permissions.recordsRead ?? 'owned'}
                       >
                         <option value='owned'>Can read only owned records</option>
                         <option value='owned-and-managed'>Can read only owned and managed records</option>
@@ -146,11 +144,10 @@ export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserS
                     <div>
                       <select
                         onChange={(event) => {
-                          console.log(event);
-                          permissions.ownedRecordsModify = event.currentTarget.value;
+                          permissions.recordsModify = event.currentTarget.value;
                           this.updateRecord({permissions: JSON.stringify(permissions)});
                         }}
-                        value={permissions.ownedRecordsModify ?? 'owned'}
+                        value={permissions.recordsModify ?? 'owned'}
                       >
                         <option value='owned'>Can modify only owned records</option>
                         <option value='owned-and-managed'>Can modify only owned and managed records</option>

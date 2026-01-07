@@ -16,7 +16,13 @@ Model <b>{{ viewParams.model }}</b>.
         {% for r in viewParams.records %}
           <tr>
             <td>
-              <a href="{{ config.projectUrl }}/{{ r._URL_DETAIL }}" target="_blank">{{ r._LOOKUP }}</a>
+              <i>{{ r.WORKFLOW_STEP.name }}</i>
+              <a href="{{ config.projectUrl }}/{{ r._URL_DETAIL }}" target="_blank">{{ r._LOOKUP }}</a><br/>
+              <div class="text-xs">
+                {{ r._LOOKUP_DETAILS }}
+                |
+                Last update by @{{ r.USER.nick }}
+              </div>
             </td>
             <td>{{ r.last_change_before_days }}</td>
           </tr>

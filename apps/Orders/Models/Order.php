@@ -234,6 +234,19 @@ class Order extends \Hubleto\Erp\Model
   }
 
   /**
+   * [Description for getLookupDetails]
+   *
+   * @param array $dataRaw
+   * 
+   * @return string
+   * 
+   */
+  public function getLookupDetails(array $dataRaw): string
+  {
+    return $dataRaw['CUSTOMER']['name'] ?? '';
+  }
+
+  /**
    * [Description for onAfterUpdate]
    *
    * @param array $originalRecord

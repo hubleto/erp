@@ -168,13 +168,8 @@ class Lead extends \Hubleto\Erp\Model
       case 'shared_folder':
         $description
           ->setReactComponent('InputHyperlink')
-          // ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
         ;
         break;
-        break;
-        // case 'id_customer':
-        //   $description ->setExtendedProps(['urlAdd' => 'customers/add']);
-        // break;
     }
     return $description;
   }
@@ -233,6 +228,19 @@ class Lead extends \Hubleto\Erp\Model
     $description->ui['addButtonText'] = $this->translate('Add Lead');
 
     return $description;
+  }
+
+  /**
+   * [Description for getLookupDetails]
+   *
+   * @param array $dataRaw
+   * 
+   * @return string
+   * 
+   */
+  public function getLookupDetails(array $dataRaw): string
+  {
+    return $dataRaw['CUSTOMER']['name'] ?? '';
   }
 
   /**

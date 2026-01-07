@@ -43,6 +43,8 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $idTeam = $record['id_team'] ?? 0;
     $sharedWith = @json_decode($record['shared_with'] ?? '', true);
 
+    if (!is_array($sharedWith)) $sharedWith = [];
+
     $canRead = false;
     $canModify = false;
 
@@ -72,10 +74,10 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       $canModify = true;
     }
 
-    // if (is_array($sharedWith) && isset($sharedWith[$idUser])) {
-    //   if (!$canRead && ($sharedWith[$idUser] == 'read' || $sharedWith[$idUser] == 'modify')) $canRead = true;
-    //   if (!$canModify && $sharedWith[$idUser] == 'modify') $canModify = true;
-    // }
+    if (isset($sharedWith[$idUser])) {
+      if ($sharedWith[$idUser] == 'read' || $sharedWith[$idUser] == 'modify') $canRead = true;
+      if ($sharedWith[$idUser] == 'modify') $canModify = true;
+    }
 
     $permissions = [true, $canRead, $canModify, $canModify];
 

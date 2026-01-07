@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow\Models;
 
+use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Integer;
 
@@ -21,6 +22,7 @@ class Workflow extends \Hubleto\Erp\Model
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
       'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
+      'show_in_kanban' => (new Boolean($this, $this->translate('Show in kanban')))->setDefaultVisible(),
       'group' => (new Varchar($this, $this->translate('Group')))->setRequired()->setDefaultVisible()->setPredefinedValues([
         'deals',
         'orders',

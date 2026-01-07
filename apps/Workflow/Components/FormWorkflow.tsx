@@ -58,7 +58,6 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
 
   renderContent(): JSX.Element {
     const R = this.state.record;
-    const showAdditional = R.id > 0 ? true : false;
 
     return <div className="flex gap-2" >
       <div>
@@ -68,6 +67,7 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
           {this.inputWrapper("order")}
           {this.inputWrapper("group")}
           {this.inputWrapper("description")}
+          {this.inputWrapper("show_in_kanban")}
         </div>
       </div>
 
@@ -123,7 +123,6 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
                 color: { type: "color", title: "Color" },
                 probability: { type: "int", title: "Probability", unit: "%" },
                 tag: { type: "varchar", title: "Tag"},
-                set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
               },
               inputs: {
                 name: { type: "varchar", title: "Name" },
@@ -131,7 +130,6 @@ export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, F
                 color: { type: "color", title: "Color" },
                 probability: { type: "int", title: "Probability", unit: "%" },
                 tag: { type: "varchar", title: "Tag"},
-                set_result: { type: "integer", title: "Sets result of a deal to", enumValues: {1: "Pending", 2: "Won", 3: "Lost"} },
               },
             }}
           ></TableWorkflowSteps>

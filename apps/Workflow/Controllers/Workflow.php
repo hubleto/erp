@@ -27,7 +27,7 @@ class Workflow extends \Hubleto\Erp\Controller
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $mWorkflow = $this->getModel(ModelWorkflow::class);
 
-    $workflows = $mWorkflow->record->get()?->toArray();
+    $workflows = $mWorkflow->record->where('show_in_kanban', true)->get()?->toArray();
     if (!is_array($workflows)) $workflows = [];
 
     $idWorkflow = $this->router()->urlParamAsInteger('idWorkflow');

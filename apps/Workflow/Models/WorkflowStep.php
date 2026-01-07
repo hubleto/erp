@@ -27,8 +27,8 @@ class WorkflowStep extends \Hubleto\Erp\Model
       'color' => (new Color($this, $this->translate('Color')))->setRequired(),
       'tag' => (new Varchar($this, $this->translate('Tag'))),
       'probability' => (new Integer($this, $this->translate('Probability')))->setUnit("%"),
-      'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))
-        ->setEnumValues([Deal::RESULT_UNKNOWN => "Unknown", Deal::RESULT_WON => "Won",  Deal::RESULT_LOST => "Lost"])
+      // 'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))
+      //   ->setEnumValues([Deal::RESULT_UNKNOWN => "Unknown", Deal::RESULT_WON => "Won",  Deal::RESULT_LOST => "Lost"])
     ]);
   }
 
@@ -44,4 +44,5 @@ class WorkflowStep extends \Hubleto\Erp\Model
 
     return $description;
   }
+
 }

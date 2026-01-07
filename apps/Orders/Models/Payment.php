@@ -123,4 +123,15 @@ class Payment extends \Hubleto\Erp\Model
     $description->show(['copyButton']);
     return $description;
   }
+
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['INVOICE_ITEM'];
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
+  }
+
 }

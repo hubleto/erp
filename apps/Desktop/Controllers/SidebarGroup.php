@@ -6,6 +6,7 @@ use Hubleto\App\Community\Desktop\Loader;
 class SidebarGroup extends \Hubleto\Erp\Controller
 {
   public bool $requiresAuthenticatedUser = true;
+  public bool $permittedForAllUsers = true;
   public bool $hideDefaultDesktop = false;
   public string $translationContext = 'Hubleto\\Erp\\Loader::Controllers\\SidebarGroup';
 

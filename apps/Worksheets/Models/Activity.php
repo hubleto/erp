@@ -97,9 +97,9 @@ class Activity extends \Hubleto\Erp\Model
 
       $description->addColumn(
         'total_worked_hours',
-        (new Integer($this, $this->translate('Total worked hours')))->setUnit('hours')->setDecimals(2)->setCssClass('badge badge-warning')
+        (new Decimal($this, $this->translate('Total worked hours')))->setUnit('hours')->setDecimals(2)->setCssClass('badge badge-warning')
       );
-      $description->hideColumns(['worked_hours']);
+      // $description->hideColumns(['worked_hours']);
 
     }
 

@@ -81,7 +81,7 @@ class Loader extends \Hubleto\Framework\App
     //     '%' . $e . '%', '%' . $e . '%', '%' . $e . '%',
     //     '%' . $e . '%'
     //   ]);
-      $qTasks = $qTasks->where(function($q) use ($e) {
+      $qTasks = $qTasks->having(function($q) use ($e) {
         $q->orHaving('tasks.identifier', 'like', '%' . $e . '%');
         $q->orHaving('tasks.title', 'like', '%' . $e . '%');
         // $q->orHaving('virt_related_to', 'like', '%' . $e . '%');

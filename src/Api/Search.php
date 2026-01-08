@@ -74,7 +74,9 @@ class Search extends \Hubleto\Erp\Controllers\ApiController
       if ($canSearchThisApp && count($expressionsToSearch) > 0) {
         $appResults = $app->search($expressionsToSearch);
         foreach ($appResults as $key => $value) {
+          $value['APP_SHORT_NAME'] = $app->shortName;
           $value['APP_NAMESPACE'] = $appNamespace;
+          $value['APP_ICON'] = $app->manifest['icon'] ?? '';
           $results[] = $value;
         }
       }

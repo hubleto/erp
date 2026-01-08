@@ -64,8 +64,8 @@ class Task extends \Hubleto\Erp\Model
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
-      'hours_estimation' => (new Decimal($this, $this->translate('Estimation')))->setDefaultVisible()->setUnit('h')->setDecimals(2),
-      'duration_days' => (new Integer($this, $this->translate('Duration')))->setDefaultVisible()->setUnit('days'),
+      'hours_estimation' => (new Decimal($this, $this->translate('Estimated workhours')))->setDefaultVisible()->setUnit('h')->setDecimals(2),
+      'duration_days' => (new Integer($this, $this->translate('Estimated duration')))->setDefaultVisible()->setUnit('days'),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),

@@ -44,6 +44,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
   refTestEmailRecipientInput: any;
   refLogActivityInput: any;
   refActivityModal: any;
+  refActivityForm: any;
 
   constructor(props: FormCampaignProps) {
     super(props);
@@ -51,6 +52,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
     this.refTestEmailRecipientInput = React.createRef();
     this.refLogActivityInput = React.createRef();
     this.refActivityModal = React.createRef();
+    this.refActivityForm = React.createRef();
   }
 
   getStateFromProps(props: FormCampaignProps) {
@@ -292,12 +294,14 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
           {this.state.showIdActivity == 0 ? null :
             <ModalForm
               ref={this.refActivityModal}
+              form={this.refActivityForm}
               uid='activity_form'
               isOpen={true}
               type='right'
             >
               <CampaignFormActivity
                 modal={this.refActivityModal}
+                ref={this.refActivityForm}
                 id={this.state.showIdActivity}
                 isInlineEditing={true}
                 description={{
@@ -433,6 +437,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
       break;
 
       case 'launch':
+        console.log(R.RECIPIENTS);
         return <>
           {this.state.campaignWarnings ? <>
             {this.state.campaignWarnings.recentlyContacted
@@ -465,16 +470,27 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
             <div className='alert alert-warning'>Campaign was already launched by {R.LAUNCHED_BY.email} on {R.datetime_launched}.</div>
           : null}
 
-          {this.state.recipients ? <>
-            <div className='flex flex-wrap mt-2 text-sm gap-2'>
-              <b>Recipients:</b>
-              {this.state.recipients ? this.state.recipients.map((item, key) => {
-                return <span key={key}>{item.email}</span>;
-              }) : null}
+          {R.RECIPIENTS ? <div className='flex gap-2 w-full'>
+            <div className='card grow'>
+              <div className='card-header'>Recipients</div>
+              <div className='card-body'>
+                {R.RECIPIENTS ? R.RECIPIENTS.map((item, key) => {
+                  return <div className='flex gap-2 items-center'>
+                    <div key={key}>{item.email}</div>
+                    {item.id_mail > 0 ? (
+                      item.MAIL?.datetime_sent
+                        ? <div className='badge badge-success'>Email was sent on {item.MAIL?.datetime_sent}</div>
+                        : <div className='badge badge-warning'>Email scheduled for {item.MAIL?.datetime_scheduled_to_send}</div>
+                    ) : null}
+                    {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
+                    {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
+                  </div>
+                }) : null}
+              </div>
             </div>
-            <div className='mt-2'>
+            <div className='grow'>
               <button
-                className="btn btn-primary-outline btn-large"
+                className="btn btn-add-outline btn-large"
                 onClick={() => {
                   request.post(
                     'campaigns/api/launch',
@@ -485,6 +501,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                       if (result.status && result.status == 'success') {
                         updateFormWorkflowByTag(this, 'campaign-launched', () => {
                           this.saveRecord();
+                          this.reload();
                         });
                       }
                     }
@@ -492,8 +509,15 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 }}
               >
                 <span className="icon"><i className="fas fa-paper-plane"></i></span>
-                <span className="text">Send email to {this.state.recipients.length} recipients now!</span>
+                <span className="text">Launch campaign now!</span>
               </button>
+              <div className='mt-2 alert alert-info'>
+                Emails will be sent only to recipients who did not receive email from
+                this campaign yet.
+              </div>
+              <div className='mt-2 alert alert-info'>
+                Opted-out recipients will be ignored.
+              </div>
               {this.state.launchResult && this.state.launchResult.status == 'success' ?
                 <div className='alert alert-success mt-2'>Campaign was launched.</div>
               : null}
@@ -504,7 +528,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                 </div>
               : null}
             </div>
-          </> : <>
+          </div> : <>
             <div className='alert alert-warning'>Campaign has no recipients. Add recipients first and then launch.</div>
           </>}
         </>;

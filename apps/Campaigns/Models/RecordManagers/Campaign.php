@@ -15,7 +15,6 @@ use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 class Campaign extends \Hubleto\Erp\RecordManager
 {
   public $table = 'campaigns';
-  public array $readQueryHiddenRelations = ['RECIPIENTS'];
 
   /** @return BelongsTo<User, covariant Lead> */
   public function MANAGER(): BelongsTo

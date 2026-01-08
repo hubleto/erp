@@ -36,7 +36,7 @@ class Campaign extends \Hubleto\Erp\Model
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step' ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
 
-    // 'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_deal', 'id' ],
+    'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_deal', 'id' ],
     'TASKS' => [ self::HAS_MANY, CampaignTask::class, 'id_deal', 'id' ],
   ];
 
@@ -125,6 +125,13 @@ class Campaign extends \Hubleto\Erp\Model
     $description->includeRelations = ['WORKFLOW', 'WORKFLOW_STEP'];
 
     return $description;
+  }
+
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    $recordId = $this->router()->urlParamAsInteger('recordId');
+    if ($recordId > 0) return ['RECIPIENTS', 'RECIPIENTS.STATUS', 'RECIPIENTS.MAIL'];
+    else return [];
   }
 
   /**

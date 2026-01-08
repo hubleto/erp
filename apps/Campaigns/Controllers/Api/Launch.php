@@ -25,6 +25,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
         ->where('campaigns.id', $idCampaign)
         ->with('MAIL_TEMPLATE')
         ->with('RECIPIENTS')
+        ->with('RECIPIENTS.STATUS')
         ->first()
       ;
 
@@ -43,6 +44,9 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
         );
 
         if (!filter_var($recipient->email, FILTER_VALIDATE_EMAIL)) continue;
+        if ($recipient->STATUS?->is_opted_out ?? false) continue;
+        if ($recipient->STATUS?->is_invalid ?? false) continue;
+        if ($recipient->id_mail > 0) continue;
 
         $mailData = [
           'subject' => $campaign->MAIL_TEMPLATE->subject,

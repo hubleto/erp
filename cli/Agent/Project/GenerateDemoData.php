@@ -622,7 +622,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
         "id_lead" => $lead->id,
         "deal_result" => $pStep['set_result'] ?? 0,
         "date_created" => $dealDateCreated,
-        "date_result_update" => $pStep['set_result'] != \Hubleto\App\Community\Deals\Models\Deal::RESULT_UNKNOWN ? $dealDateClose : null,
+        "date_result_update" => ($pStep['set_result'] ?? 0) != \Hubleto\App\Community\Deals\Models\Deal::RESULT_UNKNOWN ? $dealDateClose : null,
       ])['id'];
 
       $mLeadHistory->record->recordCreate([

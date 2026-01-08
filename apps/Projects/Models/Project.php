@@ -35,6 +35,7 @@ class Project extends \Hubleto\Erp\Model
 
   public array $relations = [
     'MAIN_DEVELOPER' => [ self::HAS_ONE, User::class, 'id_main_developer', 'id' ],
+    'PROJECT_MANAGER' => [ self::HAS_ONE, User::class, 'id_project_manager', 'id' ],
     'ACCOUNT_MANAGER' => [ self::HAS_ONE, User::class, 'id_account_manager', 'id' ],
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
@@ -62,6 +63,9 @@ class Project extends \Hubleto\Erp\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
+        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+      ,
+      'id_project_manager' => (new Lookup($this, $this->translate('Project manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()

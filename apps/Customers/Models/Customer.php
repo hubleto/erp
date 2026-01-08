@@ -59,7 +59,7 @@ class Customer extends Model
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setDefaultVisible(),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setDefaultVisible()->setDefaultValue(1),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),

@@ -4,22 +4,22 @@
     },
     "models.invoice": {
         "Profile": "Profil",
-        "Issued by": "Wystawiał",
+        "Issued by": "Wystawca",
         "Customer": "Klient",
         "Number": "Numer",
-        "TIP: Number is auto-generated based on the pattern configured in the profile.": "TIP: Numer generowany jest automatycznie według wzoru w profilu.",
-        "Variable symbol": "Zmienny symbol",
-        "Constant symbol": "Stały symbol",
-        "Specific symbol": "Specyficzny symbol",
-        "Issued": "Narażona",
-        "Delivered": "Dostawne",
-        "Due": "Dojrzałość",
-        "Payment": "Zwrot kosztów",
-        "Notes": "Notatki"
+        "TIP: Number is auto-generated based on the pattern configured in the profile.": "WSKAZÓWKA: Numer jest generowany automatycznie na podstawie wzorca skonfigurowanego w profilu.",
+        "Variable symbol": "Symbol zmienny",
+        "Constant symbol": "Symbol stały",
+        "Specific symbol": "Symbol specyficzny",
+        "Issued": "Data wystawienia",
+        "Delivered": "Data dostawy",
+        "Due": "Termin płatności",
+        "Payment": "Płatność",
+        "Notes": "Uwagi"
     },
     "models.Item": {
         "Invoice": "Faktura",
-        "Item": "Przedmiot",
+        "Item": "Pozycja",
         "Unit price": "Cena jednostkowa",
         "Amount": "Ilość"
     },
@@ -27,24 +27,24 @@
         "Invoices": "Faktury"
     },
     "tableInvoices": {
-        "Total excl. VAT": "Razem bez VAT",
-        "Total incl. VAT": "Razem z VAT",
+        "Total excl. VAT": "Suma netto",
+        "Total incl. VAT": "Suma brutto",
         "VAT": "VAT",
         "Customer": "Klient",
-        "Variable symbol": "Zmienny symbol",
+        "Variable symbol": "Symbol zmienny",
         "Number": "Numer",
-        "Issue": "Wydany",
-        "Due": "Termin",
-        "Delivery": "Data dostawy",
-        "Payment": "Zapłata",
-        "Total VAT": "Całkowity podatek VAT"
+        "Issue": "Data wystawienia",
+        "Due": "Termin płatności",
+        "Delivery": "Dostawa",
+        "Payment": "Płatność",
+        "Total VAT": "Suma VAT"
     },
     "manifest": {
-        "Invoices": "",
-        "Prepared items": "",
-        "Payments": "",
-        "Payment methods": "",
-        "Profiles": "",
-        "Invoincing": ""
+        "Invoices": "Faktury",
+        "Prepared items": "Przygotowane pozycje",
+        "Payments": "Płatności",
+        "Payment methods": "Metody płatności",
+        "Profiles": "Profile",
+        "Invoicing": "Fakturowanie"
     }
 }

@@ -3,33 +3,33 @@
         "First name": "Imię",
         "Middle name": "Drugie imię",
         "Last name": "Nazwisko",
-        "Email": "Email",
+        "Email": "E-mail",
         "Language": "Język",
         "Active profile": "Aktywny profil",
         "Login": "Login",
         "Password": "Hasło",
-        "Active": "Konto jest aktywne",
-        "Time of last login": "Godzina ostatniego logowania",
-        "Last login IP": "Adres IP ostatniego logowania",
-        "Time of last access": "Ostatni czas dostępu",
-        "Last access IP": "Adres IP ostatniego dostępu"
+        "Active": "Aktywny",
+        "Time of last login": "Czas ostatniego logowania",
+        "Last login IP": "IP ostatniego logowania",
+        "Time of last access": "Czas ostatniego dostępu",
+        "Last access IP": "IP ostatniego dostępu"
     },
     "models.country": {
-        "Country Name": "Państwo",
+        "Country Name": "Kraj",
         "Code": "Kod"
     },
     "models.profile": {
         "Company": "Firma"
     },
     "models.activityType": {
-        "Type Name": "Typ",
+        "Type Name": "Nazwa typu",
         "Color": "Kolor",
-        "Shown in Calendar": "Zobacz w kalendarzu",
+        "Shown in Calendar": "Widoczny w kalendarzu",
         "Icon": "Ikona"
     },
     "models.currency": {
         "Currency Name": "Waluta",
-        "Currency Code": "Kod"
+        "Currency Code": "Kod waluty"
     },
     "models.workflow": {
         "Name": "Nazwa",
@@ -37,47 +37,47 @@
     },
     "models.workflowStep": {
         "Name": "Nazwa",
-        "Order": "Zamówienie",
-        "Company": "Kolor"
+        "Order": "Kolejność",
+        "Company": "Firma"
     },
     "models.tag": {
         "Name": "Nazwa",
         "Color": "Kolor"
     },
     "models.setting": {
-        "Key": "Parametr",
+        "Key": "Klucz",
         "Value": "Wartość",
         "Only for user": "Tylko dla użytkownika"
     },
     "models.invoiceProfile": {
         "Name": "Nazwa",
         "Phone": "Telefon",
-        "E-mail": "Email",
+        "E-mail": "E-mail",
         "WWW": "WWW",
-        "Company ID": "Numer identyfikacyjny",
-        "Tax ID": "CYNA",
-        "VAT ID": "NUMER VAT",
-        "Street, line 1": "Ulica, rząd nr. 1",
-        "Street, line 2": "Ulica, rząd nr. 2",
+        "Company ID": "REGON / Numer firmy",
+        "Tax ID": "NIP",
+        "VAT ID": "Numer VAT",
+        "Street, line 1": "Adres (linia 1)",
+        "Street, line 2": "Adres (linia 2)",
         "ZIP": "Kod pocztowy",
         "City": "Miasto",
-        "Country": "Państwo",
-        "Bank name": "Názwa banku",
+        "Country": "Kraj",
+        "Bank name": "Nazwa banku",
         "Account number": "Numer konta",
         "Account IBAN": "IBAN",
-        "SWIFT": "SWIFT",
-        "Numbering pattern": "Wzór na numerację"
+        "SWIFT": "SWIFT / BIC",
+        "Numbering pattern": "Schemat numeracji"
     },
     "models.userRole": {
         "Role": "Rola",
         "Grant all permissions": "Przyznaj wszystkie uprawnienia"
     },
     "models.rolePermission": {
-        "Permission": "Pozwolenie",
+        "Permission": "Uprawnienie",
         "Role": "Rola"
     },
     "models.permission": {
-        "Permission": "Pozwolenie"
+        "Permission": "Uprawnienie"
     },
     "controllers.dashboard": {
         "Settings": "Ustawienia",
@@ -85,15 +85,15 @@
         "User Roles": "Role użytkowników",
         "Profiles": "Profile",
         "Permissions": "Uprawnienia",
-        "Tags": "Tags",
-        "Activity Types": "Rodzaje działalności",
-        "Contact Types": "Rodzaje działalności",
-        "Countries": "Państwa",
+        "Tags": "Tagi",
+        "Activity Types": "Typy aktywności",
+        "Contact Types": "Typy kontaktów",
+        "Countries": "Kraje",
         "Currencies": "Waluty",
         "Lead Statuses": "Statusy leadów",
-        "Deal Statuses": "Statusy dealów",
-        "Workflows": "Workflows",
-        "Invoice profiles": "Profile rozliczeniowe"
+        "Deal Statuses": "Statusy szans sprzedaży",
+        "Workflows": "Procesy (Workflows)",
+        "Invoice profiles": "Profile fakturowania"
     },
     "controllers.userRoles": {
         "Settings": "Ustawienia",
@@ -101,52 +101,52 @@
     },
     "controllers.countries": {
         "Settings": "Ustawienia",
-        "Countries": "Państwa"
+        "Countries": "Kraje"
     },
     "loader": {
         "Settings": "Ustawienia"
     },
     "input": {
-        "Upload file": ""
+        "Upload file": "Prześlij plik"
     },
     "Models\\User": {
         "First name": "Imię",
         "Last name": "Nazwisko",
-        "Nick": "Nacięcie",
+        "Nick": "Pseudonim",
         "Email": "E-mail",
         "Language": "Język",
-        "Default company": "Firma domyślna"
+        "Default company": "Domyślna firma"
     },
     "Models\\UserRole": {
         "Role": "Rola",
-        "Grant all permissions (administrator role)": "Przyznać wszystkie uprawnienia (rola administratora)",
+        "Grant all permissions (administrator role)": "Przyznaj wszystkie uprawnienia (rola administratora)",
         "Description": "Opis",
-        "Is default role (cannot be modified)": "Jest domyślną rolą (nie można zmodyfikować)"
+        "Is default role (cannot be modified)": "Rola domyślna (brak możliwości modyfikacji)"
     },
     "Models\\UserHasRole": {
         "User": "Użytkownik",
         "Role": "Rola"
     },
     "Models\\RolePermission": {
-        "Permission": "Pozwolenie",
+        "Permission": "Uprawnienie",
         "Role": "Rola"
     },
     "manifest": {
         "Settings": "Ustawienia",
-        "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania dla twojego Hubleto.",
+        "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania Twojego Hubleto.",
         "Settings and tools": "Ustawienia i narzędzia",
-        "Users": "",
-        "Roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Activity types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Platform config": "",
-        "Sidebar": "",
-        "Teams": ""
+        "Users": "Użytkownicy",
+        "Roles": "Role",
+        "Your companies": "Twoje firmy",
+        "General settings": "Ustawienia ogólne",
+        "Permissions list": "Lista uprawnień",
+        "Role permissions": "Uprawnienia ról",
+        "Activity types": "Typy aktywności",
+        "Countries": "Kraje",
+        "Currencies": "Waluty",
+        "Platform config": "Konfiguracja platformy",
+        "Sidebar": "Pasek boczny",
+        "Teams": "Zespoły"
     },
     "root": {
         "Users": "Użytkownicy",
@@ -154,11 +154,11 @@
         "Your companies": "Twoje firmy",
         "General settings": "Ustawienia ogólne",
         "Permissions list": "Lista uprawnień",
-        "Role permissions": "Uprawnienia do ról",
+        "Role permissions": "Uprawnienia ról",
         "Activity types": "Typy aktywności",
         "Countries": "Kraje",
         "Currencies": "Waluty",
-        "Invoice profiles": "Profile faktury",
+        "Invoice profiles": "Profile faktur",
         "Platform config": "Konfiguracja platformy",
         "Sidebar": "Pasek boczny",
         "Teams": "Zespoły"
@@ -169,18 +169,18 @@
     },
     "Models\\Company": {
         "Company": "Firma",
-        "Tax ID": "Identyfikator podatkowy",
+        "Tax ID": "NIP",
         "VAT ID": "VAT ID",
-        "Street, line 1": "Ulica, linia 1",
-        "Street, line 2": "Ulica, linia 2",
-        "ZIP": "ZAMEK BŁYSKAWICZNY",
+        "Street, line 1": "Adres (linia 1)",
+        "Street, line 2": "Adres (linia 2)",
+        "ZIP": "Kod pocztowy",
         "City": "Miasto",
         "Country": "Kraj",
-        "Registration ID": "",
-        "Business register": "",
-        "Logo": "",
-        "Brand color - primary": "",
-        "Brand color - secondary": ""
+        "Registration ID": "REGON",
+        "Business register": "Rejestr przedsiębiorców (KRS)",
+        "Logo": "Logo",
+        "Brand color - primary": "Główny kolor marki",
+        "Brand color - secondary": "Dodatkowy kolor marki"
     },
     "Models\\ActivityType": {
         "Type": "Typ",
@@ -194,14 +194,14 @@
         "Symbol": "Symbol"
     },
     "Models\\Team": {
-        "Team name": "",
-        "Team color": "",
-        "Description": "",
-        "Manager": ""
+        "Team name": "Nazwa zespołu",
+        "Team color": "Kolor zespołu",
+        "Description": "Opis",
+        "Manager": "Kierownik / Menedżer"
     },
     "Models\\Setting": {
-        "Key": "",
-        "Value": "",
-        "Only for user": ""
+        "Key": "Klucz",
+        "Value": "Wartość",
+        "Only for user": "Tylko dla użytkownika"
     }
 }

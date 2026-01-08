@@ -1,21 +1,21 @@
 {
     "Models\\Contact": {
-        "Salutation": "Pozdrowienie",
-        "Title before": "Tytuł wcześniej",
+        "Salutation": "Zwrot grzecznościowy",
+        "Title before": "Tytuł przed nazwiskiem",
         "First name": "Imię",
         "Middle name": "Drugie imię",
         "Last name": "Nazwisko",
-        "Title after": "Tytuł po",
+        "Title after": "Tytuł po nazwisku",
         "Customer": "Klient",
-        "Primary Contact": "Kontakt podstawowy",
-        "Notes": "Notatki",
-        "Date Created": "Utworzona data",
+        "Primary Contact": "Kontakt główny",
+        "Notes": "Uwagi",
+        "Date Created": "Data utworzenia",
         "Active": "Aktywny",
         "Add contact": "Dodaj kontakt",
-        "Emails": "E -maile",
+        "Emails": "Adresy e-mail",
         "Phone Numbers": "Numery telefonów",
-        "Valid": "",
-        "Tags": ""
+        "Valid": "Poprawny",
+        "Tags": "Tagi"
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -23,15 +23,15 @@
         "Type": "Typ",
         "Email": "E-mail",
         "Number": "Numer",
-        "URL": "URL",
-        "Other": "Inny",
+        "URL": "Adres URL",
+        "Other": "Inne",
         "Value": "Wartość",
-        "Contacts": "",
-        "Add Customer": ""
+        "Contacts": "Kontakty",
+        "Add Customer": "Dodaj klienta"
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
-        "Tag": "Etykietka"
+        "Tag": "Tag"
     },
     "Models\\Category": {
         "Type": "Typ"
@@ -41,13 +41,13 @@
         "Color": "Kolor"
     },
     "manifest": {
-        "Contacts": "",
-        "Default customer management and addressbook.": "",
-        "Contact Categories": "",
-        "Contact Tags": "",
-        "Import contacts": ""
+        "Contacts": "Kontakty",
+        "Default customer management and addressbook.": "Domyślne zarządzanie klientami i książka adresowa.",
+        "Contact Categories": "Kategorie kontaktów",
+        "Contact Tags": "Tagi kontaktów",
+        "Import contacts": "Importuj kontakty"
     },
     "Controllers\\Contacts": {
-        "Contacts": ""
+        "Contacts": "Kontakty"
     }
 }

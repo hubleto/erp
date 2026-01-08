@@ -4,38 +4,38 @@
     },
     "manifest": {
         "Documents": "Dokumenty",
-        "Free document management.": "Darmowe zarządzanie dokumentami.",
-        "Browse": "",
-        "Show as list": "",
-        "Manage folders": "",
-        "Templates": ""
+        "Free document management.": "Bezpłatne zarządzanie dokumentami.",
+        "Browse": "Przeglądaj",
+        "Show as list": "Widok listy",
+        "Manage folders": "Zarządzaj folderami",
+        "Templates": "Szablony"
     },
     "root": {
-        "Browse": "Przeglądać",
+        "Browse": "Przeglądaj",
         "List": "Lista"
     },
     "Models\\Document": {
         "Uid": "UID",
-        "Folder": "Falcówka",
+        "Folder": "Folder",
         "Document name": "Nazwa dokumentu",
         "File": "Plik",
-        "File Link": "Link pliku",
-        "Origin Link": "Link pochodzenia",
-        "Add Document": ""
+        "File Link": "Link do pliku",
+        "Origin Link": "Link źródłowy",
+        "Add Document": "Dodaj dokument"
     },
     "Models\\Template": {
-        "Name": "",
-        "Used For": "",
-        "Content": "",
-        "Notes": ""
+        "Name": "Nazwa",
+        "Used For": "Zastosowanie",
+        "Content": "Treść",
+        "Notes": "Uwagi"
     },
     "Controllers\\Browse": {
-        "Browse": "",
-        "Documents": ""
+        "Browse": "Przeglądaj",
+        "Documents": "Dokumenty"
     },
     "Models\\Folder": {
-        "Uid": "",
-        "Parent folder": "",
-        "Folder name": ""
+        "Uid": "UID",
+        "Parent folder": "Folder nadrzędny",
+        "Folder name": "Nazwa folderu"
     }
 }

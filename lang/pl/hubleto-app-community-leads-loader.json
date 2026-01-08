@@ -1,106 +1,106 @@
 {
     "loaders": {
-        "Leads": "Leads",
+        "Leads": "Leady",
         "Leads Archive": "Archiwum leadów"
     },
     "controllers.leads": {
         "Sales": "Sprzedaż",
-        "Leads": "Leads"
+        "Leads": "Leady"
     },
     "controllers.leadsArchive": {
         "Sales": "Sprzedaż",
-        "Leads": "Leads",
+        "Leads": "Leady",
         "Archive": "Archiwum"
     },
     "manifest": {
-        "Leads": "Wskazówki",
-        "Management of leads, cold contacts. Convert leads to deals.": "Zarządzanie potencjalnymi klientami, zimnymi kontaktami. Konwertuj prowadzi do ofert.",
-        "Lead Levels": "",
-        "Lead Tags": "",
-        "Lead Lost Reasons": "",
-        "Active leads": "",
-        "Archived leads": ""
+        "Leads": "Leady",
+        "Management of leads, cold contacts. Convert leads to deals.": "Zarządzanie leadami i zimnymi kontaktami. Konwertuj leady na szanse sprzedaży.",
+        "Lead Levels": "Poziomy leadów",
+        "Lead Tags": "Tagi leadów",
+        "Lead Lost Reasons": "Przyczyny utraty leadów",
+        "Active leads": "Aktywne leady",
+        "Archived leads": "Zarchiwizowane leady"
     },
     "root": {
-        "Lead Tags": "Tagi ołowiowe",
-        "Lead Lost Reasons": "Ołów przegrał powody",
+        "Lead Tags": "Tagi leadów",
+        "Lead Lost Reasons": "Przyczyny utraty leadów",
         "Active leads": "Aktywne leady",
-        "Archived leads": "Zarchiwizowane przewody"
+        "Archived leads": "Zarchiwizowane leady"
     },
     "Models\\LeadActivity": {
         "Subject": "Temat",
         "Activity type": "Typ aktywności",
         "Start date": "Data rozpoczęcia",
-        "Start time": "Czas rozpoczęcia",
+        "Start time": "Godzina rozpoczęcia",
         "End date": "Data zakończenia",
-        "End time": "Czas zakończenia",
+        "End time": "Godzina zakończenia",
         "All day": "Cały dzień",
-        "Completed": "Zakończony",
-        "Created by": "Stworzone przez",
-        "Lead": "Ołów",
+        "Completed": "Zakończono",
+        "Created by": "Utworzone przez",
+        "Lead": "Lead",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Minuty spotkań (link)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Meeting minutes (link)": "Notatka ze spotkania (link)",
+        "Location": "Lokalizacja",
+        "Online meeting link": "Link do spotkania online",
+        "Description": "Opis",
+        "Recurrence": "Cykliczność",
+        "Long meeting minutes (link to external document)": "Pełna notatka ze spotkania (link zewnętrzny)",
+        "Short meeting minutes": "Krótka notatka ze spotkania"
     },
     "Models\\Lead": {
-        "Lead Identifier": "Identyfikator ołowiu",
+        "Lead Identifier": "Identyfikator leada",
         "Title": "Tytuł",
         "Customer": "Klient",
         "Contact": "Kontakt",
         "Price": "Cena",
         "Currency": "Waluta",
-        "Score": "Wynik",
-        "Expected close date": "Oczekiwana data zamknięcia",
+        "Score": "Ocena (Score)",
+        "Expected close date": "Przewidywana data zamknięcia",
         "Owner": "Właściciel",
-        "Created": "Stworzony",
+        "Created": "Utworzono",
         "Status": "Status",
-        "Reason for Lost": "Powód utraconego",
-        "Notes": "Notatki",
+        "Reason for Lost": "Przyczyna utraty",
+        "Notes": "Uwagi",
         "Source channel": "Kanał źródłowy",
         "Archived": "Zarchiwizowane",
-        "Add lead": "Dodaj ołów",
-        "Manager": "Menedżer",
-        "Specific subject (if any)": "",
-        "Email": "",
-        "Phone number": "",
-        "Team": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Closed": "",
-        "Tags": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": "",
-        "Add Lead": ""
+        "Add lead": "Dodaj lead",
+        "Manager": "Opiekun / Menedżer",
+        "Specific subject (if any)": "Temat szczegółowy",
+        "Email": "E-mail",
+        "Phone number": "Numer telefonu",
+        "Team": "Zespół",
+        "Workflow": "Proces / Lejek",
+        "Workflow step": "Etap procesu",
+        "Closed": "Zamknięte",
+        "Tags": "Tagi",
+        "Open \/ Closed": "Otwarte \/ Zamknięte",
+        "Open": "Otwarte",
+        "All": "Wszystkie",
+        "Add Lead": "Dodaj lead"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Utracony rozum"
+        "Lost Reason": "Przyczyna utraty"
     },
     "Models\\LeadHistory": {
         "Change Date": "Data zmiany",
-        "Lead": "Ołów",
+        "Lead": "Lead",
         "Description": "Opis"
     },
     "Models\\LeadTag": {
-        "Lead": "Ołów",
-        "Tag": "Etykietka"
+        "Lead": "Lead",
+        "Tag": "Tag"
     },
     "Models\\LeadProduct": {
-        "Lead": "Ołów",
+        "Lead": "Lead",
         "Product": "Produkt",
         "Unit Price": "Cena jednostkowa",
-        "Amount": "Kwota",
-        "Vat": "Kadź",
+        "Amount": "Ilość",
+        "Vat": "VAT",
         "Discount": "Rabat",
         "Sum": "Suma"
     },
     "Models\\LeadDocument": {
-        "Lead": "Ołów",
+        "Lead": "Lead",
         "Document": "Dokument"
     },
     "Models\\Tag": {
@@ -108,17 +108,17 @@
         "Color": "Kolor"
     },
     "Controllers\\Leads": {
-        "Leads": "Wskazówki"
+        "Leads": "Leady"
     },
     "Models\\LeadCampaign": {
-        "Lead": "",
-        "Campaign": ""
+        "Lead": "Lead",
+        "Campaign": "Kampania"
     },
     "Models\\LeadTask": {
-        "Lead": "",
-        "Task": ""
+        "Lead": "Lead",
+        "Task": "Zadanie"
     },
     "Controllers\\Boards\\LeadWarnings": {
-        "Open leads without future plan": ""
+        "Open leads without future plan": "Otwarte leady bez zaplanowanych działań"
     }
 }

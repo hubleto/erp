@@ -1,123 +1,123 @@
 {
     "loader": {
-        "Deals": "Deals",
-        "Deals Archive": "Archiwum dealów"
+        "Deals": "Szanse sprzedaży",
+        "Deals Archive": "Archiwum szans sprzedaży"
     },
     "controllers.deals": {
         "Sales": "Sprzedaż",
-        "Deals": "Deals"
+        "Deals": "Szanse sprzedaży"
     },
     "controllers.dealsArchive": {
         "Sales": "Sprzedaż",
-        "Deals": "Deals",
+        "Deals": "Szanse sprzedaży",
         "Archive": "Archiwum"
     },
     "manifest": {
-        "Deals": "Oferty",
-        "Deal management. From deal to purchase.": "Zarządzanie transakcją. Od umowy do zakupu.",
-        "Deal Tags": "",
-        "Deal Lost Reasons": "",
-        "Deal warnings": "",
-        "Most valuable deals": "",
-        "Deal value by result": ""
+        "Deals": "Szanse sprzedaży",
+        "Deal management. From deal to purchase.": "Zarządzanie transakcjami. Od szansy do zakupu.",
+        "Deal Tags": "Tagi szans sprzedaży",
+        "Deal Lost Reasons": "Przyczyny utraty szans",
+        "Deal warnings": "Ostrzeżenia dotyczące szans",
+        "Most valuable deals": "Najcenniejsze szanse sprzedaży",
+        "Deal value by result": "Wartość szans według wyniku"
     },
     "root": {
-        "Deal Tags": "Tagi transakcji",
-        "Deal Lost Reasons": "Umakalizuje się utracone powody",
-        "Most valuable deals": "Najcenniejsze oferty",
-        "Deal value by result": "Wartość transakcji według wyniku",
-        "Active deals": "Aktywne oferty",
-        "Archived deals": "Zarchiwizowane oferty",
-        "Deal warnings": "Ostrzeżenia o transakcji"
+        "Deal Tags": "Tagi szans sprzedaży",
+        "Deal Lost Reasons": "Przyczyny utraty szans",
+        "Most valuable deals": "Najcenniejsze szanse sprzedaży",
+        "Deal value by result": "Wartość szans według wyniku",
+        "Active deals": "Aktywne szanse",
+        "Archived deals": "Zarchiwizowane szanse",
+        "Deal warnings": "Ostrzeżenia dotyczące szans"
     },
     "Models\\Deal": {
-        "Deal Identifier": "Identyfikator transakcji",
+        "Deal Identifier": "Identyfikator szansy",
         "Title": "Tytuł",
         "Customer": "Klient",
         "Contact": "Kontakt",
-        "Lead": "Ołów",
+        "Lead": "Lead",
         "Price": "Cena",
         "Currency": "Waluta",
-        "Expected close date": "Oczekiwana data zamknięcia",
+        "Expected close date": "Przewidywana data zamknięcia",
         "Owner": "Właściciel",
-        "Created": "Stworzony",
-        "Workflow": "Rurociąg",
-        "Workflow step": "Krok rurociągu",
-        "Notes": "Notatki",
+        "Created": "Utworzono",
+        "Workflow": "Etap lejka / Proces",
+        "Workflow step": "Krok procesu",
+        "Notes": "Uwagi",
         "Source channel": "Kanał źródłowy",
         "Archived": "Zarchiwizowane",
-        "Deal Result": "Wynik transakcji",
-        "Reason for Lost": "Powód utraconego",
-        "Date of result update": "Data aktualizacji wyników",
+        "Deal Result": "Wynik szansy",
+        "Reason for Lost": "Przyczyna utraty",
+        "Date of result update": "Data aktualizacji wyniku",
         "New Customer": "Nowy klient",
         "Business type": "Typ biznesu",
-        "Link to shared folder (online storage) with related documents": "Link do folderu udostępnionego (przechowywanie online) z powiązanymi dokumentami",
-        "Add Deal": "Dodaj ofertę",
-        "Manager": "Menedżer",
-        "Version": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": "",
-        "Template for quotation": "",
-        "Customer's order number": "",
-        "Closed": "",
-        "Ownership": "",
-        "All": "",
-        "Owned by me": "",
-        "Managed by me": "",
-        "Open \/ Closed": "",
-        "Open": ""
+        "Link to shared folder (online storage) with related documents": "Link do udostępnionego folderu z dokumentami",
+        "Add Deal": "Dodaj szansę sprzedaży",
+        "Manager": "Opiekun / Menedżer",
+        "Version": "Wersja",
+        "Price excl. VAT": "Cena netto",
+        "Price incl. VAT": "Cena brutto",
+        "Template for quotation": "Szablon oferty",
+        "Customer's order number": "Numer zamówienia klienta",
+        "Closed": "Zamknięte",
+        "Ownership": "Własność",
+        "All": "Wszystkie",
+        "Owned by me": "Moje (własność)",
+        "Managed by me": "Zarządzane przeze mnie",
+        "Open \/ Closed": "Otwarte \/ Zamknięte",
+        "Open": "Otwarte"
     },
     "Controllers\\Boards\\MostValuableDeals": {
-        "Open deal": "Otwarta umowa"
+        "Open deal": "Otwarta szansa sprzedaży"
     },
     "Models\\DealActivity": {
         "Subject": "Temat",
         "Activity type": "Typ aktywności",
         "Start date": "Data rozpoczęcia",
-        "Start time": "Czas rozpoczęcia",
+        "Start time": "Godzina rozpoczęcia",
         "End date": "Data zakończenia",
-        "End time": "Czas zakończenia",
+        "End time": "Godzina zakończenia",
         "All day": "Cały dzień",
-        "Completed": "Zakończony",
-        "Created by": "Stworzone przez",
-        "Deal": "Umowa",
+        "Completed": "Zakończono",
+        "Created by": "Utworzone przez",
+        "Deal": "Szansa sprzedaży",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Minuty spotkań (link)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Meeting minutes (link)": "Notatka ze spotkania (link)",
+        "Location": "Lokalizacja",
+        "Online meeting link": "Link do spotkania online",
+        "Description": "Opis",
+        "Recurrence": "Cykliczność",
+        "Long meeting minutes (link to external document)": "Pełna notatka ze spotkania (link zewnętrzny)",
+        "Short meeting minutes": "Krótka notatka ze spotkania"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Utracony rozum"
+        "Lost Reason": "Przyczyna utraty"
     },
     "Models\\DealHistory": {
         "Change Date": "Data zmiany",
-        "Deal": "Umowa",
+        "Deal": "Szansa sprzedaży",
         "Description": "Opis"
     },
     "Models\\DealTag": {
-        "Deal": "Umowa",
-        "Tag": "Etykietka"
+        "Deal": "Szansa sprzedaży",
+        "Tag": "Tag"
     },
     "Models\\Item": {
-        "Deal": "Umowa",
+        "Deal": "Szansa sprzedaży",
         "Product": "Produkt",
         "Unit Price": "Cena jednostkowa",
-        "Amount": "Kwota",
-        "Vat": "Kadź",
+        "Amount": "Ilość",
+        "Vat": "VAT",
         "Discount": "Rabat",
         "Sum": "Suma",
-        "Order": "",
-        "Description": "",
-        "Sales Price": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Order": "Kolejność",
+        "Description": "Opis",
+        "Sales Price": "Cena sprzedaży",
+        "Price excl. VAT": "Cena netto",
+        "Price incl. VAT": "Cena brutto"
     },
     "Models\\DealDocument": {
-        "Deal": "Umowa",
+        "Deal": "Szansa sprzedaży",
         "Document": "Dokument"
     },
     "Models\\Tag": {
@@ -125,26 +125,26 @@
         "Color": "Kolor"
     },
     "Controllers\\Boards\\DealWarnings": {
-        "Pending deals without future plan": "Oczekiwane oferty bez przyszłego planu",
-        "Open deals without future plan": ""
+        "Pending deals without future plan": "Oczekujące szanse bez zaplanowanych działań",
+        "Open deals without future plan": "Otwarte szanse bez zaplanowanych działań"
     },
     "Models\\DealLead": {
-        "Deal": "",
-        "Lead": ""
+        "Deal": "Szansa sprzedaży",
+        "Lead": "Lead"
     },
     "Models\\DealTask": {
-        "Deal": "",
-        "Task": ""
+        "Deal": "Szansa sprzedaży",
+        "Task": "Zadanie"
     },
     "Controllers\\Deals": {
-        "Deals": "",
-        "Open deals": "",
-        "Total value": ""
+        "Deals": "Szanse sprzedaży",
+        "Open deals": "Otwarte szanse",
+        "Total value": "Łączna wartość"
     },
     "Controllers\\Boards\\DealValueByResult": {
-        "Unknown": "",
-        "Pending": "",
-        "Won": "",
-        "Lost": ""
+        "Unknown": "Nieznany",
+        "Pending": "W toku",
+        "Won": "Wygrane",
+        "Lost": "Przegrane"
     }
 }

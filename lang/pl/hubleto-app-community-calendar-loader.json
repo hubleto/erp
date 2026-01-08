@@ -7,9 +7,9 @@
     },
     "manifest": {
         "Calendar": "Kalendarz",
-        "Free calendar app.": "Bezpłatna aplikacja kalendarza.",
-        "Reminders": "",
-        "Share": ""
+        "Free calendar app.": "Bezpłatna aplikacja kalendarza",
+        "Reminders": "Przypomnienia",
+        "Share": "Udostępnij"
     },
     "root": {
         "Events for today": "Wydarzenia na dziś"
@@ -18,26 +18,26 @@
         "Subject": "Temat",
         "Activity type": "Typ aktywności",
         "Start date": "Data rozpoczęcia",
-        "Start time": "Czas rozpoczęcia",
+        "Start time": "Godzina rozpoczęcia",
         "End date": "Data zakończenia",
-        "End time": "Czas zakończenia",
+        "End time": "Godzina zakończenia",
         "All day": "Cały dzień",
-        "Completed": "Zakończony",
-        "Created by": "Stworzone przez",
-        "Meeting minutes (link)": "Minuty spotkań (link)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Completed": "Zakończone",
+        "Created by": "Utworzone przez",
+        "Meeting minutes (link)": "Protokół spotkania (link)",
+        "Location": "Lokalizacja",
+        "Online meeting link": "Link do spotkania online",
+        "Description": "Opis",
+        "Recurrence": "Powtarzalność",
+        "Long meeting minutes (link to external document)": "Szczegółowy protokół spotkania (link do dokumentu zewnętrznego)",
+        "Short meeting minutes": "Krótki protokół spotkania"
     },
     "Controllers\\Boards\\Reminders": {
-        "All-day": "Cały dzień",
-        "Open event details": "Otwarte szczegóły wydarzenia",
-        "events for tomorrow": "Wydarzenia na jutro",
+        "All-day": "Całodniowe",
+        "Open event details": "Otwórz szczegóły wydarzenia",
+        "events for tomorrow": "wydarzenia na jutro",
         "events later": "wydarzenia później",
-        "reminders later": "",
-        "Later": ""
+        "reminders later": "późniejsze przypomnienia",
+        "Later": "Później"
     }
 }

@@ -1,34 +1,34 @@
 {
     "loader": {
-        "Cloud": "Cloud"
+        "Cloud": "Chmura"
     },
     "manifest": {
         "Cloud": "Chmura",
-        "Management of cloud Hubleto account.": "Zarządzanie konto Cloud Hubleto."
+        "Management of cloud Hubleto account.": "Zarządzanie kontem Hubleto w chmurze"
     },
     "Models\\Log": {
-        "Log datetime": "Log Datetime",
+        "Log datetime": "Data i godzina logu",
         "Active users": "Aktywni użytkownicy",
         "Paid apps": "Płatne aplikacje",
-        "Premium expected": "Premium oczekiwane"
+        "Premium expected": "Oczekiwane premium"
     },
     "Models\\Payment": {
-        "Charged": "Oskarżony",
+        "Charged": "Obciążono",
         "Discount": "Rabat",
-        "Full amount": "Pełna kwota",
-        "Discounted amount": "Dyskontowana kwota",
+        "Full amount": "Kwota pełna",
+        "Discounted amount": "Kwota po rabacie",
         "Type": "Typ",
-        "Details": "Bliższe dane",
-        "Has invoice": "Ma fakturę",
+        "Details": "Szczegóły",
+        "Has invoice": "Posiada fakturę",
         "Billing account": "Konto rozliczeniowe",
-        "UUID": "Uuid"
+        "UUID": "UUID"
     },
     "Models\\Credit": {
-        "Recalculated": "Ponownie obliczone",
-        "Credit": "Kredyt"
+        "Recalculated": "Przeliczone",
+        "Credit": "Saldo"
     },
     "root": {
-        "Free trial expires in": "Bezpłatny proces wygasa w",
+        "Free trial expires in": "Bezpłatny okres próbny wygasa za",
         "days": "dni"
     }
 }

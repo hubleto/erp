@@ -1,41 +1,41 @@
 {
     "loader": {
         "Sales": "Sprzedaż",
-        "Workflow": "Workflow"
+        "Workflow": "Proces (Workflow)"
     },
     "controllers.home": {
         "Sales": "Sprzedaż"
     },
     "manifest": {
-        "Workflow": "Rurociąg",
-        "Free sales workflow management.": "Bezpłatne zarządzanie rurociągami sprzedaży.",
-        "History": "",
-        "Workflows": ""
+        "Workflow": "Lejek sprzedaży",
+        "Free sales workflow management.": "Bezpłatne zarządzanie procesami sprzedaży.",
+        "History": "Historia",
+        "Workflows": "Procesy sprzedaży"
     },
     "root": {
-        "Workflows": "Rurociągi"
+        "Workflows": "Lejki sprzedaży"
     },
     "Models\\Workflow": {
         "Name": "Nazwa",
         "Description": "Opis",
-        "Order": "",
-        "Group": ""
+        "Order": "Kolejność",
+        "Group": "Grupa"
     },
     "Models\\WorkflowStep": {
         "Name": "Nazwa",
-        "Order": "Zamówienie",
+        "Order": "Kolejność wyświetlania",
         "Color": "Kolor",
         "Probability": "Prawdopodobieństwo",
-        "Workflow": "Rurociąg",
-        "Set result of a deal to": "Ustaw wynik umowy",
-        "Tag": ""
+        "Workflow": "Lejek / Proces",
+        "Set result of a deal to": "Ustaw wynik szansy sprzedaży na",
+        "Tag": "Tag"
     },
     "Models\\WorkflowHistory": {
-        "Model": "",
-        "Record Id": "",
-        "Changed": "",
-        "User": "",
-        "Workflow": "",
-        "Workflow Step": ""
+        "Model": "Model",
+        "Record Id": "ID rekordu",
+        "Changed": "Zmieniono",
+        "User": "Użytkownik",
+        "Workflow": "Proces",
+        "Workflow Step": "Etap procesu"
     }
 }

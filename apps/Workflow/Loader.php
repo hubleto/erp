@@ -60,7 +60,7 @@ class Loader extends \Hubleto\Framework\App
       $html .= '
         <a
           class="
-            btn ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-primary" : "btn-transparent") . '
+            btn ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
             mb-2 w-full
           "
           href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"

@@ -118,6 +118,14 @@ class Mail extends \Hubleto\Erp\Model
     return $description;
   }
 
+  /**
+   * [Description for validateBeforeSending]
+   *
+   * @param array $mail
+   * 
+   * @return void
+   * 
+   */
   public function validateBeforeSending(array $mail): void
   {
     if (!class_exists(PHPMailer::class)) {

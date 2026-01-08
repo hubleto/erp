@@ -150,6 +150,11 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
           <div className='flex gap-2'>
             {this.input('inbound_outbound', { cssClass: 'w-auto', uiStyle: 'buttons' })}
             {this.input('type', { cssClass: 'w-auto', uiStyle: 'buttons' })}
+            <div className='grow'>
+              {R.inbound_outbound == 1 ?
+                this.inputWrapper('id_supplier', {wrapperCssClass: 'flex gap-2'})
+              : this.inputWrapper('id_customer', {wrapperCssClass: 'flex gap-2'})}
+            </div>
           </div>
           <div className='flex gap-2 mt-2'>
             <div className='gap-2 w-56'>
@@ -185,26 +190,13 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             </div>
             <div className="flex flex-5 gap-2 mt-2">
               <div className='flex-1'>
-                <div className='grow'>
-                  {R.inbound_outbound == 1 ?
-                    this.inputWrapper('id_supplier', {wrapperCssClass: 'flex gap-2'})
-                  : this.inputWrapper('id_customer', {wrapperCssClass: 'flex gap-2'})}
-                </div>
                 {this.state.id == -1 ? null : <>
                   {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}                  
                   {this.inputWrapper('id_payment_method', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}
                   {this.inputWrapper('id_currency', {wrapperCssClass: 'flex gap-2'})}
-                  <div className='flex gap-2'>
-                    <div className='grow'>
-                      {this.inputWrapper('vs')}
-                    </div>
-                    <div className='grow'>
-                      {this.inputWrapper('cs')}
-                    </div>
-                    <div className='grow'>
-                      {this.inputWrapper('ss')}
-                    </div>
-                  </div>
+                  {this.inputWrapper('vs')}
+                  {this.inputWrapper('cs')}
+                  {this.inputWrapper('ss')}
                   {this.inputWrapper('notes')}
                   {this.inputWrapper('number_external', {wrapperCssClass: 'flex gap-2'})}
                   {this.inputWrapper('id_issued_by', {wrapperCssClass: 'flex gap-2'})}

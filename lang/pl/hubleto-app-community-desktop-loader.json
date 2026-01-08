@@ -5,36 +5,36 @@
     "manifest": {
         "Desktop": "Desiktop",
         "Default Hubleto desktop implementation.": "Domyślna implementacja Hubleto Desktop.",
-        "CRM": "",
-        "Marketing": "",
-        "Sales": "",
-        "Retail": "",
-        "Productivity": "",
-        "E-Commerce": "",
-        "Finance": "",
-        "Custom": "",
-        "Maintenance": "",
-        "Help": "",
-        "Addressbook": "",
-        "Calendar": "",
-        "Documents": "",
-        "Communication": "",
-        "Workflow": "",
-        "Helpdesk": "",
-        "Events": "",
-        "Website": "",
-        "Reporting": ""
+        "CRM": "CRM",
+        "Marketing": "Marketing",
+        "Sales": "Sprzedaż",
+        "Retail": "Handel detaliczny",
+        "Productivity": "Produktywność",
+        "E-Commerce": "E-commerce",
+        "Finance": "Finanse",
+        "Custom": "Niestandardowe",
+        "Maintenance": "Utrzymanie",
+        "Help": "Pomoc",
+        "Addressbook": "Książka adresowa",
+        "Calendar": "Kalendarz",
+        "Documents": "Dokumenty",
+        "Communication": "Komunikacja",
+        "Workflow": "Przepływ pracy",
+        "Helpdesk": "Pomoc techniczna",
+        "Events": "Wydarzenia",
+        "Website": "Strona internetowa",
+        "Reporting": "Raportowanie"
     },
     "Controllers\\Home": {
         "Welcome": "Powitanie",
-        "Edit profile": ""
+        "Edit profile": "Edytuj profil"
     },
     "Controllers\\Desktop": {
-        "Search app...": "",
-        "Help": "",
-        "Premium": "",
-        "Manage your user account": "",
-        "Manage cloud account": "",
-        "Sign out": ""
+        "Search app...": "Szukaj aplikacji...",
+        "Help": "Pomoc",
+        "Premium": "Premium",
+        "Manage your user account": "Zarządzaj kontem użytkownika",
+        "Manage cloud account": "Zarządzaj kontem w chmurze",
+        "Sign out": "Wyloguj się"
     }
 }

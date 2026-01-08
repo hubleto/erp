@@ -3,17 +3,25 @@
 namespace Hubleto\App\Community\Customers\Tests;
 
 use Hubleto\App\Community\Customers\Models\Customer;
+use Hubleto\App\Community\Customers\Models\CustomerDocument;
+use Hubleto\App\Community\Customers\Models\Tag;
+use Hubleto\App\Community\Customers\Models\CustomerTag;
+
 final class RenderAllRoutesTest extends \Hubleto\Erp\TestCase
 {
 
-  public function testModelCruds(): void
+  public function testCrudRouteForModel(): void
   {
-    $this->_testModelCrud(Customer::class, 'customers');
+    $this->_testCrudRouteForModel(Customer::class, 'customers');
+    $this->_testCrudRouteForModel(CustomerDocument::class, 'customers');
+    $this->_testCrudRouteForModel(Tag::class, 'customers');
+    $this->_testCrudRouteForModel(CustomerTag::class, 'customers');
   }
 
-  public function testRoutesContainAppMainTitle(): void
+  public function testApiRoutes(): void
   {
-    $this->_testRouteContainsAppMainTitle('customers/tags');
+    $this->_testApiRouteReturnsJson('customers/api/get-customer');
+    $this->_testApiRouteReturnsJson('customers/api/log-activity', ['idCustomer' => 1, 'activity' => 'test']);
   }
 
   // public function testRoutesRendersJson(): void

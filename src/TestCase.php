@@ -33,13 +33,16 @@ class TestCase extends \PHPUnit\Framework\TestCase
   {
     $routes = [];
     if (count($vars) > 0) {
-      $tmpFirstKey = reset(array_keys($vars));
-      foreach ($vars[$tmpFirstKey] as $k => $v) {
-        $tmpRoute = $route;
-        foreach ($vars as $varName => $varValues) {
-          $tmpRoute = str_replace('{{ ' . $varName . ' }}', $varValues[$k] ?? null, $tmpRoute);
+      $tmpKeys = array_keys($vars);
+      $tmpFirstKey = reset($tmpKeys);
+      if (is_array($vars[$tmpFirstKey])) {
+        foreach ($vars[$tmpFirstKey] as $k => $v) {
+          $tmpRoute = $route;
+          foreach ($vars as $varName => $varValues) {
+            $tmpRoute = str_replace('{{ ' . $varName . ' }}', $varValues[$k] ?? null, $tmpRoute);
+          }
+          $routes[] = $tmpRoute;
         }
-        $routes[] = $tmpRoute;
       }
     } else {
       $routes = [ $route ];
@@ -68,7 +71,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
   }
 
   /**
-   * [Description for _testRouteContainsError]
+   * [Description for _testRouteDoesNotContainError]
    *
    * @param string $route
    * @param array $vars
@@ -76,7 +79,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
    * @return void
    * 
    */
-  public function _testRouteContainsError(string $route, array $vars = []): void
+  public function _testRouteDoesNotContainError(string $route, array $vars = []): void
   {
     $renderer = \Hubleto\Erp\Loader::getGlobalApp()->renderer();
     foreach ($this->expandRoutesByVars($route, $vars) as $route) {
@@ -87,7 +90,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
   }
 
   /**
-   * [Description for _testRouteRendersJson]
+   * [Description for _testApiRouteReturnsJson]
    *
    * @param string $route
    * @param array $vars
@@ -95,34 +98,31 @@ class TestCase extends \PHPUnit\Framework\TestCase
    * @return void
    * 
    */
-  public function _testRouteRendersJson(string $route, array $vars = []): void
+  public function _testApiRouteReturnsJson(string $route, array $vars = []): void
   {
     $renderer = \Hubleto\Erp\Loader::getGlobalApp()->renderer();
-    foreach ($this->expandRoutesByVars($route, $vars) as $route) {
-      $output = $renderer->render($route);
-      $this->assertJson($output, $route . ' does not render JSON.');
-    }
-    
+    $output = $renderer->render($route, $vars);
+    $this->assertJson($output, $route . ' with ' . json_encode($vars) . ' does not render JSON. It returns: ' . $output); 
   }
 
   /**
-   * [Description for testModelCrud]
+   * [Description for _testCrudRouteForModel]
    *
    * @param string $modelBaseUrl
    * 
    * @return void
    * 
    */
-  public function _testModelCrud(string $modelClass, string $modelBaseUrl): void
+  public function _testCrudRouteForModel(string $modelClass, string $modelBaseUrl): void
   {
     $this->_testRouteContainsAppMainTitle($modelBaseUrl . '/add');
-    $this->_testRouteContainsError($modelBaseUrl . '/add');
-    $this->_testRouteContainsError(
+    $this->_testRouteDoesNotContainError($modelBaseUrl . '/add');
+    $this->_testRouteDoesNotContainError(
       $modelBaseUrl . 'customers/{{ id }}',
       ['id' => $this->generateRandomIds(100)]
     );
 
-    $this->_testRouteRendersJson('api/record/save', [
+    $this->_testApiRouteReturnsJson('api/record/save', [
       'model' => $modelClass,
     ]);
   }

@@ -53,6 +53,12 @@ class Mailer extends \Hubleto\Framework\Core
         $result['log'][] = 'GetMails: checking account ' . $account['name'];
         $localMailboxes = Helper::keyBy('name', $mMailbox->record->where('id_account', $account['id'])->get()->toArray());
 
+        if (empty($account['imap_host'])) continue;
+        if (empty($account['imap_port'])) continue;
+        if (empty($account['imap_encryption'])) continue;
+        if (empty($account['imap_username'])) continue;
+        if (empty($account['imap_password'])) continue;
+
         $server = new Server(
           $account['imap_host'],
           $account['imap_port'],

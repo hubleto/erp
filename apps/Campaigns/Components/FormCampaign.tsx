@@ -481,7 +481,7 @@ export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, F
                       item.MAIL?.datetime_sent
                         ? <div className='badge badge-success'>Email was sent on {item.MAIL?.datetime_sent}</div>
                         : <div className='badge badge-warning'>Email scheduled for {item.MAIL?.datetime_scheduled_to_send}</div>
-                    ) : null}
+                    ) : <div className='badge'>Email not sent yet</div>}
                     {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
                     {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
                   </div>

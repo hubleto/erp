@@ -21,6 +21,7 @@ class GetMails extends \Hubleto\Erp\Cron
 
   public function run(): void
   {
+    /** @var Mailer */
     $mailer = $this->getService(Mailer::class);
     $mailer->getMails();
   }

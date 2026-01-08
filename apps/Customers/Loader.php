@@ -39,6 +39,14 @@ class Loader extends \Hubleto\Framework\App
     ]);
   }
 
+  /**
+   * [Description for installTables]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installTables(int $round): void
   {
 

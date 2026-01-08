@@ -35,6 +35,12 @@ export default class TableCustomers extends HubletoTable<TableCustomersProps, Ta
     }
   }
 
+  getCsvImportEndpointParams(): any {
+    return {
+      model: this.props.model
+    }
+  }
+
   setRecordFormUrl(id: number) {
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/customers/' + (id > 0 ? id : 'add'));
   }

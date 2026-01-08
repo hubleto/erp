@@ -1,0 +1,41 @@
+<?php
+
+namespace Hubleto\App\Community\Invoices;
+
+use Hubleto\Framework\Core;
+
+class Counter extends Core
+{
+
+  /**
+   * [Description for preparedItems]
+   *
+   * @return int
+   * 
+   */
+  public function preparedItems(): int
+  {
+    $mItem = $this->getModel(Models\Item::class);
+    return $mItem->record->prepareReadQuery()
+      ->whereNull('id_invoice')
+      ->count()
+    ;
+  }
+
+  /**
+   * [Description for dueInvoices]
+   *
+   * @return int
+   * 
+   */
+  public function dueInvoices(): int
+  {
+    $mItem = $this->getModel(Models\Item::class);
+    return $mItem->record->prepareReadQuery()
+      ->whereDate('date_due', '<', date("Y-m-d"))
+      ->whereNull('date_payment')
+      ->count()
+    ;
+  }
+
+}

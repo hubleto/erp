@@ -67,7 +67,17 @@ class Loader extends \Hubleto\Framework\App
         <div class="list">
       ';
 
-      if (count($account->MAILBOXES) == 0) {
+      if (
+        empty($account->imap_host)
+        || empty($account->imap_port)
+        || empty($account->imap_encryption)
+        || empty($account->imap_username)
+        || empty($account->imap_password)
+      ) {
+        $accountsHtml .= '
+          <div class="alert alert-info text-sm m-2">Account is not used for receiving emails (some IMAP settings are missing).</div>
+        ';
+      } else if (count($account->MAILBOXES) == 0) {
         $accountsHtml .= '
           <div class="alert alert-info text-sm m-2">Account has no mailboxes.</div>
         ';

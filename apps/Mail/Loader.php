@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Mail;
 
 use Hubleto\App\Community\Mail\Models\Account;
+use Hubleto\App\Community\Mail\Models\Mail;
 
 class Loader extends \Hubleto\Framework\App
 {
@@ -57,7 +58,12 @@ class Loader extends \Hubleto\Framework\App
   {
     $activeIdMailbox = $this->router()->urlParamAsInteger('idMailbox');
 
+    /** @var Models\Account */
     $mAccount = $this->getModel(Account::class);
+
+    /** @var Models\Mail */
+    $mMail = $this->getModel(Mail::class);
+
     $accounts = $mAccount->record->prepareReadQuery()->with('MAILBOXES')->get();
 
     $accountsHtml = '';
@@ -83,6 +89,13 @@ class Loader extends \Hubleto\Framework\App
         ';
       } else {
         foreach ($account->MAILBOXES as $mailbox) {
+          $unreadEmailsCount = $mMail->record
+            ->where('id_account', $account['id'])
+            ->where('id_mailbox', $mailbox['id'])
+            ->whereNull('datetime_read')
+            ->count()
+          ;
+
           $accountsHtml .= '
             <a
               class="
@@ -92,6 +105,9 @@ class Loader extends \Hubleto\Framework\App
               href="' . $this->env()->projectUrl . '/mail/' . $mailbox->id . '"
             >
               <span class="text">' . $mailbox->name . '</span>
+              ' . ($unreadEmailsCount > 0 ? '
+                <div class="badge badge-small badge-red ml-auto mr-1">' . $unreadEmailsCount . '</div>
+              ' : '').'
             </a>
           ';
         }

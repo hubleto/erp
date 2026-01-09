@@ -41,6 +41,7 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
       ...super.getEndpointParams(),
       idAccount: this.props.idAccount,
       idMailbox: this.props.idMailbox,
+      mailboxName: this.props.mailboxName,
       showOnlyScheduledToSend: this.props.showOnlyScheduledToSend,
       showOnlySent: this.props.showOnlySent,
       showOnlyDrafts: this.props.showOnlyDrafts,
@@ -56,7 +57,7 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
 
   rowClassName(rowData: any): string {
     if (this.props.mailboxName == 'INBOX') {
-      return rowData.read ? '' : 'bg-yellow-50 text-yellow-800';
+      return rowData.datetime_read ? '' : 'bg-yellow-50 text-yellow-800';
     } else {
       return '';
     }
@@ -65,12 +66,16 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
   renderActionsColumn(data: any, options: any) {
     const R = this.findRecordById(data.id);
     if (this.props.mailboxName == 'INBOX') {
-      if (R.read) {
+      if (R.datetime_read) {
         return <button
           className="btn btn-small btn-transparent"
           onClick={(e) => {
             e.preventDefault();
-            request.get( "messages/api/mark-as-unread", { idMail: data.id }, (response: any) => { this.loadData(); } )
+            request.get("mail/api/mark-as-unread", {
+              idAccount: this.props.idAccount,
+              idMailbox: this.props.idMailbox,
+              idMail: data.id
+          }, (response: any) => { this.loadData(); })
           }}
         >
           <span className="icon"><i className="fas fa-eye-slash"></i></span>
@@ -81,7 +86,11 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
           className="btn btn-small btn-transparent"
           onClick={(e) => {
             e.preventDefault();
-            request.get( "messages/api/mark-as-read", { idMail: data.id }, (response: any) => { this.loadData(); } )
+            request.get("mail/api/mark-as-read", {
+              idAccount: this.props.idAccount,
+              idMailbox: this.props.idMailbox,
+              idMail: data.id
+            }, (response: any) => { this.loadData(); })
           }}
         >
           <span className="icon"><i className="fas fa-eye"></i></span>

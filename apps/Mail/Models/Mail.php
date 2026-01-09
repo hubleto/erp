@@ -41,7 +41,7 @@ class Mail extends \Hubleto\Erp\Model
       'id_account' => (new Lookup($this, $this->translate('Account'), Account::class))->setReadonly(),
       'id_mailbox' => (new Lookup($this, $this->translate('Mailbox'), Mailbox::class))->setReadonly(),
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
-      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s'))->setDefaultVisible(),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s')),
       'datetime_scheduled_to_send' => (new DateTime($this, $this->translate('Scheduled to send'))),
       'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setReadonly()->setDefaultVisible(),
       'datetime_read' => (new DateTime($this, $this->translate('Read'))),
@@ -67,32 +67,12 @@ class Mail extends \Hubleto\Erp\Model
    */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
+    $mailboxName = $this->router()->urlParamAsString('mailboxName');
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
-
-    unset($description->columns['body']);
-    unset($description->columns['color']);
-    unset($description->columns['priority']);
-    unset($description->columns['read']);
-
-    switch ($this->router()->urlParamAsString('view')) {
-      case 'briefOverview':
-        $description->ui['moreActions'] = null;
-        $description->showOnlyColumns([
-          'id_account',
-          'subject',
-          'from',
-          'to',
-          'datetime_scheduled_to_send',
-          'datetime_sent',
-        ]);
-      break;
-      default:
-      break;
-    }
 
     $description->permissions['canDelete'] = false;
     $description->permissions['canUpdate'] = false;

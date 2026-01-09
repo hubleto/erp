@@ -62,7 +62,7 @@ export default class ListFolder extends Table<ListFolderProps, ListFolderState> 
           className="btn btn-small btn-transparent"
           onClick={(e) => {
             e.preventDefault();
-            request.get( "messages/api/mark-as-unread", { idMail: data.id }, (response: any) => { this.loadData(); } )
+            request.get("mail/api/mark-as-unread", { idMail: data.id }, (response: any) => { this.loadData(); })
           }}
         >
           <span className="icon"><i className="fas fa-eye-slash"></i></span>
@@ -73,7 +73,7 @@ export default class ListFolder extends Table<ListFolderProps, ListFolderState> 
           className="btn btn-small btn-transparent"
           onClick={(e) => {
             e.preventDefault();
-            request.get( "messages/api/mark-as-read", { idMail: data.id }, (response: any) => { this.loadData(); } )
+            request.get("mail/api/mark-as-read", { idMail: data.id }, (response: any) => { this.loadData(); })
           }}
         >
           <span className="icon"><i className="fas fa-eye"></i></span>

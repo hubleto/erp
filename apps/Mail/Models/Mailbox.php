@@ -20,6 +20,7 @@ class Mailbox extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_account' => (new Lookup($this, $this->translate('Account'), Account::class))->setReadonly(),
       'name' => (new Varchar($this, $this->translate('Name'))),
+      'attributes' => (new Varchar($this, $this->translate('Attributes'))),
     ]);
   }
 

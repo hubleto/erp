@@ -29,8 +29,8 @@ class Loader extends \Hubleto\Framework\App
       '/^mail\/sent\/?$/' => Controllers\Sent::class,
       '/^mail\/get\/?$/' => Controllers\Get::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
-      '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
-      '/^mail\/mails\/add\/?$/' => ['controller' => Controllers\Mails::class, 'vars' => ['recordId' => -1]],
+      // '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
+      // '/^mail\/mails\/add\/?$/' => ['controller' => Controllers\Mails::class, 'vars' => ['recordId' => -1]],
       // '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
 
       '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,

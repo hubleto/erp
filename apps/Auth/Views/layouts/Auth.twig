@@ -58,14 +58,14 @@
             />
 
             <div class="flex justify-between my-2">
-              <div>
+              <div class="flex gap-2">
                 <input type="checkbox" id="session-persist" name="session-persist" value="1" checked>
                 <label for="session-persist">{{ translate("Keep signed in") }}</label>
               </div>
             </div>
           {% endblock %}
 
-          <div class="gap-2 flex justify-between items-center">
+          <div class="gap-2 flex justify-between items-center mt-8">
             <div>
               {% block button %}
                 <button type="submit" class="btn btn-large">

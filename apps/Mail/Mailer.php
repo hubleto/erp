@@ -35,7 +35,7 @@ class Mailer extends \Hubleto\Framework\Core
     try {
 
       $today = new \DateTimeImmutable();
-      $thirtyDaysAgo = $today->sub(new \DateInterval('P30D'));
+      $sixtyDaysAgo = $today->sub(new \DateInterval('P60D'));
 
       /** @var Account */
       $mAccount = $this->getModel(Account::class);
@@ -87,18 +87,24 @@ class Mailer extends \Hubleto\Framework\Core
             $localMailbox = [
               'id_account' => $account['id'],
               'name' => $imapMailbox->getName(),
+              'attributes' => $imapMailbox->getAttributes(),
             ];
 
             $localMailbox['id'] = $mMailbox->record->recordCreate($localMailbox)['id'];
           }
 
           $messages = $imapMailbox->getMessages(
-            new \Ddeboer\Imap\Search\Date\Since($thirtyDaysAgo),
+            new \Ddeboer\Imap\Search\Date\Since($sixtyDaysAgo),
             \SORTDATE, // Sort criteria
             true // Descending order
           );
 
-          $mailsInMailbox = $mMail->record->select('mail_id', 'mail_number')->where('id_mailbox', $localMailbox['id'])->get()->toArray();
+          $mailsInMailbox = $mMail->record
+            ->select('mail_id', 'mail_number')
+            ->where('id_account', $account['id'])
+            ->where('id_mailbox', $localMailbox['id'])
+            ->get()->toArray()
+          ;
 
           $mailIds = [];
           $mailNumbers = [];
@@ -122,6 +128,7 @@ class Mailer extends \Hubleto\Framework\Core
               $this->logger()->info('GetMails: creating mail in database');
               $result['log'][] = 'GetMails: creating mail in database';
               $mMail->record->recordCreate([
+                'id_account' => $account['id'],
                 'id_mailbox' => $localMailbox['id'],
                 'mail_id' => $mailId,
                 'mail_number' => $mailNumber,
@@ -133,6 +140,8 @@ class Mailer extends \Hubleto\Framework\Core
                 // 'sent' => $this->compileEmailAddresses($mailHeaders['cc']),
                 'body_text' => $message->getBodyText(),
                 'body_html' => $message->getBodyHtml(),
+                'datetime_created' => date("Y-m-d H:i:s"),
+                'datetime_sent' => $message->getDate()->format("Y-m-d H:i:s"),
               ]);
             }
           }

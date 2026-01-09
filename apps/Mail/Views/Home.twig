@@ -1,8 +1,12 @@
-<h1 class="app-main-title">{{ translate('Mail') }}</h1>
+{% set account = viewParams.account %}
+{% set mailbox = viewParams.mailbox %}
+
+<h1 class="app-main-title">{{ translate('Mail') }} > {{ account.name }} > {{ mailbox.name }}</h1>
 
 <app-mail-table-mails
+  string:tag="mail-table-mails"
   int:id-account="{{ viewParams.account.id }}"
   int:id-mailbox="{{ viewParams.mailbox.id }}"
+  string:mailbox-name="{{ viewParams.mailbox.name }}"
   bool:readonly="true"
-  string:view="briefOverview"
 ></app-mail-table-mails>

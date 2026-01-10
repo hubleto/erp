@@ -4,85 +4,9 @@ namespace Hubleto\Erp;
 
 
 use Hubleto\App\Community\Auth\Models\User;
-use Hubleto\Framework\Helper;
-use Hubleto\App\Community\Auth\AuthProvider;
-
-use Hubleto\App\Community\Auth\Models\UserRole;
 
 class RecordManager extends \Hubleto\Framework\RecordManager
 {
-
-  /**
-   * [Description for getPermissions]
-   *
-   * @param array $record
-   * 
-   * @return array
-   * 
-   */
-  public function getPermissions(array $record): array
-  {
-
-    $permissions = parent::getPermissions($record);
-
-    // prepare some variables
-
-    $hubleto = \Hubleto\Framework\Loader::getGlobalApp();
-
-    /** @var AuthProvider */
-    $authProvider = $hubleto->getService(AuthProvider::class);
-    $idUser = $authProvider->getUserId();
-    $permissions = $authProvider->getUserPermissions();
-
-    $hasIdOwner = isset($record['id_owner']);
-    $hasIdManager = isset($record['id_manager']);
-    $hasIdTeam = isset($record['id_team']);
-
-    $idOwner = $record['id_owner'] ?? 0;
-    $idManager = $record['id_manager'] ?? 0;
-    $idTeam = $record['id_team'] ?? 0;
-    $sharedWith = @json_decode($record['shared_with'] ?? '', true);
-
-    if (!is_array($sharedWith)) $sharedWith = [];
-
-    $canRead = false;
-    $canModify = false;
-
-    $isOwner = $hasIdOwner ? $idOwner > 0 && $idOwner == $idUser : true;
-    $isManager = $hasIdManager ? $idManager > 0 && $idManager == $idUser : true;
-    $isTeamMember = $hasIdTeam ? $idTeam > 0 && $authProvider->isTeamMember($idTeam) : true;
-
-    // enable permissions by certain criteria
-
-    if ($permissions['recordsRead'] == 'owned') {
-      $canRead = $isOwner;
-    } elseif ($permissions['recordsRead'] == 'owned-and-managed') {
-      $canRead = $isOwner || $isManager;
-    } else if ($permissions['recordsRead'] == 'owned-managed-and-team') {
-      $canRead = $isOwner || $isManager || $isTeamMember;
-    } else {
-      $canRead = true;
-    }
-
-    if ($permissions['recordsModify'] == 'owned') {
-      $canModify = $isOwner;
-    } elseif ($permissions['recordsModify'] == 'owned-and-managed') {
-      $canModify = $isOwner || $isManager;
-    } else if ($permissions['recordsModify'] == 'owned-managed-and-team') {
-      $canModify = $isOwner || $isManager || $isTeamMember;
-    } else {
-      $canModify = true;
-    }
-
-    if (isset($sharedWith[$idUser])) {
-      if ($sharedWith[$idUser] == 'read' || $sharedWith[$idUser] == 'modify') $canRead = true;
-      if ($sharedWith[$idUser] == 'modify') $canModify = true;
-    }
-
-    $permissions = [true, $canRead, $canModify, $canModify];
-
-    return $permissions;
-  }
 
   /**
    * [Description for prepareReadQuery]

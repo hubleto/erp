@@ -56,47 +56,41 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
   }
 
   rowClassName(rowData: any): string {
-    if (this.props.mailboxName == 'INBOX') {
-      return rowData.datetime_read ? '' : 'bg-yellow-50 text-yellow-800';
-    } else {
-      return '';
-    }
+    return rowData.datetime_read ? '' : 'bg-yellow-50 text-yellow-800';
   }
 
   renderActionsColumn(data: any, options: any) {
     const R = this.findRecordById(data.id);
-    if (this.props.mailboxName == 'INBOX') {
-      if (R.datetime_read) {
-        return <button
-          className="btn btn-small btn-transparent"
-          onClick={(e) => {
-            e.preventDefault();
-            request.get("mail/api/mark-as-unread", {
-              idAccount: this.props.idAccount,
-              idMailbox: this.props.idMailbox,
-              idMail: data.id
+    if (R.datetime_read) {
+      return <button
+        className="btn btn-small btn-transparent"
+        onClick={(e) => {
+          e.preventDefault();
+          request.get("mail/api/mark-as-unread", {
+            idAccount: this.props.idAccount,
+            idMailbox: this.props.idMailbox,
+            idMail: data.id
+        }, (response: any) => { this.loadData(); })
+        }}
+      >
+        <span className="icon"><i className="fas fa-eye-slash"></i></span>
+        <span className="text">{this.translate('Mark as unread')}</span>
+      </button>
+    } else {
+      return <button
+        className="btn btn-small btn-transparent"
+        onClick={(e) => {
+          e.preventDefault();
+          request.get("mail/api/mark-as-read", {
+            idAccount: this.props.idAccount,
+            idMailbox: this.props.idMailbox,
+            idMail: data.id
           }, (response: any) => { this.loadData(); })
-          }}
-        >
-          <span className="icon"><i className="fas fa-eye-slash"></i></span>
-          <span className="text">{this.translate('Mark as unread')}</span>
-        </button>
-      } else {
-        return <button
-          className="btn btn-small btn-transparent"
-          onClick={(e) => {
-            e.preventDefault();
-            request.get("mail/api/mark-as-read", {
-              idAccount: this.props.idAccount,
-              idMailbox: this.props.idMailbox,
-              idMail: data.id
-            }, (response: any) => { this.loadData(); })
-          }}
-        >
-          <span className="icon"><i className="fas fa-eye"></i></span>
-          <span className="text">{this.translate('Mark as read')}</span>
-        </button>
-      }
+        }}
+      >
+        <span className="icon"><i className="fas fa-eye"></i></span>
+        <span className="text">{this.translate('Mark as read')}</span>
+      </button>
     }
   }
 

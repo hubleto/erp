@@ -7,6 +7,9 @@ class Download extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): array
   {
     $file = $this->router()->urlParamAsString('file');
+
+    if (str_contains($file, '../') || str_contains($file, '..\\')) exit;
+
     $filePath = $this->env()->uploadFolder . '/' . $file;
 
     if (file_exists($filePath)) {

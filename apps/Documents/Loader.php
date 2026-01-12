@@ -17,6 +17,7 @@ class Loader extends \Hubleto\Framework\App
 
     $this->router()->get([
       '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
+      '/^documents\/api\/download\/?$/' => Controllers\Api\Download::class,
 
       '/^documents\/?$/' => Controllers\Browse::class,
       '/^documents\/browse\/?$/' => Controllers\Browse::class,

@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Invoices\Controllers\Api;
 
 use Hubleto\App\Community\Invoices\Models\Invoice;
 use Hubleto\App\Community\Mail\Models\Mail;
+use Hubleto\Framework\Helper;
 
 class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -23,6 +24,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       ->with('PROFILE')
       ->with('ITEMS')
       ->with('PROFILE.SENDER_ACCOUNT')
+      ->with('CUSTOMER.CONTACTS.VALUES')
       ->first()
     ;
 
@@ -38,11 +40,21 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       $twigTemplate = $this->renderer()->getTwig()->createTemplate($bodyHtml);
       $bodyHtml = $twigTemplate->render($invoice->toArray());
 
+      $recipients = [];
+      if ($invoice->CUSTOMER->CONTACTS) {
+        foreach ($invoice->CUSTOMER->CONTACTS as $contact) {
+          foreach ($contact->VALUES as $value) {
+            if ($value->type == 'email') $recipients[] = $value['value'];
+          }
+        }
+        
+      }
+
       return [
-        'invoice' => $invoice->toArray(),
         'senderAccount' => $invoice->PROFILE->SENDER_ACCOUNT,
         'subject' => $subject,
         'bodyHtml' => $bodyHtml,
+        'to' => join(', ', $recipients),
         'cc' => $cc,
         'bcc' => $bcc
       ];
@@ -56,16 +68,29 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
 
       if (empty($to)) throw new \Exception("Recipient must be provided.");
 
-      $result = [];
-
       try {
 
-        $mMail->createAndSend([
-          'subject' => $subject,
-          'body_html' => $bodyHtml,
-          'id_account' => $idSenderAccount,
-          'to' => $to,
-        ]);
+        $mMail->createAndSend(
+          [
+            'subject' => $subject,
+            'body_html' => $bodyHtml,
+            'id_account' => $idSenderAccount,
+            'to' => $to,
+            'cc' => $cc,
+            'bcc' => $bcc,
+          ],
+          [
+            [
+              'name' =>
+                'Invoice '
+                . Helper::str2url($invoice->number)
+                . ' '
+                . Helper::str2url($invoice->CUSTOMER->name)
+                . '.pdf',
+              'file' => $invoice->pdf,
+            ]
+          ]
+        );
 
         return ['status' => 'success'];
       } catch (\Throwable $e) {

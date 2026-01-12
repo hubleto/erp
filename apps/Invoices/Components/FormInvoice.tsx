@@ -574,6 +574,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       break;
 
       case 'send':
+        if (!R.pdf) return <div className='alert alert-danger'>PDF version of the invoice was not generated yet. Cannot send.</div>;
         if (!this.state.sendInvoicePreparedData) return <div className='alert'>Preparing email...</div>;
         if (this.state.sendInvoiceResult) return <div className='alert alert-success'>{JSON.stringify(this.state.sendInvoiceResult)}</div>;
         return <>
@@ -635,7 +636,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               <td>Email:</td>
               <td>
                 <textarea
-                  className='w-full'
+                  className='w-full h-64'
                   onChange={(e: any) => {
                     this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bodyHtml: e.currentTarget.value}});
                   }}
@@ -655,6 +656,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   to: this.state.sendInvoicePreparedData.to,
                   cc: this.state.sendInvoicePreparedData.cc,
                   bcc: this.state.sendInvoicePreparedData.bcc,
+                  ATTACHMENTS: this.state.sendInvoicePreparedData.ATTACHMENTS,
                 },
                 {},
                 (result: any) => {

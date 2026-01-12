@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\Mail\Models\RecordManagers;
 
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -21,8 +20,8 @@ class Mail extends \Hubleto\Erp\RecordManager
   }
 
   /** @return BelongsTo<User, covariant Customer> */
-  public function MAILS(): HasMany {
-    return $this->hasMany(Mail::class, 'id_mail');
+  public function ATTACHMENTS(): HasMany {
+    return $this->hasMany(Attachment::class, 'id_mail');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed

@@ -172,6 +172,14 @@ class Mail extends \Hubleto\Erp\Model
         $mailer->addAddress(trim($recipient));
       }
 
+      if (!empty($mail['cc'])) {
+        $mailer->addCC($mail['cc']);
+      }
+
+      if (!empty($mail['bcc'])) {
+        $mailer->addBCC($mail['bcc']);
+      }
+
       if (!empty($mail['reply_to'])) {
         $mailer->addReplyTo($mail['reply_to']);
       }
@@ -229,7 +237,7 @@ class Mail extends \Hubleto\Erp\Model
     return $this->send($mail);
   }
 
-  public function createAndSend(array $mailData, array $attachments = []): int
+  public function create(array $mailData, array $attachments = []): int
   {
     /** @var Attachment */
     $mAttachment = $this->getModel(Attachment::class);
@@ -249,6 +257,12 @@ class Mail extends \Hubleto\Erp\Model
       ]);
     }
 
+    return $idMail;
+  }
+
+  public function createAndSend(array $mailData, array $attachments = []): int
+  {
+    $idMail = $this->create($mailData, $attachments);
     $sendResult = $this->sendById($idMail);
 
     if ($sendResult) return $idMail;

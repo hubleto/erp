@@ -13,6 +13,8 @@ interface FormInvoiceProps extends HubletoFormProps {
 
 interface FormInvoiceState extends HubletoFormState {
   linkPreparedItem: boolean;
+  sendInvoicePreparedData?: any,
+  sendInvoiceResult?: any,
 }
 
 export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoiceState> {
@@ -49,6 +51,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       tabs.push({ uid: 'preview', title: this.translate('Preview, download, print') });
       // tabs.push({ uid: 'documents', title: this.translate('Documents') });
       tabs.push({ uid: 'payments', title: this.translate('Payments') });
+      tabs.push({ uid: 'send', title: this.translate('Send') });
     }
     tabs = [...tabs, ...this.getCustomTabs()];
 
@@ -100,6 +103,20 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     switch (tabUid) {
       case 'preview':
         this.updatePreview(this.state.record.id_template);
+      break;
+      case 'send':
+        this.setState({sendInvoicePreparedData: null, sendInvoiceResult: null});
+        request.post(
+          'invoices/api/send-invoice-in-email',
+          {
+            idInvoice: this.state.record.id,
+            prepare: true
+          },
+          {},
+          (result: any) => {
+            this.setState({sendInvoicePreparedData: result})
+          }
+        );
       break;
     }
   }
@@ -554,6 +571,101 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
           parentForm={this}
           idInvoice={R.id}
         />;
+      break;
+
+      case 'send':
+        if (!this.state.sendInvoicePreparedData) return <div className='alert'>Preparing email...</div>;
+        if (this.state.sendInvoiceResult) return <div className='alert alert-success'>{JSON.stringify(this.state.sendInvoiceResult)}</div>;
+        return <>
+
+          <table className='table-default dense'><tbody>
+            <tr>
+              <td>Subject:</td>
+              <td>
+                <input
+                  className='w-full'
+                  value={this.state.sendInvoicePreparedData.subject ?? ''}
+                  onChange={(e: any) => {
+                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, subject: e.currentTarget.value}});
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>From:</td>
+              <td>{this.state.sendInvoicePreparedData.senderAccount.name}</td>
+            </tr>
+            <tr>
+              <td>To:</td>
+              <td>
+                <input
+                  className='w-full'
+                  value={this.state.sendInvoicePreparedData.to ?? ''}
+                  onChange={(e: any) => {
+                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, to: e.currentTarget.value}});
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>CC:</td>
+              <td>
+                <input
+                  className='w-full'
+                  value={this.state.sendInvoicePreparedData.cc ?? ''}
+                  onChange={(e: any) => {
+                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, cc: e.currentTarget.value}});
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>BCC:</td>
+              <td>
+                <input
+                  className='w-full'
+                  value={this.state.sendInvoicePreparedData.bcc ?? ''}
+                  onChange={(e: any) => {
+                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bcc: e.currentTarget.value}});
+                  }}
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>
+                <textarea
+                  className='w-full'
+                  onChange={(e: any) => {
+                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bodyHtml: e.currentTarget.value}});
+                  }}
+                >{this.state.sendInvoicePreparedData.bodyHtml ?? ''}</textarea>
+              </td>
+            </tr>
+          </tbody></table>
+          <button className='btn btn-add-outline mt-2'
+            onClick={() => {
+              request.post(
+                'invoices/api/send-invoice-in-email',
+                {
+                  idInvoice: this.state.record.id,
+                  idSenderAccount: this.state.sendInvoicePreparedData.senderAccount.id,
+                  subject: this.state.sendInvoicePreparedData.subject,
+                  bodyHtml: this.state.sendInvoicePreparedData.bodyHtml,
+                  to: this.state.sendInvoicePreparedData.to,
+                  cc: this.state.sendInvoicePreparedData.cc,
+                  bcc: this.state.sendInvoicePreparedData.bcc,
+                },
+                {},
+                (result: any) => {
+                  this.setState({sendInvoiceResult: result})
+                }
+              );
+            }}
+          >
+            <span className='text'>Send invoice</span>
+          </button>
+        </>;
       break;
 
     }

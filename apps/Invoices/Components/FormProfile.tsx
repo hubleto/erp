@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui/ext/HubletoForm";
-import request from '@hubleto/react-ui/core/Request';
 
-interface FormProfileProps extends HubletoFormProps {
+export interface FormProfileProps extends HubletoFormProps {
 }
 
 interface FormProfileState extends HubletoFormState {
@@ -31,7 +30,9 @@ export default class FormProfile extends HubletoForm<FormProfileProps, FormProfi
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Invoice')}</b> },
+        { uid: 'default', title: <b>{this.translate('Profile')}</b> },
+        { uid: 'invoice-rendering', title: <b>{this.translate('Invoice rendering')}</b> },
+        { uid: 'e-mails', title: <b>{this.translate('E-mails')}</b> },
         ...this.getCustomTabs()
       ],
     };
@@ -67,11 +68,46 @@ export default class FormProfile extends HubletoForm<FormProfileProps, FormProfi
               {this.inputWrapper('headline')}
               {this.inputWrapper('id_company')}
               {this.inputWrapper('id_currency')}
-              {this.inputWrapper('id_template')}
               {this.inputWrapper('id_payment_method')}
               {this.inputWrapper('due_days')}
               {this.inputWrapper('numbering_pattern')}
+            </div>
+          </div>
+        </>;
+      break;
+      case 'invoice-rendering':
+        return <>
+          <div className="flex gap-2 mt-2">
+            <div className='flex-1'>
+              {this.inputWrapper('id_template')}
               {this.inputWrapper('stamp_and_signature')}
+            </div>
+          </div>
+        </>;
+      break;
+      case 'e-mails':
+        return <>
+          {this.inputWrapper('id_sender_account')}
+          <div className='card mt-2'>
+            <div className='card-header'>
+              {this.translate('Send invoice')}
+            </div>
+            <div className='card-body'>
+              {this.inputWrapper('mail_send_invoice_subject')}
+              {this.inputWrapper('mail_send_invoice_body')}
+              {this.inputWrapper('mail_send_invoice_cc')}
+              {this.inputWrapper('mail_send_invoice_bcc')}
+            </div>
+          </div>
+          <div className='card mt-2'>
+            <div className='card-header'>
+              {this.translate('Send warning about due invoice')}
+            </div>
+            <div className='card-body'>
+              {this.inputWrapper('mail_send_due_warning_subject')}
+              {this.inputWrapper('mail_send_due_warning_body')}
+              {this.inputWrapper('mail_send_due_warning_cc')}
+              {this.inputWrapper('mail_send_due_warning_bcc')}
             </div>
           </div>
         </>;

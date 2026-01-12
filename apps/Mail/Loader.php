@@ -156,6 +156,7 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\Mail::class)->dropTableIfExists()->install();
       $this->getModel(Models\Template::class)->dropTableIfExists()->install();
       $this->getModel(Models\Index::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Attachment::class)->dropTableIfExists()->install();
     }
   }
 

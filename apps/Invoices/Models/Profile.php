@@ -7,8 +7,10 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Mail\Models\Account;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Image;
 
 class Profile extends \Hubleto\Erp\Model
@@ -22,6 +24,7 @@ class Profile extends \Hubleto\Erp\Model
   public array $relations = [
     'COMPANY' => [ self::BELONGS_TO, Company::class, "id_company" ],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
+    'SENDER_ACCOUNT' => [ self::HAS_ONE, Account::class, 'id', 'id_sender_account'],
   ];
 
   /**
@@ -53,8 +56,17 @@ class Profile extends \Hubleto\Erp\Model
       'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible(),
       'due_days' => (new Integer($this, $this->translate('Due days')))->setDefaultVisible(),
       'stamp_and_signature' => (new Image($this, $this->translate('Stamp and signature'))),
-      'id_template' => (new Lookup($this, $this->translate('Default invoice template'), Template::class)),
+      'id_template' => (new Lookup($this, $this->translate('Default invoice template'), Template::class))->setDefaultVisible(),
+      'id_sender_account' => (new Lookup($this, $this->translate('Default sender account'), Account::class))->setDefaultVisible(),
       'id_payment_method' => (new Lookup($this, $this->translate('Default payment method'), PaymentMethod::class)),
+      'mail_send_invoice_subject' => (new Varchar($this, $this->translate('Mail to send invoice - subject'))),
+      'mail_send_invoice_body' => (new Text($this, $this->translate('Mail to send invoice - body')))->setReactComponent('InputWysiwyg'),
+      'mail_send_invoice_cc' => (new Varchar($this, $this->translate('Mail to send invoice - CC'))),
+      'mail_send_invoice_bcc' => (new Varchar($this, $this->translate('Mail to send invoice - BCC'))),
+      'mail_send_due_warning_subject' => (new Varchar($this, $this->translate('Mail to send warning about due invoice - subject'))),
+      'mail_send_due_warning_body' => (new Text($this, $this->translate('Mail to send warning about due invoice - body')))->setReactComponent('InputWysiwyg'),
+      'mail_send_due_warning_cc' => (new Varchar($this, $this->translate('Mail to send invoice - CC'))),
+      'mail_send_due_warning_bcc' => (new Varchar($this, $this->translate('Mail to send invoice - BCC'))),
     ]);
   }
 

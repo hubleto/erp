@@ -24,6 +24,7 @@ class Mail extends \Hubleto\Erp\Model
   public array $relations = [
     'ACCOUNT' => [ self::BELONGS_TO, Account::class, 'id_account', 'id' ],
     'MAILBOX' => [ self::BELONGS_TO, Mailbox::class, 'id_mailbox', 'id' ],
+    'ATTACHMENTS' => [ self::HAS_MANY, Attachment::class, 'id_mail', 'id' ],
   ];
 
   /**
@@ -166,10 +167,23 @@ class Mail extends \Hubleto\Erp\Model
         $mail['ACCOUNT']['sender_name'] ?? ''
       );
 
-      $mailer->addAddress($mail['to']);
+      $recipients = explode(",", $mail['to']);
+      foreach ($recipients as $recipient) {
+        $mailer->addAddress(trim($recipient));
+      }
 
       if (!empty($mail['reply_to'])) {
         $mailer->addReplyTo($mail['reply_to']);
+      }
+
+      if (is_array($mail['ATTACHMENTS'])) {
+        foreach ($mail['ATTACHMENTS'] as $attachment) {
+          if (empty($attachment['file'])) continue;
+          $mailer->addAttachment(
+            $this->env()->uploadFolder . '/' . $attachment['file'],
+            $attachment['name']
+          );
+        }
       }
 
       $mailer->isHTML(true);
@@ -207,14 +221,38 @@ class Mail extends \Hubleto\Erp\Model
    */
   public function sendById(int $id): bool
   {
-    $mail = $this->record->prepareReadQuery()->where('mails.id', $id)->first()?->toArray();
+    $mail = $this->record->prepareReadQuery()
+      ->where('mails.id', $id)
+      ->with('ATTACHMENTS')
+      ->first()?->toArray()
+    ;
     return $this->send($mail);
   }
 
-  public function createAndSend(array $mailData): bool
+  public function createAndSend(array $mailData, array $attachments = []): int
   {
+    /** @var Attachment */
+    $mAttachment = $this->getModel(Attachment::class);
+
+    $mailData['datetime_created'] = date('Y-m-d H:i:s');
+
     $mail = $this->record->recordCreate($mailData);
-    return $this->sendById((int) $mail['id']);
+    $idMail = (int) $mail['id'];
+
+    if ($idMail <= 0) throw new \Exception('Failed to create the email.');
+
+    foreach ($attachments as $attachment) {
+      $mAttachment->record->recordCreate([
+        'id_mail' => $idMail,
+        'name' => $attachment['name'],
+        'file' => $attachment['file'],
+      ]);
+    }
+
+    $sendResult = $this->sendById($idMail);
+
+    if ($sendResult) return $idMail;
+    else return 0;
   }
 
 }

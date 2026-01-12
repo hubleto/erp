@@ -22,6 +22,7 @@ class Loader extends \Hubleto\Framework\App
       '/^invoices\/api\/create-invoice-from-prepared-item\/?$/' => Controllers\Api\CreateInvoiceFromPreparedItem::class,
       '/^invoices\/api\/link-prepared-item\/?$/' => Controllers\Api\LinkPreparedItem::class,
       '/^invoices\/api\/unlink-prepared-item\/?$/' => Controllers\Api\UnlinkPreparedItem::class,
+      '/^invoices\/api\/send-invoice-in-email\/?$/' => Controllers\Api\SendInvoiceInEmail::class,
       '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
       '/^invoices\/add?\/?$/' => ['controller' => Controllers\Invoices::class, 'vars' => [ 'recordId' => -1 ]],
       '/^invoices\/profiles(\/(?<recordId>\d+))?\/?$/' => Controllers\Profiles::class,
@@ -99,8 +100,8 @@ class Loader extends \Hubleto\Framework\App
           <span class="text">' . $this->translate('Invoices') . '</span>
         </a>
 
-        ' . ($dueInvoicesCount > 0 ? '<div class="badge badge-danger">Due: ' . $dueInvoicesCount . '</div>' : '') . '
-        ' . ($unsentInvoicesCount > 0 ? '<div class="badge badge-danger">Unsent: ' . $unsentInvoicesCount . '</div>' : '') . '
+        ' . ($dueInvoicesCount > 0 ? '<div class="badge badge-danger text-xs">Due: ' . $dueInvoicesCount . '</div>' : '') . '
+        ' . ($unsentInvoicesCount > 0 ? '<div class="badge badge-danger text-xs">Not sent: ' . $unsentInvoicesCount . '</div>' : '') . '
 
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">
           <span class="icon"><i class="fas fa-list"></i></span>

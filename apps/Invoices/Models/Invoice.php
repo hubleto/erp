@@ -88,7 +88,6 @@ class Invoice extends \Hubleto\Erp\Model {
       // used for inbound invoices
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
 
-
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPES)->setRequired()->setDefaultValue(3)->setDefaultVisible()->setEnumCssClasses([
         self::TYPE_PROFORMA => 'bg-blue-50 text-slate-700',
         self::TYPE_ADVANCE => 'bg-lime-50 text-slate-700',

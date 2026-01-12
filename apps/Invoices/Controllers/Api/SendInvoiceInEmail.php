@@ -70,7 +70,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
 
       try {
 
-        $mMail->createAndSend(
+        $idMailSent = $mMail->createAndSend(
           [
             'subject' => $subject,
             'body_html' => $bodyHtml,
@@ -91,6 +91,12 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
             ]
           ]
         );
+
+        if ($idMailSent > 0) {
+          $mInvoice->record->where('invoices.id', $idInvoice)->update([
+            'date_sent' => date('Y-m-d'),
+          ]);
+        }
 
         return ['status' => 'success'];
       } catch (\Throwable $e) {

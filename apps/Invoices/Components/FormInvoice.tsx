@@ -595,7 +595,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             </tr>
             <tr>
               <td>From:</td>
-              <td>{this.state.sendInvoicePreparedData.senderAccount.name ?? <div className='text-red-800'>Not configured</div>}</td>
+              <td>{this.state.sendInvoicePreparedData.senderAccount?.name ?? <div className='text-red-800'>Not configured</div>}</td>
             </tr>
             <tr>
               <td>To:</td>
@@ -636,16 +636,9 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             <tr>
               <td>Email:</td>
               <td>
-                {/* <textarea
-                  className='w-full h-64'
-                  onChange={(e: any) => {
-                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bodyHtml: e.currentTarget.value}});
-                  }}
-                >{this.state.sendInvoicePreparedData.bodyHtml ?? ''}</textarea> */}
                 <TextareaWithHtmlPreview
                   value={this.state.sendInvoicePreparedData.bodyHtml ?? ''}
                   onChange={(input: any) => {
-                    console.log(input);
                     this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bodyHtml: input.state.value}});
                   }}
                 ></TextareaWithHtmlPreview>

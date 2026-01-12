@@ -11,15 +11,20 @@ class GetPreviewHtml extends \Hubleto\Erp\Controllers\ApiController
     $idInvoice = $this->router()->urlParamAsInteger('idInvoice');
     $idTemplate = $this->router()->urlParamAsInteger('idTemplate');
 
-    /** @var Invoice */
-    $mInvoice = $this->getModel(Invoice::class);
+    $html = '';
 
-    $mInvoice->record->find($idInvoice)->update(['id_template' => $idTemplate]);
+    if ($idTemplate > 0) {
 
-    try {
-      $html = $mInvoice->getPreviewHtml($idInvoice);
-    } catch (\Throwable $e) {
-      $html = '<div class="alert alert-danger">Error generating preview: ' . $e->getMessage() . '</div>';
+      /** @var Invoice */
+      $mInvoice = $this->getModel(Invoice::class);
+
+      $mInvoice->record->find($idInvoice)->update(['id_template' => $idTemplate]);
+
+      try {
+        $html = $mInvoice->getPreviewHtml($idInvoice);
+      } catch (\Throwable $e) {
+        $html = '<div class="alert alert-danger">Error generating preview: ' . $e->getMessage() . '</div>';
+      }
     }
 
     return [

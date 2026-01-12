@@ -153,13 +153,12 @@ class PayMonthly extends \Hubleto\Erp\Controllers\ApiController
       $toPay = $discountedPriceForCurrentlyActiveUsers + $discountedPriceForActiveUsersAddedPrevMonth;
 
       if ($toPay > 0) {
-        $mPayment->record->recordCreate([
-          'datetime_charged' => date('Y-m-d H:i:s', strtotime($today)),
-          'full_amount' => $toPay,
-          'details' => '{"reason":"simulated payment with card"}',
-          'type' => $mPayment::TYPE_PAYMENT_BY_CARD,
-          'uuid' => \Hubleto\Framework\Helper::generateUuidV4(),
-        ]);
+        $mPayment->makePayment(
+          $today,
+          $toPay,
+          '{"reason":"simulated payment with card"}',
+          $mPayment::TYPE_PAYMENT_BY_CARD
+        );
       }
 
       $premiumAccount->recalculateCredit();

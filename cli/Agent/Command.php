@@ -4,9 +4,6 @@
 
 namespace Hubleto\Erp\Cli\Agent;
 
-use Hubleto\Framework\Interfaces\TerminalInterface;
-use Hubleto\Framework\Terminal;
-
 class Command extends \Hubleto\Framework\Core
 {
 

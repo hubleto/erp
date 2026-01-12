@@ -30,7 +30,7 @@ class Item extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setRequired(),
+      'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setDefaultVisible(),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setDefaultVisible(),
       'id_order_item' => (new Lookup($this, $this->translate('Order Item'), OrderItem::class))->setDefaultVisible(),

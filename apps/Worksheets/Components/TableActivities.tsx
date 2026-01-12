@@ -56,7 +56,8 @@ export default class TableActivities extends HubletoTable<TableActivitiesProps, 
     let workedTotal = 0;
     for (let i in this.state.data?.data) {
       const row = this.state.data?.data[i];
-      workedTotal += parseFloat(row['worked_hours']);
+      if (row['total_worked_hours']) workedTotal += parseFloat(row['total_worked_hours']);
+      else workedTotal += parseFloat(row['worked_hours']);
     }
 
     return <>

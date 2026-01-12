@@ -63,7 +63,7 @@
           {% endif %}
         {% endif %}
         {% if not viewParams.subscriptionInfo.isActive %}
-          <div class="block badge text-center badge-danger p-4 mt-2">
+          {# <div class="block badge text-center badge-danger p-4 mt-2">
             <div class="text-2xl">{{ translate('Your Premium account is blocked') }}</div>
             <div class="mt-2">
               <a class="btn btn-white" href="{{ config.projectUrl }}/cloud/activate-subscription-renewal">
@@ -75,6 +75,12 @@
                 <span class="icon"><i class="fas fa-arrow-down"></i></span>
                 <span class="text">{{ translate('Downgrade to Personal account') }}</span>
               </a>
+            </div>
+          </div> #}
+          <div class="block badge text-center badge-danger p-4 mt-2">
+            <div class="text-2xl">{{ translate('Your subscription is inactive') }}</div>
+            <div>
+              Make a payment to reactivate it again.
             </div>
           </div>
         {% else %}

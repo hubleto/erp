@@ -15,6 +15,12 @@ class PremiumAccount extends \Hubleto\Framework\Core
     return $accountUid;
   }
 
+  public function getPartnerUid()
+  {
+    $partnertUid = $this->config()->getAsString('cloud/partnertUid');
+    return $partnertUid;
+  }
+
   public function getPaymentVariableSymbol()
   {
     $paymentVariableSymbol = $this->config()->getAsString('cloud/paymentVariableSymbol');

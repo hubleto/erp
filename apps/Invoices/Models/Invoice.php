@@ -269,7 +269,9 @@ class Invoice extends \Hubleto\Erp\Model {
     $mProfile = $this->getService(Profile::class);
 
     if ($idProfile <= 0) {
-      $idProfile = $mProfile->record->where('is_default', 1)->first()->id;
+      $defaultProfile = $mProfile->record->where('is_default', 1)->first();
+      if (!$defaultProfile) throw new \Exception($this->translate('Default invoicing profile is not set.'));
+      $idProfile = (int) $defaultProfile->id;
     }
     if ($idProfile <= 0) {
       throw new \Exception('Invoice profile is required to create an invoice.');
@@ -527,7 +529,11 @@ class Invoice extends \Hubleto\Erp\Model {
     /** @var Invoice */
     $mInvoice = $this->getModel(Invoice::class);
 
-    $invoice = $mInvoice->record->prepareReadQuery()->where('invoices.id', $idInvoice)->first();
+    $invoice = $mInvoice->record->prepareReadQuery()
+      ->with('CUSTOMER')
+      ->where('invoices.id', $idInvoice)
+      ->first()
+    ;
     if (!$invoice) throw new \Exception('Invoice was not found.');
 
     /** @var Template */
@@ -538,7 +544,13 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $vars = $this->getPreviewVars($idInvoice);
 
-    $invoiceOutputFilename = 'invoice-' . Helper::str2url($invoice->number) . '.pdf';
+    $invoiceOutputFilename =
+      'Invoice '
+      . Helper::str2url($invoice->number)
+      . ' '
+      . Helper::str2url($invoice->CUSTOMER->name)
+      . '.pdf'
+    ;
 
     /** @var Generator */
     $generator = $this->getService(Generator::class);

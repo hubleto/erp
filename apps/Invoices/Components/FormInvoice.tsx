@@ -189,7 +189,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               </div>
             </div>
             <div className="flex flex-5 gap-2 mt-2">
-              <div className='flex-1'>
+              <div className='flex-1 min-w-80'>
                 {this.state.id == -1 ? null : <>
                   {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}                  
                   {this.inputWrapper('id_payment_method', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}
@@ -481,7 +481,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                         // if (result.idDocument) {
                         //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
                         // }
-                        this.reload();
+                        // this.reload();
+                        if (result && result.pdfFile) {
+                          this.updateRecord({pdf: result.pdfFile});
+                        }
                       }
                     );
                   }}

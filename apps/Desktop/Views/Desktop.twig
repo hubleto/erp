@@ -71,6 +71,7 @@
 </head>
 
 <body id="page-top">
+  <div id="ajax-loader"></div>
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
 
     <div id="app-launcher" onclick="lchr(false);">
@@ -92,7 +93,7 @@
     <nav id="default-navbar"><div>
       <div class="flex items-center">
         <div class="flex flex-row justify-around">
-          <a class="flex" href="{{ config.projectUrl }}/">
+          <a class="flex" href="{{ config.projectUrl }}/" class="w-8 h-8">
             <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
           </a>
           <button onclick="toggleSidebar()" class="block sm:hidden ml-4 border border-primary/20 text-primary py-1.5 px-2 rounded">

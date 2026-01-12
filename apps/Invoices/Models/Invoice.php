@@ -106,6 +106,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
       'date_due' => (new Date($this, $this->translate('Due')))->setDefaultVisible(),
       'date_payment' => (new Date($this, $this->translate('Paid')))->setDefaultVisible(),
+      'date_sent' => (new Date($this, $this->translate('Sent')))->setDefaultVisible(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
       'total_excl_vat' => new Decimal($this, $this->translate('Total excl. VAT'))->setReadonly(),
       'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
@@ -143,6 +144,15 @@ class Invoice extends \Hubleto\Erp\Model {
       'options' => [
         self::INBOUND_INVOICE => $this->translate('Inbound'),
         self::OUTBOUND_INVOICE => $this->translate('Outbound'),
+      ]
+    ]);
+
+    $description->addFilter('fSent', [
+      'title' => $this->translate('Sent / Not sent'),
+      'direction' => 'horizontal',
+      'options' => [
+        1 => $this->translate('Sent'),
+        2 => $this->translate('Not sent'),
       ]
     ]);
 

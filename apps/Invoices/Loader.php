@@ -67,9 +67,13 @@ class Loader extends \Hubleto\Framework\App
    */
   public function getSidebarBadgeNumber(): int
   {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
     return
-      $this->getService(Counter::class)->preparedItems()
-      + $this->getService(Counter::class)->dueInvoices()
+      $counter->preparedItems()
+      + $counter->dueInvoices()
+      + $counter->unsentInvoices()
     ;
   }
 
@@ -81,15 +85,18 @@ class Loader extends \Hubleto\Framework\App
    */
   public function renderSecondSidebar(): string
   {
-    $preparedItemsCount = $this->getService(Counter::class)->preparedItems();
-    $dueInvoicesCount = $this->getService(Counter::class)->dueInvoices();
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $preparedItemsCount = $counter->preparedItems();
+    $invoicesBadgeNumber = $counter->dueInvoices() + $counter->unsentInvoices();
 
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices">
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
           <span class="text">' . $this->translate('Invoices') . '</span>
-        ' . ($dueInvoicesCount > 0 ? '<span class="badge badge-danger ml-auto">' . $dueInvoicesCount . '</span>' : '') . '
+        ' . ($invoicesBadgeNumber > 0 ? '<span class="badge badge-danger ml-auto">' . $invoicesBadgeNumber . '</span>' : '') . '
         </a>
         <!-- <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=2">
           <span class="icon"><i class="fas fa-arrow-right"></i></span>

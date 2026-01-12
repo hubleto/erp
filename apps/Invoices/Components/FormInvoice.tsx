@@ -184,6 +184,9 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
               <div className={'border-t border-t-4 border-t-green-400 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
                 {this.inputWrapper('date_due', {wrapperCssClass: 'block'})}
               </div>
+              <div className={'border-t border-t-4 border-t-violet-400 grow ' + (R.date_sent ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+                {this.inputWrapper('date_sent', {wrapperCssClass: 'block'})}
+              </div>
               <div className={'border-t border-t-4 border-t-green-600 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
                 {this.inputWrapper('date_payment', {wrapperCssClass: 'block'})}
               </div>

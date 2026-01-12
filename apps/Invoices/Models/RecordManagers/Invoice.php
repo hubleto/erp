@@ -118,6 +118,11 @@ class Invoice extends \Hubleto\Erp\RecordManager {
       case 2: $query = $query->whereDate($this->table . ".date_due", ">", date("Y-m-d")); break;
     }
 
+    switch ($filters["fSent"] ?? 0) {
+      case 1: $query = $query->whereNotNull($this->table . ".date_sent"); break;
+      case 2: $query = $query->whereNull($this->table . ".date_sent"); break;
+    }
+
     switch ($filters["fPaid"] ?? 0) {
       case 1: $query = $query->whereNotNull($this->table . ".date_payment"); break;
       case 2: $query = $query->whereNull($this->table . ".date_payment"); break;

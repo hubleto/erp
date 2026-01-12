@@ -38,4 +38,19 @@ class Counter extends Core
     ;
   }
 
+  /**
+   * [Description for unsentInvoices]
+   *
+   * @return int
+   * 
+   */
+  public function unsentInvoices(): int
+  {
+    $mItem = $this->getModel(Models\Item::class);
+    return $mItem->record->prepareReadQuery()
+      ->whereNull('date_sent')
+      ->count()
+    ;
+  }
+
 }

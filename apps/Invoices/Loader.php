@@ -89,23 +89,19 @@ class Loader extends \Hubleto\Framework\App
     $counter = $this->getService(Counter::class);
 
     $preparedItemsCount = $counter->preparedItems();
-    $invoicesBadgeNumber = $counter->dueInvoices() + $counter->unsentInvoices();
+    $dueInvoicesCount = $counter->dueInvoices();
+    $unsentInvoicesCount = $counter->unsentInvoices();
 
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices">
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
           <span class="text">' . $this->translate('Invoices') . '</span>
-        ' . ($invoicesBadgeNumber > 0 ? '<span class="badge badge-danger ml-auto">' . $invoicesBadgeNumber . '</span>' : '') . '
         </a>
-        <!-- <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=2">
-          <span class="icon"><i class="fas fa-arrow-right"></i></span>
-          <span class="text">' . $this->translate('Outbound') . '</span>
-        </a>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/invoices?filters[fInboundOutbound]=1">
-          <span class="icon"><i class="fas fa-arrow-left"></i></span>
-          <span class="text">' . $this->translate('Inbound') . '</span>
-        </a> -->
+
+        ' . ($dueInvoicesCount > 0 ? '<div class="badge badge-danger">Due: ' . $dueInvoicesCount . '</div>' : '') . '
+        ' . ($unsentInvoicesCount > 0 ? '<div class="badge badge-danger">Unsent: ' . $unsentInvoicesCount . '</div>' : '') . '
+
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Items') . '</span>

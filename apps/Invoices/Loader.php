@@ -73,7 +73,7 @@ class Loader extends \Hubleto\Framework\App
     return
       $counter->preparedItems()
       + $counter->dueInvoices()
-      + $counter->unsentInvoices()
+      // + $counter->unsentInvoices()
     ;
   }
 

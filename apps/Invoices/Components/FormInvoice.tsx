@@ -674,6 +674,18 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                 ></TextareaWithHtmlPreview>
               </td>
             </tr>
+            <tr>
+              <td>Attachments:</td>
+              <td>
+                {this.state.sendInvoicePreparedData.attachments ? this.state.sendInvoicePreparedData.attachments.map((att, index) => {
+                  return <a
+                    className='badge badge-info'
+                    href={globalThis.hubleto.config.uploadUrl + "/" + att.file}
+                    target="_blank"
+                  >{att.name}</a>
+                }) : null}
+              </td>
+            </tr>
           </tbody></table>
           <button className='btn btn-add-outline mt-2'
             onClick={() => {

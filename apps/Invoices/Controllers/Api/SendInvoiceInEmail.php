@@ -28,6 +28,22 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       ->first()
     ;
 
+    switch ($invoice->type) {
+      case 1: $attachmentName = 'Proforma Invoice'; break;
+      case 2: $attachmentName = 'Advance Invoice'; break;
+      case 3: $attachmentName = 'Invoice'; break;
+      case 4: $attachmentName = 'Credit Note'; break;
+      case 5: $attachmentName = 'Debit Note'; break;
+    }
+
+    $attachmentName .=
+      ' '
+      . Helper::str2url($invoice->number)
+      . ' '
+      . Helper::str2url($invoice->CUSTOMER->name)
+      . '.pdf'
+    ;
+
     if ($prepare) {
       $subject = $invoice->PROFILE->mail_send_invoice_subject ?? '';
       $bodyHtml = $invoice->PROFILE->mail_send_invoice_body ?? '';
@@ -56,7 +72,10 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
         'bodyHtml' => $bodyHtml,
         'to' => join(', ', $recipients),
         'cc' => $cc,
-        'bcc' => $bcc
+        'bcc' => $bcc,
+        'attachments' => [
+          [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
+        ]
       ];
     } else {
       $idSenderAccount = $this->router()->urlParamAsInteger('idSenderAccount');
@@ -69,22 +88,6 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       if (empty($to)) throw new \Exception("Recipient must be provided.");
 
       try {
-
-        switch ($invoice->type) {
-          case 1: $attachmentName = 'Proforma Invoice'; break;
-          case 2: $attachmentName = 'Advance Invoice'; break;
-          case 3: $attachmentName = 'Invoice'; break;
-          case 4: $attachmentName = 'Credit Note'; break;
-          case 5: $attachmentName = 'Debit Note'; break;
-        }
-
-        $attachmentName .=
-          ' '
-          . Helper::str2url($invoice->number)
-          . ' '
-          . Helper::str2url($invoice->CUSTOMER->name)
-          . '.pdf'
-        ;
 
         $idMailSent = $mMail->createAndSend(
           [

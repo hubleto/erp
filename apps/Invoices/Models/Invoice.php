@@ -116,7 +116,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
       'virt_items' => (new Virtual($this, $this->translate('Items')))->setDefaultVisible()
-        ->setProperty('sql',"
+        ->setProperty('sql', "
           SELECT
             CONCAT('[', GROUP_CONCAT(
               JSON_OBJECT(
@@ -129,7 +129,7 @@ class Invoice extends \Hubleto\Erp\Model {
           WHERE `ii`.`id_invoice` in (`invoices`.`id`)
         "),
       'virt_payments' => (new Virtual($this, $this->translate('Payments')))->setDefaultVisible()
-        ->setProperty('sql',"
+        ->setProperty('sql', "
           SELECT
             CONCAT('[', GROUP_CONCAT(
               JSON_OBJECT(

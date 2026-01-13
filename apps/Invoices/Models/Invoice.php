@@ -305,6 +305,11 @@ class Invoice extends \Hubleto\Erp\Model {
       ->get()
     ;
 
+    $dueDays = $profile['due_days'] ?? 14;
+    if ($dueDays < 0) $dueDays = 0;
+
+    // Extract start and end offset of the invoice number from the
+    // numbering pattern of the invoicing profile
     $nPositionStart = -1;
     $nPositionEnd = -1;
     for ($n = 0; $n < strlen($numberingPattern); $n++) {
@@ -317,14 +322,13 @@ class Invoice extends \Hubleto\Erp\Model {
     }
     if ($nPositionEnd == -1) $nPositionEnd = $n;
 
+    // Extract highest number of the invoice
     $maxNumber = 0;
     foreach ($invoicesThisYear as $invoice) {
       $maxNumber = max($maxNumber, (int) substr($invoice->number, $nPositionStart, $nPositionEnd));
     }
 
-    $dueDays = $profile['due_days'] ?? 14;
-    if ($dueDays < 0) $dueDays = 0;
-
+    // Calculate number of the new invoice
     $record['number'] = $numberingPattern;
     $record['number'] = str_replace('YYYY', date('Y'), $record['number']);
     $record['number'] = str_replace('YY', date('y'), $record['number']);
@@ -336,6 +340,7 @@ class Invoice extends \Hubleto\Erp\Model {
     $record['number'] = str_replace('NNN', str_pad((string) ($maxNumber + 1), 3, '0', STR_PAD_LEFT), $record['number']);
     $record['number'] = str_replace('NN', str_pad((string) ($maxNumber + 1), 2, '0', STR_PAD_LEFT), $record['number']);
 
+    // Calculate other default values
     $record['id_currency'] = $profile['id_currency'] ?? 0;
     $record['vs'] = preg_replace('/[^0-9]/', '', $record['number']);
     $record['cs'] = '0308';

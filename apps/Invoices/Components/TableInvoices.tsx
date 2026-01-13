@@ -74,7 +74,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right wide';
+    params.type = this.state.recordId == -1 ? 'centered small' : 'right wide';
     return params;
   }
 

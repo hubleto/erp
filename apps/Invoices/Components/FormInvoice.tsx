@@ -164,313 +164,323 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
     switch (tabUid) {
       case 'default':
         const currencySymbol = R && R.CURRENCY ? R.CURRENCY.symbol : '';
-        return <>
-          <div className='flex gap-2'>
-            {this.input('inbound_outbound', { cssClass: 'w-auto', uiStyle: 'buttons' })}
-            {this.input('type', { cssClass: 'w-auto', uiStyle: 'buttons' })}
-            <div className='grow'>
-              {R.inbound_outbound == 1 ?
-                this.inputWrapper('id_supplier', {wrapperCssClass: 'flex gap-2'})
-              : this.inputWrapper('id_customer', {wrapperCssClass: 'flex gap-2'})}
-            </div>
-          </div>
-          <div className='flex gap-2 mt-2'>
-            <div className='gap-2 w-56'>
-              <div className='p-2 grow'>
-                {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-4xl'})}
-              </div>
-              <div className='p-2 grow text-nowrap bg-slate-100 text-slate-800'>
-                <div>
-                  <div className='text-4xl'>
-                    <b>{globalThis.hubleto.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
-                  </div>
-                  <div className='text-sm'>excl. VAT</div>
-                </div>
-                <div className='mt-2'>
-                  <div className='text-4xl'>
-                    {globalThis.hubleto.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
-                  </div>
-                  <div className='text-sm'>incl. VAT</div>
-                </div>
-              </div>
-              <div className={'border-t border-t-4 border-t-blue-400 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
-                {this.inputWrapper('date_delivery', {wrapperCssClass: 'block'})}
-              </div>
-              <div className={'border-t border-t-4 border-t-orange-300 grow ' + (R.date_issue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
-                {this.inputWrapper('date_issue', {wrapperCssClass: 'block'})}
-              </div>
-              <div className={'border-t border-t-4 border-t-green-400 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
-                {this.inputWrapper('date_due', {wrapperCssClass: 'block'})}
-              </div>
-              <div className={'border-t border-t-4 border-t-violet-400 grow ' + (R.date_sent ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
-                {this.inputWrapper('date_sent', {wrapperCssClass: 'block'})}
-              </div>
-              <div className={'border-t border-t-4 border-t-green-600 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
-                {this.inputWrapper('date_payment', {wrapperCssClass: 'block'})}
+
+        if (this.state.id <= 0) {
+          return <>
+            {this.inputWrapper('inbound_outbound', { uiStyle: 'buttons' })}
+            {this.inputWrapper('type', { uiStyle: 'buttons' })}
+            {R.inbound_outbound == 1 ? this.inputWrapper('id_supplier') : this.inputWrapper('id_customer')}
+            {this.inputWrapper('number', {cssClass: 'text-4xl'})}
+          </>
+        } else {
+          return <>
+            <div className='flex gap-2'>
+              {this.input('inbound_outbound', { cssClass: 'w-auto', uiStyle: 'buttons' })}
+              {this.input('type', { cssClass: 'w-auto', uiStyle: 'buttons' })}
+              <div className='grow'>
+                {R.inbound_outbound == 1 ?
+                  this.inputWrapper('id_supplier', {wrapperCssClass: 'flex gap-2'})
+                : this.inputWrapper('id_customer', {wrapperCssClass: 'flex gap-2'})}
               </div>
             </div>
-            <div className="flex flex-5 gap-2 mt-2">
-              <div className='flex-1 min-w-80'>
-                {this.state.id == -1 ? null : <>
-                  {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}                  
-                  {this.inputWrapper('id_payment_method', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}
-                  {this.inputWrapper('id_currency', {wrapperCssClass: 'flex gap-2'})}
-                  {this.inputWrapper('vs')}
-                  {this.inputWrapper('cs')}
-                  {this.inputWrapper('ss')}
-                  {this.inputWrapper('notes')}
-                  {this.inputWrapper('number_external', {wrapperCssClass: 'flex gap-2'})}
-                  {this.inputWrapper('id_issued_by', {wrapperCssClass: 'flex gap-2'})}
-                </>}
+            <div className='flex gap-2 mt-2'>
+              <div className='gap-2 w-56'>
+                <div className='p-2 grow'>
+                  {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-4xl'})}
+                </div>
+                <div className='p-2 grow text-nowrap bg-slate-100 text-slate-800'>
+                  <div>
+                    <div className='text-4xl'>
+                      <b>{globalThis.hubleto.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
+                    </div>
+                    <div className='text-sm'>excl. VAT</div>
+                  </div>
+                  <div className='mt-2'>
+                    <div className='text-4xl'>
+                      {globalThis.hubleto.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
+                    </div>
+                    <div className='text-sm'>incl. VAT</div>
+                  </div>
+                </div>
+                <div className={'border-t border-t-4 border-t-blue-400 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+                  {this.inputWrapper('date_delivery', {wrapperCssClass: 'block'})}
+                </div>
+                <div className={'border-t border-t-4 border-t-orange-300 grow ' + (R.date_issue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+                  {this.inputWrapper('date_issue', {wrapperCssClass: 'block'})}
+                </div>
+                <div className={'border-t border-t-4 border-t-green-400 grow ' + (R.date_due ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+                  {this.inputWrapper('date_due', {wrapperCssClass: 'block'})}
+                </div>
+                <div className={'border-t border-t-4 border-t-violet-400 grow ' + (R.date_sent ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+                  {this.inputWrapper('date_sent', {wrapperCssClass: 'block'})}
+                </div>
+                <div className={'border-t border-t-4 border-t-green-600 grow ' + (R.date_payment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+                  {this.inputWrapper('date_payment', {wrapperCssClass: 'block'})}
+                </div>
               </div>
-              {this.state.id <= 0 ? null : <div>
-                {this.inputWrapper('description')}
-                <div className='card flex-2'>
-                  <div className='card-header'>{this.translate('Items')}</div>
-                  <div className='card-body'>
-                    <table className='table-default dense not-striped'>
-                      <thead>
-                        <tr>
-                          <td rowSpan={3} className='align-top'>#</td>
-                          <th colSpan={3} style={{width: '50%'}}>{this.translate('Order')}</th>
-                          <th colSpan={4}>{this.translate('Order item')}</th>
-                          <td rowSpan={3}>&nbsp;</td>
-                        </tr>
-                        <tr>
-                          <th colSpan={4}>{this.translate('Item')}</th>
-                          <th>{this.translate('Unit price')}</th>
-                          <th>{this.translate('Amount')}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {R && R.ITEMS ? R.ITEMS.map((item, key) => {
-                          const rowBgClass = (key % 2 == 0 ? 'bg-white' : 'bg-gray-50');
+              <div className="flex flex-5 gap-2 mt-2">
+                <div className='flex-1 min-w-80'>
+                  {this.state.id == -1 ? null : <>
+                    {this.inputWrapper('id_profile', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}                  
+                    {this.inputWrapper('id_payment_method', {wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'})}
+                    {this.inputWrapper('id_currency', {wrapperCssClass: 'flex gap-2'})}
+                    {this.inputWrapper('vs')}
+                    {this.inputWrapper('cs')}
+                    {this.inputWrapper('ss')}
+                    {this.inputWrapper('notes')}
+                    {this.inputWrapper('number_external', {wrapperCssClass: 'flex gap-2'})}
+                    {this.inputWrapper('id_issued_by', {wrapperCssClass: 'flex gap-2'})}
+                  </>}
+                </div>
+                {this.state.id <= 0 ? null : <div>
+                  {this.inputWrapper('description')}
+                  <div className='card flex-2'>
+                    <div className='card-header'>{this.translate('Items')}</div>
+                    <div className='card-body'>
+                      <table className='table-default dense not-striped'>
+                        <thead>
+                          <tr>
+                            <td rowSpan={3} className='align-top'>#</td>
+                            <th colSpan={3} style={{width: '50%'}}>{this.translate('Order')}</th>
+                            <th colSpan={4}>{this.translate('Order item')}</th>
+                            <td rowSpan={3}>&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <th colSpan={4}>{this.translate('Item')}</th>
+                            <th>{this.translate('Unit price')}</th>
+                            <th>{this.translate('Amount')}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {R && R.ITEMS ? R.ITEMS.map((item, key) => {
+                            const rowBgClass = (key % 2 == 0 ? 'bg-white' : 'bg-gray-50');
 
-                          return <>
-                            <tr key={key + '1'} className={item._toBeDeleted_ ? 'border border-red-400' : ''}>
-                              <td rowSpan={3} className={'align-top ' + rowBgClass}>
-                                <div className='badge'>{key + 1}</div>
-                              </td>
-                              <td colSpan={3} style={{width: '50%'}} className={rowBgClass}>
-                                {InputFactory({
-                                  value: item.id_order,
-                                  cssClass: 'bg-white min-w-64',
-                                  description: {
-                                    type: 'lookup',
-                                    model: 'Hubleto/App/Community/Orders/Models/Order'
-                                  },
-                                  onInit: (input) => {
-                                    this.idOrderInputs[key] = input;
-                                  },
-                                  onChange: (input, value) => {
-                                    R.ITEMS[key].id_order = input.state.value;
-                                    R.ITEMS[key].item = input.refInput.current.getValue()[0]?._LOOKUP;
-                                    this.updateRecord(R);
-                                  }
-                                })}
-                              </td>
-                              <td colSpan={4} className={rowBgClass}>
-                                {InputFactory({
-                                  value: item.id_order_item,
-                                  cssClass: 'bg-white min-w-64',
-                                  description: {
-                                    type: 'lookup',
-                                    model: 'Hubleto/App/Community/Orders/Models/Item',
-                                  },
-                                  customEndpointParams: { idOrder: item.id_order },
-                                  onChange: (input) => {
-
-                                    request.post('orders/api/get-item',
-                                      {idItem: input.state.value},
-                                      {},
-                                      (data: any) => {
-                                        const P = data.item;
-                                        R.ITEMS[key].id_order_item = input.state.value;
-                                        R.ITEMS[key].item = P?.title ?? '';
-                                        R.ITEMS[key].unit_price = P?.sales_price ?? 0;
-                                        R.ITEMS[key].amount = P?.amount ?? 0;
-                                        R.ITEMS[key].price_excl_vat = P?.price_excl_vat ?? 0;
-                                        R.ITEMS[key].price_incl_vat = P?.price_incl_vat ?? 0;
-                                        R.ITEMS[key].vat = P?.vat ?? 0;
-                                        R.ITEMS[key].discount = P?.discount ?? 0;
-                                        this.updateRecord(R);
-                                      }
-                                    )
-                                  }
-                                })}
-                              </td>
-                              <td rowSpan={3} className={rowBgClass}>
-                                <div className='flex gap-2'>
-                                  <button
-                                    className='btn btn-warning'
-                                    onClick={() => {
-                                      request.post(
-                                        'invoices/api/unlink-prepared-item',
-                                        {
-                                          idInvoice: R.id,
-                                          idItem: item.id
-                                        },
-                                        {},
-                                        (result: any) => {
-                                          this.loadRecord();
-                                        }
-                                      );
-                                    }}
-                                  >
-                                    <span className='icon'><i className='fas fa-link-slash'></i></span>
-                                  </button>
-                                  <button
-                                    className='btn btn-danger'
-                                    onClick={() => {
-                                      R.ITEMS[key]._toBeDeleted_ = true;
+                            return <>
+                              <tr key={key + '1'} className={item._toBeDeleted_ ? 'border border-red-400' : ''}>
+                                <td rowSpan={3} className={'align-top ' + rowBgClass}>
+                                  <div className='badge'>{key + 1}</div>
+                                </td>
+                                <td colSpan={3} style={{width: '50%'}} className={rowBgClass}>
+                                  {InputFactory({
+                                    value: item.id_order,
+                                    cssClass: 'bg-white min-w-64',
+                                    description: {
+                                      type: 'lookup',
+                                      model: 'Hubleto/App/Community/Orders/Models/Order'
+                                    },
+                                    onInit: (input) => {
+                                      this.idOrderInputs[key] = input;
+                                    },
+                                    onChange: (input, value) => {
+                                      R.ITEMS[key].id_order = input.state.value;
+                                      R.ITEMS[key].item = input.refInput.current.getValue()[0]?._LOOKUP;
                                       this.updateRecord(R);
-                                    }}
-                                  >
-                                    <span className='icon'><i className='fas fa-trash'></i></span>
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr key={key + '2'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
-                              <td className={rowBgClass} colSpan={4}>
-                                {InputFactory({
-                                  value: item.item,
-                                  cssClass: 'bg-white',
-                                  description: { type: 'string' },
-                                  onChange: (e) => {
-                                    R.ITEMS[key].item = e.state.value;
-                                    this.updateRecord(R);
-                                  }
-                                })}
-                              </td>
-                              <td className={rowBgClass + ' pr-4'}>
-                                {InputFactory({
-                                  value: item.unit_price,
-                                  cssClass: 'bg-white',
-                                  description: { type: 'number', unit: currencySymbol + '/unit' },
-                                  onChange: (e) => {
-                                    R.ITEMS[key].unit_price = e.state.value;
-                                    this.updateRecord(R);
-                                  }
-                                })}
-                              </td>
-                              <td className={rowBgClass + ' pr-4'}>
-                                {InputFactory({
-                                  value: item.amount,
-                                  cssClass: 'bg-white',
-                                  description: { type: 'number', unit: 'units' },
-                                  onChange: (e) => {
-                                    R.ITEMS[key].amount = e.state.value;
-                                    this.updateRecord(R);
-                                  }
-                                })}
-                              </td>
-                            </tr>
-                            <tr key={key + '3'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
-                              <td className={rowBgClass}><div className='flex gap-2 items-center'>
-                                Discount: {InputFactory({
-                                  value: item.discount,
-                                  cssClass: 'bg-white',
-                                  description: { type: 'number', unit: '%' },
-                                  onChange: (e) => {
-                                    R.ITEMS[key].discount = e.state.value;
-                                    this.updateRecord(R);
-                                  }
-                                })}
-                              </div></td>
-                              <td className={rowBgClass}><div className='flex gap-2 items-center'>
-                                VAT: {InputFactory({
-                                  value: item.vat,
-                                  cssClass: 'bg-white',
-                                  description: { type: 'number', unit: '%' },
-                                  onChange: (e) => {
-                                    R.ITEMS[key].vat = e.state.value;
-                                    this.updateRecord(R);
-                                  }
-                                })}
-                              </div></td>
-                              <td className={rowBgClass + ' text-right'} colSpan={4}>
-                                <div>
-                                  {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} excl. VAT
-                                </div>
-                                <div>
-                                  {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} incl. VAT
-                                </div>
-                              </td>
-                            </tr>
-                          </>;
-                        }) : null}
-                      </tbody>
-                    </table>
-                    <div className='flex gap-2'>
-                      <button
-                        className='btn btn-add mt-2'
-                        onClick={() => {
-                          if (!R.ITEMS) R.ITEMS = [];
-                          R.ITEMS.push({
-                            id_invoice: this.state.id,
-                            id_customer: R.id_customer,
-                          });
-                          this.updateRecord(R);
-                        }}
-                      >
-                        <span className='icon'><i className='fas fa-plus'></i></span>
-                        <span className='text'>{this.translate('Add new item')}</span>
-                      </button>
-                      <button
-                        className='btn btn-add-outline mt-2'
-                        onClick={() => {
-                          this.setState({linkPreparedItem: true})
-                        }}
-                      >
-                        <span className='icon'><i className='fas fa-link'></i></span>
-                        <span className='text'>{this.translate('Link prepared item')}</span>
-                      </button>
+                                    }
+                                  })}
+                                </td>
+                                <td colSpan={4} className={rowBgClass}>
+                                  {InputFactory({
+                                    value: item.id_order_item,
+                                    cssClass: 'bg-white min-w-64',
+                                    description: {
+                                      type: 'lookup',
+                                      model: 'Hubleto/App/Community/Orders/Models/Item',
+                                    },
+                                    customEndpointParams: { idOrder: item.id_order },
+                                    onChange: (input) => {
+
+                                      request.post('orders/api/get-item',
+                                        {idItem: input.state.value},
+                                        {},
+                                        (data: any) => {
+                                          const P = data.item;
+                                          R.ITEMS[key].id_order_item = input.state.value;
+                                          R.ITEMS[key].item = P?.title ?? '';
+                                          R.ITEMS[key].unit_price = P?.sales_price ?? 0;
+                                          R.ITEMS[key].amount = P?.amount ?? 0;
+                                          R.ITEMS[key].price_excl_vat = P?.price_excl_vat ?? 0;
+                                          R.ITEMS[key].price_incl_vat = P?.price_incl_vat ?? 0;
+                                          R.ITEMS[key].vat = P?.vat ?? 0;
+                                          R.ITEMS[key].discount = P?.discount ?? 0;
+                                          this.updateRecord(R);
+                                        }
+                                      )
+                                    }
+                                  })}
+                                </td>
+                                <td rowSpan={3} className={rowBgClass}>
+                                  <div className='flex gap-2'>
+                                    <button
+                                      className='btn btn-warning'
+                                      onClick={() => {
+                                        request.post(
+                                          'invoices/api/unlink-prepared-item',
+                                          {
+                                            idInvoice: R.id,
+                                            idItem: item.id
+                                          },
+                                          {},
+                                          (result: any) => {
+                                            this.loadRecord();
+                                          }
+                                        );
+                                      }}
+                                    >
+                                      <span className='icon'><i className='fas fa-link-slash'></i></span>
+                                    </button>
+                                    <button
+                                      className='btn btn-danger'
+                                      onClick={() => {
+                                        R.ITEMS[key]._toBeDeleted_ = true;
+                                        this.updateRecord(R);
+                                      }}
+                                    >
+                                      <span className='icon'><i className='fas fa-trash'></i></span>
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr key={key + '2'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
+                                <td className={rowBgClass} colSpan={4}>
+                                  {InputFactory({
+                                    value: item.item,
+                                    cssClass: 'bg-white',
+                                    description: { type: 'string' },
+                                    onChange: (e) => {
+                                      R.ITEMS[key].item = e.state.value;
+                                      this.updateRecord(R);
+                                    }
+                                  })}
+                                </td>
+                                <td className={rowBgClass + ' pr-4'}>
+                                  {InputFactory({
+                                    value: item.unit_price,
+                                    cssClass: 'bg-white',
+                                    description: { type: 'number', unit: currencySymbol + '/unit' },
+                                    onChange: (e) => {
+                                      R.ITEMS[key].unit_price = e.state.value;
+                                      this.updateRecord(R);
+                                    }
+                                  })}
+                                </td>
+                                <td className={rowBgClass + ' pr-4'}>
+                                  {InputFactory({
+                                    value: item.amount,
+                                    cssClass: 'bg-white',
+                                    description: { type: 'number', unit: 'units' },
+                                    onChange: (e) => {
+                                      R.ITEMS[key].amount = e.state.value;
+                                      this.updateRecord(R);
+                                    }
+                                  })}
+                                </td>
+                              </tr>
+                              <tr key={key + '3'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
+                                <td className={rowBgClass}><div className='flex gap-2 items-center'>
+                                  Discount: {InputFactory({
+                                    value: item.discount,
+                                    cssClass: 'bg-white',
+                                    description: { type: 'number', unit: '%' },
+                                    onChange: (e) => {
+                                      R.ITEMS[key].discount = e.state.value;
+                                      this.updateRecord(R);
+                                    }
+                                  })}
+                                </div></td>
+                                <td className={rowBgClass}><div className='flex gap-2 items-center'>
+                                  VAT: {InputFactory({
+                                    value: item.vat,
+                                    cssClass: 'bg-white',
+                                    description: { type: 'number', unit: '%' },
+                                    onChange: (e) => {
+                                      R.ITEMS[key].vat = e.state.value;
+                                      this.updateRecord(R);
+                                    }
+                                  })}
+                                </div></td>
+                                <td className={rowBgClass + ' text-right'} colSpan={4}>
+                                  <div>
+                                    {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} excl. VAT
+                                  </div>
+                                  <div>
+                                    {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} incl. VAT
+                                  </div>
+                                </td>
+                              </tr>
+                            </>;
+                          }) : null}
+                        </tbody>
+                      </table>
+                      <div className='flex gap-2'>
+                        <button
+                          className='btn btn-add mt-2'
+                          onClick={() => {
+                            if (!R.ITEMS) R.ITEMS = [];
+                            R.ITEMS.push({
+                              id_invoice: this.state.id,
+                              id_customer: R.id_customer,
+                            });
+                            this.updateRecord(R);
+                          }}
+                        >
+                          <span className='icon'><i className='fas fa-plus'></i></span>
+                          <span className='text'>{this.translate('Add new item')}</span>
+                        </button>
+                        <button
+                          className='btn btn-add-outline mt-2'
+                          onClick={() => {
+                            this.setState({linkPreparedItem: true})
+                          }}
+                        >
+                          <span className='icon'><i className='fas fa-link'></i></span>
+                          <span className='text'>{this.translate('Link prepared item')}</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>}
+                </div>}
+              </div>
             </div>
-          </div>
-          {this.state.linkPreparedItem ? <>
-            <ModalSimple
-              uid={this.props.uid + '_modal_table_link_not_invoiced_items'}
-              isOpen={true}
-              type='centered'
-              showHeader={true}
-              title={<>
-                <h2>{this.translate('Link prepared item')}</h2>
-              </>}
-              onClose={(modal: ModalSimple) => {
-                this.setState({linkPreparedItem: false});
-              }}
-            >
-              <TableItems
-                uid={this.props.uid + "_table_link_not_invoiced_items"}
-                tag={"link_not_invoiced_items"}
-                parentForm={this}
-                idInvoice={0}
-                filters={{fStatus: 1}}
-                readonly={true}
-                onRowClick={(table: any, row: any) => {
-                  request.post(
-                    'invoices/api/link-prepared-item',
-                    {
-                      idInvoice: R.id,
-                      idItem: row.id
-                    },
-                    {},
-                    (result: any) => {
-                      this.setState({linkPreparedItem: false}, () => {
-                        this.loadRecord();
-                      });
-                    }
-                  );
+            {this.state.linkPreparedItem ? <>
+              <ModalSimple
+                uid={this.props.uid + '_modal_table_link_not_invoiced_items'}
+                isOpen={true}
+                type='centered'
+                showHeader={true}
+                title={<>
+                  <h2>{this.translate('Link prepared item')}</h2>
+                </>}
+                onClose={(modal: ModalSimple) => {
+                  this.setState({linkPreparedItem: false});
                 }}
-              />
-            </ModalSimple>
-          </> : null}
-        </>;
+              >
+                <TableItems
+                  uid={this.props.uid + "_table_link_not_invoiced_items"}
+                  tag={"link_not_invoiced_items"}
+                  parentForm={this}
+                  idInvoice={0}
+                  filters={{fStatus: 1}}
+                  readonly={true}
+                  onRowClick={(table: any, row: any) => {
+                    request.post(
+                      'invoices/api/link-prepared-item',
+                      {
+                        idInvoice: R.id,
+                        idItem: row.id
+                      },
+                      {},
+                      (result: any) => {
+                        this.setState({linkPreparedItem: false}, () => {
+                          this.loadRecord();
+                        });
+                      }
+                    );
+                  }}
+                />
+              </ModalSimple>
+            </> : null}
+          </>;
+        }
       break;
 
       case 'preview':

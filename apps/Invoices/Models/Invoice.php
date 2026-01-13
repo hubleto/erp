@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Invoices\Models;
 
 
 use Hubleto\Framework\Db\Column\Date;
-use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\Currency;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -17,7 +17,7 @@ use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Documents\Generator;
-use Hubleto\App\Community\Settings\Models\Currency;
+use Hubleto\App\Community\Settings\Models\Currency as CurrencyModel;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
@@ -54,7 +54,7 @@ class Invoice extends \Hubleto\Erp\Model {
     'PAYMENT_METHOD' => [ self::BELONGS_TO, PaymentMethod::class, "id_payment_method" ],
     'PROFILE' => [ self::BELONGS_TO, Profile::class, "id_profile" ],
     'ISSUED_BY' => [ self::BELONGS_TO, User::class, "id_issued_by" ],
-    'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
+    'CURRENCY' => [ self::HAS_ONE, CurrencyModel::class, 'id', 'id_currency'],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
@@ -107,9 +107,9 @@ class Invoice extends \Hubleto\Erp\Model {
       'date_due' => (new Date($this, $this->translate('Due')))->setDefaultVisible(),
       'date_payment' => (new Date($this, $this->translate('Paid')))->setDefaultVisible(),
       'date_sent' => (new Date($this, $this->translate('Sent')))->setDefaultVisible(),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
-      'total_excl_vat' => new Decimal($this, $this->translate('Total excl. VAT'))->setReadonly(),
-      'total_incl_vat' => new Decimal($this, $this->translate('Total incl. VAT'))->setReadonly(),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), CurrencyModel::class)),
+      'total_excl_vat' => new Currency($this, $this->translate('Total excl. VAT'))->setReadonly(),
+      'total_incl_vat' => new Currency($this, $this->translate('Total incl. VAT'))->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),

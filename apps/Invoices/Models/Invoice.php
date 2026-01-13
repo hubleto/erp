@@ -128,6 +128,18 @@ class Invoice extends \Hubleto\Erp\Model {
           FROM `invoice_items` `ii`
           WHERE `ii`.`id_invoice` in (`invoices`.`id`)
         "),
+      'virt_payments' => (new Virtual($this, $this->translate('Payments')))->setDefaultVisible()
+        ->setProperty('sql',"
+          SELECT
+            CONCAT('[', GROUP_CONCAT(
+              JSON_OBJECT(
+                'date_payment', date_payment,
+                'amount', amount
+              )
+            ), ']')
+          FROM `invoice_payments` `ip`
+          WHERE `ip`.`id_invoice` in (`invoices`.`id`)
+        "),
     ]);
   }
 

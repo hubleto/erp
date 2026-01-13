@@ -97,6 +97,7 @@ class Loader extends \Hubleto\Framework\Loader
         '/^api\/get-chart-data\/?$/' => Api\GetTemplateChartData::class,
         '/^api\/get-table-columns-customize\/?$/' => Api\GetTableColumnsCustomize::class,
         '/^api\/save-table-columns-customize\/?$/' => Api\SaveTableColumnsCustomize::class,
+        '/^api\/reset-table-columns-customize\/?$/' => Api\ResetTableColumnsCustomize::class,
         '/^api\/table-export-csv\/?$/' => Api\TableExportCsv::class,
         '/^api\/table-import-csv\/?$/' => Api\TableImportCsv::class,
         '/^api\/search\/?$/' => Api\Search::class,

@@ -16,6 +16,7 @@ interface FormInvoiceState extends HubletoFormState {
   linkPreparedItem: boolean;
   sendInvoicePreparedData?: any,
   sendInvoiceResult?: any,
+  htmlPreview?: any,
 }
 
 export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoiceState> {
@@ -36,12 +37,8 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
 
   idOrderInputs: Array<any>;
 
-  refPreview: any;
-
   constructor(props: FormInvoiceProps) {
     super(props);
-
-    this.refPreview = React.createRef();
   }
 
   getStateFromProps(props: FormInvoiceProps) {
@@ -131,7 +128,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       },
       {},
       (result: any) => {
-        this.refPreview.current.setState({content: result.html});
+        this.setState({htmlPreview: result.html});
       }
     );
   }
@@ -145,7 +142,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
       },
       {},
       (vars: any) => {
-        this.refPreview.current.setState({content: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
+        this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
       }
     );
   }
@@ -233,7 +230,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   </>}
                 </div>
                 {this.state.id <= 0 ? null : <div>
-                  {this.inputWrapper('description')}
+                  {this.inputWrapper('description', {cssClass: 'text-blue-500'})}
                   <div className='card flex-2'>
                     <div className='card-header'>{this.translate('Items')}</div>
                     <div className='card-body'>
@@ -263,7 +260,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                 <td colSpan={3} style={{width: '50%'}} className={rowBgClass}>
                                   {InputFactory({
                                     value: item.id_order,
-                                    cssClass: 'bg-white min-w-64',
+                                    cssClass: 'bg-white text-xs',
                                     description: {
                                       type: 'lookup',
                                       model: 'Hubleto/App/Community/Orders/Models/Order'
@@ -281,7 +278,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                 <td colSpan={4} className={rowBgClass}>
                                   {InputFactory({
                                     value: item.id_order_item,
-                                    cssClass: 'bg-white min-w-64',
+                                    cssClass: 'bg-white text-xs',
                                     description: {
                                       type: 'lookup',
                                       model: 'Hubleto/App/Community/Orders/Models/Item',
@@ -344,7 +341,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                 <td className={rowBgClass} colSpan={4}>
                                   {InputFactory({
                                     value: item.item,
-                                    cssClass: 'bg-white',
+                                    cssClass: 'bg-white text-blue-500',
                                     description: { type: 'string' },
                                     onChange: (e) => {
                                       R.ITEMS[key].item = e.state.value;
@@ -355,7 +352,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                 <td className={rowBgClass + ' pr-4'}>
                                   {InputFactory({
                                     value: item.unit_price,
-                                    cssClass: 'bg-white',
+                                    cssClass: 'bg-white text-blue-500',
                                     description: { type: 'number', unit: currencySymbol + '/unit' },
                                     onChange: (e) => {
                                       R.ITEMS[key].unit_price = e.state.value;
@@ -366,7 +363,7 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                 <td className={rowBgClass + ' pr-4'}>
                                   {InputFactory({
                                     value: item.amount,
-                                    cssClass: 'bg-white',
+                                    cssClass: 'bg-white text-blue-500',
                                     description: { type: 'number', unit: 'units' },
                                     onChange: (e) => {
                                       R.ITEMS[key].amount = e.state.value;
@@ -399,10 +396,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   })}
                                 </div></td>
                                 <td className={rowBgClass + ' text-right'} colSpan={4}>
-                                  <div>
+                                  <div className={'badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
                                     {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} excl. VAT
                                   </div>
-                                  <div>
+                                  <div className={'badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
                                     {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} incl. VAT
                                   </div>
                                 </td>
@@ -543,9 +540,9 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
             <div className='w-full h-full card mt-2'>
               <div className="card-body">
                 <HtmlFrame
-                  ref={this.refPreview}
                   className='w-full h-full'
                   iframeId={this.props.uid + '_invoice_preview'}
+                  content={this.state.htmlPreview}
                 />
               </div>
               <div className='card-footer'>

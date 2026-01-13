@@ -105,7 +105,6 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
     if (columnName == 'date_due') {
       const now = moment();
       const daysDue = moment(now).diff(moment(rowData['date_due']), 'days');
-      console.log(rowData['date_due'], daysDue);
       if (daysDue >= 0) return cellClassName + ' text-red-800';
       else if (daysDue > -7) return cellClassName + ' text-yellow-800';
       else return cellClassName;

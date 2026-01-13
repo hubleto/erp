@@ -10,6 +10,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\File;
+use Hubleto\Framework\Db\Column\Virtual;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 
@@ -114,6 +115,19 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
+      'virt_items' => (new Virtual($this, $this->translate('Items')))->setDefaultVisible()
+        ->setProperty('sql',"
+          SELECT
+            CONCAT('[', GROUP_CONCAT(
+              JSON_OBJECT(
+                'item', item,
+                'unit_price', unit_price,
+                'amount', amount
+              )
+            ), ']')
+          FROM `invoice_items` `ii`
+          WHERE `ii`.`id_invoice` in (`invoices`.`id`)
+        "),
     ]);
   }
 

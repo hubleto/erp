@@ -175,7 +175,10 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
           return <>
             {this.inputWrapper('inbound_outbound', { uiStyle: 'buttons' })}
             {this.inputWrapper('type', { uiStyle: 'buttons' })}
-            {R.inbound_outbound == 1 ? this.inputWrapper('id_supplier') : this.inputWrapper('id_customer')}
+            {R.inbound_outbound == 1
+              ? this.inputWrapper('id_supplier')
+              : this.inputWrapper('id_customer')
+            }
             {this.inputWrapper('number', {cssClass: 'text-4xl'})}
           </>
         } else {
@@ -285,34 +288,36 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                                   })}
                                 </td>
                                 <td colSpan={4} className={rowBgClass}>
-                                  {InputFactory({
-                                    value: item.id_order_item,
-                                    cssClass: 'bg-white text-xs',
-                                    description: {
-                                      type: 'lookup',
-                                      model: 'Hubleto/App/Community/Orders/Models/Item',
-                                    },
-                                    customEndpointParams: { idOrder: item.id_order },
-                                    onChange: (input) => {
+                                  {item.id_order > 0 ?
+                                    InputFactory({
+                                      value: item.id_order_item,
+                                      cssClass: 'bg-white text-xs',
+                                      description: {
+                                        type: 'lookup',
+                                        model: 'Hubleto/App/Community/Orders/Models/Item',
+                                      },
+                                      customEndpointParams: { idOrder: item.id_order },
+                                      onChange: (input) => {
 
-                                      request.post('orders/api/get-item',
-                                        {idItem: input.state.value},
-                                        {},
-                                        (data: any) => {
-                                          const P = data.item;
-                                          R.ITEMS[key].id_order_item = input.state.value;
-                                          R.ITEMS[key].item = P?.title ?? '';
-                                          R.ITEMS[key].unit_price = P?.sales_price ?? 0;
-                                          R.ITEMS[key].amount = P?.amount ?? 0;
-                                          R.ITEMS[key].price_excl_vat = P?.price_excl_vat ?? 0;
-                                          R.ITEMS[key].price_incl_vat = P?.price_incl_vat ?? 0;
-                                          R.ITEMS[key].vat = P?.vat ?? 0;
-                                          R.ITEMS[key].discount = P?.discount ?? 0;
-                                          this.updateRecord(R);
-                                        }
-                                      )
-                                    }
-                                  })}
+                                        request.post('orders/api/get-item',
+                                          {idItem: input.state.value},
+                                          {},
+                                          (data: any) => {
+                                            const P = data.item;
+                                            R.ITEMS[key].id_order_item = input.state.value;
+                                            R.ITEMS[key].item = P?.title ?? '';
+                                            R.ITEMS[key].unit_price = P?.sales_price ?? 0;
+                                            R.ITEMS[key].amount = P?.amount ?? 0;
+                                            R.ITEMS[key].price_excl_vat = P?.price_excl_vat ?? 0;
+                                            R.ITEMS[key].price_incl_vat = P?.price_incl_vat ?? 0;
+                                            R.ITEMS[key].vat = P?.vat ?? 0;
+                                            R.ITEMS[key].discount = P?.discount ?? 0;
+                                            this.updateRecord(R);
+                                          }
+                                        )
+                                      }
+                                    })
+                                  : null}
                                 </td>
                                 <td rowSpan={3} className={rowBgClass}>
                                   <div className='flex gap-2'>

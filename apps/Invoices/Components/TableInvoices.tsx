@@ -118,6 +118,20 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
       return <div className='badge badge-danger'>{this.translate('Not sent')}</div>;
     } else if (columnName == "date_payment" && !data['date_payment']) {
       return <div className='badge badge-danger'>{this.translate('Not paid')}</div>;
+    } else if (columnName == "virt_items") {
+      console.log(data['virt_items']);
+      try {
+        let items = JSON.parse(data['virt_items']);
+        console.log(items);
+        return <div className='flex flex-col'>{items.map((item, index) => {
+          console.log(item);
+          return <div key={index} className='badge text-xs'>
+            {item.item}: {item.unit_price ?? 0} ks x {item.amount ?? 0} €
+          </div>
+        })}</div>;
+      } catch (ex) {
+        return null;
+      }
     } else {
       return super.renderCell(columnName, column, data, options);
     }

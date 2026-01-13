@@ -558,8 +558,16 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $vars = $this->getPreviewVars($idInvoice);
 
-    $invoiceOutputFilename =
-      'Invoice '
+    switch ($invoice->type) {
+      case 1: $invoiceOutputFilename = 'Proforma Invoice'; break;
+      case 2: $invoiceOutputFilename = 'Advance Invoice'; break;
+      case 3: $invoiceOutputFilename = 'Invoice'; break;
+      case 4: $invoiceOutputFilename = 'Credit Note'; break;
+      case 5: $invoiceOutputFilename = 'Debit Note'; break;
+    }
+
+    $invoiceOutputFilename .=
+      ' '
       . Helper::str2url($invoice->number)
       . ' '
       . Helper::str2url($invoice->CUSTOMER->name)

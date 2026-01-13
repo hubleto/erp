@@ -70,6 +70,22 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
 
       try {
 
+        switch ($invoice->type) {
+          case 1: $attachmentName = 'Proforma Invoice'; break;
+          case 2: $attachmentName = 'Advance Invoice'; break;
+          case 3: $attachmentName = 'Invoice'; break;
+          case 4: $attachmentName = 'Credit Note'; break;
+          case 5: $attachmentName = 'Debit Note'; break;
+        }
+
+        $attachmentName .=
+          ' '
+          . Helper::str2url($invoice->number)
+          . ' '
+          . Helper::str2url($invoice->CUSTOMER->name)
+          . '.pdf'
+        ;
+
         $idMailSent = $mMail->createAndSend(
           [
             'subject' => $subject,
@@ -80,15 +96,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
             'bcc' => $bcc,
           ],
           [
-            [
-              'name' =>
-                'Invoice '
-                . Helper::str2url($invoice->number)
-                . ' '
-                . Helper::str2url($invoice->CUSTOMER->name)
-                . '.pdf',
-              'file' => $invoice->pdf,
-            ]
+            [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
           ]
         );
 

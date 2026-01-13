@@ -148,10 +148,19 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
   }
 
   renderTitle(): JSX.Element {
-    const r = this.state.record;
+    const R = this.state.record;
+    let title = (this.state.record.inbound_outbound == 1 ? 'Inbound' : 'Outbound');
+
+    switch (R.type) {
+      case 1: case '1': title += ' Proforma Invoice'; break;
+      case 2: case '2': title += ' Advance Invoice'; break;
+      case 3: case '3': title += ' Invoice'; break;
+      case 4: case '4': title += ' Credit Note'; break;
+      case 5: case '5': title += ' Debit Note'; break;
+    }
     return <>
-      <small>{this.state.record.inbound_outbound == 1 ? 'Inbound Invoice' : 'Outbound Invoice'}</small>
-      <h2>{r.number ? r.number : '---'}</h2>
+      <small>{title}</small>
+      <h2>{R.number ? R.number : '---'}</h2>
     </>;
   }
 
@@ -524,12 +533,21 @@ export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoi
                   className='btn btn-transparent mb-4'
                   onClick={() => {
                     const iframe = window.frames[this.props.uid + '_invoice_preview'];
-                    const documentTitle = document.title;
-                    document.title = 'Invoice ' + R.number + ' ' + R.CUSTOMER.name;
+                    const origDocumentTitle = document.title;
+
+                    switch (R.type) {
+                      case 1: case '1': document.title = 'Proforma Invoice'; break;
+                      case 2: case '2': document.title = 'Advance Invoice'; break;
+                      case 3: case '3': document.title = 'Invoice'; break;
+                      case 4: case '4': document.title = 'Credit Note'; break;
+                      case 5: case '5': document.title = 'Debit Note'; break;
+                    }
+                    document.title += ' ' + R.number + ' ' + R.CUSTOMER.name;
+
                     iframe.contentWindow.focus();
                     iframe.contentWindow.print();
 
-                    document.title = documentTitle;
+                    document.title = origDocumentTitle;
                   }}
                 >
                   <span className='icon'><i className='fas fa-print'></i></span>

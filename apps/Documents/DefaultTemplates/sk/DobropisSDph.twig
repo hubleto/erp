@@ -12,7 +12,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Faktúra {{ PROFILE.COMPANY.name }} {{ number }}</title>
+  <title>Dobropis {{ PROFILE.COMPANY.name }} {{ number }}</title>
   <style>
     {% if PDF_EXPORT %}
       * { font-family: Dejavu Sans !important; line-height: 0.95em; font-size: 10pt; }
@@ -41,8 +41,7 @@
 </head>
 <body>
   <!-- TOP -->
-  <div>Faktúra - daňový doklad č. <b>{{ number }}</b></div>
-  {% if to_be_paid <= 0 %} <div style="color:red">Neuhrádzajte, faktúra je už uhradená.</div> {% endif %}
+  <div>Dobropis - daňový doklad č. <b>{{ number }}</b></div>
   <br/>
   <div class="dmain">
     <!-- DODAVATEL -->
@@ -118,7 +117,7 @@
     </div>
     <div class="dcolumn" style="width:40%">
       <div class="content" style="background:#EEEEEE;text-align:center">
-        Suma k úhrade<br>
+        Dobropisovaná suma<br>
         <b style="font-size:1.4em;">{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b><br/>
         <br/>
         Dátum splatnosti<br>
@@ -226,7 +225,7 @@
                     {% endif %}
                     <tr><td>&nbsp;</td></tr>
                     <tr>
-                      <td><b style="font-size:1.2em">K úhrade</b></td>
+                      <td><b style="font-size:1.2em">Dobropisovaná suma</b></td>
                       <td class="text-right"><b style="font-size:1.2em">{{ hubleto.locale().formatCurrency(to_be_paid, CURRENCY.symbol) }}</b></td>
                     </tr>
                   </tbody>
@@ -241,7 +240,7 @@
   </table>
   <br/>
   <br/>
-  Faktúru vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.<br/>
+  Dobropis vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.<br/>
   <br/>
   Vygenerované v ERP Hubleto.<br/>
   https://www.hubleto.com<br/>

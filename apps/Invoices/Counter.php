@@ -30,7 +30,7 @@ class Counter extends Core
    */
   public function dueInvoices(): int
   {
-    $mItem = $this->getModel(Models\Item::class);
+    $mItem = $this->getModel(Models\Invoice::class);
     return $mItem->record->prepareReadQuery()
       ->whereDate('date_due', '<', date("Y-m-d"))
       ->whereNull('date_payment')
@@ -46,7 +46,7 @@ class Counter extends Core
    */
   public function unsentInvoices(): int
   {
-    $mItem = $this->getModel(Models\Item::class);
+    $mItem = $this->getModel(Models\Invoice::class);
     return $mItem->record->prepareReadQuery()
       ->whereNull('date_sent')
       ->count()

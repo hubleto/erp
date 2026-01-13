@@ -108,8 +108,8 @@ class Invoice extends \Hubleto\Erp\Model {
       'date_payment' => (new Date($this, $this->translate('Paid')))->setDefaultVisible(),
       'date_sent' => (new Date($this, $this->translate('Sent')))->setDefaultVisible(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), CurrencyModel::class)),
-      'total_excl_vat' => new Currency($this, $this->translate('Total excl. VAT'))->setReadonly(),
-      'total_incl_vat' => new Currency($this, $this->translate('Total incl. VAT'))->setReadonly(),
+      'total_excl_vat' => new Currency($this, $this->translate('Total excl. VAT'))->setDecimals(2)->setReadonly(),
+      'total_incl_vat' => new Currency($this, $this->translate('Total incl. VAT'))->setDecimals(2)->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
@@ -202,11 +202,6 @@ class Invoice extends \Hubleto\Erp\Model {
     $description->addFilter('fIssued', [
       'title' => $this->translate('Issued'),
       'options' => [
-        'all' => $this->translate('All'),
-        'today' => $this->translate('Today'),
-        'yesterday' => $this->translate('Yesterday'),
-        'last7Days' => $this->translate('Last 7 days'),
-        'last14Days' => $this->translate('Last 14 days'),
         'thisMonth' => $this->translate('This month'),
         'lastMonth' => $this->translate('Last month'),
         'beforeLastMonth' => $this->translate('Month before last'),

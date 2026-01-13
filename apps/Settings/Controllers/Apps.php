@@ -45,32 +45,34 @@ class Apps extends \Hubleto\Erp\Controller
 
     $appsToShow = [];
     if (empty($findApp)) {
-      foreach ($installedApps as $appNamespace => $app) {
-        $appsToShow[$appNamespace] = [
-          'manifest' => $app->manifest,
-          'instance' => $app,
-            'type' => $app->manifest['appType'],
-        ];
-      }
+      $appsFound = $availableApps;
+      // foreach ($installedApps as $appNamespace => $app) {
+      //   $appsToShow[$appNamespace] = [
+      //     'manifest' => $app->manifest,
+      //     'instance' => $app,
+      //       'type' => $app->manifest['appType'],
+      //   ];
+      // }
     } else {
       $appsFound = array_filter($availableApps, function ($appManifest, $appNamespace) use ($findApp) {
         return \str_contains(strtolower($appNamespace), strtolower($findApp));
       }, ARRAY_FILTER_USE_BOTH);
 
-      foreach ($appsFound as $appNamespace => $appManifest) {
-        if (isset($installedApps[$appNamespace])) {
-          $appsToShow[$appNamespace] = [
-            'manifest' => $installedApps[$appNamespace]->manifest,
-            'instance' => $installedApps[$appNamespace],
-            'type' => $installedApps[$appNamespace]->manifest['appType'],
-          ];
-        } else {
-          $appsToShow[$appNamespace] = [
-            'manifest' => $appManifest,
-            'instance' => null,
-            'type' => $appManifest['appType'],
-          ];
-        }
+    }
+
+    foreach ($appsFound as $appNamespace => $appManifest) {
+      if (isset($installedApps[$appNamespace])) {
+        $appsToShow[$appNamespace] = [
+          'manifest' => $installedApps[$appNamespace]->manifest,
+          'instance' => $installedApps[$appNamespace],
+          'type' => $installedApps[$appNamespace]->manifest['appType'],
+        ];
+      } else {
+        $appsToShow[$appNamespace] = [
+          'manifest' => $appManifest,
+          'instance' => null,
+          'type' => $appManifest['appType'],
+        ];
       }
     }
 

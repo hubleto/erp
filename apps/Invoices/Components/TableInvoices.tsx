@@ -123,7 +123,7 @@ export default class TableInvoices extends HubletoTable<TableInvoicesProps, Tabl
         let items = JSON.parse(data['virt_items']);
         return <div className='flex flex-col'>{items.map((item, index) => {
           return <div key={index} className='badge text-xs'>
-            {item.item}: {item.unit_price ?? 0} ks x {item.amount ?? 0} €
+            {item.item}: {item.amount ?? 0} ks x {globalThis.hubleto.currencyFormat(item.unit_price)} €
           </div>
         })}</div>;
       } catch (ex) {

@@ -45,7 +45,7 @@ $config['smtpPassword'] = '{{ smtpPassword }}';
 // misc
 $config['develMode'] = TRUE;
 $config['language'] = 'en';
-$config['premiumRepoFolder'] = '{{ premiumRepoFolder }}';
+$config['enterpriseAppsRepository'] = '{{ enterpriseAppsRepository }}';
 $config['externalAppsRepositories'] = [
   'MyCompany' => __DIR__ . '/apps/external/MyCompany'
 ];

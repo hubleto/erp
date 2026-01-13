@@ -24,6 +24,7 @@
         <div class="card">
           <div class="card-header">
             <div>
+              <div class="font-normal text-xs text-gray-400">{{ app.manifest.namespace }}</div>
               {{ app.manifest.nameTranslated ?? app.manifest.name }}
               {% if app.type == 1 %} <div class="badge badge-violet">Community</div> {% endif %}
               {% if app.type == 2 %} <div class="badge badge-lime">Premium</div> {% endif %}
@@ -33,7 +34,6 @@
           </div>
           <div class="card-body">
             <div>{{ app.manifest.highlightTranslated ?? app.manifest.highlight }}</div>
-            <div class="text-gray-400">{{ app.namespace }}</div>
           </div>
           <div class="card-footer">
             {% if app.instance %}
@@ -56,13 +56,13 @@
               {% endif %}
             {% else %}
               {% if app.type == 1 or isPremium %}
-                <a class="btn btn-primary" href="?installApp={{ appNamespace }}">
+                <a class="btn btn-add" href="?installApp={{ appNamespace }}">
                   <span class="icon"><i class="fas fa-add"></i></span>
                   <span class="text">{{ translate('Install') }}</span>
                 </a>
               {% elseif not isPremium %}
                 <div class="badge badge-warning">You can install Premium apps only in Premium account.</div>
-                <a class="btn btn-primary" href="{{ config.projectUrl }}/cloud">
+                <a class="btn btn-add" href="{{ config.projectUrl }}/cloud">
                   <span class="icon"><i class="fas fa-medal"></i></span>
                   <span class="text">{{ translate('Activate Premium account') }}</span>
                 </a>

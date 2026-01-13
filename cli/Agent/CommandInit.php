@@ -122,7 +122,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $packagesToInstall = null;
     $appsToInstall = null;
     $externalAppsRepositories = [];
-    $premiumRepoFolder = null;
+    $enterpriseAppsRepository = null;
 
     $configFile = (string) ($this->arguments[2] ?? '');
 
@@ -198,8 +198,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     if (isset($config['externalAppsRepositories'])) {
       $externalAppsRepositories = $config['externalAppsRepositories'];
     }
-    if (isset($config['premiumRepoFolder'])) {
-      $premiumRepoFolder = $config['premiumRepoFolder'];
+    if (isset($config['enterpriseAppsRepository'])) {
+      $enterpriseAppsRepository = $config['enterpriseAppsRepository'];
     }
     if (isset($config['smtpHost'])) {
       $smtpHost = $config['smtpHost'];
@@ -435,7 +435,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       }
     }
 
-    $installer->premiumRepoFolder = (string) ($premiumRepoFolder ?? '');
+    $installer->enterpriseAppsRepository = (string) ($enterpriseAppsRepository ?? '');
     $installer->externalAppsRepositories = $externalAppsRepositories;
 
     if (isset($config['extraConfigEnv'])) {

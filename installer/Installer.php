@@ -24,7 +24,7 @@ class Installer extends \Hubleto\Framework\Core
   public string $secureFolder = '';
   public string $assetsUrl = '';
 
-  public string $premiumRepoFolder = '';
+  public string $enterpriseAppsRepository = '';
 
   public string $env = '';
   public string $uid = '';
@@ -158,7 +158,7 @@ class Installer extends \Hubleto\Framework\Core
 
   public function installApps(int $round): void
   {
-    $this->config()->set('premiumRepoFolder', $this->premiumRepoFolder);
+    $this->config()->set('enterpriseAppsRepository', $this->enterpriseAppsRepository);
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
       $this->appManager()->installApp($round, $appNamespace, $appConfig, true);
     }
@@ -212,7 +212,7 @@ class Installer extends \Hubleto\Framework\Core
     $configEnv = str_replace('{{ accountFullName }}', $this->accountFullName, $configEnv);
     $configEnv = str_replace('{{ sessionSalt }}', \Hubleto\Framework\Helper::str2url($this->uid), $configEnv);
     $configEnv = str_replace('{{ accountUid }}', \Hubleto\Framework\Helper::str2url($this->uid), $configEnv);
-    $configEnv = str_replace('{{ premiumRepoFolder }}', $this->premiumRepoFolder, $configEnv);
+    $configEnv = str_replace('{{ enterpriseAppsRepository }}', $this->enterpriseAppsRepository, $configEnv);
 
     $configEnv = str_replace('{{ smtpHost }}', $this->smtpHost, $configEnv);
     $configEnv = str_replace('{{ smtpPort }}', $this->smtpPort, $configEnv);

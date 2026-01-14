@@ -57,9 +57,9 @@ To develop your apps run following commands in your terminal:
 
 ```bash
 php hubleto init # init the project
-php hubleto app create "HubletoApp\Custom\HelloWorldApp"
-php hubleto app install "HubletoApp\Custom\HelloWorldApp"
-php hubleto create model "HubletoApp\Custom\HelloWorldApp" "TodoItem"
+php hubleto app create "HelloWorldApp"
+php hubleto app install "HelloWorldApp"
+php hubleto create model "HelloWorldApp" "TodoItem"
 ```
 
 More details are in developer's guide at https://developer.hubleto.com.

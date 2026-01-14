@@ -1,7 +1,7 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import BillingTableBillingAccountService from "./Components/TableBillingAccountServices"
 
-class BillingApp extends HubletoApp {
+class BillingApp extends App {
   init() {
     super.init();
 

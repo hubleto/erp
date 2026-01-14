@@ -1,9 +1,9 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableDocuments from "./Components/TableDocuments"
 import TableTemplates from "./Components/TableTemplates"
 import Browser from "./Components/Browser"
 
-class DocumentsApp extends HubletoApp {
+class DocumentsApp extends App {
   init() {
     super.init();
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import request from "@hubleto/react-ui/core/Request";
 import TableOrders from "./Components/TableOrders";
 import OrdersFormActivity from "./Components/OrdersFormActivity"
 import TablePayments from "./Components/TablePayments"
 
-class OrdersApp extends HubletoApp {
+class OrdersApp extends App {
   init() {
     super.init();
 

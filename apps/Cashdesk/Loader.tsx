@@ -1,8 +1,8 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableReceipts from "./Components/TableReceipts"
 import TableCashRegisters from "./Components/TableCashRegisters"
 
-class CashdeskApp extends HubletoApp {
+class CashdeskApp extends App {
   init() {
     super.init();
 

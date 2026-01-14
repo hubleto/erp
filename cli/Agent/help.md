@@ -29,6 +29,6 @@
 Examples:
   php hubleto help
   php hubleto project init
-  php hubleto app create \HubletoApp\Custom\MyFirstApp
-  php hubleto app install \HubletoApp\Custom\MyFirstApp\Loader force
+  php hubleto app create MyFirstApp
+  php hubleto app install MyFirstApp\Loader force
   php hubleto project generate-demo-data

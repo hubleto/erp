@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableLeads from "./Components/TableLeads"
 import LeadFormActivity from "./Components/LeadFormActivity"
 import TableLevels from './Components/TableLevels'
 
-class LeadsApp extends HubletoApp {
+class LeadsApp extends App {
   init() {
     super.init();
 

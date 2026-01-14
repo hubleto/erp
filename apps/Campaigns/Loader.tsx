@@ -1,10 +1,10 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableCampaigns from "./Components/TableCampaigns"
 import TableRecipients from "./Components/TableRecipients"
 import TableRecipientStatuses from "./Components/TableRecipientStatuses"
 import CampaignFormActivity from "./Components/CampaignFormActivity"
 
-class CampaignsApp extends HubletoApp {
+class CampaignsApp extends App {
   init() {
     super.init();
 

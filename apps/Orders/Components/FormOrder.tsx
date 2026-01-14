@@ -6,7 +6,6 @@ import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TablePayments from './TablePayments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
-import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import OrdersFormActivity, { OrdersFormActivityProps, OrdersFormActivityState } from './OrdersFormActivity';
 import ModalForm from '@hubleto/react-ui/core/ModalForm';
@@ -172,44 +171,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       activityAllDay: false,
     } as FormOrderState);
   }
-
-  // getHeaderButtons()
-  // {
-  //   return [
-  //     ...super.getHeaderButtons(),
-  //     {
-  //       title: 'Generate PDF',
-  //       onClick: () => {
-  //         request.post(
-  //           'orders/api/generate-pdf',
-  //           {idOrder: this.state.record.id},
-  //           {},
-  //           (result: any) => {
-  //             console.log(result);
-  //             if (result.idDocument) {
-  //               window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
-  //             }
-  //           }
-  //         );
-  //       }
-  //     },
-  //     {
-  //       title: 'Close order',
-  //       onClick: () => { }
-  //     }
-  //   ]
-  // }
-
-  // renderTopMenu(): JSX.Element {
-  //   const R = this.state.record;
-  //   return <>
-  //     {super.renderTopMenu()}
-  //     {this.state.id <= 0 ? null : <>
-  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-  //       {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-  //     </>}
-  //   </>
-  // }
 
   renderTab(tabUid: string) {
     const R = this.state.record;

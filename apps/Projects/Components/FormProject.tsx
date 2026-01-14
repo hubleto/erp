@@ -78,16 +78,6 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
     </>;
   }
 
-  // renderTopMenu(): JSX.Element {
-  //   return <>
-  //     {super.renderTopMenu()}
-  //     {this.state.id <= 0 ? null : <>
-  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-  //       {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-  //     </>}
-  //   </>;
-  // }
-
   renderTab(tabUid: string) {
     const R = this.state.record;
 

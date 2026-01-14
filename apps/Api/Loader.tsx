@@ -1,9 +1,9 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableKeys from './Components/TableKeys'
 import TablePermissions from './Components/TablePermissions'
 import TableUsages from './Components/TableUsages'
 
-class ApiApp extends HubletoApp {
+class ApiApp extends App {
   init() {
     super.init();
 

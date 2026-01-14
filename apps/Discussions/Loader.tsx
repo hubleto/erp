@@ -1,9 +1,9 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableDiscussions from './Components/TableDiscussions'
 import TableMembers from './Components/TableMembers';
 import TableMessages from './Components/TableMessages';
 
-class DiscussionsApp extends HubletoApp {
+class DiscussionsApp extends App {
   init() {
     super.init();
 

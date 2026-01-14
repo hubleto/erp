@@ -30,7 +30,7 @@ class GetPermissions extends \Hubleto\Erp\Controllers\ApiController
 
       foreach ($allPermissions as $permission) { //@phpstan-ignore-line
         /*
-          [0] => HubletoApp namespace
+          [0] => App namespace
           [1] => App Version
           [2] => App Name
           [3] => Controller, Model, Api or other

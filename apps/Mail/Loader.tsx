@@ -1,8 +1,8 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableMails from "./Components/TableMails"
 import TableTemplates from "./Components/TableTemplates"
 
-class MailApp extends HubletoApp {
+class MailApp extends App {
   init() {
     super.init();
 

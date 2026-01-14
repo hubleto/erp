@@ -17,8 +17,6 @@ import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TableDealHistory from './TableDealHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableOrders from '@hubleto/apps/Orders/Components/TableOrders';
-// import TableProjects from '@hubleto/apps/Projects/Components/TableProjects';
-import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 
 export interface FormDealProps extends FormExtendedProps {}
 
@@ -630,25 +628,6 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       break;
     }
   }
-
-  // renderTopMenu(): JSX.Element {
-  //   return <>
-  //     {super.renderTopMenu()}
-  //     {this.state.id <= 0 ? null : <div className='flex-2 pl-4'>
-  //       <WorkflowSelector
-  //         parentForm={this}
-  //         onWorkflowStepChange={(idWorkflowStep: number, step: any) => {
-  //           let newRecord: any = {id_workflow_step: idWorkflowStep, deal_result: 0, is_closed: false};
-  //           if (step.name.match(/won/i)) newRecord.deal_result = 1;
-  //           if (step.name.match(/lost/i)) newRecord.deal_result = 2;
-  //           if (newRecord.deal_result != 0) newRecord.is_closed = true;
-  //           this.updateRecord(newRecord);
-  //         }}
-  //       ></WorkflowSelector>
-  //     </div>}
-  //     {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-  //   </>
-  // }
 
   renderContent(): JSX.Element {
     const R = this.state.record;

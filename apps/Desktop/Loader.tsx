@@ -1,6 +1,6 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 
-class DesktopApp extends HubletoApp {
+class DesktopApp extends App {
   init() {
     super.init();
   }

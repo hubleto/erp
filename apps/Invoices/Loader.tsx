@@ -1,10 +1,10 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableProfiles from "./Components/TableProfiles"
 import TableInvoices from "./Components/TableInvoices"
 import TableItems from "./Components/TableItems"
 import TablePayments from "./Components/TablePayments"
 
-class InvoicesApp extends HubletoApp {
+class InvoicesApp extends App {
   init() {
     super.init();
 

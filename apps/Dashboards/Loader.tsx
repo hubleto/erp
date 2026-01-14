@@ -1,8 +1,8 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableDashboards from "./Components/TableDashboards"
 import Dashboard from "./Components/Dashboard"
 
-class DashboardsApp extends HubletoApp {
+class DashboardsApp extends App {
   init() {
     super.init();
 

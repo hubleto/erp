@@ -4,7 +4,7 @@ For releases v0.10 and later, check release notes at https://github.com/hubleto/
 
 ## Release v0.9
 
-  * easier app creation (`php hubleto app create HubletoApp\Custom\MyFirstApp`)
+  * easier app creation (`php hubleto app create MyFirstApp`)
   * codebase clean-up
   * new apps `Reports`
   * improved session management

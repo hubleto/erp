@@ -1,10 +1,10 @@
 import React from 'react';
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableDeals from "./Components/TableDeals"
 import DealFormActivity from "./Components/DealFormActivity"
 import request from "@hubleto/react-ui/core/Request";
 
-class DealsApp extends HubletoApp {
+class DealsApp extends App {
   init() {
     super.init();
 

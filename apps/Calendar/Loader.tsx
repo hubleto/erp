@@ -1,10 +1,10 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import CalendarMain from "./Components/CalendarMain";
 import CalendarActivityForm from "./Components/FormActivity";
 import CalendarShareTable from "./Components/CalendarShareTable";
 import FormSharedCalendar from "./Components/FormSharedCalendar";
 
-class CalendarApp extends HubletoApp {
+class CalendarApp extends App {
   init() {
     super.init();
 

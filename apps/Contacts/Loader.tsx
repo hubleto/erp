@@ -1,7 +1,7 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableContacts from "./Components/TableContacts"
 
-class ContactsApp extends HubletoApp {
+class ContactsApp extends App {
   init() {
     super.init();
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableWarehouses from "./Components/TableWarehouses"
 import TableInventory from "./Components/TableInventory"
 import TableLocations from "./Components/TableLocations"
@@ -7,7 +7,7 @@ import TableTransactions from "./Components/TableTransactions"
 import TableTransactionItems from "./Components/TableTransactionItems"
 import FormTransaction from "./Components/FormTransaction"
 
-class WarehousesApp extends HubletoApp {
+class WarehousesApp extends App {
   init() {
     super.init();
 

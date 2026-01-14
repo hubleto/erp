@@ -10,7 +10,7 @@ import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import CampaignFormActivity, { CampaignFormActivityProps, CampaignFormActivityState } from './CampaignFormActivity';
 import moment, { Moment } from "moment";
 import Calendar from '../../Calendar/Components/Calendar';
-import { updateFormWorkflowByTag } from '@hubleto/react-ui/ext/WorkflowSelector';
+import { updateFormWorkflowByTag } from '@hubleto/react-ui/ext/ErpWorkflowSelector';
 
 export interface FormCampaignProps extends FormExtendedProps {}
 export interface FormCampaignState extends FormExtendedState {
@@ -109,16 +109,6 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       <h2>{this.state.record.name ?? '-'}</h2>
     </>;
   }
-
-  // renderTopMenu(): JSX.Element {
-  //   return <>
-  //     {super.renderTopMenu()}
-  //     {this.state.id <= 0 ? null : <>
-  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-  //       {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-  //     </>}
-  //   </>
-  // }
 
   logCompletedActivity() {
     request.get(

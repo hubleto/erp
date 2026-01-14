@@ -1,10 +1,10 @@
 import React from 'react';
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import TableCategories from "./Components/TableCategories";
 import TableGroups from "./Components/TableGroups";
 import TableProducts from "./Components/TableProducts";
 
-class ProductsApp extends HubletoApp {
+class ProductsApp extends App {
   init() {
     super.init();
 

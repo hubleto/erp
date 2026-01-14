@@ -1,9 +1,9 @@
-import HubletoApp from '@hubleto/react-ui/ext/HubletoApp'
+import App from '@hubleto/react-ui/core/App'
 import CustomersTableCustomers from "./Components/TableCustomers"
 import CustomersTableActivities from "./Components/TableActivities"
 import CustomersFormActivity from "./Components/CustomerFormActivity"
 
-class CustomersApp extends HubletoApp {
+class CustomersApp extends App {
   init() {
     super.init();
 

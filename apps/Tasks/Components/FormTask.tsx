@@ -65,16 +65,6 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
     </>;
   }
 
-  // renderTopMenu() {
-  //   return <>
-  //     {super.renderTopMenu()}
-  //     {this.state.id <= 0 ? null : <>
-  //       <div className='flex-2 pl-4'><WorkflowSelector parentForm={this}></WorkflowSelector></div>
-  //       {this.inputWrapper('is_closed', {wrapperCssClass: 'flex gap-2'})}
-  //     </>}
-  //   </>
-  // }
-
   addTodo(value: string, R: any) {
     if (value.trim() != '') {
       let newR = R;

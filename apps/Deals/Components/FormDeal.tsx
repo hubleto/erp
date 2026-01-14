@@ -1,6 +1,6 @@
 import React, { Component, createRef, ChangeEvent } from 'react';
 import { deepObjectMerge, getUrlParam } from '@hubleto/react-ui/core/Helper';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import moment, { Moment } from "moment";
@@ -20,9 +20,9 @@ import TableOrders from '@hubleto/apps/Orders/Components/TableOrders';
 // import TableProjects from '@hubleto/apps/Projects/Components/TableProjects';
 import WorkflowSelector from '../../Workflow/Components/WorkflowSelector';
 
-export interface FormDealProps extends HubletoFormProps {}
+export interface FormDealProps extends FormExtendedProps {}
 
-export interface FormDealState extends HubletoFormState {
+export interface FormDealState extends FormExtendedState {
   showIdActivity: number,
   activityTime: string,
   activityDate: string,
@@ -34,9 +34,9 @@ export interface FormDealState extends HubletoFormState {
   selectParentLead?: boolean,
 }
 
-export default class FormDeal<P, S> extends HubletoForm<FormDealProps,FormDealState> {
+export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-handshake',
     model: 'Hubleto/App/Community/Deals/Models/Deal',
     renderWorkflowUi: true,

@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import { ProgressBar } from 'primereact/progressbar';
 import request from "@hubleto/react-ui/core/Request";
 import Markdown from 'marked-react';
 
-interface MessagesProps extends HubletoTableProps {
+interface MessagesProps extends TableExtendedProps {
   idDiscussion?: number,
 }
 
-interface MessagesState extends HubletoTableState {
+interface MessagesState extends TableExtendedState {
 }
 
-export default class Messages extends HubletoTable<MessagesProps, MessagesState> {
+export default class Messages extends TableExtended<MessagesProps, MessagesState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Discussions/Models/Message',
   }

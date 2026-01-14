@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { deepObjectMerge } from "@hubleto/react-ui/core/Helper";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import request from '@hubleto/react-ui/core/Request';
 
-interface FormUserProps extends HubletoFormProps { }
-interface FormUserState extends HubletoFormState {
+interface FormUserProps extends FormExtendedProps { }
+interface FormUserState extends FormExtendedState {
   appsInfo: any,
 }
 
-export default class FormUser<P, S> extends HubletoForm<FormUserProps, FormUserState> {
+export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUserState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Auth/Models/User',
   }
 

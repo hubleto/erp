@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormSpeaker from './FormSpeaker';
 
-interface TableSpeakersProps extends HubletoTableProps {
+interface TableSpeakersProps extends TableExtendedProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface TableSpeakersState extends HubletoTableState {
+interface TableSpeakersState extends TableExtendedState {
 }
 
-export default class TableSpeakers extends HubletoTable<TableSpeakersProps, TableSpeakersState> {
+export default class TableSpeakers extends TableExtended<TableSpeakersProps, TableSpeakersState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Events/Models/Speaker',
   }

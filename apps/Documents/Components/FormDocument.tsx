@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 
-export interface FormDocumentProps extends HubletoFormProps {
+export interface FormDocumentProps extends FormExtendedProps {
 }
-export interface FormDocumentState extends HubletoFormState {}
+export interface FormDocumentState extends FormExtendedState {}
 
-export default class FormDocument<P, S> extends HubletoForm<FormDocumentProps,FormDocumentState> {
+export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,FormDocumentState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Documents/Models/Document',
   };
 

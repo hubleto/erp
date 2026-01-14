@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 
-export interface FormTemplateProps extends HubletoFormProps {}
-export interface FormTemplateState extends HubletoFormState {}
+export interface FormTemplateProps extends FormExtendedProps {}
+export interface FormTemplateState extends FormExtendedState {}
 
-export default class FormTemplate<P, S> extends HubletoForm<FormTemplateProps,FormTemplateState> {
+export default class FormTemplate<P, S> extends FormExtended<FormTemplateProps,FormTemplateState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Mail/Models/Template',
   };
 

@@ -12,7 +12,7 @@ For releases v0.10 and later, check release notes at https://github.com/hubleto/
 
 ## Release v0.8
 
-  * new `<HubletoChart>` React component
+  * new `<Chart>` React component
   * new `php hubleto app create`, `php hubleto debug router` and `php hubleto create model` commands
   * improved translation and language support
   * new community app `Goals`
@@ -27,7 +27,7 @@ For releases v0.10 and later, check release notes at https://github.com/hubleto/
   * `columns()` renamed to `describeColumns()`
   * more flexible CSS skin (thanks to TailwindCSS v4)
   * color scales in tables
-  * more consisent form design thanks to a `HubletoForm` react component
+  * more consisent form design thanks to a `FormExtended` react component
   * sidebar is now generated using information from app manifests
   * first prototyping of external apps
 

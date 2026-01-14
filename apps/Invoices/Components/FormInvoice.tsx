@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui/ext/HubletoForm";
+import FormExtended, {FormExtendedProps, FormExtendedState} from "@hubleto/react-ui/ext/FormExtended";
 // import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
@@ -9,19 +9,19 @@ import TablePayments from './TablePayments';
 import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
 import TextareaWithHtmlPreview from "@hubleto/react-ui/core/Inputs/TextareaWithHtmlPreview";
 
-interface FormInvoiceProps extends HubletoFormProps {
+interface FormInvoiceProps extends FormExtendedProps {
 }
 
-interface FormInvoiceState extends HubletoFormState {
+interface FormInvoiceState extends FormExtendedState {
   linkPreparedItem: boolean;
   sendInvoicePreparedData?: any,
   sendInvoiceResult?: any,
   htmlPreview?: any,
 }
 
-export default class FormInvoice extends HubletoForm<FormInvoiceProps, FormInvoiceState> {
+export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvoiceState> {
   static defaultProps = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-file-invoice',
     description: {
       ui: { headerClassName: 'bg-indigo-50', },

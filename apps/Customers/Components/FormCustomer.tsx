@@ -1,5 +1,5 @@
 import React, { Component, ChangeEvent } from "react";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import InputTags2 from "@hubleto/react-ui/core/Inputs/Tags2";
 import FormInput from "@hubleto/react-ui/core/FormInput";
 import TableContacts from "../../Contacts/Components/TableContacts";
@@ -16,7 +16,7 @@ import request from "@hubleto/react-ui/core/Request";
 import { FormProps, FormState } from "@hubleto/react-ui/core/Form";
 import moment from "moment";
 
-export interface FormCustomerProps extends HubletoFormProps {
+export interface FormCustomerProps extends FormExtendedProps {
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
@@ -25,7 +25,7 @@ export interface FormCustomerProps extends HubletoFormProps {
   tableDealsDescription?: any,
 }
 
-export interface FormCustomerState extends HubletoFormState {
+export interface FormCustomerState extends FormExtendedState {
   highlightIdActivity: number,
   createNewLead: boolean,
   createNewDeal: boolean,
@@ -40,9 +40,9 @@ export interface FormCustomerState extends HubletoFormState {
   tablesKey: number,
 }
 
-export default class FormCustomer<P, S> extends HubletoForm<FormCustomerProps, FormCustomerState> {
+export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, FormCustomerState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-address-card',
     model: "Hubleto/App/Community/Customers/Models/Customer"
   };

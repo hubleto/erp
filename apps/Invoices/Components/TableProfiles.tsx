@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormProfile, { FormProfileProps } from './FormProfile';
 
-interface TableProfilesProps extends HubletoTableProps {
+interface TableProfilesProps extends TableExtendedProps {
   idCustomer?: number,
 }
 
-interface TableProfilesState extends HubletoTableState {
+interface TableProfilesState extends TableExtendedState {
 }
 
-export default class TableProfiles extends HubletoTable<TableProfilesProps, TableProfilesState> {
+export default class TableProfiles extends TableExtended<TableProfilesProps, TableProfilesState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Invoices/Models/Profile',
   }

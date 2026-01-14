@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormClick, { FormClickProps } from './FormClick';
 
-interface TableClicksProps extends HubletoTableProps {
+interface TableClicksProps extends TableExtendedProps {
   idCampaign: number
 }
-interface TableClicksState extends HubletoTableState {}
+interface TableClicksState extends TableExtendedState {}
 
-export default class TableClicks extends HubletoTable<TableClicksProps, TableClicksState> {
+export default class TableClicks extends TableExtended<TableClicksProps, TableClicksState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Campaigns/Models/Click',
     orderBy: {field: 'datetime_clicked', direction: 'desc'},

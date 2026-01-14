@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 
-interface FormTaskProps extends HubletoFormProps { }
-interface FormTaskState extends HubletoFormState {
+interface FormTaskProps extends FormExtendedProps { }
+interface FormTaskState extends FormExtendedState {
   newTodo?: string,
 }
 
-export default class FormTask<P, S> extends HubletoForm<FormTaskProps, FormTaskState> {
+export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTaskState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-list-check',
     model: 'Hubleto/App/Community/Tasks/Models/Task',
     renderWorkflowUi: true,

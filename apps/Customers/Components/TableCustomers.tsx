@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormCustomer, { FormCustomerProps } from './FormCustomer';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import { FormProps } from '@hubleto/react-ui/core/Form';
 import request from '@hubleto/react-ui/core/Request';
 
-interface TableCustomersProps extends HubletoTableProps {
+interface TableCustomersProps extends TableExtendedProps {
 }
 
-interface TableCustomersState extends HubletoTableState {
+interface TableCustomersState extends TableExtendedState {
   tableContactsDescription?: any,
   tableLeadsDescription?: any,
   tableDealsDescription?: any,
   tableDocumentsDescription?: any,
 }
 
-export default class TableCustomers extends HubletoTable<TableCustomersProps, TableCustomersState> {
+export default class TableCustomers extends TableExtended<TableCustomersProps, TableCustomersState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Customers/Models/Customer',
   }

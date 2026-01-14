@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormLevel from './FormLevel';
 
-interface TableLevelsProps extends HubletoTableProps {
+interface TableLevelsProps extends TableExtendedProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface TableLevelsState extends HubletoTableState {
+interface TableLevelsState extends TableExtendedState {
 }
 
-export default class TableLevels extends HubletoTable<TableLevelsProps, TableLevelsState> {
+export default class TableLevels extends TableExtended<TableLevelsProps, TableLevelsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Leads/Models/Level',
   }

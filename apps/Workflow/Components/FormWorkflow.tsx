@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { deepObjectMerge, getUrlParam } from "@hubleto/react-ui/core/Helper";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableWorkflowSteps from "./TableWorkflowSteps";
 import { FormProps, FormState } from "@hubleto/react-ui/core/Form";
 
-interface FormWorkflowProps extends HubletoFormProps {}
+interface FormWorkflowProps extends FormExtendedProps {}
 
-interface FormWorkflowState extends HubletoFormState {
+interface FormWorkflowState extends FormExtendedState {
   tablesKey: number,
   newStepId: number,
 }
 
-export default class FormWorkflow<P, S> extends HubletoForm<FormWorkflowProps, FormWorkflowState> {
+export default class FormWorkflow<P, S> extends FormExtended<FormWorkflowProps, FormWorkflowState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: "Hubleto/App/Community/Workflow/Models/Workflow",
   };
 

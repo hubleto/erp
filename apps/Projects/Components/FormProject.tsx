@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import FormInput from '@hubleto/react-ui/core/FormInput';
@@ -7,15 +7,15 @@ import request from '@hubleto/react-ui/core/Request';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import { ProgressBar } from 'primereact/progressbar';
 
-export interface FormProjectProps extends HubletoFormProps { }
-export interface FormProjectState extends HubletoFormState {
+export interface FormProjectProps extends FormExtendedProps { }
+export interface FormProjectState extends FormExtendedState {
   statistics?: any,
   selectParentOrder?: boolean,
 }
 
-export default class FormProject<P, S> extends HubletoForm<FormProjectProps, FormProjectState> {
+export default class FormProject<P, S> extends FormExtended<FormProjectProps, FormProjectState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-diagram-project',
     model: 'Hubleto/App/Community/Projects/Models/Team',
     renderWorkflowUi: true,

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import moment from 'moment';
 
-export interface FormActivityProps extends HubletoFormProps {}
-export interface FormActivityState extends HubletoFormState {}
+export interface FormActivityProps extends FormExtendedProps {}
+export interface FormActivityState extends FormExtendedState {}
 
 interface Recurrence {
   period: '' | 'day' | 'week' | 'month' | 'year',
@@ -12,9 +12,9 @@ interface Recurrence {
   dates: Array<string>,
 }
 
-export default class FormActivity<P, S> extends HubletoForm<FormActivityProps,FormActivityState> {
+export default class FormActivity<P, S> extends FormExtended<FormActivityProps,FormActivityState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-calendar-days',
     model: 'Hubleto/App/Community/Calendar/Models/Activity',
   };

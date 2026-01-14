@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from '@hubleto/react-ui/core/Helper';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import TableValues from './TableValues';
@@ -9,21 +9,21 @@ import Boolean from '@hubleto/react-ui/core/Inputs/Boolean';
 import request from '@hubleto/react-ui/core/Request';
 import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
 
-export interface FormContactProps extends HubletoFormProps {
+export interface FormContactProps extends FormExtendedProps {
   newEntryId?: number,
   creatingNew: boolean,
   tableValuesDescription: any
 }
 
-export interface FormContactState extends HubletoFormState {
+export interface FormContactState extends FormExtendedState {
   newEntryId?: number,
   primaryContactMessage: boolean,
   contactsTableKey: number,
 }
 
-export default class FormContact<P, S> extends HubletoForm<FormContactProps,FormContactState> {
+export default class FormContact<P, S> extends FormExtended<FormContactProps,FormContactState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-user',
     model: 'Hubleto/App/Community/Contacts/Models/Contact',
   };

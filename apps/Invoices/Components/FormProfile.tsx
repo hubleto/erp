@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import HubletoForm, {HubletoFormProps, HubletoFormState} from "@hubleto/react-ui/ext/HubletoForm";
+import FormExtended, {FormExtendedProps, FormExtendedState} from "@hubleto/react-ui/ext/FormExtended";
 
-export interface FormProfileProps extends HubletoFormProps {
+export interface FormProfileProps extends FormExtendedProps {
 }
 
-interface FormProfileState extends HubletoFormState {
+interface FormProfileState extends FormExtendedState {
 }
 
-export default class FormProfile extends HubletoForm<FormProfileProps, FormProfileState> {
+export default class FormProfile extends FormExtended<FormProfileProps, FormProfileState> {
   static defaultProps = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-file-invoice',
     description: {
       ui: { headerClassName: 'bg-indigo-50', },

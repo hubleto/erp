@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormActivityType from './FormActivityType';
 
-interface TableActivityTypesProps extends HubletoTableProps {
+interface TableActivityTypesProps extends TableExtendedProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface TableActivityTypesState extends HubletoTableState {
+interface TableActivityTypesState extends TableExtendedState {
 }
 
-export default class TableActivityTypes extends HubletoTable<TableActivityTypesProps, TableActivityTypesState> {
+export default class TableActivityTypes extends TableExtended<TableActivityTypesProps, TableActivityTypesState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Worksheets/Models/ActivityType',
   }

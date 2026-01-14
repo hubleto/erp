@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormLocation from './FormLocation';
 
-interface TableLocationsProps extends HubletoTableProps {
+interface TableLocationsProps extends TableExtendedProps {
   idWarehouse?: number,
 }
 
-interface TableLocationsState extends HubletoTableState {
+interface TableLocationsState extends TableExtendedState {
 }
 
-export default class TableLocations extends HubletoTable<TableLocationsProps, TableLocationsState> {
+export default class TableLocations extends TableExtended<TableLocationsProps, TableLocationsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Warehouses/Models/Location',
   }

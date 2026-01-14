@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormShop from './FormShop';
 
-interface TableShopsProps extends HubletoTableProps { }
+interface TableShopsProps extends TableExtendedProps { }
 
-interface TableShopsState extends HubletoTableState { }
+interface TableShopsState extends TableExtendedState { }
 
-export default class TableShops extends HubletoTable<TableShopsProps, TableShopsState> {
+export default class TableShops extends TableExtended<TableShopsProps, TableShopsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Shops/Models/Shop',
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/Calendar/Components/FormActivity'
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
@@ -14,7 +14,7 @@ export interface LeadFormActivityState extends FormActivityState {
 
 export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivityProps, LeadFormActivityState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Leads/Models/LeadActivity',
   };
 

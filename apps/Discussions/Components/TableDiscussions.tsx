@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormDiscussion from './FormDiscussion';
 
-interface TableDiscussionsProps extends HubletoTableProps { }
+interface TableDiscussionsProps extends TableExtendedProps { }
 
-interface TableDiscussionsState extends HubletoTableState {
+interface TableDiscussionsState extends TableExtendedState {
 }
 
-export default class TableDiscussions extends HubletoTable<TableDiscussionsProps, TableDiscussionsState> {
+export default class TableDiscussions extends TableExtended<TableDiscussionsProps, TableDiscussionsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Discussions/Models/Discussion',
   }

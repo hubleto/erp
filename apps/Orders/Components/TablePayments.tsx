@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormPayment, { FormPaymentProps } from './FormPayment';
 import request from '@hubleto/react-ui/core/Request';
 import moment from "moment";
 
-interface TablePaymentsProps extends HubletoTableProps {
+interface TablePaymentsProps extends TableExtendedProps {
   idOrder?: number,
 }
 
-interface TablePaymentsState extends HubletoTableState {
+interface TablePaymentsState extends TableExtendedState {
 }
 
-export default class TablePayments extends HubletoTable<TablePaymentsProps, TablePaymentsState> {
+export default class TablePayments extends TableExtended<TablePaymentsProps, TablePaymentsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Orders/Models/Payment',
   }

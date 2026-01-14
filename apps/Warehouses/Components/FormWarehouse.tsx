@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import TableLocations from './TableLocations';
 
-interface FormWarehouseProps extends HubletoFormProps { }
-interface FormWarehouseState extends HubletoFormState { }
+interface FormWarehouseProps extends FormExtendedProps { }
+interface FormWarehouseState extends FormExtendedState { }
 
-export default class FormWarehouse<P, S> extends HubletoForm<FormWarehouseProps, FormWarehouseState> {
+export default class FormWarehouse<P, S> extends FormExtended<FormWarehouseProps, FormWarehouseState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Warehouses/Models/Warehouse',
   }
 

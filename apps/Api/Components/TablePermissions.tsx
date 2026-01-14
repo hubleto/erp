@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormPermission from './FormPermission';
 
-interface TablePermissionsProps extends HubletoTableProps {
+interface TablePermissionsProps extends TableExtendedProps {
   idKey?: number,
 }
 
-interface TablePermissionsState extends HubletoTableState {
+interface TablePermissionsState extends TableExtendedState {
 }
 
-export default class TablePermissions extends HubletoTable<TablePermissionsProps, TablePermissionsState> {
+export default class TablePermissions extends TableExtended<TablePermissionsProps, TablePermissionsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Api/Models/Permission',
   }

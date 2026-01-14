@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 
-interface FormAgendaProps extends HubletoFormProps { }
-interface FormAgendaState extends HubletoFormState { }
+interface FormAgendaProps extends FormExtendedProps { }
+interface FormAgendaState extends FormExtendedState { }
 
-export default class FormAgenda<P, S> extends HubletoForm<FormAgendaProps, FormAgendaState> {
+export default class FormAgenda<P, S> extends FormExtended<FormAgendaProps, FormAgendaState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Events/Models/Team',
   }
 

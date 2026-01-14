@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormCampaign, { FormCampaignProps } from './FormCampaign';
 
-interface TableCampaignsProps extends HubletoTableProps {}
-interface TableCampaignsState extends HubletoTableState {}
+interface TableCampaignsProps extends TableExtendedProps {}
+interface TableCampaignsState extends TableExtendedState {}
 
-export default class TableCampaigns extends HubletoTable<TableCampaignsProps, TableCampaignsState> {
+export default class TableCampaigns extends TableExtended<TableCampaignsProps, TableCampaignsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Campaigns/Models/Campaign',
   }

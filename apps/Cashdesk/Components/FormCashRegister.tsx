@@ -1,14 +1,14 @@
 import React, { Component, ChangeEvent } from "react";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Int from '@hubleto/react-ui/core/Inputs/Int';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
-export interface FormCashRegisterProps extends HubletoFormProps { }
-export interface FormCashRegisterState extends HubletoFormState { }
+export interface FormCashRegisterProps extends FormExtendedProps { }
+export interface FormCashRegisterState extends FormExtendedState { }
 
-export default class FormCashRegister<P, S> extends HubletoForm<FormCashRegisterProps, FormCashRegisterState> {
+export default class FormCashRegister<P, S> extends FormExtended<FormCashRegisterProps, FormCashRegisterState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: "Hubleto/App/Community/Cashdesk/Models/CashRegister"
   };
 

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import HubletoChart, { HubletoChartType } from "@hubleto/src/core/Components/HubletoChart";
+import Chart, { ChartType } from "@hubleto/src/core/Components/Chart";
 
 export interface ReportGoalProps {
 }
 
 export interface ReportGoalState {
   data: any,
-  selectedGraph: HubletoChartType,
+  selectedGraph: ChartType,
 }
 
 export default class ReportGoal extends Component<ReportGoalProps,ReportGoalState> {
@@ -22,7 +22,7 @@ export default class ReportGoal extends Component<ReportGoalProps,ReportGoalStat
 render(): JSX.Element {
     return (
       <>
-        <HubletoChart type={this.state.selectedGraph} data={this.state.data} />
+        <Chart type={this.state.selectedGraph} data={this.state.data} />
       </>
     );
   }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 
-interface FormPermissionProps extends HubletoFormProps { }
-interface FormPermissionState extends HubletoFormState { }
+interface FormPermissionProps extends FormExtendedProps { }
+interface FormPermissionState extends FormExtendedState { }
 
-export default class FormPermission<P, S> extends HubletoForm<FormPermissionProps, FormPermissionState> {
+export default class FormPermission<P, S> extends FormExtended<FormPermissionProps, FormPermissionState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Api/Models/Permission',
   }
 

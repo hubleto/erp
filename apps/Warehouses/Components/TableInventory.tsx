@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormInventory from './FormInventory';
 
-interface TableInventoryProps extends HubletoTableProps {
+interface TableInventoryProps extends TableExtendedProps {
   idProduct?: number,
 }
 
-interface TableInventoryState extends HubletoTableState {
+interface TableInventoryState extends TableExtendedState {
 }
 
-export default class TableInventory extends HubletoTable<TableInventoryProps, TableInventoryState> {
+export default class TableInventory extends TableExtended<TableInventoryProps, TableInventoryState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Warehouses/Models/Inventory',
   }

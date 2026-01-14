@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormReceipt, { FormReceiptProps } from './FormReceipt';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import { FormProps } from '@hubleto/react-ui/core/Form';
 import request from '@hubleto/react-ui/core/Request';
 
-interface TableReceiptsProps extends HubletoTableProps {
+interface TableReceiptsProps extends TableExtendedProps {
 }
 
-interface TableReceiptsState extends HubletoTableState {
+interface TableReceiptsState extends TableExtendedState {
   tableContactsDescription?: any,
   tableLeadsDescription?: any,
   tableDealsDescription?: any,
   tableDocumentsDescription?: any,
 }
 
-export default class TableReceipts extends HubletoTable<TableReceiptsProps, TableReceiptsState> {
+export default class TableReceipts extends TableExtended<TableReceiptsProps, TableReceiptsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Cashdesk/Models/Receipt',
   }

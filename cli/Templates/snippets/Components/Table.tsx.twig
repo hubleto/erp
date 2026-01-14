@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import Form{{ modelSingularForm }} from './Form{{ modelSingularForm }}';
 
-interface Table{{ modelPluralForm }}Props extends HubletoTableProps {
+interface Table{{ modelPluralForm }}Props extends TableExtendedProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface Table{{ modelPluralForm }}State extends HubletoTableState {
+interface Table{{ modelPluralForm }}State extends TableExtendedState {
 }
 
-export default class Table{{ modelPluralForm }} extends HubletoTable<Table{{ modelPluralForm }}Props, Table{{ modelPluralForm }}State> {
+export default class Table{{ modelPluralForm }} extends TableExtended<Table{{ modelPluralForm }}Props, Table{{ modelPluralForm }}State> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: '{{ appNamespaceForwardSlash }}/Models/{{ model }}',
   }

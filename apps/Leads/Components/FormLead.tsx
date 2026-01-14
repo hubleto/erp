@@ -1,5 +1,5 @@
 import React, { Component, createRef, ChangeEvent } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
@@ -16,9 +16,9 @@ import TableLeadHistory from './TableLeadHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 
-export interface FormLeadProps extends HubletoFormProps {}
+export interface FormLeadProps extends FormExtendedProps {}
 
-export interface FormLeadState extends HubletoFormState {
+export interface FormLeadState extends FormExtendedState {
   showIdDocument: number,
   showIdActivity: number,
   activityTime: string,
@@ -29,9 +29,9 @@ export interface FormLeadState extends HubletoFormState {
   tablesKey: number,
 }
 
-export default class FormLead<P, S> extends HubletoForm<FormLeadProps,FormLeadState> {
+export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Leads/Models/Lead',
     renderWorkflowUi: true,
   };

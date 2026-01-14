@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 
-export interface FormPanelProps extends HubletoFormProps {}
-export interface FormPanelState extends HubletoFormState {}
+export interface FormPanelProps extends FormExtendedProps {}
+export interface FormPanelState extends FormExtendedState {}
 
-export default class FormPanel<P, S> extends HubletoForm<FormPanelProps,FormPanelState> {
+export default class FormPanel<P, S> extends FormExtended<FormPanelProps,FormPanelState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Dashboards/Models/Panel',
   };
 

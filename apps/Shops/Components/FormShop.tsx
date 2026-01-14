@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 
-interface FormShopProps extends HubletoFormProps { }
-interface FormShopState extends HubletoFormState { }
+interface FormShopProps extends FormExtendedProps { }
+interface FormShopState extends FormExtendedState { }
 
-export default class FormShop<P, S> extends HubletoForm<FormShopProps, FormShopState> {
+export default class FormShop<P, S> extends FormExtended<FormShopProps, FormShopState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-shop',
     model: 'Hubleto/App/Community/Shops/Models/Shop',
   }

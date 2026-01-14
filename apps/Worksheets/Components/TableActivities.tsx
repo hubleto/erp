@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormActivity from './FormActivity';
 
-interface TableActivitiesProps extends HubletoTableProps {
+interface TableActivitiesProps extends TableExtendedProps {
   idTask?: number,
   idProject?: number,
 }
 
-interface TableActivitiesState extends HubletoTableState {
+interface TableActivitiesState extends TableExtendedState {
 }
 
-export default class TableActivities extends HubletoTable<TableActivitiesProps, TableActivitiesState> {
+export default class TableActivities extends TableExtended<TableActivitiesProps, TableActivitiesState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Worksheets/Models/Activity',
   }

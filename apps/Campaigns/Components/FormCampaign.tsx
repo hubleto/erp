@@ -1,5 +1,5 @@
 import React, { Component, ChangeEvent } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
 import TableRecipients from '@hubleto/apps/Campaigns/Components/TableRecipients';
 import TableClicks from '@hubleto/apps/Campaigns/Components/TableClicks';
@@ -12,8 +12,8 @@ import moment, { Moment } from "moment";
 import Calendar from '../../Calendar/Components/Calendar';
 import { updateFormWorkflowByTag } from '@hubleto/react-ui/ext/WorkflowSelector';
 
-export interface FormCampaignProps extends HubletoFormProps {}
-export interface FormCampaignState extends HubletoFormState {
+export interface FormCampaignProps extends FormExtendedProps {}
+export interface FormCampaignState extends FormExtendedState {
   testEmailVariables?: any,
   testEmailSendResult?: any,
   launchResult?: any,
@@ -26,9 +26,9 @@ export interface FormCampaignState extends HubletoFormState {
   activityAllDay: boolean,
 }
 
-export default class FormCampaign<P, S> extends HubletoForm<FormCampaignProps, FormCampaignState> {
+export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, FormCampaignState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Campaigns/Models/Campaign',
     renderWorkflowUi: true,
   };

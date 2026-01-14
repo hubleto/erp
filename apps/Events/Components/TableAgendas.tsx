@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormAgenda from './FormAgenda';
 
-interface TableAgendasProps extends HubletoTableProps {
+interface TableAgendasProps extends TableExtendedProps {
   // Uncomment and modify these lines if you want to create URL-based filtering for your model
   // idCustomer?: number,
 }
 
-interface TableAgendasState extends HubletoTableState {
+interface TableAgendasState extends TableExtendedState {
 }
 
-export default class TableAgendas extends HubletoTable<TableAgendasProps, TableAgendasState> {
+export default class TableAgendas extends TableExtended<TableAgendasProps, TableAgendasState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Events/Models/Agenda',
   }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { setUrlParam, getUrlParam, deleteUrlParam } from '@hubleto/react-ui/core/Helper';
 import { TableDescription } from '@hubleto/react-ui/core/Table';
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormInvoice from './FormInvoice';
 import moment from "moment";
 
-interface TableInvoicesProps extends HubletoTableProps {
+interface TableInvoicesProps extends TableExtendedProps {
   idCustomer?: any,
   number?: any,
   vs?: any,
@@ -19,7 +19,7 @@ interface TableInvoicesProps extends HubletoTableProps {
   datePaymentTo?: any,
 }
 
-interface TableInvoicesState extends HubletoTableState {
+interface TableInvoicesState extends TableExtendedState {
   idCustomer: any,
   number: any,
   vs: any,
@@ -33,9 +33,9 @@ interface TableInvoicesState extends HubletoTableState {
   datePaymentTo: any,
 }
 
-export default class TableInvoices extends HubletoTable<TableInvoicesProps, TableInvoicesState> {
+export default class TableInvoices extends TableExtended<TableInvoicesProps, TableInvoicesState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     itemsPerPage: 25,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Invoices/Models/Invoice',

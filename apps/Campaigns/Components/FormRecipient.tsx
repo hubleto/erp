@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import request from '@hubleto/react-ui/core/Request';
 
-export interface FormRecipientProps extends HubletoFormProps {}
-export interface FormRecipientState extends HubletoFormState {
+export interface FormRecipientProps extends FormExtendedProps {}
+export interface FormRecipientState extends FormExtendedState {
   mailPreviewInfo?: any,
 }
 
-export default class FormRecipient<P, S> extends HubletoForm<FormRecipientProps, FormRecipientState> {
+export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps, FormRecipientState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Campaigns/Models/Recipient',
   };
 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 
-interface FormInventoryProps extends HubletoFormProps { }
-interface FormInventoryState extends HubletoFormState { }
+interface FormInventoryProps extends FormExtendedProps { }
+interface FormInventoryState extends FormExtendedState { }
 
-export default class FormInventory<P, S> extends HubletoForm<FormInventoryProps, FormInventoryState> {
+export default class FormInventory<P, S> extends FormExtended<FormInventoryProps, FormInventoryState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Warehouses/Models/Team',
   }
 

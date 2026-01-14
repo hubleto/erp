@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import TableTransactionItems from './TableTransactionItems';
 import Int from '@hubleto/react-ui/core/Inputs/Int';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
-interface FormTransactionProps extends HubletoFormProps { }
-interface FormTransactionState extends HubletoFormState { }
+interface FormTransactionProps extends FormExtendedProps { }
+interface FormTransactionState extends FormExtendedState { }
 
-export default class FormTransaction<P, S> extends HubletoForm<FormTransactionProps, FormTransactionState> {
+export default class FormTransaction<P, S> extends FormExtended<FormTransactionProps, FormTransactionState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Warehouses/Models/Transaction',
   }
 

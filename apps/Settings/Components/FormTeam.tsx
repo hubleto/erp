@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { deepObjectMerge } from "@hubleto/react-ui/core/Helper";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 
-interface FormTeamProps extends HubletoFormProps { }
-interface FormTeamState extends HubletoFormState { }
+interface FormTeamProps extends FormExtendedProps { }
+interface FormTeamState extends FormExtendedState { }
 
-export default class FormTeam<P, S> extends HubletoForm<FormTeamProps, FormTeamState> {
+export default class FormTeam<P, S> extends FormExtended<FormTeamProps, FormTeamState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Settings/Models/Team',
   }
 

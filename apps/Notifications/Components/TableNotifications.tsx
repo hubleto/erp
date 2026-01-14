@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import Form, { FormProps } from '@hubleto/react-ui/core/Form';
 import FormNotification from './FormNotification';
 
-interface TableNotificationsProps extends HubletoTableProps {
+interface TableNotificationsProps extends TableExtendedProps {
   folder?: string,
 }
-interface TableNotificationsState extends HubletoTableState {
+interface TableNotificationsState extends TableExtendedState {
 }
 
-export default class TableNotifications extends HubletoTable<TableNotificationsProps, TableNotificationsState> {
+export default class TableNotifications extends TableExtended<TableNotificationsProps, TableNotificationsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Notifications/Models/Notification',
   }

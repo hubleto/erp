@@ -1,13 +1,13 @@
 import React, { Component, createRef, RefObject } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 
-interface FormUserRoleProps extends HubletoFormProps {}
-interface FormUserRoleState extends HubletoFormState {}
+interface FormUserRoleProps extends FormExtendedProps {}
+interface FormUserRoleState extends FormExtendedState {}
 
-export default class FormUserRole<P, S> extends HubletoForm<FormUserRoleProps,FormUserRoleState> {
+export default class FormUserRole<P, S> extends FormExtended<FormUserRoleProps,FormUserRoleState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Auth/Models/UserRole',
   };
 

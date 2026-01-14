@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import moment from 'moment';
 
-export interface FormSharedCalendarProps extends HubletoFormProps {
+export interface FormSharedCalendarProps extends FormExtendedProps {
   onUpdate: () => void;
 }
 
-export interface FormSharedCalendarState extends HubletoFormState {}
+export interface FormSharedCalendarState extends FormExtendedState {}
 
-export default class FormSharedCalendar<P, S> extends HubletoForm<FormSharedCalendarProps,FormSharedCalendarState> {
+export default class FormSharedCalendar<P, S> extends FormExtended<FormSharedCalendarProps,FormSharedCalendarState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Calendar/Models/SharedCalendar',
   };
 

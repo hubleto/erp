@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormTransaction from './FormTransaction';
 
-interface TableTransactionsProps extends HubletoTableProps {
+interface TableTransactionsProps extends TableExtendedProps {
   idProduct?: number,
   direction?: number,
 }
 
-interface TableTransactionsState extends HubletoTableState {
+interface TableTransactionsState extends TableExtendedState {
 }
 
-export default class TableTransaction extends HubletoTable<TableTransactionsProps, TableTransactionsState> {
+export default class TableTransaction extends TableExtended<TableTransactionsProps, TableTransactionsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Warehouses/Models/Transaction',
   }

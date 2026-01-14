@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 
-export interface FormNotificationProps extends HubletoFormProps {}
-export interface FormNotificationState extends HubletoFormState {}
+export interface FormNotificationProps extends FormExtendedProps {}
+export interface FormNotificationState extends FormExtendedState {}
 
-export default class FormNotification<P, S> extends HubletoForm<FormNotificationProps,FormNotificationState> {
+export default class FormNotification<P, S> extends FormExtended<FormNotificationProps,FormNotificationState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Notifications/Models/Notification',
   };
 

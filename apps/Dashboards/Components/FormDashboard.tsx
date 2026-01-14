@@ -1,13 +1,13 @@
 import React, { Component, createRef, RefObject } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TablePanels from './TablePanels';
 
-interface FormDashboardProps extends HubletoFormProps {}
-interface FormDashboardState extends HubletoFormState {}
+interface FormDashboardProps extends FormExtendedProps {}
+interface FormDashboardState extends FormExtendedState {}
 
-export default class FormDashboard<P, S> extends HubletoForm<FormDashboardProps,FormDashboardState> {
+export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps,FormDashboardState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Dashboards/Models/Dashboard',
   };
 

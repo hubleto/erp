@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormUsage from './FormUsage';
 
-interface TableUsagesProps extends HubletoTableProps {
+interface TableUsagesProps extends TableExtendedProps {
   idKey?: number,
 }
 
-interface TableUsagesState extends HubletoTableState {
+interface TableUsagesState extends TableExtendedState {
 }
 
-export default class TableUsages extends HubletoTable<TableUsagesProps, TableUsagesState> {
+export default class TableUsages extends TableExtended<TableUsagesProps, TableUsagesState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Api/Models/Usage',
     readonly: true,

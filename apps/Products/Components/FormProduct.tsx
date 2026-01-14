@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableProductSuppliers from './TableProductSuppliers';
 import Barcode from 'react-barcode';
 
-export interface FormProductProps extends HubletoFormProps {}
-export interface FormProductState extends HubletoFormState {}
+export interface FormProductProps extends FormExtendedProps {}
+export interface FormProductState extends FormExtendedState {}
 
-export default class FormProduct<P, S> extends HubletoForm<FormProductProps,FormProductState> {
+export default class FormProduct<P, S> extends FormExtended<FormProductProps,FormProductState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Products/Models/Product',
   };
 

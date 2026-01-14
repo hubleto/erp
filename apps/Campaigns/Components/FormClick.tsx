@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import request from '@hubleto/react-ui/core/Request';
 
-export interface FormClickProps extends HubletoFormProps {}
-export interface FormClickState extends HubletoFormState {
+export interface FormClickProps extends FormExtendedProps {}
+export interface FormClickState extends FormExtendedState {
   mailPreviewInfo?: any,
 }
 
-export default class FormClick<P, S> extends HubletoForm<FormClickProps, FormClickState> {
+export default class FormClick<P, S> extends FormExtended<FormClickProps, FormClickState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Campaigns/Models/Click',
   };
 

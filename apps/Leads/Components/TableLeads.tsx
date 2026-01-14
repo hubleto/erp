@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormLead, { FormLeadProps } from './FormLead';
 import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
 import request from '@hubleto/react-ui/core/Request';
 
-export interface TableLeadsProps extends HubletoTableProps {
+export interface TableLeadsProps extends TableExtendedProps {
   idCustomer?: number,
   idCampaign?: number,
 }
 
-export interface TableLeadsState extends HubletoTableState {
+export interface TableLeadsState extends TableExtendedState {
   // showSetStatusDialog: boolean,
   selectedBulkStatus: number,
   rerenderKey: number,
 }
 
-export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeadsState> {
+export default class TableLeads extends TableExtended<TableLeadsProps, TableLeadsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Leads/Models/Lead',
   }
@@ -166,7 +166,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
   //               <option value={20}>C{this.translate("onverted to deal")}</option>
   //             </select>
   //           </div>
-  //           <HubletoTable
+  //           <TableExtended
   //             key={this.state.rerenderKey}
   //             model={this.model}
   //             data={{data: this.state.selection}}
@@ -210,7 +210,7 @@ export default class TableLeads extends HubletoTable<TableLeadsProps, TableLeads
   //               }
   //             }}
   //           >
-  //           </HubletoTable>
+  //           </TableExtended>
   //         </>
   //       </ModalSimple>
   //     : null}

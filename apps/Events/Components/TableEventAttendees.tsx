@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormEventAttendee from './FormEventAttendee';
 
-interface TableEventAttendeesProps extends HubletoTableProps {
+interface TableEventAttendeesProps extends TableExtendedProps {
   idEvent?: number,
 }
 
-interface TableEventAttendeesState extends HubletoTableState {
+interface TableEventAttendeesState extends TableExtendedState {
 }
 
-export default class TableEventAttendees extends HubletoTable<TableEventAttendeesProps, TableEventAttendeesState> {
+export default class TableEventAttendees extends TableExtended<TableEventAttendeesProps, TableEventAttendeesState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Events/Models/EventAttendee',
   }

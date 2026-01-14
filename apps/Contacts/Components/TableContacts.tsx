@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
-import HubletoTable, { HubletoTableProps, HubletoTableState } from '@hubleto/react-ui/ext/HubletoTable';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormContact, { FormContactProps, FormContactState } from './FormContact';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import request from '@hubleto/react-ui/core/Request';
 import { ProgressBar } from 'primereact/progressbar';
 
-interface TableContactsProps extends HubletoTableProps {
+interface TableContactsProps extends TableExtendedProps {
   idCustomer: number,
   showAsCards?: boolean;
 }
 
-interface TableContactsState extends HubletoTableState {
+interface TableContactsState extends TableExtendedState {
   tableValuesDescription?: any,
 }
 
-export default class TableContacts extends HubletoTable<TableContactsProps, TableContactsState> {
+export default class TableContacts extends TableExtended<TableContactsProps, TableContactsState> {
   static defaultProps = {
-    ...HubletoTable.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Contacts/Models/Contact',
   }

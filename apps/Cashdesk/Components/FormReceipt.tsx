@@ -1,15 +1,15 @@
 import React, { Component, ChangeEvent } from "react";
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Int from '@hubleto/react-ui/core/Inputs/Int';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import Barcode from 'react-barcode';
 
-export interface FormReceiptProps extends HubletoFormProps { }
-export interface FormReceiptState extends HubletoFormState { }
+export interface FormReceiptProps extends FormExtendedProps { }
+export interface FormReceiptState extends FormExtendedState { }
 
-export default class FormReceipt<P, S> extends HubletoForm<FormReceiptProps, FormReceiptState> {
+export default class FormReceipt<P, S> extends FormExtended<FormReceiptProps, FormReceiptState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: "Hubleto/App/Community/Cashdesk/Models/Receipt"
   };
 

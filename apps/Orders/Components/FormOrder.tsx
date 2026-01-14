@@ -1,6 +1,6 @@
 import React, { Component, createRef, useRef, ChangeEvent } from 'react';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableItems from './TableItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TablePayments from './TablePayments';
@@ -15,10 +15,10 @@ import moment, { Moment } from "moment";
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 
-export interface FormOrderProps extends HubletoFormProps {
+export interface FormOrderProps extends FormExtendedProps {
 }
 
-export interface FormOrderState extends HubletoFormState {
+export interface FormOrderState extends FormExtendedState {
   showIdActivity: number,
   activityTime: string,
   activityDate: string,
@@ -27,9 +27,9 @@ export interface FormOrderState extends HubletoFormState {
   selectParentDeal?: boolean,
 }
 
-export default class FormOrder<P, S> extends HubletoForm<FormOrderProps,FormOrderState> {
+export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrderState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     icon: 'fas fa-money-check-dollar',
     model: 'Hubleto/App/Community/Orders/Models/Order',
     renderWorkflowUi: true,

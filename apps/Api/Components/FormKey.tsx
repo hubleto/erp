@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import HubletoForm, { HubletoFormProps, HubletoFormState } from '@hubleto/react-ui/ext/HubletoForm';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import Varchar from '@hubleto/react-ui/core/Inputs/Varchar';
 import TablePermissions from './TablePermissions';
 import TableUsages from './TableUsages';
 import request from '@hubleto/react-ui/core/Request';
 
-interface FormKeyProps extends HubletoFormProps { }
-interface FormKeyState extends HubletoFormState {
+interface FormKeyProps extends FormExtendedProps { }
+interface FormKeyState extends FormExtendedState {
   testResult: any,
 }
 
-export default class FormKey<P, S> extends HubletoForm<FormKeyProps, FormKeyState> {
+export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeyState> {
   static defaultProps: any = {
-    ...HubletoForm.defaultProps,
+    ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Api/Models/Key',
   }
 

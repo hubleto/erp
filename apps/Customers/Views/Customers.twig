@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate('Customers') }}</h1>
 
-<app-customers-table-customers
+<hblreact-customers-table-customers
   string:tag="table-customers"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-customers-table-customers>
+></hblreact-customers-table-customers>

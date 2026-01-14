@@ -4,13 +4,13 @@
 {% if viewParams.idAccount > 0 and viewParams.idMailbox > 0 %}
   <h1 class="app-main-title">{{ translate('Mail') }} > {{ account.name }} > {{ mailbox.name }}</h1>
 
-  <app-mail-table-mails
+  <hblreact-mail-table-mails
     string:tag="mail-table-mails"
     int:id-account="{{ viewParams.account.id }}"
     int:id-mailbox="{{ viewParams.mailbox.id }}"
     string:mailbox-name="{{ viewParams.mailbox.name }}"
     bool:readonly="true"
-  ></app-mail-table-mails>
+  ></hblreact-mail-table-mails>
 {% else %}
   <div class="mt-20 w-full text-center">
     <i class="fas fa-envelope text-primary" style="opacity:0.05;font-size:20em"></i>

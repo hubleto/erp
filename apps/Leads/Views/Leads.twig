@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate('Leads') }}</h1>
 
-<app-leads-table-leads
+<hblreact-leads-table-leads
   string:tag="table-leads"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-leads-table-leads>
+></hblreact-leads-table-leads>

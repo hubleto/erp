@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate('Projects') }} > Phases</h1>
 
-<app-projects-table-phases
+<hblreact-projects-table-phases
   string:tag="table-project-phases"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-projects-table-phases>
+></hblreact-projects-table-phases>

@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate("Documents") }}</h1>
 
-<app-documents-table-documents
+<hblreact-documents-table-documents
   string:tag="table-documents"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-documents-table-documents>
+></hblreact-documents-table-documents>

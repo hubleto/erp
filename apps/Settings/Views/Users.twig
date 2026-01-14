@@ -1,6 +1,6 @@
 <h1>{{ translate('Settings') }} > {{ translate('Users') }}</h1>
 
-<app-settings-table-users
+<hblreact-settings-table-users
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-settings-table-users>
+></hblreact-settings-table-users>

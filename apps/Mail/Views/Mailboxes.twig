@@ -14,12 +14,12 @@
   <div>
     {% for a in viewParams.accounts %}
       {{ a.name }}
-      <app-mail-table-mails
+      <hblreact-mail-table-mails
         int:id-account="{{ a.id }}"
         bool:show-only-scheduled-to-send="true"
         bool:readonly="true"
         string:view="briefOverview"
-      ></app-mail-table-mails>
+      ></hblreact-mail-table-mails>
     {% endfor %}
   </div>
 </div>

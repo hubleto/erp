@@ -54,12 +54,12 @@
 
 <div class="mt-2">
   <h1>{{ dashboard.title }}</h1>
-  <app-dashboards-dashboard
+  <hblreact-dashboards-dashboard
     int:id-dashboard='{{ dashboard.id }}'
     string:redirect-url='{{ config.projectUrl }}'
     json:panels='{{ dashboard.PANELS|json_encode|raw }}'
     bool:show-add-new-panel-button='true'
-  ></app-dashboards-dashboard>
+  ></hblreact-dashboards-dashboard>
 </div>
 
 <div class="mx-auto pt-20">

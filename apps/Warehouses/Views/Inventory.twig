@@ -1,8 +1,8 @@
 <h1 class="app-main-title">{{ translate('Warehouses') }} > {{ translate('Inventory') }}</h1>
 
-<app-warehouses-table-inventory
+<hblreact-warehouses-table-inventory
   string:tag="table-inventory"
   int:record-id="{{ viewParams.recordId }}"
   bool:readonly="true"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-warehouses-table-inventory>
+></hblreact-warehouses-table-inventory>

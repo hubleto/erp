@@ -1,7 +1,7 @@
 <h1 class="app-main-title">Suppliers</h1>
 
-<app-table
+<hblreact-table
   string:model="\Hubleto\App\Community\Suppliers\Models\Supplier"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-table>
+></hblreact-table>

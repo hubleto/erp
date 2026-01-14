@@ -1,8 +1,8 @@
 <h1 class="app-main-title">{{ translate('Notifications') }}</h1>
 
-<app-notifications-table-notifications
+<hblreact-notifications-table-notifications
   string:folder="inbox"
   string:tag="api-table-keys"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-notifications-table-notifications>
+></hblreact-notifications-table-notifications>

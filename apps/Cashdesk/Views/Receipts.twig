@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate('Cashdesk') }} > {{ translate('Receipts') }}</h1>
 
-<app-cashdesk-table-receipts
+<hblreact-cashdesk-table-receipts
   string:tag="table-receipts"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-cashdesk-table-receipts>
+></hblreact-cashdesk-table-receipts>

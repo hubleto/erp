@@ -1,7 +1,7 @@
 <h1 class='app-main-title'>{{ translate('Settings') }} > {{ translate('Workflows') }}</h1>
 
-<app-settings-table-workflows
+<hblreact-settings-table-workflows
   string:tag="table-workflows"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-settings-table-workflows>
+></hblreact-settings-table-workflows>

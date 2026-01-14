@@ -1,8 +1,8 @@
 <h1 class="app-main-title">{{ translate('Orders') }} > {{ translate('Payments') }}</h1>
 
-<app-orders-table-payments
+<hblreact-orders-table-payments
   string:tag="table-payments"
   string:view="{{ viewParams.view }}"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-orders-table-payments>
+></hblreact-orders-table-payments>

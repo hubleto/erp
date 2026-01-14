@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate('Warehouses') }}</h1>
 
-<app-warehouses-table-warehouses
+<hblreact-warehouses-table-warehouses
   string:tag="table-warehouses"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-warehouses-table-warehouses>
+></hblreact-warehouses-table-warehouses>

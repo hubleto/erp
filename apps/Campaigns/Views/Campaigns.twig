@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate('Campaigns') }}</h1>
 
-<app-campaigns-table-campaigns
+<hblreact-campaigns-table-campaigns
   string:tag="table-campaigns"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-campaigns-table-campaigns>
+></hblreact-campaigns-table-campaigns>

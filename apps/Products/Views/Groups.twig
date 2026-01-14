@@ -1,7 +1,7 @@
 <h1 class="app-main-title">{{ translate('Products') }} > {{ translate('Groups') }}</h1>
 
-<app-products-table-groups
+<hblreact-products-table-groups
   string:tag="products-table-groups"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
-></app-products-table-groups>
+></hblreact-products-table-groups>

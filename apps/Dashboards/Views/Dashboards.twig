@@ -32,11 +32,11 @@
     {% for d in viewParams.dashboards %}
       {% if d.slug == viewParams.dashboardSlug %}
         <h2>{{ d.title }}</h2>
-        <app-dashboards-dashboard
+        <hblreact-dashboards-dashboard
           int:id-dashboard='{{ d.id }}'
           bool:show-add-new-panel-button='true'
           json:panels='{{ d.PANELS|json_encode|raw }}'
-        ></app-dashboards-dashboard>
+        ></hblreact-dashboards-dashboard>
       {% endif %}
     {% endfor %}
   </div>
@@ -70,10 +70,10 @@
     {% for d in viewParams.dashboards %}
       {% if d.slug == viewParams.dashboardSlug %}
         <h2>{{ d.title }}</h2>
-        <app-dashboards-dashboard
+        <hblreact-dashboards-dashboard
           int:id-dashboard='{{ d.id }}'
           json:panels='{{ d.PANELS|json_encode|raw }}'
-        ></app-dashboards-dashboard>
+        ></hblreact-dashboards-dashboard>
       {% endif %}
     {% endfor %}
   </div>

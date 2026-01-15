@@ -151,7 +151,9 @@ class Activity extends \Hubleto\Erp\Model
     $days = date_diff(new \DateTimeImmutable($record['date_worked']), new \DateTimeImmutable())->days;
     $daysDiffMax = $this->config()->forApp(WorksheetsApp::class)->getAsInteger('activityDaysDiffMax', 5);
 
-    if ($days > $daysDiffMax) {
+    $userType = $this->authProvider()->getUserType();
+
+    if ($userType != User::TYPE_ADMINISTRATOR && $days > $daysDiffMax) {
       throw new RecordSaveException('You may not create or modify activity more than ' . $daysDiffMax . ' days after it has been performed.');
     }
   }

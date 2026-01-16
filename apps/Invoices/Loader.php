@@ -35,6 +35,8 @@ class Loader extends \Hubleto\Framework\App
       '/^invoices\/items\/add?\/?$/' => ['controller' => Controllers\Items::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
+    $this->addSearchSwitch('i', 'invoices');
+
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflow($this, 'invoices', Workflow::class);
@@ -127,6 +129,41 @@ class Loader extends \Hubleto\Framework\App
         </div>
       </div>
     ';
+  }
+
+  /**
+   * Implements fulltext search functionality for tasks
+   *
+   * @param array $expressions List of expressions to be searched and glued with logical 'or'.
+   * 
+   * @return array
+   * 
+   */
+  public function search(array $expressions): array
+  {
+    $mInvoice = $this->getModel(Models\Invoice::class);
+    $qInvoices = $mInvoice->record->prepareReadQuery();
+    
+    foreach ($expressions as $e) {
+      $qInvoices = $qInvoices->having(function($q) use ($e) {
+        $q->orHaving('invoices.number', 'like', '%' . $e . '%');
+        $q->orHaving('invoices.vs', 'like', '%' . $e . '%');
+      });
+    }
+
+    $invoices = $qInvoices->get()->toArray();
+    $results = [];
+
+    foreach ($invoices as $invoice) {
+      $results[] = [
+        "id" => $invoice['id'],
+        "label" => $invoice['number'] . ' ' . $invoice['vs'],
+        "url" => 'invoices/' . $invoice['id'],
+        "description" => Models\Invoice::TYPES[$invoice['type']],
+      ];
+    }
+
+    return $results;
   }
 
 }

@@ -132,7 +132,7 @@ class Mail extends \Hubleto\Erp\Model
     }
 
     foreach (explode(',', $mail['to']) as $tmpTo) {
-      if (!filter_var($tmpTo, FILTER_VALIDATE_EMAIL)) throw new \Exception('Recipient contains invalid email address.');
+      if (!filter_var(trim($tmpTo), FILTER_VALIDATE_EMAIL)) throw new \Exception('Recipient contains invalid email address.');
     }
   }
 

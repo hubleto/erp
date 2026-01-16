@@ -78,10 +78,16 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     ],
   ];
 
-  public function parseConfigFile(string $configFile): array
+  public function parseConfigFile(string $configFile, array $extraConfigsInCommandLine = []): array
   {
     $configStr = (string) file_get_contents($configFile);
     $config = (array) (\Symfony\Component\Yaml\Yaml::parse($configStr) ?? []);
+
+    if (count($extraConfigsInCommandLine)) {
+      $extraConfig = (array) (\Symfony\Component\Yaml\Yaml::parse(join('\n', $extraConfigsInCommandLine)) ?? []);
+      $config = array_merge($config, $extraConfig);
+    }
+
     return $config;
   }
 
@@ -121,13 +127,26 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $noPrompt = null;
     $packagesToInstall = null;
     $appsToInstall = null;
+    $defaultConfiguration = null;
     $externalAppsRepositories = [];
     $enterpriseAppsRepository = null;
 
-    $configFile = (string) ($this->arguments[2] ?? '');
+    $configFile = '';
+    $extraConfigsInCommandLine = [];
+    for ($i = 2; $i < count($this->arguments); $i++) {
+      $arg = trim((string) $this->arguments[$i]);
+      if (empty($arg)) continue;
+
+      if (str_ends_with($arg, '.yaml') || str_ends_with($arg, '.yml')
+      ) {
+        $configFile = $arg;
+      } else {
+        $extraConfigsInCommandLine[] = $arg;
+      }
+    }
 
     if (!empty($configFile) && is_file($configFile)) {
-      $config = $this->parseConfigFile($configFile);
+      $config = $this->parseConfigFile($configFile, $extraConfigsInCommandLine);
     } else {
       $config = $this->initConfig;
     }
@@ -194,6 +213,9 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
     if (isset($config['appsToInstall'])) {
       $appsToInstall = $config['appsToInstall'];
+    }
+    if (isset($config['defaultConfiguration'])) {
+      $defaultConfiguration = $config['defaultConfiguration'];
     }
     if (isset($config['externalAppsRepositories'])) {
       $externalAppsRepositories = $config['externalAppsRepositories'];
@@ -315,7 +337,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     if (empty($packagesToInstall)) {
-      $packagesToInstall = 'crm,marketing,sales,projects';
+      $packagesToInstall = join(', ', array_keys($this->packages));
     }
     if (empty($adminPassword) && !isset($smtpHost)) {
       $adminPassword = \Hubleto\Framework\Helper::randomPassword();
@@ -360,6 +382,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     $this->terminal()->cyan('  -> generateDemoData = ' . ($generateDemoData ? 'yes' : 'no') . "\n");
     $this->terminal()->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
+    $this->terminal()->cyan('  -> defaultConfiguration = ' . (string) $defaultConfiguration . "\n");
 
     $this->config()->set('projectFolder', $projectFolder);
     $this->config()->set('releaseFolder', $releaseFolder);
@@ -377,7 +400,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->env()->secureFolder = $secureFolder;
 
     $this->terminal()->cyan("\n");
-    $this->terminal()->cyan("Hurray. Installing your Hubleto with following packages: " . join(", ", explode(",", (string) $packagesToInstall)) . "\n");
+    $this->terminal()->cyan("Hurray. Installing your Hubleto.\n");
 
     // install
     $installer = new \Hubleto\Erp\Installer\Installer(
@@ -456,16 +479,18 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("  -> Creating base tables.\n");
     $installer->installBaseModels();
 
-    $this->terminal()->cyan("  -> Installing apps, round #1.\n");
+    $this->terminal()->cyan("  -> Installing " . count($installer->appsToInstall) . " apps (" . join(', ', array_keys($installer->appsToInstall)) . ").\n");
+
+    $this->terminal()->cyan("    -> Round #1.\n");
     $installer->installApps(1);
 
-    $this->terminal()->cyan("  -> Installing apps, round #2.\n");
+    $this->terminal()->cyan("    -> Round #2.\n");
     $installer->installApps(2);
 
-    $this->terminal()->cyan("  -> Installing apps, round #3.\n");
+    $this->terminal()->cyan("    -> Round #3.\n");
     $installer->installApps(3);
 
-    $this->terminal()->cyan("    -> Finalizing...\n");
+    $this->terminal()->cyan("    -> Finalizing.\n");
     foreach ($installer->appsToInstall as $appNamespace => $appConfig) {
       $app = $this->appManager()->createAppInstance($appNamespace);
       $mClasses = $app->getAvailableModelClasses();
@@ -478,18 +503,24 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("  -> Adding default company and admin user.\n");
     $installer->addCompanyAndAdminUser();
 
+    $this->terminal()->cyan("  -> Reinitializing Hubleto after installation.\n");
+    $this->appManager()->init();
+
+    $this->terminal()->cyan("  -> Applying default configuration: {$defaultConfiguration}\n");
+    $installer->applyDefaultConfiguration($defaultConfiguration);
+
     if ($generateDemoData) {
-      $this->appManager()->init();
+      $this->terminal()->cyan("  -> Generating demo data.\n");
       $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
     }
 
     $this->terminal()->cyan("\n");
-    $this->terminal()->cyan("All done! You're a fantastic CRM developer.\n");
-    $this->terminal()->colored("cyan", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword . "\n");
-    $this->terminal()->cyan("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-    $this->terminal()->cyan("  -> Check the developer's guide at https://developer.hubleto.com.\n");
-    $this->terminal()->cyan("\n");
-    $this->terminal()->cyan("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
-    $this->terminal()->colored("cyan", "black", "Run: php hubleto app create MyFirstApp\n");
+    $this->terminal()->yellow("All done! You're a fantastic CRM developer.\n");
+    $this->terminal()->colored("yellow", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword . "\n");
+    $this->terminal()->yellow("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
+    $this->terminal()->yellow("  -> Check the developer's guide at https://developer.hubleto.com.\n");
+    $this->terminal()->yellow("\n");
+    $this->terminal()->yellow("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
+    $this->terminal()->yellow("Run: php hubleto app create MyFirstApp\n");
   }
 }

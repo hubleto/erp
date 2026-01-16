@@ -164,6 +164,12 @@ class Installer extends \Hubleto\Framework\Core
     }
   }
 
+  /**
+   * [Description for addCompanyAndAdminUser]
+   *
+   * @return void
+   * 
+   */
   public function addCompanyAndAdminUser(): void
   {
     $mCompany = $this->getModel(\Hubleto\App\Community\Settings\Models\Company::class);
@@ -196,6 +202,39 @@ class Installer extends \Hubleto\Framework\Core
     }
   }
 
+  /**
+   * [Description for applyDefaultConfiguration]
+   *
+   * @param string $defaultConfiguration
+   * 
+   * @return void
+   * 
+   */
+  public function applyDefaultConfiguration(string $defaultConfiguration): void
+  {
+    switch ($defaultConfiguration) {
+      case 'softvertribunal':
+        $this->appManager()->getCommunityApp('Campaigns')->saveConfig('sidebarOrder', '0');
+        $this->appManager()->getCommunityApp('Leads')->saveConfig('sidebarOrder', '0');
+        $this->appManager()->getCommunityApp('Suppliers')->saveConfig('sidebarOrder', '0');
+        $this->appManager()->getCommunityApp('Warehouses')->saveConfig('sidebarOrder', '0');
+        $this->appManager()->getCommunityApp('Shops')->saveConfig('sidebarOrder', '0');
+        $this->appManager()->getCommunityApp('Products')->saveConfig('sidebarOrder', '0');
+        $this->appManager()->getCommunityApp('Issues')->saveConfig('sidebarOrder', '0');
+        $this->appManager()->getCommunityApp('Cashdesk')->saveConfig('sidebarOrder', '0');
+
+        $this->config()->save('secondLogoUrl', $this->config()->getAsString('assetsUrl') . "/images/logo-tribunal_horizontal.png");
+        $this->config()->save('uiTheme', 'softvertribunal');
+      break;
+    }
+  }
+
+  /**
+   * [Description for getConfigEnvContent]
+   *
+   * @return string
+   * 
+   */
   public function getConfigEnvContent(): string
   {
     $configEnv = (string) file_get_contents(__DIR__ . '/Templates/ConfigEnv.php.tpl');

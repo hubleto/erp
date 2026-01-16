@@ -21,8 +21,6 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
     $permissionsManager->DANGEROUS__grantAllPermissions();
 
-    $this->terminal()->cyan("Generating demo data...\n");
-
     $mCompany = $this->getService(Company::class);
     $mUser = $this->getService(User::class);
     $mUserRole = $this->getService(UserRole::class);
@@ -185,12 +183,12 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     foreach ($this->appManager()->getInstalledAppNamespaces() as $appNamespace => $appConfig) {
       $app = $this->appManager()->getApp($appNamespace);
       if ($app) {
-        $this->terminal()->cyan("  {$appNamespace}\n");
+        // $this->terminal()->cyan("  {$appNamespace}\n");
         $app->generateDemoData();
       }
     }
 
-    $this->terminal()->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
+    // $this->terminal()->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
 
     $permissionsManager->revokeGrantAllPermissions();
   }

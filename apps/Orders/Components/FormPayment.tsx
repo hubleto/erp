@@ -14,7 +14,6 @@ export default class FormPayment extends FormExtended<FormPaymentProps, FormPaym
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     },
-    renderWorkflowUi: true,
   }
 
   props: FormPaymentProps;

@@ -1,3 +1,6 @@
+{% set logoUrl = config.logoUrl ?? config.assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
+{% set secondLogoUrl = config.secondLogoUrl %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +31,9 @@
       </div>
     {% endblock %}
     <div class="inner">
-      <div class="logo">
-        <img src="{{ config.assetsUrl }}/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-bottom:1em; width: auto;" />
+      <div class="logo flex gap-2" style="max-height:4em;margin-bottom:1em; width: auto;">
+        <img src="{{ logoUrl }}" class="w-full h-full" />
+        {% if secondLogoUrl %} <img src="{{ secondLogoUrl }}"  class="w-full h-full"> {% endif %}
       </div>
       <div class="form">
         <form class="content" id="login_form" action="" method="POST">

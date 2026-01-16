@@ -110,6 +110,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_currency' => (new Lookup($this, $this->translate('Currency'), CurrencyModel::class)),
       'total_excl_vat' => new Currency($this, $this->translate('Total excl. VAT'))->setDecimals(2)->setReadonly(),
       'total_incl_vat' => new Currency($this, $this->translate('Total incl. VAT'))->setDecimals(2)->setReadonly(),
+      'total_payments' => new Currency($this, $this->translate('Total payments'))->setDecimals(2)->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
@@ -265,7 +266,9 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $totalExclVat = 0;
     $totalInclVat = 0;
+    $totalPayments = 0;
 
+    // items
     $mItem = $this->getService(Item::class);
     $items = $mItem->record->where('id_invoice', $idInvoice)->get();
 
@@ -274,9 +277,19 @@ class Invoice extends \Hubleto\Erp\Model {
       $totalInclVat += $item->price_incl_vat;
     }
 
+    // payments
+    $mPayment = $this->getService(Payment::class);
+    $payments = $mPayment->record->where('id_invoice', $idInvoice)->get();
+
+    foreach ($payments as $payment) {
+      $totalPayments += $payment->amount;
+    }
+
+    // update
     $invoice->update([
       "total_excl_vat" => $totalExclVat,
       "total_incl_vat" => $totalInclVat,
+      "total_payments" => $totalPayments,
     ]);
   }
 

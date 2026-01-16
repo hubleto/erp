@@ -146,8 +146,9 @@ class Loader extends \Hubleto\Framework\App
     
     foreach ($expressions as $e) {
       $qInvoices = $qInvoices->having(function($q) use ($e) {
+        $eAsInt = preg_replace('/[^0-9]/', '', $e);
         $q->orHaving('invoices.number', 'like', '%' . $e . '%');
-        $q->orHaving('invoices.vs', 'like', '%' . $e . '%');
+        $q->orHaving('invoices.vs', 'like', '%' . $eAsInt . '%');
       });
     }
 

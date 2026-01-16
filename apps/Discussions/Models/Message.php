@@ -56,29 +56,4 @@ class Message extends \Hubleto\Erp\Model
     return $description;
   }
 
-  // public function describeForm(): \Hubleto\Framework\Description\Form
-  // {
-  //   return parent::describeForm();
-  // }
-
-  // public function onBeforeCreate(array $record): array
-  // {
-  //   return parent::onBeforeCreate($record);
-  // }
-
-  // public function onBeforeUpdate(array $record): array
-  // {
-  //   return parent::onBeforeUpdate($record);
-  // }
-
-  // public function onAfterUpdate(array $originalRecord, array $savedRecord): array
-  // {
-  //   return parent::onAfterUpdate($originalRecord, $savedRecord);
-  // }
-
-  // public function onAfterCreate(array $savedRecord): array
-  // {
-  //   return parent::onAfterCreate($savedRecord);
-  // }
-
 }

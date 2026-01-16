@@ -29,7 +29,7 @@ class Payment extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class)),
-      'date_payment' => (new Date($this, $this->translate('Payment date')))->setDefaultVisible(),
+      'date_payment' => (new Date($this, $this->translate('Payment date')))->setDefaultVisible()->setDefaultValue(date('Y-m-d')),
       'amount' => (new Decimal($this, $this->translate('Amount')))->setDefaultVisible(),
       'is_advance_payment' => (new Boolean($this, $this->translate('Is advance payment')))->setDefaultVisible(),
     ]);
@@ -49,6 +49,53 @@ class Payment extends \Hubleto\Erp\Model
     $description->hide(['footer']);
 
     return $description;
+  }
+
+  /**
+   * [Description for onAfterCreate]
+   *
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
+  public function onAfterCreate(array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterCreate($savedRecord);
+
+    $idInvoice = (int) $savedRecord['id_invoice'];
+
+    if ($idInvoice > 0) {
+      /** @var Invoice */
+      $mInvoice = $this->getModel(Invoice::class);
+      $mInvoice->recalculateTotalsForInvoice($idInvoice);
+    }
+
+    return $savedRecord;
+  }
+
+  /**
+   * [Description for onAfterUpdate]
+   *
+   * @param array $originalRecord
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    $idInvoice = (int) $savedRecord['id_invoice'];
+
+    if ($idInvoice > 0) {
+      /** @var Invoice */
+      $mInvoice = $this->getModel(Invoice::class);
+      $mInvoice->recalculateTotalsForInvoice($idInvoice);
+    }
+
+    return $savedRecord;
   }
 
 }

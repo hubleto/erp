@@ -197,18 +197,20 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                 <div className='p-2 grow'>
                   {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-4xl'})}
                 </div>
-                <div className='p-2 grow text-nowrap bg-slate-100 text-slate-800'>
-                  <div>
-                    <div className='text-4xl'>
-                      <b>{globalThis.hubleto.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
-                    </div>
-                    <div className='text-sm'>excl. VAT</div>
+                <div className='p-2 grow text-nowrap bg-slate-50 text-slate-800'>
+                  <div className='text-sm'>
+                    <b>{globalThis.hubleto.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
+                    <span className='ml-2'>excl. VAT</span>
                   </div>
                   <div className='mt-2'>
-                    <div className='text-4xl'>
+                    <span className='text-2xl badge badge-yellow'>
                       {globalThis.hubleto.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
-                    </div>
-                    <div className='text-sm'>incl. VAT</div>
+                    </span>
+                    <span className='text-sm ml-2'>incl. VAT</span>
+                  </div>
+                  <div className='text-sm mt-2'>
+                    <b>{globalThis.hubleto.numberFormat(R.total_payments, 2, ',', ' ')} {currencySymbol}</b>
+                    <span className='ml-2'>paid</span>
                   </div>
                 </div>
                 <div className={'border-t border-t-4 border-t-blue-400 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>

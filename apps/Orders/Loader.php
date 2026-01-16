@@ -95,6 +95,22 @@ class Loader extends \Hubleto\Framework\App
   }
 
   /**
+   * [Description for getSidebarBadgeNumber]
+   *
+   * @return int
+   * 
+   */
+  public function getSidebarBadgeNumber(): int
+  {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    return
+      $counter->duePaymentsNotPreparedForInvoice()
+    ;
+  }
+
+  /**
    * [Description for renderSecondSidebar]
    *
    * @return string
@@ -102,12 +118,10 @@ class Loader extends \Hubleto\Framework\App
    */
   public function renderSecondSidebar(): string
   {
-  
-    $mPayment = $this->getModel(Models\Payment::class);
-    $duePaymentsCount = $mPayment->record
-      ->whereDate('date_due', '<=', date("Y-m-d"))
-      ->whereNull('id_invoice_item')
-      ->count();
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $duePaymentsCount = $counter->duePaymentsNotPreparedForInvoice();
 
     return '
       <div class="flex flex-col gap-2">

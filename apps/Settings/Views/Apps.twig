@@ -19,27 +19,28 @@
       />
     </form>
 
-    <div class="grid md:grid-cols-4 lg:grid-cols-4 gap-2 mt-2">
+    <div class="list mt-2">
       {% for appNamespace, app in viewParams.appsToShow %}
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="font-normal text-xs text-gray-400">{{ app.manifest.namespace }}</div>
-              {{ app.manifest.nameTranslated ?? app.manifest.name }}
-              {% if app.type == 1 %} <div class="badge badge-violet">Community</div> {% endif %}
-              {% if app.type == 2 %} <div class="badge badge-lime">Premium</div> {% endif %}
-              {% if app.type == 3 %} <div class="badge badge-yellow">External</div> {% endif %}
-            </div>
+        <div class="item flex gap-2 items-center p-2 justify-between">
+          <div>
             <i class="{{ app.manifest.icon }}"></i>
           </div>
-          <div class="card-body">
-            <div>{{ app.manifest.highlightTranslated ?? app.manifest.highlight }}</div>
+          <div>
+            {% if app.type == 'community' %} <div class="badge badge-violet">Community</div> {% endif %}
+            {% if app.type == 'enterprise' %} <div class="badge badge-lime">Enterprise</div> {% endif %}
+            {% if app.type == 'external' %} <div class="badge badge-yellow">External</div> {% endif %}
+            {% if app.type == 'custom' %} <div class="badge badge-green">Custom</div> {% endif %}
           </div>
-          <div class="card-footer">
+          <div class="grow">
+            <div class="font-normal text-xs text-gray-400">{{ app.manifest.namespace }}</div>
+            <b>{{ app.manifest.nameTranslated ?? app.manifest.name }}</b>
+            {{ app.manifest.highlightTranslated ?? app.manifest.highlight }}
+          </div>
+          <div>
             {% if app.instance %}
               <a class="btn btn-blue" href="../{{ app.manifest.rootUrlSlug }}">
                 <span class="icon"><i class="fas fa-arrow-right"></i></span>
-                <span class="text">{{ translate('Open') }}</span>
+                <span class="text">{{ translate('Go to app') }}</span>
               </a>
               {% if app.instance.enabled %}
                 {% if app.instance.canBeDisabled %}
@@ -76,9 +77,9 @@
       {% endfor %}
     </div>
 
-    <a class="btn btn-transparent mt-2" href="{{ config.projectUrl }}/settings/update-default-permissions">
+    {# <a class="btn btn-transparent mt-2" href="{{ config.projectUrl }}/settings/update-default-permissions">
       <span class="icon"><i class="fas fa-refresh"></i></span>
       <span class="text">Update default permissions</span>
-    </a>
+    </a> #}
   </div>
 </div>

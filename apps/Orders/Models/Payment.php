@@ -40,7 +40,7 @@ class Payment extends \Hubleto\Erp\Model
       'discount' => new Decimal($this, $this->translate('Discount'))->setDefaultVisible()->setUnit('%'),
       'vat' => new Decimal($this, $this->translate('VAT'))->setUnit('%'),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
-      'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), Item::class))->setDefaultVisible()->setReadonly(),
+      'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), Item::class))->setDefaultVisible(),
     ]);
   }
 

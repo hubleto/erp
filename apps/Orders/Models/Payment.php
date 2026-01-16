@@ -2,13 +2,15 @@
 
 namespace Hubleto\App\Community\Orders\Models;
 
-use Hubleto\App\Community\Invoices\Models\Item;
-use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
+
+use Hubleto\App\Community\Invoices\Models\Item;
+use Hubleto\App\Community\Orders\Models\Order;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Payment extends \Hubleto\Erp\Model
 {
@@ -21,6 +23,8 @@ class Payment extends \Hubleto\Erp\Model
   public array $relations = [
     'ORDER' => [ self::BELONGS_TO, Order::class, "id_order" ],
     'INVOICE_ITEM' => [ self::BELONGS_TO, Item::class, "id_invoice_item" ],
+    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
+    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];
 
   /**
@@ -41,6 +45,8 @@ class Payment extends \Hubleto\Erp\Model
       'vat' => new Decimal($this, $this->translate('VAT'))->setUnit('%'),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), Item::class))->setDefaultVisible(),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
     ]);
   }
 

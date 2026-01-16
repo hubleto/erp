@@ -263,7 +263,7 @@
             {% set hasActivatedApp = false %}
             {% for app in viewParams.appsInSidebar %}
               {% if sidebarGroup in app.manifest.sidebarGroup|split(',') %}
-                {% set appBtns = appBtns|merge([_self.appBtn(app, true, app.getSidebarBadgeNumber())]) %}
+                {% set appBtns = appBtns|merge([_self.appBtn(app, true, viewParams.sidebarBadgeNumbers[app.manifest.namespace])]) %}
                 {% if app.isActivated %}
                   {% set hasActivatedApp = true %}
                 {% endif %}

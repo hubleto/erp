@@ -57,7 +57,17 @@ class Desktop extends \Hubleto\Erp\Controller
       }
     }
 
+    $sidebarBadgeNumbers = [];
+    foreach ($appsInSidebar as $appNamespace => $app) {
+      try {
+        $sidebarBadgeNumbers[$appNamespace] = $app->getSidebarBadgeNumber();
+      } catch (\Throwable $e) {
+        //
+      }
+    }
+
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
+    $this->viewParams['sidebarBadgeNumbers'] = $sidebarBadgeNumbers;
     $this->viewParams['activatedApp'] = $activatedApp;
     $this->viewParams['activatedSidebarGroup'] = $activatedSidebarGroup;
     $this->viewParams['activatedSidebarGroupUrlSlug'] = $activatedSidebarGroupUrlSlug;

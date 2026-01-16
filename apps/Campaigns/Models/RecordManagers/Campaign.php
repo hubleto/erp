@@ -17,15 +17,15 @@ class Campaign extends \Hubleto\Erp\RecordManager
   public $table = 'campaigns';
 
   /** @return BelongsTo<User, covariant Lead> */
-  public function MANAGER(): BelongsTo
-  {
-    return $this->belongsTo(User::class, 'id_manager', 'id');
-  }
-
-  /** @return BelongsTo<User, covariant Lead> */
   public function OWNER(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_owner', 'id');
+  }
+
+  /** @return BelongsTo<User, covariant Lead> */
+  public function MANAGER(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_manager', 'id');
   }
 
   /** @return BelongsTo<User, covariant Lead> */

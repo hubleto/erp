@@ -479,7 +479,12 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("  -> Creating base tables.\n");
     $installer->installBaseModels();
 
-    $this->terminal()->cyan("  -> Installing " . count($installer->appsToInstall) . " apps (" . join(', ', array_keys($installer->appsToInstall)) . ").\n");
+    $this->terminal()->cyan(
+      "  -> Installing "
+      . count($installer->appsToInstall) . " apps ("
+      . join(', ', array_map(function ($item) { return str_replace('\Loader', '', str_replace('Hubleto\App\\', '', $item)); }, array_keys($installer->appsToInstall)))
+      . ").\n"
+    );
 
     $this->terminal()->cyan("    -> Round #1.\n");
     $installer->installApps(1);
@@ -507,7 +512,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->appManager()->init();
 
     $this->terminal()->cyan("  -> Applying default configuration: {$defaultConfiguration}\n");
-    $installer->applyDefaultConfiguration($defaultConfiguration);
+    $installer->applyDefaultConfiguration((string) $defaultConfiguration);
 
     if ($generateDemoData) {
       $this->terminal()->cyan("  -> Generating demo data.\n");

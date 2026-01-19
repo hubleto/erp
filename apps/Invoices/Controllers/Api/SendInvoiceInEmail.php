@@ -11,6 +11,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): array
   {
     $prepare = $this->router()->urlParamAsBool('prepare');
+    $emailType = $this->router()->urlParamAsString('emailType');
     $idInvoice = $this->router()->urlParamAsInteger('idInvoice');
 
     /** @var Invoice */
@@ -45,8 +46,20 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
     ;
 
     if ($prepare) {
-      $subject = $invoice->PROFILE->mail_send_invoice_subject ?? '';
-      $bodyHtml = $invoice->PROFILE->mail_send_invoice_body ?? '';
+      $subject = '';
+      $bodyHtml = '';
+
+      switch ($emailType) {
+        case 'send-invoice':
+          $subject = $invoice->PROFILE->mail_send_invoice_subject ?? '';
+          $bodyHtml = $invoice->PROFILE->mail_send_invoice_body ?? '';
+        break;
+        case 'notify-due-invoice':
+          $subject = $invoice->PROFILE->mail_send_due_warning_subject ?? '';
+          $bodyHtml = $invoice->PROFILE->mail_send_due_warning_body ?? '';
+        break;
+      }
+
       $cc = $invoice->PROFILE->mail_send_invoice_cc ?? '';
       $bcc = $invoice->PROFILE->mail_send_invoice_bcc ?? '';
 

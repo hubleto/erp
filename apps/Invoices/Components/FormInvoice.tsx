@@ -14,6 +14,7 @@ interface FormInvoiceProps extends FormExtendedProps {
 
 interface FormInvoiceState extends FormExtendedState {
   linkPreparedItem: boolean;
+  sendInvoiceEmailType?: any,
   sendInvoicePreparedData?: any,
   sendInvoiceResult?: any,
   htmlPreview?: any,
@@ -57,6 +58,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
       ...super.getStateFromProps(props),
       tabs: tabs,
       linkPreparedItem: false,
+      sendInvoiceEmailType: 'send-invoice',
     };
   }
 
@@ -100,26 +102,15 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'preview':
-        this.updatePreview(this.state.record.id_template);
+        this.updateInvoicePreview(this.state.record.id_template);
       break;
       case 'send':
-        this.setState({sendInvoicePreparedData: null, sendInvoiceResult: null});
-        request.post(
-          'invoices/api/send-invoice-in-email',
-          {
-            idInvoice: this.state.record.id,
-            prepare: true
-          },
-          {},
-          (result: any) => {
-            this.setState({sendInvoicePreparedData: result})
-          }
-        );
+        this.updateEmailPreview();
       break;
     }
   }
 
-  updatePreview(idTemplate: number) {
+  updateInvoicePreview(idTemplate: number) {
     request.post(
       'invoices/api/get-preview-html',
       {
@@ -133,7 +124,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     );
   }
 
-  showPreviewVars() {
+  showInvoicePreviewVars() {
     request.post(
       'invoices/api/get-preview-vars',
       {
@@ -143,6 +134,22 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
       {},
       (vars: any) => {
         this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
+      }
+    );
+  }
+
+  updateEmailPreview() {
+    this.setState({sendInvoicePreparedData: null, sendInvoiceResult: null});
+    request.post(
+      'invoices/api/send-invoice-in-email',
+      {
+        idInvoice: this.state.record.id,
+        emailType: this.state.sendInvoiceEmailType,
+        prepare: true
+      },
+      {},
+      (result: any) => {
+        this.setState({sendInvoicePreparedData: result})
       }
     );
   }
@@ -195,7 +202,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
             <div className='flex gap-2 mt-2'>
               <div className='gap-2 w-56'>
                 <div className='p-2 grow'>
-                  {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-4xl'})}
+                  {this.inputWrapper('number', {wrapperCssClass: 'block', cssClass: 'text-xl'})}
                 </div>
                 <div className='p-2 grow text-nowrap bg-slate-50 text-slate-800'>
                   <div className='text-sm'>
@@ -503,7 +510,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
               {this.inputWrapper('id_template', {
                 uiStyle: 'buttons-vertical',
                 onChange: (input: any) => {
-                  this.updatePreview(input.state.value);
+                  this.updateInvoicePreview(input.state.value);
                 }
               })}
             </div>
@@ -574,7 +581,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                 <a
                   href='#'
                   onClick={() => {
-                    this.showPreviewVars();
+                    this.showInvoicePreviewVars();
                   }}
                 >{this.translate('Show variables which can be used in template')}</a>
               </div>
@@ -608,110 +615,137 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
 
       case 'send':
         if (!R.pdf) return <div className='alert alert-danger'>PDF version of the invoice was not generated yet. Cannot send.</div>;
-        if (!this.state.sendInvoicePreparedData) return <div className='alert'>Preparing email...</div>;
         if (this.state.sendInvoiceResult) return <div className='alert alert-success'>{JSON.stringify(this.state.sendInvoiceResult)}</div>;
         return <>
-
-          <table className='table-default dense'><tbody>
-            <tr>
-              <td>Subject:</td>
-              <td>
-                <input
-                  className='w-full'
-                  value={this.state.sendInvoicePreparedData.subject ?? ''}
-                  onChange={(e: any) => {
-                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, subject: e.currentTarget.value}});
+          <div className='btn-group'>
+            <button
+              className={'btn ' + (this.state.sendInvoiceEmailType == 'send-invoice' ? 'btn-primary': 'btn-transparent')}
+              onClick={() => {
+                this.setState({sendInvoiceEmailType: 'send-invoice'}, () => {
+                  this.updateEmailPreview();
+                });
+              }}
+            >
+              <span className='text'>Send invoice</span>
+            </button>
+            <button
+              className={'btn ' + (this.state.sendInvoiceEmailType == 'notify-due-invoice' ? 'btn-primary': 'btn-transparent')}
+              onClick={() => {
+                this.setState({sendInvoiceEmailType: 'notify-due-invoice'}, () => {
+                  this.updateEmailPreview();
+                });
+              }}
+            >
+              <span className='text'>Send notification on due invoice</span>
+            </button>
+          </div>
+          <div className='mt-2'>
+            {!this.state.sendInvoicePreparedData
+              ? <div className='alert alert-warning'>Preparing email...</div>
+              : <>
+                <table className='table-default dense'><tbody>
+                  <tr>
+                    <td>Subject:</td>
+                    <td>
+                      <input
+                        className='w-full'
+                        value={this.state.sendInvoicePreparedData.subject ?? ''}
+                        onChange={(e: any) => {
+                          this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, subject: e.currentTarget.value}});
+                        }}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>From:</td>
+                    <td>{this.state.sendInvoicePreparedData.senderAccount?.name ?? <div className='text-red-800'>Not configured</div>}</td>
+                  </tr>
+                  <tr>
+                    <td>To:</td>
+                    <td>
+                      <input
+                        className='w-full'
+                        value={this.state.sendInvoicePreparedData.to ?? ''}
+                        onChange={(e: any) => {
+                          this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, to: e.currentTarget.value}});
+                        }}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>CC:</td>
+                    <td>
+                      <input
+                        className='w-full'
+                        value={this.state.sendInvoicePreparedData.cc ?? ''}
+                        onChange={(e: any) => {
+                          this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, cc: e.currentTarget.value}});
+                        }}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>BCC:</td>
+                    <td>
+                      <input
+                        className='w-full'
+                        value={this.state.sendInvoicePreparedData.bcc ?? ''}
+                        onChange={(e: any) => {
+                          this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bcc: e.currentTarget.value}});
+                        }}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Email:</td>
+                    <td>
+                      <TextareaWithHtmlPreview
+                        value={this.state.sendInvoicePreparedData.bodyHtml ?? ''}
+                        onChange={(input: any) => {
+                          this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bodyHtml: input.state.value}});
+                        }}
+                      ></TextareaWithHtmlPreview>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Attachments:</td>
+                    <td>
+                      {this.state.sendInvoicePreparedData.attachments ? this.state.sendInvoicePreparedData.attachments.map((att, index) => {
+                        return <a
+                          className='badge badge-info'
+                          href={globalThis.hubleto.config.uploadUrl + "/" + att.file}
+                          target="_blank"
+                        >{att.name}</a>
+                      }) : null}
+                    </td>
+                  </tr>
+                </tbody></table>
+                <button className='btn btn-add-outline mt-2'
+                  onClick={() => {
+                    request.post(
+                      'invoices/api/send-invoice-in-email',
+                      {
+                        idInvoice: this.state.record.id,
+                        idSenderAccount: this.state.sendInvoicePreparedData.senderAccount.id,
+                        subject: this.state.sendInvoicePreparedData.subject,
+                        bodyHtml: this.state.sendInvoicePreparedData.bodyHtml,
+                        to: this.state.sendInvoicePreparedData.to,
+                        cc: this.state.sendInvoicePreparedData.cc,
+                        bcc: this.state.sendInvoicePreparedData.bcc,
+                        ATTACHMENTS: this.state.sendInvoicePreparedData.ATTACHMENTS,
+                      },
+                      {},
+                      (result: any) => {
+                        this.setState({sendInvoiceResult: result})
+                      }
+                    );
                   }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>From:</td>
-              <td>{this.state.sendInvoicePreparedData.senderAccount?.name ?? <div className='text-red-800'>Not configured</div>}</td>
-            </tr>
-            <tr>
-              <td>To:</td>
-              <td>
-                <input
-                  className='w-full'
-                  value={this.state.sendInvoicePreparedData.to ?? ''}
-                  onChange={(e: any) => {
-                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, to: e.currentTarget.value}});
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>CC:</td>
-              <td>
-                <input
-                  className='w-full'
-                  value={this.state.sendInvoicePreparedData.cc ?? ''}
-                  onChange={(e: any) => {
-                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, cc: e.currentTarget.value}});
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>BCC:</td>
-              <td>
-                <input
-                  className='w-full'
-                  value={this.state.sendInvoicePreparedData.bcc ?? ''}
-                  onChange={(e: any) => {
-                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bcc: e.currentTarget.value}});
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Email:</td>
-              <td>
-                <TextareaWithHtmlPreview
-                  value={this.state.sendInvoicePreparedData.bodyHtml ?? ''}
-                  onChange={(input: any) => {
-                    this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bodyHtml: input.state.value}});
-                  }}
-                ></TextareaWithHtmlPreview>
-              </td>
-            </tr>
-            <tr>
-              <td>Attachments:</td>
-              <td>
-                {this.state.sendInvoicePreparedData.attachments ? this.state.sendInvoicePreparedData.attachments.map((att, index) => {
-                  return <a
-                    className='badge badge-info'
-                    href={globalThis.hubleto.config.uploadUrl + "/" + att.file}
-                    target="_blank"
-                  >{att.name}</a>
-                }) : null}
-              </td>
-            </tr>
-          </tbody></table>
-          <button className='btn btn-add-outline mt-2'
-            onClick={() => {
-              request.post(
-                'invoices/api/send-invoice-in-email',
-                {
-                  idInvoice: this.state.record.id,
-                  idSenderAccount: this.state.sendInvoicePreparedData.senderAccount.id,
-                  subject: this.state.sendInvoicePreparedData.subject,
-                  bodyHtml: this.state.sendInvoicePreparedData.bodyHtml,
-                  to: this.state.sendInvoicePreparedData.to,
-                  cc: this.state.sendInvoicePreparedData.cc,
-                  bcc: this.state.sendInvoicePreparedData.bcc,
-                  ATTACHMENTS: this.state.sendInvoicePreparedData.ATTACHMENTS,
-                },
-                {},
-                (result: any) => {
-                  this.setState({sendInvoiceResult: result})
-                }
-              );
-            }}
-          >
-            <span className='text'>Send invoice</span>
-          </button>
+                >
+                  <span className='text'>Send invoice</span>
+                </button>
+              </>
+            }
+          </div>
         </>;
       break;
 

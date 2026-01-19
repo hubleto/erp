@@ -62,6 +62,35 @@ class Loader extends \Hubleto\Framework\App
     }
   }
 
+  public function generateDemoData(): void
+  {
+    /** @var Models\PaymentMethod */
+    $mPaymentMethod = $this->getModel(Models\PaymentMethod::class);
+
+    /** @var Models\Profile */
+    $mProfile = $this->getModel(Models\Profile::class);
+
+    $idPaymentMethod = $mPaymentMethod->record->recordCreate(['name' => 'bank transfer'])['id'];
+
+    $mProfile->record->recordCreate([
+      'name' => 'Test Profile 1',
+      'numbering_pattern' => 'T/YYYYNNNN',
+      'is_default' => true,
+      'id_payment_method' => $idPaymentMethod,
+      'invoice_type_prefixes' => json_encode([
+          Models\Invoice::TYPES[Models\Invoice::TYPE_PROFORMA] => 'PRO',
+          Models\Invoice::TYPES[Models\Invoice::TYPE_ADVANCE] => 'ADV',
+          Models\Invoice::TYPES[Models\Invoice::TYPE_STANDARD] => 'INV',
+          Models\Invoice::TYPES[Models\Invoice::TYPE_CREDIT_NOTE] => 'CRD',
+          Models\Invoice::TYPES[Models\Invoice::TYPE_DEBIT_NOTE] => 'DBT',
+    ]),
+      'mail_send_invoice_subject' => 'Invoice nr. {{ number }}',
+      'mail_send_invoice_body' => 'Dear customer, see attached invoice nr. {{ number }}.',
+      'mail_send_due_warning_subject' => 'Notification on due invoice nr. {{ number }}',
+      'mail_send_due_warning_body' => 'Dear customer, this is a kindly reminder on due invoice nr. {{ number }}.',
+    ]);
+  }
+
   /**
    * [Description for getSidebarBadgeNumber]
    *

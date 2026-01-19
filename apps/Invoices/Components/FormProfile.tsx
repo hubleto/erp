@@ -72,6 +72,7 @@ export default class FormProfile extends FormExtended<FormProfileProps, FormProf
               {this.inputWrapper('id_payment_method')}
               {this.inputWrapper('due_days')}
               {this.inputWrapper('numbering_pattern')}
+              {this.inputWrapper('invoice_type_prefixes')}
             </div>
           </div>
         </>;

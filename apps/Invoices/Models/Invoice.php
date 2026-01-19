@@ -362,8 +362,12 @@ class Invoice extends \Hubleto\Erp\Model {
       $maxNumber = max($maxNumber, (int) substr($invoice->number, $nPositionStart, $nPositionEnd));
     }
 
+    $invoiceTypePrefixes = @json_decode($profile['invoice_type_prefixes'], true);
+    $recordTypeAsString = self::TYPES[$record['type']] ?? '';
+
     // Calculate number of the new invoice
     $record['number'] = $numberingPattern;
+    $record['number'] = str_replace('T', $invoiceTypePrefixes[$recordTypeAsString] ?? '', $record['number']);
     $record['number'] = str_replace('YYYY', date('Y'), $record['number']);
     $record['number'] = str_replace('YY', date('y'), $record['number']);
     $record['number'] = str_replace('MM', date('m'), $record['number']);

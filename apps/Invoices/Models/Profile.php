@@ -12,6 +12,7 @@ use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Image;
+use Hubleto\Framework\Db\Column\Json;
 
 class Profile extends \Hubleto\Erp\Model
 {
@@ -40,16 +41,17 @@ class Profile extends \Hubleto\Erp\Model
       'headline' => (new Varchar($this, $this->translate('Headline')))->setDefaultVisible(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setDefaultVisible(),
       'numbering_pattern' => (new Varchar($this, $this->translate('Numbering pattern')))
-        ->setDescription($this->translate('YYYY - 4-digit year, YY - 2-digit year, MM - 2-digit month, DD - 2-digit day, N(repeated) - incremental invoice number'))
+        ->setDescription($this->translate('T - invoice type, YYYY - 4-digit year, YY - 2-digit year, MM - 2-digit month, DD - 2-digit day, N(repeated) - incremental invoice number'))
         ->setPredefinedValues([
-          'YYYYNNNN',
-          'YYNNNNNN',
-          'YYMMDDNNNN',
-          'YYYY/NNNN',
-          '11-YYYY-NN',
+          'T/YYYYNNNN',
+          'TYYNNNNNN',
+          'T-YYMMDD-NNNN',
+          'T/YYYY/NNNN',
+          'T11-YYYY-NN',
         ])
         ->setDefaultVisible()
       ,
+      'invoice_type_prefixes' => (new Json($this, $this->translate('Invoice type prefixes')))->setReactComponent('InputJsonKeyValue'),
       'iban' => (new Varchar($this, $this->translate('Bank account number (IBAN)')))->setDefaultVisible(),
       'swift' => (new Varchar($this, $this->translate('Bank (SWIFT/BIC)')))->setDefaultVisible(),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setDefaultVisible(),

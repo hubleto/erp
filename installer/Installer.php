@@ -223,7 +223,7 @@ class Installer extends \Hubleto\Framework\Core
         $this->appManager()->getCommunityApp('Issues')->saveConfig('sidebarOrder', '0');
         $this->appManager()->getCommunityApp('Cashdesk')->saveConfig('sidebarOrder', '0');
 
-        $this->config()->save('secondLogoUrl', $this->config()->getAsString('assetsUrl') . "/images/logo-tribunal_horizontal.png");
+        $this->config()->save('secondLogoUrl', $this->config()->getAsString('assetsUrl') . "/images/logo-tribunal_znak.png");
         $this->config()->save('uiTheme', 'softvertribunal');
       break;
     }

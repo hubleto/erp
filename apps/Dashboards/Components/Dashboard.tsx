@@ -260,6 +260,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
           uid='add_new_panel_modal'
           isOpen={true}
           type='right'
+          onClose={() => { this.setState({showIdPanel: 0}); }}
         >
           <FormPanel
             modal={this.refPanelModal}

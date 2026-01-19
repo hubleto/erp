@@ -63,11 +63,16 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       $cc = $invoice->PROFILE->mail_send_invoice_cc ?? '';
       $bcc = $invoice->PROFILE->mail_send_invoice_bcc ?? '';
 
+      $twigVars = $invoice->toArray();
+      $twigVars['HUBLETO'] = [
+        'locale' => $this->locale(),
+      ];
+
       $twigTemplate = $this->renderer()->getTwig()->createTemplate($subject);
-      $subject = $twigTemplate->render($invoice->toArray());
+      $subject = $twigTemplate->render($twigVars);
 
       $twigTemplate = $this->renderer()->getTwig()->createTemplate($bodyHtml);
-      $bodyHtml = $twigTemplate->render($invoice->toArray());
+      $bodyHtml = $twigTemplate->render($twigVars);
 
       $recipients = [];
       if ($invoice->CUSTOMER->CONTACTS) {

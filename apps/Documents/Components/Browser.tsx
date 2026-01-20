@@ -129,7 +129,10 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
               }
             }}
           >
-            <span className="text">{item.name} {isLast ? <i className='fa fa-chevron-down'></i> : <></>}</span>
+            <span className="text flex items-center gap-1">
+              <span className="truncate max-w-[150px]">{item.name}</span>
+              {isLast ? <i className='fa fa-chevron-down'></i> : <></>}
+            </span>
           </button>;
         })}
         <button
@@ -153,19 +156,19 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             }}
           >
             <span className="icon"><i className="fas fa-folder"></i></span>
-            <span className="text">{item.name ?? ''}</span>
+            <div className="text line-clamp-2 w-full break-words">{item.name ?? ''}</div>
           </button>
         }) : null}
         {this.state.folderContent.documents ? this.state.folderContent.documents.map((item, index) => {
           return <button
             key={index}
-            className="btn btn-square btn-primary-outline"
+            className="btn btn-square btn-primary-outline w-32"
             onClick={() => {
               this.setState({ recordId: item.id });
             }}
           >
             <span className="icon"><i className="fas fa-file"></i></span>
-            <span className="text">{item.name ?? ''}</span>
+            <div className="text line-clamp-2 w-full break-words">{item.name ?? ''}</div>
           </button>
         }) : null}
         <button

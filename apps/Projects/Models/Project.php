@@ -40,8 +40,6 @@ class Project extends \Hubleto\Erp\Model
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
     'PHASE' => [ self::HAS_ONE, Phase::class, 'id_phase', 'id' ],
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
 
     'ORDERS' => [ self::HAS_MANY, ProjectOrder::class, 'id_order', 'id'],
     'TASKS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id'],
@@ -71,6 +69,7 @@ class Project extends \Hubleto\Erp\Model
       'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
+      'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),

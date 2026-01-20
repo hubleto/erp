@@ -175,9 +175,12 @@ class Loader extends \Hubleto\Framework\App
     
     foreach ($expressions as $e) {
       $qInvoices = $qInvoices->having(function($q) use ($e) {
+        $e = (string) $e;
         $eAsInt = preg_replace('/[^0-9]/', '', $e);
         $q->orHaving('invoices.number', 'like', '%' . $e . '%');
-        $q->orHaving('invoices.vs', 'like', '%' . $eAsInt . '%');
+        if (strlen($eAsInt) > 3) {
+          $q->orHaving('invoices.vs', 'like', '%' . $eAsInt . '%');
+        }
       });
     }
 

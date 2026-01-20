@@ -13,7 +13,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     $model = $this->router()->urlParamAsString('model');
     $this->model = $this->getModel($model);
 
-    $records = $this->model->loadTableData(
+    $records = $this->model->record->loadTableData(
       $this->router()->urlParamAsString('fulltextSearch'),
       $this->router()->urlParamAsArray('columnSearch'),
       $this->router()->urlParamAsArray('orderBy'),

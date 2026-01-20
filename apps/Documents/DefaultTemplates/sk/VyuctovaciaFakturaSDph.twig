@@ -187,7 +187,7 @@
     <tbody>
       <tr>
         <td style="width:50%">
-          <div style="padding-top:10mm;padding-left:5mm">
+          <div style="padding-top:5mm;padding-left:5mm">
             {% if PROFILE.stamp_and_signature %}
               <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:180px;max-height:180px;"><br/>
               <br/>
@@ -196,7 +196,7 @@
         </td>
         <td style="width:50%">
           <!-- SUMAR -->
-          <div style="padding-top:10mm;">
+          <div style="padding-top:5mm;">
             <div class="content">
               <div class="sumar">
                 <table>
@@ -241,8 +241,7 @@
   </table>
   <br/>
   <br/>
-  Faktúru vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.<br/>
-  <br/>
-  Vygenerované v ERP Hubleto.<br/>
+  Vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.
+  Vygenerované v ERP Hubleto.
   https://www.hubleto.com<br/>
 </body>

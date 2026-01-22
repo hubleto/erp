@@ -117,7 +117,10 @@ export default class TableInvoices extends TableExtended<TableInvoicesProps, Tab
     if (columnName == "date_sent" && !data['date_sent']) {
       return <div className='badge badge-danger'>{this.translate('Not sent')}</div>;
     } else if (columnName == "date_payment" && !data['date_payment']) {
-      return <div className='badge badge-danger'>{this.translate('Not paid')}</div>;
+      const now = moment();
+      const dateDue = moment(data['date_due']);
+      const badgeColor = (now > dateDue ? 'danger' : 'warning');
+      return <div className={'badge badge-' + badgeColor}>{this.translate('Not paid')}</div>;
     } else if (columnName == "virt_items") {
       try {
         let items = JSON.parse(data['virt_items']);

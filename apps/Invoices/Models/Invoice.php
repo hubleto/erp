@@ -293,7 +293,11 @@ class Invoice extends \Hubleto\Erp\Model {
       "total_payments" => $totalPayments,
     ];
 
-    if ($totalPayments >= $totalInclVat) {
+    if (
+      $totalInclVat > 0
+      && $totalPayments >= $totalInclVat
+      && count($payments) > 0
+    ) {
       $dataToUpdate['date_payment'] = date("Y-m-d", $lastPaymentTs);
     }
 

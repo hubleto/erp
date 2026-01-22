@@ -33,12 +33,28 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
     var calendarConfigs = this.props.calendarConfigs;
     return (
       <>
-        <div className='modal-header'>
-          <div className="modal-header-left"></div>
-          <div className="modal-header-title">{this.translate("New event")}</div>
+        <div className='modal-header active'>
+          <div className="modal-header-left">
+            <button className="btn btn-add" onClick={() => this.props.onCallback()}>
+              <span className="icon">
+                <i className="fas fa-save"></i>
+              </span>
+              <span className="text">Save</span>
+            </button>
+          </div>
+          <div className="modal-header-title">
+            <h2>{this.translate("New event")}</h2>
+          </div>
           <div className="modal-header-right">
-            <button className="btn btn-close" onClick={() => this.props.onCallback()}>
-              <span className="text !py-2">&times;</span>
+            <button
+              className="btn btn-close"
+              type="button"
+              aria-label="Close"
+              onClick={() => this.props.onCallback()}>
+              <span className="icon">
+                <i className="fas fa-xmark"></i>
+                <span className="shortcut">Esc</span>
+              </span>
             </button>
           </div>
         </div>
@@ -48,7 +64,7 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
           {this.props.clickConfig?.time}
         </div>
         <div className="badge badge-info m-4 px-4 text-xl">
-          {this.translate("Choose calendar to which the event should be created.")}
+            {this.translate("Choose the calendar where you want to create the event.")}
         </div>
         <div className='flex gap-2 flex-col px-4 mt-4'>
           {Object.keys(this.props.calendarConfigs).map((item, index) => {
@@ -77,7 +93,7 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
                         },
                         id: -1,
                         modal: this.refActivityModal,
-                        onClose:() => {this.setState({formSelected: null}), this.props.onCallback()},
+                        onClose:() => {this.setState({formSelected: null})},
                         onSaveCallback:() => {this.setState({formSelected: null}), this.props.onCallback()},
                       })
                     });
@@ -97,6 +113,7 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
             uid='activity_form'
             isOpen={true}
             type='inside-parent'
+            onClose={() => this.setState({formSelected: null})}
           >
             {this.state.formSelected}
           </ModalForm>

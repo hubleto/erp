@@ -101,6 +101,7 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
           uid={this.props.uid + "_add_activity_modal"}
           isOpen={true}
           type='centered small theme-secondary'
+          onClose={() => this.setState({addActivityForIdTask: 0})}
         >
           <FormActivity
             id={-1}

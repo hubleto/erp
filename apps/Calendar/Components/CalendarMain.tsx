@@ -237,6 +237,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           uid='activity_new_form'
           isOpen={true}
           type='right'
+          onClose={() => this.setState({newActivity: false})}
         >
           <FormActivitySelector
             onCallback={() => this.setState({newActivity: false})}

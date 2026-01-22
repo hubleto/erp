@@ -49,8 +49,9 @@ class Document extends \Hubleto\Erp\Model
   {
     if ($originalRecord["file"] != $savedRecord["file"]) {
       $localFilename = ltrim((string) $originalRecord["file"], "./");
-      if (file_exists($this->config()->getAsString('uploadFolder') . "/" . $localFilename)) {
-        unlink($this->config()->getAsString('uploadFolder') . "/" . $localFilename);
+      $fullPath = $this->config()->getAsString('uploadFolder') . "/" . $localFilename;
+      if (!is_dir($fullPath) && file_exists($fullPath)) {
+        unlink($fullPath);
       }
     }
 
@@ -62,8 +63,9 @@ class Document extends \Hubleto\Erp\Model
     $document = (array) $this->record->find($id)->toArray();
 
     $localFilename = ltrim((string) $document["file"], "./");
-    if (file_exists($this->config()->getAsString('uploadFolder') . "/" . $localFilename)) {
-      unlink($this->config()->getAsString('uploadFolder') . "/" . $localFilename);
+    $fullPath = $this->config()->getAsString('uploadFolder') . "/" . $localFilename;
+    if (!is_dir($fullPath) && file_exists($fullPath)) {
+      unlink($fullPath);
     }
 
     return $id;

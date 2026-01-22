@@ -24,9 +24,10 @@ class Dashboard extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultVisible(),
+      'id_owner' => (new Lookup($this, $this->translate("Owner"), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultVisible()
+        ->setDefaultValue($this->authProvider()->getUserId()),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setDefaultVisible(),
+      'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setDefaultVisible()->setReadonly(),
       'color' => (new Color($this, $this->translate('Color')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible()
         ->setDescription($this->translate("By turning this on you will change the dashboard shown on the Homepage"))
@@ -47,7 +48,7 @@ class Dashboard extends \Hubleto\Erp\Model
 
   public function onBeforeCreate(array $record): array
   {
-    if ((int) $record["is_default"] == 1) {
+    if (isset($record["is_default"]) && (int) $record["is_default"] == 1) {
       $this->record->where("id_owner", $record["id_owner"])->update(["is_default" => 0]);
     }
     return parent::onBeforeCreate($record);
@@ -55,7 +56,7 @@ class Dashboard extends \Hubleto\Erp\Model
 
   public function onBeforeUpdate(array $record): array
   {
-    if ((int) $record["is_default"] == 1) {
+    if (isset($record["is_default"]) && (int) $record["is_default"] == 1) {
       $this->record->where("id_owner", $record["id_owner"])->update(["is_default" => 0]);
     }
     return parent::onBeforeUpdate($record);

@@ -8,7 +8,7 @@ class DashboardsManage extends \Hubleto\Erp\Controller
   {
     return array_merge(parent::getBreadcrumbs(), [
       // [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
-      // [ 'url' => 'dashboards/manage', 'content' => $this->translate('Dashboards') ],
+      [ 'url' => 'dashboards/manage', 'content' => $this->translate('Manage') ],
     ]);
   }
 

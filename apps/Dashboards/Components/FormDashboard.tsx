@@ -55,7 +55,7 @@ export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps
         <a
           className='btn btn-add px-2'
           target='_blank'
-          href={globalThis.hubleto.config.projectUrl+"/dashboards/manage/"+this.state.record.slug}
+          href={globalThis.hubleto.config.projectUrl+"/dashboards/"+this.state.record.slug}
         >
           {this.translate("Preview")}
         </a>
@@ -79,9 +79,9 @@ export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps
         <div className='card-body'>
           {this.inputWrapper("id_owner")}
           {this.inputWrapper("title", {onChange: () => {this.updateRecord({slug: this.slugify(this.state.record.title)})}})}
-          {this.inputWrapper("slug")}
           {this.inputWrapper("color")}
           {this.inputWrapper("is_default")}
+          {this.inputWrapper("slug")}
         </div>
       </div>
       {this.divider(this.translate('Panels'))}

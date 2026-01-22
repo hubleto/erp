@@ -280,17 +280,25 @@ class Invoice extends \Hubleto\Erp\Model {
     // payments
     $mPayment = $this->getService(Payment::class);
     $payments = $mPayment->record->where('id_invoice', $idInvoice)->get();
+    $lastPaymentTs = 0;
 
     foreach ($payments as $payment) {
       $totalPayments += $payment->amount;
+      $lastPaymentTs = max($lastPaymentTs, strtotime($payment->date_payment));
     }
 
-    // update
-    $invoice->update([
+    $dataToUpdate = [
       "total_excl_vat" => $totalExclVat,
       "total_incl_vat" => $totalInclVat,
       "total_payments" => $totalPayments,
-    ]);
+    ];
+
+    if ($totalPayments >= $totalInclVat) {
+      $dataToUpdate['date_payment'] = date("Y-m-d", $lastPaymentTs);
+    }
+
+    // update
+    $invoice->update($dataToUpdate);
   }
 
   /**

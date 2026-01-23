@@ -14,8 +14,8 @@ class Activities extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
 
-    // Uncomment this if you want your controller be hookable
-    $this->hookManager()->run('controller:prepare-view-start', [$this]);
+    // Uncomment this to fire an event
+    $this->eventManager()->fire('onControllerBeforePrepareView', [$this]);
 
     parent::prepareView();
 
@@ -25,8 +25,8 @@ class Activities extends \Hubleto\Erp\Controller
 
     $this->setView('@Hubleto:App:Community:Worksheets/Activities.twig');
 
-    // Uncomment this if you want your controller be hookable
-    $this->hookManager()->run('controller:prepare-view-end', [$this]);
+    // Uncomment this to fire an event
+    $this->eventManager()->fire('onControllerAfterPrepareView', [$this]);
   }
 
 }

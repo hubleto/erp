@@ -8,7 +8,7 @@ class Loader extends \Hubleto\Framework\App
 {
 
   /**
-   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
    * 
@@ -42,6 +42,16 @@ class Loader extends \Hubleto\Framework\App
       $this,
       $this->translate('Items with not updated step'),
       'workflow/boards/items-with-not-updated-step'
+    );
+
+    $this->eventManager()->addEventListener(
+      'onModelAfterUpdate',
+      $this->getService(EventListeners\SaveWorkflowHistory::class)
+    );
+
+    $this->eventManager()->addEventListener(
+      'onModelAfterUpdate',
+      $this->getService(EventListeners\WorkflowAutomat::class)
     );
   }
 

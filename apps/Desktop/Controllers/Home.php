@@ -8,7 +8,7 @@ class Home extends \Hubleto\Erp\Controller
   public bool $permittedForAllUsers = true;
 
   /**
-   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
    * 

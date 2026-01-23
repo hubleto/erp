@@ -19,7 +19,7 @@
         "psr-4": {
             "Hubleto\\Erp\\": "src",
             "Hubleto\\Erp\\Cli\\": "cli",
-            "Hubleto\\Erp\\Hook\\": "hooks",
+            "Hubleto\\Erp\\EventListener\\": "event-listeners",
             "Hubleto\\Erp\\Cron\\": "crons",
             "Hubleto\\Erp\\Report\\": "reports",
             "Hubleto\\Erp\\Installer\\": "installer",

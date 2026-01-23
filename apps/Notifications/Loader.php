@@ -2,13 +2,11 @@
 
 namespace Hubleto\App\Community\Notifications;
 
-
-
 class Loader extends \Hubleto\Framework\App
 {
 
   /**
-   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
    * 
@@ -27,6 +25,11 @@ class Loader extends \Hubleto\Framework\App
     ]);
 
     $this->cronManager()->addCron(Crons\DailyDigest::class);
+
+    $this->eventManager()->addEventListener(
+      'onModelAfterUpdate',
+      $this->getService(EventListeners\NotifyUpdatedRecord::class)
+    );
   }
 
   /**

@@ -6,7 +6,7 @@ class Loader extends \Hubleto\Framework\App
 {
 
   /**
-   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
    * 
@@ -131,7 +131,7 @@ class Loader extends \Hubleto\Framework\App
           <span class="text">' . $this->translate('Invoices') . '</span>
         </a>
 
-        ' . ($dueInvoicesCount > 0 ? '<div class="badge badge-danger text-xs">Due: ' . $dueInvoicesCount . '</div>' : '') . '
+        ' . ($dueInvoicesCount > 0 ? '<div class="badge badge-danger text-xs">Due and not paid: ' . $dueInvoicesCount . '</div>' : '') . '
         ' . ($unsentInvoicesCount > 0 ? '<div class="badge badge-danger text-xs">Not sent: ' . $unsentInvoicesCount . '</div>' : '') . '
 
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">

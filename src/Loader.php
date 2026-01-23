@@ -41,8 +41,8 @@ class Loader extends \Hubleto\Framework\Loader
       \Hubleto\Framework\Models\Token::class => \Hubleto\App\Community\Auth\Models\Token::class,
     ]);
 
-    // run hook
-    $this->hookManager()->run('core:bootstrap-end', [$this]);
+    // fire an event
+    $this->eventManager()->fire('onCoreAfterBootstrap', [$this]);
 
   }
 
@@ -103,8 +103,8 @@ class Loader extends \Hubleto\Framework\Loader
         '/^api\/search\/?$/' => Api\Search::class,
       ]);
 
-      // run hook
-      $this->hookManager()->run('core:init-end', [$this]);
+      // fire an event
+      $this->eventManager()->fire('onCoreAfterInit', [$this]);
     } catch (\Exception $e) {
       echo "HUBLETO INIT failed: [".get_class($e)."] ".$e->getMessage() . "\n";
       echo $e->getTraceAsString() . "\n";

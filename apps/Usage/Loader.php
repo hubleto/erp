@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Usage;
 
+use Hubleto\Framework\EventListener;
+
 class Loader extends \Hubleto\Framework\App
 {
   public const DEFAULT_INSTALLATION_CONFIG = [
@@ -9,7 +11,7 @@ class Loader extends \Hubleto\Framework\App
   ];
 
   /**
-   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
    * 
@@ -22,6 +24,11 @@ class Loader extends \Hubleto\Framework\App
       '/^usage\/?$/' => Controllers\Home::class,
       '/^usage\/log\/?$/' => Controllers\Log::class,
     ]);
+
+    $this->eventManager()->addEventListener(
+      'onControllerBeforeInit',
+      $this->getService(EventListeners\LogUsage::class)
+    );
   }
 
   public function installTables(int $round): void

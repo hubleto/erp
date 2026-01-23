@@ -61,7 +61,7 @@ class Controller extends \Hubleto\Framework\Controller
    */
   public function init(): void
   {
-    $this->hookManager()->run('controller:init-start', [$this]);
+    $this->eventManager()->fire('onControllerBeforeInit', [$this]);
 
     // Put your controller's initialization code here. See example below.
     // Throw an exception on error.
@@ -82,7 +82,7 @@ class Controller extends \Hubleto\Framework\Controller
       return;
     }
 
-    $this->hookManager()->run('controller:prepare-view-start', [$this]);
+    $this->eventManager()->fire('onControllerBeforePrepareView', [$this]);
 
     $logFolder = $this->config()->getAsString('logFolder');
 
@@ -126,7 +126,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     $this->viewParams['contextHelpUrl'] = $contextHelpUrl;
 
-    $this->hookManager()->run('controller:prepare-view-end', [$this]);
+    $this->eventManager()->fire('onControllerAfterPrepareView', [$this]);
 
   }
 
@@ -139,7 +139,7 @@ class Controller extends \Hubleto\Framework\Controller
       parent::setView('@hubleto-main/AccessForbidden.twig');
     } else {
       parent::setView($view);
-      $this->hookManager()->run('controller:set-view', [$this, $view]);
+      $this->eventManager()->fire('onControllerSetView', [$this, $view]);
     }
   }
 

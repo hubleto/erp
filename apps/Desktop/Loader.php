@@ -26,7 +26,7 @@ class Loader extends \Hubleto\Framework\App
   }
 
   /**
-   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
    * 

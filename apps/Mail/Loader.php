@@ -10,7 +10,7 @@ class Loader extends \Hubleto\Framework\App
   public array $templateVariables = [];
 
   /**
-   * Inits the app: adds routes, settings, calendars, hooks, menu items, ...
+   * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
    * 

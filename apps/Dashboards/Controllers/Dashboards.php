@@ -9,9 +9,13 @@ class Dashboards extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
-    return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'dashboards/manage/' . $dashboardSlug, 'content' => $this->translate('Manage') ],
-    ]);
+    if (!empty($dashboardSlug)) {
+      return array_merge(parent::getBreadcrumbs(), [
+        [ 'url' => 'dashboards/' . $dashboardSlug, 'content' => $this->translate('Manage') ],
+      ]);
+    } else {
+      return array_merge(parent::getBreadcrumbs(), []);
+    }
   }
 
   public function prepareView(): void

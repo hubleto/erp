@@ -292,13 +292,17 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
             uid='edit_dashboard_modal_form'
             id={this.props.idDashboard}
             onClose={() => { this.setState({showIdDashboard: 0}); }}
-            onSaveCallback={() => {
-              this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
-              : window.location.assign(globalThis.hubleto.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
+            onSaveCallback={(form, saveResponse) => {
+              if (saveResponse.status == "success") {
+                this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
+                : window.location.assign(globalThis.hubleto.config.projectUrl+"/dashboards/"+this.refForm.current.state.record.slug)
+              }
             }}
-            onDeleteCallback={() => {
-              this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
-              : window.location.assign(globalThis.hubleto.config.projectUrl+"/dashboards/manage/"+this.refForm.current.state.record.slug)
+            onDeleteCallback={(form, saveResponse) => {
+              if (saveResponse.status == true) {
+                this.props.redirectUrl ? window.location.assign(this.props.redirectUrl)
+                : window.location.assign(globalThis.hubleto.config.projectUrl+"/dashboards")
+              }
             }}
           />
         </ModalForm>

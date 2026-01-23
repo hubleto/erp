@@ -20,7 +20,7 @@ class Panel extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class))
+      'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class, "CASCADE"))
         ->setRequired()->setReadonly()->setDefaultValue($this->router()->urlParamAsInteger('idDashboard')),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),

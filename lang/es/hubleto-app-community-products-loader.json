@@ -1,0 +1,119 @@
+{
+    "manifest": {
+        "Products": "Productos",
+        "Free product portfolio managment.": "Gestión gratuita del portafolio de productos.",
+        "Groups": "Grupos",
+        "Categories": "Categorias"
+    },
+    "root": {
+        "Products": "Productos",
+        "Product Groups": "Grupos de productos",
+        "Suppliers": "Proveedores",
+        "Groups": "Grupos"
+    },
+    "Controllers\\Products": {
+        "Products": "Productos"
+    },
+    "Models\\Product": {
+        "Title": "Título",
+        "Assigned User": "Usuario asignado",
+        "Supplier": "Proveedor",
+        "On sale": "En venta",
+        "Image": "Imagen",
+        "Description": "Descripción",
+        "Number of items in package": "Número de artículos en el paquete",
+        "Single unit price": "Precio por unidad",
+        "Margin": "Margen",
+        "Vat": "Impuesto",
+        "Single unit order possible": "Pedido de unidad individual posible",
+        "Unit": "Unidad",
+        "Packaging": "Embalaje",
+        "Sale ended": "Venta finalizada",
+        "Show price to customer": "Mostrar precio al cliente",
+        "Set price after reweight?": "Establecer precio después del re-pesaje?",
+        "Needs reordering?": "Necesita reordenar?",
+        "Storage rules": "Reglas de almacenamiento",
+        "Table": "Tabla",
+        "Add product": "Agregar producto",
+        "Product Group": "Grupo de productos",
+        "Product Type": "Tipo de producto",
+        "Name": "Nombre",
+        "Invoicing policy": "Política de facturación",
+        "Internal notes": "Notas internas",
+        "Amount of items in package": "Número de artículos en el paquete",
+        "Sales price": "Precio de venta",
+        "VAT": "Impuesto",
+        "Bar code": "Código de barras",
+        "Data ": "Datos",
+        "EAN": "EAN",
+        "Group": "Grupo",
+        "Category": "Categoría",
+        "Image 1": "Imagen 1",
+        "Image 2": "Imagen 2",
+        "Image 3": "Imagen 3",
+        "Image 4": "Imagen 4",
+        "Image 5": "Imagen 5",
+        "Packaging unit": "Unidad de embalaje",
+        "Package length": "Longitud del paquete",
+        "Package width": "Ancho del paquete",
+        "Package height": "Altura del paquete",
+        "Package volume": "Volumen del paquete",
+        "Package mass": "Masa del paquete",
+        "Package discount": "Descuento del paquete",
+        "Package description": "Descripción del paquete",
+        "Type": "Tipo"
+    },
+    "Models\\Group": {
+        "Title": "Título",
+        "Name": "Nombre"
+    },
+    "Models\\Supplier": {
+        "Title": "Nombre",
+        "Address": "Dirección",
+        "City": "Ciudad",
+        "Postal code": "Código postal",
+        "Country": "País",
+        "Contact person": "Persona de contacto",
+        "Phone number": "Número de teléfono",
+        "Supplier email": "Correo electrónico del proveedor",
+        "Order email": "Correo electrónico de pedido",
+        "Tax ID": "ID fiscal",
+        "Company ID": "ID de la empresa",
+        "VAT ID": "ID de IVA",
+        "Payment account number": "Número de cuenta de pago"
+    },
+    "Components\\FormProduct": {
+        "Product": "Producto",
+        "Suppliers": "Proveedores"
+    },
+    "Models\\ProductSupplier": {
+        "Product": "Producto",
+        "Supplier": "Proveedor",
+        "Supplier product name": "Nombre del producto del proveedor",
+        "Supplier product code": "Código del producto del proveedor",
+        "Purchase price": "Precio de compra",
+        "Internal notes": "Notas internas",
+        "Delivery time": "Tiempo de entrega"
+    },
+    "Controllers\\Groups": {
+        "Products": "Productos",
+        "Product Groups": "Grupos de productos",
+        "Groups": "Grupos"
+    },
+    "Models\\Category": {
+        "Parent": "Categoría",
+        "Name": "Nombre",
+        "Color": "Color",
+        "Short description": "Descripción corta",
+        "Long description": "Descripción larga",
+        "Photo #1": "Foto #1",
+        "Photo #2": "Foto #2",
+        "Photo #3": "Foto #3",
+        "Photo #4": "Foto #4",
+        "Photo #5": "Foto #5",
+        "URL slug": "URL slug"
+    },
+    "Components\\TableProducts": {
+        "Hide filter": "Ocultar filtro"
+    }
+}

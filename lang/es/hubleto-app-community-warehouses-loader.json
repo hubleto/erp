@@ -1,0 +1,129 @@
+{
+    "manifest": {
+        "Warehouses": "Almacenes",
+        "Management of individual warehouses or storage facilities.": "Gestión de almacenes individuales o instalaciones de almacenamiento.",
+        "Warehouse types": "Tipos de almacenes",
+        "Warehouse locations types": "Tipos de ubicaciones",
+        "Locations": "Ubicaciones",
+        "Transactions": "Movimientos",
+        "Inventory": "Inventario",
+        "Create transaction": "Registrar movimiento",
+        "Locations types": "Tipos de ubicaciones"
+    },
+    "root": {
+        "Warehouses": "Almacenes",
+        "Locations": "Ubicaciones"
+    },
+    "Models\\Warehouse": {
+        "Name": "Nombre",
+        "Warehouse type": "Tipo de almacén",
+        "Address": "Dirección",
+        "Address Plus code": "Código Plus de la dirección",
+        "Contact person": "Persona de contacto",
+        "Contact email": "Correo de contacto",
+        "Contact phone": "Teléfono de contacto",
+        "Coordinates: longitude": "Coordenadas: longitud",
+        "Coordinates: latitude": "Coordenadas: latitud",
+        "Description": "Descripción",
+        "Capacity": "Capacidad",
+        "Capacity unit": "Unidad de almacenamiento",
+        "Operational status": "Estado operativo",
+        "Photo #1": "Foto #1",
+        "Photo #2": "Foto #2",
+        "Photo #3": "Foto #3",
+        "Manager of operation": "Responsable de operaciones",
+        "Current stock status": "Estado actual de stock",
+        "Add warehouse": "Agregar almacén",
+        "Type": "Tipo"
+    },
+    "Models\\WarehouseType": {
+        "Name": "Nombre"
+    },
+    "Models\\Location": {
+        "Warehouse": "Almacén",
+        "Location code": "Código de ubicación",
+        "Location type": "Tipo de ubicación",
+        "Description": "Descripción",
+        "Capacity": "Capacidad",
+        "Operational status": "Estado operativo",
+        "Placement": "Posición",
+        "Photo #1": "Foto #1",
+        "Photo #2": "Foto #2",
+        "Photo #3": "Foto #3",
+        "Manager of operation": "Responsable de operaciones",
+        "Current stock status": "Estado actual de stock",
+        "Add location": "Agregar ubicación",
+        "Type": "Tipo"
+    },
+    "Models\\LocationType": {
+        "Name": "Nombre"
+    },
+    "Controllers\\Warehouses": {
+        "Warehouses": "Almacenes"
+    },
+    "Components\\FormWarehouse": {
+        "Contact": "Contacto",
+        "Capacity and stock status": "Capacidad y estado de stock",
+        "Address": "Dirección",
+        "More information": "Información adicional",
+        "Locations": "Ubicaciones",
+        "Warehouse": "Almacén"
+    },
+    "Controllers\\Locations": {
+        "Warehouses": "Almacenes",
+        "Locations": "Ubicaciones"
+    },
+    "Components\\FormLocation": {
+        "Capacity and stock status": "Capacidad y estado de stock",
+        "Placement": "Posición",
+        "More information": "Información adicional"
+    },
+    "Controllers\\Inventory": {
+        "Warehouses": "Almacenes",
+        "Inventory": "Inventario"
+    },
+    "Models\\Inventory": {
+        "Product": "Producto",
+        "Location in warehouse": "Ubicación en el almacén",
+        "Quantity": "Cantidad",
+        "Batch number": "Número de lote",
+        "Serial number": "Número de serie",
+        "Expiration": "Fecha de vencimiento",
+        "Received": "Recibido",
+        "Last moved": "Último movimiento"
+    },
+    "Components\\TableInventory": {
+        "Total quantity": "Cantidad total"
+    },
+    "Controllers\\Transactions": {
+        "Warehouses": "Almacenes",
+        "Transactions": "Movimientos"
+    },
+    "Models\\Transaction": {
+        "Transaction UID": "UID del movimiento",
+        "Direction": "Dirección",
+        "Type": "Tipo",
+        "Supplier": "Proveedor",
+        "Supplier invoice number": "Número de factura del proveedor",
+        "Supplier order number": "Número de orden del proveedor",
+        "Batch number": "Número de lote",
+        "Serial number": "Número de serie",
+        "Reference document #1": "Documento de referencia #1",
+        "Reference document #2": "Documento de referencia #2",
+        "Reference document #3": "Documento de referencia #3",
+        "Notes": "Notas",
+        "Date and time of transaction": "Fecha y hora del movimiento",
+        "Who performed the transaction": "Movimiento registrado por",
+        "Add transaction": "Agregar movimiento",
+        "Inbound": "Entrada",
+        "Outbound": "Salida"
+    },
+    "Models\\TransactionItem": {
+        "Transaction": "Movimiento",
+        "Product": "Producto",
+        "Purchase price": "Precio de compra",
+        "Quantity": "Cantidad",
+        "Original location": "Ubicación original",
+        "New location": "Nueva ubicación"
+    }
+}

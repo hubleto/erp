@@ -1,0 +1,128 @@
+{
+    "manifest": {
+        "Contacts": "Contactos",
+        "Default customer management and addressbook.": "Gestión predeterminada de clientes y libreta de direcciones.",
+        "Contact Categories": "Categorías de contacto",
+        "Contact Tags": "Etiquetas de contacto",
+        "Import contacts": "Importar contactos"
+    },
+    "Components\\FormPerson": {
+        "Edit": "Editar",
+        "Save": "Guardar",
+        "Delete": "Eliminar",
+        "Personal Information": "Información personal",
+        "Category": "Categoría",
+        "Type": "Tipo",
+        "Email": "Correo electrónico",
+        "Phone Number": "Número de teléfono",
+        "Customer": "Cliente",
+        "Tags": "Etiquetas",
+        "Value": "Valor",
+        "Add contact": "Agregar contacto",
+        "No contacts for this person yet.": "Aún no tienes contactos para esta persona."
+    },
+    "Components\\TablePersons": {
+        "Start typing to search...": "Escribe para buscar..."
+    },
+    "Models\\Person": {
+        "First name": "Nombre",
+        "Last name": "Apellido",
+        "Customer": "Cliente",
+        "Main Contact": "Contacto principal",
+        "Notes": "Notas",
+        "Active": "Activo",
+        "Date Created": "Fecha de creación",
+        "Contacts": "Contactos",
+        "Add Contact": "Agregar contacto",
+        "Emails": "Correos electrónicos",
+        "Phone Numbers": "Números de teléfono",
+        "Add": "Agregar",
+        "Primary Contact": "Contacto principal"
+    },
+    "Models\\Value": {
+        "Person": "Persona",
+        "Contact Category": "Categoría de contacto",
+        "Type": "Tipo",
+        "Email": "Correo electrónico",
+        "Phone Number": "Número de teléfono",
+        "Other": "Otro",
+        "Value": "Valor",
+        "Contact": "Contacto",
+        "Category": "Categoría",
+        "Number": "Número",
+        "URL": "URL",
+        "Contacts": "Contactos",
+        "Add Customer": "Agregar cliente"
+    },
+    "Models\\PersonTag": {
+        "Person": "Persona",
+        "Tag": "Etiqueta"
+    },
+    "Models\\Address": {
+        "Person": "Persona",
+        "Street Line 1": "Dirección, línea 1",
+        "Street Line 2": "Dirección, línea 2",
+        "Region": "Región",
+        "City": "Ciudad",
+        "Postal Code": "Código postal",
+        "Country": "País"
+    },
+    "root": {
+        "Contact Categories": "Categorías de contacto",
+        "Contact Tags": "Etiquetas de contacto",
+        "Contacts": "Contactos",
+        "Import contacts": "Importar contactos"
+    },
+    "Models\\Category": {
+        "Type": "Tipo"
+    },
+    "Models\\Tag": {
+        "Name": "Etiqueta",
+        "Color": "Color"
+    },
+    "Models\\Contact": {
+        "Salutation": "Saludo",
+        "Title before": "Título",
+        "First name": "Nombre",
+        "Middle name": "Segundo nombre",
+        "Last name": "Apellido",
+        "Title after": "Título después",
+        "Customer": "Cliente",
+        "Primary Contact": "Contacto principal",
+        "Notes": "Notas",
+        "Date Created": "Fecha de creación",
+        "Active": "Activo",
+        "Add contact": "Agregar contacto",
+        "Emails": "Correos electrónicos",
+        "Phone Numbers": "Números de teléfono",
+        "Mr.": "Sr.",
+        "Mrs.": "Sra.",
+        "Valid": "Válido",
+        "Tags": "Etiquetas"
+    },
+    "Models\\ContactTag": {
+        "Contact": "Contacto",
+        "Tag": "Etiqueta"
+    },
+    "Controllers\\Contacts": {
+        "Contacts": "Contactos"
+    },
+    "Components\\FormContact": {
+        "No contacts yet.": "Aún no hay contactos.",
+        "Email": "Correo electrónico",
+        "Type": "Tipo",
+        "Phone Number": "Número de teléfono",
+        "Other": "Otro",
+        "Value": "Valor",
+        "Category": "Categoría",
+        "Add contact": "Agregar contacto",
+        "Customer": "Cliente",
+        "Tags": "Etiquetas",
+        "Primary Contact": "Contacto principal",
+        "Contact": "Contacto",
+        "Contacts": "Contactos"
+    },
+    "Components\\TableContacts": {
+        "Primary": "Principal"
+    }
+}

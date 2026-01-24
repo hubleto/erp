@@ -1,0 +1,53 @@
+{
+    "Components\\Form": {
+        "Add": "Agregar",
+        "Save": "Guardar",
+        "Copy": "Copiar",
+        "Delete": "Eliminar",
+        "Confirm delete": "Confirmar eliminación",
+        "Edit": "Editar",
+        "Adding record": "Agregando registro",
+        "Editing record": "Editando registro",
+        "Record": "Registro",
+        "New record": "Nuevo registro"
+    },
+    "Components\\Input": {
+        "Upload file": "Subir archivo"
+    },
+    "Components\\Table": {
+        "You are about to delete the record. Press OK to confirm.": "Está a punto de eliminar el registro. Presione Aceptar para confirmar.",
+        "Yes, delete": "Sí, eliminar",
+        "No, do not delete": "No, no eliminar",
+        "Delete": "Eliminar",
+        "Start typing to search...": "Comienza a escribir para buscar...",
+        "Search...": "Buscar...",
+        "No data.": "No hay datos.",
+        "More options": "Más opciones"
+    },
+    "Controllers\\ControllerSignIn": {
+        "Keep signed in": "Mantener sesión iniciada"
+    },
+    "Controllers\\SignIn": {
+        "Your email": "Correo electrónico",
+        "Password": "Contraseña",
+        "Keep signed in": "Mantener sesión iniciada",
+        "Sign in": "Iniciar sesión",
+        "Forgot password?": "¿Olvidaste tu contraseña?"
+    },
+    "Components\\Inputs\\Image": {
+        "Choose image": "Seleccionar imagen"
+    },
+    "Components\\Inputs\\Password": {
+        "New password": "Nueva contraseña",
+        "Confirm new password": "Confirmar nueva contraseña"
+    },
+    "Controllers\\NotFound": {
+        "Page Not Found": "Página no encontrada",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Lo sentimos, no pudimos encontrar la página que buscabas. Verifica tus permisos o regresa a la página principal.",
+        "Home": "Inicio"
+    },
+    "Model": {
+        "Export to CSV": "Exportar a CSV",
+        "Import from CSV": "Importar desde CSV"
+    }
+}

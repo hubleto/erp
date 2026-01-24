@@ -1,0 +1,58 @@
+{
+    "manifest": {
+        "Calendar": "Calendario",
+        "Free calendar app.": "Aplicación de calendario gratuita.",
+        "Reminders": "Recordatorios",
+        "Share": "Compartir"
+    },
+    "Controllers\\Calendar": {
+        "Calendar": "Calendario"
+    },
+    "Models\\Activity": {
+        "Subject": "Asunto",
+        "Activity type": "Tipo de actividad",
+        "Start date": "Fecha de inicio",
+        "Start time": "Hora de inicio",
+        "End date": "Fecha de finalización",
+        "End time": "Hora de finalización",
+        "All day": "Todo el día",
+        "Completed": "Completado",
+        "Created by": "Creado por",
+        "Meeting minutes (link)": "Minutas de la reunión (enlace)",
+        "Location": "Ubicación",
+        "Online meeting link": "Enlace a la reunión en línea",
+        "Description": "Descripción",
+        "Recurrence": "Recurrencia",
+        "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Minutas cortas de la reunión"
+    },
+    "Controllers\\Boards\\Reminders": {
+        "Open event details": "Abrir detalles del evento",
+        "All-day": "Todo el día",
+        "events for tomorrow": "Eventos para mañana",
+        "events later": "Eventos más tarde",
+        "reminders later": "Recordatorios más tarde",
+        "Later": "Más tarde",
+        "reminders tomorrow": "Recordatorios para mañana",
+        "Tomorrow": "Mañana"
+    },
+    "root": {
+        "Events for today": "Eventos para hoy",
+        "Reminders": "Recordatorios"
+    },
+    "Components\\CalendarMain": {
+        "New activity": "Nueva actividad",
+        "All": "Todo",
+        "Ownership": "Propiedad",
+        "My activities": "Mis actividades"
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "Creado por",
+        "Calendar ID": "ID del calendario",
+        "Share key": "Clave para compartir",
+        "Display details": "Mostrar detalles",
+        "Enabled": "Habilitado",
+        "Date from": "Desde",
+        "Date to": "Hasta"
+    }
+}

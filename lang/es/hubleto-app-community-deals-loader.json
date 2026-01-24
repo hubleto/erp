@@ -1,0 +1,195 @@
+{
+    "manifest": {
+        "Deals": "Oportunidades",
+        "Deal management. From deal to purchase.": "Gestión de oportunidades. Desde la oportunidad hasta la compra.",
+        "Deal Tags": "Etiquetas de oportunidades",
+        "Deal Lost Reasons": "Razones de pérdida de oportunidades",
+        "Deal warnings": "Advertencias de oportunidades",
+        "Most valuable deals": "Oportunidades más valiosas",
+        "Deal value by result": "Valor de oportunidades por resultado",
+        "Active deals": "Oportunidades activas",
+        "Archived deals": "Oportunidades archivadas"
+    },
+    "Controllers\\Deals": {
+        "Sales": "Ventas",
+        "Deals": "Oportunidades",
+        "Open deals": "Oportunidades abiertas",
+        "Total value": "Valor total"
+    },
+    "Controllers\\DealsArchive": {
+        "Sales": "Ventas",
+        "Deals": "Oportunidades",
+        "Archive": "Archivo"
+    },
+    "Models\\Deal": {
+        "Deal Identifier": "Identificación",
+        "Title": "Título",
+        "Customer": "Cliente",
+        "Contact person": "Persona de contacto",
+        "Lead": "Prospecto",
+        "Price": "Precio",
+        "Currency": "Moneda",
+        "Expected close date": "Fecha de cierre prevista",
+        "Assigned user": "Usuario asignado",
+        "Date created": "Creado",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Notes": "Notas",
+        "Source channel": "Canal de origen",
+        "Archived": "Archivado",
+        "Status": "Estado",
+        "Link to shared folder (online storage) with related documents": "Enlace a la carpeta compartida con documentos relacionados",
+        "Deal Result": "Resultado de la oportunidad",
+        "Date of result update": "Fecha de actualización del resultado",
+        "New Customer": "Nuevo cliente",
+        "Business type": "Tipo de negocio",
+        "Contact": "Contacto",
+        "Owner": "Propietario",
+        "Created": "Creado",
+        "Reason for Lost": "Razón de pérdida",
+        "Add Deal": "Agregar oportunidad",
+        "Version": "Versión",
+        "Price excl. VAT": "Precio sin impuestos",
+        "Price incl. VAT": "Precio con impuestos",
+        "Manager": "Gerente",
+        "Template for quotation": "Plantilla para cotización",
+        "Customer's order number": "Número de orden del cliente",
+        "Closed": "Cerrado",
+        "Result": "Resultado",
+        "All": "Todos",
+        "Ownership": "Propiedad",
+        "Owned by me": "De mi propiedad",
+        "Managed by me": "Gestionado por mí",
+        "Open \/ Closed": "Abiertas \/ Cerradas",
+        "Open": "Abierta",
+        "Active": "Activa",
+        " changed from ": " cambió de ",
+        " to ": " a "
+    },
+    "Models\\DealHistory": {
+        "Change Date": "Fecha de cambio",
+        "Deal": "Oportunidad",
+        "Description": "Descripción"
+    },
+    "Models\\DealTag": {
+        "Deal": "Oportunidad",
+        "Tag": "Etiqueta"
+    },
+    "Models\\DealActivity": {
+        "Deal": "Oportunidad",
+        "Contact person": "Persona de contacto",
+        "Activity type": "Tipo de actividad",
+        "Subject": "Asunto",
+        "Start date": "Fecha de inicio",
+        "Start time": "Hora de inicio",
+        "End date": "Fecha de finalización",
+        "End time": "Hora de finalización",
+        "All day": "Todo el día",
+        "Completed": "Completada",
+        "Created by": "Creado por",
+        "Contact": "Contacto",
+        "Meeting minutes (link)": "Acta de la reunión (enlace)",
+        "Location": "Ubicación",
+        "Online meeting link": "Enlace a la reunión en línea",
+        "Description": "Descripción",
+        "Recurrence": "Recurrencia",
+        "Long meeting minutes (link to external document)": "Acta larga de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Acta corta de la reunión"
+    },
+    "Models\\DealDocument": {
+        "Deal": "Oportunidad",
+        "Document": "Documento"
+    },
+    "root": {
+        "Deal statuses": "Estados de oportunidades",
+        "Deal Tags": "Etiquetas de oportunidades",
+        "Deal value by result": "Valor de oportunidades por resultado",
+        "Most valuable deals": "Oportunidades más valiosas",
+        "Active deals": "Oportunidades activas",
+        "Archived deals": "Oportunidades archivadas",
+        "Deal Lost Reasons": "Razones de pérdida",
+        "Deal warnings": "Alertas"
+    },
+    "Components\\FormDeal": {
+        "Calendar": "Calendario",
+        "Local documents": "Documentos locales",
+        "Shared documents": "Documentos compartidos",
+        "History": "Historial",
+        "Go to original lead": "Ir al prospecto original",
+        "Documents": "Documentos",
+        "Show deals": "Mostrar oportunidades",
+        "Enter = Log completed activity": "Enter = Registrar actividad completada",
+        "Shift+Enter = Schedule": "Shift+Enter = Programar",
+        "Type recent activity here": "Escriba la actividad reciente aquí",
+        "Not completed yet": "Aún no completada",
+        "Most recent activities": "Actividades más recientes",
+        "Deal": "Oportunidad",
+        "Log completed activity": "Registrar actividad completada",
+        "Enter": "Enter",
+        "Schedule activity": "Programar actividad",
+        "Shift+Enter": "Shift+Enter",
+        "Deal value:": "Valor de la oportunidad:",
+        "Weighted profit": "Ganancia ponderada",
+        "Tasks": "Tareas",
+        "Products": "Productos"
+    },
+    "Models\\Tag": {
+        "Name": "Nombre",
+        "Color": "Color"
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Oportunidad abierta"
+    },
+    "Models\\Item": {
+        "Deal": "Oportunidad",
+        "Product": "Producto",
+        "Unit Price": "Precio unitario",
+        "Amount": "Monto",
+        "Vat": "Impuesto",
+        "Discount": "Descuento",
+        "Sum": "Total",
+        "Order": "Orden",
+        "Description": "Descripción",
+        "Price excl. VAT": "Precio sin impuestos",
+        "Price incl. VAT": "Precio con impuestos",
+        "Sales Price": "Precio de venta"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Razón de pérdida"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Configuraciones",
+        "Deal Lost Reasons": "Razones de pérdida de oportunidades"
+    },
+    "Controllers\\Settings": {
+        "Deals": "Oportunidades",
+        "Settings": "Configuraciones",
+        "Show 'Deal warnings' in dashboard": "Mostrar 'Alertas de oportunidades' en el panel",
+        "Show 'Most valuable deals' in dashboard": "Mostrar 'Oportunidades más valiosas' en el panel",
+        "Show 'Deal value by result' in dashboard": "Mostrar 'Valor de oportunidades por resultado' en el tablero",
+        "Calendar color": "Color del calendario"
+    },
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Čakajúce dealy bez budúceho plánu",
+        "No notifications for deals.": "Žiadne oznámenia o dealoch.",
+        "Open deal": "Deal",
+        "Open deals without future plan": "Otvorené dealy bez budúceho plánu"
+    },
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "Desconocido",
+        "Pending": "En proceso",
+        "Won": "Ganado",
+        "Lost": "Perdido"
+    },
+    "Models\\DealLead": {
+        "Deal": "Oportunidad",
+        "Lead": "Prospecto"
+    },
+    "Models\\DealTask": {
+        "Deal": "Oportunidad",
+        "Task": "Tarea"
+    },
+    "Components\\TableDeals": {
+        "Hide filter": "Ocultar filtro"
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "manifest": {
+        "Worksheets": "Hojas de trabajo",
+        "Worksheet log": "Registro de hojas de trabajo",
+        "Activity types": "Tipos de actividad",
+        "Daily chart": "Gráfico diario"
+    },
+    "root": {
+        "Worksheets": "Hojas de trabajo",
+        "Activity types": "Tipos de actividad"
+    },
+    "Models\\Activity": {
+        "Worker": "Empleado",
+        "Task": "Tarea",
+        "Type": "Tipo de actividad",
+        "Day": "Día",
+        "Worked hours": "Horas trabajadas",
+        "Description": "Descripción",
+        "Approved": "Aprobado",
+        "Is chargeable": "Facturable",
+        "Created": "Creado",
+        "Period": "Período",
+        "All": "Todos",
+        "Today": "Hoy",
+        "This week": "Esta semana",
+        "Last week": "La semana pasada",
+        "This month": "Este mes",
+        "Last month": "El mes pasado",
+        "This year": "Este año",
+        "Last year": "El año pasado",
+        "Yesterday": "Ayer",
+        "Last 7 days": "Últimos 7 días",
+        "Last 14 days": "Últimos 14 días",
+        "Month before last": "El mes antepasado"
+    },
+    "Components\\TableActivities": {
+        "Worked total": "Total de horas trabajadas",
+        "hours": "horas"
+    },
+    "Models\\ActivityType": {
+        "Varchar": "Nombre",
+        "Color": "Color"
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "manifest": {
+        "Documents": "Documentos",
+        "Free document management.": "Gestión gratuita de documentos.",
+        "Browse": "Explorar",
+        "List": "Lista",
+        "Templates": "Plantillas",
+        "Show as list": "Mostrar como lista",
+        "Manage folders": "Gestionar carpetas"
+    },
+    "Models\\Document": {
+        "Document name": "Nombre del documento",
+        "File": "Archivo",
+        "Link": "Enlace a la versión en línea",
+        "File Link": "Enlace al archivo",
+        "Origin Link": "Enlace original",
+        "Uid": "Id",
+        "Folder": "Carpeta",
+        "Add Document": "Agregar documento"
+    },
+    "Controllers\\Documents": {
+        "Documents": "Documentos"
+    },
+    "root": {
+        "Browse": "Explorar",
+        "List": "Lista",
+        "Templates": "Plantillas"
+    },
+    "Controllers\\Table": {
+        "Documents": "Documentos"
+    },
+    "Models\\Folder": {
+        "Uid": "Id",
+        "Parent folder": "Carpeta principal",
+        "Folder name": "Nombre de la carpeta"
+    },
+    "Models\\Template": {
+        "Name": "Nombre",
+        "Content": "Contenido",
+        "Notes": "Notas",
+        "Used For": "Usado para"
+    },
+    "Controllers\\Browse": {
+        "Documents": "Documentos",
+        "Browse": "Explorar"
+    },
+    "Components\\Browser": {
+        "Add folder": "Agregar carpeta",
+        "Add document": "Agregar documento"
+    },
+    "Components\\FormDocument": {
+        "Document": "Documento"
+    }
+}

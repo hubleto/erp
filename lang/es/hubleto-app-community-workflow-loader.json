@@ -1,0 +1,43 @@
+{
+    "manifest": {
+        "Workflow": "Flujo de trabajo",
+        "Free sales workflow management.": "Gestión flexible de flujos de ventas.",
+        "History": "Historial",
+        "Workflows": "Flujos de trabajo"
+    },
+    "Controllers\\Home": {
+        "Workflow": "Flujo de trabajo",
+        "Add workflow": "Agregar flujo de trabajo",
+        "Manage workflow steps": "Administrar etapas del flujo"
+    },
+    "root": {
+        "Workflows": "Flujos de trabajo"
+    },
+    "Models\\Workflow": {
+        "Name": "Nombre",
+        "Description": "Descripción",
+        "Type": "Tipo",
+        "Group": "Grupo",
+        "Order": "Pedido"
+    },
+    "Models\\WorkflowStep": {
+        "Name": "Nombre",
+        "Order": "Pedido",
+        "Color": "Color",
+        "Probability": "Probabilidad",
+        "Workflow": "Flujo de trabajo",
+        "Set result of a deal to": "Establecer resultado de una oportunidad a",
+        "Tag": "Etiqueta"
+    },
+    "Controllers\\Workflow": {
+        "Workflow": "Flujo de trabajo"
+    },
+    "Models\\WorkflowHistory": {
+        "Model": "Modelo",
+        "Record Id": "ID de registro",
+        "Changed": "Cambiado",
+        "User": "Usuario",
+        "Workflow": "Flujo de trabajo",
+        "Workflow Step": "Etapa del flujo"
+    }
+}

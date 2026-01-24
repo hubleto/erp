@@ -1,0 +1,23 @@
+{
+    "manifest": {
+        "Suppliers": "Proveedores",
+        "List of product suppliers": "Lista de proveedores de productos"
+    },
+    "Controllers\\Suppliers": {
+        "Suppliers": "Proveedores"
+    },
+    "Models\\Supplier": {
+        "Name": "Nombre",
+        "Address": "Dirección",
+        "City": "Ciudad",
+        "Postal code": "Código postal",
+        "Country": "País",
+        "Contact": "Contacto",
+        "Order email": "Correo para pedidos",
+        "Tax ID": "ID fiscal",
+        "Company ID": "ID de la empresa",
+        "VAT ID": "ID de impuesto",
+        "Payment account number": "Número de cuenta de pago",
+        "Add supplier": "Añadir proveedor"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "manifest": {
+        "Developer": "Desarrollador",
+        "Developer tools to automate your Hubleto development": "Herramientas para desarrolladores para automatizar su desarrollo en Hubleto",
+        "Developer tools": "Herramientas para desarrolladores"
+    },
+    "root": {
+        "Developer tools": "Herramientas para desarrolladores"
+    },
+    "Controllers\\Dashboard": {
+        "Developer": "Desarrollador",
+        "DB Updates": "Actualizaciones de la base de datos",
+        "Form designer": "Diseñador de formularios"
+    },
+    "Controllers\\DbUpdates": {
+        "Developer": "Desarrollador",
+        "DB Updater": "Actualizaciones de la base de datos",
+        "Database updater": "Actualizaciones de la base de datos",
+        "No necessary database updates found.": "No se encontraron actualizaciones necesarias para la base de datos."
+    }
+}

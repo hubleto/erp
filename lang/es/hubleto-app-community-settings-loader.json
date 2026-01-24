@@ -1,0 +1,242 @@
+{
+    "manifest": {
+        "Settings": "Ajustes",
+        "Settings and control panel for your Hubleto.": "Panel de control y ajustes para tu Hubleto.",
+        "Settings and tools": "Ajustes y herramientas",
+        "Users": "Usuarios",
+        "Roles": "Roles",
+        "Your companies": "Tus empresas",
+        "General settings": "Ajustes generales",
+        "Permissions list": "Lista de permisos",
+        "Role permissions": "Permisos de roles",
+        "Activity types": "Tipos de actividad",
+        "Countries": "Países",
+        "Currencies": "Monedas",
+        "Invoice profiles": "Perfiles de facturación",
+        "Platform config": "Configuración de la plataforma",
+        "Sidebar": "Menú lateral",
+        "Teams": "Equipos"
+    },
+    "Models\\User": {
+        "First name": "Nombre",
+        "Middle name": "Segundo nombre",
+        "Last name": "Apellido",
+        "Email": "Correo electrónico",
+        "Language": "Idioma",
+        "Active profile": "Perfil activo",
+        "Login": "Usuario",
+        "Password": "Contraseña",
+        "Active": "Cuenta activa",
+        "Time of last login": "Hora del último ingreso",
+        "Last login IP": "IP del último ingreso",
+        "Time of last access": "Hora del último acceso",
+        "Last access IP": "IP del último acceso",
+        "Nick": "Apodo",
+        "Default company": "Empresa",
+        "Roles": "Roles",
+        "Teams": "Equipos",
+        "Type": "Tipo",
+        "Apps": "Aplicaciones"
+    },
+    "Models\\Country": {
+        "Country Name": "Nombre del país",
+        "Code": "Código",
+        "Country": "País"
+    },
+    "Models\\Profile": {
+        "Company": "Empresa"
+    },
+    "Models\\ActivityType": {
+        "Type Name": "Typ",
+        "Color": "Farba",
+        "Shown in Calendar": "Zobraziť v kalendári",
+        "Icon": "Ikonka",
+        "Type": "Typ",
+        "Show in calendar": "Show v kalendári"
+    },
+    "Models\\Currency": {
+        "Currency Name": "Nombre de la moneda",
+        "Currency Code": "Código de la moneda",
+        "Currency": "Moneda",
+        "Code": "Código",
+        "Symbol": "Símbolo"
+    },
+    "Models\\Workflow": {
+        "Name": "Nombre",
+        "Description": "Descripción"
+    },
+    "Models\\WorkflowStep": {
+        "Name": "Nombre",
+        "Order": "Orden",
+        "Company": "Empresa",
+        "Workflow": "Flujo de trabajo",
+        "Color": "Color",
+        "Set result of a deal to": "Establecer resultado de la oportunidad a"
+    },
+    "Models\\Tag": {
+        "Name": "Nombre",
+        "Color": "Color"
+    },
+    "Models\\Setting": {
+        "Key": "Parámetro",
+        "Value": "Valor",
+        "Only for user": "Solo para el usuario"
+    },
+    "Models\\InvoiceProfile": {
+        "Name": "Nombre",
+        "Phone": "Teléfono",
+        "E-mail": "Correo electrónico",
+        "WWW": "Sitio web",
+        "Company ID": "ID de empresa",
+        "Tax ID": "ID fiscal",
+        "VAT ID": "Registro de impuestos",
+        "Street, line 1": "Calle, línea 1",
+        "Street, line 2": "Calle, línea 2",
+        "ZIP": "Código postal",
+        "City": "Ciudad",
+        "Country": "País",
+        "Bank name": "Nombre del banco",
+        "Account number": "Número de cuenta",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Patrón de numeración",
+        "Customer ID": "ID de cliente",
+        "Supplier": "Proveedor"
+    },
+    "Models\\UserRole": {
+        "Role": "Rol",
+        "Grant all permissions": "Dar todos los permisos (administrador)",
+        "Grant all permissions (administrator role)": "Dar todos los permisos (rol de administrador)",
+        "Description": "Descripción",
+        "Is default role (cannot be modified)": "Es el rol predeterminado (no se puede modificar)"
+    },
+    "Models\\RolePermission": {
+        "Permission": "Permiso",
+        "Role": "Rol"
+    },
+    "Models\\Permission": {
+        "Permission": "Permiso"
+    },
+    "Controllers\\Dashboard": {
+        "Settings": "Ajustes",
+        "Users": "Usuarios",
+        "User Roles": "Roles de usuario",
+        "Profiles": "Perfiles",
+        "Permissions": "Permisos",
+        "Tags": "Etiquetas",
+        "Activity Types": "Tipos de actividad",
+        "Contact Types": "Tipos de contacto",
+        "Countries": "Países",
+        "Currencies": "Monedas",
+        "Lead Statuses": "Estados de clientes potenciales",
+        "Deal Statuses": "Estados de oportunidades",
+        "Workflows": "Flujos de trabajo",
+        "Invoice profiles": "Perfiles de factura",
+        "Manage installed apps": "Administrar aplicaciones instaladas",
+        "Disable": "Desactivar",
+        "Uninstall": "Desinstalar",
+        "Open": "Abrir",
+        "Most common settings": "Ajustes más comunes",
+        "Manage users": "Administrar usuarios",
+        "Manage apps": "Administrar aplicaciones",
+        "All settings": "Todas las configuraciones",
+        "Change theme": "Cambiar tema",
+        "Locale": "Idioma y región"
+    },
+    "Controllers\\UserRoles": {
+        "Settings": "Ajustes",
+        "User Roles": "Roles de usuario"
+    },
+    "Controllers\\Countries": {
+        "Settings": "Ajustes",
+        "Countries": "Países"
+    },
+    "Controllers\\Users": {
+        "Settings": "Ajustes",
+        "Users": "Usuarios"
+    },
+    "Controllers\\Activitytypes": {
+        "Settings": "Ajustes",
+        "Activity Types": "Tipos de actividad"
+    },
+    "root": {
+        "Users": "Usuarios",
+        "User roles": "Roles de usuario",
+        "Your companies": "Mis empresas",
+        "General settings": "Ajustes generales",
+        "Permissions": "Permisos",
+        "Tags": "Etiquetas",
+        "Activity types": "Tipos de actividad",
+        "Contact types": "Tipos de contacto",
+        "Countries": "Países",
+        "Currencies": "Monedas",
+        "Workflows": "Flujos de trabajo",
+        "Invoice profiles": "Perfiles de facturación",
+        "Platform config": "Configuración de la plataforma",
+        "Contact Categories": "Categorías de contactos",
+        "Roles": "Roles",
+        "Permissions list": "Lista de permisos",
+        "Role permissions": "Permisos de roles",
+        "Sidebar": "Menú lateral",
+        "Teams": "Equipos"
+    },
+    "Models\\UserHasRole": {
+        "User": "Usuario",
+        "Role": "Rol"
+    },
+    "Controllers\\Profile": {
+        "Settings": "Ajustes",
+        "Profile": "Perfil"
+    },
+    "Models\\Company": {
+        "Company": "Empresa",
+        "Tax ID": "Identificación fiscal",
+        "VAT ID": "Registro de impuestos",
+        "Street, line 1": "Calle, línea 1",
+        "Street, line 2": "Calle, línea 2",
+        "ZIP": "Código postal",
+        "City": "Ciudad",
+        "Country": "País",
+        "Registration ID": "Número de registro",
+        "Business register": "Registro mercantil",
+        "Logo": "Logo",
+        "Brand color - primary": "Color de marca - primario",
+        "Brand color - secondary": "Color de marca - secundario"
+    },
+    "Controllers\\Sidebar": {
+        "Settings": "Ajustes",
+        "Sidebar": "Menú lateral"
+    },
+    "Components\\FormUserRole": {
+        "Save": "Guardar"
+    },
+    "Components\\FormUser": {
+        "About the user": "Acerca del usuario"
+    },
+    "Controllers\\InvoiceProfiles": {
+        "Settings": "Ajustes",
+        "Invoice profiles": "Perfiles de factura"
+    },
+    "Models\\Team": {
+        "Team name": "Nombre del equipo",
+        "Team color": "Color del equipo",
+        "Description": "Descripción",
+        "Team manager": "Responsable del equipo",
+        "Manager": "Responsable"
+    },
+    "Models\\TeamMember": {
+        "Team": "Equipo",
+        "Member": "Miembro"
+    },
+    "Controllers\\Apps": {
+        "Settings": "Ajustes",
+        "Apps": "Aplicaciones",
+        "Open": "Abrir",
+        "Disable": "Desactivar",
+        "Install": "Instalar"
+    },
+    "Controllers\\MyAccount": {
+        "Settings": "Ajustes",
+        "Company": "Empresa"
+    }
+}

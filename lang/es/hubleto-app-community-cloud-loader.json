@@ -1,0 +1,84 @@
+{
+    "manifest": {
+        "Cloud": "Cloud",
+        "Management of cloud Hubleto account.": "Gestión de la cuenta Hubleto Cloud."
+    },
+    "Models\\Log": {
+        "Date": "Fecha",
+        "Active users": "Usuarios activos",
+        "Paid apps": "Aplicaciones pagadas",
+        "Premium expected": "Premium esperado",
+        "Log datetime": "Fecha y hora del registro"
+    },
+    "Models\\Credit": {
+        "Recalculated": "Recalculado",
+        "Credit": "Crédito"
+    },
+    "Models\\Payment": {
+        "Charged": "Fecha y hora del pago",
+        "Discount": "Descuento",
+        "Full amount": "Cantidad total",
+        "Discounted amount": "Cantidad con descuento",
+        "Type": "Tipo",
+        "Details": "Detalles",
+        "Has invoice": "Tiene factura",
+        "Billing account": "Perfil de facturación",
+        "UUID": "Uuid"
+    },
+    "Models\\Discount": {
+        "Year": "Año",
+        "Month": "Mes",
+        "Discount": "Descuento",
+        "Notes": "Notas",
+        "Billing account": "Perfil de facturación"
+    },
+    "Controllers\\Dashboard": {
+        "You are upgraded to Premium": "Has sido actualizado a Premium",
+        "Free trial expires in": "La prueba gratuita expira en",
+        "days": "días",
+        "Configure your payment method.": "Configure su método de pago.",
+        "Automatic subscription renewal is active": "La renovación automática de la suscripción está activa",
+        "Access to your Premium account will be automaticaly renewed next month.": "El acceso a su cuenta Premium se renovará automáticamente el próximo mes.",
+        "Your Premium benefits": "Sus beneficios Premium",
+        "unlimited users": "usuarios ilimitados",
+        "more apps & features": "más aplicaciones y funciones",
+        "premium support": "soporte premium",
+        "Add new users or install new apps": "Agregar nuevos usuarios o instalar nuevas aplicaciones",
+        "Configure payment with card": "Configurar pago con tarjeta",
+        "Charge credit via bank transfer": "Cargar crédito mediante transferencia bancaria",
+        "Show payments and download invoices": "Mostrar pagos y descargar facturas",
+        "Manage billing accounts": "Gestionar perfiles de facturación",
+        "Usage info": "Información de uso",
+        "Month": "Mes",
+        "Active users": "Usuarios activos",
+        "Paid apps": "Aplicaciones pagadas",
+        "Show details": "Mostrar detalles",
+        "Price for this month": "Precio para este mes",
+        "Terms of use and privacy policy accepted": "Términos de uso y política de privacidad aceptados",
+        "Subscription active until": "Suscripción activa hasta",
+        "Premium account activated": "Cuenta Premium activada",
+        "Free trial until": "Prueba gratuita hasta",
+        "Account UID": "Identificador de cuenta",
+        "Variable symbol for payments": "Símbolo variable para pagos",
+        "Price is calculated based on maximum number of active users or paid apps during this month.": "El precio se calcula en función del número máximo de usuarios activos o aplicaciones pagadas durante este mes.",
+        "Deactivate subscription renewal": "Desactivar la renovación de la suscripción"
+    },
+    "root": {
+        "Free trial expires in": "La prueba gratuita expira en",
+        "days": "días"
+    },
+    "Models\\BillingAccount": {
+        "Name": "Nombre",
+        "Phone": "Teléfono",
+        "E-mail": "Correo electrónico",
+        "Tax ID": "Identificación fiscal",
+        "VAT ID": "Registro impuesto",
+        "Street, line 1": "Calle, línea 1",
+        "Street, line 2": "Calle, línea 2",
+        "ZIP": "Código postal",
+        "City": "Ciudad",
+        "Country": "País",
+        "Is active": "Está activo",
+        "Created": "Creado"
+    }
+}

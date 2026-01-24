@@ -1,0 +1,94 @@
+{
+    "root": {
+        "Active Mail": "Correo activo",
+        "Templates": "Plantillas",
+        "Drafts": "Borradores",
+        "Accounts": "Cuentas"
+    },
+    "manifest": {
+        "Mail": "Correo",
+        "Email client": "Cliente de correo",
+        "Active Mail": "Correo activo",
+        "Templates": "Plantillas",
+        "Accounts": "Cuentas",
+        "Scheduled to send": "Programado para enviar",
+        "Sent from Hubleto": "Enviado desde Hubleto"
+    },
+    "Models\\Mail": {
+        "Mail Id": "ID de correo",
+        "Mail Number": "Número de correo",
+        "Mailbox": "Buzón",
+        "Priority": "Prioridad",
+        "Created": "Creado",
+        "Sent": "Enviado",
+        "Read": "Leído",
+        "Subject": "Asunto",
+        "From": "De",
+        "To": "Para",
+        "Cc": "CC",
+        "Bcc": "CCO",
+        "Body (Text)": "Cuerpo (Texto)",
+        "Body (HTML)": "Cuerpo (HTML)",
+        "Color": "Color",
+        "Draft": "Borrador",
+        "Template": "Plantilla",
+        "Account": "Cuenta",
+        "Scheduled to send": "Programado para enviar",
+        "Reply to": "Responder a"
+    },
+    "Models\\Account": {
+        "Name": "Nombre",
+        "Color": "Color",
+        "Sender email address": "Dirección de correo del remitente",
+        "Sender name": "Nombre del remitente",
+        "IMAP host": "Host IMAP",
+        "IMAP port": "Puerto IMAP",
+        "IMAP encryption": "Cifrado IMAP",
+        "IMAP username": "Nombre de usuario IMAP",
+        "IMAP password": "Contraseña IMAP",
+        "SMTP host": "Host SMTP",
+        "SMTP port": "Puerto SMTP",
+        "SMTP encryption": "Cifrado SMTP",
+        "SMTP username": "Nombre de usuario SMTP",
+        "SMTP password": "Contraseña SMTP"
+    },
+    "Models\\Mailbox": {
+        "Account": "Cuenta",
+        "Name": "Nombre"
+    },
+    "Controllers\\Home": {
+        "Mail": "Correo"
+    },
+    "Controllers\\Templates": {
+        "Mail": "Correo",
+        "Templates": "Plantillas"
+    },
+    "Models\\Template": {
+        "Subject": "Asunto",
+        "Body (Text)": "Cuerpo (Texto)",
+        "Body (HTML)": "Cuerpo (HTML)"
+    },
+    "Controllers\\Scheduled": {
+        "Scheduled": "Programado",
+        "Mail": "Correo"
+    },
+    "Controllers\\Sent": {
+        "Sent": "Enviado",
+        "Mail": "Correo"
+    },
+    "Controllers\\Get": {
+        "Mail": "Correo",
+        "Get": "Obtener"
+    },
+    "Controllers\\Accounts": {
+        "Mail": "Correo",
+        "Accounts": "Cuentas"
+    },
+    "Models\\Index": {
+        "Mail": "Correo",
+        "From": "De",
+        "To": "Para",
+        "Cc": "CC",
+        "Bcc": "CCO"
+    }
+}

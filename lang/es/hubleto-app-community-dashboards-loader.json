@@ -1,0 +1,43 @@
+{
+    "manifest": {
+        "Dashboards": "Tableros",
+        "Free dashboards app": "Aplicación gratuita de tableros"
+    },
+    "root": {
+        "Dashboards": "Tableros"
+    },
+    "Models\\Dashboard": {
+        "Owner": "Propietario",
+        "Title": "Título",
+        "Slug": "Slug",
+        "Color": "Color",
+        "Is default": "Predeterminado",
+        "Add dashboard": "Agregar tablero",
+        "By turning this on you will change the dashboard shown on the Homepage": "Al activar esto, cambiará el tablero que se muestra en la página de inicio"
+    },
+    "Models\\Panel": {
+        "Dashboard": "Tablero",
+        "Board": "Tablero",
+        "Title": "Título",
+        "Configuration": "Configuración",
+        "-- Select board to be displayed in panel --": "-- Seleccione el tablero a mostrar --",
+        "Width": "Ancho",
+        "Order": "Orden",
+        "Position": "Posición"
+    },
+    "Components\\Dashboard": {
+        "Add new panel": "Agregar nuevo panel",
+        "Configure this dashboard": "Configurar tablero"
+    },
+    "Controllers\\Dashboards": {
+        "Dashboards": "Tableros",
+        "Add dashboard": "Agregar tablero"
+    },
+    "Controllers\\Settings": {
+        "Dashboards": "Tableros",
+        "Settings": "Configuraciones"
+    },
+    "Components\\FormDashboard": {
+        "Panels": "Paneles"
+    }
+}

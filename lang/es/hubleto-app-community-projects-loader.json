@@ -1,0 +1,61 @@
+{
+    "manifest": {
+        "Projects": "Proyectos",
+        "Project management": "Gestión de proyectos",
+        "Phases": "Fases",
+        "Monthly summary": "Resumen mensual"
+    },
+    "root": {
+        "Projects": "Proyectos",
+        "Phases": "Fases"
+    },
+    "Models\\Project": {
+        "Deal": "Oportunidad",
+        "Customer": "Cliente",
+        "Contact": "Contacto",
+        "Identifier": "Identificador",
+        "Title": "Título",
+        "Description": "Descripción",
+        "Main developer": "Encargado principal",
+        "Account manager": "Responsable de cuenta",
+        "Priority": "Prioridad",
+        "Start": "Inicio",
+        "Deadline": "Fecha límite",
+        "Budget": "Presupuesto",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Closed": "Cerrado",
+        "Color": "Color",
+        "Notes": "Notas",
+        "Created": "Creado",
+        "Open \/ Closed": "Abierto \/ Cerrado",
+        "Open": "Abierto",
+        "All": "Todos",
+        "Average hourly costs": "Costo promedio por hora"
+    },
+    "Models\\Phase": {
+        "Name": "Nombre",
+        "Order": "Orden",
+        "Color": "Color"
+    },
+    "Components\\FormProject": {
+        "Projects": "Proyectos",
+        "Worksheet": "Registro de horas",
+        "Project": "Proyecto",
+        "Tasks": "Tareas",
+        "Statistics": "Estadísticas",
+        "Open tasks": "Tareas abiertas"
+    },
+    "Models\\ProjectOrder": {
+        "Project": "Proyecto",
+        "Order": "Pedido"
+    },
+    "Models\\ProjectTask": {
+        "Project": "Proyecto",
+        "Task": "Tarea"
+    },
+    "Models\\ProjectDeal": {
+        "Project": "Proyecto",
+        "Deal": "Oportunidad"
+    }
+}

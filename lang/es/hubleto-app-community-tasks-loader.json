@@ -1,0 +1,47 @@
+{
+    "manifest": {
+        "Tasks": "Tareas",
+        "Task management app": "Aplicación de gestión de tareas"
+    },
+    "Models\\Task": {
+        "Identifier": "Identificador",
+        "Title": "Título",
+        "Description": "Descripción",
+        "Developer": "Desarrollador",
+        "Tester": "Probador",
+        "Priority": "Prioridad",
+        "Estimation": "Estimación",
+        "Duration": "Duración",
+        "Start": "Inicio",
+        "Deadline": "Fecha límite",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Is milestone": "Es un hito",
+        "Closed": "Cerrado",
+        "Notes": "Notas",
+        "Created": "Creado",
+        "External Model": "Modelo externo",
+        "External ID": "ID externo",
+        "Worked": "Trabajado",
+        "Customer": "Cliente",
+        "Contact": "Contacto",
+        "Is chargeable": "Es facturable",
+        "Related to": "Relacionado con",
+        "Open \/ Closed": "Abierto / Cerrado",
+        "Open": "Abierto",
+        "All": "Todos"
+    },
+    "Models\\Todo": {
+        "To do": "Por hacer",
+        "Task": "Tarea",
+        "Responsible": "Responsable",
+        "Closed": "Cerrado",
+        "Deadline": "Fecha límite"
+    },
+    "Controllers\\Boards\\MyRecentTasks": {
+        "You did not work on any task since last 2 weeks.": "No trabajaste en ninguna tarea durante las últimas 2 semanas."
+    },
+    "Controllers\\Tasks": {
+        "Tasks": "Tareas"
+    }
+}

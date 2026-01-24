@@ -1,0 +1,37 @@
+{
+    "manifest": {
+        "Inventory": "Inventario",
+        "Management of inventory items in warehouses.": "Gestión de artículos de inventario en almacenes.",
+        "Warehouses": "Almacenes",
+        "Transactions": "Transacciones"
+    },
+    "root": {
+        "Warehouses": "Almacenes",
+        "Transactions": "Transacciones"
+    },
+    "Models\\Inventory": {
+        "Product": "Producto",
+        "Location in warehouse": "Ubicación en el almacén",
+        "Status": "Estado",
+        "Quantity": "Cantidad",
+        "Batch number": "Número de lote",
+        "Serial number": "Número de serie",
+        "Expiration": "Caducidad",
+        "Received": "Recibido",
+        "Last moved": "Último movimiento"
+    },
+    "Models\\Status": {
+        "Name": "Nombre"
+    },
+    "Models\\Transaction": {
+        "Transaction UID": "ID de la transacción",
+        "Type": "Tipo",
+        "Date and time of transaction": "Fecha y hora de la transacción",
+        "Product": "Producto",
+        "Quantity": "Cantidad",
+        "Reference document #1": "Documento de referencia #1",
+        "Reference document #2": "Documento de referencia #2",
+        "Reference document #3": "Documento de referencia #3",
+        "Notes": "Notas"
+    }
+}

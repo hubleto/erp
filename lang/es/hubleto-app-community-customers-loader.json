@@ -1,0 +1,130 @@
+{
+    "manifest": {
+        "Customers": "Clientes",
+        "Free customer management and addressbook.": "Gestión gratuita de clientes y libreta de direcciones.",
+        "Customer Tags": "Etiquetas de clientes"
+    },
+    "Models\\Customer": {
+        "Add Customer": "Agregar cliente",
+        "Name": "Nombre",
+        "Street Line 1": "Calle, línea 1",
+        "Street Line 2": "Calle, línea 2",
+        "Region": "Región",
+        "City": "Ciudad",
+        "Country": "País",
+        "Postal Code": "Código postal",
+        "VAT ID": "Registro Impuesto",
+        "Customer ID": "Número de cliente",
+        "Tax ID": "Número de identificación fiscal",
+        "Notes": "Notas",
+        "Date Created": "Fecha de creación",
+        "Active": "Activo",
+        "Assigned User": "Usuario asignado",
+        "Customers": "Clientes",
+        "Shared folder (online document storage)": "Carpeta compartida (almacenamiento de documentos en línea)",
+        "Link to shared folder (online storage) with related documents": "Enlace a la carpeta compartida (almacenamiento en línea) con documentos relacionados",
+        "Owner": "Propietario",
+        "Manager": "Gerente",
+        "Tags": "Etiquetas",
+        "Archive": "Archivo",
+        "Archived": "Archivado",
+        "Identifier": "Identificador",
+        "Non-active": "Inactivo"
+    },
+    "Controllers\\Customers": {
+        "Customers": "Clientes"
+    },
+    "Models\\CustomerActivity": {
+        "Customer": "Cliente",
+        "Contact Person": "Persona de contacto",
+        "Activity type": "Tipo de actividad",
+        "Subject": "Asunto",
+        "Start Date": "Fecha de inicio",
+        "Start Time": "Hora de inicio",
+        "End Date": "Fecha de finalización",
+        "End Time": "Hora de finalización",
+        "All day": "Todo el día",
+        "Completed": "Completado",
+        "Created by": "Creado por",
+        "Contact": "Contacto",
+        "Start date": "Fecha de inicio",
+        "Start time": "Hora de inicio",
+        "End date": "Fecha de finalización",
+        "End time": "Hora de finalización",
+        "Meeting minutes (link)": "Minutas de la reunión (enlace)",
+        "Location": "Ubicación",
+        "Online meeting link": "Enlace a la reunión en línea",
+        "Description": "Descripción",
+        "Recurrence": "Recurrencia",
+        "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Minutas cortas de la reunión"
+    },
+    "Models\\CustomerDocument": {
+        "Customer": "Cliente",
+        "Document": "Documento"
+    },
+    "Models\\CustomerTag": {
+        "Customer": "Cliente",
+        "Tag": "Etiqueta"
+    },
+    "Components\\FormCustomer": {
+        "Contacts": "Contactos",
+        "Add contact": "Agregar contacto",
+        "Customer": "Cliente",
+        "Last name": "Apellido",
+        "Main Contact": "Contacto principal",
+        "First name": "Nombre",
+        "Leads": "Clientes potenciales",
+        "Deals": "Oportunidades",
+        "Calendar": "Calendario",
+        "Shared documents": "Documentos compartidos",
+        "Local documents": "Documentos locales",
+        "Documents": "Documentos",
+        "Contact persons": "Personas de contacto",
+        "Add contact person": "Agregar persona de contacto",
+        "Phone number": "Número de teléfono",
+        "Email": "Correo electrónico",
+        "Primary Contact": "Contacto principal",
+        "Tags": "Etiquetas",
+        "Show on map": "Mostrar en el mapa",
+        "Enter = Log completed activity": "Enter = registrar actividad completada",
+        "Shift+Enter = Schedule": "Shift+Enter = programar actividad",
+        "Type recent activity here": "Escriba la actividad reciente aquí",
+        "Not completed yet": "No completado aún",
+        "Most recent activities": "Actividades más recientes",
+        "Log completed activity": "Registrar actividad completada",
+        "Schedule activity": "Programar actividad",
+        "Enter": "Enter",
+        "Shift+Enter": "Shift+Enter"
+    },
+    "root": {
+        "Customer Tags": "Etiquetas de clientes"
+    },
+    "Models\\Tag": {
+        "Name": "Etiqueta",
+        "Color": "Color",
+        "Customer Tags": "Etiquetas de clientes",
+        "Add Customer Tag": "Agregar etiqueta de cliente"
+    },
+    "Components\\FormActivity": {
+        "Customer": "Cliente"
+    },
+    "Components\\CustomerFormActivity": {
+        "Customer": "Cliente",
+        "End": "Fin",
+        "Start": "Inicio"
+    },
+    "Controllers\\Activity": {
+        "Customers": "Clientes",
+        "Activities": "Actividades"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Configuraciones",
+        "Customer Tags": "Etiquetas de clientes",
+        "Customers": "Clientes",
+        "Tags": "Etiquetas"
+    },
+    "Components\\TableCustomers": {
+        "Hide filter": "Ocultar filtro"
+    }
+}

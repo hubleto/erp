@@ -1,4 +1,4 @@
-Costa Rica, 16.1.2025
+Costa Rica, 24.1.2025
 
 I hereby agree to the terms of the Hubleto Individual Contributor License Agreement v1.0.
 

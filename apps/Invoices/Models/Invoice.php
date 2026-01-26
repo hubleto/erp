@@ -593,7 +593,28 @@ class Invoice extends \Hubleto\Erp\Model {
         // labelAlignment: LabelAlignment::Left
       );
 
-      $vars['PAY_BY_SQUARE_QR_CODE'] = $builder->build()->getDataUri();
+      $vars['PAY_BY_SQUARE_QR_CODE'] = $builder->build(
+        null, // ?WriterInterface $writer = null,
+        null, // ?array $writerOptions = null,
+        null, // ?bool $validateResult = null,
+        null, // ?string $data = null,
+        null, // ?EncodingInterface $encoding = null,
+        null, // ?ErrorCorrectionLevel $errorCorrectionLevel = null,
+        null, // ?int $size = null,
+        1, // ?int $margin = null,
+        null, // ?RoundBlockSizeMode $roundBlockSizeMode = null,
+        null, // ?ColorInterface $foregroundColor = null,
+        null, // ?ColorInterface $backgroundColor = null,
+        null, // ?string $labelText = null,
+        null, // ?FontInterface $labelFont = null,
+        null, // ?LabelAlignment $labelAlignment = null,
+        null, // ?MarginInterface $labelMargin = null,
+        null, // ?ColorInterface $labelTextColor = null,
+        null, // ?string $logoPath = null,
+        null, // ?int $logoResizeToWidth = null,
+        null, // ?int $logoResizeToHeight = null,
+        null, // ?bool $logoPunchoutBackground = null,
+      )->getDataUri();
     } catch (\Throwable $e) {
       // cannot generate QR code, doing nothing
       $vars['PAY_BY_SQUARE_QR_CODE_ERROR'] = $e->getMessage();

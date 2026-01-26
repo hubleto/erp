@@ -562,8 +562,10 @@ class Invoice extends \Hubleto\Erp\Model {
 
     // render PayBySquare QR code
     try {
+      $totalInclVat = (float) ($vars['total_incl_vat'] ?? 0);
+      $totalAdvancePayments = (float) ($vars['advance_payments_total'] ?? 0);
       $pbsEnc = new \Hubleto\Utilities\PayBySquareEncoder();
-      $pbsEnc->setAmount((float) ($vars['total_incl_vat'] ?? 0) - (float) ($vars['advance_payments_total'] ?? 0));
+      $pbsEnc->setAmount(round($totalInclVat - $totalAdvancePayments, 2));
       $pbsEnc->setIBAN($vars['PROFILE']['iban'] ?? '');
       $pbsEnc->setBIC($vars['PROFILE']['swift'] ?? '');
       $pbsEnc->setBeneficiaryName($vars['PROFILE']['name'] ?? '');

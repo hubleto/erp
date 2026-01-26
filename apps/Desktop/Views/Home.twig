@@ -2,9 +2,9 @@
 {% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? config.assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
 <div class="w-full flex gap-2">
-  <div class="grow bg-slate-50 p-2 mb-2 flex gap-2 rounded">
+  <div class="grow bg-slate-50 dark:bg-slate-800 p-2 mb-2 flex gap-2 rounded">
     {% if user.DEFAULT_COMPANY.logo != '' %}
-      <div class="flex border-r items-center" style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary ?? '#EEEEEE dark:border-slate-600' }}">
+      <div class="flex border-r items-center dark:border-slate-600" {% if user.DEFAULT_COMPANY.brand_color_primary %}style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary }}"{% endif %}>
         <img
           src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
           class="max-h-32 max-w-32 m-8"

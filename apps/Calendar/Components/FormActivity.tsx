@@ -98,7 +98,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
 
     return <>
       <div className='flex gap-2'>
-        {customInputs ? <div className="grow p-2 mb-2 bg-blue-50">{customInputs}</div> : null}
+        {customInputs ? <div className="grow p-2 mb-2 bg-blue-50 dark:bg-gray-900/50 rounded">{customInputs}</div> : null}
         <div className='flex gap-2 flex-col'>
           <div className='w-full'>{this.inputWrapper('completed')}</div>
           <div className='w-full'>{this.inputWrapper('id_owner')}</div>
@@ -141,11 +141,11 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
         </div>
         <div className='w-1/2'>
           {this.divider(this.translate('Repeats'))}
-          {this.inputWrapperCustom('recurrence', {}, '', <div className='hubleto component input flex flex-col items-start gap-2'>
+          {this.inputWrapperCustom('recurrence', {}, '', <div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
             {recurrence && recurrence.period == '' ?
               <select
                 value={recurrence.period}
-                className='w-full'
+                className='w-full dark:bg-gray-800 dark:border-gray-600 dark:text-white'
                 onChange={(event) => {
                   let newR = R;
                   //@ts-ignore
@@ -162,6 +162,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
               <div className='flex gap-1 items-center text-nowrap'>
                 <span>{this.translate('Repeat every')}</span>
                 <input
+                  className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
                   type='number'
                   value={recurrence.periodEvery}
                   style={{width: '4em'}}
@@ -173,6 +174,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
                   }}
                 ></input>
                 <select
+                  className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
                   value={recurrence.period}
                   style={{width: '8em'}}
                   onChange={(event) => {
@@ -194,6 +196,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
               <div className='flex gap-1 items-center text-nowrap'>
                 <span>{this.translate('End after')}</span>
                 <input
+                  className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
                   type='number'
                   value={recurrence.periodCount}
                   style={{width: '4em'}}

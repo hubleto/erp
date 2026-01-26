@@ -116,6 +116,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
       uid: 'activity_form',
       isOpen: true,
       type: 'right',
+      onClose: () => { this.setState({ activityFormComponent: null }); },
       ...this.state.activityFormModalProps
     };
 
@@ -227,7 +228,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
         ></Calendar>
       </div>
       {this.state.activityFormComponent ?
-        <ModalForm {...activityFormModalProps}>
+        <ModalForm ref={this.refActivityModal} {...activityFormModalProps}>
           {this.state.activityFormComponent}
         </ModalForm>
       : <></>}

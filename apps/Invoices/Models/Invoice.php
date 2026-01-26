@@ -600,7 +600,7 @@ class Invoice extends \Hubleto\Erp\Model {
         null, // ?string $data = null,
         null, // ?EncodingInterface $encoding = null,
         null, // ?ErrorCorrectionLevel $errorCorrectionLevel = null,
-        120, // ?int $size = null,
+        500, // ?int $size = null,
         2, // ?int $margin = null,
         null, // ?RoundBlockSizeMode $roundBlockSizeMode = null,
         null, // ?ColorInterface $foregroundColor = null,

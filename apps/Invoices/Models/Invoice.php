@@ -695,13 +695,13 @@ class Invoice extends \Hubleto\Erp\Model {
       case 5: $invoiceOutputFilename = 'Debit Note'; break;
     }
 
-    $invoiceOutputFilename .=
-      ' '
-      . Helper::str2url($invoice->number)
-      . ' '
-      . Helper::str2url($invoice->CUSTOMER->name)
+    $invoiceOutputFilename = strtolower(
+      $invoiceOutputFilename
+      . '-' . Helper::str2url($invoice->number)
+      . '-' . date('Ymd', strtotime($invoice->date_issue))
+      . '-' . Helper::str2url($invoice->CUSTOMER->name)
       . '.pdf'
-    ;
+    );
 
     /** @var Generator */
     $generator = $this->getService(Generator::class);

@@ -131,8 +131,18 @@ class Loader extends \Hubleto\Framework\App
           <span class="text">' . $this->translate('Invoices') . '</span>
         </a>
 
-        ' . ($dueInvoicesCount > 0 ? '<div class="badge badge-danger text-xs">Due and not paid: ' . $dueInvoicesCount . '</div>' : '') . '
-        ' . ($unsentInvoicesCount > 0 ? '<div class="badge badge-danger text-xs">Not sent: ' . $unsentInvoicesCount . '</div>' : '') . '
+        ' . ($dueInvoicesCount > 0 ? '
+          <a
+            href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
+            class="badge badge-danger text-xs"
+          >Due and not paid: ' . $dueInvoicesCount . '</a>
+        ' : '') . '
+        ' . ($unsentInvoicesCount > 0 ? '
+          <a
+            href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
+            class="badge badge-danger text-xs"
+          >Not sent: ' . $unsentInvoicesCount . '</a>
+        ' : '') . '
 
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">
           <span class="icon"><i class="fas fa-list"></i></span>

@@ -563,7 +563,7 @@ class Invoice extends \Hubleto\Erp\Model {
     // render PayBySquare QR code
     try {
       $pbsEnc = new \Hubleto\Utilities\PayBySquareEncoder();
-      $pbsEnc->setAmount(9.99);
+      $pbsEnc->setAmount((float) ($vars['total_incl_vat'] ?? 0) - (float) ($vars['advance_payments_total'] ?? 0));
       $pbsEnc->setIBAN($vars['PROFILE']['iban'] ?? '');
       $pbsEnc->setBIC($vars['PROFILE']['swift'] ?? '');
       $pbsEnc->setBeneficiaryName($vars['PROFILE']['name'] ?? '');
@@ -582,15 +582,15 @@ class Invoice extends \Hubleto\Erp\Model {
         data: $encoded,
         encoding: new Encoding('UTF-8'),
         errorCorrectionLevel: ErrorCorrectionLevel::High,
-        size: 300,
-        margin: 10,
+        size: 120,
+        margin: 0,
         roundBlockSizeMode: RoundBlockSizeMode::Margin,
         // logoPath: __DIR__.'/assets/bender.png',
         // logoResizeToWidth: 50,
         // logoPunchoutBackground: true,
-        labelText: 'Pay By Square',
-        labelFont: new OpenSans(20),
-        labelAlignment: LabelAlignment::Left
+        // labelText: 'Pay By Square',
+        // labelFont: new OpenSans(20),
+        // labelAlignment: LabelAlignment::Left
       );
 
       $vars['PAY_BY_SQUARE_QR_CODE'] = $builder->build()->getDataUri();

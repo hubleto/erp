@@ -238,12 +238,14 @@
         </td>
         <td style="width:33%;text-align:right">
           {% if PAY_BY_SQUARE_QR_CODE %}
-            <div style="float:right;border:3px solid #6fa4d7;padding:2mm;border-radius:1mm;width:120px">
+            <div style="float:right;border:3px solid #6fa4d7;border-radius:1mm;width:120px">
               <img
-                src="{{ PAY_BY_SQUARE_QR_CODE }}" style="max-width:180px;max-height:180px;"
-              ><br/>
-              <span style="color:#6fa4d7;font-size:8pt">PAY</span>
-              <span style="color:#b2b4b9;font-size:8pt">by square</span>
+                src="{{ PAY_BY_SQUARE_QR_CODE }}" style="width:100%;"
+              >
+              <div style="padding:3px">
+                <span style="color:#6fa4d7;font-size:8pt">PAY</span>
+                <span style="color:#b2b4b9;font-size:8pt">by square</span>
+              </div>
             </div>
           {% endif %}
         </td>

@@ -583,7 +583,7 @@ class Invoice extends \Hubleto\Erp\Model {
         encoding: new Encoding('UTF-8'),
         errorCorrectionLevel: ErrorCorrectionLevel::High,
         size: 120,
-        margin: 0,
+        margin: 1,
         roundBlockSizeMode: RoundBlockSizeMode::Margin,
         // logoPath: __DIR__.'/assets/bender.png',
         // logoResizeToWidth: 50,

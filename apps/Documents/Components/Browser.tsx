@@ -108,7 +108,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
     return <>
       <div className="flex gap-2">
         <button
-          className="btn btn-info text-xl"
+          className="btn btn-info text-xl dark:bg-blue-900 dark:text-blue-100 dark:border-blue-900"
           onClick={() => { this.changeFolder('_ROOT_', []); }}
         >
           <span className="icon"><i className="fas fa-home"></i></span>
@@ -118,7 +118,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
 
           return <button
             key={index}
-            className={"btn text-xl " + (isLast ? "btn-info" : "btn-cancel")}
+            className={"btn text-xl " + (isLast ? "btn-info dark:bg-blue-900 dark:text-blue-100 dark:border-blue-900" : "btn-cancel dark:bg-gray-700 dark:text-gray-200")}
             onClick={() => {
               if (isLast) {
                 this.setState({showFolderProperties: this.state.folderContent.folder.id});
@@ -162,7 +162,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
         {this.state.folderContent.documents ? this.state.folderContent.documents.map((item, index) => {
           return <button
             key={index}
-            className="btn btn-square btn-primary-outline w-32"
+            className="btn btn-square btn-primary-outline w-32 dark:bg-transparent"
             onClick={() => {
               this.setState({ recordId: item.id });
             }}
@@ -188,6 +188,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
           uid='create_sub_folder_modal'
           isOpen={true}
           type='right'
+          onClose={() => { this.setState({showFolderProperties: 0}); }}
         >
           <Form
             modal={this.refFolderPropertiesModal}

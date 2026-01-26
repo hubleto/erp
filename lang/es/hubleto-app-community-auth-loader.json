@@ -1,0 +1,41 @@
+{
+    "manifest": {
+        "Notifications": "Notificaciones",
+        "Auth": "Autenticación",
+        "Hubleto Authorization App for User Management": "Aplicación de autorización de Hubleto para la gestión de usuarios"
+    },
+    "Models\\User": {
+        "Type": "Tipo",
+        "First name": "Nombre",
+        "Last name": "Apellido",
+        "Nick": "Apodo",
+        "Email": "Correo electrónico",
+        "Language": "Idioma",
+        "Default company": "Empresa predeterminada",
+        "Apps": "Aplicaciones",
+        "Roles": "Roles",
+        "Teams": "Equipos",
+        "Position": "Posición",
+        "Phone number #1": "Número de teléfono #1",
+        "Phone number #2": "Número de teléfono #2",
+        "Photo": "Foto",
+        "Timezone": "Zona horaria"
+    },
+    "Models\\UserRole": {
+        "Role": "Rol",
+        "Grant all permissions (administrator role)": "Conceder todos los permisos (rol de administrador)",
+        "Description": "Descripción",
+        "Is default role (cannot be modified)": "Es el rol predeterminado (no se puede modificar)"
+    },
+    "Models\\UserHasRole": {
+        "User": "Usuario",
+        "Role": "Rol"
+    },
+    "Controllers\\SignIn": {
+        "Your email": "Correo electrónico",
+        "Password": "Contraseña",
+        "Keep signed in": "Mantener sesión iniciada",
+        "Sign in": "Iniciar sesión",
+        "Forgot password?": "¿Olvidó su contraseña?"
+    }
+}

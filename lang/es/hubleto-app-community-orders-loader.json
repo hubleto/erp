@@ -1,0 +1,155 @@
+{
+    "manifest": {
+        "Orders": "Pedidos",
+        "Free order managment.": "Gestión de pedidos gratuita.",
+        "Order states": "Estados de pedidos",
+        "Order warnings": "Advertencias de pedidos",
+        "All orders": "Todos los pedidos",
+        "Purchase orders": "Pedidos de compra",
+        "Sales orders": "Pedidos de venta",
+        "Payments": "Pagos"
+    },
+    "root": {
+        "Order states": "Estados de pedidos"
+    },
+    "Controllers\\Orders": {
+        "Orders": "Pedidos"
+    },
+    "Models\\Order": {
+        "Order number": "Número de pedido",
+        "Customer": "Cliente",
+        "Title": "Título",
+        "State": "Estado",
+        "Price": "Precio",
+        "Currency": "Moneda",
+        "Order date": "Fecha de pedido",
+        "Required delivery date": "Fecha de entrega requerida",
+        "Shipping information": "Información de envío",
+        "Notes": "Notas",
+        "Add order": "Agregar pedido",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Template": "Plantilla",
+        "Identifier": "Identificador",
+        "Owner": "Propietario",
+        "Manager": "Gerente",
+        "Price excl. VAT": "Precio sin impuesto",
+        "Price incl. VAT": "Precio con impuesto",
+        "Closed": "Cerrado",
+        "Open \/ Closed": "Abierto \/ Cerrado",
+        "Open": "Abierto",
+        "All": "Todos",
+        "Purchase \/ Sales": "Compra \/ Venta",
+        "Purchase order": "Pedido de compra",
+        "Sales order": "Pedido de venta",
+        "External identifier": "Identificador externo",
+        "Supplier": "Proveedor",
+        "Payment period": "Período de pago",
+        "One-time payment": "Pago único",
+        "Monthly": "Mensual",
+        "Bi-Monthly": "Bimensual",
+        "Quarterly": "Trimestral",
+        "Each 6 months": "Cada 6 meses",
+        "Yearly": "Anual",
+        "Each 2 years": "Cada 2 años",
+        "Prepaid working hours": "Horas de trabajo prepagadas",
+        "Prepaid working hours - period": "Horas de trabajo prepagadas - período",
+        "No working hours recurrence": "Sin recurrencia de horas de trabajo",
+        "Shared folder (online document storage)": "Carpeta compartida (almacenamiento de documentos en línea)",
+        "Link to shared folder (online storage) with related documents": "Enlace a la carpeta compartida (almacenamiento en línea) con documentos relacionados",
+        "PDF": "PDF",
+        "Purchase orders": "Pedidos de compra",
+        "Sales orders": "Pedidos de venta"
+    },
+    "Models\\State": {
+        "Title": "Título",
+        "Code": "Código",
+        "Color": "Color"
+    },
+    "Models\\Item": {
+        "Order": "Pedido",
+        "Title": "Título",
+        "Product": "Producto",
+        "Unit price": "Precio unitario",
+        "Amount": "Cantidad",
+        "Discount": "Descuento",
+        "Vat": "Impuesto",
+        "Add item": "Agregar producto",
+        "Sales price": "Precio de venta",
+        "Price excl. VAT": "Precio sin impuesto",
+        "Price incl. VAT": "Precio con impuesto",
+        "Position": "Posición"
+    },
+    "Models\\History": {
+        "Order": "Pedido",
+        "Short Description": "Descripción corta",
+        "Long Description": "Descripción detallada",
+        "Date Time": "Fecha y hora"
+    },
+    "Components\\FormOrder": {
+        "Order": "Pedido",
+        "History": "Historial",
+        "Title": "Título",
+        "Documents": "Documentos",
+        "Projects": "Proyectos",
+        "Invoices": "Facturas",
+        "Products": "Productos",
+        "Type recent activity here": "Escriba la actividad reciente aquí",
+        "Log completed activity": "Registrar actividad completada",
+        "Enter": "Enter",
+        "Schedule activity": "Programar actividad",
+        "Shift+Enter": "Shift+Enter",
+        "Most recent activities": "Actividades más recientes",
+        "Items": "Artículos",
+        "Preview": "Vista previa",
+        "Calendar": "Calendario",
+        "Payments": "Pagos",
+        "Select parent deal": "Seleccionar trato principal",
+        "unsaved changes": "cambios no guardados",
+        "Save and close": "Guardar y cerrar"
+    },
+    "Models\\OrderDocument": {
+        "Order": "Pedido",
+        "Document": "Documento"
+    },
+    "Models\\OrderActivity": {
+        "Subject": "Asunto",
+        "Activity type": "Tipo de actividad",
+        "Start date": "Fecha de inicio",
+        "Start time": "Hora de inicio",
+        "End date": "Fecha de finalización",
+        "End time": "Hora de finalización",
+        "All day": "Todo el día",
+        "Completed": "Completado",
+        "Meeting minutes (link)": "Minutas de la reunión (enlace)",
+        "Created by": "Creado por",
+        "Order": "Pedido",
+        "Location": "Ubicación",
+        "Online meeting link": "Enlace a la reunión en línea",
+        "Description": "Descripción",
+        "Recurrence": "Recurrencia",
+        "Long meeting minutes (link to external document)": "Minutas detalladas de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Minutas breves de la reunión"
+    },
+    "Models\\OrderDeal": {
+        "Order": "Pedido",
+        "Deal": "Oportunidad"
+    },
+    "Controllers\\Boards\\OrderWarnings": {
+        "Open orders without future plan": "Pedidos abiertos sin plan futuro"
+    },
+    "Models\\Payment": {
+        "Order": "Pedido",
+        "Title": "Título",
+        "Due date": "Fecha de vencimiento",
+        "Unit price": "Precio unitario",
+        "Amount": "Cantidad",
+        "Discount": "Descuento",
+        "VAT": "Impuesto",
+        "Notes": "Notas",
+        "Invoice item": "Artículo de factura"
+    },
+    "Components\\TableOrders": {
+        "Hide filter": "Ocultar filtro"
+    }
+}

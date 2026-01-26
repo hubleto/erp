@@ -1,0 +1,44 @@
+{
+    "manifest": {
+        "Api": "API",
+        "Hubleto Api Key management": "Gestión de claves API de Hubleto",
+        "API keys": "Claves API",
+        "Discussions": "Discusiones",
+        "Members": "Miembros",
+        "Messages": "Mensajes"
+    },
+    "Models\\Key": {
+        "Key": "Clave",
+        "Valid until": "Válido hasta",
+        "Enabled": "Habilitado",
+        "Notes": "Notas",
+        "IP Address blacklist": "Lista negra de direcciones IP",
+        "IP Address whitelist": "Lista blanca de direcciones IP",
+        "Created by": "Creado por",
+        "Created": "Creado"
+    },
+    "Models\\Permission": {
+        "Key": "Clave",
+        "App": "Aplicación",
+        "Controller": "Controlador"
+    },
+    "Components\\FormKey": {
+        "Usage": "Registros de uso",
+        "Key": "Clave",
+        "Permissions": "Permisos",
+        "Test": "Probar",
+        "Test result": "Resultado de la prueba",
+        "Run test": "Ejecutar prueba"
+    },
+    "Models\\Usage": {
+        "Key": "Clave",
+        "App": "Aplicación",
+        "Controller": "Controlador",
+        "Used on": "Usado en",
+        "IP address": "Dirección IP",
+        "Status": "Estado",
+        "Unknown": "Desconocido",
+        "Success": "Éxito",
+        "Error": "Error"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "manifest": {
+        "Notifications": "Notificaciones",
+        "Internal team notifications": "Notificaciones internas del equipo"
+    },
+    "Models\\Notification": {
+        "Priority": "Prioridad",
+        "Category": "Categoría",
+        "From": "De",
+        "To": "Para",
+        "Subject": "Asunto",
+        "Body": "Cuerpo",
+        "Color": "Color",
+        "Tags": "Etiquetas",
+        "Sent": "Enviado",
+        "Read": "Leído",
+        "URL": "URL"
+    },
+    "Controllers\\Notifications": {
+        "Notifications": "Notificaciones"
+    },
+    "Components\\TableNotifications": {
+        "Mark as unread": "Marcar como no leído",
+        "Mark as read": "Marcar como leído"
+    }
+}

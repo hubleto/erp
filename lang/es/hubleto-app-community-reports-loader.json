@@ -1,0 +1,12 @@
+{
+    "manifest": {
+        "Reports": "Reportes",
+        "Free report generator app.": "Generador de reportes gratuito."
+    },
+    "Models\\Report": {
+        "Title": "Título",
+        "Model": "Modelo",
+        "Query": "Consulta",
+        "Notes": "Notas"
+    }
+}

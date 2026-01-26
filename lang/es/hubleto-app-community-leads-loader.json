@@ -1,0 +1,161 @@
+{
+    "manifest": {
+        "Leads": "Clientes potenciales",
+        "Management of leads, cold contacts. Convert leads to deals.": "Gestión de clientes potenciales y contactos en frío. Conversión en oportunidades.",
+        "Lead Levels": "Niveles de clientes potenciales",
+        "Lead Tags": "Etiquetas de clientes potenciales",
+        "Lead Lost Reasons": "Motivos de pédida",
+        "Active leads": "Clientes potenciales activos",
+        "Archived leads": "Clientes potenciales archivados"
+    },
+    "Controllers\\Leads": {
+        "Sales": "Ventas",
+        "Leads": "Clientes potenciales"
+    },
+    "Controllers\\LeadsArchive": {
+        "Sales": "Ventas",
+        "Leads": "Clientes potenciales",
+        "Archive": "Archivo"
+    },
+    "Models\\LeadActivity": {
+        "Activity type": "Tipo de actividad",
+        "Subject": "Asunto",
+        "Lead": "Cliente potencial",
+        "Contact person": "Persona de contacto",
+        "Start date": "Fecha de inicio",
+        "Start time": "Hora de inicio",
+        "End date": "Fecha de finalización",
+        "End time": "Hora de finalización",
+        "All day": "Todo el día",
+        "Completed": "Completada",
+        "Created by": "Creado por",
+        "Contact": "Contacto",
+        "Meeting minutes (link)": "Acta de la reunión (enlace)",
+        "Location": "Ubicación",
+        "Online meeting link": "Enlace a la reunión en línea",
+        "Description": "Descripción",
+        "Recurrence": "Recurrente",
+        "Long meeting minutes (link to external document)": "Acta larga de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Acta corta de la reunión"
+    },
+    "Models\\Lead": {
+        "Add Lead": "Añadir cliente potencial",
+        "Lead Identifier": "Identificador",
+        "Title": "Título",
+        "Customer": "Cliente",
+        "Contact person": "Persona de contacto",
+        "Price": "Precio",
+        "Currency": "Moneda",
+        "Expected close date": "Fecha de cierre prevista",
+        "Assigned user": "Usuario asignado",
+        "Date created": "Fecha de creación",
+        "Status": "Estado",
+        "Notes": "Notas",
+        "Source channel": "Canal de origen",
+        "Archived": "Archivado",
+        "Link to shared folder (online storage) with related documents": "Enlace a la carpeta compartida (almacenamiento en línea) con documentos relacionados",
+        "Score": "Puntuación",
+        "Contact": "Contacto",
+        "Created": "Creado",
+        "Reason for Lost": "Motivo de pérdida",
+        "Add lead": "Añadir cliente potencial",
+        "Owner": "Propietario",
+        "Identifier": "Identificador",
+        "Specific subject (if any)": "Asunto específico (si lo hay)",
+        "Campaign": "Campaña",
+        "Email": "Email",
+        "Phone number": "Teléfono",
+        "Level": "Nivel",
+        "Manager": "Gerente",
+        "Team": "Equipo",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Closed": "Cerrado",
+        "Tags": "Etiquetas",
+        "Open \/ Closed": "Abierto \/ Cerrado",
+        "Open": "Abierto",
+        "All": "Todos"
+    },
+    "root": {
+        "Lead statuses": "Estados de clientes potenciales",
+        "Lead Tags": "Etiquetas de clientes potenciales",
+        "Active leads": "Clientes potenciales activos",
+        "Archived leads": "Clientes potenciales archivados",
+        "Lead Lost Reasons": "Motivos de pérdida",
+        "Lead Levels": "Niveles de clientes potenciales"
+    },
+    "Models\\LeadHistory": {
+        "Change Date": "Fecha de cambio",
+        "Lead": "Cliente potencial",
+        "Description": "Descripción"
+    },
+    "Models\\LeadTag": {
+        "Lead": "Cliente potencial",
+        "Tag": "Etiqueta"
+    },
+    "Models\\LeadDocument": {
+        "Lead": "Cliente potencial",
+        "Document": "Documento"
+    },
+    "Components\\FormLead": {
+        "Lead": "Cliente potencial",
+        "Documents": "Documentos",
+        "Calendar": "Calendario",
+        "Shared documents": "Documentos compartidos",
+        "History": "Historial",
+        "Local documents": "Documentos locales",
+        "Go to deal": "Ir a la oportunidad",
+        "Show leads": "Mostrar clientes potenciales",
+        "Type recent activity here": "Escriba la actividad reciente aquí",
+        "Enter = Log completed activity": "Enter = Registrar actividad completada",
+        "Shift+Enter = Schedule": "Shift+Enter = Programar actividad",
+        "Most recent activities": "Actividades más recientes",
+        "Not completed yet": "No completado aún",
+        "Tasks": "Tareas",
+        "Log completed activity": "Registrar actividad completada",
+        "Enter": "Enter",
+        "Schedule activity": "Programar actividad",
+        "Shift+Enter": "Shift+Enter"
+    },
+    "Models\\Tag": {
+        "Name": "Nombre",
+        "Color": "Color"
+    },
+    "Models\\LeadProduct": {
+        "Lead": "Cliente potencial",
+        "Product": "Producto",
+        "Unit Price": "Precio unitario",
+        "Amount": "Cantidad",
+        "Dicount (%)": "Descuento (%)",
+        "Vat (%)": "Impuesto (%)",
+        "Vat": "Impuesto",
+        "Discount": "Descuento",
+        "Sum": "Suma"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Motivo de pérdida"
+    },
+    "Components\\FormActivity": {
+        "End": "Fin",
+        "Start": "Inicio"
+    },
+    "Models\\Level": {
+        "Name": "Nombre",
+        "Color": "Color"
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Open leads without future plan": "Clientes potenciales abiertos sin plan futuro",
+        "No warnings for leads.": "No hay advertencias para clientes potenciales."
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "Cliente potencial",
+        "Campaign": "Campaña"
+    },
+    "Models\\LeadTask": {
+        "Lead": "Cliente potencial",
+        "Task": "Tarea"
+    },
+    "Components\\TableLeads": {
+        "Hide filter": "Ocultar filtro"
+    }
+}

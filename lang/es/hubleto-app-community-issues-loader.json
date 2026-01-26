@@ -1,0 +1,23 @@
+{
+    "manifest": {
+        "Issues": "Problemas",
+        "Issue management": "Gestión de problemas",
+        "Mail accounts": "Cuentas de correo"
+    },
+    "root": {
+        "Issues": "Problemas",
+        "Mail accounts": "Cuentas de correo"
+    },
+    "Controllers\\Issues": {
+        "Issues": "Problemas"
+    },
+    "Models\\Issue": {
+        "Title": "Título",
+        "Problem description": "Descripción del problema"
+    },
+    "Models\\MailAccount": {
+        "Mail account (requires Mail app)": "Cuenta de correo (requiere la aplicación de correo)",
+        "Configuration": "Configuración",
+        "Notes": "Notas"
+    }
+}

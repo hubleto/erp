@@ -1,0 +1,98 @@
+{
+    "manifest": {
+        "Campaigns": "Campañas",
+        "Management of marketing campaigns": "Gestión de campañas de marketing",
+        "Recipients": "Destinatarios",
+        "Recipient statuses": "Estados de los destinatarios"
+    },
+    "Models\\Campaign": {
+        "Name": "Nombre",
+        "UTM source": "Origen UTM",
+        "UTM campaign": "Campaña UTM",
+        "UTM term": "Término UTM",
+        "UTM content": "Contenido UTM",
+        "Target audience": "Público objetivo",
+        "Goal": "Objetivo",
+        "Notes": "Notas",
+        "Mail body (HTML)": "Cuerpo del correo (HTML)",
+        "Color": "Color",
+        "Mail template": "Plantilla de correo",
+        "Manager": "Gerente",
+        "Created": "Creado",
+        "UID": "UID",
+        "Mail account to send email from": "Cuenta de correo para enviar",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Approved": "Aprobado",
+        "Closed": "Cerrado",
+        "Add Campaign": "Agregar campaña",
+        "Open \/ Closed": "Abierto \/ Cerrado",
+        "Open": "Abierto",
+        "All": "Todos",
+        "Reply to": "Responder a",
+        "Owner": "Propietario",
+        "Lanuched by": "Lanzado por",
+        "Launched": "Lanzado"
+    },
+    "Models\\Recipient": {
+        "Campaign": "Campaña",
+        "Contact": "Contacto",
+        "Email": "Correo electrónico",
+        "First name": "Nombre",
+        "Last name": "Apellido",
+        "Salutation": "Saludo",
+        "Reference to mail sent": "Correo enviado de referencia",
+        "Variables": "Variables",
+        "Status": "Estado"
+    },
+    "Models\\CampaignTask": {
+        "Campaign": "Campaña",
+        "Task": "Tarea"
+    },
+    "Controllers\\Campaigns": {
+        "Campaigns": "Campañas"
+    },
+    "Components\\FormCampaign": {
+        "Campaign": "Campaña",
+        "Add recipients from contacts": "Agregar destinatarios desde contactos",
+        "Tasks": "Tareas",
+        "Launch": "Lanzar",
+        "Calendar": "Calendario",
+        "Contacts": "Contactos",
+        "Recipients": "Destinatarios",
+        "Test": "Prueba",
+        "Clicks": "Clicks"
+    },
+    "Models\\Click": {
+        "Campaign": "Campaña",
+        "Recipient": "Destinatario",
+        "Url": "Url",
+        "Clicked": "Clickeado"
+    },
+    "Models\\CampaignActivity": {
+        "Subject": "Asunto",
+        "Location": "Ubicación",
+        "Online meeting link": "Enlace a la reunión",
+        "Description": "Descripción",
+        "Activity type": "Tipo de actividad",
+        "Start date": "Fecha de inicio",
+        "Start time": "Hora de inicio",
+        "End date": "Fecha de finalización",
+        "End time": "Hora de finalización",
+        "Recurrence": "Recurrencia",
+        "All day": "Todo el día",
+        "Completed": "Completado",
+        "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Minutas cortas de la reunión",
+        "Created by": "Creado por",
+        "Campaign": "Campaña"
+    },
+    "Components\\TableCampaigns": {
+        "Hide filter": "Esconder filtro"
+    },
+    "Models\\RecipientStatus": {
+        "Email": "Correo electrónico",
+        "Is opted-out": "Está excluido",
+        "Is invalid": "Es inválido"
+    }
+}

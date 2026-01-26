@@ -1,0 +1,69 @@
+{
+    "manifest": {
+        "Invoices": "Facturas",
+        "Invoincing": "Facturación",
+        "Prepared items": "Artículos preparados",
+        "Payments": "Pagos",
+        "Payment methods": "Métodos de pago",
+        "Profiles": "Perfiles"
+    },
+    "Models\\Invoice": {
+        "Profile": "Perfil",
+        "Issued by": "Emitido por",
+        "Customer": "Cliente",
+        "Number": "Número",
+        "TIP: Number is auto-generated based on the pattern configured in the profile.": "TIP: El número se genera automáticamente según el patrón configurado en el perfil.",
+        "Variable symbol": "Símbolo variable",
+        "Constant symbol": "Símbolo constante",
+        "Specific symbol": "Símbolo específico",
+        "Issued": "Emitido",
+        "Delivered": "Entregado",
+        "Due": "Vencimiento",
+        "Payment": "Pago",
+        "Notes": "Notas",
+        "Invoice profile": "Perfil de factura",
+        "Paid": "Pagado",
+        "Currency": "Moneda",
+        "Total excl. VAT": "Total sin impuestos",
+        "Total incl. VAT": "Total con impuestos",
+        "Template": "Plantilla",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Add invoice": "Agregar factura"
+    },
+    "Components\\TableInvoices": {
+        "Total excl. VAT": "Total sin impuestos",
+        "Total incl. VAT": "Total con impuestos",
+        "VAT": "Impuestos",
+        "Customer": "Cliente",
+        "Variable symbol": "Símbolo variable",
+        "Number": "Número",
+        "Issue": "Emitido",
+        "Due": "Vencimiento",
+        "Delivery": "Entrega",
+        "Payment": "Pago",
+        "Total VAT": "Total impuestos"
+    },
+    "Components\\FormInvoice": {
+        "Invoice": "Factura",
+        "Items": "Artículos",
+        "Print invoice": "Imprimir factura"
+    },
+    "Models\\Item": {
+        "Invoice": "Factura",
+        "Item": "Artículo",
+        "Unit price": "Precio unitario",
+        "Amount": "Cantidad",
+        "Discount": "Descuento",
+        "VAT": "Impuestos",
+        "Price excl. VAT": "Precio sin impuestos",
+        "Price incl. VAT": "Precio con impuestos"
+    },
+    "Controllers\\Invoices": {
+        "Invoices": "Facturas"
+    },
+    "Models\\InvoiceDocument": {
+        "Invoice": "Factura",
+        "Document": "Documento"
+    }
+}

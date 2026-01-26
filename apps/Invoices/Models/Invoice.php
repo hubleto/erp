@@ -23,6 +23,14 @@ use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
 use Hubleto\Framework\Helper;
 
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Label\LabelAlignment;
+use Endroid\QrCode\Label\Font\OpenSans;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
+
 class Invoice extends \Hubleto\Erp\Model {
 
   const TYPE_PROFORMA = 1;
@@ -552,6 +560,46 @@ class Invoice extends \Hubleto\Erp\Model {
       unset($vars['ITEMS'][$key]['CUSTOMER']);
     }
 
+    // render PayBySquare QR code
+    try {
+      $pbsEnc = new \Hubleto\Utilities\PayBySquareEncoder();
+      $pbsEnc->setAmount(9.99);
+      $pbsEnc->setIBAN($vars['PROFILE']['iban'] ?? '');
+      $pbsEnc->setBIC($vars['PROFILE']['swift'] ?? '');
+      $pbsEnc->setBeneficiaryName($vars['PROFILE']['name'] ?? '');
+      $pbsEnc->setVariableSymbol($vars['vs'] ?? '');
+      $pbsEnc->setConstantSymbol($vars['cs'] ?? '');
+      $pbsEnc->setSpecificSymbol($vars['ss'] ?? '');
+      $pbsEnc->setNote("Invoice " . ($vars['number'] ?? ''));
+
+      $pbsEnc->setXzPath($this->config()->getAsString('xzPath', '/usr/bin/xz'));
+      $encoded = $pbsEnc->getEncodedString();
+
+      $builder = new Builder(
+        writer: new PngWriter(),
+        writerOptions: [],
+        validateResult: false,
+        data: $encoded,
+        encoding: new Encoding('UTF-8'),
+        errorCorrectionLevel: ErrorCorrectionLevel::High,
+        size: 300,
+        margin: 10,
+        roundBlockSizeMode: RoundBlockSizeMode::Margin,
+        // logoPath: __DIR__.'/assets/bender.png',
+        // logoResizeToWidth: 50,
+        // logoPunchoutBackground: true,
+        labelText: 'Pay By Square',
+        labelFont: new OpenSans(20),
+        labelAlignment: LabelAlignment::Left
+      );
+
+      $vars['PAY_BY_SQUARE_QR_CODE'] = $builder->build()->getDataUri();
+    } catch (\Throwable $e) {
+      // cannot generate QR code, doing nothing
+      $vars['PAY_BY_SQUARE_QR_CODE_ERROR'] = $e->getMessage();
+    }
+
+    // return
     return $vars;
 
   }

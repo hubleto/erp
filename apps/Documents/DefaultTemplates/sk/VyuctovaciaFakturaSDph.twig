@@ -192,6 +192,10 @@
               <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:180px;max-height:180px;"><br/>
               <br/>
             {% endif %}
+            {% if PAY_BY_SQUARE_QR_CODE %}
+              <img src="{{ PAY_BY_SQUARE_QR_CODE }}" style="max-width:180px;max-height:180px;"><br/>
+              <br/>
+            {% endif %}
           </div>
         </td>
         <td style="width:50%">

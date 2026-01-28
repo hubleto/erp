@@ -70,6 +70,8 @@ export default class FormProfile extends FormExtended<FormProfileProps, FormProf
               {this.inputWrapper('id_company')}
               {this.inputWrapper('id_currency')}
               {this.inputWrapper('id_payment_method')}
+              {this.inputWrapper('iban')}
+              {this.inputWrapper('swift')}
               {this.inputWrapper('due_days')}
               {this.inputWrapper('numbering_pattern')}
               {this.inputWrapper('invoice_type_prefixes')}

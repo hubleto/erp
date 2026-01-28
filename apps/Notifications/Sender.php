@@ -33,7 +33,7 @@ class Sender extends Core
   ): array|bool {
     $idUser = $this->authProvider()->getUserId();
 
-    if ($idTo > 0 && $idTo != $idUser) {
+    if ($idUser > 0 && $idTo > 0 && $idTo != $idUser) {
       $mNotification = $this->getModel(Models\Notification::class);
       $notification = $mNotification->record->create([
         'priority' => $priority,

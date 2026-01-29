@@ -182,25 +182,6 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
   }
 
   /**
-   * [Description for findUsersByLogin]
-   *
-   * @param string $login
-   * 
-   * @return array
-   * 
-   */
-  public function findUsersByLogin(string $login): array
-  {
-    return $this->createUserModel()->record
-      ->where('email', trim($login))
-      ->where($this->activeAttribute, '<>', 0)
-      ->get()
-      ->makeVisible([$this->passwordAttribute])
-      ->toArray()
-    ;
-  }
-
-  /**
    * [Description for forgotPassword]
    *
    * @return void
@@ -350,17 +331,17 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
 
       $login = trim($login);
 
-      if (empty($login) && !empty($_COOKIE[$this->sessionManager()->getSalt() . '-user'])) {
+      if (empty($login)) {
         $login = $userModel->authCookieGetLogin();
       }
 
       if (!empty($login) && !empty($password)) {
-        $users = $this->findUsersByLogin($login);
+        $users = $userModel->findUsersByLogin($login);
 
         $successful = false;
 
         foreach ($users as $user) {
-          $passwordMatch = $this->verifyPassword($password, $user[$this->passwordAttribute]);
+          $passwordMatch = $userModel->verifyPassword($user, $password);
 
           if ($passwordMatch) {
             $authResult = $userModel->loadUser($user['id']);

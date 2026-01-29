@@ -14,7 +14,10 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Password;
 use Hubleto\Framework\Db\Column\Varchar;
 
-class User extends \Hubleto\Framework\Models\User
+use Hubleto\Framework\Models\User as UserModel;
+use Hubleto\Framework\Interfaces\UserModelInterface;
+
+class User extends UserModel implements UserModelInterface
 {
 
   public const int TYPE_NOT_SPECIFIED = 0;
@@ -124,63 +127,12 @@ class User extends \Hubleto\Framework\Models\User
     ]);
   }
 
-  public function getQueryForUser(int $idUser): mixed
-  {
-    return $this->record
-      ->with('ROLES')
-      ->with('TEAMS')
-      ->with('DEFAULT_COMPANY')
-      ->where('id', $idUser)
-      ->where('is_active', '<>', 0)
-    ;
-  }
-
-  public function getClientIpAddress(): string {
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-      $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-      $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-      $ip = $_SERVER['REMOTE_ADDR'];
-    }
-    return $ip;
-  }
-
-  public function updateAccessInformation(int $idUser): void
-  {
-    $clientIp = $this->getClientIpAddress();
-    $this->record->where('id', $idUser)->update([
-      'last_access_time' => date('Y-m-d H:i:s'),
-      'last_access_ip' => $clientIp,
-    ]);
-  }
-
-  public function updateLoginAndAccessInformation(int $idUser): void
-  {
-    $clientIp = $this->getClientIpAddress();
-    $this->record->where('id', $idUser)->update([
-      'last_login_time' => date('Y-m-d H:i:s'),
-      'last_login_ip' => $clientIp,
-      'last_access_time' => date('Y-m-d H:i:s'),
-      'last_access_ip' => $clientIp,
-    ]);
-  }
-
-  public function loadUser(int $idUser): array
-  {
-    $user = (array) $this->getQueryForUser($idUser)->first()?->toArray();
-
-    $tmpRoles = [];
-    if (is_array($user['ROLES'])) {
-      foreach ($user['ROLES'] as $role) {
-        $tmpRoles[] = (int) $role['pivot']['id_role']; // @phpstan-ignore-line
-      }
-    }
-    $user['ROLES'] = $tmpRoles;
-
-    return $user;
-  }
-
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
@@ -216,93 +168,135 @@ class User extends \Hubleto\Framework\Models\User
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
-    // $description->permissions = [
-    //   'canDelete' => false,
-    //   'canUpdate' => true,
-    // ];
     return $description;
   }
 
-  public function isUserActive($user): bool {
+  /**
+   * [Description for loadUser]
+   *
+   * @param mixed $uidUser
+   * 
+   * @return array
+   * 
+   */
+  public function loadUser(mixed $uidUser): array
+  {
+    $idUser = (int) $uidUser;
+
+    $user = $this->record
+      ->with('ROLES')
+      ->with('TEAMS')
+      ->with('DEFAULT_COMPANY')
+      ->where('id', $idUser)
+      ->where('is_active', '<>', 0)
+      ->first()
+      ?->toArray()
+    ;
+
+    $tmpRoles = [];
+    if (is_array($user['ROLES'])) {
+      foreach ($user['ROLES'] as $role) {
+        $tmpRoles[] = (int) $role['pivot']['id_role']; // @phpstan-ignore-line
+      }
+    }
+    $user['ROLES'] = $tmpRoles;
+
+    return $user;
+  }
+
+  /**
+   * [Description for isUserActive]
+   *
+   * @param mixed $user
+   * 
+   * @return bool
+   * 
+   */
+  public function isUserActive($user): bool
+  {
     return $user['is_active'] == 1;
   }
 
+  /**
+   * [Description for findUsersByLogin]
+   *
+   * @param string $login
+   * 
+   * @return array
+   * 
+   */
+  public function findUsersByLogin(string $login): array
+  {
+    return $this->record
+      ->where('email', trim($login))
+      ->where('is_active', '<>', 0)
+      ->get()
+      ->makeVisible(['password'])
+      ->toArray()
+    ;
+  }
+
+  /**
+   * [Description for authCookieGetLogin]
+   *
+   * @return string
+   * 
+   */
   public function authCookieGetLogin(): string
   {
-    list($tmpHash, $tmpLogin) = explode(",", $_COOKIE[$this->sessionManager()->getSalt() . '-user']);
-    return $tmpLogin;
-  }
-
-  public function authCookieSerialize($login, $password): string
-  {
-    return md5($login.".".$password).",".$login;
-  }
-
-  public function generateToken($idUser, $tokenSalt, $tokenType): string
-  {
-    /** @var Token $tokenModel */
-    $tokenModel = $this->getModel(Token::class);
-    $token = $tokenModel->generateToken($tokenSalt, $tokenType);
-
-    $this->record->updateRow([
-      "id_token_reset_password" => $token['id'],
-    ], $idUser);
-
-    return $token['token'];
-  }
-
-  public function generatePasswordResetToken($idUser, $tokenSalt): string
-  {
-    return $this->generateToken(
-      $idUser,
-      $tokenSalt,
-      self::TOKEN_TYPE_USER_FORGOT_PASSWORD
-    );
-  }
-
-  public function validateToken($token, $deleteAfterValidation = TRUE): array
-  {
-    /** @var Token $tokenModel */
-    $tokenModel = $this->getModel(Token::class);
-    $tokenData = $tokenModel->validateToken($token);
-
-    $userData = $this->record->where(
-      'id_token_reset_password', $tokenData['id']
-    )->first()
-    ;
-
-    if (!empty($userData)) {
-      $userData = $userData->toArray();
+    if (!empty($_COOKIE[$this->sessionManager()->getSalt() . '-user'])) {
+      list($tmpHash, $tmpLogin) = explode(",", $_COOKIE[$this->sessionManager()->getSalt() . '-user']);
+      return $tmpLogin;
+    } else {
+      return '';
     }
-
-    if ($deleteAfterValidation) {
-      $this->record->updateRow([
-        "id_token_reset_password" => NULL,
-      ], $userData["id"]);
-
-      $tokenModel->deleteToken($tokenData['id']);
-    }
-
-    return $userData;
   }
 
-  public function getByEmail(string $email): array {
-    $user = $this->record->where("email", $email)->first();
-
-    return !empty($user) ? $user->toArray() : [];
-  }
-
-  public function encryptPassword(string $password): string {
+  /**
+   * [Description for encryptPassword]
+   *
+   * @param string $password
+   * 
+   * @return string
+   * 
+   */
+  public function encryptPassword(string $password): string
+  {
     return password_hash($password, PASSWORD_DEFAULT);
   }
 
-  public function updatePassword(int $idUser, string $password): array {
+  /**
+   * [Description for updatePassword]
+   *
+   * @param mixed $uidUser
+   * @param string $password
+   * 
+   * @return array
+   * 
+   */
+  public function updatePassword(mixed $uidUser, string $password): array
+  {
+    $idUser = (int) $uidUser;
     return $this->record
       ->where('id', $idUser)
       ->update(
         ["password" => $this->encryptPassword($password)]
       )
-      ;
+    ;
+  }
+
+  /**
+   * [Description for verifyPassword]
+   *
+   * @param array $user
+   * @param string $password
+   * 
+   * @return bool
+   * 
+   */
+  public function verifyPassword(array $user, string $password): bool
+  {
+    return password_verify($user['password'] ?? '', $password);
   }
 
 }

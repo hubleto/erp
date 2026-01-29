@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Notifications\EventListeners;
 
 use Hubleto\App\Community\Notifications\Sender;
-use Hubleto\Erp\Model;
+use Hubleto\Framework\Model;
 
 class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \Hubleto\Framework\Interfaces\EventListenerInterface
 {

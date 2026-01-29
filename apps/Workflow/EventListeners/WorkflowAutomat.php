@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow\EventListeners;
 
-use Hubleto\Erp\Model;
+use Hubleto\Framework\Model;
 
 class WorkflowAutomat extends \Hubleto\Framework\EventListener implements \Hubleto\Framework\Interfaces\EventListenerInterface
 {

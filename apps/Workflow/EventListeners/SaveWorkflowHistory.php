@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Workflow\EventListeners;
 
 use Hubleto\App\Community\Workflow\Models\WorkflowHistory;
-use Hubleto\Erp\Model;
+use Hubleto\Framework\Model;
 
 class SaveWorkflowHistory extends \Hubleto\Framework\EventListener implements \Hubleto\Framework\Interfaces\EventListenerInterface
 {

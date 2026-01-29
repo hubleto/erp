@@ -10,8 +10,8 @@
     "require": {
         "hubleto/framework": "@dev",
         "hubleto/pay-by-square-encoder": "@dev",
-        "defuse/php-encryption": "^2.4",
-        "ddeboer/imap": "^1.21",
+        "defuse/php-encryption": "^2",
+        "ddeboer/imap": "^1",
         "endroid/qr-code": "^6",
         "dompdf/dompdf": "^3",
         "fakerphp/faker": "^1"

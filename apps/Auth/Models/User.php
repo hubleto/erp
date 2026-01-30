@@ -296,7 +296,7 @@ class User extends UserModel implements UserModelInterface
    */
   public function verifyPassword(array $user, string $password): bool
   {
-    return password_verify($user['password'] ?? '', $password);
+    return password_verify($password, $user['password'] ?? '');
   }
 
 }

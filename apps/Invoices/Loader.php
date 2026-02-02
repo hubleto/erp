@@ -104,7 +104,7 @@ class Loader extends \Hubleto\Framework\App
 
     return
       $counter->preparedItems()
-      + $counter->dueInvoices()
+      + $counter->dueAndNotPaidInvoices()
       + $counter->unsentInvoices()
     ;
   }
@@ -121,7 +121,8 @@ class Loader extends \Hubleto\Framework\App
     $counter = $this->getService(Counter::class);
 
     $preparedItemsCount = $counter->preparedItems();
-    $dueInvoicesCount = $counter->dueInvoices();
+    $notPaidInvoicesCount = $counter->notPaidInvoices();
+    $dueAndNotPaidInvoicesCount = $counter->dueAndNotPaidInvoices();
     $unsentInvoicesCount = $counter->unsentInvoices();
 
     return '
@@ -130,19 +131,26 @@ class Loader extends \Hubleto\Framework\App
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
           <span class="text">' . $this->translate('Invoices') . '</span>
         </a>
-
-        ' . ($dueInvoicesCount > 0 ? '
-          <a
-            href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
-            class="badge badge-danger text-xs"
-          >Due and not paid: ' . $dueInvoicesCount . '</a>
-        ' : '') . '
-        ' . ($unsentInvoicesCount > 0 ? '
-          <a
-            href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
-            class="badge badge-danger text-xs"
-          >Not sent: ' . $unsentInvoicesCount . '</a>
-        ' : '') . '
+        <div class="flex flex-col">
+          ' . ($notPaidInvoicesCount > 0 ? '
+            <a
+              href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
+              class="badge badge-warning text-xs"
+            >Not paid: ' . $notPaidInvoicesCount . '</a>
+          ' : '') . '
+          ' . ($dueAndNotPaidInvoicesCount > 0 ? '
+            <a
+              href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
+              class="badge badge-danger text-xs"
+            >Due and not paid: ' . $dueAndNotPaidInvoicesCount . '</a>
+          ' : '') . '
+          ' . ($unsentInvoicesCount > 0 ? '
+            <a
+              href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
+              class="badge badge-danger text-xs"
+            >Not sent: ' . $unsentInvoicesCount . '</a>
+          ' : '') . '
+        </div>
 
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">
           <span class="icon"><i class="fas fa-list"></i></span>

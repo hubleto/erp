@@ -23,12 +23,27 @@ class Counter extends Core
   }
 
   /**
-   * [Description for dueInvoices]
+   * [Description for notPaidInvoices]
    *
    * @return int
    * 
    */
-  public function dueInvoices(): int
+  public function notPaidInvoices(): int
+  {
+    $mItem = $this->getModel(Models\Invoice::class);
+    return $mItem->record->prepareReadQuery()
+      ->whereNull('date_payment')
+      ->count()
+    ;
+  }
+
+  /**
+   * [Description for dueAndNotPaidInvoices]
+   *
+   * @return int
+   * 
+   */
+  public function dueAndNotPaidInvoices(): int
   {
     $mItem = $this->getModel(Models\Invoice::class);
     return $mItem->record->prepareReadQuery()

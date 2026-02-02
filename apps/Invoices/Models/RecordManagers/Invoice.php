@@ -130,15 +130,15 @@ class Invoice extends \Hubleto\Erp\RecordManager {
 
     if (isset($filters['fIssued'])) {
       switch ($filters['fIssued']) {
-        case 'today': $query = $query->whereDate('date_due', date('Y-m-d')); break;
-        case 'yesterday': $query = $query->whereDate('date_due', date('Y-m-d', strtotime('-1 day'))); break;
-        case 'last7Days': $query = $query->whereDate('date_due', '>=', date('Y-m-d', strtotime('-7 days'))); break;
-        case 'last14Days': $query = $query->whereDate('date_due', '>=', date('Y-m-d', strtotime('-14 days'))); break;
-        case 'thisMonth': $query = $query->whereMonth('date_due', date('m')); break;
-        case 'lastMonth': $query = $query->whereMonth('date_due', date('m', strtotime('-1 month'))); break;
-        case 'beforeLastMonth': $query = $query->whereMonth('date_due', date('m', strtotime('-2 month'))); break;
-        case 'thisYear': $query = $query->whereYear('date_due', date('Y')); break;
-        case 'lastYear': $query = $query->whereYear('date_due', date('Y') - 1); break;
+        case 'today': $query = $query->whereDate('date_delivery', date('Y-m-d')); break;
+        case 'yesterday': $query = $query->whereDate('date_delivery', date('Y-m-d', strtotime('-1 day'))); break;
+        case 'last7Days': $query = $query->whereDate('date_delivery', '>=', date('Y-m-d', strtotime('-7 days'))); break;
+        case 'last14Days': $query = $query->whereDate('date_delivery', '>=', date('Y-m-d', strtotime('-14 days'))); break;
+        case 'thisMonth': $query = $query->whereMonth('date_delivery', date('m')); break;
+        case 'lastMonth': $query = $query->whereMonth('date_delivery', date('m', strtotime('-1 month'))); break;
+        case 'beforeLastMonth': $query = $query->whereMonth('date_delivery', date('m', strtotime('-2 month'))); break;
+        case 'thisYear': $query = $query->whereYear('date_delivery', date('Y')); break;
+        case 'lastYear': $query = $query->whereYear('date_delivery', date('Y') - 1); break;
       }
     }
 

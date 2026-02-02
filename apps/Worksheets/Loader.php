@@ -23,6 +23,7 @@ class Loader extends \Hubleto\Framework\App
       '/^worksheets\/activity-types\/?$/' => Controllers\ActivityTypes::class,
 
       '/^worksheets\/boards\/daily-chart\/?$/' => Controllers\Boards\DailyChart::class,
+      '/^worksheets\/boards\/monthly-summary\/?$/' => Controllers\Boards\MonthlySummary::class,
       '/^worksheets\/api\/daily-activity-chart\/?$/' => Controllers\Api\DailyActivityChart::class,
     ]);
 
@@ -33,6 +34,11 @@ class Loader extends \Hubleto\Framework\App
         $this,
         $this->translate('Daily chart'),
         'worksheets/boards/daily-chart'
+      );
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('Monthly summary'),
+        'worksheets/boards/monthly-summary'
       );
     }
 

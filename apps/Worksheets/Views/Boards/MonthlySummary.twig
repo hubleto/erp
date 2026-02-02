@@ -1,0 +1,23 @@
+{% set e = viewParams.employee %}
+{% set s = viewParams.summary %}
+
+{% if viewParams.employee.id <= 0 %}
+  No employee with email address '{{ viewParams.employeeEmail }}' found.
+{% else %}
+  <div class="font-bold">{{ viewParams.employeeEmail }}</div>
+
+  {% if viewParams.summary and viewParams.summary|length > 0 %}
+    <table class="table-default dense mt-2">
+      <tbody>
+        {% for data in viewParams.summary %}
+          <tr>
+          <td>{{ (data.year ~ '-' ~ data.month ~ '-01')|date('F Y') }}</td>
+            <td class="text-right">{{ data.worked_hours_total }} h</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    No summary available for this employee.
+  {% endif %}
+{% endif %}

@@ -34,12 +34,15 @@ class Item extends \Hubleto\Erp\Model
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible(),
-      'unit_price' => (new Decimal($this, $this->translate('Unit price')))->setRequired()->setDefaultVisible(),
-      'amount' => (new Integer($this, $this->translate('Amount')))->setRequired()->setDefaultVisible(),
-      'discount' => (new Integer($this, $this->translate('Discount')))->setUnit('%')->setDefaultVisible(),
-      'vat' => (new Integer($this, $this->translate('VAT')))->setUnit('%')->setDefaultVisible(),
-      'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setDefaultVisible(),
-      'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setDefaultVisible(),
+
+      'unit_price' => new Decimal($this, $this->translate('Unit price'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
+      'amount' => new Decimal($this, $this->translate('Amount'))->setDefaultVisible()->setUnit('x'),
+      'discount' => new Decimal($this, $this->translate('Discount'))->setDefaultVisible()->setUnit('%'),
+      'vat' => new Decimal($this, $this->translate('VAT'))->setUnit('%'),
+
+      'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
+      'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
+
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), Item::class))->setDefaultVisible(),

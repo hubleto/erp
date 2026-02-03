@@ -93,7 +93,7 @@ class Order extends \Hubleto\Erp\Model
         2 => $this->translate('Bi-Monthly'),
         3 => $this->translate('Quarterly'),
         6 => $this->translate('Each 6 months'),
-        12 => $this->translate('Yearly'),
+        12 => $this->translate('Annually'),
         24 => $this->translate('Each 2 years'),
       ]),
       'prepaid_working_hours' => (new Integer($this, $this->translate('Prepaid working hours')))->setUnit('hours'),

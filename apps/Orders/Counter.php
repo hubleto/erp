@@ -40,6 +40,7 @@ class Counter extends Core
         ifnull(max(orders_items.date_due), "2000-01-01") as last_item_date_due
       ')
       ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
+      ->groupBy('orders.id')
       // ->whereRaw('orders_items.date_due > date_sub(now(), interval orders.payment_period month)')
       // ->groupBy('id_order')
       ->whereRaw('orders.payment_period > 0')

@@ -40,6 +40,7 @@ class MissingItemsInPeriodicalOrders extends \Hubleto\Erp\Controller
       ')
       ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
       ->whereRaw('orders.payment_period > 0')
+      ->groupBy('orders.id')
       ->get()
       ?->toArray()
     ;

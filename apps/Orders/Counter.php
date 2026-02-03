@@ -44,7 +44,7 @@ class Counter extends Core
       // ->groupBy('id_order')
       ->whereRaw('orders.payment_period > 0')
       // ->havingRaw('items_inside_payment_period <= 0')
-      ->havingRaw('last_item_date_due <= now()')
+      ->havingRaw('ifnull(last_item_date_due, now()) <= now()')
       ->pluck('id')
       ?->toArray()
     ;

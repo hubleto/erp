@@ -34,7 +34,8 @@ class Counter extends Core
             count(orders_items.id)
           from orders_items
           where
-            orders_items.date_due > date_sub(now(), interval orders.payment_period month)
+            orders_items.id_order = orders.id
+            and orders_items.date_due > date_sub(now(), interval orders.payment_period month)
         ) as items_inside_payment_period
       ')
       // ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')

@@ -109,6 +109,7 @@ class Loader extends \Hubleto\Framework\App
 
     return
       $counter->dueItemsNotPreparedForInvoice()
+      + count($counter->periodicalOrdersMissingItems())
     ;
   }
 

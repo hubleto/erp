@@ -81,6 +81,7 @@ export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps
           {this.inputWrapper("title", {onChange: () => {this.updateRecord({slug: this.slugify(this.state.record.title)})}})}
           {this.inputWrapper("color")}
           {this.inputWrapper("is_default")}
+          {this.divider(this.translate('Advanced options'))}
           {this.inputWrapper("slug")}
         </div>
       </div>

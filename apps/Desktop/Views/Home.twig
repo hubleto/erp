@@ -53,7 +53,7 @@
 </div>
 
 <div class="mt-2">
-  <h1>{{ dashboard.title }}</h1>
+  <h1 style="color: {{ dashboard.color }}">{{ dashboard.title }}</h1>
   <hblreact-dashboards-dashboard
     int:id-dashboard='{{ dashboard.id }}'
     string:redirect-url='{{ config.projectUrl }}'

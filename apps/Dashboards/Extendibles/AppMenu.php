@@ -10,7 +10,7 @@ class AppMenu extends \Hubleto\Framework\Extendible
       [
         'app' => $this->app,
         'url' => 'dashboards',
-        'title' => $this->app->translate('Dashboards'),
+        'title' => $this->app->translate('Preview Dashboards'),
         'icon' => 'fas fa-table',
       ],
       [

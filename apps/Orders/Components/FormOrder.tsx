@@ -3,7 +3,7 @@ import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableItems from './TableItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
-// import TablePayments from './TablePayments';
+import TablePayments from './TablePayments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
 import FormInput from '@hubleto/react-ui/core/FormInput';
@@ -74,7 +74,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
         { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
         { uid: 'preview', title: this.translate('Preview') },
         { uid: 'calendar', title: this.translate('Calendar') },
-        // { uid: 'payments', title: this.translate('Payments') },
+        { uid: 'payments', title: this.translate('Payments') },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
@@ -482,16 +482,16 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
 
       break;
 
-      // case 'payments':
-      //   return <TablePayments
-      //     key={"table_order_payment"}
-      //     tag={"table_order_payment"}
-      //     parentForm={this}
-      //     uid={this.props.uid + "_table_order_payment"}
-      //     idOrder={R.id}
-      //   />;
+      case 'payments':
+        return <TablePayments
+          key={"table_order_payment"}
+          tag={"table_order_payment"}
+          parentForm={this}
+          uid={this.props.uid + "_table_order_payment"}
+          idOrder={R.id}
+        />;
 
-      // break;
+      break;
 
       case 'documents':
         return <TableDocuments

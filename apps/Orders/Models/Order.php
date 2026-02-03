@@ -88,7 +88,7 @@ class Order extends \Hubleto\Erp\Model
       'price_excl_vat' => (new Decimal($this, $this->translate('Price excl. VAT')))->setDefaultValue(0)->setDefaultVisible(),
       'price_incl_vat' => (new Decimal($this, $this->translate('Price incl. VAT')))->setDefaultValue(0)->setDefaultVisible(),
       'payment_period' => (new Integer($this, $this->translate('Payment period')))->setEnumValues([
-        0 => $this->translate('One-time payment'),
+        0 => $this->translate('No periodical payments'),
         1 => $this->translate('Monthly'),
         2 => $this->translate('Bi-Monthly'),
         3 => $this->translate('Quarterly'),

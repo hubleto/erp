@@ -26,15 +26,17 @@ class Loader extends \Hubleto\Framework\App
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,
       '/^orders\/api\/set-parent-deal\/?$/' => Controllers\Api\SetParentDeal::class,
       '/^orders\/api\/get-item\/?$/' => Controllers\Api\GetItem::class,
-      '/^orders\/api\/prepare-payment-for-invoice\/?$/' => Controllers\Api\PreparePaymentForInvoice::class,
+      '/^orders\/api\/prepare-item-for-invoice\/?$/' => Controllers\Api\PrepareItemForInvoice::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 
       '/^orders(\/(?<recordId>\d+))?\/?$/' => Controllers\Orders::class,
       '/^orders\/add\/?$/' => ['controller' => Controllers\Orders::class, 'vars' => ['recordId' => -1]],
 
-      '/^orders\/payments(\/(?<recordId>\d+))?\/?$/' => Controllers\Payments::class,
-      '/^orders\/payments\/add\/?$/' => ['controller' => Controllers\Payments::class, 'vars' => ['recordId' => -1]],
+      '/^orders\/items(\/(?<recordId>\d+))?\/?$/' => Controllers\Items::class,
+      '/^orders\/items\/add\/?$/' => ['controller' => Controllers\Items::class, 'vars' => ['recordId' => -1]],
+
+      '/^orders\/missing-items-in-periodical-orders\/?$/' => Controllers\MissingItemsInPeriodicalOrders::class,
 
       '/^orders\/states\/?$/' => Controllers\States::class,
     ]);
@@ -78,7 +80,7 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Payment::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Item::class)->dropTableIfExists()->install();
       $this->getModel(Models\History::class)->dropTableIfExists()->install();
     }
 
@@ -106,7 +108,7 @@ class Loader extends \Hubleto\Framework\App
     $counter = $this->getService(Counter::class);
 
     return
-      $counter->duePaymentsNotPreparedForInvoice()
+      $counter->dueItemsNotPreparedForInvoice()
     ;
   }
 
@@ -121,7 +123,8 @@ class Loader extends \Hubleto\Framework\App
     /** @var Counter */
     $counter = $this->getService(Counter::class);
 
-    $duePaymentsCount = $counter->duePaymentsNotPreparedForInvoice();
+    $dueItemsCount = $counter->dueItemsNotPreparedForInvoice();
+    $periodicalOrdersMissingItems = $counter->periodicalOrdersMissingItems();
 
     return '
       <div class="flex flex-col gap-2">
@@ -129,6 +132,13 @@ class Loader extends \Hubleto\Framework\App
           <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
           <span class="text">' . $this->translate('All orders') . '</span>
         </a>
+        <div class="flex flex-col">
+          ' . (count($periodicalOrdersMissingItems) > 0 ? '
+            <a  href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders" class="badge badge-danger ml-auto">
+              Some orders require your attention
+            </a>
+          ' : '') . '
+        </div>
         <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=purchaseOrders">
           <span class="icon"><i class="fas fa-arrow-left"></i></span>
           <span class="text">' . $this->translate('Purchase orders') . '</span>
@@ -137,10 +147,10 @@ class Loader extends \Hubleto\Framework\App
           <span class="icon"><i class="fas fa-arrow-right"></i></span>
           <span class="text">' . $this->translate('Sales orders') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/payments">
-          <span class="icon"><i class="fas fa-euro-sign"></i></span>
-          <span class="text">' . $this->translate('Payments') . '</span>
-          ' . ($duePaymentsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $duePaymentsCount . '</span>' : '') . '
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/items">
+          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="text">' . $this->translate('Items') . '</span>
+          ' . ($dueItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $dueItemsCount . '</span>' : '') . '
         </a>
       </div>
     ';

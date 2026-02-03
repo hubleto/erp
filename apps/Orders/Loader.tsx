@@ -3,7 +3,7 @@ import App from '@hubleto/react-ui/core/App'
 import request from "@hubleto/react-ui/core/Request";
 import TableOrders from "./Components/TableOrders";
 import OrdersFormActivity from "./Components/OrdersFormActivity"
-import TablePayments from "./Components/TablePayments"
+import TableItems from "./Components/TableItems"
 
 class OrdersApp extends App {
   init() {
@@ -12,7 +12,7 @@ class OrdersApp extends App {
     // register react components
     globalThis.hubleto.registerReactComponent('OrdersTableOrders', TableOrders);
     globalThis.hubleto.registerReactComponent('OrdersFormActivity', OrdersFormActivity);
-    globalThis.hubleto.registerReactComponent('OrdersTablePayments', TablePayments);
+    globalThis.hubleto.registerReactComponent('OrdersTableItems', TableItems);
 
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Deals').addCustomFormTab({

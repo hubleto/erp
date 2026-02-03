@@ -1,0 +1,8 @@
+<h1 class="app-main-title">{{ translate('Orders') }} > {{ translate('Items') }}</h1>
+
+<hblreact-orders-table-items
+  string:tag="table-items"
+  string:view="{{ viewParams.view }}"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></hblreact-orders-table-items>

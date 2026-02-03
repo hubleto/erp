@@ -1,0 +1,36 @@
+<h1 class="app-main-title">{{ translate('Orders') }} > {{ translate('Missing items in periodical orders') }}</h1>
+
+<table class="table-default dense">
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Customer</th>
+      <th>Payment period</th>
+      <th>Items</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for o in viewParams.orders %}
+      <tr>
+        <td>
+          <a href="{{ o.id }}" class="text-primary">{{ o.identifier }} {{ o.title }}</a>
+        </td>
+        <td>{{ o.CUSTOMER.name }}</td>
+        <td>{{ o['_ENUM[payment_period]'] }}</td>
+        <td>
+          {% for i in o.ITEMS %}
+            <div class="flex">
+               <div class="badge badge-info">{{ hubleto.locale().formatDateShort(i.date_due) }}</div>
+               <div class="badge badge-yellow">{{ i.title }}</div>
+               <div class="badge">
+                {{ hubleto.locale().formatCurrency(i.unit_price, o.CURRENCY.symbol) }}
+                x
+                {{ hubleto.locale().formatNumber(i.amount, 2) }}
+              </div>
+            </div>
+          {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

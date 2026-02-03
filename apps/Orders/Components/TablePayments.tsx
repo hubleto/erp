@@ -94,7 +94,7 @@ export default class TablePayments extends TableExtended<TablePaymentsProps, Tab
                 yesText: this.translate('Yes, prepare for invoice'),
                 yesButtonClass: 'btn-warning',
                 onYes: () => {
-                  request.post('orders/api/prepare-payment-for-invoice',
+                  request.post('orders/api/prepare-item-for-invoice',
                     {
                       idOrder: data['id_order'],
                       idPayment: data['id'],

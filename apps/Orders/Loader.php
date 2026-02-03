@@ -11,7 +11,7 @@ class Loader extends \Hubleto\Framework\App
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -67,9 +67,9 @@ class Loader extends \Hubleto\Framework\App
    * [Description for installTables]
    *
    * @param int $round
-   * 
+   *
    * @return void
-   * 
+   *
    */
   public function installTables(int $round): void
   {
@@ -82,6 +82,7 @@ class Loader extends \Hubleto\Framework\App
       $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();
       $this->getModel(Models\Item::class)->dropTableIfExists()->install();
       $this->getModel(Models\History::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Payment::class)->dropTableIfExists()->install();
     }
 
     if ($round == 2) {
@@ -100,7 +101,7 @@ class Loader extends \Hubleto\Framework\App
    * [Description for getSidebarBadgeNumber]
    *
    * @return int
-   * 
+   *
    */
   public function getSidebarBadgeNumber(): int
   {
@@ -117,7 +118,7 @@ class Loader extends \Hubleto\Framework\App
    * [Description for renderSecondSidebar]
    *
    * @return string
-   * 
+   *
    */
   public function renderSecondSidebar(): string
   {
@@ -161,7 +162,7 @@ class Loader extends \Hubleto\Framework\App
    * [Description for generateDemoData]
    *
    * @return void
-   * 
+   *
    */
   public function generateDemoData(): void
   {
@@ -217,15 +218,15 @@ class Loader extends \Hubleto\Framework\App
    * Implements fulltext search functionality for orders
    *
    * @param array $expressions List of expressions to be searched and glued with logical 'or'.
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function search(array $expressions): array
   {
     $mOrder = $this->getModel(Models\Order::class);
     $qOrders = $mOrder->record->prepareReadQuery();
-    
+
     foreach ($expressions as $e) {
       $qOrders = $qOrders->where(function($q) use ($e) {
         $q->orWhere('orders.identifier', 'like', '%' . $e . '%');

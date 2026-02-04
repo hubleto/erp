@@ -11,6 +11,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
 use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Invoices\Models\Item as InvoiceItem;
 
 class Item extends \Hubleto\Erp\Model
 {
@@ -45,7 +46,7 @@ class Item extends \Hubleto\Erp\Model
 
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
-      'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), Item::class))->setDefaultVisible(),
+      'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), InvoiceItem::class))->setDefaultVisible(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'position' => (new Integer($this, $this->translate('Position (in the PDF)')))->setDefaultVisible(),
@@ -116,7 +117,7 @@ class Item extends \Hubleto\Erp\Model
    * [Description for describeForm]
    *
    * @return \Hubleto\Framework\Description\Form
-   * 
+   *
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
@@ -145,19 +146,19 @@ class Item extends \Hubleto\Erp\Model
    * [Description for onBeforeCreate]
    *
    * @param array $record
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onBeforeCreate(array $record): array
   {
     $record["price_excl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceExcludingVat(
-      (float) ($record["sales_price"] ?? 0),
+      (float) ($record["unit_price"] ?? 0),
       (float) ($record["amount"] ?? 0),
       (float) ($record["discount"] ?? 0)
     );
     $record["price_incl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceIncludingVat(
-      (float) ($record["sales_price"] ?? 0),
+      (float) ($record["unit_price"] ?? 0),
       (float) ($record["amount"] ?? 0),
       (float) ($record["vat"] ?? 0),
       (float) ($record["discount"] ?? 0)
@@ -169,19 +170,19 @@ class Item extends \Hubleto\Erp\Model
    * [Description for onBeforeUpdate]
    *
    * @param array $record
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onBeforeUpdate(array $record): array
   {
     $record["price_excl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceExcludingVat(
-      (float) ($record["sales_price"] ?? 0),
+      (float) ($record["unit_price"] ?? 0),
       (float) ($record["amount"] ?? 0),
       (float) ($record["discount"] ?? 0)
     );
     $record["price_incl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceIncludingVat(
-      (float) ($record["sales_price"] ?? 0),
+      (float) ($record["unit_price"] ?? 0),
       (float) ($record["amount"] ?? 0),
       (float) ($record["vat"] ?? 0),
       (float) ($record["discount"] ?? 0)

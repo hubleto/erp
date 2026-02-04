@@ -9,7 +9,7 @@ class Loader extends \Hubleto\Framework\App
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -33,6 +33,7 @@ class Loader extends \Hubleto\Framework\App
       '/^invoices\/payment-methods\/add?\/?$/' => ['controller' => Controllers\PaymentMethods::class, 'vars' => [ 'recordId' => -1 ]],
       '/^invoices\/items(\/(?<recordId>\d+))?\/?$/' => Controllers\Items::class,
       '/^invoices\/items\/add?\/?$/' => ['controller' => Controllers\Items::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^invoices\/api\/create-invoice-from-order?\/?$/' => Controllers\Api\CreateInvoiceFromOrder::class,
     ]);
 
     $this->addSearchSwitch('i', 'invoices');
@@ -47,9 +48,9 @@ class Loader extends \Hubleto\Framework\App
    * [Description for installTables]
    *
    * @param int $round
-   * 
+   *
    * @return void
-   * 
+   *
    */
   public function installTables(int $round): void
   {
@@ -95,7 +96,7 @@ class Loader extends \Hubleto\Framework\App
    * [Description for getSidebarBadgeNumber]
    *
    * @return int
-   * 
+   *
    */
   public function getSidebarBadgeNumber(): int
   {
@@ -113,7 +114,7 @@ class Loader extends \Hubleto\Framework\App
    * [Description for renderSecondSidebar]
    *
    * @return string
-   * 
+   *
    */
   public function renderSecondSidebar(): string
   {
@@ -182,15 +183,15 @@ class Loader extends \Hubleto\Framework\App
    * Implements fulltext search functionality for tasks
    *
    * @param array $expressions List of expressions to be searched and glued with logical 'or'.
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function search(array $expressions): array
   {
     $mInvoice = $this->getModel(Models\Invoice::class);
     $qInvoices = $mInvoice->record->prepareReadQuery();
-    
+
     foreach ($expressions as $e) {
       $qInvoices = $qInvoices->having(function($q) use ($e) {
         $e = (string) $e;

@@ -6,7 +6,7 @@ use Hubleto\App\Community\CalendarSync\Controllers\Google;
 use Hubleto\App\Community\CalendarSync\Controllers\Home;
 use Hubleto\App\Community\CalendarSync\Controllers\Ics;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
   public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 0,

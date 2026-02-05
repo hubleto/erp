@@ -6,7 +6,7 @@ use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\App\Community\Warehouses\Models\Location;
 use Hubleto\App\Community\Warehouses\Models\Transaction;
 
-class StockStatus extends \Hubleto\Framework\Core
+class StockStatus extends \Hubleto\Erp\Core
 {
 
   /**

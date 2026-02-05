@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Api;
 
-class Validator extends \Hubleto\Framework\Core
+class Validator extends \Hubleto\Erp\Core
 {
 
   public function getFullControllerClassName(string $app, string $controller): string

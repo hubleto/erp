@@ -7,7 +7,7 @@ use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use Hubleto\App\Community\OAuth\Entities\ScopeEntity;
 
-class Scope extends \Hubleto\Framework\Core implements ScopeRepositoryInterface
+class Scope extends \Hubleto\Erp\Core implements ScopeRepositoryInterface
 {
 
   public function getScopeEntityByIdentifier($scopeIdentifier): ?ScopeEntityInterface

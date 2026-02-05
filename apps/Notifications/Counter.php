@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Notifications;
 
-use Hubleto\Framework\Core;
+use Hubleto\Erp\Core;
 
 class Counter extends Core
 {

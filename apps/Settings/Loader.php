@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Settings;
 
 use Hubleto\App\Community\Auth\Models\UserRole;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
   public bool $canBeDisabled = false;
 

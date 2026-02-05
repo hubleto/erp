@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Invoices;
 
-class PriceCalculator extends \Hubleto\Framework\Core
+class PriceCalculator extends \Hubleto\Erp\Core
 {
 
   /**

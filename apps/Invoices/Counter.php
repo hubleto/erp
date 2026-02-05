@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Invoices;
 
-use Hubleto\Framework\Core;
+use Hubleto\Erp\Core;
 
 class Counter extends Core
 {

@@ -2,9 +2,7 @@
 
 namespace Hubleto\App\Community\Usage;
 
-
-
-class Logger extends \Hubleto\Framework\Core
+class Logger extends \Hubleto\Erp\Core
 {
 
   public function logUsage(string $message = ''): void

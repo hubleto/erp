@@ -4,7 +4,7 @@
 
 namespace Hubleto\Erp\Cli\Agent;
 
-class Command extends \Hubleto\Framework\Core
+class Command extends \Hubleto\Erp\Core
 {
 
   public array $arguments = [];

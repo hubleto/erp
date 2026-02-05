@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar;
 
-class Events extends \Hubleto\Framework\Core
+class Events extends \Hubleto\Erp\Core
 {
 
   public function loadRemindersSummary(int $idUser = 0): array

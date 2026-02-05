@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Notifications;
 
-class Digest extends \Hubleto\Framework\Core
+class Digest extends \Hubleto\Erp\Core
 {
 
   /**

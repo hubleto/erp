@@ -1,12 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Hubleto\Erp\Emails;
+namespace Hubleto\Erp;
 
 use Hubleto\Framework\Exceptions\GeneralException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-class EmailProvider extends \Hubleto\Erp\Core
+/**
+ * Default implementation of email provider.
+ */
+class EmailProvider extends Core implements Interfaces\EmailProviderInterface
 {
 
   private string $defaultEmailTemplate = "@hubleto-main/layouts/Email.twig";
@@ -17,11 +20,7 @@ class EmailProvider extends \Hubleto\Erp\Core
   private string $smtpUsername;
   private string $smtpPassword;
 
-  public function __construct(public \Hubleto\Framework\Loader $main)
-  {
-  }
-
-  public function init(): void
+  public function __construct()
   {
     $this->smtpHost = $this->config()->getAsString('smtpHost', '');
     $this->smtpPort = $this->config()->getAsInteger('smtpPort', 0);

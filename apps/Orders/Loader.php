@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Orders;
 
 use Hubleto\App\Community\Documents\Models\Template;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
 
   /**
@@ -137,7 +137,7 @@ class Loader extends \Hubleto\Framework\App
         <div class="flex flex-col">
           ' . (count($periodicalOrdersMissingItems) > 0 ? '
             <a  href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders" class="badge badge-danger ml-auto">
-              Some orders require your attention
+              Some periodical orders require your attention
             </a>
           ' : '') . '
         </div>

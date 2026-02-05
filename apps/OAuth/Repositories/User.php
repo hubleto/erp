@@ -7,7 +7,7 @@ use League\OAuth2\Server\Entities\UserEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use Hubleto\App\Community\OAuth\Entities\UserEntity;
 
-class User extends \Hubleto\Framework\Core implements UserRepositoryInterface
+class User extends \Hubleto\Erp\Core implements UserRepositoryInterface
 {
 
   public function getUserEntityByUserCredentials(

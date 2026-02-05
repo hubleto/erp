@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Auth;
 
 use Hubleto\Framework\DependencyInjection;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
 
   /**

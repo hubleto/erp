@@ -6,7 +6,7 @@ use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use Hubleto\App\Community\OAuth\Entities\AuthCodeEntity;
 
-class AuthCode extends \Hubleto\Framework\Core implements AuthCodeRepositoryInterface
+class AuthCode extends \Hubleto\Erp\Core implements AuthCodeRepositoryInterface
 {
 
   public function persistNewAuthCode(AuthCodeEntityInterface $authCodeEntity): void

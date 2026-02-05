@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Desktop;
 
 use Hubleto\Framework\DependencyInjection;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
   public const DEFAULT_INSTALLATION_CONFIG = [
     'sidebarOrder' => 0,

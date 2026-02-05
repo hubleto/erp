@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Desktop;
 
-class DashboardManager extends \Hubleto\Framework\Core
+class DashboardManager extends \Hubleto\Erp\Core
 {
 
   /** @var array<int, \Hubleto\App\Community\Desktop\Types\Board> */

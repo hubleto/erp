@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Projects;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
 
   /**

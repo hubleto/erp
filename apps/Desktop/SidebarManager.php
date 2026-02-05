@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Desktop;
 
-class SidebarManager extends \Hubleto\Framework\Core
+class SidebarManager extends \Hubleto\Erp\Core
 {
   public const ITEM_LINK = 'link';
   public const ITEM_DIVIDER = 'divider';

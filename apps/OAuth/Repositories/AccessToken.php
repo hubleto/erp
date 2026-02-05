@@ -7,7 +7,7 @@ use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use Hubleto\App\Community\OAuth\Entities\AccessTokenEntity;
 
-class AccessToken extends \Hubleto\Framework\Core implements AccessTokenRepositoryInterface
+class AccessToken extends \Hubleto\Erp\Core implements AccessTokenRepositoryInterface
 {
 
   public function persistNewAccessToken(AccessTokenEntityInterface $accessTokenEntity): void

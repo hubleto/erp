@@ -4,8 +4,6 @@ namespace Hubleto\Erp;
 
 
 use Hubleto\App\Community\Settings\PermissionsManager;
-use Hubleto\Framework\Interfaces\AppManagerInterface;
-use Hubleto\Framework\Config;
 /**
  * @property \Hubleto\Erp\Loader $main
  */

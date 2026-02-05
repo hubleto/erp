@@ -6,7 +6,8 @@ namespace Hubleto\App\Community\Auth;
 use Hubleto\App\Community\Auth\Models\Token;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Auth\Models\UserHasToken;
-use Hubleto\Framework\Core;
+use Hubleto\Erp\Core;
+use Hubleto\Erp\EmailProvider;
 use Hubleto\Framework\Model;
 
 /**
@@ -212,10 +213,13 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
         'id_token' => $token['id'],
       ]);
 
+      /** @var EmailProvider */
+      $emailProvider = $this->getService(EmailProvider::class);
+
       if ($user->password != '') {
-        $this->emailProvider()->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $token['token']);
+        $emailProvider->sendResetPasswordEmail($login, $name, $user['language'] ?? 'en', $token['token']);
       } else {
-        $this->emailProvider()->sendWelcomeEmail($login, $name, $user['language'] ?? 'en', $token['token']);
+        $emailProvider->sendWelcomeEmail($login, $name, $user['language'] ?? 'en', $token['token']);
       }
     }
   }

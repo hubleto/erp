@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar;
 
-class Manager extends \Hubleto\Framework\Core
+class Manager extends \Hubleto\Erp\Core
 {
 
   /** @var array<string, \Hubleto\Erp\Calendar> */

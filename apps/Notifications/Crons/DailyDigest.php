@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Notifications\Crons;
 
-
+use Hubleto\Erp\EmailProvider;
 
 class DailyDigest extends \Hubleto\Erp\Cron
 {
@@ -18,8 +18,11 @@ class DailyDigest extends \Hubleto\Erp\Cron
       $digest = $this->getService(\Hubleto\App\Community\Notifications\Digest::class);
       $digestHtml = $digest->getDailyDigestForUser($user);
 
+      /** @var EmailProvider */
+      $emailProvider = $this->getService(EmailProvider::class);
+
       if (!empty($digestHtml)) {
-        if ($this->emailProvider()->send($user['email'], 'Hubleto: Your Daily Digest', $digestHtml)) {
+        if ($emailProvider->send($user['email'], 'Hubleto: Your Daily Digest', $digestHtml)) {
           $emailsSent[] = $user['email'];
         }
       }

@@ -2,10 +2,10 @@
 
 namespace Hubleto\App\Community\Campaigns;
 
-use \Hubleto\Framework\Core;
+use \Hubleto\Erp\Core;
 use \Hubleto\Framework\Env;
 
-class Lib extends \Hubleto\Framework\Core
+class Lib extends Core
 {
 
   /**

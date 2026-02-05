@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Dashboards;
 
-class Manager extends \Hubleto\Framework\Core
+class Manager extends \Hubleto\Erp\Core
 {
 
   protected array $boards = [];

@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow;
 
-class Manager extends \Hubleto\Framework\Core
+class Manager extends \Hubleto\Erp\Core
 {
 
   /** @var array<string, Workflow> */

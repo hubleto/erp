@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Calendar;
 use Hubleto\App\Community\Calendar\Models\Activity;
 use Hubleto\App\Community\Calendar\Models\SharedCalendar;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
 
   /**

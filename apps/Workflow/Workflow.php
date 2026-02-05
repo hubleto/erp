@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow;
 
-class Workflow extends \Hubleto\Framework\Core
+class Workflow extends \Hubleto\Erp\Core
 {
   public \Hubleto\Framework\Interfaces\AppInterface $app;
 

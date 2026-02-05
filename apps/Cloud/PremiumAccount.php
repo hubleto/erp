@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Cloud;
 
-class PremiumAccount extends \Hubleto\Framework\Core
+class PremiumAccount extends \Hubleto\Erp\Core
 {
 
   public function getAccountUid()

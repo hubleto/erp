@@ -6,7 +6,7 @@ use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use Hubleto\App\Community\OAuth\Entities\RefreshTokenEntity;
 
-class RefreshToken extends \Hubleto\Framework\Core implements RefreshTokenRepositoryInterface
+class RefreshToken extends \Hubleto\Erp\Core implements RefreshTokenRepositoryInterface
 {
 
   public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity): void

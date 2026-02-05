@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp;
 
-class Calendar extends \Hubleto\Framework\Core
+class Calendar extends \Hubleto\Erp\Core
 {
 
   /**

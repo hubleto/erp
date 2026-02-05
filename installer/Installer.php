@@ -8,7 +8,7 @@ use Hubleto\App\Community\Auth\Models\UserRole;
 use Hubleto\App\Community\Auth\Models\UserHasRole;
 use Hubleto\App\Community\Auth\Models\User;
 
-class Installer extends \Hubleto\Framework\Core
+class Installer extends \Hubleto\Erp\Core
 {
 
   public string $adminName = '';

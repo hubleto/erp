@@ -6,7 +6,7 @@ use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use Hubleto\App\Community\OAuth\Entities\ClientEntity;
 
-class Client extends \Hubleto\Framework\Core implements ClientRepositoryInterface
+class Client extends \Hubleto\Erp\Core implements ClientRepositoryInterface
 {
 
   public function getClientEntity(string $clientIdentifier): ?ClientEntityInterface

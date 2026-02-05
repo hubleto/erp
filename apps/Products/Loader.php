@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Products;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
 
   public array $productTypes = [];
@@ -63,8 +63,6 @@ class Loader extends \Hubleto\Framework\App
    */
   public function generateDemoData(): void
   {
-
-    $faker = \Faker\Factory::create();;
 
     $categories = [
       [ 'id' => 100, 'id_parent' => 0, 'name' => 'Computers & Accessories' ],
@@ -220,7 +218,6 @@ class Loader extends \Hubleto\Framework\App
     }
     
     foreach ($products as $product) {
-      $product['ean'] = $faker->ean13();
       $mProduct->record->recordCreate($product);
     }
   }

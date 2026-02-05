@@ -7,7 +7,7 @@ use Dompdf\Options;
 
 use Hubleto\App\Community\Documents\Models\Template;
 
-class Generator extends \Hubleto\Framework\Core
+class Generator extends \Hubleto\Erp\Core
 {
 
   /**

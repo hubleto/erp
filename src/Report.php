@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp;
 
-class Report extends \Hubleto\Framework\Core
+class Report extends \Hubleto\Erp\Core
 {
   public \Hubleto\Framework\Interfaces\AppInterface $hubletoApp;
 

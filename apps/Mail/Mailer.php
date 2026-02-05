@@ -8,7 +8,7 @@ use Hubleto\App\Community\Mail\Models\Mailbox;
 use Ddeboer\Imap\Server;
 use Hubleto\Framework\Helper;
 
-class Mailer extends \Hubleto\Framework\Core
+class Mailer extends \Hubleto\Erp\Core
 {
 
   public function compileEmailAddresses(array $input): string

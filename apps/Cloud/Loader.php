@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Cloud;
 
 
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
   public bool $canBeDisabled = false;
   public bool $permittedForAllUsers = true;

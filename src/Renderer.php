@@ -2,7 +2,6 @@
 
 namespace Hubleto\Erp;
 
-
 use Hubleto\Framework\AuthProvider;
 use Hubleto\App\Community\Auth\Controllers\SignIn;
 use Hubleto\App\Community\Auth\Controllers\NotEnoughPermissions;

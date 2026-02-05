@@ -10,11 +10,9 @@ use Hubleto\App\Community\Settings\PermissionsManager;
 
 class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 {
-  public $faker;
+
   public function run(): void
   {
-
-    $this->faker = \Faker\Factory::create();;
 
     /** @var PermissionsManager */
     $permissionsManager = $this->getService(PermissionsManager::class);
@@ -27,13 +25,14 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     $mUserHasRole = $this->getService(UserHasRole::class);
 
     $mCompany->record->where('id', 1)->update([
-      'tax_id' => $this->faker->randomNumber(5, true).$this->faker->randomNumber(5, true),
-      'vat_id' => $this->faker->randomNumber(5, true).$this->faker->randomNumber(5, true),
-      'street_1' => $this->faker->streetAddress(),
+      'tax_id' => '588230975',
+      'vat_id' => 'US588230975',
+      'street_1' => '1574 Copperhead Road',
       'street_2' => '',
-      'zip' => $this->faker->postcode(),
-      'city' => $this->faker->city(),
-      'country' => $this->faker->country(),
+      'zip' => '06182',
+      'city' => 'Hartford',
+      'region' => 'Connecticut',
+      'country' => 'US',
     ]);
 
     $idCompany = 1; // plati za predpokladu, ze tento command sa spusta hned po CommandInit

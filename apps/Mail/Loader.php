@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Mail;
 use Hubleto\App\Community\Mail\Models\Account;
 use Hubleto\App\Community\Mail\Models\Mail;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
   public array $templateVariables = [];
 

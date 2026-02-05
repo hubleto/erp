@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Desktop;
 
-class AppMenuManager extends \Hubleto\Framework\Core
+class AppMenuManager extends \Hubleto\Erp\Core
 {
 
   /** @var array<int, array<string, bool|string>> */

@@ -24,6 +24,7 @@ class Company extends \Hubleto\Erp\Model
       'street_2' => (new Varchar($this, $this->translate('Street, line 2'))),
       'zip' => (new Varchar($this, $this->translate('ZIP'))),
       'city' => (new Varchar($this, $this->translate('City'))),
+      'region' => (new Varchar($this, $this->translate('Region'))),
       'country' => (new Varchar($this, $this->translate('Country'))),
       'logo' => (new Image($this, $this->translate('Logo'))),
       'brand_color_primary' => (new Color($this, $this->translate('Brand color - primary'))),

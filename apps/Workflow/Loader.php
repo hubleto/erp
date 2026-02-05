@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Workflow;
 
 use Hubleto\App\Community\Deals\Models\Deal;
 
-class Loader extends \Hubleto\Framework\App
+class Loader extends \Hubleto\Erp\App
 {
 
   /**

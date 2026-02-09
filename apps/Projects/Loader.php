@@ -9,7 +9,7 @@ class Loader extends \Hubleto\Erp\App
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -44,12 +44,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
-    $calendarManager->addCalendar(
-      $this,
-      'Projects-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
-      '#008000', // your app's calendar color
-      Calendar::class // your app's Calendar class
-    );
+    $calendarManager->addCalendar($this, 'projects', $this->configAsString('calendarColor'), Calendar::class);
 
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'projects', $this->translate('Projects'), 'fas fa-diagram-project');
@@ -66,6 +61,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\ProjectDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectOrder::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectTask::class)->dropTableIfExists()->install();
+      $this->getModel(Models\ProjectActivity::class)->dropTableIfExists()->install();
     }
     if ($round == 2) {
 
@@ -112,15 +108,15 @@ class Loader extends \Hubleto\Erp\App
    * Implements fulltext search functionality for tasks
    *
    * @param array $expressions List of expressions to be searched and glued with logical 'or'.
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function search(array $expressions): array
   {
     $mProject = $this->getModel(Models\Project::class);
     $qProjects = $mProject->record->prepareReadQuery();
-    
+
     foreach ($expressions as $e) {
       $qProjects = $qProjects->where(function($q) use ($e) {
         $q->orWhere('projects.identifier', 'like', '%' . $e . '%');

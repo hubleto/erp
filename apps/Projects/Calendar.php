@@ -11,11 +11,35 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     "formComponent" => "ProjectsFormActivity"
   ];
 
+  public function loadEvent(int $id): array
+  {
+    return $this->prepareLoadActivityQuery($this->getModel(Models\ProjectActivity::class), $id)->first()?->toArray();
+  }
+
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
-    // Implement your functionality for loading calendar events.
+    $idProject = $this->router()->urlParamAsInteger('idProject');
+    $mProjectActivity = $this->getModel(Models\ProjectActivity::class);
+    $activities = $this->prepareLoadActivitiesQuery($mProjectActivity, $dateStart, $dateEnd, $filter)->with('PROJECT.CUSTOMER');
+    if ($idProject > 0) {
+      $activities = $activities->where("id_project", $idProject);
+    }
 
-    return [];
+    $events = $this->convertActivitiesToEvents(
+      'projects',
+      $activities->get()?->toArray(),
+      function (array $activity) {
+        if (isset($activity['PROJECT'])) {
+          $project = $activity['PROJECT'];
+          $customer = $project['CUSTOMER'] ?? [];
+          return 'Project ' . $project['identifier'] . ' ' . $project['title'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
+        } else {
+          return '';
+        }
+      }
+    );
+
+    return $events;
   }
 
 }

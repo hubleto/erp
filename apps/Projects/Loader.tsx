@@ -2,6 +2,7 @@ import React from 'react';
 import App from '@hubleto/react-ui/core/App'
 import TableProjects from "./Components/TableProjects"
 import TablePhases from './Components/TablePhases'
+import ProjectsFormActivity from './Components/ProjectsFormActivity'
 import request from "@hubleto/react-ui/core/Request";
 
 class ProjectsApp extends App {
@@ -11,6 +12,7 @@ class ProjectsApp extends App {
     // register react components
     globalThis.hubleto.registerReactComponent('ProjectsTableProjects', TableProjects);
     globalThis.hubleto.registerReactComponent('ProjectsTablePhases', TablePhases);
+    globalThis.hubleto.registerReactComponent('ProjectsFormActivity', ProjectsFormActivity);
 
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addCustomFormTab({

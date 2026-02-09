@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar;
 
-
+use DateTime;
 use Hubleto\App\Community\Calendar\Models\Activity;
 
 class Calendar extends \Hubleto\Erp\Calendar
@@ -73,16 +73,32 @@ class Calendar extends \Hubleto\Erp\Calendar
 
     foreach ($activities as $key => $activity) { //@phpstan-ignore-line
       $recurrence = @json_decode($activity['recurrence'], true);
+      $diffDays = 0;
 
       if (is_array($recurrence) && is_array($recurrence['dates'])) {
         $dates = $recurrence['dates'];
+
+        // calculate the difference in days, if the original activity with recurrence has more than a day
+        if ($recurrence && ($activity['date_start'] != $activity['date_end'])) {
+          $dStart = new DateTime($activity['date_start']);
+          $dEnd = new DateTime($activity['date_end']);
+          $difference = $dStart->diff($dEnd);
+          $diffDays = $difference->days;
+        }
+
       } else {
         $dates = [ $activity['date_start'] ];
       }
       foreach ($dates as $date) {
         $dStart = date("Y-m-d", strtotime($date));
         $tStart = (string) ($activity['time_start'] ?? '');
-        $dEnd = date("Y-m-d", strtotime($date));
+
+        //add the diffirence in days to the recurring activities
+        if ($recurrence) {
+          $dEnd = date("Y-m-d", strtotime($date . " +" . $diffDays . " days" ));
+        } else {
+          $dEnd = date("Y-m-d", strtotime($activity['date_end']));
+        }
         $tEnd = (string) ($activity['time_end'] ?? '');
 
         $events[$eventKey]['id'] = (int) ($activity['id'] ?? 0);
@@ -103,7 +119,7 @@ class Calendar extends \Hubleto\Erp\Calendar
           $events[$eventKey]['end'] = $dStart . " " . $tEnd;
         }
 
-        $longerThanDay = (!empty($dStart) && !empty($dEnd) && ($dStart != $dEnd));
+        $longerThanDay = ((!empty($dStart) && !empty($dEnd)) && ($dStart != $dEnd));
 
         // fix for fullCalendar not showing the last date of an event longer than one day
         if ((!empty($dStart) && !empty($dEnd) && $longerThanDay)) {

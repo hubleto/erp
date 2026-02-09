@@ -15,10 +15,10 @@ class DealActivity extends \Hubleto\App\Community\Calendar\Models\RecordManagers
     return $this->belongsTo(Deal::class, 'id_deal', 'id');
   }
 
-  /** @return BelongsTo<Lead, covariant LeadActivity> */
+  /** @return BelongsTo<Contact, covariant Contact> */
   public function CONTACT(): BelongsTo
   {
-    return $this->belongsTo(Contact::class, 'id_lead', 'id');
+    return $this->belongsTo(Contact::class, 'id_contact', 'id');
   }
 
 }

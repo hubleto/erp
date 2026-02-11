@@ -13,7 +13,7 @@
             {{ hubleto.locale().formatDateShort(m.date_due) }}
             {{ m.title }}
             {% if m.REPORTS|length > 0 %}
-              (last report from {{ (m.REPORTS|first).date_report }})
+              (progress {{ (m.REPORTS|first).progress_percent }} % reported on {{ (m.REPORTS|first).date_report }})
             {% else %}
               (no report yet)
             {% endif %}

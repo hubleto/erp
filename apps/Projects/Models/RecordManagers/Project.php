@@ -75,6 +75,12 @@ class Project extends \Hubleto\Erp\RecordManager
     return $this->hasMany(ProjectTask::class, 'id_project', 'id');
   }
 
+  /** @return HasMany<ProjectTask, covariant Deal> */
+  public function MILESTONES(): HasMany
+  {
+    return $this->hasMany(Milestone::class, 'id_project', 'id');
+  }
+
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);

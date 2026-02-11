@@ -42,6 +42,7 @@ class Project extends \Hubleto\Erp\Model
 
     'ORDERS' => [ self::HAS_MANY, ProjectOrder::class, 'id_order', 'id'],
     'TASKS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id'],
+    'MILESTONES' => [ self::HAS_MANY, Milestone::class, 'id_project', 'id' ],
   ];
 
   /**

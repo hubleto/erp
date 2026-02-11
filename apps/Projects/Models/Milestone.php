@@ -18,6 +18,7 @@ class Milestone extends \Hubleto\Erp\Model
 
   public array $relations = [
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
+    'REPORTS' => [ self::HAS_MANY, MilestoneReport::class, 'id_milestone', 'id' ],
   ];
 
   public function describeColumns(): array

@@ -4,6 +4,20 @@
       <div class="text-gray-400">{{ item.CUSTOMER.name }}</div>
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
       <div class="text-primary">{{ item.MAIN_DEVELOPER.email }}</div>
+      {% if item.MILESTONES|length <= 0 %}
+        <div class="text-red-800">Project has no milestones.</div>
+      {% else %}
+        {% for m in item.MILESTONES %}
+          <div class="text-violet-600">
+            <i class="fas fa-calendar-check"></i>
+            {{ hubleto.locale().formatDateShort(m.date_due) }}
+            {{ m.title }}
+            {% if m.REPORTS|length > 0 %}
+              (last report from {{ (m.REPORTS|first).date_report }})
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
       {% for t in item.TASKS %}
         <div class="text-sm text-gray-400">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
       {% endfor %}

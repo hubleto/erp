@@ -14,6 +14,8 @@
             {{ m.title }}
             {% if m.REPORTS|length > 0 %}
               (last report from {{ (m.REPORTS|first).date_report }})
+            {% else %}
+              (no report yet)
             {% endif %}
           </div>
         {% endfor %}

@@ -1,0 +1,8 @@
+<h1 class="app-main-title">{{ translate('Projects') }} > {{ translate('Assignment of tasks') }}</h1>
+
+<hblreact-table
+  string:model="Hubleto/App/Community/Projects/Models/ProjectTask"
+  string:tag="table-projects-tasks"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></hblreact-table

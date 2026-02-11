@@ -26,6 +26,9 @@ class Loader extends \Hubleto\Erp\App
       '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
       '/^projects\/add?\/?$/' => ['controller' => Controllers\Projects::class, 'vars' => [ 'recordId' => -1 ]],
 
+      '/^projects\/task-assignment(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsTasks::class,
+      '/^projects\/task-assignment\/add?\/?$/' => ['controller' => Controllers\ProjectsTasks::class, 'vars' => [ 'recordId' => -1 ]],
+
       '/^projects\/milestones(\/(?<recordId>\d+))?\/?$/' => Controllers\Milestones::class,
       '/^projects\/milestones\/add?\/?$/' => ['controller' => Controllers\Milestones::class, 'vars' => [ 'recordId' => -1 ]],
 

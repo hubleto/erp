@@ -4,8 +4,8 @@
       <div class="text-gray-400">{{ item.CUSTOMER.name }}</div>
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
       <div>
-        <span class="text-blue-800">DEV: {{ item.MAIN_DEVELOPER.email }}</span>
-        <span class="text-green-800">PM: {{ item.PROJECT_MANAGER.email }}</span>
+        <span class="badge badge-small badge-blue">DEV: {{ item.MAIN_DEVELOPER.nick }}</span>
+        <span class="badge badge-small badge-green">PM: {{ item.PROJECT_MANAGER.nick }}</span>
       </div>
       {% if item.MILESTONES|length <= 0 %}
         <div class="text-red-800">Project has no milestones.</div>

@@ -36,6 +36,20 @@ class Milestone extends \Hubleto\Erp\Model
         ->setProperty('sql', '
           select max(pmr.date_report) from projects_milestone_reports pmr
           where pmr.id_milestone = projects_milestones.id
+          order by pmr.date_report desc
+          limit 1
+        ')
+        ->setTextAlign('right')
+      ,
+
+      'virt_last_progress_percent' => (new Virtual($this, $this->translate('Last progress')))
+        ->setUnit('%')
+        ->setDefaultVisible()
+        ->setProperty('sql', '
+          select pmr.progress_percent from projects_milestone_reports pmr
+          where pmr.id_milestone = projects_milestones.id
+          order by pmr.date_report desc
+          limit 1
         ')
         ->setTextAlign('right')
       ,
@@ -49,7 +63,7 @@ class Milestone extends \Hubleto\Erp\Model
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
         $description->hide(['header', 'footer']);
-        $description->showOnlyColumns(['title', 'date_due', 'virt_last_report_date']);
+        $description->showOnlyColumns(['title', 'date_due', 'virt_last_report_date', 'virt_last_progress_percent']);
         $description->permissions = [false, true, false, false];
       break;
       default:

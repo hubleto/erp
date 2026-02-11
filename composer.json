@@ -7,15 +7,6 @@
         "issues": "https://github.com/hubleto/erp/issues",
         "source": "https://github.com/hubleto/erp"
     },
-    "require": {
-        "hubleto/framework": "0.27",
-        "hubleto/pay-by-square-encoder": "0.27",
-        "defuse/php-encryption": "^2",
-        "ddeboer/imap": "^1",
-        "endroid/qr-code": "^6",
-        "dompdf/dompdf": "^3",
-        "phpmailer/phpmailer": "^6"
-    },
     "keywords": ["hubleto", "crm", "erp", "application", "hub"],
     "autoload": {
         "psr-4": {

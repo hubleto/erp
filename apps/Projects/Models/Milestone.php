@@ -27,7 +27,8 @@ class Milestone extends \Hubleto\Erp\Model
       'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setRequired(),
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired(),
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setRequired(),
-      'description' => (new Text($this, $this->translate('Description')))->setDefaultVisible()->setRequired(),
+      'expected_output' => (new Text($this, $this->translate('Expected output')))->setDefaultVisible()->setRequired(),
+      'description' => (new Text($this, $this->translate('Description of activities')))->setDefaultVisible(),
       'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
 
       'virt_last_report_date' => (new Virtual($this, $this->translate('Last report')))

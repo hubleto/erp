@@ -8,8 +8,8 @@
         "source": "https://github.com/hubleto/erp"
     },
     "require": {
-        "hubleto/framework": "dev-main",
-        "hubleto/pay-by-square-encoder": "dev-main",
+        "hubleto/framework": "0.27",
+        "hubleto/pay-by-square-encoder": "0.27",
         "defuse/php-encryption": "^2",
         "ddeboer/imap": "^1",
         "endroid/qr-code": "^6",

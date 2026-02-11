@@ -31,11 +31,6 @@ class Project extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(User::class, 'id_account_manager', 'id');
   }
 
-  public function PHASE(): BelongsTo
-  {
-    return $this->belongsTo(Phase::class, 'id_phase', 'id');
-  }
-
   public function CUSTOMER(): BelongsTo
   {
     return $this->belongsTo(Customer::class, 'id_customer', 'id');

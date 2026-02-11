@@ -39,7 +39,6 @@ class Project extends \Hubleto\Erp\Model
     'ACCOUNT_MANAGER' => [ self::HAS_ONE, User::class, 'id_account_manager', 'id' ],
     'CUSTOMER' => [ self::HAS_ONE, Customer::class, 'id_customer', 'id' ],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id_contact', 'id' ],
-    'PHASE' => [ self::HAS_ONE, Phase::class, 'id_phase', 'id' ],
 
     'ORDERS' => [ self::HAS_MANY, ProjectOrder::class, 'id_order', 'id'],
     'TASKS' => [ self::HAS_MANY, ProjectTask::class, 'id_task', 'id'],

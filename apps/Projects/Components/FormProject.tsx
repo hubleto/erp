@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
+import TableMilestones from './TableMilestones';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
@@ -37,7 +38,8 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
       selectParentOrder: false,
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
-        { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
+        { uid: 'milestones', title: this.translate('Milestones') },
+        { uid: 'tasks', title: this.translate('Tasks') },
         { uid: 'worksheet', title: this.translate('Worksheet') },
         { uid: 'statistics', title: this.translate('Statistics') },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
@@ -138,8 +140,20 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
               {/* {this.inputWrapper('is_closed')} */}
             </div>
             <div className='flex-1'>
-              {R.id > 0 ?
-                <div className='card card-info'>
+              {R.id > 0 ? <>
+                <div className='card card-warning'>
+                  <div className='card-header'>{this.translate('Milestones')}</div>
+                  <div className='card-body'>
+                    <TableMilestones
+                      tag={"table_project_task"}
+                      parentForm={this}
+                      uid={this.props.uid + "_table_project_task"}
+                      idProject={R.id}
+                      view='briefOverview'
+                    />
+                  </div>
+                </div>
+                <div className='card card-info mt-2'>
                   <div className='card-header'>{this.translate('Open tasks')}</div>
                   <div className='card-body'>
                     <TableTasks
@@ -155,7 +169,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                     />
                   </div>
                 </div>
-              : null}
+              </> : null}
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('id_contact')}
               {this.inputWrapper('color')}
@@ -168,27 +182,32 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
         </>;
       break;
 
+      case 'milestones':
+        return (this.state.id < 0
+          ? <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+          : <TableMilestones
+            tag={"table_project_milestone"}
+            parentForm={this}
+            uid={this.props.uid + "_table_project_milestone"}
+            idProject={R.id}
+          />
+        );
+      break;
+
       case 'tasks':
-        try {
-          return <>
-            {this.state.id < 0 ?
-                <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
-              :
-                <TableTasks
-                  tag={"table_project_task"}
-                  parentForm={this}
-                  uid={this.props.uid + "_table_project_task"}
-                  junctionTitle='Project'
-                  junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
-                  junctionSourceColumn='id_project'
-                  junctionSourceRecordId={R.id}
-                  junctionDestinationColumn='id_task'
-                />
-            }
-          </>;
-        } catch (ex) {
-          return <div className="alert alert-error">Failed to display tasks. Check if you have 'Tasks' app installed.</div>
-        }
+        return (this.state.id < 0
+          ? <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+          : <TableTasks
+            tag={"table_project_task"}
+            parentForm={this}
+            uid={this.props.uid + "_table_project_task"}
+            junctionTitle='Project'
+            junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
+            junctionSourceColumn='id_project'
+            junctionSourceRecordId={R.id}
+            junctionDestinationColumn='id_task'
+          />
+        );
       break;
 
       case 'worksheet':

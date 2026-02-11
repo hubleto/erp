@@ -25,7 +25,10 @@ class Loader extends \Hubleto\Erp\App
 
       '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
       '/^projects\/add?\/?$/' => ['controller' => Controllers\Projects::class, 'vars' => [ 'recordId' => -1 ]],
-      '/^projects\/phases\/?$/' => Controllers\Phases::class,
+
+      '/^projects\/milestones(\/(?<recordId>\d+))?\/?$/' => Controllers\Milestones::class,
+      '/^projects\/milestones\/add?\/?$/' => ['controller' => Controllers\Milestones::class, 'vars' => [ 'recordId' => -1 ]],
+
       '/^projects\/monthly-summary\/?$/' => Controllers\MonthlySummary::class,
     ]);
 
@@ -46,35 +49,19 @@ class Loader extends \Hubleto\Erp\App
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     $calendarManager->addCalendar($this, 'projects', $this->configAsString('calendarColor'), Calendar::class);
 
-    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
-    $appMenu->addItem($this, 'projects', $this->translate('Projects'), 'fas fa-diagram-project');
-    $appMenu->addItem($this, 'projects/phases', $this->translate('Phases'), 'fas fa-list');
-
   }
 
   // installTables
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Phase::class)->dropTableIfExists()->install();
       $this->getModel(Models\Project::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Milestone::class)->dropTableIfExists()->install();
+      $this->getModel(Models\MilestoneReport::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectOrder::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectTask::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectActivity::class)->dropTableIfExists()->install();
-    }
-    if ($round == 2) {
-
-    }
-    if ($round == 3) {
-      $mPhase = $this->getModel(Models\Phase::class);
-      $mPhase->record->recordCreate(['name' => 'Early preparation', 'order' => 1, 'color' => '#344556']);
-      $mPhase->record->recordCreate(['name' => 'Advanced preparation', 'order' => 2, 'color' => '#6830a5']);
-      $mPhase->record->recordCreate(['name' => 'Final preparation', 'order' => 3, 'color' => '#3068a5']);
-      $mPhase->record->recordCreate(['name' => 'Early implementation', 'order' => 4, 'color' => '#ae459f']);
-      $mPhase->record->recordCreate(['name' => 'Advanced implementation', 'order' => 5, 'color' => '#a38f9a']);
-      $mPhase->record->recordCreate(['name' => 'Final implementation', 'order' => 6, 'color' => '#44879a']);
-      $mPhase->record->recordCreate(['name' => 'Delivery', 'order' => 7, 'color' => '#74809a']);
     }
   }
 

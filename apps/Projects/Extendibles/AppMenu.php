@@ -15,6 +15,12 @@ class AppMenu extends \Hubleto\Framework\Extendible
       ],
       [
         'app' => $this->app,
+        'url' => 'projects/milestones',
+        'title' => $this->app->translate('Milestones'),
+        'icon' => 'fas fa-calendar-check',
+      ],
+      [
+        'app' => $this->app,
         'url' => 'projects/monthly-summary',
         'title' => $this->app->translate('Monthly summary'),
         'icon' => 'fas fa-chart-bar',

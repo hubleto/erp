@@ -29,9 +29,9 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99998 ],
       \Hubleto\App\Community\Api\Loader::class => [ 'sidebarOrder' => 99998 ],
     ],
-    'cloud' => [
-      \Hubleto\App\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998 ],
-    ],
+    // 'cloud' => [
+    //   \Hubleto\App\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998 ],
+    // ],
     'crm' => [
       \Hubleto\App\Community\Campaigns\Loader::class => [ 'sidebarOrder' => 202 ],
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
@@ -520,7 +520,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $this->terminal()->cyan("\n");
-    $this->terminal()->yellow("All done! You're a fantastic CRM developer.\n");
+    $this->terminal()->yellow("All done! Enjoy Hubleto.\n");
     $this->terminal()->colored("yellow", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword . "\n");
     $this->terminal()->yellow("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
     $this->terminal()->yellow("  -> Check the developer's guide at https://developer.hubleto.com.\n");

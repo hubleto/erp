@@ -34,7 +34,7 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
           $idOwner, // to
           $model->shortName . ' updated', // subject
           $body,
-          $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
+          $this->env()->projectUrl . '/' . $model->getRecordDetailUrl($savedRecord['id']) // url
         );
       }
 
@@ -45,7 +45,7 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
           $idManager, // to
           $model->shortName . ' updated', // subject
           $body,
-          $this->env()->projectUrl . '/' . $model->getItemDetailUrl((int) $savedRecord['id']) // url
+          $this->env()->projectUrl . '/' . $model->getRecordDetailUrl($savedRecord['id']) // url
         );
       }
     }

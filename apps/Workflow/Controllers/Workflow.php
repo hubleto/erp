@@ -42,7 +42,14 @@ class Workflow extends \Hubleto\Erp\Controller
       $workflowLoader = $workflowManager->getWorkflowLoaderForGroup($workflow->group);
 
       $this->viewParams["workflow"] = $workflow;
-      $this->viewParams["items"] = ($workflowLoader ? $workflowLoader->loadItems($idWorkflow, ['fOwner' => $fOwner]) : []);
+
+      $items = ($workflowLoader ? $workflowLoader->loadItems($idWorkflow, ['fOwner' => $fOwner]) : []);
+
+      foreach ($items as $key => $item) {
+        $items[$key]['_UID'] = md5($key . rand(0, 999999));
+      }
+
+      $this->viewParams["items"] = $items;
     }
 
     $this->viewParams["workflows"] = $workflows;

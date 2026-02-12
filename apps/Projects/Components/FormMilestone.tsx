@@ -42,17 +42,19 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
             {this.inputWrapper('description')}
             {this.inputWrapper('color')}
           </div>
-          <div className='grow card'>
-            <div className='card-header'>Reports</div>
-            <div className='card-body'>
-              <TableMilestoneReports
-                tag={"table_project_milestone_report"}
-                parentForm={this}
-                uid={this.props.uid + "_table_project_milestone_report"}
-                idMilestone={R.id}
-              />
+          {R.id > 0 ?
+            <div className='grow card'>
+              <div className='card-header'>Reports</div>
+              <div className='card-body'>
+                <TableMilestoneReports
+                  tag={"table_project_milestone_report"}
+                  parentForm={this}
+                  uid={this.props.uid + "_table_project_milestone_report"}
+                  idMilestone={R.id}
+                />
+              </div>
             </div>
-          </div>
+          : null}
         </div>;
       break;
     }

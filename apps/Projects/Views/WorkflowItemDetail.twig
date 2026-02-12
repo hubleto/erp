@@ -1,6 +1,6 @@
 <div class="card-header rounded flex flex-col p-2 text-sm font-normal">
   <div class="flex justify-between w-full">
-    <div class="flex flex-col truncate">
+    <div class="flex flex-col truncate gap-1">
       <div class="text-gray-400">{{ item.CUSTOMER.name }}</div>
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
       <div>
@@ -11,21 +11,38 @@
         <div class="text-red-800">Project has no milestones.</div>
       {% else %}
         {% for m in item.MILESTONES %}
-          <div class="text-violet-600">
-            <i class="fas fa-calendar-check"></i>
-            {{ hubleto.locale().formatDateShort(m.date_due) }}
-            {{ m.title }}
-            {% if m.REPORTS|length > 0 %}
-              (progress {{ (m.REPORTS|first).progress_percent }} % reported on {{ hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }})
-            {% else %}
-              (no report yet)
-            {% endif %}
-          </div>
+          <a
+            class="btn btn-transparent text-violet-600"
+            href="{{ hubleto.env().projectUrl }}/projects/milestones/{{ m.id }}"
+            target="_blank"
+          >
+            <span class="icon"><i class="fas fa-calendar-check"></i></span>
+            <span class="text">
+              {{ hubleto.locale().formatDateShort(m.date_due) }}
+              {{ m.title }}
+              {% if m.REPORTS|length > 0 %}
+                (progress {{ (m.REPORTS|first).progress_percent }} % reported on {{ hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }})
+              {% else %}
+                (no report yet)
+              {% endif %}
+            </span>
+          </a>
         {% endfor %}
       {% endif %}
-      {% for t in item.TASKS %}
-        <div class="text-sm text-gray-400">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
-      {% endfor %}
+      <button
+        class="btn btn-transparent"
+        onclick="
+          $('#{{ item._UID }}_tasks').slideToggle();
+          return false;
+        "
+      >
+        <span class="text">{{ item.TASKS|length }} open tasks</span>
+      </button>
+      <div id="{{ item._UID }}_tasks" style="display:none">
+        {% for t in item.TASKS %}
+          <div class="text-sm text-gray-400">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </div>

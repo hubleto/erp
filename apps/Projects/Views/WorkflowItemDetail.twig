@@ -29,20 +29,7 @@
           </a>
         {% endfor %}
       {% endif %}
-      <button
-        class="btn btn-transparent"
-        onclick="
-          $('#{{ item._UID }}_tasks').slideToggle();
-          return false;
-        "
-      >
-        <span class="text">{{ item.TASKS|length }} open tasks</span>
-      </button>
-      <div id="{{ item._UID }}_tasks" style="display:none">
-        {% for t in item.TASKS %}
-          <div class="text-sm text-gray-400">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
-        {% endfor %}
-      </div>
+      <div class="text-sm text-gray-400">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
     </div>
   </div>
 </div>

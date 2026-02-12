@@ -7,7 +7,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
 
   public function loadItems(int $idWorkflow, array $filters): array
   {
-    $fOwner = (int) ($filters['fOwner'] ?? 0);
+    $fUser = (int) ($filters['fUser'] ?? 0);
 
     $mProject = $this->getModel(Models\Project::class);
     $items = $mProject->record->prepareReadQuery()
@@ -21,8 +21,11 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
       ->where($mProject->table . ".is_closed", false)
     ;
 
-    if ($fOwner > 0) {
-      $items = $items->where('id_owner', $fOwner);
+    if ($fUser > 0) {
+      $items = $items->where(function($q) use ($fUser) {
+        $q->where('id_project_manager', $fUser);
+        $q->orWhere('id_main_developer', $fUser);
+      });
     }
 
     $items = $items->get()?->toArray();

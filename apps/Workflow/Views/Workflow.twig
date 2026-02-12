@@ -49,25 +49,23 @@
     <div class="flex flex-col flex-grow overflow-auto">
       <h1 class="app-main-title">{{ viewParams.workflow.name }}</h1>
 
-      {# <div class="card card-horizontal mb-2">
+      <div class="flex gap-2 mb-2">
         <div class="card-header">
           <i class="fas fa-magnifying-glass"></i>
         </div>
         <div class="card-body flex gap-2">
-          <div class="input-wrapper flex-1">
-            <div class="input-label">Owner</div>
-            <div class="input-body">
-              <hblreact-input-lookup
-                uid="fOwner"
-                model="Hubleto/App/Community/Settings/Models/User"
-                class="w-full"
-                value="{{ viewParams.fOwner }}"
-                function:on-change="onFilterChange();"
-              />
-            </div>
-          </div>
+          {% for u in viewParams.users %}
+            <a
+              class="btn {{ u.id == viewParams.fUser ? "btn-primary" : "btn-transparent" }}"
+              href="?fUser={{ u.id }}"
+            >
+              <span class="text">
+                {{ u.nick }}
+              </span>
+            </a>
+          {% endfor %}
         </div>
-      </div> #}
+      </div>
 
       <div class="flex flex-col items-stretch md:flex-row justify-start gap-2 overflow-auto">
         {% for step in viewParams.workflow.STEPS %}

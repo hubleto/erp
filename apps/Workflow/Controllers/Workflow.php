@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow\Controllers;
 
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Tasks\Models\Task;
@@ -21,7 +22,11 @@ class Workflow extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $fOwner = $this->router()->urlParamAsInteger('fOwner');
+    $fUser = $this->router()->urlParamAsInteger('fUser');
+
+    /** @var User */
+    $mUser = $this->getModel(User::class);
+    $users = $mUser->record->where('is_active', true)->get();
 
     /** @var \Hubleto\App\Community\Workflow\Manager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
@@ -43,7 +48,7 @@ class Workflow extends \Hubleto\Erp\Controller
 
       $this->viewParams["workflow"] = $workflow;
 
-      $items = ($workflowLoader ? $workflowLoader->loadItems($idWorkflow, ['fOwner' => $fOwner]) : []);
+      $items = ($workflowLoader ? $workflowLoader->loadItems($idWorkflow, ['fUser' => $fUser]) : []);
 
       foreach ($items as $key => $item) {
         $items[$key]['_UID'] = md5($key . rand(0, 999999));
@@ -53,6 +58,8 @@ class Workflow extends \Hubleto\Erp\Controller
     }
 
     $this->viewParams["workflows"] = $workflows;
+    $this->viewParams["users"] = $users;
+    $this->viewParams["fUser"] = $fUser;
 
     $this->setView('@Hubleto:App:Community:Workflow/Workflow.twig');
   }

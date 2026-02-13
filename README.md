@@ -59,24 +59,24 @@ Contributing to the Hubleto core is the best way how to support us. You can cont
 
 To start contribution, follow the steps described below.
 
-### Fork Hubleto repositories
+  1. **Fork Hubleto repositories**
 
-Fork following repositories into one folder, e.g. /var/www/hubleto.
+      Fork following repositories into one folder, e.g. /var/www/hubleto.
 
-  * https://github.com/hubleto/framework
-  * https://github.com/hubleto/erp
-  * https://github.com/hubleto/react-ui
-  * https://github.com/hubleto/assets
+        * https://github.com/hubleto/framework
+        * https://github.com/hubleto/erp
+        * https://github.com/hubleto/react-ui
+        * https://github.com/hubleto/assets
 
-### Re-create your Hubleto folder
+  2. **Re-create your Hubleto folder**
 
-```
-cd YOUR_PROJECT_FOLDER
-composer create-project hubleto/erp-project . dev-main
-./bin/use-local-repositories /var/www/hubleto
-npm run build
-php hubleto init
-```
+      ```
+      cd YOUR_PROJECT_FOLDER
+      composer create-project hubleto/erp-project . dev-main
+      ./bin/use-local-repositories /var/www/hubleto
+      npm run build
+      php hubleto init
+      ```
 
 ## Follow us
 

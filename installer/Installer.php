@@ -214,14 +214,14 @@ class Installer extends \Hubleto\Erp\Core
   {
     switch ($defaultConfiguration) {
       case 'softvertribunal':
-        $this->appManager()->getCommunityApp('Campaigns')?->saveConfig('sidebarOrder', '0');
-        $this->appManager()->getCommunityApp('Leads')?->saveConfig('sidebarOrder', '0');
-        $this->appManager()->getCommunityApp('Suppliers')?->saveConfig('sidebarOrder', '0');
-        $this->appManager()->getCommunityApp('Warehouses')?->saveConfig('sidebarOrder', '0');
-        $this->appManager()->getCommunityApp('Shops')?->saveConfig('sidebarOrder', '0');
-        $this->appManager()->getCommunityApp('Products')?->saveConfig('sidebarOrder', '0');
-        $this->appManager()->getCommunityApp('Issues')?->saveConfig('sidebarOrder', '0');
-        $this->appManager()->getCommunityApp('Cashdesk')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Campaigns')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Leads')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Suppliers')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Warehouses')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Shops')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Products')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Issues')?->saveConfig('sidebarOrder', '0');
+        // $this->appManager()->getCommunityApp('Cashdesk')?->saveConfig('sidebarOrder', '0');
 
         $this->config()->save('secondLogoUrl', $this->config()->getAsString('assetsUrl') . "/images/logo-tribunal_znak.png");
         $this->config()->save('uiTheme', 'softvertribunal');

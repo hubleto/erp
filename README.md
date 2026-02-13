@@ -41,9 +41,7 @@ The whole platform consists of several repositories, check them all to get the f
 
 # Getting started
 
-Run `composer create-project hubleto/erp-project .` in any folder.
-
-More details are in developer's guide at https://developer.hubleto.com/getting-started.
+Follow https://github.com/hubleto/erp-project/blob/main/README.md to install your Hubleto.
 
 ## Contribute to Hubleto core (setup dev environment)
 

@@ -10,7 +10,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     'core' => [
       \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 0],
       \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99997 ],
-      \Hubleto\App\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997 ],
       \Hubleto\App\Community\Crypto\Loader::class => [ ],
       \Hubleto\App\Community\Desktop\Loader::class => [ 'sidebarOrder' => 0 ],
       \Hubleto\App\Community\Usage\Loader::class => [ 'sidebarOrder' => 0 ],
@@ -27,7 +26,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 //      \Hubleto\App\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
       \Hubleto\App\Community\Help\Loader::class => [ 'sidebarOrder' => 99998 ],
       \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99998 ],
-      \Hubleto\App\Community\Api\Loader::class => [ 'sidebarOrder' => 99998 ],
     ],
     // 'cloud' => [
     //   \Hubleto\App\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998 ],
@@ -75,6 +73,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     ],
     'developer' => [
       \Hubleto\App\Community\Developer\Loader::class => [ 'sidebarOrder' => 410 ],
+      \Hubleto\App\Community\Tools\Loader::class => [ 'sidebarOrder' => 99997 ],
+      \Hubleto\App\Community\Api\Loader::class => [ 'sidebarOrder' => 99998 ],
     ],
   ];
 
@@ -521,21 +521,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->terminal()->cyan("\n");
     $this->terminal()->yellow("All done! Enjoy Hubleto.\n");
-
-    if (is_array($config['composer'])) {
-      $composerJsonFile = $this->env()->projectFolder . '/composer.json';
-
-      if (is_file($composerJsonFile)) {
-        $composer = json_decode($composerJsonFile);
-        $composer = array_merge_recursive($composer, $config['composer']);
-        file_put_contents($composerJsonFile, json_encode($composer, JSON_PRETTY_PRINT));
-
-        $this->terminal()->cyan("\n");
-        $this->terminal()->cyan("!!! I have modified 'composer.json' based on your config.\n");
-        $this->terminal()->cyan("!!! Run `composer update`.\n");
-        $this->terminal()->cyan("\n");
-      }
-    }
 
     $this->terminal()->colored("yellow", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword . "\n");
     $this->terminal()->yellow("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");

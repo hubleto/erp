@@ -46,7 +46,7 @@ class CommandPrepareComposer extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $composer = json_decode(file_get_contents($composerJsonFile), true);
-    $composer = array_merge($composer, $config['composer']);
+    $composer = array_merge_recursive($composer, $config['composer']);
     file_put_contents($composerJsonFile, json_encode($composer, JSON_PRETTY_PRINT));
 
     $this->terminal()->cyan("\n");

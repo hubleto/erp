@@ -39,36 +39,15 @@ The whole platform consists of several repositories, check them all to get the f
 +------------------------------------------+
 ```
 
-# Start using Hubleto in few minutes
+# Getting started
 
-You have two options to install Hubleto: from a `.zip` package or using `composer`.
+Run `composer create-project hubleto/erp-project .` in any folder.
 
-## Zip package
+More details are in developer's guide at https://developer.hubleto.com/getting-started.
 
-Download & unzip Hubleto release: https://www.hubleto.com/en/download
+## Contribute to Hubleto core (setup dev environment)
 
-## Composer
-
-Run `composer create-project hubleto/er-project` in any folder. More information here: https://github.com/hubleto/project
-
-# Develop your apps
-
-To develop your apps run following commands in your terminal:
-
-```bash
-php hubleto init # init the project
-php hubleto app create "HelloWorldApp"
-php hubleto app install "HelloWorldApp"
-php hubleto create model "HelloWorldApp" "TodoItem"
-```
-
-More details are in developer's guide at https://developer.hubleto.com.
-
-<img src="https://developer.hubleto.com/book/content/assets/images/create-simple-addressbook.gif" alt="Create simple addressbook CRM" />
-
-## Contribute ![](https://img.shields.io/badge/contributions-welcome-green)
-
-You can contribute in many areas:
+Contributing to the Hubleto core is the best way how to support us. You can contribute in many areas:
 
   * report [bugs](https://github.com/hubleto/erp/issues) or submit [issues](https://github.com/hubleto/erp/issues)
   * improve or create new [community apps](apps)
@@ -77,6 +56,27 @@ You can contribute in many areas:
   * improve [Hubleto Core](src)
   * translate [language packs](apps/Customers/Lang)
   * improve [developer's guide](https://developer.hubleto.com)
+
+To start contribution, follow the steps described below.
+
+### Fork Hubleto repositories
+
+Fork following repositories into one folder, e.g. /var/www/hubleto.
+
+  * https://github.com/hubleto/framework
+  * https://github.com/hubleto/erp
+  * https://github.com/hubleto/react-ui
+  * https://github.com/hubleto/assets
+
+### Re-create your Hubleto folder
+
+```
+cd YOUR_PROJECT_FOLDER
+composer create-project hubleto/erp-project . dev-main
+./bin/use-local-repositories /var/www/hubleto
+npm run build
+php hubleto init
+```
 
 ## Follow us
 

@@ -20,6 +20,31 @@ class Model extends \Hubleto\Framework\Model
   const COLUMN_COLOR_DEFAULT_ICON = 'fas fa-palette bg-violet-50 rounded text-violet-600 p-2 mr-2 w-10 text-center block';
 
   /**
+   * [Description for describeColumns]
+   *
+   * @return array
+   * 
+   */
+  public function describeColumns(): array
+  {
+    $columns = parent::describeColumns();
+    $customColumns = $this->config()->forModel(get_class($this))->getAsJson('customColumns');
+
+    foreach ($customColumns as $colName => $colDef) {
+      if (!is_array($colDef)) continue;
+      $colClass = 'Hubleto\\Framework\\Db\\Column\\' . ($colDef['class'] ?? '');
+      if (class_exists($colClass)) {
+        $columns[$colName] = new $colClass($this, $colDef['title'] ?? '')
+          ->fromArray($colDef)
+          ->setProperty('isCustom', true)
+          ->setDefaultVisible()
+        ;
+      }
+    }
+
+    return $columns;
+  }
+  /**
    * [Description for getPermissions]
    *
    * @param array $record

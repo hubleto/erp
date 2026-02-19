@@ -158,6 +158,10 @@ class Loader extends \Hubleto\Erp\App
           <span class="text">' . $this->translate('Items') . '</span>
           ' . ($dueItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $dueItemsCount . '</span>' : '') . '
         </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/quotes">
+          <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
+          <span class="text">' . $this->translate('Quotes') . '</span>
+        </a>
       </div>
     ';
   }

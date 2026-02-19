@@ -2,6 +2,7 @@ import React, { Component, createRef, useRef, ChangeEvent } from 'react';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableItems from './TableItems';
+import TableQuotes from './TableQuotes';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TablePayments from './TablePayments';
 import request from "@hubleto/react-ui/core/Request";
@@ -71,7 +72,8 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
-        { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
+        { uid: 'items', title: this.translate('Items') },
+        { uid: 'quotes', title: this.translate('Quotes') },
         { uid: 'preview', title: this.translate('Preview') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'payments', title: this.translate('Payments') },
@@ -472,14 +474,17 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
           parentForm={this}
           uid={this.props.uid + "_table_order_item"}
           idOrder={R.id}
-          // junctionTitle='Order'
-          // junctionModel='Hubleto/App/Community/Orders/Models/Item'
-          // junctionSourceColumn='id_order'
-          // junctionSourceRecordId={R.id}
-          // junctionDestinationColumn='id_item'
-          // readonly={!this.state.isInlineEditing}
         />;
+      break;
 
+      case 'quotes':
+        return <TableQuotes
+          key={"table_order_quote"}
+          tag={"table_order_quote"}
+          parentForm={this}
+          uid={this.props.uid + "_table_order_quote"}
+          idOrder={R.id}
+        />;
       break;
 
       case 'payments':

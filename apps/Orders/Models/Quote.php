@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Orders\Models;
 
 use Hubleto\Framework\Db\Column\Date;
-use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -45,16 +45,16 @@ class Quote extends \Hubleto\Erp\Model
       'date_approved' => (new Date($this, $this->translate('Approved')))->setDefaultVisible(),
       'date_accepted' => (new Date($this, $this->translate('Accepted by customer')))->setDefaultVisible(),
       'summary' => (new Text($this, $this->translate('Quote summary')))->setDefaultVisible(),
-      'online_document_1' => (new Varchar($this, $this->translate('Online document #1'))),
-      'online_document_2' => (new Varchar($this, $this->translate('Online document #2'))),
-      'online_document_3' => (new Varchar($this, $this->translate('Online document #3'))),
-      'online_document_4' => (new Varchar($this, $this->translate('Online document #4'))),
-      'online_document_5' => (new Varchar($this, $this->translate('Online document #5'))),
-      'final_pdf_1' => (new Varchar($this, $this->translate('Final PDF #1'))),
-      'final_pdf_2' => (new Varchar($this, $this->translate('Final PDF #2'))),
-      'final_pdf_3' => (new Varchar($this, $this->translate('Final PDF #3'))),
-      'final_pdf_4' => (new Varchar($this, $this->translate('Final PDF #4'))),
-      'final_pdf_5' => (new Varchar($this, $this->translate('Final PDF #5'))),
+      'online_document_1' => (new Varchar($this, $this->translate('Online document #1')))->setReactComponent('InputHyperlink'),
+      'online_document_2' => (new Varchar($this, $this->translate('Online document #2')))->setReactComponent('InputHyperlink'),
+      'online_document_3' => (new Varchar($this, $this->translate('Online document #3')))->setReactComponent('InputHyperlink'),
+      'online_document_4' => (new Varchar($this, $this->translate('Online document #4')))->setReactComponent('InputHyperlink'),
+      'online_document_5' => (new Varchar($this, $this->translate('Online document #5')))->setReactComponent('InputHyperlink'),
+      'final_pdf_1' => (new File($this, $this->translate('Final PDF #1'))),
+      'final_pdf_2' => (new File($this, $this->translate('Final PDF #2'))),
+      'final_pdf_3' => (new File($this, $this->translate('Final PDF #3'))),
+      'final_pdf_4' => (new File($this, $this->translate('Final PDF #4'))),
+      'final_pdf_5' => (new File($this, $this->translate('Final PDF #5'))),
       'notes_document_1' => (new Text($this, $this->translate('Notes for document #1'))),
       'notes_document_2' => (new Text($this, $this->translate('Notes for document #2'))),
       'notes_document_3' => (new Text($this, $this->translate('Notes for document #3'))),

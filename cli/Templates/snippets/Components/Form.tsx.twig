@@ -21,15 +21,21 @@ export default class Form{{ modelSingularForm }}<P, S> extends FormExtended<Form
     super(props);
   }
 
-  getStateFromProps(props: FormDealProps) {
+  getStateFromProps(props: Form{{ modelSingularForm }}Props) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>this.translate('{{ modelSingularForm }}')</b> },
+        { uid: 'default', title: <b>{this.translate('{{ modelSingularForm }}')}</b> },
         // Add your tabs here.
         // 'tab_with_nested_table': { title: 'Example tab with nested table' }
       ]
     };
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+    }
   }
 
   getRecordFormUrl(): string {
@@ -37,10 +43,22 @@ export default class Form{{ modelSingularForm }}<P, S> extends FormExtended<Form
   }
 
   renderTitle(): JSX.Element {
+    const R = this.state.record;
     return <>
-      <small>{{ model }}</small>
-      <h2>Record #{this.state.record.id ?? '0'}</h2>
+      <small>{this.translate('{{ model }}')}</small>
+      <h2>{R.id <= 0 ? this.translate('New') : R.id}</h2>
     </>;
+  }
+
+  renderTab(tabUid: string) {
+    const R = this.state.record;
+
+    switch (tabUid) {
+      case 'default':
+        return super.renderTab(tabUid);
+      break;
+    }
+
   }
 
 }

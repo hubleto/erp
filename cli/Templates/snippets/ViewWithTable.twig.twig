@@ -6,9 +6,11 @@
     * https://developer.hubleto.com/v0/advanced-development/customizing-ui
 #}
 
-<h1 class="app-main-title">{{ appName }} > {{ modelPluralForm }}</h1>
+<h1 class="app-main-title">{{ '{{' }} translate('{{ appName }}') {{ '}}' }} > {{ '{{' }} translate('{{ modelPluralForm }}') {{ '}}' }}</h1>
 
 <hblreact-{{ appNameKebab|lower }}-table-{{ modelPluralFormKebab }}
   string:tag="table-{{ modelPluralFormKebab }}"
   int:record-id="{{ '{{' }} viewParams.recordId {{ '}}' }}"
+  string:view="{{ '{{' }} viewParams.view {{ '}}' }}"
+  json:filters='{{ '{{' }} viewParams.filters|json_encode {{ '}}' }}'
 ></hblreact-{{ appNameKebab|lower }}-table-{{ modelPluralFormKebab }}>

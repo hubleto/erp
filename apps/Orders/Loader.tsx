@@ -4,6 +4,7 @@ import request from "@hubleto/react-ui/core/Request";
 import TableOrders from "./Components/TableOrders";
 import OrdersFormActivity from "./Components/OrdersFormActivity"
 import TableItems from "./Components/TableItems"
+import TableQuotes from './Components/TableQuotes';
 
 class OrdersApp extends App {
   init() {
@@ -13,6 +14,7 @@ class OrdersApp extends App {
     globalThis.hubleto.registerReactComponent('OrdersTableOrders', TableOrders);
     globalThis.hubleto.registerReactComponent('OrdersFormActivity', OrdersFormActivity);
     globalThis.hubleto.registerReactComponent('OrdersTableItems', TableItems);
+    globalThis.hubleto.registerReactComponent('OrdersTableQuotes', TableQuotes);
 
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Deals').addCustomFormTab({

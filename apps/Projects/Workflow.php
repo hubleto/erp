@@ -22,7 +22,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     ;
 
     if ($fUser > 0) {
-      $items = $items->where('id_project_manager', $fUser);
+      $items = $items->where($mProject->table . '.id_project_manager', $fUser);
     }
 
     $items = $items->get()?->toArray();

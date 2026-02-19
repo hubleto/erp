@@ -16,7 +16,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     ;
 
     if ($fUser > 0) {
-      $items = $items->where('id_manager', $fUser);
+      $items = $items->where($mOrder->table . '.id_manager', $fUser);
     }
 
     $items = $items->get()?->toArray();

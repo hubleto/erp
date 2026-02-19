@@ -36,6 +36,9 @@ class Loader extends \Hubleto\Erp\App
       '/^orders\/items(\/(?<recordId>\d+))?\/?$/' => Controllers\Items::class,
       '/^orders\/items\/add\/?$/' => ['controller' => Controllers\Items::class, 'vars' => ['recordId' => -1]],
 
+      '/^orders\/quotes(\/(?<recordId>\d+))?\/?$/' => Controllers\Quotes::class,
+      '/^orders\/quotes\/add\/?$/' => ['controller' => Controllers\Quotes::class, 'vars' => ['recordId' => -1]],
+
       '/^orders\/missing-items-in-periodical-orders\/?$/' => Controllers\MissingItemsInPeriodicalOrders::class,
 
       '/^orders\/states\/?$/' => Controllers\States::class,
@@ -77,6 +80,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\State::class)->dropTableIfExists()->install();
       $this->getModel(Models\Order::class)->dropTableIfExists()->install();
       $this->getModel(Models\Item::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Quote::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
       $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();

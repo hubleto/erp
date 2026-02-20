@@ -51,6 +51,11 @@ class Activity extends \Hubleto\Erp\Model
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultValue(date("Y-m-d H:i:s"))->setReadonly(true),
       'virt_month' => (new Virtual($this, $this->translate('Month')))->setDefaultVisible()
         ->setProperty('sql', "concat(YEAR(`date_worked`), '-', LPAD(MONTH(`date_worked`), 2, '0'))"),
+      'virt_customer' => (new Virtual($this, $this->translate('Customer')))->setDefaultVisible()
+        ->setProperty('sql', "
+          SELECT `c`.`identifier` FROM `customers` `c`
+          LEFT JOIN `cusstomers` `c` ON `c`.`id` = `t`.`id_customer`
+        "),
       'virt_deal' => (new Virtual($this, $this->translate('Deal')))->setDefaultVisible()
         ->setProperty('sql', "
           SELECT `d`.`identifier` FROM `deals_tasks` `dt`
@@ -87,6 +92,7 @@ class Activity extends \Hubleto\Erp\Model
 
       $showOnlyColumns = [];
       if (in_array('task', $fGroupBy)) $showOnlyColumns[] = 'id_task';
+      if (in_array('customer', $fGroupBy)) $showOnlyColumns[] = 'virt_customer';
       if (in_array('type', $fGroupBy)) $showOnlyColumns[] = 'id_type';
       if (in_array('project', $fGroupBy)) $showOnlyColumns[] = 'virt_project';
       if (in_array('deal', $fGroupBy)) $showOnlyColumns[] = 'virt_deal';
@@ -125,6 +131,7 @@ class Activity extends \Hubleto\Erp\Model
       'type' => 'multipleSelectButtons',
       'options' => [
         'task' => $this->translate('Task'),
+        'customer' => $this->translate('Customer'),
         'type' => $this->translate('Type'),
         'project' => $this->translate('Project'),
         'deal' => $this->translate('Deal'),

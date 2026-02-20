@@ -109,6 +109,7 @@ class Activity extends \Hubleto\Erp\RecordManager
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];
       if (in_array('task', $fGroupBy)) $query = $query->groupBy('id_task');
+      if (in_array('customer', $fGroupBy)) $query = $query->groupBy('virt_customer');
       if (in_array('type', $fGroupBy)) $query = $query->groupBy('id_type');
       if (in_array('project', $fGroupBy)) $query = $query->groupBy('virt_project');
       if (in_array('deal', $fGroupBy)) $query = $query->groupBy('virt_deal');

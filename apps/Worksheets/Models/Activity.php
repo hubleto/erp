@@ -53,8 +53,9 @@ class Activity extends \Hubleto\Erp\Model
         ->setProperty('sql', "concat(YEAR(`date_worked`), '-', LPAD(MONTH(`date_worked`), 2, '0'))"),
       'virt_customer' => (new Virtual($this, $this->translate('Customer')))->setDefaultVisible()
         ->setProperty('sql', "
-          SELECT `c`.`identifier` FROM `customers` `c`
-          WHERE `c`.`id` = `t`.`id_customer`
+          SELECT `c`.`identifier` FROM `tasks` `t`
+          LEFT JOIN `customers` `c` ON `c`.`id` = `t`.`id_customer`
+          WHERE `t`.`id` = `worksheet_activities`.`id_task`
         "),
       'virt_deal' => (new Virtual($this, $this->translate('Deal')))->setDefaultVisible()
         ->setProperty('sql', "

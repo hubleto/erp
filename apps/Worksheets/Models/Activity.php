@@ -54,7 +54,7 @@ class Activity extends \Hubleto\Erp\Model
       'virt_customer' => (new Virtual($this, $this->translate('Customer')))->setDefaultVisible()
         ->setProperty('sql', "
           SELECT `c`.`identifier` FROM `customers` `c`
-          LEFT JOIN `cusstomers` `c` ON `c`.`id` = `t`.`id_customer`
+          WHERE `c`.`id` = `t`.`id_customer`
         "),
       'virt_deal' => (new Virtual($this, $this->translate('Deal')))->setDefaultVisible()
         ->setProperty('sql', "

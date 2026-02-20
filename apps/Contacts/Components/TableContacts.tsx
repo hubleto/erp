@@ -73,17 +73,13 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "virt_tags") {
-      return (
-        <>
-          {data.TAGS.map((tag, key) => {
-            return <div
-              key={key}
-              style={{backgroundColor: tag.TAG?.color}}
-              className='badge'
-            >{tag.TAG?.name}</div>;
-          })}
-        </>
-      );
+      return data.TAGS.map((tag, key) => {
+        return <div
+          key={key}
+          style={{backgroundColor: tag.TAG?.color}}
+          className='badge'
+        >{tag.TAG?.name}</div>;
+      });
     } else if (data.VALUES && data.VALUES.length > 0) {
       if (columnName == "virt_email") {
         let contactsRendered = 0;
@@ -153,6 +149,7 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
                 <span className="icon flex flex-col gap-2">
                   <i className="fas fa-user text-2xl"></i>
                   {item.is_primary ? <div className="badge badge-violet">{this.translate("Primary")}</div> : null}
+                  {item.is_for_invoicing ? <div className="badge badge-green">{this.translate("Invoicing")}</div> : null}
                 </span>
                 <span className="text" style={{maxHeight: "10em"}}>
                   <div className="flex gap-2">

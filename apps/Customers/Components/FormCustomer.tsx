@@ -52,7 +52,9 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
 
   refLogActivityInput: any;
   refDocumentModal: any;
+  refDocumentForm: any;
   refActivityModal: any;
+  refActivityForm: any;
 
 
   translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
@@ -63,7 +65,9 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
 
     this.refLogActivityInput = React.createRef();
     this.refDocumentModal = React.createRef();
+    this.refDocumentForm = React.createRef();
     this.refActivityModal = React.createRef();
+    this.refActivityForm = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -142,6 +146,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
         uid='activity_form'
         isOpen={true}
         type='right theme-secondary'
+        form={this.refActivityForm}
       >
         <CustomerFormActivity
           modal={this.refActivityModal}
@@ -175,6 +180,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
         uid='document_form'
         isOpen={true}
         type='right'
+        form={this.refDocumentForm}
       >
         <FormDocument
           modal={this.refDocumentModal}
@@ -237,7 +243,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
 
     switch (tabUid) {
       case 'default':
-        const customInputs = this.renderCustomInputs();
+        // const customInputs = this.renderCustomInputs();
 
         let mapAddress = '';
         if (R.street_line_1 != '' && R.city != '' && R.COUNTRY && R.COUNTRY.name != '') {
@@ -389,11 +395,11 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
               </div>
             </> : null}
           </div>
-          {customInputs.length > 0 ?
+          {/* {customInputs.length > 0 ?
             <div className="card mt-2"><div className="card-header">{this.translate('Custom data')}</div><div className="card-body">
               {customInputs}
             </div></div>
-          : <></>}
+          : <></>} */}
         </>
 
       break;

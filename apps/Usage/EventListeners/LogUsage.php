@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Usage\EventListeners;
 
 use Hubleto\Erp\Controller;
+use Hubleto\App\Community\Usage\Logger;
 
 class LogUsage extends \Hubleto\Framework\EventListener implements \Hubleto\Framework\Interfaces\EventListenerInterface
 {
@@ -11,7 +12,8 @@ class LogUsage extends \Hubleto\Framework\EventListener implements \Hubleto\Fram
   {
     if (!$controller->disableLogUsage) {
       try {
-        $usageLogger = $this->getService(\Hubleto\App\Community\Usage\Logger::class);
+        /** @var Logger */
+        $usageLogger = $this->getService(Logger::class);
         $usageLogger->logUsage();
       } catch (\Throwable $e) {
         //

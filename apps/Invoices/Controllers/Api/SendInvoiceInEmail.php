@@ -77,6 +77,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       $recipients = [];
       if ($invoice->CUSTOMER->CONTACTS) {
         foreach ($invoice->CUSTOMER->CONTACTS as $contact) {
+          if (!$contact->is_for_invoicing) continue;
           foreach ($contact->VALUES as $value) {
             if ($value->type == 'email') $recipients[] = $value['value'];
           }

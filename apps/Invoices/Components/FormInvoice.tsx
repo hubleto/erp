@@ -648,7 +648,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     <td>Subject:</td>
                     <td>
                       <input
-                        className='w-full'
+                        className='w-full bg-white'
                         value={this.state.sendInvoicePreparedData.subject ?? ''}
                         onChange={(e: any) => {
                           this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, subject: e.currentTarget.value}});
@@ -662,9 +662,9 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                   </tr>
                   <tr>
                     <td>To:</td>
-                    <td>
+                    <td className={this.state.sendInvoicePreparedData.to == '' ? 'bg-red-100' : ''}>
                       <input
-                        className='w-full'
+                        className='w-full bg-white'
                         value={this.state.sendInvoicePreparedData.to ?? ''}
                         onChange={(e: any) => {
                           this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, to: e.currentTarget.value}});
@@ -676,7 +676,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     <td>CC:</td>
                     <td>
                       <input
-                        className='w-full'
+                        className='w-full bg-white'
                         value={this.state.sendInvoicePreparedData.cc ?? ''}
                         onChange={(e: any) => {
                           this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, cc: e.currentTarget.value}});
@@ -688,7 +688,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     <td>BCC:</td>
                     <td>
                       <input
-                        className='w-full'
+                        className='w-full bg-white'
                         value={this.state.sendInvoicePreparedData.bcc ?? ''}
                         onChange={(e: any) => {
                           this.setState({sendInvoicePreparedData: {...this.state.sendInvoicePreparedData, bcc: e.currentTarget.value}});

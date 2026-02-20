@@ -69,9 +69,9 @@ class Loader extends \Hubleto\Erp\App
   {
     return '
       <div class="flex flex-col gap-2">
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/dashboards">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/dashboards">
           <span class="icon"><i class="fas fa-table"></i></span>
-          <span class="text">' . $this->translate('Preview Dashboards') . '</span>
+          <span class="text">' . $this->translate('Dashboards') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/dashboards/manage">
           <span class="icon"><i class="fas fa-list"></i></span>

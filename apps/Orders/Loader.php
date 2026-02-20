@@ -134,9 +134,9 @@ class Loader extends \Hubleto\Erp\App
 
     return '
       <div class="flex flex-col gap-2">
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/orders">
           <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
-          <span class="text">' . $this->translate('All orders') . '</span>
+          <span class="text">' . $this->translate('Orders') . '</span>
         </a>
         <div class="flex flex-col">
           ' . (count($periodicalOrdersMissingItems) > 0 ? '

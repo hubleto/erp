@@ -65,13 +65,12 @@ class Loader extends \Hubleto\Erp\App
   {
     $mWorkflow = $this->getModel(Models\Workflow::class);
 
-    $html = '';
+    $workflowButtonsHtml = '';
     foreach ($mWorkflow->record->where('show_in_kanban', true)->orderBy('order')->get() as $workflow) {
-      $html .= '
+      $workflowButtonsHtml .= '
         <a
           class="
             btn ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
-            mb-2 w-full
           "
           href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"
         >
@@ -79,9 +78,9 @@ class Loader extends \Hubleto\Erp\App
         </a>
       ';
     }
-    $html .= '
+    $workflowButtonsHtml .= '
       <a
-        class="btn btn-transparent mt-2"
+        class="btn btn-transparent"
         href="' . $this->env()->projectUrl . '/settings/workflows"
       >
         <span class="icon"><i class="fas fa-cog"></i></span>
@@ -89,7 +88,15 @@ class Loader extends \Hubleto\Erp\App
       </a>
     ';
 
-    return $html;
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/workflow">
+          <span class="icon"><i class="fas fa-timeline"></i></span>
+          <span class="text">' . $this->translate('Workflow') . '</span>
+        </a>
+        ' . $workflowButtonsHtml . '
+      </div>
+    ';
   }
 
   /**

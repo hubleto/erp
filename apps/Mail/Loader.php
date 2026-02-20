@@ -119,7 +119,13 @@ class Loader extends \Hubleto\Erp\App
     }
 
     return '
-      ' . $accountsHtml . '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/mail">
+          <span class="icon"><i class="fas fa-envelope"></i></span>
+          <span class="text">' . $this->translate('Mail') . '</span>
+        </a>
+
+        ' . $accountsHtml . '
 
       <div>
         <a

@@ -128,9 +128,9 @@ class Loader extends \Hubleto\Erp\App
   {
     return '
       <div class="flex flex-col gap-2">
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/documents">
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
-          <span class="text">' . $this->translate('Browse') . '</span>
+          <span class="text">' . $this->translate('Documents') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/list">
           <span class="icon"><i class="fas fa-list"></i></span>

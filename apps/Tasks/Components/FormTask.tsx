@@ -3,7 +3,9 @@ import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/rea
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 
-interface FormTaskProps extends FormExtendedProps { }
+interface FormTaskProps extends FormExtendedProps {
+  idCustomer?: any,
+}
 interface FormTaskState extends FormExtendedState {
   newTodo?: string,
 }
@@ -46,6 +48,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
     return {
       ...super.getEndpointParams(),
       saveRelations: ['TODO'],
+      idCustomer: this.props.idCustomer,
     }
   }
 

@@ -160,6 +160,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                       tag={"table_project_task"}
                       parentForm={this}
                       uid={this.props.uid + "_table_project_task"}
+                      idCustomer={R.id_customer}
                       junctionTitle='Project'
                       junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
                       junctionSourceColumn='id_project'
@@ -201,6 +202,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
             tag={"table_project_task"}
             parentForm={this}
             uid={this.props.uid + "_table_project_task"}
+            idCustomer={R.id_customer}
             junctionTitle='Project'
             junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
             junctionSourceColumn='id_project'

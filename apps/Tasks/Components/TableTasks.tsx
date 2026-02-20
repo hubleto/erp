@@ -4,7 +4,9 @@ import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import FormTask from './FormTask';
 import FormActivity from '@hubleto/apps/Worksheets/Components/FormActivity';
 
-interface TableTasksProps extends TableExtendedProps { }
+interface TableTasksProps extends TableExtendedProps {
+  idCustomer?: any,
+}
 
 interface TableTasksState extends TableExtendedState {
   addActivityForIdTask: number,
@@ -23,11 +25,13 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
   translationContext: string = 'Hubleto\\App\\Community\\Tasks\\Loader';
   translationContextInner: string = 'Components\\TableTasks';
 
-  refActivityModal: any = null;
+  refActivityModal: any;
+  refActivityForm: any;
 
   constructor(props: TableTasksProps) {
     super(props);
     this.refActivityModal = React.createRef();
+    this.refActivityForm = React.createRef();
     this.state = this.getStateFromProps(props);
   }
 
@@ -47,6 +51,7 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
+      idCustomer: this.props.idCustomer,
     }
   }
 
@@ -89,6 +94,9 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
 
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
+    formProps.idCustomer = this.props.idCustomer;
+    if (!formProps.description) formProps.description = {};
+    formProps.description.defaultValues = { id_customer: this.props.idCustomer };
     return <FormTask {...formProps}/>;
   }
 
@@ -102,6 +110,7 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
           isOpen={true}
           type='centered small theme-secondary'
           onClose={() => this.setState({addActivityForIdTask: 0})}
+          form={this.refActivityForm}
         >
           <FormActivity
             id={-1}

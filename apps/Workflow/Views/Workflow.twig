@@ -20,102 +20,77 @@
   3: {"color":"#c42202","title":"Lost"},
 } %}
 
-<div class="flex gap-2 w-full">
+{% if viewParams.workflow.id > 0 %}
 
-  {# <div class="text-nowrap">
-    <a
-      class="btn btn-primary-outline mb-2"
-      href="{{ hubleto.env().projectUrl }}/settings/workflows"
-    >
-      <span class="icon"><i class="fas fa-plus"></i></span>
-      <span class="text">Add workflow</span>
-    </a>
+  <div class="flex gap-2 w-full">
+    <div class="grow flex gap-2 flex-col md:flex-row" style="height:calc(100vh - var(--nav-height) - 1rem)">
+      <div class="flex flex-col flex-grow overflow-auto">
+        <h1 class="app-main-title">{{ viewParams.workflow.name }}</h1>
 
-    <div class="list">
-      {% for p in viewParams.workflows %}
-        <a
-          class="
-            btn btn-small btn-list-item {{ p.id == viewParams.idWorkflow ? "btn-primary" : "btn-transparent" }}
-          "
-          href="{{ hubleto.env().projectUrl }}/workflow/{{ p.id }}"
-        >
-          <span class="text">{{ p.name }}</span>
-        </a>
-      {% endfor %}
-    </div>
-  </div> #}
-
-  <div class="grow flex gap-2 flex-col md:flex-row" style="height:calc(100vh - var(--nav-height) - 1rem)">
-    <div class="flex flex-col flex-grow overflow-auto">
-      <h1 class="app-main-title">{{ viewParams.workflow.name }}</h1>
-
-      <div class="flex gap-2 mb-2">
-        <div class="card-header">
-          <i class="fas fa-magnifying-glass"></i>
-        </div>
-        <div class="card-body flex gap-2">
-          {% for u in viewParams.users %}
-            <a
-              class="btn {{ u.id == viewParams.fUser ? "btn-primary" : "btn-transparent" }}"
-              href="?fUser={{ u.id }}"
-            >
-              <span class="text">
-                {{ u.nick }}
-              </span>
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-
-      <div class="flex flex-col items-stretch md:flex-row justify-start gap-2 overflow-auto">
-        {% for step in viewParams.workflow.STEPS %}
-
-          {% set itemsInStep = 0 %}
-          {% for item in viewParams.items %}
-            {% if item.id_workflow_step == step.id %} {% set itemsInStep = itemsInStep + 1 %} {% endif %}
-          {% endfor %}
-
-          <div class="card {{ itemsInStep == 0 ? "flex-2 shrink" : "flex-3" }}">
-
-            <div class="card-header flex flex-col gap-1" style="border-top: 0.5em solid {{ step.color }}">
-              <div class="text-base text-nowrap">{{ step.name }}</div>
-              {% set itemsCount = 0 %}
-              {% for item in viewParams.items %}
-                {% if item.id_workflow_step == step.id %}
-                  {% set itemsCount = itemsCount + 1 %}
-                {% endif %}
-              {% endfor %}
-              <div class="text-sm text-slate-400">{{ itemsCount }} items</div>
-            </div>
-
-            <div class="card-body overflow-auto flex flex-row flex-wrap md:block">
-              {% for item in viewParams.items %}
-                {% if item.id_workflow_step == step.id %}
-                  <div class="card mb-2 w-full md:w-auto hover:border-primary">
-                    <div class="card-body">
-                      {% include item._DETAIL_VIEW with { item: item } %}
-                    </div>
-                    <a class="btn btn-transparent rounded-none" href="{{ hubleto.env().projectUrl }}/{{ item._DETAIL_URL }}" target="_blank">
-                      <span class="text">Show details</span>
-                    </a>
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-  {# 
-            <div class="card-footer">
-              <a
-                class="btn btn-transparent"
-                href="deals/add?id_workflow={{ viewParams.workflow.id }}&id_workflow_step={{ step.id }}"
-                target="_blank"
-              >
-                <span class="icon"><i class="fas fa-add"></i></span>
-                <span class="text text-nowrap">{{ translate('Add item') }}</span>
-              </a>
-            </div> #}
+        <div class="flex gap-2 mb-2">
+          <div class="card-header">
+            <i class="fas fa-magnifying-glass"></i>
           </div>
-        {% endfor %}
+          <div class="card-body flex gap-2">
+            {% for u in viewParams.users %}
+              <a
+                class="btn {{ u.id == viewParams.fUser ? "btn-primary" : "btn-transparent" }}"
+                href="?fUser={{ u.id }}"
+              >
+                <span class="text">
+                  {{ u.nick }}
+                </span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="flex flex-col items-stretch md:flex-row justify-start gap-2 overflow-auto">
+          {% for step in viewParams.workflow.STEPS %}
+
+            {% set itemsInStep = 0 %}
+            {% for item in viewParams.items %}
+              {% if item.id_workflow_step == step.id %} {% set itemsInStep = itemsInStep + 1 %} {% endif %}
+            {% endfor %}
+
+            <div class="card {{ itemsInStep == 0 ? "flex-2 shrink" : "flex-3" }}">
+
+              <div class="card-header flex flex-col gap-1" style="border-top: 0.5em solid {{ step.color }}">
+                <div class="text-base text-nowrap">{{ step.name }}</div>
+                {% set itemsCount = 0 %}
+                {% for item in viewParams.items %}
+                  {% if item.id_workflow_step == step.id %}
+                    {% set itemsCount = itemsCount + 1 %}
+                  {% endif %}
+                {% endfor %}
+                <div class="text-sm text-slate-400">{{ itemsCount }} items</div>
+              </div>
+
+              <div class="card-body overflow-auto flex flex-row flex-wrap md:block">
+                {% for item in viewParams.items %}
+                  {% if item.id_workflow_step == step.id %}
+                    <div class="card mb-2 w-full md:w-auto hover:border-primary">
+                      <div class="card-body">
+                        {% include item._DETAIL_VIEW with { item: item } %}
+                      </div>
+                      <a class="btn btn-transparent rounded-none" href="{{ hubleto.env().projectUrl }}/{{ item._DETAIL_URL }}" target="_blank">
+                        <span class="text">Show details</span>
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+{% else %}
+
+  <div class="mt-20 w-full text-center">
+    <i class="fas fa-timeline text-primary" style="opacity:0.05;font-size:20em"></i>
+  </div>
+
+{% endif %}

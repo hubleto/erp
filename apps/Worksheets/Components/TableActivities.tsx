@@ -36,7 +36,7 @@ export default class TableActivities extends TableExtended<TableActivitiesProps,
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'centered small theme-secondary';
+    params.type = 'centered theme-secondary';
     return params;
   }
 

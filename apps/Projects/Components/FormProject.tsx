@@ -3,6 +3,7 @@ import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/rea
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import TableMilestones from './TableMilestones';
+import TableExpenses from './TableExpenses';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
@@ -41,6 +42,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
         { uid: 'milestones', title: this.translate('Milestones') },
         { uid: 'tasks', title: this.translate('Tasks') },
         { uid: 'worksheet', title: this.translate('Worksheet') },
+        { uid: 'expenses', title: this.translate('Expenses') },
         { uid: 'statistics', title: this.translate('Statistics') },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
@@ -220,6 +222,18 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
           idProject={R.id}
           readonly={true}
         />;
+      break;
+
+      case 'expenses':
+        return (this.state.id < 0
+          ? <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+          : <TableExpenses
+            tag={"table_project_expense"}
+            parentForm={this}
+            uid={this.props.uid + "_table_project_expense"}
+            idProject={R.id}
+          />
+        );
       break;
 
       case 'statistics':

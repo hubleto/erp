@@ -75,6 +75,9 @@ class Activity extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
+
+    $description->ui['orderBy'] = 'date_worked desc';
+
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
         $description->showOnlyColumns(['identifier', 'title', 'id_developer', 'virt_worked']);

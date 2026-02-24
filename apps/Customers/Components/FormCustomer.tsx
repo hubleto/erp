@@ -56,6 +56,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
   refActivityModal: any;
   refActivityForm: any;
 
+  parentApp: string = 'Hubleto/App/Community/Customers';
 
   translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
   translationContextInner: string = 'Components\\FormCustomer';
@@ -95,6 +96,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
       tabs: [
         { uid: 'default', title: <b>{this.translate('Customer')}</b> },
         { uid: 'calendar', title: this.translate('Calendar') },
+        ...this.getCustomTabs()
       ],
     };
   }

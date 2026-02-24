@@ -154,6 +154,13 @@ class Activity extends \Hubleto\Erp\Model
     return $description;
   }
 
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+    $description->show(['copyButton']);
+    return $description;
+  }
+
   public function validateDateDiff(array $record): void
   {
     $days = date_diff(new \DateTimeImmutable($record['date_worked']), new \DateTimeImmutable())->days;

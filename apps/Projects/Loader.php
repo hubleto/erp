@@ -65,6 +65,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\ProjectOrder::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectTask::class)->dropTableIfExists()->install();
       $this->getModel(Models\ProjectActivity::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Expense::class)->dropTableIfExists()->install();
     }
   }
 

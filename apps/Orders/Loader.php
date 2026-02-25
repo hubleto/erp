@@ -77,16 +77,16 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\State::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Order::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Item::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Quote::class)->dropTableIfExists()->install();
-      $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->install();
-      $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->install();
-      $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Item::class)->dropTableIfExists()->install();
-      $this->getModel(Models\History::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Payment::class)->dropTableIfExists()->install();
+      $this->getModel(Models\State::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Order::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Item::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Quote::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\OrderDeal::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\OrderDocument::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\OrderActivity::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Item::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\History::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Payment::class)->dropTableIfExists()->installTables();
     }
 
     if ($round == 2) {

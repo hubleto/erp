@@ -153,7 +153,7 @@ class Installer extends \Hubleto\Erp\Core
 
   public function installBaseModels(): void
   {
-    $this->getModel(\Hubleto\Framework\Models\Config::class)->install();
+    $this->getModel(\Hubleto\Framework\Models\Config::class)->installTables();
   }
 
   public function installApps(int $round): void

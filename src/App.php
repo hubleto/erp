@@ -4,4 +4,8 @@ namespace Hubleto\Erp;
 
 class App extends \Hubleto\Framework\App
 {
+  public function getMcpTools(): array
+  {
+    return [];
+  }
 }

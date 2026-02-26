@@ -40,6 +40,13 @@ class Loader extends \Hubleto\Erp\App
 
   }
 
+  public function getMcpTools(): array
+  {
+    return [
+      [McpTools\ContactsTool::class, 'getContactByEmail']
+    ];
+  }
+
   public function installTables(int $round): void
   {
     if ($round == 1) {

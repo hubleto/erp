@@ -2,6 +2,9 @@
 
 namespace Hubleto\App\Community\Developer\Controllers;
 
+use Hubleto\Framework\Enums\InstalledMigrationEnum;
+use Hubleto\Framework\Interfaces\ModelInterface;
+
 class UpgradeModels extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
@@ -23,18 +26,39 @@ class UpgradeModels extends \Hubleto\Erp\Controller
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
         $mObj = $this->getService($mClass);
-        $availableUpgrades = $mObj->getAvailableUpgrades();
-        if (count($availableUpgrades) > 0) {
-          $logs[] = 'Installing upgrades for ' . $mObj->fullName . '.';
-          foreach ($availableUpgrades as $upgrade) {
-            $logs[] = '  ' . $upgrade;
+        if (!($mObj instanceof ModelInterface)) throw new \Exception($e);
+        $availableMigrations = $mObj->getPendingMigrations(InstalledMigrationEnum::TABLES);
+        if (count($availableMigrations) > 0) {
+          $logs[] = 'Installing migrations for ' . $mObj->fullName . '.';
+          foreach ($availableMigrations as $migration) {
+            $logs[] = '  ' . get_class($migration);
           }
 
           try {
-            $mObj->installUpgrades();
-            $logs[] = 'Upgrades for ' . $mObj->fullName . ' successfully installed.';
+            $mObj->installTables();
+            $logs[] = 'Table migrations for ' . $mObj->fullName . ' successfully installed.';
           } catch (\Throwable $e) {
-            $logs[] = 'Upgrades for ' . $mObj->fullName . ' failed to install.';
+            $logs[] = 'Table migrations for ' . $mObj->fullName . ' failed to install.';
+          }
+          $logs[] = '--';
+        }
+      }
+
+      foreach ($mClasses as $mClass) {
+        $mObj = $this->getService($mClass);
+        if (!($mObj instanceof ModelInterface)) throw new \Exception($e);
+        $availableMigrations = $mObj->getPendingMigrations(InstalledMigrationEnum::FOREIGN_KEYS);
+        if (count($availableMigrations) > 0) {
+          $logs[] = 'Installing migrations for ' . $mObj->fullName . '.';
+          foreach ($availableMigrations as $migration) {
+            $logs[] = '  ' . get_class($migration);
+          }
+
+          try {
+            $mObj->installForeignKeys();
+            $logs[] = 'Foreign key migrations for ' . $mObj->fullName . ' successfully installed.';
+          } catch (\Throwable $e) {
+            $logs[] = 'Foreign key migrations for ' . $mObj->fullName . ' failed to install.';
           }
           $logs[] = '--';
         }

@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Customers\Models;
 
+use Hubleto\App\Community\Customers\Models\Migrations\CustomerDocument_26_02_2026_0001;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\App\Community\Documents\Models\Document;
 
@@ -54,5 +55,12 @@ class CustomerDocument extends \Hubleto\Erp\Model
     ($this->getService(Document::class))->record->where("id", $idDocument)->delete();
 
     return $id;
+  }
+
+  public function migrations(): array
+  {
+    return [
+      0 => new CustomerDocument_26_02_2026_0001($this->db(), $this)
+    ];
   }
 }

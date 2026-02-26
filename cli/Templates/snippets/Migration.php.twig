@@ -1,0 +1,30 @@
+<?php
+
+namespace {{appNamespace}}\Models\Migrations;
+
+use http\Exception\BadMethodCallException;
+use Hubleto\Framework\Migration;
+
+class {{ model }}_{{ date }}_0001 extends Migration
+{
+
+  public function installTables(): void
+  {
+    {{ installTables|raw }}
+  }
+
+  public function uninstallTables(): void
+  {
+    $this->db->execute("DROP TABLE IF EXISTS {{ tableName }};");
+  }
+
+  public function installForeignKeys(): void
+  {
+    {{ installForeignKeys|raw }}
+  }
+
+  public function uninstallForeignKeys(): void
+  {
+    {{ uninstallForeignKeys|raw }}
+  }
+}

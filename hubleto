@@ -47,6 +47,7 @@ if (!empty($action)) {
           case 'view': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\View::class)->setArguments($argv); break;
           case 'mvc': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\TableFormViewAndController::class)->setArguments($argv); break;
           case 'api': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\ApiEndpoint::class)->setArguments($argv); break;
+          case 'migration': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Create\Migration::class)->setArguments($argv); break;
         }
       break;
       case 'project':

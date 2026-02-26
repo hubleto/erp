@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Customers\Models;
 
+use Hubleto\App\Community\Customers\Models\Migrations\CustomerTag_26_02_2026_0001;
 use Hubleto\Framework\Db\Column\Lookup;
 
 class CustomerTag extends \Hubleto\Erp\Model
@@ -31,6 +32,13 @@ class CustomerTag extends \Hubleto\Erp\Model
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
     return $description;
+  }
+
+  public function migrations(): array
+  {
+    return [
+      0 => new CustomerTag_26_02_2026_0001($this->db(), $this)
+    ];
   }
 
 }

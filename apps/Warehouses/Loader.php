@@ -101,13 +101,13 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\WarehouseType::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\LocationType::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Warehouse::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Location::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Inventory::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Transaction::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\TransactionItem::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\WarehouseType::class)->installTables();
+      $this->getModel(Models\LocationType::class)->installTables();
+      $this->getModel(Models\Warehouse::class)->installTables();
+      $this->getModel(Models\Location::class)->installTables();
+      $this->getModel(Models\Inventory::class)->installTables();
+      $this->getModel(Models\Transaction::class)->installTables();
+      $this->getModel(Models\TransactionItem::class)->installTables();
     }
     if ($round == 2) {
       $mLocationType = $this->getModel(Models\LocationType::class);

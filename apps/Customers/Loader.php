@@ -56,10 +56,10 @@ class Loader extends \Hubleto\Erp\App
       $mCustomerTag = $this->getModel(Models\Tag::class);
       $mCrossCustomerTag = $this->getModel(Models\CustomerTag::class);
 
-      $mCustomer->dropTableIfExists()->installTables();
-      $mCustomerTag->dropTableIfExists()->installTables();
-      $mCrossCustomerTag->dropTableIfExists()->installTables();
-      $mCustomerDocument->dropTableIfExists()->installTables();
+      $mCustomer->installTables();
+      $mCustomerTag->installTables();
+      $mCrossCustomerTag->installTables();
+      $mCustomerDocument->installTables();
 
       $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#D33115' ]);
       $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#4caf50' ]);
@@ -68,7 +68,7 @@ class Loader extends \Hubleto\Erp\App
 
     if ($round == 2) {
       $mCustomerActivity = $this->getModel(\Hubleto\App\Community\Customers\Models\CustomerActivity::class);
-      $mCustomerActivity->dropTableIfExists()->installTables();
+      $mCustomerActivity->installTables();
     }
   }
 

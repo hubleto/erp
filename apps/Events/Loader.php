@@ -47,15 +47,15 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Type::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Venue::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Speaker::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Attendee::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Event::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\EventVenue::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\EventSpeaker::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\EventAttendee::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Agenda::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Type::class)->installTables();
+      $this->getModel(Models\Venue::class)->installTables();
+      $this->getModel(Models\Speaker::class)->installTables();
+      $this->getModel(Models\Attendee::class)->installTables();
+      $this->getModel(Models\Event::class)->installTables();
+      $this->getModel(Models\EventVenue::class)->installTables();
+      $this->getModel(Models\EventSpeaker::class)->installTables();
+      $this->getModel(Models\EventAttendee::class)->installTables();
+      $this->getModel(Models\Agenda::class)->installTables();
     }
     if ($round == 2) {
       $mType = $this->getModel(Models\Type::class);

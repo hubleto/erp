@@ -57,10 +57,4 @@ class CustomerDocument extends \Hubleto\Erp\Model
     return $id;
   }
 
-  public function migrations(): array
-  {
-    return [
-      0 => new CustomerDocument_26_02_2026_0001($this->db(), $this)
-    ];
-  }
 }

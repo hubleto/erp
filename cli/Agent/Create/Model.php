@@ -54,7 +54,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->renderer()->renderView('@snippets/ModelRecordManager.php.twig', $tplVars));
 
     $codeInstallModel = [
-      "\$this->getModel(Models\\{$model}::class)->dropTableIfExists()->installTables();"
+      "\$this->getModel(Models\\{$model}::class)->installTables();"
     ];
 
     $codeInstallModelInserted = $this->terminal()->insertCodeToFile(

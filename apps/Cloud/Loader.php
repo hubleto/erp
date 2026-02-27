@@ -70,11 +70,11 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\BillingAccount::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Log::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Credit::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Payment::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Discount::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\BillingAccount::class)->installTables();
+      $this->getModel(Models\Log::class)->installTables();
+      $this->getModel(Models\Credit::class)->installTables();
+      $this->getModel(Models\Payment::class)->installTables();
+      $this->getModel(Models\Discount::class)->installTables();
     }
   }
 

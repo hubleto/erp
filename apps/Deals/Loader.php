@@ -77,16 +77,16 @@ class Loader extends \Hubleto\Erp\App
       $mDealDocument = $this->getModel(Models\DealDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
 
-      $mLostReasons->dropTableIfExists()->installTables();
-      $mDeal->dropTableIfExists()->installTables();
-      $mDealHistory->dropTableIfExists()->installTables();
-      $mDealTag->dropTableIfExists()->installTables();
-      $mDealLead->dropTableIfExists()->installTables();
-      $mDealTask->dropTableIfExists()->installTables();
-      $mCrossDealTag->dropTableIfExists()->installTables();
-      $mItem->dropTableIfExists()->installTables();
-      $mDealActivity->dropTableIfExists()->installTables();
-      $mDealDocument->dropTableIfExists()->installTables();
+      $mLostReasons->installTables();
+      $mDeal->installTables();
+      $mDealHistory->installTables();
+      $mDealTag->installTables();
+      $mDealLead->installTables();
+      $mDealTask->installTables();
+      $mCrossDealTag->installTables();
+      $mItem->installTables();
+      $mDealActivity->installTables();
+      $mDealDocument->installTables();
 
       $mDealTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
       $mDealTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);

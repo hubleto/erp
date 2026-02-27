@@ -25,6 +25,7 @@ class UpgradeModels extends \Hubleto\Erp\Controller
     foreach ($apps as $app) {
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
+        /** @var \Hubleto\Framework\Model */
         $mObj = $this->getService($mClass);
         if (!($mObj instanceof ModelInterface)) throw new \Exception($e);
         $availableMigrations = $mObj->getPendingMigrations(InstalledMigrationEnum::TABLES);
@@ -45,6 +46,7 @@ class UpgradeModels extends \Hubleto\Erp\Controller
       }
 
       foreach ($mClasses as $mClass) {
+        /** @var \Hubleto\Framework\Model */
         $mObj = $this->getService($mClass);
         if (!($mObj instanceof ModelInterface)) throw new \Exception($e);
         $availableMigrations = $mObj->getPendingMigrations(InstalledMigrationEnum::FOREIGN_KEYS);

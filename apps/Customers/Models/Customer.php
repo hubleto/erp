@@ -2,9 +2,6 @@
 
 namespace Hubleto\App\Community\Customers\Models;
 
-
-
-use Hubleto\App\Community\Customers\Models\Migrations\Customer_26_02_2026_0001;
 use Hubleto\Erp\Model;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
@@ -160,13 +157,6 @@ class Customer extends Model
   {
     return [
       'name' => $text,
-    ];
-  }
-
-  public function migrations(): array
-  {
-    return [
-      0 => new Customer_26_02_2026_0001($this->db(), $this)
     ];
   }
 

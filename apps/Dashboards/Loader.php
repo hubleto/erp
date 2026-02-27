@@ -36,8 +36,8 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Dashboard::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Panel::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Dashboard::class)->installTables();
+      $this->getModel(Models\Panel::class)->installTables();
     }
   }
 

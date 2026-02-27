@@ -490,16 +490,16 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       . ").\n"
     );
 
-    $this->terminal()->cyan("    -> Round #1.\n");
+    $this->terminal()->cyan("    -> Creating tables, round #1.\n");
     $installer->installApps(1);
 
-    $this->terminal()->cyan("    -> Round #2.\n");
+    $this->terminal()->cyan("    -> Creating tables, round #2.\n");
     $installer->installApps(2);
 
-    $this->terminal()->cyan("    -> Round #3.\n");
+    $this->terminal()->cyan("    -> Creating tables, round #3.\n");
     $installer->installApps(3);
 
-    $this->terminal()->cyan("    -> Finalizing.\n");
+    $this->terminal()->cyan("    -> Creating foreign keys.\n");
     foreach ($installer->appsToInstall as $appNamespace => $appConfig) {
       $app = $this->appManager()->createAppInstance($appNamespace);
       $mClasses = $app->getAvailableModelClasses();

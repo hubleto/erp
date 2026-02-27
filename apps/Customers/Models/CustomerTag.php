@@ -34,11 +34,4 @@ class CustomerTag extends \Hubleto\Erp\Model
     return $description;
   }
 
-  public function migrations(): array
-  {
-    return [
-      0 => new CustomerTag_26_02_2026_0001($this->db(), $this)
-    ];
-  }
-
 }

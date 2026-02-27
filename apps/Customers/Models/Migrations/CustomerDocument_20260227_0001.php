@@ -2,14 +2,16 @@
 
 namespace Hubleto\App\Community\Customers\Models\Migrations;
 
-use http\Exception\BadMethodCallException;
 use Hubleto\Framework\Migration;
 
-class CustomerDocument_26_02_2026_0001 extends Migration
+class CustomerDocument_20260227_0001 extends Migration
 {
 
   public function installTables(): void
   {
+    $this->db->execute("set foreign_key_checks = 0;
+drop table if exists `customer_documents`;
+set foreign_key_checks = 1;");
     $this->db->execute("SET foreign_key_checks = 0;
 drop table if exists `customer_documents`;
 create table `customer_documents` (
@@ -24,7 +26,9 @@ SET foreign_key_checks = 1;");
 
   public function uninstallTables(): void
   {
-    $this->db->execute("DROP TABLE IF EXISTS customer_documents;");
+    $this->db->execute("set foreign_key_checks = 0;
+drop table if exists `customer_documents`;
+set foreign_key_checks = 1;");
   }
 
   public function installForeignKeys(): void

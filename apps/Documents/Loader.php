@@ -50,7 +50,7 @@ class Loader extends \Hubleto\Erp\App
   {
     if ($round == 1) {
       $mFolder = $this->getModel(Models\Folder::class);
-      $mFolder->dropTableIfExists()->installTables();
+      $mFolder->installTables();
 
       $mFolder->record->recordCreate([
         'id_parent_folder' => null,
@@ -58,8 +58,8 @@ class Loader extends \Hubleto\Erp\App
         'name' => '_ROOT_',
       ]);
 
-      $this->getModel(Models\Document::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Template::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Document::class)->installTables();
+      $this->getModel(Models\Template::class)->installTables();
     }
 
   }

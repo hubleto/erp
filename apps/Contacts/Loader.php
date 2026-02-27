@@ -56,11 +56,11 @@ class Loader extends \Hubleto\Erp\App
       $mTag = $this->getModel(Models\Tag::class);
       $mContactTag = $this->getModel(Models\ContactTag::class);
 
-      $mCategory->dropTableIfExists()->installTables();
-      $mContact->dropTableIfExists()->installTables();
-      $mValue->dropTableIfExists()->installTables();
-      $mTag->dropTableIfExists()->installTables();
-      $mContactTag->dropTableIfExists()->installTables();
+      $mCategory->installTables();
+      $mContact->installTables();
+      $mValue->installTables();
+      $mTag->installTables();
+      $mContactTag->installTables();
 
       $mCategory->record->recordCreate([ 'name' => 'Work' ]);
       $mCategory->record->recordCreate([ 'name' => 'Home' ]);

@@ -114,9 +114,9 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflowStep = $this->getModel(Models\WorkflowStep::class);
       $mWorkflowHistory = $this->getModel(Models\WorkflowHistory::class);
 
-      $mWorkflow->dropTableIfExists()->installTables();
-      $mWorkflowStep->dropTableIfExists()->installTables();
-      $mWorkflowHistory->dropTableIfExists()->installTables();
+      $mWorkflow->installTables();
+      $mWorkflowStep->installTables();
+      $mWorkflowHistory->installTables();
 
       $idWorkflow = $mWorkflow->record->recordCreate([ "name" => "Campaigns", "show_in_kanban" => 1, "order" => 1, "group" => "campaigns" ])['id'];
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => 'Preparation', 'order' => 1, 'color' => '#344556', 'tag' => 'campaign-preparation']);

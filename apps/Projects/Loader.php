@@ -58,14 +58,14 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Project::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Milestone::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\MilestoneReport::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\ProjectDeal::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\ProjectOrder::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\ProjectTask::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\ProjectActivity::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Expense::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Project::class)->installTables();
+      $this->getModel(Models\Milestone::class)->installTables();
+      $this->getModel(Models\MilestoneReport::class)->installTables();
+      $this->getModel(Models\ProjectDeal::class)->installTables();
+      $this->getModel(Models\ProjectOrder::class)->installTables();
+      $this->getModel(Models\ProjectTask::class)->installTables();
+      $this->getModel(Models\ProjectActivity::class)->installTables();
+      $this->getModel(Models\Expense::class)->installTables();
     }
   }
 

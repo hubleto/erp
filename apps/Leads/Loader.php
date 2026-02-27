@@ -84,16 +84,16 @@ class Loader extends \Hubleto\Erp\App
       $mLeadDocument = $this->getModel(Models\LeadDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
 
-      $mLevel->dropTableIfExists()->installTables();
-      $mLostReasons->dropTableIfExists()->installTables();
-      $mLead->dropTableIfExists()->installTables();
-      $mLeadHistory->dropTableIfExists()->installTables();
-      $mLeadTag->dropTableIfExists()->installTables();
-      $mCrossLeadTag->dropTableIfExists()->installTables();
-      $mLeadActivity->dropTableIfExists()->installTables();
-      $mLeadDocument->dropTableIfExists()->installTables();
-      $mLeadCampaign->dropTableIfExists()->installTables();
-      $mLeadTask->dropTableIfExists()->installTables();
+      $mLevel->installTables();
+      $mLostReasons->installTables();
+      $mLead->installTables();
+      $mLeadHistory->installTables();
+      $mLeadTag->installTables();
+      $mCrossLeadTag->installTables();
+      $mLeadActivity->installTables();
+      $mLeadDocument->installTables();
+      $mLeadCampaign->installTables();
+      $mLeadTask->installTables();
 
       $mLeadTag->record->recordCreate([ 'name' => "Complex", 'color' => '#2196f3' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);

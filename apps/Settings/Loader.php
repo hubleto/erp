@@ -71,15 +71,15 @@ class Loader extends \Hubleto\Erp\App
       $mTeam = $this->getModel(Models\Team::class);
       $mTeamMember = $this->getModel(Models\TeamMember::class);
 
-      $mCompany->dropTableIfExists()->installTables();
-      $mPermission->dropTableIfExists()->installTables();
-      $mRolePermission->dropTableIfExists()->installTables();
-      $mCountry->dropTableIfExists()->installTables();
-      $mSetting->dropTableIfExists()->installTables();
-      $mActivityTypes->dropTableIfExists()->installTables();
-      $mCurrency->dropTableIfExists()->installTables();
-      $mTeam->dropTableIfExists()->installTables();
-      $mTeamMember->dropTableIfExists()->installTables();
+      $mCompany->installTables();
+      $mPermission->installTables();
+      $mRolePermission->installTables();
+      $mCountry->installTables();
+      $mSetting->installTables();
+      $mActivityTypes->installTables();
+      $mCurrency->installTables();
+      $mTeam->installTables();
+      $mTeamMember->installTables();
 
       $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',

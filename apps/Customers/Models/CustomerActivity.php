@@ -24,11 +24,4 @@ class CustomerActivity extends \Hubleto\App\Community\Calendar\Models\Activity
     ]);
   }
 
-  public function migrations(): array
-  {
-    return [
-      0 => new CustomerActivity_26_02_2026_0001($this->db(), $this)
-    ];
-  }
-
 }

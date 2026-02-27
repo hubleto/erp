@@ -31,11 +31,11 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\AccessToken::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\AuthCode::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Client::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\RefreshToken::class)->dropTableIfExists()->installTables();
-      $this->getModel(Models\Scope::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\AccessToken::class)->installTables();
+      $this->getModel(Models\AuthCode::class)->installTables();
+      $this->getModel(Models\Client::class)->installTables();
+      $this->getModel(Models\RefreshToken::class)->installTables();
+      $this->getModel(Models\Scope::class)->installTables();
     }
     if ($round == 2) {
       $mClient = $this->getModel(Models\Client::class);

@@ -1,0 +1,51 @@
+<?php
+
+namespace Hubleto\App\Community\Customers\Models\Migrations;
+
+use http\Exception\BadMethodCallException;
+use Hubleto\Framework\Migration;
+
+class CustomerTag_26_02_2026_0001 extends Migration
+{
+
+  public function installTables(): void
+  {
+    $this->db->execute("SET foreign_key_checks = 0;
+drop table if exists `cross_customer_tags`;
+create table `cross_customer_tags` (
+ `id` int(8) primary key auto_increment,
+ `id_customer` int(8) NULL default NULL,
+ `id_tag` int(8) NULL default NULL,
+ index `id` (`id`),
+ index `id_customer` (`id_customer`),
+ index `id_tag` (`id_tag`)) ENGINE = InnoDB;
+SET foreign_key_checks = 1;");
+  }
+
+  public function uninstallTables(): void
+  {
+    $this->db->execute("DROP TABLE IF EXISTS cross_customer_tags;");
+  }
+
+  public function installForeignKeys(): void
+  {
+    $this->db->execute("ALTER TABLE `cross_customer_tags`
+          ADD CONSTRAINT `fk_4534f7a1136b391bdbb126fd951fb16e`
+          FOREIGN KEY (`id_customer`)
+          REFERENCES `customers` (`id`)
+          ON DELETE RESTRICT
+          ON UPDATE RESTRICT; ALTER TABLE `cross_customer_tags`
+          ADD CONSTRAINT `fk_a9f071d7a0eb3e2feb77bdb337078c8b`
+          FOREIGN KEY (`id_tag`)
+          REFERENCES `customer_tags` (`id`)
+          ON DELETE RESTRICT
+          ON UPDATE RESTRICT;");
+  }
+
+  public function uninstallForeignKeys(): void
+  {
+    $this->db->execute("ALTER TABLE `cross_customer_tags`
+          DROP FOREIGN KEY `fk_4534f7a1136b391bdbb126fd951fb16e`; ALTER TABLE `cross_customer_tags`
+          DROP FOREIGN KEY `fk_a9f071d7a0eb3e2feb77bdb337078c8b`;");
+  }
+}

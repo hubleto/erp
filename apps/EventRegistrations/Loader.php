@@ -42,7 +42,7 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Contact::class)->dropTableIfExists()->install();
+      $this->getModel(Models\Contact::class)->dropTableIfExists()->installTables();
     }
   }
 

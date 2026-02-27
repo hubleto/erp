@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Customers\Models;
 
+use Hubleto\App\Community\Customers\Models\Migrations\CustomerActivity_26_02_2026_0001;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\App\Community\Contacts\Models\Contact;
 
@@ -21,6 +22,13 @@ class CustomerActivity extends \Hubleto\App\Community\Calendar\Models\Activity
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
     ]);
+  }
+
+  public function migrations(): array
+  {
+    return [
+      0 => new CustomerActivity_26_02_2026_0001($this->db(), $this)
+    ];
   }
 
 }

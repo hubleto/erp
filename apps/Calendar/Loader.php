@@ -47,9 +47,9 @@ class Loader extends \Hubleto\Erp\App
   {
     if ($round == 1) {
       $mActivity = $this->getModel(Activity::class);
-      $mActivity->install();
+      $mActivity->installTables();
       $mSharedCalendar = $this->getModel(SharedCalendar::class);
-      $mSharedCalendar->install();
+      $mSharedCalendar->installTables();
     }
   }
 

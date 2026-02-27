@@ -77,16 +77,16 @@ class Loader extends \Hubleto\Erp\App
       $mDealDocument = $this->getModel(Models\DealDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
 
-      $mLostReasons->dropTableIfExists()->install();
-      $mDeal->dropTableIfExists()->install();
-      $mDealHistory->dropTableIfExists()->install();
-      $mDealTag->dropTableIfExists()->install();
-      $mDealLead->dropTableIfExists()->install();
-      $mDealTask->dropTableIfExists()->install();
-      $mCrossDealTag->dropTableIfExists()->install();
-      $mItem->dropTableIfExists()->install();
-      $mDealActivity->dropTableIfExists()->install();
-      $mDealDocument->dropTableIfExists()->install();
+      $mLostReasons->dropTableIfExists()->installTables();
+      $mDeal->dropTableIfExists()->installTables();
+      $mDealHistory->dropTableIfExists()->installTables();
+      $mDealTag->dropTableIfExists()->installTables();
+      $mDealLead->dropTableIfExists()->installTables();
+      $mDealTask->dropTableIfExists()->installTables();
+      $mCrossDealTag->dropTableIfExists()->installTables();
+      $mItem->dropTableIfExists()->installTables();
+      $mDealActivity->dropTableIfExists()->installTables();
+      $mDealDocument->dropTableIfExists()->installTables();
 
       $mDealTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
       $mDealTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);

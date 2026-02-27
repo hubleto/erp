@@ -38,9 +38,9 @@ class Loader extends \Hubleto\Erp\App
   public function installTables(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\CashRegister::class)->dropTableIfExists()->install();
-      $this->getModel(Models\Receipt::class)->dropTableIfExists()->install();
-      $this->getModel(Models\ReceiptItem::class)->dropTableIfExists()->install();
+      $this->getModel(Models\CashRegister::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\Receipt::class)->dropTableIfExists()->installTables();
+      $this->getModel(Models\ReceiptItem::class)->dropTableIfExists()->installTables();
     }
   }
 

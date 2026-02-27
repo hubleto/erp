@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Customers\Models;
 
+use Hubleto\App\Community\Customers\Models\Migrations\Tag_26_02_2026_0001;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
 
@@ -30,6 +31,13 @@ class Tag extends \Hubleto\Erp\Model
     $description->ui['showFooter'] = false;
 
     return $description;
+  }
+
+  public function migrations(): array
+  {
+    return [
+      0 => new Tag_26_02_2026_0001($this->db(), $this)
+    ];
   }
 
 }

@@ -13,7 +13,6 @@ class CustomerActivity_20260227_0001 extends Migration
 drop table if exists `customer_activities`;
 set foreign_key_checks = 1;");
     $this->db->execute("SET foreign_key_checks = 0;
-drop table if exists `customer_activities`;
 create table `customer_activities` (
  `id` int(8) primary key auto_increment,
  `subject` varchar(255) ,

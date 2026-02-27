@@ -13,7 +13,6 @@ class Tag_20260227_0001 extends Migration
 drop table if exists `customer_tags`;
 set foreign_key_checks = 1;");
     $this->db->execute("SET foreign_key_checks = 0;
-drop table if exists `customer_tags`;
 create table `customer_tags` (
  `id` int(8) primary key auto_increment,
  `name` varchar(255) ,

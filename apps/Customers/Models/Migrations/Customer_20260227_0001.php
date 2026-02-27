@@ -13,7 +13,6 @@ class Customer_20260227_0001 extends Migration
 drop table if exists `customers`;
 set foreign_key_checks = 1;");
     $this->db->execute("SET foreign_key_checks = 0;
-drop table if exists `customers`;
 create table `customers` (
  `name` varchar(255) ,
  `identifier` varchar(255) ,

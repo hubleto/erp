@@ -31,7 +31,7 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
       }
     }
 
-    $app = $this->appManager()->getApp($appNamespace);
+    $app = $this->getService($appNamespace . '\\Loader');
 
     if (!$app) {
       throw new \Exception("App '{$appNamespace}' does not exist or is not installed.");
@@ -68,6 +68,7 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
       $dropFkCommands = array_filter($sqlGenerator->getSqlDropForeignKeysCommands($classObject));
 
       $dropTableIfExists = join(";\n", $sqlGenerator->getSqlDropTableIfExists($classObject)) . ';';
+
       $installTables = join(";\n", $createTableCommands) . ';';
       if (!empty($createIndexCommands)) {
         $installTables .= "\n\n" . join("; ", $createIndexCommands) . ';';

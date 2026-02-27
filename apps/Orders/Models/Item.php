@@ -59,6 +59,7 @@ class Item extends \Hubleto\Erp\Model
 
     $description->ui['title'] = 'Order Items';
     $description->ui["addButtonText"] = $this->translate("Add item");
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
 
     $description->ui['orderBy'] = [
       'field' => 'date_due',

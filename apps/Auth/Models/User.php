@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\Auth\Models;
 
-use Hubleto\App\Community\Auth\Models\Migrations\Migration_25_02_2026_0001_user;
 use Hubleto\App\Community\Settings\Models\Company;
 use Hubleto\App\Community\Auth\Models\UserHasRole;
 use Hubleto\Erp\Model;

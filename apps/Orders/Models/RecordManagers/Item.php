@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Orders\Models\RecordManagers;
 use Hubleto\App\Community\Products\Models\RecordManagers\Product;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+use Hubleto\App\Community\Invoices\Models\RecordManagers\Item as InvoiceItem;
 
 class Item extends \Hubleto\Erp\RecordManager
 {
@@ -25,7 +26,7 @@ class Item extends \Hubleto\Erp\RecordManager
   /** @return BelongsTo<User, covariant User> */
   public function INVOICE_ITEM(): BelongsTo
   {
-    return $this->belongsTo(Item::class, 'id_invoice_item', 'id');
+    return $this->belongsTo(InvoiceItem::class, 'id_invoice_item', 'id');
   }
 
   /** @return BelongsTo<User, covariant Lead> */

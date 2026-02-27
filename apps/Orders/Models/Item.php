@@ -24,7 +24,7 @@ class Item extends \Hubleto\Erp\Model
   public array $relations = [
     'ORDER' => [ self::BELONGS_TO, Order::class, 'id_order', 'id'],
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id'],
-    'INVOICE_ITEM' => [ self::BELONGS_TO, Item::class, "id_invoice_item" ],
+    'INVOICE_ITEM' => [ self::BELONGS_TO, InvoiceItem::class, "id_invoice_item" ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];

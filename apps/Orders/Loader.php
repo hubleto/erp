@@ -141,7 +141,7 @@ class Loader extends \Hubleto\Erp\App
         <div class="flex flex-col">
           ' . (count($periodicalOrdersMissingItems) > 0 ? '
             <a  href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders" class="badge badge-danger ml-auto">
-              Some periodical orders require your attention
+              ' . count($periodicalOrdersMissingItems) . ' periodical orders require your attention
             </a>
           ' : '') . '
         </div>

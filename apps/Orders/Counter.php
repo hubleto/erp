@@ -26,14 +26,7 @@ class Counter extends Core
   public function periodicalOrdersMissingItems(): array
   {
     $mOrder = $this->getModel(Models\Order::class);
-        // (
-        //   select
-        //     count(orders_items.id)
-        //   from orders_items
-        //   where
-        //     orders_items.id_order = orders.id
-        //     and orders_items.date_due > date_sub(now(), interval orders.payment_period month)
-        // ) as items_inside_payment_period,
+
     return $mOrder->record
       ->selectRaw('
         orders.id,
@@ -41,10 +34,7 @@ class Counter extends Core
       ')
       ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
       ->groupBy('orders.id')
-      // ->whereRaw('orders_items.date_due > date_sub(now(), interval orders.payment_period month)')
-      // ->groupBy('id_order')
       ->whereRaw('orders.payment_period > 0')
-      // ->havingRaw('items_inside_payment_period <= 0')
       ->havingRaw('last_item_date_due <= now()')
       ->pluck('id')
       ?->toArray()

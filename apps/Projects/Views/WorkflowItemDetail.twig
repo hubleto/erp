@@ -29,7 +29,9 @@
           </a>
         {% endfor %}
       {% endif %}
-      <div class="text-sm text-gray-400">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
+      {% for t in item.TASKS %}
+        <div class="text-sm text-gray-400">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
+      {% endfor %}
     </div>
   </div>
 </div>

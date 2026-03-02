@@ -224,7 +224,7 @@ class Order extends \Hubleto\Erp\Model
     $defaultCurrency = (int) $mSettings->record
       ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
       ->first()
-      ->value
+      ?->value
     ;
 
     $description = parent::describeForm();

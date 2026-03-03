@@ -119,7 +119,7 @@
     <div class="dcolumn" style="width:40%">
       <div class="content" style="background:#EEEEEE;text-align:center">
         Suma k úhrade<br>
-        <b style="font-size:1.4em;">{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b><br/>
+        <b style="font-size:1.4em;text-wrap:nowrap">{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b><br/>
         <br/>
         Dátum splatnosti<br>
         <b style="font-size:1.4em;">{{ hubleto.locale().formatDateShort(date_due ?? '') }}</b>
@@ -161,9 +161,14 @@
                     <tr>
                       <td style="width:50%;color:blue">
                         <i>{{ i.item }}</i>
+                        {% if i.discount > 0 %}
+                          <div style="color:orange">
+                            Započítaná zľava {{ i.discount|round }} %
+                          </div>
+                        {% endif %}
                       </td>
                       <td style="width:50%;text-align:right">
-                        <span>{{ hubleto.locale().formatCurrency(i.unit_price, CURRENCY.symbol) }}</span>
+                        <span>{{ hubleto.locale().formatCurrency(i.unit_price * (100 - i.discount)/100, CURRENCY.symbol) }}</span>
                         ×
                         {{ hubleto.locale().formatNumber(i.amount, 4) }}
                         = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> bez DPH</b>
@@ -203,15 +208,15 @@
                   <tbody>
                     <tr>
                       <td>Spolu bez DPH</td>
-                      <td class="text-right">{{ hubleto.locale().formatCurrency(total_excl_vat, CURRENCY.symbol) }}</td>
+                      <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(total_excl_vat, CURRENCY.symbol) }}</td>
                     </tr>
                     <tr>
                       <td>DPH</td>
-                      <td class="text-right">{{ hubleto.locale().formatCurrency(total_incl_vat - total_excl_vat, CURRENCY.symbol) }}</td>
+                      <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(total_incl_vat - total_excl_vat, CURRENCY.symbol) }}</td>
                     </tr>
                     <tr>
                       <td><b>Spolu s DPH</b></td>
-                      <td class="text-right"><b>{{ hubleto.locale().formatCurrency(total_incl_vat, CURRENCY.symbol) }}</b></td>
+                      <td class="text-right" style="text-wrap:nowrap"><b>{{ hubleto.locale().formatCurrency(total_incl_vat, CURRENCY.symbol) }}</b></td>
                     </tr>
                     <tr><td>&nbsp;</td></tr>
                     {% if PAYMENTS %}
@@ -219,7 +224,7 @@
                         {% if p.is_advance_payment %}
                           <tr>
                             <td>Prijatá záloha dňa {{ hubleto.locale().formatDateShort(p.date_payment ?? '') }}</td>
-                            <td class="text-right">{{ hubleto.locale().formatCurrency(p.amount, CURRENCY.symbol) }}</td>
+                            <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(p.amount, CURRENCY.symbol) }}</td>
                           </tr>
                         {% endif %}
                       {% endfor %}
@@ -227,7 +232,7 @@
                     <tr><td>&nbsp;</td></tr>
                     <tr>
                       <td><b style="font-size:1.2em">K úhrade</b></td>
-                      <td class="text-right"><b style="font-size:1.2em">{{ hubleto.locale().formatCurrency(to_be_paid, CURRENCY.symbol) }}</b></td>
+                      <td class="text-right"><b style="font-size:1.2em;text-wrap:nowrap">{{ hubleto.locale().formatCurrency(to_be_paid, CURRENCY.symbol) }}</b></td>
                     </tr>
                   </tbody>
                 </table>
@@ -247,6 +252,8 @@
                 <span style="color:#b2b4b9;font-size:8pt">by square</span>
               </div>
             </div>
+          {% else %}
+            <div style="color:red">{{ PAY_BY_SQUARE_QR_CODE_ERROR }}</div>
           {% endif %}
         </td>
       </tr>

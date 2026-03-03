@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Projects\Controllers\Api;
 
+use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Projects\Models\Project;
 use Hubleto\App\Community\Projects\Models\ProjectTask;
 use Hubleto\App\Community\Tasks\Models\Task;
@@ -19,6 +20,7 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
     $mTask = $this->getService(Task::class);
     $mProjectTask = $this->getService(ProjectTask::class);
     $mActivity = $this->getService(Activity::class);
+    $mUser = $this->getService(User::class);
 
     try {
       $project = $mProject->record->prepareReadQuery()->where($mProject->table.".id", $idProject)->first();
@@ -33,6 +35,23 @@ class GetStatistics extends \Hubleto\Erp\Controllers\ApiController
       ;
 
       if (count($projectTasksIds) == 0) $projectTasksIds = [0];
+
+      // workedByUser
+      $workedByUser = $this->db()->fetchAll('
+        select
+          `' . $mActivity->table . '`.`id_worker` as `id_worker`,
+          concat(ifnull(`u`.`first_name`, ""), " ", ifnull(`u`.`last_name`, "")) as `worker_name`,
+          sum(`' . $mActivity->table . '`.`worked_hours`) as `worked_hours`
+        from `' . $mActivity->table . '`
+        left join `' . $mTask->table . '` `t` on `t`.`id` = `' . $mActivity->table . '`.`id_task`
+        left join `' . $mUser->table . '` `u` on `u`.`id` = `' . $mActivity->table . '`.`id_worker`
+        where
+          `t`.`id` in (' . join(',', $projectTasksIds) . ')
+        group by
+          `id_worker`
+      ');
+
+      $statistics['workedByUser'] = $workedByUser;
 
       // workedByMonth
       $workedByMonth = $this->db()->fetchAll('

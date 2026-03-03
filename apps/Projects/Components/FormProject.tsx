@@ -13,6 +13,7 @@ export interface FormProjectProps extends FormExtendedProps { }
 export interface FormProjectState extends FormExtendedState {
   statistics?: any,
   selectParentOrder?: boolean,
+  salaries?: any,
 }
 
 export default class FormProject<P, S> extends FormExtended<FormProjectProps, FormProjectState> {
@@ -37,6 +38,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
     return {
       ...super.getStateFromProps(props),
       selectParentOrder: false,
+      salaries: {},
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
         { uid: 'milestones', title: this.translate('Milestones') },
@@ -239,47 +241,100 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
       case 'statistics':
         if (this.state.statistics) {
           let totalWorkedHours = 0;
-          let totalCosts = 0;
-          return <div className='flex gap-2'>
-            <div className='card'>
-              <div className='card-header'>Worked hours & costs by month</div>
-              <div className='card-body'>
-                <table className='table-default dense'>
-                  <tbody>
-                    {this.state.statistics.workedByMonth.map((item, key) => {
-                      totalWorkedHours += parseFloat(item.worked_hours);
-                      totalCosts += parseFloat(item.costs);
-                      return <tr key={key}>
-                        <td>{item.year}-{item.month}</td>
-                        <td>{item.worked_hours} hours</td>
-                        <td>{globalThis.hubleto.numberFormat(item.costs, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
-                      </tr>;
-                    })}
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
-                      <td className='bg-primary text-white p-2'>{totalWorkedHours} hours</td>
-                      <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalCosts, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
-                    </tr>
-                  </tfoot>
-                </table>
+          let totalCostsByMonth = 0;
+          let totalCostsByWorker = 0;
+          return <div>
+            <div className='flex gap-2'>
+              <div className='card'>
+                <div className='card-header'>Worked hours & costs by month</div>
+                <div className='card-body'>
+                  <table className='table-default dense'>
+                    <tbody>
+                      {this.state.statistics.workedByMonth.map((item, key) => {
+                        totalWorkedHours += parseFloat(item.worked_hours);
+                        totalCostsByMonth += parseFloat(item.costs);
+                        return <tr key={key}>
+                          <td>{item.year}-{item.month}</td>
+                          <td>{item.worked_hours} hours</td>
+                          <td>{globalThis.hubleto.numberFormat(item.costs, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
+                        </tr>;
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                        <td className='bg-primary text-white p-2'>{totalWorkedHours} hours</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalCostsByMonth, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+
+              <div className='card'>
+                <div className='card-header'>{this.translate('Chargeable hours by month')}</div>
+                <div className='card-body'>
+                  <table className='table-default dense'>
+                    <tbody>
+                      {this.state.statistics.chargeableByMonth.map((item, key) => {
+                        return <tr key={key}>
+                          <td>{item.year}-{item.month}</td>
+                          <td>{item.worked_hours} hours</td>
+                        </tr>;
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
-            <div className='card'>
-              <div className='card-header'>{this.translate('Chargeable hours by month')}</div>
-              <div className='card-body'>
-                <table className='table-default dense'>
-                  <tbody>
-                    {this.state.statistics.chargeableByMonth.map((item, key) => {
-                      return <tr key={key}>
-                        <td>{item.year}-{item.month}</td>
-                        <td>{item.worked_hours} hours</td>
-                      </tr>;
-                    })}
-                  </tbody>
-                </table>
+            <div className="flex gap-2 mt-2">
+              <div className='card'>
+                <div className='card-header'>{this.translate('Labor costs calculator')}</div>
+                <div className='card-body'>
+                  <table className='table-default dense'>
+                    <thead>
+                      <tr>
+                        <th>User</th>
+                        <th>Worked hours</th>
+                        <th>Salary</th>
+                        <th>Labor costs</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.statistics.workedByUser.map((item, key) => {
+                        let workerCosts = item.worked_hours * this.state.salaries[item.id_worker];
+                        totalCostsByWorker += workerCosts;
+                        return <tr key={key}>
+                          <td>{item.worker_name}</td>
+                          <td>{item.worked_hours} hours</td>
+                          <td><div className="flex gap-2 items-center">
+                            <input
+                              value={this.state.salaries[item.id_worker] ?? ''}
+                              className="w-12 bg-white"
+                              onChange={(e) => {
+                                let salaries = this.state.salaries;
+                                salaries[item.id_worker] = e.currentTarget.value;
+                                this.setState({salaries: salaries});
+                              }}
+                            /> €/h
+                          </div></td>
+                          <td>
+                            {globalThis.hubleto.currencyFormat(workerCosts)}
+                          </td>
+                        </tr>;
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                        <td className='bg-primary text-white p-2'>&nbsp;</td>
+                        <td className='bg-primary text-white p-2'>&nbsp;</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.currencyFormat(totalCostsByWorker)}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
               </div>
             </div>
           </div>;

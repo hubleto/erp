@@ -1,0 +1,7 @@
+<h1 class="app-main-title">{{ translate('Tasks') }} > {{ translate('Todo') }}</h1>
+
+<hblreact-tasks-table-todos
+  string:tag="table-todos"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></hblreact-tasks-table-todos>

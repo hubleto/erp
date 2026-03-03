@@ -241,7 +241,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
       case 'statistics':
         if (this.state.statistics) {
           let totalWorkedHours = 0;
-          let totalCostsByMonth = 0;
+          let totalChargeableHours = 0;
           let totalCostsByWorker = 0;
           return <div>
             <div className='flex gap-2'>
@@ -252,19 +252,16 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                     <tbody>
                       {this.state.statistics.workedByMonth.map((item, key) => {
                         totalWorkedHours += parseFloat(item.worked_hours);
-                        totalCostsByMonth += parseFloat(item.costs);
                         return <tr key={key}>
                           <td>{item.year}-{item.month}</td>
                           <td>{item.worked_hours} hours</td>
-                          <td>{globalThis.hubleto.numberFormat(item.costs, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
                         </tr>;
                       })}
                     </tbody>
                     <tfoot>
                       <tr>
                         <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
-                        <td className='bg-primary text-white p-2'>{totalWorkedHours} hours</td>
-                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalCostsByMonth, 2, ",", " ")}&nbsp;{globalThis.hubleto.currencySymbol}</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalWorkedHours)} hours</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -277,12 +274,19 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                   <table className='table-default dense'>
                     <tbody>
                       {this.state.statistics.chargeableByMonth.map((item, key) => {
+                        totalChargeableHours += parseFloat(item.worked_hours);
                         return <tr key={key}>
                           <td>{item.year}-{item.month}</td>
                           <td>{item.worked_hours} hours</td>
                         </tr>;
                       })}
                     </tbody>
+                    <tfoot>
+                      <tr>
+                        <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalChargeableHours)} hours</td>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
               </div>

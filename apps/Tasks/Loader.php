@@ -20,6 +20,9 @@ class Loader extends \Hubleto\Erp\App
 
       '/^tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\Tasks::class,
       '/^tasks\/add?\/?$/' => ['controller' => Controllers\Tasks::class, 'vars' => [ 'recordId' => -1 ]],
+
+      '/^tasks\/todo(\/(?<recordId>\d+))?\/?$/' => Controllers\Todos::class,
+      '/^tasks\/todo\/add?\/?$/' => ['controller' => Controllers\Todos::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     $this->addSearchSwitch('t', 'tasks');
@@ -41,6 +44,28 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\Task::class)->installTables();
       $this->getModel(Models\Todo::class)->installTables();
     }
+  }
+
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-primary-outline btn-square" href="' . $this->env()->projectUrl . '/tasks">
+          <span class="icon"><i class="fas fa-list-check"></i></span>
+          <span class="text text-primary">' . $this->translate('Tasks') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/tasks/todo">
+          <span class="icon"><i class="fas fa-receipt"></i></span>
+          <span class="text">' . $this->translate('Todo') . '</span>
+        </a>
+      </div>
+    ';
   }
 
   /**

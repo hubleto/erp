@@ -50,7 +50,7 @@ class Todo extends \Hubleto\Erp\Model
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
       ,
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
-      'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
+      'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
     ]);
   }
 
@@ -63,7 +63,7 @@ class Todo extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add Task';
+    $description->ui['addButtonText'] = 'Add Todo';
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     return $description;

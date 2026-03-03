@@ -67,12 +67,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "id_invoice_item") {
       if (data['INVOICE_ITEM']) {
-        return <button
-          className='btn btn-success btn-small'
-        >
-          <span className='icon'><i className='fas fa-check'></i></span>
-          <span className='text'>{this.translate('Prepared for invoice')}</span>
-        </button>;
+        return super.renderCell(columnName, column, data, options);;
       } else {
         return <button
           className='btn btn-yellow btn-small'

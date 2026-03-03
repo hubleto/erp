@@ -62,8 +62,8 @@ class Item extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
 
     $description->ui['orderBy'] = [
-      'field' => 'date_due',
-      'direction' => 'asc',
+      'field' => ['id_invoice_item', 'date_due' ],
+      'direction' => [ 'asc', 'asc' ]
     ];
 
     if (isset($filters['fGroupBy'])) {

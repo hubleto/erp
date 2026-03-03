@@ -22,6 +22,7 @@ export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps
   }
 
   slugify(text: string) {
+    if (text == null || text.length < 1) return "";
     return text
       .toString()
       .normalize('NFD')

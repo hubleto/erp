@@ -105,9 +105,15 @@ export default class TableInvoices extends TableExtended<TableInvoicesProps, Tab
     if (columnName == 'date_due') {
       const now = moment();
       const daysDue = moment(now).diff(moment(rowData['date_due']), 'days');
-      if (daysDue >= 0) return cellClassName + ' text-red-800';
-      else if (daysDue > -7) return cellClassName + ' text-yellow-800';
-      else return cellClassName;
+      const datePayment = moment(rowData['date_payment']);
+
+      if (!datePayment.isValid()) {
+        if (daysDue >= 0) return cellClassName + ' bg-red-200 text-red-800';
+        else if (daysDue > -7) return cellClassName + ' text-yellow-800';
+        else return cellClassName;
+      } else {
+        return cellClassName;
+      }
     } else {
       return cellClassName;
     }

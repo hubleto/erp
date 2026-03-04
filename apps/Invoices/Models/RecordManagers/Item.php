@@ -97,9 +97,9 @@ class Item extends \Hubleto\Erp\RecordManager {
 
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];
-      if (in_array('customer', $fGroupBy)) $query = $query->groupBy('id_customer');
-      if (in_array('order', $fGroupBy)) $query = $query->groupBy('id_order');
-      if (in_array('invoice', $fGroupBy)) $query = $query->groupBy('id_invoice');
+      if (in_array('customer', $fGroupBy)) $query = $query->groupBy('invoice_items.id_customer');
+      if (in_array('order', $fGroupBy)) $query = $query->groupBy('invoice_items.id_order');
+      if (in_array('invoice', $fGroupBy)) $query = $query->groupBy('invoice_items.id_invoice');
     }
 
     return $query;

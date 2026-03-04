@@ -56,7 +56,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     if (columnName == 'date_due') {
       const now = moment();
       const daysDue = moment(now).diff(moment(rowData['date_due']), 'days');
-      if (daysDue >= 0) return cellClassName + ' text-red-800';
+      if (daysDue >= 0) return cellClassName + ' bg-red-200 text-red-800';
       else if (daysDue > -7) return cellClassName + ' text-yellow-800';
       else return cellClassName;
     } else {

@@ -250,8 +250,8 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     {this.inputWrapper('id_issued_by', {wrapperCssClass: 'flex gap-2'})}
                   </>}
                 </div>
-                {this.state.id <= 0 ? null : <div>
-                  {this.inputWrapper('description', {cssClass: 'text-blue-500'})}
+                {this.state.id <= 0 ? null : <div className='flex flex-col gap-2'>
+                  {this.input('description_before', {cssClass: 'bg-blue-50 text-blue-500'})}
                   <div className='card flex-2'>
                     <div className='card-header'>{this.translate('Items')}</div>
                     <div className='card-body'>
@@ -458,6 +458,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                       </div>
                     </div>
                   </div>
+                  {this.input('description_after', {cssClass: 'bg-blue-50 text-blue-500'})}
                 </div>}
               </div>
             </div>

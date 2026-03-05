@@ -21,8 +21,10 @@ create table `projects_milestones` (
  `expected_output` text ,
  `description` text ,
  `color` char(10) ,
+ `is_closed` int(1),
  index `id` (`id`),
  index `id_project` (`id_project`),
+ index `is_closed` (`is_closed`),
  index `date_due` (`date_due`)) ENGINE = InnoDB;
 SET foreign_key_checks = 1;");
   }

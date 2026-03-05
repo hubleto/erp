@@ -4,7 +4,7 @@ import TableProjects from "./Components/TableProjects"
 import TableMilestones from './Components/TableMilestones'
 import ProjectsFormActivity from './Components/ProjectsFormActivity'
 import request from "@hubleto/react-ui/core/Request";
-
+import FormOrder from '@hubleto/apps/Orders/Components/FormOrder';
 class ProjectsApp extends App {
   init() {
     super.init();
@@ -35,8 +35,9 @@ class ProjectsApp extends App {
       },
     });
 
-    globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addFormHeaderButton(
+    FormOrder.addFormHeaderButton(
       'Create project',
+      '',
       (form: any) => {
         request.get(
           'projects/api/create-from-order',

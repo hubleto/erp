@@ -27,7 +27,6 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     },
-    renderWorkflowUi: true,
   }
 
   props: FormInvoiceProps;

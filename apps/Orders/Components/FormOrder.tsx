@@ -517,7 +517,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
         return <>
           <TableHistories
             uid={this.props.uid + "_table_order_history"}
-            data={{ data: R.HISTORY }}
+            data={{ records: R.HISTORY }}
             descriptionSource='props'
             description={{
               ui: {

@@ -4,6 +4,7 @@ import TableProfiles from "./Components/TableProfiles"
 import TableInvoices from "./Components/TableInvoices"
 import TableItems from "./Components/TableItems"
 import TablePayments from "./Components/TablePayments"
+import FormOrder from '@hubleto/apps/Orders/Components/FormOrder';
 
 class InvoicesApp extends App {
   init() {
@@ -15,8 +16,9 @@ class InvoicesApp extends App {
     globalThis.hubleto.registerReactComponent('InvoicesTableItems', TableItems);
     globalThis.hubleto.registerReactComponent('InvoicesTablePayments', TablePayments);
 
-    globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addFormHeaderButton(
+    FormOrder.addFormHeaderButton(
       'Create invoice',
+      '',
       (form: any) => {
         request.get(
           'invoices/api/create-invoice-from-order',

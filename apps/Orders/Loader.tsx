@@ -5,6 +5,7 @@ import TableOrders from "./Components/TableOrders";
 import OrdersFormActivity from "./Components/OrdersFormActivity"
 import TableItems from "./Components/TableItems"
 import TableQuotes from './Components/TableQuotes';
+import FormDeal from '@hubleto/apps/Deals/Components/FormDeal';
 
 class OrdersApp extends App {
   init() {
@@ -37,8 +38,9 @@ class OrdersApp extends App {
       },
     });
 
-    globalThis.hubleto.getApp('Hubleto/App/Community/Deals').addFormHeaderButton(
+    FormDeal.addFormHeaderButton(
       'Create order',
+      '',
       (form: any) => {
         request.get(
           'orders/api/create-from-deal',

@@ -137,8 +137,8 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
         </div>
         {this.renderFormModal()}
         <div className="md:grid md:grid-cols-2 gap-2 mt-2">
-          {Object.keys(this.state.data?.data).map((key) => {
-            const item = this.state.data.data[key];
+          {Object.keys(this.state.data?.records).map((key) => {
+            const item = this.state.data.records[key];
             return <div key={key}>
               <button
                 className="btn btn-transparent w-full"

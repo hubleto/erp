@@ -175,7 +175,7 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
   //             descriptionSource='props'
   //             isInlineEditing={true}
   //             onRowClick={() => null}
-  //             onChange={(table: TableLeads) => {this.setState({selection: table.state.data?.data})}}
+  //             onChange={(table: TableLeads) => {this.setState({selection: table.state.data?.records})}}
   //             description={{
   //               columns: {
   //                 identifier: {type: "varchar", title: this.translate("Identifier"), readonly: true,

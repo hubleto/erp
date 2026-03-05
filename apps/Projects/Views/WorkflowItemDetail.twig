@@ -11,22 +11,27 @@
         <div class="text-red-800">Project has no milestones.</div>
       {% else %}
         {% for m in item.MILESTONES %}
-          <a
-            class="btn btn-transparent text-violet-600"
-            href="{{ hubleto.env().projectUrl }}/projects/milestones/{{ m.id }}"
-            target="_blank"
-          >
-            <span class="icon"><i class="fas fa-calendar-check"></i></span>
-            <span class="text">
-              {{ hubleto.locale().formatDateShort(m.date_due) }}
-              {{ m.title }}
-              {% if m.REPORTS|length > 0 %}
-                (progress {{ (m.REPORTS|first).progress_percent }} % reported on {{ hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }})
-              {% else %}
-                (no report yet)
-              {% endif %}
-            </span>
-          </a>
+          {% if not m.is_closed %} 
+            <a
+              class="btn btn-transparent {{ (m.REPORTS|first).progress_percent == 100 ? "text-gray-600" : "text-violet-600" }}"
+              href="{{ hubleto.env().projectUrl }}/projects/milestones/{{ m.id }}"
+              target="_blank"
+            >
+              <span class="icon"><i class="fas fa-calendar-check"></i></span>
+              <span class="text">
+                {{ hubleto.locale().formatDateShort(m.date_due) }}
+                {{ m.title }}
+                {% if m.REPORTS|length > 0 %}
+                  (progress {{ (m.REPORTS|first).progress_percent }} % reported on {{ hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }})
+                {% else %}
+                  (no report yet)
+                {% endif %}
+              </span>
+            </a>
+          {% endif %}
+          {% if m.is_closed %}
+            <div class="badge">Closed milestone: {{ m.title }}</div>
+          {% endif %}
         {% endfor %}
       {% endif %}
       {% for t in item.TASKS %}

@@ -46,7 +46,7 @@ export default class TableCashRegisters extends TableExtended<TableCashRegisters
   
   renderTable(): JSX.Element {
     return <div className='grid grid-cols-4 gap-2'>
-      {this.state.data.data.map((row, index) => {
+      {this.state.data.records.map((row, index) => {
         return <button
           onClick={() => { this.openForm(row.id); }}
           className='btn btn-square btn-transparent btn-large'

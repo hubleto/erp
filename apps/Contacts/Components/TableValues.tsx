@@ -63,9 +63,9 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
     return <>
       {this.renderFormModal()}
       <div className="flex flex-col gap-2">
-        {this.state.data?.data ?
-          Object.keys(this.state.data?.data).map((key) => {
-            const item = this.state.data.data[key];
+        {this.state.data?.records ?
+          Object.keys(this.state.data?.records).map((key) => {
+            const item = this.state.data.records[key];
             const itemType = this.getType(item.value);
             return <div key={key} className={'flex gap-2 items-center'  + (item._toBeDeleted_ ? ' bg-red-100' : '')}>
               <button
@@ -97,7 +97,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                       <input
                         className="w-full bg-blue-50 dark:bg-white/20"
                         onChange={(e) => {
-                          let newValues = this.state.data.data;
+                          let newValues = this.state.data.records;
                           newValues[key].value = e.currentTarget.value;
                           newValues[key].type = this.getType(e.currentTarget.value);
                           this.props.parentForm.updateRecord({ VALUES: newValues });
@@ -115,7 +115,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                     model='Hubleto/App/Community/Contacts/Models/Category'
                     value={item.id_category}
                     onChange={(input: any, value: any) => {
-                      let newValues = this.state.data.data;
+                      let newValues = this.state.data.records;
                       newValues[key].id_category = value;
                       this.props.parentForm.updateRecord({ VALUES: newValues });
                     }}
@@ -134,7 +134,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
                 <button
                   className={'btn ' + (item._toBeDeleted_ ? 'btn-primary' : 'btn-danger')}
                   onClick={() => {
-                    let newValues = this.state.data.data;
+                    let newValues = this.state.data.records;
                     if (newValues[key].id < 0) {
                       newValues.splice(Number(key), 1);
                     } else {

@@ -104,8 +104,8 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     let totalVat = 0;
     let totalInclVat = 0;
 
-    for (let i in this.state.data?.data) {
-      const row = this.state.data?.data[i];
+    for (let i in this.state.data?.records) {
+      const row = this.state.data?.records[i];
       totalExclVat += parseFloat(row['price_excl_vat']);
       totalVat += parseFloat(row['price_incl_vat']) - parseFloat(row['price_excl_vat']);
       totalInclVat += parseFloat(row['price_incl_vat']);

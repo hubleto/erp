@@ -159,8 +159,8 @@ export default class TableInvoices extends TableExtended<TableInvoicesProps, Tab
     let totalVat = 0;
     let totalInclVat = 0;
 
-    for (let i in this.state.data?.data) {
-      const row = this.state.data?.data[i];
+    for (let i in this.state.data?.records) {
+      const row = this.state.data?.records[i];
       totalExclVat += parseFloat(row['total_excl_vat']);
       totalVat += parseFloat(row['total_incl_vat']) - parseFloat(row['total_excl_vat']);
       totalInclVat += parseFloat(row['total_incl_vat']);

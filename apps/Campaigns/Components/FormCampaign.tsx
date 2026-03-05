@@ -358,7 +358,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
           idCampaign={R.id}
           view='briefOverview'
           onAfterLoadData={(table: any) => {
-            this.setState({ recipients: table.state.data.data });
+            this.setState({ recipients: table.state.data.records });
           }}
         />;
       break;

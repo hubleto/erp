@@ -98,12 +98,12 @@ export default class FormWorkflow<P, S> extends FormExtended<FormWorkflowProps, 
             uid={this.props.uid + "_table_workflow_steps_input"}
             context="Hello World"
             descriptionSource="props"
-            data={{ data: R.STEPS }}
+            records={{ records: R.STEPS }}
             isUsedAsInput={true}
             isInlineEditing={this.state.isInlineEditing}
             onRowClick={() => this.setState({isInlineEditing: true})}
             onChange={(table: TableWorkflowSteps) => {
-              this.updateRecord({ STEPS: table.state.data?.data });
+              this.updateRecord({ STEPS: table.state.data?.records });
               this.setState({updatingRecord: true});
             }}
             description={{

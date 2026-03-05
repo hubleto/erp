@@ -134,17 +134,17 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
                   parentForm={this}
                   context="Hello World"
                   // customEndpointParams={{idContact: R.id}}
-                  data={{data: R.VALUES}}
+                  data={{records: R.VALUES}}
                   isInlineEditing={this.state.isInlineEditing}
                   isUsedAsInput={true}
                   readonly={!this.state.isInlineEditing}
                   descriptionSource="props"
                   onRowClick={() => this.setState({isInlineEditing: true})}
                   onChange={(table: TableValues) => {
-                    this.updateRecord({ VALUES: table.state.data.data });
+                    this.updateRecord({ VALUES: table.state.data.records });
                   }}
                   onDeleteSelectionChange={(table: TableValues) => {
-                    this.updateRecord({ VALUES: table.state.data.data ?? [] });
+                    this.updateRecord({ VALUES: table.state.data.records ?? [] });
                     this.setState({contactsTableKey: Math.random()} as FormContactState)
                   }}
                   customEndpointParams={{idContact: R.id}}

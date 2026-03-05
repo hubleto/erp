@@ -12,7 +12,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     $mProject = $this->getModel(Models\Project::class);
     $items = $mProject->record->prepareReadQuery()
       ->with(['MILESTONES.REPORTS' => function($query) {
-          $query->orderBy('projects_milestone_reports.date_report', 'desc');
+        $query->orderBy('projects_milestone_reports.date_report', 'desc');
       }])
       ->with('TASKS.TASK', function($q) {
         $q->where('tasks.is_closed', false);

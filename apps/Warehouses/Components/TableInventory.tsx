@@ -64,8 +64,8 @@ export default class TableInventory extends TableExtended<TableInventoryProps, T
   renderFooter(): JSX.Element {
     let totalQuantity = 0;
 
-    for (let i in this.state.data?.data) {
-      const row = this.state.data?.data[i];
+    for (let i in this.state.data?.records) {
+      const row = this.state.data?.records[i];
       totalQuantity += parseFloat(row['quantity']);
     }
 

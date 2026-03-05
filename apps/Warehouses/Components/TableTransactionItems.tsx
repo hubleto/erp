@@ -95,8 +95,8 @@ export default class TableTransactionItems extends TableExtended<TableTransactio
 
   renderFooter(): JSX.Element {
     let totalQuantity = 0;
-    for (let i in this.state.data?.data) {
-      const row = this.state.data?.data[i];
+    for (let i in this.state.data?.records) {
+      const row = this.state.data?.records[i];
 
       if (row.TRANSACTION.direction == 1) // inbound
         totalQuantity += parseFloat(row['quantity']);

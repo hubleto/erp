@@ -8,6 +8,7 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Virtual;
+use Hubleto\Framework\Db\Column\Boolean;
 
 class Milestone extends \Hubleto\Erp\Model
 {
@@ -30,6 +31,7 @@ class Milestone extends \Hubleto\Erp\Model
       'expected_output' => (new Text($this, $this->translate('Expected output')))->setDefaultVisible()->setRequired(),
       'description' => (new Text($this, $this->translate('Description of activities')))->setDefaultVisible(),
       'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
 
       'virt_last_report_date' => (new Virtual($this, $this->translate('Last report')))
         ->setDefaultVisible()

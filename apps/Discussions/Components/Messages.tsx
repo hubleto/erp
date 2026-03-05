@@ -58,8 +58,8 @@ export default class Messages extends TableExtended<MessagesProps, MessagesState
 
     return <>
       <div className="list">
-        {Object.keys(this.state.data.data ?? {}).map((index: any) => {
-          const message = this.state.data.data[index];
+        {Object.keys(this.state.data.records ?? {}).map((index: any) => {
+          const message = this.state.data.records[index];
           return <div className="btn btn-list-item btn-transparent gap-2 p-2 justify-between  " key={index}>
             <div>
               <div>
@@ -95,7 +95,7 @@ export default class Messages extends TableExtended<MessagesProps, MessagesState
                 {},
                 (res: any) => {
                   let data = this.state.data;
-                  data.data.push(res.sentMessage);
+                  data.records.push(res.sentMessage);
                   this.setState({data: data}, () => {
                     this.refMessageTextarea.current.value = '';
                   });

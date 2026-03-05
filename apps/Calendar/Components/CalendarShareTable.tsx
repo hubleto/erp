@@ -111,9 +111,9 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
   removeShare(table: any) {
     let recordToDelete: any = null;
 
-    for (let i in table.state.data?.data) {
-      if (table.state.data?.data[i]._toBeDeleted_) {
-        recordToDelete = table.state.data?.data[i];
+    for (let i in table.state.data?.records) {
+      if (table.state.data?.records[i]._toBeDeleted_) {
+        recordToDelete = table.state.data?.records[i];
         break;
       }
     }

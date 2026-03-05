@@ -2,7 +2,7 @@
 
 {% block status %}
   <div class="alert alert-danger">
-    {{ viewParams.message }}
+    {{ translate("You don't have permissions for this panel") }}
   </div>
 {% endblock %}
 
@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block button %}
-  <a href="?sign-out" class="btn btn-large">
+  <a href="?sign-out" class="btn btn-large whitespace-nowrap w-max">
     <span class="icon"><i class="fas fa-arrow-right"></i></span>
     <span class="text">{{ translate("Sign out") }}</span>
   </a>

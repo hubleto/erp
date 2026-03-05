@@ -6,7 +6,7 @@ use Hubleto\Framework\Db\ModelSQLCommandsGenerator;
 use Hubleto\Framework\Enums\InstalledMigrationEnum;
 use Hubleto\Framework\Interfaces\ModelInterface;
 
-class Migrate extends \Hubleto\Erp\Cli\Agent\Command
+class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
   {
@@ -75,13 +75,14 @@ class Migrate extends \Hubleto\Erp\Cli\Agent\Command
 
           $plural = $pendingMigrations > 1 ? 's' : '';
 
-          if ($pendingMigrations > 0)
+          if ($pendingMigrations > 0) {
             $this->terminal()->cyan("'{$class}' - {$pendingMigrations} pending migration{$plural}...\n");
 
-          if ($round == 1) {
-            $classObject->installTables();
-          } else {
-            $classObject->installForeignKeys();
+            if ($round == 1) {
+              $classObject->installTables();
+            } else {
+              $classObject->installForeignKeys();
+            }
           }
         }
       }

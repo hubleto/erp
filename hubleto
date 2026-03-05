@@ -23,7 +23,7 @@ if (!empty($action)) {
     switch ($action) {
       case 'help': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\CommandHelp::class)->setArguments($argv); break;
       case 'init': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\CommandInit::class)->setArguments($argv); break;
-      case 'migrate': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\Migrate::class)->setArguments($argv); break;
+      case 'migrate': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\CommandMigrate::class)->setArguments($argv); break;
       case 'prepare-composer': $command = $hubleto->getService(\Hubleto\Erp\Cli\Agent\CommandPrepareComposer::class)->setArguments($argv); break;
       case 'app':
         switch ($argv[2]) {

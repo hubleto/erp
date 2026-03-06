@@ -10,7 +10,7 @@ class GetPartnerInfo extends \Hubleto\Erp\Controllers\ApiController
     $partnerInfo = [];
 
     if (!empty($partnerUid)) {
-      $partnerInfoStr = \Hubleto\Framework\Helper::loadUrl("https://partners.hubleto.com/" . $partnerUid . ".json");
+      $partnerInfoStr = \Hubleto\Framework\Helper::loadUrl("https://partners.hubleto.eu/" . $partnerUid . ".json");
       try {
         $partnerInfo = @json_decode($partnerInfoStr, true);
         if (!is_array($partnerInfo)) $partnerInfo = [];

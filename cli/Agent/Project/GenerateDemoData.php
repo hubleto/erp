@@ -44,7 +44,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "first_name" => "Richard",
       "last_name" => "Manstall",
       "nick" => "chief",
-      "email" => "chief@hubleto.com",
+      "email" => "chief@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => true,
       "login" => "chief",
@@ -56,7 +56,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "first_name" => "Jeeve",
       "last_name" => "Stobs",
       "nick" => "manager",
-      "email" => "manager@hubleto.com",
+      "email" => "manager@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => true,
       "login" => "manager",
@@ -68,7 +68,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "first_name" => "Fedora",
       "last_name" => "Debian",
       "nick" => "employee",
-      "email" => "employee@hubleto.com",
+      "email" => "employee@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => true,
       "login" => "employee",
@@ -80,7 +80,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "first_name" => "Hop",
       "last_name" => "Gracer",
       "nick" => "assistant",
-      "email" => "assistant@hubleto.com",
+      "email" => "assistant@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => false,
       "login" => "assistant",
@@ -92,7 +92,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "first_name" => "Chaplie",
       "last_name" => "Charlin",
       "nick" => "external",
-      "email" => "external@hubleto.com",
+      "email" => "external@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => false,
       "login" => "external",
@@ -184,7 +184,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       }
     }
 
-    // $this->terminal()->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.com' and password is 'demo'.\n");
+    // $this->terminal()->cyan("Demo data generated. Administrator email (login) is now 'demo@hubleto.eu' and password is 'demo'.\n");
 
     $permissionsManager->revokeGrantAllPermissions();
   }

@@ -8,7 +8,7 @@ class Quotes extends \Hubleto\Erp\Controller
   /**
    * Returns parameters for the view to be rendered, as well as the
    * path to the view. For more information about controllers see
-   * https://developer.hubleto.com/v0/docs/controllers
+   * https://developer.hubleto.eu/docs/controllers
    *
    * @return void
    * 

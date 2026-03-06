@@ -39,7 +39,7 @@ For releases v0.10 and later, check release notes at https://github.com/hubleto/
   * enhanced type safety of the core (use of methods configAsString(), urlParamAsInteger(), routeVarAsBool() and so forth)
   * static code analysis checks (thanks to the PHPStan)
   * new features in community apps
-  * improved routing featurs (using named groups in routes), see [Dynamic routes with variables](https://developer.hubleto.com/tutorial/advanced/dynamic-routes)
+  * improved routing featurs (using named groups in routes), see [Dynamic routes with variables](https://developer.hubleto.eu/tutorial/advanced/dynamic-routes)
   * new `\Hubleto\Framework\CalendarManager` class and `$this->main->calendarManager` object
 
 New ASCII art logo :-)

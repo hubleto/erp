@@ -1,4 +1,4 @@
-name: Update dev-main on test.hubleto.com
+name: Update dev-main on test.hubleto.eu
 
 on:
   push:
@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call update URL
-        run: curl -X POST "https://test.hubleto.com/api/server/update-node"
+        run: curl -X POST "https://test.hubleto.eu/api/server/update-node"

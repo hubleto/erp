@@ -25,8 +25,8 @@
     <div class="card card-body block mt-2">
       {{ translate('We are happy you decided to use Hubleto.') }}<br/>
       {{ translate('Before you start, you should first read, understand and accept our') }}
-      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/terms-of-use" target="_blank"><span class="text">{{ translate('Terms of use') }}</span></a> {{ translate('and') }}
-      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.com/en/privacy-policy" target="_blank"><span class="text">{{ translate('Privacy policy') }}</span></a>.<br/>
+      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.eu/en/terms-of-use" target="_blank"><span class="text">{{ translate('Terms of use') }}</span></a> {{ translate('and') }}
+      <a class="btn btn-transparent btn-small btn-primary-outline" href="https://www.hubleto.eu/en/privacy-policy" target="_blank"><span class="text">{{ translate('Privacy policy') }}</span></a>.<br/>
       <br/>
       {{ translate('Therefore, we kindly ask you to go through these documents and appoint your consent') }}
       {{ translate('by ticking the checkbox below.') }}
@@ -112,7 +112,7 @@
           {% endif %}
         {% endif %}
         <div class="flex gap-2 w-full mt-2">
-          <a href="https://pay.hubleto.com/?accountUid={{ config.accountUid }}&partnerUid={{ config.partnerUid }}&monthlyPrice={{ viewParams.priceForThisMonth }}" class="flex-1 btn btn-add-outline btn-square btn-large" target="_blank">
+          <a href="https://pay.hubleto.eu/?accountUid={{ config.accountUid }}&partnerUid={{ config.partnerUid }}&monthlyPrice={{ viewParams.priceForThisMonth }}" class="flex-1 btn btn-add-outline btn-square btn-large" target="_blank">
             <span class="icon text-4xl p-8"><i class="fas fa-credit-card"></i></span>
             <span class="text">{{ translate('Extend subscription') }}</span>
             <span class="text text-xs">{{ translate('You will be redirected to the payment provider') }}</span>
@@ -160,7 +160,7 @@
             dataType: 'json',
             success: (partnerInfo) => {
               console.log(partnerInfo);
-              $("#partnerLogo").attr('src', 'https://partners.hubleto.com/logo/' + partnerInfo.logo);
+              $("#partnerLogo").attr('src', 'https://partners.hubleto.eu/logo/' + partnerInfo.logo);
               $("#partnerName").html(partnerInfo.name);
               $("#partnerAbout").html(partnerInfo.about);
               $("#partnerTechnicalSupportEmail").html(partnerInfo.technicalSupportEmail);

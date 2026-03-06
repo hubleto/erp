@@ -145,21 +145,13 @@ class Loader extends \Hubleto\Erp\App
             </a>
           ' : '') . '
         </div>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=purchaseOrders">
-          <span class="icon"><i class="fas fa-arrow-left"></i></span>
-          <span class="text">' . $this->translate('Purchase orders') . '</span>
-        </a>
-        <a class="btn btn-transparent btn-small ml-4" href="' . $this->env()->projectUrl . '/orders?view=salesOrders">
-          <span class="icon"><i class="fas fa-arrow-right"></i></span>
-          <span class="text">' . $this->translate('Sales orders') . '</span>
-        </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/items">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Items') . '</span>
           ' . ($dueItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $dueItemsCount . '</span>' : '') . '
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/quotes">
-          <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
+          <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="text">' . $this->translate('Quotes') . '</span>
         </a>
       </div>

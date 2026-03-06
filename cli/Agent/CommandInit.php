@@ -248,7 +248,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $lastRewriteBase = '/' . $tmpFolder . $lastRewriteBase;
     }
 
-    $this->terminal()->cyan("For more information about the parameters check https://developer.hubleto.com/v0/cli/init\n");
+    $this->terminal()->cyan("For more information about the parameters check https://developer.hubleto.eu/v0/cli/init\n");
 
     if ($rewriteBase === null) {
       $rewriteBase = $this->terminal()->choose($rewriteBases, 'ConfigEnv.rewriteBase', '/');
@@ -528,7 +528,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->terminal()->colored("yellow", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword . "\n");
     $this->terminal()->yellow("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-    $this->terminal()->yellow("  -> Check the developer's guide at https://developer.hubleto.com.\n");
+    $this->terminal()->yellow("  -> Check the developer's guide at https://developer.hubleto.eu.\n");
     $this->terminal()->yellow("\n");
     $this->terminal()->yellow("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
     $this->terminal()->yellow("Run: php hubleto app create MyFirstApp\n");

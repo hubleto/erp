@@ -27,7 +27,7 @@ class {{ model }} extends \Hubleto\Framework\Model
   const ENUM_THREE = 3;
 
   // Enum lists to be used for columns with enumerable lists.
-  // For more details see https://developer.hubleto.com/v0/docs/models/enums
+  // For more details see https://developer.hubleto.eu/docs/models/enums
   const INTEGER_ENUM_VALUES = [
     self::ENUM_ONE => 'One',
     self::ENUM_TWO => 'Two',
@@ -38,14 +38,14 @@ class {{ model }} extends \Hubleto\Framework\Model
   public string $table = '{{ sqlTable }}';
 
   // Model's record manager class.
-  // For more details see https://developer.hubleto.com/v0/docs/models/record-manager
+  // For more details see https://developer.hubleto.eu/docs/models/record-manager
   public string $recordManagerClass = RecordManagers\{{ model }}::class;
 
   public ?string $lookupSqlValue = 'concat("{{ model }} #", {{ '{%' }}TABLE{{ '%}' }}.id)';
   public ?string $lookupUrlDetail = '{{ modelPluralFormKebab }}/{{ '{%' }}ID{{ '%}' }}';
 
   // Definition of model's relations.
-  // For more details see https://developer.hubleto.com/v0/docs/models/relations
+  // For more details see https://developer.hubleto.eu/docs/models/relations
   public array $relations = [ 
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id' ],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
@@ -53,7 +53,7 @@ class {{ model }} extends \Hubleto\Framework\Model
 
   /**
    * Returns description of the columns in this model.
-   * For more details see https://developer.hubleto.com/v0/docs/models/description-api
+   * For more details see https://developer.hubleto.eu/docs/models/description-api
    *
    * @return array
    * 
@@ -106,7 +106,7 @@ class {{ model }} extends \Hubleto\Framework\Model
 
   /**
    * Returns description of the table showing data from this model.
-   * For more details see https://developer.hubleto.com/v0/docs/models/description-api
+   * For more details see https://developer.hubleto.eu/docs/models/description-api
    *
    * @return \Hubleto\Framework\Description\Table
    * 
@@ -128,7 +128,7 @@ class {{ model }} extends \Hubleto\Framework\Model
 
   /**
    * Returns description of the form showing a data in a record of this model.
-   * For more details see https://developer.hubleto.com/v0/docs/models/description-api
+   * For more details see https://developer.hubleto.eu/docs/models/description-api
    *
    * @return \Hubleto\Framework\Description\Table
    * 
@@ -140,7 +140,7 @@ class {{ model }} extends \Hubleto\Framework\Model
 
   /**
    * Callback called before the record is created.
-   * For more details see https://developer.hubleto.com/v0/docs/models/callbacks
+   * For more details see https://developer.hubleto.eu/docs/models/callbacks
    *
    * @param array $record
    * 
@@ -154,7 +154,7 @@ class {{ model }} extends \Hubleto\Framework\Model
 
   /**
    * Callback called after the record is created.
-   * For more details see https://developer.hubleto.com/v0/docs/models/callbacks
+   * For more details see https://developer.hubleto.eu/docs/models/callbacks
    *
    * @param array $record
    * 
@@ -168,7 +168,7 @@ class {{ model }} extends \Hubleto\Framework\Model
 
   /**
    * Callback called before the record is updated.
-   * For more details see https://developer.hubleto.com/v0/docs/models/callbacks
+   * For more details see https://developer.hubleto.eu/docs/models/callbacks
    *
    * @param array $record
    * 
@@ -182,7 +182,7 @@ class {{ model }} extends \Hubleto\Framework\Model
 
   /**
    * Callback called after the record is updated.
-   * For more details see https://developer.hubleto.com/v0/docs/models/callbacks
+   * For more details see https://developer.hubleto.eu/docs/models/callbacks
    *
    * @param array $record
    * 

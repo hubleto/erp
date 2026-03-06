@@ -74,6 +74,7 @@ class Loader extends \Hubleto\Erp\App
           "
           href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"
         >
+          <span class="icon"><i class="fas fa-bars-progress"></i></span>
           <span class="text">' . $workflow->name . '</span>
         </a>
       ';

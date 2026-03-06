@@ -53,7 +53,7 @@ Contributing to the Hubleto core is the best way how to support us. You can cont
   * start [discussions](https://github.com/hubleto/erp/discussions/categories/general)
   * improve [Hubleto Core](src)
   * translate [language packs](apps/Customers/Lang)
-  * improve [developer's guide](https://developer.hubleto.com)
+  * improve [developer's guide](https://developer.hubleto.eu)
 
 To start contribution, follow the steps described below.
 

@@ -10,26 +10,20 @@ class AppMenu extends \Hubleto\Framework\Extendible
       [
         'app' => $this->app,
         'url' => 'orders',
-        'title' => $this->app->translate('All orders'),
+        'title' => $this->app->translate('Orders'),
         'icon' => 'fas fa-money-check-dollar',
       ],
       [
         'app' => $this->app,
-        'url' => 'orders?view=purchaseOrders',
-        'title' => $this->app->translate('Purchase orders'),
-        'icon' => 'fas fa-cart-shopping',
+        'url' => 'orders/items',
+        'title' => $this->app->translate('Items'),
+        'icon' => 'fas fa-list',
       ],
       [
         'app' => $this->app,
-        'url' => 'orders?view=salesOrders',
-        'title' => $this->app->translate('Sales orders'),
-        'icon' => 'fas fa-euro-sign',
-      ],
-      [
-        'app' => $this->app,
-        'url' => 'orders/payments',
-        'title' => $this->app->translate('Payments'),
-        'icon' => 'fas fa-euro-sign',
+        'url' => 'orders/quotes',
+        'title' => $this->app->translate('Quotes'),
+        'icon' => 'fas fa-receipt',
       ],
     ];
   }

@@ -27,6 +27,15 @@ export default class TablePanels extends Table<TablePanelsProps, TablePanelsStat
     return params;
   }
 
+  getFormProps(): any {
+    let formProps = super.getFormProps();
+    formProps.onSaveCallback = (form: any, saveResponse: any) => {
+      this.reload();
+      if (this.state.recordId === -1) { this.openForm(-1); } 
+    };
+    return formProps;
+  }
+
   constructor(props: TablePanelsProps) {
     super(props);
     this.state = this.getStateFromProps(props);

@@ -35,8 +35,8 @@
         <img src="{{ logoUrl }}" class="w-full h-full" />
         {% if secondLogoUrl %} <img src="{{ secondLogoUrl }}"  class="w-full h-full"> {% endif %}
       </div>
-      <div class="form">
-        <form class="content" id="login_form" action="" method="POST">
+      <div class="form min-w-min">
+        <form class="content min-w-min" id="login_form" action="" method="POST">
           <input type="hidden" name="set-language" id="set-language" value="{{ app.getLanguage() }}">
           <input type="hidden" name="authUser" id="authUser" value="1">
 

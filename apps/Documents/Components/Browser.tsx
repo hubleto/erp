@@ -53,6 +53,28 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
     }
   }
 
+  componentDidMount() {
+    super.componentDidMount();
+    window.addEventListener('popstate', this.handlePopState);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  handlePopState = (event: any) => {
+    if (event.state && event.state.folderUid) {
+      this.setState(event.state, () => { this.loadData(); });
+    } else {
+      this.setState({
+        recordId: 0,
+        folderUid: '_ROOT_',
+        path: [],
+        showFolderProperties: 0,
+      } as BrowserState, () => { this.loadData(); });
+    }
+  }
+
   loadData() {
     this.setState({loadingData: true}, () => {
       request.get(
@@ -85,12 +107,15 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
   }
 
   changeFolder(newFolderUid: string, newPath: Array<string>) {
-    this.setState({
+    const newState = {
       recordId: 0,
       folderUid: newFolderUid,
       path: newPath,
       showFolderProperties: 0,
-    } as BrowserState, () => { this.loadData(); });
+    };
+    
+    window.history.pushState(newState, "", '?folderUid=' + newFolderUid);
+    this.setState(newState as BrowserState, () => { this.loadData(); });
   }
 
   createSubFolder() {

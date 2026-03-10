@@ -24,14 +24,19 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
       $columnsMap = [];
       $rowNr = 0;
       $importedRecords = 0;
+      $separator = ",";
 
       foreach (explode("\n", $csvData) as $csvLine) {
         if (empty(trim($csvLine))) continue;
 
         if ($rowNr == 0) {
           $columnsMap = str_getcsv(trim($csvLine));
+          if (!is_array($columnsMap)) {
+            $separator = ";";
+            $columnsMap = str_getcsv(trim($csvLine), $separator);
+          }
         } else {
-          $row = str_getcsv(trim(iconv("Windows-1250", "UTF-8//TRANSLIT//IGNORE", $csvLine)));
+          $row = str_getcsv(trim(iconv("Windows-1250", "UTF-8//TRANSLIT//IGNORE", $csvLine)), $separator);
 
           $record = $defaultCsvImportValues;
           foreach ($row as $colNr => $colValue) {

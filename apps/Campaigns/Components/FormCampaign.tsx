@@ -467,11 +467,10 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 {R.RECIPIENTS ? R.RECIPIENTS.map((item, key) => {
                   return <div className='flex gap-2 items-center'>
                     <div key={key}>{item.email}</div>
-                    {item.id_mail > 0 ? (
-                      item.MAIL?.datetime_sent
-                        ? <div className='badge badge-success'>Email was sent on {item.MAIL?.datetime_sent}</div>
-                        : <div className='badge badge-warning'>Email scheduled for {item.MAIL?.datetime_scheduled_to_send}</div>
-                    ) : <div className='badge'>Email not sent yet</div>}
+                    {item.id_mail > 0 ? <>
+                      <div className='badge badge-warning'>Scheduled for {item.MAIL?.datetime_scheduled_to_send}</div>
+                      <div className='badge badge-success'>Sent on {item.MAIL?.datetime_sent}</div>
+                    </> : <div className='badge'>Email not sent yet</div>}
                     {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
                     {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
                   </div>

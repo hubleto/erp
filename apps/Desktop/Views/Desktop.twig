@@ -103,7 +103,7 @@
           </button>
         </div>
       </div>
-      <div class="flex-1 ml-2 max-w-72">
+      <div class="flex-1 ml-2 max-w-72 hidden md:block">
         <hblreact-search string:endpoint='api/search'></hblreact-search>
       </div>
       {% if viewParams.activatedSidebarGroup %}
@@ -123,7 +123,7 @@
           </svg>
         </div>
       {% endif %}
-      <div class="hidden md:block flex-1">
+      <div class="block flex-1">
         {% if viewParams.activatedApp.manifest.namespace != "Hubleto\\App\\Community\\Desktop" %}
           {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
         {% endif %}
@@ -134,10 +134,10 @@
           <span class="text">Apps</span>
         </button>
       </div>
-      <div class="md:block ml-2">
-        <ul class="flex font-sm gap-1">
+      <div class="flex-1 ml-2">
+        <ul class="flex font-sm gap-1 justify-end">
           {% if viewParams.availableLanguages|length > 0 %}
-            <li class="mr-2 block">
+            <li class="mr-2 hidden md:block">
               <button class="btn btn-transparent btn-dropdown">
                 <div class="menu">
                   <div class="list mr-2">

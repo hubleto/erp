@@ -31,12 +31,12 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
 
         if ($rowNr == 0) {
           $columnsMap = str_getcsv(trim($csvLine));
-          if (!is_array($columnsMap)) {
+          if (!is_array($columnsMap) || (is_array($columnsMap) && count($columnsMap) == 1)) {
             $separator = ";";
             $columnsMap = str_getcsv(trim($csvLine), $separator);
           }
         } else {
-          $row = str_getcsv(trim(iconv("Windows-1250", "UTF-8//TRANSLIT//IGNORE", $csvLine)), $separator);
+          $row = str_getcsv(trim($csvLine), $separator);
 
           $record = $defaultCsvImportValues;
           foreach ($row as $colNr => $colValue) {

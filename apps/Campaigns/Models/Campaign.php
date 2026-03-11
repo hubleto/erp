@@ -147,6 +147,7 @@ class Campaign extends \Hubleto\Erp\Model
   {
 
     $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
+    $savedRecord['datetime_created'] = date("Y-m-d H:i:s");
 
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);

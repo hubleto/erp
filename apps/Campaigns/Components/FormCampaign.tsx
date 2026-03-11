@@ -503,24 +503,37 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             <div className='card grow'>
               <div className='card-header'>Recipients</div>
               <div className='card-body'>
-                <table className='table-default dense'>
-                  <tbody>
-                    {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? this.state.campaignLaunchInfo.recipients.map((item, key) => {
-                      return <tr>
-                        <td className='text-nowrap'>{key+1}</td>
-                        <td className='text-nowrap'>{item.email}</td>
-                        <td className='text-nowrap'>
-                          {item.id_mail > 0 ? <>
-                            <div className='badge badge-warning'>Scheduled for {item.MAIL?.datetime_scheduled_to_send}</div>
-                            <div className='badge badge-success'>Sent on {item.MAIL?.datetime_sent}</div>
-                          </> : <div className='badge'>Email not sent yet</div>}
-                          {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
-                          {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
-                        </td>
+                {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
+                  <table className='table-default dense'>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Clicks</th>
                       </tr>
-                    }) : null}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {this.state.campaignLaunchInfo.recipients.map((item, key) => {
+                        return <tr>
+                          <td className='text-nowrap'>{key+1}</td>
+                          <td className='text-nowrap'>{item.email}</td>
+                          <td className='text-nowrap'>
+                            {item.id_mail > 0 ? <>
+                              <div className='badge badge-warning'>Scheduled {item.MAIL?.datetime_scheduled_to_send}</div>
+                              {item.MAIL?.datetime_sent ? <div className='badge badge-success'>Sent {item.MAIL?.datetime_sent}</div> : null}
+                            </> : <div className='badge'>Not scheduled yet</div>}
+                            {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
+                            {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
+                          </td>
+                          <td>
+                            {item.CLICKS.length}
+                          </td>
+                        </tr>
+                      })}
+                    </tbody>
+                  </table>
+                : <div className='alert alert-warning'>Loading information about recipients and launch status.</div>}
               </div>
             </div>
           </div>

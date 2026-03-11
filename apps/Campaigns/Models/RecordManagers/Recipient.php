@@ -7,6 +7,7 @@ use Hubleto\App\Community\Campaigns\Models\RecordManagers\RecipientStatus;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Mail\Models\RecordManagers\Mail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class BelongsToEmail extends BelongsTo
 {
@@ -69,6 +70,12 @@ class Recipient extends \Hubleto\Erp\RecordManager
   public function STATUS(): BelongsToEmail
   {
     return $this->belongsToEmail(RecipientStatus::class, 'email', 'email');
+  }
+
+  /** @return HasMany<Contact, covariant Customer> */
+  public function CLICKS(): HasMany
+  {
+    return $this->hasMany(Click::class, 'id_recipient');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed

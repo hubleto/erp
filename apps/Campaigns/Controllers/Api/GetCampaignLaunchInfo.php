@@ -18,7 +18,12 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
     /** @var Recipient */
     $mRecipient = $this->getModel(Recipient::class);
 
-    $recipients = $mRecipient->record->where('id_campaign', $idCampaign)->with('MAIL')->with('STATUS')->get();
+    $recipients = $mRecipient->record
+      ->where('id_campaign', $idCampaign)
+      ->with('MAIL')
+      ->with('STATUS')
+      ->with('CLICKS')
+      ->get();
 
     $launchInfo = [
       'recipients' => $recipients,

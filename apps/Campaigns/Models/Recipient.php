@@ -20,6 +20,8 @@ class Recipient extends \Hubleto\Erp\Model
     'CONTACT' => [ self::BELONGS_TO, Contact::class, 'id_contact', 'id' ],
     'MAIL' => [ self::BELONGS_TO, Mail::class, 'id_mail', 'id' ],
     'STATUS' => [ self::BELONGS_TO, RecipientStatus::class, 'email', 'email' ],
+
+    'CLICKS' => [ self::HAS_MANY, Click::class, 'id_recipient', 'id'  ],
   ];
 
   public function describeColumns(): array

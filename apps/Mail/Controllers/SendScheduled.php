@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Mail\Controllers;
 
 use Hubleto\App\Community\Mail\Crons\SendMails;
+use Hubleto\Framework\Logger;
 
 class SendScheduled extends \Hubleto\Erp\Controller
 {
@@ -21,9 +22,13 @@ class SendScheduled extends \Hubleto\Erp\Controller
     parent::prepareView();
 
     $this->logger()->clearLogCache();
+    $this->logger()->setDebugLevel(Logger::DEBUG_LEVEL_INFO);
+
+    /** @var SendMails */
     $sendMailsCron = $this->getService(SendMails::class);
     $sendMailsCron->maxMailsToSend = $maxMailsToSend;
     $sendMailsCron->run();
+
     $this->viewParams['log'] = $this->logger()->getLogCache();
 
     $this->setView('@Hubleto:App:Community:Mail/SendScheduled.twig');

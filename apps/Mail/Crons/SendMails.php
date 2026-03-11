@@ -12,6 +12,7 @@ class SendMails extends \Hubleto\Erp\Cron
 
   public function run(): void
   {
+
     /** @var Mail */
     $mMail = $this->getModel(Mail::class);
 

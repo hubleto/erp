@@ -5,6 +5,28 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import listPlugin from '@fullcalendar/list';
 import request from "@hubleto/react-ui/core/Request";
+import skLocale from '@fullcalendar/core/locales/sk';
+import csLocale from '@fullcalendar/core/locales/cs';
+import plLocale from '@fullcalendar/core/locales/pl';
+import deLocale from '@fullcalendar/core/locales/de';
+import roLocale from '@fullcalendar/core/locales/ro';
+import itLocale from '@fullcalendar/core/locales/it';
+import esLocale from '@fullcalendar/core/locales/es';
+import frLocale from '@fullcalendar/core/locales/fr';
+
+const localeMap = {
+  'sk': skLocale,
+  'cs': csLocale,
+  'pl': plLocale,
+  'de': deLocale,
+  'ro': roLocale,
+  'it': itLocale,
+  'es': esLocale,
+  'fr': frLocale,
+  'en': null,
+};
+
+const currentLang = globalThis.hubleto.config.language;
 
 interface CalendarProps {
   eventsEndpoint: string,
@@ -122,6 +144,7 @@ export default class Calendar extends Component {
           }}
           eventContent={this.renderCell} // custom render function
           eventClick={(info) => this.props.onEventClick(info)}
+          locale={localeMap[currentLang]}
         />
       </div>
     )

@@ -5,6 +5,7 @@ import Form, { FormProps } from '@hubleto/react-ui/core/Form';
 import FormDocument from './FormDocument';
 import { ProgressBar } from 'primereact/progressbar';
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
+import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
 interface BrowserProps extends TableProps {
   folderUid?: string,
@@ -17,6 +18,11 @@ interface BrowserState extends TableState {
   folderContent: any,
   path: Array<any>,
   showFolderProperties: number,
+  selectedFolders: Array<number>,
+  selectedDocuments: Array<number>,
+  deletingRecord?: boolean,
+  deleteButtonDisabled?: boolean,
+  showBulkMove?: boolean,
 }
 
 export default class Browser extends Table<BrowserProps, BrowserState> {
@@ -33,10 +39,12 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
   translationContextInner: string = 'Components\\Browser';
 
   refFolderPropertiesModal: any;
+  refBulkMoveFolderLookup: any;
 
   constructor(props: BrowserProps) {
     super(props);
     this.refFolderPropertiesModal = React.createRef();
+    this.refBulkMoveFolderLookup = React.createRef();
     this.state = {
       ...this.getStateFromProps(props),
       folderUid: this.props.folderUid ? this.props.folderUid : '_ROOT_',
@@ -44,6 +52,11 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
       folderContent: null,
       path: this.props.path ?? [],
       showFolderProperties: 0,
+      selectedFolders: [],
+      selectedDocuments: [],
+      deletingRecord: false,
+      deleteButtonDisabled: false,
+      showBulkMove: false,
     };
   }
 
@@ -76,7 +89,13 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
   }
 
   loadData() {
-    this.setState({loadingData: true}, () => {
+    this.setState({
+      loadingData: true,
+      selectedFolders: [],
+      selectedDocuments: [],
+      deletingRecord: false,
+      showBulkMove: false,
+    }, () => {
       request.get(
         '',
         {
@@ -124,6 +143,38 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
     });
   }
 
+  toggleSelection(id: number, type: 'selectedFolders' | 'selectedDocuments') {
+    const sel = this.state[type].includes(id)
+      ? this.state[type].filter(i => i !== id)
+      : [...this.state[type], id];
+    this.setState({ [type]: sel } as any);
+  }
+
+  bulkDelete() {
+    this.setState({deletingRecord: false, deleteButtonDisabled: false });
+    const items = [
+      ...this.state.selectedFolders.map(id => ({ id, model: 'Hubleto/App/Community/Documents/Models/Folder' })),
+      ...this.state.selectedDocuments.map(id => ({ id, model: 'Hubleto/App/Community/Documents/Models/Document' }))
+    ];
+        const promises = items.map(item => new Promise(resolve => {
+      request.delete('api/record/delete', item, resolve, resolve);
+    }));
+    Promise.all(promises).then(() => this.loadData());
+  }
+
+  bulkMove() {
+    const idFolder = Number(this.refBulkMoveFolderLookup.current?.state?.value ?? 0);
+    const promises = this.state.selectedDocuments.map(id => new Promise(resolve => {
+      const doc = this.state.folderContent.documents.find((d: any) => d.id === id);
+      request.post( 'api/record/save', { model: 'Hubleto/App/Community/Documents/Models/Document', record: { ...doc, id_folder: idFolder  }, },
+        {},
+        resolve,
+        resolve,
+      );
+    }));
+    Promise.all(promises).then(() => this.loadData());
+  }
+
   render(): JSX.Element {
 
     if (!this.state.folderContent) {
@@ -167,31 +218,100 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
           <span className="icon"><i className="fas fa-plus"></i></span>
           <span className="text">{this.translate('Add folder')}</span>
         </button>
+        {this.state.selectedDocuments.length > 0 ? (
+          <>
+            <button
+              onClick={() => {
+                this.setState({ showBulkMove: !this.state.showBulkMove });
+              }}
+              className="btn btn-transparent text-xl"
+            >
+              <span className="icon"><i className="fas fa-folder-open"></i></span>
+              <span className="text text-nowrap">
+                {this.translate("Move")}
+              </span>
+            </button>
+            {this.state.showBulkMove ? (
+              <div className="flex gap-2 items-center">
+                <Lookup
+                  ref={this.refBulkMoveFolderLookup}
+                  model='Hubleto/App/Community/Documents/Models/Folder'
+                  value={this.state.folderContent.folder.id}
+                  uiStyle='select'
+                ></Lookup>
+                <button
+                  className="btn btn-info text-nowrap"
+                  onClick={() => { this.bulkMove(); }}
+                >
+                  <span className="text">{this.translate('Move selected')}</span>
+                </button>
+              </div>
+            ) : null}
+          </>
+        ) : null}
+        {this.state.selectedFolders.length > 0 || this.state.selectedDocuments.length > 0 ? (
+          <button
+            onClick={() => {
+              if (!this.state.deleteButtonDisabled) {
+                if (this.state.deletingRecord) this.bulkDelete();
+                else {
+                  this.setState({deletingRecord: true, deleteButtonDisabled: true});
+                  setTimeout(() => this.setState({deleteButtonDisabled: false}), 1000);
+                }
+              }
+            }}
+            className={ "btn text-xl " + (this.state.deletingRecord ? "font-bold" : "") + " " + (this.state.deleteButtonDisabled ? "btn-light" : "btn-delete")}
+          >
+            <span className="icon"><i className="fas fa-trash-alt"></i></span>
+            <span className="text text-nowrap">
+              {this.state.deletingRecord ?
+                this.translate("Confirm delete")
+                : this.translate("Delete")
+              }
+            </span>
+          </button>
+        ) : null}
       </div>
       <div className="flex gap-2 mt-2">
         {this.state.folderContent.subFolders ? this.state.folderContent.subFolders.map((item, index) => {
+          const isSelected = this.state.selectedFolders.includes(item.id);
           return <button
             key={index}
-            className="btn btn-square btn-light w-32"
-            onClick={() => {
+            className={"relative btn btn-square w-32 " + (isSelected ? "btn-primary dark:bg-blue-900" : "btn-light")}
+            onClick={(e) => {
               let newFolderUid = item.uid;
               let newPath = this.state.path;
               newPath.push(item);
               this.changeFolder(newFolderUid, newPath);
             }}
           >
+            <input 
+              type="checkbox" 
+              className="absolute top-2 left-2 cursor-pointer w-4 h-4" 
+              checked={isSelected}
+              onChange={() => this.toggleSelection(item.id, 'selectedFolders')}
+              onClick={(e) => e.stopPropagation()}
+            />
             <span className="icon"><i className="fas fa-folder"></i></span>
             <div className="text line-clamp-2 w-full break-words">{item.name ?? ''}</div>
           </button>
         }) : null}
         {this.state.folderContent.documents ? this.state.folderContent.documents.map((item, index) => {
+          const isSelected = this.state.selectedDocuments.includes(item.id);
           return <button
             key={index}
-            className="btn btn-square btn-primary-outline w-32 dark:bg-transparent"
-            onClick={() => {
+            className={"relative btn btn-square w-32 " + (isSelected ? "btn-primary dark:bg-blue-900" : "btn-primary-outline dark:bg-transparent")}
+            onClick={(e) => {
               this.setState({ recordId: item.id });
             }}
           >
+            <input 
+              type="checkbox" 
+              className="absolute top-2 left-2 cursor-pointer w-4 h-4" 
+              checked={isSelected}
+              onChange={() => this.toggleSelection(item.id, 'selectedDocuments')}
+              onClick={(e) => e.stopPropagation()}
+            />
             <span className="icon"><i className="fas fa-file"></i></span>
             <div className="text line-clamp-2 w-full break-words">{item.name ?? ''}</div>
           </button>
@@ -213,6 +333,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
           uid='create_sub_folder_modal'
           isOpen={true}
           type='right'
+          form={{}}
           onClose={() => { this.setState({showFolderProperties: 0}); }}
         >
           <Form

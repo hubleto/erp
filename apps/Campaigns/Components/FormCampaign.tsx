@@ -64,6 +64,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       activityDate: '',
       activitySubject: '',
       activityAllDay: false,
+      campaignLaunchInfo: null,
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
         { uid: 'calendar', title: this.translate('Calendar') },
@@ -92,14 +93,16 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'launch':
-        request.post(
-          'campaigns/api/get-campaign-launch-info',
-          { idCampaign: this.state.record.id },
-          {},
-          (data: any) => {
-            this.setState({campaignLaunchInfo: data});
-          }
-        )
+        if (!this.state.campaignLaunchInfo) {
+          request.post(
+            'campaigns/api/get-campaign-launch-info',
+            { idCampaign: this.state.record.id },
+            {},
+            (data: any) => {
+              this.setState({campaignLaunchInfo: data});
+            }
+          );
+        }
       break;
     }
   }
@@ -527,7 +530,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                             {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
                           </td>
                           <td>
-                            {item.CLICKS.length}
+                            {item.CLICKS.length > 0 ? item.CLICKS.length : null}
                           </td>
                         </tr>
                       })}

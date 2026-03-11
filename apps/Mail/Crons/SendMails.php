@@ -19,16 +19,21 @@ class SendMails extends \Hubleto\Erp\Cron
     $maxMailsToSend = $this->maxMailsToSend;
     if ($maxMailsToSend > 30) $maxMailsToSend = 30;
 
-    $mailsToSend = $mMail->record->prepareReadQuery()
+    $mailsToSendQuery = $mMail->record->prepareReadQuery()
       ->whereNull('datetime_sent')
       ->where('datetime_scheduled_to_send', '<=', date('Y-m-d H:i:s'))
+    ;
+
+    $mailsScheduledCount = $mailsToSendQuery->count();
+
+    $mailsToSend = $mailsToSendQuery
       ->with('ACCOUNT')
       ->with('MAILBOX')
       ->limit($maxMailsToSend) // cron is launched each minute; send max 3 emails per minute
       ->get()
     ;
 
-    $this->logger()->info('SendMails: found ' . $mailsToSend->count() . ' mails to send (maxMailsToSend = ' . $this->maxMailsToSend . ')');
+    $this->logger()->info('SendMails: found ' . $mailsToSend->count() . ' mails to send (maxMailsToSend = ' . $this->maxMailsToSend . ', total mails scheduled = ' . $mailsScheduledCount .')');
 
     foreach ($mailsToSend as $mail) {
       try {

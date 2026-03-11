@@ -493,6 +493,21 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               <div className='mt-2 alert alert-info'>
                 Opted-out recipients will be ignored.
               </div>
+              {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
+                <div className='card mt-2'>
+                  <div className='card-header'>Who clicked?</div>
+                  <div className='card-body flex flex-wrap'>
+                    {this.state.campaignLaunchInfo.recipients.map((item, key) => {
+                      if (item.CLICKS.length == 0) {
+                        return null;
+                      } else {
+                        return <div className='badge'>{item.email}</div>;
+                      }
+                    })}
+                  </div>
+                </div>
+              : null}
+
               {this.state.launchResult && this.state.launchResult.status == 'success' ?
                 <div className='alert alert-success mt-2'>Campaign was launched.</div>
               : null}

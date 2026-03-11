@@ -122,7 +122,8 @@ class Campaign extends \Hubleto\Erp\Model
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
-    $description->includeRelations = ['WORKFLOW', 'WORKFLOW_STEP'];
+    $description->show(['copyButton']);
+    // $description->includeRelations = ['WORKFLOW', 'WORKFLOW_STEP'];
 
     return $description;
   }

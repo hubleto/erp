@@ -130,6 +130,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $defaultConfiguration = null;
     $externalAppsRepositories = [];
     $enterpriseAppsRepository = null;
+    $language = null;
 
     $configFile = '';
     $extraConfigsInCommandLine = [];
@@ -238,6 +239,9 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     if (isset($config['smtpPassword'])) {
       $smtpPassword = $config['smtpPassword'];
     }
+    if (isset($config['language'])) {
+      $language = $config['language'];
+    }
 
     $rewriteBases = [];
     $lastRewriteBase = '';
@@ -304,6 +308,9 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
     if ($adminPassword === null) {
       $adminPassword = $this->terminal()->read('Account.adminPassword (leave empty to generate random password)');
+    }
+    if ($language === null) {
+      $language = $this->terminal()->read('Account.language (en ,sk ,cs, pl, de, ro, it, es, fr)', 'en');
     }
     if ($generateDemoData === null) {
       $confirm = '';
@@ -385,6 +392,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan('  -> adminEmail = ' . (string) $adminEmail . "\n");
     $this->terminal()->cyan('  -> adminPassword = ' . (string) $adminPassword . "\n");
     $this->terminal()->cyan('  -> generateDemoData = ' . ($generateDemoData ? 'yes' : 'no') . "\n");
+    $this->terminal()->cyan('  -> language = ' . (string) $language . "\n");
     $this->terminal()->cyan('  -> packagesToInstall = ' . (string) $packagesToInstall . "\n");
     $this->terminal()->cyan('  -> defaultConfiguration = ' . (string) $defaultConfiguration . "\n");
 
@@ -431,6 +439,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       (string) $smtpEncryption,
       (string) $smtpLogin,
       (string) $smtpPassword,
+      (string) $language,
       false, // randomize (deprecated)
     );
 
@@ -520,6 +529,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     if ($generateDemoData) {
       $this->terminal()->cyan("  -> Generating demo data.\n");
+      $this->authProvider()->setUserLanguage($language);
       $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
     }
 

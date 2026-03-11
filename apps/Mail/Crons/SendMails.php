@@ -33,7 +33,7 @@ class SendMails extends \Hubleto\Erp\Cron
       ->get()
     ;
 
-    $this->logger()->info('SendMails: found ' . $mailsToSend->count() . ' mails to send (maxMailsToSend = ' . $this->maxMailsToSend . ', total mails scheduled = ' . $mailsScheduledCount .')');
+    $this->logger()->info('SendMails: sending ' . $mailsToSend->count() . ' mails (maxMailsToSend = ' . $this->maxMailsToSend . ', total mails scheduled = ' . $mailsScheduledCount .')');
 
     foreach ($mailsToSend as $mail) {
       try {

@@ -23,7 +23,14 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
       ->with('MAIL')
       ->with('STATUS')
       ->with('CLICKS')
-      ->get();
+      ->get()
+      ?->toArray()
+    ;
+
+    foreach ($recipients as $key => $recipient) {
+      unset($recipients[$key]['MAIL']['body_text']);
+      unset($recipients[$key]['MAIL']['body_html']);
+    }
 
     $launchInfo = [
       'recipients' => $recipients,

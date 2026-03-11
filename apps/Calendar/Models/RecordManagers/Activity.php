@@ -24,7 +24,7 @@ class Activity extends \Hubleto\Erp\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    return parent::prepareReadQuery($query, $level)->orderBy('date_start')->orderBy('time_start');
+    return parent::prepareReadQuery($query, $level, $includeRelations)->orderBy('date_start')->orderBy('time_start');
   }
 
 }

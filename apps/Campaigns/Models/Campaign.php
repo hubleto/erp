@@ -158,38 +158,4 @@ class Campaign extends \Hubleto\Erp\Model
     return parent::onAfterCreate($savedRecord);
   }
 
-  // /**
-  //  * [Description for onAfterUpdate]
-  //  *
-  //  * @param array $originalRecord
-  //  * @param array $savedRecord
-  //  * 
-  //  * @return array
-  //  * 
-  //  */
-  // public function onAfterUpdate(array $originalRecord, array $savedRecord): array
-  // {
-  //   $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
-
-  //   $mTemplate = $this->getModel(Template::class);
-  //   $template = $mTemplate->record->find((int) ($savedRecord['id_mail_template'] ?? 0));
-
-  //   if ($template) {
-  //     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
-  //       (string) $template->body_html,
-  //       (string) $savedRecord['utm_source'],
-  //       (string) $savedRecord['utm_campaign'],
-  //       (string) $savedRecord['utm_term'],
-  //       (string) $savedRecord['utm_content'],
-  //     );
-
-  //     $mCampaign = $this->getModel(Campaign::class);
-  //     $mCampaign->record->find((int) $savedRecord['id'])->update([
-  //       'mail_body' => $bodyHtml
-  //     ]);
-  //   }
-
-  //   return $savedRecord;
-  // }
-
 }

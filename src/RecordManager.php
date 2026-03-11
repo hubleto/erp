@@ -22,7 +22,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
   {
     $hubleto = \Hubleto\Framework\Loader::getGlobalApp();
 
-    $query = parent::prepareReadQuery($query, $level);
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $hasIdOwner = $this->model->hasColumn('id_owner');
     $hasIdManager = $this->model->hasColumn('id_manager');

@@ -6,18 +6,24 @@ use Hubleto\App\Community\Campaigns\Models\Recipient;
 use Hubleto\App\Community\Campaigns\Models\Campaign;
 use Hubleto\App\Community\Campaigns\Lib;
 
-class GetCampaignWarnings extends \Hubleto\Erp\Controllers\ApiController
+class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
 
-    $warnings = [
+    /** @var Campaign */
+    $mCampaign = $this->getModel(Campaign::class);
+
+    /** @var Recipient */
+    $mRecipient = $this->getModel(Recipient::class);
+
+    $recipients = $mRecipient->record->where('id_campaign', $idCampaign)->with('MAIL')->with('STATUS')->get();
+
+    $launchInfo = [
+      'recipients' => $recipients,
       'recentlyContacted' => []
     ];
-
-    /** @var Campaign */ $mCampaign = $this->getModel(Campaign::class);
-    /** @var Recipient */ $mRecipient = $this->getModel(Recipient::class);
 
     $contactIds = $mRecipient->record->where('id_campaign', $idCampaign)->pluck('id_contact');
 
@@ -32,7 +38,7 @@ class GetCampaignWarnings extends \Hubleto\Erp\Controllers\ApiController
     ;
 
     foreach ($recentlyContacted as $tmp) {
-      $warnings['recentlyContacted'][] = [
+      $launchInfo['recentlyContacted'][] = [
         'CAMPAIGN' => [
           'id' => $tmp->CAMPAIGN->id,
           'name' => $tmp->CAMPAIGN->name,
@@ -41,6 +47,6 @@ class GetCampaignWarnings extends \Hubleto\Erp\Controllers\ApiController
       ];
     }
 
-    return $warnings;
+    return $launchInfo;
   }
 }

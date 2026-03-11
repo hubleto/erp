@@ -17,7 +17,7 @@ export interface FormCampaignState extends FormExtendedState {
   testEmailVariables?: any,
   testEmailSendResult?: any,
   launchResult?: any,
-  campaignWarnings?: any,
+  campaignLaunchInfo?: any,
   recipients?: any,
   showIdActivity: number,
   activityTime: string,
@@ -93,11 +93,11 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     switch (tabUid) {
       case 'launch':
         request.post(
-          'campaigns/api/get-campaign-warnings',
+          'campaigns/api/get-campaign-launch-info',
           { idCampaign: this.state.record.id },
           {},
           (data: any) => {
-            this.setState({campaignWarnings: data});
+            this.setState({campaignLaunchInfo: data});
           }
         )
       break;
@@ -428,11 +428,11 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       case 'launch':
         console.log(R.RECIPIENTS);
         return <>
-          {this.state.campaignWarnings ? <>
-            {this.state.campaignWarnings.recentlyContacted
-              && this.state.campaignWarnings.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
+          {this.state.campaignLaunchInfo ? <>
+            {this.state.campaignLaunchInfo.recentlyContacted
+              && this.state.campaignLaunchInfo.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
               <b>{this.translate('Recently contacted')}</b>
-              {this.state.campaignWarnings.recentlyContacted.map((item, key) => {
+              {this.state.campaignLaunchInfo.recentlyContacted.map((item, key) => {
                 if (!item.CONTACT) return null;
                 return <div key={key}>
                   <code>
@@ -459,24 +459,8 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             <div className='alert alert-warning'>Campaign was already launched by {R.LAUNCHED_BY.email} on {R.datetime_launched}.</div>
           : null}
 
-          {R.RECIPIENTS ? <div className='flex gap-2 w-full'>
-            <div className='card grow'>
-              <div className='card-header'>Recipients</div>
-              <div className='card-body'>
-                {R.RECIPIENTS ? R.RECIPIENTS.map((item, key) => {
-                  return <div className='flex gap-2 items-center'>
-                    <div key={key}>{item.email}</div>
-                    {item.id_mail > 0 ? <>
-                      <div className='badge badge-warning'>Scheduled for {item.MAIL?.datetime_scheduled_to_send}</div>
-                      <div className='badge badge-success'>Sent on {item.MAIL?.datetime_sent}</div>
-                    </> : <div className='badge'>Email not sent yet</div>}
-                    {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
-                    {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
-                  </div>
-                }) : null}
-              </div>
-            </div>
-            <div className='grow'>
+          <div className='flex gap-2 w-full'>
+            <div className=''>
               <button
                 className="btn btn-add-outline btn-large"
                 onClick={() => {
@@ -516,9 +500,30 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 </div>
               : null}
             </div>
-          </div> : <>
-            <div className='alert alert-warning'>Campaign has no recipients. Add recipients first and then launch.</div>
-          </>}
+            <div className='card grow'>
+              <div className='card-header'>Recipients</div>
+              <div className='card-body'>
+                <table className='table-default dense'>
+                  <tbody>
+                    {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? this.state.campaignLaunchInfo.recipients.map((item, key) => {
+                      return <tr>
+                        <td className='text-nowrap'>{key+1}</td>
+                        <td className='text-nowrap'>{item.email}</td>
+                        <td className='text-nowrap'>
+                          {item.id_mail > 0 ? <>
+                            <div className='badge badge-warning'>Scheduled for {item.MAIL?.datetime_scheduled_to_send}</div>
+                            <div className='badge badge-success'>Sent on {item.MAIL?.datetime_sent}</div>
+                          </> : <div className='badge'>Email not sent yet</div>}
+                          {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
+                          {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
+                        </td>
+                      </tr>
+                    }) : null}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </>;
       break;
 

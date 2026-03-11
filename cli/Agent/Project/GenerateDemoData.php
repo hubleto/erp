@@ -10,6 +10,8 @@ use Hubleto\App\Community\Settings\PermissionsManager;
 
 class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 {
+  public string $translationContext = 'Hubleto\Erp\Cli\Agent\Project\GenerateDemoData';
+  public string $translationContextInner = 'GenerateDemoData';
 
   public function run(): void
   {
@@ -639,7 +641,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       }
 
       $mDealActivity->record->recordCreate([
-        "subject" => "Follow-up call",
+        "subject" => $this->translate("Follow-up call"),
         "date_start" => $dealDateCreated,
         "time_start" => rand(10, 15) . ':00',
         "all_day" => rand(1, 5) == 1,

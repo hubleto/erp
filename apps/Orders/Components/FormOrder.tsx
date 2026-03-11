@@ -33,6 +33,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
     icon: 'fas fa-money-check-dollar',
     model: 'Hubleto/App/Community/Orders/Models/Order',
     renderWorkflowUi: true,
+    renderOwnerManagerUi: true,
   };
 
   props: FormOrderProps;
@@ -265,8 +266,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
                     </div>
                     {this.inputWrapper('note', {cssClass: 'bg-yellow-50 border-none'})}
                     {this.divider(null)}
-                    {this.inputWrapper('id_owner', {wrapperCssClass: 'flex gap-2'})}
-                    {this.inputWrapper('id_manager', {wrapperCssClass: 'flex gap-2'})}
                     {this.divider(null)}
                     {this.inputWrapper('shipping_info')}
                   </div>

@@ -31,6 +31,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Campaigns/Models/Campaign',
     renderWorkflowUi: true,
+    renderOwnerManagerUi: true,
   };
 
   props: FormCampaignProps;
@@ -161,8 +162,6 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 {this.inputWrapper('utm_term')}
                 {this.inputWrapper('utm_content')}
               </div>
-              {this.inputWrapper('id_owner')}
-              {this.inputWrapper('id_manager')}
               {this.inputWrapper('color')}
               {this.inputWrapper('shared_folder')}
               {this.inputWrapper('datetime_created')}

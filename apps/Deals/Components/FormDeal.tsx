@@ -38,6 +38,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
     icon: 'fas fa-handshake',
     model: 'Hubleto/App/Community/Deals/Models/Deal',
     renderWorkflowUi: true,
+    renderOwnerManagerUi: true,
   };
 
   props: FormDealProps;
@@ -317,8 +318,6 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
               </div>
             : null}
           </div> : null}
-          {this.inputWrapper('id_owner', {readonly: R.is_closed})}
-          {this.inputWrapper('id_manager', {readonly: R.is_closed})}
           <div className="flex gap-2">
             {this.inputWrapper('source_channel', {readonly: R.is_closed})}
             {this.inputWrapper('is_new_customer', {readonly: R.is_closed, onChange: (input: any, value: any) => {

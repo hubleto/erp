@@ -14,6 +14,7 @@ export default class FormPayment extends FormExtended<FormPaymentProps, FormPaym
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     },
+    renderOwnerManagerUi: true,
   }
 
   props: FormPaymentProps;
@@ -71,8 +72,6 @@ export default class FormPayment extends FormExtended<FormPaymentProps, FormPaym
               {this.inputWrapper('vat')}
             </div>
             <div className='flex-1'>
-              {this.inputWrapper('id_owner')}
-              {this.inputWrapper('id_manager')}
               {this.inputWrapper('notes')}
               <div className='bg-slate-50 p-2'>
                 <b>{this.translate('Payment summary')}</b><br/>

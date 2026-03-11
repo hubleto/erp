@@ -15,6 +15,7 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     },
+    renderOwnerManagerUi: true,
   }
 
   props: FormItemProps;
@@ -75,8 +76,6 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
               {this.inputWrapper('position')}
             </div>
             <div className='flex-1'>
-              {this.inputWrapper('id_owner')}
-              {this.inputWrapper('id_manager')}
               {this.inputWrapper('notes')}
               <div className='bg-slate-50 p-2'>
                 <b>{this.translate('Summary')}</b><br/>

@@ -34,6 +34,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
     ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Leads/Models/Lead',
     renderWorkflowUi: true,
+    renderOwnerManagerUi: true,
   };
 
   props: FormLeadProps;
@@ -214,8 +215,6 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                 {this.inputWrapper('id_currency')}
               </div>
               {this.inputWrapper('score', {readonly: R.is_closed})}
-              {this.inputWrapper('id_owner', {readonly: R.is_closed})}
-              {this.inputWrapper('id_manager', {readonly: R.is_closed})}
               {this.inputWrapper('id_team', {readonly: R.is_closed})}
               {this.inputWrapper('date_expected_close', {readonly: R.is_closed})}
               {this.inputWrapper('source_channel', {readonly: R.is_closed})}

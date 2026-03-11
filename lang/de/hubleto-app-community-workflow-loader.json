@@ -9,7 +9,8 @@
         "Workflow": "Workflow",
         "Free sales workflow management.": "Kostenloses Verkaufsworkflowmanagement.",
         "History": "",
-        "Workflows": ""
+        "Workflows": "",
+        "Items with not updated step": ""
     },
     "root": {
         "Workflows": "Workflows"
@@ -19,7 +20,8 @@
         "Description": "Beschreibung",
         "Type": "Typ",
         "Order": "",
-        "Group": ""
+        "Group": "",
+        "Show in kanban": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Name",

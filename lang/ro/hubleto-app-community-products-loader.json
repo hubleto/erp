@@ -74,6 +74,11 @@
         "Photo #3": "",
         "Photo #4": "",
         "Photo #5": "",
-        "URL slug": ""
+        "URL slug": "",
+        "Add product category": ""
+    },
+    "Controllers\\Categories": {
+        "Categories": "",
+        "Products": ""
     }
 }

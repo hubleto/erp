@@ -7,7 +7,9 @@
         "All orders": "",
         "Purchase orders": "",
         "Sales orders": "",
-        "Payments": ""
+        "Payments": "",
+        "Items": "",
+        "Quotes": ""
     },
     "root": {
         "Order states": "Bestellstaaten"
@@ -59,7 +61,10 @@
         "Open \/ Closed": "",
         "Open": "",
         "Purchase orders": "",
-        "Sales orders": ""
+        "Sales orders": "",
+        "Shared with": "",
+        "No periodical payments": "",
+        "Annually": ""
     },
     "Models\\State": {
         "Title": "Titel",
@@ -79,7 +84,14 @@
         "Sales price": "",
         "Price excl. VAT": "",
         "Price incl. VAT": "",
-        "Position": ""
+        "Position": "",
+        "VAT": "",
+        "Due date": "",
+        "Notes": "",
+        "Invoice item": "",
+        "Owner": "",
+        "Manager": "",
+        "Position (in the PDF)": ""
     },
     "Models\\History": {
         "Order": "Befehl",

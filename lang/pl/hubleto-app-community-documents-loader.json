@@ -27,7 +27,8 @@
         "Name": "Nazwa",
         "Used For": "Zastosowanie",
         "Content": "Treść",
-        "Notes": "Uwagi"
+        "Notes": "Uwagi",
+        "Add template": ""
     },
     "Controllers\\Browse": {
         "Browse": "Przeglądaj",
@@ -36,6 +37,14 @@
     "Models\\Folder": {
         "Uid": "UID",
         "Parent folder": "Folder nadrzędny",
-        "Folder name": "Nazwa folderu"
+        "Folder name": "Nazwa folderu",
+        "Add Folder": ""
+    },
+    "Controllers\\Folders": {
+        "Folders": ""
+    },
+    "Controllers\\Templates": {
+        "Templates": "",
+        "Documents": ""
     }
 }

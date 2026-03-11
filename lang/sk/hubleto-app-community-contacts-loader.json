@@ -98,7 +98,8 @@
         "Mr.": "Pán",
         "Mrs.": "Pani",
         "Valid": "Platný",
-        "Tags": "Značky"
+        "Tags": "Značky",
+        "Invoicing Contact": ""
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
@@ -123,6 +124,42 @@
         "Contacts": "Kontakty"
     },
     "Components\\TableContacts": {
-        "Primary": "Primárny"
+        "Primary": "Primárny",
+        "Copy cell content to clipboard": ""
+    },
+    "Controllers\\Import": {
+        "Import": "Import",
+        "Contacts": "Kontakty",
+        "Step 1: Prepare list of contacts": "Krok 1: Pripravte zoznam kontaktov",
+        "Contacts can be imported from a ": "Kontakty je možné importovať z ",
+        " or ": " alebo ",
+        " file. The file for import must comply with following rules": " súboru. Súbor pre import musí spĺňať nasledujúce pravidlá",
+        "The file can contain unlimited number of lines.": "Súbor môže obsahovať neobmedzený počet riadkov.",
+        "Values in file must be separated by semicolon": "Hodnoty v súbore musia byť oddelené bodkočiarkou",
+        "First line of the file must be the header containig names of the columns.": "Prvý riadok súboru musí byť hlavička obsahujúca názvy stĺpcov.",
+        "Following lines contain ": "Nasledujúce riadky obsahujú ",
+        "persons": "osoby",
+        "First 3 columns must be ": "Prvé 3 stĺpce musia byť ",
+        "First name": "Meno",
+        "Middle name": "Stredné meno",
+        " and ": " a ",
+        "Last name": "Priezvisko",
+        " of the person": " osoby",
+        "Following columns contain contact information. Each column represents one contact information.": "Nasledujúce stĺpce obsahujú kontaktné informácie. Každý stĺpec predstavuje jednu kontaktnú informáciu.",
+        "Each person can contain any number of contact information.": "Každá osoba môže obsahovať ľubovoľný počet kontaktných informácií.",
+        "The import automatically detects ": "Import automaticky rozpozná ",
+        "emails": "e-maily",
+        "phone numbers": "telefónne čísla",
+        "links": "odkazy",
+        "Example CSV file": "Príklad CSV súboru",
+        "You may also": "Môžete tiež",
+        "Export your addressbook": "Exportovať váš adresár",
+        "modify it and re-import again": "upraviť ho a znovu importovať",
+        "Step 2: Upload the file with contacts": "Krok 2: Nahrajte súbor s kontaktmi",
+        "Step 3: Give a tag to new imported contacts": "Krok 3: Priraďte tag novým importovaným kontaktom",
+        "Step 4: Check the import": "Krok 4: Skontrolujte import",
+        "Check the import now": "Skontrolovať import teraz",
+        "Step 5: Run the import": "Krok 5: Spustite import",
+        "You will be able to run the import after its check": "Import bude možné spustiť po jeho skontrolovaní"
     }
 }

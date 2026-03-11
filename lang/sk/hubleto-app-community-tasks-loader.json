@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Tasks": "Úlohy",
-        "Task management app": "Správa úloh"
+        "Task management app": "Správa úloh",
+        "Todo": "Todo"
     },
     "Models\\Task": {
         "Identifier": "Identifikátor",
@@ -27,9 +28,11 @@
         "Contact": "Kontakt",
         "Is chargeable": "Je útovateľné",
         "Related to": "Súvisí s",
-        "Open \/ Closed": "Otvorené / Uzavreté",
+        "Open \/ Closed": "Otvorené \/ Uzavreté",
         "Open": "Otvorené",
-        "All": "Všetky"
+        "All": "Všetky",
+        "Estimated workhours": "Odhadované pracovné hodiny",
+        "Estimated duration": "Odhadovaná dĺžka"
     },
     "Models\\Todo": {
         "To do": "Todo",
@@ -43,5 +46,22 @@
     },
     "Controllers\\Tasks": {
         "Tasks": "Úlohy"
+    },
+    "Components\\FormTask": {
+        "Task": "Úloha",
+        "unsaved changes": "neuložené zmeny",
+        "Todo": "Todo",
+        "Press ENTER to add new Todo": "Stlačte ENTER pre pridanie nového Todo"
+    },
+    "Components\\TableTasks": {
+        "Copy cell content to clipboard": "Kopírovať do schránky",
+        "Add activity": "Pridať aktivitu"
+    },
+    "Controllers\\Todos": {
+        "Tasks": "",
+        "Todo": ""
+    },
+    "Components\\FormTodo": {
+        "Todo": ""
     }
 }

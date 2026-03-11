@@ -19,12 +19,12 @@
         "Completed": "Ukončená",
         "Created by": "Vytvoril",
         "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Location": "Miesto",
+        "Online meeting link": "Odkaz na online stretnutie",
+        "Description": "Popis",
+        "Recurrence": "Opakovanie",
+        "Long meeting minutes (link to external document)": "Podrobná zápisnica (odkaz na externý dokument)",
+        "Short meeting minutes": "Stručná zápisnica"
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Zobraziť podrobnosti",
@@ -44,7 +44,22 @@
         "New activity": "Nová aktivita",
         "All": "Všetko",
         "Ownership": "Vlastníctvo",
-        "My activities": "Moje aktivity"
+        "My activities": "Moje aktivity",
+        "Calendars": "Kalendáre",
+        "Export calendar": "Exportovať kalendár"
+    },
+    "Components\\CalendarShareTable": {
+        "You are about to remove all shared access to the calendar \"{calendar}\". Do you want to continue?": "Chystáte sa odstrániť všetok zdieľaný prístup ku kalendáru \"{calendar}\". Chcete pokračovať?",
+        "Stop sharing": "Prestať zdieľať",
+        "Stop sharing \"{calendar}\"": "Zastaviť zdieľanie \"{calendar}\"",
+        "Yes, remove all shares": "Áno, odstrániť všetky zdieľania",
+        "No, keep current sharing": "Nie, ponechať aktuálne zdieľanie",
+        "Share calendar": "Zdieľať kalendár",
+        "again": "znovu",
+        "List of all created shares": "Zoznam všetkých vytvorených zdieľaní",
+        "Shared 1 time": "Zdieľané 1-krát",
+        "Shared {count} times": "Zdieľané {count}-krát",
+        "Share calendar as ICS": "Zdieľať kalendár ako ICS"
     },
     "Models\\SharedCalendar": {
         "Created by": "Vytvoril",
@@ -54,5 +69,23 @@
         "Enabled": "Povolené",
         "Date from": "Od",
         "Date to": "Do"
+    },
+    "Components\\FormActivitySelector": {
+        "New event": "Nová udalosť",
+        "Choose the calendar where you want to create the event.": "Vyberte kalendár, v ktorom chcete vytvoriť udalosť."
+    },
+    "Components\\FormActivity": {
+        "Start - End": "Začiatok - Koniec",
+        "Repeats": "Opakuje sa",
+        "Does not repeat": "Neopakuje sa",
+        "Configure custom recurrence": "Nastaviť vlastné opakovanie"
+    },
+    "Controllers\\Share": {
+        "Share": "Zdieľať",
+        "Calendar: Settings": "Kalendár: Nastavenia"
+    },
+    "Components\\FormSharedCalendar": {
+        "Shared calendar": "Zdieľaný kalendár",
+        "unsaved changes": "neuložené zmeny"
     }
 }

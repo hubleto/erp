@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Tasks": "Tareas",
-        "Task management app": "Aplicación de gestión de tareas"
+        "Task management app": "Aplicación de gestión de tareas",
+        "Todo": ""
     },
     "Models\\Task": {
         "Identifier": "Identificador",
@@ -27,9 +28,11 @@
         "Contact": "Contacto",
         "Is chargeable": "Es facturable",
         "Related to": "Relacionado con",
-        "Open \/ Closed": "Abierto / Cerrado",
+        "Open \/ Closed": "Abierto \/ Cerrado",
         "Open": "Abierto",
-        "All": "Todos"
+        "All": "Todos",
+        "Estimated workhours": "",
+        "Estimated duration": ""
     },
     "Models\\Todo": {
         "To do": "Por hacer",
@@ -43,5 +46,9 @@
     },
     "Controllers\\Tasks": {
         "Tasks": "Tareas"
+    },
+    "Controllers\\Todos": {
+        "Tasks": "",
+        "Todo": ""
     }
 }

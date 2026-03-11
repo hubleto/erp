@@ -64,7 +64,8 @@
         "Open": "Abierta",
         "Active": "Activa",
         " changed from ": " cambió de ",
-        " to ": " a "
+        " to ": " a ",
+        "Shared with": ""
     },
     "Models\\DealHistory": {
         "Change Date": "Fecha de cambio",

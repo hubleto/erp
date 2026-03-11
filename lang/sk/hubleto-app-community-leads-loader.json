@@ -156,6 +156,7 @@
         "Task": "Úloha"
     },
     "Components\\TableLeads": {
-        "Hide filter": ""
+        "Hide filter": "",
+        "Copy cell content to clipboard": ""
     }
 }

@@ -24,7 +24,8 @@
         "Name": "",
         "Used For": "",
         "Content": "",
-        "Notes": ""
+        "Notes": "",
+        "Add template": ""
     },
     "Controllers\\Browse": {
         "Browse": "",
@@ -33,6 +34,14 @@
     "Models\\Folder": {
         "Uid": "",
         "Parent folder": "",
-        "Folder name": ""
+        "Folder name": "",
+        "Add Folder": ""
+    },
+    "Controllers\\Folders": {
+        "Folders": ""
+    },
+    "Controllers\\Templates": {
+        "Templates": "",
+        "Documents": ""
     }
 }

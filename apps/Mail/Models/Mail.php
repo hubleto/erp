@@ -93,8 +93,8 @@ class Mail extends \Hubleto\Erp\Model
 
     $description->permissions['canDelete'] = false;
     $description->permissions['canUpdate'] = false;
-    $description->ui['addButtonText'] = 'Save draft';
-    $description->ui['saveButtonText'] = 'Save draft';
+    $description->ui['addButtonText'] = $this->translate('Save draft');
+    $description->ui['saveButtonText'] = $this->translate('Save draft');
 
     return $description;
   }

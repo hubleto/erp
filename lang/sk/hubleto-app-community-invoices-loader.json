@@ -5,7 +5,10 @@
         "Prepared items": "",
         "Payments": "",
         "Payment methods": "",
-        "Profiles": ""
+        "Profiles": "",
+        "items": "",
+        "Items": "",
+        "Invoicing profiles": ""
     },
     "Models\\Invoice": {
         "Profile": "Profil",
@@ -29,7 +32,35 @@
         "Template": "Šablóna",
         "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
-        "Add invoice": "Pridať faktúru"
+        "Add invoice": "Pridať faktúru",
+        "Inbound \/ outbound": "",
+        "Inbound": "",
+        "Outbound": "",
+        "Invoicing profile": "",
+        "Payment method": "",
+        "Supplier": "",
+        "Type": "",
+        "Leave empty to generate automatically.": "",
+        "External number": "",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Sent": "",
+        "Total payments": "",
+        "PDF": "",
+        "Items": "",
+        "Payments": "",
+        "Inbound \/ Outbound": "",
+        "Sent \/ Not sent": "",
+        "Not sent": "",
+        "Due \/ Not due": "",
+        "Not due": "",
+        "Paid \/ Not paid": "",
+        "Not paid": "",
+        "This month": "",
+        "Last month": "",
+        "Month before last": "",
+        "This year": "",
+        "Last year": ""
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Spolu bez DPH",
@@ -42,7 +73,9 @@
         "Due": "Splatnosť",
         "Delivery": "Dodanie",
         "Payment": "Úhrada",
-        "Total VAT": "Spolu DPH"
+        "Total VAT": "Spolu DPH",
+        "Not sent": "",
+        "Not paid": ""
     },
     "Components\\FormInvoice": {
         "Invoice": "Faktúra",
@@ -57,7 +90,10 @@
         "Discount": "Zľava",
         "VAT": "DPH",
         "Price excl. VAT": "Cena bez DPH",
-        "Price incl. VAT": "Cena s DPH"
+        "Price incl. VAT": "Cena s DPH",
+        "Customer": "",
+        "Order": "",
+        "Order Item": ""
     },
     "Controllers\\Invoices": {
         "Invoices": "Faktúry"
@@ -65,5 +101,37 @@
     "Models\\InvoiceDocument": {
         "Invoice": "Faktúra",
         "Document": "Dokument"
+    },
+    "Models\\Profile": {
+        "Name": "",
+        "Headline": "",
+        "Company": "",
+        "Numbering pattern": "",
+        "T - invoice type, YYYY - 4-digit year, YY - 2-digit year, MM - 2-digit month, DD - 2-digit day, N(repeated) - incremental invoice number": "",
+        "Invoice type prefixes": "",
+        "Bank account number (IBAN)": "",
+        "Bank (SWIFT\/BIC)": "",
+        "Currency": "",
+        "Is default": "",
+        "Due days": "",
+        "Stamp and signature": "",
+        "Default invoice template": "",
+        "Default sender account": "",
+        "Default payment method": "",
+        "Mail to send invoice - subject": "",
+        "Mail to send invoice - body": "",
+        "Mail to send invoice - CC": "",
+        "Mail to send invoice - BCC": "",
+        "Mail to send warning about due invoice - subject": "",
+        "Mail to send warning about due invoice - body": ""
+    },
+    "Models\\PaymentMethod": {
+        "Name": ""
+    },
+    "Models\\Payment": {
+        "Invoice": "",
+        "Payment date": "",
+        "Amount": "",
+        "Is advance payment": ""
     }
 }

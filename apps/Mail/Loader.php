@@ -135,21 +135,21 @@ class Loader extends \Hubleto\Erp\App
           href="' . $this->env()->projectUrl . '/mail/get"
         >
           <span class="icon"><i class="fas fa-download"></i></span>
-          <span class="text">Get emails</span>
+          <span class="text">' . $this->translate('Get emails') . '</span>
         </a>
         <a
           class="btn btn-small btn-list-item btn-transparent mt-2"
           href="' . $this->env()->projectUrl . '/mail/scheduled"
         >
           <span class="icon"><i class="fas fa-clock"></i></span>
-          <span class="text">Scheduled to send</span>
+          <span class="text">' . $this->translate('Scheduled to send') . '</span>
         </a>
         <a
           class="btn btn-small btn-list-item btn-transparent mt-2"
           href="' . $this->env()->projectUrl . '/mail/accounts"
         >
           <span class="icon"><i class="fas fa-cog"></i></span>
-          <span class="text">Manage accounts</span>
+          <span class="text">' . $this->translate('Manage accounts') . '</span>
         </a>
       </div>
 

@@ -7,7 +7,9 @@
         "Sales orders": "",
         "Payments": "",
         "Order states": "",
-        "Order warnings": ""
+        "Order warnings": "",
+        "Items": "",
+        "Quotes": ""
     },
     "root": {
         "Order states": ""
@@ -70,7 +72,10 @@
         "Open \/ Closed": "",
         "Open": "",
         "Purchase orders": "",
-        "Sales orders": ""
+        "Sales orders": "",
+        "Shared with": "",
+        "No periodical payments": "",
+        "Annually": ""
     },
     "Models\\Item": {
         "Order": "",
@@ -82,7 +87,15 @@
         "Discount": "",
         "Vat": "",
         "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Price incl. VAT": "",
+        "Unit price": "",
+        "VAT": "",
+        "Due date": "",
+        "Notes": "",
+        "Invoice item": "",
+        "Owner": "",
+        "Manager": "",
+        "Position (in the PDF)": ""
     },
     "Models\\OrderDocument": {
         "Order": "",

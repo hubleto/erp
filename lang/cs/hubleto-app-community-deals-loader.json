@@ -80,7 +80,8 @@
         "Price excl. VAT": "Cena bez DPH",
         "Price incl. VAT": "Cena s DPH",
         "Template for quotation": "Šablona pro nabídku",
-        "Customer's order number": "Čislo objednávky zákazníka"
+        "Customer's order number": "Čislo objednávky zákazníka",
+        "Shared with": ""
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otevřený obchod"

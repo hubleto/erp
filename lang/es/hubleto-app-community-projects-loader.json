@@ -3,7 +3,9 @@
         "Projects": "Proyectos",
         "Project management": "Gestión de proyectos",
         "Phases": "Fases",
-        "Monthly summary": "Resumen mensual"
+        "Monthly summary": "Resumen mensual",
+        "Milestones": "",
+        "Task assignment": ""
     },
     "root": {
         "Projects": "Proyectos",
@@ -31,7 +33,9 @@
         "Open \/ Closed": "Abierto \/ Cerrado",
         "Open": "Abierto",
         "All": "Todos",
-        "Average hourly costs": "Costo promedio por hora"
+        "Average hourly costs": "Costo promedio por hora",
+        "Project manager": "",
+        "Shared with": ""
     },
     "Models\\Phase": {
         "Name": "Nombre",
@@ -57,5 +61,24 @@
     "Models\\ProjectDeal": {
         "Project": "Proyecto",
         "Deal": "Oportunidad"
+    },
+    "Models\\ProjectActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Project": "",
+        "Contact": ""
     }
 }

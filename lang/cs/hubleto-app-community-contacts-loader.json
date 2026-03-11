@@ -34,7 +34,8 @@
         "Phone Numbers": "Telefoní čísla",
         "Mr.": "Pan",
         "Mrs.": "Pani",
-        "Tags": "Štítky"
+        "Tags": "Štítky",
+        "Invoicing Contact": ""
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -110,7 +111,11 @@
         "Step 2: Upload the file with contacts": "Krok 2: Nahrajte soubor s kontaktmy",
         "Step 3: Check the import": "Krok 3: Zkontrolujte import",
         "Step 4: Run the import": "Krok 4: Spusťte import",
-        "You will be able to run the import after its check": "Po kontrole budete moci spustit import"
+        "You will be able to run the import after its check": "Po kontrole budete moci spustit import",
+        " of the person": "",
+        "Step 3: Give a tag to new imported contacts": "",
+        "Step 4: Check the import": "",
+        "Step 5: Run the import": ""
     },
     "Controllers\\Tags": {
         "Settings": "Nastavení",

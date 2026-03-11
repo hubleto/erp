@@ -5,8 +5,10 @@
         "Browse": "Prehliadať",
         "List": "Zoznam",
         "Templates": "Šablóny",
-        "Show as list": "",
-        "Manage folders": ""
+        "Show as list": "Zobraziť ako zoznam",
+        "Manage folders": "Spravovať priečinky",
+        "Marketing materials": "Marketingové materiály",
+        "Customer profiles": "Profily zákazníkov"
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",
@@ -32,17 +34,22 @@
     "Models\\Folder": {
         "Uid": "Uid",
         "Parent folder": "Priečinok",
-        "Folder name": "Názov priečinka"
+        "Folder name": "Názov priečinka",
+        "Add Folder": "Pridať priečinok"
     },
     "Models\\Template": {
         "Name": "Názov",
         "Content": "Obsah",
         "Notes": "Poznámky",
-        "Used For": ""
+        "Used For": "Používané pre",
+        "Add template": "Pridať šablónu"
     },
     "Controllers\\Browse": {
         "Documents": "Dokumenty",
-        "Browse": ""
+        "Browse": "Prehliadať"
+    },
+    "Controllers\\Folders": {
+        "Folders": "Priečinky"
     },
     "Components\\Browser": {
         "Add folder": "Pridať priečinok",
@@ -50,5 +57,9 @@
     },
     "Components\\FormDocument": {
         "Document": "Dokument"
+    },
+    "Controllers\\Templates": {
+        "Templates": "Šablóny",
+        "Documents": "Dokumenty"
     }
 }

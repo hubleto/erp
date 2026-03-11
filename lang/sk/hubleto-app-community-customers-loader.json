@@ -28,8 +28,9 @@
         "Tags": "Značky",
         "Archive": "Archív",
         "Archived": "Archivovaný",
-        "Identifier": "",
-        "Non-active": ""
+        "Identifier": "Identifikátor",
+        "Non-active": "Neaktívny",
+        "Shared with": "Zdieľané s"
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -95,7 +96,8 @@
         "Log completed activity": "Zaznamenať ukončenú aktivitu",
         "Schedule activity": "Naplánovať aktivitu",
         "Enter": "Enter",
-        "Shift+Enter": "Shift+Enter"
+        "Shift+Enter": "Shift+Enter",
+        "unsaved changes": ""
     },
     "root": {
         "Customer Tags": "Značky zákazníkov"
@@ -125,6 +127,9 @@
         "Tags": "Značky"
     },
     "Components\\TableCustomers": {
-        "Hide filter": ""
+        "Hide filter": "",
+        "Show as plain table": "",
+        "Show\/Hide filter": "",
+        "Copy cell content to clipboard": ""
     }
 }

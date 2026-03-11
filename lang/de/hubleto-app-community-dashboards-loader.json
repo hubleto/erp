@@ -1,14 +1,18 @@
 {
     "manifest": {
         "Dashboards": "Dashboards",
-        "Free dashboards app": "Kostenlose Dashboardsanwendung"
+        "Free dashboards app": "Kostenlose Dashboardsanwendung",
+        "Preview Dashboards": "",
+        "Manage": ""
     },
     "root": {
         "Dashboards": "Dashboards"
     },
     "Controllers\\Dashboards": {
         "Dashboards": "Dashboards",
-        "Manage dashboards": "Dashboards verwalten"
+        "Manage dashboards": "Dashboards verwalten",
+        "Preview Dashboards": "",
+        "Add dashboard": ""
     },
     "Models\\Dashboard": {
         "Owner": "Eigentümer",
@@ -35,6 +39,11 @@
         "Settings": "Einstellungen"
     },
     "Components\\Dashboard": {
-        "Add new panel": ""
+        "Add new panel": "",
+        "Configure this dashboard": ""
+    },
+    "Controllers\\DashboardsManage": {
+        "Manage": "",
+        "Dashboards": ""
     }
 }

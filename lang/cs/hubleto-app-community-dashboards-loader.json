@@ -1,14 +1,18 @@
 {
     "manifest": {
         "Dashboards": "Panely",
-        "Free dashboards app": "Panelová aplikace zdarma"
+        "Free dashboards app": "Panelová aplikace zdarma",
+        "Preview Dashboards": "",
+        "Manage": ""
     },
     "root": {
         "Dashboards": "Panely"
     },
     "Controllers\\Dashboards": {
         "Dashboards": "Panely",
-        "Manage dashboards": "Spravovat panely"
+        "Manage dashboards": "Spravovat panely",
+        "Preview Dashboards": "",
+        "Add dashboard": ""
     },
     "Models\\Dashboard": {
         "Owner": "Vlastník",
@@ -38,6 +42,11 @@
         "Panels": "Tabule"
     },
     "Components\\Dashboard": {
-        "Add new panel": "Přidat novou tabuli"
+        "Add new panel": "Přidat novou tabuli",
+        "Configure this dashboard": ""
+    },
+    "Controllers\\DashboardsManage": {
+        "Manage": "",
+        "Dashboards": ""
     }
 }

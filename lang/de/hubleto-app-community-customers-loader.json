@@ -57,7 +57,9 @@
         "Manager": "Verwalter",
         "Shared folder (online document storage)": "Geteilter Ordner",
         "Identifier": "",
-        "Non-active": ""
+        "Non-active": "",
+        "Shared with": "",
+        "Columns": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",

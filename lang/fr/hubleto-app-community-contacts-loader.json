@@ -21,7 +21,8 @@
         "Phone Numbers": "",
         "Emails": "",
         "Tags": "",
-        "Add contact": ""
+        "Add contact": "",
+        "Invoicing Contact": ""
     },
     "Models\\Value": {
         "Contact": "",
@@ -48,5 +49,40 @@
     },
     "Controllers\\Contacts": {
         "Contacts": ""
+    },
+    "Controllers\\Import": {
+        "Import": "",
+        "Contacts": "",
+        "Step 1: Prepare list of contacts": "",
+        "Contacts can be imported from a ": "",
+        " or ": "",
+        " file. The file for import must comply with following rules": "",
+        "The file can contain unlimited number of lines.": "",
+        "Values in file must be separated by semicolon": "",
+        "First line of the file must be the header containig names of the columns.": "",
+        "Following lines contain ": "",
+        "persons": "",
+        "First 3 columns must be ": "",
+        "First name": "",
+        "Middle name": "",
+        " and ": "",
+        "Last name": "",
+        " of the person": "",
+        "Following columns contain contact information. Each column represents one contact information.": "",
+        "Each person can contain any number of contact information.": "",
+        "The import automatically detects ": "",
+        "emails": "",
+        "phone numbers": "",
+        "links": "",
+        "Example CSV file": "",
+        "You may also": "",
+        "Export your addressbook": "",
+        "modify it and re-import again": "",
+        "Step 2: Upload the file with contacts": "",
+        "Step 3: Give a tag to new imported contacts": "",
+        "Step 4: Check the import": "",
+        "Check the import now": "",
+        "Step 5: Run the import": "",
+        "You will be able to run the import after its check": ""
     }
 }

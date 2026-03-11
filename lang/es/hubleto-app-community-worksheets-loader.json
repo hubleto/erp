@@ -3,7 +3,8 @@
         "Worksheets": "Hojas de trabajo",
         "Worksheet log": "Registro de hojas de trabajo",
         "Activity types": "Tipos de actividad",
-        "Daily chart": "Gráfico diario"
+        "Daily chart": "Gráfico diario",
+        "Monthly summary": ""
     },
     "root": {
         "Worksheets": "Hojas de trabajo",
@@ -31,7 +32,13 @@
         "Yesterday": "Ayer",
         "Last 7 days": "Últimos 7 días",
         "Last 14 days": "Últimos 14 días",
-        "Month before last": "El mes antepasado"
+        "Month before last": "El mes antepasado",
+        "Month": "",
+        "Customer": "",
+        "Deal": "",
+        "Project": "",
+        "Group by": "",
+        "Total worked hours": ""
     },
     "Components\\TableActivities": {
         "Worked total": "Total de horas trabajadas",

@@ -71,7 +71,8 @@
         "Price excl. VAT": "",
         "Price incl. VAT": "",
         "Template for quotation": "",
-        "Customer's order number": ""
+        "Customer's order number": "",
+        "Shared with": ""
     },
     "Models\\DealActivity": {
         "Deal": "Handeln",

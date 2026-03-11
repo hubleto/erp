@@ -30,7 +30,8 @@
     "Models\\Folder": {
         "Uid": "Uid",
         "Parent folder": "Elternordner",
-        "Folder name": "Ordner Name"
+        "Folder name": "Ordner Name",
+        "Add Folder": ""
     },
     "Controllers\\Browse": {
         "Documents": "Dokumente",
@@ -40,6 +41,14 @@
         "Name": "",
         "Used For": "",
         "Content": "",
-        "Notes": ""
+        "Notes": "",
+        "Add template": ""
+    },
+    "Controllers\\Folders": {
+        "Folders": ""
+    },
+    "Controllers\\Templates": {
+        "Templates": "",
+        "Documents": ""
     }
 }

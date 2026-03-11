@@ -201,7 +201,8 @@
         "Business register": "Registro mercantil",
         "Logo": "Logo",
         "Brand color - primary": "Color de marca - primario",
-        "Brand color - secondary": "Color de marca - secundario"
+        "Brand color - secondary": "Color de marca - secundario",
+        "Region": ""
     },
     "Controllers\\Sidebar": {
         "Settings": "Ajustes",

@@ -7,7 +7,9 @@
         "All orders": "",
         "Purchase orders": "",
         "Sales orders": "",
-        "Payments": ""
+        "Payments": "",
+        "Items": "",
+        "Quotes": ""
     },
     "root": {
         "Order states": "Stavy objednávok"
@@ -59,7 +61,10 @@
         "Link to shared folder (online storage) with related documents": "",
         "PDF": "",
         "Purchase orders": "",
-        "Sales orders": ""
+        "Sales orders": "",
+        "Shared with": "",
+        "No periodical payments": "",
+        "Annually": ""
     },
     "Models\\State": {
         "Title": "Názov",
@@ -78,7 +83,14 @@
         "Sales price": "Predajná cena",
         "Price excl. VAT": "Suma bez DPH",
         "Price incl. VAT": "Suma s DPH",
-        "Position": ""
+        "Position": "",
+        "VAT": "",
+        "Due date": "",
+        "Notes": "",
+        "Invoice item": "",
+        "Owner": "",
+        "Manager": "",
+        "Position (in the PDF)": ""
     },
     "Models\\History": {
         "Order": "Objednávka",

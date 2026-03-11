@@ -41,7 +41,7 @@
         "Expected close date": "Przewidywana data zamknięcia",
         "Owner": "Właściciel",
         "Created": "Utworzono",
-        "Workflow": "Etap lejka / Proces",
+        "Workflow": "Etap lejka \/ Proces",
         "Workflow step": "Krok procesu",
         "Notes": "Uwagi",
         "Source channel": "Kanał źródłowy",
@@ -53,7 +53,7 @@
         "Business type": "Typ biznesu",
         "Link to shared folder (online storage) with related documents": "Link do udostępnionego folderu z dokumentami",
         "Add Deal": "Dodaj szansę sprzedaży",
-        "Manager": "Opiekun / Menedżer",
+        "Manager": "Opiekun \/ Menedżer",
         "Version": "Wersja",
         "Price excl. VAT": "Cena netto",
         "Price incl. VAT": "Cena brutto",
@@ -65,7 +65,8 @@
         "Owned by me": "Moje (własność)",
         "Managed by me": "Zarządzane przeze mnie",
         "Open \/ Closed": "Otwarte \/ Zamknięte",
-        "Open": "Otwarte"
+        "Open": "Otwarte",
+        "Shared with": ""
     },
     "Controllers\\Boards\\MostValuableDeals": {
         "Open deal": "Otwarta szansa sprzedaży"

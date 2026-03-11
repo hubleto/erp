@@ -32,13 +32,15 @@
     "Models\\Folder": {
         "Uid": "Id",
         "Parent folder": "Carpeta principal",
-        "Folder name": "Nombre de la carpeta"
+        "Folder name": "Nombre de la carpeta",
+        "Add Folder": ""
     },
     "Models\\Template": {
         "Name": "Nombre",
         "Content": "Contenido",
         "Notes": "Notas",
-        "Used For": "Usado para"
+        "Used For": "Usado para",
+        "Add template": ""
     },
     "Controllers\\Browse": {
         "Documents": "Documentos",
@@ -50,5 +52,12 @@
     },
     "Components\\FormDocument": {
         "Document": "Documento"
+    },
+    "Controllers\\Folders": {
+        "Folders": ""
+    },
+    "Controllers\\Templates": {
+        "Templates": "",
+        "Documents": ""
     }
 }

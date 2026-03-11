@@ -29,7 +29,9 @@
         "Archive": "Archivo",
         "Archived": "Archivado",
         "Identifier": "Identificador",
-        "Non-active": "Inactivo"
+        "Non-active": "Inactivo",
+        "Shared with": "",
+        "Columns": ""
     },
     "Controllers\\Customers": {
         "Customers": "Clientes"

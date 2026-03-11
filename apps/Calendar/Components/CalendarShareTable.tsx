@@ -18,6 +18,9 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
   props: CalendarShareTableProps;
   state: CalendarShareTableState;
 
+  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
+  translationContextInner: string = 'Components\\CalendarShareTable';
+
   constructor(props) {
     super(props);
 
@@ -76,18 +79,15 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
 
   stopSharingConfirm(calendar: any) {
     globalThis.hubleto.showDialogConfirm(
-      this.translate(
-        'You are about to remove all shared access to the calendar "' + calendar + '". Do you want to continue?',
-        'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'
-      ),
+      this.translate('You are about to remove all shared access to the calendar "{calendar}". Do you want to continue?').replace('{calendar}', calendar),
       {
         headerClassName: 'dialog-danger-header',
         contentClassName: 'dialog-danger-content',
-        header: this.translate('Stop sharing "' + calendar + '"', 'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'),
-        yesText: this.translate('Yes, remove all shares', 'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'),
+        header: this.translate('Stop sharing "{calendar}"').replace('{calendar}', calendar),
+        yesText: this.translate('Yes, remove all shares'),
         yesButtonClass: 'btn-danger',
         onYes: () => { this.stopSharingCalendar(calendar); },
-        noText: this.translate('No, keep current sharing', 'Hubleto\\App\\Community\\Calendar\\Components\\CalendarShareTable'),
+        noText: this.translate('No, keep current sharing'),
         onNo: () => { },
       }
     );
@@ -131,8 +131,8 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
       <tr key={calendarObject[0]} style={{"borderLeft": "1em solid " + calendarObject[1].color}}>
         <td>{calendarObject[1].title}</td>
         <td className="text-right">
-          { calendarObject[1].shared == 1 && "Shared 1 time"}
-          { calendarObject[1].shared > 1 && "Shared " + calendarObject[1].shared + " times"}
+          { calendarObject[1].shared == 1 && this.translate('Shared 1 time')}
+          { calendarObject[1].shared > 1 && this.translate('Shared {count} times').replace('{count}', calendarObject[1].shared)}
           { calendarObject[1].shared > 0 &&
             <button onClick={() => this.stopSharingConfirm(calendarObject[0])} className="btn btn-transparent btn-small">
               <span className="icon"><i className="fas fa-chain-broken"></i></span>
@@ -141,7 +141,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
           }
           <button onClick={() => this.shareCalendar(calendarObject[0])} className="btn btn-transparent btn-small">
             <span className="icon"><i className="fas fa-share-nodes"></i></span>
-            <span className="text">Share calendar { calendarObject[1].shared >= 1 && "again"}</span>
+            <span className="text">{this.translate('Share calendar')} { calendarObject[1].shared >= 1 && this.translate('again')}</span>
           </button>
         </td>
       </tr>
@@ -154,7 +154,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
     return <>
       <div className="card w-1/2 m-auto">
         <div className="card-header">
-          Share calendar as ICS
+          {this.translate("Share calendar as ICS")}
         </div>
         <div className="card-body">
           <table className="table-default dense w-full">
@@ -166,7 +166,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
       </div>
       <div className="card w-1/2 m-auto mt-2">
         <div className="card-header">
-          List of all created shares
+          {this.translate('List of all created shares')}
         </div>
         <div className="card-body">
           { this.state.loading ?

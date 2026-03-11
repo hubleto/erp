@@ -158,7 +158,8 @@
         "Country": "",
         "Logo": "",
         "Brand color - primary": "",
-        "Brand color - secondary": ""
+        "Brand color - secondary": "",
+        "Region": ""
     },
     "Models\\ActivityType": {
         "Type": "",

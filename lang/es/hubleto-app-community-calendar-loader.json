@@ -54,5 +54,9 @@
         "Enabled": "Habilitado",
         "Date from": "Desde",
         "Date to": "Hasta"
+    },
+    "Controllers\\Share": {
+        "Share": "",
+        "Calendar: Settings": ""
     }
 }

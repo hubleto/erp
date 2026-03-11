@@ -34,7 +34,8 @@
         "Launched": "",
         "Open \/ Closed": "",
         "Open": "",
-        "All": ""
+        "All": "",
+        "Shared with": ""
     },
     "Components\\FormCampaign": {
         "Leads": "Leads",

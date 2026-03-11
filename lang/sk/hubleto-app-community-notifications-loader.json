@@ -22,5 +22,8 @@
     "Components\\TableNotifications": {
         "Mark as unread": "Označiť ako neprečítané",
         "Mark as read": "Označiť ako prečítané"
+    },
+    "Components\\FormNotification": {
+        "Notification": "Notifikácia"
     }
 }

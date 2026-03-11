@@ -111,9 +111,14 @@
         "Photo #3": "Foto #3",
         "Photo #4": "Foto #4",
         "Photo #5": "Foto #5",
-        "URL slug": "URL slug"
+        "URL slug": "URL slug",
+        "Add product category": ""
     },
     "Components\\TableProducts": {
         "Hide filter": "Ocultar filtro"
+    },
+    "Controllers\\Categories": {
+        "Categories": "",
+        "Products": ""
     }
 }

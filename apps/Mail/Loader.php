@@ -69,8 +69,9 @@ class Loader extends \Hubleto\Erp\App
     $accountsHtml = '';
     foreach ($accounts as $account) {
       $accountsHtml .= '
-        <div class="bg-primary/10 p-1 text-sm"> ' . $account->name . '</div>
-        <div class="list">
+        <div>
+          <div class="bg-primary/10 p-1 text-sm">' . $account->name . '</div>
+          <div class="list">
       ';
 
       if (
@@ -81,11 +82,11 @@ class Loader extends \Hubleto\Erp\App
         || empty($account->imap_password)
       ) {
         $accountsHtml .= '
-          <div class="alert alert-info text-sm m-2">Account is not used for receiving emails (some IMAP settings are missing).</div>
+          <div class="badge badge-info text-xs p-1 block">Account is not used for receiving emails.</div>
         ';
       } else if (count($account->MAILBOXES) == 0) {
         $accountsHtml .= '
-          <div class="alert alert-info text-sm m-2">Account has no mailboxes.</div>
+          <div class="badge badge-info text-xs p-1 block">Account has no mailboxes.</div>
         ';
       } else {
         foreach ($account->MAILBOXES as $mailbox) {
@@ -114,6 +115,7 @@ class Loader extends \Hubleto\Erp\App
       }
         
       $accountsHtml .= '
+          </div>
         </div>
       ';
     }

@@ -31,7 +31,7 @@ export default class TableDocuments extends TableExtended<TableDocumentsProps, T
 
   getFormModalProps(): any {
     let params = super.getFormModalProps();
-    params.type = 'right';
+    params.type = 'right wider';
     return params;
   }
 

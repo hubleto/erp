@@ -45,26 +45,37 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
 
   renderTab(tabUid: string) {
     const R = this.state.record;
+    const downloadUrl = globalThis.hubleto.config.projectUrl + '/documents/download?f=' + (R.FOLDER?.uid ?? '') + '&d=' + R.uid;
 
     switch (tabUid) {
       case 'default':
-        return <>
-          {this.inputWrapper('id_folder')}
-          {this.inputWrapper('name', {cssClass: 'text-2xl'})}
-          {this.inputWrapper('file')}
-          {this.inputWrapper('hyperlink')}
-          {this.inputWrapper('is_public')}
-          <div className='mt-16 text-center'>
-            <a
-              href={globalThis.hubleto.config.projectUrl + '/documents/download?f=' + (R.FOLDER?.uid ?? '') + '&d=' + R.uid}
-              target='_blank'
-              className='btn btn-extra-large btn-primary-outline'
-            >
-              <span className='icon'><i className='fas fa-download'></i></span>
-              <span className='text'>Download</span>
-            </a>
+        return <div className='flex gap-2 h-full'>
+          <div className='flex-1'>
+            {this.inputWrapper('id_folder')}
+            {this.inputWrapper('name', {cssClass: 'text-2xl'})}
+            {this.inputWrapper('file')}
+            {this.inputWrapper('hyperlink')}
+            {this.inputWrapper('is_public')}
+            <div className='mt-16 text-center'>
+              <a
+                href={downloadUrl}
+                target='_blank'
+                className='btn btn-extra-large btn-primary-outline'
+              >
+                <span className='icon'><i className='fas fa-download'></i></span>
+                <span className='text'>Download</span>
+              </a>
+            </div>
           </div>
-        </>
+          <div className='flex-2'>
+            <div className='card h-full'>
+              <div className='card-header'>Preview</div>
+              <div className='card-body h-full'>
+                <iframe className='w-full h-full' src={downloadUrl}></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
       ;
     };
   }

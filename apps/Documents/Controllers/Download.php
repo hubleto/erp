@@ -25,7 +25,7 @@ class Download extends \Hubleto\Erp\Controller
     $folder = $mFolder->record->where('uid', $folderUid)->first();
     $document = $mDocument->record->where('uid', $documentUid)->first();
 
-    $filePath = $this->env()->uploadFolder . '/' . $document->file;
+    $filePath = $this->env()->uploadFolder . '/' . $document?->file;
 
     if (
       false

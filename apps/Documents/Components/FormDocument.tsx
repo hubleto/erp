@@ -45,7 +45,7 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
 
   renderTab(tabUid: string) {
     const R = this.state.record;
-    const downloadUrl = globalThis.hubleto.config.projectUrl + '/documents/download?f=' + (R.FOLDER?.uid ?? '') + '&d=' + R.uid;
+    const downloadUrl = R.hyperlink ?? globalThis.hubleto.config.projectUrl + '/documents/download?f=' + (R.FOLDER?.uid ?? '') + '&d=' + R.uid;
 
     switch (tabUid) {
       case 'default':

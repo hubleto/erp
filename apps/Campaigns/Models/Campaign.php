@@ -3,9 +3,6 @@
 namespace Hubleto\App\Community\Campaigns\Models;
 
 
-use Hubleto\App\Community\Campaigns\Lib;
-
-
 use Hubleto\App\Community\Mail\Models\Template;
 use Hubleto\App\Community\Mail\Models\Account;
 use Hubleto\Framework\Db\Column\Json;
@@ -15,11 +12,10 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
+use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Auth\Models\User;
-
-use Hubleto\App\Community\Leads\Models\LeadCampaign;
 
 class Campaign extends \Hubleto\Erp\Model
 {
@@ -51,6 +47,9 @@ class Campaign extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('UID')))->setReadonly(true),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()
+        ->setEnumValues([0 => 'not specified', 1 => 'direct mail', 2 => 'cold call', 99 => 'other']
+      ),
       'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setDefaultVisible(),
       'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setDefaultVisible(),
       'utm_term' => (new Varchar($this, $this->translate('UTM term')))->setDefaultVisible(),

@@ -161,6 +161,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
           <div className='w-full flex gap-2'>
             <div className='flex-1 border-r border-gray-100'>
               {this.inputWrapper('name')}
+              {this.inputWrapper('type')}
               {this.inputWrapper('target_audience')}
               {this.inputWrapper('goal')}
               {this.inputWrapper('notes')}

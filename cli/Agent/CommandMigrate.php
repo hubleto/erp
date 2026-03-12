@@ -16,6 +16,16 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
       $this->appManager()->sanitizeAppNamespace($appNamespace);
     }
     $model = (string) ($this->arguments[3] ?? '');
+    $dryRun = (bool) ($this->arguments[4] ?? '') == 'dry-run';
+
+    if ($appNamespace == 'dry-run' || $model == 'dry-run') {
+      // This is to overcome the dry-run argument problem.
+      // If you run `php hubleto migrate dry-run`,
+      // it shall not run the migration for the model `dry-run`.
+      $appNamespace = '';
+      $model = '';
+      $dryRun = true;
+    }
 
     $this->appManager()->init();
 
@@ -37,14 +47,20 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
       $appQueue = $this->appManager()->getEnabledApps();
     }
 
+    if ($dryRun) {
+      $this->terminal()->yellow("\nThis is dry run. I will not install any migration.\n");
+    }
+
     $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->renderer()->addNamespace($tplFolder, 'snippets');
 
     for ($round = 1; $round <= 2; $round++) {
-      if ($round == 1) {
-        $this->terminal()->yellow("\nInstalling tables...\n");
-      } else {
-        $this->terminal()->yellow("\nInstalling foreign keys...\n");
+      if (!$dryRun) {
+        if ($round == 1) {
+          $this->terminal()->yellow("\nInstalling tables...\n");
+        } else {
+          $this->terminal()->yellow("\nInstalling foreign keys...\n");
+        }
       }
 
       foreach ($appQueue as $app) {
@@ -55,6 +71,7 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
         }
 
         foreach ($queue as $class) {
+          /** @var ModelInterface */
           $classObject = new $class;
 
           if (!($classObject instanceof ModelInterface)) {
@@ -78,10 +95,12 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
           if ($pendingMigrations > 0) {
             $this->terminal()->cyan("'{$class}' - {$pendingMigrations} pending migration{$plural}...\n");
 
-            if ($round == 1) {
-              $classObject->installTables();
-            } else {
-              $classObject->installForeignKeys();
+            if (!$dryRun) {
+              if ($round == 1) {
+                $classObject->installTables();
+              } else {
+                $classObject->installForeignKeys();
+              }
             }
           }
         }

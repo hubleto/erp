@@ -28,14 +28,14 @@ class Loader extends \Hubleto\Erp\App
     ]);
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\AccessToken::class)->installTables();
-      $this->getModel(Models\AuthCode::class)->installTables();
-      $this->getModel(Models\Client::class)->installTables();
-      $this->getModel(Models\RefreshToken::class)->installTables();
-      $this->getModel(Models\Scope::class)->installTables();
+      $this->getModel(Models\AccessToken::class)->upgradeSchema();
+      $this->getModel(Models\AuthCode::class)->upgradeSchema();
+      $this->getModel(Models\Client::class)->upgradeSchema();
+      $this->getModel(Models\RefreshToken::class)->upgradeSchema();
+      $this->getModel(Models\Scope::class)->upgradeSchema();
     }
     if ($round == 2) {
       $mClient = $this->getModel(Models\Client::class);

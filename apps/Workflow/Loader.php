@@ -101,23 +101,23 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
-   * [Description for installTables]
+   * [Description for upgradeSchema]
    *
    * @param int $round
    * 
    * @return void
    * 
    */
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
       $mWorkflow = $this->getModel(Models\Workflow::class);
       $mWorkflowStep = $this->getModel(Models\WorkflowStep::class);
       $mWorkflowHistory = $this->getModel(Models\WorkflowHistory::class);
 
-      $mWorkflow->installTables();
-      $mWorkflowStep->installTables();
-      $mWorkflowHistory->installTables();
+      $mWorkflow->upgradeSchema();
+      $mWorkflowStep->upgradeSchema();
+      $mWorkflowHistory->upgradeSchema();
 
       $idWorkflow = $mWorkflow->record->recordCreate([ "name" => "Campaigns", "show_in_kanban" => 1, "order" => 1, "group" => "campaigns" ])['id'];
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => 'Preparation', 'order' => 1, 'color' => '#344556', 'tag' => 'campaign-preparation']);

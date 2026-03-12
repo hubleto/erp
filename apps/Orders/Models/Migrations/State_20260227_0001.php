@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class State_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `order_states`;
@@ -22,19 +22,19 @@ create table `order_states` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `order_states`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     
   }

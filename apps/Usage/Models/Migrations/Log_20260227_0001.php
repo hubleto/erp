@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Log_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `usage_log`;
@@ -27,14 +27,14 @@ create table `usage_log` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `usage_log`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `usage_log`
           ADD CONSTRAINT `fk_c9a8f81fafb971ee5acbd5d62a6afa63`
@@ -44,7 +44,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `usage_log`
           DROP FOREIGN KEY `fk_c9a8f81fafb971ee5acbd5d62a6afa63`;");

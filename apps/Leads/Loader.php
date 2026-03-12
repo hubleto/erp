@@ -70,7 +70,7 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'leads/archive', $this->translate('Archived leads'), 'fas fa-box-archive');
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
       $mLevel = $this->getModel(Models\Level::class);
@@ -84,16 +84,16 @@ class Loader extends \Hubleto\Erp\App
       $mLeadDocument = $this->getModel(Models\LeadDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
 
-      $mLevel->installTables();
-      $mLostReasons->installTables();
-      $mLead->installTables();
-      $mLeadHistory->installTables();
-      $mLeadTag->installTables();
-      $mCrossLeadTag->installTables();
-      $mLeadActivity->installTables();
-      $mLeadDocument->installTables();
-      $mLeadCampaign->installTables();
-      $mLeadTask->installTables();
+      $mLevel->upgradeSchema();
+      $mLostReasons->upgradeSchema();
+      $mLead->upgradeSchema();
+      $mLeadHistory->upgradeSchema();
+      $mLeadTag->upgradeSchema();
+      $mCrossLeadTag->upgradeSchema();
+      $mLeadActivity->upgradeSchema();
+      $mLeadDocument->upgradeSchema();
+      $mLeadCampaign->upgradeSchema();
+      $mLeadTask->upgradeSchema();
 
       $mLeadTag->record->recordCreate([ 'name' => "Complex", 'color' => '#2196f3' ]);
       $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);

@@ -43,19 +43,19 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'events/attendees', $this->translate('Attendees'), 'fas fa-user-tag');
   }
 
-  // installTables
-  public function installTables(int $round): void
+  // upgradeSchema
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Type::class)->installTables();
-      $this->getModel(Models\Venue::class)->installTables();
-      $this->getModel(Models\Speaker::class)->installTables();
-      $this->getModel(Models\Attendee::class)->installTables();
-      $this->getModel(Models\Event::class)->installTables();
-      $this->getModel(Models\EventVenue::class)->installTables();
-      $this->getModel(Models\EventSpeaker::class)->installTables();
-      $this->getModel(Models\EventAttendee::class)->installTables();
-      $this->getModel(Models\Agenda::class)->installTables();
+      $this->getModel(Models\Type::class)->upgradeSchema();
+      $this->getModel(Models\Venue::class)->upgradeSchema();
+      $this->getModel(Models\Speaker::class)->upgradeSchema();
+      $this->getModel(Models\Attendee::class)->upgradeSchema();
+      $this->getModel(Models\Event::class)->upgradeSchema();
+      $this->getModel(Models\EventVenue::class)->upgradeSchema();
+      $this->getModel(Models\EventSpeaker::class)->upgradeSchema();
+      $this->getModel(Models\EventAttendee::class)->upgradeSchema();
+      $this->getModel(Models\Agenda::class)->upgradeSchema();
     }
     if ($round == 2) {
       $mType = $this->getModel(Models\Type::class);

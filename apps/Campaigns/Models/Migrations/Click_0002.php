@@ -7,25 +7,25 @@ use Hubleto\Framework\Migration;
 class Click_0002 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute('alter table `campaigns_clicks` add `log` json');
     $this->db->execute('alter table `campaigns_clicks` add `bot_score` int(8)');
     $this->db->execute('alter table `campaigns_clicks` add index `bot_score` (`bot_score`)');
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute('alter table `campaigns_clicks` drop `log`');
     $this->db->execute('alter table `campaigns_clicks` drop `bot_score`');
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     //
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     //
   }

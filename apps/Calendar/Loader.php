@@ -43,13 +43,13 @@ class Loader extends \Hubleto\Erp\App
 
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
       $mActivity = $this->getModel(Activity::class);
-      $mActivity->installTables();
+      $mActivity->upgradeSchema();
       $mSharedCalendar = $this->getModel(SharedCalendar::class);
-      $mSharedCalendar->installTables();
+      $mSharedCalendar->upgradeSchema();
     }
   }
 

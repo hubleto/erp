@@ -46,11 +46,11 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
       $mFolder = $this->getModel(Models\Folder::class);
-      $mFolder->installTables();
+      $mFolder->upgradeSchema();
 
       $mFolder->record->recordCreate([
         'id_parent_folder' => null,
@@ -58,8 +58,8 @@ class Loader extends \Hubleto\Erp\App
         'name' => '_ROOT_',
       ]);
 
-      $this->getModel(Models\Document::class)->installTables();
-      $this->getModel(Models\Template::class)->installTables();
+      $this->getModel(Models\Document::class)->upgradeSchema();
+      $this->getModel(Models\Template::class)->upgradeSchema();
     }
 
   }

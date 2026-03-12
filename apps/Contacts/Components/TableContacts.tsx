@@ -162,9 +162,9 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
                       return <div
                         key={index}
                         className="rounded"
-                        style={{color: tag.TAG.color, border: '1px solid ' + tag.TAG.color, padding: '0 3px'}}
+                        style={{color: tag.TAG?.color, border: '1px solid ' + tag.TAG?.color, padding: '0 3px'}}
                       >
-                        <small>{tag.TAG.name}</small>
+                        <small>{tag.TAG?.name}</small>
                       </div>
                     })}
                   </div>

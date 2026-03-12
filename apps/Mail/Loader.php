@@ -156,15 +156,15 @@ class Loader extends \Hubleto\Erp\App
     ';
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Account::class)->installTables();
-      $this->getModel(Models\Mailbox::class)->installTables();
-      $this->getModel(Models\Mail::class)->installTables();
-      $this->getModel(Models\Template::class)->installTables();
-      $this->getModel(Models\Index::class)->installTables();
-      $this->getModel(Models\Attachment::class)->installTables();
+      $this->getModel(Models\Account::class)->upgradeSchema();
+      $this->getModel(Models\Mailbox::class)->upgradeSchema();
+      $this->getModel(Models\Mail::class)->upgradeSchema();
+      $this->getModel(Models\Template::class)->upgradeSchema();
+      $this->getModel(Models\Index::class)->upgradeSchema();
+      $this->getModel(Models\Attachment::class)->upgradeSchema();
     }
   }
 

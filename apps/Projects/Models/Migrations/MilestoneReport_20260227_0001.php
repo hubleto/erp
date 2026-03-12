@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class MilestoneReport_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `projects_milestone_reports`;
@@ -29,14 +29,14 @@ create table `projects_milestone_reports` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `projects_milestone_reports`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `projects_milestone_reports`
           ADD CONSTRAINT `fk_4961876e4967f64fd9ad899911e2389e`
@@ -51,7 +51,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `projects_milestone_reports`
           DROP FOREIGN KEY `fk_4961876e4967f64fd9ad899911e2389e`; ALTER TABLE `projects_milestone_reports`

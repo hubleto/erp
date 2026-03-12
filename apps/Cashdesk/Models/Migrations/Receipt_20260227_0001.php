@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Receipt_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `cashdesk_receipts`;
@@ -30,14 +30,14 @@ create table `cashdesk_receipts` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `cashdesk_receipts`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `cashdesk_receipts`
           ADD CONSTRAINT `fk_3d752d7ede56d7b7561e01d7fc7ed02f`
@@ -52,7 +52,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `cashdesk_receipts`
           DROP FOREIGN KEY `fk_3d752d7ede56d7b7561e01d7fc7ed02f`; ALTER TABLE `cashdesk_receipts`

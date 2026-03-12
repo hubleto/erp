@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class EventAttendee_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `events_has_attendees`;
@@ -25,14 +25,14 @@ create table `events_has_attendees` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `events_has_attendees`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `events_has_attendees`
           ADD CONSTRAINT `fk_b81ef7536cd7b80fbc140fb236636a2b`
@@ -47,7 +47,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `events_has_attendees`
           DROP FOREIGN KEY `fk_b81ef7536cd7b80fbc140fb236636a2b`; ALTER TABLE `events_has_attendees`

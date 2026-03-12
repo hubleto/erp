@@ -58,7 +58,7 @@ class Loader extends \Hubleto\Erp\App
     $this->addSetting($this, ['title' => $this->translate('Teams'), 'icon' => 'fas fa-users', 'url' => 'settings/teams']);
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
       $mCompany = $this->getModel(Models\Company::class);
@@ -71,15 +71,15 @@ class Loader extends \Hubleto\Erp\App
       $mTeam = $this->getModel(Models\Team::class);
       $mTeamMember = $this->getModel(Models\TeamMember::class);
 
-      $mCompany->installTables();
-      $mPermission->installTables();
-      $mRolePermission->installTables();
-      $mCountry->installTables();
-      $mSetting->installTables();
-      $mActivityTypes->installTables();
-      $mCurrency->installTables();
-      $mTeam->installTables();
-      $mTeamMember->installTables();
+      $mCompany->upgradeSchema();
+      $mPermission->upgradeSchema();
+      $mRolePermission->upgradeSchema();
+      $mCountry->upgradeSchema();
+      $mSetting->upgradeSchema();
+      $mActivityTypes->upgradeSchema();
+      $mCurrency->upgradeSchema();
+      $mTeam->upgradeSchema();
+      $mTeamMember->upgradeSchema();
 
       $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',

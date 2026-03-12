@@ -67,26 +67,26 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
-   * [Description for installTables]
+   * [Description for upgradeSchema]
    *
    * @param int $round
    *
    * @return void
    *
    */
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\State::class)->installTables();
-      $this->getModel(Models\Order::class)->installTables();
-      $this->getModel(Models\Item::class)->installTables();
-      $this->getModel(Models\Quote::class)->installTables();
-      $this->getModel(Models\OrderDeal::class)->installTables();
-      $this->getModel(Models\OrderDocument::class)->installTables();
-      $this->getModel(Models\OrderActivity::class)->installTables();
-      $this->getModel(Models\Item::class)->installTables();
-      $this->getModel(Models\History::class)->installTables();
-      $this->getModel(Models\Payment::class)->installTables();
+      $this->getModel(Models\State::class)->upgradeSchema();
+      $this->getModel(Models\Order::class)->upgradeSchema();
+      $this->getModel(Models\Item::class)->upgradeSchema();
+      $this->getModel(Models\Quote::class)->upgradeSchema();
+      $this->getModel(Models\OrderDeal::class)->upgradeSchema();
+      $this->getModel(Models\OrderDocument::class)->upgradeSchema();
+      $this->getModel(Models\OrderActivity::class)->upgradeSchema();
+      $this->getModel(Models\Item::class)->upgradeSchema();
+      $this->getModel(Models\History::class)->upgradeSchema();
+      $this->getModel(Models\Payment::class)->upgradeSchema();
     }
 
     if ($round == 2) {

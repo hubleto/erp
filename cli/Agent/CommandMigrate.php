@@ -102,9 +102,9 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
             if ($dryRun) {
             } else {
               if ($round == 1) {
-                $classObject->installTables();
+                $classObject->upgradeSchema();
               } else {
-                $classObject->installForeignKeys();
+                $classObject->upgradeForeignKeys();
               }
             }
           }

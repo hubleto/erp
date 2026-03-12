@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Panel_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `dashboards_panels`;
@@ -28,14 +28,14 @@ create table `dashboards_panels` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `dashboards_panels`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `dashboards_panels`
           ADD CONSTRAINT `fk_cc0608561cc277c542bca13716847dd0`
@@ -45,7 +45,7 @@ set foreign_key_checks = 1;");
           ON UPDATE CASCADE;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `dashboards_panels`
           DROP FOREIGN KEY `fk_cc0608561cc277c542bca13716847dd0`;");

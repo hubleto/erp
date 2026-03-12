@@ -40,14 +40,14 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
-   * [Description for installTables]
+   * [Description for upgradeSchema]
    *
    * @param int $round
    * 
    * @return void
    * 
    */
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
 
     if ($round == 1) {
@@ -56,10 +56,10 @@ class Loader extends \Hubleto\Erp\App
       $mCustomerTag = $this->getModel(Models\Tag::class);
       $mCrossCustomerTag = $this->getModel(Models\CustomerTag::class);
 
-      $mCustomer->installTables();
-      $mCustomerTag->installTables();
-      $mCrossCustomerTag->installTables();
-      $mCustomerDocument->installTables();
+      $mCustomer->upgradeSchema();
+      $mCustomerTag->upgradeSchema();
+      $mCrossCustomerTag->upgradeSchema();
+      $mCustomerDocument->upgradeSchema();
 
       $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#D33115' ]);
       $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#4caf50' ]);
@@ -68,7 +68,7 @@ class Loader extends \Hubleto\Erp\App
 
     if ($round == 2) {
       $mCustomerActivity = $this->getModel(\Hubleto\App\Community\Customers\Models\CustomerActivity::class);
-      $mCustomerActivity->installTables();
+      $mCustomerActivity->upgradeSchema();
     }
   }
 

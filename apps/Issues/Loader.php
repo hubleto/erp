@@ -32,12 +32,12 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'issues/mail-accounts', $this->translate('Mail accounts'), 'fas fa-list');
   }
 
-  // installTables
-  public function installTables(int $round): void
+  // upgradeSchema
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Issue::class)->installTables();
-      $this->getModel(Models\MailAccount::class)->installTables();
+      $this->getModel(Models\Issue::class)->upgradeSchema();
+      $this->getModel(Models\MailAccount::class)->upgradeSchema();
    }
   }
 

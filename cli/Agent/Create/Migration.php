@@ -69,9 +69,9 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
 
       $dropTableIfExists = join(";\n", $sqlGenerator->getSqlDropTableIfExists($classObject)) . ';';
 
-      $installTables = join(";\n", $createTableCommands) . ';';
+      $upgradeSchema = join(";\n", $createTableCommands) . ';';
       if (!empty($createIndexCommands)) {
-        $installTables .= "\n\n" . join("; ", $createIndexCommands) . ';';
+        $upgradeSchema .= "\n\n" . join("; ", $createIndexCommands) . ';';
       }
 
       $tplVars = [
@@ -79,9 +79,9 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
         'model' => $className,
         'date' => date('Ymd'),
         'dropTableIfExists' => !empty($dropTableIfExists) ? '$this->db->execute("' . $dropTableIfExists . '");' : '',
-        'installTables' => !empty($installTables) ? '$this->db->execute("' . $installTables . '");' : '',
-        'installForeignKeys' => !empty(join("; ", $createFkCommands)) ? '$this->db->execute("' . join("; ", $createFkCommands) . ';'. '");' : '',
-        'uninstallForeignKeys' => !empty(join("; ", $dropFkCommands)) ? '$this->db->execute("' .join("; ", $dropFkCommands) . ';'. '");' : '',
+        'upgradeSchema' => !empty($upgradeSchema) ? '$this->db->execute("' . $upgradeSchema . '");' : '',
+        'upgradeForeignKeys' => !empty(join("; ", $createFkCommands)) ? '$this->db->execute("' . join("; ", $createFkCommands) . ';'. '");' : '',
+        'downgradeForeignKeys' => !empty(join("; ", $dropFkCommands)) ? '$this->db->execute("' .join("; ", $dropFkCommands) . ';'. '");' : '',
       ];
 
       if (!is_dir($app->srcFolder . '/Models')) {

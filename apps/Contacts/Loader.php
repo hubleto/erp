@@ -47,7 +47,7 @@ class Loader extends \Hubleto\Erp\App
     ];
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
       $mCategory = $this->getModel(Models\Category::class);
@@ -56,11 +56,11 @@ class Loader extends \Hubleto\Erp\App
       $mTag = $this->getModel(Models\Tag::class);
       $mContactTag = $this->getModel(Models\ContactTag::class);
 
-      $mCategory->installTables();
-      $mContact->installTables();
-      $mValue->installTables();
-      $mTag->installTables();
-      $mContactTag->installTables();
+      $mCategory->upgradeSchema();
+      $mContact->upgradeSchema();
+      $mValue->upgradeSchema();
+      $mTag->upgradeSchema();
+      $mContactTag->upgradeSchema();
 
       $mCategory->record->recordCreate([ 'name' => 'Work' ]);
       $mCategory->record->recordCreate([ 'name' => 'Home' ]);

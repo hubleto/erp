@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Payment_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `invoice_payments`;
@@ -26,14 +26,14 @@ create table `invoice_payments` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `invoice_payments`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `invoice_payments`
           ADD CONSTRAINT `fk_c2f5d21a14b13ebad4e20f03a6ad12e6`
@@ -43,7 +43,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `invoice_payments`
           DROP FOREIGN KEY `fk_c2f5d21a14b13ebad4e20f03a6ad12e6`;");

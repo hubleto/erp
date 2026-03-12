@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Agenda_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `events_agendas`;
@@ -30,14 +30,14 @@ create table `events_agendas` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `events_agendas`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `events_agendas`
           ADD CONSTRAINT `fk_fe24d2d53bff5dbe3fdb52cd7dc7cd0c`
@@ -47,7 +47,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `events_agendas`
           DROP FOREIGN KEY `fk_fe24d2d53bff5dbe3fdb52cd7dc7cd0c`;");

@@ -54,7 +54,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->renderer()->renderView('@snippets/ModelRecordManager.php.twig', $tplVars));
 
     $codeInstallModel = [
-      "\$this->getModel(Models\\{$model}::class)->installTables();"
+      "\$this->getModel(Models\\{$model}::class)->upgradeSchema();"
     ];
 
     $codeInstallModelInserted = $this->terminal()->insertCodeToFile(
@@ -68,8 +68,8 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
 
     if (!$codeInstallModelInserted) {
       $this->terminal()->yellow("⚠ Failed to add some code automatically\n");
-      $this->terminal()->yellow("⚠  -> Add the model in `installTables()` method in  {$app->srcFolder}/Loader.php\n");
-      $this->terminal()->colored("cyan", "black", "Add to Loader.php->installTables():\n");
+      $this->terminal()->yellow("⚠  -> Add the model in `upgradeSchema()` method in  {$app->srcFolder}/Loader.php\n");
+      $this->terminal()->colored("cyan", "black", "Add to Loader.php->upgradeSchema():\n");
       $this->terminal()->colored("cyan", "black", join("\n", $codeInstallModel) . "\n");
       $this->terminal()->white("\n");
     }

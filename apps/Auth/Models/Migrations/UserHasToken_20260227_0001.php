@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class UserHasToken_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `user_has_tokens`;
@@ -23,14 +23,14 @@ create table `user_has_tokens` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `user_has_tokens`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `user_has_tokens`
           ADD CONSTRAINT `fk_e050a7c1a961da8729c1ce5063a52b58`
@@ -45,7 +45,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `user_has_tokens`
           DROP FOREIGN KEY `fk_e050a7c1a961da8729c1ce5063a52b58`; ALTER TABLE `user_has_tokens`

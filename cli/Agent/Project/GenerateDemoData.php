@@ -194,7 +194,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
   public function generateInvoiceProfiles(): void
   {
     $mProfile = $this->getModel(\Hubleto\App\Community\Invoices\Models\Profile::class);
-    $mProfile->installTables();
+    $mProfile->upgradeSchema();
     $mProfile->record->recordCreate([
       "name" => "Test Invoice Profile"
     ]);

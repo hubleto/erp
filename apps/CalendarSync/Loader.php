@@ -43,10 +43,10 @@ class Loader extends \Hubleto\Erp\App
     $calendarManager->addCalendar($this, 'sync', 'yellow', Calendar::class);
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Source::class)->installTables();
+      $this->getModel(Models\Source::class)->upgradeSchema();
     }
   }
 

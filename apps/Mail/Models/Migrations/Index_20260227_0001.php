@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Index_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `mails_index`;
@@ -29,14 +29,14 @@ create table `mails_index` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `mails_index`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `mails_index`
           ADD CONSTRAINT `fk_ed3606ccbffa91327e8898866a1bec6b`
@@ -66,7 +66,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `mails_index`
           DROP FOREIGN KEY `fk_ed3606ccbffa91327e8898866a1bec6b`; ALTER TABLE `mails_index`

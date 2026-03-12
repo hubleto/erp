@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class User_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `users`;
@@ -50,14 +50,14 @@ SET foreign_key_checks = 1;
             ;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `users`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `users`
           ADD CONSTRAINT `fk_d00cabf34a363fcdf1d7485c331eb1f1`
@@ -67,7 +67,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `users`
           DROP FOREIGN KEY `fk_d00cabf34a363fcdf1d7485c331eb1f1`;");

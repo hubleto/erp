@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Campaign_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `campaigns`;
@@ -54,14 +54,14 @@ create table `campaigns` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `campaigns`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `campaigns`
           ADD CONSTRAINT `fk_a588511694e8c9d43e6afa9d3e84a036`
@@ -101,7 +101,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `campaigns`
           DROP FOREIGN KEY `fk_a588511694e8c9d43e6afa9d3e84a036`; ALTER TABLE `campaigns`

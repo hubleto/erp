@@ -35,15 +35,15 @@ class Loader extends \Hubleto\Erp\App
     $this->getService(\Hubleto\Framework\AuthProvider::class)->init();
   }
 
-  // installTables
-  public function installTables(int $round): void
+  // upgradeSchema
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\User::class)->installTables();
-      $this->getModel(Models\Token::class)->installTables();
-      $this->getModel(Models\UserHasToken::class)->installTables();
-      $this->getModel(Models\UserRole::class)->installTables();
-      $this->getModel(Models\UserHasRole::class)->installTables();
+      $this->getModel(Models\User::class)->upgradeSchema();
+      $this->getModel(Models\Token::class)->upgradeSchema();
+      $this->getModel(Models\UserHasToken::class)->upgradeSchema();
+      $this->getModel(Models\UserRole::class)->upgradeSchema();
+      $this->getModel(Models\UserHasRole::class)->upgradeSchema();
 
       $mUserRole = $this->getModel(Models\UserRole::class);
       $mUserRole->record->recordCreate([

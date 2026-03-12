@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Attachment_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `mails_attachments`;
@@ -23,14 +23,14 @@ create table `mails_attachments` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `mails_attachments`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `mails_attachments`
           ADD CONSTRAINT `fk_6f5fe75bcac3c3f635c10526c0ef7371`
@@ -40,7 +40,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `mails_attachments`
           DROP FOREIGN KEY `fk_6f5fe75bcac3c3f635c10526c0ef7371`;");

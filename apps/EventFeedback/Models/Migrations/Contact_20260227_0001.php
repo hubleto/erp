@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Contact_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `my_app_contacts`;
@@ -23,14 +23,14 @@ create table `my_app_contacts` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `my_app_contacts`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `my_app_contacts`
           ADD CONSTRAINT `fk_2a3b93f7447e8acf6dce3dc8997d5bd2`
@@ -40,7 +40,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `my_app_contacts`
           DROP FOREIGN KEY `fk_2a3b93f7447e8acf6dce3dc8997d5bd2`;");

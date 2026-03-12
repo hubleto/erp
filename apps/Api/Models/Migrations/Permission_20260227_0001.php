@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Permission_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `api_permissions`;
@@ -23,14 +23,14 @@ create table `api_permissions` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `api_permissions`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `api_permissions`
           ADD CONSTRAINT `fk_895af616127b47b6c9cc5280860fcbc1`
@@ -40,7 +40,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `api_permissions`
           DROP FOREIGN KEY `fk_895af616127b47b6c9cc5280860fcbc1`;");

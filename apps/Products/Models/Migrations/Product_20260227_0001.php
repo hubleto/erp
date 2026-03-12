@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Product_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `products`;
@@ -63,14 +63,14 @@ create table `products` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `products`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `products`
           ADD CONSTRAINT `fk_ccc7adf173b50aa3bebb3d2d4a89aca4`
@@ -85,7 +85,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `products`
           DROP FOREIGN KEY `fk_ccc7adf173b50aa3bebb3d2d4a89aca4`; ALTER TABLE `products`

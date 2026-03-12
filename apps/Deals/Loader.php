@@ -63,7 +63,7 @@ class Loader extends \Hubleto\Erp\App
     $dashboardManager->addBoard($this, $this->translate('Deal value by result'), 'deals/boards/deal-value-by-result');
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
       $mDeal = $this->getModel(Models\Deal::class);
@@ -77,16 +77,16 @@ class Loader extends \Hubleto\Erp\App
       $mDealDocument = $this->getModel(Models\DealDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
 
-      $mLostReasons->installTables();
-      $mDeal->installTables();
-      $mDealHistory->installTables();
-      $mDealTag->installTables();
-      $mDealLead->installTables();
-      $mDealTask->installTables();
-      $mCrossDealTag->installTables();
-      $mItem->installTables();
-      $mDealActivity->installTables();
-      $mDealDocument->installTables();
+      $mLostReasons->upgradeSchema();
+      $mDeal->upgradeSchema();
+      $mDealHistory->upgradeSchema();
+      $mDealTag->upgradeSchema();
+      $mDealLead->upgradeSchema();
+      $mDealTask->upgradeSchema();
+      $mCrossDealTag->upgradeSchema();
+      $mItem->upgradeSchema();
+      $mDealActivity->upgradeSchema();
+      $mDealDocument->upgradeSchema();
 
       $mDealTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
       $mDealTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);

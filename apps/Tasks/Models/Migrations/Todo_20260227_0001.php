@@ -7,7 +7,7 @@ use Hubleto\Framework\Migration;
 class Todo_20260227_0001 extends Migration
 {
 
-  public function installTables(): void
+  public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `tasks_todo`;
@@ -28,14 +28,14 @@ create table `tasks_todo` (
 SET foreign_key_checks = 1;");
   }
 
-  public function uninstallTables(): void
+  public function downgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0;
 drop table if exists `tasks_todo`;
 set foreign_key_checks = 1;");
   }
 
-  public function installForeignKeys(): void
+  public function upgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `tasks_todo`
           ADD CONSTRAINT `fk_14180a3b106b417853476dc5bd0b5e70`
@@ -50,7 +50,7 @@ set foreign_key_checks = 1;");
           ON UPDATE RESTRICT;");
   }
 
-  public function uninstallForeignKeys(): void
+  public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `tasks_todo`
           DROP FOREIGN KEY `fk_14180a3b106b417853476dc5bd0b5e70`; ALTER TABLE `tasks_todo`

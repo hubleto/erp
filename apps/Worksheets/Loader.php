@@ -47,12 +47,12 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'worksheets/activity-types', $this->translate('Activity types'), 'fas fa-table');
   }
 
-  // installTables
-  public function installTables(int $round): void
+  // upgradeSchema
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\ActivityType::class)->installTables();
-      $this->getModel(Models\Activity::class)->installTables();
+      $this->getModel(Models\ActivityType::class)->upgradeSchema();
+      $this->getModel(Models\Activity::class)->upgradeSchema();
     }
   }
 

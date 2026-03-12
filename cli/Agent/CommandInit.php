@@ -514,7 +514,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $mClasses = $app->getAvailableModelClasses();
       foreach ($mClasses as $mClass) {
         $mObj = $this->getService($mClass);
-        $mObj->installForeignKeys();
+        $mObj->upgradeForeignKeys();
       }
     }
 

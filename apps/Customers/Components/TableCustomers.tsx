@@ -49,7 +49,7 @@ export default class TableCustomers extends TableExtended<TableCustomersProps, T
     if (columnName == "virt_tags") {
       return <>
         {data.TAGS.map((tag, key) => {
-          return <div style={{backgroundColor: tag.TAG.color}} className='badge' key={'tag-' + data.id + '-' + key}>{tag.TAG.name}</div>;
+          return <div style={{backgroundColor: tag.TAG?.color ?? 'white'}} className='badge' key={'tag-' + data.id + '-' + key}>{tag.TAG?.name}</div>;
         })}
       </>;
     } else {

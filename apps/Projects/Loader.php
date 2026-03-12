@@ -54,18 +54,18 @@ class Loader extends \Hubleto\Erp\App
 
   }
 
-  // installTables
-  public function installTables(int $round): void
+  // upgradeSchema
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Project::class)->installTables();
-      $this->getModel(Models\Milestone::class)->installTables();
-      $this->getModel(Models\MilestoneReport::class)->installTables();
-      $this->getModel(Models\ProjectDeal::class)->installTables();
-      $this->getModel(Models\ProjectOrder::class)->installTables();
-      $this->getModel(Models\ProjectTask::class)->installTables();
-      $this->getModel(Models\ProjectActivity::class)->installTables();
-      $this->getModel(Models\Expense::class)->installTables();
+      $this->getModel(Models\Project::class)->upgradeSchema();
+      $this->getModel(Models\Milestone::class)->upgradeSchema();
+      $this->getModel(Models\MilestoneReport::class)->upgradeSchema();
+      $this->getModel(Models\ProjectDeal::class)->upgradeSchema();
+      $this->getModel(Models\ProjectOrder::class)->upgradeSchema();
+      $this->getModel(Models\ProjectTask::class)->upgradeSchema();
+      $this->getModel(Models\ProjectActivity::class)->upgradeSchema();
+      $this->getModel(Models\Expense::class)->upgradeSchema();
     }
   }
 

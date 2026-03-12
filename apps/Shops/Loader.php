@@ -22,11 +22,11 @@ class Loader extends \Hubleto\Erp\App
 
   }
 
-  // installTables
-  public function installTables(int $round): void
+  // upgradeSchema
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\Shop::class)->installTables();
+      $this->getModel(Models\Shop::class)->upgradeSchema();
     }
   }
 

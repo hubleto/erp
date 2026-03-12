@@ -67,14 +67,14 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\BillingAccount::class)->installTables();
-      $this->getModel(Models\Log::class)->installTables();
-      $this->getModel(Models\Credit::class)->installTables();
-      $this->getModel(Models\Payment::class)->installTables();
-      $this->getModel(Models\Discount::class)->installTables();
+      $this->getModel(Models\BillingAccount::class)->upgradeSchema();
+      $this->getModel(Models\Log::class)->upgradeSchema();
+      $this->getModel(Models\Credit::class)->upgradeSchema();
+      $this->getModel(Models\Payment::class)->upgradeSchema();
+      $this->getModel(Models\Discount::class)->upgradeSchema();
     }
   }
 

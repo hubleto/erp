@@ -91,23 +91,23 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
-   * [Description for installTables]
+   * [Description for upgradeSchema]
    *
    * @param int $round
    * 
    * @return void
    * 
    */
-  public function installTables(int $round): void
+  public function upgradeSchema(int $round): void
   {
     if ($round == 1) {
-      $this->getModel(Models\WarehouseType::class)->installTables();
-      $this->getModel(Models\LocationType::class)->installTables();
-      $this->getModel(Models\Warehouse::class)->installTables();
-      $this->getModel(Models\Location::class)->installTables();
-      $this->getModel(Models\Inventory::class)->installTables();
-      $this->getModel(Models\Transaction::class)->installTables();
-      $this->getModel(Models\TransactionItem::class)->installTables();
+      $this->getModel(Models\WarehouseType::class)->upgradeSchema();
+      $this->getModel(Models\LocationType::class)->upgradeSchema();
+      $this->getModel(Models\Warehouse::class)->upgradeSchema();
+      $this->getModel(Models\Location::class)->upgradeSchema();
+      $this->getModel(Models\Inventory::class)->upgradeSchema();
+      $this->getModel(Models\Transaction::class)->upgradeSchema();
+      $this->getModel(Models\TransactionItem::class)->upgradeSchema();
     }
     if ($round == 2) {
       $mLocationType = $this->getModel(Models\LocationType::class);

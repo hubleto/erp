@@ -60,7 +60,7 @@ class Lib extends Core
 
     $bodyHtml = str_replace(
       '{{ botDetectorHiddenLink }}',
-      '<a href="' . $clickTrackerUrl . '?c=' . $botClickDataB64 . '">&nbsp;botDetector</a>',
+      '<a href="' . $clickTrackerUrl . '?c=' . $botClickDataB64 . '" style="font-size:1px">&nbsp;</a>',
       $bodyHtml
     );
 

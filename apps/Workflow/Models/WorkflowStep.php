@@ -22,10 +22,10 @@ class WorkflowStep extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_workflow' => (new Lookup($this, $this->translate("Workflow"), Workflow::class))->setRequired(),
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
-      'order' => (new Integer($this, $this->translate('Order')))->setRequired(),
-      'color' => (new Color($this, $this->translate('Color')))->setRequired(),
-      'tag' => (new Varchar($this, $this->translate('Tag'))),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
+      'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setDefaultVisible(),
+      'tag' => (new Varchar($this, $this->translate('Tag')))->setDefaultVisible(),
       'probability' => (new Integer($this, $this->translate('Probability')))->setUnit("%"),
       // 'set_result' => (new Integer($this, $this->translate('Set result of a deal to')))
       //   ->setEnumValues([Deal::RESULT_UNKNOWN => "Unknown", Deal::RESULT_WON => "Won",  Deal::RESULT_LOST => "Lost"])
@@ -36,10 +36,10 @@ class WorkflowStep extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Workflow Steps';
+    $description->ui['title'] = '';
     $description->ui['addButtonText'] = 'Add Workflow Step';
     $description->ui['showHeader'] = true;
-    $description->ui['showFulltextSearch'] = true;
+    $description->ui['showFulltextSearch'] = false;
     $description->ui['showFooter'] = false;
 
     return $description;

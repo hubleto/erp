@@ -75,7 +75,7 @@ export default class FormWorkflow<P, S> extends FormExtended<FormWorkflowProps, 
         <div className="card-header">{this.translate('Steps')}</div>
         <div className="card-body">
 
-          <a
+          {/* <a
             className="btn btn-add-outline mb-2"
             onClick={() => {
               if (!R.STEPS) R.STEPS = [];
@@ -90,48 +90,49 @@ export default class FormWorkflow<P, S> extends FormExtended<FormWorkflowProps, 
           >
             <span className="icon"><i className="fas fa-add"></i></span>
             <span className="text">{this.translate('Add step')}</span>
-          </a>
+          </a> */}
 
           <TableWorkflowSteps
             invalidInputs={this.state.invalidInputs}
             key={this.state.tablesKey}
             uid={this.props.uid + "_table_workflow_steps_input"}
-            context="Hello World"
-            descriptionSource="props"
-            records={{ records: R.STEPS }}
-            isUsedAsInput={true}
-            isInlineEditing={this.state.isInlineEditing}
-            onRowClick={() => this.setState({isInlineEditing: true})}
-            onChange={(table: TableWorkflowSteps) => {
-              this.updateRecord({ STEPS: table.state.data?.records });
-              this.setState({updatingRecord: true});
-            }}
-            description={{
-              ui: {
-                showFooter: false,
-                showHeader: false,
-              },
-              permissions: {
-                canCreate: true,
-                canDelete: true,
-                canRead: true,
-                canUpdate: true,
-              },
-              columns: {
-                name: { type: "varchar", title: "Name" },
-                order: { type: "int", title: "Order" },
-                color: { type: "color", title: "Color" },
-                probability: { type: "int", title: "Probability", unit: "%" },
-                tag: { type: "varchar", title: "Tag"},
-              },
-              inputs: {
-                name: { type: "varchar", title: "Name" },
-                order: { type: "int", title: "Order" },
-                color: { type: "color", title: "Color" },
-                probability: { type: "int", title: "Probability", unit: "%" },
-                tag: { type: "varchar", title: "Tag"},
-              },
-            }}
+            // context="Hello World"
+            // descriptionSource="props"
+            // records={{ records: R.STEPS }}
+            // isUsedAsInput={true}
+            idWorkflow={R.id}
+            // isInlineEditing={this.state.isInlineEditing}
+            // onRowClick={() => this.setState({isInlineEditing: true})}
+            // onChange={(table: TableWorkflowSteps) => {
+            //   this.updateRecord({ STEPS: table.state.data?.records });
+            //   this.setState({updatingRecord: true});
+            // }}
+            // description={{
+            //   ui: {
+            //     showFooter: false,
+            //     showHeader: false,
+            //   },
+            //   permissions: {
+            //     canCreate: true,
+            //     canDelete: true,
+            //     canRead: true,
+            //     canUpdate: true,
+            //   },
+            //   columns: {
+            //     name: { type: "varchar", title: "Name" },
+            //     order: { type: "int", title: "Order" },
+            //     color: { type: "color", title: "Color" },
+            //     probability: { type: "int", title: "Probability", unit: "%" },
+            //     tag: { type: "varchar", title: "Tag"},
+            //   },
+            //   inputs: {
+            //     name: { type: "varchar", title: "Name" },
+            //     order: { type: "int", title: "Order" },
+            //     color: { type: "color", title: "Color" },
+            //     probability: { type: "int", title: "Probability", unit: "%" },
+            //     tag: { type: "varchar", title: "Tag"},
+            //   },
+            // }}
           ></TableWorkflowSteps>
         </div>
       </div>

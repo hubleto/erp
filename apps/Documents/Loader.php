@@ -17,7 +17,6 @@ class Loader extends \Hubleto\Erp\App
 
     $this->router()->get([
       '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
-      '/^documents\/api\/download\/?$/' => Controllers\Api\Download::class,
 
       '/^documents\/?$/' => Controllers\Browse::class,
       '/^documents\/browse\/?$/' => Controllers\Browse::class,
@@ -25,6 +24,8 @@ class Loader extends \Hubleto\Erp\App
 
       '/^documents\/(?<recordId>\d+)\/?$/' => Controllers\Documents::class,
       '/^documents\/add\/?$/' => ['controller' => Controllers\Documents::class, 'vars' => ['recordId' => -1]],
+
+      '/^documents\/download\/?$/' => Controllers\Download::class,
 
       '/^documents\/folders\/?$/' => Controllers\Folders::class,
       '/^documents\/folders\/add\/?$/' => ['controller' => Controllers\Folders::class, 'vars' => ['recordId' => -1]],

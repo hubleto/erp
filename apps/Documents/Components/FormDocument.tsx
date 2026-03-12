@@ -26,6 +26,9 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
   getStateFromProps(props: FormDocumentProps) {
     return {
       ...super.getStateFromProps(props),
+      tabs: [
+        { uid: 'default', title: <b>{this.translate('Document')}</b> },
+      ]
     };
   }
 
@@ -40,29 +43,30 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderTab(tabUid: string) {
     const R = this.state.record;
-    // const showAdditional: boolean = R.id > 0 ? true : false;
 
-    // const linkExists = this.state.description.defaultValues?.creatingForModel ? false : true
-
-    return <>
-      <div className='card mt-4'>
-        <div className='card-body'>
+    switch (tabUid) {
+      case 'default':
+        return <>
           {this.inputWrapper('id_folder')}
           {this.inputWrapper('name', {cssClass: 'text-2xl'})}
           {this.inputWrapper('file')}
           {this.inputWrapper('hyperlink')}
-          {/* {R.origin_link && linkExists ?
-            <a href={this.state.record.origin_link} className='btn brn-primary mt-2'>
-              <span className='icon'><i className='fas fa-link'></i></span>
-              <span className='text'>{this.translate("Go to origin entry")}</span>
+          {this.inputWrapper('is_public')}
+          <div className='mt-16 text-center'>
+            <a
+              href={globalThis.hubleto.config.projectUrl + '/documents/download?f=' + (R.FOLDER?.uid ?? '') + '&d=' + R.uid}
+              target='_blank'
+              className='btn btn-extra-large btn-primary-outline'
+            >
+              <span className='icon'><i className='fas fa-download'></i></span>
+              <span className='text'>Download</span>
             </a>
-          : <></>
-          } */}
-        </div>
-      </div>
-    </>;
+          </div>
+        </>
+      ;
+    };
   }
 }
 

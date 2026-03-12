@@ -14,14 +14,6 @@ class Document extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Folder::class, 'id_folder', 'id');
   }
 
-  public function recordCreate(array $record, $useProvidedRecordId = false): array
-  {
-    if (!isset($record['uid'])) {
-      $record['uid'] = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
-    }
-    return parent::recordCreate($record);
-  }
-
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
 

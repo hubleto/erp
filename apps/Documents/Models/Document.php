@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Documents\Models;
 use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Boolean;
 
 class Document extends \Hubleto\Erp\Model
 {
@@ -13,6 +14,10 @@ class Document extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.name';
   public ?string $lookupUrlAdd = 'documents/add';
   public ?string $lookupUrlDetail = 'documents/{%ID%}';
+
+  public array $relations = [
+    'FOLDER' => [ self::BELONGS_TO, Folder::class, 'id_folder', 'id'],
+  ];
 
   public function describeColumns(): array
   {
@@ -23,6 +28,7 @@ class Document extends \Hubleto\Erp\Model
       'file' => (new File($this, $this->translate('File')))->setDefaultVisible(),
       'hyperlink' => (new Varchar($this, $this->translate('File Link')))->setReactComponent('InputHyperlink'),
       'origin_link' => (new Varchar($this, $this->translate('Origin Link'))),
+      'is_public' => (new Boolean($this, $this->translate('Public')))->setDefaultVisible(),
     ]);
   }
 
@@ -39,6 +45,15 @@ class Document extends \Hubleto\Erp\Model
     return $description;
   }
 
+
+  public function onBeforeCreate(array $record): array
+  {
+    if (!isset($record['uid'])) {
+      $record['uid'] = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
+    }
+    return $record;
+  }
+  
   public function onAfterCreate(array $savedRecord): array
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
@@ -69,5 +84,10 @@ class Document extends \Hubleto\Erp\Model
     }
 
     return $id;
+  }
+
+  public function getRelationsIncludedInLoadFormData(): array|null
+  {
+    return ['FOLDER'];
   }
 }

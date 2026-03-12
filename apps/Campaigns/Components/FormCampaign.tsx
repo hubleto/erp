@@ -598,7 +598,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           <td>
                             {item.CLICKS.length > 0 ? item.CLICKS.length : null}
                           </td>
-                          <td className={'text-nowrap'}>{botScoreTotal}</td>
+                          <td className={'text-nowrap'}>{botScoreTotal > 0 ? botScoreTotal : null}</td>
                         </tr>
                       })}
                     </tbody>

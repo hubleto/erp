@@ -5,6 +5,8 @@ namespace Hubleto\App\Community\Campaigns\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\Json;
+use Hubleto\Framework\Db\Column\Integer;
 
 class Click extends \Hubleto\Erp\Model
 {
@@ -23,6 +25,8 @@ class Click extends \Hubleto\Erp\Model
       'id_recipient' => (new Lookup($this, $this->translate('Recipient'), Recipient::class))->setDefaultVisible(),
       'url' => (new Varchar($this, $this->translate('Url')))->setDefaultVisible(),
       'datetime_clicked' => (new DateTime($this, $this->translate('Clicked')))->setDefaultVisible(),
+      'log' => (new Json($this, $this->translate('Log'))),
+      'bot_score' => (new Integer($this, $this->translate('Bot Score')))->setDefaultVisible(),
     ]);
   }
 

@@ -18,6 +18,7 @@ class Loader extends \Hubleto\Erp\App
     $this->router()->get([
       '/^campaigns\/api\/save-recipients-from-contacts\/?$/' => Controllers\Api\SaveRecipientsFromContacts::class,
       '/^campaigns\/api\/get-mail-preview-info\/?$/' => Controllers\Api\GetMailPreviewInfo::class,
+      '/^campaigns\/api\/get-campaign-test-info\/?$/' => Controllers\Api\GetCampaignTestInfo::class,
       '/^campaigns\/api\/get-campaign-launch-info\/?$/' => Controllers\Api\GetCampaignLaunchInfo::class,
       '/^campaigns\/api\/send-test-email\/?$/' => Controllers\Api\SendTestEmail::class,
       '/^campaigns\/api\/launch\/?$/' => Controllers\Api\Launch::class,

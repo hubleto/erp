@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Campaigns\Models\Migrations;
 
 use Hubleto\Framework\Migration;
 
-class Click_20260227_0001 extends Migration
+class Click_0001 extends Migration
 {
 
   public function installTables(): void

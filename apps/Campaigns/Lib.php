@@ -42,10 +42,26 @@ class Lib extends Core
 
     $bodyHtml = Lib::replaceVariables($bodyHtml, $emailVariables);
 
-    $bodyHtml = Lib::routeLinksThroughCampaignTracker(
+    $bodyHtml = Lib::routeLinksThroughClickTracker(
       $campaign,
       $recipient,
       $bodyHtml,
+    );
+
+    $clickTrackerUrl = self::getClickTrackerUrl();
+
+    $botClickData = [
+      'cuid' => ($campaign['uid'] ?? ''),
+      'rcid' => ($recipient['id'] ?? ''),
+      'bot' => true,
+    ];
+
+    $botClickDataB64 = base64_encode(json_encode($botClickData));
+
+    $bodyHtml = str_replace(
+      '{{ botDetectorHiddenLink }}',
+      '<a href="' . $clickTrackerUrl . '?c=' . $botClickDataB64 . '">&nbsp;botDetector</a>',
+      $bodyHtml
     );
 
     return $bodyHtml;
@@ -100,8 +116,13 @@ class Lib extends Core
     return $body;
   }
 
+  public static function getClickTrackerUrl(): string
+  {
+    return Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/click-tracker';
+  }
+
   /**
-   * [Description for routeLinksThroughCampaignTracker]
+   * [Description for routeLinksThroughClickTracker]
    *
    * @param array $campaign
    * @param array $contact
@@ -110,13 +131,13 @@ class Lib extends Core
    * @return string
    * 
    */
-  public static function routeLinksThroughCampaignTracker(array $campaign, array $recipient, string $body): string
+  public static function routeLinksThroughClickTracker(array $campaign, array $recipient, string $body): string
   {
-    $trackerUrl = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/click-tracker';
+    $clickTrackerUrl = self::getClickTrackerUrl();
 
     $body = preg_replace_callback(
       '/(<a\s*)href="([^"]*)"/i',
-      function($m) use ($trackerUrl, $campaign, $recipient) {
+      function($m) use ($clickTrackerUrl, $campaign, $recipient) {
 
         $clickData = [
           'cuid' => ($campaign['uid'] ?? ''),
@@ -126,16 +147,16 @@ class Lib extends Core
 
         $clickDataB64 = base64_encode(json_encode($clickData));
 
-        return $m[1] . 'href="' . $trackerUrl . '?c=' . $clickDataB64 . '"';
+        return $m[1] . 'href="' . $clickTrackerUrl . '?c=' . $clickDataB64 . '"';
       },
       $body
     );
 
     $body = preg_replace_callback(
       '/(<a\s*)href=\'([^\']*)\'/i',
-      function($m) use ($trackerUrl, $campaign, $recipient) {
+      function($m) use ($clickTrackerUrl, $campaign, $recipient) {
         return 
-          $m[1] . 'href=\'' . $trackerUrl
+          $m[1] . 'href=\'' . $clickTrackerUrl
           . '?cuid=' . ($campaign['uid'] ?? '')
           . '&rcid=' . ($recipient['id'] ?? '')
           . '&url=' . urlencode($m[2])

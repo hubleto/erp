@@ -53,10 +53,12 @@ export default class FormClick<P, S> extends FormExtended<FormClickProps, FormCl
     switch (tabUid) {
       case 'default':
         return <>
-          {this.inputWrapper('id_campaign')}
-          {this.inputWrapper('id_recipient')}
-          {this.inputWrapper('url')}
-          {this.inputWrapper('datetime_clicked')}
+          {this.inputWrapper('id_campaign', {readonly: true})}
+          {this.inputWrapper('id_recipient', {readonly: true})}
+          {this.inputWrapper('url', {readonly: true})}
+          {this.inputWrapper('datetime_clicked', {readonly: true})}
+          {this.inputWrapper('log', {readonly: true})}
+          {this.inputWrapper('bot_score', {readonly: true})}
         </>;
       break
 

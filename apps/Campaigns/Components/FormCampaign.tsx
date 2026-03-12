@@ -17,6 +17,7 @@ export interface FormCampaignState extends FormExtendedState {
   testEmailVariables?: any,
   testEmailSendResult?: any,
   launchResult?: any,
+  campaignTestInfo?: any,
   campaignLaunchInfo?: any,
   recipients?: any,
   showIdActivity: number,
@@ -64,6 +65,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       activityDate: '',
       activitySubject: '',
       activityAllDay: false,
+      campaignTestInfo: null,
       campaignLaunchInfo: null,
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
@@ -92,8 +94,20 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
   onTabChange() {
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
+      case 'test':
+        this.setState({campaignTestInfo: null}, () => {
+          request.post(
+            'campaigns/api/get-campaign-test-info',
+            { idCampaign: this.state.record.id },
+            {},
+            (data: any) => {
+              this.setState({campaignTestInfo: data});
+            }
+          );
+        });
+      break;
       case 'launch':
-        if (!this.state.campaignLaunchInfo) {
+        this.setState({campaignLaunchInfo: null}, () => {
           request.post(
             'campaigns/api/get-campaign-launch-info',
             { idCampaign: this.state.record.id },
@@ -102,7 +116,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               this.setState({campaignLaunchInfo: data});
             }
           );
-        }
+        });
       break;
     }
   }
@@ -379,57 +393,78 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       break;
 
       case 'test':
-        return <>
-          Test email recipient:
-          <input
-            ref={this.refTestEmailRecipientInput}
-            className="ml-2"
-            type="text"
-            placeholder="Recipient email"
-          />
-          <br/>
-          Test email variables:
-          <InputJsonKeyValue uid="test-email-variables"
-            onChange={(input: any, value: any) => {
-              input.setState({value: value});
-              this.setState({testEmailVariables: value});
-            }}
-          ></InputJsonKeyValue>
-          <button
-            className="btn btn-transparent mt-2"
-            onClick={() => {
-              request.post(
-                'campaigns/api/send-test-email',
-                {
-                  idCampaign: this.state.record.id,
-                  to: this.refTestEmailRecipientInput.current.value,
-                  variables: this.state.testEmailVariables,
-                },
-                {},
-                (result: any) => {
-                  this.setState({testEmailSendResult: result})
-                }
-              );
-            }}
-          >
-            <span className="icon"><i className="fas fa-envelope"></i></span>
-            <span className="text">{this.translate('Send test email')}</span>
-          </button>
-          {this.state.testEmailSendResult && this.state.testEmailSendResult.status == 'success' ?
-            <div className='alert alert-success mt-2'>Test email was sent to you.</div>
-          : null}
-          {this.state.testEmailSendResult && this.state.testEmailSendResult.status != 'success' ?
-            <div className='alert alert-danger mt-2'>
-              Error occured when sending a test email to you.
-              <br/>
-              <b>{this.state.testEmailSendResult.message}</b>
+        return <div className='flex gap-2'>
+          <div className='card flex-1'>
+            <div className='card-header'>Analysis & warnings</div>
+            <div className='card-body'>
+              {this.state.campaignTestInfo ? <>
+                {this.state.campaignTestInfo.warnings.length == 0 ? 
+                  <div className='alert alert-success'>
+                    <i className='fas fa-check mr-2'></i>
+                    No warnings
+                  </div>
+                :
+                  this.state.campaignTestInfo.warnings.map((item, key) => {
+                    return <div key={key} className='alert alert-warning'>{item}</div>;
+                  })
+              }
+              </> : <div className='alert alert-warning'>Analysing campaign...</div>}
             </div>
-          : null}
-        </>;
+          </div>
+          <div className='card flex-1'>
+            <div className='card-header'>Send test email</div>
+            <div className='card-body'>
+              Test email recipient:
+              <input
+                ref={this.refTestEmailRecipientInput}
+                className="ml-2"
+                type="text"
+                placeholder="Recipient email"
+              />
+              <br/>
+              Test email variables:
+              <InputJsonKeyValue uid="test-email-variables"
+                onChange={(input: any, value: any) => {
+                  input.setState({value: value});
+                  this.setState({testEmailVariables: value});
+                }}
+              ></InputJsonKeyValue>
+              <button
+                className="btn btn-transparent mt-2"
+                onClick={() => {
+                  request.post(
+                    'campaigns/api/send-test-email',
+                    {
+                      idCampaign: this.state.record.id,
+                      to: this.refTestEmailRecipientInput.current.value,
+                      variables: this.state.testEmailVariables,
+                    },
+                    {},
+                    (result: any) => {
+                      this.setState({testEmailSendResult: result})
+                    }
+                  );
+                }}
+              >
+                <span className="icon"><i className="fas fa-envelope"></i></span>
+                <span className="text">{this.translate('Send test email')}</span>
+              </button>
+              {this.state.testEmailSendResult && this.state.testEmailSendResult.status == 'success' ?
+                <div className='alert alert-success mt-2'>Test email was sent to you.</div>
+              : null}
+              {this.state.testEmailSendResult && this.state.testEmailSendResult.status != 'success' ?
+                <div className='alert alert-danger mt-2'>
+                  Error occured when sending a test email to you.
+                  <br/>
+                  <b>{this.state.testEmailSendResult.message}</b>
+                </div>
+              : null}
+            </div>
+          </div>
+        </div>;
       break;
 
       case 'launch':
-        console.log(R.RECIPIENTS);
         return <>
           {this.state.campaignLaunchInfo ? <>
             {this.state.campaignLaunchInfo.recentlyContacted
@@ -495,13 +530,21 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               </div>
               {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
                 <div className='card mt-2'>
-                  <div className='card-header'>Who clicked?</div>
+                  <div className='card-header'>Who clicked? (Bot Score = 0)</div>
                   <div className='card-body flex flex-wrap'>
                     {this.state.campaignLaunchInfo.recipients.map((item, key) => {
                       if (item.CLICKS.length == 0) {
                         return null;
                       } else {
-                        return <div className='badge'>{item.email}</div>;
+                        let botScoreTotal = 0;
+                        item.CLICKS.map((click, key) => {
+                          botScoreTotal += click.bot_score;
+                        });
+                        if (botScoreTotal == 0) {
+                          return <div className='badge'>{item.email}</div>;
+                        } else {
+                          return null;
+                        }
                       }
                     })}
                   </div>
@@ -529,10 +572,16 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                         <th>Email</th>
                         <th>Status</th>
                         <th>Clicks</th>
+                        <th>Bot score</th>
                       </tr>
                     </thead>
                     <tbody>
                       {this.state.campaignLaunchInfo.recipients.map((item, key) => {
+                        let botScoreTotal = 0;
+                        item.CLICKS.map((click, key) => {
+                          botScoreTotal += click.bot_score;
+                        });
+
                         return <tr>
                           <td className='text-nowrap'>{key+1}</td>
                           <td className={'text-nowrap' + (item.CLICKS.length > 0 ? ' bg-green-100' : '')}>{item.email}</td>
@@ -549,6 +598,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           <td>
                             {item.CLICKS.length > 0 ? item.CLICKS.length : null}
                           </td>
+                          <td className={'text-nowrap'}>{botScoreTotal}</td>
                         </tr>
                       })}
                     </tbody>

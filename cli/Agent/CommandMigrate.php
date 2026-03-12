@@ -85,17 +85,23 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
           }
 
           if ($round == 1) {
-            $pendingMigrations = sizeof($classObject->getPendingMigrations(InstalledMigrationEnum::TABLES));
+            $pendingMigrations = $classObject->getPendingMigrations(InstalledMigrationEnum::TABLES);
+            $pendingMigrationsCount = sizeof($pendingMigrations);
           } else {
-            $pendingMigrations = sizeof($classObject->getPendingMigrations(InstalledMigrationEnum::FOREIGN_KEYS));
+            $pendingMigrations = $classObject->getPendingMigrations(InstalledMigrationEnum::FOREIGN_KEYS);
+            $pendingMigrationsCount = sizeof($pendingMigrations);
           }
 
-          $plural = $pendingMigrations > 1 ? 's' : '';
+          $plural = $pendingMigrationsCount > 1 ? 's' : '';
 
-          if ($pendingMigrations > 0) {
-            $this->terminal()->cyan("'{$class}' - {$pendingMigrations} pending migration{$plural}...\n");
-
-            if (!$dryRun) {
+          if ($pendingMigrationsCount > 0) {
+            $this->terminal()->cyan("{$class} has {$pendingMigrationsCount} pending migration{$plural}\n");
+            foreach ($pendingMigrations as $migration) {
+              $this->terminal()->cyan("  -> " . get_class($migration) . "\n");
+            }
+ 
+            if ($dryRun) {
+            } else {
               if ($round == 1) {
                 $classObject->installTables();
               } else {
@@ -107,7 +113,7 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
       }
     }
 
-    $this->terminal()->green("\n\nLatest migrations successfully applied!\n");
+    $this->terminal()->green("\nPending migrations successfully applied!\n");
   }
 
 }

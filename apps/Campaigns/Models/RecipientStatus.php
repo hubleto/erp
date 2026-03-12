@@ -19,7 +19,7 @@ class RecipientStatus extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'email' => (new Varchar($this, $this->translate('Email')))->setDefaultVisible()->addIndex('INDEX `email` (`email`)'),
-      'is_opted_out' => (new Boolean($this, $this->translate('Is opted-out')))->setDefaultVisible(),
+      'is_unsubscribed' => (new Boolean($this, $this->translate('Is unsubscribed')))->setDefaultVisible(),
       'is_invalid' => (new Boolean($this, $this->translate('Is invalid')))->setDefaultVisible(),
     ]);
   }
@@ -32,7 +32,7 @@ class RecipientStatus extends \Hubleto\Erp\Model
     $description->hide(['footer']);
     $view = $this->router()->urlParamAsString('view');
     if ($view == 'briefOverview') {
-      $description->showOnlyColumns(['email', 'is_opted_out', 'is_invalid']);
+      $description->showOnlyColumns(['email', 'is_unsubscribed', 'is_invalid']);
     }
 
     return $description;

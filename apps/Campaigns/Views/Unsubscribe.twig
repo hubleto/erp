@@ -1,0 +1,30 @@
+<html>
+<head>
+  <style>
+   * { font-family: verdana; }
+   p { font-size: 9pt; }
+  </style>
+</head>
+<body>
+  <div style="width:600px;margin:auto;padding:1em;background:#4780bf;color:white;">
+    <h1>Unsubscribe</h1>
+    <h2>{{ viewParams.campaign.name }}</h2>
+    {% if viewParams.email %}
+      ✓ Your email <b>{{ viewParams.email}}</b> have been unsubscribed.
+    {% else %}
+      <form method="GET" action="">
+        <input type="hidden" name="c" value="{{ viewParams.c }}" />
+        <p>
+          Your email:<br/>
+          <input type="email" name="email" style="width:100%" required /><br/>
+          <br/>
+          <button type="submit">Unsubscribe</button>
+        </p>
+      </form>
+    {% endif %}
+  </div>
+  <p style="padding-top:1em;width:600px;margin:auto">
+    Powered by Hubleto <a href="https://www.hubleto.eu" target="_blank">www.hubleto.eu</a>.
+  </p>
+</body>
+</html>

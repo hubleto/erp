@@ -48,8 +48,22 @@ class Lib extends Core
       $bodyHtml,
     );
 
-    $clickTrackerUrl = self::getClickTrackerUrl();
+    $bodyHtml = str_replace('{{ botDetectorHiddenLink }}', self::getBotDetectorHiddenLink($campaign, $recipient), $bodyHtml);
+    $bodyHtml = str_replace('{{ unsubscribeHref }}', self::getUnsubscribeHref($campaign, $recipient), $bodyHtml);
+    $bodyHtml = str_replace('{{ viewInBrowserHref }}', self::getViewInBrowserHref($campaign, $recipient), $bodyHtml);
 
+    return $bodyHtml;
+  }
+
+  /**
+   * [Description for getBotDetectorHiddenLink]
+   *
+   * @return string
+   * 
+   */
+  public static function getBotDetectorHiddenLink(array $campaign, array $recipient): string
+  {
+    $clickTrackerUrl = self::getClickTrackerUrl();
     $botClickData = [
       'cuid' => ($campaign['uid'] ?? ''),
       'rcid' => ($recipient['id'] ?? ''),
@@ -58,13 +72,35 @@ class Lib extends Core
 
     $botClickDataB64 = base64_encode(json_encode($botClickData));
 
-    $bodyHtml = str_replace(
-      '{{ botDetectorHiddenLink }}',
-      '<a href="' . $clickTrackerUrl . '?c=' . $botClickDataB64 . '" style="font-size:1px">&nbsp;</a>',
-      $bodyHtml
-    );
+    return '<a href="' . $clickTrackerUrl . '?c=' . $botClickDataB64 . '" style="font-size:1px">&nbsp;</a>';
+  }
 
-    return $bodyHtml;
+  /**
+   * [Description for getUnsubscribeHref]
+   *
+   * @return string
+   * 
+   */
+  public static function getUnsubscribeHref(array $campaign, array $recipient): string
+  {
+    $url = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/unsubscribe';
+
+    $urlData = [ 'cuid' => ($campaign['uid'] ?? ''), 'rcid' => ($recipient['id'] ?? ''), ];
+    return $url . '?c=' . base64_encode(json_encode($urlData));
+  }
+
+  /**
+   * [Description for getUnsubscribeUrl]
+   *
+   * @return string
+   * 
+   */
+  public static function getViewInBrowserHref(array $campaign, array $recipient): string
+  {
+    $url = Core::getServiceStatic(Env::class)->projectUrl . '/campaigns/mail-preview';
+
+    $urlData = [ 'cuid' => ($campaign['uid'] ?? ''), 'rcid' => ($recipient['id'] ?? ''), ];
+    return $url . '?c=' . base64_encode(json_encode($urlData));
   }
 
   /**
@@ -139,15 +175,24 @@ class Lib extends Core
       '/(<a\s*)href="([^"]*)"/i',
       function($m) use ($clickTrackerUrl, $campaign, $recipient) {
 
-        $clickData = [
-          'cuid' => ($campaign['uid'] ?? ''),
-          'rcid' => ($recipient['id'] ?? ''),
-          'url' => $m[2],
+        $reservedLinkPlaceholders = [
+          '{{ unsubscribeHref }}',
+          '{{ viewInBrowserHref }}',
         ];
 
-        $clickDataB64 = base64_encode(json_encode($clickData));
+        if (in_array($m[2], $reservedLinkPlaceholders)) {
+          return $m[0];
+        } else {
+          $clickData = [
+            'cuid' => ($campaign['uid'] ?? ''),
+            'rcid' => ($recipient['id'] ?? ''),
+            'url' => $m[2],
+          ];
 
-        return $m[1] . 'href="' . $clickTrackerUrl . '?c=' . $clickDataB64 . '"';
+          $clickDataB64 = base64_encode(json_encode($clickData));
+
+          return $m[1] . 'href="' . $clickTrackerUrl . '?c=' . $clickDataB64 . '"';
+        }
       },
       $body
     );

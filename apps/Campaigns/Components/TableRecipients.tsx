@@ -55,7 +55,7 @@ export default class TableRecipients extends TableExtended<TableRecipientsProps,
   }
 
   rowClassName(rowData: any): string {
-    return rowData.is_opted_out ? 'bg-red-300' : (rowData.is_invalid ? 'bg-gray-300' : super.rowClassName(rowData));
+    return rowData.is_unsubscribed ? 'bg-red-300' : (rowData.is_invalid ? 'bg-gray-300' : super.rowClassName(rowData));
   }
 
   setRecordFormUrl(id: number) {
@@ -65,10 +65,10 @@ export default class TableRecipients extends TableExtended<TableRecipientsProps,
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "virt_status" && data.virt_status) {
       const status = data.virt_status.split(',');
-      const isOptedOut = status[0] == 'opted-out';
+      const isUnsubscribed = status[0] == 'unsubscribed';
       const isInvalid = status[1] == 'invalid';
       return <>
-        {isOptedOut ? <div className='badge badge-danger'>{this.translate('Opted out')}</div> : null}
+        {isUnsubscribed ? <div className='badge badge-danger'>{this.translate('Unsubscribed')}</div> : null}
         {isInvalid ? <div className='badge'>{this.translate('Invalid')}</div> : null}
       </>;
     } else {

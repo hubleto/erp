@@ -44,7 +44,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
         );
 
         if (!filter_var($recipient->email, FILTER_VALIDATE_EMAIL)) continue;
-        if ($recipient->STATUS?->is_opted_out ?? false) continue;
+        if ($recipient->STATUS?->is_unsubscribed ?? false) continue;
         if ($recipient->STATUS?->is_invalid ?? false) continue;
         if ($recipient->id_mail > 0) continue;
 

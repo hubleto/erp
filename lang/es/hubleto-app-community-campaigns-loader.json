@@ -92,7 +92,7 @@
     },
     "Models\\RecipientStatus": {
         "Email": "Correo electrónico",
-        "Is opted-out": "Está excluido",
+        "Is unsubscribed": "Está excluido",
         "Is invalid": "Es inválido"
     }
 }

@@ -54,7 +54,7 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
     $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->renderer()->addNamespace($tplFolder, 'snippets');
 
-    for ($round = 1; $round <= 2; $round++) {
+    for ($round = 1; $round <= ($dryRun ? 1 : 2); $round++) {
       if (!$dryRun) {
         if ($round == 1) {
           $this->terminal()->yellow("\nInstalling tables...\n");
@@ -71,7 +71,6 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
         }
 
         foreach ($queue as $class) {
-          /** @var ModelInterface */
           $classObject = new $class;
 
           if (!($classObject instanceof ModelInterface)) {

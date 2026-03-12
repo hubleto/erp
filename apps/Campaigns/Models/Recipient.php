@@ -38,7 +38,7 @@ class Recipient extends \Hubleto\Erp\Model
       'virt_status' => (new Virtual($this, $this->translate('Status')))->setDefaultVisible()
         ->setProperty('sql',"
           SELECT
-            concat(if(`is_opted_out`, 'opted-out', ''), ',', if(`is_invalid`, 'invalid', '')) 
+            concat(if(`is_unsubscribed`, 'unsubscribed', ''), ',', if(`is_invalid`, 'invalid', '')) 
           FROM `campaigns_recipient_statuses` `crs`
           WHERE `crs`.`email` in (`campaigns_recipients`.`email`)
         "),
@@ -51,11 +51,6 @@ class Recipient extends \Hubleto\Erp\Model
     $description->ui['addButtonText'] = 'Add recipient';
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
-    // $view = $this->router()->urlParamAsString('view');
-    // if ($view == 'briefOverview') {
-    //   $description->showOnlyColumns(['email', 'first_name', 'last_name', 'salutation', 'variables', 'is_opted_out']);
-    // }
-
     return $description;
   }
 

@@ -31,6 +31,8 @@ class Loader extends \Hubleto\Erp\App
       '/^campaigns\/recipients\/statuses(\/(?<recordId>\d+))?\/?$/' => Controllers\RecipientStatuses::class,
       '/^campaigns\/recipients\/statuses\/add?\/?$/' => ['controller' => Controllers\RecipientStatuses::class, 'vars' => [ 'recordId' => -1 ]],
       '/^campaigns\/click-tracker\/?$/' => Controllers\ClickTracker::class,
+      '/^campaigns\/mail-preview\/?$/' => Controllers\MailPreview::class,
+      '/^campaigns\/unsubscribe\/?$/' => Controllers\Unsubscribe::class,
     ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager */

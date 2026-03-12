@@ -526,7 +526,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 this campaign yet.
               </div>
               <div className='mt-2 alert alert-info'>
-                Opted-out recipients will be ignored.
+                Unsubscribed recipients will be ignored.
               </div>
               {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
                 <div className='card mt-2'>
@@ -592,13 +592,13 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                                 : <div className='badge badge-warning'>Scheduled {item.MAIL?.datetime_scheduled_to_send}</div>
                               }
                             </> : <div className='badge'>Not scheduled yet</div>}
-                            {item.STATUS?.is_opted_out ? <div className='badge badge-danger'>Opted out</div> : null}
+                            {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>Unsubscribed</div> : null}
                             {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
                           </td>
                           <td>
                             {item.CLICKS.length > 0 ? item.CLICKS.length : null}
                           </td>
-                          <td className={'text-nowrap'}>{botScoreTotal > 0 ? botScoreTotal : null}</td>
+                          <td className={'text-nowrap text-red-800'}>{botScoreTotal > 0 ? botScoreTotal : null}</td>
                         </tr>
                       })}
                     </tbody>

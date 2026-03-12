@@ -45,7 +45,7 @@ class ClickTracker extends \Hubleto\Erp\Controller
 
     $botScore = 0;
 
-    if ($bot) $botScore++;
+    if ($bot) $botScore += 3;
 
     // Most security scanners use 'HEAD' to check headers without loading the page.
     if ($requestMethod !== 'GET') $botScore++;

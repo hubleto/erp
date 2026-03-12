@@ -54,7 +54,7 @@ export default class FormRecipientStatus<P, S> extends FormExtended<FormRecipien
       case 'default':
         return <>
           {this.inputWrapper('email')}
-          {this.inputWrapper('is_opted_out')}
+          {this.inputWrapper('is_unsubscribed')}
           {this.inputWrapper('is_invalid')}
         </>;
       break

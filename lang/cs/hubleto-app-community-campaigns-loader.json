@@ -76,7 +76,7 @@
     },
     "Models\\RecipientStatus": {
         "Email": "",
-        "Is opted-out": "",
+        "Is unsubscribed": "",
         "Is invalid": ""
     }
 }

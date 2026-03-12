@@ -19,13 +19,15 @@
         "Phone number #1": "",
         "Phone number #2": "",
         "Photo": "",
-        "Timezone": ""
+        "Timezone": "",
+        "Permissions": ""
     },
     "Models\\UserRole": {
         "Role": "Rola",
         "Grant all permissions (administrator role)": "Povoliť všetko (administrátor)",
         "Description": "Popis",
-        "Is default role (cannot be modified)": "Je východzia rola (nemôže byť upravená)"
+        "Is default role (cannot be modified)": "Je východzia rola (nemôže byť upravená)",
+        "Permissions": ""
     },
     "Models\\UserHasRole": {
         "User": "Používateľ",

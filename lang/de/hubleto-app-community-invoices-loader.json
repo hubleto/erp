@@ -48,7 +48,10 @@
         "Prepared items": "",
         "Payments": "",
         "Payment methods": "",
-        "Profiles": ""
+        "Profiles": "",
+        "items": "",
+        "Items": "",
+        "Invoicing profiles": ""
     },
     "Models\\Invoice": {
         "Supplier": "",
@@ -69,6 +72,81 @@
         "Notes": "",
         "Template": "",
         "Workflow": "",
-        "Workflow step": ""
+        "Workflow step": "",
+        "Inbound \/ outbound": "",
+        "Inbound": "",
+        "Outbound": "",
+        "Invoicing profile": "",
+        "Payment method": "",
+        "Leave empty to generate automatically.": "",
+        "External number": "",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Sent": "",
+        "Total payments": "",
+        "PDF": "",
+        "Items": "",
+        "Payments": "",
+        "Add invoice": "",
+        "Inbound \/ Outbound": "",
+        "Sent \/ Not sent": "",
+        "Not sent": "",
+        "Due \/ Not due": "",
+        "Not due": "",
+        "Paid \/ Not paid": "",
+        "Not paid": "",
+        "This month": "",
+        "Last month": "",
+        "Month before last": "",
+        "This year": "",
+        "Last year": ""
+    },
+    "Models\\Item": {
+        "Invoice": "",
+        "Customer": "",
+        "Order": "",
+        "Order Item": "",
+        "Item": "",
+        "Unit price": "",
+        "Amount": "",
+        "Discount": "",
+        "VAT": "",
+        "Price excl. VAT": "",
+        "Price incl. VAT": ""
+    },
+    "Models\\Profile": {
+        "Name": "",
+        "Headline": "",
+        "Company": "",
+        "Numbering pattern": "",
+        "T - invoice type, YYYY - 4-digit year, YY - 2-digit year, MM - 2-digit month, DD - 2-digit day, N(repeated) - incremental invoice number": "",
+        "Invoice type prefixes": "",
+        "Bank account number (IBAN)": "",
+        "Bank (SWIFT\/BIC)": "",
+        "Currency": "",
+        "Is default": "",
+        "Due days": "",
+        "Stamp and signature": "",
+        "Default invoice template": "",
+        "Default sender account": "",
+        "Default payment method": "",
+        "Mail to send invoice - subject": "",
+        "Mail to send invoice - body": "",
+        "Mail to send invoice - CC": "",
+        "Mail to send invoice - BCC": "",
+        "Mail to send warning about due invoice - subject": "",
+        "Mail to send warning about due invoice - body": ""
+    },
+    "Models\\PaymentMethod": {
+        "Name": ""
+    },
+    "Models\\Payment": {
+        "Invoice": "",
+        "Payment date": "",
+        "Amount": "",
+        "Is advance payment": ""
+    },
+    "Controllers\\Invoices": {
+        "Invoices": ""
     }
 }

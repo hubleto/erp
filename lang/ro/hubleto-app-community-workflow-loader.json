@@ -3,7 +3,8 @@
         "Workflow": "",
         "Free sales workflow management.": "",
         "History": "",
-        "Workflows": ""
+        "Workflows": "",
+        "Items with not updated step": ""
     },
     "root": {
         "Workflows": ""
@@ -12,7 +13,8 @@
         "Name": "",
         "Description": "",
         "Order": "",
-        "Group": ""
+        "Group": "",
+        "Show in kanban": ""
     },
     "Models\\WorkflowStep": {
         "Name": "",

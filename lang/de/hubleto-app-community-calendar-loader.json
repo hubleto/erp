@@ -46,13 +46,17 @@
         "Open reminder details": "Erinnerungsdetails öffnen",
         "Let's have a break. You have nothing to do for today.": "Lass uns eine Pause machen. Heute hast du nichts zu tun.",
         "reminders later": "spätere Erinnerungen",
-        "Later": "Später"
+        "Later": "Später",
+        "reminders tomorrow": "",
+        "Tomorrow": ""
     },
     "Components\\CalendarMain": {
         "Calendars": "Kalender",
         "Ownership": "Eigentümer",
         "All": "Alle",
-        "My activities": "Meine Aktivitäten"
+        "My activities": "Meine Aktivitäten",
+        "Export calendar": "",
+        "New activity": ""
     },
     "Components\\FormActivity": {
         "Start": "Anfang",
@@ -66,5 +70,9 @@
         "Calendar": "Kalender",
         "Settings": "Einstellungen",
         "Calendar: Settings": "Kalender: Einstellungen"
+    },
+    "Controllers\\Share": {
+        "Share": "",
+        "Calendar: Settings": ""
     }
 }

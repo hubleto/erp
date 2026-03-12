@@ -48,7 +48,7 @@ class Loader extends \Hubleto\Erp\App
 
     $dashboard = $mDashboard->record->recordCreate([
       'id_owner' => 1,
-      'title' => 'Default dashboard',
+      'title' => $this->translate('My dashboard'),
       'slug' => 'default',
       'is_default' => true,
     ]);

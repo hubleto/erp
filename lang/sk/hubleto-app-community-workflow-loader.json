@@ -3,7 +3,8 @@
         "Workflow": "Workflow",
         "Free sales workflow management.": "Bezplatný manažment predajných kanálov",
         "History": "História",
-        "Workflows": "Workflovy"
+        "Workflows": "Workflovy",
+        "Items with not updated step": ""
     },
     "Controllers\\Home": {
         "Workflow": "Workflow",
@@ -18,7 +19,8 @@
         "Description": "Opis",
         "Type": "Typ",
         "Group": "Skupiny",
-        "Order": ""
+        "Order": "",
+        "Show in kanban": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Pomenovať",

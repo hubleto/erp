@@ -1,4 +1,4 @@
-<div><b>Internal emails</b></div>
+<div><b>{{ translate('Internal emails') }}</b></div>
 
 <div>
   <a
@@ -6,25 +6,25 @@
     href="{{ hubleto.env().projectUrl }}/mail/templates"
   >
     <span class="icon"><i class="fas fa-pen-to-square"></i></span>
-    <span class="text">Templates</span>
+    <span class="text">{{ translate('Templates') }}</span>
   </a>
   <a
     class="btn btn-small btn-list-item btn-transparent mt-2"
     href="{{ hubleto.env().projectUrl }}/mail/scheduled"
   >
     <span class="icon"><i class="fas fa-clock"></i></span>
-    <span class="text">Scheduled to send</span>
+    <span class="text">{{ translate('Scheduled to send') }}</span>
   </a>
   <a
     class="btn btn-small btn-list-item btn-transparent mt-2"
     href="{{ hubleto.env().projectUrl }}/mail/sent"
   >
     <span class="icon"><i class="fas fa-paper-plane"></i></span>
-    <span class="text">Sent</span>
+    <span class="text">{{ translate('Sent') }}</span>
   </a>
 </div>
 
-<div class="mt-2"><b>External accounts</b></div>
+<div class="mt-2"><b>{{ translate('External accounts') }}</b></div>
 
 {% for a in viewParams.accounts %}
   <div class='bg-primary/10 p-1 text-sm'>{{ a.name }}</div>
@@ -49,13 +49,13 @@
     href="{{ hubleto.env().projectUrl }}/mail/get"
   >
     <span class="icon"><i class="fas fa-download"></i></span>
-    <span class="text">Get emails</span>
+    <span class="text">{{ translate('Get emails') }}</span>
   </a>
   <a
     class="btn btn-small btn-list-item btn-transparent mt-2"
     href="{{ hubleto.env().projectUrl }}/mail/accounts"
   >
     <span class="icon"><i class="fas fa-cog"></i></span>
-    <span class="text">Manage accounts</span>
+    <span class="text">{{ translate('Manage accounts') }}</span>
   </a>
 </div>

@@ -57,7 +57,7 @@ class Account extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['addButtonText'] = 'Add account';
+    $description->ui['addButtonText'] = $this->translate('Add account');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 

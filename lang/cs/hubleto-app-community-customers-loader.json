@@ -50,7 +50,9 @@
         "Archive": "Archív",
         "Archived": "Archivováno",
         "Identifier": "",
-        "Non-active": ""
+        "Non-active": "",
+        "Shared with": "",
+        "Columns": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",

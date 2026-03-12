@@ -213,7 +213,8 @@
         "Brand color - primary": "",
         "Brand color - secondary": "",
         "Registration ID": "",
-        "Business register": ""
+        "Business register": "",
+        "Region": ""
     },
     "Models\\ActivityType": {
         "Type": "Typ",

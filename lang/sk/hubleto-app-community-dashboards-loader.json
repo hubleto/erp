@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Dashboards": "Dashboardy",
-        "Free dashboards app": "Správa dashboardov"
+        "Free dashboards app": "Bezplatná aplikácia pre dashboardy",
+        "Manage": "Spravovať",
+        "My dashboard": "Môj dashboard"
     },
     "root": {
         "Dashboards": "Dashboardy"
@@ -11,9 +13,9 @@
         "Title": "Názov",
         "Slug": "URL cesta",
         "Color": "Farba",
-        "Is default": "Východzí",
+        "Is default": "Predvolený",
         "Add dashboard": "Pridať dashboard",
-        "By turning this on you will change the dashboard shown on the Homepage": ""
+        "By turning this on you will change the dashboard shown on the Homepage": "Zapnutím tejto možnosti zmeníte dashboard zobrazený na úvodnej stránke"
     },
     "Models\\Panel": {
         "Dashboard": "Dashboard",
@@ -23,21 +25,26 @@
         "-- Select board to be displayed in panel --": "-- Zvoľte panel --",
         "Width": "Širka",
         "Order": "Poradie",
-        "Position": ""
+        "Position": "Pozícia",
+        "Add panel": "Pridať panel"
     },
     "Components\\Dashboard": {
         "Add new panel": "Pridať panel",
-        "Configure this dashboard": ""
+        "Configure this dashboard": "Konfigurovať tento dashboard"
     },
     "Controllers\\Dashboards": {
         "Dashboards": "Dashboardy",
         "Add dashboard": "Pridať dashboard"
     },
-    "Controllers\\Settings": {
+    "Controllers\\DashboardsManage": {
         "Dashboards": "Dashboardy",
-        "Settings": "Nastavenia"
+        "Settings": "Nastavenia",
+        "Manage": "Spravovať"
     },
     "Components\\FormDashboard": {
-        "Panels": "Panely"
+        "Panels": "Panely",
+        "Preview": "Náhľad",
+        "Advanced options": "Pokročilé nastavenia",
+        "Preview available after saving": "Náhľad dostupný po uložení"
     }
 }

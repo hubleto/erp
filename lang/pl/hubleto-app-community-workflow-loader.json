@@ -10,7 +10,8 @@
         "Workflow": "Lejek sprzedaży",
         "Free sales workflow management.": "Bezpłatne zarządzanie procesami sprzedaży.",
         "History": "Historia",
-        "Workflows": "Procesy sprzedaży"
+        "Workflows": "Procesy sprzedaży",
+        "Items with not updated step": ""
     },
     "root": {
         "Workflows": "Lejki sprzedaży"
@@ -19,14 +20,15 @@
         "Name": "Nazwa",
         "Description": "Opis",
         "Order": "Kolejność",
-        "Group": "Grupa"
+        "Group": "Grupa",
+        "Show in kanban": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Nazwa",
         "Order": "Kolejność wyświetlania",
         "Color": "Kolor",
         "Probability": "Prawdopodobieństwo",
-        "Workflow": "Lejek / Proces",
+        "Workflow": "Lejek \/ Proces",
         "Set result of a deal to": "Ustaw wynik szansy sprzedaży na",
         "Tag": "Tag"
     },

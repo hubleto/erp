@@ -111,9 +111,23 @@
         "Photo #3": "",
         "Photo #4": "",
         "Photo #5": "",
-        "URL slug": ""
+        "URL slug": "",
+        "Add product category": ""
     },
     "Components\\TableProducts": {
         "Hide filter": ""
+    },
+    "Controllers\\Categories": {
+        "Categories": "",
+        "Products": ""
+    },
+    "Components\\TableCategories": {
+        "Add new": ""
+    },
+    "Components\\FormCategory": {
+        "Category": "",
+        "Products": "",
+        "Description": "",
+        "First create the category.": ""
     }
 }

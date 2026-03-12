@@ -3,7 +3,8 @@
         "Workflow": "Workflow",
         "Free sales workflow management.": "Správa workflow zdarma.",
         "History": "História",
-        "Workflows": "Workflows"
+        "Workflows": "Workflows",
+        "Items with not updated step": ""
     },
     "root": {
         "Workflows": "Workflows"
@@ -13,7 +14,8 @@
         "Description": "Popis",
         "Type": "Typ",
         "Group": "Skupina",
-        "Order": ""
+        "Order": "",
+        "Show in kanban": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Název",

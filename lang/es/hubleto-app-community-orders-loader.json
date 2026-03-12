@@ -7,7 +7,9 @@
         "All orders": "Todos los pedidos",
         "Purchase orders": "Pedidos de compra",
         "Sales orders": "Pedidos de venta",
-        "Payments": "Pagos"
+        "Payments": "Pagos",
+        "Items": "",
+        "Quotes": ""
     },
     "root": {
         "Order states": "Estados de pedidos"
@@ -59,7 +61,10 @@
         "Link to shared folder (online storage) with related documents": "Enlace a la carpeta compartida (almacenamiento en línea) con documentos relacionados",
         "PDF": "PDF",
         "Purchase orders": "Pedidos de compra",
-        "Sales orders": "Pedidos de venta"
+        "Sales orders": "Pedidos de venta",
+        "Shared with": "",
+        "No periodical payments": "",
+        "Annually": ""
     },
     "Models\\State": {
         "Title": "Título",
@@ -78,7 +83,14 @@
         "Sales price": "Precio de venta",
         "Price excl. VAT": "Precio sin impuesto",
         "Price incl. VAT": "Precio con impuesto",
-        "Position": "Posición"
+        "Position": "Posición",
+        "VAT": "",
+        "Due date": "",
+        "Notes": "",
+        "Invoice item": "",
+        "Owner": "",
+        "Manager": "",
+        "Position (in the PDF)": ""
     },
     "Models\\History": {
         "Order": "Pedido",

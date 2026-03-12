@@ -3,7 +3,8 @@
         "Workflow": "Flujo de trabajo",
         "Free sales workflow management.": "Gestión flexible de flujos de ventas.",
         "History": "Historial",
-        "Workflows": "Flujos de trabajo"
+        "Workflows": "Flujos de trabajo",
+        "Items with not updated step": ""
     },
     "Controllers\\Home": {
         "Workflow": "Flujo de trabajo",
@@ -18,7 +19,8 @@
         "Description": "Descripción",
         "Type": "Tipo",
         "Group": "Grupo",
-        "Order": "Pedido"
+        "Order": "Pedido",
+        "Show in kanban": ""
     },
     "Models\\WorkflowStep": {
         "Name": "Nombre",

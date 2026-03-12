@@ -3,7 +3,8 @@
         "Worksheets": "Vykazovanie",
         "Worksheet log": "Vykazovanie odpracovaných hodín",
         "Activity types": "Typy činností",
-        "Daily chart": ""
+        "Daily chart": "Denný prehľad",
+        "Monthly summary": "Mesačný súhrn"
     },
     "root": {
         "Worksheets": "Vykazovanie",
@@ -31,14 +32,32 @@
         "Yesterday": "Včera",
         "Last 7 days": "Posledných 7 dní",
         "Last 14 days": "Posledných 14 dní",
-        "Month before last": "Predminulý mesiac"
+        "Month before last": "Predminulý mesiac",
+        "Month": "Mesiac",
+        "Customer": "Zákazník",
+        "Deal": "Obchod",
+        "Project": "Projekt",
+        "Group by": "Zoskupiť podľa",
+        "Total worked hours": ""
     },
     "Components\\TableActivities": {
         "Worked total": "Odpracované celkom",
-        "hours": "hodín"
+        "hours": "hodín",
+        "Copy cell content to clipboard": ""
     },
     "Models\\ActivityType": {
-        "Varchar": "",
-        "Color": ""
+        "Varchar": "Text",
+        "Color": "Farba"
+    },
+    "Components\\FormActivity": {
+        "Activity": "Aktivita",
+        "unsaved changes": ""
+    },
+    "Components\\FormActivityType": {
+        "ActivityType": "",
+        "unsaved changes": ""
+    },
+    "Components\\TableActivityTypes": {
+        "Copy cell content to clipboard": ""
     }
 }

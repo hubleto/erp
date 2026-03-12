@@ -30,6 +30,29 @@
     },
     "Controllers\\Boards\\Reminders": {
         "reminders later": "",
-        "Later": ""
+        "Later": "",
+        "reminders tomorrow": "",
+        "Tomorrow": ""
+    },
+    "Components\\CalendarMain": {
+        "New activity": "",
+        "Calendars": "",
+        "Ownership": "",
+        "All": "",
+        "My activities": "",
+        "Export calendar": ""
+    },
+    "Controllers\\Share": {
+        "Share": "",
+        "Calendar: Settings": ""
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "",
+        "Calendar ID": "",
+        "Share key": "",
+        "Display details": "",
+        "Enabled": "",
+        "Date from": "",
+        "Date to": ""
     }
 }

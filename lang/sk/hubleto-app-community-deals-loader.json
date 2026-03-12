@@ -64,7 +64,8 @@
         "Open": "Otvorené",
         "Active": "Aktívne",
         " changed from ": " zmenené z ",
-        " to ": " na "
+        " to ": " na ",
+        "Shared with": "Zdieľané s"
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",
@@ -134,7 +135,7 @@
         "Products": "Produkty"
     },
     "Models\\Tag": {
-        "Name": "Pomenovať",
+        "Name": "Názov",
         "Color": "Farba"
     },
     "Controllers\\Boards\\MostValuableDeals": {
@@ -145,14 +146,14 @@
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Výška",
-        "Vat": "Kov",
+        "Vat": "DPH",
         "Discount": "Zľavu",
         "Sum": "Súčet",
         "Order": "Objednávka",
         "Description": "Popis",
         "Price excl. VAT": "Cena bez DPH",
         "Price incl. VAT": "Cena s DPH",
-        "Sales Price": "Nákupná cena"
+        "Sales Price": "Predajná cena"
     },
     "Models\\LostReason": {
         "Lost Reason": "Stratený dôvod"
@@ -167,7 +168,7 @@
         "Show 'Deal warnings' in dashboard": "Ukážte „Deal Warnings“ na prístrojovej doske",
         "Show 'Most valuable deals' in dashboard": "Zobraziť „najcennejšie ponuky“ na prístrojovej doske",
         "Show 'Deal value by result' in dashboard": "Zobraziť „hodnotu dealu podľa výsledku“ na prístrojovej doske",
-        "Calendar color": "Kalendár"
+        "Calendar color": "Farba kalendára"
     },
     "Controllers\\Boards\\DealWarnings": {
         "Pending deals without future plan": "Čakajúce dealy bez budúceho plánu",
@@ -190,6 +191,6 @@
         "Task": "Úloha"
     },
     "Components\\TableDeals": {
-        "Hide filter": ""
+        "Hide filter": "Skryť filter"
     }
 }

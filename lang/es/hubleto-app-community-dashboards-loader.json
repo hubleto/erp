@@ -1,7 +1,9 @@
 {
     "manifest": {
         "Dashboards": "Tableros",
-        "Free dashboards app": "Aplicación gratuita de tableros"
+        "Free dashboards app": "Aplicación gratuita de tableros",
+        "Preview Dashboards": "",
+        "Manage": ""
     },
     "root": {
         "Dashboards": "Tableros"
@@ -23,7 +25,8 @@
         "-- Select board to be displayed in panel --": "-- Seleccione el tablero a mostrar --",
         "Width": "Ancho",
         "Order": "Orden",
-        "Position": "Posición"
+        "Position": "Posición",
+        "Add panel": ""
     },
     "Components\\Dashboard": {
         "Add new panel": "Agregar nuevo panel",
@@ -31,7 +34,8 @@
     },
     "Controllers\\Dashboards": {
         "Dashboards": "Tableros",
-        "Add dashboard": "Agregar tablero"
+        "Add dashboard": "Agregar tablero",
+        "Preview Dashboards": ""
     },
     "Controllers\\Settings": {
         "Dashboards": "Tableros",
@@ -39,5 +43,9 @@
     },
     "Components\\FormDashboard": {
         "Panels": "Paneles"
+    },
+    "Controllers\\DashboardsManage": {
+        "Manage": "",
+        "Dashboards": ""
     }
 }

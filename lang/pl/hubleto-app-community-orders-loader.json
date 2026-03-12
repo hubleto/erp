@@ -7,7 +7,9 @@
         "Sales orders": "Zamówienia sprzedaży",
         "Payments": "Płatności",
         "Order states": "Statusy zamówień",
-        "Order warnings": "Ostrzeżenia dotyczące zamówień"
+        "Order warnings": "Ostrzeżenia dotyczące zamówień",
+        "Items": "",
+        "Quotes": ""
     },
     "root": {
         "Order states": "Statusy zamówień"
@@ -40,8 +42,8 @@
         "Customer": "Klient",
         "Supplier": "Dostawca",
         "Owner": "Właściciel",
-        "Manager": "Opiekun / Menedżer",
-        "Workflow": "Proces / Obieg",
+        "Manager": "Opiekun \/ Menedżer",
+        "Workflow": "Proces \/ Obieg",
         "Workflow step": "Etap procesu",
         "Price excl. VAT": "Cena netto",
         "Price incl. VAT": "Cena brutto",
@@ -70,7 +72,10 @@
         "Open \/ Closed": "Otwarte \/ Zamknięte",
         "Open": "Otwarte",
         "Purchase orders": "Zamówienia zakupu",
-        "Sales orders": "Zamówienia sprzedaży"
+        "Sales orders": "Zamówienia sprzedaży",
+        "Shared with": "",
+        "No periodical payments": "",
+        "Annually": ""
     },
     "Models\\Item": {
         "Order": "Zamówienie",
@@ -82,7 +87,15 @@
         "Discount": "Rabat",
         "Vat": "VAT",
         "Price excl. VAT": "Cena netto",
-        "Price incl. VAT": "Cena brutto"
+        "Price incl. VAT": "Cena brutto",
+        "Unit price": "",
+        "VAT": "",
+        "Due date": "",
+        "Notes": "",
+        "Invoice item": "",
+        "Owner": "",
+        "Manager": "",
+        "Position (in the PDF)": ""
     },
     "Models\\OrderDocument": {
         "Order": "Zamówienie",
@@ -109,7 +122,7 @@
         "Title": "Tytuł",
         "Due date": "Termin płatności",
         "Unit price": "Cena jednostkowa",
-        "Amount": "Ilość / Kwota",
+        "Amount": "Ilość \/ Kwota",
         "Discount": "Rabat",
         "VAT": "VAT",
         "Notes": "Uwagi",

@@ -24,7 +24,8 @@
     "Models\\Folder": {
         "Uid": "Uid",
         "Parent folder": "Nadřazená složka",
-        "Folder name": "Název složky"
+        "Folder name": "Název složky",
+        "Add Folder": ""
     },
     "Controllers\\Browse": {
         "Documents": "Dokumenty",
@@ -41,6 +42,14 @@
         "Name": "Název",
         "Content": "Obsah",
         "Notes": "Poznámky",
-        "Used For": ""
+        "Used For": "",
+        "Add template": ""
+    },
+    "Controllers\\Folders": {
+        "Folders": ""
+    },
+    "Controllers\\Templates": {
+        "Templates": "",
+        "Documents": ""
     }
 }

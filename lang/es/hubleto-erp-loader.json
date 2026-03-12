@@ -48,6 +48,7 @@
     },
     "Model": {
         "Export to CSV": "Exportar a CSV",
-        "Import from CSV": "Importar desde CSV"
+        "Import from CSV": "Importar desde CSV",
+        "Columns": ""
     }
 }

@@ -48,7 +48,9 @@
         "Tags": "",
         "Link to shared folder (online storage) with related documents": "",
         "Add Customer": "",
-        "Non-active": ""
+        "Non-active": "",
+        "Shared with": "",
+        "Columns": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "",

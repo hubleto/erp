@@ -38,6 +38,29 @@
         "events for tomorrow": "wydarzenia na jutro",
         "events later": "wydarzenia później",
         "reminders later": "późniejsze przypomnienia",
-        "Later": "Później"
+        "Later": "Później",
+        "reminders tomorrow": "",
+        "Tomorrow": ""
+    },
+    "Components\\CalendarMain": {
+        "Calendars": "",
+        "New activity": "",
+        "All": "",
+        "Ownership": "",
+        "My activities": "",
+        "Export calendar": ""
+    },
+    "Controllers\\Share": {
+        "Share": "",
+        "Calendar: Settings": ""
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "",
+        "Calendar ID": "",
+        "Share key": "",
+        "Display details": "",
+        "Enabled": "",
+        "Date from": "",
+        "Date to": ""
     }
 }

@@ -38,6 +38,7 @@ class Installer extends \Hubleto\Erp\Core
   public string $smtpEncryption = '';
   public string $smtpLogin = '';
   public string $smtpPassword = '';
+  public string $language = '';
 
   public bool $randomize = false;
 
@@ -74,6 +75,7 @@ class Installer extends \Hubleto\Erp\Core
     string $smtpEncryption,
     string $smtpLogin,
     string $smtpPassword,
+    string $language,
     bool $randomize = false
   ) {
     $this->env = $env;
@@ -101,6 +103,7 @@ class Installer extends \Hubleto\Erp\Core
     $this->smtpEncryption = $smtpEncryption;
     $this->smtpLogin = $smtpLogin;
     $this->smtpPassword = $smtpPassword;
+    $this->language = $language;
 
     $this->randomize = $randomize;
 
@@ -188,7 +191,7 @@ class Installer extends \Hubleto\Erp\Core
       'email' => $this->adminEmail,
       'is_active' => true,
       'id_default_company' => $idCompany,
-      'language' => 'en',
+      'language' => $this->language,
     ])['id'];
 
     $mUserHasRole->record->recordCreate([
@@ -258,6 +261,7 @@ class Installer extends \Hubleto\Erp\Core
     $configEnv = str_replace('{{ smtpEncryption }}', $this->smtpEncryption, $configEnv);
     $configEnv = str_replace('{{ smtpLogin }}', $this->smtpLogin, $configEnv);
     $configEnv = str_replace('{{ smtpPassword }}', $this->smtpPassword, $configEnv);
+    $configEnv = str_replace('{{ language }}', $this->language, $configEnv);
 
     if (count($this->externalAppsRepositories) > 0) {
       $configEnv .= '' . "\n";

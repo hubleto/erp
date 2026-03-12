@@ -54,7 +54,7 @@
         "Phone": "Telefon",
         "E-mail": "E-mail",
         "WWW": "WWW",
-        "Company ID": "REGON / Numer firmy",
+        "Company ID": "REGON \/ Numer firmy",
         "Tax ID": "NIP",
         "VAT ID": "Numer VAT",
         "Street, line 1": "Adres (linia 1)",
@@ -65,7 +65,7 @@
         "Bank name": "Nazwa banku",
         "Account number": "Numer konta",
         "Account IBAN": "IBAN",
-        "SWIFT": "SWIFT / BIC",
+        "SWIFT": "SWIFT \/ BIC",
         "Numbering pattern": "Schemat numeracji"
     },
     "models.userRole": {
@@ -180,7 +180,8 @@
         "Business register": "Rejestr przedsiębiorców (KRS)",
         "Logo": "Logo",
         "Brand color - primary": "Główny kolor marki",
-        "Brand color - secondary": "Dodatkowy kolor marki"
+        "Brand color - secondary": "Dodatkowy kolor marki",
+        "Region": ""
     },
     "Models\\ActivityType": {
         "Type": "Typ",
@@ -197,7 +198,7 @@
         "Team name": "Nazwa zespołu",
         "Team color": "Kolor zespołu",
         "Description": "Opis",
-        "Manager": "Kierownik / Menedżer"
+        "Manager": "Kierownik \/ Menedżer"
     },
     "Models\\Setting": {
         "Key": "Klucz",

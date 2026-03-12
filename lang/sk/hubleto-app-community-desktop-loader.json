@@ -27,7 +27,7 @@
     },
     "Controllers\\Home": {
         "Welcome": "Vitajte",
-        "Edit profile": ""
+        "Edit profile": "Upraviť profil"
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",

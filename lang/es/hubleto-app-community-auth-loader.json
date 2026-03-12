@@ -19,13 +19,15 @@
         "Phone number #1": "Número de teléfono #1",
         "Phone number #2": "Número de teléfono #2",
         "Photo": "Foto",
-        "Timezone": "Zona horaria"
+        "Timezone": "Zona horaria",
+        "Permissions": ""
     },
     "Models\\UserRole": {
         "Role": "Rol",
         "Grant all permissions (administrator role)": "Conceder todos los permisos (rol de administrador)",
         "Description": "Descripción",
-        "Is default role (cannot be modified)": "Es el rol predeterminado (no se puede modificar)"
+        "Is default role (cannot be modified)": "Es el rol predeterminado (no se puede modificar)",
+        "Permissions": ""
     },
     "Models\\UserHasRole": {
         "User": "Usuario",

@@ -10,13 +10,15 @@
         "History": "",
         "Workflow": "",
         "Free sales workflow management.": "",
-        "Workflows": ""
+        "Workflows": "",
+        "Items with not updated step": ""
     },
     "Models\\Workflow": {
         "Name": "",
         "Order": "",
         "Description": "",
-        "Group": ""
+        "Group": "",
+        "Show in kanban": ""
     },
     "Models\\WorkflowStep": {
         "Workflow": "",

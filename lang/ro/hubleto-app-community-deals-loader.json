@@ -72,7 +72,8 @@
         "Owned by me": "",
         "Managed by me": "",
         "Open \/ Closed": "",
-        "Open": ""
+        "Open": "",
+        "Shared with": ""
     },
     "Models\\LostReason": {
         "Lost Reason": ""

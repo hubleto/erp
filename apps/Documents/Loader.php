@@ -76,11 +76,11 @@ class Loader extends \Hubleto\Erp\App
       'hyperlink' => 'https://www.google.com',
     ]);
 
-    $idFolderMM = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => 'Marketing materials' ])['id'];
+    $idFolderMM = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => $this->translate('Marketing materials') ])['id'];
     $idFolderMM1 = $mFolder->record->recordCreate([ 'id_parent_folder' => $idFolderMM, 'name' => 'LinkedIn' ])['id'];
     $idFolderMM2 = $mFolder->record->recordCreate([ 'id_parent_folder' => $idFolderMM, 'name' => 'GoogleAds' ])['id'];
 
-    $idFolderCU = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => 'Customer profiles' ])['id'];
+    $idFolderCU = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => $this->translate('Customer profiles') ])['id'];
 
     $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM, 'name' => 'logo.png', 'hyperlink' => 'https://www.google.com' ]);
     $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM1, 'name' => 'post_image_1.png', 'hyperlink' => 'https://www.google.com' ]);

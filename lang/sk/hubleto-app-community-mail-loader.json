@@ -1,6 +1,6 @@
 {
     "root": {
-        "Active Mail": "",
+        "Active Mail": "Aktívny email",
         "Templates": "Šablóny",
         "Drafts": "Rozpísané",
         "Accounts": "Účty"
@@ -8,11 +8,16 @@
     "manifest": {
         "Mail": "Email",
         "Email client": "Emailový klient",
-        "Active Mail": "",
-        "Templates": "",
-        "Accounts": "",
-        "Scheduled to send": "",
-        "Sent from Hubleto": ""
+        "Active Mail": "Aktívny email",
+        "Templates": "Šablóny",
+        "Accounts": "Účty",
+        "Sent": "Odoslané",
+        "Scheduled to send": "Naplánované na odoslanie",
+        "Sent from Hubleto": "Odoslané z Hubleto",
+        "Get emails": "Načítať emaily",
+        "Manage accounts": "Spravovať účty",
+        "Internal emails": "Interné emaily",
+        "External accounts": "Externé účty"
     },
     "Models\\Mail": {
         "Mail Id": "ID správy",
@@ -20,7 +25,7 @@
         "Mailbox": "Mailbox",
         "Priority": "Priorita",
         "Created": "Vytvorená",
-        "Sent": "Odoslaná",
+        "Sent": "Odoslané",
         "Read": "Prečítaná",
         "Subject": "Predmet",
         "From": "Odosielateľ",
@@ -32,63 +37,114 @@
         "Color": "Farba",
         "Draft": "Rozpísaná",
         "Template": "Šablóna",
-        "Account": "",
-        "Scheduled to send": "",
-        "Reply to": ""
+        "Account": "Účet",
+        "Scheduled to send": "Naplánované na odoslanie",
+        "Reply to": "Odpovedať",
+        "Save draft": "Uložiť koncept"
     },
     "Models\\Account": {
-        "Name": "",
-        "Color": "",
-        "Sender email address": "",
-        "Sender name": "",
-        "IMAP host": "",
-        "IMAP port": "",
-        "IMAP encryption": "",
-        "IMAP username": "",
-        "IMAP password": "",
-        "SMTP host": "",
-        "SMTP port": "",
-        "SMTP encryption": "",
-        "SMTP username": "",
-        "SMTP password": ""
+        "Name": "Názov",
+        "Color": "Farba",
+        "Sender email address": "Emailová adresa odosielateľa",
+        "Sender name": "Meno odosielateľa",
+        "IMAP host": "IMAP host",
+        "IMAP port": "IMAP port",
+        "IMAP encryption": "IMAP šifrovanie",
+        "IMAP username": "IMAP používateľské meno",
+        "IMAP password": "IMAP heslo",
+        "SMTP host": "SMTP host",
+        "SMTP port": "SMTP port",
+        "SMTP encryption": "SMTP šifrovanie",
+        "SMTP username": "SMTP používateľské meno",
+        "SMTP password": "SMTP heslo",
+        "Owner": "Majiteľ",
+        "Manager": "Manažér",
+        "Add account": "Pridať účet"
     },
     "Models\\Mailbox": {
-        "Account": "",
-        "Name": ""
+        "Account": "Účet",
+        "Name": "Názov",
+        "Attributes": "Atribúty"
     },
     "Controllers\\Home": {
-        "Mail": ""
+        "Mail": "Email"
     },
     "Controllers\\Templates": {
-        "Mail": "",
-        "Templates": ""
+        "Mail": "Email",
+        "Templates": "Šablóny"
+    },
+    "Controllers\\Drafts": {
+        "Mail": "Email",
+        "Drafts": "Rozpísané"
     },
     "Models\\Template": {
-        "Subject": "",
-        "Body (Text)": "",
-        "Body (HTML)": ""
+        "Subject": "Predmet",
+        "Body (Text)": "Správa (Text)",
+        "Body (HTML)": "Správa (HTML)",
+        "Add template": "Pridať šablónu"
     },
     "Controllers\\Scheduled": {
-        "Scheduled": "",
-        "Mail": ""
+        "Scheduled": "Naplánované",
+        "Mail": "Email",
+        "Send scheduled emails now": "Odoslať naplánované emaily teraz",
+        "Show sent emails": "Zobraziť odoslané emaily",
+        "Scheduled to send": "Naplánované na odoslanie"
+    },
+    "Controllers\\SendScheduled": {
+        "Mail": "Email",
+        "Send scheduled": "Odoslať naplánované",
+        "Mails scheduled to send were sent.": "Naplánované emaily boli odoslané.",
+        "Scheduled": "Naplánované"
     },
     "Controllers\\Sent": {
-        "Sent": "",
-        "Mail": ""
+        "Sent": "Odoslané",
+        "Mail": "Email"
     },
     "Controllers\\Get": {
-        "Mail": "",
-        "Get": ""
+        "Mail": "Email",
+        "Get": "Načítať"
     },
     "Controllers\\Accounts": {
-        "Mail": "",
-        "Accounts": ""
+        "Mail": "Email",
+        "Accounts": "Účty"
+    },
+    "Controllers\\Mailboxes": {
+        "Mail": "Email",
+        "Mailboxes": "Mailboxy"
     },
     "Models\\Index": {
-        "Mail": "",
-        "From": "",
-        "To": "",
-        "Cc": "",
-        "Bcc": ""
+        "Mail": "Email",
+        "From": "Odosielateľ",
+        "To": "Príjemca",
+        "Cc": "CC",
+        "Bcc": "BCC"
+    },
+    "Models\\Attachment": {
+        "Mail": "Email",
+        "Name": "Názov",
+        "File": "Súbor"
+    },
+    "Components\\FormTemplate": {
+        "Template": "Šablóna"
+    },
+    "Components\\FormMail": {
+        "Template": "Šablóna",
+        "Send now": "Odoslať",
+        "Mail": "Email"
+    },
+    "Components\\FormAccount": {
+        "Email account":"Emailový účet",
+        "Receiving (IMAP)": "Prijímanie (IMAP)",
+        "Sending (SMTP)":"Odosielanie (SMTP)",
+        "Account": "Účet"
+    },
+    "Components\\ListFolder": {
+        "Mark as unread": "Označiť ako neprečítané",
+        "Mark as read": "Označiť ako prečítané"
+    },
+    "Components\\TableMails": {
+        "Mark as unread": "Označiť ako neprečítané",
+        "Mark as read": "Označiť ako prečítané"
     }
+
 }

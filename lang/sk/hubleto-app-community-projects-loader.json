@@ -3,7 +3,9 @@
         "Projects": "Projekty",
         "Project management": "Projektový manažment",
         "Phases": "Fázy",
-        "Monthly summary": ""
+        "Monthly summary": "",
+        "Milestones": "",
+        "Task assignment": ""
     },
     "root": {
         "Projects": "Projekty",
@@ -31,7 +33,9 @@
         "Open \/ Closed": "Otvorené \/ Zatvorené",
         "Open": "Otvorené",
         "All": "Všetky",
-        "Average hourly costs": ""
+        "Average hourly costs": "",
+        "Project manager": "",
+        "Shared with": ""
     },
     "Models\\Phase": {
         "Name": "Názov",
@@ -57,5 +61,24 @@
     "Models\\ProjectDeal": {
         "Project": "Projekt",
         "Deal": "Deal"
+    },
+    "Models\\ProjectActivity": {
+        "Subject": "",
+        "Location": "",
+        "Online meeting link": "",
+        "Description": "",
+        "Activity type": "",
+        "Start date": "",
+        "Start time": "",
+        "End date": "",
+        "End time": "",
+        "Recurrence": "",
+        "All day": "",
+        "Completed": "",
+        "Long meeting minutes (link to external document)": "",
+        "Short meeting minutes": "",
+        "Created by": "",
+        "Project": "",
+        "Contact": ""
     }
 }

@@ -35,7 +35,9 @@
         "Open reminder details": "Otevřít podrobnosti o připomínkách",
         "Let's have a break. You have nothing to do for today.": "Dejte si pauzu. Dneska nemáte co dělat.",
         "reminders later": "připonínek později",
-        "Later": "Později"
+        "Later": "Později",
+        "reminders tomorrow": "",
+        "Tomorrow": ""
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendář"
@@ -45,7 +47,8 @@
         "Ownership": "Vlastík",
         "All": "Všichni",
         "My activities": "Moje aktivity",
-        "New activity": "Nová aktivita"
+        "New activity": "Nová aktivita",
+        "Export calendar": ""
     },
     "Components\\FormActivity": {
         "Start": "Začátek",
@@ -59,5 +62,18 @@
         "Calendar": "Kalendář",
         "Settings": "Nastavení",
         "Calendar: Settings": "Kalendář: Nastavení"
+    },
+    "Controllers\\Share": {
+        "Share": "",
+        "Calendar: Settings": ""
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "",
+        "Calendar ID": "",
+        "Share key": "",
+        "Display details": "",
+        "Enabled": "",
+        "Date from": "",
+        "Date to": ""
     }
 }

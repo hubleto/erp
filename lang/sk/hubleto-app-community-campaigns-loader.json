@@ -32,7 +32,8 @@
         "Reply to": "",
         "Owner": "",
         "Lanuched by": "",
-        "Launched": ""
+        "Launched": "",
+        "Shared with": ""
     },
     "Models\\Recipient": {
         "Campaign": "Kampaň",
@@ -88,7 +89,8 @@
         "Campaign": ""
     },
     "Components\\TableCampaigns": {
-        "Hide filter": ""
+        "Hide filter": "",
+        "Copy cell content to clipboard": ""
     },
     "Models\\RecipientStatus": {
         "Email": "",

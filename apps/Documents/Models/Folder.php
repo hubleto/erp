@@ -38,7 +38,7 @@ class Folder extends \Hubleto\Erp\Model
    public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add Folder';
+    $description->ui['addButtonText'] = $this->translate('Add Folder');
     $description->show(['header', 'fulltextSearch', 'columnSearch']);
     $description->hide(['footer']);
     return $description;

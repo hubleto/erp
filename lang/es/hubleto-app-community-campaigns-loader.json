@@ -32,7 +32,8 @@
         "Reply to": "Responder a",
         "Owner": "Propietario",
         "Lanuched by": "Lanzado por",
-        "Launched": "Lanzado"
+        "Launched": "Lanzado",
+        "Shared with": ""
     },
     "Models\\Recipient": {
         "Campaign": "Campaña",

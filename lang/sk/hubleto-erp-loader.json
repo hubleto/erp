@@ -9,20 +9,37 @@
         "Adding record": "Pridať záznam",
         "Editing record": "Úprava záznamu",
         "Record": "Záznam",
-        "New record": "Nový záznam"
+        "New record": "Nový záznam",
+        "Saved": "Uložené",
+        "You have unsaved changes. Are you sure to close?": "Máte neuložené zmeny. Naozaj chcete zavrieť?"
     },
     "Components\\Input": {
         "Upload file": "Nahrať súbor"
     },
     "Components\\Table": {
-        "You are about to delete the record. Press OK to confirm.": "Chystáte sa zmazať záznam. Potvrďte tento krok.",
-        "Yes, delete": "Áno, zmazať",
-        "No, do not delete": "Nie, zavrieť okno",
         "Delete": "Zmazať",
         "Start typing to search...": "Začnite vyhľadávať...",
         "Search...": "Hľadať",
         "No data.": "Žiadne údaje.",
-        "More options": "Nastavenia"
+        "More options": "Nastavenia",
+        "Show\/Hide filter": "Zobraziť\/skryť filter",
+        "Hide filter": "Skryť filter",
+        "Show as plain table": "Zobraziť ako jednoduchú tabuľku",
+        "Show as standard table": "Zobraziť ako štandardnú tabuľku",
+        "Delete record": "Vymazanie záznamu",
+        "Cancel": "Zrušiť",
+        "Are you sure you want to delete this record?": "Ste si istý, že chcete vymazať tento záznam?",
+        "Copy cell content to clipboard": "Kopírovať obsah bunky do schránky",
+        "records were hidden based on your permissions.": "záznamov bolo skrytých na základe vašich oprávnení."
+    },
+    "Components\\TableExtended": {
+        "Add new": "Pridať",
+        "Customize Columns": "Prispôsobiť stĺpce"
+    },
+    "Components\\TableExtendedColumnsCustomize": {
+        "Customize Columns": "Prispôsobiť stĺpce",
+        "Save": "Uložiť",
+        "Reset to default": "Pôvodné nastavenie"
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Zostať prihlásený"
@@ -37,6 +54,10 @@
     "Components\\Inputs\\Image": {
         "Choose image": "Nahrať obrázok"
     },
+    "Components\\Inputs\\TextareaWithHtmlPreview": {
+        "Toggle fullscreen": "Prepnúť celú obrazovku",
+        "Preview": "Náhľad"
+    },
     "Components\\Inputs\\Password": {
         "New password": "Nové heslo",
         "Confirm new password": "Potvrdiť nové heslo"
@@ -48,6 +69,7 @@
     },
     "Model": {
         "Export to CSV": "Exportovať do CSV",
-        "Import from CSV": "Importovať z CSV"
+        "Import from CSV": "Importovať z CSV",
+        "Columns": "Stĺpce"
     }
 }

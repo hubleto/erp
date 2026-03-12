@@ -7,6 +7,12 @@
     },
     "Model": {
         "Export to CSV": "",
-        "Import from CSV": ""
+        "Import from CSV": "",
+        "Columns": ""
+    },
+    "Controllers\\NotFound": {
+        "Page Not Found": "",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
+        "Home": ""
     }
 }

@@ -3,12 +3,12 @@
 namespace Hubleto\App\Community\Notifications\EventListeners;
 
 use Hubleto\App\Community\Notifications\Sender;
-use Hubleto\Framework\Model;
+use Hubleto\Framework\Interfaces\ModelInterface;
 
 class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \Hubleto\Framework\Interfaces\EventListenerInterface
 {
 
-  public function onModelAfterUpdate(Model $model, array $originalRecord, array $savedRecord): void
+  public function onModelAfterUpdate(ModelInterface $model, array $originalRecord, array $savedRecord): void
   {
     $user = $this->authProvider()->getUser();
 

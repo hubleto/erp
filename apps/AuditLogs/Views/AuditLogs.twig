@@ -1,0 +1,8 @@
+<h1 class="app-main-title">{{ translate('AuditLogs') }}</h1>
+
+<hblreact-audit-logs-table-audit-logs
+  string:folder="inbox"
+  string:tag="api-table-keys"
+  int:record-id="{{ viewParams.recordId }}"
+  json:filters='{{ viewParams.filters|json_encode }}'
+></hblreact-audit-logs-table-audit-logs>

@@ -1,0 +1,18 @@
+{
+    "manifest": {
+        "AuditLogs": "Upozornenia",
+        "Internal audit logs": "Interné záznamy"
+    },
+    "Models\\AuditLog": {
+        "Priority": "Priorita",
+        "Category": "Kategória",
+        "From": "Odosielateľ",
+        "To": "Príjemca",
+        "Subject": "Predmet",
+        "Body": "Správa",
+        "Color": "Farba",
+        "Tags": "Značky",
+        "Sent": "Odoslaná",
+        "Read": "Prečítaná"
+    }
+}

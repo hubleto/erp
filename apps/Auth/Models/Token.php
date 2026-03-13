@@ -22,6 +22,8 @@ class Token extends \Hubleto\Framework\Models\Token {
   public $tokenTypes = [];
   public string $recordManagerClass = RecordManagers\Token::class;
 
+  public bool $disableAuditLog = true;
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [

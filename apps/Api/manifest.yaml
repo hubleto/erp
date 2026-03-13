@@ -3,7 +3,7 @@ appType: community
 sidebarGroup: maintenance
 rootUrlSlug: api
 name: Api
-icon: fas fa-list-check
+icon: fas fa-arrow-right-arrow-left
 author:
   name: "WAI.blue"
   nick: "wai.blue"

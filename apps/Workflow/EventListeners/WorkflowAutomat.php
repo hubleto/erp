@@ -2,12 +2,12 @@
 
 namespace Hubleto\App\Community\Workflow\EventListeners;
 
-use Hubleto\Framework\Model;
+use Hubleto\Framework\Interfaces\ModelInterface;
 
 class WorkflowAutomat extends \Hubleto\Framework\EventListener implements \Hubleto\Framework\Interfaces\EventListenerInterface
 {
 
-  public function onModelAfterUpdate(Model $model, array $originalRecord, array $savedRecord): void
+  public function onModelAfterUpdate(ModelInterface $model, array $originalRecord, array $savedRecord): void
   {
     if (!$model || !$savedRecord) return;
 

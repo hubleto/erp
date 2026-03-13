@@ -12,6 +12,7 @@ class Log extends \Hubleto\Erp\Model
 {
   public string $table = 'usage_log';
   public string $recordManagerClass = RecordManagers\Log::class;
+  public bool $disableAuditLog = true;
 
   public function describeColumns(): array
   {

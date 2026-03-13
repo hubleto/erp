@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\AuditLogs
+appType: community
+sidebarGroup: maintenance
+rootUrlSlug: audit-logs
+name: Audit Logs
+icon: fas fa-clipboard-list
+author:
+  name: "WAI.blue"
+  company: "wai.blue"
+highlight: Internal audit logs

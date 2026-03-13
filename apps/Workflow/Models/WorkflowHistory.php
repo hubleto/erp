@@ -17,6 +17,8 @@ class WorkflowHistory extends \Hubleto\Erp\Model
   public string $recordManagerClass = RecordManagers\WorkflowHistory::class;
   public ?string $lookupSqlValue = '{%TABLE%}.id';
 
+  public bool $disableAuditLog = true;
+
   public array $relations = [
     'USER' => [ self::BELONGS_TO, User::class, 'id_user', 'id' ],
     'WORKFLOW_STEP' => [ self::BELONGS_TO, WorkflowStep::class, 'id_workflow_step', 'id' ],

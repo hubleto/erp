@@ -10,7 +10,9 @@ class UserHasToken extends Model {
 
   public string $table = "user_has_tokens";
   public string $recordManagerClass = RecordManagers\UserHasToken::class;
-  public bool $isJunctionTable = FALSE;
+  public bool $isJunctionTable = false;
+
+  public bool $disableAuditLog = true;
 
   public function describeColumns(): array
   {

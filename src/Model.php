@@ -19,6 +19,8 @@ class Model extends \Hubleto\Framework\Model
   const COLUMN_ADDRESS_DEFAULT_ICON = 'fas fa-location-dot bg-green-50 rounded text-green-600 p-2 mr-2 w-10 text-center block';
   const COLUMN_COLOR_DEFAULT_ICON = 'fas fa-palette bg-violet-50 rounded text-violet-600 p-2 mr-2 w-10 text-center block';
 
+  public bool $disableAuditLog = false;
+
   /**
    * [Description for describeColumns]
    *

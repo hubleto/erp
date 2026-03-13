@@ -207,18 +207,6 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
               {this.inputWrapper('status', {readonly: R.is_closed, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})} */}
               {this.inputWrapper('email')}
               {this.inputWrapper('phone')}
-              {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_closed})}
-              {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_closed}): null}
-            </div>
-            <div className='border-l border-gray-200'></div>
-            <div className='grow'>
-              <div className='flex flex-row *:w-1/2'>
-                {this.inputWrapper('price', { cssClass: 'text-2xl', readonly: R.is_closed ? true : false })}
-                {this.inputWrapper('id_currency')}
-              </div>
-              {this.inputWrapper('score', {readonly: R.is_closed})}
-              {this.inputWrapper('id_team', {readonly: R.is_closed})}
-              {this.inputWrapper('date_expected_close', {readonly: R.is_closed})}
               {this.inputWrapper('source_channel', {readonly: R.is_closed})}
               <FormInput title='Tags'>
                 <InputTags2 {...this.getInputProps('tags_input')}
@@ -237,6 +225,18 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                   }}
                 ></InputTags2>
               </FormInput>
+              {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_closed})}
+              {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_closed}): null}
+            </div>
+            <div className='border-l border-gray-200'></div>
+            <div className='grow'>
+              <div className='flex flex-row *:w-1/2'>
+                {this.inputWrapper('price', { cssClass: 'text-2xl', readonly: R.is_closed ? true : false })}
+                {this.inputWrapper('id_currency')}
+              </div>
+              {this.inputWrapper('score', {readonly: R.is_closed})}
+              {this.inputWrapper('id_team', {readonly: R.is_closed})}
+              {this.inputWrapper('date_expected_close', {readonly: R.is_closed})}
               {/* <FormInput title={"Customer"}>
                 <Lookup {...this.getInputProps('id_customer')}
                   model='Hubleto/App/Community/Customers/Models/Customer'
@@ -443,7 +443,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
             <div className='card-body [&_*]:whitespace-normal'>
               <TableLeadHistory
                 uid={this.props.uid + "_table_lead_history"}
-                data={{ data: R.HISTORY }}
+                data={{ records: R.HISTORY }}
                 descriptionSource="props"
                 onRowClick={(table) => {}}
                 description={{

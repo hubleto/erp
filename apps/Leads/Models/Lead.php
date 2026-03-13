@@ -265,6 +265,11 @@ class Lead extends \Hubleto\Erp\Model
     return 1;
   }
 
+  public function getMaxReadLevelForLoadFormData(): int
+  {
+    return 2;
+  }
+
   /**
    * [Description for onBeforeCreate]
    *

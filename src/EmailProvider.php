@@ -24,7 +24,7 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
   {
     $this->smtpHost = $this->config()->getAsString('smtpHost', '');
     $this->smtpPort = $this->config()->getAsInteger('smtpPort', 0);
-    $this->smtpEncryption = $this->config()->getAsString('smtpEncryption', 'ssl');
+    $this->smtpEncryption = $this->config()->getAsString('smtpEncryption', '');
     $this->smtpUsername = $this->config()->getAsString('smtpLogin', '');
     $this->smtpPassword = $this->config()->getAsString('smtpPassword', '');
   }
@@ -59,7 +59,7 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
       throw new \Exception('PHPMailer is required to send emails. Run `composer require phpmailer/phpmailer` to install it.');
     }
 
-    if (empty($this->smtpHost) || empty($this->smtpUsername) || empty($this->smtpPassword) || empty($this->smtpEncryption) || empty($this->smtpPort)) {
+    if (empty($this->smtpHost) || empty($this->smtpPort)) {
       throw new \Exception('SMTP is not properly configured. Cannot send emails.');
     }
 
@@ -67,7 +67,7 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
     try {
       $mail->isSMTP();
       $mail->Host = $this->smtpHost;
-      $mail->SMTPAuth = true;
+      $mail->SMTPAuth = !((empty($this->smtpUsername) || empty($this->smtpPassword)));
       $mail->Username = $this->smtpUsername;
       $mail->Password = $this->smtpPassword;
       $mail->SMTPSecure = $this->smtpEncryption;

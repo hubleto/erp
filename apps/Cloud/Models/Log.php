@@ -13,6 +13,8 @@ class Log extends \Hubleto\Erp\Model
   public string $table = 'cloud_log';
   public string $recordManagerClass = RecordManagers\Log::class;
 
+  public bool $disableAuditLog = true;
+
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [

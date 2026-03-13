@@ -43,18 +43,16 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
 
   parentApp: string = 'Hubleto/App/Community/Campaigns';
 
-  refTestEmailRecipientInput: any;
-  refLogActivityInput: any;
-  refActivityModal: any;
-  refActivityForm: any;
+  refTestEmailRecipientInput: any = React.createRef();
+  refLogActivityInput: any = React.createRef();
+  refActivityModal: any = React.createRef();
+  refActivityForm: any = React.createRef();
+  refEmails: any = React.createRef();
+  refTableRecipients: any = React.createRef();
 
   constructor(props: FormCampaignProps) {
     super(props);
     this.state = this.getStateFromProps(props);
-    this.refTestEmailRecipientInput = React.createRef();
-    this.refLogActivityInput = React.createRef();
-    this.refActivityModal = React.createRef();
-    this.refActivityForm = React.createRef();
   }
 
   getStateFromProps(props: FormCampaignProps) {
@@ -368,16 +366,52 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       break;
 
       case 'recipients':
-        return <TableRecipients
-          tag='table_campaign_recipients'
-          parentForm={this}
-          uid={this.props.uid + "_table_campaign_recipient"}
-          idCampaign={R.id}
-          view='briefOverview'
-          onAfterLoadData={(table: any) => {
-            this.setState({ recipients: table.state.data.records });
-          }}
-        />;
+        return <div className='flex gap-2'>
+          <div className='flex-3'>
+            <TableRecipients
+              tag='table_campaign_recipients'
+              ref={this.refTableRecipients}
+              parentForm={this}
+              uid={this.props.uid + "_table_campaign_recipient"}
+              idCampaign={R.id}
+              view='briefOverview'
+              onAfterLoadData={(table: any) => {
+                this.setState({ recipients: table.state.data.records });
+              }}
+            />
+          </div>
+          <div className='flex-1'>
+            <div className='card'>
+              <div className='card-header'>{this.translate('Import emails')}</div>
+              <div className='card-body'>
+                <textarea
+                  className='w-full'
+                  placeholder='One email per line.'
+                  ref={this.refEmails}
+                ></textarea>
+                <button
+                  className='btn btn-add-outline mt-2 w-full'
+                  onClick={() => {
+                    request.post(
+                      'campaigns/api/import-emails',
+                      {
+                        idCampaign: R.id,
+                        emails: this.refEmails.current.value,
+                      },
+                      {},
+                      (data: any) => {
+                        this.refTableRecipients.current.reload();
+                      }
+                    )
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-upload'></i></span>
+                  <span className='text'>{this.translate('Import emails')}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>;
       break;
 
       case 'tasks':

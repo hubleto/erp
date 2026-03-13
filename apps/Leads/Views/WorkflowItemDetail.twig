@@ -6,11 +6,9 @@
           <div class="badge badge-lime badge-small">{{ c.CAMPAIGN.name }}</div>
         {% endfor %}
       </div>
-      <div class="text-gray-400">{{ item.CUSTOMER.name ?? "[Customer unknown]" }}</div>
       <div class="font-bold">
-        {% for v in item.CONTACT.VALUES %}
-          <div>{{ v.value }}</div>
-        {% endfor %}
+        {{ item.email }}
+        {{ item.phone }}
       </div>
       <div class="text-primary">{{ item.OWNER.email }}</div>
     </div>

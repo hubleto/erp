@@ -37,23 +37,9 @@ class Lead extends \Hubleto\Erp\Model
       "#",
       `{%TABLE%}`.id,
       " ",
-      ifnull(
-        (
-          select concat(ifnull(`c`.`first_name`, ""), " ", ifnull(`c`.`last_name`, "")) from `contacts` `c`
-          where `c`.`id` = `{%TABLE%}`.`id_contact`
-        ),
-        "---"
-      ),
+      `{%TABLE%}`.email,
       " ",
-      ifnull(
-        (
-          select group_concat(`cv`.`value` separator ", ") from `contact_values` `cv`
-          where
-            `cv`.`id_contact` = `{%TABLE%}`.`id_contact`
-            and `type` in ("email", "other")
-        ),
-        "---"
-      )
+      `{%TABLE%}`.phone
     )
   ';
   public ?string $lookupUrlDetail = 'leads/{%ID%}';
@@ -93,15 +79,17 @@ class Lead extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'email' => (new Varchar($this, $this->translate('Email')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'phone' => (new Varchar($this, $this->translate('Phone')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
-      'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      // 'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
-      'virt_email' => (new Virtual($this, $this->translate('Email')))->setDefaultVisible()
-        ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")
-      ,
-      'virt_phone_number' => (new Virtual($this, $this->translate('Phone number')))
-        ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'number' LIMIT 1")
-      ,
+      // 'virt_email' => (new Virtual($this, $this->translate('Email')))->setDefaultVisible()
+      //   ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")
+      // ,
+      // 'virt_phone_number' => (new Virtual($this, $this->translate('Phone number')))
+      //   ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'number' LIMIT 1")
+      // ,
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setRequired()->setDefaultValue(null)->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       // 'id_level' => (new Lookup($this, $this->translate('Level'), Level::class))->setDefaultVisible(),
       // 'status' => (new Integer($this, $this->translate('Status')))->setDefaultVisible()->setEnumValues(

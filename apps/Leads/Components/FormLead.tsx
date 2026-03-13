@@ -181,7 +181,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                   >{item.CAMPAIGN.name}</a>;
                 }) : null}
               </FormInput>
-              <FormInput title={"Contact"} required={true}>
+              {/* <FormInput title={"Contact"} required={true}>
                 <Lookup {...this.getInputProps('id_contact')}
                   model='Hubleto/App/Community/Contacts/Models/Contact'
                   customEndpointParams={{idCustomer: R.id_customer}}
@@ -196,15 +196,17 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                     }
                   }}
                 ></Lookup>
-              </FormInput>
-              {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-lime-100 text-lime-900 mb-2">
+              </FormInput> */}
+              {/* {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-lime-100 text-lime-900 mb-2">
                 {R.CONTACT.VALUES.map((item, key) => {
                   return <div key={key}>{item.value}</div>;
                 })}
-              </div> : null}
-              {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})}
+              </div> : null} */}
+              {/* {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})} */}
               {/* {this.inputWrapper('id_level', {readonly: R.is_closed, uiStyle: 'buttons'})}
               {this.inputWrapper('status', {readonly: R.is_closed, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})} */}
+              {this.inputWrapper('email')}
+              {this.inputWrapper('phone')}
               {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_closed})}
               {this.state.record.status == 4 ? this.inputWrapper('lost_reason', {readonly: R.is_closed}): null}
             </div>
@@ -235,7 +237,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                   }}
                 ></InputTags2>
               </FormInput>
-              <FormInput title={"Customer"}>
+              {/* <FormInput title={"Customer"}>
                 <Lookup {...this.getInputProps('id_customer')}
                   model='Hubleto/App/Community/Customers/Models/Customer'
                   urlAdd='customers/add'
@@ -249,7 +251,9 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                     }
                   }}
                 ></Lookup>
-              </FormInput>
+              </FormInput> */}
+              {this.inputWrapper('id_customer')}
+              {this.inputWrapper('id_contact')}
               {this.inputWrapper('shared_folder', {readonly: R.is_closed})}
               {this.inputWrapper('date_created')}
             </div>

@@ -86,7 +86,7 @@ class Recipient extends \Hubleto\Erp\Model
 
       $description->addColumn(
         'clicks_summary',
-        (new Text($this, $this->translate('Clicked campaigns')))
+        (new Text($this, $this->translate('Click summary')))->setTableCssClass('whitespace-pre bg-yellow-50')
       );
 
       $description->addColumn(

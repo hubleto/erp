@@ -78,6 +78,39 @@ class Recipient extends \Hubleto\Erp\RecordManager
     return $this->hasMany(Click::class, 'id_recipient');
   }
 
+  /**
+   * [Description for prepareSelectsForReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return array
+   * 
+   */
+  public function prepareSelectsForReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): array
+  {
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+    $selects = parent::prepareSelectsForReadQuery($query, $level, $includeRelations);
+
+    if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
+      $selects[] = 'count(campaigns_recipients.id) as count';
+    }
+
+    return $selects;
+  }
+
+  /**
+   * [Description for prepareReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return mixed
+   * 
+   */
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
@@ -86,6 +119,15 @@ class Recipient extends \Hubleto\Erp\RecordManager
 
     if ($hubleto->router()->isUrlParam("idCampaign")) {
       $query = $query->where($this->table . '.id_campaign', $hubleto->router()->urlParamAsInteger("idCampaign"));
+    }
+
+    if (isset($filters['fGroupBy'])) {
+      $fGroupBy = (array) $filters['fGroupBy'];
+      if (in_array('virt_utm_source', $fGroupBy)) $query = $query->groupBy('campaigns.virt_utm_source');
+      if (in_array('virt_utm_campaign', $fGroupBy)) $query = $query->groupBy('campaigns.virt_utm_campaign');
+      if (in_array('virt_utm_term', $fGroupBy)) $query = $query->groupBy('campaigns.virt_utm_term');
+      if (in_array('virt_status', $fGroupBy)) $query = $query->groupBy('campaigns.virt_status');
+      if (in_array('email', $fGroupBy)) $query = $query->groupBy('campaigns.email');
     }
 
     return $query;

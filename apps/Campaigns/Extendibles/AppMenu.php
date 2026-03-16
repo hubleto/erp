@@ -17,13 +17,13 @@ class AppMenu extends \Hubleto\Framework\Extendible
         'app' => $this->app,
         'url' => 'campaigns/recipients',
         'title' => $this->app->translate('Recipients'),
-        'icon' => 'fas fa-users',
+        'icon' => 'fas fa-paper-plane',
       ],
       [
         'app' => $this->app,
         'url' => 'campaigns/recipients/statuses',
         'title' => $this->app->translate('Recipient statuses'),
-        'icon' => 'fas fa-users',
+        'icon' => 'fas fa-check-double',
       ],
     ];
   }

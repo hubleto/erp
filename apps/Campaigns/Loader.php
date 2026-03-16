@@ -58,4 +58,30 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/campaigns">
+          <span class="icon"><i class="fas fa-users-viewfinder"></i></span>
+          <span class="text">' . $this->translate('Campaigns') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/campaigns/recipients">
+          <span class="icon"><i class="fas fa-paper-plane"></i></span>
+          <span class="text">' . $this->translate('Recipients') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/campaigns/recipients/statuses">
+          <span class="icon"><i class="fas fa-check-double"></i></span>
+          <span class="text">' . $this->translate('Recipient statuses') . '</span>
+        </a>
+      </div>
+    ';
+  }
+
 }

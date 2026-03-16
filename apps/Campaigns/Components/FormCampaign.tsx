@@ -385,7 +385,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               <div className='card-header'>{this.translate('Import emails')}</div>
               <div className='card-body'>
                 <textarea
-                  className='w-full'
+                  className='w-full h-80'
                   placeholder='One email per line.'
                   ref={this.refEmails}
                 ></textarea>

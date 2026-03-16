@@ -31,6 +31,8 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
 
       $campaign = $mCampaign->record
         ->where('campaigns.id', $idCampaign)
+        ->with('MAIL_ACCOUNT')
+        ->with('MAIL_TEMPLATE')
         ->first()
       ;
 

@@ -29,7 +29,7 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
       /** @var Mail */
       $mMail = $this->getModel(Mail::class);
 
-      $campaign = $mCampaign->record->prepareReadQuery()
+      $campaign = $mCampaign->record
         ->where('campaigns.id', $idCampaign)
         ->first()
       ;

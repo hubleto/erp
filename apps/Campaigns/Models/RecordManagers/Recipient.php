@@ -129,7 +129,7 @@ class Recipient extends \Hubleto\Erp\RecordManager
       if (in_array('virt_utm_campaign', $fGroupBy)) $query = $query->groupBy('virt_utm_campaign');
       if (in_array('virt_utm_term', $fGroupBy)) $query = $query->groupBy('virt_utm_term');
       if (in_array('virt_status', $fGroupBy)) $query = $query->groupBy('virt_status');
-      if (in_array('email', $fGroupBy)) $query = $query->groupBy('campaigns.email');
+      if (in_array('email', $fGroupBy)) $query = $query->groupBy('email');
     }
 
     return $query;

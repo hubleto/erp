@@ -96,6 +96,11 @@ class Recipient extends \Hubleto\Erp\Model
         (new Integer($this, $this->translate('Bot score')))
       );
 
+      $description->ui['orderBy'] = [
+      'field' => [ 'clicks_count', 'bot_score' ],
+      'direction' => [ 'desc', 'asc' ]
+    ];
+
     }
 
     $description->addFilter('fGroupBy', [

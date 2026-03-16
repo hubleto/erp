@@ -3,7 +3,7 @@
 <div class="flex gap-2">
   <div class="shrink p-2">
     {% for f in viewParams.logFiles %}
-      <div>
+      <div class="{% if f == viewParams.logFile %} font-bold {% endif %}">
         <a href="?f={{ f }}" class="text-blue-800">{{ f }}</a>
       </div>
     {% endfor %}

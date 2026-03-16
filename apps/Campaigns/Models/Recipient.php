@@ -78,6 +78,11 @@ class Recipient extends \Hubleto\Erp\Model
         (new Integer($this, $this->translate('Count')))
       );
 
+      $description->addColumn(
+        'clicks',
+        (new Integer($this, $this->translate('Clicks')))
+      );
+
     }
 
     $description->addFilter('fGroupBy', [

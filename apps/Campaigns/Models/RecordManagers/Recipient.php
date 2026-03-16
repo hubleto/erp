@@ -96,6 +96,7 @@ class Recipient extends \Hubleto\Erp\RecordManager
 
     if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
       $selects[] = 'count(campaigns_recipients.id) as count';
+      $selects[] = '(select count(cc.id) from campaigns_clicks cc where cc.id_recipient = campaigns_recipients.id) as clicks';
     }
 
     return $selects;
@@ -116,6 +117,7 @@ class Recipient extends \Hubleto\Erp\RecordManager
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $filters = $hubleto->router()->urlParamAsArray("filters");
 
     if ($hubleto->router()->isUrlParam("idCampaign")) {
       $query = $query->where($this->table . '.id_campaign', $hubleto->router()->urlParamAsInteger("idCampaign"));
@@ -123,10 +125,10 @@ class Recipient extends \Hubleto\Erp\RecordManager
 
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];
-      if (in_array('virt_utm_source', $fGroupBy)) $query = $query->groupBy('campaigns.virt_utm_source');
-      if (in_array('virt_utm_campaign', $fGroupBy)) $query = $query->groupBy('campaigns.virt_utm_campaign');
-      if (in_array('virt_utm_term', $fGroupBy)) $query = $query->groupBy('campaigns.virt_utm_term');
-      if (in_array('virt_status', $fGroupBy)) $query = $query->groupBy('campaigns.virt_status');
+      if (in_array('virt_utm_source', $fGroupBy)) $query = $query->groupBy('virt_utm_source');
+      if (in_array('virt_utm_campaign', $fGroupBy)) $query = $query->groupBy('virt_utm_campaign');
+      if (in_array('virt_utm_term', $fGroupBy)) $query = $query->groupBy('virt_utm_term');
+      if (in_array('virt_status', $fGroupBy)) $query = $query->groupBy('virt_status');
       if (in_array('email', $fGroupBy)) $query = $query->groupBy('campaigns.email');
     }
 

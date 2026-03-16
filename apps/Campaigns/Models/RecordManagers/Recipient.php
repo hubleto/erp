@@ -97,7 +97,7 @@ class Recipient extends \Hubleto\Erp\RecordManager
     if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
       $selects[] = 'count(campaigns_recipients.id) as count';
       $selects[] = '(select count(cc.id) from campaigns_clicks cc where cc.id_recipient = campaigns_recipients.id) as clicks_count';
-      $selects[] = '(select group_concat(distinct concat(c.name, ": ", cc.url)) from campaigns_clicks cc left join campaigns c on c.id = cc.id_campaign where cc.id_recipient = campaigns_recipients.id) as clicks_summary';
+      $selects[] = '(select group_concat(distinct concat(c.name, ": ", cc.url) separator "\n") from campaigns_clicks cc left join campaigns c on c.id = cc.id_campaign where cc.id_recipient = campaigns_recipients.id) as clicks_summary';
       $selects[] = '(select sum(cc.bot_score) from campaigns_clicks cc where cc.id_recipient = campaigns_recipients.id) as bot_score';
     }
 

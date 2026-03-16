@@ -1,0 +1,17 @@
+<h1 class="app-main-title">{{ translate('Settings') }} > {{ translate('Log Viewer') }}</h1>
+
+<div class="flex gap-2">
+  <div class="shrink p-2">
+    {% for f in viewParams.logFiles %}
+      <div>
+        <a href="?f={{ f }}" class="text-blue-800">{{ f }}</a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="grow card">
+    <div class="card-header">{{ viewParams.logFile }}</div>
+    <div class="card-body">
+      <pre class="w-full">{{ viewParams.logFileContent }}</pre>
+    <div>
+  </div>
+</div>

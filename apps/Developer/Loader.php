@@ -22,13 +22,6 @@ class Loader extends \Hubleto\Erp\App
       '/^developer\/form-designer\/?$/' => Controllers\FormDesigner::class,
     ]);
 
-    // $tools = $this->getService(\Hubleto\App\Community\Tools\Manager::class);
-    // $tools->addTool($this, [
-    //   'title' => $this->translate('Developer tools'),
-    //   'icon' => 'fas fa-screwdriver-wrench',
-    //   'url' => 'developer',
-    // ]);
-
   }
 
 }

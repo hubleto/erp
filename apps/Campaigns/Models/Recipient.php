@@ -63,6 +63,8 @@ class Recipient extends \Hubleto\Erp\Model
     $description->hide(['footer']);
 
     if (isset($filters['fGroupBy'])) {
+      $description->setPermissions(false, false, false, false);
+
       $fGroupBy = (array) $filters['fGroupBy'];
 
       $showOnlyColumns = [];

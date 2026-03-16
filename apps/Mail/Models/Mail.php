@@ -232,8 +232,10 @@ class Mail extends \Hubleto\Erp\Model
    */
   public function sendById(int $id): bool
   {
-    $mail = $this->record->prepareReadQuery()
+    $mail = $this->record
       ->where('mails.id', $id)
+      ->with('ACCOUNT')
+      ->with('MAILBOX')
       ->with('ATTACHMENTS')
       ->first()?->toArray()
     ;

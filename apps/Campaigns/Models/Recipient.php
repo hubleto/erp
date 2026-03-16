@@ -3,6 +3,7 @@
 namespace Hubleto\App\Community\Campaigns\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -79,8 +80,13 @@ class Recipient extends \Hubleto\Erp\Model
       );
 
       $description->addColumn(
-        'clicks',
+        'clicks_count',
         (new Integer($this, $this->translate('Clicks')))
+      );
+
+      $description->addColumn(
+        'clicks_summary',
+        (new Text($this, $this->translate('Clicked campaigns')))
       );
 
       $description->addColumn(

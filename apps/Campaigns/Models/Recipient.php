@@ -83,6 +83,11 @@ class Recipient extends \Hubleto\Erp\Model
         (new Integer($this, $this->translate('Clicks')))
       );
 
+      $description->addColumn(
+        'bot_score',
+        (new Integer($this, $this->translate('Bot score')))
+      );
+
     }
 
     $description->addFilter('fGroupBy', [

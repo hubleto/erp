@@ -97,6 +97,7 @@ class Recipient extends \Hubleto\Erp\RecordManager
     if (isset($filters['fGroupBy']) && is_array($filters['fGroupBy'])) {
       $selects[] = 'count(campaigns_recipients.id) as count';
       $selects[] = '(select count(cc.id) from campaigns_clicks cc where cc.id_recipient = campaigns_recipients.id) as clicks';
+      $selects[] = '(select sum(cc.bot_score) from campaigns_clicks cc where cc.id_recipient = campaigns_recipients.id) as bot_score';
     }
 
     return $selects;

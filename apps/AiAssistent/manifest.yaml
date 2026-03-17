@@ -1,0 +1,9 @@
+namespace: Hubleto\App\Community\AiAssistent
+appType: community
+sidebarGroup: crm
+rootUrlSlug: ai-assistant
+name: AIAssistant
+icon: fas fa-robot
+author:
+  name: "Hubleto"
+highlight: AI Assistant for intelligent data interaction

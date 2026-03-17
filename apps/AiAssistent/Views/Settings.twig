@@ -1,0 +1,50 @@
+<div class="flex items-center">
+  <h1 class="app-main-title">{{ translate('AIAssistant') }} > {{ translate('Settings') }}</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">{{ translate('Settings saved.') }}</div>
+  {% endif %}
+</div>
+
+<script>
+  function saveSettings() {
+    $("#settings-form").submit();
+  }
+</script>
+
+<div class="card mt-10 w-1/2 m-auto">
+  <form id="settings-form" action="" method="POST">
+    <input type="hidden" name="settingsChanged" value="1">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>{{ translate("Google Gemini API Key") }}</td>
+          <td>
+            <input
+              type="password" name="apiKey"
+              class="hubleto component input"
+              value="{{ viewParams.app.configAsString('apiKey') }}"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ translate("Context Sensitivity Level") }}<br/>
+            <small class="text-gray-500">{{ translate("Level of detail from ERP records sent to AI.") }}</small>
+          </td>
+          <td>
+            <select name="sensitivityLevel" class="hubleto component input">
+              <option value="0" {% if viewParams.app.configAsInteger('sensitivityLevel') == 0 %}selected{% endif %}>{{ translate('0 - Restricted (No context data)') }}</option>
+              <option value="1" {% if viewParams.app.configAsInteger('sensitivityLevel') == 1 %}selected{% endif %}>{{ translate('1 - Detailed data (Send record info to AI)') }}</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mt-4 text-right pr-4 pb-4">
+      <button type="submit" class="btn btn-add">
+        <span class="icon"><i class="fas fa-save"></i></span>
+        <span class="text">{{ translate('Save') }}</span>
+      </button>
+    </div>
+  </form>
+</div>

@@ -9,21 +9,21 @@ class AppMenu extends \Hubleto\Framework\Extendible
     return [
       [
         'app' => $this->app,
-        'url' => 'discussions',
-        'title' => $this->app->translate('Discussions'),
-        'icon' => 'fas fa-user',
+        'url' => 'api',
+        'title' => $this->app->translate('API'),
+        'icon' => 'fas fa-arrow-right-arrow-left',
       ],
       [
         'app' => $this->app,
-        'url' => 'discussions/members',
-        'title' => $this->app->translate('Members'),
-        'icon' => 'fas fa-file-import',
+        'url' => 'api/keys',
+        'title' => $this->app->translate('Keys'),
+        'icon' => 'fas fa-key',
       ],
       [
         'app' => $this->app,
-        'url' => 'discussions/messages',
-        'title' => $this->app->translate('Messages'),
-        'icon' => 'fas fa-file-import',
+        'url' => 'api/usage',
+        'title' => $this->app->translate('Usage log'),
+        'icon' => 'fas fa-check-double',
       ],
     ];
   }

@@ -22,8 +22,8 @@ class Loader extends \Hubleto\Erp\App
       '/^api\/keys\/add?\/?$/' => ['controller' => Controllers\Keys::class, 'vars' => [ 'recordId' => -1 ]],
       '/^api\/permissions(\/(?<recordId>\d+))?\/?$/' => Controllers\Permissions::class,
       '/^api\/permissions\/add?\/?$/' => ['controller' => Controllers\Permissions::class, 'vars' => [ 'recordId' => -1 ]],
-      '/^api\/usages(\/(?<recordId>\d+))?\/?$/' => Controllers\Usages::class,
-      '/^api\/usages\/add?\/?$/' => ['controller' => Controllers\Usages::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^api\/usage(\/(?<recordId>\d+))?\/?$/' => Controllers\Usages::class,
+      '/^api\/usage\/add?\/?$/' => ['controller' => Controllers\Usages::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
 
@@ -45,6 +45,32 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\Permission::class)->upgradeSchema();
       $this->getModel(Models\Usage::class)->upgradeSchema();
     }
+  }
+
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/api">
+          <span class="icon"><i class="fas fa-arrow-right-arrow-left"></i></span>
+          <span class="text">' . $this->translate('API') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/api/keys">
+          <span class="icon"><i class="fas fa-key"></i></span>
+          <span class="text">' . $this->translate('Keys') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/api/usage">
+          <span class="icon"><i class="fas fa-check-double"></i></span>
+          <span class="text">' . $this->translate('Usage log') . '</span>
+        </a>
+      </div>
+    ';
   }
 
 }

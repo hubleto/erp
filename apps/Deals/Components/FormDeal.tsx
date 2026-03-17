@@ -399,8 +399,10 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
           // makes the folder embeddable
 
-          iframeUrl = 'https://drive.google.com/embeddedfolderview?id='
-            + url.pathname.replace('/drive/folders/', '')
+          iframeUrl = 'https://drive.google.com/embeddedfolderview'
+            + '?id=' + url.pathname.replace('/drive/folders/', '')
+            + '&authuser=0'
+          ;
 
         }
 

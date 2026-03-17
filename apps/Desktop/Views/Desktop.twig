@@ -93,12 +93,12 @@
 
     <nav id="default-navbar"><div>
       <div class="flex items-center">
-        <div class="flex flex-row justify-around gap-2">
+        <div class="flex flex-row justify-around md:gap-2">
           <a class="flex" href="{{ config.projectUrl }}/" class="w-8 h-8">
             <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
           </a>
           {% if secondLogoUrl %} <img src="{{ secondLogoUrl }}" class="h-8 m-auto"> {% endif %}
-          <button onclick="toggleSidebar()" class="block sm:hidden ml-4 border border-primary/20 text-primary py-1.5 px-2 rounded">
+          <button onclick="toggleSidebar()" class="block sm:hidden md:ml-4 md:border md:border-primary/20 text-primary py-1.5 px-2 md:rounded">
             <span class="icon"><i id="menuButton" class="fas fa-chevron-down"></i></span>
           </button>
         </div>

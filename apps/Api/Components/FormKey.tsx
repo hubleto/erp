@@ -7,7 +7,8 @@ import request from '@hubleto/react-ui/core/Request';
 
 interface FormKeyProps extends FormExtendedProps { }
 interface FormKeyState extends FormExtendedState {
-  testResult: any,
+  testRequest: any,
+  testResponse: any,
 }
 
 export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeyState> {
@@ -35,14 +36,23 @@ export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeySta
   }
 
   getStateFromProps(props: FormKeyProps) {
-    return {
-      ...super.getStateFromProps(props),
-      testResult: null,
-      tabs: [
-        { uid: 'default', title: this.translate('Key') },
+    let editTabs = [];
+
+    if (props.id > 0) {
+      editTabs = [
         { uid: 'permissions', title: this.translate('Permissions') },
         { uid: 'test', title: this.translate('Test') },
         { uid: 'usage', title: this.translate('Usage') },
+      ];
+    }
+
+    return {
+      ...super.getStateFromProps(props),
+      testRequest: null,
+      testResponse: null,
+      tabs: [
+        { uid: 'default', title: this.translate('Key') },
+        ...editTabs,
       ]
     };
   }
@@ -73,7 +83,7 @@ export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeySta
           {this.inputWrapper('created')}
           {this.inputWrapper('id_created_by')}
         </>;
-        break;
+      break;
       case 'permissions':
         return R.id > 0 ?
           <TablePermissions
@@ -85,7 +95,6 @@ export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeySta
         : null;
       break;
       case 'test':
-        console.log(this.refInputApp.current, this.refInputController.current, this.refInputVars.current);
         return R.id > 0 ? <>
           <table className='table-default dense'>
             <thead>
@@ -117,17 +126,22 @@ export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeySta
           <button
             className='btn btn-primary-outline mt-2'
             onClick={() => {
+              let testRequest = {
+                key: R.key,
+                app: this.refInputApp.current.state.value,
+                controller: this.refInputController.current.state.value,
+                vars: this.refInputVars.current.state.value,
+              }
+
               request.post(
                 'api/call',
-                {
-                  key: R.key,
-                  app: this.refInputApp.current.state.value,
-                  controller: this.refInputController.current.state.value,
-                  vars: this.refInputVars.current.state.value,
-                },
+                testRequest,
                 {},
                 (data: any) => {
-                  this.setState({testResult: data});
+                  this.setState({testRequest: testRequest, testResponse: data});
+                },
+                (error: any) => {
+                  this.setState({testRequest: testRequest, testResponse: error});
                 }
               )
             }}
@@ -135,7 +149,7 @@ export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeySta
             <span className='icon'><i className='fas fa-bolt'></i></span>
             <span className='text'>{this.translate('Run test')}</span>
           </button>
-          {this.state.testResult ?
+          {this.state.testResponse ?
             <div className='card mt-2'>
               <div className='card-header'>{this.translate('Test result')}</div>
               <div className='card-body'>
@@ -143,13 +157,13 @@ export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeySta
                   POST accounts/wai-blue/api/call{"\n"}
                   {"  "}-H 'Content-type: application/json'{"\n"}
                   {"  "}-D '&#123;{"\n"}
-                  {"    "}key: {R.key}{"\n"}
-                  {"    "}app: {this.refInputApp.current.state.value}{"\n"}
-                  {"    "}controller: {this.refInputController.current.state.value}{"\n"}
-                  {"    "}vars: {JSON.stringify(this.refInputVars.current.state.value)}{"\n"}
+                  {"    "}key: {this.state.testRequest.key}{"\n"}
+                  {"    "}app: {this.state.testRequest.app}{"\n"}
+                  {"    "}controller: {this.state.testRequest.controller}{"\n"}
+                  {"    "}vars: {JSON.stringify(this.state.testRequest.vars)}{"\n"}
                   {"  "}&#125;'{"\n"}
                 </pre>
-                <pre className='text-xs bg-blue-50 p-2'>{JSON.stringify(this.state.testResult, null, 2)}</pre>
+                <pre className='text-xs bg-blue-50 p-2'>{JSON.stringify(this.state.testResponse, null, 2)}</pre>
               </div>
             </div>
           : null}

@@ -41,6 +41,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
       salaries: {},
       tabs: [
         { uid: 'default', title: <b>{this.translate('Project')}</b> },
+        { uid: 'documents', title: this.translate('Documents') },
         { uid: 'milestones', title: this.translate('Milestones') },
         { uid: 'tasks', title: this.translate('Tasks') },
         { uid: 'worksheet', title: this.translate('Worksheet') },
@@ -134,7 +135,6 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
               {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
               {this.inputWrapper('title', {cssClass: 'text-2xl'})}
               {this.inputWrapper('description')}
-              {this.inputWrapper('online_documentation_folder')}
               {this.inputWrapper('id_main_developer')}
               {this.inputWrapper('id_project_manager')}
               {this.inputWrapper('id_account_manager')}
@@ -185,6 +185,31 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
             </div>
           </div>
         </>;
+      break;
+
+      case 'documents':
+        let iframeUrl = R.online_documentation_folder ?? '';
+
+        // for Google Drive, replacing
+        // https://drive.google.com/drive/folders/FOLDER_ID
+        // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
+        // makes the folder embeddable
+
+        if (iframeUrl.indexOf('drive.google.com/drive/folders') > 0) {
+          iframeUrl = iframeUrl.replace(
+            'drive.google.com/drive/folders/',
+            'drive.google.com/embeddedfolderview?id='
+          );
+          console.log(iframeUrl);
+        }
+
+        return <div className='flex flex-col gap-2 h-full'>
+          {this.inputWrapper('online_documentation_folder')}
+          <iframe
+            className='w-full h-full shadow-sm'
+            src={iframeUrl}
+          ></iframe>
+        </div>;
       break;
 
       case 'milestones':

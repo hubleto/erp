@@ -84,6 +84,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       tabs: [
         { uid: 'default', title: <b>{this.translate('Deal')}</b> },
         { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
+        { uid: 'documents', title: this.translate('Documents') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
@@ -299,7 +300,6 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
               </div>
             : <></>}
           </div>
-          {this.inputWrapper('shared_folder', {readonly: R.is_closed})}
           {this.inputWrapper('customer_order_number', {readonly: R.is_closed})}
           {this.inputWrapper('id_template_quotation', {readonly: R.is_closed})}
           {this.inputWrapper('date_expected_close', {readonly: R.is_closed})}
@@ -383,6 +383,30 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           </div>
         </>;
 
+      break;
+
+      case 'documents':
+        let iframeUrl = R.shared_folder ?? '';
+
+        // for Google Drive, replacing
+        // https://drive.google.com/drive/folders/FOLDER_ID
+        // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
+        // makes the folder embeddable
+
+        if (iframeUrl.indexOf('drive.google.com/drive/folders') > 0) {
+          iframeUrl = iframeUrl.replace(
+            'drive.google.com/drive/folders/',
+            'drive.google.com/embeddedfolderview?id='
+          );
+        }
+
+        return <div className='flex flex-col gap-2 h-full'>
+          {this.inputWrapper('shared_folder', {readonly: R.is_closed})}
+          <iframe
+            className='w-full h-full shadow-sm'
+            src={iframeUrl}
+          ></iframe>
+        </div>;
       break;
 
       case 'calendar':

@@ -67,6 +67,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       campaignLaunchInfo: null,
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
+        { uid: 'documents', title: this.translate('Documents') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'contacts', title: this.translate('Contacts') },
         { uid: 'recipients', title: this.translate('Recipients') },
@@ -160,7 +161,6 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             <div className='flex-1 border-r border-gray-100'>
               {this.inputWrapper('name')}
               {this.inputWrapper('type')}
-              {this.inputWrapper('shared_folder')}
               {this.inputWrapper('target_audience')}
               {this.inputWrapper('goal')}
               {this.inputWrapper('notes')}
@@ -186,6 +186,31 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
           </div>
         </>;
       break
+
+      case 'documents':
+        let iframeUrl = R.shared_folder ?? '';
+
+        // for Google Drive, replacing
+        // https://drive.google.com/drive/folders/FOLDER_ID
+        // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
+        // makes the folder embeddable
+
+        if (iframeUrl.indexOf('drive.google.com/drive/folders') > 0) {
+          iframeUrl = iframeUrl.replace(
+            'drive.google.com/drive/folders/',
+            'drive.google.com/embeddedfolderview?id='
+          );
+          console.log(iframeUrl);
+        }
+
+        return <div className='flex flex-col gap-2 h-full'>
+          {this.inputWrapper('shared_folder')}
+          <iframe
+            className='w-full h-full shadow-sm'
+            src={iframeUrl}
+          ></iframe>
+        </div>;
+      break;
 
       case 'calendar':
         //@ts-ignore

@@ -188,19 +188,22 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
       break;
 
       case 'documents':
+        let url = new URL(R.online_documentation_folder ?? '');
         let iframeUrl = R.online_documentation_folder ?? '';
 
-        // for Google Drive, replacing
-        // https://drive.google.com/drive/folders/FOLDER_ID
-        // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
-        // makes the folder embeddable
+        if (
+          url.hostname == 'drive.google.com'
+          && url.pathname.indexOf('/drive/folders') == 0
+        ) {
 
-        if (iframeUrl.indexOf('drive.google.com/drive/folders') > 0) {
-          iframeUrl = iframeUrl.replace(
-            'drive.google.com/drive/folders/',
-            'drive.google.com/embeddedfolderview?id='
-          );
-          console.log(iframeUrl);
+          // for Google Drive, replacing
+          // https://drive.google.com/drive/folders/FOLDER_ID
+          // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
+          // makes the folder embeddable
+
+          iframeUrl = 'https://drive.google.com/embeddedfolderview?id='
+            + url.pathname.replace('/drive/folders/', '')
+
         }
 
         return <div className='flex flex-col gap-2 h-full'>

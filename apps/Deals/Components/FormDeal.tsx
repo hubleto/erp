@@ -386,12 +386,23 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       break;
 
       case 'documents':
+        let url = new URL(R.shared_folder ?? '');
         let iframeUrl = R.shared_folder ?? '';
 
-        // for Google Drive, replacing
-        // https://drive.google.com/drive/folders/FOLDER_ID
-        // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
-        // makes the folder embeddable
+        if (
+          url.hostname == 'drive.google.com'
+          && url.pathname.indexOf('/drive/folders') == 0
+        ) {
+
+          // for Google Drive, replacing
+          // https://drive.google.com/drive/folders/FOLDER_ID
+          // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
+          // makes the folder embeddable
+
+          iframeUrl = 'https://drive.google.com/embeddedfolderview?id='
+            + url.pathname.replace('/drive/folders/', '')
+
+        }
 
         if (iframeUrl.indexOf('drive.google.com/drive/folders') > 0) {
           iframeUrl = iframeUrl.replace(

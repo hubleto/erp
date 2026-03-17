@@ -1,5 +1,16 @@
 {
     "GenerateDemoData": {
-        "Follow-up call2": "Nadväzujúci hovor"
+        "Follow-up call": "Follow-up hovor",
+        "Lead created": "Lead vytvorený",
+        "Converted to a deal": "Prevedené na deal",
+        "Newsletter subscribers": "Odberatelia newslettera",
+        "Cold calling - SMEs": "Cold calling - malé a stredné podniky",
+        "Website visitors filling 'Subscribe to our newsletter'.": "Návštevníci webu, ktorí vyplnili formulár 'Prihlásiť sa na odber newslettera'.",
+        "SMEs reached out by cold calling.": "Malé a stredné podniky oslovené cold callingom.",
+        "Meeting": "Stretnutie",
+        "Business Trip": "Pracovná cesta",
+        "Call": "Hovor",
+        "Email": "Email",
+        "Other": "Iné"
     }
 }

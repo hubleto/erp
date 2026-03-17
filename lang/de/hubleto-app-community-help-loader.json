@@ -5,6 +5,10 @@
     },
     "Controllers\\Help": {
         "Help center": "Hilfezentrum",
-        "About your Hubleto": "Über Ihren Hubleto"
+        "About your Hubleto": "Über Ihren Hubleto",
+        "Need help using Hubleto?": "",
+        "Found a bug?": "",
+        "Need help with development?": "",
+        "Just looking around?": ""
     }
 }

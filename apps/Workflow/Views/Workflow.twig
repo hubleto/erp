@@ -74,7 +74,7 @@
                         {% include item._DETAIL_VIEW with { item: item } %}
                       </div>
                       <a class="btn btn-transparent rounded-none" href="{{ hubleto.env().projectUrl }}/{{ item._DETAIL_URL }}" target="_blank">
-                        <span class="text">Show details</span>
+                        <span class="text">{{ translate('Show details') }}</span>
                       </a>
                     </div>
                   {% endif %}

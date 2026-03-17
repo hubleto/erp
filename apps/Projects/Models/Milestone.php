@@ -69,7 +69,7 @@ class Milestone extends \Hubleto\Erp\Model
         $description->permissions = [false, true, false, false];
       break;
       default:
-        $description->ui['addButtonText'] = 'Add milestone';
+        $description->ui['addButtonText'] = $this->translate('Add milestone');
         $description->show(['header', 'fulltextSearch', 'columnSearch']);
       break;
     }

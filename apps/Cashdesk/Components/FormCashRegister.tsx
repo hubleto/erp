@@ -34,7 +34,7 @@ export default class FormCashRegister<P, S> extends FormExtended<FormCashRegiste
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Cash register')}</b> },
+        { uid: 'default', title: <b>{this.translate('Cash register','Hubleto\\App\\Community\\Cashdesk\\Loader','Components\\FormCashRegister')}</b> },
       ],
     };
   }

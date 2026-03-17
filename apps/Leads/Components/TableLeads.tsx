@@ -88,7 +88,7 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
   onAfterLoadTableDescription(description: any) {
     description.columns['DEAL'] = {
       type: 'varchar',
-      title: globalThis.hubleto.translate('Deal'),
+      title: this.translate('Deal'),
     };
 
     return description;

@@ -16,8 +16,8 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
     $to = $this->router()->urlParamAsString('to');
     $variables = $this->router()->urlParamAsString('variables');
 
-    if (empty($to)) throw new \Exception("Recipient must be provided.");
-    if (!filter_var($to, FILTER_VALIDATE_EMAIL)) throw new \Exception("Recipient is not valid email address.");
+    if (empty($to)) throw new \Exception($this->translate("Recipient must be provided."));
+    if (!filter_var($to, FILTER_VALIDATE_EMAIL)) throw new \Exception($this->translate("Recipient is not valid email address."));
 
     $result = [];
 

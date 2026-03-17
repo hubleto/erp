@@ -1,0 +1,22 @@
+{
+    "manifest": {
+        "Audit Logs": "Audit Logy"
+    },
+    "Models\\AuditLog": {
+        "Datetime": "Dátum a čas",
+        "Type": "Typ",
+        "Context": "Kontext",
+        "Model": "Model",
+        "RecordId": "ID záznamu",
+        "Message": "Správa",
+        "Priority": "Priorita",
+        "User": "Používateľ",
+        "IP": "IP adresa",
+        "create": "Vytvorenie",
+        "update": "Aktualizácia",
+        "delete": "Odstránenie"
+    },
+    "Controllers\\AuditLogs": {
+        "AuditLogs": "AuditLogy"
+    }
+}

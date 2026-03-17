@@ -65,7 +65,15 @@
         "Active": "Aktívne",
         " changed from ": " zmenené z ",
         " to ": " na ",
-        "Shared with": "Zdieľané s"
+        "Shared with": "Zdieľané s",
+        "Advertisement": "Reklama",
+        "Partner": "Partner",
+        "Web": "Web",
+        "Cold call": "Cold call",
+        "E-mail": "E-mail",
+        "Referral": "Odporúčanie",
+        "Other": "Iné",
+        "Shared folder (online document storage)": "Zdieľaný priečinok (online úložisko dokumentov)"
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",
@@ -90,12 +98,12 @@
         "Created by": "Vytvorené",
         "Contact": "Kontakt",
         "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Location": "Miesto",
+        "Online meeting link": "Odkaz na online stretnutie",
+        "Description": "Popis",
+        "Recurrence": "Opakovanie",
+        "Long meeting minutes (link to external document)": "Podrobný zápis zo stretnutia (odkaz na externý dokument)",
+        "Short meeting minutes": "Krátky zápis zo stretnutia"
     },
     "Models\\DealDocument": {
         "Deal": "Deal",
@@ -132,7 +140,11 @@
         "Deal value:": "Hodnota dealu",
         "Weighted profit": "Vážená hodnota dealu",
         "Tasks": "Úlohy",
-        "Products": "Produkty"
+        "Products": "Produkty",
+        "Items": "Položky",
+        "Select parent lead": "Vybrať nadradený lead",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt"
     },
     "Models\\Tag": {
         "Name": "Názov",

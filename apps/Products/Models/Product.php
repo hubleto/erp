@@ -47,19 +47,19 @@ class Product extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     $typeEnumValues = array_merge(
-      self::TYPE_ENUM_VALUES,
+      array_map(fn($v) => $this->translate($v), self::TYPE_ENUM_VALUES),
       $this->getService(\Hubleto\App\Community\Products\Loader::class)->productTypes
     );
 
     $typeDescription = 
-      'Consumables are physical products for which you do not manage inventory levels - they are always available. '
-      . 'Storable products are physical items for which you manage inventory levels.'
+      $this->translate('Consumables are physical products for which you do not manage inventory levels - they are always available. ')
+      . $this->translate('Storable products are physical items for which you manage inventory levels.')
     ;
 
     $invoicingPolicyDescription = 
-      'Order: An invoice is generated immediately after a sales order is confirmed. '
-      . 'Delivery: An invoice is generated immediately after the delivery is completed. '
-      . 'Manual: Invoice is not automatically generated.'
+      $this->translate('Order: An invoice is generated immediately after a sales order is confirmed. ')
+      . $this->translate('Delivery: An invoice is generated immediately after the delivery is completed. ')
+      . $this->translate('Manual: Invoice is not automatically generated.')
     ;
 
     return array_merge(parent::describeColumns(), [
@@ -68,7 +68,7 @@ class Product extends \Hubleto\Erp\Model
       'id_group' => (new Lookup($this, $this->translate('Group'), Group::class)),
       'id_category' => (new Lookup($this, $this->translate('Category'), Category::class)),
       'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setDescription($typeDescription)->setDefaultVisible(),
-      'invoicing_policy' => (new Integer($this, $this->translate('Invoicing policy')))->setEnumValues(self::INVOICING_POLICY_ENUM_VALUES)->setDescription($invoicingPolicyDescription),
+      'invoicing_policy' => (new Integer($this, $this->translate('Invoicing policy')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::INVOICING_POLICY_ENUM_VALUES))->setDescription($invoicingPolicyDescription),
       'is_on_sale' => new Boolean($this, $this->translate('On sale'))->setDefaultVisible(),
       'image_1' => new Image($this, $this->translate('Image 1')),
       'image_2' => new Image($this, $this->translate('Image 2')),
@@ -112,13 +112,13 @@ class Product extends \Hubleto\Erp\Model
     $description->addFilter('fProductType', [
       'title' => $this->translate('Type'),
       'type' => 'multipleSelectButtons',
-      'options' => self::TYPE_ENUM_VALUES
+      'options' => array_map(fn($v) => $this->translate($v), self::TYPE_ENUM_VALUES)
     ]);
 
     $description->addFilter('fProductInvoicingPolicy', [
       'title' => $this->translate('Invoicing policy'),
       'type' => 'multipleSelectButtons',
-      'options' => self::INVOICING_POLICY_ENUM_VALUES
+      'options' => array_map(fn($v) => $this->translate($v), self::INVOICING_POLICY_ENUM_VALUES)
     ]);
 
     $fGroupOptions = [];

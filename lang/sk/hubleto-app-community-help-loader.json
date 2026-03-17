@@ -6,6 +6,10 @@
     "Controllers\\Help": {
         "Help center": "Centrum pomoci",
         "Search knowledgebase...": "Vyhľadávať v báze znalostí",
-        "Browse knowledgebase": "Prehliadať bázu znalostí"
+        "Browse knowledgebase": "Prehliadať bázu znalostí",
+        "Need help using Hubleto?": "Potrebujete pomoc s používaním Hubleta?",
+        "Found a bug?": "Našli ste chybu?",
+        "Need help with development?": "Potrebujete pomoc pri vývoji?",
+        "Just looking around?": "Len sa rozhliadate?"
     }
 }

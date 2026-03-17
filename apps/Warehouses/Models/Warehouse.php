@@ -48,12 +48,12 @@ class Warehouse extends \Hubleto\Erp\Model
       'lat' => (new Decimal($this, $this->translate('Coordinates: latitude'))),
       'description' => (new Text($this, $this->translate('Description'))),
       'capacity' => (new Decimal($this, $this->translate('Capacity')))->setReadonly()->setDefaultVisible()
-        ->setDescription('Automatically calculated as total capacity of all locations in warehouse.')
+        ->setDescription($this->translate('Automatically calculated as total capacity of all locations in warehouse.'))
       ,
       'capacity_unit' => (new Varchar($this, $this->translate('Capacity unit')))->setDefaultVisible(),
       'current_stock_status' => (new Decimal($this, $this->translate('Current stock status')))->setDefaultVisible(),
       'operational_status' => (new Integer($this, $this->translate('Operational status')))->setDefaultVisible()
-        ->setEnumValues(self::OPERATIONAL_STATUSES)
+        ->setEnumValues(array_map(fn($v) => $this->translate($v), self::OPERATIONAL_STATUSES))
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)
         ->setEnumCssClasses([
           self::OPERATIONAL_STATUS_ACTIVE => 'bg-green-100 text-green-800',
@@ -84,7 +84,7 @@ class Warehouse extends \Hubleto\Erp\Model
     $description->addFilter('fWarehouseOperationalStatus', [
       'title' => $this->translate('Operational status'),
       'type' => 'multipleSelectButtons',
-      'options' => self::OPERATIONAL_STATUSES
+      'options' => array_map(fn($v) => $this->translate($v), self::OPERATIONAL_STATUSES)
     ]);
 
     $fWarehouseTypeOptions = [];

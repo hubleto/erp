@@ -3,9 +3,13 @@
         "Projects": "Projekty",
         "Project management": "Projektový manažment",
         "Phases": "Fázy",
-        "Monthly summary": "",
-        "Milestones": "",
-        "Task assignment": ""
+        "Monthly summary": "Mesačný prehľad",
+        "Milestones": "Míľniky",
+        "Task assignment": "Priradenie úloh",
+        "Sample project #1": "Vzorový projekt #1",
+        "Sample project #1 for demonstration purposes.": "Vzorový projekt #1 na demonštračné účely.",
+        "Sample project #2": "Vzorový projekt #2",
+        "Sample project #2 for demonstration purposes.": "Vzorový projekt #2 na demonštračné účely."
     },
     "root": {
         "Projects": "Projekty",
@@ -33,9 +37,10 @@
         "Open \/ Closed": "Otvorené \/ Zatvorené",
         "Open": "Otvorené",
         "All": "Všetky",
-        "Average hourly costs": "",
-        "Project manager": "",
-        "Shared with": ""
+        "Average hourly costs": "Priemerné hodinové náklady",
+        "Project manager": "Projektový manažér",
+        "Shared with": "Zdieľané s",
+        "Add Project": "Pridať projekt"
     },
     "Models\\Phase": {
         "Name": "Názov",
@@ -50,6 +55,9 @@
         "Statistics": "Štatistiky",
         "Open tasks": "Otvorené úlohy"
     },
+    "Components\\FormMilestone": {
+        "Milestone": "Míľnik"
+    },
     "Models\\ProjectOrder": {
         "Project": "Projekt",
         "Order": "Objednávka"
@@ -63,22 +71,47 @@
         "Deal": "Deal"
     },
     "Models\\ProjectActivity": {
-        "Subject": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "Recurrence": "",
-        "All day": "",
-        "Completed": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Created by": "",
-        "Project": "",
-        "Contact": ""
+        "Subject": "Predmet",
+        "Location": "Miesto",
+        "Online meeting link": "Odkaz na online stretnutie",
+        "Description": "Popis",
+        "Activity type": "Typ aktivity",
+        "Start date": "Dátum začiatku",
+        "Start time": "Čas začiatku",
+        "End date": "Dátum konca",
+        "End time": "Čas konca",
+        "Recurrence": "Opakovanie",
+        "All day": "Celý deň",
+        "Completed": "Dokončená",
+        "Long meeting minutes (link to external document)": "Podrobná zápisnica (odkaz na externý dokument)",
+        "Short meeting minutes": "Stručná zápisnica",
+        "Created by": "Vytvoril",
+        "Project": "Projekt",
+        "Contact": "Kontakt"
+    },
+    "Controllers\\Projects": {
+        "Projects": "Projekty"
+    },
+    "Models\\Milestone": {
+        "Title": "Názov",
+        "Due date": "Dátum splnenia",
+        "Expected output": "Očakávaný výsledok",
+        "Description of activities": "Popis aktivít",
+        "Color": "Farba",
+        "Closed": "Uzavreté",
+        "Last report": "Posledná správa",        
+        "Last progress": "Posledný pokrok",
+        "Add milestone": "Pridať míľnik",
+        "Project": "Projekt"
+    },
+    "Controllers\\Milestones": {
+        "Milestones": "Míľniky"
+    },
+    "Controllers\\MonthlySummary": {
+       "Projects":"Projekty",
+       "Monthly summary":"Mesačný prehľad",
+       "Search project": "Hľadať projekt",
+        "No project found.": "Nenašiel sa žiadny projekt.",
+        "projects found": "projekty nájdené"
     }
 }

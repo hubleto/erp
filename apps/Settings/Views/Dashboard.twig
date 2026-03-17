@@ -24,14 +24,14 @@
       <table class="table-default dense">
         <tbody>
           <tr>
-            <td>Default currency and timezone</td>
+            <td>{{ translate('Default currency and timezone') }}</td>
             <td>
               <div class="badge badge-info">{{ hubleto.locale().getCurrencyIsoCode() }} [{{ hubleto.locale().getCurrencySymbol() }}]</div>
               <div class="badge badge-info">{{ hubleto.locale().getTimezone() }}</div>
             </td>
           </tr>
           <tr>
-            <td>Date (short / long) and time formats</td>
+            <td>{{ translate('Date (short / long) and time formats') }}</td>
             <td class="flex gap-2">
               <div class="badge badge-info">{{ hubleto.locale().getDateShortFormat() }}</div>
               <div class="badge badge-info">{{ hubleto.locale().getDateLongFormat() }}</div>
@@ -40,7 +40,7 @@
             </td>
           </tr>
           <tr>
-            <td>Decimals and thousands separator</td>
+            <td>{{ translate('Decimals and thousands separator') }}</td>
             <td>
               <div class="badge badge-info">{{ hubleto.locale().getDecimalsSeparator() }}</div>
               <div class="badge badge-info">{{ hubleto.locale().getThousandsSeparator() }}</div>
@@ -74,7 +74,7 @@
   <div class="card-body">
     <input
       class="w-full p-2 border border-gray text-lg"
-      placeholder="Search settings..."
+      placeholder="{{ translate('Search settings...') }}"
       onkeyup="searchSetting(this.value);"
     />
 

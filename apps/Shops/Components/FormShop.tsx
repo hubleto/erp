@@ -28,7 +28,7 @@ export default class FormShop<P, S> extends FormExtended<FormShopProps, FormShop
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Shop')}</b> },
+        { uid: 'default', title: <b>{this.translate('Shop','Hubleto\\App\\Community\\Shops\\Loader','Components\\FormShop')}</b> },
         ...this.getCustomTabs()
       ]
     }
@@ -46,7 +46,7 @@ export default class FormShop<P, S> extends FormExtended<FormShopProps, FormShop
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.translate('Shop')}</small>
+      <small>{this.translate('Shop','Hubleto\\App\\Community\\Shops\\Loader','Components\\FormShop')}</small>
       <h2>{this.state.record.address ?? '-'}</h2>
     </>;
   }

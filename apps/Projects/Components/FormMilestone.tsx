@@ -23,7 +23,7 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.translate('Milestone')}</small>
+      <small>{this.translate('Milestone','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormMilestone')}</small>
       <h2>{this.state.record.title ?? '-'}</h2>
     </>;
   }

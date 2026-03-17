@@ -30,9 +30,9 @@ export default class FormProfile extends FormExtended<FormProfileProps, FormProf
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Profile')}</b> },
-        { uid: 'invoice-rendering', title: <b>{this.translate('Invoice rendering')}</b> },
-        { uid: 'e-mails', title: <b>{this.translate('E-mails')}</b> },
+        { uid: 'default', title: <b>{this.translate('Profile','Hubleto\\App\\Community\\Invoices\\Loader','Components\\FormProfile')}</b> },
+        { uid: 'invoice-rendering', title: <b>{this.translate('Invoice rendering','Hubleto\\App\\Community\\Invoices\\Loader','Components\\FormProfile')}</b> },
+        { uid: 'e-mails', title: <b>{this.translate('E-mails','Hubleto\\App\\Community\\Invoices\\Loader','Components\\FormProfile')}</b> },
         ...this.getCustomTabs()
       ],
     };
@@ -51,7 +51,7 @@ export default class FormProfile extends FormExtended<FormProfileProps, FormProf
   renderTitle(): JSX.Element {
     const R = this.state.record;
     return <>
-      <small>{this.translate('Invoice profile')}</small>
+      <small>{this.translate('Invoice profile','Hubleto\\App\\Community\\Invoices\\Loader','Components\\FormProfile')}</small>
       <h2>{R.name}</h2>
     </>;
   }

@@ -8,7 +8,20 @@
         "Transactions": "Pohyby",
         "Inventory": "Inventár",
         "Create transaction": "Zaevidovať pohyb",
-        "Locations types": "Typu umiestnení"
+        "Locations types": "Typu umiestnení",
+        "All items": "Všetky položky",
+        "Area": "Oblasť",
+        "Aisle": "Ulička",
+        "Rack": "Regál",
+        "Shelf": "Polica",
+        "Bin": "Box",
+        "Main": "Hlavný",
+        "Regional": "Regionálny",
+        "External": "Externý",
+        "Main Distribution Center": "Hlavné distribučné centrum",
+        "Main warehouse used for supplying the most important customers.": "Hlavný sklad používaný na zásobovanie najdôležitejších zákazníkov.",
+        "Regional Hub East": "Regionálne centrum východ",
+        "Regional warehouse used for supplying the regional customers.": "Regionálny sklad používaný na zásobovanie regionálnych zákazníkov."
     },
     "root": {
         "Warehouses": "Sklady",
@@ -34,7 +47,11 @@
         "Manager of operation": "Vedúci prevádzky",
         "Current stock status": "Aktuálny stav skladu",
         "Add warehouse": "Pridať sklad",
-        "Type": "Typ"
+        "Type": "Typ",
+        "Automatically calculated as total capacity of all locations in warehouse.": "Automaticky vypočítané ako celková kapacita všetkých miest v sklade.",
+        "Active": "Aktívny",
+        "Inactive": "Neaktívny",
+        "Maintenance": "Údržba"
     },
     "Models\\WarehouseType": {
         "Name": "Názov"
@@ -53,7 +70,11 @@
         "Manager of operation": "Manažér prevádzky",
         "Current stock status": "Aktuálny stav",
         "Add location": "Pridať umiestnenie",
-        "Type": "Typ"
+        "Type": "Typ",
+        "Active": "Aktívny",
+        "Inactive": "Neaktívny",
+        "Maintenance": "Údržba",
+        "JSON-formatted information about placement of location inside the warehouse.": "Informácie o umiestnení lokácie v sklade vo formáte JSON."
     },
     "Models\\LocationType": {
         "Name": "Názov"
@@ -67,7 +88,8 @@
         "Address": "Adresa",
         "More information": "Viac informácií",
         "Locations": "Umiestnenia",
-        "Warehouse": "Sklad"
+        "Warehouse": "Sklad",
+        "First create warehouse, then you will be prompted to add its locations.": "Najprv vytvorte sklad, potom budete vyzvaní na pridanie jeho umiestnení."
     },
     "Controllers\\Locations": {
         "Warehouses": "Sklady",
@@ -76,7 +98,8 @@
     "Components\\FormLocation": {
         "Capacity and stock status": "Kapacita a stav",
         "Placement": "Poloha",
-        "More information": "Viac informácií"
+        "More information": "Viac informácií",
+        "Location":"Umiestnenie"
     },
     "Controllers\\Inventory": {
         "Warehouses": "Sklady",
@@ -90,7 +113,9 @@
         "Serial number": "Sériové číslo",
         "Expiration": "Expirácia",
         "Received": "Prijaté",
-        "Last moved": "Posledný pohyb"
+        "Last moved": "Posledný pohyb",
+        "Location": "Umiestnenie",
+        "Add item": "Pridať položku"
     },
     "Components\\TableInventory": {
         "Total quantity": "Celkové množstvo"
@@ -116,7 +141,16 @@
         "Who performed the transaction": "Pohyb zaevidoval",
         "Add transaction": "Pridať pohyb",
         "Inbound": "Príjemka",
-        "Outbound": "Výdajka"
+        "Outbound": "Výdajka",
+        "Old location": "Pôvodná umiestnenie",
+        "New location": "Nová umiestnenie",
+        "Receipt": "Príjem",
+        "Shipment": "Expedícia",
+        "Transfer In": "Presun dovnútra",
+        "Transfer Out": "Presun von",
+        "Adjustment In": "Úprava zásob (príjem)",
+        "Adjustment Out": "Úprava zásob (výdaj)",
+        "Return": "Vrátenie"
     },
     "Models\\TransactionItem": {
         "Transaction": "Pohyb",
@@ -125,5 +159,14 @@
         "Quantity": "Množstvo",
         "Original location": "Pôvodné umiestnenie",
         "New location": "Nové umiestnenie"
+    },
+    "Components\\FormInventory": {
+        "Inventory": "Sklad"
+    },
+    "Components\\FormTransaction": {
+        "Transaction": "Transakcia",
+        "Product": "Produkt",
+        "Purchase price": "Nákupná cena",
+        "Add item": "Pridať položku"
     }
 }

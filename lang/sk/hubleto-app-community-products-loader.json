@@ -3,7 +3,7 @@
         "Products": "Produkty",
         "Free product portfolio managment.": "Správa produktového portfólia zdarma.",
         "Groups": "Skupiny",
-        "Categories": ""
+        "Categories": "Kategórie"
     },
     "root": {
         "Products": "Produkty",
@@ -25,14 +25,14 @@
         "Single unit price": "Jednotková cena",
         "Margin": "Marža",
         "Vat": "DPH",
-        "Single unit order possible": "Single unit order possible",
+        "Single unit order possible": "Možné objednať jednotlivo",
         "Unit": "Jednotka",
         "Packaging": "Balenie",
         "Sale ended": "Predaj ukončený",
-        "Show price to customer": "Show price to customer",
-        "Set price after reweight?": "Set price after reweight",
-        "Needs reordering?": "Needs reordering",
-        "Storage rules": "Storage rules",
+        "Show price to customer": "Zobraziť cenu zákazníkovi",
+        "Set price after reweight?": "Nastaviť cenu po prevážení?",
+        "Needs reordering?": "Vyžaduje doplnenie zásob?",
+        "Storage rules": "Pravidlá skladovania",
         "Table": "Table",
         "Add product": "Pridať produkt",
         "Product Group": "Skupina",
@@ -46,22 +46,33 @@
         "Bar code": "Čiarový kód",
         "Data ": "Dáta",
         "EAN": "EAN",
-        "Group": "",
-        "Category": "",
-        "Image 1": "",
-        "Image 2": "",
-        "Image 3": "",
-        "Image 4": "",
-        "Image 5": "",
-        "Packaging unit": "",
-        "Package length": "",
-        "Package width": "",
-        "Package height": "",
-        "Package volume": "",
-        "Package mass": "",
-        "Package discount": "",
-        "Package description": "",
-        "Type": ""
+        "Group": "Skupina",
+        "Category": "Kategória",
+        "Image 1": "Obrázok 1",
+        "Image 2": "Obrázok 2",
+        "Image 3": "Obrázok 3",
+        "Image 4": "Obrázok 4",
+        "Image 5": "Obrázok 5",
+        "Packaging unit": "Jednotka balenia",
+        "Package length": "Dĺžka balenia",
+        "Package width": "Šírka balenia",
+        "Package height": "Výška balenia",
+        "Package volume": "Objem balenia",
+        "Package mass": "Hmotnosť balenia",
+        "Package discount": "Zľava na balenie",
+        "Package description": "Popis balenia",
+        "Type": "Typ",
+        "Consumable": "Spotrebný materiál",
+        "Order": "Objednávka",
+        "Storable": "Skladovateľný",
+        "Service": "Služba",
+        "Delivery": "Dodanie",
+        "Manual": "Manuálne",
+        "Consumables are physical products for which you do not manage inventory levels - they are always available. ": "Spotrebný materiál sú fyzické produkty, pre ktoré nesledujete zásoby – sú vždy k dispozícii. ",
+        "Storable products are physical items for which you manage inventory levels.": "Skladovateľné produkty sú fyzické položky, pre ktoré spravujete úroveň zásob.",
+        "Order: An invoice is generated immediately after a sales order is confirmed. ": "Objednávka: Faktúra sa vygeneruje okamžite po potvrdení predajnej objednávky. ",
+        "Delivery: An invoice is generated immediately after the delivery is completed. ": "Dodanie: Faktúra sa vygeneruje okamžite po dokončení dodávky. ",
+        "Manual: Invoice is not automatically generated.": "Manuálne: Faktúra sa nevytvára automaticky."
     },
     "Models\\Group": {
         "Title": "Názov",
@@ -84,7 +95,10 @@
     },
     "Components\\FormProduct": {
         "Product": "Produkt",
-        "Suppliers": "Dodávateľ"
+        "Suppliers": "Dodávateľ",
+        "Packaging": "Balenie",
+        "Gallery": "Galéria",
+        "First create the product.": "Najskôr vytvorte produkt."
     },
     "Models\\ProductSupplier": {
         "Product": "Produkt",
@@ -93,7 +107,9 @@
         "Supplier product code": "Kód produktu u dodávateľa",
         "Purchase price": "Nákupná cena",
         "Internal notes": "Interné poznámky",
-        "Delivery time": "Čas dodania"
+        "Delivery time": "Čas dodania",
+        "Add supplier": "Pridať dodávateľa",
+        "Product Suppliers": "Dodávatelia produktu"
     },
     "Controllers\\Groups": {
         "Products": "Produkty",
@@ -101,33 +117,33 @@
         "Groups": "Skupiny"
     },
     "Models\\Category": {
-        "Parent": "",
-        "Name": "",
-        "Color": "",
-        "Short description": "",
-        "Long description": "",
-        "Photo #1": "",
-        "Photo #2": "",
-        "Photo #3": "",
-        "Photo #4": "",
-        "Photo #5": "",
-        "URL slug": "",
-        "Add product category": ""
+        "Parent": "Nadradená kategória",
+        "Name": "Názov",
+        "Color": "Farba",
+        "Short description": "Krátky popis",
+        "Long description": "Dlhý popis",
+        "Photo #1": "Foto č. 1",
+        "Photo #2": "Foto č. 2",
+        "Photo #3": "Foto č. 3",
+        "Photo #4": "Foto č. 4",
+        "Photo #5": "Foto č. 5",
+        "URL slug": "URL slug",
+        "Add product category": "Pridať produktovú kategóriu"
     },
     "Components\\TableProducts": {
-        "Hide filter": ""
+        "Hide filter": "Skryť filter"
     },
     "Controllers\\Categories": {
-        "Categories": "",
-        "Products": ""
+        "Categories": "Kategórie",
+        "Products": "Produkty"
     },
     "Components\\TableCategories": {
-        "Add new": ""
+        "Add new": "Pridať novú"
     },
     "Components\\FormCategory": {
-        "Category": "",
-        "Products": "",
-        "Description": "",
-        "First create the category.": ""
+        "Category": "Kategória",
+        "Products": "Produkty",
+        "Description": "Popis",
+        "First create the category.": "Najprv vytvorte kategóriu."
     }
 }

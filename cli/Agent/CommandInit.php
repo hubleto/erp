@@ -444,6 +444,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       false, // randomize (deprecated)
     );
 
+    $this->authProvider()->setUserLanguage($language);
+
     $installer->appsToInstall = [];
 
     // 'core' is always installed
@@ -530,7 +532,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     if ($generateDemoData) {
       $this->terminal()->cyan("  -> Generating demo data.\n");
-      $this->authProvider()->setUserLanguage($language);
       $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
     }
 

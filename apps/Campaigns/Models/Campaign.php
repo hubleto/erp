@@ -57,7 +57,7 @@ class Campaign extends \Hubleto\Erp\Model
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
-      'shared_folder' => new Varchar($this, "Online document folder")->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
+      'shared_folder' => new Varchar($this, $this->translate("Online document folder"))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       // 'mail_body' => (new Text($this, $this->translate('Mail body (HTML)')))->setReactComponent('InputWysiwyg'),
       'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'id_mail_account' => (new Lookup($this, $this->translate('Mail account to send email from'), Account::class)),
@@ -95,8 +95,15 @@ class Campaign extends \Hubleto\Erp\Model
     $description->hide(['footer']);
 
     $description->ui['filters'] = [
-      'fCampaignWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),
-      'fCampaignOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fCampaignWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Phase')),
+      'fCampaignOwnership' => [ 
+        'title' => $this->translate('Ownership'), 
+        'options' => [ 
+          0 => $this->translate('All'),
+          1 => $this->translate('Owned by me',), 
+          2 => $this->translate('Managed by me') 
+        ] 
+      ],
       'fCampaignClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [

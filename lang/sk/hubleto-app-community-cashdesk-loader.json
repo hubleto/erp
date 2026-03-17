@@ -1,0 +1,42 @@
+{
+    "manifest": {
+        "Cashdesk": "Pokladňa",
+        "Cash registers": "Pokladne",
+        "Receipts": "Pokladničné doklady"
+    },
+    "Controllers\\Home": {
+        "Cashdesk": "Pokladňa",
+        "Cash registers": "Pokladne",
+        "Receipts": "Pokladničné doklady"
+    },
+    "Controllers\\CashRegisters": {
+        "Cashdesk": "Pokladňa",
+        "Cash registers": "Pokladne"
+    },
+    "Controllers\\Receipts": {
+        "Cashdesk": "Pokladňa",
+        "Receipts": "Pokladničné doklady"
+    },
+    "Models\\CashRegister": {
+        "Cash register": "Pokladňa",
+        "Company": "Spoločnosť",
+        "Shop": "Predajňa",
+        "Identifier": "Identifikátor",
+        "Description": "Popis",
+        "Add cash register": "Pridať pokladňu"
+    },
+    "Components\\FormCashRegister": {
+        "Cash register": "Pokladňa"
+    },
+    "Models\\Receipt": {
+        "Receipt": "Pokladničný doklad",
+        "Number": "Číslo",
+        "Company": "Spoločnosť",
+        "Cash register": "Pokladňa",
+        "Total price excl. VAT": "Celková cena bez DPH",
+        "Total price incl. VAT": "Celková cena s DPH",
+        "Created": "Vytvorené",
+        "Sent to cash register": "Odoslané do pokladne",
+        "Add receipt": "Pridať doklad"
+    }
+}

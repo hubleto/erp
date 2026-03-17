@@ -134,6 +134,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
               {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
               {this.inputWrapper('title', {cssClass: 'text-2xl'})}
               {this.inputWrapper('description')}
+              {this.inputWrapper('online_documentation_folder')}
               {this.inputWrapper('id_main_developer')}
               {this.inputWrapper('id_project_manager')}
               {this.inputWrapper('id_account_manager')}
@@ -178,7 +179,6 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('id_contact')}
               {this.inputWrapper('color')}
-              {this.inputWrapper('online_documentation_folder')}
               {this.inputWrapper('notes')}
               {this.inputWrapper('average_hourly_costs')}
               {/* {this.inputWrapper('id_deal')} */}

@@ -61,7 +61,7 @@ class Customer extends Model
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
-      'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)")),
+      'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)"))->setCssClass('text-violet-800'),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql',"
           SELECT
@@ -158,6 +158,42 @@ class Customer extends Model
     return [
       'name' => $text,
     ];
+  }
+
+  public function getAiAssistantContext(int $sensitivityLevel, int $recordId): array
+  {
+    $customer = $this->record->prepareReadQuery()->where('customers.id', $recordId)->first;
+
+    if (!$customer) return [];
+
+    switch ($sensitivityLevel) {
+      case 0:
+      default:
+        return ['name' => $customer->name];
+      break;
+      case 1:
+        return [
+          'name' => $customer->name,
+          'vat_id' => $customer->vat_id,
+          'customer_id' => $customer->customer_id,
+          'tax_id' => $customer->tax_id,
+        ];
+      break;
+      case 2:
+        return [
+          'name' => $customer->name,
+          'vat_id' => $customer->vat_id,
+          'customer_id' => $customer->customer_id,
+          'tax_id' => $customer->tax_id,
+          'street_line_1' => $customer->street_line_1,
+          'street_line_2' => $customer->street_line_2,
+          'region' => $customer->region,
+          'city' => $customer->city,
+          'postal_code' => $customer->postal_code,
+          'note' => $customer->note,
+        ];
+      break;
+    }
   }
 
 }

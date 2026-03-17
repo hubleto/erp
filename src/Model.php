@@ -48,6 +48,7 @@ class Model extends \Hubleto\Framework\Model
 
     return $columns;
   }
+
   /**
    * [Description for getPermissions]
    *
@@ -118,6 +119,19 @@ class Model extends \Hubleto\Framework\Model
     $permissions = [true, $canRead, $canModify, $canModify];
 
     return $permissions;
+  }
+
+  /**
+   * [Description for getAiAssistantContext]
+   *
+   * @param int $recordId
+   * 
+   * @return array
+   * 
+   */
+  public function getAiAssistantContext(int $sensitivityLevel, int $recordId): array
+  {
+    return [];
   }
 
 }

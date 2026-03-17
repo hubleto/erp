@@ -111,7 +111,7 @@ class Order extends \Hubleto\Erp\Model
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
       'shipping_info' => (new Varchar($this, $this->translate('Shipping information'))),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)"))
+      'shared_folder' => (new Varchar($this, $this->translate("Shared folder (online document storage)"))->setCssClass('text-violet-800'))
         ->setReactComponent('InputHyperlink')
         ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
       ,

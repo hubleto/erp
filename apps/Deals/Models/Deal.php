@@ -108,7 +108,7 @@ class Deal extends \Hubleto\Erp\Model
       'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
-      'shared_folder' => new Varchar($this, "Shared folder (online document storage)"),
+      'shared_folder' => new Varchar($this, "Shared folder (online document storage)")->setCssClass('text-violet-800'),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),

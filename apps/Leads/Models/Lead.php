@@ -116,7 +116,7 @@ class Lead extends \Hubleto\Erp\Model
       'id_team' => (new Lookup($this, $this->translate('Team'), Team::class)),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
-      'shared_folder' => new Varchar($this, "Online document folder"),
+      'shared_folder' => new Varchar($this, "Online document folder")->setCssClass('text-violet-800'),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),

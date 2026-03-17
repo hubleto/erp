@@ -162,7 +162,7 @@ class Customer extends Model
 
   public function getAiAssistantContext(int $sensitivityLevel, int $recordId): array
   {
-    $customer = $this->record->prepareReadQuery()->where('customers.id', $recordId)->first;
+    $customer = $this->record->prepareReadQuery()->where('customers.id', $recordId)->first();
 
     if (!$customer) return [];
 

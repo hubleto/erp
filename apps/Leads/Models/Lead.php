@@ -255,16 +255,34 @@ class Lead extends \Hubleto\Erp\Model
     }
   }
 
+  /**
+   * [Description for getRelationsIncludedInLoadTableData]
+   *
+   * @return array|null
+   * 
+   */
   public function getRelationsIncludedInLoadTableData(): array|null
   {
     return ['TAGS'];
   }
 
+  /**
+   * [Description for getMaxReadLevelForLoadTableData]
+   *
+   * @return int
+   * 
+   */
   public function getMaxReadLevelForLoadTableData(): int
   {
     return 1;
   }
 
+  /**
+   * [Description for getMaxReadLevelForLoadFormData]
+   *
+   * @return int
+   * 
+   */
   public function getMaxReadLevelForLoadFormData(): int
   {
     return 2;

@@ -234,6 +234,17 @@ class Order extends \Hubleto\Erp\Model
   }
 
   /**
+   * [Description for getMaxReadLevelForLoadFormData]
+   *
+   * @return int
+   * 
+   */
+  public function getMaxReadLevelForLoadFormData(): int
+  {
+    return 2;
+  }
+
+  /**
    * [Description for getLookupDetails]
    *
    * @param array $dataRaw

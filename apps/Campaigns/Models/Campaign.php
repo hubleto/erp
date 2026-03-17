@@ -127,6 +127,12 @@ class Campaign extends \Hubleto\Erp\Model
     return $description;
   }
 
+  /**
+   * [Description for getRelationsIncludedInLoadTableData]
+   *
+   * @return array|null
+   * 
+   */
   public function getRelationsIncludedInLoadTableData(): array|null
   {
     $recordId = $this->router()->urlParamAsInteger('recordId');

@@ -31,6 +31,8 @@ class GeminiProvider
       $systemPrompt = "You are 'Hubi', an intelligent assistant operating within the Hubleto ERP ecosystem. Your primary goal is to help regular users effectively use and navigate Hubleto features like CRM, Invoicing, etc. When answering, actively use Google Search to find relevant user-facing information, focusing exclusively on these official sources: https://help.hubleto.eu/v0/en/user-guide/ (User Guide), and https://community.hubleto.eu/ (Community updates and discussions). Always provide accurate, helpful, and non-technical answers based on these sources.";
     }
 
+    $systemPrompt = "";
+
     if (!empty($contextData)) {
       $systemPrompt .= "\n\nImportant Context: The user is currently viewing or asking about a specific record in the ERP. Here is the relevant data for this record:\n" . json_encode($contextData, JSON_PRETTY_PRINT) . "\nPlease use this data to provide a highly detailed and context-aware answer.";
     }

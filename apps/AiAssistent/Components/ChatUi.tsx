@@ -8,6 +8,8 @@ export interface ChatUiProps {
 
 export interface ChatUiState {
   messages: Array<{ role: 'user' | 'model', content: string, html?: string }>;
+  context: any,
+  showContextDetails: boolean,
   inputValue: string;
   isLoading: boolean;
   promptMode: 'user' | 'developer';
@@ -16,10 +18,15 @@ export interface ChatUiState {
 export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState> {
   translationContextInner: string = 'Components\\ChatUi';
 
+  props: ChatUiProps;
+  state: ChatUiState;
+
   constructor(props: ChatUiProps) {
     super(props);
     this.state = {
       messages: [],
+      context: null,
+      showContextDetails: false,
       inputValue: '',
       isLoading: false,
       promptMode: 'user'
@@ -64,11 +71,13 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
         if (response && response.status === 'success') {
           this.setState({
             messages: [...newMessages, { role: 'model', content: response.response, html: response.responseHtml }],
+            context: response.context,
             isLoading: false
           });
         } else {
           this.setState({
             messages: [...newMessages, { role: 'model', content: response?.message || 'Error occurred.' }],
+            context: response.context,
             isLoading: false
           });
         }
@@ -101,7 +110,7 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
     ];
 
     return (
-      <div className="flex h-full bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-700" style={{ minHeight: '600px', height: 'calc(100vh - 200px)' }}>
+      <div className="flex h-full bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-700">
         
         <div className="w-1/4 border-r border-slate-200 dark:border-slate-700 p-4 bg-slate-50 dark:bg-slate-800 flex flex-col gap-4 overflow-y-auto">
           <div className="flex bg-slate-200 dark:bg-slate-700 p-1 rounded-lg">
@@ -127,14 +136,24 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
             </button>
           </div>
           
-          {contextSource && (
-            <div className="mt-2 text-sm bg-blue-50 dark:bg-slate-700/50 border border-blue-200 dark:border-slate-600 rounded-md p-3 text-slate-700 dark:text-slate-300 flex items-center shadow-sm">
-              <i className="fas fa-database text-blue-500 dark:text-blue-400 mr-2"></i>
-              <span>
-                <strong>{this.translate('Context')}:</strong> {contextSource} {idParam ? `#${idParam}` : ''}
-              </span>
+          {contextSource && <>
+            <div className="mt-2 text-sm bg-blue-50 dark:bg-slate-700/50 border border-blue-200 dark:border-slate-600 rounded-md p-3 text-slate-700 dark:text-slate-300 flex flex-col items-start shadow-sm">
+              <div className='flex items-center'>
+                <i className="fas fa-database text-blue-500 dark:text-blue-400 mr-2"></i>
+                <span>
+                  <strong>{this.translate('Context')}:</strong> {contextSource} {idParam ? `#${idParam}` : ''}<br/>
+                  {this.state.context ?
+                    <button className='btn btn-transparent' onClick={() => { this.setState({showContextDetails: true }); }}>
+                      <span className='text'>Show context details</span>
+                    </button>
+                  : null}
+                </span>
+              </div>
+              {this.state.showContextDetails ? <pre className='text-xs w-full overflow-x-auto'>
+                {JSON.stringify(this.state.context, null, 2)}
+              </pre> : null}
             </div>
-          )}
+          </>}
 
           <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-200 mt-2">{this.translate('Sample Questions')}</h3>
           <ul className="flex flex-col gap-2">

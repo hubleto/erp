@@ -1,8 +1,5 @@
-<div class="flex flex-col h-full">
-  <div class="mb-4">
-    <h1 class="app-main-title">{{ translate('AIAssistant') }}</h1>
-  </div>
-  <div class="flex-1">
-    <hblreact-ai-assistent-chat-ui string:assets-url="{{ hubleto.env().assetsUrl }}"></hblreact-ai-assistent-chat-ui>
-  </div>
-</div>
+<h1 class="app-main-title">{{ translate('AI Assistant') }}</h1>
+<hblreact-ai-assistent-chat-ui
+  style="overflow:auto"
+  string:assets-url="{{ hubleto.env().assetsUrl }}"
+></hblreact-ai-assistent-chat-ui>

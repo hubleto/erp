@@ -23,7 +23,7 @@ class Chat extends \Hubleto\Erp\Controllers\ApiController
     
     $contextData = [];
     $sensitivityLevel = $aiApp->configAsInteger('sensitivityLevel');
-    if ($sensitivityLevel > 0 && $modelParam && $idParam) {
+    if ($modelParam && $idParam) {
       $modelParam = str_replace('/', '\\', $modelParam);
       if (class_exists($modelParam)) {
         $modelObj = $this->getService($modelParam);
@@ -41,6 +41,7 @@ class Chat extends \Hubleto\Erp\Controllers\ApiController
 
     return [
       'status' => 'success',
+      'context' => $contextData,
       'response' => $response,
       'responseHtml' => $responseHtml
     ];

@@ -163,9 +163,9 @@ class Product extends \Hubleto\Erp\Model
     return [
       'EAN code' => $product->ean,
       'Product name' => $product->name,
-      'Product group' => $product->GROUP->name,
-      'Product category' => $product->CATEGORY->name,
-      'Product category description' => $product->CATEGORY->short_description,
+      'Product group' => $product->GROUP?->name,
+      'Product category' => $product->CATEGORY?->name,
+      'Product category description' => $product->CATEGORY?->short_description,
       'Product image #1' => $this->env()->uploadUrl . '/' . $product->image_1,
       'Product image #2' => $this->env()->uploadUrl . '/' . $product->image_2,
       'Product image #3' => $this->env()->uploadUrl . '/' . $product->image_3,

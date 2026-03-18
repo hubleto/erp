@@ -23,7 +23,7 @@
   </div>
 {% endmacro %}
 
-{% set logoUrl = config.logoUrl ?? config.assetsUrl ~ "/images/logo-hubleto.png" %}
+{% set logoUrl = config.logoUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto.png" %}
 {% set secondLogoUrl = config.secondLogoUrl %}
 
 <!DOCTYPE html>
@@ -35,17 +35,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <meta name='og:image' content='{{ config.assetsUrl }}/images/logo-hubleto.png'>
+  <meta name='og:image' content='{{ hubleto.env().assetsUrl }}/images/logo-hubleto.png'>
   <meta name='og:title' content='Hubleto | Business Application Hub'>
   <link rel='shortcut icon' href='{{ logoUrl }}'>
   <title>{{ config.appTitle ?? user.DEFAULT_COMPANY.name ~ " | Hubleto | Business Application Hub" }}</title>
 
   <script>
     window.ConfigEnv = {
-      'rewriteBase': '{{ config.rewriteBase }}',
-      'url': '{{ config.projectUrl }}',
-      'projectUrl': '{{ config.projectUrl }}',
-      'uploadUrl': '{{ config.uploadUrl }}',
+      'rewriteBase': '{{ hubleto.env().rewriteBase }}',
+      'url': '{{ hubleto.env().projectUrl }}',
+      'projectUrl': '{{ hubleto.env().projectUrl }}',
+      'uploadUrl': '{{ hubleto.env().uploadUrl }}',
       'idUser': {{ user.id ?? 0 }},
       'userEmail': '{{ user.email ?? '' }}',
       'isPremium': {% if isPremium %} true {% else %} false {% endif %},
@@ -58,14 +58,14 @@
     }
   </script>
 
-  <script src='{{ config.assetsUrl }}/jquery-3.5.1.js'></script>
-  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-vendor.js'></script>
-  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-core.js'></script>
-  <script defer src='{{ config.assetsUrl }}/compiled/js/react-ui-ext.js'></script>
-  <script defer src='{{ config.assetsUrl }}/compiled/js/main.js'></script>
-  <script defer src='{{ config.assetsUrl }}/compiled/js/apps.js'></script>
-  <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
-  <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
+  <script src='{{ hubleto.env().assetsUrl }}/jquery-3.5.1.js'></script>
+  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/react-ui-vendor.js'></script>
+  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/react-ui-core.js'></script>
+  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/react-ui-ext.js'></script>
+  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/main.js'></script>
+  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/apps.js'></script>
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
   {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
     <style> :root { --color-primary: {{ user.DEFAULT_COMPANY.brand_color_primary }} !important; } </style>
   {% endif %}
@@ -151,7 +151,7 @@
                         href="?set-language={{ langSymbol }}"
                         class="btn btn-white btn-no-border btn-list-item"
                       >
-                        <span class="icon"><img src="{{ config.assetsUrl }}/images/flags/{{ lang.flagImage }}" style="max-height:1em;max-width:1em;" /></span>
+                        <span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/{{ lang.flagImage }}" style="max-height:1em;max-width:1em;" /></span>
                         <span class="text">{{ lang.name }}</span>
                       </a>
                     {% endfor %}
@@ -161,7 +161,7 @@
                   {{ (user.language ?: 'en')|upper }}
                 </span>
                 <span class="icon">
-                  <img src="{{ config.assetsUrl }}/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
+                  <img src="{{ hubleto.env().assetsUrl }}/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
                 </span>
               </button>
             </li>

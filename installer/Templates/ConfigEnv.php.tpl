@@ -21,13 +21,15 @@ $config['uploadFolder'] = __DIR__ . '/upload';
 $config['rewriteBase'] = "{{ rewriteBase }}";
 $config['projectUrl'] = '{{ projectUrl }}';
 $config['uploadUrl'] = '{{ projectUrl }}/upload';
+$config['assetsUrl'] = '{{ assetsUrl }}';
 
-if (is_dir(__DIR__ . '/assets')) $config['assetsUrl'] = '{{ projectUrl }}/assets';
-else $config['assetsUrl'] = '{{ projectUrl }}/vendor/hubleto/assets';
+if (is_dir(__DIR__ . '/assets')) $config['assetsCompiledUrl'] = '{{ projectUrl }}/assets/compiled';
+else $config['assetsCompiledUrl'] = '{{ projectUrl }}/vendor/hubleto/assets/compiled';
 
 // sanitize dirs and urls based on used release
 $config['releaseFolder'] = str_replace('__RELEASE__', $config['release'], $config['releaseFolder']);
 $config['assetsUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsUrl']);
+$config['assetsCompiledUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsCompiledUrl']);
 
 // db
 $config['db_host'] = '{{ dbHost }}';

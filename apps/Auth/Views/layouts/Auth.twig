@@ -1,4 +1,4 @@
-{% set logoUrl = config.logoUrl ?? config.assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
+{% set logoUrl = config.logoUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 {% set secondLogoUrl = config.secondLogoUrl %}
 
 <!DOCTYPE html>
@@ -10,12 +10,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <meta name='og:image' content='{{ config.assetsUrl }}/images/logo-hubleto.png'>
+  <meta name='og:image' content='{{ hubleto.env().assetsUrl }}/images/logo-hubleto.png'>
   <meta name='og:title' content='Hubleto | Business Application Hub'>
-  <link rel='shortcut icon' href='{{ config.assetsUrl }}/images/logo-hubleto.png'>
+  <link rel='shortcut icon' href='{{ hubleto.env().assetsUrl }}/images/logo-hubleto.png'>
   <title>Hubleto</title>
 
-  <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
 </head>
 
 <body>
@@ -23,11 +23,11 @@
   <div id="sign-in-screen">
     {% block languages %}
       <div class="languages">
-        <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=cs" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=ro" class="btn btn-white"><span class="icon"><img src="{{ config.assetsUrl }}/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=cs" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        <a href="?set-language=ro" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span></a>
       </div>
     {% endblock %}
     <div class="inner">

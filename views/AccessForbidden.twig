@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <meta name='og:image' content='{{ config.assetsUrl }}/images/logo-hubleto.png'>
+  <meta name='og:image' content='{{ hubleto.env().assetsUrl }}/images/logo-hubleto.png'>
   <meta name='og:title' content='Hubleto | Business Application Hub'>
-  <link rel='shortcut icon' href='{{ config.assetsUrl }}/images/logo-hubleto.png'>
+  <link rel='shortcut icon' href='{{ hubleto.env().assetsUrl }}/images/logo-hubleto.png'>
   <title>Hubleto</title>
 
-  <link rel="stylesheet" type="text/css" href="{{ config.assetsUrl }}/compiled/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="logo">
-    <img src="{{ config.assetsUrl }}/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-top:5em; width: auto;" />
+    <img src="{{ hubleto.env().assetsUrl }}/images/logo-hubleto-text-horizontal.png" style="max-height:4em;margin-top:5em; width: auto;" />
   </div>
 </div>
 <div class="text-xs text-gray-400 text-right" style="position:fixed;right:0;bottom:0;padding:0.5em">

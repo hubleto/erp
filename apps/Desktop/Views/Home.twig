@@ -1,5 +1,5 @@
 {% set dashboard = viewParams.defaultDashboard %}
-{% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? config.assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
+{% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
 <div class="w-full flex gap-2">
   <div class="grow bg-slate-50 dark:bg-slate-800 p-2 mb-2 flex gap-2 rounded">

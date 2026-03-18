@@ -160,6 +160,15 @@ class Customer extends Model
     ];
   }
 
+  /**
+   * [Description for getAiAssistantContext]
+   *
+   * @param int $sensitivityLevel
+   * @param int $recordId
+   * 
+   * @return array
+   * 
+   */
   public function getAiAssistantContext(int $sensitivityLevel, int $recordId): array
   {
     $customer = $this->record->prepareReadQuery()->where('customers.id', $recordId)->first();

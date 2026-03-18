@@ -20,8 +20,10 @@ $config['uploadFolder'] = __DIR__ . '/upload';
 // urls
 $config['rewriteBase'] = "{{ rewriteBase }}";
 $config['projectUrl'] = '{{ projectUrl }}';
-$config['assetsUrl'] = '{{ assetsUrl }}';
 $config['uploadUrl'] = '{{ projectUrl }}/upload';
+
+if (is_dir(__DIR__ . '/assets')) $config['assetsUrl'] = '{{ projectUrl }}/assets';
+else $config['assetsUrl'] = '{{ projectUrl }}/vendor/hubleto/assets';
 
 // sanitize dirs and urls based on used release
 $config['releaseFolder'] = str_replace('__RELEASE__', $config['release'], $config['releaseFolder']);

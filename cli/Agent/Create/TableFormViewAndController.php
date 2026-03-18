@@ -137,7 +137,8 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $this->terminal()->yellow("⚠  NEXT STEPS:\n");
-    $this->terminal()->yellow("⚠   -> Run `npm run build-js` in `{$this->env()->srcFolder}` to compile Javascript.\n");
+    $this->terminal()->yellow("⚠   -> Run `npm install @hubleto/react-ui` to install Hubleto's React-based UI framework.\n");
+    $this->terminal()->yellow("⚠   -> Run `npm run build` to compile Javascript and CSS into assets.\n");
     $this->terminal()->colored("cyan", "black", "Run: npm run build-js\n");
     $this->terminal()->colored("cyan", "black", "And then open in browser: {$this->env()->projectUrl}/{$app->manifest['rootUrlSlug']}/" . strtolower($modelPluralForm) . "\n");
   }

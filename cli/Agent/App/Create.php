@@ -129,9 +129,9 @@ class Create extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $this->terminal()->yellow("💡  TIPS:\n");
-    $this->terminal()->yellow("💡  -> Test the app in browser: {$this->env()->projectUrl}/" . strtolower($appName) . "\n");
-    $this->terminal()->yellow("💡  -> Run command below to add your first model.\n");
-    $this->terminal()->colored("cyan", "black", "Run: php hubleto create model {$appNamespace} {$appName}FirstModel\n");
+    $this->terminal()->yellow("💡  -> Add your first model.\n");
+    $this->terminal()->yellow("💡  ->   php hubleto create model {$appNamespace} {$appName}FirstModel\n");
+    $this->terminal()->yellow("\n");
   }
 
 }

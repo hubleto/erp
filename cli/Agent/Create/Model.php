@@ -42,6 +42,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
       'model' => $model,
       'sqlTable' => strtolower($modelPluralForm),
       'modelPluralFormKebab' => $modelPluralFormKebab,
+      'date' => date('Y-m-d')
     ];
 
     if (!is_dir($app->srcFolder . '/Models')) {
@@ -50,8 +51,12 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     if (!is_dir($app->srcFolder . '/Models/RecordManagers')) {
       mkdir($app->srcFolder . '/Models/RecordManagers');
     }
+    if (!is_dir($app->srcFolder . '/Models/Migrations')) {
+      mkdir($app->srcFolder . '/Models/Migrations');
+    }
     file_put_contents($app->srcFolder . '/Models/' . $model . '.php', $this->renderer()->renderView('@snippets/Model.php.twig', $tplVars));
     file_put_contents($app->srcFolder . '/Models/RecordManagers/' . $model . '.php', $this->renderer()->renderView('@snippets/ModelRecordManager.php.twig', $tplVars));
+    file_put_contents($app->srcFolder . '/Models/Migrations/' . $model . '.php', $this->renderer()->renderView('@snippets/Migration.php.twig', $tplVars));
 
     $codeInstallModel = [
       "\$this->getModel(Models\\{$model}::class)->upgradeSchema();"

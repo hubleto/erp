@@ -38,15 +38,12 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'ai-assistant', $this->translate('AIAssistant'), 'fas fa-robot');
   }
 
-  // installTables
-  public function installTables(int $round): void
+  // upgradeSchema
+  public function installApp(int $round): void
   {
     if ($round == 1) {
-      // install your models here
-      // Example: $this->getModel(Models\Contact::class)->installTables();
-
       // DO NOT DELETE FOLLOWING LINE, OR `php hubleto` WILL NOT GENERATE CODE HERE
-      //@hubleto-cli:install-tables
+      //@hubleto-cli:upgrade-schema
     }
     if ($round == 2) {
       // do something in the 2nd round, if required

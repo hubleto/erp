@@ -42,7 +42,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
       'model' => $model,
       'sqlTable' => strtolower($modelPluralForm),
       'modelPluralFormKebab' => $modelPluralFormKebab,
-      'date' => date('Y-m-d')
+      'dateHash' => date('Ymd')
     ];
 
     if (!is_dir($app->srcFolder . '/Models')) {
@@ -64,7 +64,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
 
     $codeInstallModelInserted = $this->terminal()->insertCodeToFile(
       $app->srcFolder . '/Loader.php',
-      '//@hubleto-cli:install-tables',
+      '//@hubleto-cli:upgrade-schema',
       $codeInstallModel
     );
 

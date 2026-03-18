@@ -63,7 +63,7 @@ class Loader extends \Hubleto\Erp\App
     $dashboardManager->addBoard($this, $this->translate('Deal value by result'), 'deals/boards/deal-value-by-result');
   }
 
-  public function upgradeSchema(int $round): void
+  public function installApp(int $round): void
   {
     if ($round == 1) {
       $mDeal = $this->getModel(Models\Deal::class);

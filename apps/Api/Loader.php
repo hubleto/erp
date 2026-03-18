@@ -38,7 +38,7 @@ class Loader extends \Hubleto\Erp\App
   }
 
   // upgradeSchema
-  public function upgradeSchema(int $round): void
+  public function installApp(int $round): void
   {
     if ($round == 1) {
       $this->getModel(Models\Key::class)->upgradeSchema();

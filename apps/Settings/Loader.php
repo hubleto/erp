@@ -59,7 +59,7 @@ class Loader extends \Hubleto\Erp\App
     $this->addSetting($this, ['title' => $this->translate('Teams'), 'icon' => 'fas fa-users', 'url' => 'settings/teams']);
   }
 
-  public function upgradeSchema(int $round): void
+  public function installApp(int $round): void
   {
     if ($round == 1) {
       $mCompany = $this->getModel(Models\Company::class);

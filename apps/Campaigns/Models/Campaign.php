@@ -191,20 +191,20 @@ class Campaign extends \Hubleto\Erp\Model
       case 0:
       default:
         return [
-          'name' => $campaign->name,
-          'type' => $campaign->type,
-          'target_audience' => $campaign->target_audience,
-          'goal' => $campaign->goal,
-          'notes' => $campaign->notes,
+          'Campaing name' => $campaign->name,
+          'Campaign type' => $campaign->type,
+          'Target audience' => $campaign->target_audience,
+          'Goal' => $campaign->goal,
+          'Internal notes' => $campaign->notes,
         ];
       break;
       case 1:
         return [
-          'name' => $campaign->name,
-          'type' => $campaign->type,
-          'target_audience' => $campaign->target_audience,
-          'goal' => $campaign->goal,
-          'notes' => $campaign->notes,
+          'Campaing name' => $campaign->name,
+          'Campaign type' => $campaign->type,
+          'Target audience' => $campaign->target_audience,
+          'Goal' => $campaign->goal,
+          'Internal notes' => $campaign->notes,
         ];
       break;
     }

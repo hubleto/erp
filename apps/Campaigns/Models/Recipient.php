@@ -58,7 +58,7 @@ class Recipient extends \Hubleto\Erp\Model
     $filters = $this->router()->urlParamAsArray("filters");
 
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add recipient';
+    $description->ui['addButtonText'] = $this->translate('Add recipient');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 

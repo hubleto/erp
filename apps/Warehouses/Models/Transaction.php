@@ -60,7 +60,7 @@ class Transaction extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->addIndex('INDEX `uid` (`uid`)'),
       'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()
-        ->setEnumValues(self::TYPES)
+        ->setEnumValues(array_map(fn($v) => $this->translate($v), self::TYPES))
         ->setDefaultValue(self::TYPE_RECEIPT)
       ,
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
@@ -94,7 +94,7 @@ class Transaction extends \Hubleto\Erp\Model
 
     $description->addFilter('fTransactionType', [
       'title' => $this->translate('Type'),
-      'options' => self::TYPES
+      'options' => array_map(fn($v) => $this->translate($v), self::TYPES)
     ]);
 
     return $description;

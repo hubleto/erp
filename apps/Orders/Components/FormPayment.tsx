@@ -107,7 +107,7 @@ export default class FormPayment extends FormExtended<FormPaymentProps, FormPaym
                       <td className='text-nowrap'>{globalThis.hubleto.currencyFormat(R.unit_price * R.amount * (1 - R.discount / 100), 4)}</td>
                     </tr>
                     <tr>
-                      <td>Including {globalThis.hubleto.numberFormat(R.vat, 0)} % VAT</td>
+                      {this.translate('Including {vat}% VAT').replace('{vat}', globalThis.hubleto.numberFormat(R.vat, 0))}
                       <td className='text-nowrap'>{globalThis.hubleto.currencyFormat(R.unit_price * R.amount * (1 + R.vat / 100), 4)}</td>
                       <td className='text-nowrap'>{globalThis.hubleto.currencyFormat(R.unit_price * R.amount * (1 + R.vat / 100) * (1 - R.discount / 100), 4)}</td>
                     </tr>

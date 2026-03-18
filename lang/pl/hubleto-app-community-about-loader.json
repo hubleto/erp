@@ -4,5 +4,9 @@
         "Help and user guide for Hubleto.": "Pomoc i podręcznik użytkownika Hubleto",
         "About": "Informacje",
         "About your Hubleto": "Informacje o Hubleto"
+    },
+    "Controllers\\About": {
+        "About your Hubleto": "",
+        "Useful links": ""
     }
 }

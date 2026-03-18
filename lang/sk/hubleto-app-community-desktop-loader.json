@@ -2,7 +2,7 @@
     "manifest": {
         "Dashboard": "Úvod",
         "Desktop": "Pracovná plocha",
-        "Default Hubleto desktop implementation.": "Hubleto pracovná plocha",
+        "Default Hubleto desktop implementation.": "Hubleto pracovná plocha.",
         "CRM": "CRM",
         "Addressbook": "Adresár",
         "Calendar": "Kalendár",
@@ -22,8 +22,8 @@
         "Maintenance": "Údržba",
         "Help": "Pomoc",
         "Custom": "Vlastné",
-        "Retail": "",
-        "Productivity": ""
+        "Retail": "Maloobchod",
+        "Productivity": "Produktivita"
     },
     "Controllers\\Home": {
         "Welcome": "Vitajte",

@@ -39,7 +39,7 @@ class OrdersApp extends App {
     });
 
     FormDeal.addFormHeaderButton(
-      'Create order',
+      globalThis.hubleto.translate('Create order', 'Hubleto\\App\\Community\\Orders\\Loader', 'manifest'),
       '',
       (form: any) => {
         request.get(

@@ -246,7 +246,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           {this.inputWrapper('identifier', {cssClass: 'text-2xl', readonly: R.is_closed})}
           {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})}
           {this.inputWrapper('version')}
-          <FormInput title={"Customer"}>
+          <FormInput title={this.translate('Customer')}>
             <Lookup {...this.getInputProps("id_customer")}
               model='Hubleto/App/Community/Customers/Models/Customer'
               urlAdd='customers/add'
@@ -261,7 +261,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
               }}
             ></Lookup>
           </FormInput>
-          <FormInput title={"Contact"}>
+          <FormInput title={this.translate('Contact')}>
             <Lookup {...this.getInputProps("id_contact")}
               model='Hubleto/App/Community/Contacts/Models/Contact'
               customEndpointParams={{idCustomer: R.id_customer}}

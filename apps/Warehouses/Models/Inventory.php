@@ -34,7 +34,7 @@ class Inventory extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add item';
+    $description->ui['addButtonText'] = $this->translate('Add item');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
 
     $fLocationOptions = [];

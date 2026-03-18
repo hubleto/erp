@@ -18,7 +18,9 @@
         "Serial number": "Sériové číslo",
         "Expiration": "Expirácia",
         "Received": "Prijaté",
-        "Last moved": "Posledný pohyb"
+        "Last moved": "Posledný pohyb",
+        "Location": "Umiestnenie",
+        "Add item": "Pridať položku"
     },
     "Models\\Status": {
         "Name": "Názov"

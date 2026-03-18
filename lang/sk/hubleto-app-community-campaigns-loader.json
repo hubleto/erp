@@ -2,11 +2,11 @@
     "manifest": {
         "Campaigns": "Kampane",
         "Management of marketing campaigns": "Správa marketingových kampaní",
-        "Recipients": "",
-        "Recipient statuses": ""
+        "Recipients": "Príjemcovia",
+        "Recipient statuses": "Stavy príjemcov"
     },
     "Models\\Campaign": {
-        "Name": "Meno",
+        "Name": "Názov",
         "UTM source": "UTM source",
         "UTM campaign": "UTM campaign",
         "UTM term": "UTM term",
@@ -29,11 +29,17 @@
         "Open \/ Closed": "Otvorená \/ Zavretá",
         "Open": "Otvorená",
         "All": "Všetky",
-        "Reply to": "",
-        "Owner": "",
-        "Lanuched by": "",
-        "Launched": "",
-        "Shared with": ""
+        "Reply to": "Odpovedať na",
+        "Owner": "Majiteľ",
+        "Lanuched by": "Spustil",
+        "Launched": "Spustená",
+        "Shared with": "Zdieľané s",
+        "Type": "Typ",
+        "Phase": "Fáza",
+        "Ownership": "Vlastníctvo",
+        "Owned by me": "Moje",
+        "Managed by me": "Mnou spravované",
+        "Online document folder": "Online priečinok dokumentov"
     },
     "Models\\Recipient": {
         "Campaign": "Kampaň",
@@ -43,58 +49,96 @@
         "Last name": "Priezvisko",
         "Salutation": "Oslovenie",
         "Reference to mail sent": "Odoslaný email",
-        "Variables": "",
-        "Status": ""
+        "Variables": "Premenné",
+        "Status": "Stav",
+        "Add recipient": "Pridať príjemcu"
     },
     "Models\\CampaignTask": {
         "Campaign": "Kampaň",
         "Task": "Úloha"
     },
     "Controllers\\Campaigns": {
-        "Campaigns": "Kampaň"
+        "Campaigns": "Kampane"
+    },
+    "Controllers\\Recipients": {
+        "Campaigns": "Kampane",
+        "Recipients": "Príjemcovia"
+    },
+    "Controllers\\Api\\SendTestEmail": {
+        "Recipient must be provided.": "Príjemca musí byť zadaný.",
+        "Recipient is not valid email address.": "Príjemca nie je platná emailová adresa."
     },
     "Components\\FormCampaign": {
         "Campaign": "Kampaň",
         "Add recipients from contacts": "Pridať príjemcu z kontaktov",
         "Tasks": "Úlohy",
         "Launch": "Spustiť",
-        "Calendar": "",
-        "Contacts": "",
-        "Recipients": "",
-        "Test": "",
-        "Clicks": ""
+        "Calendar": "Kalendár",
+        "Contacts": "Kontakty",
+        "Recipients": "Príjemcovia",
+        "Test": "Test",
+        "Clicks": "Kliknutia",
+        "Select contacts which will be added as recipients": "Vybrať kontakty, ktoré budú pridané ako príjemcovia",
+        "One email per line.": "Jeden email na riadok.",
+        "Import emails": "Importovať emaily",
+        "Emails will be sent only to recipients who did not receive email from this campaign yet.": "Emaily budú odoslané iba príjemcom, ktorí ešte nedostali email z tejto kampane.",
+        "Unsubscribed recipients will be ignored.": "Odhlásení príjemcovia budú ignorovaní.",
+        "Who clicked? (Bot Score = 0)": "Kto klikol? (Bot skóre = 0)",
+        "Email":"Email",
+        "Status":"Status",
+        "Bot score": "Bot scóre",
+        "Launch campaign now!": "Spustiť kampaň",
+        "Analysis & warnings": "Analýza & upozornenia",
+        "Send test email": "Odoslať testovací email",
+        "Test email recipient:": "Príjemca testovacieho emailu",
+        "Recipient email": "Emailová adresa príjemcu",
+        "Test email variables:": "Premenné testovacieho emailu",
+        "Loading information about recipients and launch status.": "Načítavam informácie o príjemcoch a stave spustenia.",
+        "Analysing campaign...": "Analizujem kampaň...",
+        "Error occured when sending a test email to you.": "Chyba pri odsielaní testovacieho emailu.",
+        "Recently contacted":"Nedávno oslovení"
     },
     "Models\\Click": {
         "Campaign": "Kampaň",
         "Recipient": "Príjemca",
-        "Url": "Url",
-        "Clicked": "Kliknuté"
+        "Url": "URL",
+        "Clicked": "Kliknuté",
+        "Bot Score": "Bot scóre"
     },
     "Models\\CampaignActivity": {
-        "Subject": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "Recurrence": "",
-        "All day": "",
-        "Completed": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Created by": "",
-        "Campaign": ""
+        "Subject": "Predmet",
+        "Location": "Miesto",
+        "Online meeting link": "Odkaz na online stretnutie",
+        "Description": "Popis",
+        "Activity type": "Typ aktivity",
+        "Start date": "Dátum začiatku",
+        "Start time": "Čas začiatku",
+        "End date": "Dátum konca",
+        "End time": "Čas konca",
+        "Recurrence": "Opakovanie",
+        "All day": "Celý deň",
+        "Completed": "Dokončená",
+        "Long meeting minutes (link to external document)": "Podrobná zápisnica (odkaz na externý dokument)",
+        "Short meeting minutes": "Stručná zápisnica",
+        "Created by": "Vytvoril",
+        "Campaign": "Kampaň"
     },
     "Components\\TableCampaigns": {
-        "Hide filter": "",
-        "Copy cell content to clipboard": ""
+        "Hide filter": "Skryť filter",
+        "Copy cell content to clipboard": "Kopírovať obsah bunky do schránky"
     },
     "Models\\RecipientStatus": {
-        "Email": "",
-        "Is unsubscribed": "",
-        "Is invalid": ""
+        "Email": "Email",
+        "Is unsubscribed": "Odhlásený",
+        "Is invalid": "Neplatný",
+        "Add recipient status": "Pridať status príjemcu"
+    },
+    "Controllers\\RecipientStatuses": {
+        "Campaigns": "Kampaňe",
+        "Recipients": "Príjemcovia",
+        "Statuses": "Statusy"
+    },
+    "Controllers\\Api\\GetCampaignTestInfo": {
+        "Mail template is not set.": "Šablóna mailu nie je nastavená."
     }
 }

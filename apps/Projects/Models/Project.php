@@ -102,7 +102,7 @@ class Project extends \Hubleto\Erp\Model
         $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_account_manager', 'id_workflow_step']);
       break;
       default:
-        $description->ui['addButtonText'] = 'Add Project';
+        $description->ui['addButtonText'] = $this->translate('Add Project');
         $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
         $description->hide(['footer']);
 

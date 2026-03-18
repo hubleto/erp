@@ -14,7 +14,7 @@ export default class FormQuote<P, S> extends FormExtended<FormQuoteProps, FormQu
   props: FormQuoteProps;
   state: FormQuoteState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Orders';
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\FormQuote';
 
   constructor(props: FormQuoteProps) {
@@ -66,7 +66,7 @@ export default class FormQuote<P, S> extends FormExtended<FormQuoteProps, FormQu
           <div className='flex-2'>
             {[1,2,3,4,5].map((i, key) => {
               return <div key={key}>
-                {this.divider('Document #' + i)}
+                {this.divider(this.translate('Document #') + i)}
                 <div className='flex gap-2'>
                   <div className='flex-3'>
                     {this.inputWrapper('online_document_' + i, {wrapperCssClass: 'flex gap-2'})}

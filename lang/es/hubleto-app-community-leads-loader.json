@@ -74,7 +74,16 @@
         "Tags": "Etiquetas",
         "Open \/ Closed": "Abierto \/ Cerrado",
         "Open": "Abierto",
-        "All": "Todos"
+        "All": "Todos",
+        "Phone": "",
+        "Advertisement": "",
+        "Partner": "",
+        "Web": "",
+        "Cold call": "",
+        "E-mail": "",
+        "Referral": "",
+        "Other": "",
+        "Online document folder": ""
     },
     "root": {
         "Lead statuses": "Estados de clientes potenciales",

@@ -32,7 +32,8 @@
         "Open": "Otvorené",
         "All": "Všetky",
         "Estimated workhours": "Odhadované pracovné hodiny",
-        "Estimated duration": "Odhadovaná dĺžka"
+        "Estimated duration": "Odhadovaná dĺžka",
+        "Add Task": "Pridať úlohu"
     },
     "Models\\Todo": {
         "To do": "Todo",
@@ -42,7 +43,7 @@
         "Deadline": "Termín"
     },
     "Controllers\\Boards\\MyRecentTasks": {
-        "You did not work on any task since last 2 weeks.": "Z posledné 2 týždne si nepracoval na žiadnej úlohe."
+        "You did not work on any task since last 2 weeks.": "Za posledné 2 týždne si nepracoval na žiadnej úlohe."
     },
     "Controllers\\Tasks": {
         "Tasks": "Úlohy"

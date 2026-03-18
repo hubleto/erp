@@ -132,7 +132,7 @@ class Task extends \Hubleto\Erp\Model
         $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_workflow_step', 'virt_worked']);
       break;
       default:
-        $description->ui['addButtonText'] = 'Add Task';
+        $description->ui['addButtonText'] = $this->translate('Add Task');
         $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
         $description->hide(['footer']);
 

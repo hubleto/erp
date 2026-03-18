@@ -59,7 +59,7 @@ class Location extends \Hubleto\Erp\Model
       'capacity' => (new Decimal($this, $this->translate('Capacity')))->setDefaultVisible(),
       'current_stock_status' => (new Decimal($this, $this->translate('Current stock status')))->setDefaultVisible(),
       'operational_status' => (new Integer($this, $this->translate('Operational status')))->setDefaultVisible()
-        ->setEnumValues(self::OPERATIONAL_STATUSES)
+        ->setEnumValues(array_map(fn($v) => $this->translate($v), self::OPERATIONAL_STATUSES))
         ->setDefaultValue(self::OPERATIONAL_STATUS_ACTIVE)
         ->setEnumCssClasses([
           self::OPERATIONAL_STATUS_ACTIVE => 'bg-green-100 text-green-800',
@@ -68,7 +68,7 @@ class Location extends \Hubleto\Erp\Model
         ])
       ,
       'placement' => (new Json($this, $this->translate('Placement')))
-        ->setDescription('JSON-formatted information about placement of location inside the warehouse.')
+        ->setDescription($this->translate('JSON-formatted information about placement of location inside the warehouse.'))
       ,
       'photo_1' => (new Image($this, $this->translate('Photo #1'))),
       'photo_2' => (new Image($this, $this->translate('Photo #2'))),
@@ -93,7 +93,7 @@ class Location extends \Hubleto\Erp\Model
     $description->addFilter('fLocationOperationalStatus', [
       'title' => $this->translate('Operational status'),
       'type' => 'multipleSelectButtons',
-      'options' => self::OPERATIONAL_STATUSES
+      'options' => array_map(fn($v) => $this->translate($v), self::OPERATIONAL_STATUSES)
     ]);
 
     $fLocationTypeOptions = [];

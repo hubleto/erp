@@ -76,8 +76,8 @@ class Loader extends \Hubleto\Erp\App
 
     $mProject->record->recordCreate([
       'id_deal' => 1,
-      'title' => 'Sample project #1',
-      'description' => 'Sample project #1 for demonstration purposes.',
+      'title' => $this->translate('Sample project #1'),
+      'description' => $this->translate('Sample project #1 for demonstration purposes.'),
       'id_main_developer' => 1,
       'id_account_manager' => 1,
       'id_phase' => 3,
@@ -86,8 +86,8 @@ class Loader extends \Hubleto\Erp\App
 
     $mProject->record->recordCreate([
       'id_deal' => 1,
-      'title' => 'Sample project #2',
-      'description' => 'Sample project #2 for demonstration purposes.',
+      'title' => $this->translate('Sample project #2'),
+      'description' => $this->translate('Sample project #2 for demonstration purposes.'),
       'id_main_developer' => 1,
       'id_account_manager' => 1,
       'id_phase' => 1,

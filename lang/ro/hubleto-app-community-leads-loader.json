@@ -63,7 +63,16 @@
         "Open": "",
         "All": "",
         "Add lead": "",
-        "Add Lead": ""
+        "Add Lead": "",
+        "Phone": "",
+        "Advertisement": "",
+        "Partner": "",
+        "Web": "",
+        "Cold call": "",
+        "E-mail": "",
+        "Referral": "",
+        "Other": "",
+        "Online document folder": ""
     },
     "Models\\LostReason": {
         "Lost Reason": ""

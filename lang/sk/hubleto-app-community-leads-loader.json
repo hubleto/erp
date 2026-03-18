@@ -2,7 +2,7 @@
     "manifest": {
         "Leads": "Leady",
         "Management of leads, cold contacts. Convert leads to deals.": "Správa leadov. Konverzia do dealov.",
-        "Lead Levels": "Levely leadov",
+        "Lead Levels": "Úrovne leadov",
         "Lead Tags": "Značky leadov",
         "Lead Lost Reasons": "Dôvody pre stratu leadu",
         "Active leads": "Aktívne leady",
@@ -20,23 +20,23 @@
     "Models\\LeadActivity": {
         "Activity type": "Typ aktivity",
         "Subject": "Predmet",
-        "Lead": "Vedenie",
+        "Lead": "Lead",
         "Contact person": "Kontaktná osoba",
         "Start date": "Dátum začiatku",
-        "Start time": "Začiatok",
-        "End date": "Dátum",
-        "End time": "Čas",
+        "Start time": "Čas začiatku",
+        "End date": "Dátum konca",
+        "End time": "Čas konca",
         "All day": "Celý deň",
         "Completed": "Dokončená",
-        "Created by": "Vytvorené",
+        "Created by": "Vytvoril",
         "Contact": "Kontakt",
         "Meeting minutes (link)": "Zápisnica zo stretnutia (odkaz)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Location": "Miesto",
+        "Online meeting link": "Odkaz na online stretnutie",
+        "Description": "Popis",
+        "Recurrence": "Opakovanie",
+        "Long meeting minutes (link to external document)": "Podrobná zápisnica (odkaz na externý dokument)",
+        "Short meeting minutes": "Stručná zápisnica"
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",
@@ -71,10 +71,20 @@
         "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Closed": "Uzavretý",
-        "Tags": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": ""
+        "Tags": "Značky",
+        "Open \/ Closed": "Otvorené \/ Zatvorené",
+        "Open": "Otvorené",
+        "All": "Všetky",
+        "Deal": "Deal",
+        "Phone": "Telefón",
+        "Advertisement": "Reklama",
+        "Partner": "Partner",
+        "Web": "Web",
+        "Cold call": "Cold call",
+        "E-mail": "E-mail",
+        "Referral": "Odporúčanie",
+        "Other": "Iné",
+        "Online document folder": "Online priečinok dokumentov"
     },
     "root": {
         "Lead statuses": "Stavy leadov",
@@ -86,15 +96,15 @@
     },
     "Models\\LeadHistory": {
         "Change Date": "Dátum zmeny",
-        "Lead": "Vedenie",
+        "Lead": "Lead",
         "Description": "Opis"
     },
     "Models\\LeadTag": {
-        "Lead": "Vedenie",
-        "Tag": "Označenie"
+        "Lead": "Lead",
+        "Tag": "Značka"
     },
     "Models\\LeadDocument": {
-        "Lead": "Vedenie",
+        "Lead": "Lead",
         "Document": "Dokument"
     },
     "Components\\FormLead": {
@@ -118,14 +128,14 @@
         "Shift+Enter": "Shift+Enter"
     },
     "Models\\Tag": {
-        "Name": "Pomenovať",
+        "Name": "Názov",
         "Color": "Farba"
     },
     "Models\\LeadProduct": {
-        "Lead": "Vedenie",
+        "Lead": "Lead",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
-        "Amount": "Výška",
+        "Amount": "Množstvo",
         "Dicount (%)": "Zľava (%)",
         "Vat (%)": "DPH (%)",
         "Vat": "DPH",
@@ -133,7 +143,7 @@
         "Sum": "Súčet"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Stratený dôvod"
+        "Lost Reason": "Dôvod straty"
     },
     "Components\\FormActivity": {
         "End": "Koniec",
@@ -156,7 +166,6 @@
         "Task": "Úloha"
     },
     "Components\\TableLeads": {
-        "Hide filter": "",
-        "Copy cell content to clipboard": ""
+        "Deal":"Deal"
     }
 }

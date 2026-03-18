@@ -22,7 +22,7 @@ class WarehousesApp extends App {
     // custom tabs
     globalThis.hubleto.getApp('Hubleto/App/Community/Products').addCustomFormTab({
       uid: 'inventory',
-      title: 'Inventory',
+      title: globalThis.hubleto.translate('Inventory','Hubleto\\App\\Community\\Warehouses\\Loader','manifest'),
       onRender: (form: any) => {
         return <TableInventory
           uid={form.props.uid + "_table_product_inventory"}
@@ -36,7 +36,7 @@ class WarehousesApp extends App {
 
     globalThis.hubleto.getApp('Hubleto/App/Community/Products').addCustomFormTab({
       uid: 'transactions',
-      title: 'Transactions',
+      title: globalThis.hubleto.translate('Transactions','Hubleto\\App\\Community\\Warehouses\\Loader','manifest'),
       onRender: (form: any) => {
         return <TableTransactions
           uid={form.props.uid + "_table_product_transactions"}

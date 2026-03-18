@@ -1,4 +1,11 @@
 {
+    "HubletoReactUi": {
+        "Some inputs need your attention": "Niektoré polia vyžadujú vašu pozornosť",
+        "Duplicate entry error": "Chyba duplicitného záznamu",
+        "OK, I understand": "OK, rozumiem",
+        "Warning": "Upozornenie",
+        "Confirm": "Potvrdiť"
+    },
     "Components\\Form": {
         "Add": "Pridať",
         "Save": "Uložiť",
@@ -13,8 +20,30 @@
         "Saved": "Uložené",
         "You have unsaved changes. Are you sure to close?": "Máte neuložené zmeny. Naozaj chcete zavrieť?"
     },
+    "Components\\FormExtended": {
+        "Copy link to clipboard":"Zkopíruj link do schránky",
+        "unsaved changes":"neuložené zmeny"
+    },
+    "Components\\ErpWorkflowSelector": {
+        "Change workflow": "Zmeň workflow",
+        "Last update: {{ date }} by {{ user }}": "Posledná aktualizácia: {{ date }} od {{ user }}",
+        "unknown": "neznámy"
+    },
     "Components\\Input": {
         "Upload file": "Nahrať súbor"
+    },
+    "Components\\Inputs\\JsonKeyValue": {
+        "Add value": "Pridať hodnotu"
+    },
+    "Components\\Inputs\\File": {
+        "Upload file": "Nahrať súbor"
+    },
+    "Components\\Inputs\\SharedWith": {
+        "Share": "Zdieľať",
+        "Default access based on ownership": "Predvolený prístup podľa vlastníctva",
+        "Can only read": "Môže iba čítať",
+        "Can read and modify": "Môže čítať a upravovať",
+        "Apply": "Použiť"
     },
     "Components\\Table": {
         "Delete": "Zmazať",
@@ -61,6 +90,10 @@
     "Components\\Inputs\\Password": {
         "New password": "Nové heslo",
         "Confirm new password": "Potvrdiť nové heslo"
+    },
+    "Components\\ErpSearch": {
+        "[Ctrl+K] Search in Hubleto...": "[Ctrl+K] Hľadať v Hubleto...",
+        "No options": "Žiadne možnosti"
     },
     "Controllers\\NotFound": {
         "Page Not Found": "Stránka nenájdená",

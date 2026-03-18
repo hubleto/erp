@@ -1,10 +1,45 @@
 {
     "manifest": {
         "Workflow": "Workflow",
-        "Free sales workflow management.": "Bezplatný manažment predajných kanálov",
+        "Free sales workflow management.": "Bezplatný manažment predajných kanálov.",
         "History": "História",
         "Workflows": "Workflovy",
-        "Items with not updated step": ""
+        "Items with not updated step": "Položky s neaktualizovaným krokom",
+        "Campaigns": "Kampane",
+        "Preparation": "Príprava",
+        "Launched": "Spustená",
+        "Analysis": "Analýza",
+        "Leads": "Leady",
+        "Subscriber": "Odberateľ",
+        "MQL": "MQL",
+        "SQL": "SQL",
+        "Opportunity": "Príležitosť",
+        "Customer": "Zákazník",
+        "Deals": "Dealy",
+        "Prospecting": "Vyhľadávanie",
+        "Qualified": "Kvalifikovaný",
+        "Quote Sent": "Ponuka odoslaná",
+        "Under Review": "V hodnotení",
+        "Contracting": "Zmluvné rokovania",
+        "WON": "VYHRANÝ",
+        "LOST": "PREHRANÝ",
+        "Orders": "Objednávky",
+        "In progress": "V procese",
+        "Delivered": "Doručené",
+        "Ready to invoice": "Pripravené na fakturáciu",
+        "Invoiced": "Vyfakturované",
+        "Paid": "Zaplatené",
+        "Projects": "Projekty",
+        "Implementation": "Implementácia",
+        "Testing": "Testovanie",
+        "Tasks": "Úlohy",
+        "Ready to test": "Pripravené na testovanie",
+        "Test passed": "Test prebehol úspešne",
+        "Test failed": "Test zlyhal",
+        "Ready to deploy": "Pripravené na nasadenie",
+        "Deployed": "Nasadené",
+        "Accepted": "Akceptované",
+        "Manage workflows": "Spravovať workflovy"        
     },
     "Controllers\\Home": {
         "Workflow": "Workflow",
@@ -15,28 +50,33 @@
         "Workflows": "Workflovy"
     },
     "Models\\Workflow": {
-        "Name": "Pomenovať",
+        "Name": "Názov",
         "Description": "Opis",
         "Type": "Typ",
-        "Group": "Skupiny",
-        "Order": "",
-        "Show in kanban": ""
+        "Group": "Skupina",
+        "Order": "Poradie",
+        "Show in kanban": "Zobraziť v kanbane"
     },
     "Models\\WorkflowStep": {
-        "Name": "Pomenovať",
-        "Order": "Objednávka",
+        "Name": "Názov",
+        "Order": "Poradie",
         "Color": "Farba",
         "Probability": "Pravdepodobnosť",
-        "Workflow": "Potrubie",
-        "Set result of a deal to": "Stanovený výsledok dohody",
+        "Workflow": "Workflow",
+        "Set result of a deal to": "Nastaviť výsledok dealu na",
         "Tag": "Značka"
     },
     "Controllers\\Workflow": {
-        "Workflow": "Workflow"
+        "Workflow": "Workflow",
+        "Show details": "Zobraziť detaily"
+    },
+    "Controllers\\History": {
+        "Workflow": "Workflow",
+        "History": "História"
     },
     "Models\\WorkflowHistory": {
         "Model": "Model",
-        "Record Id": "ID Záznamu",
+        "Record Id": "ID záznamu",
         "Changed": "Zmenené",
         "User": "Používateľ",
         "Workflow": "Workflow",

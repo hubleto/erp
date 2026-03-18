@@ -114,11 +114,11 @@ class Loader extends \Hubleto\Erp\App
       $mCurrency->record->recordCreate([ 'name' => 'Argentine Peso', 'code' => 'ARS', 'symbol' => '$' ]);
       $mCurrency->record->recordCreate([ 'name' => 'New Zealand Dollar', 'code' => 'NZD', 'symbol' => 'NZ$' ]);
 
-      $mActivityTypes->record->recordCreate([ 'name' => 'Meeting', 'color' => '#607d8b', 'calendar_visibility' => true ]);
-      $mActivityTypes->record->recordCreate([ 'name' => 'Bussiness Trip', 'color' => '#673ab7', 'calendar_visibility' => true ]);
-      $mActivityTypes->record->recordCreate([ 'name' => 'Call', 'color' => '#348789', 'calendar_visibility' => true ]);
-      $mActivityTypes->record->recordCreate([ 'name' => 'Email', 'color' => '#3f51b5', 'calendar_visibility' => true ]);
-      $mActivityTypes->record->recordCreate([ 'name' => 'Other', 'color' => '#91133e', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => $this->translate('Meeting'), 'color' => '#607d8b', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => $this->translate('Business Trip'), 'color' => '#673ab7', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => $this->translate('Call'), 'color' => '#348789', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => $this->translate('Email'), 'color' => '#3f51b5', 'calendar_visibility' => true ]);
+      $mActivityTypes->record->recordCreate([ 'name' => $this->translate('Other'), 'color' => '#91133e', 'calendar_visibility' => true ]);
 
       $countries = [
         [1, 'Aruba', 'ABW'],

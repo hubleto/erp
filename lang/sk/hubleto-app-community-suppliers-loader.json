@@ -1,23 +1,24 @@
 {
     "manifest": {
         "Suppliers": "Dodávatelia",
-        "List of product suppliers": "Zoznam dodávateľov"
+        "List of product suppliers": "Zoznam dodávateľov produktov"
     },
     "Controllers\\Suppliers": {
-        "Suppliers": ""
+        "Suppliers": "Dodávatelia"
     },
     "Models\\Supplier": {
-        "Name": "",
-        "Address": "",
-        "City": "",
-        "Postal code": "",
-        "Country": "",
-        "Contact": "",
-        "Order email": "",
-        "Tax ID": "",
-        "Company ID": "",
-        "VAT ID": "",
-        "Payment account number": "",
-        "Add supplier": ""
+        "Name": "Názov",
+        "Address": "Adresa",
+        "City": "Mesto",
+        "Postal code": "PSČ",
+        "Country": "Krajina",
+        "Contact": "Kontakt",
+        "Order email": "E-mail pre objednávky",
+        "Tax ID": "DIČ",
+        "Company ID": "IČO",
+        "VAT ID": "IČ DPH",
+        "Payment account number": "Číslo účtu",
+        "Add supplier": "Pridať dodávateľa",
+        "Suppliers": "Dodávatelia"
     }
 }

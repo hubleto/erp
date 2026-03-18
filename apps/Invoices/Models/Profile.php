@@ -82,7 +82,7 @@ class Profile extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['addButtonText'] = "Add invoice profile";
+    $description->ui['addButtonText'] = $this->translate("Add invoice profile");
 
     return $description;
   }

@@ -67,7 +67,16 @@
         "Tags": "",
         "Open \/ Closed": "",
         "Open": "",
-        "All": ""
+        "All": "",
+        "Phone": "",
+        "Advertisement": "",
+        "Partner": "",
+        "Web": "",
+        "Cold call": "",
+        "E-mail": "",
+        "Referral": "",
+        "Other": "",
+        "Online document folder": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Důvod ztracení"

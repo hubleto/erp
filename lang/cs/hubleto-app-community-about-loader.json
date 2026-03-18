@@ -7,6 +7,7 @@
     },
     "Controllers\\About": {
         "About": "O Hubleto",
-        "About your Hubleto": "O Vašem Hubleto"
+        "About your Hubleto": "O Vašem Hubleto",
+        "Useful links": ""
     }
 }

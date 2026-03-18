@@ -447,7 +447,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     \Hubleto\App\Community\Customers\Models\CustomerActivity $mCustomerActivity,
   ): void {
 
-    $activityTypes = ["Meeting", "Bussiness Trip", "Call", "Email"];
+    $activityTypes = [$this->translate("Meeting"), $this->translate("Business Trip"), $this->translate("Call"), $this->translate("Email")];
     $minutes = ["00", "15", "30", "45"];
     $customers = $mCustomer->record->all();
 
@@ -461,23 +461,23 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
         $timeString = $date." ".$randomHour.":".$randomMinute.":00";
         $time = date("H:i:s", strtotime($timeString));
 
-        $randomSubject = $activityTypes[rand(0, 3)];
-        $activityType = null;
+        $activityType = rand(1, 4);
+        $randomSubject = $activityTypes[$activityType - 1];
 
-        switch ($randomSubject) {
-          case $activityTypes[0]:
-            $activityType = 1;
-            break;
-          case $activityTypes[1]:
-            $activityType = 2;
-            break;
-          case $activityTypes[2]:
-            $activityType = 3;
-            break;
-          case $activityTypes[3]:
-            $activityType = 4;
-            break;
-        }
+        // switch ($randomSubject) {
+        //   case $activityTypes[0]:
+        //     $activityType = 1;
+        //     break;
+        //   case $activityTypes[1]:
+        //     $activityType = 2;
+        //     break;
+        //   case $activityTypes[2]:
+        //     $activityType = 3;
+        //     break;
+        //   case $activityTypes[3]:
+        //     $activityType = 4;
+        //     break;
+        // }
 
         $activityId = $mCustomerActivity->record->recordCreate([
           "id_activity_type" => $activityType,
@@ -501,8 +501,8 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
   ): void {
 
     $mCampaign = $this->getModel(\Hubleto\App\Community\Campaigns\Models\Campaign::class);
-    $mCampaign->record->recordCreate(["name" => "Newsletter subscribers", "target_audience" => "Website visitors filling 'Subscribe to our newsletter'.", "color" => "#AB149E" ]);
-    $mCampaign->record->recordCreate(["name" => "Cold calling - SMEs", "target_audience" => "SMEs reached out by cold calling.", "color" => "#68CCCA" ]);
+    $mCampaign->record->recordCreate(["name" => $this->translate("Newsletter subscribers"), "target_audience" => $this->translate("Website visitors filling 'Subscribe to our newsletter'."), "color" => "#AB149E" ]);
+    $mCampaign->record->recordCreate(["name" => $this->translate("Cold calling - SMEs"), "target_audience" => $this->translate("SMEs reached out by cold calling."), "color" => "#68CCCA" ]);
 
     $customers = $mCustomer->record
       ->with("CONTACTS")
@@ -540,13 +540,13 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       ])['id'];
 
       $mLeadHistory->record->recordCreate([
-        "description" => "Lead created",
+        "description" => $this->translate("Lead created"),
         "change_date" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
         "id_lead" => $idLead
       ]);
 
       $mLeadActivity->record->recordCreate([
-        "subject" => "Follow-up call",
+        "subject" => $this->translate("Follow-up call"),
         "date_start" => $leadDateCreated,
         "time_start" => rand(10, 15) . ':00',
         "all_day" => rand(1, 5) == 1,
@@ -622,7 +622,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       ])['id'];
 
       $mLeadHistory->record->recordCreate([
-        "description" => "Converted to a deal",
+        "description" => $this->translate("Converted to a deal"),
         "change_date" => date("Y-m-d", rand(strtotime("-1 month"), strtotime("+1 month"))),
         "id_lead" => $lead->id
       ]);

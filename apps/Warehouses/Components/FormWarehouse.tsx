@@ -26,8 +26,8 @@ export default class FormWarehouse<P, S> extends FormExtended<FormWarehouseProps
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Warehouse')}</b> },
-        { uid: 'locations', title: this.translate('Locations'), showCountFor: 'LOCATIONS' },
+        { uid: 'default', title: <b>{this.translate('Warehouse','Hubleto\\App\\Community\\Warehouses\\Loader','Components\\FormWarehouse')}</b> },
+        { uid: 'locations', title: this.translate('Locations','Hubleto\\App\\Community\\Warehouses\\Loader','Components\\FormWarehouse'), showCountFor: 'LOCATIONS' },
         ...this.getCustomTabs()
       ]
     }
@@ -83,7 +83,7 @@ export default class FormWarehouse<P, S> extends FormExtended<FormWarehouseProps
       case 'locations':
         return <>
           {this.state.id < 0 ?
-            <div className="badge badge-info">First create warehouse, then you will be prompted to add its locations.</div>
+            <div className="badge badge-info">{this.translate('First create warehouse, then you will be prompted to add its locations.')}</div>
           :
             <TableLocations
               uid={this.props.uid + '_table_locations'}

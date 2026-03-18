@@ -15,7 +15,13 @@
         "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
         "Sidebar": "Ľavé menu",
-        "Teams": "Tímy"
+        "Teams": "Tímy",
+        "Meeting": "Stretnutie",
+        "Business Trip": "Pracovná cesta",
+        "Call": "Hovor",
+        "Email": "Email",
+        "Other": "Iné",
+        "Log viewer": "Prehliadač logov"
     },
     "Models\\User": {
         "First name": "Meno",
@@ -141,7 +147,12 @@
         "Manage apps": "Spravovať aplikácie",
         "All settings": "Všetky nastavenia",
         "Change theme": "Zmeniť tému",
-        "Locale": "Lokalizácia"
+        "Locale": "Lokalizácia",
+        "Sign out from Hubleto": "Odhlásiť z Hubleta",
+        "Default currency and timezone": "Základná mena a časové pásmo",
+        "Date (short / long) and time formats": "Formáty dátumu (krátky / dlhý) a času",
+        "Decimals and thousands separator": "Desatinné miesta a oddeľovač tisícov",
+        "Search settings...": "Hľadať v nastaveniach..."
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavenia",
@@ -197,12 +208,12 @@
         "ZIP": "Zips",
         "City": "Mesto",
         "Country": "Krajina",
-        "Registration ID": "",
-        "Business register": "",
-        "Logo": "",
-        "Brand color - primary": "",
-        "Brand color - secondary": "",
-        "Region": ""
+        "Registration ID": "IČO",
+        "Business register": "Obchodný register",
+        "Logo": "Logo",
+        "Brand color - primary": "Primárna farba značky",
+        "Brand color - secondary": "Sekundárna farba značky",
+        "Region": "Región"
     },
     "Controllers\\Sidebar": {
         "Settings": "Nastavenia",
@@ -239,5 +250,9 @@
     "Controllers\\MyAccount": {
         "Settings": "Nastavenia",
         "Company": "Firma"
+    },
+    "Controllers\\LogViewer": {
+        "Settings": "Nastavenia",
+        "Log Viewer": "Prehliadač logov"
     }
 }

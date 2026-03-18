@@ -26,7 +26,8 @@
     "Controllers\\Dashboard": {
         "Developer": "Vývojař",
         "DB Updates": "Aktualize databázy",
-        "Form designer": "Návrhář formulářů"
+        "Form designer": "Návrhář formulářů",
+        "Check DB consistency": ""
     },
     "Controllers\\DbUpdates": {
         "Developer": "Vývojař",
@@ -38,5 +39,10 @@
         "SQL": "SQL",
         "Run this update": "Spustit tuto aktualizaci",
         "Run the updates now!": "Spustiť aktualizace teď!"
+    },
+    "Controllers\\CheckDbConsistency": {
+        "Developer tools": "",
+        "Check DB consistency": "",
+        "No necessary database updates found.": ""
     }
 }

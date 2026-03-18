@@ -17,10 +17,10 @@
 
 {% if viewParams.summary|length == 0 %}
   <div class="alert alert-info mt-2">
-    <p>No project found.</p>
+    <p>{{ translate('No project found.') }}</p>
   </div>
 {% else %}
-  <div class="mt-2 font-bold">{{ viewParams.summary|length }} projects found</div>
+  <div class="mt-2 font-bold">{{ viewParams.summary|length }} {{ translate('projects found') }}</div>
   <div class="flex flex-wrap gap-2 mt-2">
     {% for project in viewParams.summary %}
       <div class="card w-72">

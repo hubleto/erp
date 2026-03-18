@@ -111,11 +111,11 @@ class Loader extends \Hubleto\Erp\App
     }
     if ($round == 2) {
       $mLocationType = $this->getModel(Models\LocationType::class);
-      $mLocationType->record->recordCreate(['name' => 'Area']);
-      $mLocationType->record->recordCreate(['name' => 'Aisle']);
-      $mLocationType->record->recordCreate(['name' => 'Rack']);
-      $mLocationType->record->recordCreate(['name' => 'Shelf']);
-      $mLocationType->record->recordCreate(['name' => 'Bin']);
+      $mLocationType->record->recordCreate(['name' => $this->translate('Area')]);
+      $mLocationType->record->recordCreate(['name' => $this->translate('Aisle')]);
+      $mLocationType->record->recordCreate(['name' => $this->translate('Rack')]);
+      $mLocationType->record->recordCreate(['name' => $this->translate('Shelf')]);
+      $mLocationType->record->recordCreate(['name' => $this->translate('Bin')]);
     }
   }
 
@@ -135,12 +135,12 @@ class Loader extends \Hubleto\Erp\App
     $mProduct = $this->getModel(\Hubleto\App\Community\Products\Models\Product::class);
     $idsProduct = $mProduct->record->pluck('id');
 
-    $idWarehouseTypeMain = $mWarehouseType->record->recordCreate(['name' => 'Main'])['id'];
-    $idWarehouseTypeRegional = $mWarehouseType->record->recordCreate(['name' => 'Regional'])['id'];
-    $idWarehouseTypeExternal = $mWarehouseType->record->recordCreate(['name' => 'External'])['id'];
+    $idWarehouseTypeMain = $mWarehouseType->record->recordCreate(['name' => $this->translate('Main')])['id'];
+    $idWarehouseTypeRegional = $mWarehouseType->record->recordCreate(['name' => $this->translate('Regional')])['id'];
+    $idWarehouseTypeExternal = $mWarehouseType->record->recordCreate(['name' => $this->translate('External')])['id'];
 
     $idWarehouseMain = $mWarehouse->record->recordCreate([
-      'name' => 'Main Distribution Center',
+      'name' => $this->translate('Main Distribution Center'),
       'id_type' => $idWarehouseTypeMain,
       'operational_status' => Models\Warehouse::OPERATIONAL_STATUS_ACTIVE,
       'address' => '123 Warehouse St, Anytown, CA, 90210, USA',
@@ -148,7 +148,7 @@ class Loader extends \Hubleto\Erp\App
       'contact_person' => 'John Doe',
       'contact_email' => 'john.doe@warehouse.example.com',
       'contacct_phone' => '+1 555-123-4562',
-      'description' => 'Main warehouse used for supplying the most important customers.',
+      'description' => $this->translate('Main warehouse used for supplying the most important customers.'),
       'capacity' => 5400,
       'capacity_unit' => 'm2',
       'current_stock_status' => 1240,
@@ -156,7 +156,7 @@ class Loader extends \Hubleto\Erp\App
     ])['id'];
 
     $idWarehouseRegional = $mWarehouse->record->recordCreate([
-      'name' => 'Regional Hub East',
+      'name' => $this->translate('Regional Hub East'),
       'id_type' => $idWarehouseTypeRegional,
       'operational_status' => Models\Warehouse::OPERATIONAL_STATUS_ACTIVE,
       'address' => '456 Industrial Rd, Eastville, NY, 10001, USA',
@@ -164,7 +164,7 @@ class Loader extends \Hubleto\Erp\App
       'contact_person' => 'Jane Smith',
       'contact_email' => 'jane.smith@warehouse.example.com',
       'contacct_phone' => '+1 435-332-4332',
-      'description' => 'Regional warehouse used for supplying the regional customers.',
+      'description' => $this->translate('Regional warehouse used for supplying the regional customers.'),
       'id_operation_manager' => 1,
     ])['id'];
 

@@ -365,7 +365,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       case 'contacts':
         return <div>
           <div>
-            Select contacts which will be added as recipients
+            { this.translate('Select contacts which will be added as recipients') }
           </div>
           <TableContacts
             tag={"table_campaign_contact"}
@@ -416,7 +416,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               <div className='card-body'>
                 <textarea
                   className='w-full h-80'
-                  placeholder='One email per line.'
+                  placeholder={this.translate('One email per line.')}
                   ref={this.refEmails}
                 ></textarea>
                 <button
@@ -460,34 +460,34 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       case 'test':
         return <div className='flex gap-2'>
           <div className='card flex-1'>
-            <div className='card-header'>Analysis & warnings</div>
+            <div className='card-header'>{ this.translate('Analysis & warnings') }</div>
             <div className='card-body'>
               {this.state.campaignTestInfo ? <>
                 {this.state.campaignTestInfo.warnings.length == 0 ? 
                   <div className='alert alert-success'>
                     <i className='fas fa-check mr-2'></i>
-                    No warnings
+                    { this.translate('No warnings') }
                   </div>
                 :
                   this.state.campaignTestInfo.warnings.map((item, key) => {
                     return <div key={key} className='alert alert-warning'>{item}</div>;
                   })
               }
-              </> : <div className='alert alert-warning'>Analysing campaign...</div>}
+              </> : <div className='alert alert-warning'>{ this.translate('Analysing campaign...') }</div>}
             </div>
           </div>
           <div className='card flex-1'>
-            <div className='card-header'>Send test email</div>
+            <div className='card-header'>{ this.translate('Send test email') }</div>
             <div className='card-body'>
-              Test email recipient:
+              { this.translate('Test email recipient:') }
               <input
                 ref={this.refTestEmailRecipientInput}
                 className="ml-2"
                 type="text"
-                placeholder="Recipient email"
+                placeholder={ this.translate("Recipient email") }
               />
               <br/>
-              Test email variables:
+              { this.translate("Test email variables:") }
               <InputJsonKeyValue uid="test-email-variables"
                 onChange={(input: any, value: any) => {
                   input.setState({value: value});
@@ -519,7 +519,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               : null}
               {this.state.testEmailSendResult && this.state.testEmailSendResult.status != 'success' ?
                 <div className='alert alert-danger mt-2'>
-                  Error occured when sending a test email to you.
+                  { this.translate('Error occured when sending a test email to you.') }
                   <br/>
                   <b>{this.state.testEmailSendResult.message}</b>
                 </div>
@@ -584,18 +584,17 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 }}
               >
                 <span className="icon"><i className="fas fa-paper-plane"></i></span>
-                <span className="text">Launch campaign now!</span>
+                <span className="text">{ this.translate('Launch campaign now!') }</span>
               </button>
               <div className='mt-2 alert alert-info'>
-                Emails will be sent only to recipients who did not receive email from
-                this campaign yet.
+                { this.translate('Emails will be sent only to recipients who did not receive email from this campaign yet.') }
               </div>
               <div className='mt-2 alert alert-info'>
-                Unsubscribed recipients will be ignored.
+                { this.translate('Unsubscribed recipients will be ignored.') }
               </div>
               {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
                 <div className='card mt-2'>
-                  <div className='card-header'>Who clicked? (Bot Score = 0)</div>
+                  <div className='card-header'>{ this.translate('Who clicked? (Bot Score = 0)') }</div>
                   <div className='card-body flex flex-wrap'>
                     {this.state.campaignLaunchInfo.recipients.map((item, key) => {
                       if (item.CLICKS.length == 0) {
@@ -627,17 +626,17 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               : null}
             </div>
             <div className='card grow'>
-              <div className='card-header'>Recipients</div>
+              <div className='card-header'>{ this.translate('Recipients') }</div>
               <div className='card-body'>
                 {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
                   <table className='table-default dense'>
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Clicks</th>
-                        <th>Bot score</th>
+                        <th>{ this.translate('Email') }</th>
+                        <th>{ this.translate('Status') }</th>
+                        <th>{ this.translate('Clicks') }</th>
+                        <th>{ this.translate('Bot score') }</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -668,7 +667,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                       })}
                     </tbody>
                   </table>
-                : <div className='alert alert-warning'>Loading information about recipients and launch status.</div>}
+                : <div className='alert alert-warning'>{ this.translate('Loading information about recipients and launch status.') }</div>}
               </div>
             </div>
           </div>

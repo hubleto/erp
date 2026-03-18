@@ -90,7 +90,9 @@
         "Serial number": "Número de serie",
         "Expiration": "Fecha de vencimiento",
         "Received": "Recibido",
-        "Last moved": "Último movimiento"
+        "Last moved": "Último movimiento",
+        "Location": "",
+        "Add item": ""
     },
     "Components\\TableInventory": {
         "Total quantity": "Cantidad total"
@@ -116,7 +118,16 @@
         "Who performed the transaction": "Movimiento registrado por",
         "Add transaction": "Agregar movimiento",
         "Inbound": "Entrada",
-        "Outbound": "Salida"
+        "Outbound": "Salida",
+        "Old location": "",
+        "New location": "",
+        "Receipt": "",
+        "Shipment": "",
+        "Transfer In": "",
+        "Transfer Out": "",
+        "Adjustment In": "",
+        "Adjustment Out": "",
+        "Return": ""
     },
     "Models\\TransactionItem": {
         "Transaction": "Movimiento",

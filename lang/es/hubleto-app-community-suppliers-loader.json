@@ -18,6 +18,7 @@
         "Company ID": "ID de la empresa",
         "VAT ID": "ID de impuesto",
         "Payment account number": "Número de cuenta de pago",
-        "Add supplier": "Añadir proveedor"
+        "Add supplier": "Añadir proveedor",
+        "Suppliers": ""
     }
 }

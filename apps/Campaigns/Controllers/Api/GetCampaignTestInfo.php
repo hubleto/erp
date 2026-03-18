@@ -47,11 +47,11 @@ class GetCampaignTestInfo extends \Hubleto\Erp\Controllers\ApiController
     ;
 
     if (!$campaign->MAIL_ACCOUNT) {
-      $testInfo['warnings'][] = 'Sender mail account is not set.';
+      $testInfo['warnings'][] = $this->translate('Mail template is not set.');
     }
 
     if (!$campaign->MAIL_TEMPLATE) {
-      $testInfo['warnings'][] = 'Mail template is not set.';
+      $testInfo['warnings'][] = $this->translate('Mail template is not set.');
     } else {
       $template = $campaign->MAIL_TEMPLATE;
       $bodyHtml = $template->body_html;

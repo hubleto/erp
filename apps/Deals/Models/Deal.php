@@ -52,7 +52,7 @@ class Deal extends \Hubleto\Erp\Model
     3 => "Web",
     4 => "Cold call",
     5 => "E-mail",
-    6 => "Refferal",
+    6 => "Referral",
     7 => "Other",
   ];
 
@@ -108,9 +108,9 @@ class Deal extends \Hubleto\Erp\Model
       'customer_order_number' => (new Varchar($this, $this->translate('Customer\'s order number')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
-      'shared_folder' => new Varchar($this, "Shared folder (online document storage)")->setCssClass('text-violet-800'),
+      'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)"))->setCssClass('text-violet-800'),
       'note' => (new Text($this, $this->translate('Notes'))),
-      'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(self::ENUM_SOURCE_CHANNELS),
+      'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS)),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(self::ENUM_DEAL_RESULTS)
@@ -172,7 +172,7 @@ class Deal extends \Hubleto\Erp\Model
     $description->hide(['footer']);
     $description->ui['filters'] = [
       'fDealWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'State'),
-      'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => self::ENUM_SOURCE_CHANNELS ],
+      'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS) ],
       'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
       'fDealClosed' => [
         'title' => $this->translate('Open / Closed'),
@@ -308,7 +308,7 @@ class Deal extends \Hubleto\Erp\Model
     $totalInclVat = 0;
 
     $mItem = $this->getService(Item::class);
-    $allITems = $mItem->record->where('id_deal', $savedRecord['id'])->get()->toArray();
+    $allItems = $mItem->record->where('id_deal', $savedRecord['id'])->get()->toArray();
 
     if (!empty($allItems)) {
       foreach ($allItems as $item) {

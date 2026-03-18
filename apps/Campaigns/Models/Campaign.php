@@ -183,31 +183,17 @@ class Campaign extends \Hubleto\Erp\Model
    */
   public function getAiAssistantContext(int $sensitivityLevel, int $recordId): array
   {
-    $campaign = $this->record->prepareReadQuery()->where('campaign.id', $recordId)->first();
+    $campaign = $this->record->prepareReadQuery()->where('campaigns.id', $recordId)->first();
 
     if (!$campaign) return [];
 
-    switch ($sensitivityLevel) {
-      case 0:
-      default:
-        return [
-          'Campaing name' => $campaign->name,
-          'Campaign type' => $campaign->type,
-          'Target audience' => $campaign->target_audience,
-          'Goal' => $campaign->goal,
-          'Internal notes' => $campaign->notes,
-        ];
-      break;
-      case 1:
-        return [
-          'Campaing name' => $campaign->name,
-          'Campaign type' => $campaign->type,
-          'Target audience' => $campaign->target_audience,
-          'Goal' => $campaign->goal,
-          'Internal notes' => $campaign->notes,
-        ];
-      break;
-    }
+    return [
+      'Campaing name' => $campaign->name,
+      'Campaign type' => $campaign->type,
+      'Target audience' => $campaign->target_audience,
+      'Goal' => $campaign->goal,
+      'Internal notes' => $campaign->notes,
+    ];
   }
 
 }

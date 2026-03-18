@@ -100,6 +100,12 @@ class Product extends \Hubleto\Erp\Model
     ]);
   }
 
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
@@ -132,5 +138,52 @@ class Product extends \Hubleto\Erp\Model
     ]);
 
     return $description;
+  }
+
+  /**
+   * [Description for getAiAssistantContext]
+   *
+   * @param int $sensitivityLevel
+   * @param int $recordId
+   * 
+   * @return array
+   * 
+   */
+  public function getAiAssistantContext(int $sensitivityLevel, int $recordId): array
+  {
+    $product = $this->record->prepareReadQuery()
+      ->where('products.id', $recordId)
+      ->with('GROUP')
+      ->with('CATEGORY')
+      ->first()
+    ;
+
+    if (!$product) return [];
+
+    return [
+      'EAN code' => $product->ean,
+      'Product name' => $product->name,
+      'Product group' => $product->GROUP->name,
+      'Product category' => $product->CATEGORY->name,
+      'Product category description' => $product->CATEGORY->short_description,
+      'Product image #1' => $this->env()->uploadUrl . '/' . $product->image_1,
+      'Product image #2' => $this->env()->uploadUrl . '/' . $product->image_2,
+      'Product image #3' => $this->env()->uploadUrl . '/' . $product->image_3,
+      'Product image #4' => $this->env()->uploadUrl . '/' . $product->image_4,
+      'Product image #5' => $this->env()->uploadUrl . '/' . $product->image_5,
+      'Product description' => $product->description,
+      'Product sales price' => $product->sales_price,
+      'Product sales unit' => $product->unit,
+      'Product sales margin' => $product->margin,
+      'Product package unit' => $product->package_unit,
+      'Product package amount' => $product->package_amount,
+      'Product package length' => $product->package_length,
+      'Product package width' => $product->package_width,
+      'Product package height' => $product->package_height,
+      'Product package volume' => $product->package_volume,
+      'Product package mass' => $product->package_mass,
+      'Product package discount' => $product->package_discount,
+      'Product package description' => $product->package_description,
+    ];
   }
 }

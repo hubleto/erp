@@ -8,11 +8,13 @@ class GeminiProvider
 {
   private AppInterface $app;
   private string $apiKey;
+  private string $model;
 
   public function __construct(AppInterface $app)
   {
     $this->app = $app;
     $this->apiKey = $app->configAsString('apiKey') ?: '';
+    $this->model = $app->configAsString('model') ?: 'gemini-2.5-flash';
   }
 
   public function sendMessage(string $message, array $history = [], string $mode = 'user', array $contextData = []): string
@@ -21,7 +23,7 @@ class GeminiProvider
       throw new \Exception("Gemini API key is not configured. Please set it in the application settings.");
     }
 
-    $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" . $this->apiKey;
+    $url = "https://generativelanguage.googleapis.com/v1beta/models/" . $this->model . ":generateContent?key=" . $this->apiKey;
 
     if ($mode === 'developer') {
       $systemPrompt = "You are 'Hubi', an intelligent technical assistant operating within the Hubleto ERP ecosystem. Your goal is to help developers write code, create models, and build extensions for Hubleto. When answering, actively use Google Search to find relevant technical information and code examples, focusing exclusively on these official sources: https://developer.hubleto.eu/v0/docs/ (Developer Documentation), and https://community.hubleto.eu/ (Community updates, bug fixes, and feature discussions). Provide accurate, deeply technical, and concise answers based on these sources.";

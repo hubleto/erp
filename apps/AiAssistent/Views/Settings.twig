@@ -27,6 +27,15 @@
           </td>
         </tr>
         <tr>
+          <td>{{ translate("AI Model") }}</td>
+          <td>
+            <select name="model" class="hubleto component input">
+              <option value="gemini-2.5-flash" {% if viewParams.app.configAsString('model') == 'gemini-2.5-flash' %}selected{% endif %}>Gemini 2.5 Flash</option>
+              <option value="gemini-3-flash-preview" {% if viewParams.app.configAsString('model') == 'gemini-3-flash-preview' %}selected{% endif %}>Gemini 3 Flash</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
           <td>
             {{ translate("Context Sensitivity Level") }}<br/>
             <small class="text-gray-500">{{ translate("Level of detail from ERP records sent to AI.") }}</small>

@@ -22,6 +22,7 @@ class Settings extends \Hubleto\Erp\Controller
     if ($settingsChanged) {
       $apiKey = $this->router()->urlParamAsString('apiKey');
       $sensitivityLevel = $this->router()->urlParamAsInteger('sensitivityLevel');
+      $model = $this->router()->urlParamAsString('model');
 
       /** @var \Hubleto\App\Community\AiAssistent\Loader $aiApp */
       $aiApp = $this->appManager()->getApp(\Hubleto\App\Community\AiAssistent\Loader::class);
@@ -31,6 +32,9 @@ class Settings extends \Hubleto\Erp\Controller
       
       $aiApp->setConfigAsInteger('sensitivityLevel', $sensitivityLevel);
       $aiApp->saveConfig('sensitivityLevel', $sensitivityLevel);
+
+      $aiApp->setConfigAsString('model', $model);
+      $aiApp->saveConfig('model', $model);
 
       $this->viewParams['settingsSaved'] = true;
     }

@@ -72,7 +72,12 @@ class GeminiProvider
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     if ($httpCode >= 400) {
-      throw new \Exception("Communication error with Google Gemini API (HTTP $httpCode): " . $response);
+      $errorData = json_decode((string)$response, true);
+      $errorMessage = $response;
+      if (isset($errorData['error']['message'])) {
+        $errorMessage = $errorData['error']['message'];
+      }
+      throw new \Exception("Communication error with Google Gemini API (HTTP $httpCode): " . $errorMessage);
     }
 
     $responseData = json_decode((string)$response, true);
@@ -92,3 +97,4 @@ class GeminiProvider
     return "Failed to get a response from AIAssistant.";
   }
 }
+

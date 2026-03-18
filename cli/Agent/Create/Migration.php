@@ -96,6 +96,7 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
       $this->terminal()->cyan("Migration " . $class . '_' . date('Ymd') . '_0001.php' . " in '{$appNamespace}' created successfully.\n");
     }
 
+    $this->terminal()->yellow("\n");
     $this->terminal()->yellow("💡  TIPS:\n");
     $this->terminal()->yellow("💡  -> Make sure to verify whether the generated migrations are correct.\n");
   }

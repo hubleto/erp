@@ -87,6 +87,7 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
       ;
     }
 
+    $this->terminal()->yellow("\n");
     $this->terminal()->yellow("💡  TIPS:\n");
     $this->terminal()->yellow("💡  -> Add controllers, views and some UI components to manage data in your model.\n");
     $this->terminal()->yellow("💡  ->   php hubleto create mvc {$appNamespace} {$model}\n");

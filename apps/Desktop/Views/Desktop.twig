@@ -65,6 +65,8 @@
   <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/main.js'></script>
   <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/apps.js'></script>
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/fontawesome-6.6.css">
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/font-gabarito.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
   {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
     <style> :root { --color-primary: {{ user.DEFAULT_COMPANY.brand_color_primary }} !important; } </style>

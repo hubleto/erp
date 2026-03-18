@@ -23,7 +23,7 @@ $config['projectUrl'] = '{{ projectUrl }}';
 $config['uploadUrl'] = '{{ projectUrl }}/upload';
 $config['assetsUrl'] = '{{ assetsUrl }}';
 
-if (is_dir(__DIR__ . '/assets')) $config['assetsCompiledUrl'] = '{{ projectUrl }}/assets/compiled';
+if (is_dir(__DIR__ . '/assets/compiled')) $config['assetsCompiledUrl'] = '{{ projectUrl }}/assets/compiled';
 else $config['assetsCompiledUrl'] = '{{ projectUrl }}/vendor/hubleto/assets/compiled';
 
 // sanitize dirs and urls based on used release

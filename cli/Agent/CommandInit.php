@@ -539,11 +539,14 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("\n");
     $this->terminal()->yellow("All done! Enjoy Hubleto.\n");
 
-    $this->terminal()->colored("yellow", "black", "Now open " . (string) $projectUrl . "?user={$adminEmail} and use this password: " . (string) $adminPassword . "\n");
-    $this->terminal()->yellow("  -> Note for NGINX users: don't forget to configure your locations in nginx.conf.\n");
-    $this->terminal()->yellow("  -> Check the developer's guide at https://developer.hubleto.eu.\n");
+    $this->terminal()->green("\n");
+    $this->terminal()->green("Your Hubleto is ready at " . (string) $projectUrl . "?user={$adminEmail}\n");
+    $this->terminal()->green("Your password is: " . (string) $adminPassword . "\n");
+
     $this->terminal()->yellow("\n");
-    $this->terminal()->yellow("💡 TIP: Run command below to create your new app 'MyFirstApp'.\n");
-    $this->terminal()->yellow("Run: php hubleto app create MyFirstApp\n");
+    $this->terminal()->yellow("💡  TIPS:\n");
+    $this->terminal()->yellow("     -> Check the developer's guide at https://developer.hubleto.eu.\n");
+    $this->terminal()->yellow("💡  -> Create your new app.\n");
+    $this->terminal()->yellow("💡  ->   php hubleto app create MyFirstApp\n");
   }
 }

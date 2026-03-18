@@ -183,7 +183,7 @@ class Campaign extends \Hubleto\Erp\Model
    */
   public function getAiAssistantContext(int $sensitivityLevel, int $recordId): array
   {
-    $campaign = $this->record->prepareReadQuery()->where('campaign.id', $recordId)->first();
+    $campaign = $this->record->prepareReadQuery()->where('campaigns.id', $recordId)->first();
 
     if (!$campaign) return [];
 

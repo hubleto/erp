@@ -87,6 +87,11 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
   };
 
   render() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const modelParam = searchParams.get('model');
+    const idParam = searchParams.get('id');
+    const contextSource = modelParam ? modelParam.split('/').pop() : '';
+
     const sampleQuestions = [
       "What is the difference between a Lead and a Deal in Hubleto?",
       "How can I create a new model and migration in Hubleto?",
@@ -122,6 +127,15 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
             </button>
           </div>
           
+          {contextSource && (
+            <div className="mt-2 text-sm bg-blue-50 dark:bg-slate-700/50 border border-blue-200 dark:border-slate-600 rounded-md p-3 text-slate-700 dark:text-slate-300 flex items-center shadow-sm">
+              <i className="fas fa-database text-blue-500 dark:text-blue-400 mr-2"></i>
+              <span>
+                <strong>{this.translate('Context')}:</strong> {contextSource} {idParam ? `#${idParam}` : ''}
+              </span>
+            </div>
+          )}
+
           <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-200 mt-2">{this.translate('Sample Questions')}</h3>
           <ul className="flex flex-col gap-2">
             {sampleQuestions.map((q, idx) => (
@@ -149,16 +163,16 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
               this.state.messages.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div 
-                    className={`max-w-[75%] p-4 shadow-sm ${
+                    className={`max-w-[90%] md:max-w-[85%] p-5 sm:p-6 shadow-md ${
                       msg.role === 'user' 
-                        ? 'bg-blue-600 text-white rounded-xl rounded-br-none' 
-                        : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-xl rounded-bl-none border border-slate-200 dark:border-slate-700'
+                        ? 'bg-blue-600 text-white rounded-2xl rounded-br-none' 
+                        : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-2xl rounded-bl-none border border-slate-200 dark:border-slate-700'
                     }`}
                   >
                     {msg.html ? (
-                      <div dangerouslySetInnerHTML={{ __html: msg.html }} className="prose dark:prose-invert max-w-none text-sm" />
+                      <div dangerouslySetInnerHTML={{ __html: msg.html }} className="prose prose-slate dark:prose-invert max-w-none text-base leading-relaxed prose-pre:bg-slate-800 prose-pre:text-slate-50" />
                     ) : (
-                      <div className="whitespace-pre-wrap">{msg.content}</div>
+                      <div className="whitespace-pre-wrap text-base leading-relaxed">{msg.content}</div>
                     )}
                   </div>
                 </div>
@@ -181,8 +195,8 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
                 onChange={this.handleInputChange}
                 onKeyDown={this.handleKeyDown}
                 placeholder={this.translate('Type your question here...')}
-                className="flex-1 border border-slate-300 dark:border-slate-600 rounded-lg p-3 resize-none focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-slate-700 dark:text-slate-200"
-                rows={3}
+                className="flex-1 h-[50px] border border-slate-300 dark:border-slate-600 rounded-lg py-3 px-4 resize-none focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-slate-700 dark:text-slate-200"
+                rows={1}
                 disabled={this.state.isLoading}
               ></textarea>
               <button 

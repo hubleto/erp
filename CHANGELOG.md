@@ -4,7 +4,7 @@ For releases v0.10 and later, check release notes at https://github.com/hubleto/
 
 ## Release v0.9
 
-  * easier app creation (`php hubleto app create MyFirstApp`)
+  * easier app creation (`php hubleto create app MyFirstApp`)
   * codebase clean-up
   * new apps `Reports`
   * improved session management
@@ -13,7 +13,7 @@ For releases v0.10 and later, check release notes at https://github.com/hubleto/
 ## Release v0.8
 
   * new `<Chart>` React component
-  * new `php hubleto app create`, `php hubleto debug router` and `php hubleto create model` commands
+  * new `php hubleto create app`, `php hubleto debug router` and `php hubleto create model` commands
   * improved translation and language support
   * new community app `Goals`
   * cleaned-up code base

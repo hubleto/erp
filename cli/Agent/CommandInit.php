@@ -545,8 +545,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->terminal()->yellow("\n");
     $this->terminal()->yellow("💡  TIPS:\n");
-    $this->terminal()->yellow("     -> Check the developer's guide at https://developer.hubleto.eu.\n");
+    $this->terminal()->yellow("💡  -> Check the developer's guide at https://developer.hubleto.eu.\n");
     $this->terminal()->yellow("💡  -> Create your new app.\n");
-    $this->terminal()->yellow("💡  ->   php hubleto app create MyFirstApp\n");
+    $this->terminal()->yellow("💡  ->   php hubleto create app MyFirstApp\n");
   }
 }

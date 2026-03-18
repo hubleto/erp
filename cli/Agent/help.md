@@ -31,6 +31,4 @@
 Examples:
   php hubleto help
   php hubleto project init
-  php hubleto app create MyFirstApp
-  php hubleto app install MyFirstApp\Loader force
-  php hubleto project generate-demo-data
+  php hubleto create app MyFirstApp

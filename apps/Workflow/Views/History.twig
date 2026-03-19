@@ -3,5 +3,6 @@
 <hblreact-table
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
   string:model="Hubleto/App/Community/Workflow/Models/WorkflowHistory"
 ></hblreact-table>

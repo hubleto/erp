@@ -4,5 +4,6 @@
   string:tag="mail-templates"
   int:record-id="{{ viewParams.recordId }}"
   json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
   bool:show-only-templates="true"
 ></hblreact-mail-table-templates>

@@ -98,6 +98,8 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
   }
 
   onTabChange() {
+    super.onTabChange();
+
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'preview':

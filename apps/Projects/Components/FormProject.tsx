@@ -63,6 +63,8 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
   }
 
   onTabChange() {
+    super.onTabChange();
+
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'statistics':

@@ -325,10 +325,10 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
         </div>;
 
         return <>
-          <div className='flex gap-2'>
+          <div className='flex flex-col md:flex-row gap-2'>
             <div className='flex-2 card'>
-              <div className="card-body flex flex-row gap-2">
-                <div className="w-1/2">
+              <div className="card-body flex flex-col md:flex-row gap-2">
+                <div>
                   {this.inputWrapper("name", {cssClass: 'text-2xl'})}
                   {this.inputWrapper("identifier")}
                   {this.inputWrapper("customer_id")}
@@ -354,8 +354,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
                   </div>
                   {this.inputWrapper('shared_folder')}
                 </div>
-                <div className='border-l border-gray-200'></div>
-                <div className="w-1/2">
+                <div>
                   {this.inputWrapper("id_owner")}
                   {this.inputWrapper("id_manager")}
                   {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600'})}
@@ -383,19 +382,15 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
                 </div>
               </div>
             </div>
-            {this.state.id > 0 ? <>
-              <div className='flex flex-col gap-2'>
-                <div style={{width: '40em'}}>
-                  <TableContacts
-                    uid={this.props.uid + "_table_contacts"}
-                    parentForm={this}
-                    showAsCards={true}
-                    idCustomer={R.id}
-                    customEndpointParams={{idCustomer: R.id}}
-                  ></TableContacts>
-                </div>
-              </div>
-            </> : null}
+            {this.state.id > 0 ? <div>
+              <TableContacts
+                uid={this.props.uid + "_table_contacts"}
+                parentForm={this}
+                showAsCards={true}
+                idCustomer={R.id}
+                customEndpointParams={{idCustomer: R.id}}
+              ></TableContacts>
+            </div> : null}
           </div>
           {/* {customInputs.length > 0 ?
             <div className="card mt-2"><div className="card-header">{this.translate('Custom data')}</div><div className="card-body">

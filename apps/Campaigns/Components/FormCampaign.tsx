@@ -91,6 +91,8 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
   }
 
   onTabChange() {
+    super.onTabChange();
+
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'test':

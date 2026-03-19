@@ -111,8 +111,8 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
       case 'default':
         return <>
           <div className='card'>
-            <div className='card-body flex flex-row gap-2'>
-              <div className="w-3/4">
+            <div className='card-body flex flex-col md:flex-row gap-2'>
+              <div className="flex-3">
                 <div className="flex gap-2 w-full">
                   <div>
                     <i className="fas fa-user text-2xl p-4 text-gray-500"></i>
@@ -126,72 +126,8 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
                     {this.inputWrapper('title_after', {cssClass: 'text-2xl'})}
                   </div>
                 </div>
-
-                {this.divider(this.translate('Contacts'))}
-                <TableValues
-                  key={"contacts_"+this.state.contactsTableKey}
-                  uid={this.props.uid + '_table_contacts'}
-                  parentForm={this}
-                  context="Hello World"
-                  // customEndpointParams={{idContact: R.id}}
-                  data={{records: R.VALUES}}
-                  isInlineEditing={this.state.isInlineEditing}
-                  isUsedAsInput={true}
-                  readonly={!this.state.isInlineEditing}
-                  descriptionSource="props"
-                  onRowClick={() => this.setState({isInlineEditing: true})}
-                  onChange={(table: TableValues) => {
-                    this.updateRecord({ VALUES: table.state.data.records });
-                  }}
-                  onDeleteSelectionChange={(table: TableValues) => {
-                    this.updateRecord({ VALUES: table.state.data.records ?? [] });
-                    this.setState({contactsTableKey: Math.random()} as FormContactState)
-                  }}
-                  customEndpointParams={{idContact: R.id}}
-                  description={{
-                    permissions: this.props.tableValuesDescription?.permissions ?? {},
-                    ui: {
-                      emptyMessage: <div className="p-2">{this.translate('No contacts yet.')}</div>
-                    },
-                    columns: {
-                      type: {
-                        type: 'varchar',
-                        title: this.translate('Type'),
-                        enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
-                      },
-                      value: { type: 'varchar', title: this.translate('Value')},
-                      id_category: { type: 'lookup', title: this.translate('Category'), model: 'Hubleto/App/Community/Contacts/Models/Category' },
-                    },
-                    inputs: {
-                      type: {
-                        type: 'varchar',
-                        title: this.translate('Type'),
-                        enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
-                      },
-                      value: { type: 'varchar', title: this.translate('Value')},
-                      id_category: { type: 'lookup', title: this.translate('Category'), model: 'Hubleto/App/Community/Contacts/Models/Category' },
-                    }
-                  }}
-                />
-                <a
-                  className="btn btn-add-outline mt-2"
-                  onClick={() => {
-                    if (!R.VALUES) R.VALUES = [];
-                    R.VALUES.push({
-                      id: this.state.newEntryId,
-                      id_contact: { _useMasterRecordId_: true },
-                      type: 'email',
-                    });
-                    this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormContactState);
-                  }}
-                >
-                  <span className="icon"><i className="fas fa-add"></i></span>
-                  <span className="text">{this.translate('Add contact')}</span>
-                </a>
-
               </div>
-              <div className='border-l border-gray-200'></div>
-              <div className="w-1/2">
+              <div className="flex-1">
                 {this.inputWrapper('id_customer')}
                 {this.inputWrapper('is_primary')}
                 {this.inputWrapper('is_for_invoicing')}
@@ -265,11 +201,67 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
               </div>
             </div>
           </div>
-          {/* {showAdditional && customInputs.length > 0 ?
-            <div className="card mt-2"><div className="card-header">{this.translate("Custom data")}</div><div className="card-body">
-              {customInputs}
-            </div></div>
-          : <></>} */}
+          {this.divider(this.translate('Contacts'))}
+          <TableValues
+            key={"contacts_"+this.state.contactsTableKey}
+            uid={this.props.uid + '_table_contacts'}
+            parentForm={this}
+            context="Hello World"
+            // customEndpointParams={{idContact: R.id}}
+            data={{records: R.VALUES}}
+            isInlineEditing={this.state.isInlineEditing}
+            isUsedAsInput={true}
+            readonly={!this.state.isInlineEditing}
+            descriptionSource="props"
+            onRowClick={() => this.setState({isInlineEditing: true})}
+            onChange={(table: TableValues) => {
+              this.updateRecord({ VALUES: table.state.data.records });
+            }}
+            onDeleteSelectionChange={(table: TableValues) => {
+              this.updateRecord({ VALUES: table.state.data.records ?? [] });
+              this.setState({contactsTableKey: Math.random()} as FormContactState)
+            }}
+            customEndpointParams={{idContact: R.id}}
+            description={{
+              permissions: this.props.tableValuesDescription?.permissions ?? {},
+              ui: {
+                emptyMessage: <div className="p-2">{this.translate('No contacts yet.')}</div>
+              },
+              columns: {
+                type: {
+                  type: 'varchar',
+                  title: this.translate('Type'),
+                  enumValues: {'email' : this.translate('Email'), 'number': this.translate('Phone Number'), 'other': this.translate('Other')},
+                },
+                value: { type: 'varchar', title: this.translate('Value')},
+                id_category: { type: 'lookup', title: this.translate('Category'), model: 'Hubleto/App/Community/Contacts/Models/Category' },
+              },
+              inputs: {
+                type: {
+                  type: 'varchar',
+                  title: this.translate('Type'),
+                  enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
+                },
+                value: { type: 'varchar', title: this.translate('Value')},
+                id_category: { type: 'lookup', title: this.translate('Category'), model: 'Hubleto/App/Community/Contacts/Models/Category' },
+              }
+            }}
+          />
+          <a
+            className="btn btn-add-outline mt-2"
+            onClick={() => {
+              if (!R.VALUES) R.VALUES = [];
+              R.VALUES.push({
+                id: this.state.newEntryId,
+                id_contact: { _useMasterRecordId_: true },
+                type: 'email',
+              });
+              this.setState({ isInlineEditing: true, newEntryId: this.state.newEntryId - 1 } as FormContactState);
+            }}
+          >
+            <span className="icon"><i className="fas fa-add"></i></span>
+            <span className="text">{this.translate('Add contact')}</span>
+          </a>
         </>;
       break;
       default:

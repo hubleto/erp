@@ -95,6 +95,8 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
   }
 
   onTabChange() {
+    super.onTabChange();
+
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'preview':

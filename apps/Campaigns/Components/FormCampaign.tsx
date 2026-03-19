@@ -159,7 +159,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     switch (tabUid) {
       case 'default':
         return <>
-          <div className='w-full flex gap-2'>
+          <div className='w-full flex flex-col md:flex-row gap-2'>
             <div className='flex-1 border-r border-gray-100'>
               {this.inputWrapper('name')}
               {this.inputWrapper('type')}

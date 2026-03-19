@@ -22,6 +22,7 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
 
       $foundRecords = [];
       $columnsMap = [];
+      $failedImports = [];
       $rowNr = 0;
       $importedRecords = 0;
       $separator = ",";
@@ -46,8 +47,12 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
           if ($testImport) {
             $foundRecords[] = $record;
           } else {
-            $model->record->recordCreate($record);
-            $importedRecords++;
+            try {
+              $model->record->recordCreate($record);
+              $importedRecords++;
+            } catch (\Throwable $e) {
+              $failedImports[] = $e->getMessage();
+            }
           }
         }
         $rowNr++;
@@ -55,6 +60,7 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
 
       $result = [
         "status" => "success",
+        "failedImports" => $failedImports,
       ];
 
       if ($testImport) {

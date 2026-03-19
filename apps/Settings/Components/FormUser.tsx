@@ -69,7 +69,7 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
     if (!uApps) uApps = [];
 
     return <>
-      <div className='w-full flex gap-2'>
+      <div className='w-full flex flex-col md:flex-row gap-2'>
         {this.state.id == -1 && !globalThis.hubleto.isPremium ?
           <div className="badge badge-warning text-lg w-full block p-8">
             You may add new users only in Premium account.<br/>

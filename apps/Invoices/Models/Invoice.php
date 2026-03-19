@@ -700,7 +700,7 @@ class Invoice extends \Hubleto\Erp\Model {
       $invoiceOutputFilename
       . '-' . Helper::str2url($invoice->number)
       . '-' . date('Ymd', strtotime($invoice->date_issue))
-      . '-' . Helper::str2url($invoice->CUSTOMER->name)
+      . '-' . Helper::str2url($invoice->CUSTOMER?->name ?? '')
       . '.pdf'
     );
 

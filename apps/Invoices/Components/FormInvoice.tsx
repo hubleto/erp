@@ -49,7 +49,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
       tabs.push({ uid: 'preview', title: this.translate('Preview, download, print') });
       // tabs.push({ uid: 'documents', title: this.translate('Documents') });
       tabs.push({ uid: 'payments', title: this.translate('Payments') });
-      tabs.push({ uid: 'send', title: this.translate('Send') });
+      tabs.push({ uid: 'email', title: this.translate('Email') });
     }
     tabs = [...tabs, ...this.getCustomTabs()];
 
@@ -105,7 +105,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
       case 'preview':
         this.updateInvoicePreview(this.state.record.id_template);
       break;
-      case 'send':
+      case 'email':
         this.updateEmailPreview();
       break;
     }
@@ -617,9 +617,9 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
         />;
       break;
 
-      case 'send':
+      case 'email':
         if (!R.pdf) return <div className='alert alert-danger'>PDF version of the invoice was not generated yet. Cannot send.</div>;
-        if (this.state.sendInvoiceResult) return <div className='alert alert-success'>{JSON.stringify(this.state.sendInvoiceResult)}</div>;
+        if (this.state.sendInvoiceResult) return <div className='alert alert-success'>{this.translate('Email was sent')}</div>;
         return <>
           <div className='btn-group'>
             <button
@@ -745,7 +745,8 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     );
                   }}
                 >
-                  <span className='text'>Send invoice</span>
+                  <span className='icon'><i className='fas fa-paper-plane'></i></span>
+                  <span className='text'>Send email</span>
                 </button>
               </>
             }

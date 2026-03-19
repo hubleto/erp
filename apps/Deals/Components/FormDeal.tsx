@@ -386,31 +386,30 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       break;
 
       case 'documents':
-        let url = new URL(R.shared_folder ?? '');
-        let iframeUrl = R.shared_folder ?? '';
+        let iframeUrl = '';
 
-        if (
-          url.hostname == 'drive.google.com'
-          && url.pathname.indexOf('/drive/folders') == 0
-        ) {
+        try {
+          let url = new URL(R.shared_folder ?? '');
+          
+          if (
+            url.hostname == 'drive.google.com'
+            && url.pathname.indexOf('/drive/folders') == 0
+          ) {
 
-          // for Google Drive, replacing
-          // https://drive.google.com/drive/folders/FOLDER_ID
-          // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
-          // makes the folder embeddable
+            // for Google Drive, replacing
+            // https://drive.google.com/drive/folders/FOLDER_ID
+            // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
+            // makes the folder embeddable
 
-          iframeUrl = 'https://drive.google.com/embeddedfolderview'
-            + '?id=' + url.pathname.replace('/drive/folders/', '')
-            + '&authuser=0'
-          ;
+            iframeUrl = 'https://drive.google.com/embeddedfolderview'
+              + '?id=' + url.pathname.replace('/drive/folders/', '')
+              + '&authuser=0'
+            ;
 
-        }
-
-        if (iframeUrl.indexOf('drive.google.com/drive/folders') > 0) {
-          iframeUrl = iframeUrl.replace(
-            'drive.google.com/drive/folders/',
-            'drive.google.com/embeddedfolderview?id='
-          );
+          } else {
+            iframeUrl = R.shared_folder ?? '';
+          }
+        } catch (e) {
         }
 
         return <div className='flex flex-col gap-2 h-full'>

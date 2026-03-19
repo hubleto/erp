@@ -138,7 +138,7 @@ class TableFormViewAndController extends \Hubleto\Erp\Cli\Agent\Command
 
     $this->terminal()->yellow("\n");
     $this->terminal()->yellow("💡  TIPS:\n");
-    $this->terminal()->yellow("💡  -> Install Hubleto's React-based UI framework.\n");
+    $this->terminal()->yellow("💡  -> Install Hubleto's React UI framework.\n");
     $this->terminal()->yellow("💡  ->   npm install @hubleto/react-ui\n");
     $this->terminal()->yellow("💡  -> Compile Javascript and CSS into assets.\n");
     $this->terminal()->yellow("💡  ->   npm run build\n");

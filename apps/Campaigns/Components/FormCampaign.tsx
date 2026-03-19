@@ -538,6 +538,16 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       break;
 
       case 'launch':
+        let invalidRecipientsCount = 0;
+        let unsubscribedRecipientsCount = 0;
+
+        if (this.state.campaignLaunchInfo?.recipients) {
+          this.state.campaignLaunchInfo.recipients.map((item, key) => {
+            if (item.STATUS?.is_unsubscribed) unsubscribedRecipientsCount++;
+            if (item.STATUS?.is_invalid) invalidRecipientsCount++;
+          });
+        }
+
         return <>
           {this.state.campaignLaunchInfo ? <>
             {this.state.campaignLaunchInfo.recentlyContacted
@@ -602,23 +612,32 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               </div>
               {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
                 <div className='card mt-2'>
-                  <div className='card-header'>{ this.translate('Who clicked? (Bot Score = 0)') }</div>
-                  <div className='card-body flex flex-wrap'>
-                    {this.state.campaignLaunchInfo.recipients.map((item, key) => {
-                      if (item.CLICKS.length == 0) {
-                        return null;
-                      } else {
-                        let botScoreTotal = 0;
-                        item.CLICKS.map((click, key) => {
-                          botScoreTotal += click.bot_score;
-                        });
-                        if (botScoreTotal == 0) {
-                          return <div className='badge'>{item.email}</div>;
-                        } else {
+                  <div className='card-header'>{ this.translate('Statistics') }</div>
+                  <div className='card-body flex flex-col gap-2'>
+                    <div className='badge badge-warning'>
+                      Invalid recipients: {invalidRecipientsCount}
+                    </div>
+                    <div className='badge badge-danger'>
+                      Unsubscribed recipients: {unsubscribedRecipientsCount}
+                    </div>
+                    <div className='flex flex-wrap'>
+                      <b>{this.translate('Who clicked? (Bot Score = 0)')}</b>
+                      {this.state.campaignLaunchInfo.recipients.map((item, key) => {
+                        if (item.CLICKS.length == 0) {
                           return null;
+                        } else {
+                          let botScoreTotal = 0;
+                          item.CLICKS.map((click, key) => {
+                            botScoreTotal += click.bot_score;
+                          });
+                          if (botScoreTotal == 0) {
+                            return <div className='badge'>{item.email}</div>;
+                          } else {
+                            return null;
+                          }
                         }
-                      }
-                    })}
+                      })}
+                    </div>
                   </div>
                 </div>
               : null}

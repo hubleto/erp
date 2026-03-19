@@ -613,7 +613,10 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
                 <div className='card mt-2'>
                   <div className='card-header'>{ this.translate('Statistics') }</div>
-                  <div className='card-body flex flex-col gap-2'>
+                  <div className='card-body flex flex-col gap-1'>
+                    <div className='badge'>
+                      Recipients: {this.state.campaignLaunchInfo.recipients.length}
+                    </div>
                     <div className='badge badge-warning'>
                       Invalid recipients: {invalidRecipientsCount}
                     </div>

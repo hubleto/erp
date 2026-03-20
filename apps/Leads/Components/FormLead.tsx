@@ -207,6 +207,9 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
               {this.inputWrapper('status', {readonly: R.is_closed, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})} */}
               {this.inputWrapper('email')}
               {this.inputWrapper('phone')}
+              {this.inputWrapper('profile_link_1')}
+              {this.inputWrapper('profile_link_2')}
+              {this.inputWrapper('profile_link_3')}
               {this.inputWrapper('source_channel', {readonly: R.is_closed})}
               <FormInput title='Tags'>
                 <InputTags2 {...this.getInputProps('tags_input')}

@@ -39,6 +39,8 @@ class Lead extends \Hubleto\Erp\Model
       " ",
       `{%TABLE%}`.email,
       " ",
+      `{%TABLE%}`.profile_link_1
+      " ",
       `{%TABLE%}`.phone
     )
   ';
@@ -79,8 +81,11 @@ class Lead extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'email' => (new Varchar($this, $this->translate('Email')))->setCssClass('font-bold')->setIcon(self::COLUMN_EMAIL_DEFAULT_ICON),
-      'phone' => (new Varchar($this, $this->translate('Phone')))->setCssClass('font-bold')->setIcon(self::COLUMN_PHONE_DEFAULT_ICON),
+      'email' => (new Varchar($this, $this->translate('Email')))->setCssClass('font-bold')->setIcon(self::COLUMN_EMAIL_DEFAULT_ICON)->setDefaultVisible(),
+      'phone' => (new Varchar($this, $this->translate('Phone')))->setCssClass('font-bold')->setIcon(self::COLUMN_PHONE_DEFAULT_ICON)->setDefaultVisible(),
+      'profile_link_1' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
+      'profile_link_2' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
+      'profile_link_3' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
       // 'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),

@@ -39,7 +39,7 @@ class Lead extends \Hubleto\Erp\Model
       " ",
       `{%TABLE%}`.email,
       " ",
-      `{%TABLE%}`.profile_link_1
+      `{%TABLE%}`.profile_link_1,
       " ",
       `{%TABLE%}`.phone
     )

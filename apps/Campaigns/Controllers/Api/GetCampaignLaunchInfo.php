@@ -31,12 +31,13 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
       unset($recipients[$key]['MAIL']['body_text']);
       unset($recipients[$key]['MAIL']['body_html']);
 
-      $botScore = 0;
       $botScoreGroups = [];
-      foreach ($recipient->CLICKS as $click) {
-        $ts = round(strtotime($click->datetime_clicked) / 5000); // 5-second interval to group the clicks
-        if (!isset($botScoreGroups[$ts*5000])) $botScoreGroups[$ts*5000] = 0;
-        $botScoreGroups[$ts*5000] += $click->bot_score;
+      if (is_array($recipient['CLICKS'])) {
+        foreach ($recipient['CLICKS'] as $click) {
+          $ts = round(strtotime($click->datetime_clicked) / 5000); // 5-second interval to group the clicks
+          if (!isset($botScoreGroups[$ts*5000])) $botScoreGroups[$ts*5000] = 0;
+          $botScoreGroups[$ts*5000] += $click->bot_score;
+        }
       }
 
       $recipients[$key]['BOT_SCORE_GROUPED_BY_TIMESTAMP'] = $botScoreGroups;

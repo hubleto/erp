@@ -540,11 +540,13 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       case 'launch':
         let invalidRecipientsCount = 0;
         let unsubscribedRecipientsCount = 0;
+        let emailsSent = 0;
 
         if (this.state.campaignLaunchInfo?.recipients) {
           this.state.campaignLaunchInfo.recipients.map((item, key) => {
             if (item.STATUS?.is_unsubscribed) unsubscribedRecipientsCount++;
             if (item.STATUS?.is_invalid) invalidRecipientsCount++;
+            if (item.MAIL?.datetime_sent) emailsSent++;
           });
         }
 
@@ -580,7 +582,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             <div className='alert alert-warning'>Campaign was already launched by {R.LAUNCHED_BY.email} on {R.datetime_launched}.</div>
           : null}
 
-          <div className='flex gap-2 w-full'>
+          <div className='flex flex-col md:flex-row gap-2 w-full'>
             <div className=''>
               <button
                 className="btn btn-add-outline btn-large"
@@ -608,7 +610,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 { this.translate('Emails will be sent only to recipients who did not receive email from this campaign yet.') }
               </div>
               <div className='mt-2 alert alert-info'>
-                { this.translate('Unsubscribed recipients will be ignored.') }
+                { this.translate('Unsubscribed and invalid recipients will be ignored.') }
               </div>
               {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
                 <div className='card mt-2'>
@@ -617,29 +619,34 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                     <div className='badge'>
                       Recipients: {this.state.campaignLaunchInfo.recipients.length}
                     </div>
+                    <div className='badge'>
+                      Emails sent: {emailsSent}
+                    </div>
                     <div className='badge badge-warning'>
-                      Invalid recipients: {invalidRecipientsCount}
+                      Invalid recipients: {invalidRecipientsCount} ({Math.round(invalidRecipientsCount / this.state.campaignLaunchInfo.recipients.length * 100)} %)
                     </div>
                     <div className='badge badge-danger'>
-                      Unsubscribed recipients: {unsubscribedRecipientsCount}
+                      Unsubscribed recipients: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / this.state.campaignLaunchInfo.recipients.length * 100)} %)
                     </div>
-                    <div className='flex flex-wrap'>
+                    <div>
                       <b>{this.translate('Who clicked? (Bot Score = 0)')}</b>
-                      {this.state.campaignLaunchInfo.recipients.map((item, key) => {
-                        if (item.CLICKS.length == 0) {
-                          return null;
-                        } else {
-                          let botScoreTotal = 0;
-                          item.CLICKS.map((click, key) => {
-                            botScoreTotal += click.bot_score;
-                          });
-                          if (botScoreTotal == 0) {
-                            return <div className='badge'>{item.email}</div>;
-                          } else {
+                      <div className='flex flex-wrap'>
+                        {this.state.campaignLaunchInfo.recipients.map((item, key) => {
+                          if (item.CLICKS.length == 0) {
                             return null;
+                          } else {
+                            let botScoreTotal = 0;
+                            item.CLICKS.map((click, key) => {
+                              botScoreTotal += click.bot_score;
+                            });
+                            if (botScoreTotal == 0) {
+                              return <div className='badge'>{item.email}</div>;
+                            } else {
+                              return null;
+                            }
                           }
-                        }
-                      })}
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -251,7 +251,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
           </button>
         </div>
       : null}
-      <div className='block gap-2 md:grid md:grid-cols-6'>
+      <div className='flex flex-col gap-2 md:grid md:grid-cols-6'>
         {panels.map((panel: Panel, index: any) => this.renderPanel(panel, index))}
       </div>
       {this.state.showIdPanel != 0 ?

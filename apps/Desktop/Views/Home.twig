@@ -2,9 +2,9 @@
 {% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
 <div class="w-full flex gap-2">
-  <div class="grow bg-slate-50 dark:bg-slate-800 p-2 mb-2 flex gap-2 rounded">
+  <div class="grow bg-slate-50 dark:bg-slate-800 p-2 mb-2 flex flex-col md:flex-row gap-2 rounded">
     {% if user.DEFAULT_COMPANY.logo != '' %}
-      <div class="flex border-r items-center dark:border-slate-600" {% if user.DEFAULT_COMPANY.brand_color_primary %}style="border-color:{{ user.DEFAULT_COMPANY.brand_color_primary }}"{% endif %}>
+      <div class="flex items-center">
         <img
           src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
           class="max-h-32 max-w-32 m-8"
@@ -12,7 +12,9 @@
       </div>
     {% endif %}
     <div class="m-8 dark:text-white">
-      <h1 class="pt-0 m-0 pb-4">{{ translate('Welcome') }}, {{ user.first_name ?? user.email }}</h1>
+      <h1 class="pt-0 m-0 pb-4">
+        {{ translate('Welcome') }}, {{ user.first_name ?? user.email }}
+      </h1>
       <div class="flex">
         {% if user.photo %}
           <div class="mr-8">
@@ -23,11 +25,15 @@
           </div>
         {% endif %}
         <div>
-          <div><b>{{ user.first_name }} {{ user.last_name }}</b></div>
+          <div>
+            <b>{{ user.first_name }} {{ user.last_name }}</b>
+            <a href="settings/my-account" class="btn btn-transparent">
+              <span class="icon"><i class="fas fa-pencil"></i></span>
+            </a>
+          </div>
           <div><b>{{ user.DEFAULT_COMPANY.name }}</b></div>
-          <div class="badge">{{ user.position }}</div>
+          {% if user.position %} <div class="badge">{{ user.position }}</div> {% endif %}
           <div class="mt-2">{{ user.email }}</div>
-          <div><a href="settings/my-account" class="text-primary">{{ translate('Edit profile') }}</a></div>
         </div>
       </div>
     </div>
@@ -36,7 +42,7 @@
   {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Usage') %}
     {% set recentlyUsed = hubleto.getService('Hubleto\\App\\Community\\Usage\\Logger').getRecentlyUsedAppNamespaces() %}
     {% if recentlyUsed|length > 0 %}
-      <div class="mb-2 dark:text-gray-200">
+      <div class="mb-2 hidden m:block dark:text-gray-200">
         <div><small>Recently used apps</small></div>
         <div class="list">
           {% for appNamespace in recentlyUsed %}

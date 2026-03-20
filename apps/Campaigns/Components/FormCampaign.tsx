@@ -669,12 +669,15 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                   <table className='table-default dense'>
                     <thead>
                       <tr>
-                        <th>#</th>
-                        <th>{ this.translate('Email') }</th>
-                        <th>{ this.translate('Status') }</th>
-                        <th>{ this.translate('Clicks') }</th>
-                        <th>{ this.translate('Bot score #1') }</th>
-                        <th>{ this.translate('Bot score #2') }</th>
+                        <th rowSpan={2}>#</th>
+                        <th rowSpan={2}>{ this.translate('Email') }</th>
+                        <th rowSpan={2}>{ this.translate('Status') }</th>
+                        <th rowSpan={2}>{ this.translate('Clicks') }</th>
+                        <th colSpan={2}>{ this.translate('Bot score') }</th>
+                      </tr>
+                      <tr>
+                        <th>{ this.translate('Total') }</th>
+                        <th>{ this.translate('Details') }</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -704,8 +707,8 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           <td className='text-nowrap'>
                             {Object.keys(item.BOT_SCORE_GROUPED_BY_TIMESTAMP).map((ts, key) => {
                               const score = item.BOT_SCORE_GROUPED_BY_TIMESTAMP[ts];
-                              return <div key={key}>
-                                {moment.unix(parseInt(ts)).format("YYYY-MM-DD HH:mm:ss")}: {score}
+                              return <div key={key} className='text-xs'>
+                                #{key} {moment.unix(parseInt(ts)).format("YYYY-MM-DD HH:mm:ss")} = {score}
                               </div>;
                             })}
                           </td>

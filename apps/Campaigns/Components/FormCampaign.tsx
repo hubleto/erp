@@ -673,7 +673,8 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                         <th>{ this.translate('Email') }</th>
                         <th>{ this.translate('Status') }</th>
                         <th>{ this.translate('Clicks') }</th>
-                        <th>{ this.translate('Bot score') }</th>
+                        <th>{ this.translate('Bot score #1') }</th>
+                        <th>{ this.translate('Bot score #2') }</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -700,6 +701,14 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                             {item.CLICKS.length > 0 ? item.CLICKS.length : null}
                           </td>
                           <td className={'text-nowrap text-red-800'}>{botScoreTotal > 0 ? botScoreTotal : null}</td>
+                          <td className='text-nowrap'>
+                            {Object.keys(item.BOT_SCORE_GROUPED_BY_TIMESTAMP).map((ts, key) => {
+                              const score = item.BOT_SCORE_GROUPED_BY_TIMESTAMP[ts];
+                              return <div key={key}>
+                                {moment.unix(parseInt(ts)).format("YYYY-MM-DD HH:mm:ss")}: {score}
+                              </div>;
+                            })}
+                          </td>
                         </tr>
                       })}
                     </tbody>

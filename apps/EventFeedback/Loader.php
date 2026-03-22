@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Erp\App
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => 'EventFeedback', // or $this->translate('EventFeedback')
+      'title' => $this->translate('EventFeedback'),
       'icon' => 'fas fa-table',
       'url' => 'settings/eventfeedback',
     ]);

@@ -11,6 +11,17 @@
         "Business Trip": "Pracovná cesta",
         "Call": "Hovor",
         "Email": "Email",
-        "Other": "Iné"
+        "Other": "Iné",
+        "Chief Officer": "Vedúci pracovník",
+        "Manager": "Manažér",
+        "Employee": "Zamestnanec",
+        "Assistant": "Asistent",
+        "External": "Externý",
+        "TV": "TV",
+        "Internet": "Internet",
+        "Fiber": "Optika",
+        "Landline": "Pevná linka",
+        "Marketing": "Marketing",
+        "Virtual Server": "Virtuálny server"
     }
 }

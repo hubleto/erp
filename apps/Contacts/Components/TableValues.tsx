@@ -20,7 +20,7 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
   props: TableValuesProps;
   state: TableValuesState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
+  translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader';
   translationContextInner: string = 'Components\\TableValues';
 
   constructor(props: TableValuesProps) {

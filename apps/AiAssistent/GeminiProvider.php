@@ -96,7 +96,7 @@ class GeminiProvider
       }
     }
 
-    return "Failed to get a response from AIAssistant.";
+    return $this->app->translate("Failed to get a response from AIAssistant.", [], 'GeminiProvider');
   }
 }
 

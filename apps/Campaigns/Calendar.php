@@ -35,7 +35,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       function (array $activity) {
         if (isset($activity['CAMPAIGN'])) {
           $campaign = $activity['CAMPAIGN'];
-          return 'Campaign #' . $campaign['id'];
+          return $this->translate('Campaign #{{ id }}', ['id' => $campaign['id']]);
         } else {
           return '';
         }

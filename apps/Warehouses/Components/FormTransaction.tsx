@@ -81,7 +81,7 @@ export default class FormTransaction<P, S> extends FormExtended<FormTransactionP
               <thead>
                 <tr>
                   <th>{this.translate('Product')}</th>
-                  <th>Qty.</th>
+                  <th>{this.translate('Qty.')}</th>
                   <th>{this.translate('Purchase price')}</th>
                 </tr>
               </thead>

@@ -26,7 +26,7 @@ class DealLead extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Add deal';
+    $description->ui['title'] = $this->translate('Add Deal');
     return $description;
   }
 

@@ -39,7 +39,7 @@ class Workflow extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     // $description->ui['title'] = 'Workflows';
-    $description->ui['addButtonText'] = 'Add Workflow';
+    $description->ui['addButtonText'] = $this->translate('Add Workflow');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

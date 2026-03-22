@@ -17,7 +17,7 @@ class ProjectsApp extends App {
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addCustomFormTab({
       uid: 'projects',
-      title: 'Projects',
+      title: globalThis.hubleto.translate('Projects', 'Hubleto\\App\\Community\\Projects\\Loader', 'manifest'),
       onRender: (form: any) => {
         return <TableProjects
           tag={"table_project_order"}
@@ -36,7 +36,7 @@ class ProjectsApp extends App {
     });
 
     FormOrder.addFormHeaderButton(
-      'Create project',
+      globalThis.hubleto.translate('Create project', 'Hubleto\\App\\Community\\Projects\\Loader', 'manifest'),
       '',
       (form: any) => {
         request.get(

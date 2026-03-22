@@ -9,6 +9,9 @@ use PHPMailer\PHPMailer\Exception;
 class EmailProvider extends \Hubleto\Erp\Core
 {
 
+  public string $translationContext = 'Hubleto\\Erp\\Loader';
+  public string $translationContextInner = 'Emails\\EmailProvider';
+
   private string $defaultEmailTemplate = "@hubleto-main/layouts/Email.twig";
 
   private string $smtpHost;
@@ -149,20 +152,20 @@ class EmailProvider extends \Hubleto\Erp\Core
    */
   public function sendResetPasswordEmail(String $login, String $name, String $language, String $token): void
   {
-    $greetings = $name == ' ' ? 'Hello from Hubleto!' : 'Dear ' . $name . ',';
+    $greetings = $name == ' ' ? $this->translate('Hello from Hubleto!') : $this->translate('Dear {{ name }},', ['name' => $name]);
     $body = $greetings . '<br><br>
-    We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:
-    
+    ' . $this->translate('We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:') . '
+
     <p style="text-align: center;">
-      <a href="'. $this->env()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Reset password</a>
+      <a href="'. $this->env()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">' . $this->translate('Reset password') . '</a>
     </p>
-    
-    If you did not request a password reset, please ignore this email. Your password will remain unchanged. <br><br><br>
-    
-    For security reasons, this link will expire in 15 minutes. <br>
+
+    ' . $this->translate('If you did not request a password reset, please ignore this email. Your password will remain unchanged.') . ' <br><br><br>
+
+    ' . $this->translate('For security reasons, this link will expire in 15 minutes.') . ' <br>
     ';
 
-    $this->send($login, "Reset your password | Hubleto", $body);
+    $this->send($login, $this->translate('Reset your password | Hubleto'), $body);
   }
 
   /**
@@ -178,19 +181,19 @@ class EmailProvider extends \Hubleto\Erp\Core
    */
   public function sendWelcomeEmail(String $login, String $name, String $language, String $token): void
   {
-    $greetings = 'Hello from Hubleto!';
+    $greetings = $this->translate('Hello from Hubleto!');
     $body = $greetings . '<br><br>
-    Thank you for signing up at our website! We\'re excited to have you on board. Please click the button below to confirm your account and get started.
+    ' . $this->translate('Thank you for signing up at our website! We\'re excited to have you on board. Please click the button below to confirm your account and get started.') . '
     <br>
     <p style="text-align: center;">
-      <a href="'. $this->env()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">Get started</a>
+      <a href="'. $this->env()->projectUrl .'/reset-password?token='. $token .'" class="btn--theme">' . $this->translate('Get started') . '</a>
     </p>
     <br>
-    
-    If you didn\'t sign up for this account, you can safely ignore this email.<br>
+
+    ' . $this->translate('If you didn\'t sign up for this account, you can safely ignore this email.') . '<br>
     ';
 
-    $this->sendEmail($login, "Your Hubleto account has been created!", $body);
+    $this->sendEmail($login, $this->translate('Your Hubleto account has been created!'), $body);
   }
 
 }

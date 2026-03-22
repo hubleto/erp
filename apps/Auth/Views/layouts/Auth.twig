@@ -46,9 +46,9 @@
 
           {% block status %}
             {% if viewParams.status == 'incorrectLogin' %}
-              <div class="alert alert-danger">Email or password invalid. Try again.</div>
+              <div class="alert alert-danger">{{ translate("Email or password invalid. Try again.") }}</div>
             {% elseif viewParams.status == 'passwordReset' %}
-              <div class="alert alert-success">Password successfully updated.</div>
+              <div class="alert alert-success">{{ translate("Password successfully updated.") }}</div>
             {% endif %}
           {% endblock %}
 

@@ -1,5 +1,8 @@
 {
     "manifest": {
         "Support": "Podpora"
+    },
+    "Controllers\\Dashboard": {
+        "Support...": "Podpora..."
     }
 }

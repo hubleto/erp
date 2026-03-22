@@ -48,7 +48,12 @@ class Campaign extends \Hubleto\Erp\Model
       'uid' => (new Varchar($this, $this->translate('UID')))->setReadonly(true),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()
-        ->setEnumValues([0 => 'not specified', 1 => 'direct mail', 2 => 'cold call', 99 => 'other']
+        ->setEnumValues([
+          0 => $this->translate('not specified'),
+          1 => $this->translate('direct mail'),
+          2 => $this->translate('cold call'),
+          99 => $this->translate('other')
+        ]
       ),
       'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setDefaultVisible(),
       'utm_campaign' => (new Varchar($this, $this->translate('UTM campaign')))->setDefaultVisible(),

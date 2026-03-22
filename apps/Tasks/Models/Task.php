@@ -52,7 +52,7 @@ class Task extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setDescription('Leave empty to generate automatically.')->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setDescription($this->translate('Leave empty to generate automatically.'))->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
@@ -74,7 +74,7 @@ class Task extends \Hubleto\Erp\Model
       'is_milestone' => (new Boolean($this, $this->translate('Is milestone')))->setDefaultValue(false),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
       // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setDefaultVisible(),
-      'shared_folder' => (new Varchar($this, "Shared folder (online document storage)"))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
+      'shared_folder' => (new Varchar($this, $this->translate('Shared folder (online document storage)')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setDefaultVisible()->setUnit("hours")
@@ -137,7 +137,7 @@ class Task extends \Hubleto\Erp\Model
         $description->hide(['footer']);
 
         $description->ui['filters'] = [
-          'fTaskWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Status'),
+          'fTaskWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Status')),
           'fTaskClosed' => [
             'title' => $this->translate('Open / Closed'),
             'options' => [

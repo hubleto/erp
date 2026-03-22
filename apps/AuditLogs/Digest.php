@@ -35,7 +35,7 @@ class Digest extends \Hubleto\Erp\Core
     }
 
     if (count($dailyDigest) > 0) {
-      $digestHtml = '<h1>Hi ' . ($user['nick'] ?? ($user['first_name'] ?? '')) . ', here is your daily digest</h1>';
+      $digestHtml = '<h1>' . $this->translate('Hi {{ name }}, here is your daily digest', ['name' => $user['nick'] ?? ($user['first_name'] ?? '')]) . '</h1>';
       foreach ($dailyDigest as $appNamespace => $items) {
         $digestHtml .= "<h3>{$appNamespace}</h3>";
         foreach ($items as $item) {

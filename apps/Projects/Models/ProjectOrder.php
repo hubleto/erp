@@ -28,7 +28,7 @@ class ProjectOrder extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Order Projects';
+    $description->ui['title'] = $this->translate('Order Projects');
     $description->ui["addButtonText"] = $this->translate("Add project");
 
     if ($this->router()->urlParamAsInteger('idOrder') > 0) {

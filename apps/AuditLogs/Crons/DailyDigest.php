@@ -22,7 +22,7 @@ class DailyDigest extends \Hubleto\Erp\Cron
       $emailProvider = $this->getService(EmailProvider::class);
 
       if (!empty($digestHtml)) {
-        if ($emailProvider->send($user['email'], 'Hubleto: Your Daily Digest', $digestHtml)) {
+        if ($emailProvider->send($user['email'], $this->translate('Hubleto: Your Daily Digest'), $digestHtml)) {
           $emailsSent[] = $user['email'];
         }
       }

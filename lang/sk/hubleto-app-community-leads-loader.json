@@ -6,7 +6,22 @@
         "Lead Tags": "Značky leadov",
         "Lead Lost Reasons": "Dôvody pre stratu leadu",
         "Active leads": "Aktívne leady",
-        "Archived leads": "Archivované leady"
+        "Archived leads": "Archivované leady",
+        "Lead value by score": "Hodnota leadov podľa skóre",
+        "Lead warnings": "Upozornenia na leady",
+        "Complex": "Komplexný",
+        "Great opportunity": "Skvelá príležitosť",
+        "Duplicate": "Duplikát",
+        "Needs attention": "Vyžaduje pozornosť",
+        "Cold": "Studený",
+        "Warm": "Teplý",
+        "Hot": "Horúci",
+        "Marketing qualified": "Marketingovo kvalifikovaný",
+        "Sales qualified": "Obchodne kvalifikovaný",
+        "Price": "Cena",
+        "Solution": "Riešenie",
+        "Demand canceled by customer": "Dopyt zrušený zákazníkom",
+        "Other": "Iné"
     },
     "Controllers\\Leads": {
         "Sales": "Obchod",
@@ -16,6 +31,38 @@
         "Sales": "Obchod",
         "Leads": "Leady",
         "Archive": "Archív"
+    },
+    "Controllers\\Levels": {
+        "Settings": "Nastavenia",
+        "Lead Levels": "Úrovne leadov",
+        "Leads": "Leady",
+        "Levels": "Úrovne"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Nastavenia",
+        "Lead Lost Reasons": "Dôvody pre stratu leadu"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavenia",
+        "Lead Tags": "Značky leadov"
+    },
+    "Controllers\\Settings": {
+        "Leads": "Leady",
+        "Settings": "Nastavenia",
+        "Settings saved.": "Nastavenia uložené.",
+        "Calendar color": "Farba kalendára",
+        "Lead Prefix": "Prefix leadu",
+        "Lead tags": "Značky leadov",
+        "Lead statuses": "Stavy leadov",
+        "Campaigns": "Kampane"
+    },
+    "Controllers\\Boards\\LeadValueByScore": {
+        "No leads found.": "Žiadne leady nenájdené.",
+        "Add lead": "Pridať lead"
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Open leads without future plan": "Otvorené leady bez budúceho plánu",
+        "No warnings for leads.": "Žiadne upozornenia pre leady."
     },
     "Models\\LeadActivity": {
         "Activity type": "Typ aktivity",
@@ -84,7 +131,19 @@
         "E-mail": "E-mail",
         "Referral": "Odporúčanie",
         "Other": "Iné",
-        "Online document folder": "Online priečinok dokumentov"
+        "Online document folder": "Online priečinok dokumentov",
+        "Profile link #1": "Odkaz na profil #1",
+        "Profile link #2": "Odkaz na profil #2",
+        "Profile link #3": "Odkaz na profil #3",
+        "Ownership": "Vlastníctvo",
+        "Owned by me": "Moje leady",
+        "Managed by me": "Spravované mnou",
+        "None": "Žiadne",
+        "changed from": "zmenené z",
+        "to": "na",
+        "Yes": "Áno",
+        "No": "Nie",
+        "Lead created": "Lead vytvorený"
     },
     "root": {
         "Lead statuses": "Stavy leadov",
@@ -101,11 +160,52 @@
     },
     "Models\\LeadTag": {
         "Lead": "Lead",
-        "Tag": "Značka"
+        "Tag": "Značka",
+        "Lead Tags": "Značky leadov"
     },
     "Models\\LeadDocument": {
         "Lead": "Lead",
         "Document": "Dokument"
+    },
+    "Models\\LeadTask": {
+        "Lead": "Lead",
+        "Task": "Úloha",
+        "Lead Tasks": "Úlohy leadu"
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "Lead",
+        "Campaign": "Kampaň",
+        "Campaign Leads": "Leady kampane",
+        "Add lead": "Pridať lead"
+    },
+    "Models\\Tag": {
+        "Name": "Názov",
+        "Color": "Farba",
+        "Lead Tags": "Značky leadov",
+        "Add Lead Tag": "Pridať značku leadu"
+    },
+    "Models\\Level": {
+        "Name": "Názov",
+        "Color": "Farba",
+        "Lead Levels": "Úrovne leadov",
+        "Add Lead Level": "Pridať úroveň leadu",
+        "Lead level": "Úroveň leadu"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Dôvod straty",
+        "Lead Lost Reasons": "Dôvody pre stratu leadu",
+        "Add Reason": "Pridať dôvod"
+    },
+    "Models\\LeadProduct": {
+        "Lead": "Lead",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Množstvo",
+        "Dicount (%)": "Zľava (%)",
+        "Vat (%)": "DPH (%)",
+        "Vat": "DPH",
+        "Discount": "Zľava",
+        "Sum": "Súčet"
     },
     "Components\\FormLead": {
         "Lead": "Lead",
@@ -125,47 +225,27 @@
         "Log completed activity": "Zaevidovať vykonanú činnosť",
         "Enter": "Enter",
         "Schedule activity": "Naplánovať aktivitu",
-        "Shift+Enter": "Shift+Enter"
+        "Shift+Enter": "Shift+Enter",
+        "Campaign": "Kampaň",
+        "Tags": "Značky",
+        "Description": "Opis",
+        "Change Date": "Dátum zmeny"
     },
-    "Models\\Tag": {
-        "Name": "Názov",
-        "Color": "Farba"
-    },
-    "Models\\LeadProduct": {
-        "Lead": "Lead",
-        "Product": "Produkt",
-        "Unit Price": "Jednotková cena",
-        "Amount": "Množstvo",
-        "Dicount (%)": "Zľava (%)",
-        "Vat (%)": "DPH (%)",
-        "Vat": "DPH",
-        "Discount": "Zľava",
-        "Sum": "Súčet"
-    },
-    "Models\\LostReason": {
-        "Lost Reason": "Dôvod straty"
+    "Components\\FormLevel": {
+        "Level": "Úroveň",
+        "Record": "Záznam"
     },
     "Components\\FormActivity": {
         "End": "Koniec",
-        "Start": "Začiatok"
-    },
-    "Models\\Level": {
-        "Name": "Názov",
-        "Color": "Farba"
-    },
-    "Controllers\\Boards\\LeadWarnings": {
-        "Open leads without future plan": "Otvorené leady bez budúceho plánu",
-        "No warnings for leads.": "Žiadne upozornenia pre leady."
-    },
-    "Models\\LeadCampaign": {
-        "Lead": "Lead",
-        "Campaign": "Kampaň"
-    },
-    "Models\\LeadTask": {
-        "Lead": "Lead",
-        "Task": "Úloha"
+        "Start": "Začiatok",
+        "Contact": "Kontakt",
+        "Lead": "Lead"
     },
     "Components\\TableLeads": {
-        "Deal":"Deal"
+        "Deal": "Deal"
+    },
+    "Calendar": {
+        "Leads": "Leady",
+        "Add new activity linked to lead": "Pridať novú aktivitu pre lead"
     }
 }

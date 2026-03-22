@@ -40,9 +40,9 @@ export default class FormTeam<P, S> extends FormExtended<FormTeamProps, FormTeam
           {this.inputWrapper('color')}
           {this.inputWrapper('description')}
           {this.inputWrapper('id_manager')}
-          {this.divider('Team members')}
+          {this.divider(this.translate('Team members'))}
           {this.state.id < 0 ?
-            <div className="badge badge-info">First create team, then you will be prompted to add members.</div>
+            <div className="badge badge-info">{this.translate('First create team, then you will be prompted to add members.')}</div>
           :
             <Table
               uid='teams_members'

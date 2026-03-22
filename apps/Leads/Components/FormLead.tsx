@@ -170,7 +170,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
         return <>
           <div className='card card-body flex flex-row gap-2'>
             <div className='grow'>
-              <FormInput title={"Campaign"}>
+              <FormInput title={ this.translate("Campaign") }>
                 {R.CAMPAIGNS ? R.CAMPAIGNS.map((item, key) => {
                   if (!item.CAMPAIGN) return null;
                   return <a
@@ -211,7 +211,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
               {this.inputWrapper('profile_link_2')}
               {this.inputWrapper('profile_link_3')}
               {this.inputWrapper('source_channel', {readonly: R.is_closed})}
-              <FormInput title='Tags'>
+              <FormInput title={ this.translate('Tags') }>
                 <InputTags2 {...this.getInputProps('tags_input')}
                   value={this.state.record.TAGS}
                   readonly={R.is_closed}

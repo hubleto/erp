@@ -12,7 +12,7 @@
           >
             <span class="icon"><i class="fas fa-table-columns"></i></span>
             <span class="text">{{ d.title }}</span>
-            {% if d.is_default %} <span class="text-sm text-gray-500">Active</span> {% endif %}
+            {% if d.is_default %} <span class="text-sm text-gray-500">{{ translate('Active') }}</span> {% endif %}
           </a>
         {% endfor %}
         <a

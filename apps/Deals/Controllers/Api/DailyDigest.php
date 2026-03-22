@@ -31,10 +31,10 @@ class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
       if ($futureActivities == 0) {
         $digest[] = [
           'color' => '#d7b628',
-          'category' => 'Missing plan',
+          'category' => $this->translate('Missing plan'),
           'text' => $deal['identifier'] . ' ' . $deal['title'],
           'url' => 'deals/' . $deal['id'],
-          'description' => 'You should schedule further activity for this deal.',
+          'description' => $this->translate('You should schedule further activity for this deal.'),
         ];
       }
     }

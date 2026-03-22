@@ -6,7 +6,9 @@
         "Lead Tags": "Štítky potienciálních obchodů",
         "Lead Lost Reasons": "Důvody zraty potienciálních obchodů",
         "Active leads": "Aktivní potenciální obchody",
-        "Archived leads": "Archivované potenciální obchody"
+        "Archived leads": "Archivované potenciální obchody",
+        "Lead value by score": "",
+        "Lead warnings": ""
     },
     "root": {
         "Lead Tags": "Štítky potenciálních obchodů",

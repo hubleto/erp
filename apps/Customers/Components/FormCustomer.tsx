@@ -362,7 +362,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
                   {this.inputWrapper("vat_id")}
                   {this.inputWrapper("date_created")}
                   {this.inputWrapper("is_active")}
-                  <FormInput title="Tags">
+                  <FormInput title={this.translate('Tags')}>
                     <InputTags2
                       {...this.getInputProps('tags')}
                       value={this.state.record.TAGS}

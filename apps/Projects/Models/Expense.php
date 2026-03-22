@@ -36,7 +36,7 @@ class Expense extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add expense';
+    $description->ui['addButtonText'] = $this->translate('Add expense');
     $description->show(['header', 'fulltextSearch', 'columnSearch']);
     return $description;
   }

@@ -10,13 +10,33 @@
         "Payments": "Platby",
         "Items": "Položky",
         "Quotes": "Ponuky",
-        "Create order": "Vytvor objednávku"
+        "Create order": "Vytvor objednávku",
+        "New": "Nová",
+        "Sent to customer": "Odoslaná zákazníkovi",
+        "Requires modification": "Vyžaduje úpravu",
+        "Accepted": "Prijatá",
+        "Modified": "Upravená",
+        "Order created": "Objednávka vytvorená",
+        "Rejected": "Odmietnutá",
+        "periodical orders require your attention": "periodické objednávky si vyžadujú vašu pozornosť"
     },
     "root": {
         "Order states": "Stavy objednávok"
     },
     "Controllers\\Orders": {
         "Orders": "Objednávky"
+    },
+    "Controllers\\States": {
+        "Orders": "Objednávky",
+        "States": "Stavy"
+    },
+    "Controllers\\MissingItemsInPeriodicalOrders": {
+        "Orders": "Objednávky",
+        "Missing items in periodical orders": "Chýbajúce položky v periodických objednávkach",
+        "Order": "Objednávka",
+        "Customer": "Zákazník",
+        "Payment period": "Lehota splatnosti",
+        "Items": "Položky"
     },
     "Models\\Order": {
         "Order number": "Číslo objednávky",
@@ -66,7 +86,10 @@
         "Shared with": "Zdieľané s",
         "No periodical payments": "Bez periodických platieb",
         "Annually": "Ročne",
-        "Group by": "Zoskupiť podľa"
+        "Group by": "Zoskupiť podľa",
+        "Total price excl. VAT": "Celková suma bez DPH",
+        "Total price incl. VAT": "Celková suma s DPH",
+        "Order created": "Objednávka vytvorená"
     },
     "Models\\State": {
         "Title": "Názov",
@@ -99,7 +122,9 @@
         "Due / Not due": "Splatné / Nesplatné",
         "Due": "Splatné",
         "Not due": "Nesplatné",
-        "Group by": "Zoskupiť podľa"
+        "Group by": "Zoskupiť podľa",
+        "Total price excl. VAT": "Celková suma bez DPH",
+        "Total price incl. VAT": "Celková suma s DPH"
     },
     "Models\\History": {
         "Order": "Objednávka",
@@ -156,9 +181,12 @@
         "Select parent deal": "Vyberte nadradený obchod",
         "unsaved changes": "Neuložené zmeny",
         "Save and close": "Uložiť a zatvoriť",
-        "Quotes": "Objednávky",
-        "Export to PDF": "Exportovať do pdf",
-        "Show variables which can be used in template": "Zobraziť premenné, ktoré možno použiť v šablóne"
+        "Quotes": "Ponuky",
+        "Export to PDF": "Exportovať do PDF",
+        "Show variables which can be used in template": "Zobraziť premenné, ktoré možno použiť v šablóne",
+        "Purchase Order": "Nákupná objednávka",
+        "Sales Order": "Predajná objednávka",
+        "Not completed yet": "Ešte nedokončená"
     },
     "Components\\FormQuote": {
         "Quote": "Objednávka",
@@ -166,7 +194,8 @@
     },
     "Models\\OrderDocument": {
         "Order": "Objednávka",
-        "Document": "Dokument"
+        "Document": "Dokument",
+        "Add document": "Pridať dokument"
     },
     "Models\\OrderActivity": {
         "Subject": "Predmet",
@@ -189,10 +218,12 @@
     },
     "Models\\OrderDeal": {
         "Order": "Objednávka",
-        "Deal": "Obchod"
+        "Deal": "Obchod",
+        "Add deal": "Pridať obchod"
     },
     "Controllers\\Boards\\OrderWarnings": {
-        "Open orders without future plan": "Otvoriť objednávky bez plánu"
+        "Open orders without future plan": "Otvorené objednávky bez budúceho plánu",
+        "No warnings for orders.": "Žiadne upozornenia pre objednávky."
     },
     "Models\\Payment": {
         "Order": "Objednávka",
@@ -211,7 +242,9 @@
         "Due / Not due": "Splatné / Nesplatné",
         "Due": "Splatné",
         "Not due": "Nesplatné",
-        "Group by": "Zoskupiť podľa"
+        "Group by": "Zoskupiť podľa",
+        "Total price excl. VAT": "Celková suma bez DPH",
+        "Total price incl. VAT": "Celková suma s DPH"
     },
     "Components\\FormPayment": {
         "Including {vat}% VAT": "Vrátane {vat}% DPH",
@@ -219,9 +252,36 @@
         "Without discount": "Bez zľavy",
         "With discount": "So zľavou",
         "Excluding VAT": "Bez DPH",
-        "Payment": "Platba"
+        "Payment": "Platba",
+        "Order Payment": "Platba objednávky"
+    },
+    "Components\\FormItem": {
+        "Order item": "Položka objednávky",
+        "Item": "Položka",
+        "Summary": "Zhrnutie",
+        "Without discount": "Bez zľavy",
+        "With discount": "So zľavou",
+        "Excluding VAT": "Bez DPH",
+        "Including {vat}% VAT": "Vrátane {vat}% DPH"
+    },
+    "Components\\TableItems": {
+        "Is this item ready to be invoiced? Press OK to confirm.": "Je táto položka pripravená na fakturáciu? Stlačte OK pre potvrdenie.",
+        "Prepare for invoice": "Pripraviť na fakturáciu",
+        "Yes, prepare for invoice": "Áno, pripraviť na fakturáciu",
+        "Cancel": "Zrušiť"
+    },
+    "Components\\TablePayments": {
+        "Prepared for invoice": "Pripravené na fakturáciu",
+        "Is this payment ready to be invoiced? Press OK to confirm.": "Je táto platba pripravená na fakturáciu? Stlačte OK pre potvrdenie.",
+        "Prepare for invoice": "Pripraviť na fakturáciu",
+        "Yes, prepare for invoice": "Áno, pripraviť na fakturáciu",
+        "Cancel": "Zrušiť"
     },
     "Components\\TableOrders": {
         "Hide filter": "Skryť filter"
+    },
+    "Calendar": {
+        "Orders": "Objednávky",
+        "Add new activity linked to order": "Pridať novú aktivitu pre objednávku"
     }
 }

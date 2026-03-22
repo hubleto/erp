@@ -22,7 +22,18 @@
     "Controllers\\CheckDbConsistency": {
         "Developer tools": "Vývojárske nástroje",
         "Check DB consistency": "Skontrolovať konzistenciu databázy",
-        "No necessary database updates found.": "Neboli nájdené žiadne potrebné aktualizácie databázy."
+        "No necessary database updates found.": "Neboli nájdené žiadne potrebné aktualizácie databázy.",
+        "UID": "UID",
+        "Type": "Typ",
+        "Description": "Popis",
+        "SQL": "SQL",
+        "Run this update": "Spustiť túto aktualizáciu",
+        "Run the updates now!": "Spustiť aktualizácie!"
+    },
+    "Controllers\\UpgradeModels": {
+        "Developer tools": "Vývojárske nástroje",
+        "Upgrade models": "Aktualizovať modely",
+        "No upgrades found.": "Neboli nájdené žiadne aktualizácie."
     },
     "Controllers\\FormDesigner": {
         "Developer": "Vývojár",

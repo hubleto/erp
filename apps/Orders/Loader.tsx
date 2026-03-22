@@ -20,7 +20,7 @@ class OrdersApp extends App {
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Deals').addCustomFormTab({
       uid: 'orders',
-      title: 'Orders',
+      title: globalThis.hubleto.translate('Orders', 'Hubleto\\App\\Community\\Orders\\Loader', 'manifest'),
       onRender: (form: any) => {
         return <TableOrders
           tag={"table_order_deal"}

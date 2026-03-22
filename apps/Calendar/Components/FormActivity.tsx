@@ -134,7 +134,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
           {R.all_day ? null : this.input('time_end')}
 
           <div className="mt-2 alert alert-info">
-            {this.translate('Duration','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}: {daysDuration > 0 && daysDuration + " day(s)"}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " hours"}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " minutes"}
+            {this.translate('Duration','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}: {daysDuration > 0 && daysDuration + " " + this.translate('day(s)','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " " + this.translate('hours','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " " + this.translate('minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}
           </div>
         </div>
         <div className='w-1/2'>
@@ -206,10 +206,10 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
                     this.updateRecord(newR);
                   }}
                 ></input>
-                <span>occurences.</span>
+                <span>{this.translate('occurences.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
               </div>
               <div className='flex gap-1 text-nowrap'>
-                Repeats from {recurrence.dates[0]} to {recurrence.dates[recurrence.dates.length - 1]}.
+                {this.translate('Repeats from {{ dateFrom }} to {{ dateTo }}.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity').replace('{{ dateFrom }}', recurrence.dates[0]).replace('{{ dateTo }}', recurrence.dates[recurrence.dates.length - 1])}
               </div>
             </>}
           </div>)}

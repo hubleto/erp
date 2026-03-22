@@ -27,8 +27,8 @@ class BillingAccount extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Billing Account';
-    $description->ui['addButtonText'] = 'Add Billing Account';
+    $description->ui['title'] = $this->translate('Billing Account');
+    $description->ui['addButtonText'] = $this->translate('Add Billing Account');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

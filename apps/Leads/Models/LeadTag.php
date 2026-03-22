@@ -25,7 +25,7 @@ class LeadTag extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Customer Categories';
+    $description->ui['title'] = $this->translate('Lead Tags');
     return $description;
   }
 

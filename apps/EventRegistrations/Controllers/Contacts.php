@@ -7,8 +7,8 @@ class Contacts extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'eventregistrations', 'content' => 'EventRegistrations' ],
-      [ 'url' => 'eventregistrations/contacts', 'content' => 'Contacts' ],
+      [ 'url' => 'eventregistrations', 'content' => $this->translate('EventRegistrations') ],
+      [ 'url' => 'eventregistrations/contacts', 'content' => $this->translate('Contacts') ],
     ]);
   }
 

@@ -80,7 +80,7 @@
           <div class="block badge text-center badge-danger p-4 mt-2">
             <div class="text-2xl">{{ translate('Your subscription is inactive') }}</div>
             <div>
-              Make a payment to reactivate it again.
+              {{ translate('Make a payment to reactivate it again.') }}
             </div>
           </div>
         {% else %}
@@ -149,8 +149,8 @@
               <div id="partnerAbout"></div>
               <div id="partnerWebsite"></div>
               <br/>
-              Technical support: <div id="partnerTechnicalSupportEmail" class="badge"></div>
-              Sales: <div id="partnerSalesEmail" class="badge"></div>
+              {{ translate('Technical support') }}: <div id="partnerTechnicalSupportEmail" class="badge"></div>
+              {{ translate('Sales') }}: <div id="partnerSalesEmail" class="badge"></div>
             </div>
           </div>
         </div>
@@ -200,7 +200,7 @@
                 {{ translate("Please type your account's email address below") }}
                 {{ translate("to confirm that you realy want to activate Premium account") }}.<br/>
                 <br/>
-                <input id="activate-premium-confirm-email" class="w-full" placeholder="To confirm, type your email address here." />
+                <input id="activate-premium-confirm-email" class="w-full" placeholder="{{ translate('To confirm, type your email address here.') }}" />
               </div>
               <div class="mt-2">
                 <button

@@ -31,7 +31,7 @@ class ProjectDeal extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Project Deals';
+    $description->ui['title'] = $this->translate('Project Deals');
     $description->ui["addButtonText"] = $this->translate("Add deal");
 
     if ($this->router()->urlParamAsInteger('idProject') > 0) {

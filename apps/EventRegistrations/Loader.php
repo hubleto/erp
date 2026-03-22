@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Erp\App
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => 'EventRegistrations', // or $this->translate('EventRegistrations')
+      'title' => $this->translate('EventRegistrations'),
       'icon' => 'fas fa-table',
       'url' => 'settings/eventregistrations',
     ]);

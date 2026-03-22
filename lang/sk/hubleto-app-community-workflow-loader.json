@@ -39,12 +39,37 @@
         "Ready to deploy": "Pripravené na nasadenie",
         "Deployed": "Nasadené",
         "Accepted": "Akceptované",
-        "Manage workflows": "Spravovať workflovy"        
+        "Manage workflows": "Spravovať workflovy"
     },
     "Controllers\\Home": {
         "Workflow": "Workflow",
         "Add workflow": "Pridať workflow",
         "Manage workflow steps": "Spravovať kroky"
+    },
+    "Controllers\\Workflows": {
+        "Settings": "Nastavenia",
+        "Workflows": "Workflovy"
+    },
+    "Controllers\\Workflow": {
+        "Workflow": "Workflow",
+        "Show details": "Zobraziť detaily",
+        "Target": "Cieľová skupina",
+        "Goal": "Cieľ",
+        "items": "položiek",
+        "Project has no milestones.": "Projekt nemá žiadne míľniky.",
+        "progress": "pokrok",
+        "reported on": "nahlásený dňa",
+        "no report yet": "zatiaľ žiadna správa",
+        "Closed milestone": "Uzavretý míľnik"
+    },
+    "Controllers\\History": {
+        "Workflow": "Workflow",
+        "History": "História"
+    },
+    "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
+        "Item": "Položka",
+        "Days without workflow update": "Dni bez aktualizácie workflow",
+        "Last update by": "Naposledy aktualizoval"
     },
     "root": {
         "Workflows": "Workflovy"
@@ -55,7 +80,8 @@
         "Type": "Typ",
         "Group": "Skupina",
         "Order": "Poradie",
-        "Show in kanban": "Zobraziť v kanbane"
+        "Show in kanban": "Zobraziť v kanbane",
+        "Add Workflow": "Pridať workflow"
     },
     "Models\\WorkflowStep": {
         "Name": "Názov",
@@ -64,15 +90,8 @@
         "Probability": "Pravdepodobnosť",
         "Workflow": "Workflow",
         "Set result of a deal to": "Nastaviť výsledok dealu na",
-        "Tag": "Značka"
-    },
-    "Controllers\\Workflow": {
-        "Workflow": "Workflow",
-        "Show details": "Zobraziť detaily"
-    },
-    "Controllers\\History": {
-        "Workflow": "Workflow",
-        "History": "História"
+        "Tag": "Značka",
+        "Add Workflow Step": "Pridať krok workflow"
     },
     "Models\\WorkflowHistory": {
         "Model": "Model",
@@ -81,5 +100,12 @@
         "User": "Používateľ",
         "Workflow": "Workflow",
         "Workflow Step": "Krok"
+    },
+    "Components\\FormWorkflow": {
+        "Workflow": "Workflow",
+        "Steps": "Kroky"
+    },
+    "Components\\FormWorkflowStep": {
+        "Workflow step": "Krok workflow"
     }
 }

@@ -1,5 +1,5 @@
-<h1 class="app-main-content">Payment</h1>
+<h1 class="app-main-content">{{ translate('Payment') }}</h1>
 
 <div class="alert alert-info">
-  Random payment of <b>{{ hubleto.locale().formatCurrency(viewParams.amount, '€') }}</b> was simulated.
+  {{ translate('Random payment of') }} <b>{{ hubleto.locale().formatCurrency(viewParams.amount, '€') }}</b> {{ translate('was simulated.') }}
 </div>

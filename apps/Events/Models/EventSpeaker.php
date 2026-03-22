@@ -40,7 +40,7 @@ class EventSpeaker extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add EventSpeaker';
+    $description->ui['addButtonText'] = $this->translate('Add speaker');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

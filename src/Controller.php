@@ -131,8 +131,14 @@ class Controller extends \Hubleto\Framework\Controller
   public function setView(string $view): void
   {
     if (!$this->activeUserHasPermission()) {
+      $this->translationContext = 'Hubleto\\Erp\\Loader';
+      $this->translationContextInner = 'Controllers\\AccessForbidden';
       $this->viewParams = [
-        'message' => "You have no access neither to {$this->hubletoApp->manifest['name']} nor {$this->shortName}."
+        'message' => $this->translate(
+          "You have no access to {{ appName }}.",
+          ['appName' => $this->hubletoApp->manifest['name'] ?? $this->shortName],
+          'Controllers\\AccessForbidden'
+        ),
       ];
       parent::setView('@hubleto-main/AccessForbidden.twig');
     } else {

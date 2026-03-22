@@ -20,8 +20,8 @@ class LostReason extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Lead Lost Reasons';
-    $description->ui['addButtonText'] = 'Add Reason';
+    $description->ui['title'] = $this->translate('Lead Lost Reasons');
+    $description->ui['addButtonText'] = $this->translate('Add Reason');
     return $description;
   }
 

@@ -21,7 +21,10 @@
         "Main Distribution Center": "Hlavné distribučné centrum",
         "Main warehouse used for supplying the most important customers.": "Hlavný sklad používaný na zásobovanie najdôležitejších zákazníkov.",
         "Regional Hub East": "Regionálne centrum východ",
-        "Regional warehouse used for supplying the regional customers.": "Regionálny sklad používaný na zásobovanie regionálnych zákazníkov."
+        "Regional warehouse used for supplying the regional customers.": "Regionálny sklad používaný na zásobovanie regionálnych zákazníkov.",
+        "Settings": "Nastavenia",
+        "Types of warehouses": "Typy skladov",
+        "Types of locations": "Typy umiestnení"
     },
     "root": {
         "Warehouses": "Sklady",
@@ -79,32 +82,6 @@
     "Models\\LocationType": {
         "Name": "Názov"
     },
-    "Controllers\\Warehouses": {
-        "Warehouses": "Sklady"
-    },
-    "Components\\FormWarehouse": {
-        "Contact": "Kontakt",
-        "Capacity and stock status": "Kapacita a stav",
-        "Address": "Adresa",
-        "More information": "Viac informácií",
-        "Locations": "Umiestnenia",
-        "Warehouse": "Sklad",
-        "First create warehouse, then you will be prompted to add its locations.": "Najprv vytvorte sklad, potom budete vyzvaní na pridanie jeho umiestnení."
-    },
-    "Controllers\\Locations": {
-        "Warehouses": "Sklady",
-        "Locations": "Umiestnenia"
-    },
-    "Components\\FormLocation": {
-        "Capacity and stock status": "Kapacita a stav",
-        "Placement": "Poloha",
-        "More information": "Viac informácií",
-        "Location":"Umiestnenie"
-    },
-    "Controllers\\Inventory": {
-        "Warehouses": "Sklady",
-        "Inventory": "Inventár"
-    },
     "Models\\Inventory": {
         "Product": "Produkt",
         "Location in warehouse": "Umiestnenie",
@@ -116,13 +93,6 @@
         "Last moved": "Posledný pohyb",
         "Location": "Umiestnenie",
         "Add item": "Pridať položku"
-    },
-    "Components\\TableInventory": {
-        "Total quantity": "Celkové množstvo"
-    },
-    "Controllers\\Transactions": {
-        "Warehouses": "Sklady",
-        "Transactions": "Pohyby"
     },
     "Models\\Transaction": {
         "Transaction UID": "UID pohybu",
@@ -160,6 +130,51 @@
         "Original location": "Pôvodné umiestnenie",
         "New location": "Nové umiestnenie"
     },
+    "Controllers\\Warehouses": {
+        "Warehouses": "Sklady"
+    },
+    "Controllers\\Locations": {
+        "Warehouses": "Sklady",
+        "Locations": "Umiestnenia"
+    },
+    "Controllers\\Inventory": {
+        "Warehouses": "Sklady",
+        "Inventory": "Inventár"
+    },
+    "Controllers\\Transactions": {
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby"
+    },
+    "Controllers\\TransactionItems": {
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby",
+        "Items": "Položky"
+    },
+    "Controllers\\WarehouseTypes": {
+        "Warehouses": "Sklady",
+        "Settings": "Nastavenia",
+        "Warehouse types": "Typy skladov"
+    },
+    "Controllers\\LocationTypes": {
+        "Warehouses": "Sklady",
+        "Settings": "Nastavenia",
+        "Location types": "Typy umiestnení"
+    },
+    "Components\\FormWarehouse": {
+        "Contact": "Kontakt",
+        "Capacity and stock status": "Kapacita a stav",
+        "Address": "Adresa",
+        "More information": "Viac informácií",
+        "Locations": "Umiestnenia",
+        "Warehouse": "Sklad",
+        "First create warehouse, then you will be prompted to add its locations.": "Najprv vytvorte sklad, potom budete vyzvaní na pridanie jeho umiestnení."
+    },
+    "Components\\FormLocation": {
+        "Capacity and stock status": "Kapacita a stav",
+        "Placement": "Poloha",
+        "More information": "Viac informácií",
+        "Location": "Umiestnenie"
+    },
     "Components\\FormInventory": {
         "Inventory": "Sklad"
     },
@@ -167,6 +182,16 @@
         "Transaction": "Transakcia",
         "Product": "Produkt",
         "Purchase price": "Nákupná cena",
+        "Qty.": "Množ.",
         "Add item": "Pridať položku"
+    },
+    "Components\\FormTransactionItem": {
+        "Transaction item": "Položka pohybu"
+    },
+    "Components\\TableInventory": {
+        "Total quantity": "Celkové množstvo"
+    },
+    "Components\\TableTransactionItems": {
+        "Total quantity": "Celkové množstvo"
     }
 }

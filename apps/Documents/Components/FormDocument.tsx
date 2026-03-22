@@ -63,13 +63,13 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
                 className='btn btn-extra-large btn-primary-outline'
               >
                 <span className='icon'><i className='fas fa-download'></i></span>
-                <span className='text'>Download</span>
+                <span className='text'>{this.translate('Download')}</span>
               </a>
             </div>
           </div>
           <div className='flex-2'>
             <div className='card h-full'>
-              <div className='card-header'>Preview</div>
+              <div className='card-header'>{this.translate('Preview')}</div>
               <div className='card-body h-full'>
                 <iframe className='w-full h-full' src={downloadUrl}></iframe>
               </div>

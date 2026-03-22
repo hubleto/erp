@@ -1,9 +1,9 @@
 <h1>{{ translate('Calendar Sources') }}</h1><br/>
-<h2>Google Calendar</h2><br/>
+<h2>{{ translate('Google Calendar') }}</h2><br/>
 
 <div class="alert alert-warning">
-  When using Google Calendar integration, also make sure to have $config['google-api-key'] defined in your ConfigEnv.php.<br/>
-  Visit <b><a href="https://developer.hubleto.eu/apps/community/calendar-sync" target="_blank">https://developer.hubleto.eu/apps/community/calendar-sync</a></b> for details on how to get and configure your Google Calendar API key.
+  {{ translate('When using Google Calendar integration, also make sure to have $config[\'google-api-key\'] defined in your ConfigEnv.php.') }}<br/>
+  {{ translate('Visit') }} <b><a href="https://developer.hubleto.eu/apps/community/calendar-sync" target="_blank">https://developer.hubleto.eu/apps/community/calendar-sync</a></b> {{ translate('for details on how to get and configure your Google Calendar API key.') }}
 </div>
 
 <hblreact-table-calendar-sync-sources

@@ -1,22 +1,26 @@
 {
     "manifest": {
-        "Shops": "Obchody"
+        "Shops": "Obchody",
+        "Retail shop management": "Správa maloobchodných predajní"
     },
     "Models\\Shop": {
         "Shop": "Obchod",
-        "Name":"Názov",
-        "Color":"Farba",
-        "Address":"Adresa",
-        "Photo #1":"Foto #1",
-        "Photo #2":"Foto #2",
-        "Photo #3":"Foto #3",
-        "Photo #4":"Foto #4",
-        "Photo #5":"Foto #5",
+        "Name": "Názov",
+        "Color": "Farba",
+        "Address": "Adresa",
+        "Photo #1": "Foto #1",
+        "Photo #2": "Foto #2",
+        "Photo #3": "Foto #3",
+        "Photo #4": "Foto #4",
+        "Photo #5": "Foto #5",
         "Add shop": "Pridať obchod",
         "Short description": "Krátky popis",
         "Long description": "Dlhý popis"
     },
     "Controllers\\Shops": {
         "Shops": "Obchody"
+    },
+    "Components\\FormShop": {
+        "Shop": "Obchod"
     }
 }

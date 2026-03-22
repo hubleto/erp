@@ -7,8 +7,8 @@ class Settings extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'eventfeedback', 'content' => 'EventFeedback' ],
-      [ 'url' => 'settings', 'content' => 'Settings' ],
+      [ 'url' => 'eventfeedback', 'content' => $this->translate('EventFeedback') ],
+      [ 'url' => 'settings', 'content' => $this->translate('Settings') ],
     ]);
   }
 

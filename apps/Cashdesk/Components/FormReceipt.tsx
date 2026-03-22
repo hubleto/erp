@@ -82,10 +82,10 @@ export default class FormReceipt<P, S> extends FormExtended<FormReceiptProps, Fo
               <thead>
                 <tr>
                   <th>{this.translate('Product')}</th>
-                  <th>Qty.</th>
-                  <th>Unit price incl. VAT (€)</th>
-                  <th>VAT (%)</th>
-                  <th>Total price incl. VAT (€)</th>
+                  <th>{this.translate('Qty.')}</th>
+                  <th>{this.translate('Unit price incl. VAT (€)')}</th>
+                  <th>{this.translate('VAT (%)')}</th>
+                  <th>{this.translate('Total price incl. VAT (€)')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -157,15 +157,15 @@ export default class FormReceipt<P, S> extends FormExtended<FormReceiptProps, Fo
             <div className='m-4 shadow p-2 rounded-lg border border-gray-200'>
               <div className='border-dashed border-b p-2 text-center'>
                 <b>{R.COMPANY.name}</b><br/>
-                TAX ID: {R.COMPANY.tax_id}<br/>
-                VAT ID: {R.COMPANY.vat_id}<br/>
+                {this.translate('TAX ID:')} {R.COMPANY.tax_id}<br/>
+                {this.translate('VAT ID:')} {R.COMPANY.vat_id}<br/>
                 {R.COMPANY.street_1}<br/>
                 {R.COMPANY.street_2}<br/>
                 {R.COMPANY.zip} {R.COMPANY.city}<br/>
                 {R.COMPANY.country}
               </div>
               <div className='text-center font-bold border-dashed border-b p-2'>
-                RECEIPT #{R.number}
+                {this.translate('RECEIPT')} #{R.number}
               </div>
               <div className='border-dashed border-b p-2'>
                 {R.ITEMS ? R.ITEMS.map((item, index) => {
@@ -182,11 +182,11 @@ export default class FormReceipt<P, S> extends FormExtended<FormReceiptProps, Fo
                 }) : null}
               </div>
               <div className='p-2 mt-2 bg-gray-600 text-white text-3xl'>
-                TOTAL: {globalThis.hubleto.numberFormat(R.total_price_incl_vat, 2, ",", " ")} €
+                {this.translate('TOTAL:')} {globalThis.hubleto.numberFormat(R.total_price_incl_vat, 2, ",", " ")} €
               </div>
               <div className='mt-4 p-2 text-center'>
                 {R.created}<br/>
-                Cash register identifier: {R.CASH_REGISTER.identifier}<br/>
+                {this.translate('Cash register identifier:')} {R.CASH_REGISTER.identifier}<br/>
                 <br/>
                 <div className='m-auto'>
                   <Barcode value={R.CASH_REGISTER.identifier} height={30} lineColor='#444444' margin={0} className='w-full'/>

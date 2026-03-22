@@ -23,13 +23,13 @@ class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
     list($remindersToday, $remindersTomorrow, $remindersLater) = $events->loadRemindersSummary($this->user['id'] ?? 0);
 
     foreach ($remindersToday as $reminder) {
-      $digest[] = $this->formatReminder('Today', '#EED202', $reminder);
+      $digest[] = $this->formatReminder($this->translate('Today'), '#EED202', $reminder);
     }
     foreach ($remindersTomorrow as $reminder) {
-      $digest[] = $this->formatReminder('Tomorrow', '#92DFF3', $reminder);
+      $digest[] = $this->formatReminder($this->translate('Tomorrow'), '#92DFF3', $reminder);
     }
     foreach ($remindersLater as $reminder) {
-      $digest[] = $this->formatReminder('Later', '#92DFF3', $reminder);
+      $digest[] = $this->formatReminder($this->translate('Later'), '#92DFF3', $reminder);
     }
 
     return $digest;

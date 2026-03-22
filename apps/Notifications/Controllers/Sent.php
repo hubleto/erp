@@ -16,7 +16,7 @@ class Sent extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->viewParams['title'] = 'Sent';
+    $this->viewParams['title'] = $this->translate('Sent');
     $this->viewParams['folder'] = 'sent';
 
     $this->setView('@Hubleto:App:Community:Notifications/ListFolder.twig');

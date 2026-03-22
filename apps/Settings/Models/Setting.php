@@ -40,8 +40,8 @@ class Setting extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Settings';
-    $description->ui['addButtonText'] = 'Add Setting';
+    $description->ui['title'] = $this->translate('Settings');
+    $description->ui['addButtonText'] = $this->translate('Add Setting');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 

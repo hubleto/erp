@@ -40,13 +40,13 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
       selectParentOrder: false,
       salaries: {},
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Project')}</b> },
-        { uid: 'documents', title: this.translate('Documents') },
-        { uid: 'milestones', title: this.translate('Milestones') },
-        { uid: 'tasks', title: this.translate('Tasks') },
-        { uid: 'worksheet', title: this.translate('Worksheet') },
-        { uid: 'expenses', title: this.translate('Expenses') },
-        { uid: 'statistics', title: this.translate('Statistics') },
+        { uid: 'default', title: <b>{this.translate('Project','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject')}</b> },
+        { uid: 'documents', title: this.translate('Documents','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'milestones', title: this.translate('Milestones','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'tasks', title: this.translate('Tasks','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'worksheet', title: this.translate('Worksheet','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'expenses', title: this.translate('Expenses','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'statistics', title: this.translate('Statistics','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
       ]
@@ -95,7 +95,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
         return <>
           <div className='w-full flex gap-2 flex-col md:flex-row'>
             <div className='flex-1 border-r border-gray-100'>
-              <FormInput title={"Order"}>
+              <FormInput title={this.translate("Order")}>
                 {this.state.selectParentOrder ? <>
                   <Lookup
                     model='Hubleto/App/Community/Orders/Models/Order'
@@ -227,7 +227,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
 
       case 'milestones':
         return (this.state.id < 0
-          ? <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+          ? <div className="badge badge-info">{this.translate('First create the project, then you will be prompted to add tasks.')}</div>
           : <TableMilestones
             tag={"table_project_milestone"}
             parentForm={this}
@@ -239,7 +239,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
 
       case 'tasks':
         return (this.state.id < 0
-          ? <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+          ? <div className="badge badge-info">{this.translate('First create the project, then you will be prompted to add tasks.')}</div>
           : <TableTasks
             tag={"table_project_task"}
             parentForm={this}
@@ -266,7 +266,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
 
       case 'expenses':
         return (this.state.id < 0
-          ? <div className="badge badge-info">First create the project, then you will be prompted to add tasks.</div>
+          ? <div className="badge badge-info">{this.translate('First create the project, then you will be prompted to add tasks.')}</div>
           : <TableExpenses
             tag={"table_project_expense"}
             parentForm={this}
@@ -284,7 +284,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
           return <div>
             <div className='flex gap-2'>
               <div className='card'>
-                <div className='card-header'>Worked hours & costs by month</div>
+                <div className='card-header'>{this.translate('Worked hours & costs by month')}</div>
                 <div className='card-body'>
                   <table className='table-default dense'>
                     <tbody>
@@ -292,14 +292,14 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                         totalWorkedHours += parseFloat(item.worked_hours);
                         return <tr key={key}>
                           <td>{item.year}-{item.month}</td>
-                          <td>{item.worked_hours} hours</td>
+                          <td>{item.worked_hours} {this.translate('hours')}</td>
                         </tr>;
                       })}
                     </tbody>
                     <tfoot>
                       <tr>
                         <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
-                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalWorkedHours)} hours</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalWorkedHours)} {this.translate('hours')}</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -315,14 +315,14 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                         totalChargeableHours += parseFloat(item.worked_hours);
                         return <tr key={key}>
                           <td>{item.year}-{item.month}</td>
-                          <td>{item.worked_hours} hours</td>
+                          <td>{item.worked_hours} {this.translate('hours')}</td>
                         </tr>;
                       })}
                     </tbody>
                     <tfoot>
                       <tr>
                         <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
-                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalChargeableHours)} hours</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalChargeableHours)} {this.translate('hours')}</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -337,10 +337,10 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                   <table className='table-default dense'>
                     <thead>
                       <tr>
-                        <th>User</th>
-                        <th>Worked hours</th>
-                        <th>Salary</th>
-                        <th>Labor costs</th>
+                        <th>{this.translate('User')}</th>
+                        <th>{this.translate('Worked hours')}</th>
+                        <th>{this.translate('Salary')}</th>
+                        <th>{this.translate('Labor costs')}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -349,7 +349,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
                         totalCostsByWorker += workerCosts;
                         return <tr key={key}>
                           <td>{item.worker_name}</td>
-                          <td>{item.worked_hours} hours</td>
+                          <td>{item.worked_hours} {this.translate('hours')}</td>
                           <td><div className="flex gap-2 items-center">
                             <input
                               value={this.state.salaries[item.id_worker] ?? ''}

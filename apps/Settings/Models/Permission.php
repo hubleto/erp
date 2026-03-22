@@ -21,7 +21,7 @@ class Permission extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Permissions';
+    $description->ui['title'] = $this->translate('Permissions');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
@@ -37,7 +37,7 @@ class Permission extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
-    $description->ui['title'] = 'Permission';
+    $description->ui['title'] = $this->translate('Permission');
 
     return $description;
   }

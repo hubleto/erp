@@ -9,7 +9,8 @@
         "Sample project #1": "Vzorový projekt #1",
         "Sample project #1 for demonstration purposes.": "Vzorový projekt #1 na demonštračné účely.",
         "Sample project #2": "Vzorový projekt #2",
-        "Sample project #2 for demonstration purposes.": "Vzorový projekt #2 na demonštračné účely."
+        "Sample project #2 for demonstration purposes.": "Vzorový projekt #2 na demonštračné účely.",
+        "Create project": "Vytvoriť projekt"
     },
     "root": {
         "Projects": "Projekty",
@@ -20,18 +21,20 @@
         "Customer": "Zákazník",
         "Contact": "Kontakt",
         "Identifier": "Identifikátor",
+        "Leave empty to generate automatically.": "Nechajte prázdne pre automatické vygenerovanie.",
         "Title": "Názov",
         "Description": "Popis",
         "Main developer": "Hlavný developer",
         "Account manager": "Account manažér",
         "Priority": "Priorita",
         "Start": "Štart",
-        "Deadline": "Deadline",
+        "Deadline": "Termín",
         "Budget": "Rozpočet",
         "Workflow": "Workflow",
         "Workflow step": "Workflow stav",
         "Closed": "Uzavretý",
         "Color": "Farba",
+        "Online documentation folder": "Priečinok online dokumentácie",
         "Notes": "Poznámky",
         "Created": "Vytvorený",
         "Open \/ Closed": "Otvorené \/ Zatvorené",
@@ -47,28 +50,75 @@
         "Order": "Poradie",
         "Color": "Farba"
     },
+    "Models\\MilestoneReport": {
+        "Milestone": "Míľnik",
+        "Summary": "Zhrnutie",
+        "Details": "Detaily",
+        "Progress": "Pokrok",
+        "Reported on": "Dátum správy",
+        "Reported by": "Reportoval",
+        "Add milestone report": "Pridať správu k míľniku"
+    },
+    "Models\\Expense": {
+        "Project": "Projekt",
+        "Reason": "Dôvod",
+        "Date": "Dátum",
+        "Amount": "Suma",
+        "Approved by": "Schválil",
+        "Spent by": "Utratil",
+        "Add expense": "Pridať výdavok"
+    },
+    "Models\\ProjectTask": {
+        "Project": "Projekt",
+        "Task": "Úloha",
+        "Assign task to project": "Priradiť úlohu k projektu"
+    },
+    "Models\\ProjectDeal": {
+        "Project": "Projekt",
+        "Deal": "Deal",
+        "Project Deals": "Dealy projektu",
+        "Add deal": "Pridať deal"
+    },
+    "Models\\ProjectOrder": {
+        "Project": "Projekt",
+        "Order": "Objednávka",
+        "Order Projects": "Projekty objednávky",
+        "Add project": "Pridať projekt"
+    },
     "Components\\FormProject": {
         "Projects": "Projekty",
         "Worksheet": "Výkaz práce",
         "Project": "Projekt",
+        "Documents": "Dokumenty",
+        "Milestones": "Míľniky",
         "Tasks": "Úlohy",
+        "Expenses": "Výdavky",
         "Statistics": "Štatistiky",
-        "Open tasks": "Otvorené úlohy"
+        "Open tasks": "Otvorené úlohy",
+        "Discussions": "Diskusie",
+        "Project:": "Projekt:",
+        "Order": "Objednávka",
+        "Select parent order": "Vybrať nadradenú objednávku",
+        "First create the project, then you will be prompted to add tasks.": "Najprv vytvorte projekt, potom budete môcť pridávať úlohy.",
+        "Worked hours & costs by month": "Odpracované hodiny a náklady podľa mesiaca",
+        "Chargeable hours by month": "Fakturovateľné hodiny podľa mesiaca",
+        "Labor costs calculator": "Kalkulátor mzdových nákladov",
+        "Total": "Spolu",
+        "User": "Používateľ",
+        "Worked hours": "Odpracované hodiny",
+        "Salary": "Mzda",
+        "Labor costs": "Mzdové náklady",
+        "hours": "hodín"
     },
     "Components\\FormMilestone": {
-        "Milestone": "Míľnik"
+        "Milestone": "Míľnik",
+        "Reports": "Správy"
     },
-    "Models\\ProjectOrder": {
-        "Project": "Projekt",
-        "Order": "Objednávka"
+    "Components\\FormMilestoneReport": {
+        "Milestone report": "Správa k míľniku"
     },
-    "Models\\ProjectTask": {
-        "Project": "Projekt",
-        "Task": "Úloha"
-    },
-    "Models\\ProjectDeal": {
-        "Project": "Projekt",
-        "Deal": "Deal"
+    "Components\\FormExpense": {
+        "Expense": "Výdavok"
     },
     "Models\\ProjectActivity": {
         "Subject": "Predmet",
@@ -92,6 +142,20 @@
     "Controllers\\Projects": {
         "Projects": "Projekty"
     },
+    "Controllers\\Dashboard": {
+        "Projects": "Projekty",
+        "Current date and time is": "Aktuálny dátum a čas je",
+        "Go to contacts": "Prejsť na kontakty"
+    },
+    "Controllers\\Contacts": {
+        "Projects": "Projekty",
+        "Contacts": "Kontakty"
+    },
+    "Controllers\\Settings": {
+        "Projects": "Projekty",
+        "Settings": "Nastavenia",
+        "Create your custom settings page here": "Tu vytvorte svoju vlastnú stránku nastavení"
+    },
     "Models\\Milestone": {
         "Title": "Názov",
         "Due date": "Dátum splnenia",
@@ -99,7 +163,7 @@
         "Description of activities": "Popis aktivít",
         "Color": "Farba",
         "Closed": "Uzavreté",
-        "Last report": "Posledná správa",        
+        "Last report": "Posledná správa",
         "Last progress": "Posledný pokrok",
         "Add milestone": "Pridať míľnik",
         "Project": "Projekt"
@@ -107,11 +171,20 @@
     "Controllers\\Milestones": {
         "Milestones": "Míľniky"
     },
+    "Controllers\\ProjectsTasks": {
+        "Projects": "Projekty",
+        "Assignment of tasks": "Priradenie úloh"
+    },
     "Controllers\\MonthlySummary": {
-       "Projects":"Projekty",
-       "Monthly summary":"Mesačný prehľad",
+       "Projects": "Projekty",
+       "Monthly summary": "Mesačný prehľad",
        "Search project": "Hľadať projekt",
         "No project found.": "Nenašiel sa žiadny projekt.",
-        "projects found": "projekty nájdené"
+        "projects found": "projekty nájdené",
+        "hours": "hodín"
+    },
+    "Calendar": {
+        "Projects": "Projekty",
+        "Add new activity linked to Projects": "Pridať novú aktivitu pre projekt"
     }
 }

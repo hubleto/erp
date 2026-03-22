@@ -12,6 +12,6 @@ invoice
   </div>
 </div>
 <div class="card-body text-sm">
-  <div>Owner: {{ item.OWNER.email }}</div>
+  <div>{{ translate('Owner') }}: {{ item.OWNER.email }}</div>
   {% if item.note %} <div class="bg-yellow-50 p-2 text-yellow-800 whitespace-pre">{{ item.note }}</div> {% endif %}
 </div>

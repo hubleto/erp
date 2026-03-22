@@ -45,11 +45,11 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     let tabs = [];
     
     if (this.props.id > 0) {
-      tabs.push({ uid: 'default', title: <b>{this.translate('Invoice')}</b> });
-      tabs.push({ uid: 'preview', title: this.translate('Preview, download, print') });
+      tabs.push({ uid: 'default', title: <b>{this.translate('Invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice')}</b> });
+      tabs.push({ uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') });
       // tabs.push({ uid: 'documents', title: this.translate('Documents') });
-      tabs.push({ uid: 'payments', title: this.translate('Payments') });
-      tabs.push({ uid: 'email', title: this.translate('Email') });
+      tabs.push({ uid: 'payments', title: this.translate('Payments', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') });
+      tabs.push({ uid: 'email', title: this.translate('Email', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') });
     }
     tabs = [...tabs, ...this.getCustomTabs()];
 
@@ -157,14 +157,14 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
 
   renderTitle(): JSX.Element {
     const R = this.state.record;
-    let title = (this.state.record.inbound_outbound == 1 ? 'Inbound' : 'Outbound');
+    let title = (this.state.record.inbound_outbound == 1 ? this.translate('Inbound') : this.translate('Outbound'));
 
     switch (R.type) {
-      case 1: case '1': title += ' Proforma Invoice'; break;
-      case 2: case '2': title += ' Advance Invoice'; break;
-      case 3: case '3': title += ' Invoice'; break;
-      case 4: case '4': title += ' Credit Note'; break;
-      case 5: case '5': title += ' Debit Note'; break;
+      case 1: case '1': title += ' ' + this.translate('Proforma Invoice'); break;
+      case 2: case '2': title += ' ' + this.translate('Advance Invoice'); break;
+      case 3: case '3': title += ' ' + this.translate('Invoice'); break;
+      case 4: case '4': title += ' ' + this.translate('Credit Note'); break;
+      case 5: case '5': title += ' ' + this.translate('Debit Note'); break;
     }
     return <>
       <small>{title}</small>
@@ -221,17 +221,17 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                 <div className='p-2 grow text-nowrap bg-slate-50 text-slate-800'>
                   <div className='text-sm'>
                     <b>{globalThis.hubleto.numberFormat(R.total_excl_vat, 2, ',', ' ')} {currencySymbol}</b>
-                    <span className='ml-2'>excl. VAT</span>
+                    <span className='ml-2'>{this.translate('excl. VAT')}</span>
                   </div>
                   <div className='mt-2'>
                     <span className='text-2xl badge badge-yellow'>
                       {globalThis.hubleto.numberFormat(R.total_incl_vat, 2, ',', ' ')} {currencySymbol}
                     </span>
-                    <span className='text-sm ml-2'>incl. VAT</span>
+                    <span className='text-sm ml-2'>{this.translate('incl. VAT')}</span>
                   </div>
                   <div className='text-sm mt-2'>
                     <b>{globalThis.hubleto.numberFormat(R.total_payments, 2, ',', ' ')} {currencySymbol}</b>
-                    <span className='ml-2'>paid</span>
+                    <span className='ml-2'>{this.translate('paid')}</span>
                   </div>
                 </div>
                 <div className={'border-t border-t-4 border-t-blue-400 grow ' + (R.date_delivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
@@ -402,7 +402,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                           </tr>
                           <tr key={key + '3'} className={item._toBeDeleted_ ? 'bg bg-red-50' : ''}>
                             <td className={rowBgClass}><div className='flex gap-2 items-center'>
-                              Discount: {InputFactory({
+                              {this.translate('Discount')}: {InputFactory({
                                 value: item.discount,
                                 cssClass: 'bg-white',
                                 description: { type: 'number', unit: '%' },
@@ -413,7 +413,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                               })}
                             </div></td>
                             <td className={rowBgClass}><div className='flex gap-2 items-center'>
-                              VAT: {InputFactory({
+                              {this.translate('VAT')}: {InputFactory({
                                 value: item.vat,
                                 cssClass: 'bg-white',
                                 description: { type: 'number', unit: '%' },
@@ -425,10 +425,10 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                             </div></td>
                             <td className={rowBgClass + ' text-right'} colSpan={4}>
                               <div className={'badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                                {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} excl. VAT
+                                {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} {this.translate('excl. VAT')}
                               </div>
                               <div className={'badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                                {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} incl. VAT
+                                {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} {this.translate('incl. VAT')}
                               </div>
                             </td>
                           </tr>
@@ -618,7 +618,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
       break;
 
       case 'email':
-        if (!R.pdf) return <div className='alert alert-danger'>PDF version of the invoice was not generated yet. Cannot send.</div>;
+        if (!R.pdf) return <div className='alert alert-danger'>{this.translate('PDF version of the invoice was not generated yet. Cannot send.')}</div>;
         if (this.state.sendInvoiceResult) return <div className='alert alert-success'>{this.translate('Email was sent')}</div>;
         return <>
           <div className='btn-group'>
@@ -630,7 +630,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                 });
               }}
             >
-              <span className='text'>Send invoice</span>
+              <span className='text'>{this.translate('Send invoice')}</span>
             </button>
             <button
               className={'btn ' + (this.state.sendInvoiceEmailType == 'notify-due-invoice' ? 'btn-primary': 'btn-transparent')}
@@ -640,16 +640,16 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                 });
               }}
             >
-              <span className='text'>Send notification on due invoice</span>
+              <span className='text'>{this.translate('Send notification on due invoice')}</span>
             </button>
           </div>
           <div className='mt-2'>
             {!this.state.sendInvoicePreparedData
-              ? <div className='alert alert-warning'>Preparing email...</div>
+              ? <div className='alert alert-warning'>{this.translate('Preparing email...')}</div>
               : <>
                 <table className='table-default dense'><tbody>
                   <tr>
-                    <td>Subject:</td>
+                    <td>{this.translate('Subject')}:</td>
                     <td>
                       <input
                         className='w-full bg-white'
@@ -661,11 +661,11 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     </td>
                   </tr>
                   <tr>
-                    <td>From:</td>
-                    <td>{this.state.sendInvoicePreparedData.senderAccount?.name ?? <div className='text-red-800'>Not configured</div>}</td>
+                    <td>{this.translate('From')}:</td>
+                    <td>{this.state.sendInvoicePreparedData.senderAccount?.name ?? <div className='text-red-800'>{this.translate('Not configured')}</div>}</td>
                   </tr>
                   <tr>
-                    <td>To:</td>
+                    <td>{this.translate('To')}:</td>
                     <td className={this.state.sendInvoicePreparedData.to == '' ? 'bg-red-100' : ''}>
                       <input
                         className='w-full bg-white'
@@ -677,7 +677,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     </td>
                   </tr>
                   <tr>
-                    <td>CC:</td>
+                    <td>{this.translate('CC')}:</td>
                     <td>
                       <input
                         className='w-full bg-white'
@@ -689,7 +689,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     </td>
                   </tr>
                   <tr>
-                    <td>BCC:</td>
+                    <td>{this.translate('BCC')}:</td>
                     <td>
                       <input
                         className='w-full bg-white'
@@ -701,7 +701,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     </td>
                   </tr>
                   <tr>
-                    <td>Email:</td>
+                    <td>{this.translate('Email')}:</td>
                     <td>
                       <TextareaWithHtmlPreview
                         value={this.state.sendInvoicePreparedData.bodyHtml ?? ''}
@@ -712,7 +712,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                     </td>
                   </tr>
                   <tr>
-                    <td>Attachments:</td>
+                    <td>{this.translate('Attachments')}:</td>
                     <td>
                       {this.state.sendInvoicePreparedData.attachments ? this.state.sendInvoicePreparedData.attachments.map((att, index) => {
                         return <a
@@ -746,7 +746,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                   }}
                 >
                   <span className='icon'><i className='fas fa-paper-plane'></i></span>
-                  <span className='text'>Send email</span>
+                  <span className='text'>{this.translate('Send email')}</span>
                 </button>
               </>
             }

@@ -34,7 +34,7 @@
             <div class="list">
               <div class="list-item p-1 bg-slate-50"><b>{{ year }}</b></div>
               {% for month, totalHours in yearlySummary %}
-                <div class="list-item p-1 pl-4"><b>{{ year }}-{{ month }}</b> {{ totalHours|number_format(2, ",", " ") }} hours</div>
+                <div class="list-item p-1 pl-4"><b>{{ year }}-{{ month }}</b> {{ totalHours|number_format(2, ",", " ") }} {{ translate('hours') }}</div>
               {% endfor %}
             </div>
           {% endfor %}

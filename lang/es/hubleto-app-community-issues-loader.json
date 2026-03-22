@@ -2,7 +2,8 @@
     "manifest": {
         "Issues": "Problemas",
         "Issue management": "Gestión de problemas",
-        "Mail accounts": "Cuentas de correo"
+        "Mail accounts": "Cuentas de correo",
+        "Issues Mail Accounts": ""
     },
     "root": {
         "Issues": "Problemas",

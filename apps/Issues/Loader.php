@@ -22,7 +22,7 @@ class Loader extends \Hubleto\Erp\App
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => 'Issues Mail Accounts', // or $this->translate('EventFeedback')
+      'title' => $this->translate('Issues Mail Accounts'),
       'icon' => 'fas fa-table',
       'url' => 'issues/mail-accounts',
     ]);

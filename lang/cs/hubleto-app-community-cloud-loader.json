@@ -79,7 +79,12 @@
         "Continue to the dashboard": "Pokračovat na hlavný panel",
         "Automatic subscription renewal is deactivated": "Automatická obnova předplatného je deaktivována",
         "Access to your Premium account will be blocked next month.": "Přistup do vašeho Premium účtu bude zablokovám příšti měsíc",
-        "Activate subscription renewal again": "Znovu aktivovat obnovu předplatného"
+        "Activate subscription renewal again": "Znovu aktivovat obnovu předplatného",
+        "Extend subscription": "",
+        "You will be redirected to the payment provider": "",
+        "Your Hubleto partner": "",
+        "Technical support": "",
+        "Sales": ""
     },
     "Models\\BillingAccount": {
         "Name": "Název",
@@ -109,5 +114,8 @@
         "Amount": "Cena",
         "Details": "Detaily",
         "Invoice": "Faktura"
+    },
+    "Controllers\\BillingAccounts": {
+        "Billing accounts": ""
     }
 }

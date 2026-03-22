@@ -55,10 +55,10 @@ export default class FormUserRole<P, S> extends FormExtended<FormUserRoleProps,F
           {this.inputWrapper("grant_all")}
         </div>
       </div>
-      {this.divider('Permissions for records with designated owner, manager or team')}
+      {this.divider(this.translate('Permissions for records with designated owner, manager or team'))}
       <div className='list'>
         <div className='list-item'><div className='flex gap-2 justify-between p-1'>
-          <div>Reading</div>
+          <div>{this.translate('Reading')}</div>
           <div>
             <select
               onChange={(event) => {
@@ -67,14 +67,14 @@ export default class FormUserRole<P, S> extends FormExtended<FormUserRoleProps,F
               }}
               value={permissions.recordsRead ?? 'owned'}
             >
-              <option value='owned'>Can read only owned records</option>
-              <option value='owned-and-managed'>Can read only owned and managed records</option>
-              <option value='all'>Can read all records</option>
+              <option value='owned'>{this.translate('Can read only owned records')}</option>
+              <option value='owned-and-managed'>{this.translate('Can read only owned and managed records')}</option>
+              <option value='all'>{this.translate('Can read all records')}</option>
             </select>
           </div>
         </div></div>
         <div className='list-item'><div className='flex gap-2 justify-between p-1'>
-          <div>Modifying</div>
+          <div>{this.translate('Modifying')}</div>
           <div>
             <select
               onChange={(event) => {
@@ -83,9 +83,9 @@ export default class FormUserRole<P, S> extends FormExtended<FormUserRoleProps,F
               }}
               value={permissions.recordsModify ?? 'owned'}
             >
-              <option value='owned'>Can modify only owned records</option>
-              <option value='owned-and-managed'>Can modify only owned and managed records</option>
-              <option value='all'>Can modify all records</option>
+              <option value='owned'>{this.translate('Can modify only owned records')}</option>
+              <option value='owned-and-managed'>{this.translate('Can modify only owned and managed records')}</option>
+              <option value='all'>{this.translate('Can modify all records')}</option>
             </select>
           </div>
         </div></div>

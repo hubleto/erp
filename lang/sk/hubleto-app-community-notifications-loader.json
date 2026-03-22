@@ -14,10 +14,23 @@
         "Tags": "Značky",
         "Sent": "Odoslané",
         "Read": "Prečítané",
-        "URL": "URL"
+        "URL": "URL",
+        "No category": "Bez kategórie"
     },
     "Controllers\\Notifications": {
         "Notifications": "Notifikácie"
+    },
+    "Controllers\\All": {
+        "Notifications": "Notifikácie",
+        "All": "Všetky"
+    },
+    "Controllers\\Inbox": {
+        "Notifications": "Notifikácie",
+        "Inbox": "Prijaté"
+    },
+    "Controllers\\Sent": {
+        "Notifications": "Notifikácie",
+        "Sent": "Odoslané"
     },
     "Components\\TableNotifications": {
         "Mark as unread": "Označiť ako neprečítané",

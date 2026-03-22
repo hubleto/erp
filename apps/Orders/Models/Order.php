@@ -333,7 +333,7 @@ class Order extends \Hubleto\Erp\Model
     $mHistory = $this->getService(History::class);
     $mHistory->record->recordCreate([
       "id_order" => $order->id,
-      "short_description" => "Order created",
+      "short_description" => $this->translate("Order created"),
       "date_time" => date("Y-m-d H:i:s"),
     ]);
 

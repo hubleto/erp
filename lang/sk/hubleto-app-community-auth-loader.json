@@ -2,7 +2,19 @@
     "manifest": {
         "Notifications": "Autentifikácia",
         "Auth": "Autentifikácia",
-        "Hubleto Authorization App for User Management": "Aplikácia na autentifikáciu používateľov"
+        "Hubleto Authorization App for User Management": "Aplikácia na autentifikáciu používateľov",
+        "Administrator": "Administrátor",
+        "Can do anything.": "Môže robiť čokoľvek.",
+        "Chief Officer (default permissions)": "Vedúci pracovník (predvolené oprávnenia)",
+        "Can read all data and can modify most of the data. Does not have access to settings.": "Môže čítať všetky údaje a upravovať väčšinu z nich. Nemá prístup k nastaveniam.",
+        "Manager (default permissions)": "Manažér (predvolené oprávnenia)",
+        "Can read and modify all data that he/she owns or is manager.": "Môže čítať a upravovať všetky údaje, ktoré vlastní alebo spravuje.",
+        "Employee (default permissions)": "Zamestnanec (predvolené oprávnenia)",
+        "In general, can read or modify only data that he/she owns.": "Vo všeobecnosti môže čítať alebo upravovať iba údaje, ktoré vlastní.",
+        "Assistant (default permissions)": "Asistent (predvolené oprávnenia)",
+        "Very similar to employee, but may be more limited in some certain situations.": "Veľmi podobné zamestnancovi, ale v určitých situáciách môže byť viac obmedzený.",
+        "External (default permissions)": "Externý (predvolené oprávnenia)",
+        "By default should not have access to anything. Access permissions must be enabled in settings by administrator.": "Predvolene by nemal mať prístup k ničomu. Prístupové oprávnenia musí povoliť administrátor v nastaveniach."
     },
     "Models\\User": {
         "Type": "Typ",
@@ -15,29 +27,61 @@
         "Apps": "Appky",
         "Roles": "Role",
         "Teams": "Tímy",
-        "Position": "",
-        "Phone number #1": "",
-        "Phone number #2": "",
-        "Photo": "",
-        "Timezone": "",
-        "Permissions": ""
+        "Position": "Pozícia",
+        "Phone number #1": "Telefónne číslo #1",
+        "Phone number #2": "Telefónne číslo #2",
+        "Photo": "Fotografia",
+        "Timezone": "Časové pásmo",
+        "Permissions": "Oprávnenia",
+        "Add User": "Pridať používateľa",
+        "NOT_SPECIFIED": "Nešpecifikovaný",
+        "ADMINISTRATOR": "Administrátor",
+        "Chief Officer (CEO, CFO, CTO, ...)": "Vedúci pracovník (CEO, CFO, CTO, ...)",
+        "Manager (Sales, Project, ...)": "Manažér (obchod, projekt, ...)",
+        "Employee": "Zamestnanec",
+        "Assistant": "Asistent",
+        "External": "Externý"
     },
     "Models\\UserRole": {
         "Role": "Rola",
         "Grant all permissions (administrator role)": "Povoliť všetko (administrátor)",
         "Description": "Popis",
         "Is default role (cannot be modified)": "Je východzia rola (nemôže byť upravená)",
-        "Permissions": ""
+        "Permissions": "",
+        "User Roles": "Používateľské roly",
+        "Add User Role": "Pridať rolu"
     },
     "Models\\UserHasRole": {
         "User": "Používateľ",
-        "Role": "Rola"
+        "Role": "Rola",
+        "Assign Roles": "Priradiť roly"
     },
     "Controllers\\SignIn": {
         "Your email": "Váš email",
         "Password": "Heslo",
         "Keep signed in": "Zostať prihlásený",
         "Sign in": "Prihlásiť sa",
-        "Forgot password?": "Zabudnuté heslo?"
+        "Forgot password?": "Zabudnuté heslo?",
+        "Email or password invalid. Try again.": "Nesprávny email alebo heslo. Skúste znova.",
+        "Password successfully updated.": "Heslo bolo úspešne aktualizované."
+    },
+    "Controllers\\ForgotPassword": {
+        "A password reset link has been sent to your email address.": "Na vašu emailovú adresu bol odoslaný odkaz na obnovenie hesla.",
+        "Check your inbox.": "Skontrolujte svoju doručenú poštu.",
+        "Email": "Email",
+        "Request password reset": "Požiadať o obnovenie hesla",
+        "Back to sign in": "Späť na prihlásenie"
+    },
+    "Controllers\\ResetPassword": {
+        "Passwords do not match.": "Heslá sa nezhodujú.",
+        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.": "Heslo musí mať aspoň 8 znakov a obsahovať aspoň jedno veľké písmeno, jedno malé písmeno, jednu číslicu a jeden špeciálny znak.",
+        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "Vitajte v Hubleto! Nastavte si heslo pre prístup k ovládaciemu panelu.",
+        "New password": "Nové heslo",
+        "Confirm new password": "Potvrďte nové heslo",
+        "Reset password": "Obnoviť heslo"
+    },
+    "Controllers\\NotEnoughPermissions": {
+        "You don't have permissions for this panel": "Nemáte oprávnenie na prístup k tomuto panelu",
+        "Sign out": "Odhlásiť sa"
     }
 }

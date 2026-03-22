@@ -16,7 +16,7 @@ class Source extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'link' => (new Varchar($this, $this->translate('Calendar ID')))->setRequired(),
-      'type' => (new Varchar($this, $this->translate('Type')))->setRequired()->setEnumValues(['google' => 'Google Calendar', 'ics' => '.ics Url']),
+      'type' => (new Varchar($this, $this->translate('Type')))->setRequired()->setEnumValues(['google' => $this->translate('Google Calendar'), 'ics' => $this->translate('.ics Url')]),
       'color' => (new Color($this, $this->translate('Color')))->setRequired()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
       'active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(true),
     ]);
@@ -26,8 +26,8 @@ class Source extends \Hubleto\Erp\Model
   {
     $description["model"] = $this->fullName;
     $description = parent::describeTable($description);
-    $description->ui['title'] = 'Calendar sources';
-    $description->ui['addButtonText'] = 'Add calendar source';
+    $description->ui['title'] = $this->translate('Calendar sources');
+    $description->ui['addButtonText'] = $this->translate('Add calendar source');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

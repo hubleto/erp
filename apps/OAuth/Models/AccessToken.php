@@ -25,7 +25,7 @@ class AccessToken extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add AccessToken';
+    $description->ui['addButtonText'] = $this->translate('Add AccessToken');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

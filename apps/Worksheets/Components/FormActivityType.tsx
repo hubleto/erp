@@ -24,7 +24,7 @@ export default class FormActivityType<P, S> extends FormExtended<FormActivityTyp
   renderTitle(): JSX.Element {
     return <>
       <small>{this.translate('ActivityType')}</small>
-      <h2>Record #{this.state.record.id ?? '0'}</h2>
+      <h2>{this.translate('Record #')}{this.state.record.id ?? '0'}</h2>
     </>;
   }
 

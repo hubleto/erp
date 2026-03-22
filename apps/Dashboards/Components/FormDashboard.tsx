@@ -88,7 +88,7 @@ export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps
       </div>
       {this.divider(this.translate('Panels'))}
       {this.state.id < 0 ?
-        <div className="badge badge-info">First create the dashboard, then you will be prompted to add panels.</div>
+        <div className="badge badge-info">{this.translate('First create the dashboard, then you will be prompted to add panels.')}</div>
       :
         <div className='mt-2'>
           <TablePanels

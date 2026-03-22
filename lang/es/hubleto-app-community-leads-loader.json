@@ -6,7 +6,9 @@
         "Lead Tags": "Etiquetas de clientes potenciales",
         "Lead Lost Reasons": "Motivos de pédida",
         "Active leads": "Clientes potenciales activos",
-        "Archived leads": "Clientes potenciales archivados"
+        "Archived leads": "Clientes potenciales archivados",
+        "Lead value by score": "",
+        "Lead warnings": ""
     },
     "Controllers\\Leads": {
         "Sales": "Ventas",

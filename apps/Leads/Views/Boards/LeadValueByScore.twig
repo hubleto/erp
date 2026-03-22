@@ -9,11 +9,11 @@
   </div>
 {% else %}
   <div class="alert alert-info">
-    No leads found.<br/>
+    {{ translate('No leads found.') }}<br/>
     <br/>
     <a href="leads?add" class="btn btn-transparent">
       <span class="icon"><i class="fas fa-add"></i></span>
-      <span class="text">Add lead</span>
+      <span class="text">{{ translate('Add lead') }}</span>
     </a>
   </div>
 {% endif %}

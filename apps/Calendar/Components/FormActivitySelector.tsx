@@ -39,7 +39,7 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
               <span className="icon">
                 <i className="fas fa-save"></i>
               </span>
-              <span className="text">Save</span>
+              <span className="text">{this.translate('Save')}</span>
             </button>
           </div>
           <div className="modal-header-title">

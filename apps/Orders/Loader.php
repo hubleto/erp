@@ -91,13 +91,13 @@ class Loader extends \Hubleto\Erp\App
 
     if ($round == 2) {
       $mState = $this->getModel(Models\State::class);
-      $mState->record->recordCreate(['title' => 'New', 'code' => 'N', 'color' => '#444444']);
-      $mState->record->recordCreate(['title' => 'Sent to customer', 'code' => 'S', 'color' => '#444444']);
-      $mState->record->recordCreate(['title' => 'Requires modification', 'code' => 'M', 'color' => '#444444']);
-      $mState->record->recordCreate(['title' => 'Accepted', 'code' => 'A', 'color' => '#444444']);
-      $mState->record->recordCreate(['title' => 'Modified', 'code' => 'M', 'color' => '#444444']);
-      $mState->record->recordCreate(['title' => 'Order created', 'code' => 'O', 'color' => '#444444']);
-      $mState->record->recordCreate(['title' => 'Rejected', 'code' => 'R', 'color' => '#444444']);
+      $mState->record->recordCreate(['title' => $this->translate('New'), 'code' => 'N', 'color' => '#444444']);
+      $mState->record->recordCreate(['title' => $this->translate('Sent to customer'), 'code' => 'S', 'color' => '#444444']);
+      $mState->record->recordCreate(['title' => $this->translate('Requires modification'), 'code' => 'M', 'color' => '#444444']);
+      $mState->record->recordCreate(['title' => $this->translate('Accepted'), 'code' => 'A', 'color' => '#444444']);
+      $mState->record->recordCreate(['title' => $this->translate('Modified'), 'code' => 'M', 'color' => '#444444']);
+      $mState->record->recordCreate(['title' => $this->translate('Order created'), 'code' => 'O', 'color' => '#444444']);
+      $mState->record->recordCreate(['title' => $this->translate('Rejected'), 'code' => 'R', 'color' => '#444444']);
     }
   }
 
@@ -141,7 +141,7 @@ class Loader extends \Hubleto\Erp\App
         <div class="flex flex-col">
           ' . (count($periodicalOrdersMissingItems) > 0 ? '
             <a  href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders" class="badge badge-danger ml-auto">
-              ' . count($periodicalOrdersMissingItems) . ' periodical orders require your attention
+              ' . count($periodicalOrdersMissingItems) . ' ' . $this->translate('periodical orders require your attention') . '
             </a>
           ' : '') . '
         </div>
@@ -199,7 +199,7 @@ class Loader extends \Hubleto\Erp\App
         'id_template' => $idTemplate,
       ])['id'];
 
-      $mHistory->record->recordCreate([ 'id_order' => $idOrder, 'short_description' => 'Order created', 'date_time' => date('Y-m-d H:i:s') ]);
+      $mHistory->record->recordCreate([ 'id_order' => $idOrder, 'short_description' => $this->translate('Order created'), 'date_time' => date('Y-m-d H:i:s') ]);
 
       // for ($j = 0; $j <= rand(0, 3); $j++) {
       //   $mItem->record->recordCreate([

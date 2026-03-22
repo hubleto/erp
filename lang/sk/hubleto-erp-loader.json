@@ -1,4 +1,13 @@
 {
+    "RecordManager": {
+        "Cannot read record. Not enough permissions.": "Záznam nie je možné čítať. Nedostatočné oprávnenia.",
+        "Cannot delete. Not enough permissions.": "Vymazanie nie je možné. Nedostatočné oprávnenia.",
+        "Cannot save. Not enough permissions.": "Uloženie nie je možné. Nedostatočné oprávnenia.",
+        "A field contains a value that already exists.": "Pole obsahuje hodnotu, ktorá už existuje.",
+        "Value '{{ value }}' for {{ field }} already exists.": "Hodnota '{{ value }}' pre {{ field }} už existuje.",
+        "{{ field }} is required.": "{{ field }} je povinné.",
+        "{{ field }} contains invalid value.": "{{ field }} obsahuje neplatnú hodnotu."
+    },
     "HubletoReactUi": {
         "Some inputs need your attention": "Niektoré polia vyžadujú vašu pozornosť",
         "Duplicate entry error": "Chyba duplicitného záznamu",
@@ -22,7 +31,8 @@
     },
     "Components\\FormExtended": {
         "Copy link to clipboard":"Zkopíruj link do schránky",
-        "unsaved changes":"neuložené zmeny"
+        "unsaved changes":"neuložené zmeny",
+        "Open in new tab":"Otvoriť v novom okne"
     },
     "Components\\ErpWorkflowSelector": {
         "Change workflow": "Zmeň workflow",
@@ -37,6 +47,10 @@
     },
     "Components\\Inputs\\File": {
         "Upload file": "Nahrať súbor"
+    },
+    "Components\\Inputs\\DateTime": {
+        "Year-Month-Day": "Rok-Mesiac-Deň",
+        "Year-Month-Day Hour:Min:Sec": "Rok-Mesiac-Deň Hodina:Min:Sek"
     },
     "Components\\Inputs\\SharedWith": {
         "Share": "Zdieľať",
@@ -100,9 +114,59 @@
         "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Stránku, ktorú hľadáte, sme nenašli.",
         "Home": "Úvod"
     },
+    "Controllers\\AccessForbidden": {
+        "Access Forbidden": "Prístup zamietnutý",
+        "Home": "Úvod",
+        "You have no access to {{ appName }}.": "Nemáte prístup k {{ appName }}."
+    },
+    "EmailProvider": {
+        "Hello from Hubleto!": "Dobrý deň od Hubleto!",
+        "Dear {{ name }},": "Vážený/á {{ name }},",
+        "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Prijali sme žiadosť o obnovenie vášho hesla. Ak ste o to požiadali, kliknite na tlačidlo nižšie a nastavte si nové heslo:",
+        "Reset password": "Obnoviť heslo",
+        "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Ak ste o obnovenie hesla nežiadali, tento e-mail ignorujte. Vaše heslo zostane nezmenené.",
+        "For security reasons, this link will expire in 15 minutes.": "Z bezpečnostných dôvodov platnosť tohto odkazu vyprší za 15 minút.",
+        "Reset your password | Hubleto": "Obnovenie hesla | Hubleto",
+        "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "Ďakujeme za registráciu! Sme radi, že ste sa pridali. Kliknite na tlačidlo nižšie na potvrdenie účtu a začnite pracovať.",
+        "Get started": "Začať",
+        "If you didn't sign up for this account, you can safely ignore this email.": "Ak ste si účet nezaložili, tento e-mail môžete ignorovať.",
+        "Your Hubleto account has been created!": "Váš Hubleto účet bol vytvorený!"
+    },
+    "Emails\\EmailProvider": {
+        "Hello from Hubleto!": "Dobrý deň od Hubleto!",
+        "Dear {{ name }},": "Vážený/á {{ name }},",
+        "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Prijali sme žiadosť o obnovenie vášho hesla. Ak ste o to požiadali, kliknite na tlačidlo nižšie a nastavte si nové heslo:",
+        "Reset password": "Obnoviť heslo",
+        "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Ak ste o obnovenie hesla nežiadali, tento e-mail ignorujte. Vaše heslo zostane nezmenené.",
+        "For security reasons, this link will expire in 15 minutes.": "Z bezpečnostných dôvodov platnosť tohto odkazu vyprší za 15 minút.",
+        "Reset your password | Hubleto": "Obnovenie hesla | Hubleto",
+        "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "Ďakujeme za registráciu! Sme radi, že ste sa pridali. Kliknite na tlačidlo nižšie na potvrdenie účtu a začnite pracovať.",
+        "Get started": "Začať",
+        "If you didn't sign up for this account, you can safely ignore this email.": "Ak ste si účet nezaložili, tento e-mail môžete ignorovať.",
+        "Your Hubleto account has been created!": "Váš Hubleto účet bol vytvorený!"
+    },
     "Model": {
         "Export to CSV": "Exportovať do CSV",
         "Import from CSV": "Importovať z CSV",
         "Columns": "Stĺpce"
+    },
+    "Renderer": {
+        "Oops! Something went wrong with the database.": "Ups! Niečo sa pokazilo v databáze.",
+        "{{ modelName }} cannot be deleted because other data is linked to it.": "{{ modelName }} nie je možné vymazať, pretože sú k nemu naviazané iné údaje.",
+        "You are trying to save a record that is already existing.": "Pokúšate sa uložiť záznam, ktorý už existuje.",
+        "You cannot delete record that is linked with another records. Delete the linked records first.": "Nemôžete vymazať záznam, ktorý je prepojený s inými záznamami. Najskôr vymažte prepojené záznamy.",
+        "Show error details": "Zobraziť podrobnosti chyby",
+        "Oops! Something went wrong.": "Ups! Niečo sa pokazilo."
+    },
+    "Controllers\\Api\\FileUpload\\Upload": {
+        "The file has been successfully uploaded": "Súbor bol úspešne nahratý",
+        "This file type cannot be uploaded": "Tento typ súboru nie je možné nahrať",
+        "The file already exists": "Súbor už existuje",
+        "An error occurred during the file upload": "Pri nahrávaní súboru nastala chyba"
+    },
+    "Controllers\\Api\\FileUpload\\Delete": {
+        "The deletion of the file encountered an error": "Pri mazaní súboru nastala chyba",
+        "File not found": "Súbor nebol nájdený",
+        "The file has been successfully deleted": "Súbor bol úspešne vymazaný"
     }
 }

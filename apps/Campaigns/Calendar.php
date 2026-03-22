@@ -4,12 +4,16 @@ namespace Hubleto\App\Community\Campaigns;
 
 class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {
-  public array $calendarConfig = [
-    "title" => "Campaigns",
-    "addNewActivityButtonText" => "Add new activity linked to campaign",
-    "icon" => "fas fa-users-viewfinder",
-    "formComponent" => "CampaignFormActivity"
-  ];
+
+  public function getCalendarConfig(): array
+  {
+    return [
+      'title' => $this->translate('Campaigns'),
+      'addNewActivityButtonText' => $this->translate('Add new activity linked to campaign'),
+      'icon' => 'fas fa-users-viewfinder',
+      'formComponent' => 'CampaignFormActivity',
+    ];
+  }
 
   public function loadEvent(int $id): array
   {

@@ -78,7 +78,9 @@
         "Start - End": "Začiatok - Koniec",
         "Repeats": "Opakuje sa",
         "Does not repeat": "Neopakuje sa",
-        "Configure custom recurrence": "Nastaviť vlastné opakovanie"
+        "Configure custom recurrence": "Nastaviť vlastné opakovanie",
+        "Meeting minutes": "Zápisnica zo stretnutia",
+        "Duration": "Trvanie"
     },
     "Controllers\\Share": {
         "Share": "Zdieľať",
@@ -87,5 +89,9 @@
     "Components\\FormSharedCalendar": {
         "Shared calendar": "Zdieľaný kalendár",
         "unsaved changes": "neuložené zmeny"
+    },
+    "Calendar": {
+        "Default": "Predvolený",
+        "Add a simple event": "Pridať jednoduchú udalosť"
     }
 }

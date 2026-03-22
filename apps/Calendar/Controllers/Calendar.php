@@ -26,7 +26,7 @@ class Calendar extends \Hubleto\Erp\Controller
     $calendarManager = $this->getService(Manager::class);
 
     foreach ($calendarManager->getCalendars() as $source => $calendar) {
-      $calendarConfig = $calendar->calendarConfig;
+      $calendarConfig = $calendar->getCalendarConfig();
       $calendarConfig['color'] = $calendar->getColor();
       $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
     }

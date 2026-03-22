@@ -18,6 +18,18 @@ class Calendar extends \Hubleto\Erp\Core
   protected \Hubleto\Framework\Interfaces\AppInterface $app;
   protected string $color = 'blue';
 
+  public function __construct()
+  {
+    parent::__construct();
+
+    $reflection = new \ReflectionClass($this);
+    preg_match('/^(.*?)\\\Calendar$/', $reflection->getName(), $m);
+    if (isset($m[1])) {
+      $this->translationContext = str_replace('\\', '-', strtolower($m[1] . '\\Loader'));
+      $this->translationContextInner = 'Calendar';
+    }
+  }
+
   public function setApp(\Hubleto\Framework\Interfaces\AppInterface $app): void
   {
     $this->app = $app;
@@ -36,6 +48,11 @@ class Calendar extends \Hubleto\Erp\Core
   public function getColor(): string
   {
     return $this->color;
+  }
+
+  public function getCalendarConfig(): array
+  {
+    return $this->calendarConfig;
   }
 
   /**

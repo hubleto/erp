@@ -1,17 +1,24 @@
 {
     "manifest": {
         "Usage": "Používanie",
-        "Usage statistics": "Štatistiky používania"
+        "Usage statistics": "Štatistiky používania",
+        "Usage log": "Záznamy používania"
     },
-    "root": {
+    "Controllers\\Home": {
+        "Usage": "Používanie",
+        "Log": "Denník"
+    },
+    "Controllers\\Log": {
+        "Usage": "Používanie",
+        "Log": "Denník",
         "Usage log": "Záznamy používania"
     },
     "Models\\Log": {
         "Time": "Čas",
-        "IP": "Ip",
+        "IP": "IP",
         "Route": "Cesta",
         "Params": "Parametre",
         "Message": "Správa",
-        "User": "Užívateľ"
+        "User": "Používateľ"
     }
 }

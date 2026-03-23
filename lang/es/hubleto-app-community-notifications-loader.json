@@ -14,7 +14,8 @@
         "Tags": "Etiquetas",
         "Sent": "Enviado",
         "Read": "Leído",
-        "URL": "URL"
+        "URL": "URL",
+        "No category": ""
     },
     "Controllers\\Notifications": {
         "Notifications": "Notificaciones"

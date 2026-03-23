@@ -8,7 +8,7 @@
         <span class="badge badge-small badge-green">PM: {{ item.PROJECT_MANAGER.nick }}</span>
       </div>
       {% if item.MILESTONES|length <= 0 %}
-        <div class="text-red-800">Project has no milestones.</div>
+        <div class="text-red-800">{{ translate('Project has no milestones.') }}</div>
       {% else %}
         {% for m in item.MILESTONES %}
           {% if not m.is_closed %} 
@@ -22,15 +22,15 @@
                 {{ hubleto.locale().formatDateShort(m.date_due) }}
                 {{ m.title }}
                 {% if m.REPORTS|length > 0 %}
-                  (progress {{ (m.REPORTS|first).progress_percent }} % reported on {{ hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }})
+                  ({{ translate('progress') }} {{ (m.REPORTS|first).progress_percent }} % {{ translate('reported on') }} {{ hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }})
                 {% else %}
-                  (no report yet)
+                  ({{ translate('no report yet') }})
                 {% endif %}
               </span>
             </a>
           {% endif %}
           {% if m.is_closed %}
-            <div class="badge">Closed milestone: {{ m.title }}</div>
+            <div class="badge">{{ translate('Closed milestone') }}: {{ m.title }}</div>
           {% endif %}
         {% endfor %}
       {% endif %}

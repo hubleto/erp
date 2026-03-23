@@ -4,12 +4,15 @@ namespace Hubleto\App\Community\Leads;
 
 class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {
-  public array $calendarConfig = [
-    "title" => "Leads",
-    "addNewActivityButtonText" => "Add new activity linked to lead",
-    "icon" => "fas fa-people-arrows",
-    "formComponent" => "LeadFormActivity"
-  ];
+  public function getCalendarConfig(): array
+  {
+    return [
+      'title' => $this->translate('Leads'),
+      'addNewActivityButtonText' => $this->translate('Add new activity linked to lead'),
+      'icon' => 'fas fa-people-arrows',
+      'formComponent' => 'LeadFormActivity',
+    ];
+  }
 
   public function loadEvent(int $id): array
   {

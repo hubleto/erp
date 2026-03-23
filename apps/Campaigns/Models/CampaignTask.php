@@ -26,7 +26,7 @@ class CampaignTask extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Add campaign';
+    $description->ui['title'] = $this->translate('Add campaign');
     return $description;
   }
 

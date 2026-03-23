@@ -34,7 +34,9 @@
     },
     "Controllers\\Dashboards": {
         "Dashboards": "Dashboardy",
-        "Add dashboard": "Pridať dashboard"
+        "Add dashboard": "Pridať dashboard",
+        "Manage": "Spravovať",
+        "Active": "Aktívny"
     },
     "Controllers\\DashboardsManage": {
         "Dashboards": "Dashboardy",
@@ -45,6 +47,10 @@
         "Panels": "Panely",
         "Preview": "Náhľad",
         "Advanced options": "Pokročilé nastavenia",
-        "Preview available after saving": "Náhľad dostupný po uložení"
+        "Preview available after saving": "Náhľad dostupný po uložení",
+        "First create the dashboard, then you will be prompted to add panels.": "Najprv vytvorte dashboard, potom budete vyzvaní na pridanie panelov."
+    },
+    "Components\\FormPanel": {
+        "Dashboard panel": "Panel dashboardu"
     }
 }

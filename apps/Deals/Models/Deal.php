@@ -113,7 +113,7 @@ class Deal extends \Hubleto\Erp\Model
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS)),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
-        ->setEnumValues(self::ENUM_DEAL_RESULTS)
+        ->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_DEAL_RESULTS))
         ->setEnumCssClasses([
           self::RESULT_UNKNOWN => 'bg-yellow-100 text-yellow-800',
           self::RESULT_WON => 'bg-green-100 text-green-800',
@@ -125,7 +125,7 @@ class Deal extends \Hubleto\Erp\Model
       'date_result_update' => (new DateTime($this, $this->translate('Date of result update')))->setReadonly(),
       'is_new_customer' => new Boolean($this, $this->translate('New Customer')),
       'business_type' => (new Integer($this, $this->translate('Business type')))
-        ->setEnumValues(self::ENUM_BUSINESS_TYPES)
+        ->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_BUSINESS_TYPES))
         ->setEnumCssClasses([
           self::BUSINESS_TYPE_NEW => 'bg-yellow-100 text-yellow-800',
           self::BUSINESS_TYPE_EXISTING => 'bg-blue-100 text-blue-800',
@@ -262,7 +262,7 @@ class Deal extends \Hubleto\Erp\Model
     $mDealHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
       "id_deal" => $savedRecord["id"],
-      "description" => $this->translate("Deal created")
+      "description" => $this->translate('Deal created')
     ]);
 
     if (empty($savedRecord['identifier'])) {
@@ -371,12 +371,12 @@ class Deal extends \Hubleto\Erp\Model
         $mDealHistory->record->recordCreate([
           "change_date" => date("Y-m-d"),
           "id_deal" => $record["id"],
-          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+          "description" => $columns[$columnName]->getTitle() . $this->translate(" changed from ") . $oldValue . $this->translate(" to ") . $newValue,
         ]);
       } else {
         if ($columns[$columnName]->getType() == "boolean") {
-          $oldValue = $values[0] ? "Yes" : "No";
-          $newValue = $values[1] ? "Yes" : "No";
+          $oldValue = $values[0] ? $this->translate("Yes") : $this->translate("No");
+          $newValue = $values[1] ? $this->translate("Yes") : $this->translate("No");
         } elseif (!empty($columns[$columnName]->getEnumValues())) {
           $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
           $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";

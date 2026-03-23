@@ -9,5 +9,22 @@
         "Found a bug?": "Našli jste chybu?",
         "Need help with development?": "Potřebujete pomoc při vývoji?",
         "Just looking around?": "Jen se rozhlížíte?"
+    },
+    "Controllers\\Search": {
+        "Help": "",
+        "Search": "",
+        "Bring search to the brand new level.": "",
+        "Hubleto fulltext search provides powerful functionality to enhance search capabilities.": "",
+        "Ctrl+K shortcut": "",
+        "Type {ctrlK} to start searching at any time.": "",
+        "App selectors": "",
+        "{appSelectors} are special tags like, e.g. {codeExample}, filtering what app should be used to search. Using app selectors makes search faster and more effective because it directly points to a certain app and ignores searching in other apps.": "",
+        "Example:": "",
+        "will invoke search in {dealsApp} app with expression {expression}.": "",
+        "The app selectors are intuitive, try using {contacts} or {tasks}.": "",
+        "Switches": "",
+        "{switches} behave a bit differently from {appSelectors}. By providing a switch (e.g, {codeExample}), you may directly specify, what kind of data you want to search. One switch may be assigned with more than one app.": "",
+        "will search for tasks (or related data) across the whole Hubleto, containing identifier {identifier}.": "",
+        "Switches can have their shorthand variants, e.g. {short} is equal to {long}.": ""
     }
 }

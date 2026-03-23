@@ -71,10 +71,10 @@ class Loader extends \Hubleto\Erp\App
     /** @var Models\Profile */
     $mProfile = $this->getModel(Models\Profile::class);
 
-    $idPaymentMethod = $mPaymentMethod->record->recordCreate(['name' => 'bank transfer'])['id'];
+    $idPaymentMethod = $mPaymentMethod->record->recordCreate(['name' => $this->translate('bank transfer')])['id'];
 
     $mProfile->record->recordCreate([
-      'name' => 'Test Profile 1',
+      'name' => $this->translate('Test Profile 1'),
       'numbering_pattern' => 'T/YYYYNNNN',
       'is_default' => true,
       'id_payment_method' => $idPaymentMethod,
@@ -137,19 +137,19 @@ class Loader extends \Hubleto\Erp\App
             <a
               href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
               class="badge badge-warning text-xs"
-            >Not paid: ' . $notPaidInvoicesCount . '</a>
+            >' . $this->translate('Not paid') . ': ' . $notPaidInvoicesCount . '</a>
           ' : '') . '
           ' . ($dueAndNotPaidInvoicesCount > 0 ? '
             <a
               href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
               class="badge badge-danger text-xs"
-            >Due and not paid: ' . $dueAndNotPaidInvoicesCount . '</a>
+            >' . $this->translate('Due and not paid') . ': ' . $dueAndNotPaidInvoicesCount . '</a>
           ' : '') . '
           ' . ($unsentInvoicesCount > 0 ? '
             <a
               href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
               class="badge badge-danger text-xs"
-            >Not sent: ' . $unsentInvoicesCount . '</a>
+            >' . $this->translate('Not sent') . ': ' . $unsentInvoicesCount . '</a>
           ' : '') . '
         </div>
 
@@ -163,7 +163,7 @@ class Loader extends \Hubleto\Erp\App
           <span class="text">' . $this->translate('Payments') . '</span>
         </a>
         <div class="mt-4">
-          <b>Settings</b>
+          <b>' . $this->translate('Settings') . '</b>
           <div class="btn-group vertical mt-2 w-full">
             <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payment-methods">
               <span class="icon"><i class="fas fa-wallet"></i></span>

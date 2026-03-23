@@ -5,7 +5,10 @@
         "API keys": "Claves API",
         "Discussions": "Discusiones",
         "Members": "Miembros",
-        "Messages": "Mensajes"
+        "Messages": "Mensajes",
+        "API": "",
+        "Keys": "",
+        "Usage log": ""
     },
     "Models\\Key": {
         "Key": "Clave",

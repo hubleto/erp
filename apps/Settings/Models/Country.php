@@ -22,8 +22,8 @@ class Country extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Countries';
-    $description->ui['addButtonText'] = 'Add Country';
+    $description->ui['title'] = $this->translate('Countries');
+    $description->ui['addButtonText'] = $this->translate('Add Country');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

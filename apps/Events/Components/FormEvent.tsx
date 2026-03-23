@@ -47,7 +47,7 @@ export default class FormEvent<P, S> extends FormExtended<FormEventProps, FormEv
             <div className="card-header">{this.translate('Venues')}</div>
             <div className="card-body">
               {this.state.id < 0 ?
-                <div className="badge badge-info">First create event, then you will be prompted to add its venues.</div>
+                <div className="badge badge-info">{this.translate('First create event, then you will be prompted to add its venues.')}</div>
               :
                 <TableEventVenues
                   uid={this.props.uid + '_table_venues'}
@@ -65,7 +65,7 @@ export default class FormEvent<P, S> extends FormExtended<FormEventProps, FormEv
             <div className="card-header">{this.translate('Attendees')}</div>
             <div className="card-body">
               {this.state.id < 0 ?
-                <div className="badge badge-info">First create event, then you will be prompted to add its attendees.</div>
+                <div className="badge badge-info">{this.translate('First create event, then you will be prompted to add its attendees.')}</div>
               :
                 <TableEventAttendees
                   uid={this.props.uid + '_table_attendees'}
@@ -81,7 +81,7 @@ export default class FormEvent<P, S> extends FormExtended<FormEventProps, FormEv
             <div className="card-header">{this.translate('Speakers')}</div>
             <div className="card-body">
               {this.state.id < 0 ?
-                <div className="badge badge-info">First create event, then you will be prompted to add its speakers.</div>
+                <div className="badge badge-info">{this.translate('First create event, then you will be prompted to add its speakers.')}</div>
               :
                 <TableEventSpeakers
                   uid={this.props.uid + '_table_speakers'}

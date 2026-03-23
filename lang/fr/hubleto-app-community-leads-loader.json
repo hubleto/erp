@@ -19,7 +19,9 @@
         "Lead Tags": "",
         "Lead Lost Reasons": "",
         "Active leads": "",
-        "Archived leads": ""
+        "Archived leads": "",
+        "Lead value by score": "",
+        "Lead warnings": ""
     },
     "Models\\Lead": {
         "Specific subject (if any)": "",

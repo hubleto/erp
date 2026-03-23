@@ -113,11 +113,11 @@ class Mail extends \Hubleto\Erp\Model
       throw new \Exception('PHPMailer is required to send emails. Run `composer require phpmailer/phpmailer` to install it.');
     }
 
-    if ((int) $mail['id'] <= 0) throw new \Exception('Email ID is missing.');
-    if (!empty($mail['datetime_sent'])) throw new \Exception('Email has already been sent.');
-    if (!empty($mail['datetime_scheduled_to_send']) && $mail['datetime_scheduled_to_send'] > date('Y-m-d H:i:s')) throw new \Exception('Email is scheduled to be sent later.');
-    if (empty($mail['subject'])) throw new \Exception('Email has not subject.');
-    if (empty($mail['ACCOUNT'])) throw new \Exception('No SMTP email account configured.');
+    if ((int) $mail['id'] <= 0) throw new \Exception($this->translate('Email ID is missing.'));
+    if (!empty($mail['datetime_sent'])) throw new \Exception($this->translate('Email has already been sent.'));
+    if (!empty($mail['datetime_scheduled_to_send']) && $mail['datetime_scheduled_to_send'] > date('Y-m-d H:i:s')) throw new \Exception($this->translate('Email is scheduled to be sent later.'));
+    if (empty($mail['subject'])) throw new \Exception($this->translate('Email has no subject.'));
+    if (empty($mail['ACCOUNT'])) throw new \Exception($this->translate('No SMTP email account configured.'));
     if (
       empty($mail['ACCOUNT']['smtp_host'])
       || empty($mail['ACCOUNT']['smtp_port'])
@@ -125,14 +125,14 @@ class Mail extends \Hubleto\Erp\Model
       || empty($mail['ACCOUNT']['smtp_username'])
       || empty($mail['ACCOUNT']['smtp_password'])
     ) {
-      throw new \Exception('Email\'s account SMTP is not properly configured.');
+      throw new \Exception($this->translate('Email\'s account SMTP is not properly configured.'));
     }
     if (empty($mail['ACCOUNT']['sender_email'])) {
-      throw new \Exception('Email\'s account sender is not properly configured.');
+      throw new \Exception($this->translate('Email\'s account sender is not properly configured.'));
     }
 
     foreach (explode(',', $mail['to']) as $tmpTo) {
-      if (!filter_var(trim($tmpTo), FILTER_VALIDATE_EMAIL)) throw new \Exception('Recipient contains invalid email address.');
+      if (!filter_var(trim($tmpTo), FILTER_VALIDATE_EMAIL)) throw new \Exception($this->translate('Recipient contains invalid email address.'));
     }
   }
 
@@ -218,7 +218,7 @@ class Mail extends \Hubleto\Erp\Model
 
       return $sent;
     } catch (\Throwable $e) {
-      throw new \Exception("Mailer Error: " . $e->getMessage());
+      throw new \Exception($this->translate('Mailer Error') . ': ' . $e->getMessage());
     }
   }
 
@@ -252,7 +252,7 @@ class Mail extends \Hubleto\Erp\Model
     $mail = $this->record->recordCreate($mailData);
     $idMail = (int) $mail['id'];
 
-    if ($idMail <= 0) throw new \Exception('Failed to create the email.');
+    if ($idMail <= 0) throw new \Exception($this->translate('Failed to create the email.'));
 
     foreach ($attachments as $attachment) {
       $mAttachment->record->recordCreate([

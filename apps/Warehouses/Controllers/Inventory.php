@@ -7,7 +7,7 @@ class Inventory extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'warehouses', 'content' => 'Inventory' ],
+      [ 'url' => 'warehouses', 'content' => $this->translate('Inventory') ],
     ]);
   }
 

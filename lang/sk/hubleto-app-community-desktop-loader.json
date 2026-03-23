@@ -27,7 +27,8 @@
     },
     "Controllers\\Home": {
         "Welcome": "Vitajte",
-        "Edit profile": "Upraviť profil"
+        "Edit profile": "Upraviť profil",
+        "Recently used apps": "Nedávno použité appky"
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",
@@ -58,6 +59,10 @@
         "Calendar": "Kalendár",
         "Workflow": "Workflow",
         "Premium": "Premium",
-        "Manage cloud account": "Spravovať cloud účet"
+        "Personal": "Osobné",
+        "Manage cloud account": "Spravovať cloud účet",
+        "Apps": "Appky",
+        "Privacy policy": "Ochrana súkromia",
+        "Terms of use": "Podmienky používania"
     }
 }

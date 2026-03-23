@@ -26,8 +26,8 @@ class ActivityType extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Activity Types';
-    $description->ui['addButtonText'] = 'Add Activity Type';
+    $description->ui['title'] = $this->translate('Activity Types');
+    $description->ui['addButtonText'] = $this->translate('Add Activity Type');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

@@ -17,7 +17,7 @@ class InvoicesApp extends App {
     globalThis.hubleto.registerReactComponent('InvoicesTablePayments', TablePayments);
 
     FormOrder.addFormHeaderButton(
-      'Create invoice',
+      globalThis.hubleto.translate('Create invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'manifest'),
       '',
       (form: any) => {
         request.get(

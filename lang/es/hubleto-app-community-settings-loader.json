@@ -15,7 +15,8 @@
         "Invoice profiles": "Perfiles de facturación",
         "Platform config": "Configuración de la plataforma",
         "Sidebar": "Menú lateral",
-        "Teams": "Equipos"
+        "Teams": "Equipos",
+        "Log viewer": ""
     },
     "Models\\User": {
         "First name": "Nombre",

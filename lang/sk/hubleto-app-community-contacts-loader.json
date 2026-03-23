@@ -4,7 +4,10 @@
         "Default customer management and addressbook.": "Adresár a manažment zákazníkov.",
         "Contact Categories": "Kategórie kontaktov",
         "Contact Tags": "Značky kontaktov",
-        "Import contacts": "Importovať kontakty"
+        "Import contacts": "Importovať kontakty",
+        "Work": "Práca",
+        "Home": "Domov",
+        "Other": "Iné"
     },
     "Components\\FormPerson": {
         "Edit": "Upraviť",
@@ -73,13 +76,6 @@
         "Contacts": "Kontakty",
         "Import contacts": "Importovať kontakty"
     },
-    "Models\\Category": {
-        "Type": "Typ"
-    },
-    "Models\\Tag": {
-        "Name": "Značka",
-        "Color": "Farba"
-    },
     "Models\\Contact": {
         "Salutation": "Oslovenie",
         "Title before": "Titul pred",
@@ -99,11 +95,7 @@
         "Mrs.": "Pani",
         "Valid": "Platný",
         "Tags": "Značky",
-        "Invoicing Contact": ""
-    },
-    "Models\\ContactTag": {
-        "Contact": "Kontakt",
-        "Tag": "Značka"
+        "Invoicing Contact": "Fakturačný kontakt"
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty"
@@ -125,6 +117,7 @@
     },
     "Components\\TableContacts": {
         "Primary": "Primárny",
+        "Invoicing": "Fakturácia",
         "Copy cell content to clipboard": ""
     },
     "Controllers\\Import": {
@@ -160,6 +153,40 @@
         "Step 4: Check the import": "Krok 4: Skontrolujte import",
         "Check the import now": "Skontrolovať import teraz",
         "Step 5: Run the import": "Krok 5: Spustite import",
-        "You will be able to run the import after its check": "Import bude možné spustiť po jeho skontrolovaní"
+        "You will be able to run the import after its check": "Import bude možné spustiť po jeho skontrolovaní",
+        "This was only check of the import. Check the log and if you are satisfied, upload the CSV file again run the import now.": "Toto bola iba kontrola importu. Skontrolujte log a ak ste spokojní, nahrajte CSV súbor znova a spustite import.",
+        "Run import": "Spustiť import",
+        "Import finished, see log below": "Import dokončený, pozrite log nižšie",
+        "Test of import, see log below": "Test importu, pozrite log nižšie",
+        "File:": "Súbor:",
+        "Tag:": "Značka:"
+    },
+    "Controllers\\Categories": {
+        "Contacts": "Kontakty",
+        "Categories": "Kategórie"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavenia",
+        "Contact Tags": "Značky kontaktov"
+    },
+    "Controllers\\Api\\CheckPrimaryContact": {
+        "Some request data were missing": "Niektoré údaje požiadavky chýbali",
+        "There already exists a primary contact for this customer for these tags:": "Pre tohto zákazníka už existuje primárny kontakt pre tieto značky:"
+    },
+    "Models\\Category": {
+        "Type": "Typ",
+        "Contact Categories": "Kategórie kontaktov",
+        "Add Contact Category": "Pridať kategóriu kontaktu"
+    },
+    "Models\\Tag": {
+        "Name": "Meno",
+        "Color": "Farba",
+        "Contact Tags": "Značky kontaktov",
+        "Add Contact Tag": "Pridať značku kontaktu"
+    },
+    "Models\\ContactTag": {
+        "Contact": "Kontakt",
+        "Tag": "Značka",
+        "Contact tags": "Značky kontaktov"
     }
 }

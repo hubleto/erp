@@ -56,15 +56,15 @@ class GetCampaignTestInfo extends \Hubleto\Erp\Controllers\ApiController
       $bodyHtml = $campaign->mail_body;
 
       if (!strpos($bodyHtml, '{{ botDetectorHiddenLink }}')) {
-        $testInfo['warnings'][] = 'Mail template does not contain `{{ botDetectorHiddenLink }}` placeholder.';
+        $testInfo['warnings'][] = $this->translate('Mail template does not contain {{ placeholder }} placeholder.', ['placeholder' => 'botDetectorHiddenLink']);
       }
 
       if (!strpos($bodyHtml, '{{ unsubscribeHref }}')) {
-        $testInfo['warnings'][] = 'Mail template does not contain `{{ unsubscribeHref }}` placeholder.';
+        $testInfo['warnings'][] = $this->translate('Mail template does not contain {{ placeholder }} placeholder.', ['placeholder' => 'unsubscribeHref']);
       }
 
       if (!strpos($bodyHtml, '{{ viewInBrowserHref }}')) {
-        $testInfo['warnings'][] = 'Mail template does not contain `{{ viewInBrowserHref }}` placeholder.';
+        $testInfo['warnings'][] = $this->translate('Mail template does not contain {{ placeholder }} placeholder.', ['placeholder' => 'viewInBrowserHref']);
       }
 
       $allVarsUsedInTemplate = true;
@@ -76,7 +76,7 @@ class GetCampaignTestInfo extends \Hubleto\Erp\Controllers\ApiController
       }
 
       if (!$allVarsUsedInTemplate) {
-        $testInfo['warnings'][] = 'Recipients contain variables `' . join(', ', $varsUsedInRecipients) . '` but not all of them are used in template.';
+        $testInfo['warnings'][] = $this->translate('Recipients contain variables {{ variables }} but not all of them are used in template.', ['variables' => join(', ', $varsUsedInRecipients)]);
       }
     }
 

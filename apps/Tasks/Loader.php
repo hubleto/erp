@@ -33,7 +33,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Dashboards\ */
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
-    $boards->addBoard( $this, 'My recent tasks', 'tasks/boards/my-recent-tasks');
+    $boards->addBoard( $this, $this->translate('My recent tasks'), 'tasks/boards/my-recent-tasks');
 
   }
 

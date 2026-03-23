@@ -4,12 +4,16 @@ namespace Hubleto\App\Community\Deals;
 
 class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {
-  public array $calendarConfig = [
-    "title" => "Deals",
-    "addNewActivityButtonText" => "Add new activity linked to deal",
-    "icon" => "fas fa-handshake",
-    "formComponent" => "DealsFormActivity"
-  ];
+  
+  public function getCalendarConfig(): array
+  {
+    return [
+      'title' => $this->translate('Deals'),
+      'addNewActivityButtonText' => $this->translate('Add new activity linked to deal'),
+      'icon' => 'fas fa-handshake',
+      'formComponent' => 'DealsFormActivity',
+    ];
+  }
 
   public function loadEvent(int $id): array
   {

@@ -79,7 +79,12 @@
         "Continue to the dashboard": "Zum Dashboard fortfahren",
         "Automatic subscription renewal is deactivated": "Automatische Erneuerung des Abonnements ist deaktiviert",
         "Access to your Premium account will be blocked next month.": "Zugang zu Ihrem Premium-Konto wird nächsten Monat gesperrt.",
-        "Activate subscription renewal again": "Abonnementverlängerung wieder aktivieren"
+        "Activate subscription renewal again": "Abonnementverlängerung wieder aktivieren",
+        "Extend subscription": "",
+        "You will be redirected to the payment provider": "",
+        "Your Hubleto partner": "",
+        "Technical support": "",
+        "Sales": ""
     },
     "Models\\BillingAccount": {
         "Name": "Name",
@@ -109,5 +114,8 @@
         "Amount": "Preis",
         "Details": "Details",
         "Invoice": "Rechnung"
+    },
+    "Controllers\\BillingAccounts": {
+        "Billing accounts": ""
     }
 }

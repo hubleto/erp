@@ -61,8 +61,8 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Dashboards\Manager */
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
-    $boards->addBoard( $this, 'Lead value by score', 'leads/boards/lead-value-by-score');
-    $boards->addBoard( $this, 'Lead warnings', 'leads/boards/lead-warnings');
+    $boards->addBoard( $this, $this->translate('Lead value by score'), 'leads/boards/lead-value-by-score');
+    $boards->addBoard( $this, $this->translate('Lead warnings'), 'leads/boards/lead-warnings');
 
     /** @var \Hubleto\App\Community\Desktop\AppMenuManager */
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
@@ -95,21 +95,21 @@ class Loader extends \Hubleto\Erp\App
       $mLeadCampaign->upgradeSchema();
       $mLeadTask->upgradeSchema();
 
-      $mLeadTag->record->recordCreate([ 'name' => "Complex", 'color' => '#2196f3' ]);
-      $mLeadTag->record->recordCreate([ 'name' => "Great opportunity", 'color' => '#4caf50' ]);
-      $mLeadTag->record->recordCreate([ 'name' => "Duplicate", 'color' => '#9e9e9e' ]);
-      $mLeadTag->record->recordCreate([ 'name' => "Needs attention", 'color' => '#795548' ]);
+      $mLeadTag->record->recordCreate([ 'name' => $this->translate("Complex"), 'color' => '#2196f3' ]);
+      $mLeadTag->record->recordCreate([ 'name' => $this->translate("Great opportunity"), 'color' => '#4caf50' ]);
+      $mLeadTag->record->recordCreate([ 'name' => $this->translate("Duplicate"), 'color' => '#9e9e9e' ]);
+      $mLeadTag->record->recordCreate([ 'name' => $this->translate("Needs attention"), 'color' => '#795548' ]);
 
-      $mLevel->record->recordCreate([ 'name' => "Cold", 'color' => '#2196f3' ]);
-      $mLevel->record->recordCreate([ 'name' => "Warm", 'color' => '#4caf50' ]);
-      $mLevel->record->recordCreate([ 'name' => "Hot", 'color' => '#9e9e9e' ]);
-      $mLevel->record->recordCreate([ 'name' => "Marketing qualified", 'color' => '#795548' ]);
-      $mLevel->record->recordCreate([ 'name' => "Sales qualified", 'color' => '#795548' ]);
+      $mLevel->record->recordCreate([ 'name' => $this->translate("Cold"), 'color' => '#2196f3' ]);
+      $mLevel->record->recordCreate([ 'name' => $this->translate("Warm"), 'color' => '#4caf50' ]);
+      $mLevel->record->recordCreate([ 'name' => $this->translate("Hot"), 'color' => '#9e9e9e' ]);
+      $mLevel->record->recordCreate([ 'name' => $this->translate("Marketing qualified"), 'color' => '#795548' ]);
+      $mLevel->record->recordCreate([ 'name' => $this->translate("Sales qualified"), 'color' => '#795548' ]);
 
-      $mLostReasons->record->recordCreate(["reason" => "Price"]);
-      $mLostReasons->record->recordCreate(["reason" => "Solution"]);
-      $mLostReasons->record->recordCreate(["reason" => "Demand canceled by customer"]);
-      $mLostReasons->record->recordCreate(["reason" => "Other"]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Price")]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Solution")]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Demand canceled by customer")]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Other")]);
     }
   }
 

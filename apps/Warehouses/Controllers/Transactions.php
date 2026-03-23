@@ -9,7 +9,7 @@ class Transactions extends \Hubleto\Erp\Controller
   {
     return array_merge(parent::getBreadcrumbs(), [
       // [ 'url' => 'warehouses', 'content' => 'Warehouses' ],
-      [ 'url' => 'warehouses/transactions', 'content' => 'Transactions' ],
+      [ 'url' => 'warehouses/transactions', 'content' => $this->translate('Transactions') ],
     ]);
   }
 

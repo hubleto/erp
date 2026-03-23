@@ -240,7 +240,7 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
                 type: {
                   type: 'varchar',
                   title: this.translate('Type'),
-                  enumValues: {'email' : 'Email', 'number' : 'Phone Number', 'other': 'Other'},
+                  enumValues: {'email' : this.translate('Email'), 'number' : this.translate('Phone Number'), 'other': this.translate('Other')},
                 },
                 value: { type: 'varchar', title: this.translate('Value')},
                 id_category: { type: 'lookup', title: this.translate('Category'), model: 'Hubleto/App/Community/Contacts/Models/Category' },

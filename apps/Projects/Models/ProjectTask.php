@@ -26,7 +26,7 @@ class ProjectTask extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Assign task to project';
+    $description->ui['addButtonText'] = $this->translate('Assign task to project');
     $description->show(['header', 'columnSearch', 'fulltextSearch']);
     $description->hide(['footer']);
     return $description;

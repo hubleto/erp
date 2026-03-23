@@ -110,7 +110,7 @@ class User extends UserModel implements UserModelInterface
       'last_login_ip' => new Varchar($this, 'Last login IP'),
       'last_access_time' => new DateTime($this, 'Time of last access'),
       'last_access_ip' => new Varchar($this, 'Last access IP'),
-      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPE_ENUM_VALUES),
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::TYPE_ENUM_VALUES)),
       'first_name' => (new Varchar($this, $this->translate('First name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name'))),
       'nick' => (new Varchar($this, $this->translate('Nick'))),
@@ -140,7 +140,7 @@ class User extends UserModel implements UserModelInterface
     unset($description->columns['password']);
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add User';
+    $description->ui['addButtonText'] = $this->translate('Add User');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

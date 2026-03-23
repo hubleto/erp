@@ -1,0 +1,43 @@
+{
+    "manifest": {
+        "AIAssistant": "AI Asistent",
+        "AI Assistant for intelligent data interaction": "AI asistent pre inteligentnú interakciu s dátami"
+    },
+    "Controllers\\Home": {
+        "AIAssistant": "AI Asistent",
+        "AI Assistant": "AI Asistent"
+    },
+    "Controllers\\Settings": {
+        "AIAssistant": "AI Asistent",
+        "Settings": "Nastavenia",
+        "Settings saved.": "Nastavenia uložené.",
+        "Google Gemini API Key": "Google Gemini API kľúč",
+        "AI Model": "AI model",
+        "Context Sensitivity Level": "Úroveň citlivosti kontextu",
+        "Level of detail from ERP records sent to AI.": "Úroveň detailov z ERP záznamov odosielaných do AI.",
+        "0 - Restricted (No context data)": "0 - Obmedzené (bez kontextových dát)",
+        "1 - Detailed data (Send record info to AI)": "1 - Podrobné dáta (odoslať info o zázname do AI)",
+        "Save": "Uložiť"
+    },
+    "GeminiProvider": {
+        "Failed to get a response from AIAssistant.": "Nepodarilo sa získať odpoveď od AI Asistenta."
+    },
+    "Components\\ChatUi": {
+        "User Mode": "Používateľský režim",
+        "Developer Mode": "Vývojársky režim",
+        "Context": "Kontext",
+        "Show context details": "Zobraziť detaily kontextu",
+        "Sample Questions": "Ukážkové otázky",
+        "Hi, I am Hubi, your AIAssistant. How can I help you today with Hubleto ERP?": "Ahoj, som Hubi, váš AI Asistent. Ako vám dnes môžem pomôcť s Hubleto ERP?",
+        "Thinking...": "Premýšľam...",
+        "Type your question here...": "Napíšte svoju otázku sem...",
+        "AI can make mistakes. Please verify answers in the official documentation.": "AI môže robiť chyby. Prosím, overte odpovede v oficiálnej dokumentácii.",
+        "Error occurred.": "Nastala chyba.",
+        "Connection error.": "Chyba pripojenia.",
+        "What is the difference between a Lead and a Deal in Hubleto?": "Aký je rozdiel medzi Leádom a Dealem v Hubleto?",
+        "How can I create a new model and migration in Hubleto?": "Ako môžem vytvoriť nový model a migráciu v Hubleto?",
+        "How do I set up calendar synchronization?": "Ako nastavím synchronizáciu kalendára?",
+        "How do I create a new custom app?": "Ako vytvorím novú vlastnú aplikáciu?",
+        "How does the link between an order and an invoice work?": "Ako funguje prepojenie medzi objednávkou a faktúrou?"
+    }
+}

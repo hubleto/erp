@@ -47,8 +47,8 @@ class UserRole extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'User Roles';
-    $description->ui['addButtonText'] = 'Add User Role';
+    $description->ui['title'] = $this->translate('User Roles');
+    $description->ui['addButtonText'] = $this->translate('Add User Role');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

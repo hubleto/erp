@@ -45,7 +45,7 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
           </div>
           {R.id > 0 ?
             <div className='grow card'>
-              <div className='card-header'>Reports</div>
+              <div className='card-header'>{this.translate('Reports')}</div>
               <div className='card-body'>
                 <TableMilestoneReports
                   tag={"table_project_milestone_report"}

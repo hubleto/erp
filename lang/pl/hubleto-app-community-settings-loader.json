@@ -146,7 +146,8 @@
         "Currencies": "Waluty",
         "Platform config": "Konfiguracja platformy",
         "Sidebar": "Pasek boczny",
-        "Teams": "Zespoły"
+        "Teams": "Zespoły",
+        "Log viewer": ""
     },
     "root": {
         "Users": "Użytkownicy",

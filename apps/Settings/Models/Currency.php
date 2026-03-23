@@ -23,8 +23,8 @@ class Currency extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Currencies';
-    $description->ui['addButtonText'] = 'Add currency';
+    $description->ui['title'] = $this->translate('Currencies');
+    $description->ui['addButtonText'] = $this->translate('Add currency');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
@@ -38,8 +38,8 @@ class Currency extends \Hubleto\Erp\Model
 
     $id = $this->router()->urlParamAsInteger('id');
 
-    $description->ui['title'] = ($id == -1 ? "New currency" : "Currency");
-    $description->ui['subTitle'] = ($id == -1 ? "Adding" : "Editing");
+    $description->ui['title'] = ($id == -1 ? $this->translate("New currency") : $this->translate("Currency"));
+    $description->ui['subTitle'] = ($id == -1 ? $this->translate("Adding") : $this->translate("Editing"));
 
     return $description;
   }

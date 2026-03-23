@@ -2,7 +2,8 @@
     "manifest": {
         "Cashdesk": "Pokladňa",
         "Cash registers": "Pokladne",
-        "Receipts": "Pokladničné doklady"
+        "Receipts": "Pokladničné doklady",
+        "Cashdesk and receipts.": "Pokladne a pokladničné doklady"
     },
     "Controllers\\Home": {
         "Cashdesk": "Pokladňa",
@@ -25,9 +26,6 @@
         "Description": "Popis",
         "Add cash register": "Pridať pokladňu"
     },
-    "Components\\FormCashRegister": {
-        "Cash register": "Pokladňa"
-    },
     "Models\\Receipt": {
         "Receipt": "Pokladničný doklad",
         "Number": "Číslo",
@@ -38,5 +36,37 @@
         "Created": "Vytvorené",
         "Sent to cash register": "Odoslané do pokladne",
         "Add receipt": "Pridať doklad"
-    }
+    },
+    "Models\\ReceiptItem": {
+        "Receipt": "Pokladničný doklad",
+        "Product": "Produkt",
+        "VAT": "DPH",
+        "Unit price excl. VAT": "Jednotková cena bez DPH",
+        "Unit VAT": "Jednotková DPH",
+        "Unit price incl. VAT": "Jednotková cena s DPH",
+        "Quantity": "Množstvo",
+        "Total price excl. VAT": "Celková cena bez DPH",
+        "Total VAT": "Celková DPH",
+        "Total price incl. VAT": "Celková cena s DPH"
+    },
+    "Components\\FormCashRegister": {
+        "Cash register": "Pokladňa"
+    },
+    "Components\\FormReceipt": {
+        "Receipt": "Pokladničný doklad",
+        "Product": "Produkt",
+        "Qty.": "Množstvo",
+        "Unit price incl. VAT (€)": "Jedn. cena s DPH (€)",
+        "VAT (%)": "DPH (%)",
+        "Total price incl. VAT (€)": "Celková cena s DPH (€)",
+        "Add item": "Pridať položku",
+        "Send to cash register": "Odoslať do pokladne",
+        "TAX ID:": "IČO:",
+        "VAT ID:": "IČ DPH:",
+        "RECEIPT": "DOKLAD",
+        "TOTAL:": "SPOLU:",
+        "Cash register identifier:": "Identifikátor pokladne:"
+    },
+    "Components\\TableCashRegisters": [],
+    "Components\\TableReceipts": []
 }

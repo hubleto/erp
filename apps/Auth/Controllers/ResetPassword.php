@@ -36,7 +36,7 @@ class ResetPassword extends \Hubleto\Erp\Controller
     ) {
 
       if ($password !== $passwordConfirm) {
-        $this->viewParams = ['error' => 'Passwords do not match.'];
+        $this->viewParams = ['error' => $this->translate('Passwords do not match.')];
         $this->setView('@Hubleto:App:Community:Auth/ResetPassword.twig');
         return;
       } elseif (
@@ -46,7 +46,7 @@ class ResetPassword extends \Hubleto\Erp\Controller
         || !preg_match('~[0-9]~', $password)
         || !preg_match('~[\W_]~', $password)
       ) {
-        $this->viewParams = ['error' => 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.'];
+        $this->viewParams = ['error' => $this->translate('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.')];
         $this->setView('@Hubleto:App:Community:Auth/ResetPassword.twig');
         return;
       } else {

@@ -45,7 +45,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "type" => User::TYPE_CHIEF_OFFICER,
       "first_name" => "Richard",
       "last_name" => "Manstall",
-      "nick" => "chief",
+      "nick" => $this->translate("Chief Officer"),
       "email" => "chief@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -57,7 +57,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "type" => User::TYPE_MANAGER,
       "first_name" => "Jeeve",
       "last_name" => "Stobs",
-      "nick" => "manager",
+      "nick" => $this->translate("Manager"),
       "email" => "manager@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -69,7 +69,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "type" => User::TYPE_EMPLOYEE,
       "first_name" => "Fedora",
       "last_name" => "Debian",
-      "nick" => "employee",
+      "nick" => $this->translate("Employee"),
       "email" => "employee@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => true,
@@ -81,7 +81,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "type" => User::TYPE_ASSISTANT,
       "first_name" => "Hop",
       "last_name" => "Gracer",
-      "nick" => "assistant",
+      "nick" => $this->translate("Assistant"),
       "email" => "assistant@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => false,
@@ -93,7 +93,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "type" => User::TYPE_EXTERNAL,
       "first_name" => "Chaplie",
       "last_name" => "Charlin",
-      "nick" => "external",
+      "nick" => $this->translate("External"),
       "email" => "external@hubleto.eu",
       "id_default_company" => $idCompany,
       "is_active" => false,
@@ -509,7 +509,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       ->get()
     ;
 
-    $titles = ["TV", "Internet", "Fiber", "Landline", "Marketing", "Virtual Server"];
+    $titles = [$this->translate("TV"), $this->translate("Internet"), $this->translate("Fiber"), $this->translate("Landline"), $this->translate("Marketing"), $this->translate("Virtual Server")];
     $identifierPrefixes = ["US", "EU", "AS"];
 
     foreach ($customers as $customer) {

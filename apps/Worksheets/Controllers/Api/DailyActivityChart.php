@@ -46,7 +46,7 @@ class DailyActivityChart extends \Hubleto\Erp\Controllers\ApiController
       'data' => [
         'datasets' => [
           [
-            'label' => 'Daily activity',
+            'label' => $this->translate('Daily activity'),
             'fill' => [ 'target' => 'origin', 'below' => 'rgba(255, 0, 0, 0.3)', 'above' => 'rgba(0, 255, 0, 0.3)' ],
             'data' => $data,
             'backgroundColor' => 'rgba(255, 99, 132, 100)',

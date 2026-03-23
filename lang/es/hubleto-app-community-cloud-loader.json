@@ -61,7 +61,23 @@
         "Account UID": "Identificador de cuenta",
         "Variable symbol for payments": "Símbolo variable para pagos",
         "Price is calculated based on maximum number of active users or paid apps during this month.": "El precio se calcula en función del número máximo de usuarios activos o aplicaciones pagadas durante este mes.",
-        "Deactivate subscription renewal": "Desactivar la renovación de la suscripción"
+        "Deactivate subscription renewal": "Desactivar la renovación de la suscripción",
+        "welcome to Hubleto cloud.": "",
+        "We are happy you decided to use Hubleto.": "",
+        "Before you start, you should first read, understand and accept our": "",
+        "Terms of use": "",
+        "and": "",
+        "Privacy policy": "",
+        "Therefore, we kindly ask you to go through these documents and appoint your consent": "",
+        "by ticking the checkbox below.": "",
+        "I have read, undestrood and agree to the": "",
+        "of Hubleto cloud": "",
+        "Continue to the dashboard": "",
+        "Extend subscription": "",
+        "You will be redirected to the payment provider": "",
+        "Your Hubleto partner": "",
+        "Technical support": "",
+        "Sales": ""
     },
     "root": {
         "Free trial expires in": "La prueba gratuita expira en",
@@ -80,5 +96,17 @@
         "Country": "País",
         "Is active": "Está activo",
         "Created": "Creado"
+    },
+    "Controllers\\BillingAccounts": {
+        "Billing accounts": ""
+    },
+    "Controllers\\PaymentsAndInvoices": {
+        "Payments and invoices": "",
+        "Charged": "",
+        "UUID": "",
+        "Type": "",
+        "Amount": "",
+        "Details": "",
+        "Invoice": ""
     }
 }

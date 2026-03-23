@@ -16,16 +16,16 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^eventfeedback\/?$/' => Controllers\Dashboard::class,
-      '/^eventfeedback\/contacts\/?$/' => Controllers\Contacts::class,
-      '/^settings\/eventfeedback\/?$/' => Controllers\Settings::class,
+      '/^events-feedback\/?$/' => Controllers\Dashboard::class,
+      '/^events-feedback\/contacts\/?$/' => Controllers\Contacts::class,
+      '/^settings\/events-feedback\/?$/' => Controllers\Settings::class,
     ]);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => 'EventFeedback', // or $this->translate('EventFeedback')
+      'title' => $this->translate('EventFeedback'),
       'icon' => 'fas fa-table',
-      'url' => 'settings/eventfeedback',
+      'url' => 'settings/events-feedback',
     ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */

@@ -1,0 +1,63 @@
+{
+    "manifest": {
+        "Discussions": "Diskusie",
+        "Members": "Členovia",
+        "Messages": "Správy"
+    },
+    "Controllers\\Discussions": {
+        "Discussions": "Diskusie"
+    },
+    "Controllers\\Members": {
+        "Discussions": "Diskusie",
+        "Members": "Členovia"
+    },
+    "Controllers\\Messages": {
+        "Discussions": "Diskusie",
+        "Messages": "Správy"
+    },
+    "Models\\Discussion": {
+        "Title": "Názov",
+        "Description": "Popis",
+        "Main MOD": "Hlavný moderátor",
+        "Closed": "Uzatvorená",
+        "Notes": "Poznámky",
+        "Created": "Vytvorená",
+        "Add Discussion": "Pridať diskusiu"
+    },
+    "Models\\Member": {
+        "Discussion": "Diskusia",
+        "Member": "Člen",
+        "Permissions": "Oprávnenia",
+        "Add Member": "Pridať člena"
+    },
+    "Models\\Message": {
+        "Discussion": "Diskusia",
+        "From": "Od",
+        "From (Email)": "Od (Email)",
+        "Text": "Text",
+        "Sent": "Odoslané",
+        "Add Message": "Pridať správu"
+    },
+    "Components\\FormDiscussion": {
+        "About": "O diskusii",
+        "Messages": "Správy",
+        "Discussion": "Diskusia"
+    },
+    "Components\\FormMember": {
+        "Member": "Člen",
+        "Record #": "Záznam č."
+    },
+    "Components\\FormMessage": {
+        "Task": "Úloha",
+        "Message": "Správa",
+        "Record #": "Záznam č."
+    },
+    "Components\\Messages": {
+        "you": "vy",
+        "Type your message here...": "Napíšte správu sem...",
+        "Tip: You can use **markdown** syntax.": "Tip: Môžete použiť **markdown** syntax."
+    },
+    "Components\\TableDiscussions": {},
+    "Components\\TableMembers": {},
+    "Components\\TableMessages": {}
+}

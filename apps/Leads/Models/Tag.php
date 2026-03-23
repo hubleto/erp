@@ -23,8 +23,8 @@ class Tag extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Lead Tags';
-    $description->ui['addButtonText'] = 'Add Lead Tag';
+    $description->ui['title'] = $this->translate('Lead Tags');
+    $description->ui['addButtonText'] = $this->translate('Add Lead Tag');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

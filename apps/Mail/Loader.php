@@ -82,11 +82,11 @@ class Loader extends \Hubleto\Erp\App
         || empty($account->imap_password)
       ) {
         $accountsHtml .= '
-          <div class="badge badge-info text-xs p-1 block">Account is not used for receiving emails.</div>
+          <div class="badge badge-info text-xs p-1 block">' . $this->translate('Account is not used for receiving emails.') . '</div>
         ';
       } else if (count($account->MAILBOXES) == 0) {
         $accountsHtml .= '
-          <div class="badge badge-info text-xs p-1 block">Account has no mailboxes.</div>
+          <div class="badge badge-info text-xs p-1 block">' . $this->translate('Account has no mailboxes.') . '</div>
         ';
       } else {
         foreach ($account->MAILBOXES as $mailbox) {

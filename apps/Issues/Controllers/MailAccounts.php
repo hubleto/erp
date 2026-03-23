@@ -7,8 +7,8 @@ class MailAccounts extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'issues', 'content' => 'Issues' ],
-      [ 'url' => 'mail-accounts', 'content' => 'Mail accounts' ],
+      [ 'url' => 'issues', 'content' => $this->translate('Issues') ],
+      [ 'url' => 'mail-accounts', 'content' => $this->translate('Mail accounts') ],
     ]);
   }
 

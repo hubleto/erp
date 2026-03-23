@@ -88,16 +88,16 @@ class Loader extends \Hubleto\Erp\App
       $mDealActivity->upgradeSchema();
       $mDealDocument->upgradeSchema();
 
-      $mDealTag->record->recordCreate([ 'name' => "Important", 'color' => '#fc2c03' ]);
-      $mDealTag->record->recordCreate([ 'name' => "ASAP", 'color' => '#62fc03' ]);
-      $mDealTag->record->recordCreate([ 'name' => "Extenstion", 'color' => '#033dfc' ]);
-      $mDealTag->record->recordCreate([ 'name' => "New Customer", 'color' => '#fcdb03' ]);
-      $mDealTag->record->recordCreate([ 'name' => "Existing Customer", 'color' => '#5203fc' ]);
+      $mDealTag->record->recordCreate([ 'name' => $this->translate("Important"), 'color' => '#fc2c03' ]);
+      $mDealTag->record->recordCreate([ 'name' => $this->translate("ASAP"), 'color' => '#62fc03' ]);
+      $mDealTag->record->recordCreate([ 'name' => $this->translate("Extenstion"), 'color' => '#033dfc' ]);
+      $mDealTag->record->recordCreate([ 'name' => $this->translate("New Customer"), 'color' => '#fcdb03' ]);
+      $mDealTag->record->recordCreate([ 'name' => $this->translate("Existing Customer"), 'color' => '#5203fc' ]);
 
-      $mLostReasons->record->recordCreate(["reason" => "Price"]);
-      $mLostReasons->record->recordCreate(["reason" => "Solution"]);
-      $mLostReasons->record->recordCreate(["reason" => "Demand canceled by customer"]);
-      $mLostReasons->record->recordCreate(["reason" => "Other"]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Price")]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Solution")]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Demand canceled by customer")]);
+      $mLostReasons->record->recordCreate(["reason" => $this->translate("Other")]);
     }
   }
 

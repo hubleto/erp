@@ -16,7 +16,7 @@ class All extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->viewParams['title'] = 'All';
+    $this->viewParams['title'] = $this->translate('All');
     $this->viewParams['folder'] = 'all';
 
     $this->setView('@Hubleto:App:Community:Notifications/ListFolder.twig');

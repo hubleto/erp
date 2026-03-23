@@ -72,7 +72,7 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
       <div className='w-full flex flex-col md:flex-row gap-2'>
         {this.state.id == -1 && !globalThis.hubleto.isPremium ?
           <div className="badge badge-warning text-lg w-full block p-8">
-            You may add new users only in Premium account.<br/>
+            {this.translate('You may add new users only in Premium account.')}<br/>
             <br/>
             <a href={globalThis.hubleto.config.projectUrl + '/cloud'} className="btn btn-primary">
               <span className="icon"><i className="fas fa-medal"></i></span>
@@ -102,16 +102,16 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
                 {this.inputWrapper('timezone')}
                 {this.inputWrapper('id_default_company')}
 
-                {this.divider('Access to Hubleto')}
+                {this.divider(this.translate('Access to Hubleto'))}
                 {this.inputWrapper('is_active', {
                   readonly: this.state.id == globalThis.hubleto.idUser,
                 })}
                 {this.inputWrapper('password')}
 
-                {this.divider('Roles')}
+                {this.divider(this.translate('Roles'))}
 
                 {this.state.id < 0 ?
-                  <div className="badge badge-info">First create user, then you will be prompted to assign roles.</div>
+                  <div className="badge badge-info">{this.translate('First create user, then you will be prompted to assign roles.')}</div>
                 :
                   <Table
                     uid='user_roles'
@@ -121,10 +121,10 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
                 }
               </div>
               <div className="flex-1 md:flex-row">
-                {this.divider('Permissions for records with designated owner or manager')}
+                {this.divider(this.translate('Permissions for records with designated owner or manager'))}
                 <div className='list'>
                   <div className='list-item'><div className='flex gap-2 justify-between p-1'>
-                    <div>Reading</div>
+                    <div>{this.translate('Reading')}</div>
                     <div>
                       <select
                         onChange={(event) => {
@@ -133,14 +133,14 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
                         }}
                         value={permissions.recordsRead ?? 'owned'}
                       >
-                        <option value='owned'>Can read only owned records</option>
-                        <option value='owned-and-managed'>Can read only owned and managed records</option>
-                        <option value='all'>Can read all records</option>
+                        <option value='owned'>{this.translate('Can read only owned records')}</option>
+                        <option value='owned-and-managed'>{this.translate('Can read only owned and managed records')}</option>
+                        <option value='all'>{this.translate('Can read all records')}</option>
                       </select>
                     </div>
                   </div></div>
                   <div className='list-item'><div className='flex gap-2 justify-between p-1'>
-                    <div>Modifying</div>
+                    <div>{this.translate('Modifying')}</div>
                     <div>
                       <select
                         onChange={(event) => {
@@ -149,14 +149,14 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
                         }}
                         value={permissions.recordsModify ?? 'owned'}
                       >
-                        <option value='owned'>Can modify only owned records</option>
-                        <option value='owned-and-managed'>Can modify only owned and managed records</option>
-                        <option value='all'>Can modify all records</option>
+                        <option value='owned'>{this.translate('Can modify only owned records')}</option>
+                        <option value='owned-and-managed'>{this.translate('Can modify only owned and managed records')}</option>
+                        <option value='all'>{this.translate('Can modify all records')}</option>
                       </select>
                     </div>
                   </div></div>
                 </div>
-                {this.divider('Access to apps')}
+                {this.divider(this.translate('Access to apps'))}
                 <div className="list">
                   {this.state.appsInfo ? <>
                     {Object.keys(this.state.appsInfo).map((appNamespace: any) => {

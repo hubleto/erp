@@ -16,7 +16,7 @@ class DealsApp extends App {
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Leads').addCustomFormTab({
       uid: 'deals',
-      title: 'Deals',
+      title: globalThis.hubleto.translate('Deals', 'Hubleto\\App\\Community\\Deals\\Loader', 'manifest'),
       onRender: (form: any) => {
         return <TableDeals
           tag={"table_lead_deal"}
@@ -35,7 +35,7 @@ class DealsApp extends App {
     });
 
     FormLead.addFormHeaderButton(
-      'Create deal',
+      globalThis.hubleto.translate('Create deal', 'Hubleto\\App\\Community\\Deals\\Loader', 'manifest'),
       '',
       (form: any) => {
         request.get(

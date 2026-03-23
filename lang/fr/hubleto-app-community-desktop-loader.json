@@ -31,7 +31,8 @@
         "Premium": "",
         "Manage your user account": "",
         "Manage cloud account": "",
-        "Sign out": ""
+        "Sign out": "",
+        "Apps": ""
     },
     "Controllers\\Home": {
         "Welcome": "",

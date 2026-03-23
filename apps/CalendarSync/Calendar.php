@@ -18,7 +18,7 @@ class Calendar extends \Hubleto\Erp\Calendar
         $jsonData = @file_get_contents($url);
         if (!$jsonData) {
           $formattedEvents[] = [
-            'id' => $key, 'start' => date('Y-m-d'), 'end' => date('Y-m-d'), 'title' => 'Error fetching events', 'allDay' => true, 'type' => $source->name, "color" => "#ff0000", "backColor" => "#ff0000",
+            'id' => $key, 'start' => date('Y-m-d'), 'end' => date('Y-m-d'), 'title' => $this->translate('Error fetching events'), 'allDay' => true, 'type' => $source->name, "color" => "#ff0000", "backColor" => "#ff0000",
             'details' => $jsonData
           ];
           continue;
@@ -33,7 +33,7 @@ class Calendar extends \Hubleto\Erp\Calendar
               'id' => $key,
               'start' => $start,
               'end' => $end,
-              'title' => $event['summary'] ?? "No Title",
+              'title' => $event['summary'] ?? $this->translate('No Title'),
               'allDay' => isset($event['start']['date']),
               'type' => $source->name,
               "color" => $source->color,
@@ -45,7 +45,7 @@ class Calendar extends \Hubleto\Erp\Calendar
         $icsData = @file_get_contents($source->link);
         if (!$icsData) {
           $formattedEvents[] = [
-            'id' => $key, 'start' => date('Y-m-d'), 'end' => date('Y-m-d'), 'title' => 'Error fetching ICS file', 'allDay' => true, 'type' => $source->name, "color" => "#ff0000", "backColor" => "#ff0000",
+            'id' => $key, 'start' => date('Y-m-d'), 'end' => date('Y-m-d'), 'title' => $this->translate('Error fetching ICS file'), 'allDay' => true, 'type' => $source->name, "color" => "#ff0000", "backColor" => "#ff0000",
           ];
           continue;
         }
@@ -58,7 +58,7 @@ class Calendar extends \Hubleto\Erp\Calendar
 
           $start = isset($startMatch[1]) ? date('Y-m-d\TH:i:s', strtotime($startMatch[1])) : date('Y-m-d\TH:i:s');
           $end = isset($endMatch[1]) ? date('Y-m-d\TH:i:s', strtotime($endMatch[1])) : $start;
-          $summary = isset($summaryMatch[1]) ? trim($summaryMatch[1]) : 'No Title';
+          $summary = isset($summaryMatch[1]) ? trim($summaryMatch[1]) : $this->translate('No Title');
 
           $formattedEvents[] = [
             'id' => $key,

@@ -1,0 +1,43 @@
+{
+    "manifest": {
+        "OAuth": "OAuth"
+    },
+    "Models\\AccessToken": {
+        "Access Token": "Prístupový token",
+        "User Id": "ID používateľa",
+        "Client Id": "ID klienta",
+        "Scopes": "Rozsahy",
+        "Revoked": "Zrušený",
+        "Add AccessToken": "Pridať prístupový token"
+    },
+    "Models\\AuthCode": {
+        "Code": "Kód",
+        "Expires At": "Platí do",
+        "User Id": "ID používateľa",
+        "Client Id": "ID klienta",
+        "Scopes": "Rozsahy",
+        "Code Challenge": "Výzva kódu",
+        "Code Challenge Method": "Metóda výzvy kódu",
+        "Redirect Uri": "Presmerovaná URI",
+        "Revoked": "Zrušený",
+        "Add AuthCode": "Pridať autorizačný kód"
+    },
+    "Models\\Client": {
+        "Client Id": "ID klienta",
+        "Client Secret": "Tajný kľúč klienta",
+        "Name": "Názov",
+        "Redirect Uri": "Presmerovaná URI",
+        "Add Client": "Pridať klienta"
+    },
+    "Models\\RefreshToken": {
+        "Access Token": "Prístupový token",
+        "Refresh Token": "Obnovovací token",
+        "Expires At": "Platí do",
+        "Add RefreshToken": "Pridať obnovovací token"
+    },
+    "Models\\Scope": {
+        "Scope Id": "ID rozsahu",
+        "Description": "Popis",
+        "Add Scope": "Pridať rozsah"
+    }
+}

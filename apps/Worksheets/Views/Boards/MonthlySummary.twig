@@ -2,7 +2,7 @@
 {% set s = viewParams.summary %}
 
 {% if viewParams.employee.id <= 0 %}
-  No employee with email address '{{ viewParams.employeeEmail }}' found.
+  {{ translate("No employee with email address '{{ employeeEmail }}' found.", { employeeEmail: viewParams.employeeEmail }) }}
 {% else %}
   <div class="font-bold">{{ viewParams.employeeEmail }}</div>
 
@@ -18,6 +18,6 @@
       </tbody>
     </table>
   {% else %}
-    No summary available for this employee.
+    {{ translate('No summary available for this employee.') }}
   {% endif %}
 {% endif %}

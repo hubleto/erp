@@ -7,7 +7,18 @@
     },
     "Controllers\\About": {
         "About": "O Hubleto",
-        "About your Hubleto": "O Hubleto",
-        "Useful links": ""
+        "About your Hubleto": "O vašom Hubleto",
+        "Useful links": "Užitočné odkazy",
+        "Package": "Balík",
+        "Version": "Verzia",
+        "Commit": "Commit",
+        "Privacy policy": "Zásady ochrany osobných údajov",
+        "Terms of use": "Podmienky používania",
+        "Website": "Webová stránka",
+        "User guide": "Používateľská príručka",
+        "Community discussion forum": "Komunitné diskusné fórum",
+        "Developer's guide": "Príručka vývojára",
+        "Source code": "Zdrojový kód",
+        "Packages": "Balíky"
     }
 }

@@ -6,8 +6,8 @@
     <table class="table-default dense">
       <thead>
         <tr>
-          <th>Item</th>
-          <th>Days without workflow update</th>
+          <th>{{ translate('Item') }}</th>
+          <th>{{ translate('Days without workflow update') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -19,7 +19,7 @@
               <div class="text-xs">
                 {{ r._LOOKUP_DETAILS }}
                 |
-                Last update by @{{ r.USER.nick }}
+                {{ translate('Last update by') }} @{{ r.USER.nick }}
               </div>
             </td>
             <td>{{ r.last_change_before_days }}</td>

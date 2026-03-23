@@ -80,7 +80,7 @@ export default class Messages extends TableExtended<MessagesProps, MessagesState
             id={this.props.uid + '_message'}
             className="w-full h-24 shadow mt-2 border-gray-200"
             ref={this.refMessageTextarea}
-            placeholder='Type your message here...'
+            placeholder={this.translate('Type your message here...')}
           />
         </div>
         <div className="shrink">
@@ -107,7 +107,7 @@ export default class Messages extends TableExtended<MessagesProps, MessagesState
           </button>
         </div>
       </div>
-      Tip: You can use **markdown** syntax.
+      {this.translate('Tip: You can use **markdown** syntax.')}
     </>
   }
 }

@@ -50,7 +50,7 @@ export default class FormPayment extends FormExtended<FormPaymentProps, FormPaym
   renderTitle(): JSX.Element {
     const R = this.state.record;
     return <>
-      <small>{this.translate('Payment')}</small>
+      <small>{this.translate('Payment', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormPayment')}</small>
       <h2>{R.date}</h2>
     </>;
   }

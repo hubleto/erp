@@ -83,7 +83,7 @@ class Product extends \Hubleto\Erp\Model
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
       'qr_code_data' => new Varchar($this, $this->translate('Data ')),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
-      'package_unit' => new Varchar($this, $this->translate('Packaging unit'))->setDescription('E.g.: palette, box, bag'),
+      'package_unit' => new Varchar($this, $this->translate('Packaging unit'))->setDescription($this->translate('E.g.: palette, box, bag')),
       'package_amount' => new Decimal($this, $this->translate('Amount of items in package')),
       'package_length' => new Decimal($this, $this->translate('Package length'))->setUnit('m'),
       'package_width' => new Decimal($this, $this->translate('Package width'))->setUnit('m'),
@@ -110,7 +110,7 @@ class Product extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Products';
+    $description->ui['title'] = $this->translate('Products');
     $description->ui["addButtonText"] = $this->translate("Add product");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);

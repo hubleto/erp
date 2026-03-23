@@ -23,8 +23,8 @@ class Level extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Lead Levels';
-    $description->ui['addButtonText'] = 'Add Lead Level';
+    $description->ui['title'] = $this->translate('Lead Levels');
+    $description->ui['addButtonText'] = $this->translate('Add Lead Level');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;
@@ -36,17 +36,17 @@ class Level extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
-    $description->ui['title'] = 'Lead level';
+    $description->ui['title'] = $this->translate('Lead level');
     $description->ui['templateJson'] = json_encode([
       'tabs' => [
         'default' => [
           'form.columns' => [ 'columns' => [
             'form.column#left' => [ 'items' => [
-              'form.divider' => ['text' => 'Lead level'],
+              'form.divider' => ['text' => $this->translate('Lead level')],
               'form.input#name' => ['input' => 'name'],
             ] ],
             'form.column#right' => [ 'items' => [
-              'form.divider' => ['text' => 'Color'],
+              'form.divider' => ['text' => $this->translate('Color')],
               'form.input#color' => ['input' => 'color'],
             ] ],
           ] ],

@@ -2,7 +2,8 @@
     "manifest": {
         "Tasks": "Tareas",
         "Task management app": "Aplicación de gestión de tareas",
-        "Todo": ""
+        "Todo": "",
+        "My recent tasks": ""
     },
     "Models\\Task": {
         "Identifier": "Identificador",

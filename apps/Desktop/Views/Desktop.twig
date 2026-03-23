@@ -138,7 +138,7 @@
       <div class="hidden sm:block ml-2">
         <button class="btn btn-transparent" onclick="lchr(true);">
           <span class="icon"><i class="fas fa-table-cells-large"></i></span>
-          <span class="text">Apps</span>
+          <span class="text">{{ translate('Apps') }}</span>
         </button>
       </div>
       <div class="flex-1 ml-2">
@@ -325,8 +325,8 @@
             </div>
           {% endif %}
           hbl v[{{ viewParams.release }}]<br/>
-          <a href="https://www.hubleto.eu/en/privacy-policy" target="_blank">Privacy policy</a>
-          <a href="https://www.hubleto.eu/en/terms-of-use" target="_blank">Terms of use</a>
+          <a href="https://www.hubleto.eu/en/privacy-policy" target="_blank">{{ translate('Privacy policy') }}</a>
+          <a href="https://www.hubleto.eu/en/terms-of-use" target="_blank">{{ translate('Terms of use') }}</a>
         </div>
       </nav>
       {% if secondSidebar != '' %}

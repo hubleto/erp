@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Unsubscribe</title>
+  <title>{{ translate('Unsubscribe') }}</title>
   <style>
    * { font-family: verdana; }
    p { font-size: 9pt; }
@@ -8,23 +8,23 @@
 </head>
 <body>
   <div style="width:600px;margin:5em auto 0 auto;padding:1em;background:#4780bf;color:white;">
-    <b>Unsubscribe</b>
+    <b>{{ translate('Unsubscribe') }}</b>
     {% if viewParams.email %}
-      ✓ Your email <b>{{ viewParams.email}}</b> have been unsubscribed.
+      ✓ {{ translate('Your email') }} <b>{{ viewParams.email}}</b> {{ translate('has been unsubscribed.') }}
     {% else %}
       <form method="GET" action="">
         <input type="hidden" name="c" value="{{ viewParams.c }}" />
         <p>
-          Your email:<br/>
+          {{ translate('Your email:') }}<br/>
           <input type="email" name="email" style="width:100%" required /><br/>
           <br/>
-          <button type="submit">Unsubscribe</button>
+          <button type="submit">{{ translate('Unsubscribe') }}</button>
         </p>
       </form>
     {% endif %}
   </div>
   <p style="padding-top:1em;width:600px;margin:auto">
-    Powered by Hubleto <a href="https://www.hubleto.eu" target="_blank">www.hubleto.eu</a>.
+    {{ translate('Powered by Hubleto') }} <a href="https://www.hubleto.eu" target="_blank">www.hubleto.eu</a>.
   </p>
 </body>
 </html>

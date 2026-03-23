@@ -48,43 +48,43 @@ class Loader extends \Hubleto\Erp\App
       $mUserRole = $this->getModel(Models\UserRole::class);
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_ADMINISTRATOR,
-        'role' => 'Administrator',
-        'description' => 'Can do anything.',
+        'role' => $this->translate('Administrator'),
+        'description' => $this->translate('Can do anything.'),
         'grant_all' => true,
         'is_default' => true,
       ])['id'];
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_CHIEF_OFFICER,
-        'role' => 'Chief Officer (default permissions)',
-        'description' => 'Can read all data and can modify most of the data. Does not have access to settings.',
+        'role' => $this->translate('Chief Officer (default permissions)'),
+        'description' => $this->translate('Can read all data and can modify most of the data. Does not have access to settings.'),
         'grant_all' => false,
         'is_default' => true,
       ])['id'];
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_MANAGER,
-        'role' => 'Manager (default permissions)',
-        'description' => 'Can read and modify all data that he/she owns or is manager.',
+        'role' => $this->translate('Manager (default permissions)'),
+        'description' => $this->translate('Can read and modify all data that he/she owns or is manager.'),
         'grant_all' => false,
         'is_default' => true,
       ])['id'];
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_EMPLOYEE,
-        'role' => 'Employee (default permissions)',
-        'description' => 'In general, can read or modify only data that he/she owns.',
+        'role' => $this->translate('Employee (default permissions)'),
+        'description' => $this->translate('In general, can read or modify only data that he/she owns.'),
         'grant_all' => false,
         'is_default' => true,
       ])['id'];
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_ASSISTANT,
-        'role' => 'Assistant (default permissions)',
-        'description' => 'Very similar to employee, but may be more limited in some certain situations.',
+        'role' => $this->translate('Assistant (default permissions)'),
+        'description' => $this->translate('Very similar to employee, but may be more limited in some certain situations.'),
         'grant_all' => false,
         'is_default' => true,
       ])['id'];
       $mUserRole->record->recordCreate([
         'id' => Models\UserRole::ROLE_EXTERNAL,
-        'role' => 'External (default permissions)',
-        'description' => 'By default should not have access to anything. Access permissions must be enabled in settings by administrator.',
+        'role' => $this->translate('External (default permissions)'),
+        'description' => $this->translate('By default should not have access to anything. Access permissions must be enabled in settings by administrator.'),
         'grant_all' => false,
         'is_default' => true,
       ])['id'];

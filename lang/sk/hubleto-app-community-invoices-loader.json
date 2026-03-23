@@ -8,7 +8,14 @@
         "Profiles": "Profily",
         "items": "Položky",
         "Items": "Položky",
-        "Invoicing profiles": "Fakturačné profily"
+        "Invoicing profiles": "Fakturačné profily",
+        "Create invoice": "Vytvor faktúru",
+        "Not paid": "Neuhradené",
+        "Due and not paid": "Splatné a neuhradené",
+        "Not sent": "Neodoslané",
+        "Settings": "Nastavenia",
+        "bank transfer": "bankový prevod",
+        "Test Profile 1": "Testovací profil 1"
     },
     "Models\\Invoice": {
         "Profile": "Profil",
@@ -65,7 +72,8 @@
         "Advance": "Zálohová",
         "Standard": "Bežná",
         "Credit Note": "Dobropis",
-        "Debit Note": "Ťarchopis"
+        "Debit Note": "Ťarchopis",
+        "Default invoicing profile is not set.": "Predvolený fakturačný profil nie je nastavený."
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Spolu bez DPH",
@@ -85,19 +93,65 @@
     "Components\\TableItems": {
         "Total excl. VAT": "Celkom bez DPH",
         "Total VAT": "Celkom DPH",
-        "Total incl. VAT": "Celkom s DPH"
+        "Total incl. VAT": "Celkom s DPH",
+        "Create invoice from this item? Press OK to confirm.": "Vytvoriť faktúru z tejto položky? Potvrďte stlačením OK.",
+        "Create invoice": "Vytvoriť faktúru",
+        "Yes, create invoice": "Áno, vytvoriť faktúru",
+        "Cancel": "Zrušiť"
     },
     "Components\\FormInvoice": {
         "Invoice": "Faktúra",
         "Items": "Položky",
-        "Print invoice": "Vytlačiť faktúru"
+        "Print invoice": "Vytlačiť faktúru",
+        "Preview, download, print": "Náhľad, stiahnutie, tlač",
+        "Payments": "Platby",
+        "Email": "E-mail",
+        "Order": "Objednávka",
+        "Order item": "Položka objednávky",
+        "Item": "Položka",
+        "Unit price": "Jednotková cena",
+        "Amount": "Množstvo",
+        "Add new item": "Pridať novú položku",
+        "Link prepared item": "Prepojiť pripravenú položku",
+        "Export to PDF": "Exportovať do PDF",
+        "Print": "Tlačiť",
+        "Show variables which can be used in template": "Zobraziť premenné použiteľné v šablóne",
+        "Email was sent": "E-mail bol odoslaný",
+        "PDF version of the invoice was not generated yet. Cannot send.": "PDF verzia faktúry ešte nebola vygenerovaná. Nie je možné odoslať.",
+        "Send invoice": "Odoslať faktúru",
+        "Send notification on due invoice": "Odoslať upozornenie na splatnú faktúru",
+        "Preparing email...": "Príprava e-mailu...",
+        "Subject": "Predmet",
+        "From": "Od",
+        "Not configured": "Nenastavené",
+        "To": "Komu",
+        "CC": "CC",
+        "BCC": "BCC",
+        "Email body": "Telo e-mailu",
+        "Attachments": "Prílohy",
+        "Send email": "Odoslať e-mail",
+        "Inbound": "Príjem",
+        "Outbound": "Výdaj",
+        "Proforma Invoice": "Proforma faktúra",
+        "Advance Invoice": "Zálohová faktúra",
+        "Credit Note": "Dobropis",
+        "Debit Note": "Ťarchopis",
+        "excl. VAT": "bez DPH",
+        "incl. VAT": "s DPH",
+        "paid": "uhradené",
+        "Discount": "Zľava",
+        "VAT": "DPH"
     },
     "Components\\FormProfile": {
         "Profile": "Profil",
         "Invoice rendering": "Generovanie faktúry",
         "E-mails": "E-maily",
         "Send invoice": "Odoslať faktúru",
-        "Send warning about due invoice": "Odoslať upozornenie na splatnú faktúru"
+        "Send warning about due invoice": "Odoslať upozornenie na splatnú faktúru",
+        "Invoice profile": "Fakturačný profil"
+    },
+    "Components\\FormPayment": {
+        "Payment": "Platba"
     },
     "Models\\Item": {
         "Invoice": "Faktúra",
@@ -125,7 +179,9 @@
         "This year": "Tento rok",
         "Last year": "Minulý rok",
         "Group by": "Zoskupiť podľa",
-        "Add invoice item": "Pridať položku faktúry"
+        "Add invoice item": "Pridať položku faktúry",
+        "Total price excl. VAT": "Celková cena bez DPH",
+        "Total price incl. VAT": "Celková cena s DPH"
     },
     "Controllers\\Invoices": {
         "Invoices": "Faktúry"
@@ -145,6 +201,9 @@
     "Controllers\\Profiles": {
         "Invoices": "Faktúry",
         "Profiles": "Profily"
+    },
+    "Controllers\\Api\\CreateInvoiceFromPreparedItem": {
+        "The prepared item was not found or has already been linked to an invoice.": "Pripravená položka nebola nájdená alebo už bola prepojená s faktúrou."
     },
     "Models\\InvoiceDocument": {
         "Invoice": "Faktúra",
@@ -172,7 +231,8 @@
         "Mail to send invoice - BCC": "E-mail na odoslanie faktúry - BCC",
         "Mail to send warning about due invoice - subject": "E-mail upozornenia o splatnej faktúre - predmet",
         "Mail to send warning about due invoice - body": "E-mail upozornenia o splatnej faktúre - obsah",
-        "Add invoice profile": "Pridať profil faktúry"
+        "Add invoice profile": "Pridať profil faktúry",
+        "Invoice profile": "Fakturačný profil"
     },
     "Models\\PaymentMethod": {
         "Name": "Názov",

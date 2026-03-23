@@ -3,7 +3,87 @@
         "Products": "Produkty",
         "Free product portfolio managment.": "Správa produktového portfólia zdarma.",
         "Groups": "Skupiny",
-        "Categories": "Kategórie"
+        "Categories": "Kategórie",
+        "Computers & Accessories": "Počítače a príslušenstvo",
+        "Laptops & Desktops": "Notebooky a stolné počítače",
+        "Laptop Computers": "Notebooky",
+        "Desktop Computers": "Stolné počítače",
+        "Monitors": "Monitory",
+        "Components & Storage": "Komponenty a úložiská",
+        "Internal Components": "Interné komponenty",
+        "Hard Drives & SSDs": "Pevné disky a SSD",
+        "Networking": "Sieťové zariadenia",
+        "Peripherals & Accessories": "Periférie a príslušenstvo",
+        "Keyboards & Mice": "Klávesnice a myši",
+        "Printers & Scanners": "Tlačiarne a skenery",
+        "Webcams & Microphones": "Webkamery a mikrofóny",
+        "Mobile Devices & Communication": "Mobilné zariadenia a komunikácia",
+        "Smartphones & Cell Phones": "Smartfóny a mobilné telefóny",
+        "Unlocked Phones": "Telefóny bez viazanosti",
+        "Contract Phones": "Telefóny so zmluvou",
+        "Basic/Feature Phones": "Základné telefóny",
+        "Tablets & E-Readers": "Tablety a čítačky e-kníh",
+        "Android Tablets": "Tablety Android",
+        "iPad Tablets": "Tablety iPad",
+        "Mobile Accessories": "Mobilné príslušenstvo",
+        "Cases & Screen Protectors": "Kryty a ochranné sklá",
+        "Chargers & Power Banks": "Nabíjačky a powerbanky",
+        "Bluetooth Headsets & Car Kits": "Bluetooth headsety a automobilové súpravy",
+        "Audio & Home Theater": "Audio a domáce kino",
+        "Home Audio": "Domáce audio",
+        "Speakers": "Reproduktory",
+        "Home Theater Systems": "Systémy domáceho kina",
+        "Receivers & Amplifiers": "Receivery a zosilňovače",
+        "Headphones & Portable Audio": "Slúchadlá a prenosné audio",
+        "Over-Ear & On-Ear Headphones": "Slúchadlá over-ear a on-ear",
+        "Earbuds & In-Ear Monitors": "Slúchadlá do uší a in-ear monitory",
+        "Portable Bluetooth Speakers": "Prenosné Bluetooth reproduktory",
+        "Televisions & Video": "Televízory a video",
+        "Smart TVs": "Smart televízory",
+        "Projectors & Screens": "Projektory a plátna",
+        "Streaming Media Players": "Streamovacie médiá prehrávače",
+        "Smart Home & Security": "Inteligentná domácnosť a bezpečnosť",
+        "Smart Home Devices": "Zariadenia pre inteligentnú domácnosť",
+        "Smart Speakers & Displays": "Inteligentné reproduktory a displeje",
+        "Smart Lighting & Plugs": "Inteligentné osvetlenie a zásuvky",
+        "Smart Thermostats & HVAC": "Inteligentné termostaty a klimatizácia",
+        "Security & Surveillance": "Bezpečnosť a dohľad",
+        "Security Cameras": "Bezpečnostné kamery",
+        "Video Doorbells": "Video zvončeky",
+        "Home Alarm Systems": "Domáce poplašné systémy",
+        "Cameras & Drones": "Fotoaparáty a drony",
+        "Digital Cameras": "Digitálne fotoaparáty",
+        "DSLR Cameras": "Zrkadlovky DSLR",
+        "Mirrorless Cameras": "Bezzrkadlové fotoaparáty",
+        "Point & Shoot Cameras": "Kompaktné fotoaparáty",
+        "Video & Action Cameras": "Videokamery a akčné kamery",
+        "Camcorders": "Videokamery",
+        "Action Cameras": "Akčné kamery",
+        "Drones & Accessories": "Drony a príslušenstvo",
+        "Camera Drones": "Fotografické drony",
+        "Drone Parts": "Diely pre drony",
+        "Gaming": "Hranie hier",
+        "Gaming Consoles": "Herné konzoly",
+        "PlayStation Consoles": "Konzoly PlayStation",
+        "Xbox Consoles": "Konzoly Xbox",
+        "Nintendo Consoles": "Konzoly Nintendo",
+        "PC Gaming": "PC hry",
+        "Gaming Headsets": "Herné headsety",
+        "Gaming Keyboards & Mice": "Herné klávesnice a myši",
+        "PC Game Controllers": "Herné ovládače pre PC",
+        "Games & Accessories": "Hry a príslušenstvo",
+        "Console Games": "Konzolové hry",
+        "VR/AR Headsets & Gear": "VR/AR headsety a vybavenie",
+        "Wearable Technology": "Nositeľná technológia",
+        "Smartwatches": "Inteligentné hodinky",
+        "Apple Watch": "Apple Watch",
+        "Android/Other Smartwatches": "Android a iné inteligentné hodinky",
+        "Fitness Trackers": "Fitness náramky",
+        "Activity Bands": "Aktivitné náramky",
+        "Smart Scales": "Inteligentné váhy",
+        "Wearable Accessories": "Príslušenstvo k nositeľnej elektronike",
+        "Watch Bands": "Remienky na hodinky",
+        "Replacement Chargers": "Náhradné nabíjačky"
     },
     "root": {
         "Products": "Produkty",
@@ -14,7 +94,17 @@
     "Controllers\\Products": {
         "Products": "Produkty"
     },
+    "Controllers\\Groups": {
+        "Products": "Produkty",
+        "Product Groups": "Skupiny produktov",
+        "Groups": "Skupiny"
+    },
+    "Controllers\\Categories": {
+        "Categories": "Kategórie",
+        "Products": "Produkty"
+    },
     "Models\\Product": {
+        "Products": "Produkty",
         "Title": "Názov",
         "Assigned User": "Zodpovedný",
         "Supplier": "Dodávateľ",
@@ -33,7 +123,7 @@
         "Set price after reweight?": "Nastaviť cenu po prevážení?",
         "Needs reordering?": "Vyžaduje doplnenie zásob?",
         "Storage rules": "Pravidlá skladovania",
-        "Table": "Table",
+        "Table": "Tabuľka",
         "Add product": "Pridať produkt",
         "Product Group": "Skupina",
         "Product Type": "Typ",
@@ -48,12 +138,14 @@
         "EAN": "EAN",
         "Group": "Skupina",
         "Category": "Kategória",
+        "Type": "Typ",
         "Image 1": "Obrázok 1",
         "Image 2": "Obrázok 2",
         "Image 3": "Obrázok 3",
         "Image 4": "Obrázok 4",
         "Image 5": "Obrázok 5",
         "Packaging unit": "Jednotka balenia",
+        "E.g.: palette, box, bag": "Napr.: paleta, krabica, vrece",
         "Package length": "Dĺžka balenia",
         "Package width": "Šírka balenia",
         "Package height": "Výška balenia",
@@ -61,7 +153,6 @@
         "Package mass": "Hmotnosť balenia",
         "Package discount": "Zľava na balenie",
         "Package description": "Popis balenia",
-        "Type": "Typ",
         "Consumable": "Spotrebný materiál",
         "Order": "Objednávka",
         "Storable": "Skladovateľný",
@@ -76,7 +167,22 @@
     },
     "Models\\Group": {
         "Title": "Názov",
-        "Name": ""
+        "Name": "Názov",
+        "Add product group": "Pridať skupinu produktov"
+    },
+    "Models\\Category": {
+        "Parent": "Nadradená kategória",
+        "Name": "Názov",
+        "Color": "Farba",
+        "Short description": "Krátky popis",
+        "Long description": "Dlhý popis",
+        "Photo #1": "Foto č. 1",
+        "Photo #2": "Foto č. 2",
+        "Photo #3": "Foto č. 3",
+        "Photo #4": "Foto č. 4",
+        "Photo #5": "Foto č. 5",
+        "URL slug": "URL slug",
+        "Add product category": "Pridať produktovú kategóriu"
     },
     "Models\\Supplier": {
         "Title": "Názov",
@@ -93,13 +199,6 @@
         "VAT ID": "IČDPH",
         "Payment account number": "Číslo platobného účtu"
     },
-    "Components\\FormProduct": {
-        "Product": "Produkt",
-        "Suppliers": "Dodávateľ",
-        "Packaging": "Balenie",
-        "Gallery": "Galéria",
-        "First create the product.": "Najskôr vytvorte produkt."
-    },
     "Models\\ProductSupplier": {
         "Product": "Produkt",
         "Supplier": "Dodávateľ",
@@ -111,39 +210,27 @@
         "Add supplier": "Pridať dodávateľa",
         "Product Suppliers": "Dodávatelia produktu"
     },
-    "Controllers\\Groups": {
-        "Products": "Produkty",
-        "Product Groups": "Skupiny produktov",
-        "Groups": "Skupiny"
-    },
-    "Models\\Category": {
-        "Parent": "Nadradená kategória",
-        "Name": "Názov",
-        "Color": "Farba",
-        "Short description": "Krátky popis",
-        "Long description": "Dlhý popis",
-        "Photo #1": "Foto č. 1",
-        "Photo #2": "Foto č. 2",
-        "Photo #3": "Foto č. 3",
-        "Photo #4": "Foto č. 4",
-        "Photo #5": "Foto č. 5",
-        "URL slug": "URL slug",
-        "Add product category": "Pridať produktovú kategóriu"
-    },
-    "Components\\TableProducts": {
-        "Hide filter": "Skryť filter"
-    },
-    "Controllers\\Categories": {
-        "Categories": "Kategórie",
-        "Products": "Produkty"
-    },
-    "Components\\TableCategories": {
-        "Add new": "Pridať novú"
+    "Components\\FormProduct": {
+        "Product": "Produkt",
+        "Suppliers": "Dodávateľ",
+        "Packaging": "Balenie",
+        "Gallery": "Galéria",
+        "First create the product.": "Najskôr vytvorte produkt."
     },
     "Components\\FormCategory": {
         "Category": "Kategória",
         "Products": "Produkty",
         "Description": "Popis",
         "First create the category.": "Najprv vytvorte kategóriu."
+    },
+    "Components\\FormGroup": {
+        "Group": "Skupina"
+    },
+    "Components\\FormProductSupplier": {},
+    "Components\\TableProducts": {
+        "Hide filter": "Skryť filter"
+    },
+    "Components\\TableCategories": {
+        "Add new": "Pridať novú"
     }
 }

@@ -7,11 +7,15 @@ use Hubleto\App\Community\Calendar\Models\Activity;
 
 class Calendar extends \Hubleto\Erp\Calendar
 {
-  public array $calendarConfig = [
-    "title" => "Default",
-    "addNewActivityButtonText" => "Add a simple event",
-    "formComponent" => "CalendarActivityForm",
-  ];
+
+  public function getCalendarConfig(): array
+  {
+    return [
+      'title' => $this->translate('Default'),
+      'addNewActivityButtonText' => $this->translate('Add a simple event'),
+      'formComponent' => 'CampaignFormActivity',
+    ];
+  }
 
   public function prepareLoadActivityQuery(\Hubleto\App\Community\Calendar\Models\Activity $mActivity, int $id): mixed
   {

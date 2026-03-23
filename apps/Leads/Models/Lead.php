@@ -84,8 +84,8 @@ class Lead extends \Hubleto\Erp\Model
       'email' => (new Varchar($this, $this->translate('Email')))->setCssClass('font-bold')->setIcon(self::COLUMN_EMAIL_DEFAULT_ICON)->setDefaultVisible(),
       'phone' => (new Varchar($this, $this->translate('Phone')))->setCssClass('font-bold')->setIcon(self::COLUMN_PHONE_DEFAULT_ICON)->setDefaultVisible(),
       'profile_link_1' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
-      'profile_link_2' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
-      'profile_link_3' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
+      'profile_link_2' => (new Varchar($this, $this->translate('Profile link #2')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
+      'profile_link_3' => (new Varchar($this, $this->translate('Profile link #3')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
       // 'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
@@ -181,7 +181,7 @@ class Lead extends \Hubleto\Erp\Model
 
     $description->ui['filters'] = [
       'fLeadWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Level'),
-      'fLeadOwnership' => [ 'title' => 'Ownership', 'options' => [ 0 => 'All', 1 => 'Owned by me', 2 => 'Managed by me' ] ],
+      'fLeadOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
       'fLeadClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [
@@ -325,14 +325,15 @@ class Lead extends \Hubleto\Erp\Model
     $diff = $this->diffRecords($oldRecord, $record);
     $columns = $this->getColumns();
     foreach ($diff as $columnName => $values) {
-      $oldValue = $values[0] ?? "None";
-      $newValue = $values[1] ?? "None";
+      $noneLabel = $this->translate("None");
+      $oldValue = $values[0] ?? $noneLabel;
+      $newValue = $values[1] ?? $noneLabel;
 
       if ($columns[$columnName]->getType() == "lookup") {
         $lookupModel = $this->getModel($columns[$columnName]->getLookupModel());
         $lookupSqlValue = $lookupModel->getLookupSqlValue($lookupModel->table);
 
-        if ($oldValue != "None") {
+        if ($oldValue != $noneLabel) {
           $oldValue = $lookupModel->record
             ->selectRaw($lookupSqlValue)
             ->where("id", $values[0])
@@ -341,7 +342,7 @@ class Lead extends \Hubleto\Erp\Model
           $oldValue = reset($oldValue);
         }
 
-        if ($newValue != "None") {
+        if ($newValue != $noneLabel) {
           $newValue = $lookupModel->record
             ->selectRaw($lookupSqlValue)
             ->where("id", $values[1])
@@ -353,21 +354,21 @@ class Lead extends \Hubleto\Erp\Model
         $mLeadHistory->record->recordCreate([
           "change_date" => date("Y-m-d"),
           "id_lead" => $record["id"],
-          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+          "description" => $columns[$columnName]->getTitle() . " " . $this->translate("changed from") . " " . $oldValue . " " . $this->translate("to") . " " . $newValue,
         ]);
       } else {
         if ($columns[$columnName]->getType() == "boolean") {
-          $oldValue = $values[0] ? "Yes" : "No";
-          $newValue = $values[1] ? "Yes" : "No";
+          $oldValue = $values[0] ? $this->translate("Yes") : $this->translate("No");
+          $newValue = $values[1] ? $this->translate("Yes") : $this->translate("No");
         } elseif (!empty($columns[$columnName]->getEnumValues())) {
-          $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
-          $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";
+          $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? $noneLabel;
+          $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? $noneLabel;
         }
 
         $mLeadHistory->record->recordCreate([
           "change_date" => date("Y-m-d"),
           "id_lead" => $record["id"],
-          "description" => $columns[$columnName]->getTitle() . " changed from " . $oldValue . " to " . $newValue,
+          "description" => $columns[$columnName]->getTitle() . " " . $this->translate("changed from") . " " . $oldValue . " " . $this->translate("to") . " " . $newValue,
         ]);
       }
     }
@@ -391,7 +392,7 @@ class Lead extends \Hubleto\Erp\Model
     $mLeadHistory->record->recordCreate([
       "change_date" => date("Y-m-d"),
       "id_lead" => $savedRecord["id"],
-      "description" => "Lead created"
+      "description" => $this->translate("Lead created")
     ]);
 
     $newLead = $savedRecord;

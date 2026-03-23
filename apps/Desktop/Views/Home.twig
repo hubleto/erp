@@ -43,7 +43,7 @@
     {% set recentlyUsed = hubleto.getService('Hubleto\\App\\Community\\Usage\\Logger').getRecentlyUsedAppNamespaces() %}
     {% if recentlyUsed|length > 0 %}
       <div class="mb-2 hidden m:block dark:text-gray-200">
-        <div><small>Recently used apps</small></div>
+        <div><small>{{ translate('Recently used apps') }}</small></div>
         <div class="list">
           {% for appNamespace in recentlyUsed %}
             {% set manifest = hubleto.appManager().getApp(appNamespace).manifest %}

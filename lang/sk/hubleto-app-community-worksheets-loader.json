@@ -38,26 +38,45 @@
         "Deal": "Obchod",
         "Project": "Projekt",
         "Group by": "Zoskupiť podľa",
-        "Total worked hours": ""
-    },
-    "Components\\TableActivities": {
-        "Worked total": "Odpracované celkom",
-        "hours": "hodín",
-        "Copy cell content to clipboard": ""
+        "Total worked hours": "Celkovo odpracovaných hodín",
+        "Add Activity": "Pridať aktivitu"
     },
     "Models\\ActivityType": {
         "Varchar": "Text",
-        "Color": "Farba"
+        "Color": "Farba",
+        "Add ActivityType": "Pridať typ aktivity"
+    },
+    "Components\\TableActivities": {
+        "Worked total": "Odpracované celkom",
+        "hours": "hodín"
     },
     "Components\\FormActivity": {
-        "Activity": "Aktivita",
-        "unsaved changes": ""
+        "Activity": "Aktivita"
     },
     "Components\\FormActivityType": {
-        "ActivityType": "",
-        "unsaved changes": ""
+        "ActivityType": "Typ aktivity",
+        "Record #": "Záznam č."
     },
-    "Components\\TableActivityTypes": {
-        "Copy cell content to clipboard": ""
+    "Components\\FormType": {
+        "Type": "Typ",
+        "Record #": "Záznam č."
+    },
+    "Controllers\\Activities": {
+        "Worksheets": "Vykazovanie",
+        "Activities": "Aktivity"
+    },
+    "Controllers\\ActivityTypes": {
+        "Worksheets": "Vykazovanie",
+        "Activity types": "Typy aktivít"
+    },
+    "Controllers\\Boards\\DailyChart": {
+        "Show/Hide details": "Zobraziť/Skryť detaily"
+    },
+    "Controllers\\Boards\\MonthlySummary": {
+        "No employee with email address '{{ employeeEmail }}' found.": "Zamestnanec s e-mailovou adresou '{{ employeeEmail }}' nebol nájdený.",
+        "No summary available for this employee.": "Pre tohto zamestnanca nie je dostupný žiadny súhrn."
+    },
+    "Controllers\\Api\\DailyActivityChart": {
+        "Daily activity": "Denná aktivita"
     }
 }

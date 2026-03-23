@@ -37,7 +37,7 @@ class WorkflowStep extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add Workflow Step';
+    $description->ui['addButtonText'] = $this->translate('Add Workflow Step');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = false;
     $description->ui['showFooter'] = false;

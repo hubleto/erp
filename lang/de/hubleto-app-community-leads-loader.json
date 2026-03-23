@@ -19,7 +19,9 @@
         "Lead Tags": "",
         "Lead Lost Reasons": "",
         "Active leads": "",
-        "Archived leads": ""
+        "Archived leads": "",
+        "Lead value by score": "",
+        "Lead warnings": ""
     },
     "root": {
         "Lead statuses": "Lead Zustände",

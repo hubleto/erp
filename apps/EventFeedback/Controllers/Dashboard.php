@@ -7,7 +7,7 @@ class Dashboard extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'eventfeedback', 'content' => 'EventFeedback' ],
+      [ 'url' => 'events-feedback', 'content' => $this->translate('EventFeedback') ],
     ]);
   }
 

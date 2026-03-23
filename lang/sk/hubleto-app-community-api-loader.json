@@ -3,9 +3,12 @@
         "Api": "API",
         "Hubleto Api Key management": "Správa API kľúčov",
         "API keys": "API kľúče",
-        "Discussions": "",
-        "Members": "",
-        "Messages": ""
+        "Discussions": "Diskusie",
+        "Members": "Členovia",
+        "Messages": "Správy",
+        "API": "API",
+        "Keys": "Kľúče",
+        "Usage log": "Záznam používania"
     },
     "Models\\Key": {
         "Key": "Kľúč",
@@ -15,20 +18,14 @@
         "IP Address blacklist": "Zakázané IP adresy",
         "IP Address whitelist": "Povolené IP adresy",
         "Created by": "Vytvoril",
-        "Created": "Vytvorený"
+        "Created": "Vytvorený",
+        "Add Key": "Pridať kľúč"
     },
     "Models\\Permission": {
         "Key": "Kľúč",
         "App": "Appka",
-        "Controller": "Kontrolér"
-    },
-    "Components\\FormKey": {
-        "Usage": "Záznamy používania",
-        "Key": "Kľúč",
-        "Permissions": "Povolenia",
-        "Test": "Otestovať",
-        "Test result": "Výsledok testu",
-        "Run test": "Spustiť test"
+        "Controller": "Kontrolér",
+        "Add Permission": "Pridať povolenie"
     },
     "Models\\Usage": {
         "Key": "Kľúč",
@@ -39,6 +36,33 @@
         "Status": "Stav",
         "Unknown": "Neznámy",
         "Success": "Úspech",
-        "Error": "Chyba"
+        "Error": "Chyba",
+        "Add Usage": "Pridať záznam použitia"
+    },
+    "Components\\FormKey": {
+        "Usage": "Záznamy používania",
+        "Key": "Kľúč",
+        "Permissions": "Povolenia",
+        "Test": "Otestovať",
+        "Test result": "Výsledok testu",
+        "Run test": "Spustiť test",
+        "API Key": "API kľúč",
+        "Parameter": "Parameter",
+        "Endpoint": "Koncový bod",
+        "App": "Appka",
+        "Controller": "Kontrolér",
+        "Vars": "Premenné"
+    },
+    "Controllers\\Keys": {
+        "API": "API",
+        "Keys": "Kľúče"
+    },
+    "Controllers\\Permissions": {
+        "API": "API",
+        "Permissions": "Povolenia"
+    },
+    "Controllers\\Usages": {
+        "API": "API",
+        "Usages": "Záznamy použitia"
     }
 }

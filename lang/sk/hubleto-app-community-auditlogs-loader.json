@@ -1,6 +1,7 @@
 {
     "manifest": {
-        "Audit Logs": "Audit Logy"
+        "Audit Logs": "Audit Logy",
+        "Internal audit logs": "Interné audit logy"
     },
     "Models\\AuditLog": {
         "Datetime": "Dátum a čas",
@@ -17,6 +18,15 @@
         "delete": "Odstránenie"
     },
     "Controllers\\AuditLogs": {
-        "AuditLogs": "AuditLogy"
+        "AuditLogs": "Audit Logy"
+    },
+    "Components\\FormAuditLog": {
+        "Audit Log": "Záznam auditu"
+    },
+    "Crons\\DailyDigest": {
+        "Hubleto: Your Daily Digest": "Hubleto: Váš denný prehľad"
+    },
+    "Digest": {
+        "Hi {{ name }}, here is your daily digest": "Dobrý deň {{ name }}, tu je váš denný prehľad"
     }
 }

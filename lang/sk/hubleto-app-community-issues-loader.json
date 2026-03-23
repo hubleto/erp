@@ -2,7 +2,8 @@
     "manifest": {
         "Issues": "Problémy",
         "Issue management": "Správa problémov",
-        "Mail accounts": "Emailové účty"
+        "Mail accounts": "Emailové účty",
+        "Issues Mail Accounts": "Emailové účty problémov"
     },
     "root": {
         "Issues": "Problémy",
@@ -10,6 +11,10 @@
     },
     "Controllers\\Issues": {
         "Issues": "Problémy"
+    },
+    "Controllers\\MailAccounts": {
+        "Issues": "Problémy",
+        "Mail accounts": "Emailové účty"
     },
     "Models\\Issue": {
         "Title": "Názov",

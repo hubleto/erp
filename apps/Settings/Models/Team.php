@@ -29,8 +29,8 @@ class Team extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Teams';
-    $description->ui['addButtonText'] = 'Add team';
+    $description->ui['title'] = $this->translate('Teams');
+    $description->ui['addButtonText'] = $this->translate('Add team');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 

@@ -3,18 +3,18 @@
 <h1>{{ translate('Settings') }} > {{ translate('Apps') }}</h1>
 
 <div class="flex gap-2">
-  <div class="alert alert-info">Installed apps: {{ viewParams.installedApps|length }}</div>
-  <div class="alert alert-info">Available apps: {{ viewParams.availableApps|length }}</div>
+  <div class="alert alert-info">{{ translate('Installed apps') }}: {{ viewParams.installedApps|length }}</div>
+  <div class="alert alert-info">{{ translate('Available apps') }}: {{ viewParams.availableApps|length }}</div>
 </div>
 
 <div class="card">
-  <div class="card-header">Apps</div>
+  <div class="card-header">{{ translate('Apps') }}</div>
   <div class="card-body">
     <form action="" method="get">
       <input
         name="findApp"
         class="w-full p-2 border border-gray text-lg {{ viewParams.findApp == "" ? "" : "bg-yellow-100 border-yellow-300" }}"
-        placeholder="(Search) Type app name and press Enter..."
+        placeholder="{{ translate('(Search) Type app name and press Enter...') }}"
         value="{{ viewParams.findApp }}"
       />
     </form>
@@ -26,10 +26,10 @@
             <i class="{{ app.manifest.icon }}"></i>
           </div>
           <div>
-            {% if app.type == 'community' %} <div class="badge badge-violet">Community</div> {% endif %}
-            {% if app.type == 'enterprise' %} <div class="badge badge-lime">Enterprise</div> {% endif %}
-            {% if app.type == 'external' %} <div class="badge badge-yellow">External</div> {% endif %}
-            {% if app.type == 'custom' %} <div class="badge badge-green">Custom</div> {% endif %}
+            {% if app.type == 'community' %} <div class="badge badge-violet">{{ translate('Community') }}</div> {% endif %}
+            {% if app.type == 'enterprise' %} <div class="badge badge-lime">{{ translate('Enterprise') }}</div> {% endif %}
+            {% if app.type == 'external' %} <div class="badge badge-yellow">{{ translate('External') }}</div> {% endif %}
+            {% if app.type == 'custom' %} <div class="badge badge-green">{{ translate('Custom') }}</div> {% endif %}
           </div>
           <div class="grow">
             <div class="font-normal text-xs text-gray-400">{{ app.manifest.namespace }}</div>
@@ -62,7 +62,7 @@
                   <span class="text">{{ translate('Install') }}</span>
                 </a>
               {% elseif not isPremium %}
-                <div class="badge badge-warning">You can install Premium apps only in Premium account.</div>
+                <div class="badge badge-warning">{{ translate('You can install Premium apps only in Premium account.') }}</div>
                 <a class="btn btn-add" href="{{ config.projectUrl }}/cloud">
                   <span class="icon"><i class="fas fa-medal"></i></span>
                   <span class="text">{{ translate('Activate Premium account') }}</span>

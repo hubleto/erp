@@ -27,7 +27,7 @@
 
 
 {% if viewParams.remindersToday|length > 0 %}
-  <b>Today</b><br/>
+  <b>{{ translate('Today') }}</b><br/>
   {{ _self.reminders(viewParams.remindersToday, viewParams, user) }}
 {% else %}
   <div class="alert alert-info">

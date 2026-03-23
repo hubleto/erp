@@ -10,6 +10,9 @@ use Hubleto\Framework\Helper;
 
 class Mailer extends \Hubleto\Erp\Core
 {
+  public string $translationContext = 'hubleto-app-community-mail-loader';
+  public string $translationContextInner = 'Mailer';
+
 
   public function compileEmailAddresses(array $input): string
   {
@@ -46,11 +49,11 @@ class Mailer extends \Hubleto\Erp\Core
       $mMail = $this->getModel(Mail::class);
 
       $this->logger()->info('GetMails: getting emails from ' . count($accounts) . ' account(s).');
-      $result['log'][] = 'GetMails: getting emails from ' . count($accounts) . ' account(s).';
+      $result['log'][] = $this->translate('Getting emails from {{ count }} account(s).', ['count' => count($accounts)]);
 
       foreach ($accounts as $account) {
         $this->logger()->info('GetMails: checking account ' . $account['name']);
-        $result['log'][] = 'GetMails: checking account ' . $account['name'];
+        $result['log'][] = $this->translate('Checking account {{ name }}', ['name' => $account['name']]);
         $localMailboxes = Helper::keyBy('name', $mMailbox->record->where('id_account', $account['id'])->get()->toArray());
 
         if (empty($account['imap_host'])) continue;
@@ -73,7 +76,7 @@ class Mailer extends \Hubleto\Erp\Core
 
         foreach ($imapMailboxes as $imapMailbox) {
           $this->logger()->info('GetMails: mailbox ' . $account['name'] . ' -> ' . $imapMailbox->getName());
-          $result['log'][] = 'GetMails: mailbox ' . $account['name'] . ' -> ' . $imapMailbox->getName();
+          $result['log'][] = $this->translate('Mailbox {{ account }} -> {{ mailbox }}', ['account' => $account['name'], 'mailbox' => $imapMailbox->getName()]);
 
           // Skip container-only mailboxes
           // @see https://secure.php.net/manual/en/function.imap-getmailboxes.php
@@ -119,14 +122,14 @@ class Mailer extends \Hubleto\Erp\Core
             $mailHeaders = $message->getHeaders();
 
             $this->logger()->info('GetMails: found mail ' . $mailNumber . ' ' . $mailId);
-            $result['log'][] = 'GetMails: found mail ' . $mailNumber . ' ' . $mailId;
+            $result['log'][] = $this->translate('Found mail {{ number }} {{ id }}', ['number' => $mailNumber, 'id' => $mailId]);
 
             if (
               !in_array($mailNumber, $mailNumbers)
               && !in_array($mailId, $mailIds)
             ) {
               $this->logger()->info('GetMails: creating mail in database');
-              $result['log'][] = 'GetMails: creating mail in database';
+              $result['log'][] = $this->translate('Creating mail in database');
               $mMail->record->recordCreate([
                 'id_account' => $account['id'],
                 'id_mailbox' => $localMailbox['id'],

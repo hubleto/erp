@@ -31,7 +31,7 @@ class Loader extends \Hubleto\Erp\App
     // This will be displayed in the Settings app, under the "All settings" card.
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => 'Event types',
+      'title' => $this->translate('Event types'),
       'icon' => 'fas fa-table',
       'url' => 'events/settings',
     ]);
@@ -59,15 +59,15 @@ class Loader extends \Hubleto\Erp\App
     }
     if ($round == 2) {
       $mType = $this->getModel(Models\Type::class);
-      $mType->record->recordCreate(['name' => 'Seminar']);
-      $mType->record->recordCreate(['name' => 'Workshop']);
-      $mType->record->recordCreate(['name' => 'Team building']);
-      $mType->record->recordCreate(['name' => 'Conference']);
-      $mType->record->recordCreate(['name' => 'Trade show']);
-      $mType->record->recordCreate(['name' => 'Trade show']);
-      $mType->record->recordCreate(['name' => 'Product launch']);
-      $mType->record->recordCreate(['name' => 'Networking']);
-      $mType->record->recordCreate(['name' => 'Other']);
+      $mType->record->recordCreate(['name' => $this->translate('Seminar')]);
+      $mType->record->recordCreate(['name' => $this->translate('Workshop')]);
+      $mType->record->recordCreate(['name' => $this->translate('Team building')]);
+      $mType->record->recordCreate(['name' => $this->translate('Conference')]);
+      $mType->record->recordCreate(['name' => $this->translate('Trade show')]);
+      $mType->record->recordCreate(['name' => $this->translate('Trade show')]);
+      $mType->record->recordCreate(['name' => $this->translate('Product launch')]);
+      $mType->record->recordCreate(['name' => $this->translate('Networking')]);
+      $mType->record->recordCreate(['name' => $this->translate('Other')]);
     }
     if ($round == 3) {
       // do something in the 3rd round, if required

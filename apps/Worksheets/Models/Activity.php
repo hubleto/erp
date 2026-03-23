@@ -83,7 +83,7 @@ class Activity extends \Hubleto\Erp\Model
         $description->showOnlyColumns(['identifier', 'title', 'id_developer', 'virt_worked']);
       break;
       default:
-        $description->ui['addButtonText'] = 'Add Activity';
+        $description->ui['addButtonText'] = $this->translate('Add Activity');
         $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
         // $description->hide(['footer']);
       break;

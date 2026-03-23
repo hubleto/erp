@@ -26,7 +26,7 @@ class LeadTask extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = 'Add lead';
+    $description->ui['title'] = $this->translate('Lead Tasks');
     return $description;
   }
 

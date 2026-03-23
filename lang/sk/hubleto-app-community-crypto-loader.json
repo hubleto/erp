@@ -2,5 +2,8 @@
     "manifest": {
         "Crypto": "Crypto",
         "Manage security keys and other security settings.": "Manažment bezpečnostných kľúčov."
+    },
+    "Controllers\\Dashboard": {
+        "Crypto": "Crypto"
     }
 }

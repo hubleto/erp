@@ -62,9 +62,9 @@ class Loader extends \Hubleto\Erp\App
       $mTag->upgradeSchema();
       $mContactTag->upgradeSchema();
 
-      $mCategory->record->recordCreate([ 'name' => 'Work' ]);
-      $mCategory->record->recordCreate([ 'name' => 'Home' ]);
-      $mCategory->record->recordCreate([ 'name' => 'Other' ]);
+      $mCategory->record->recordCreate([ 'name' => $this->translate('Work') ]);
+      $mCategory->record->recordCreate([ 'name' => $this->translate('Home') ]);
+      $mCategory->record->recordCreate([ 'name' => $this->translate('Other') ]);
 
       $mTag->record->recordCreate([ 'name' => "IT manager", 'color' => '#D33115' ]);
       $mTag->record->recordCreate([ 'name' => "CEO", 'color' => '#4caf50' ]);

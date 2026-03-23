@@ -36,8 +36,8 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
       newTodo: '',
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Task')}</b> },
-        { uid: 'worksheet', title: this.translate('Worksheet') },
+        { uid: 'default', title: <b>{this.translate('Task','Hubleto\\App\\Community\\Tasks\\Loader','Components\\FormTask')}</b> },
+        { uid: 'worksheet', title: this.translate('Worksheet','Hubleto\\App\\Community\\Tasks\\Loader','Components\\FormTask') },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
       ]
@@ -87,7 +87,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
             <div className='flex-1 border-r border-gray-100'>
               <div className='flex gap-2'>
                 {R.ORDERS && R.ORDERS.length > 0 ?
-                  <FormInput title={"Orders"}>{R.ORDERS.map((item, key) => {
+                  <FormInput title={this.translate("Orders")}>{R.ORDERS.map((item, key) => {
                     return (item ? <a
                       key={key}
                       className='badge'
@@ -97,7 +97,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                   })}</FormInput>
                   : null}
                 {R.DEALS && R.DEALS.length > 0 ?
-                  <FormInput title={"Deals"}>{R.DEALS.map((item, key) => {
+                  <FormInput title={this.translate("Deals")}>{R.DEALS.map((item, key) => {
                     return (item ? <a
                       key={key}
                       className='badge'
@@ -107,7 +107,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                   })}</FormInput>
                 : null}
                 {R.PROJECTS && R.PROJECTS.length > 0 ?
-                  <FormInput title={"Projects"}>{R.PROJECTS.map((item, key) => {
+                  <FormInput title={this.translate("Projects")}>{R.PROJECTS.map((item, key) => {
                     return (item ? <a
                       key={key}
                       className='badge'
@@ -171,7 +171,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                               readOnly={this.state.record.is_closed}
                               ref={refInputTodo}
                               value={item.todo}
-                              placeholder='What to do?'
+                              placeholder={this.translate('What to do?')}
                               onChange={(e) => {
                                 let newR = R;
                                 newR.TODO[key].todo = refInputTodo.current.value;
@@ -209,7 +209,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                           <textarea
                             className='w-full field-sizing-content bg-yellow-50 dark:bg-slate-600'
                             ref={this.refInputNewTodo}
-                            placeholder='Add new todo...'
+                            placeholder={this.translate('Add new todo...')}
                             onChange={(e) => {
                               this.setState({newTodo: this.refInputNewTodo.current.value});
                             }}

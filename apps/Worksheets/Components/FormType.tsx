@@ -24,7 +24,7 @@ export default class FormType<P, S> extends FormExtended<FormTypeProps, FormType
   renderTitle(): JSX.Element {
     return <>
       <small>{this.translate('Type')}</small>
-      <h2>Record #{this.state.record.id ?? '0'}</h2>
+      <h2>{this.translate('Record #')}{this.state.record.id ?? '0'}</h2>
     </>;
   }
 

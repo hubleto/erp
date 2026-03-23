@@ -97,7 +97,7 @@ class Profile extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
-    $description->ui['title'] = 'Invoice profile';
+    $description->ui['title'] = $this->translate('Invoice profile');
 
     return $description;
   }

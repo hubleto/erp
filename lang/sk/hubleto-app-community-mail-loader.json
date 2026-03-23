@@ -17,7 +17,9 @@
         "Get emails": "Načítať emaily",
         "Manage accounts": "Spravovať účty",
         "Internal emails": "Interné emaily",
-        "External accounts": "Externé účty"
+        "External accounts": "Externé účty",
+        "Account is not used for receiving emails.": "Účet nie je používaný na prijímanie emailov.",
+        "Account has no mailboxes.": "Účet nemá žiadne mailboxy."
     },
     "Models\\Mail": {
         "Mail Id": "ID správy",
@@ -40,7 +42,17 @@
         "Account": "Účet",
         "Scheduled to send": "Naplánované na odoslanie",
         "Reply to": "Odpovedať",
-        "Save draft": "Uložiť koncept"
+        "Save draft": "Uložiť koncept",
+        "Email ID is missing.": "Chýba ID emailu.",
+        "Email has already been sent.": "Email bol už odoslaný.",
+        "Email is scheduled to be sent later.": "Email je naplánovaný na neskoršie odoslanie.",
+        "Email has no subject.": "Email nemá predmet.",
+        "No SMTP email account configured.": "Nie je nakonfigurovaný žiadny SMTP účet.",
+        "Email's account SMTP is not properly configured.": "SMTP nastavenia emailového účtu nie sú správne nakonfigurované.",
+        "Email's account sender is not properly configured.": "Odosielateľ emailového účtu nie je správne nakonfigurovaný.",
+        "Recipient contains invalid email address.": "Príjemca obsahuje neplatnú emailovú adresu.",
+        "Mailer Error": "Chyba odosielania",
+        "Failed to create the email.": "Nepodarilo sa vytvoriť email."
     },
     "Models\\Account": {
         "Name": "Názov",
@@ -145,6 +157,17 @@
     "Components\\TableMails": {
         "Mark as unread": "Označiť ako neprečítané",
         "Mark as read": "Označiť ako prečítané"
+    },
+    "Components\\TableAccounts": {
+        "Mark as unread": "Označiť ako neprečítané",
+        "Mark as read": "Označiť ako prečítané"
+    },
+    "Mailer": {
+        "Getting emails from {{ count }} account(s).": "Načítavam emaily z {{ count }} účtu/účtov.",
+        "Checking account {{ name }}": "Kontrolujem účet {{ name }}",
+        "Mailbox {{ account }} -> {{ mailbox }}": "Mailbox {{ account }} -> {{ mailbox }}",
+        "Found mail {{ number }} {{ id }}": "Nájdený email {{ number }} {{ id }}",
+        "Creating mail in database": "Ukladám email do databázy"
     }
 
 }

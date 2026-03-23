@@ -24,8 +24,6 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
 
   recurrence: Recurrence;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
-  translationContextInner: string = 'Components\\FormActivity';
 
   getActivitySourceReadable(): string
   {
@@ -119,7 +117,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
       {this.inputWrapper('all_day')}
       <div className='flex gap-2 w-full flex-col md:flex-row'>
         <div className='w-1/2'>
-          {this.divider(this.translate('Start - End'))}
+          {this.divider(this.translate('Start - End','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity'))}
           {this.input('date_start', {
             onChange: (input: any, value: any) => {
               this.updateRecord({date_end: moment(value).add(daysDuration, 'days').format('YYYY-MM-DD')})
@@ -136,11 +134,11 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
           {R.all_day ? null : this.input('time_end')}
 
           <div className="mt-2 alert alert-info">
-            Duration: {daysDuration > 0 && daysDuration + " day(s)"}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " hours"}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " minutes"}
+            {this.translate('Duration','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}: {daysDuration > 0 && daysDuration + " " + this.translate('day(s)','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " " + this.translate('hours','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " " + this.translate('minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}
           </div>
         </div>
         <div className='w-1/2'>
-          {this.divider(this.translate('Repeats'))}
+          {this.divider(this.translate('Repeats','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity'))}
           {this.inputWrapperCustom('recurrence', {}, '', <div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
             {recurrence && recurrence.period == '' ?
               <select
@@ -155,12 +153,12 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
                   this.updateRecord(newR);
                 }}
               >
-                <option value=''>{this.translate('Does not repeat')}</option>
-                <option value='day'>{this.translate('Configure custom recurrence')}</option>
+                <option value=''>{this.translate('Does not repeat','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                <option value='day'>{this.translate('Configure custom recurrence','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
               </select>
             : <>
               <div className='flex gap-1 items-center text-nowrap'>
-                <span>{this.translate('Repeat every')}</span>
+                <span>{this.translate('Repeat every','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
                 <input
                   className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
                   type='number'
@@ -186,15 +184,15 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
                     this.updateRecord(newR);
                   }}
                 >
-                  <option value=''>{this.translate('does not repeat')}</option>
-                  <option value='day'>{this.translate('day')}</option>
-                  <option value='week'>{this.translate('week')}</option>
-                  <option value='month'>{this.translate('month')}</option>
-                  <option value='year'>{this.translate('year')}</option>
+                  <option value=''>{this.translate('does not repeat','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                  <option value='day'>{this.translate('day','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                  <option value='week'>{this.translate('week','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                  <option value='month'>{this.translate('month','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                  <option value='year'>{this.translate('year','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
                 </select>
               </div>
               <div className='flex gap-1 items-center text-nowrap'>
-                <span>{this.translate('End after')}</span>
+                <span>{this.translate('End after','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
                 <input
                   className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
                   type='number'
@@ -208,16 +206,16 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
                     this.updateRecord(newR);
                   }}
                 ></input>
-                <span>occurences.</span>
+                <span>{this.translate('occurences.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
               </div>
               <div className='flex gap-1 text-nowrap'>
-                Repeats from {recurrence.dates[0]} to {recurrence.dates[recurrence.dates.length - 1]}.
+                {this.translate('Repeats from {{ dateFrom }} to {{ dateTo }}.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity').replace('{{ dateFrom }}', recurrence.dates[0]).replace('{{ dateTo }}', recurrence.dates[recurrence.dates.length - 1])}
               </div>
             </>}
           </div>)}
         </div>
       </div>
-      {this.divider('Meeting minutes')}
+      {this.divider(this.translate('Meeting minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity'))}
       {this.inputWrapper('meeting_minutes')}
       {this.inputWrapper('meeting_minutes_link')}
     </>;

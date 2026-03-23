@@ -44,7 +44,11 @@ class Event extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('text-2xl text-primary')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_type' => (new Lookup($this, $this->translate('Type'), Type::class))->setDefaultVisible(),
-      'attendance_options' => (new Integer($this, $this->translate('Attendance options')))->setDefaultVisible()->setEnumValues(self::ENUM_ATTENDANCE_OPTIONS),
+      'attendance_options' => (new Integer($this, $this->translate('Attendance options')))->setDefaultVisible()->setEnumValues([
+        self::ENUM_ATTENDANCE_OPTION_IN_PERSON => $this->translate('In-person'),
+        self::ENUM_ATTENDANCE_OPTION_VIRTUAL => $this->translate('Virtual'),
+        self::ENUM_ATTENDANCE_OPTION_HYBRID => $this->translate('Hybrid'),
+      ]),
       'brief_description' => (new Text($this, $this->translate('Brief description'))),
       'full_description' => (new Text($this, $this->translate('Full description'))),
       'date_start' => (new Date($this, $this->translate('Date')))->setDefaultVisible()->setRequired()->setDefaultValue(date("Y-m-d")),
@@ -79,7 +83,7 @@ class Event extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = 'Add Event';
+    $description->ui['addButtonText'] = $this->translate('Add Event');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;
     $description->ui['showFooter'] = false;

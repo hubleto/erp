@@ -16,7 +16,7 @@ class LeadsApp extends App {
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Campaigns').addCustomFormTab({
       uid: 'leads',
-      title: 'Leads',
+      title: globalThis.hubleto.translate('Leads', 'Hubleto\\App\\Community\\Leads\\Loader', 'manifest'),
       onRender: (form: any) => {
         return <TableLeads
           tag={"table_campaign_lead"}

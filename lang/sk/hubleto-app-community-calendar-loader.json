@@ -34,7 +34,19 @@
         "reminders later": "pripomienok neskôr",
         "Later": "Neskôr",
         "reminders tomorrow": "pripomienok zajtra",
-        "Tomorrow": "Zajtra"
+        "Tomorrow": "Zajtra",
+        "Today": "Dnes",
+        "Let's have a break. You have nothing to do for today.": "Oddýchnite si. Na dnes nemáte nič naplánované."
+    },
+    "Controllers\\Api\\DailyDigest": {
+        "Today": "Dnes",
+        "Tomorrow": "Zajtra",
+        "Later": "Neskôr"
+    },
+    "Controllers\\Share": {
+        "Share": "Zdieľať",
+        "Calendar: Settings": "Kalendár: Nastavenia",
+        "Settings saved.": "Nastavenia uložené."
     },
     "root": {
         "Events for today": "Dnešné udalosti",
@@ -59,7 +71,8 @@
         "List of all created shares": "Zoznam všetkých vytvorených zdieľaní",
         "Shared 1 time": "Zdieľané 1-krát",
         "Shared {count} times": "Zdieľané {count}-krát",
-        "Share calendar as ICS": "Zdieľať kalendár ako ICS"
+        "Share calendar as ICS": "Zdieľať kalendár ako ICS",
+        "Loading...": "Načítava sa..."
     },
     "Models\\SharedCalendar": {
         "Created by": "Vytvoril",
@@ -72,20 +85,36 @@
     },
     "Components\\FormActivitySelector": {
         "New event": "Nová udalosť",
-        "Choose the calendar where you want to create the event.": "Vyberte kalendár, v ktorom chcete vytvoriť udalosť."
+        "Choose the calendar where you want to create the event.": "Vyberte kalendár, v ktorom chcete vytvoriť udalosť.",
+        "Save": "Uložiť"
     },
     "Components\\FormActivity": {
         "Start - End": "Začiatok - Koniec",
         "Repeats": "Opakuje sa",
         "Does not repeat": "Neopakuje sa",
-        "Configure custom recurrence": "Nastaviť vlastné opakovanie"
-    },
-    "Controllers\\Share": {
-        "Share": "Zdieľať",
-        "Calendar: Settings": "Kalendár: Nastavenia"
+        "Configure custom recurrence": "Nastaviť vlastné opakovanie",
+        "Meeting minutes": "Zápisnica zo stretnutia",
+        "Duration": "Trvanie",
+        "Repeat every": "Opakovať každých",
+        "does not repeat": "neopakuje sa",
+        "day": "deň",
+        "week": "týždeň",
+        "month": "mesiac",
+        "year": "rok",
+        "End after": "Ukončiť po",
+        "occurences.": "opakovaniach.",
+        "Repeats from {{ dateFrom }} to {{ dateTo }}.": "Opakuje sa od {{ dateFrom }} do {{ dateTo }}.",
+        "day(s)": "deň/dní",
+        "hours": "hodín",
+        "minutes": "minút"
     },
     "Components\\FormSharedCalendar": {
         "Shared calendar": "Zdieľaný kalendár",
-        "unsaved changes": "neuložené zmeny"
+        "unsaved changes": "neuložené zmeny",
+        "Copy share link": "Kopírovať odkaz na zdieľanie"
+    },
+    "Calendar": {
+        "Default": "Predvolený",
+        "Add a simple event": "Pridať jednoduchú udalosť"
     }
 }

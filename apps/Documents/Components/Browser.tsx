@@ -315,7 +315,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             <span className="icon"><i className="fas fa-file"></i></span>
             <div className="text line-clamp-2 w-full break-words">{item.name ?? ''}</div>
             {item.is_public ?
-              <div className="text-xs text-yellow-800 p-1">Public</div>
+              <div className="text-xs text-yellow-800 p-1">{this.translate('Public')}</div>
             : null}
           </button>
         }) : null}

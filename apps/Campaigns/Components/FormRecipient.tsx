@@ -89,7 +89,7 @@ export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps
                       dangerouslySetInnerHTML={{__html: mailPreviewInfo.bodyHtml}}
                     ></div>
                   </> : <div>
-                    No mail preview available.
+                    {this.translate('No mail preview available.')}
                   </div>}
                 </div>
               </div>

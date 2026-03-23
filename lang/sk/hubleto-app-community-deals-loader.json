@@ -8,7 +8,17 @@
         "Most valuable deals": "Najhodnotnejšie dealy",
         "Deal value by result": "Hodnota dealov podľa výsledku",
         "Active deals": "Aktívne dealy",
-        "Archived deals": "Archivované dealy"
+        "Archived deals": "Archivované dealy",
+        "Create deal": "Vytvoriť deal",
+        "Important": "Dôležitý",
+        "ASAP": "Čo najskôr",
+        "Extenstion": "Rozšírenie",
+        "New Customer": "Nový zákazník",
+        "Existing Customer": "Existujúci zákazník",
+        "Price": "Cena",
+        "Solution": "Riešenie",
+        "Demand canceled by customer": "Dopyt zrušený zákazníkom",
+        "Other": "Iné"
     },
     "Controllers\\Deals": {
         "Sales": "Predaj",
@@ -19,7 +29,16 @@
     "Controllers\\DealsArchive": {
         "Sales": "Predaj",
         "Deals": "Dealy",
-        "Archive": "Archív"
+        "Archive": "Archív",
+        "Archived deals": "Archivované dealy"
+    },
+    "Controllers\\ReportGoal": {
+        "Sales": "Predaj",
+        "Goals": "Ciele"
+    },
+    "Controllers\\Api\\DailyDigest": {
+        "Missing plan": "Chýba plán",
+        "You should schedule further activity for this deal.": "Pre tento deal by ste mali naplánovať ďalšiu aktivitu."
     },
     "Models\\Deal": {
         "Deal Identifier": "Identifikátor",
@@ -39,6 +58,11 @@
         "Archived": "Archivovaný",
         "Status": "Stav",
         "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný dokument",
+        "Unknown": "Neznámy",
+        "Won": "Vyhratý",
+        "Lost": "Prehratý",
+        "New": "Nový",
+        "Existing": "Existujúci",
         "Deal Result": "Výsledok dealu",
         "Date of result update": "Dátum aktualizácie výsledku",
         "New Customer": "Nový zákazník",
@@ -73,16 +97,22 @@
         "E-mail": "E-mail",
         "Referral": "Odporúčanie",
         "Other": "Iné",
-        "Shared folder (online document storage)": "Zdieľaný priečinok (online úložisko dokumentov)"
+        "Shared folder (online document storage)": "Zdieľaný priečinok (online úložisko dokumentov)",
+        "Deal created": "Deal vytvorený",
+        "Yes": "Áno",
+        "No": "Nie"
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",
         "Deal": "Deal",
-        "Description": "Opis"
+        "Description": "Opis",
+        "Deals": "Dealy",
+        "Add Deal": "Pridať deal"
     },
     "Models\\DealTag": {
         "Deal": "Deal",
-        "Tag": "Označenie"
+        "Tag": "Označenie",
+        "Deal Tags": "Značky dealov"
     },
     "Models\\DealActivity": {
         "Deal": "Deal",
@@ -109,6 +139,41 @@
         "Deal": "Deal",
         "Document": "Dokument"
     },
+    "Models\\LostReason": {
+        "Lost Reason": "Stratený dôvod",
+        "Deal Lost Reasons": "Dôvody straty dealu",
+        "Add Reason": "Pridať dôvod"
+    },
+    "Models\\Tag": {
+        "Name": "Názov",
+        "Color": "Farba",
+        "Deal Tags": "Značky dealov",
+        "Add Deal Tag": "Pridať značku dealu"
+    },
+    "Models\\Item": {
+        "Deal": "Deal",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Výška",
+        "Vat": "DPH",
+        "Discount": "Zľavu",
+        "Sum": "Súčet",
+        "Order": "Objednávka",
+        "Description": "Popis",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH",
+        "Sales Price": "Predajná cena"
+    },
+    "Models\\DealLead": {
+        "Deal": "Deal",
+        "Lead": "Lead",
+        "Add Deal": "Pridať deal"
+    },
+    "Models\\DealTask": {
+        "Deal": "Deal",
+        "Task": "Úloha",
+        "Add Deal": "Pridať deal"
+    },
     "root": {
         "Deal statuses": "Stavy dealov",
         "Deal Tags": "Značky dealov",
@@ -133,6 +198,7 @@
         "Not completed yet": "Nedokončená",
         "Most recent activities": "Najnovšie aktivity",
         "Deal": "Deal",
+        "Lead": "Lead",
         "Log completed activity": "Zaevidovať aktivitu",
         "Enter": "Enter",
         "Schedule activity": "Naplánovať aktivitu",
@@ -144,31 +210,14 @@
         "Items": "Položky",
         "Select parent lead": "Vybrať nadradený lead",
         "Customer": "Zákazník",
-        "Contact": "Kontakt"
-    },
-    "Models\\Tag": {
-        "Name": "Názov",
-        "Color": "Farba"
-    },
-    "Controllers\\Boards\\MostValuableDeals": {
-        "Open deal": "Otvoriť deal"
-    },
-    "Models\\Item": {
-        "Deal": "Deal",
-        "Product": "Produkt",
-        "Unit Price": "Jednotková cena",
-        "Amount": "Výška",
-        "Vat": "DPH",
-        "Discount": "Zľavu",
-        "Sum": "Súčet",
-        "Order": "Objednávka",
+        "Contact": "Kontakt",
         "Description": "Popis",
-        "Price excl. VAT": "Cena bez DPH",
-        "Price incl. VAT": "Cena s DPH",
-        "Sales Price": "Predajná cena"
+        "Change Date": "Dátum zmeny",
+        "Generate quotation (PDF)": "Generovať cenovú ponuku (PDF)",
+        "Price is calculated from items.": "Cena je vypočítaná z položiek."
     },
-    "Models\\LostReason": {
-        "Lost Reason": "Stratený dôvod"
+    "Components\\TableDeals": {
+        "Hide filter": "Skryť filter"
     },
     "Controllers\\LostReasons": {
         "Settings": "Nastavenia",
@@ -177,13 +226,16 @@
     "Controllers\\Settings": {
         "Deals": "Dealy",
         "Settings": "Nastavenia",
-        "Show 'Deal warnings' in dashboard": "Ukážte „Deal Warnings“ na prístrojovej doske",
-        "Show 'Most valuable deals' in dashboard": "Zobraziť „najcennejšie ponuky“ na prístrojovej doske",
-        "Show 'Deal value by result' in dashboard": "Zobraziť „hodnotu dealu podľa výsledku“ na prístrojovej doske",
-        "Calendar color": "Farba kalendára"
+        "Settings saved.": "Nastavenia uložené.",
+        "Show 'Deal warnings' in dashboard": "Ukážte 'Deal Warnings' na dashboarde",
+        "Show 'Most valuable deals' in dashboard": "Zobraziť 'najcennejšie ponuky' na dashboarde",
+        "Show 'Deal value by result' in dashboard": "Zobraziť 'hodnotu dealu podľa výsledku' na dashboarde",
+        "Calendar color": "Farba kalendára",
+        "Deals Prefix": "Prefix dealu"
     },
     "Controllers\\Boards\\DealWarnings": {
         "Pending deals without future plan": "Čakajúce dealy bez budúceho plánu",
+        "No warnings for deals.": "Žiadne upozornenia pre dealy.",
         "No notifications for deals.": "Žiadne oznámenia o dealoch.",
         "Open deal": "Deal",
         "Open deals without future plan": "Otvorené dealy bez budúceho plánu"
@@ -192,17 +244,17 @@
         "Unknown": "Neznámy",
         "Pending": "V procese",
         "Won": "Vyhraný",
-        "Lost": "Prehraný"
+        "Lost": "Prehraný",
+        "No deals found.": "Žiadne dealy sa nenašli.",
+        "Add deal": "Pridať deal"
     },
-    "Models\\DealLead": {
-        "Deal": "Deal",
-        "Lead": "Lead"
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Otvoriť deal",
+        "No deals found.": "Žiadne dealy sa nenašli.",
+        "Add deal": "Pridať deal"
     },
-    "Models\\DealTask": {
-        "Deal": "Deal",
-        "Task": "Úloha"
-    },
-    "Components\\TableDeals": {
-        "Hide filter": "Skryť filter"
+    "Calendar": {
+        "Deals": "Dealy",
+        "Add new activity linked to deal": "Pridať novú aktivitu pre deal"
     }
 }

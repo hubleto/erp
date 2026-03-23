@@ -38,7 +38,7 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
       $calendar = $calendarManager->getCalendar($this->router()->urlParamAsString('source'));
       if ($this->router()->isUrlParam('id')) {
         $event = (array) $calendar->loadEvent($this->router()->urlParamAsInteger('id'));
-        $event['SOURCEFORM'] = $calendar->calendarConfig["formComponent"] ?? null;
+        $event['SOURCEFORM'] = $calendar->getCalendarConfig()["formComponent"] ?? null;
 
         return $event;
 
@@ -74,8 +74,8 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
 
       $calEvents = (array) $calendar->loadEvents($dateStart, $dateEnd, $filter);
       foreach ($calEvents as $key => $value) {
-        $calEvents[$key]['SOURCEFORM'] = $calendar->calendarConfig["formComponent"] ?? null;
-        $calEvents[$key]['icon'] = $calendar->calendarConfig["icon"] ?? null;
+        $calEvents[$key]['SOURCEFORM'] = $calendar->getCalendarConfig()["formComponent"] ?? null;
+        $calEvents[$key]['icon'] = $calendar->getCalendarConfig()["icon"] ?? null;
       }
       $events = array_merge($events, $calEvents);
     }

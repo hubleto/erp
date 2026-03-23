@@ -37,11 +37,11 @@ class Recipient extends \Hubleto\Erp\Model
       'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
       'variables' => (new Json($this, $this->translate('Variables')))->setDefaultVisible()->setReactComponent('InputJsonKeyValue'),
       'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly()->setDefaultVisible(),
-      'virt_utm_source' => (new Virtual($this, $this->translate('UTM: Source')))->setDefaultVisible()
+      'virt_utm_source' => (new Virtual($this, $this->translate('UTM: source')))->setDefaultVisible()
         ->setProperty('sql', "SELECT `c`.`utm_source` FROM `campaigns` `c` WHERE `c`.`id` = `campaigns_recipients`.`id_campaign`"),
-      'virt_utm_campaign' => (new Virtual($this, $this->translate('UTM: Campaign')))->setDefaultVisible()
+      'virt_utm_campaign' => (new Virtual($this, $this->translate('UTM: campaign')))->setDefaultVisible()
         ->setProperty('sql', "SELECT `c`.`utm_campaign` FROM `campaigns` `c` WHERE `c`.`id` = `campaigns_recipients`.`id_campaign`"),
-      'virt_utm_term' => (new Virtual($this, $this->translate('UTM: Term')))->setDefaultVisible()
+      'virt_utm_term' => (new Virtual($this, $this->translate('UTM: term')))->setDefaultVisible()
         ->setProperty('sql', "SELECT `c`.`utm_term` FROM `campaigns` `c` WHERE `c`.`id` = `campaigns_recipients`.`id_campaign`"),
       'virt_status' => (new Virtual($this, $this->translate('Status')))->setDefaultVisible()
         ->setProperty('sql',"

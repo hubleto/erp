@@ -22,7 +22,7 @@ class Loader extends \Hubleto\Erp\App
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => 'OAuth', // or $this->translate('OAuth')
+      'title' => $this->translate('OAuth'),
       'icon' => 'fas fa-table',
       'url' => 'settings/oauth',
     ]);

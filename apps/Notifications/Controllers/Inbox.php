@@ -16,7 +16,7 @@ class Inbox extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->viewParams['title'] = 'Inbox';
+    $this->viewParams['title'] = $this->translate('Inbox');
     $this->viewParams['folder'] = 'inbox';
 
     $this->setView('@Hubleto:App:Community:Notifications/ListFolder.twig');

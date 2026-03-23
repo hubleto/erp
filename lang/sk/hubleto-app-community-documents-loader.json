@@ -8,17 +8,28 @@
         "Show as list": "Zobraziť ako zoznam",
         "Manage folders": "Spravovať priečinky",
         "Marketing materials": "Marketingové materiály",
-        "Customer profiles": "Profily zákazníkov"
+        "Customer profiles": "Profily zákazníkov",
+        "Quotation": "Cenová ponuka",
+        "Proforma invoice": "Proforma faktúra",
+        "Advance invoice": "Zálohová faktúra",
+        "Standard invoice": "Vyúčtovacia faktúra",
+        "Credit note": "Dobropis",
+        "Debit note": "Ťarchopis",
+        "Proforma faktúra": "Proforma faktúra",
+        "Zálohová faktúra": "Zálohová faktúra",
+        "Vyúčtovacia faktúra s DPH": "Vyúčtovacia faktúra s DPH",
+        "Dobropis s DPH": "Dobropis s DPH",
+        "Ťarchopis": "Ťarchopis"
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",
         "File": "Súbor",
-        "Link": "Odkaz na online verziu",
         "File Link": "Odkaz na dokument",
         "Origin Link": "Pôvodný odkaz",
         "Uid": "Uid",
         "Folder": "Priečinok",
-        "Add Document": "Pridať dokument"
+        "Add Document": "Pridať dokument",
+        "Public": "Verejné"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"
@@ -53,13 +64,26 @@
     },
     "Components\\Browser": {
         "Add folder": "Pridať priečinok",
-        "Add document": "Pridať dokument"
+        "Add document": "Pridať dokument",
+        "Move": "Presunúť",
+        "Move selected": "Presunúť vybrané",
+        "Confirm delete": "Potvrdiť vymazanie",
+        "Delete": "Vymazať",
+        "Public": "Verejné"
     },
     "Components\\FormDocument": {
-        "Document": "Dokument"
+        "Document": "Dokument",
+        "Download": "Stiahnuť",
+        "Preview": "Náhľad"
+    },
+    "Components\\FormTemplate": {
+        "Document template": "Šablóna dokumentu"
     },
     "Controllers\\Templates": {
         "Templates": "Šablóny",
         "Documents": "Dokumenty"
-    }
+    },
+    "Components\\TableDocuments": {},
+    "Components\\TableFolders": {},
+    "Components\\TableTemplates": {}
 }

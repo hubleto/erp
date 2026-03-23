@@ -277,12 +277,12 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               <button onClick={() => {this.logCompletedActivity()}} className="btn btn-blue-outline btn-small w-full">
                 <span className="icon"><i className="fas fa-check"></i></span>
                 <span className="text">{this.translate('Log completed activity')}</span>
-                <span className="shortcut">{this.translate('Enter')}</span>
+                <span className="shortcut">Enter</span>
               </button>
               <button onClick={() => {this.scheduleActivity()}} className="btn btn-small w-full btn-blue-outline">
                 <span className="icon"><i className="fas fa-clock"></i></span>
                 <span className="text">{this.translate('Schedule activity')}</span>
-                <span className="shortcut">{this.translate('Shift+Enter')}</span>
+                <span className="shortcut">Shift+Enter</span>
               </button>
             </div>
             {this.divider(this.translate('Most recent activities'))}
@@ -523,7 +523,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 <span className="text">{this.translate('Send test email')}</span>
               </button>
               {this.state.testEmailSendResult && this.state.testEmailSendResult.status == 'success' ?
-                <div className='alert alert-success mt-2'>Test email was sent to you.</div>
+                <div className='alert alert-success mt-2'>{ this.translate('Test email was sent to you.') }</div>
               : null}
               {this.state.testEmailSendResult && this.state.testEmailSendResult.status != 'success' ?
                 <div className='alert alert-danger mt-2'>
@@ -568,8 +568,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                         return null;
                       }
                     }) : null}
-                  </code> in
-                  campaign <a
+                  </code> {this.translate('in campaign')} <a
                     href={globalThis.hubleto.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
                     target='_blank'
                   >{item.CAMPAIGN.name}</a>.
@@ -578,8 +577,8 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             </div> : null}
           </> : null}
 
-          {R.id_launched_by ? 
-            <div className='alert alert-warning'>Campaign was already launched by {R.LAUNCHED_BY.email} on {R.datetime_launched}.</div>
+          {R.id_launched_by ?
+            <div className='alert alert-warning'>{this.translate('Campaign was already launched by {{ email }} on {{ datetime }}.', {email: R.LAUNCHED_BY.email, datetime: R.datetime_launched})}</div>
           : null}
 
           <div className='flex flex-col md:flex-row gap-2 w-full'>
@@ -617,16 +616,16 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                   <div className='card-header'>{ this.translate('Statistics') }</div>
                   <div className='card-body flex flex-col gap-1'>
                     <div className='badge'>
-                      Recipients: {this.state.campaignLaunchInfo.recipients.length}
+                      {this.translate('Recipients')}: {this.state.campaignLaunchInfo.recipients.length}
                     </div>
                     <div className='badge'>
-                      Emails sent: {emailsSent}
+                      {this.translate('Emails sent')}: {emailsSent}
                     </div>
                     <div className='badge badge-warning'>
-                      Invalid recipients: {invalidRecipientsCount} ({Math.round(invalidRecipientsCount / this.state.campaignLaunchInfo.recipients.length * 100)} %)
+                      {this.translate('Invalid recipients')}: {invalidRecipientsCount} ({Math.round(invalidRecipientsCount / this.state.campaignLaunchInfo.recipients.length * 100)} %)
                     </div>
                     <div className='badge badge-danger'>
-                      Unsubscribed recipients: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / this.state.campaignLaunchInfo.recipients.length * 100)} %)
+                      {this.translate('Unsubscribed recipients')}: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / this.state.campaignLaunchInfo.recipients.length * 100)} %)
                     </div>
                     <div>
                       <b>{this.translate('Who clicked? (Bot Score = 0)')}</b>
@@ -653,11 +652,11 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               : null}
 
               {this.state.launchResult && this.state.launchResult.status == 'success' ?
-                <div className='alert alert-success mt-2'>Campaign was launched.</div>
+                <div className='alert alert-success mt-2'>{ this.translate('Campaign was launched.') }</div>
               : null}
               {this.state.launchResult && this.state.launchResult.status != 'success' ?
                 <div className='alert alert-danger mt-2'>
-                  Error occured when launching the campaign.<br/>
+                  { this.translate('Error occured when launching the campaign.') }<br/>
                   <b>{this.state.launchResult.message}</b>
                 </div>
               : null}
@@ -693,12 +692,12 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           <td className='text-nowrap'>
                             {item.id_mail > 0 ? <>
                               {item.MAIL?.datetime_sent
-                                ? <div className='badge badge-success'>Sent {item.MAIL?.datetime_sent}</div>
-                                : <div className='badge badge-warning'>Scheduled {item.MAIL?.datetime_scheduled_to_send}</div>
+                                ? <div className='badge badge-success'>{this.translate('Sent')} {item.MAIL?.datetime_sent}</div>
+                                : <div className='badge badge-warning'>{this.translate('Scheduled')} {item.MAIL?.datetime_scheduled_to_send}</div>
                               }
-                            </> : <div className='badge'>Not scheduled yet</div>}
-                            {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>Unsubscribed</div> : null}
-                            {item.STATUS?.is_invalid ? <div className='badge badge-warning'>Invalid</div> : null}
+                            </> : <div className='badge'>{this.translate('Not scheduled yet')}</div>}
+                            {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>{this.translate('Unsubscribed')}</div> : null}
+                            {item.STATUS?.is_invalid ? <div className='badge badge-warning'>{this.translate('Invalid')}</div> : null}
                           </td>
                           <td>
                             {item.CLICKS.length > 0 ? item.CLICKS.length : null}

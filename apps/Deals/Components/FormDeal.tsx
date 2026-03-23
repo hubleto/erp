@@ -180,7 +180,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
     return [
       ...super.getHeaderButtons(),
       {
-        title: 'Generate quotation (PDF)',
+        title: this.translate('Generate quotation (PDF)'),
         onClick: () => {
           request.post(
             'deals/api/generate-quotation-pdf',
@@ -204,7 +204,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       case 'default':
 
         const inputsColumnLeft = <>
-          <FormInput title={"Lead"}>
+          <FormInput title={this.translate("Lead")}>
             {this.state.selectParentLead ? <>
               <Lookup
                 model='Hubleto/App/Community/Leads/Models/Lead'
@@ -296,7 +296,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
             {this.state.isInlineEditing && (R.ITEMS && R.ITEMS.length > 0) ?
               <div className='badge badge-warning'>
                 <span className='icon mr-2'><i className='fas fa-warning'></i></span>
-                <span className='text'>Price is calculated from items.</span>
+                <span className='text'>{this.translate('Price is calculated from items.')}</span>
               </div>
             : <></>}
           </div>

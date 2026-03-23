@@ -16,6 +16,7 @@ export interface ChatUiState {
 }
 
 export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState> {
+  translationContext: string = 'Hubleto\\App\\Community\\AiAssistent\\Loader';
   translationContextInner: string = 'Components\\ChatUi';
 
   props: ChatUiProps;
@@ -76,7 +77,7 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
           });
         } else {
           this.setState({
-            messages: [...newMessages, { role: 'model', content: response?.message || 'Error occurred.' }],
+            messages: [...newMessages, { role: 'model', content: response?.message || this.translate('Error occurred.') }],
             context: response.context,
             isLoading: false
           });
@@ -84,7 +85,7 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
       },
       (error: any) => {
         this.setState({
-          messages: [...newMessages, { role: 'model', content: 'Connection error.' }],
+          messages: [...newMessages, { role: 'model', content: this.translate('Connection error.') }],
           isLoading: false
         });
       }
@@ -102,11 +103,11 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
     const contextSource = modelParam ? modelParam.split('/').pop() : '';
 
     const sampleQuestions = [
-      "What is the difference between a Lead and a Deal in Hubleto?",
-      "How can I create a new model and migration in Hubleto?",
-      "How do I set up calendar synchronization?",
-      "How do I create a new custom app?",
-      "How does the link between an order and an invoice work?"
+      this.translate("What is the difference between a Lead and a Deal in Hubleto?"),
+      this.translate("How can I create a new model and migration in Hubleto?"),
+      this.translate("How do I set up calendar synchronization?"),
+      this.translate("How do I create a new custom app?"),
+      this.translate("How does the link between an order and an invoice work?")
     ];
 
     return (
@@ -144,7 +145,7 @@ export default class ChatUi extends TranslatedComponent<ChatUiProps, ChatUiState
                   <strong>{this.translate('Context')}:</strong> {contextSource} {idParam ? `#${idParam}` : ''}<br/>
                   {this.state.context ?
                     <button className='btn btn-transparent' onClick={() => { this.setState({showContextDetails: true }); }}>
-                      <span className='text'>Show context details</span>
+                      <span className='text'>{this.translate('Show context details')}</span>
                     </button>
                   : null}
                 </span>

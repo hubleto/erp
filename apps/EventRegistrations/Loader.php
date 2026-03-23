@@ -16,16 +16,16 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^eventregistrations\/?$/' => Controllers\Dashboard::class,
-      '/^eventregistrations\/contacts\/?$/' => Controllers\Contacts::class,
-      '/^settings\/eventregistrations\/?$/' => Controllers\Settings::class,
+      '/^events-registrations\/?$/' => Controllers\Dashboard::class,
+      '/^events-registrations\/contacts\/?$/' => Controllers\Contacts::class,
+      '/^settings\/events-registrations\/?$/' => Controllers\Settings::class,
     ]);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => 'EventRegistrations', // or $this->translate('EventRegistrations')
+      'title' => $this->translate('EventRegistrations'),
       'icon' => 'fas fa-table',
-      'url' => 'settings/eventregistrations',
+      'url' => 'settings/events-registrations',
     ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */

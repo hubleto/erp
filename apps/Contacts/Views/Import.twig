@@ -3,14 +3,14 @@
 {% if viewParams.importFinished %}
   {% if viewParams.checkImport %}
     <div class="card">
-      <div class="card-header">Test of import, see log below</div>
+      <div class="card-header">{{ translate("Test of import, see log below") }}</div>
       <div class="card-body">
         <div class="alert alert-info">
           {{ translate("This was only check of the import. Check the log and if you are satisfied, upload the CSV file again run the import now.") }}<br/>
           <br/>
           <form action="" method="post" enctype="multipart/form-data">
-            <div class="mb-2">File: <input type="file" name="contactsFile" accept=".csv,.txt"></div>
-            <div class="mb-2">Tag: <input type="input" name="tag" value="{{ viewParams.tag }}"></div>
+            <div class="mb-2">{{ translate("File:") }} <input type="file" name="contactsFile" accept=".csv,.txt"></div>
+            <div class="mb-2">{{ translate("Tag:") }} <input type="input" name="tag" value="{{ viewParams.tag }}"></div>
             <button type="submit" class="btn btn-primary">
               <span class="icon"><i class="fas fa-file-import"></i></span>
               <span class="text">{{ translate('Run import') }}</span>

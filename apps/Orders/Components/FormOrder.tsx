@@ -135,7 +135,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.state.record.purchase_sales == 1 ? 'Purchase Order' : 'Sales Order'}</small>
+      <small>{this.state.record.purchase_sales == 1 ? this.translate('Purchase Order') : this.translate('Sales Order')}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>
     </>;
   }

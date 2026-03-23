@@ -23,7 +23,7 @@ export default class FormEventSpeaker<P, S> extends FormExtended<FormEventSpeake
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.translate('EventSpeaker')}</small>
+      <small>{this.translate('Event speaker')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }

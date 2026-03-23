@@ -42,12 +42,15 @@
         "Roles": "Role",
         "Teams": "Tímy",
         "Type": "Typ",
-        "Apps": "Aplikácie"
+        "Apps": "Aplikácie",
+        "Add User": "Pridať používateľa"
     },
     "Models\\Country": {
         "Country Name": "Štát",
         "Code": "Kód",
-        "Country": "Krajina"
+        "Country": "Krajina",
+        "Countries": "Štáty",
+        "Add Country": "Pridať štát"
     },
     "Models\\Profile": {
         "Company": "Firma"
@@ -58,14 +61,21 @@
         "Shown in Calendar": "Zobraziť v kalendári",
         "Icon": "Ikonka",
         "Type": "Typ",
-        "Show in calendar": "Show v kalendári"
+        "Show in calendar": "Show v kalendári",
+        "Activity Types": "Typy aktivít",
+        "Add Activity Type": "Pridať typ aktivity"
     },
     "Models\\Currency": {
         "Currency Name": "Mena",
         "Currency Code": "Kód",
         "Currency": "Mena",
         "Code": "Kódovať",
-        "Symbol": "Symbol"
+        "Symbol": "Symbol",
+        "Currencies": "Meny",
+        "Add currency": "Pridať menu",
+        "New currency": "Nová mena",
+        "Adding": "Pridávanie",
+        "Editing": "Úprava"
     },
     "Models\\Workflow": {
         "Name": "Názov",
@@ -86,7 +96,9 @@
     "Models\\Setting": {
         "Key": "Parameter",
         "Value": "Hodnota",
-        "Only for user": "Iba pre používateľa"
+        "Only for user": "Iba pre používateľa",
+        "Settings": "Nastavenia",
+        "Add Setting": "Pridať nastavenie"
     },
     "Models\\InvoiceProfile": {
         "Name": "Názov",
@@ -118,10 +130,44 @@
     },
     "Models\\RolePermission": {
         "Permission": "Povolenie",
-        "Role": "Rola"
+        "Role": "Rola",
+        "Assign permission to role": "Priradiť oprávnenie k roli"
     },
     "Models\\Permission": {
-        "Permission": "Povolenie"
+        "Permission": "Povolenie",
+        "Permissions": "Povolenia"
+    },
+    "Models\\Company": {
+        "Company": "Spoločnosť",
+        "Tax ID": "Daňový ID",
+        "VAT ID": "ID DPH",
+        "Street, line 1": "Ulica, riadok 1",
+        "Street, line 2": "Ulica, riadok 2",
+        "ZIP": "Zips",
+        "City": "Mesto",
+        "Country": "Krajina",
+        "Registration ID": "IČO",
+        "Business register": "Obchodný register",
+        "Logo": "Logo",
+        "Brand color - primary": "Primárna farba značky",
+        "Brand color - secondary": "Sekundárna farba značky",
+        "Region": "Región",
+        "Add company": "Pridať spoločnosť"
+    },
+    "Models\\Team": {
+        "Team name": "Názov tímu",
+        "Team color": "Farebný tím",
+        "Description": "Opis",
+        "Team manager": "Manažér tímu",
+        "Manager": "Manažér",
+        "Members": "Členovia",
+        "Teams": "Tímy",
+        "Add team": "Pridať tím"
+    },
+    "Models\\TeamMember": {
+        "Team": "Tím",
+        "Member": "Člen",
+        "Add member to team": "Pridať člena do tímu"
     },
     "Controllers\\Dashboard": {
         "Settings": "Nastavenia",
@@ -170,6 +216,117 @@
         "Settings": "Nastavenia",
         "Activity Types": "Typy aktivít"
     },
+    "Controllers\\Companies": {
+        "Settings": "Nastavenia",
+        "Companies": "Spoločnosti"
+    },
+    "Controllers\\Currencies": {
+        "Settings": "Nastavenia",
+        "Currencies": "Meny"
+    },
+    "Controllers\\Teams": {
+        "Settings": "Nastavenia",
+        "Teams": "Tímy"
+    },
+    "Controllers\\Theme": {
+        "Settings": "Nastavenia",
+        "Theme": "Téma"
+    },
+    "Controllers\\Permissions": {
+        "Settings": "Nastavenia",
+        "Permissions": "Povolenia"
+    },
+    "Controllers\\RolePermissions": {
+        "Role permissions": "Povolenia rolí"
+    },
+    "Controllers\\UpdateDefaultPermissions": {
+        "Settings": "Nastavenia",
+        "Update default permissions": "Aktualizovať predvolené oprávnenia"
+    },
+    "Controllers\\Config": {
+        "Settings": "Nastavenia",
+        "Platform config": "Konfigurácia platformy"
+    },
+    "Controllers\\General": {
+        "Settings": "Nastavenia",
+        "General settings": "Všeobecné nastavenia"
+    },
+    "Controllers\\Sidebar": {
+        "Settings": "Nastavenia",
+        "Sidebar": "Bočný panel",
+        "Save sidebar configuration": "Uložiť konfiguráciu bočného panela"
+    },
+    "Controllers\\Apps": {
+        "Settings": "Nastavenia",
+        "Apps": "Aplikácie",
+        "Open": "Otvoriť",
+        "Disable": "Zakázať",
+        "Install": "Inštalovať",
+        "Go to app": "Prejsť do aplikácie",
+        "Enable": "Aktivovať",
+        "Activate Premium account": "Aktivovať prémiový účet",
+        "Installed apps": "Nainštalované aplikácie",
+        "Available apps": "Dostupné aplikácie",
+        "(Search) Type app name and press Enter...": "(Hľadať) Zadajte názov aplikácie a stlačte Enter...",
+        "Community": "Community",
+        "Enterprise": "Enterprise",
+        "External": "Externá",
+        "Custom": "Vlastná",
+        "You can install Premium apps only in Premium account.": "Prémiové aplikácie môžete inštalovať iba v prémiovom účte."
+    },
+    "Controllers\\LogViewer": {
+        "Settings": "Nastavenia",
+        "Log Viewer": "Prehliadač logov"
+    },
+    "Controllers\\MyAccount": {
+        "Settings": "Nastavenia",
+        "Company": "Firma"
+    },
+    "Controllers\\Profile": {
+        "Settings": "Nastavenia",
+        "Profile": "Profil"
+    },
+    "Controllers\\InvoiceProfiles": {
+        "Settings": "Nastavenia",
+        "Invoice profiles": "Faktúra"
+    },
+    "Components\\FormUserRole": {
+        "Save": "Uložiť",
+        "User role": "Používateľská rola",
+        "Permissions for records with designated owner, manager or team": "Oprávnenia pre záznamy s určeným vlastníkom, manažérom alebo tímom",
+        "Reading": "Čítanie",
+        "Modifying": "Úprava",
+        "Can read only owned records": "Môže čítať iba vlastné záznamy",
+        "Can read only owned and managed records": "Môže čítať iba vlastné a spravované záznamy",
+        "Can read all records": "Môže čítať všetky záznamy",
+        "Can modify only owned records": "Môže upravovať iba vlastné záznamy",
+        "Can modify only owned and managed records": "Môže upravovať iba vlastné a spravované záznamy",
+        "Can modify all records": "Môže upravovať všetky záznamy"
+    },
+    "Components\\FormUser": {
+        "About the user": "O používateľovi",
+        "User": "Používateľ",
+        "You may add new users only in Premium account.": "Nových používateľov môžete pridávať iba v prémiovom účte.",
+        "Activate Premium account": "Aktivovať prémiový účet",
+        "Access to Hubleto": "Prístup do Hubleto",
+        "Roles": "Role",
+        "First create user, then you will be prompted to assign roles.": "Najprv vytvorte používateľa, potom budete vyzvaní na priradenie rolí.",
+        "Permissions for records with designated owner or manager": "Oprávnenia pre záznamy s určeným vlastníkom alebo manažérom",
+        "Reading": "Čítanie",
+        "Modifying": "Úprava",
+        "Can read only owned records": "Môže čítať iba vlastné záznamy",
+        "Can read only owned and managed records": "Môže čítať iba vlastné a spravované záznamy",
+        "Can read all records": "Môže čítať všetky záznamy",
+        "Can modify only owned records": "Môže upravovať iba vlastné záznamy",
+        "Can modify only owned and managed records": "Môže upravovať iba vlastné a spravované záznamy",
+        "Can modify all records": "Môže upravovať všetky záznamy",
+        "Access to apps": "Prístup k aplikáciám"
+    },
+    "Components\\FormTeam": {
+        "Team": "Tím",
+        "Team members": "Členovia tímu",
+        "First create team, then you will be prompted to add members.": "Najprv vytvorte tím, potom budete vyzvaní na pridanie členov."
+    },
     "root": {
         "Users": "Používatelia",
         "User roles": "Používateľské role",
@@ -194,65 +351,5 @@
     "Models\\UserHasRole": {
         "User": "Užívateľ",
         "Role": "Úloha"
-    },
-    "Controllers\\Profile": {
-        "Settings": "Nastavenia",
-        "Profile": "Profil"
-    },
-    "Models\\Company": {
-        "Company": "Spoločnosť",
-        "Tax ID": "Daňový ID",
-        "VAT ID": "ID DPH",
-        "Street, line 1": "Ulica, riadok 1",
-        "Street, line 2": "Ulica, riadok 2",
-        "ZIP": "Zips",
-        "City": "Mesto",
-        "Country": "Krajina",
-        "Registration ID": "IČO",
-        "Business register": "Obchodný register",
-        "Logo": "Logo",
-        "Brand color - primary": "Primárna farba značky",
-        "Brand color - secondary": "Sekundárna farba značky",
-        "Region": "Región"
-    },
-    "Controllers\\Sidebar": {
-        "Settings": "Nastavenia",
-        "Sidebar": "Bočný panel"
-    },
-    "Components\\FormUserRole": {
-        "Save": "Uložiť"
-    },
-    "Components\\FormUser": {
-        "About the user": "O používateľovi"
-    },
-    "Controllers\\InvoiceProfiles": {
-        "Settings": "Nastavenia",
-        "Invoice profiles": "Faktúra"
-    },
-    "Models\\Team": {
-        "Team name": "Názov tímu",
-        "Team color": "Farebný tím",
-        "Description": "Opis",
-        "Team manager": "Manažér tímu",
-        "Manager": "Manažér"
-    },
-    "Models\\TeamMember": {
-        "Team": "Tím",
-        "Member": "Člen"
-    },
-    "Controllers\\Apps": {
-        "Settings": "Nastavenia",
-        "Apps": "Aplikácia",
-        "Open": "OTVORENÉ",
-        "Disable": "Zakázať",
-        "Install": "Inštalovať"
-    },
-    "Controllers\\MyAccount": {
-        "Settings": "Nastavenia",
-        "Company": "Firma"
-    },
-    "Controllers\\LogViewer": {
-        "Settings": "Nastavenia",
-        "Log Viewer": "Prehliadač logov"
     }
 }

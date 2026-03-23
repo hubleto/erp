@@ -50,11 +50,10 @@ class GetCampaignTestInfo extends \Hubleto\Erp\Controllers\ApiController
       $testInfo['warnings'][] = $this->translate('Mail template is not set.');
     }
 
-    if (!$campaign->MAIL_TEMPLATE) {
+    if (empty($campaign->mail_subject) || empty($campaign->mail_body)) {
       $testInfo['warnings'][] = $this->translate('Mail template is not set.');
     } else {
-      $template = $campaign->MAIL_TEMPLATE;
-      $bodyHtml = $template->body_html;
+      $bodyHtml = $campaign->mail_body;
 
       if (!strpos($bodyHtml, '{{ botDetectorHiddenLink }}')) {
         $testInfo['warnings'][] = 'Mail template does not contain `{{ botDetectorHiddenLink }}` placeholder.';

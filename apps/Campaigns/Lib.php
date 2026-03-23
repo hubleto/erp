@@ -22,7 +22,7 @@ class Lib extends Core
   {
 
     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
-      (string) ($campaign['MAIL_TEMPLATE']['body_html'] ?? ''),
+      (string) ($campaign['mail_body'] ?? ''),
       (string) ($campaign['utm_source'] ?? ''),
       (string) ($campaign['utm_campaign'] ?? ''),
       (string) ($campaign['utm_term'] ?? ''),

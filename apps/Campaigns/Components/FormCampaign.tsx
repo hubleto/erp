@@ -70,6 +70,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         { uid: 'documents', title: this.translate('Documents') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'contacts', title: this.translate('Contacts') },
+        { uid: 'mail', title: this.translate('Mail') },
         { uid: 'recipients', title: this.translate('Recipients') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'test', title: this.translate('Test') },
@@ -403,6 +404,13 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         </div>;
       break;
 
+      case 'mail':
+        return <>
+          {this.inputWrapper('mail_subject')}
+          {this.inputWrapper('mail_body')}
+        </>
+      break;
+
       case 'recipients':
         return <div className='flex gap-2'>
           <div className='flex-3'>
@@ -541,12 +549,22 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         let invalidRecipientsCount = 0;
         let unsubscribedRecipientsCount = 0;
         let emailsSent = 0;
+        let emailsWithBotScoreZero = [];
 
         if (this.state.campaignLaunchInfo?.recipients) {
           this.state.campaignLaunchInfo.recipients.map((item, key) => {
             if (item.STATUS?.is_unsubscribed) unsubscribedRecipientsCount++;
             if (item.STATUS?.is_invalid) invalidRecipientsCount++;
             if (item.MAIL?.datetime_sent) emailsSent++;
+
+            let hasBotScoreZero = false;
+            Object.keys(item.BOT_SCORE_GROUPED_BY_TIMESTAMP).map((ts, key) => {
+              if (item.BOT_SCORE_GROUPED_BY_TIMESTAMP[ts] == 0) {
+                hasBotScoreZero = true;
+              }
+            });
+
+            if (hasBotScoreZero) emailsWithBotScoreZero.push(item.email);
           });
         }
 
@@ -612,7 +630,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               <div className='mt-2 alert alert-info'>
                 { this.translate('Unsubscribed and invalid recipients will be ignored.') }
               </div>
-              {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? 
+              {this.state.campaignLaunchInfo && this.state.campaignLaunchInfo.recipients ? <>
                 <div className='card mt-2'>
                   <div className='card-header'>{ this.translate('Statistics') }</div>
                   <div className='card-body flex flex-col gap-1'>
@@ -628,29 +646,17 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                     <div className='badge badge-danger'>
                       Unsubscribed recipients: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / this.state.campaignLaunchInfo.recipients.length * 100)} %)
                     </div>
-                    <div>
-                      <b>{this.translate('Who clicked? (Bot Score = 0)')}</b>
-                      <div className='flex flex-wrap'>
-                        {this.state.campaignLaunchInfo.recipients.map((item, key) => {
-                          if (item.CLICKS.length == 0) {
-                            return null;
-                          } else {
-                            let botScoreTotal = 0;
-                            item.CLICKS.map((click, key) => {
-                              botScoreTotal += click.bot_score;
-                            });
-                            if (botScoreTotal == 0) {
-                              return <div className='badge'>{item.email}</div>;
-                            } else {
-                              return null;
-                            }
-                          }
-                        })}
-                      </div>
-                    </div>
                   </div>
                 </div>
-              : null}
+                <div className='card mt-2'>
+                  <div className='card-header'>{ this.translate('Potential leads') }</div>
+                  <div className='card-body flex flex-wrap gap-1'>
+                    {emailsWithBotScoreZero.map((email, key) => {
+                      return <div key={key} className='badge'>{email}</div>;
+                    })}
+                  </div>
+                </div>
+              </> : null}
 
               {this.state.launchResult && this.state.launchResult.status == 'success' ?
                 <div className='alert alert-success mt-2'>Campaign was launched.</div>
@@ -708,7 +714,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                             {Object.keys(item.BOT_SCORE_GROUPED_BY_TIMESTAMP).map((ts, key) => {
                               const score = item.BOT_SCORE_GROUPED_BY_TIMESTAMP[ts];
                               return <div key={key} className='text-xs'>
-                                #{key} {moment.unix(parseInt(ts)).format("YYYY-MM-DD HH:mm:ss")} = {score}
+                                #{key+1} {moment.unix(parseInt(ts)).format("YYYY-MM-DD HH:mm:ss")} = {score}
                               </div>;
                             })}
                           </td>

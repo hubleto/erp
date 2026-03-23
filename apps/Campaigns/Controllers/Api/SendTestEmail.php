@@ -45,7 +45,7 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
       ]);
 
       $mMail->createAndSend([
-        'subject' => $campaign->MAIL_TEMPLATE->subject,
+        'subject' => $campaign->mail_subject,
         'body_html' => $bodyHtml,
         'id_account' => $campaign->id_mail_account,
         'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',

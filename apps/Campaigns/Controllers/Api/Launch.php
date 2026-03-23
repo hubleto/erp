@@ -49,7 +49,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
         if ($recipient->id_mail > 0) continue;
 
         $mailData = [
-          'subject' => $campaign->MAIL_TEMPLATE->subject,
+          'subject' => $campaign->mail_subject,
           'body_html' => $bodyHtml,
           'id_account' => $campaign->id_mail_account,
           'from' => $campaign->MAIL_ACCOUNT->sender_email ?? '',

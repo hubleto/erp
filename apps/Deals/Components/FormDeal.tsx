@@ -428,7 +428,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=deals&idDeal=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -504,7 +504,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=deals&idDeal=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=deals&idDeal=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

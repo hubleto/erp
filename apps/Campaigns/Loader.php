@@ -80,6 +80,10 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-check-double"></i></span>
           <span class="text">' . $this->translate('Recipient statuses') . '</span>
         </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=campaigns">
+          <span class="icon"><i class="fas fa-calendar-days"></i></span>
+          <span class="text">' . $this->translate('Calendar') . '</span>
+        </a>
       </div>
     ';
   }

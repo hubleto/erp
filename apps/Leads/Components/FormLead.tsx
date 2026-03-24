@@ -271,7 +271,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
           readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=leads&idLead=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -347,7 +347,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
           readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=leads&idLead=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=leads&idLead=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

@@ -330,7 +330,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
           onCreateCallback={() => this.loadRecord()}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=orders&idOrder=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -405,7 +405,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
           onCreateCallback={() => this.loadRecord()}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=orders&idOrder=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=orders&idOrder=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

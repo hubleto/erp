@@ -17,6 +17,8 @@ class Calendar extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    $show = $this->router()->urlParamAsString('show');
+
     /** @var \Hubleto\App\Community\Calendar\Loader */
     $calendarApp = $this->getService(\Hubleto\App\Community\Calendar\Loader::class);
 
@@ -25,10 +27,11 @@ class Calendar extends \Hubleto\Erp\Controller
     /** @var Manager */
     $calendarManager = $this->getService(Manager::class);
 
-    foreach ($calendarManager->getCalendars() as $source => $calendar) {
+    foreach ($calendarManager->getCalendars() as $calendarName => $calendar) {
       $calendarConfig = $calendar->getCalendarConfig();
       $calendarConfig['color'] = $calendar->getColor();
-      $this->viewParams["calendarConfigs"][$source] = $calendarConfig;
+      $calendarConfig['show'] = empty($show) || $show == $calendarName;
+      $this->viewParams["calendars"][$calendarName] = $calendarConfig;
     }
 
     $this->setView('@Hubleto:App:Community:Calendar/Calendar.twig');

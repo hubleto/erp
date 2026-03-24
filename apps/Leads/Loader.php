@@ -114,6 +114,28 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      <div class="flex flex-col gap-2">
+        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/leads">
+          <span class="icon"><i class="fas fa-people-arrows"></i></span>
+          <span class="text">' . $this->translate('Leads') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=leads">
+          <span class="icon"><i class="fas fa-calendar-days"></i></span>
+          <span class="text">' . $this->translate('Calendar') . '</span>
+        </a>
+      </div>
+    ';
+  }
+
+  /**
    * Implements fulltext search functionality for tasks
    *
    * @param array $expressions List of expressions to be searched and glued with logical 'or'.

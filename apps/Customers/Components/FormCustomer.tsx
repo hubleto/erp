@@ -257,7 +257,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
           onCreateCallback={() => this.loadRecord()}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=customers&idCustomer=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -407,7 +407,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
           onCreateCallback={() => this.loadRecord()}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=customers&idCustomer=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=customers&idCustomer=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

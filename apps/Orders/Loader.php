@@ -154,6 +154,10 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="text">' . $this->translate('Quotes') . '</span>
         </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=orders">
+          <span class="icon"><i class="fas fa-calendar-days"></i></span>
+          <span class="text">' . $this->translate('Calendar') . '</span>
+        </a>
       </div>
     ';
   }

@@ -233,7 +233,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
           readonly={R.is_closed}
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=campaigns&idCampaign=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,
@@ -309,7 +309,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
           readonly={R.is_closed}
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?source=campaigns&idCampaign=' + R.id}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=campaigns&idCampaign=' + R.id}
           onDateClick={(date, time, info) => {
             this.setState({
               activityDate: date,

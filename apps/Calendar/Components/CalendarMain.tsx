@@ -20,7 +20,7 @@ interface CalendarMainProps {
   onCreateCallback?: any
   onDateClick: any,
   onEventClick: any,
-  configs?: any,
+  calendars?: any,
 }
 
 interface CalendarMainState {
@@ -33,7 +33,7 @@ interface CalendarMainState {
   activityFormComponent?: JSX.Element,
   activityFormModalProps?: any,
   newActivity: boolean,
-  fSources: Array<string>,
+  calendars: any,
   fOwnership: number,
 }
 
@@ -47,12 +47,14 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
 
   refCalendar: any;
   refActivityModal: any;
+  refActivityForm: any;
 
   constructor(props) {
     super(props);
 
     this.refCalendar = React.createRef();
     this.refActivityModal = React.createRef();
+    this.refActivityForm = React.createRef();
 
     this.state = {
       eventSource: this.props.eventSource ?? '',
@@ -62,7 +64,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
       dateClicked: "",
       timeClicked: "",
       newActivity: false,
-      fSources: Object.keys(this.props.configs),
+      calendars: this.props.calendars,
       fOwnership: 0,
     };
   }
@@ -71,36 +73,40 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
     return (
       'calendar/api/get-calendar-events?fOwnership='
       + this.state.fOwnership
-      + '&' + this.state.fSources.map((item) => 'fSources[]=' + item).join('&')
-      + (eventSource ? '&source=' + eventSource : '')
+      + '&' + Object.keys(this.state.calendars)
+        .filter((calendarName) => this.state.calendars[calendarName].show)
+        .map((calendarName) => 'calendars[]=' + calendarName)
+        .join('&')
+      // + (eventSource ? '&source=' + eventSource : '')
       + (eventId ? '&id=' + eventId : '')
     );
   }
 
-  componentDidMount() {
-    if (this.props.eventSource && this.props.eventId) {
-      request.get(
-        this.getCalendarEventsEndpointUrl(this.props.eventSource, this.props.eventId),
-        {},
-        (event: any) => {
-          if (event) {
-            this.setState({
-              eventSource: '',
-              eventId: 0,
-              activityFormComponent: globalThis.hubleto.renderReactElement(event.SOURCEFORM,
-                {
-                  id: event.id,
-                  modal: this.refActivityModal,
-                  onClose:() => {this.setState({activityFormComponent: null})},
-                  onSaveCallback:() => {this.setState({activityFormComponent: null})}
-                }
-              )
-            });
-          }
-        }
-      );
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.eventSource && this.props.eventId) {
+  //     console.log('this.props.eventSource', this.props.eventSource);
+  //     request.get(
+  //       this.getCalendarEventsEndpointUrl(this.props.eventSource, this.props.eventId),
+  //       {},
+  //       (event: any) => {
+  //         if (event) {
+  //           this.setState({
+  //             eventSource: '',
+  //             eventId: 0,
+  //             activityFormComponent: globalThis.hubleto.renderReactElement(event.SOURCEFORM,
+  //               {
+  //                 id: event.id,
+  //                 modal: this.refActivityModal,
+  //                 onClose:() => {this.setState({activityFormComponent: null})},
+  //                 onSaveCallback:() => {this.setState({activityFormComponent: null})}
+  //               }
+  //             )
+  //           });
+  //         }
+  //       }
+  //     );
+  //   }
+  // }
 
   renderCell = (eventInfo) => {
     return <>
@@ -119,6 +125,8 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
       onClose: () => { this.setState({ activityFormComponent: null }); },
       ...this.state.activityFormModalProps
     };
+
+    console.log('render', this.state);
 
     return <div className="flex gap-2 flex-col md:flex-row">
       <div className="flex flex-col gap-2 text-nowrap">
@@ -139,27 +147,19 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
 
         <b>{this.translate('Calendars')}</b>
         <div className="list">
-          {Object.keys(this.props.configs).map((source: any) => {
-            const calendar = this.props.configs[source];
+          {Object.keys(this.props.calendars).map((calendarName: any) => {
+            const calendar = this.props.calendars[calendarName];
 
             return <button
               className="btn btn-small btn-list-item btn-transparent"
               style={{"borderLeft": "1em solid " + calendar.color}}
               onClick={() => {
-                let fSources: Array<string> = [];
-                if (this.state.fSources.includes(source)) {
-                  for (let i in this.state.fSources) {
-                    if (this.state.fSources[i] != source) fSources.push(this.state.fSources[i]);
-                  }
-                } else {
-                  fSources = this.state.fSources;
-                  fSources.push(source);
-                }
-
-                this.setState({fSources: fSources});
+                let calendars = this.state.calendars;
+                calendars[calendarName].show = !calendars[calendarName].show;
+                this.setState({calendars: calendars});
               }}
             >
-              <span className="icon"><input type="checkbox" checked={this.state.fSources.includes(source)}></input></span>
+              <span className="icon"><input type="checkbox" checked={this.state.calendars[calendarName].show}></input></span>
               <span className="text">{calendar.title}</span>
             </button>;
           })}
@@ -192,7 +192,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           height={this.props.height}
           initialView={this.props.initialView ?? "timeGridWeek"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/' + this.getCalendarEventsEndpointUrl()}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/' + this.getCalendarEventsEndpointUrl(this.props.eventSource)}
           onEventsLoaded={(events) => {
           }}
           onDateClick={(date, time, info) => {
@@ -235,14 +235,16 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
       {this.state.newActivity ?
         <ModalForm
           ref={this.refActivityModal}
+          form={this.refActivityForm}
           uid='activity_new_form'
           isOpen={true}
           type='right'
           onClose={() => this.setState({newActivity: false})}
         >
           <FormActivitySelector
+            ref={this.refActivityForm}
             onCallback={() => this.setState({newActivity: false})}
-            calendarConfigs={this.props.configs}
+            calendarConfigs={this.props.calendars}
             clickConfig={{
               date: this.state.dateClicked,
               time: this.state.timeClicked

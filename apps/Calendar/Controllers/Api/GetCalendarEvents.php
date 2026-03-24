@@ -30,12 +30,12 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
       'fOwnership' => $this->router()->urlParamAsInteger('fOwnership'),
     ];
 
-    if ($this->router()->isUrlParam('source')) {
+    if ($this->router()->isUrlParam('calendar')) {
 
       /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
       $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
 
-      $calendar = $calendarManager->getCalendar($this->router()->urlParamAsString('source'));
+      $calendar = $calendarManager->getCalendar($this->router()->urlParamAsString('calendar'));
       if ($this->router()->isUrlParam('id')) {
         $event = (array) $calendar->loadEvent($this->router()->urlParamAsInteger('id'));
         $event['SOURCEFORM'] = $calendar->getCalendarConfig()["formComponent"] ?? null;
@@ -50,7 +50,7 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
         $this->dateStart,
         $this->dateEnd,
         $filter,
-        $this->router()->urlParamAsArray('fSources')
+        $this->router()->urlParamAsArray('calendars')
       );
     }
   }

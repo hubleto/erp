@@ -123,8 +123,8 @@ class Lead extends \Hubleto\Erp\Model
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, $this->translate("Online document folder"))->setCssClass('text-violet-800'),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
-      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues([
         1 => $this->translate("Advertisement"),
         2 => $this->translate("Partner"),

@@ -6,7 +6,7 @@ use Hubleto\App\Community\Mail\Mailer;
 
 class GetMails extends \Hubleto\Erp\Cron
 {
-  public string $schedulingPattern = '* * * * *';
+  public string $schedulingPattern = '*/5 * * * *';
 
   public function compileEmailAddresses(array $input): string
   {

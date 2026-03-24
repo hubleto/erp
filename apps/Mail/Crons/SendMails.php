@@ -6,9 +6,8 @@ use Hubleto\App\Community\Mail\Models\Mail;
 
 class SendMails extends \Hubleto\Erp\Cron
 {
-  public string $schedulingPattern = '* * * * *';
+  public string $schedulingPattern = '*/5 * * * *';
   public int $maxMailsToSend = 10;
-
 
   public function run(): void
   {

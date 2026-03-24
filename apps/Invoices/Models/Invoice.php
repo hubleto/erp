@@ -121,8 +121,8 @@ class Invoice extends \Hubleto\Erp\Model {
       'total_incl_vat' => new Currency($this, $this->translate('Total incl. VAT'))->setDecimals(2)->setReadonly(),
       'total_payments' => new Currency($this, $this->translate('Total payments'))->setDecimals(2)->setReadonly(),
       'notes' => (new Text($this, $this->translate('Notes'))),
-      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
       'virt_items' => (new Virtual($this, $this->translate('Items')))->setDefaultVisible()

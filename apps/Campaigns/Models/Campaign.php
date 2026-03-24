@@ -69,17 +69,17 @@ class Campaign extends \Hubleto\Erp\Model
       'id_mail_template' => (new Lookup($this, $this->translate('Mail template'), Template::class))
         ->setDefaultVisible()
       ,
-      'mail_subject' => (new Varchar($this, $this->translate('Subject')))->setRequired()->setCssClass('font-bold')->setDefaultVisible(),
+      'mail_subject' => (new Varchar($this, $this->translate('Subject')))->setCssClass('font-bold')->setDefaultVisible(),
       'mail_body' => (new Text($this, $this->translate('Body')))->setReactComponent('InputTextareaWithHtmlPreview'),
       'reply_to' => (new Varchar($this, $this->translate('Reply to'))),
-      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class)),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible(),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s')),
+      'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s'))->setReadonly(),
       'id_launched_by' => (new Lookup($this, $this->translate('Lanuched by'), User::class))->setReadonly(true),
       'datetime_launched' => (new DateTime($this, $this->translate('Launched')))->setReadonly(true)->setDefaultVisible(),
     ]);

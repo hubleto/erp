@@ -3,6 +3,8 @@
 <hblreact-mail-table-templates
   string:tag="mail-templates"
   int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'
   string:form-active-tab-uid='{{ viewParams.tab }}'
   bool:show-only-templates="true"

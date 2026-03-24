@@ -14,6 +14,8 @@
 <hblreact-deals-table-deals
   string:tag="table-deals"
   int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'
   string:form-active-tab-uid='{{ viewParams.tab }}'
 ></hblreact-deals-table-deals>

@@ -4,6 +4,8 @@
   string:folder="inbox"
   string:tag="api-table-keys"
   int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'
   string:form-active-tab-uid='{{ viewParams.tab }}'
 ></hblreact-audit-logs-table-audit-logs>

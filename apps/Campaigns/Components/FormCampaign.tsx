@@ -549,7 +549,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         let invalidRecipientsCount = 0;
         let unsubscribedRecipientsCount = 0;
         let emailsSent = 0;
-        let emailsWithBotScoreZero = [];
+        let potentialLeads = [];
 
         if (this.state.campaignLaunchInfo?.recipients) {
           this.state.campaignLaunchInfo.recipients.map((item, key) => {
@@ -557,14 +557,20 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             if (item.STATUS?.is_invalid) invalidRecipientsCount++;
             if (item.MAIL?.datetime_sent) emailsSent++;
 
-            let hasBotScoreZero = false;
-            Object.keys(item.BOT_SCORE_GROUPED_BY_TIMESTAMP).map((ts, key) => {
-              if (item.BOT_SCORE_GROUPED_BY_TIMESTAMP[ts] == 0) {
-                hasBotScoreZero = true;
-              }
-            });
+            let isPotentialLead = false;
+            if (item.CLICK_GROUPS) {
+              Object.keys(item.CLICK_GROUPS).map((ts, key) => {
+                const group = item.CLICK_GROUPS[ts];
+                if (
+                  group[0] <= 1 // clicks
+                  && group[1] == 0 // bot score
+                ) {
+                  isPotentialLead = true;
+                }
+              });
+            }
 
-            if (hasBotScoreZero) emailsWithBotScoreZero.push(item.email);
+            if (isPotentialLead) potentialLeads.push(item.email);
           });
         }
 
@@ -650,7 +656,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 <div className='card mt-2'>
                   <div className='card-header'>{ this.translate('Potential leads') }</div>
                   <div className='card-body flex flex-wrap gap-1'>
-                    {emailsWithBotScoreZero.map((email, key) => {
+                    {potentialLeads.map((email, key) => {
                       return <div key={key} className='badge'>{email}</div>;
                     })}
                   </div>
@@ -710,12 +716,12 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           </td>
                           <td className={'text-nowrap text-red-800'}>{botScoreTotal > 0 ? botScoreTotal : null}</td>
                           <td className='text-nowrap'>
-                            {Object.keys(item.BOT_SCORE_GROUPED_BY_TIMESTAMP).map((ts, key) => {
-                              const score = item.BOT_SCORE_GROUPED_BY_TIMESTAMP[ts];
+                            {item.CLICK_GROUPS ? Object.keys(item.CLICK_GROUPS).map((ts, key) => {
+                              const group = item.CLICK_GROUPS[ts];
                               return <div key={key} className='text-xs'>
-                                #{key+1} {moment.unix(parseInt(ts)).format("YYYY-MM-DD HH:mm:ss")} = {score}
+                                #{key+1} {moment.unix(parseInt(ts)).format("YYYY-MM-DD HH:mm:ss")} = {group[0]}, {group[1]}
                               </div>;
-                            })}
+                            }) : null}
                           </td>
                         </tr>
                       })}

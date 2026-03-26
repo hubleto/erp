@@ -79,12 +79,13 @@ export default class Calendar extends Component {
     }
 
     return <>
-      {eventInfo.event.extendedProps.icon ?
+      {/* {eventInfo.event.extendedProps.icon ?
         <i
           style={{color: color}}
           className={"ml-2 " + eventInfo.event.extendedProps.icon}
         ></i>
-      : null}
+      : null} */}
+      {eventInfo.event.extendedProps.completed ? <i className='fas fa-check ml-1'></i> : null}
       <b className="ml-2">{eventInfo.timeText}</b>
       <span className="ml-2">{eventInfo.event.title}</span>
       {eventInfo.event.extendedProps.details ?

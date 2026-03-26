@@ -13,7 +13,7 @@ class Calendar extends \Hubleto\Erp\Calendar
     return [
       'title' => $this->translate('Default'),
       'addNewActivityButtonText' => $this->translate('Add a simple event'),
-      'formComponent' => 'CampaignFormActivity',
+      'formComponent' => 'CalendarFormActivity',
     ];
   }
 

@@ -6,11 +6,11 @@ import FormActivitySelector from "./FormActivitySelector";
 import request from "@hubleto/react-ui/core/Request";
 import moment from 'moment';
 import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import FormActivity from "./FormActivity";
 
 
 interface CalendarMainProps {
-  eventSource?: string,
-  eventId?: number,
+  showActivity?: string,
   children: any,
   eventsEndpoint: string,
   views?: string,
@@ -24,8 +24,7 @@ interface CalendarMainProps {
 }
 
 interface CalendarMainState {
-  eventSource?: string,
-  eventId?: number,
+  showActivity?: string,
   events: Array<any>,
   showIdActivity?: number,
   dateClicked?: string,
@@ -48,6 +47,8 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
   refCalendar: any;
   refActivityModal: any;
   refActivityForm: any;
+  // refActivityModal: any;
+  // refActivityForm: any;
 
   constructor(props) {
     super(props);
@@ -55,10 +56,11 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
     this.refCalendar = React.createRef();
     this.refActivityModal = React.createRef();
     this.refActivityForm = React.createRef();
+    // this.refActivityModal = React.createRef();
+    // this.refActivityForm = React.createRef();
 
     this.state = {
-      eventSource: this.props.eventSource ?? '',
-      eventId: this.props.eventId ?? 0,
+      showActivity: this.props.showActivity ?? '',
       events: [],
       showIdActivity: 0,
       dateClicked: "",
@@ -69,7 +71,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
     };
   }
 
-  getCalendarEventsEndpointUrl(eventSource?: string, eventId?: number): string {
+  getCalenActivitiesEndpointUrl(showActivity?: string, eventId?: number): string {
     return (
       'calendar/api/get-calendar-events?fOwnership='
       + this.state.fOwnership
@@ -77,36 +79,10 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
         .filter((calendarName) => this.state.calendars[calendarName].show)
         .map((calendarName) => 'calendars[]=' + calendarName)
         .join('&')
-      // + (eventSource ? '&source=' + eventSource : '')
+      // + (showActivity ? '&source=' + showActivity : '')
       + (eventId ? '&id=' + eventId : '')
     );
   }
-
-  // componentDidMount() {
-  //   if (this.props.eventSource && this.props.eventId) {
-  //     console.log('this.props.eventSource', this.props.eventSource);
-  //     request.get(
-  //       this.getCalendarEventsEndpointUrl(this.props.eventSource, this.props.eventId),
-  //       {},
-  //       (event: any) => {
-  //         if (event) {
-  //           this.setState({
-  //             eventSource: '',
-  //             eventId: 0,
-  //             activityFormComponent: globalThis.hubleto.renderReactElement(event.SOURCEFORM,
-  //               {
-  //                 id: event.id,
-  //                 modal: this.refActivityModal,
-  //                 onClose:() => {this.setState({activityFormComponent: null})},
-  //                 onSaveCallback:() => {this.setState({activityFormComponent: null})}
-  //               }
-  //             )
-  //           });
-  //         }
-  //       }
-  //     );
-  //   }
-  // }
 
   renderCell = (eventInfo) => {
     return <>
@@ -117,16 +93,37 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
   }
 
   render(): JSX.Element {
-    let activityFormModalProps = {
-      modal: this.refActivityModal,
-      uid: 'activity_form',
-      isOpen: true,
-      type: 'right',
-      onClose: () => { this.setState({ activityFormComponent: null }); },
-      ...this.state.activityFormModalProps
-    };
+    let eventForm = null;
+    if (this.state.showActivity) {
 
-    console.log('render', this.state);
+      setUrlParam('showActivity', this.state.showActivity);
+
+      const activityCalendar = this.state.showActivity.split(',')[0];
+      const activityId = this.state.showActivity.split(',')[1];
+      let calendar = this.state.calendars[activityCalendar];
+
+      console.log(activityCalendar, activityId, calendar, this.state);
+
+      eventForm = globalThis.hubleto.renderReactElement(calendar.formComponent,
+        {
+          ref: this.refActivityForm,
+          description: {
+            defaultValues: {
+              date_start: this.state.dateClicked,
+              time_start: this.state.timeClicked ?? moment().format('HH:mm:ss'),
+              date_end: this.state.dateClicked,
+              time_end: moment().add(30, 'minutes').format("HH:mm:ss"),
+            }
+          },
+          id: activityId,
+          modal: this.refActivityModal,
+          onClose:() => {this.setState({showActivity: ''})},
+          onSaveCallback:() => {this.setState({showActivity: ''})}
+        }
+      )
+    } else {
+      deleteUrlParam('showActivity');
+    }
 
     return <div className="flex gap-2 flex-col md:flex-row">
       <div className="flex flex-col gap-2 text-nowrap">
@@ -134,8 +131,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           className="btn btn-primary-outline mb-2"
           onClick={() => {
             this.setState({
-              activityFormComponent: null,
-              newActivity: true,
+              showActivity: 'calendar,-1',
               dateClicked: moment().format('YYYY-MM-DD'),
               timeClicked: moment().format('HH:mm:ss'),
             });
@@ -192,66 +188,32 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           height={this.props.height}
           initialView={this.props.initialView ?? "timeGridWeek"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/' + this.getCalendarEventsEndpointUrl(this.props.eventSource)}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/' + this.getCalenActivitiesEndpointUrl(this.props.showActivity)}
           onEventsLoaded={(events) => {
           }}
           onDateClick={(date, time, info) => {
-            deleteUrlParam('eventSource');
-            deleteUrlParam('eventId');
-
             this.setState({
-              activityFormComponent: null,
-              newActivity: true,
+              showActivity: 'calendar,-1',
               dateClicked: date,
               timeClicked: info.view.type == "dayGridMonth" ? null : time
             });
           }}
           onEventClick={(info) => {
-            setUrlParam('eventSource', info.event.extendedProps.source);
-            setUrlParam('eventId', info.event.id);
-
             this.setState({
-              newActivity: false,
-              activityFormComponent: globalThis.hubleto.renderReactElement(info.event.extendedProps.SOURCEFORM,
-                {
-                  id: info.event.id,
-                  showInModal: true,
-                  showInModalSimple: true,
-                  modal: this.refActivityModal,
-                  onClose:() => {this.setState({activityFormComponent: null})},
-                  onSaveCallback:() => {this.setState({activityFormComponent: null})}
-                }
-              )
+              showActivity: info.event.extendedProps.source + ',' + info.event.id,
             });
             info.jsEvent.preventDefault();
           }}
         ></Calendar>
       </div>
-      {this.state.activityFormComponent ?
-        <ModalForm ref={this.refActivityModal} {...activityFormModalProps}>
-          {this.state.activityFormComponent}
-        </ModalForm>
-      : <></>}
-      {this.state.newActivity ?
-        <ModalForm
-          ref={this.refActivityModal}
-          form={this.refActivityForm}
-          uid='activity_new_form'
-          isOpen={true}
-          type='right'
-          onClose={() => this.setState({newActivity: false})}
-        >
-          <FormActivitySelector
-            ref={this.refActivityForm}
-            onCallback={() => this.setState({newActivity: false})}
-            calendarConfigs={this.props.calendars}
-            clickConfig={{
-              date: this.state.dateClicked,
-              time: this.state.timeClicked
-            }}
-          />
-        </ModalForm>
-      : <></>}
+      {eventForm ? <ModalForm
+        ref={this.refActivityModal}
+        form={this.refActivityForm}
+        uid='event_modal'
+        isOpen={true}
+        type='right'
+        onClose={() => this.setState({showActivity: ''})}
+      >{eventForm}</ModalForm> : null}
     </div>;
   }
 }

@@ -43,6 +43,14 @@ class Loader extends \Hubleto\Erp\App
 
   }
 
+  /**
+   * [Description for installApp]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installApp(int $round): void
   {
     if ($round == 1) {
@@ -51,6 +59,22 @@ class Loader extends \Hubleto\Erp\App
       $mSharedCalendar = $this->getModel(SharedCalendar::class);
       $mSharedCalendar->upgradeSchema();
     }
+  }
+
+  /**
+   * [Description for getSidebarBadgeNumber]
+   *
+   * @return int
+   *
+   */
+  public function getSidebarBadgeNumber(): int
+  {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    return
+      $counter->missedIncompleteActivities()
+    ;
   }
 
   public function getInitialView(): string

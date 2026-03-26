@@ -33,7 +33,7 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
 
       $clickGroups = [];
       $botScoreGroups = [];
-      $grouppingCoefficient = 50000; // 5-second interval to group the clicks
+      $grouppingCoefficient = 2000; // 2-second interval to group the clicks
 
       if (is_array($recipient['CLICKS'])) {
         foreach ($recipient['CLICKS'] as $click) {

@@ -74,6 +74,8 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
         $upgradeSchema .= "\n\n" . join("; ", $createIndexCommands) . ';';
       }
 
+      $migrationCounter = 1;
+
       $tplVars = [
         'appNamespace' => $appNamespace,
         'model' => $className,
@@ -90,7 +92,8 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
       if (!is_dir($app->srcFolder . '/Models/Migrations')) {
         mkdir($app->srcFolder . '/Models/Migrations');
       }
-      file_put_contents($app->srcFolder . '/Models/Migrations/' . $className . '_' . date('Ymd') . '_0001.php', $this->renderer()->renderView('@snippets/Migration.php.twig', $tplVars));
+
+      file_put_contents($app->srcFolder . '/Models/Migrations/' . $className . '_' . str_pad((string) $migrationCounter, 4, '0', STR_PAD_LEFT) . '.php', $this->renderer()->renderView('@snippets/Migration.php.twig', $tplVars));
 
       $this->terminal()->white("\n");
       $this->terminal()->cyan("Migration " . $class . '_' . date('Ymd') . '_0001.php' . " in '{$appNamespace}' created successfully.\n");

@@ -27,6 +27,8 @@ class Counter extends Core
   {
     $mOrder = $this->getModel(Models\Order::class);
 
+    $lastDayOfPreviusMonth = date("Y-m-t", strtotime("-1 month"));
+
     return $mOrder->record
       ->selectRaw('
         orders.id,
@@ -35,7 +37,7 @@ class Counter extends Core
       ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
       ->groupBy('orders.id')
       ->whereRaw('orders.payment_period > 0')
-      ->havingRaw('last_item_date_due <= now()')
+      ->havingRaw('last_item_date_due <= "' . $lastDayOfPreviusMonth . '"')
       ->pluck('id')
       ?->toArray()
     ;

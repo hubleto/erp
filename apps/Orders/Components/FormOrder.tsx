@@ -25,6 +25,7 @@ export interface FormOrderState extends FormExtendedState {
   activitySubject: string,
   activityAllDay: boolean,
   selectParentDeal?: boolean,
+  htmlPreview?: any,
 }
 
 export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrderState> {
@@ -75,7 +76,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
         { uid: 'items', title: this.translate('Items') },
         { uid: 'quotes', title: this.translate('Quotes') },
-        { uid: 'preview', title: this.translate('Preview') },
+        { uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'payments', title: this.translate('Payments') },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
@@ -100,12 +101,12 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'preview':
-        this.updatePreview(this.state.record.id_template);
+        this.updateOrderPreview(this.state.record.id_template);
       break;
     }
   }
 
-  updatePreview(idTemplate: number) {
+  updateOrderPreview(idTemplate: number) {
     request.post(
       'orders/api/get-preview-html',
       {
@@ -114,12 +115,12 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       },
       {},
       (result: any) => {
-        this.refPreview.current.setState({content: result.html});
+        this.setState({htmlPreview: result.html});
       }
     );
   }
 
-  showPreviewVars() {
+  showOrderPreviewVars() {
     request.post(
       'orders/api/get-preview-vars',
       {
@@ -128,7 +129,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       },
       {},
       (vars: any) => {
-        this.refPreview.current.setState({content: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
+        this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
       }
     );
   }
@@ -278,6 +279,52 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
         </>;
       break;
 
+      // case 'preview':
+      //   return <div className='flex gap-2 h-full'>
+      //     <div className='flex-1 w-72 flex flex-col gap-2'>
+      //       <div className='grow'>
+      //         {this.inputWrapper('id_template', {
+      //           uiStyle: 'buttons-vertical',
+      //           onChange: (input: any) => {
+      //             this.updatePreview(input.state.value);
+      //           }
+      //         })}
+      //       </div>
+      //       <div className='grow'>
+      //         <button
+      //           className='btn btn-transparent btn-large mb-4'
+      //           onClick={() => {
+      //             request.post(
+      //               'orders/api/generate-pdf',
+      //               {idOrder: this.state.record.id},
+      //               {},
+      //               (result: any) => {
+      //                 this.reload();
+      //               }
+      //             );
+      //           }}
+      //         >
+      //           <span className='icon'><i className='fas fa-print'></i></span>
+      //           <span className='text'>{this.translate('Export to PDF')}</span>
+      //         </button>
+      //         {this.inputWrapper('pdf', {readonly: true})}
+      //       </div>
+      //     </div>
+      //     <div className="flex-3 gap-2 h-full card card-body">
+      //       <HtmlFrame
+      //         ref={this.refPreview}
+      //         className='w-full h-full'
+      //       />
+      //       <a
+      //         href='#'
+      //         onClick={() => {
+      //           this.showPreviewVars();
+      //         }}
+      //       >{this.translate('Show variables which can be used in template')}</a>
+      //     </div>
+      //   </div>;
+      // break;
+
       case 'preview':
         return <div className='flex gap-2 h-full'>
           <div className='flex-1 w-72 flex flex-col gap-2'>
@@ -285,41 +332,75 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
               {this.inputWrapper('id_template', {
                 uiStyle: 'buttons-vertical',
                 onChange: (input: any) => {
-                  this.updatePreview(input.state.value);
+                  this.updateOrderPreview(input.state.value);
                 }
               })}
             </div>
-            <div className='grow'>
-              <button
-                className='btn btn-transparent btn-large mb-4'
-                onClick={() => {
-                  request.post(
-                    'orders/api/generate-pdf',
-                    {idOrder: this.state.record.id},
-                    {},
-                    (result: any) => {
-                      this.reload();
-                    }
-                  );
-                }}
-              >
-                <span className='icon'><i className='fas fa-print'></i></span>
-                <span className='text'>{this.translate('Export to PDF')}</span>
-              </button>
-              {this.inputWrapper('pdf', {readonly: true})}
-            </div>
           </div>
-          <div className="flex-3 gap-2 h-full card card-body">
-            <HtmlFrame
-              ref={this.refPreview}
-              className='w-full h-full'
-            />
-            <a
-              href='#'
-              onClick={() => {
-                this.showPreviewVars();
-              }}
-            >{this.translate('Show variables which can be used in template')}</a>
+          <div className='flex-3 flex flex-col'>
+            <div className='flex gap-2 align-center justify-end'>
+              <div>
+                {this.input('pdf', {readonly: true})}
+              </div>
+              <div className='flex gap-2'>
+                <button
+                  className='btn btn-transparent mb-4'
+                  onClick={() => {
+                    request.post(
+                      'orders/api/generate-pdf',
+                      {idOrder: this.state.record.id},
+                      {},
+                      (result: any) => {
+                        // if (result.idDocument) {
+                        //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
+                        // }
+                        // this.reload();
+                        if (result && result.pdfFile) {
+                          this.updateRecord({pdf: result.pdfFile});
+                        }
+                      }
+                    );
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-download'></i></span>
+                  <span className='text'>{this.translate('Export to PDF')}</span>
+                </button>
+                <button
+                  className='btn btn-transparent mb-4'
+                  onClick={() => {
+                    const iframe = window.frames[this.props.uid + '_order_preview'];
+                    const origDocumentTitle = document.title;
+
+                    document.title += 'Order ' + R.number + ' ' + R.CUSTOMER.name;
+
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+
+                    document.title = origDocumentTitle;
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-print'></i></span>
+                  <span className='text'>{this.translate('Print')}</span>
+                </button>
+              </div>
+            </div>
+            <div className='w-full h-full card mt-2'>
+              <div className="card-body">
+                <HtmlFrame
+                  className='w-full h-full'
+                  iframeId={this.props.uid + '_order_preview'}
+                  content={this.state.htmlPreview}
+                />
+              </div>
+              <div className='card-footer'>
+                <a
+                  href='#'
+                  onClick={() => {
+                    this.showOrderPreviewVars();
+                  }}
+                >{this.translate('Show variables which can be used in template')}</a>
+              </div>
+            </div>
           </div>
         </div>;
       break;
@@ -469,13 +550,21 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       break;
 
       case 'items':
-        return <TableItems
-          key={"table_order_item"}
-          tag={"table_order_item"}
-          parentForm={this}
-          uid={this.props.uid + "_table_order_item"}
-          idOrder={R.id}
-        />;
+        return <div className='flex flex-col gap-2'>
+          <div>
+            {this.inputWrapper('description_before')}
+          </div>
+          <TableItems
+            key={"table_order_item"}
+            tag={"table_order_item"}
+            parentForm={this}
+            uid={this.props.uid + "_table_order_item"}
+            idOrder={R.id}
+          />
+          <div>
+            {this.inputWrapper('description_after')}
+          </div>
+        </div>;
       break;
 
       case 'quotes':

@@ -106,6 +106,8 @@ class Order extends \Hubleto\Erp\Model
         12 => $this->translate('Yearly'),
         24 => $this->translate('Each 2 years'),
       ]),
+      'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
+      'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired()->setDefaultValue(date("Y-m-d")),
       'required_delivery_date' => (new Date($this, $this->translate('Required delivery date'))),
@@ -340,6 +342,14 @@ class Order extends \Hubleto\Erp\Model
     return $savedRecord;
   }
 
+  /**
+   * [Description for getPreviewVars]
+   *
+   * @param int $idOrder
+   * 
+   * @return array
+   * 
+   */
   public function getPreviewVars(int $idOrder): array
   {
     /** @var Order */
@@ -385,7 +395,6 @@ class Order extends \Hubleto\Erp\Model
 
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
     if (!$template) throw new \Exception('Template was not found.');
-
 
     /** @var Generator */
     $generator = $this->getService(Generator::class);

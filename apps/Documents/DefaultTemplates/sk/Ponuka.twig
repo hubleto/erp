@@ -1,18 +1,7 @@
-{% set advance_payments_total = 0 %}
-{% if PAYMENTS %}
-  {% for p in PAYMENTS %}
-    {% if p.is_advance_payment %}
-      {% set advance_payments_total = advance_payments_total + p.amount %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
-
-{% set to_be_paid = total_incl_vat - advance_payments_total %}
-
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Faktúra {{ PROFILE.COMPANY.name }} {{ number }}</title>
+  <title>Ponuka {{ PROFILE.COMPANY.name }} {{ number }}</title>
   <style>
     {% if PDF_EXPORT %}
       * { font-family: Dejavu Sans !important; line-height: 0.95em; font-size: 10pt; }
@@ -41,8 +30,7 @@
 </head>
 <body>
   <!-- TOP -->
-  <div>Faktúra - daňový doklad č. <b>{{ number }}</b></div>
-  {% if to_be_paid <= 0 %} <div style="color:red">Neuhrádzajte, faktúra je už uhradená.</div> {% endif %}
+  <div>Ponuka č. <b>{{ identifier }}</b></div>
   <br/>
   <div class="dmain">
     <!-- DODAVATEL -->
@@ -92,38 +80,6 @@
         {% if CUSTOMER.tax_id %} DIČ: {{ CUSTOMER.tax_id }}<br/> {% endif %}
         {% if CUSTOMER.vat_id %} IČDPH: {{ CUSTOMER.vat_id }}<br/> {% endif %}
       </div>
-      <div class="content">
-        <br/>
-        Variabilný symbol: <b>{{ vs }}</b><br/>
-        {% if ss %} Špecifický symbol: <b>{{ ss }}</b><br/>{% endif %}
-        {% if cs %} Konštantný symbol: <b>{{ cs }}</b><br/>{% endif %}
-        Forma úhrady: <b>{{ PAYMENT_METHOD.name }}</b><br/>
-        <br/>
-        Dátum vystavenia: {{ hubleto.locale().formatDateShort(date_issue ?? '') }}<br/>
-        Dátum dodania: {{ hubleto.locale().formatDateShort(date_delivery ?? '') }}<br/>
-      </div>
-    </div>
-    <div style="clear:both;"></div>
-  </div>
-  <div class="dmain">
-    <div class="dcolumn" style="width:60%">
-      <div class="content" style="background:#EEEEEE;text-align:center">
-        IBAN <br>
-        <b style="font-size:1.4em;">{{ PROFILE.iban }}</b>
-        <br>
-        <br> BIC/SWIFT <br>
-        <b style="font-size:1.4em;">{{ PROFILE.swift }}</b>
-        <br>
-      </div>
-    </div>
-    <div class="dcolumn" style="width:40%">
-      <div class="content" style="background:#EEEEEE;text-align:center">
-        Suma k úhrade<br>
-        <b style="font-size:1.4em;text-wrap:nowrap">{{ hubleto.locale().formatCurrency(total_incl_vat - advance_payments_total, CURRENCY.symbol) }}</b><br/>
-        <br/>
-        Dátum splatnosti<br>
-        <b style="font-size:1.4em;">{{ hubleto.locale().formatDateShort(date_due ?? '') }}</b>
-      </div>
     </div>
     <div style="clear:both;"></div>
   </div>
@@ -161,21 +117,13 @@
                   <tbody>
                     <tr>
                       <td style="width:50%;color:blue">
-                        <i>{{ i.item }}</i>
-                        {% if i.discount > 0 %}
-                          <div style="color:orange">
-                            Započítaná zľava {{ i.discount|round }} %
-                          </div>
-                        {% endif %}
+                        <i>{{ i.title }}</i>
                       </td>
                       <td style="width:50%;text-align:right">
                         <span>{{ hubleto.locale().formatCurrency(i.unit_price * (100 - i.discount)/100, CURRENCY.symbol) }}</span>
                         ×
                         {{ hubleto.locale().formatNumber(i.amount, 4) }}
                         = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> bez DPH</b>
-                        <div style="color:#888888">
-                          DPH {{ i.vat|number_format(2, '.', '') }} % = <span>{{ hubleto.locale().formatCurrency(i.price_vat, CURRENCY.symbol) }}</span>
-                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -188,7 +136,6 @@
     </div>
   </div>
 
-
   {% if description_after %}
     <div style="text-align:left;margin:1em 0em;white-space:pre-wrap;">{{ description_after }}</div>
   {% endif %}
@@ -198,16 +145,7 @@
   <table style="width:100%">
     <tbody>
       <tr>
-        <td style="width:30%">
-          <div style="padding-top:5mm;padding-left:5mm">
-            {% if PROFILE.stamp_and_signature %}
-              <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:180px;max-height:180px;"><br/>
-              <br/>
-            {% endif %}
-          </div>
-        </td>
-        <td style="width:3%">&nbsp;</td>
-        <td style="width:46%">
+        <td style="width:50%">
           <!-- SUMAR -->
           <div style="padding-top:5mm;">
             <div class="content">
@@ -216,31 +154,7 @@
                   <tbody>
                     <tr>
                       <td>Spolu bez DPH</td>
-                      <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(total_excl_vat, CURRENCY.symbol) }}</td>
-                    </tr>
-                    <tr>
-                      <td>DPH</td>
-                      <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(total_incl_vat - total_excl_vat, CURRENCY.symbol) }}</td>
-                    </tr>
-                    <tr>
-                      <td><b>Spolu s DPH</b></td>
-                      <td class="text-right" style="text-wrap:nowrap"><b>{{ hubleto.locale().formatCurrency(total_incl_vat, CURRENCY.symbol) }}</b></td>
-                    </tr>
-                    <tr><td>&nbsp;</td></tr>
-                    {% if PAYMENTS %}
-                      {% for p in PAYMENTS %}
-                        {% if p.is_advance_payment %}
-                          <tr>
-                            <td>Prijatá záloha dňa {{ hubleto.locale().formatDateShort(p.date_payment ?? '') }}</td>
-                            <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(p.amount, CURRENCY.symbol) }}</td>
-                          </tr>
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    <tr><td>&nbsp;</td></tr>
-                    <tr>
-                      <td><b style="font-size:1.2em">K úhrade</b></td>
-                      <td class="text-right"><b style="font-size:1.2em;text-wrap:nowrap">{{ hubleto.locale().formatCurrency(to_be_paid, CURRENCY.symbol) }}</b></td>
+                      <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(price_excl_vat, CURRENCY.symbol) }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -249,21 +163,13 @@
             </div>
           </div>
         </td>
-        <td style="width:3%">&nbsp;</td>
-        <td style="width:20%;text-align:right">
-          {% if PAY_BY_SQUARE_QR_CODE %}
-            <div style="float:right;border:3px solid #6fa4d7;padding:2mm;border-radius:1mm;width:120px">
-              <img
-                src="{{ PAY_BY_SQUARE_QR_CODE }}" style="width:100%;"
-              >
-              <div style="padding:3px">
-                <span style="color:#6fa4d7;font-size:8pt">PAY</span>
-                <span style="color:#b2b4b9;font-size:8pt">by square</span>
-              </div>
-            </div>
-          {% else %}
-            <div style="color:red">{{ PAY_BY_SQUARE_QR_CODE_ERROR }}</div>
-          {% endif %}
+        <td style="width:50%">
+          <div style="padding-top:5mm;padding-left:5mm">
+            {% if PROFILE.stamp_and_signature %}
+              <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:180px;max-height:180px;"><br/>
+              <br/>
+            {% endif %}
+          </div>
         </td>
       </tr>
     </tbody>

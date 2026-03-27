@@ -99,6 +99,7 @@ class Loader extends \Hubleto\Erp\App
       'en-invoice-standard' => ['name' => 'Standard invoice', 'file' => 'en/InvoiceStandard.twig'],
       'en-invoice-credit-note' => ['name' => 'Credit note', 'file' => 'en/InvoiceCreditNote.twig'],
       'en-invoice-debit-note' => ['name' => 'Debit note', 'file' => 'en/InvoiceDebitNote.twig'],
+      'sk-quotation' => ['name' => 'Ponuka', 'file' => 'sk/Ponuka.twig'],
       'sk-invoice-proforma' => ['name' => 'Proforma faktúra', 'file' => 'sk/InvoiceProforma.twig'],
       'sk-invoice-advance' => ['name' => 'Zálohová faktúra', 'file' => 'sk/InvoiceAdvance.twig'],
       'sk-invoice-standard' => ['name' => 'Vyúčtovacia faktúra s DPH', 'file' => 'sk/VyuctovaciaFakturaSDph.twig'],

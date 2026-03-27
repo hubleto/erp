@@ -11,13 +11,24 @@ class GetPreviewHtml extends \Hubleto\Erp\Controllers\ApiController
     $idOrder = $this->router()->urlParamAsInteger('idOrder');
     $idTemplate = $this->router()->urlParamAsInteger('idTemplate');
 
-    /** @var Order */
-    $mOrder = $this->getModel(Order::class);
+    $html = '';
 
-    $mOrder->record->find($idOrder)->update(['id_template' => $idTemplate]);
+    if ($idTemplate > 0) {
+
+      /** @var Order */
+      $mOrder = $this->getModel(Order::class);
+
+      $mOrder->record->find($idOrder)->update(['id_template' => $idTemplate]);
+
+      try {
+        $html = $mOrder->getPreviewHtml($idOrder);
+      } catch (\Throwable $e) {
+        $html = '<div class="alert alert-danger">Error generating preview: ' . $e->getMessage() . '</div>';
+      }
+    }
 
     return [
-      'html' => $mOrder->getPreviewHtml($idOrder)
+      'html' => $html,
     ];
   }
 }

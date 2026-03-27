@@ -47,6 +47,22 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
+   * [Description for getSidebarBadgeNumber]
+   *
+   * @return int
+   *
+   */
+  public function getSidebarBadgeNumber(): int
+  {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    return
+      $counter->myDueTodo()
+    ;
+  }
+
+  /**
    * [Description for renderSecondSidebar]
    *
    * @return string
@@ -54,6 +70,8 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderSecondSidebar(): string
   {
+    $counter = $this->getService(Counter::class);
+    $myDueTodo = $counter->myDueTodo();
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-primary-outline btn-square" href="' . $this->env()->projectUrl . '/tasks">
@@ -63,6 +81,7 @@ class Loader extends \Hubleto\Erp\App
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/tasks/todo">
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="text">' . $this->translate('Todo') . '</span>
+          ' . ($myDueTodo > 0 ? '<span class="badge badge-danger ml-auto">' . $myDueTodo . '</span>' : '') . '
         </a>
       </div>
     ';

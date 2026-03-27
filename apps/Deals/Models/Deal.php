@@ -415,6 +415,8 @@ class Deal extends \Hubleto\Erp\Model
     if (!$deal) throw new \Exception('Deal was not found.');
 
     $vars = $deal->toArray();
+    $vars['hubleto'] = $this;
+    $vars['user'] = $this->authProvider()->getUser();
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
     unset($vars['CUSTOMER']['CONTACTS']);

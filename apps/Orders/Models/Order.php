@@ -359,6 +359,8 @@ class Order extends \Hubleto\Erp\Model
     if (!$order) throw new \Exception('Order was not found.');
 
     $vars = $order->toArray();
+    $vars['hubleto'] = $this;
+    $vars['user'] = $this->authProvider()->getUser();
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
     unset($vars['CUSTOMER']['CONTACTS']);

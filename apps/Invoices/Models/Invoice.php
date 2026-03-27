@@ -538,6 +538,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $vars = $invoice->toArray();
     $vars['hubleto'] = $this;
+    $vars['user'] = $this->authProvider()->getUser();
     $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
     unset($vars['CUSTOMER']['CONTACTS']);

@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>Ponuka {{ PROFILE.COMPANY.name }} {{ number }}</title>
+  <title>Ponuka {{ user.DEFAULT_COMPANY.name }} {{ number }}</title>
   <style>
     {% if PDF_EXPORT %}
       * { font-family: Dejavu Sans !important; line-height: 0.95em; font-size: 10pt; }
@@ -39,7 +39,7 @@
         <table>
           <tr>
             <td style="padding-top:0.5em">
-              <img src="{{ config.uploadUrl }}/{{ PROFILE.COMPANY.logo }}" style="max-width:80px;max-height:80px;">
+              <img src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}" style="max-width:80px;max-height:80px;">
             </td>
             <td style="width:95%;padding-left:1em;padding-top:0.5em">
               {{ PROFILE.headline }}
@@ -50,17 +50,17 @@
         <div>
           <b>DODÁVATEĽ</b><br/>
           <br/>
-          <b>{{ PROFILE.COMPANY.name }}</b><br/>
-          {{ PROFILE.COMPANY.street_1 }}<br/>
-          {% if PROFILE.COMPANY.street_2 %} {{ PROFILE.COMPANY.street_2 }}<br/> {% endif %}
-          {{ PROFILE.COMPANY.zip }} {{ PROFILE.COMPANY.city }}<br/>
-          {% if PROFILE.COMPANY.country %} {{ PROFILE.COMPANY.country }}<br/> {% endif %}
+          <b>{{ user.DEFAULT_COMPANY.name }}</b><br/>
+          {{ user.DEFAULT_COMPANY.street_1 }}<br/>
+          {% if user.DEFAULT_COMPANY.street_2 %} {{ user.DEFAULT_COMPANY.street_2 }}<br/> {% endif %}
+          {{ user.DEFAULT_COMPANY.zip }} {{ user.DEFAULT_COMPANY.city }}<br/>
+          {% if user.DEFAULT_COMPANY.country %} {{ user.DEFAULT_COMPANY.country }}<br/> {% endif %}
           <br/>
-          {% if PROFILE.COMPANY.registration_id %} IČO: {{ PROFILE.COMPANY.registration_id }}<br/> {% endif %}
-          {% if PROFILE.COMPANY.tax_id %} DIČ: {{ PROFILE.COMPANY.tax_id }}<br/> {% endif %}
-          {% if PROFILE.COMPANY.vat_id %} IČDPH: {{ PROFILE.COMPANY.vat_id }}<br/> {% endif %}
+          {% if user.DEFAULT_COMPANY.registration_id %} IČO: {{ user.DEFAULT_COMPANY.registration_id }}<br/> {% endif %}
+          {% if user.DEFAULT_COMPANY.tax_id %} DIČ: {{ user.DEFAULT_COMPANY.tax_id }}<br/> {% endif %}
+          {% if user.DEFAULT_COMPANY.vat_id %} IČDPH: {{ user.DEFAULT_COMPANY.vat_id }}<br/> {% endif %}
           <br/>
-          {{ PROFILE.COMPANY.business_register }}<br/>
+          {{ user.DEFAULT_COMPANY.business_register }}<br/>
         </div>
       </div>
     </div>
@@ -118,6 +118,7 @@
                     <tr>
                       <td style="width:50%;color:blue">
                         <i>{{ i.title }}</i>
+                        <div style="font-size:8pt">{{ i.description }}<div>
                       </td>
                       <td style="width:50%;text-align:right">
                         <span>{{ hubleto.locale().formatCurrency(i.unit_price * (100 - i.discount)/100, CURRENCY.symbol) }}</span>

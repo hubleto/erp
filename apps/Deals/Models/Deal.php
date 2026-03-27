@@ -3,6 +3,8 @@
 namespace Hubleto\App\Community\Deals\Models;
 
 
+use DateTimeImmutable;
+
 use Hubleto\App\Community\Deals\Loader as DealsApp;
 
 use Hubleto\App\Community\Settings\PermissionsManager;
@@ -15,6 +17,7 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Db\Column\File;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Leads\Models\Lead;
@@ -28,9 +31,6 @@ use Hubleto\Framework\Helper;
 
 use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Documents\Models\Template;
-use Hubleto\App\Community\Orders\Models\OrderDeal;
-use Hubleto\App\Community\Invoices\Models\Invoice;
-use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
 
 class Deal extends \Hubleto\Erp\Model
 {
@@ -69,6 +69,7 @@ class Deal extends \Hubleto\Erp\Model
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'TEMPLATE_QUOTATION' => [ self::HAS_ONE, Template::class, 'id', 'id_template_quotation'],
+    'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
 
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
@@ -111,6 +112,8 @@ class Deal extends \Hubleto\Erp\Model
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)"))->setCssClass('text-violet-800'),
       'note' => (new Text($this, $this->translate('Notes'))),
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS)),
+      'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
+      'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_DEAL_RESULTS))
@@ -133,6 +136,8 @@ class Deal extends \Hubleto\Erp\Model
         ->setDefaultValue(self::BUSINESS_TYPE_NEW)
       ,
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
+      'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
+      'pdf' => (new File($this, $this->translate('PDF'))),
     ]);
   }
 
@@ -394,79 +399,106 @@ class Deal extends \Hubleto\Erp\Model
   }
 
   /**
-   * Generates quotation PDF document from given deal and returns ID of generated document
+   * [Description for getPreviewVars]
+   *
+   * @param int $idDeal
+   * 
+   * @return array
+   * 
+   */
+  public function getPreviewVars(int $idDeal): array
+  {
+    /** @var Deal */
+    $mDeal = $this->getModel(Deal::class);
+
+    $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
+    if (!$deal) throw new \Exception('Deal was not found.');
+
+    $vars = $deal->toArray();
+    $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
+
+    unset($vars['CUSTOMER']['CONTACTS']);
+    unset($vars['CUSTOMER']['OWNER']);
+    unset($vars['CUSTOMER']['MANAGER']);
+    unset($vars['CUSTOMER']['ACTIVITIES']);
+    unset($vars['CUSTOMER']['DOCUMENTS']);
+    unset($vars['CUSTOMER']['TAGS']);
+    unset($vars['CUSTOMER']['LEADS']);
+    unset($vars['CUSTOMER']['DEALS']);
+    unset($vars['PROFILE']['COMPANY']);
+    unset($vars['PROFILE']['TEMPLATE']);
+    unset($vars['OWNER']['ROLES']);
+    unset($vars['OWNER']['TEAMS']);
+    unset($vars['OWNER']['DEFAULT_COMPANY']);
+    unset($vars['MANAGER']['ROLES']);
+    unset($vars['MANAGER']['TEAMS']);
+    unset($vars['MANAGER']['DEFAULT_COMPANY']);
+    unset($vars['WORKFLOW']);
+    unset($vars['WORKFLOW_STEP']);
+    unset($vars['TEMPLATE']);
+
+    return $vars;
+
+  }
+
+  /**
+   * [Description for getPreviewHtml]
+   *
+   * @param int $idDeal
+   * 
+   * @return string
+   * 
+   */
+  public function getPreviewHtml(int $idDeal): string
+  {
+
+    $vars = $this->getPreviewVars($idDeal);
+
+    /** @var Template */
+    $mTemplate = $this->getService(Template::class);
+
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
+    if (!$template) throw new \Exception('Template was not found.');
+
+    /** @var Generator */
+    $generator = $this->getService(Generator::class);
+    return $generator->renderTemplate($vars['id_template'], $vars);
+  }
+
+  /**
+   * Generates PDF document from given deal and returns ID of generated document
    *
    * @param int $idDeal Deal for which the PDF should be generated.
    * 
    * @return int ID of generated document.
    * 
    */
-  public function generateQuotationPdf(int $idDeal): int
+  public function generatePdf(int $idDeal): int
   {
-    /** @var Deal */
-    $mDeal = $this->getModel(Deal::class);
+    $mDeal = $this->getService(Deal::class);
     $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
     if (!$deal) throw new \Exception('Deal was not found.');
 
     $mTemplate = $this->getService(Template::class);
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $deal->id_template_quotation)->first();
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $deal->id_template)->first();
     if (!$template) throw new \Exception('Template was not found.');
 
-    $vars = $deal->toArray();
-    $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
+    $vars = $this->getPreviewVars($idDeal);
+
+    $dealOutputFilename = 'deal-' . $deal->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
 
     $generator = $this->getService(Generator::class);
     $idDocument = $generator->createPdfFromTemplate(
       $template->id,
-      'quotation-' . Helper::str2url($deal->identifier) . ($deal->version ? '-v' . $deal->version : '') . '-' . date('YmdHis') . '.pdf',
+      $dealOutputFilename,
       $vars
     );
 
-    if ($idDocument > 0) {
-      $mDealDocument = $this->getService(DealDocument::class);
-      $mDealDocument->record->recordCreate([
-        'id_deal' => $idDeal,
-        'id_document' => $idDocument,
-      ]);
-    }
+    $mDeal->record->find($idDeal)->update([
+      'pdf' => $dealOutputFilename,
+    ]);
 
     return $idDocument;
   }
 
-  /**
-   * Generates invoice for given deal.
-   *
-   * @param int $idDeal
-   * 
-   * @return void
-   * 
-   */
-  public function generateInvoice(int $idDeal): int
-  {
-    /** @var Invoice */
-    $mInvoice = $this->getModel(Invoice::class);
-
-    $deal = $this->record->prepareReadQuery()->where('id', $idDeal)->first();
-
-    $idInvoice = 0;
-
-    if ($deal) {
-      $idInvoice = $mInvoice->generateInvoice(new InvoiceDto(
-        1, // $idProfile
-        $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(), // $idIssuedBy
-        (int) $deal['id_customer'], // $idCustomer
-        'ORD/' . $deal->number, // $number
-        null, // $vs
-        '', // $cs
-        '', // $ss
-        null, // $dateIssue
-        new \DateTimeImmutable()->add(new \DateInterval('P14D')), // $dateDelivery
-        new \DateTimeImmutable()->add(new \DateInterval('P14D')), // $dateDue
-        null, // $datePayment
-        '', // $note
-      ));
-    }
-
-    return $idInvoice;
-  }
 }

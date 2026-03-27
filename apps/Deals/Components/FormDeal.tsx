@@ -16,7 +16,7 @@ import TableItems from './TableItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TableDealHistory from './TableDealHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
-import TableOrders from '@hubleto/apps/Orders/Components/TableOrders';
+import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 
 export interface FormDealProps extends FormExtendedProps {}
 
@@ -30,6 +30,7 @@ export interface FormDealState extends FormExtendedState {
   tableDealDocumentsDescription: any,
   tablesKey: number,
   selectParentLead?: boolean,
+  htmlPreview?: any,
 }
 
 export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealState> {
@@ -84,6 +85,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       tabs: [
         { uid: 'default', title: <b>{this.translate('Deal')}</b> },
         { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
+        { uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') },
         { uid: 'documents', title: this.translate('Documents') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
@@ -96,6 +98,45 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
 
   getRecordFormUrl(): string {
     return 'deals/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
+  onTabChange() {
+    super.onTabChange();
+
+    const tabUid = this.state.activeTabUid;
+    switch (tabUid) {
+      case 'preview':
+        this.updateDealPreview(this.state.record.id_template);
+      break;
+    }
+  }
+
+  updateDealPreview(idTemplate: number) {
+    request.post(
+      'deals/api/get-preview-html',
+      {
+        idDeal: this.state.record.id,
+        idTemplate: idTemplate,
+      },
+      {},
+      (result: any) => {
+        this.setState({htmlPreview: result.html});
+      }
+    );
+  }
+
+  showDealPreviewVars() {
+    request.post(
+      'deals/api/get-preview-vars',
+      {
+        idDeal: this.state.record.id,
+        idTemplate: this.state.record.id_template,
+      },
+      {},
+      (vars: any) => {
+        this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
+      }
+    );
   }
 
   onAfterLoadFormDescription(description: any) {
@@ -173,28 +214,6 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       activitySubject: this.refLogActivityInput.current.value,
       activityAllDay: false,
     } as FormDealState);
-  }
-
-  getHeaderButtons()
-  {
-    return [
-      ...super.getHeaderButtons(),
-      {
-        title: this.translate('Generate quotation (PDF)'),
-        onClick: () => {
-          request.post(
-            'deals/api/generate-quotation-pdf',
-            {idDeal: this.state.record.id},
-            {},
-            (result: any) => {
-              if (result.idDocument) {
-                window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
-              }
-            }
-          );
-        }
-      }
-    ]
   }
 
   renderTab(tabUid: string) {
@@ -361,8 +380,6 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
 
       case 'items':
 
-        var lookupData;
-
         const getLookupData = (lookupElement) => {
           if (lookupElement.current) {
             lookupData = lookupElement.current.state.data;
@@ -371,6 +388,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
 
         return <>
           <div className='w-full h-full overflow-x-auto'>
+            <div>{this.inputWrapper('description_before')}</div>
             <TableItems
               key={"items_" + this.state.tablesKey}
               uid={this.props.uid + "_table_deal_items"}
@@ -380,9 +398,90 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
               descriptionSource='both'
               readonly={!this.state.isInlineEditing}
             ></TableItems>
+            <div>{this.inputWrapper('description_after')}</div>
           </div>
         </>;
 
+      break;
+
+      case 'preview':
+        return <div className='flex gap-2 h-full'>
+          <div className='flex-1 w-72 flex flex-col gap-2'>
+            <div className='grow'>
+              {this.inputWrapper('id_template', {
+                uiStyle: 'buttons-vertical',
+                onChange: (input: any) => {
+                  this.updateDealPreview(input.state.value);
+                }
+              })}
+            </div>
+          </div>
+          <div className='flex-3 flex flex-col'>
+            <div className='flex gap-2 align-center justify-end'>
+              <div>
+                {this.input('pdf', {readonly: true})}
+              </div>
+              <div className='flex gap-2'>
+                <button
+                  className='btn btn-transparent mb-4'
+                  onClick={() => {
+                    request.post(
+                      'deals/api/generate-pdf',
+                      {idDeal: this.state.record.id},
+                      {},
+                      (result: any) => {
+                        // if (result.idDocument) {
+                        //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
+                        // }
+                        // this.reload();
+                        if (result && result.pdfFile) {
+                          this.updateRecord({pdf: result.pdfFile});
+                        }
+                      }
+                    );
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-download'></i></span>
+                  <span className='text'>{this.translate('Export to PDF')}</span>
+                </button>
+                <button
+                  className='btn btn-transparent mb-4'
+                  onClick={() => {
+                    const iframe = window.frames[this.props.uid + '_deal_preview'];
+                    const origDocumentTitle = document.title;
+
+                    document.title += 'Deal ' + R.number + ' ' + R.CUSTOMER.name;
+
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+
+                    document.title = origDocumentTitle;
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-print'></i></span>
+                  <span className='text'>{this.translate('Print')}</span>
+                </button>
+              </div>
+            </div>
+            <div className='w-full h-full card mt-2'>
+              <div className="card-body">
+                <HtmlFrame
+                  className='w-full h-full'
+                  iframeId={this.props.uid + '_deal_preview'}
+                  content={this.state.htmlPreview}
+                />
+              </div>
+              <div className='card-footer'>
+                <a
+                  href='#'
+                  onClick={() => {
+                    this.showDealPreviewVars();
+                  }}
+                >{this.translate('Show variables which can be used in template')}</a>
+              </div>
+            </div>
+          </div>
+        </div>;
       break;
 
       case 'documents':
@@ -607,7 +706,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
             <div className='card-body [&_*]:whitespace-normal'>
               <TableDealHistory
                 uid={this.props.uid + "_table_deal_history"}
-                data={{ data: R.HISTORY }}
+                data={{ records: R.HISTORY }}
                 descriptionSource="props"
                 onRowClick={(table) => {}}
                 description={{

@@ -121,6 +121,12 @@ class Deal extends \Hubleto\Erp\RecordManager
     return $this->hasOne(Template::class, 'id', 'id_template_quotation');
   }
 
+  /** @return hasOne<Currency, covariant Lead> */
+  public function TEMPLATE(): HasOne
+  {
+    return $this->hasOne(Template::class, 'id', 'id_template');
+  }
+
   /**
    * [Description for prepareReadQuery]
    *

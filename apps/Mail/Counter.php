@@ -20,6 +20,7 @@ class Counter extends Core
 
     /** @var Models\Mail */
     $mMail = $this->getModel(Models\Mail::class);
+
     $accounts = $mAccount->record->prepareReadQuery()->with('MAILBOXES')->get();
 
     $idMailboxes = [];
@@ -39,7 +40,8 @@ class Counter extends Core
     }
 
     return $mMail->record
-      ->whereNull('datetime_read')
+      ->whereNull('mails.datetime_read')
+      ->where('mails.id_mailbox', '>', 0)
       ->whereIn('mails.id_mailbox', $idMailboxes)
       ->count()
     ;

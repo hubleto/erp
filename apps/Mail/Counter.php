@@ -38,6 +38,7 @@ class Counter extends Core
         }
       }
     }
+    var_dump($idMailboxes);
 
     return $mMail->record
       ->whereNull('mails.datetime_read')

@@ -39,7 +39,7 @@ export default class TableExtendedMails extends TableExtended<TableExtendedMails
   getEndpointParams() {
     return {
       ...super.getEndpointParams(),
-      idAccount: this.props.idAccount,
+      // idAccount: this.props.idAccount,
       idMailbox: this.props.idMailbox,
       mailboxName: this.props.mailboxName,
       showOnlyScheduledToSend: this.props.showOnlyScheduledToSend,

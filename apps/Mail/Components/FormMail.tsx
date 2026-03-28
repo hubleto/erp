@@ -27,6 +27,10 @@ export default class FormMail<P, S> extends FormExtended<FormMailProps,FormMailS
     };
   }
 
+  getRecordFormUrl(): string {
+    return 'mail/' + this.state.record.id_mailbox + '/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
   renderTitle(): null|JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
@@ -69,22 +73,16 @@ export default class FormMail<P, S> extends FormExtended<FormMailProps,FormMailS
     return <>
       <div className='flex gap-2'>
         <div className='flex-3'>
+          {this.inputWrapper('subject', {cssClass: 'text-2xl'})}
+          {this.inputWrapper('body_html', {readonly: readonly})}
+        </div>
+        <div className='flex-1'>
           {this.inputWrapper('from')}
           {this.inputWrapper('to')}
           {this.inputWrapper('cc')}
           {this.inputWrapper('bcc')}
           {this.inputWrapper('reply_to')}
-          {this.inputWrapper('subject', {cssClass: 'text-2xl'})}
-          {this.inputWrapper('body_html', {readonly: readonly})}
         </div>
-        {/* <div className='flex-1'>
-          {this.inputWrapper('from')}
-          {this.inputWrapper('priority')}
-          {this.inputWrapper('datetime_created')}
-          {this.inputWrapper('datetime_sent')}
-          {this.inputWrapper('color')}
-          {this.inputWrapper('is_draft')}
-        </div> */}
       </div>
     </>;
   }

@@ -16,6 +16,8 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
+      '/^tasks\/api\/create-from-mail\/?$/' => Controllers\Api\CreateFromMail::class,
+
       '/^tasks\/boards\/my-recent-tasks\/?$/' => Controllers\Boards\MyRecentTasks::class,
 
       '/^tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\Tasks::class,

@@ -32,4 +32,13 @@ class ProjectTask extends \Hubleto\Erp\Model
     return $description;
   }
 
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+
+    $idTask = $this->router()->urlParamAsInteger('idTask');
+    $description->defaultValues = ['id_task' => $idTask];
+    return $description;
+  }
+
 }

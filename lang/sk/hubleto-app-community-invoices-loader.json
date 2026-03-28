@@ -115,7 +115,7 @@
         "Link prepared item": "Prepojiť pripravenú položku",
         "Export to PDF": "Exportovať do PDF",
         "Print": "Tlačiť",
-        "Show variables which can be used in template": "Zobraziť premenné použiteľné v šablóne",
+        "Show variables available in template": "Zobraziť premenné použiteľné v šablóne",
         "Email was sent": "E-mail bol odoslaný",
         "PDF version of the invoice was not generated yet. Cannot send.": "PDF verzia faktúry ešte nebola vygenerovaná. Nie je možné odoslať.",
         "Send invoice": "Odoslať faktúru",

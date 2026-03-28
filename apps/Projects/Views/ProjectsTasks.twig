@@ -4,6 +4,7 @@
   string:model="Hubleto/App/Community/Projects/Models/ProjectTask"
   string:tag="table-projects-tasks"
   int:record-id="{{ viewParams.recordId }}"
+  json:custom-endpoint-params='{"idTask": {{ viewParams.idTask ?? 0 }} }'
   string:fulltext-search='{{ viewParams.q }}'
   json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'

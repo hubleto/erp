@@ -21,6 +21,7 @@ class Loader extends \Hubleto\Erp\App
 
     $this->router()->get([
       '/^mail\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Home::class,
+      '/^mail\/?(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Home::class,
 
       '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
       '/^mail\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
@@ -46,6 +47,22 @@ class Loader extends \Hubleto\Erp\App
 
     $this->templateVariables = $this->collectExtendibles('MailTemplateVariables');
     $this->sidebarView = '@Hubleto:App:Community:Mail/Sidebar.twig';
+  }
+
+  /**
+   * [Description for getSidebarBadgeNumber]
+   *
+   * @return int
+   *
+   */
+  public function getSidebarBadgeNumber(): int
+  {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    return
+      $counter->alUnreadMails()
+    ;
   }
 
   /**

@@ -320,7 +320,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       //         onClick={() => {
       //           this.showPreviewVars();
       //         }}
-      //       >{this.translate('Show variables which can be used in template')}</a>
+      //       >{this.translate('Show variables available in template')}</a>
       //     </div>
       //   </div>;
       // break;
@@ -398,7 +398,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
                   onClick={() => {
                     this.showOrderPreviewVars();
                   }}
-                >{this.translate('Show variables which can be used in template')}</a>
+                >{this.translate('Show variables available in template')}</a>
               </div>
             </div>
           </div>

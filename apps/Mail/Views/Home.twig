@@ -5,7 +5,8 @@
   <h1 class="app-main-title">{{ translate('Mail') }} > {{ account.name }} > {{ mailbox.name }}</h1>
 
   <hblreact-mail-table-mails
-    string:tag="mail-table-mails"
+    string:tag="mail-table-mails-{{ viewParams.account.id }}-{{ viewParams.mailbox.id }}"
+    int:record-id="{{ viewParams.recordId }}"
     int:id-account="{{ viewParams.account.id }}"
     int:id-mailbox="{{ viewParams.mailbox.id }}"
     string:mailbox-name="{{ viewParams.mailbox.name }}"

@@ -587,7 +587,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
                   onClick={() => {
                     this.showInvoicePreviewVars();
                   }}
-                >{this.translate('Show variables which can be used in template')}</a>
+                >{this.translate('Show variables available in template')}</a>
               </div>
             </div>
           </div>

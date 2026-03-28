@@ -477,7 +477,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
                   onClick={() => {
                     this.showDealPreviewVars();
                   }}
-                >{this.translate('Show variables which can be used in template')}</a>
+                >{this.translate('Show variables available in template')}</a>
               </div>
             </div>
           </div>

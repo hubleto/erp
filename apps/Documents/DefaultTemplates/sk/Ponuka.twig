@@ -118,7 +118,7 @@
                     <tr>
                       <td style="width:50%;color:blue">
                         <i>{{ i.title }}</i>
-                        <div style="font-size:8pt">{{ i.description }}<div>
+                        <div style="color:#444444;font-size:8pt">{{ i.description }}<div>
                       </td>
                       <td style="width:50%;text-align:right">
                         <span>{{ hubleto.locale().formatCurrency(i.unit_price * (100 - i.discount)/100, CURRENCY.symbol) }}</span>
@@ -141,43 +141,9 @@
     <div style="text-align:left;margin:1em 0em;white-space:pre-wrap;">{{ description_after }}</div>
   {% endif %}
 
-  <br>
-  <br>
-  <table style="width:100%">
-    <tbody>
-      <tr>
-        <td style="width:50%">
-          <!-- SUMAR -->
-          <div style="padding-top:5mm;">
-            <div class="content">
-              <div class="sumar">
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Spolu bez DPH</td>
-                      <td class="text-right" style="text-wrap:nowrap">{{ hubleto.locale().formatCurrency(price_excl_vat, CURRENCY.symbol) }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div style="clear:both;"></div>
-            </div>
-          </div>
-        </td>
-        <td style="width:50%">
-          <div style="padding-top:5mm;padding-left:5mm">
-            {% if PROFILE.stamp_and_signature %}
-              <img src="{{ config.uploadUrl }}/{{ PROFILE.stamp_and_signature }}" style="max-width:180px;max-height:180px;"><br/>
-              <br/>
-            {% endif %}
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
   <br/>
   <br/>
-  Vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.
+  Vystavil {{ user.first_name }} {{ user.last_name }} {{ now }}.<br/>
   Vygenerované v ERP Hubleto.
   https://www.hubleto.eu<br/>
 </body>

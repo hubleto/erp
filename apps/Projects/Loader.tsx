@@ -5,6 +5,7 @@ import TableMilestones from './Components/TableMilestones'
 import ProjectsFormActivity from './Components/ProjectsFormActivity'
 import request from "@hubleto/react-ui/core/Request";
 import FormOrder from '@hubleto/apps/Orders/Components/FormOrder';
+import FormTask from '@hubleto/apps/Tasks/Components/FormTask';
 class ProjectsApp extends App {
   init() {
     super.init();
@@ -48,6 +49,14 @@ class ProjectsApp extends App {
             }
           }
         );
+      }
+    );
+
+    FormTask.addFormFooterButton(
+      'Assign task to project',
+      'fas fa-check-double',
+      (form: any) => {
+        globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/task-assignment/add?idTask=' + form.state.record.id);
       }
     )
   }

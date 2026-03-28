@@ -96,7 +96,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                   <FormInput title={this.translate("Orders")}>{R.ORDERS.map((item, key) => {
                     return (item ? <a
                       key={key}
-                      className='badge'
+                      className='badge badge-violet text-lg'
                       href={globalThis.hubleto.config.projectUrl + '/orders/' + item.id}
                       target='_blank'
                     >{item.identifier}</a> : '#');
@@ -106,7 +106,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                   <FormInput title={this.translate("Deals")}>{R.DEALS.map((item, key) => {
                     return (item ? <a
                       key={key}
-                      className='badge'
+                      className='badge badge-violet text-lg'
                       href={globalThis.hubleto.config.projectUrl + '/deals/' + item.id}
                       target='_blank'
                     >{item.identifier}</a> : '#');
@@ -116,7 +116,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                   <FormInput title={this.translate("Projects")}>{R.PROJECTS.map((item, key) => {
                     return (item ? <a
                       key={key}
-                      className='badge'
+                      className='badge badge-violet text-lg'
                       href={globalThis.hubleto.config.projectUrl + '/projects/' + item.id}
                       target='_blank'
                     >{item.identifier}</a> : '#');

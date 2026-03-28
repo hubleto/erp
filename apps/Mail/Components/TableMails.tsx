@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import { FormProps } from '@hubleto/react-ui/core/Form';
 import FormMail from './FormMail';
 
-interface TableMailsProps extends TableProps {
+interface TableExtendedMailsProps extends TableExtendedProps {
   idAccount?: number,
   idMailbox?: number,
   mailboxName?: string,
@@ -13,23 +13,23 @@ interface TableMailsProps extends TableProps {
   showOnlyDrafts?: boolean,
   showOnlyTemplates?: boolean,
 }
-interface TableMailsState extends TableState {
+interface TableExtendedMailsState extends TableExtendedState {
 }
 
-export default class TableMails extends Table<TableMailsProps, TableMailsState> {
+export default class TableExtendedMails extends TableExtended<TableExtendedMailsProps, TableExtendedMailsState> {
   static defaultProps = {
-    ...Table.defaultProps,
+    ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Mail/Models/Mail',
   }
 
-  props: TableMailsProps;
-  state: TableMailsState;
+  props: TableExtendedMailsProps;
+  state: TableExtendedMailsState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Mail\\Loader';
   translationContextInner: string = 'Components\\TableMails';
 
-  constructor(props: TableMailsProps) {
+  constructor(props: TableExtendedMailsProps) {
     super(props);
     this.state = {
       ...this.getStateFromProps(props),
@@ -57,6 +57,10 @@ export default class TableMails extends Table<TableMailsProps, TableMailsState> 
 
   rowClassName(rowData: any): string {
     return rowData.datetime_read ? '' : 'bg-yellow-50 text-yellow-800';
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/mail/' + this.props.idMailbox + '/' + (id > 0 ? id : 'add'));
   }
 
   renderActionsColumn(data: any, options: any) {

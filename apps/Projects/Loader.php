@@ -109,6 +109,18 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-diagram-project"></i></span>
           <span class="text">' . $this->translate('Projects') . '</span>
         </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/milestones">
+          <span class="icon"><i class="fas fa-calendar-check"></i></span>
+          <span class="text">' . $this->translate('Milestones') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/task-assignment">
+          <span class="icon"><i class="fas fa-check-double"></i></span>
+          <span class="text">' . $this->translate('Task assignment') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/monthly-summary">
+          <span class="icon"><i class="fas fa-chart-bar"></i></span>
+          <span class="text">' . $this->translate('Monthly summary') . '</span>
+        </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=projects">
           <span class="icon"><i class="fas fa-calendar-days"></i></span>
           <span class="text">' . $this->translate('Calendar') . '</span>

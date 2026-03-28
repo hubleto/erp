@@ -18,6 +18,7 @@ class Counter extends Core
     $mMail = $this->getModel(Models\Mail::class);
     return $mMail->record
       ->whereNull('datetime_read')
+      ->where('mails.id_mailbox', '>', 0)
       ->count()
     ;
   }

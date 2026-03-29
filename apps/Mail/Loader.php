@@ -98,9 +98,9 @@ class Loader extends \Hubleto\Erp\App
         || empty($account->imap_username)
         || empty($account->imap_password)
       ) {
-        $accountsHtml .= '
-          <div class="badge badge-info text-xs p-1 block">' . $this->translate('Account is not used for receiving emails.') . '</div>
-        ';
+        // $accountsHtml .= '
+        //   <div class="badge badge-info text-xs p-1 block">' . $this->translate('Account is not used for receiving emails.') . '</div>
+        // ';
       } else if (count($account->MAILBOXES) == 0) {
         $accountsHtml .= '
           <div class="badge badge-info text-xs p-1 block">' . $this->translate('Account has no mailboxes.') . '</div>

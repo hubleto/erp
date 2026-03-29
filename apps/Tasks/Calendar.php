@@ -37,7 +37,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       $tasks = $tasks->where($mTask->table . '.id_developer', $filter['idUser']);
     }
     if (isset($filter['completed'])) {
-      $tasks = $tasks->where('is_closed', $filter['completed']);
+      $tasks = $tasks->where($mTask->table . '.is_closed', $filter['completed']);
     }
 
     $tasks = $tasks->get();
@@ -65,7 +65,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       $todos = $todos->where($mTodo->table . '.id_responsible', $filter['idUser']);
     }
     if (isset($filter['completed'])) {
-      $todos = $todos->where('is_closed', $filter['completed']);
+      $todos = $todos->where($mTodo->table . '.is_closed', $filter['completed']);
     }
 
     $todos = $todos->get();

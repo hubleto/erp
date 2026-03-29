@@ -98,6 +98,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
                     {},
                     (data: any) => {
                       this.reload();
+                      globalThis.window.open(globalThis.hubleto.config.projectUrl + '/invoices/items/' + data.idInvoiceItem);
                     }
                   );
                 },

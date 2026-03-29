@@ -12,6 +12,8 @@ class PrepareItemForInvoice extends \Hubleto\Erp\Controllers\ApiController
     $idOrder = $this->router()->urlParamAsInteger("idOrder");
     $idItem = $this->router()->urlParamAsInteger("idItem");
 
+    $idInvoiceItem = 0;
+
     /** @var Item */
     $mOrderItem = $this->getModel(OrderItem::class);
     $orderItem = $mOrderItem->record
@@ -21,7 +23,7 @@ class PrepareItemForInvoice extends \Hubleto\Erp\Controllers\ApiController
       ->first();
 
     if ($orderItem) {
-      /** @var Item */
+      /** @var InvoiceItem */
       $mInvoiceItem = $this->getModel(InvoiceItem::class);
       $idInvoiceItem = $mInvoiceItem->record->recordCreate([
         'id_invoice' => 0,
@@ -40,11 +42,11 @@ class PrepareItemForInvoice extends \Hubleto\Erp\Controllers\ApiController
         ->where($mOrderItem->table . '.id_order', $idOrder)
         ->update(['id_invoice_item' => $idInvoiceItem])
       ;
-
     }
 
     return [
       "status" => "success",
+      "idInvoiceItem" => $idInvoiceItem,
     ];
   }
 

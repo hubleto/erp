@@ -342,7 +342,7 @@
         "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
         "Contact Categories": "Kategórie kontaktov",
-        "Roles": "Úloha",
+        "Roles": "Role",
         "Permissions list": "Zoznam povolení",
         "Role permissions": "Povolenie",
         "Sidebar": "Bočný panel",
@@ -350,6 +350,6 @@
     },
     "Models\\UserHasRole": {
         "User": "Užívateľ",
-        "Role": "Úloha"
+        "Role": "Rola"
     }
 }

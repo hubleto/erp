@@ -1,0 +1,197 @@
+{
+    "manifest": {
+        "Warehouses": "Sklady",
+        "Management of individual warehouses or storage facilities.": "Správa skladů",
+        "Warehouse types": "Typy skladů",
+        "Warehouse locations types": "Typy umístění",
+        "Locations": "Umístění",
+        "Transactions": "Pohyby",
+        "Inventory": "Inventář",
+        "Create transaction": "Zaznamenat pohyb",
+        "Locations types": "Typy umístění",
+        "All items": "Všechny položky",
+        "Area": "Oblast",
+        "Aisle": "Ulička",
+        "Rack": "Regál",
+        "Shelf": "Police",
+        "Bin": "Box",
+        "Main": "Hlavní",
+        "Regional": "Regionální",
+        "External": "Externí",
+        "Main Distribution Center": "Hlavní distribuční centrum",
+        "Main warehouse used for supplying the most important customers.": "Hlavní sklad používaný pro zásobování nejdůležitějších zákazníků.",
+        "Regional Hub East": "Regionální centrum východ",
+        "Regional warehouse used for supplying the regional customers.": "Regionální sklad používaný pro zásobování regionálních zákazníků.",
+        "Settings": "Nastavení",
+        "Types of warehouses": "Typy skladů",
+        "Types of locations": "Typy umístění"
+    },
+    "root": {
+        "Warehouses": "Sklady",
+        "Locations": "Lokality"
+    },
+    "Models\\Warehouse": {
+        "Name": "Název",
+        "Warehouse type": "Typ",
+        "Address": "Adresa",
+        "Address Plus code": "'Plus kód' adresy",
+        "Contact person": "Kontaktní osoba",
+        "Contact email": "Kontaktní e-mail",
+        "Contact phone": "Kontaktní telefon",
+        "Coordinates: longitude": "Poloha: Lng",
+        "Coordinates: latitude": "Poloha: Lat",
+        "Description": "Popis",
+        "Capacity": "Kapacita",
+        "Capacity unit": "Skladovací jednotka",
+        "Operational status": "Provozní stav",
+        "Photo #1": "Fotografie #1",
+        "Photo #2": "Fotografie #2",
+        "Photo #3": "Fotografie #3",
+        "Manager of operation": "Vedoucí provozu",
+        "Current stock status": "Aktuální stav skladu",
+        "Add warehouse": "Přidat sklad",
+        "Type": "Typ",
+        "Automatically calculated as total capacity of all locations in warehouse.": "Automaticky vypočítáno jako celková kapacita všech míst ve skladu.",
+        "Active": "Aktivní",
+        "Inactive": "Neaktivní",
+        "Maintenance": "Údržba"
+    },
+    "Models\\WarehouseType": {
+        "Name": "Název"
+    },
+    "Models\\Location": {
+        "Warehouse": "Sklad",
+        "Location code": "Kód umístění",
+        "Location type": "Typ umístění",
+        "Description": "Popis",
+        "Capacity": "Kapacita",
+        "Operational status": "Provozní stav",
+        "Placement": "Poloha",
+        "Photo #1": "Foto #1",
+        "Photo #2": "Foto #2",
+        "Photo #3": "Foto #3",
+        "Manager of operation": "Manažer provozu",
+        "Current stock status": "Aktuální stav",
+        "Add location": "Přidat umístění",
+        "Type": "Typ",
+        "Active": "Aktivní",
+        "Inactive": "Neaktivní",
+        "Maintenance": "Údržba",
+        "JSON-formatted information about placement of location inside the warehouse.": "Informace o umístění lokace ve skladu ve formátu JSON."
+    },
+    "Models\\LocationType": {
+        "Name": "Název"
+    },
+    "Models\\Inventory": {
+        "Product": "Produkt",
+        "Location in warehouse": "Umístění",
+        "Quantity": "Množství",
+        "Batch number": "Číslo šarže",
+        "Serial number": "Sériové číslo",
+        "Expiration": "Expirace",
+        "Received": "Přijato",
+        "Last moved": "Poslední pohyb",
+        "Location": "Umístění",
+        "Add item": "Přidat položku"
+    },
+    "Models\\Transaction": {
+        "Transaction UID": "UID pohybu",
+        "Direction": "Směr",
+        "Type": "Typ",
+        "Supplier": "Dodavatel",
+        "Supplier invoice number": "Číslo faktury u dodavatele",
+        "Supplier order number": "Číslo objednávky u dodavatele",
+        "Batch number": "Číslo šarže",
+        "Serial number": "Sériové číslo",
+        "Reference document #1": "Referenční dokument #1",
+        "Reference document #2": "Referenční dokument #2",
+        "Reference document #3": "Referenční dokument #3",
+        "Notes": "Poznámky",
+        "Date and time of transaction": "Datum a čas pohybu",
+        "Who performed the transaction": "Pohyb zaznamenal",
+        "Add transaction": "Přidat pohyb",
+        "Inbound": "Příjemka",
+        "Outbound": "Výdejka",
+        "Old location": "Původní umístění",
+        "New location": "Nové umístění",
+        "Receipt": "Příjem",
+        "Shipment": "Expedice",
+        "Transfer In": "Přesun dovnitř",
+        "Transfer Out": "Přesun ven",
+        "Adjustment In": "Úprava zásob (příjem)",
+        "Adjustment Out": "Úprava zásob (výdej)",
+        "Return": "Vrácení"
+    },
+    "Models\\TransactionItem": {
+        "Transaction": "Pohyb",
+        "Product": "Produkt",
+        "Purchase price": "Nákupní cena",
+        "Quantity": "Množství",
+        "Original location": "Původní umístění",
+        "New location": "Nové umístění"
+    },
+    "Controllers\\Warehouses": {
+        "Warehouses": "Sklady"
+    },
+    "Controllers\\Locations": {
+        "Warehouses": "Sklady",
+        "Locations": "Umístění"
+    },
+    "Controllers\\Inventory": {
+        "Warehouses": "Sklady",
+        "Inventory": "Inventář"
+    },
+    "Controllers\\Transactions": {
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby"
+    },
+    "Controllers\\TransactionItems": {
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby",
+        "Items": "Položky"
+    },
+    "Controllers\\WarehouseTypes": {
+        "Warehouses": "Sklady",
+        "Settings": "Nastavení",
+        "Warehouse types": "Typy skladů"
+    },
+    "Controllers\\LocationTypes": {
+        "Warehouses": "Sklady",
+        "Settings": "Nastavení",
+        "Location types": "Typy umístění"
+    },
+    "Components\\FormWarehouse": {
+        "Contact": "Kontakt",
+        "Capacity and stock status": "Kapacita a stav",
+        "Address": "Adresa",
+        "More information": "Více informací",
+        "Locations": "Umístění",
+        "Warehouse": "Sklad",
+        "First create warehouse, then you will be prompted to add its locations.": "Nejprve vytvořte sklad, poté budete vyzváni k přidání jeho umístění."
+    },
+    "Components\\FormLocation": {
+        "Capacity and stock status": "Kapacita a stav",
+        "Placement": "Poloha",
+        "More information": "Více informací",
+        "Location": "Umístění"
+    },
+    "Components\\FormInventory": {
+        "Inventory": "Sklad"
+    },
+    "Components\\FormTransaction": {
+        "Transaction": "Transakce",
+        "Product": "Produkt",
+        "Purchase price": "Nákupní cena",
+        "Qty.": "Množ.",
+        "Add item": "Přidat položku"
+    },
+    "Components\\FormTransactionItem": {
+        "Transaction item": "Položka pohybu"
+    },
+    "Components\\TableInventory": {
+        "Total quantity": "Celkové množství"
+    },
+    "Components\\TableTransactionItems": {
+        "Total quantity": "Celkové množství"
+    }
+}

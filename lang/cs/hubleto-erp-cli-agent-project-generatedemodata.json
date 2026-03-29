@@ -1,0 +1,27 @@
+{
+    "GenerateDemoData": {
+        "Follow-up call": "Follow-up hovor",
+        "Lead created": "Lead vytvořen",
+        "Converted to a deal": "Převedeno na deal",
+        "Newsletter subscribers": "Odběratelé newsletteru",
+        "Cold calling - SMEs": "Cold calling - malé a střední podniky",
+        "Website visitors filling 'Subscribe to our newsletter'.": "Návštěvníci webu, kteří vyplnili formulář 'Přihlásit se k odběru newsletteru'.",
+        "SMEs reached out by cold calling.": "Malé a střední podniky oslovené cold callingem.",
+        "Meeting": "Schůzka",
+        "Business Trip": "Pracovní cesta",
+        "Call": "Hovor",
+        "Email": "E-mail",
+        "Other": "Jiné",
+        "Chief Officer": "Vedoucí pracovník",
+        "Manager": "Manažer",
+        "Employee": "Zaměstnanec",
+        "Assistant": "Asistent",
+        "External": "Externí",
+        "TV": "TV",
+        "Internet": "Internet",
+        "Fiber": "Optika",
+        "Landline": "Pevná linka",
+        "Marketing": "Marketing",
+        "Virtual Server": "Virtuální server"
+    }
+}

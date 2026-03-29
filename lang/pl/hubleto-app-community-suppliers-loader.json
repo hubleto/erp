@@ -1,0 +1,24 @@
+{
+    "manifest": {
+        "Suppliers": "Dostawcy",
+        "List of product suppliers": "Lista dostawców produktów"
+    },
+    "Controllers\\Suppliers": {
+        "Suppliers": "Dostawcy"
+    },
+    "Models\\Supplier": {
+        "Name": "Nazwa",
+        "Address": "Adres",
+        "City": "Miasto",
+        "Postal code": "Kod pocztowy",
+        "Country": "Kraj",
+        "Contact": "Kontakt",
+        "Order email": "E-mail do zamówień",
+        "Tax ID": "NIP",
+        "Company ID": "REGON",
+        "VAT ID": "NIP UE",
+        "Payment account number": "Numer konta bankowego",
+        "Add supplier": "Dodaj dostawcę",
+        "Suppliers": "Dostawcy"
+    }
+}

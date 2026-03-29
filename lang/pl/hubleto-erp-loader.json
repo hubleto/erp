@@ -1,54 +1,172 @@
 {
-    "desktop": {
-        "Upgrade to Premium": "Przejdź do Premium",
-        "Your messages": "Twoje wiadomości",
-        "Help center": "Centrum pomocy",
-        "Browse knowledgebase": "Przeglądaj bazę wiedzy",
-        "Hot tips & tricks": "Gorące porady i wskazówki",
-        "Need more help?": "Czy potrzebujesz pomocy?",
-        "Contact us": "Skontaktuj się z nami",
-        "Manage your account": "Zarządzaj kontem",
-        "Sign out": "Wyloguj się",
-        "Search knowledgebase...": "Przeglądaj bazę wiedzy...",
-        "No hot tips for this screen": "Brak porad i wskazówek dotyczących tego ekranu"
-    },
-    "form": {
-        "Add": "Dodać",
-        "Save": "Ratować",
-        "Copy": "Kopia",
-        "Delete": "Usuwać",
-        "Confirm delete": "Potwierdź usunięcie",
-        "Edit": "Redagować",
-        "Adding record": "Dodaj rekord",
-        "Editing record": "Edytuj rekord",
-        "Record": "Rekord",
-        "New record": "Nowy rekord"
-    },
-    "input": {
-        "Upload file": ""
-    },
-    "table": {
-        "You are about to delete the record. Press OK to confirm.": "Zamierzasz usunąć rekord. Potwierdź naciskając przycisk OK.",
-        "Yes, delete": "Tak, usuń",
-        "No, do not delete": "Nie, zamknij okno",
-        "Delete": "Usuwać",
-        "Start typing to search...": "Aby wyszukać, zacznij pisać..."
-    },
-    "Desktop": {
-        "Premium": "Premia",
-        "Manage your user account": "Zarządzaj swoim kontem użytkownika",
-        "Manage cloud account": "Zarządzaj kontem w chmurze",
-        "Sign out": "Wyloguj się",
-        "Help": "Pomoc"
-    },
-    "Model": {
-        "Export to CSV": "",
-        "Import from CSV": "",
-        "Columns": ""
-    },
-    "Controllers\\NotFound": {
-        "Page Not Found": "",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
-        "Home": ""
-    }
+  "RecordManager": {
+    "Cannot read record. Not enough permissions.": "Nie można odczytać rekordu. Niewystarczające uprawnienia.",
+    "Cannot delete. Not enough permissions.": "Nie można usunąć. Niewystarczające uprawnienia.",
+    "Cannot save. Not enough permissions.": "Nie można zapisać. Niewystarczające uprawnienia.",
+    "A field contains a value that already exists.": "Pole zawiera wartość, która już istnieje.",
+    "Value '{{ value }}' for {{ field }} already exists.": "Wartość '{{ value }}' dla {{ field }} już istnieje.",
+    "{{ field }} is required.": "{{ field }} jest wymagane.",
+    "{{ field }} contains invalid value.": "{{ field }} zawiera nieprawidłową wartość."
+  },
+  "HubletoReactUi": {
+    "Some inputs need your attention": "Niektóre pola wymagają Twojej uwagi",
+    "Duplicate entry error": "Błąd duplikatu wpisu",
+    "OK, I understand": "OK, rozumiem",
+    "Warning": "Ostrzeżenie",
+    "Confirm": "Potwierdź"
+  },
+  "Components\\Form": {
+    "Add": "Dodaj",
+    "Save": "Zapisz",
+    "Copy": "Kopiuj",
+    "Delete": "Usuń",
+    "Confirm delete": "Potwierdź usunięcie",
+    "Edit": "Edytuj",
+    "Adding record": "Dodaj rekord",
+    "Editing record": "Edycja rekordu",
+    "Record": "Rekord",
+    "New record": "Nowy rekord",
+    "Saved": "Zapisano",
+    "You have unsaved changes. Are you sure to close?": "Masz niezapisane zmiany. Czy na pewno chcesz zamknąć?"
+  },
+  "Components\\FormExtended": {
+    "Copy link to clipboard": "Skopiuj link do schowka",
+    "unsaved changes": "niezapisane zmiany",
+    "Open in new tab": "Otwórz w nowej karcie"
+  },
+  "Components\\ErpWorkflowSelector": {
+    "Change workflow": "Zmień workflow",
+    "Last update: {{ date }} by {{ user }}": "Ostatnia aktualizacja: {{ date }} przez {{ user }}",
+    "unknown": "nieznany"
+  },
+  "Components\\Input": {
+    "Upload file": "Prześlij plik"
+  },
+  "Components\\Inputs\\JsonKeyValue": {
+    "Add value": "Dodaj wartość"
+  },
+  "Components\\Inputs\\File": {
+    "Upload file": "Prześlij plik"
+  },
+  "Components\\Inputs\\DateTime": {
+    "Year-Month-Day": "Rok-Miesiąc-Dzień",
+    "Year-Month-Day Hour:Min:Sec": "Rok-Miesiąc-Dzień Godzina:Min:Sek"
+  },
+  "Components\\Inputs\\SharedWith": {
+    "Share": "Udostępnij",
+    "Default access based on ownership": "Domyślny dostęp oparty na własności",
+    "Can only read": "Może tylko czytać",
+    "Can read and modify": "Może czytać i modyfikować",
+    "Apply": "Zastosuj"
+  },
+  "Components\\Table": {
+    "Delete": "Usuń",
+    "Start typing to search...": "Zacznij wpisywać, aby wyszukać...",
+    "Search...": "Szukaj",
+    "No data.": "Brak danych.",
+    "More options": "Ustawienia",
+    "Show\\/Hide filter": "Pokaż\\/ukryj filtr",
+    "Hide filter": "Ukryj filtr",
+    "Show as plain table": "Pokaż jako prostą tabelę",
+    "Show as standard table": "Pokaż jako standardową tabelę",
+    "Delete record": "Usuwanie rekordu",
+    "Cancel": "Anuluj",
+    "Are you sure you want to delete this record?": "Czy na pewno chcesz usunąć ten rekord?",
+    "Copy cell content to clipboard": "Kopiuj zawartość komórki do schowka",
+    "records were hidden based on your permissions.": "rekordy zostały ukryte na podstawie Twoich uprawnień."
+  },
+  "Components\\TableExtended": {
+    "Add new": "Dodaj",
+    "Customize Columns": "Dostosuj kolumny"
+  },
+  "Components\\TableExtendedColumnsCustomize": {
+    "Customize Columns": "Dostosuj kolumny",
+    "Save": "Zapisz",
+    "Reset to default": "Przywróć domyślne"
+  },
+  "Controllers\\ControllerSignIn": {
+    "Keep signed in": "Pozostań zalogowany"
+  },
+  "Controllers\\SignIn": {
+    "Your email": "Email",
+    "Password": "Hasło",
+    "Keep signed in": "Pozostań zalogowany",
+    "Sign in": "Zaloguj się",
+    "Forgot password?": "Zapomniałem hasła"
+  },
+  "Components\\Inputs\\Image": {
+    "Choose image": "Prześlij obraz"
+  },
+  "Components\\Inputs\\TextareaWithHtmlPreview": {
+    "Toggle fullscreen": "Przełącz pełny ekran",
+    "Preview": "Podgląd"
+  },
+  "Components\\Inputs\\Password": {
+    "New password": "Nowe hasło",
+    "Confirm new password": "Potwierdź nowe hasło"
+  },
+  "Components\\ErpSearch": {
+    "[Ctrl+K] Search in Hubleto...": "[Ctrl+K] Szukaj w Hubleto...",
+    "No options": "Brak opcji"
+  },
+  "Controllers\\NotFound": {
+    "Page Not Found": "Strona nie znaleziona",
+    "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Nie znaleźliśmy strony, której szukasz.",
+    "Home": "Strona główna"
+  },
+  "Controllers\\AccessForbidden": {
+    "Access Forbidden": "Dostęp zabroniony",
+    "Home": "Strona główna",
+    "You have no access to {{ appName }}.": "Nie masz dostępu do {{ appName }}."
+  },
+  "EmailProvider": {
+    "Hello from Hubleto!": "Pozdrowienia od Hubleto!",
+    "Dear {{ name }},": "Szanowny/-a {{ name }},",
+    "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta. Jeśli to Ty wysłałeś tę prośbę, kliknij przycisk poniżej, aby ustawić nowe hasło:",
+    "Reset password": "Zresetuj hasło",
+    "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Jeśli nie prosiłeś o reset hasła, zignoruj ten e-mail. Twoje hasło pozostanie niezmienione.",
+    "For security reasons, this link will expire in 15 minutes.": "Ze względów bezpieczeństwa ten link wygaśnie za 15 minut.",
+    "Reset your password | Hubleto": "Resetowanie hasła | Hubleto",
+    "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "Dziękujemy za rejestrację! Cieszymy się, że dołączyłeś. Kliknij przycisk poniżej, aby potwierdzić konto i zacząć pracę.",
+    "Get started": "Zaczynamy",
+    "If you didn't sign up for this account, you can safely ignore this email.": "Jeśli nie zakładałeś tego konta, możesz bezpiecznie zignorować ten e-mail.",
+    "Your Hubleto account has been created!": "Twoje konto Hubleto zostało utworzone!"
+  },
+  "Emails\\EmailProvider": {
+    "Hello from Hubleto!": "Pozdrowienia od Hubleto!",
+    "Dear {{ name }},": "Szanowny/-a {{ name }},",
+    "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta. Jeśli to Ty wysłałeś tę prośbę, kliknij przycisk poniżej, aby ustawić nowe hasło:",
+    "Reset password": "Zresetuj hasło",
+    "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Jeśli nie prosiłeś o reset hasła, zignoruj ten e-mail. Twoje hasło pozostanie niezmienione.",
+    "For security reasons, this link will expire in 15 minutes.": "Ze względów bezpieczeństwa ten link wygaśnie za 15 minut.",
+    "Reset your password | Hubleto": "Resetowanie hasła | Hubleto",
+    "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "Dziękujemy za rejestrację! Cieszymy się, że dołączyłeś. Kliknij przycisk poniżej, aby potwierdzić konto i zacząć pracę.",
+    "Get started": "Zaczynamy",
+    "If you didn't sign up for this account, you can safely ignore this email.": "Jeśli nie zakładałeś tego konta, możesz bezpiecznie zignorować ten e-mail.",
+    "Your Hubleto account has been created!": "Twoje konto Hubleto zostało utworzone!"
+  },
+  "Model": {
+    "Export to CSV": "Eksportuj do CSV",
+    "Import from CSV": "Importuj z CSV",
+    "Columns": "Kolumny"
+  },
+  "Renderer": {
+    "Oops! Something went wrong with the database.": "Ups! Coś poszło nie tak z bazą danych.",
+    "{{ modelName }} cannot be deleted because other data is linked to it.": "{{ modelName }} nie można usunąć, ponieważ inne dane są z nim powiązane.",
+    "You are trying to save a record that is already existing.": "Próbujesz zapisać rekord, który już istnieje.",
+    "You cannot delete record that is linked with another records. Delete the linked records first.": "Nie możesz usunąć rekordu powiązanego z innymi rekordami. Najpierw usuń powiązane rekordy.",
+    "Show error details": "Pokaż szczegóły błędu",
+    "Oops! Something went wrong.": "Ups! Coś poszło nie tak."
+  },
+  "Controllers\\Api\\FileUpload\\Upload": {
+    "The file has been successfully uploaded": "Plik został pomyślnie przesłany",
+    "This file type cannot be uploaded": "Ten typ pliku nie może być przesłany",
+    "The file already exists": "Plik już istnieje",
+    "An error occurred during the file upload": "Wystąpił błąd podczas przesyłania pliku"
+  },
+  "Controllers\\Api\\FileUpload\\Delete": {
+    "The deletion of the file encountered an error": "Podczas usuwania pliku wystąpił błąd",
+    "File not found": "Plik nie został znaleziony",
+    "The file has been successfully deleted": "Plik został pomyślnie usunięty"
+  }
 }

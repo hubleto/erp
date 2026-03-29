@@ -1,6 +1,12 @@
 {
     "manifest": {
         "Reports": "Reporty",
-        "Free report generator app.": "Bezplatná aplikace generátoru reportů."
+        "Free report generator app.": "Správa reportů zdarma."
+    },
+    "Models\\Report": {
+        "Title": "Název",
+        "Model": "Model",
+        "Query": "Dotaz",
+        "Notes": "Poznámky"
     }
 }

@@ -1,0 +1,15 @@
+{
+    "manifest": {
+        "Billing": "Fakturowanie"
+    },
+    "Controllers\\BillingAccounts": {
+        "Customers": "Klienci",
+        "Billing Accounts": "Konta rozliczeniowe"
+    },
+    "Models\\BillingAccount": {
+        "Customer": "Klient",
+        "Description": "Opis",
+        "Billing Account": "Konto rozliczeniowe",
+        "Add Billing Account": "Dodaj konto rozliczeniowe"
+    }
+}

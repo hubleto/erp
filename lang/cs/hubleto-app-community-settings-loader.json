@@ -1,65 +1,141 @@
 {
-    "Models\\User": {
-        "First name": "Křestní jméno",
-        "Last name": "Příjmení",
-        "Nick": "Nick",
-        "Email": "E-mail",
-        "Language": "Jazyk",
-        "Default company": "Výchozí společnost",
-        "Apps": "Aplikace",
+    "manifest": {
+        "Settings": "Nastavení",
+        "Settings and control panel for your Hubleto.": "Nastavení účtu Hubleto.",
+        "Settings and tools": "Nastavení a nástroje",
+        "Users": "Uživatelé",
         "Roles": "Role",
-        "Teams": "Tímy"
+        "Your companies": "Vaše firmy",
+        "General settings": "Obecná nastavení",
+        "Permissions list": "Seznam oprávnění",
+        "Role permissions": "Oprávnění rolí",
+        "Activity types": "Typy aktivit",
+        "Countries": "Státy",
+        "Currencies": "Měny",
+        "Invoice profiles": "Fakturační profily",
+        "Platform config": "Konfigurace platformy",
+        "Sidebar": "Levé menu",
+        "Teams": "Týmy",
+        "Meeting": "Schůzka",
+        "Business Trip": "Pracovní cesta",
+        "Call": "Hovor",
+        "Email": "Email",
+        "Other": "Jiné",
+        "Log viewer": "Prohlížeč logů"
+    },
+    "Models\\User": {
+        "First name": "Jméno",
+        "Middle name": "Prostřední jméno",
+        "Last name": "Příjmení",
+        "Email": "Email",
+        "Language": "Jazyk",
+        "Active profile": "Aktivní profil",
+        "Login": "Login",
+        "Password": "Heslo",
+        "Active": "Účet je aktivní",
+        "Time of last login": "Čas posledního přihlášení",
+        "Last login IP": "IP adresa posledního přihlášení",
+        "Time of last access": "Čas posledního přístupu",
+        "Last access IP": "IP adresa posledního přístupu",
+        "Nick": "Přezdívka",
+        "Default company": "Firma",
+        "Roles": "Role",
+        "Teams": "Týmy",
+        "Type": "Typ",
+        "Apps": "Aplikace",
+        "Add User": "Přidat uživatele"
+    },
+    "Models\\Country": {
+        "Country Name": "Stát",
+        "Code": "Kód",
+        "Country": "Země",
+        "Countries": "Státy",
+        "Add Country": "Přidat stát"
+    },
+    "Models\\Profile": {
+        "Company": "Firma"
+    },
+    "Models\\ActivityType": {
+        "Type Name": "Typ",
+        "Color": "Barva",
+        "Shown in Calendar": "Zobrazit v kalendáři",
+        "Icon": "Ikona",
+        "Type": "Typ",
+        "Show in calendar": "Zobrazit v kalendáři",
+        "Activity Types": "Typy aktivit",
+        "Add Activity Type": "Přidat typ aktivity"
+    },
+    "Models\\Currency": {
+        "Currency Name": "Měna",
+        "Currency Code": "Kód",
+        "Currency": "Měna",
+        "Code": "Kód",
+        "Symbol": "Symbol",
+        "Currencies": "Měny",
+        "Add currency": "Přidat měnu",
+        "New currency": "Nová měna",
+        "Adding": "Přidávání",
+        "Editing": "Úprava"
+    },
+    "Models\\Workflow": {
+        "Name": "Název",
+        "Description": "Popis"
+    },
+    "Models\\WorkflowStep": {
+        "Name": "Název",
+        "Order": "Pořadí",
+        "Company": "Barva",
+        "Workflow": "Kanál",
+        "Color": "Barva",
+        "Set result of a deal to": ""
+    },
+    "Models\\Tag": {
+        "Name": "Název",
+        "Color": "Barva"
+    },
+    "Models\\Setting": {
+        "Key": "Parametr",
+        "Value": "Hodnota",
+        "Only for user": "Pouze pro uživatele",
+        "Settings": "Nastavení",
+        "Add Setting": "Přidat nastavení"
+    },
+    "Models\\InvoiceProfile": {
+        "Name": "Název",
+        "Phone": "Telefon",
+        "E-mail": "Email",
+        "WWW": "WWW",
+        "Company ID": "IČO",
+        "Tax ID": "DIČ",
+        "VAT ID": "IČ DPH",
+        "Street, line 1": "Ulice, řádek č. 1",
+        "Street, line 2": "Ulice, řádek č. 2",
+        "ZIP": "PSČ",
+        "City": "Město",
+        "Country": "Stát",
+        "Bank name": "Název banky",
+        "Account number": "Číslo účtu",
+        "Account IBAN": "IBAN",
+        "SWIFT": "SWIFT",
+        "Numbering pattern": "Vzorec pro číslování",
+        "Customer ID": "ID zákazníka",
+        "Supplier": "Dodavatel"
     },
     "Models\\UserRole": {
         "Role": "Role",
-        "Grant all permissions (administrator role)": "Udělejte všechna povolení (role správce)",
+        "Grant all permissions": "Udělit všechna oprávnění (administrátor)",
+        "Grant all permissions (administrator role)": "Udělit všechna oprávnění (role správce)",
         "Description": "Popis",
         "Is default role (cannot be modified)": "Je výchozí role (nelze upravit)"
     },
-    "Models\\UserHasRole": {
-        "User": "Uživatel",
-        "Role": "Role"
-    },
     "Models\\RolePermission": {
-        "Permission": "Povolení",
-        "Role": "Role"
+        "Permission": "Oprávnění",
+        "Role": "Role",
+        "Assign permission to role": "Přiřadit oprávnění k roli"
     },
-    "manifest": {
-        "Settings": "Nastavení",
-        "Settings and control panel for your Hubleto.": "Nastavení a ovládací panel pro Vaše Hubteto.",
-        "Users": "Uživatelé",
-        "Roles": "Role",
-        "Your companies": "Vaše firmy",
-        "General settings": "Obecná nastavení",
-        "Permissions list": "Seznam oprávnění",
-        "Role permissions": "Oprávnění role",
-        "Activity types": "Typy aktivity",
-        "Countries": "Země",
-        "Currencies": "Měny",
-        "Invoice profiles": "Profily pro fakturování",
-        "Platform config": "Konfigurace platformy",
-        "Sidebar": "Bončí panel",
-        "Teams": "Tímy",
-        "Log viewer": ""
-    },
-    "root": {
-        "Users": "Uživatelé",
-        "Roles": "Role",
-        "Your companies": "Vaše firmy",
-        "General settings": "Obecná nastavení",
-        "Permissions list": "Seznam oprávnění",
-        "Role permissions": "Oprávnění role",
-        "Activity types": "Typy aktivity",
-        "Countries": "Země",
-        "Currencies": "Měny",
-        "Invoice profiles": "Profily pro fakturování",
-        "Platform config": "Konfigurace platformy",
-        "Sidebar": "Bončý panel",
-        "Teams": "Týmy"
-    },
-    "Models\\Country": {
-        "Country": "Země",
-        "Code": "Kód"
+    "Models\\Permission": {
+        "Permission": "Oprávnění",
+        "Permissions": "Oprávnění"
     },
     "Models\\Company": {
         "Company": "Společnost",
@@ -70,120 +146,210 @@
         "ZIP": "PSČ",
         "City": "Město",
         "Country": "Země",
-        "Registration ID": "",
-        "Business register": "",
-        "Logo": "",
-        "Brand color - primary": "",
-        "Brand color - secondary": "",
-        "Region": ""
-    },
-    "Models\\ActivityType": {
-        "Type": "Typ",
-        "Color": "Barva",
-        "Show in calendar": "Zobrazit v kalendáři",
-        "Icon": "Ikona"
-    },
-    "Models\\Currency": {
-        "Currency": "Měna",
-        "Code": "Kód",
-        "Symbol": "Symbol"
+        "Registration ID": "IČO",
+        "Business register": "Obchodní rejstřík",
+        "Logo": "Logo",
+        "Brand color - primary": "Primární barva značky",
+        "Brand color - secondary": "Sekundární barva značky",
+        "Region": "Region",
+        "Add company": "Přidat společnost"
     },
     "Models\\Team": {
-        "Team name": "Tímový jméno",
-        "Team color": "Tímová barva",
+        "Team name": "Název týmu",
+        "Team color": "Barva týmu",
         "Description": "Popis",
-        "Manager": "Manažér",
-        "Members": "Členové"
+        "Team manager": "Manažer týmu",
+        "Manager": "Manažer",
+        "Members": "Členové",
+        "Teams": "Týmy",
+        "Add team": "Přidat tým"
     },
-    "Models\\Setting": {
-        "Key": "Klíč",
-        "Value": "Hodnota",
-        "Only for user": "Iba pro uživatele"
-    },
-    "Controllers\\MyAccount": {
-        "Settings": "Nastavení",
-        "Company": "Firma"
-    },
-    "Components\\FormUser": {
-        "About the user": "O užívateli"
+    "Models\\TeamMember": {
+        "Team": "Tým",
+        "Member": "Člen",
+        "Add member to team": "Přidat člena do týmu"
     },
     "Controllers\\Dashboard": {
         "Settings": "Nastavení",
+        "Users": "Uživatelé",
+        "User Roles": "Uživatelské role",
+        "Profiles": "Profily",
+        "Permissions": "Oprávnění",
+        "Tags": "Tagy",
+        "Activity Types": "Typy aktivit",
+        "Contact Types": "Typy kontaktů",
+        "Countries": "Státy",
+        "Currencies": "Měny",
+        "Lead Statuses": "Stavy leadů",
+        "Deal Statuses": "Stavy dealů",
+        "Workflows": "Workflow",
+        "Invoice profiles": "Fakturační profily",
+        "Manage installed apps": "Spravovat nainstalované aplikace",
+        "Disable": "Deaktivovat",
+        "Uninstall": "Odinstalovat",
+        "Open": "Otevřít",
         "Most common settings": "Nejběžnější nastavení",
-        "Change theme": "Změnit tématiku",
         "Manage users": "Spravovat uživatele",
         "Manage apps": "Spravovat aplikace",
-        "All settings": "Všechny nastavení"
-    },
-    "Models\\InvoiceProfile": {
-        "Name": "Název",
-        "Phone": "Telefonní číslo",
-        "E-mail": "E-mail",
-        "WWW": "Webstránka",
-        "Customer ID": "IČO",
-        "Tax ID": "DIČ",
-        "VAT ID": "IČ DPH",
-        "Street, line 1": "Ulice, řádek 1",
-        "Street, line 2": "Ulice, řadek 2",
-        "ZIP": "PSČ",
-        "City": "Město",
-        "Country": "Krajina",
-        "Bank name": "Název banky",
-        "Account number": "Číslo účtu",
-        "Account IBAN": "IBAN",
-        "SWIFT": "SWIFT",
-        "Numbering pattern": "Číslovací vzor"
-    },
-    "Models\\Permission": {
-        "Permission": "Povolení"
-    },
-    "Models\\TeamMember": {
-        "Team": "Tím",
-        "Member": "Člen"
+        "All settings": "Všechna nastavení",
+        "Change theme": "Změnit téma",
+        "Locale": "Lokalizace",
+        "Sign out from Hubleto": "Odhlásit z Hubleto",
+        "Default currency and timezone": "Výchozí měna a časové pásmo",
+        "Date (short / long) and time formats": "Formáty data (krátký / dlouhý) a času",
+        "Decimals and thousands separator": "Desetinná místa a oddělovač tisíců",
+        "Search settings...": "Hledat v nastavení..."
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavení",
-        "User Roles": "Role uživatele"
+        "User Roles": "Uživatelské role"
     },
-    "Controllers\\Currencies": {
+    "Controllers\\Countries": {
         "Settings": "Nastavení",
-        "Currencies": "Měny"
-    },
-    "Controllers\\RolePermissions": {
-        "Settings": "Nastavení",
-        "Role permissions": "Oprávnění role"
-    },
-    "Controllers\\Sidebar": {
-        "Settings": "Nastavení",
-        "Sidebar": "Boční panel"
-    },
-    "Controllers\\InvoiceProfiles": {
-        "Settings": "Nastavení",
-        "Invoice profiles": "Profily pro fakturování"
-    },
-    "Controllers\\Permissions": {
-        "Settings": "Nastavení",
-        "Permissions": "Povolení"
-    },
-    "Controllers\\ActivityTypes": {
-        "Settings": "Nastavení",
-        "Activity Types": "Typy aktivit",
-        "Types of activities": "Typy aktivit"
-    },
-    "Controllers\\Teams": {
-        "Settings": "Nastavení",
-        "Teams": "Tímy"
+        "Countries": "Státy"
     },
     "Controllers\\Users": {
         "Settings": "Nastavení",
         "Users": "Uživatelé"
     },
+    "Controllers\\Activitytypes": {
+        "Settings": "Nastavení",
+        "Activity Types": "Typy aktivit"
+    },
     "Controllers\\Companies": {
         "Settings": "Nastavení",
-        "Companies": "Firmy"
+        "Companies": "Společnosti"
     },
-    "Controllers\\Countries": {
+    "Controllers\\Currencies": {
         "Settings": "Nastavení",
-        "Countries": "Krajiny"
+        "Currencies": "Měny"
+    },
+    "Controllers\\Teams": {
+        "Settings": "Nastavení",
+        "Teams": "Týmy"
+    },
+    "Controllers\\Theme": {
+        "Settings": "Nastavení",
+        "Theme": "Téma"
+    },
+    "Controllers\\Permissions": {
+        "Settings": "Nastavení",
+        "Permissions": "Oprávnění"
+    },
+    "Controllers\\RolePermissions": {
+        "Role permissions": "Oprávnění rolí"
+    },
+    "Controllers\\UpdateDefaultPermissions": {
+        "Settings": "Nastavení",
+        "Update default permissions": "Aktualizovat výchozí oprávnění"
+    },
+    "Controllers\\Config": {
+        "Settings": "Nastavení",
+        "Platform config": "Konfigurace platformy"
+    },
+    "Controllers\\General": {
+        "Settings": "Nastavení",
+        "General settings": "Obecná nastavení"
+    },
+    "Controllers\\Sidebar": {
+        "Settings": "Nastavení",
+        "Sidebar": "Boční panel",
+        "Save sidebar configuration": "Uložit konfiguraci bočního panelu"
+    },
+    "Controllers\\Apps": {
+        "Settings": "Nastavení",
+        "Apps": "Aplikace",
+        "Open": "Otevřít",
+        "Disable": "Zakázat",
+        "Install": "Instalovat",
+        "Go to app": "Přejít do aplikace",
+        "Enable": "Aktivovat",
+        "Activate Premium account": "Aktivovat prémiový účet",
+        "Installed apps": "Nainstalované aplikace",
+        "Available apps": "Dostupné aplikace",
+        "(Search) Type app name and press Enter...": "(Hledat) Zadejte název aplikace a stiskněte Enter...",
+        "Community": "Community",
+        "Enterprise": "Enterprise",
+        "External": "Externí",
+        "Custom": "Vlastní",
+        "You can install Premium apps only in Premium account.": "Prémiové aplikace můžete instalovat pouze v prémiovém účtu."
+    },
+    "Controllers\\LogViewer": {
+        "Settings": "Nastavení",
+        "Log Viewer": "Prohlížeč logů"
+    },
+    "Controllers\\MyAccount": {
+        "Settings": "Nastavení",
+        "Company": "Firma"
+    },
+    "Controllers\\Profile": {
+        "Settings": "Nastavení",
+        "Profile": "Profil"
+    },
+    "Controllers\\InvoiceProfiles": {
+        "Settings": "Nastavení",
+        "Invoice profiles": "Faktura"
+    },
+    "Components\\FormUserRole": {
+        "Save": "Uložit",
+        "User role": "Uživatelská role",
+        "Permissions for records with designated owner, manager or team": "Oprávnění pro záznamy s určeným vlastníkem, manažerem nebo týmem",
+        "Reading": "Čtení",
+        "Modifying": "Úprava",
+        "Can read only owned records": "Může číst pouze vlastní záznamy",
+        "Can read only owned and managed records": "Může číst pouze vlastní a spravované záznamy",
+        "Can read all records": "Může číst všechny záznamy",
+        "Can modify only owned records": "Může upravovat pouze vlastní záznamy",
+        "Can modify only owned and managed records": "Může upravovat pouze vlastní a spravované záznamy",
+        "Can modify all records": "Může upravovat všechny záznamy"
+    },
+    "Components\\FormUser": {
+        "About the user": "O uživateli",
+        "User": "Uživatel",
+        "You may add new users only in Premium account.": "Nové uživatele můžete přidávat pouze v prémiovém účtu.",
+        "Activate Premium account": "Aktivovat prémiový účet",
+        "Access to Hubleto": "Přístup do Hubleto",
+        "Roles": "Role",
+        "First create user, then you will be prompted to assign roles.": "Nejprve vytvořte uživatele, poté budete vyzváni k přiřazení rolí.",
+        "Permissions for records with designated owner or manager": "Oprávnění pro záznamy s určeným vlastníkem nebo manažerem",
+        "Reading": "Čtení",
+        "Modifying": "Úprava",
+        "Can read only owned records": "Může číst pouze vlastní záznamy",
+        "Can read only owned and managed records": "Může číst pouze vlastní a spravované záznamy",
+        "Can read all records": "Může číst všechny záznamy",
+        "Can modify only owned records": "Může upravovat pouze vlastní záznamy",
+        "Can modify only owned and managed records": "Může upravovat pouze vlastní a spravované záznamy",
+        "Can modify all records": "Může upravovat všechny záznamy",
+        "Access to apps": "Přístup k aplikacím"
+    },
+    "Components\\FormTeam": {
+        "Team": "Tým",
+        "Team members": "Členové týmu",
+        "First create team, then you will be prompted to add members.": "Nejprve vytvořte tým, poté budete vyzváni k přidání členů."
+    },
+    "root": {
+        "Users": "Uživatelé",
+        "User roles": "Uživatelské role",
+        "Your companies": "Moje firmy",
+        "General settings": "Obecná nastavení",
+        "Permissions": "Oprávnění",
+        "Tags": "Tagy",
+        "Activity types": "Typy aktivit",
+        "Contact types": "Typy kontaktů",
+        "Countries": "Státy",
+        "Currencies": "Měny",
+        "Workflows": "Workflows",
+        "Invoice profiles": "Fakturační profily",
+        "Platform config": "Konfigurace platformy",
+        "Contact Categories": "Kategorie kontaktů",
+        "Roles": "Role",
+        "Permissions list": "Seznam oprávnění",
+        "Role permissions": "Oprávnění rolí",
+        "Sidebar": "Boční panel",
+        "Teams": "Týmy"
+    },
+    "Models\\UserHasRole": {
+        "User": "Uživatel",
+        "Role": "Role"
     }
 }

@@ -1,66 +1,120 @@
 {
-    "controllers.calendar": {
-        "Calendar": "Kalendarz"
-    },
-    "loader": {
-        "Calendar": "Kalendarz"
-    },
     "manifest": {
         "Calendar": "Kalendarz",
-        "Free calendar app.": "Bezpłatna aplikacja kalendarza",
+        "Free calendar app.": "Bezpłatna aplikacja kalendarza.",
         "Reminders": "Przypomnienia",
         "Share": "Udostępnij"
     },
-    "root": {
-        "Events for today": "Wydarzenia na dziś"
+    "Controllers\\Calendar": {
+        "Calendar": "Kalendarz"
     },
     "Models\\Activity": {
         "Subject": "Temat",
-        "Activity type": "Typ aktywności",
-        "Start date": "Data rozpoczęcia",
-        "Start time": "Godzina rozpoczęcia",
-        "End date": "Data zakończenia",
-        "End time": "Godzina zakończenia",
-        "All day": "Cały dzień",
+        "Activity type": "Typ",
+        "Start date": "Początek",
+        "Start time": "Czas rozpoczęcia",
+        "End date": "Koniec",
+        "End time": "Czas zakończenia",
+        "All day": "Całodniowe",
         "Completed": "Zakończone",
-        "Created by": "Utworzone przez",
-        "Meeting minutes (link)": "Protokół spotkania (link)",
+        "Created by": "Utworzył",
+        "Meeting minutes (link)": "Protokół ze spotkania (link)",
         "Location": "Lokalizacja",
         "Online meeting link": "Link do spotkania online",
         "Description": "Opis",
-        "Recurrence": "Powtarzalność",
-        "Long meeting minutes (link to external document)": "Szczegółowy protokół spotkania (link do dokumentu zewnętrznego)",
-        "Short meeting minutes": "Krótki protokół spotkania"
+        "Recurrence": "Powtarzanie",
+        "Long meeting minutes (link to external document)": "Szczegółowy protokół (link do zewnętrznego dokumentu)",
+        "Short meeting minutes": "Skrócony protokół"
     },
     "Controllers\\Boards\\Reminders": {
+        "Open event details": "Pokaż szczegóły",
         "All-day": "Całodniowe",
-        "Open event details": "Otwórz szczegóły wydarzenia",
-        "events for tomorrow": "wydarzenia na jutro",
-        "events later": "wydarzenia później",
-        "reminders later": "późniejsze przypomnienia",
+        "events for tomorrow": "Wydarzenia na jutro",
+        "events later": "Wydarzeń później",
+        "reminders later": "przypomnień później",
         "Later": "Później",
-        "reminders tomorrow": "",
-        "Tomorrow": ""
+        "reminders tomorrow": "przypomnień jutro",
+        "Tomorrow": "Jutro",
+        "Today": "Dziś",
+        "Let's have a break. You have nothing to do for today.": "Odpocznij. Nie masz nic zaplanowanego na dziś."
     },
-    "Components\\CalendarMain": {
-        "Calendars": "",
-        "New activity": "",
-        "All": "",
-        "Ownership": "",
-        "My activities": "",
-        "Export calendar": ""
+    "Controllers\\Api\\DailyDigest": {
+        "Today": "Dziś",
+        "Tomorrow": "Jutro",
+        "Later": "Później"
     },
     "Controllers\\Share": {
-        "Share": "",
-        "Calendar: Settings": ""
+        "Share": "Udostępnij",
+        "Calendar: Settings": "Kalendarz: Ustawienia",
+        "Settings saved.": "Ustawienia zapisane."
+    },
+    "root": {
+        "Events for today": "Dzisiejsze wydarzenia",
+        "Reminders": "Przypomnienia"
+    },
+    "Components\\CalendarMain": {
+        "New activity": "Nowa aktywność",
+        "All": "Wszystko",
+        "Ownership": "Własność",
+        "My activities": "Moje aktywności",
+        "Calendars": "Kalendarze",
+        "Export calendar": "Eksportuj kalendarz"
+    },
+    "Components\\CalendarShareTable": {
+        "You are about to remove all shared access to the calendar \"{calendar}\". Do you want to continue?": "Zamierzasz usunąć cały udostępniony dostęp do kalendarza \"{calendar}\". Czy chcesz kontynuować?",
+        "Stop sharing": "Zatrzymaj udostępnianie",
+        "Stop sharing \"{calendar}\"": "Zatrzymaj udostępnianie \"{calendar}\"",
+        "Yes, remove all shares": "Tak, usuń wszystkie udostępnienia",
+        "No, keep current sharing": "Nie, zachowaj aktualne udostępnianie",
+        "Share calendar": "Udostępnij kalendarz",
+        "again": "ponownie",
+        "List of all created shares": "Lista wszystkich utworzonych udostępnień",
+        "Shared 1 time": "Udostępnione 1 raz",
+        "Shared {count} times": "Udostępnione {count} razy",
+        "Share calendar as ICS": "Udostępnij kalendarz jako ICS",
+        "Loading...": "Ładowanie..."
     },
     "Models\\SharedCalendar": {
-        "Created by": "",
-        "Calendar ID": "",
-        "Share key": "",
-        "Display details": "",
-        "Enabled": "",
-        "Date from": "",
-        "Date to": ""
+        "Created by": "Utworzył",
+        "Calendar ID": "ID kalendarza",
+        "Share key": "Klucz udostępniania",
+        "Display details": "Pokaż szczegóły",
+        "Enabled": "Włączone",
+        "Date from": "Od",
+        "Date to": "Do"
+    },
+    "Components\\FormActivitySelector": {
+        "New event": "Nowe wydarzenie",
+        "Choose the calendar where you want to create the event.": "Wybierz kalendarz, w którym chcesz utworzyć wydarzenie.",
+        "Save": "Zapisz"
+    },
+    "Components\\FormActivity": {
+        "Start - End": "Początek - Koniec",
+        "Repeats": "Powtarza się",
+        "Does not repeat": "Nie powtarza się",
+        "Configure custom recurrence": "Skonfiguruj niestandardowe powtarzanie",
+        "Meeting minutes": "Protokół ze spotkania",
+        "Duration": "Czas trwania",
+        "Repeat every": "Powtarzaj co",
+        "does not repeat": "nie powtarza się",
+        "day": "dzień",
+        "week": "tydzień",
+        "month": "miesiąc",
+        "year": "rok",
+        "End after": "Zakończ po",
+        "occurences.": "powtórzeniach.",
+        "Repeats from {{ dateFrom }} to {{ dateTo }}.": "Powtarza się od {{ dateFrom }} do {{ dateTo }}.",
+        "day(s)": "dzień/dni",
+        "hours": "godzin",
+        "minutes": "minut"
+    },
+    "Components\\FormSharedCalendar": {
+        "Shared calendar": "Udostępniony kalendarz",
+        "unsaved changes": "niezapisane zmiany",
+        "Copy share link": "Kopiuj link udostępniania"
+    },
+    "Calendar": {
+        "Default": "Domyślny",
+        "Add a simple event": "Dodaj proste wydarzenie"
     }
 }

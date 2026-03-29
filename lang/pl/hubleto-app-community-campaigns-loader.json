@@ -1,0 +1,221 @@
+{
+  "manifest": {
+    "Campaigns": "Kampanie",
+    "Management of marketing campaigns": "Zarządzanie kampaniami marketingowymi",
+    "Recipients": "Odbiorcy",
+    "Recipient statuses": "Statusy odbiorców",
+    "Target": "Cel",
+    "Goal": "Cel"
+  },
+  "Models\\Campaign": {
+    "Name": "Nazwa",
+    "UTM source": "UTM source",
+    "UTM campaign": "UTM campaign",
+    "UTM term": "UTM term",
+    "UTM content": "UTM content",
+    "Target audience": "Grupa docelowa",
+    "Goal": "Cel",
+    "Notes": "Notatki",
+    "Mail body (HTML)": "Treść wiadomości e-mail (HTML)",
+    "Color": "Kolor",
+    "Mail template": "Szablon wiadomości e-mail",
+    "Manager": "Menedżer",
+    "Created": "Utworzona",
+    "UID": "UID",
+    "Mail account to send email from": "Konto nadawcze",
+    "Workflow": "Workflow",
+    "Workflow step": "Krok workflow",
+    "Approved": "Zatwierdzona",
+    "Closed": "Zamknięta",
+    "Add Campaign": "Dodaj kampanię",
+    "Open \\/ Closed": "Otwarta \\/ Zamknięta",
+    "Open": "Otwarta",
+    "All": "Wszystkie",
+    "Reply to": "Odpowiedz do",
+    "Owner": "Właściciel",
+    "Lanuched by": "Uruchomiona przez",
+    "Launched": "Uruchomiona",
+    "Shared with": "Udostępniona dla",
+    "Type": "Typ",
+    "Phase": "Faza",
+    "Ownership": "Własność",
+    "Owned by me": "Moje",
+    "Managed by me": "Zarządzane przeze mnie",
+    "Online document folder": "Folder dokumentów online",
+    "not specified": "nie określono",
+    "direct mail": "direct mail",
+    "cold call": "cold call",
+    "other": "inne"
+  },
+  "Models\\Recipient": {
+    "Campaign": "Kampania",
+    "Contact": "Kontakt",
+    "Email": "Email",
+    "First name": "Imię",
+    "Last name": "Nazwisko",
+    "Salutation": "Powitanie",
+    "Reference to mail sent": "Wysłana wiadomość e-mail",
+    "Variables": "Zmienne",
+    "Status": "Status",
+    "Add recipient": "Dodaj odbiorcę",
+    "UTM: source": "UTM: źródło",
+    "UTM: campaign": "UTM: kampania",
+    "UTM: term": "UTM: wyrażenie",
+    "Group by": "Grupuj według",
+    "Count": "Liczba",
+    "Clicks": "Kliknięcia",
+    "Click summary": "Podsumowanie kliknięć",
+    "Bot score": "Wynik bota"
+  },
+  "Models\\CampaignTask": {
+    "Campaign": "Kampania",
+    "Task": "Zadanie",
+    "Add campaign": "Dodaj kampanię"
+  },
+  "Controllers\\Campaigns": {
+    "Campaigns": "Kampanie"
+  },
+  "Controllers\\Recipients": {
+    "Campaigns": "Kampanie",
+    "Recipients": "Odbiorcy"
+  },
+  "Controllers\\Api\\SendTestEmail": {
+    "Recipient must be provided.": "Odbiorca musi być podany.",
+    "Recipient is not valid email address.": "Odbiorca nie jest prawidłowym adresem e-mail."
+  },
+  "Controllers\\Api\\GetCampaignTestInfo": {
+    "Mail template is not set.": "Szablon wiadomości e-mail nie jest ustawiony.",
+    "Mail template does not contain {{ placeholder }} placeholder.": "Szablon wiadomości e-mail nie zawiera symbolu zastępczego {{ placeholder }}.",
+    "Recipients contain variables {{ variables }} but not all of them are used in template.": "Odbiorcy zawierają zmienne {{ variables }}, ale nie wszystkie z nich są użyte w szablonie."
+  },
+  "Components\\FormCampaign": {
+    "Campaign": "Kampania",
+    "Add recipients from contacts": "Dodaj odbiorcę z kontaktów",
+    "Tasks": "Zadania",
+    "Launch": "Uruchom",
+    "Calendar": "Kalendarz",
+    "Contacts": "Kontakty",
+    "Recipients": "Odbiorcy",
+    "Test": "Test",
+    "Clicks": "Kliknięcia",
+    "Select contacts which will be added as recipients": "Wybierz kontakty, które zostaną dodane jako odbiorcy",
+    "One email per line.": "Jeden e-mail w wierszu.",
+    "Import emails": "Importuj e-maile",
+    "Emails will be sent only to recipients who did not receive email from this campaign yet.": "E-maile zostaną wysłane tylko do odbiorców, którzy jeszcze nie otrzymali wiadomości z tej kampanii.",
+    "Unsubscribed recipients will be ignored.": "Wypisani odbiorcy zostaną zigniorowani.",
+    "Unsubscribed and invalid recipients will be ignored.": "Wypisani i nieprawidłowi odbiorcy zostaną zignorowani.",
+    "Who clicked? (Bot Score = 0)": "Kto kliknął? (Wynik bota = 0)",
+    "Email": "Email",
+    "Status": "Status",
+    "Bot score": "Wynik bota",
+    "Launch campaign now!": "Uruchom kampanię",
+    "Analysis & warnings": "Analiza i ostrzeżenia",
+    "Send test email": "Wyślij testowy e-mail",
+    "Test email recipient:": "Odbiorca testowego e-maila",
+    "Recipient email": "Adres e-mail odbiorcy",
+    "Test email variables:": "Zmienne testowego e-maila",
+    "Loading information about recipients and launch status.": "Ładowanie informacji o odbiorcach i statusie uruchomienia.",
+    "Analysing campaign...": "Analizuję kampanię...",
+    "Error occured when sending a test email to you.": "Wystąpił błąd podczas wysyłania testowego e-maila.",
+    "Recently contacted": "Ostatnio skontaktowani",
+    "Documents": "Dokumenty",
+    "Log completed activity": "Zarejestruj ukończoną aktywność",
+    "Schedule activity": "Zaplanuj aktywność",
+    "Most recent activities": "Ostatnie aktywności",
+    "Not completed yet": "Jeszcze nieukończone",
+    "Type recent activity here": "Wpisz tutaj nową aktywność",
+    "No warnings": "Brak ostrzeżeń",
+    "Statistics": "Statystyki",
+    "Total": "Łącznie",
+    "Details": "Szczegóły",
+    "Emails sent": "Wysłanych e-maili",
+    "Invalid recipients": "Nieprawidłowi odbiorcy",
+    "Unsubscribed recipients": "Wypisani odbiorcy",
+    "Campaign was launched.": "Kampania została uruchomiona.",
+    "Error occured when launching the campaign.": "Wystąpił błąd podczas uruchamiania kampanii.",
+    "Sent": "Wysłane",
+    "Scheduled": "Zaplanowane",
+    "Not scheduled yet": "Jeszcze niezaplanowane",
+    "Unsubscribed": "Wypisany",
+    "Invalid": "Nieprawidłowy",
+    "in campaign": "w kampanii",
+    "Campaign was already launched by {{ email }} on {{ datetime }}.": "Kampania została już uruchomiona przez {{ email }} dnia {{ datetime }}.",
+    "Test email was sent to you.": "Testowy e-mail został do Ciebie wysłany."
+  },
+  "Models\\Click": {
+    "Campaign": "Kampania",
+    "Recipient": "Odbiorca",
+    "Url": "URL",
+    "Clicked": "Kliknięto",
+    "Bot Score": "Wynik bota",
+    "Log": "Log"
+  },
+  "Models\\CampaignActivity": {
+    "Subject": "Temat",
+    "Location": "Miejsce",
+    "Online meeting link": "Link do spotkania online",
+    "Description": "Opis",
+    "Activity type": "Typ aktywności",
+    "Start date": "Data rozpoczęcia",
+    "Start time": "Godzina rozpoczęcia",
+    "End date": "Data zakończenia",
+    "End time": "Godzina zakończenia",
+    "Recurrence": "Powtarzanie",
+    "All day": "Cały dzień",
+    "Completed": "Ukończona",
+    "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
+    "Short meeting minutes": "Krótki protokół ze spotkania",
+    "Created by": "Utworzone przez",
+    "Campaign": "Kampania"
+  },
+  "Components\\TableCampaigns": {
+    "Hide filter": "Ukryj filtr",
+    "Copy cell content to clipboard": "Kopiuj zawartość komórki do schowka"
+  },
+  "Components\\FormActivity": {
+    "Campaign": "Kampania"
+  },
+  "Components\\FormRecipient": {
+    "Campaign": "Kampania",
+    "Recipient": "Odbiorca",
+    "Mail preview": "Podgląd e-maila",
+    "No mail preview available.": "Podgląd e-maila jest niedostępny."
+  },
+  "Components\\FormRecipientStatus": {
+    "Campaign": "Kampania",
+    "Recipient status": "Status odbiorcy"
+  },
+  "Components\\FormClick": {
+    "Campaign": "Kampania",
+    "Click": "Kliknięcie"
+  },
+  "Components\\TableRecipients": {
+    "Unsubscribed": "Wypisany",
+    "Invalid": "Nieprawidłowy"
+  },
+  "Components\\TableRecipientStatuses": {},
+  "Components\\TableClicks": {},
+  "Models\\RecipientStatus": {
+    "Email": "Email",
+    "Is unsubscribed": "Wypisany",
+    "Is invalid": "Nieprawidłowy",
+    "Add recipient status": "Dodaj status odbiorcy"
+  },
+  "Controllers\\RecipientStatuses": {
+    "Campaigns": "Kampanie",
+    "Recipients": "Odbiorcy",
+    "Statuses": "Statusy"
+  },
+  "Controllers\\Unsubscribe": {
+    "Unsubscribe": "Wypisz się",
+    "Your email": "Twój e-mail",
+    "has been unsubscribed.": "został wypisany.",
+    "Your email:": "Twój e-mail:",
+    "Powered by Hubleto": "Powered by Hubleto"
+  },
+  "Calendar": {
+    "Campaigns": "Kampanie",
+    "Add new activity linked to campaign": "Dodaj nową aktywność dla kampanii",
+    "Campaign #{{ id }}": "Kampania nr {{ id }}"
+  }
+}

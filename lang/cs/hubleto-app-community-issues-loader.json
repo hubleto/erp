@@ -1,0 +1,28 @@
+{
+    "manifest": {
+        "Issues": "Problémy",
+        "Issue management": "Správa problémů",
+        "Mail accounts": "E-mailové účty",
+        "Issues Mail Accounts": "E-mailové účty problémů"
+    },
+    "root": {
+        "Issues": "Problémy",
+        "Mail accounts": "E-mailové účty"
+    },
+    "Controllers\\Issues": {
+        "Issues": "Problémy"
+    },
+    "Controllers\\MailAccounts": {
+        "Issues": "Problémy",
+        "Mail accounts": "E-mailové účty"
+    },
+    "Models\\Issue": {
+        "Title": "Název",
+        "Problem description": "Popis problému"
+    },
+    "Models\\MailAccount": {
+        "Mail account (requires Mail app)": "E-mailový účet (vyžaduje aplikaci Mail)",
+        "Configuration": "Konfigurace",
+        "Notes": "Poznámky"
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "manifest": {
+        "Api": "API",
+        "Hubleto Api Key management": "Zarządzanie kluczami API",
+        "API keys": "Klucze API",
+        "Discussions": "Dyskusje",
+        "Members": "Członkowie",
+        "Messages": "Wiadomości",
+        "API": "API",
+        "Keys": "Klucze",
+        "Usage log": "Dziennik użycia"
+    },
+    "Models\\Key": {
+        "Key": "Klucz",
+        "Valid until": "Ważny do",
+        "Enabled": "Włączony",
+        "Notes": "Notatki",
+        "IP Address blacklist": "Zablokowane adresy IP",
+        "IP Address whitelist": "Dozwolone adresy IP",
+        "Created by": "Utworzony przez",
+        "Created": "Utworzony",
+        "Add Key": "Dodaj klucz"
+    },
+    "Models\\Permission": {
+        "Key": "Klucz",
+        "App": "Aplikacja",
+        "Controller": "Kontroler",
+        "Add Permission": "Dodaj uprawnienie"
+    },
+    "Models\\Usage": {
+        "Key": "Klucz",
+        "App": "Aplikacja",
+        "Controller": "Kontroler",
+        "Used on": "Użyto",
+        "IP address": "Adres IP",
+        "Status": "Status",
+        "Unknown": "Nieznany",
+        "Success": "Sukces",
+        "Error": "Błąd",
+        "Add Usage": "Dodaj wpis użycia"
+    },
+    "Components\\FormKey": {
+        "Usage": "Dziennik użycia",
+        "Key": "Klucz",
+        "Permissions": "Uprawnienia",
+        "Test": "Testuj",
+        "Test result": "Wynik testu",
+        "Run test": "Uruchom test",
+        "API Key": "Klucz API",
+        "Parameter": "Parametr",
+        "Endpoint": "Punkt końcowy",
+        "App": "Aplikacja",
+        "Controller": "Kontroler",
+        "Vars": "Zmienne"
+    },
+    "Controllers\\Keys": {
+        "API": "API",
+        "Keys": "Klucze"
+    },
+    "Controllers\\Permissions": {
+        "API": "API",
+        "Permissions": "Uprawnienia"
+    },
+    "Controllers\\Usages": {
+        "API": "API",
+        "Usages": "Dziennik użycia"
+    }
+}

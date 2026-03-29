@@ -1,0 +1,68 @@
+{
+    "manifest": {
+        "Api": "API",
+        "Hubleto Api Key management": "Správa API klíčů",
+        "API keys": "API klíče",
+        "Discussions": "Diskuze",
+        "Members": "Členové",
+        "Messages": "Zprávy",
+        "API": "API",
+        "Keys": "Klíče",
+        "Usage log": "Záznam používání"
+    },
+    "Models\\Key": {
+        "Key": "Klíč",
+        "Valid until": "Platný do",
+        "Enabled": "Povoleno",
+        "Notes": "Poznámky",
+        "IP Address blacklist": "Zakázané IP adresy",
+        "IP Address whitelist": "Povolené IP adresy",
+        "Created by": "Vytvořil",
+        "Created": "Vytvořeno",
+        "Add Key": "Přidat klíč"
+    },
+    "Models\\Permission": {
+        "Key": "Klíč",
+        "App": "Aplikace",
+        "Controller": "Kontroler",
+        "Add Permission": "Přidat oprávnění"
+    },
+    "Models\\Usage": {
+        "Key": "Klíč",
+        "App": "Aplikace",
+        "Controller": "Kontroler",
+        "Used on": "Použito",
+        "IP address": "IP adresa",
+        "Status": "Stav",
+        "Unknown": "Neznámý",
+        "Success": "Úspěch",
+        "Error": "Chyba",
+        "Add Usage": "Přidat záznam použití"
+    },
+    "Components\\FormKey": {
+        "Usage": "Záznamy používání",
+        "Key": "Klíč",
+        "Permissions": "Oprávnění",
+        "Test": "Otestovat",
+        "Test result": "Výsledek testu",
+        "Run test": "Spustit test",
+        "API Key": "API klíč",
+        "Parameter": "Parametr",
+        "Endpoint": "Koncový bod",
+        "App": "Aplikace",
+        "Controller": "Kontroler",
+        "Vars": "Proměnné"
+    },
+    "Controllers\\Keys": {
+        "API": "API",
+        "Keys": "Klíče"
+    },
+    "Controllers\\Permissions": {
+        "API": "API",
+        "Permissions": "Oprávnění"
+    },
+    "Controllers\\Usages": {
+        "API": "API",
+        "Usages": "Záznamy použití"
+    }
+}

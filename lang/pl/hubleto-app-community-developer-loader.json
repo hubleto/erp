@@ -1,0 +1,54 @@
+{
+    "manifest": {
+        "Developer": "Deweloper",
+        "Developer tools to automate your Hubleto development": "Narzędzia deweloperskie",
+        "Developer tools": "Narzędzia deweloperskie"
+    },
+    "root": {
+        "Developer tools": "Narzędzia deweloperskie"
+    },
+    "Controllers\\Dashboard": {
+        "Developer": "Deweloper",
+        "DB Updates": "Aktualizacje bazy danych",
+        "Form designer": "Projektant formularzy",
+        "Check DB consistency": "Sprawdź spójność bazy danych"
+    },
+    "Controllers\\DbUpdates": {
+        "Developer": "Deweloper",
+        "DB Updater": "Aktualizacje bazy danych",
+        "Database updater": "Aktualizacje bazy danych",
+        "No necessary database updates found.": "Nie znaleziono wymaganych aktualizacji bazy danych."
+    },
+    "Controllers\\CheckDbConsistency": {
+        "Developer tools": "Narzędzia deweloperskie",
+        "Check DB consistency": "Sprawdź spójność bazy danych",
+        "No necessary database updates found.": "Nie znaleziono wymaganych aktualizacji bazy danych.",
+        "UID": "UID",
+        "Type": "Typ",
+        "Description": "Opis",
+        "SQL": "SQL",
+        "Run this update": "Uruchom tę aktualizację",
+        "Run the updates now!": "Uruchom aktualizacje!"
+    },
+    "Controllers\\UpgradeModels": {
+        "Developer tools": "Narzędzia deweloperskie",
+        "Upgrade models": "Aktualizuj modele",
+        "No upgrades found.": "Nie znaleziono żadnych aktualizacji."
+    },
+    "Controllers\\FormDesigner": {
+        "Developer": "Deweloper",
+        "Form designer": "Projektant formularzy",
+        "Template": "Szablon",
+        "One column": "Jedna kolumna",
+        "Two columns": "Dwie kolumny",
+        "Three columns": "Trzy kolumny",
+        "Rendered Typescript code": "Wygenerowany kod TypeScript",
+        "Copy & paste following code into your ": "Skopiuj i wklej następujący kod do swojego ",
+        " file and then:": " pliku, a następnie:",
+        "1. Adapt the code to render inputs, nested tables or other components based on your requirements.": "1. Dostosuj kod tak, aby renderował pola wejściowe, zagnieżdżone tabele lub inne komponenty zgodnie z wymaganiami.",
+        "2. Run ": "2. Uruchom ",
+        " in your terminal.": " w swoim terminalu.",
+        "Check ": "Sprawdź ",
+        " for more details.": " aby uzyskać więcej szczegółów."
+    }
+}

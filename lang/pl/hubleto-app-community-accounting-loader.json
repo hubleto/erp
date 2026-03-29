@@ -1,0 +1,17 @@
+{
+    "manifest": {
+        "Accounting": "Księgowość"
+    },
+    "Models\\Account": {
+        "Account name": "Nazwa konta",
+        "Account type": "Typ konta",
+        "Account subtype": "Podtyp konta",
+        "Balance": "Saldo"
+    },
+    "Models\\AccountType": {
+        "Type title": "Typ konta"
+    },
+    "Models\\AccountSubtype": {
+        "Subtype title": "Podtyp konta"
+    }
+}

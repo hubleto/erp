@@ -1,55 +1,89 @@
 {
     "manifest": {
         "Documents": "Dokumenty",
-        "Free document management.": "Správa dokumentů zdarma.",
-        "Browse": "Prohlížet",
+        "Free document management.": "Bezplatná správa dokumentů.",
+        "Browse": "Procházet",
         "List": "Seznam",
         "Templates": "Šablony",
-        "Show as list": "",
-        "Manage folders": ""
-    },
-    "root": {
-        "Browse": "Prohlížet",
-        "List": "Seznam"
+        "Show as list": "Zobrazit jako seznam",
+        "Manage folders": "Spravovat složky",
+        "Marketing materials": "Marketingové materiály",
+        "Customer profiles": "Profily zákazníků",
+        "Quotation": "Cenová nabídka",
+        "Proforma invoice": "Proforma faktura",
+        "Advance invoice": "Zálohová faktura",
+        "Standard invoice": "Vyúčtovací faktura",
+        "Credit note": "Dobropis",
+        "Debit note": "Vrubopis",
+        "Proforma faktúra": "Proforma faktura",
+        "Zálohová faktúra": "Zálohová faktura",
+        "Vyúčtovacia faktúra s DPH": "Vyúčtovací faktura s DPH",
+        "Dobropis s DPH": "Dobropis s DPH",
+        "Ťarchopis": "Vrubopis"
     },
     "Models\\Document": {
-        "Uid": "Uid",
-        "Folder": "Složka",
         "Document name": "Název dokumentu",
         "File": "Soubor",
-        "File Link": "Odkaz souboru",
-        "Origin Link": "Odkaz původu souboru",
-        "Add Document": "Přidat dokument"
+        "File Link": "Odkaz na dokument",
+        "Origin Link": "Původní odkaz",
+        "Uid": "Uid",
+        "Folder": "Složka",
+        "Add Document": "Přidat dokument",
+        "Public": "Veřejné"
+    },
+    "Controllers\\Documents": {
+        "Documents": "Dokumenty"
+    },
+    "root": {
+        "Browse": "Procházet",
+        "List": "Seznam",
+        "Templates": "Šablony"
+    },
+    "Controllers\\Table": {
+        "Documents": "Dokumenty"
     },
     "Models\\Folder": {
         "Uid": "Uid",
         "Parent folder": "Nadřazená složka",
         "Folder name": "Název složky",
-        "Add Folder": ""
-    },
-    "Controllers\\Browse": {
-        "Documents": "Dokumenty",
-        "Browse": ""
-    },
-    "Components\\Browser": {
-        "Add document": "Přidat dokument",
-        "Add folder": "Přidat soubor"
-    },
-    "Components\\FormDocument": {
-        "Document": "Dokument"
+        "Add Folder": "Přidat složku"
     },
     "Models\\Template": {
         "Name": "Název",
         "Content": "Obsah",
         "Notes": "Poznámky",
-        "Used For": "",
-        "Add template": ""
+        "Used For": "Používáno pro",
+        "Add template": "Přidat šablonu"
+    },
+    "Controllers\\Browse": {
+        "Documents": "Dokumenty",
+        "Browse": "Procházet"
     },
     "Controllers\\Folders": {
-        "Folders": ""
+        "Folders": "Složky"
+    },
+    "Components\\Browser": {
+        "Add folder": "Přidat složku",
+        "Add document": "Přidat dokument",
+        "Move": "Přesunout",
+        "Move selected": "Přesunout vybrané",
+        "Confirm delete": "Potvrdit smazání",
+        "Delete": "Smazat",
+        "Public": "Veřejné"
+    },
+    "Components\\FormDocument": {
+        "Document": "Dokument",
+        "Download": "Stáhnout",
+        "Preview": "Náhled"
+    },
+    "Components\\FormTemplate": {
+        "Document template": "Šablona dokumentu"
     },
     "Controllers\\Templates": {
-        "Templates": "",
-        "Documents": ""
-    }
+        "Templates": "Šablony",
+        "Documents": "Dokumenty"
+    },
+    "Components\\TableDocuments": {},
+    "Components\\TableFolders": {},
+    "Components\\TableTemplates": {}
 }

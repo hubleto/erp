@@ -1,0 +1,82 @@
+{
+    "manifest": {
+        "Worksheets": "Výkaznictví",
+        "Worksheet log": "Výkaznictví odpracovaných hodin",
+        "Activity types": "Typy činností",
+        "Daily chart": "Denní přehled",
+        "Monthly summary": "Měsíční souhrn"
+    },
+    "root": {
+        "Worksheets": "Výkaznictví",
+        "Activity types": "Typy aktivit"
+    },
+    "Models\\Activity": {
+        "Worker": "Pracovník",
+        "Task": "Úloha",
+        "Type": "Typ činnosti",
+        "Day": "Den",
+        "Worked hours": "Odpracováno",
+        "Description": "Popis",
+        "Approved": "Schváleno",
+        "Is chargeable": "Účtovatelné",
+        "Created": "Vytvořeno",
+        "Period": "Období",
+        "All": "Vše",
+        "Today": "Dnes",
+        "This week": "Tento týden",
+        "Last week": "Minulý týden",
+        "This month": "Tento měsíc",
+        "Last month": "Minulý měsíc",
+        "This year": "Tento rok",
+        "Last year": "Minulý rok",
+        "Yesterday": "Včera",
+        "Last 7 days": "Posledních 7 dní",
+        "Last 14 days": "Posledních 14 dní",
+        "Month before last": "Předminulý měsíc",
+        "Month": "Měsíc",
+        "Customer": "Zákazník",
+        "Deal": "Obchod",
+        "Project": "Projekt",
+        "Group by": "Seskupit podle",
+        "Total worked hours": "Celkem odpracováno hodin",
+        "Add Activity": "Přidat aktivitu"
+    },
+    "Models\\ActivityType": {
+        "Varchar": "Text",
+        "Color": "Barva",
+        "Add ActivityType": "Přidat typ aktivity"
+    },
+    "Components\\TableActivities": {
+        "Worked total": "Odpracováno celkem",
+        "hours": "hodin"
+    },
+    "Components\\FormActivity": {
+        "Activity": "Aktivita"
+    },
+    "Components\\FormActivityType": {
+        "ActivityType": "Typ aktivity",
+        "Record #": "Záznam č."
+    },
+    "Components\\FormType": {
+        "Type": "Typ",
+        "Record #": "Záznam č."
+    },
+    "Controllers\\Activities": {
+        "Worksheets": "Výkaznictví",
+        "Activities": "Aktivity"
+    },
+    "Controllers\\ActivityTypes": {
+        "Worksheets": "Výkaznictví",
+        "Activity types": "Typy aktivit"
+    },
+    "Controllers\\Boards\\DailyChart": {
+        "Show/Hide details": "Zobrazit/Skrýt detaily"
+    },
+    "Controllers\\Boards\\MonthlySummary": {
+        "No employee with email address '{{ employeeEmail }}' found.": "Zaměstnanec s e-mailovou adresou '{{ employeeEmail }}' nebyl nalezen.",
+        "No summary available for this employee.": "Pro tohoto zaměstnance není dostupný žádný souhrn."
+    },
+    "Controllers\\Api\\DailyActivityChart": {
+        "Daily activity": "Denní aktivita"
+    }
+}

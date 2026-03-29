@@ -1,0 +1,63 @@
+{
+    "manifest": {
+        "Discussions": "Dyskusje",
+        "Members": "Członkowie",
+        "Messages": "Wiadomości"
+    },
+    "Controllers\\Discussions": {
+        "Discussions": "Dyskusje"
+    },
+    "Controllers\\Members": {
+        "Discussions": "Dyskusje",
+        "Members": "Członkowie"
+    },
+    "Controllers\\Messages": {
+        "Discussions": "Dyskusje",
+        "Messages": "Wiadomości"
+    },
+    "Models\\Discussion": {
+        "Title": "Tytuł",
+        "Description": "Opis",
+        "Main MOD": "Główny moderator",
+        "Closed": "Zamknięta",
+        "Notes": "Notatki",
+        "Created": "Utworzona",
+        "Add Discussion": "Dodaj dyskusję"
+    },
+    "Models\\Member": {
+        "Discussion": "Dyskusja",
+        "Member": "Członek",
+        "Permissions": "Uprawnienia",
+        "Add Member": "Dodaj członka"
+    },
+    "Models\\Message": {
+        "Discussion": "Dyskusja",
+        "From": "Od",
+        "From (Email)": "Od (Email)",
+        "Text": "Treść",
+        "Sent": "Wysłano",
+        "Add Message": "Dodaj wiadomość"
+    },
+    "Components\\FormDiscussion": {
+        "About": "O dyskusji",
+        "Messages": "Wiadomości",
+        "Discussion": "Dyskusja"
+    },
+    "Components\\FormMember": {
+        "Member": "Członek",
+        "Record #": "Rekord nr"
+    },
+    "Components\\FormMessage": {
+        "Task": "Zadanie",
+        "Message": "Wiadomość",
+        "Record #": "Rekord nr"
+    },
+    "Components\\Messages": {
+        "you": "ty",
+        "Type your message here...": "Wpisz wiadomość tutaj...",
+        "Tip: You can use **markdown** syntax.": "Wskazówka: Możesz używać składni **markdown**."
+    },
+    "Components\\TableDiscussions": {},
+    "Components\\TableMembers": {},
+    "Components\\TableMessages": {}
+}

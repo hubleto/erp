@@ -1,43 +1,111 @@
 {
-    "loader": {
-        "Sales": "Sprzedaż",
-        "Workflow": "Proces (Workflow)"
-    },
-    "controllers.home": {
-        "Sales": "Sprzedaż"
-    },
     "manifest": {
-        "Workflow": "Lejek sprzedaży",
+        "Workflow": "Workflow",
         "Free sales workflow management.": "Bezpłatne zarządzanie procesami sprzedaży.",
         "History": "Historia",
-        "Workflows": "Procesy sprzedaży",
-        "Items with not updated step": ""
+        "Workflows": "Workflowy",
+        "Items with not updated step": "Elementy z nieaktualizowanym krokiem",
+        "Campaigns": "Kampanie",
+        "Preparation": "Przygotowanie",
+        "Launched": "Uruchomiona",
+        "Analysis": "Analiza",
+        "Leads": "Leady",
+        "Subscriber": "Subskrybent",
+        "MQL": "MQL",
+        "SQL": "SQL",
+        "Opportunity": "Szansa",
+        "Customer": "Klient",
+        "Deals": "Deale",
+        "Prospecting": "Poszukiwanie",
+        "Qualified": "Zakwalifikowany",
+        "Quote Sent": "Oferta wysłana",
+        "Under Review": "W ocenie",
+        "Contracting": "Negocjacje umowy",
+        "WON": "WYGRANY",
+        "LOST": "PRZEGRANY",
+        "Orders": "Zamówienia",
+        "In progress": "W toku",
+        "Delivered": "Dostarczone",
+        "Ready to invoice": "Gotowe do fakturowania",
+        "Invoiced": "Zafakturowane",
+        "Paid": "Zapłacone",
+        "Projects": "Projekty",
+        "Implementation": "Wdrożenie",
+        "Testing": "Testowanie",
+        "Tasks": "Zadania",
+        "Ready to test": "Gotowe do testowania",
+        "Test passed": "Test zakończony pomyślnie",
+        "Test failed": "Test nieudany",
+        "Ready to deploy": "Gotowe do wdrożenia",
+        "Deployed": "Wdrożone",
+        "Accepted": "Zaakceptowane",
+        "Manage workflows": "Zarządzaj workflowami"
+    },
+    "Controllers\\Home": {
+        "Workflow": "Workflow",
+        "Add workflow": "Dodaj workflow",
+        "Manage workflow steps": "Zarządzaj krokami"
+    },
+    "Controllers\\Workflows": {
+        "Settings": "Ustawienia",
+        "Workflows": "Workflowy"
+    },
+    "Controllers\\Workflow": {
+        "Workflow": "Workflow",
+        "Show details": "Pokaż szczegóły",
+        "Target": "Grupa docelowa",
+        "Goal": "Cel",
+        "items": "elementów",
+        "Project has no milestones.": "Projekt nie ma żadnych kamieni milowych.",
+        "progress": "postęp",
+        "reported on": "zgłoszony dnia",
+        "no report yet": "brak raportu",
+        "Closed milestone": "Zamknięty kamień milowy"
+    },
+    "Controllers\\History": {
+        "Workflow": "Workflow",
+        "History": "Historia"
+    },
+    "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
+        "Item": "Element",
+        "Days without workflow update": "Dni bez aktualizacji workflow",
+        "Last update by": "Ostatnio zaktualizował"
     },
     "root": {
-        "Workflows": "Lejki sprzedaży"
+        "Workflows": "Workflowy"
     },
     "Models\\Workflow": {
         "Name": "Nazwa",
         "Description": "Opis",
-        "Order": "Kolejność",
+        "Type": "Typ",
         "Group": "Grupa",
-        "Show in kanban": ""
+        "Order": "Kolejność",
+        "Show in kanban": "Pokaż w kanbanie",
+        "Add Workflow": "Dodaj workflow"
     },
     "Models\\WorkflowStep": {
         "Name": "Nazwa",
-        "Order": "Kolejność wyświetlania",
+        "Order": "Kolejność",
         "Color": "Kolor",
         "Probability": "Prawdopodobieństwo",
-        "Workflow": "Lejek \/ Proces",
-        "Set result of a deal to": "Ustaw wynik szansy sprzedaży na",
-        "Tag": "Tag"
+        "Workflow": "Workflow",
+        "Set result of a deal to": "Ustaw wynik dealu na",
+        "Tag": "Etykieta",
+        "Add Workflow Step": "Dodaj krok workflow"
     },
     "Models\\WorkflowHistory": {
         "Model": "Model",
         "Record Id": "ID rekordu",
-        "Changed": "Zmieniono",
+        "Changed": "Zmienione",
         "User": "Użytkownik",
-        "Workflow": "Proces",
-        "Workflow Step": "Etap procesu"
+        "Workflow": "Workflow",
+        "Workflow Step": "Krok"
+    },
+    "Components\\FormWorkflow": {
+        "Workflow": "Workflow",
+        "Steps": "Kroki"
+    },
+    "Components\\FormWorkflowStep": {
+        "Workflow step": "Krok workflow"
     }
 }

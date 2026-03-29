@@ -1,58 +1,64 @@
 {
     "manifest": {
         "Customers": "Zákazníci",
-        "Free customer management and addressbook.": "Adresář a správa zákazníků zdarma.",
-        "Customer Tags": "Štitky zákazníků"
-    },
-    "root": {
+        "Free customer management and addressbook.": "Adresář a správa zákazníků.",
         "Customer Tags": "Štítky zákazníků"
     },
-    "Models\\CustomerActivity": {
-        "Subject": "Předmět",
-        "Activity type": "Typ aktivity",
-        "Start date": "Datum zahájení",
-        "Start time": "Čas zahájení",
-        "End date": "Datum ukončení",
-        "End time": "Čas ukončení",
-        "All day": "Celý den",
-        "Completed": "Dokončeno",
-        "Created by": "Vytvořeno",
-        "Customer": "Zákazník",
-        "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
-    },
     "Models\\Customer": {
-        "Name": "Jméno",
-        "Street Line 1": "Ulice řádek 1",
-        "Street Line 2": "Ulice řádek 2",
-        "Region": "Kraj",
+        "Add Customer": "Přidat zákazníka",
+        "Name": "Název",
+        "Street Line 1": "Ulice, řádek č. 1",
+        "Street Line 2": "Ulice, řádek č. 2",
+        "Region": "Region",
         "City": "Město",
-        "Postal Code": "Poštovní kód",
-        "Country": "Země",
+        "Country": "Stát",
+        "Postal Code": "PSČ",
         "VAT ID": "DIČ",
         "Customer ID": "IČO",
-        "Tax ID": "IČ DIČ",
+        "Tax ID": "DIČ",
         "Notes": "Poznámky",
-        "Date Created": "Datum vytvoření",
+        "Date Created": "Vytvořen",
         "Active": "Aktivní",
-        "Owner": "Majitel",
-        "Manager": "Manažér",
-        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku (online úložiště) se souvisejícími dokumenty",
-        "Add Customer": "Přidat zákazníka",
-        "Shared folder (online document storage)": "Sdílená složka (online úložiště)",
+        "Assigned User": "Vlastník",
+        "Customers": "Zákazníci",
+        "Shared folder (online document storage)": "Sdílená složka",
+        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku",
+        "Owner": "Vlastník",
+        "Manager": "Manažer",
         "Tags": "Štítky",
-        "Archive": "Archív",
-        "Archived": "Archivováno",
-        "Identifier": "",
-        "Non-active": "",
-        "Shared with": "",
-        "Columns": ""
+        "Archive": "Archiv",
+        "Archived": "Archivován",
+        "Identifier": "Identifikátor",
+        "Non-active": "Neaktivní",
+        "Shared with": "Sdíleno s"
+    },
+    "Controllers\\Customers": {
+        "Customers": "Zákazníci"
+    },
+    "Models\\CustomerActivity": {
+        "Customer": "Zákazník",
+        "Contact Person": "Kontaktní osoba",
+        "Activity type": "Typ aktivity",
+        "Subject": "Předmět",
+        "Start Date": "Začátek",
+        "Start Time": "Čas",
+        "End Date": "Konec",
+        "End Time": "Čas",
+        "All day": "Celodenní",
+        "Completed": "Ukončena",
+        "Created by": "Vytvořil",
+        "Contact": "Kontakt",
+        "Start date": "Datum začátku",
+        "Start time": "Začátek",
+        "End date": "Datum",
+        "End time": "Čas",
+        "Meeting minutes (link)": "Zápis ze schůzky (odkaz)",
+        "Location": "Místo",
+        "Online meeting link": "Odkaz na online schůzku",
+        "Description": "Popis",
+        "Recurrence": "Opakování",
+        "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
+        "Short meeting minutes": "Stručný zápis ze schůzky"
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",
@@ -60,53 +66,89 @@
     },
     "Models\\CustomerTag": {
         "Customer": "Zákazník",
-        "Tag": "Štítek"
-    },
-    "Models\\Tag": {
-        "Name": "Název",
-        "Color": "Barva",
-        "Customer Tags": "Štítky zákazníků",
-        "Add Customer Tag": "Přidat štítek zákazníka"
-    },
-    "Controllers\\Customers": {
-        "Customers": "Zákazníci"
+        "Tag": "Štítek",
+        "Customer Categories": "Kategorie zákazníků",
+        "Add Customer": "Přidat zákazníka"
     },
     "Components\\FormCustomer": {
-        "Customer": "Zákazník",
-        "Type recent activity here": "Zde napište nedávnou aktivitu",
-        "Log completed activity": "Zaznamenat dokončenou aktivitu",
-        "Enter": "Enter",
-        "Schedule activity": "Naplánovat aktivitu",
-        "Shift+Enter": "Shift+Enter",
-        "Most recent activities": "Nedávné aktivity",
-        "Show on map": "Ukázat na mapě",
         "Contacts": "Kontakty",
         "Add contact": "Přidat kontakt",
-        "First name": "Křestní jméno",
+        "Customer": "Zákazník",
         "Last name": "Příjmení",
-        "Email": "Email",
-        "Phone number": "Telefonní číslo",
-        "Primary Contact": "Hlavní kontakt",
-        "Tags": "Štítky",
+        "Main Contact": "Hlavní kontakt",
+        "First name": "Jméno",
+        "Leads": "Leady",
+        "Deals": "Dealy",
         "Calendar": "Kalendář",
+        "Shared documents": "Sdílené dokumenty",
+        "Local documents": "Dokumenty",
         "Documents": "Dokumenty",
-        "Local documents": "Lokální dokumenty",
-        "Not completed yet": "Zatím nedokončeno",
-        "Document": "Dokument",
-        "Add document": "Přidat dokument",
-        "Link": "Odkaz"
+        "Contact persons": "Kontaktní osoby",
+        "Add contact person": "Přidat kontaktní osobu",
+        "Phone number": "Tel. č.",
+        "Email": "E-mail",
+        "Primary Contact": "Primární kontakt",
+        "Tags": "Štítky",
+        "Show on map": "Zobrazit na mapě",
+        "Enter = Log completed activity": "Enter = zapsat ukončenou aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovat aktivitu na později",
+        "Type recent activity here": "Zadejte poslední aktivitu zde",
+        "Not completed yet": "Nedokončena",
+        "Most recent activities": "Nejnovější aktivity",
+        "Log completed activity": "Zaznamenat ukončenou aktivitu",
+        "Schedule activity": "Naplánovat aktivitu",
+        "Enter": "Enter",
+        "Shift+Enter": "Shift+Enter",
+        "unsaved changes": "neuložené změny"
+    },
+    "root": {
+        "Customer Tags": "Štítky zákazníků"
+    },
+    "Models\\Tag": {
+        "Name": "Štítek",
+        "Color": "Barva",
+        "Customer Tags": "Štítky zákazníků",
+        "Add Customer Tag": "Přidat štítek"
+    },
+    "Components\\FormActivity": {
+        "Customer": "Zákazník"
     },
     "Components\\CustomerFormActivity": {
-        "Start": "Začátek",
         "Customer": "Zákazník",
-        "End": "Konec",
-        "Contact": "Kontakt"
+        "Contact": "Kontakt",
+        "End": "Ukončit",
+        "Start": "Start"
     },
-    "Components\\TableContacts": {
-        "Primary": "Hlavní"
+    "Components\\TableActivities": {},
+    "Controllers\\Activity": {
+        "Customers": "Zákazníci",
+        "Activities": "Aktivity"
     },
     "Controllers\\Tags": {
         "Settings": "Nastavení",
-        "Customer Tags": "Štítky zákazníků"
+        "Customer Tags": "Štítky zákazníků",
+        "Customers": "Zákazníci",
+        "Tags": "Štítky"
+    },
+    "Controllers\\Settings": {
+        "Customers": "Zákazníci",
+        "Settings": "Nastavení",
+        "Customers: Settings": "Zákazníci: Nastavení",
+        "Settings saved.": "Nastavení uloženo.",
+        "Customer tags": "Štítky zákazníků",
+        "Calendar color": "Barva kalendáře"
+    },
+    "Controllers\\Dashboard": {
+        "Customers": "Zákazníci"
+    },
+    "Components\\TableCustomers": {
+        "Hide filter": "Skrýt filtr",
+        "Show as plain table": "Zobrazit jako tabulku",
+        "Show\\/Hide filter": "Zobrazit\\/Skrýt filtr",
+        "Copy cell content to clipboard": "Kopírovat obsah buňky do schránky"
+    },
+    "Calendar": {
+        "Customers": "Zákazníci",
+        "Add new activity linked to customer": "Přidat novou aktivitu ke zákazníkovi"
     }
 }

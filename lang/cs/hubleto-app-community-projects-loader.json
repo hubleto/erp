@@ -1,0 +1,190 @@
+{
+    "manifest": {
+        "Projects": "Projekty",
+        "Project management": "Projektový management",
+        "Phases": "Fáze",
+        "Monthly summary": "Měsíční přehled",
+        "Milestones": "Milníky",
+        "Task assignment": "Přiřazení úkolů",
+        "Sample project #1": "Vzorový projekt č. 1",
+        "Sample project #1 for demonstration purposes.": "Vzorový projekt č. 1 pro demonstrační účely.",
+        "Sample project #2": "Vzorový projekt č. 2",
+        "Sample project #2 for demonstration purposes.": "Vzorový projekt č. 2 pro demonstrační účely.",
+        "Create project": "Vytvořit projekt"
+    },
+    "root": {
+        "Projects": "Projekty",
+        "Phases": "Fáze"
+    },
+    "Models\\Project": {
+        "Deal": "Deal",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt",
+        "Identifier": "Identifikátor",
+        "Leave empty to generate automatically.": "Ponechte prázdné pro automatické vygenerování.",
+        "Title": "Název",
+        "Description": "Popis",
+        "Main developer": "Hlavní vývojář",
+        "Account manager": "Account manažer",
+        "Priority": "Priorita",
+        "Start": "Start",
+        "Deadline": "Termín",
+        "Budget": "Rozpočet",
+        "Workflow": "Workflow",
+        "Workflow step": "Stav workflow",
+        "Closed": "Uzavřený",
+        "Color": "Barva",
+        "Online documentation folder": "Složka online dokumentace",
+        "Notes": "Poznámky",
+        "Created": "Vytvořen",
+        "Open \\/ Closed": "Otevřené \\/ Uzavřené",
+        "Open": "Otevřené",
+        "All": "Vše",
+        "Average hourly costs": "Průměrné hodinové náklady",
+        "Project manager": "Projektový manažer",
+        "Shared with": "Sdíleno s",
+        "Add Project": "Přidat projekt"
+    },
+    "Models\\Phase": {
+        "Name": "Název",
+        "Order": "Pořadí",
+        "Color": "Barva"
+    },
+    "Models\\MilestoneReport": {
+        "Milestone": "Milník",
+        "Summary": "Shrnutí",
+        "Details": "Podrobnosti",
+        "Progress": "Pokrok",
+        "Reported on": "Datum zprávy",
+        "Reported by": "Vykazoval",
+        "Add milestone report": "Přidat zprávu k milníku"
+    },
+    "Models\\Expense": {
+        "Project": "Projekt",
+        "Reason": "Důvod",
+        "Date": "Datum",
+        "Amount": "Částka",
+        "Approved by": "Schválil",
+        "Spent by": "Utratil",
+        "Add expense": "Přidat výdaj"
+    },
+    "Models\\ProjectTask": {
+        "Project": "Projekt",
+        "Task": "Úkol",
+        "Assign task to project": "Přiřadit úkol k projektu"
+    },
+    "Models\\ProjectDeal": {
+        "Project": "Projekt",
+        "Deal": "Deal",
+        "Project Deals": "Dealy projektu",
+        "Add deal": "Přidat deal"
+    },
+    "Models\\ProjectOrder": {
+        "Project": "Projekt",
+        "Order": "Objednávka",
+        "Order Projects": "Projekty objednávky",
+        "Add project": "Přidat projekt"
+    },
+    "Components\\FormProject": {
+        "Projects": "Projekty",
+        "Worksheet": "Výkaz práce",
+        "Project": "Projekt",
+        "Documents": "Dokumenty",
+        "Milestones": "Milníky",
+        "Tasks": "Úkoly",
+        "Expenses": "Výdaje",
+        "Statistics": "Statistiky",
+        "Open tasks": "Otevřené úkoly",
+        "Discussions": "Diskuse",
+        "Project:": "Projekt:",
+        "Order": "Objednávka",
+        "Select parent order": "Vybrat nadřazenou objednávku",
+        "First create the project, then you will be prompted to add tasks.": "Nejprve vytvořte projekt, poté budete moci přidávat úkoly.",
+        "Worked hours & costs by month": "Odpracované hodiny a náklady podle měsíce",
+        "Chargeable hours by month": "Fakturovatelné hodiny podle měsíce",
+        "Labor costs calculator": "Kalkulátor mzdových nákladů",
+        "Total": "Celkem",
+        "User": "Uživatel",
+        "Worked hours": "Odpracované hodiny",
+        "Salary": "Mzda",
+        "Labor costs": "Mzdové náklady",
+        "hours": "hodin"
+    },
+    "Components\\FormMilestone": {
+        "Milestone": "Milník",
+        "Reports": "Zprávy"
+    },
+    "Components\\FormMilestoneReport": {
+        "Milestone report": "Zpráva k milníku"
+    },
+    "Components\\FormExpense": {
+        "Expense": "Výdaj"
+    },
+    "Models\\ProjectActivity": {
+        "Subject": "Předmět",
+        "Location": "Místo",
+        "Online meeting link": "Odkaz na online schůzku",
+        "Description": "Popis",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum začátku",
+        "Start time": "Čas začátku",
+        "End date": "Datum konce",
+        "End time": "Čas konce",
+        "Recurrence": "Opakování",
+        "All day": "Celý den",
+        "Completed": "Dokončená",
+        "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
+        "Short meeting minutes": "Stručný zápis ze schůzky",
+        "Created by": "Vytvořil",
+        "Project": "Projekt",
+        "Contact": "Kontakt"
+    },
+    "Controllers\\Projects": {
+        "Projects": "Projekty"
+    },
+    "Controllers\\Dashboard": {
+        "Projects": "Projekty",
+        "Current date and time is": "Aktuální datum a čas je",
+        "Go to contacts": "Přejít na kontakty"
+    },
+    "Controllers\\Contacts": {
+        "Projects": "Projekty",
+        "Contacts": "Kontakty"
+    },
+    "Controllers\\Settings": {
+        "Projects": "Projekty",
+        "Settings": "Nastavení",
+        "Create your custom settings page here": "Zde vytvořte vlastní stránku nastavení"
+    },
+    "Models\\Milestone": {
+        "Title": "Název",
+        "Due date": "Datum splnění",
+        "Expected output": "Očekávaný výsledek",
+        "Description of activities": "Popis aktivit",
+        "Color": "Barva",
+        "Closed": "Uzavřeno",
+        "Last report": "Poslední zpráva",
+        "Last progress": "Poslední pokrok",
+        "Add milestone": "Přidat milník",
+        "Project": "Projekt"
+    },
+    "Controllers\\Milestones": {
+        "Milestones": "Milníky"
+    },
+    "Controllers\\ProjectsTasks": {
+        "Projects": "Projekty",
+        "Assignment of tasks": "Přiřazení úkolů"
+    },
+    "Controllers\\MonthlySummary": {
+        "Projects": "Projekty",
+        "Monthly summary": "Měsíční přehled",
+        "Search project": "Hledat projekt",
+        "No project found.": "Žádný projekt nenalezen.",
+        "projects found": "projekty nalezeny",
+        "hours": "hodin"
+    },
+    "Calendar": {
+        "Projects": "Projekty",
+        "Add new activity linked to Projects": "Přidat novou aktivitu pro projekt"
+    }
+}

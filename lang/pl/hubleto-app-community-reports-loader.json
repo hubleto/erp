@@ -1,6 +1,12 @@
 {
-    "manifest": {
-        "Reports": "Raporty",
-        "Free report generator app.": "Bezpłatna aplikacja generatora raportów."
-    }
+  "manifest": {
+    "Reports": "Raporty",
+    "Free report generator app.": "Bezpłatna aplikacja do generowania raportów."
+  },
+  "Models\\Report": {
+    "Title": "Nazwa",
+    "Model": "Model",
+    "Query": "Zapytanie",
+    "Notes": "Uwagi"
+  }
 }

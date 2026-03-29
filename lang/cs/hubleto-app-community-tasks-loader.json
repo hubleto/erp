@@ -1,0 +1,84 @@
+{
+    "manifest": {
+        "Tasks": "Úlohy",
+        "Task management app": "Správa úloh",
+        "Todo": "Todo",
+        "My recent tasks": "Moje nedávné úlohy"
+    },
+    "Models\\Task": {
+        "Identifier": "Identifikátor",
+        "Title": "Název",
+        "Description": "Popis",
+        "Developer": "Vývojář",
+        "Tester": "Tester",
+        "Priority": "Priorita",
+        "Estimation": "Odhad náročnosti",
+        "Duration": "Trvání",
+        "Start": "Start",
+        "Deadline": "Termín",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow stav",
+        "Is milestone": "Milník",
+        "Closed": "Uzavřená",
+        "Notes": "Poznámky",
+        "Created": "Vytvořená",
+        "External Model": "Externí model",
+        "External ID": "Externí ID",
+        "Worked": "Odpracováno",
+        "Customer": "Zákazník",
+        "Contact": "Kontakt",
+        "Is chargeable": "Je účtovatelné",
+        "Related to": "Souvisí s",
+        "Open \\/ Closed": "Otevřené \\/ Uzavřené",
+        "Open": "Otevřené",
+        "All": "Všechny",
+        "Estimated workhours": "Odhadované pracovní hodiny",
+        "Estimated duration": "Odhadovaná délka",
+        "Add Task": "Přidat úlohu",
+        "Leave empty to generate automatically.": "Nechte prázdné pro automatické generování.",
+        "Shared folder (online document storage)": "Sdílená složka (online úložiště dokumentů)",
+        "Status": "Stav"
+    },
+    "Models\\Todo": {
+        "To do": "Todo",
+        "Task": "Úloha",
+        "Responsible": "Zodpovědný",
+        "Closed": "Uzavřené",
+        "Deadline": "Termín",
+        "Add Todo": "Přidat Todo"
+    },
+    "Controllers\\Boards\\MyRecentTasks": {
+        "You did not work on any task since last 2 weeks.": "Za poslední 2 týdny jsi nepracoval na žádné úloze."
+    },
+    "Controllers\\Tasks": {
+        "Tasks": "Úlohy"
+    },
+    "Components\\FormTask": {
+        "Task": "Úloha",
+        "unsaved changes": "neuložené změny",
+        "Todo": "Todo",
+        "Press ENTER to add new Todo": "Stiskněte ENTER pro přidání nového Todo",
+        "Worksheet": "Pracovní výkaz",
+        "Orders": "Objednávky",
+        "Deals": "Obchody",
+        "Projects": "Projekty",
+        "What to do?": "Co je třeba udělat?",
+        "Add new todo...": "Přidat nové todo..."
+    },
+    "Components\\TableTasks": {
+        "Copy cell content to clipboard": "Kopírovat do schránky",
+        "Add activity": "Přidat aktivitu"
+    },
+    "Controllers\\Todos": {
+        "Tasks": "Úlohy",
+        "Todo": "Todo"
+    },
+    "Components\\FormTodo": {
+        "Todo": "Todo"
+    },
+    "Components\\TableTodos": {},
+    "Calendar": {
+        "Tasks": "Úlohy",
+        "Add new activity linked to Tasks": "Přidat novou aktivitu pro úlohu"
+    }
+}

@@ -1,0 +1,87 @@
+{
+    "manifest": {
+        "Notifications": "Uwierzytelnianie",
+        "Auth": "Uwierzytelnianie",
+        "Hubleto Authorization App for User Management": "Aplikacja do uwierzytelniania użytkowników",
+        "Administrator": "Administrator",
+        "Can do anything.": "Może robić wszystko.",
+        "Chief Officer (default permissions)": "Kierownik (domyślne uprawnienia)",
+        "Can read all data and can modify most of the data. Does not have access to settings.": "Może czytać wszystkie dane i modyfikować większość z nich. Nie ma dostępu do ustawień.",
+        "Manager (default permissions)": "Menedżer (domyślne uprawnienia)",
+        "Can read and modify all data that he/she owns or is manager.": "Może czytać i modyfikować wszystkie dane, których jest właścicielem lub menedżerem.",
+        "Employee (default permissions)": "Pracownik (domyślne uprawnienia)",
+        "In general, can read or modify only data that he/she owns.": "Zasadniczo może czytać lub modyfikować tylko dane, których jest właścicielem.",
+        "Assistant (default permissions)": "Asystent (domyślne uprawnienia)",
+        "Very similar to employee, but may be more limited in some certain situations.": "Bardzo podobny do pracownika, ale w niektórych sytuacjach może mieć większe ograniczenia.",
+        "External (default permissions)": "Zewnętrzny (domyślne uprawnienia)",
+        "By default should not have access to anything. Access permissions must be enabled in settings by administrator.": "Domyślnie nie powinien mieć dostępu do niczego. Uprawnienia dostępu musi włączyć administrator w ustawieniach."
+    },
+    "Models\\User": {
+        "Type": "Typ",
+        "First name": "Imię",
+        "Last name": "Nazwisko",
+        "Nick": "Pseudonim",
+        "Email": "Email",
+        "Language": "Język",
+        "Default company": "Firma",
+        "Apps": "Aplikacje",
+        "Roles": "Role",
+        "Teams": "Zespoły",
+        "Position": "Stanowisko",
+        "Phone number #1": "Numer telefonu #1",
+        "Phone number #2": "Numer telefonu #2",
+        "Photo": "Zdjęcie",
+        "Timezone": "Strefa czasowa",
+        "Permissions": "Uprawnienia",
+        "Add User": "Dodaj użytkownika",
+        "NOT_SPECIFIED": "Nieokreślony",
+        "ADMINISTRATOR": "Administrator",
+        "Chief Officer (CEO, CFO, CTO, ...)": "Kierownik (CEO, CFO, CTO, ...)",
+        "Manager (Sales, Project, ...)": "Menedżer (sprzedaż, projekt, ...)",
+        "Employee": "Pracownik",
+        "Assistant": "Asystent",
+        "External": "Zewnętrzny"
+    },
+    "Models\\UserRole": {
+        "Role": "Rola",
+        "Grant all permissions (administrator role)": "Przyznaj wszystkie uprawnienia (rola administratora)",
+        "Description": "Opis",
+        "Is default role (cannot be modified)": "Jest rolą domyślną (nie można modyfikować)",
+        "Permissions": "",
+        "User Roles": "Role użytkowników",
+        "Add User Role": "Dodaj rolę"
+    },
+    "Models\\UserHasRole": {
+        "User": "Użytkownik",
+        "Role": "Rola",
+        "Assign Roles": "Przypisz role"
+    },
+    "Controllers\\SignIn": {
+        "Your email": "Twój email",
+        "Password": "Hasło",
+        "Keep signed in": "Pozostań zalogowany",
+        "Sign in": "Zaloguj się",
+        "Forgot password?": "Zapomniałeś hasła?",
+        "Email or password invalid. Try again.": "Nieprawidłowy email lub hasło. Spróbuj ponownie.",
+        "Password successfully updated.": "Hasło zostało pomyślnie zaktualizowane."
+    },
+    "Controllers\\ForgotPassword": {
+        "A password reset link has been sent to your email address.": "Na Twój adres email został wysłany link do resetowania hasła.",
+        "Check your inbox.": "Sprawdź swoją skrzynkę odbiorczą.",
+        "Email": "Email",
+        "Request password reset": "Poproś o reset hasła",
+        "Back to sign in": "Powrót do logowania"
+    },
+    "Controllers\\ResetPassword": {
+        "Passwords do not match.": "Hasła nie są zgodne.",
+        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.": "Hasło musi mieć co najmniej 8 znaków i zawierać co najmniej jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny.",
+        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "Witaj w Hubleto! Ustaw hasło, aby uzyskać dostęp do pulpitu i rozpocząć korzystanie z aplikacji.",
+        "New password": "Nowe hasło",
+        "Confirm new password": "Potwierdź nowe hasło",
+        "Reset password": "Resetuj hasło"
+    },
+    "Controllers\\NotEnoughPermissions": {
+        "You don't have permissions for this panel": "Nie masz uprawnień do tego panelu",
+        "Sign out": "Wyloguj się"
+    }
+}

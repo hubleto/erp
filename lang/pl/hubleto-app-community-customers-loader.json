@@ -1,51 +1,64 @@
 {
-    "Models\\CustomerActivity": {
-        "Subject": "Temat",
-        "Activity type": "Typ aktywności",
-        "Start date": "Data rozpoczęcia",
-        "Start time": "Godzina rozpoczęcia",
-        "End date": "Data zakończenia",
-        "End time": "Godzina zakończenia",
-        "All day": "Cały dzień",
-        "Completed": "Zakończono",
-        "Created by": "Utworzone przez",
-        "Customer": "Klient",
-        "Contact": "Kontakt",
-        "Meeting minutes (link)": "Notatka ze spotkania (link)",
-        "Location": "Lokalizacja",
-        "Online meeting link": "Link do spotkania online",
-        "Description": "Opis",
-        "Recurrence": "Cykliczność",
-        "Long meeting minutes (link to external document)": "Pełna notatka ze spotkania (link do dokumentu zewnętrznego)",
-        "Short meeting minutes": "Krótka notatka ze spotkania"
+    "manifest": {
+        "Customers": "Klienci",
+        "Free customer management and addressbook.": "Książka adresowa i zarządzanie klientami.",
+        "Customer Tags": "Etykiety klientów"
+    },
+    "Models\\Customer": {
+        "Add Customer": "Dodaj klienta",
+        "Name": "Nazwa",
+        "Street Line 1": "Ulica, wiersz nr 1",
+        "Street Line 2": "Ulica, wiersz nr 2",
+        "Region": "Region",
+        "City": "Miasto",
+        "Country": "Kraj",
+        "Postal Code": "Kod pocztowy",
+        "VAT ID": "NIP UE",
+        "Customer ID": "NIP",
+        "Tax ID": "REGON",
+        "Notes": "Uwagi",
+        "Date Created": "Utworzony",
+        "Active": "Aktywny",
+        "Assigned User": "Właściciel",
+        "Customers": "Klienci",
+        "Shared folder (online document storage)": "Folder współdzielony",
+        "Link to shared folder (online storage) with related documents": "Link do folderu współdzielonego",
+        "Owner": "Właściciel",
+        "Manager": "Menedżer",
+        "Tags": "Etykiety",
+        "Archive": "Archiwum",
+        "Archived": "Zarchiwizowany",
+        "Identifier": "Identyfikator",
+        "Non-active": "Nieaktywny",
+        "Shared with": "Udostępnione dla"
     },
     "Controllers\\Customers": {
         "Customers": "Klienci"
     },
-    "Models\\Customer": {
-        "Name": "Nazwa",
-        "Street Line 1": "Adres (linia 1)",
-        "Street Line 2": "Adres (linia 2)",
-        "Region": "Województwo \/ Region",
-        "City": "Miasto",
-        "Postal Code": "Kod pocztowy",
-        "Country": "Kraj",
-        "VAT ID": "NIP \/ VAT ID",
-        "Customer ID": "ID Klienta",
-        "Tax ID": "Numer identyfikacji podatkowej",
-        "Notes": "Uwagi",
-        "Date Created": "Data utworzenia",
-        "Active": "Aktywny",
-        "Owner": "Właściciel",
-        "Link to shared folder (online storage) with related documents": "Link do udostępnionego folderu z dokumentami",
-        "Add Customer": "Dodaj klienta",
-        "Manager": "Opiekun \/ Menedżer",
-        "Identifier": "Identyfikator",
-        "Shared folder (online document storage)": "Udostępniony folder (chmura)",
-        "Tags": "Tagi",
-        "Non-active": "Nieaktywny",
-        "Shared with": "",
-        "Columns": ""
+    "Models\\CustomerActivity": {
+        "Customer": "Klient",
+        "Contact Person": "Osoba kontaktowa",
+        "Activity type": "Typ aktywności",
+        "Subject": "Temat",
+        "Start Date": "Początek",
+        "Start Time": "Czas",
+        "End Date": "Koniec",
+        "End Time": "Czas",
+        "All day": "Całodniowe",
+        "Completed": "Zakończone",
+        "Created by": "Utworzył",
+        "Contact": "Kontakt",
+        "Start date": "Data rozpoczęcia",
+        "Start time": "Początek",
+        "End date": "Data",
+        "End time": "Czas",
+        "Meeting minutes (link)": "Protokół ze spotkania (link)",
+        "Location": "Lokalizacja",
+        "Online meeting link": "Link do spotkania online",
+        "Description": "Opis",
+        "Recurrence": "Powtarzanie",
+        "Long meeting minutes (link to external document)": "Protokół ze spotkania (link do zewnętrznego dokumentu)",
+        "Short meeting minutes": "Skrócony protokół"
     },
     "Models\\CustomerDocument": {
         "Customer": "Klient",
@@ -53,15 +66,89 @@
     },
     "Models\\CustomerTag": {
         "Customer": "Klient",
-        "Tag": "Tag"
+        "Tag": "Etykieta",
+        "Customer Categories": "Kategorie klientów",
+        "Add Customer": "Dodaj klienta"
+    },
+    "Components\\FormCustomer": {
+        "Contacts": "Kontakty",
+        "Add contact": "Dodaj kontakt",
+        "Customer": "Klient",
+        "Last name": "Nazwisko",
+        "Main Contact": "Główny kontakt",
+        "First name": "Imię",
+        "Leads": "Leady",
+        "Deals": "Deale",
+        "Calendar": "Kalendarz",
+        "Shared documents": "Dokumenty współdzielone",
+        "Local documents": "Dokumenty",
+        "Documents": "Dokumenty",
+        "Contact persons": "Osoby kontaktowe",
+        "Add contact person": "Dodaj osobę kontaktową",
+        "Phone number": "Nr tel.",
+        "Email": "E-mail",
+        "Primary Contact": "Kontakt podstawowy",
+        "Tags": "Etykiety",
+        "Show on map": "Pokaż na mapie",
+        "Enter = Log completed activity": "Enter = zapisz zakończoną aktywność",
+        "Shift+Enter = Schedule": "Shift+Enter = zaplanuj aktywność na później",
+        "Type recent activity here": "Wpisz ostatnią aktywność tutaj",
+        "Not completed yet": "Jeszcze niezakończone",
+        "Most recent activities": "Najnowsze aktywności",
+        "Log completed activity": "Zapisz zakończoną aktywność",
+        "Schedule activity": "Zaplanuj aktywność",
+        "Enter": "Enter",
+        "Shift+Enter": "Shift+Enter",
+        "unsaved changes": "niezapisane zmiany"
+    },
+    "root": {
+        "Customer Tags": "Etykiety klientów"
     },
     "Models\\Tag": {
-        "Name": "Nazwa",
-        "Color": "Kolor"
+        "Name": "Etykieta",
+        "Color": "Kolor",
+        "Customer Tags": "Etykiety klientów",
+        "Add Customer Tag": "Dodaj etykietę"
     },
-    "manifest": {
+    "Components\\FormActivity": {
+        "Customer": "Klient"
+    },
+    "Components\\CustomerFormActivity": {
+        "Customer": "Klient",
+        "Contact": "Kontakt",
+        "End": "Zakończ",
+        "Start": "Start"
+    },
+    "Components\\TableActivities": {},
+    "Controllers\\Activity": {
         "Customers": "Klienci",
-        "Free customer management and addressbook.": "Bezpłatne zarządzanie klientami i książka adresowa.",
-        "Customer Tags": "Tagi klientów"
+        "Activities": "Aktywności"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Ustawienia",
+        "Customer Tags": "Etykiety klientów",
+        "Customers": "Klienci",
+        "Tags": "Etykiety"
+    },
+    "Controllers\\Settings": {
+        "Customers": "Klienci",
+        "Settings": "Ustawienia",
+        "Customers: Settings": "Klienci: Ustawienia",
+        "Settings saved.": "Ustawienia zapisane.",
+        "Customer tags": "Etykiety klientów",
+        "Calendar color": "Kolor kalendarza"
+    },
+    "Controllers\\Dashboard": {
+        "Customers": "Klienci"
+    },
+    "Components\\TableCustomers": {
+        "Hide filter": "Ukryj filtr",
+        "Show as plain table": "Pokaż jako tabelę",
+        "Show/Hide filter": "Pokaż/Ukryj filtr",
+        "Copy cell content to clipboard": "Kopiuj zawartość komórki do schowka"
+    },
+    "Calendar": {
+        "Customers": "Klienci",
+        "Add new activity linked to customer": "Dodaj nową aktywność powiązaną z klientem"
     }
 }

@@ -1,30 +1,33 @@
 {
     "manifest": {
-        "Help": "Pomoc",
+        "Help": "Nápověda",
         "Help and user guide for Hubleto.": "Nápověda a uživatelská příručka pro Hubleto."
     },
     "Controllers\\Help": {
-        "Help": "Pomoc",
-        "Need help using Hubleto?": "Potřebujete pomoc při používaní Hubleto?",
+        "Help": "Nápověda",
+        "Help center": "Centrum nápovědy",
+        "Search knowledgebase...": "Prohledat znalostní bázi...",
+        "Browse knowledgebase": "Procházet znalostní bázi",
+        "Need help using Hubleto?": "Potřebujete pomoc s používáním Hubleta?",
         "Found a bug?": "Našli jste chybu?",
-        "Need help with development?": "Potřebujete pomoc při vývoji?",
+        "Need help with development?": "Potřebujete pomoc s vývojem?",
         "Just looking around?": "Jen se rozhlížíte?"
     },
     "Controllers\\Search": {
-        "Help": "",
-        "Search": "",
-        "Bring search to the brand new level.": "",
-        "Hubleto fulltext search provides powerful functionality to enhance search capabilities.": "",
-        "Ctrl+K shortcut": "",
-        "Type {ctrlK} to start searching at any time.": "",
-        "App selectors": "",
-        "{appSelectors} are special tags like, e.g. {codeExample}, filtering what app should be used to search. Using app selectors makes search faster and more effective because it directly points to a certain app and ignores searching in other apps.": "",
-        "Example:": "",
-        "will invoke search in {dealsApp} app with expression {expression}.": "",
-        "The app selectors are intuitive, try using {contacts} or {tasks}.": "",
-        "Switches": "",
-        "{switches} behave a bit differently from {appSelectors}. By providing a switch (e.g, {codeExample}), you may directly specify, what kind of data you want to search. One switch may be assigned with more than one app.": "",
-        "will search for tasks (or related data) across the whole Hubleto, containing identifier {identifier}.": "",
-        "Switches can have their shorthand variants, e.g. {short} is equal to {long}.": ""
+        "Help": "Nápověda",
+        "Search": "Vyhledávání",
+        "Bring search to the brand new level.": "Posuňte vyhledávání na zcela novou úroveň.",
+        "Hubleto fulltext search provides powerful functionality to enhance search capabilities.": "Fulltextové vyhledávání Hubleto poskytuje výkonné funkce pro rozšíření možností vyhledávání.",
+        "Ctrl+K shortcut": "Klávesová zkratka Ctrl+K",
+        "Type {ctrlK} to start searching at any time.": "Kdykoli stiskněte {ctrlK} pro zahájení vyhledávání.",
+        "App selectors": "Selektory aplikací",
+        "{appSelectors} are special tags like, e.g. {codeExample}, filtering what app should be used to search. Using app selectors makes search faster and more effective because it directly points to a certain app and ignores searching in other apps.": "{appSelectors} jsou speciální značky, např. {codeExample}, které filtrují, ve které aplikaci se má vyhledávat. Používání selektorů aplikací urychluje a zpřesňuje vyhledávání, protože přímo odkazuje na konkrétní aplikaci a ignoruje ostatní.",
+        "Example:": "Příklad:",
+        "will invoke search in {dealsApp} app with expression {expression}.": "spustí vyhledávání v aplikaci {dealsApp} s výrazem {expression}.",
+        "The app selectors are intuitive, try using {contacts} or {tasks}.": "Selektory aplikací jsou intuitivní, zkuste použít {contacts} nebo {tasks}.",
+        "Switches": "Přepínače",
+        "{switches} behave a bit differently from {appSelectors}. By providing a switch (e.g, {codeExample}), you may directly specify, what kind of data you want to search. One switch may be assigned with more than one app.": "{switches} se chovají trochu jinak než {appSelectors}. Zadáním přepínače (např. {codeExample}) můžete přímo určit, jaký typ dat chcete vyhledávat. Jeden přepínač může být přiřazen k více než jedné aplikaci.",
+        "will search for tasks (or related data) across the whole Hubleto, containing identifier {identifier}.": "vyhledá úkoly (nebo související data) v celém Hubleto, které obsahují identifikátor {identifier}.",
+        "Switches can have their shorthand variants, e.g. {short} is equal to {long}.": "Přepínače mohou mít zkrácené varianty, např. {short} je ekvivalent {long}."
     }
 }

@@ -1,124 +1,192 @@
 {
     "manifest": {
         "Contacts": "Kontakty",
-        "Default customer management and addressbook.": "Výchozí správa zákazníků a adresář.",
-        "Contact Categories": "Kategorie kontaktú",
-        "Contact Tags": "Štítky kontaktú",
-        "Import contacts": "Importovat kontakty"
+        "Default customer management and addressbook.": "Adresář a správa zákazníků.",
+        "Contact Categories": "Kategorie kontaktů",
+        "Contact Tags": "Štítky kontaktů",
+        "Import contacts": "Importovat kontakty",
+        "Work": "Práce",
+        "Home": "Domov",
+        "Other": "Jiné"
+    },
+    "Components\\FormPerson": {
+        "Edit": "Upravit",
+        "Save": "Uložit",
+        "Delete": "Smazat",
+        "Personal Information": "Osobní údaje",
+        "Category": "Kategorie",
+        "Type": "Typ",
+        "Email": "E-mail",
+        "Phone Number": "Telefon",
+        "Customer": "Zákazník",
+        "Tags": "Štítky",
+        "Value": "Hodnota",
+        "Add contact": "Přidat kontakt",
+        "No contacts for this person yet.": "Pro tuto osobu zatím nejsou žádné kontakty"
+    },
+    "Components\\TablePersons": {
+        "Start typing to search...": "Hledat..."
+    },
+    "Models\\Person": {
+        "First name": "Jméno",
+        "Last name": "Příjmení",
+        "Customer": "Zákazník",
+        "Main Contact": "Hlavní kontakt",
+        "Notes": "Poznámky",
+        "Active": "Aktivní",
+        "Date Created": "Vytvořen",
+        "Contacts": "Kontakty",
+        "Add Contact": "Přidat kontakt",
+        "Emails": "E-maily",
+        "Phone Numbers": "Telefony",
+        "Add": "Přidat",
+        "Primary Contact": "Primární kontakt"
+    },
+    "Models\\Value": {
+        "Person": "Kontakt",
+        "Contact Category": "Kategorie",
+        "Type": "Typ",
+        "Email": "E-mail",
+        "Phone Number": "Telefon",
+        "Other": "Jiné",
+        "Value": "Hodnota",
+        "Contact": "Kontakt",
+        "Category": "Kategorie",
+        "Number": "Počet",
+        "URL": "Adresa URL",
+        "Contacts": "Kontakty",
+        "Add Customer": "Přidat zákazníka"
+    },
+    "Models\\PersonTag": {
+        "Person": "Kontakt",
+        "Tag": "Štítek"
+    },
+    "Models\\Address": {
+        "Person": "Osoba",
+        "Street Line 1": "Adresa, řádek 1",
+        "Street Line 2": "Adresa, řádek 2",
+        "Region": "Region",
+        "City": "Město",
+        "Postal Code": "PSČ",
+        "Country": "Stát"
     },
     "root": {
-        "Contact Categories": "Kategorie kontaktú",
-        "Contact Tags": "Štítky kontaktú",
-        "Contacts": "Kontakty",
-        "Import contacts": "Importovat kontakty"
-    },
-    "Controllers\\Contacts": {
+        "Contact Categories": "Kategorie kontaktů",
+        "Contact Tags": "Štítky kontaktů",
         "Contacts": "Kontakty",
         "Import contacts": "Importovat kontakty"
     },
     "Models\\Contact": {
         "Salutation": "Oslovení",
-        "Title before": "Titul dříve",
-        "First name": "Křestní jméno",
-        "Middle name": "Střední jméno",
+        "Title before": "Titul před",
+        "First name": "Jméno",
+        "Middle name": "Prostřední jméno",
         "Last name": "Příjmení",
-        "Title after": "Titul po",
+        "Title after": "Titul za",
         "Customer": "Zákazník",
         "Primary Contact": "Primární kontakt",
         "Notes": "Poznámky",
-        "Date Created": "Datum vytvoření",
+        "Date Created": "Vytvořen",
         "Active": "Aktivní",
-        "Valid": "Platný",
         "Add contact": "Přidat kontakt",
-        "Emails": "Emaily",
-        "Phone Numbers": "Telefoní čísla",
+        "Emails": "E-maily",
+        "Phone Numbers": "Telefonní čísla",
         "Mr.": "Pan",
-        "Mrs.": "Pani",
+        "Mrs.": "Paní",
+        "Valid": "Platný",
         "Tags": "Štítky",
-        "Invoicing Contact": ""
+        "Invoicing Contact": "Fakturační kontakt"
     },
-    "Models\\Value": {
-        "Contact": "Kontakt",
-        "Category": "Kategorie",
-        "Type": "Typ",
-        "Email": "E-mail",
-        "Number": "Číslo",
-        "URL": "URL",
-        "Other": "Ostatní",
-        "Value": "Hodnota",
-        "Contacts": "Kontaktní informace",
-        "Add Customer": "Přidat zákazníka"
-    },
-    "Models\\ContactTag": {
-        "Contact": "Kontakt",
-        "Tag": "Štítek"
-    },
-    "Models\\Category": {
-        "Type": "Typ"
-    },
-    "Models\\Tag": {
-        "Name": "Název",
-        "Color": "Barva",
-        "Contact Tags": "Kontaktní štítky",
-        "Add Contact Tag": "Přidat kontaktní značku"
+    "Controllers\\Contacts": {
+        "Contacts": "Kontakty"
     },
     "Components\\FormContact": {
-        "Contact": "Kontaktní informace",
-        "No contacts yet.": "Zatím žádné kontaktní informace",
-        "Contacts": "Kontaktní informace",
+        "No contacts yet.": "Zatím žádné kontakty.",
+        "Email": "E-mail",
         "Type": "Typ",
-        "Phone Number": "Telefoní čísla",
-        "Email": "Email",
-        "Other": "Jiný",
-        "Category": "Kategorie",
+        "Phone Number": "Telefon",
+        "Other": "Jiné",
         "Value": "Hodnota",
+        "Category": "Kategorie",
         "Add contact": "Přidat kontakt",
-        "Tags": "Štítky",
         "Customer": "Zákazník",
+        "Tags": "Štítky",
         "Primary Contact": "Primární kontakt",
-        "Due to some changes the Primary Contact has to be checked again": "Z důvodu vykonaných změn je nutné znovu zapnout primární kontakt."
+        "Contact": "Kontakt",
+        "Contacts": "Kontakty"
+    },
+    "Components\\TableContacts": {
+        "Primary": "Primární",
+        "Invoicing": "Fakturace",
+        "Copy cell content to clipboard": ""
     },
     "Controllers\\Import": {
-        "Contacts": "Kontakty",
         "Import": "Import",
-        "Check the import now": "Skontrolovat import",
-        "Step 1: Prepare list of contacts": "Krok 1: Připravte si zoznam kontaktů",
-        "Contacts can be imported from a ": "Kontakty mohou být importovaný z ",
+        "Contacts": "Kontakty",
+        "Step 1: Prepare list of contacts": "Krok 1: Připravte seznam kontaktů",
+        "Contacts can be imported from a ": "Kontakty lze importovat z ",
         " or ": " nebo ",
         " file. The file for import must comply with following rules": " souboru. Soubor pro import musí splňovat následující pravidla",
-        "The file can contain unlimited number of lines.": "Soubor může obsahovat nekonečno řádků",
+        "The file can contain unlimited number of lines.": "Soubor může obsahovat neomezený počet řádků.",
         "Values in file must be separated by semicolon": "Hodnoty v souboru musí být odděleny středníkem",
         "First line of the file must be the header containig names of the columns.": "První řádek souboru musí být záhlaví obsahující názvy sloupců.",
-        "Following lines contain ": "Nasledujíci řádky obsahují ",
+        "Following lines contain ": "Následující řádky obsahují ",
         "persons": "osoby",
-        "First 3 columns must be ": "První tři sloupce musí být",
-        "First name": "Křestní jméno",
-        "Middle name": "Střední jméno",
+        "First 3 columns must be ": "První 3 sloupce musí být ",
+        "First name": "Jméno",
+        "Middle name": "Prostřední jméno",
         " and ": " a ",
         "Last name": "Příjmení",
-        " or the ": " nebo ",
-        "person": "osobu",
-        "Following columns contain contact information. Each column represents one contact information.": "Nasledujíci sloupce obsajucí kontaktní informace. Každý sloupec reprezentuje jednu kontaktní informaci.",
-        "Each person can contain any number of contact information.": "Každá osoba může obsahovat libovolný počet kontaktních informací",
-        "The import automatically detects ": "Import automaticky detekuje ",
-        "emails": "emaily",
+        " of the person": " osoby",
+        "Following columns contain contact information. Each column represents one contact information.": "Následující sloupce obsahují kontaktní informace. Každý sloupec představuje jednu kontaktní informaci.",
+        "Each person can contain any number of contact information.": "Každá osoba může obsahovat libovolný počet kontaktních informací.",
+        "The import automatically detects ": "Import automaticky rozpozná ",
+        "emails": "e-maily",
         "phone numbers": "telefonní čísla",
         "links": "odkazy",
         "Example CSV file": "Příklad CSV souboru",
         "You may also": "Můžete také",
-        "Export your addressbook": "Exportovat adresář",
-        "modify it and re-import again": "změnit ho nebo spustit import znova",
-        "Step 2: Upload the file with contacts": "Krok 2: Nahrajte soubor s kontaktmy",
-        "Step 3: Check the import": "Krok 3: Zkontrolujte import",
-        "Step 4: Run the import": "Krok 4: Spusťte import",
-        "You will be able to run the import after its check": "Po kontrole budete moci spustit import",
-        " of the person": "",
-        "Step 3: Give a tag to new imported contacts": "",
-        "Step 4: Check the import": "",
-        "Step 5: Run the import": ""
+        "Export your addressbook": "Exportovat váš adresář",
+        "modify it and re-import again": "upravit ho a znovu importovat",
+        "Step 2: Upload the file with contacts": "Krok 2: Nahrajte soubor s kontakty",
+        "Step 3: Give a tag to new imported contacts": "Krok 3: Přiřaďte štítek novým importovaným kontaktům",
+        "Step 4: Check the import": "Krok 4: Zkontrolujte import",
+        "Check the import now": "Zkontrolovat import nyní",
+        "Step 5: Run the import": "Krok 5: Spusťte import",
+        "You will be able to run the import after its check": "Import bude možné spustit po jeho zkontrolování",
+        "This was only check of the import. Check the log and if you are satisfied, upload the CSV file again run the import now.": "Toto byla pouze kontrola importu. Zkontrolujte log a pokud jste spokojeni, nahrajte CSV soubor znovu a spusťte import.",
+        "Run import": "Spustit import",
+        "Import finished, see log below": "Import dokončen, viz log níže",
+        "Test of import, see log below": "Test importu, viz log níže",
+        "File:": "Soubor:",
+        "Tag:": "Štítek:"
+    },
+    "Controllers\\Categories": {
+        "Contacts": "Kontakty",
+        "Categories": "Kategorie"
     },
     "Controllers\\Tags": {
         "Settings": "Nastavení",
-        "Contact Tags": "Kontaktní štítky"
+        "Contact Tags": "Štítky kontaktů"
+    },
+    "Controllers\\Api\\CheckPrimaryContact": {
+        "Some request data were missing": "Některá data požadavku chyběla",
+        "There already exists a primary contact for this customer for these tags:": "Pro tohoto zákazníka již existuje primární kontakt pro tyto štítky:"
+    },
+    "Models\\Category": {
+        "Type": "Typ",
+        "Contact Categories": "Kategorie kontaktů",
+        "Add Contact Category": "Přidat kategorii kontaktu"
+    },
+    "Models\\Tag": {
+        "Name": "Jméno",
+        "Color": "Barva",
+        "Contact Tags": "Štítky kontaktů",
+        "Add Contact Tag": "Přidat štítek kontaktu"
+    },
+    "Models\\ContactTag": {
+        "Contact": "Kontakt",
+        "Tag": "Štítek",
+        "Contact tags": "Štítky kontaktů"
     }
 }

@@ -1,46 +1,111 @@
 {
     "manifest": {
         "Workflow": "Workflow",
-        "Free sales workflow management.": "Správa workflow zdarma.",
-        "History": "História",
-        "Workflows": "Workflows",
-        "Items with not updated step": ""
+        "Free sales workflow management.": "Bezplatná správa prodejních kanálů.",
+        "History": "Historie",
+        "Workflows": "Workflow",
+        "Items with not updated step": "Položky s neaktualizovaným krokem",
+        "Campaigns": "Kampaně",
+        "Preparation": "Příprava",
+        "Launched": "Spuštěná",
+        "Analysis": "Analýza",
+        "Leads": "Leady",
+        "Subscriber": "Odběratel",
+        "MQL": "MQL",
+        "SQL": "SQL",
+        "Opportunity": "Příležitost",
+        "Customer": "Zákazník",
+        "Deals": "Dealy",
+        "Prospecting": "Vyhledávání",
+        "Qualified": "Kvalifikovaný",
+        "Quote Sent": "Nabídka odeslána",
+        "Under Review": "V hodnocení",
+        "Contracting": "Smluvní jednání",
+        "WON": "VYHRANÝ",
+        "LOST": "PROHRANÝ",
+        "Orders": "Objednávky",
+        "In progress": "V procesu",
+        "Delivered": "Doručeno",
+        "Ready to invoice": "Připraveno k fakturaci",
+        "Invoiced": "Vyfakturováno",
+        "Paid": "Zaplaceno",
+        "Projects": "Projekty",
+        "Implementation": "Implementace",
+        "Testing": "Testování",
+        "Tasks": "Úlohy",
+        "Ready to test": "Připraveno k testování",
+        "Test passed": "Test proběhl úspěšně",
+        "Test failed": "Test selhal",
+        "Ready to deploy": "Připraveno k nasazení",
+        "Deployed": "Nasazeno",
+        "Accepted": "Akceptováno",
+        "Manage workflows": "Spravovat workflow"
+    },
+    "Controllers\\Home": {
+        "Workflow": "Workflow",
+        "Add workflow": "Přidat workflow",
+        "Manage workflow steps": "Spravovat kroky"
+    },
+    "Controllers\\Workflows": {
+        "Settings": "Nastavení",
+        "Workflows": "Workflow"
+    },
+    "Controllers\\Workflow": {
+        "Workflow": "Workflow",
+        "Show details": "Zobrazit detaily",
+        "Target": "Cílová skupina",
+        "Goal": "Cíl",
+        "items": "položek",
+        "Project has no milestones.": "Projekt nemá žádné milníky.",
+        "progress": "pokrok",
+        "reported on": "nahlášeno dne",
+        "no report yet": "zatím žádná zpráva",
+        "Closed milestone": "Uzavřený milník"
+    },
+    "Controllers\\History": {
+        "Workflow": "Workflow",
+        "History": "Historie"
+    },
+    "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
+        "Item": "Položka",
+        "Days without workflow update": "Dny bez aktualizace workflow",
+        "Last update by": "Naposledy aktualizoval"
     },
     "root": {
-        "Workflows": "Workflows"
+        "Workflows": "Workflow"
     },
     "Models\\Workflow": {
         "Name": "Název",
         "Description": "Popis",
         "Type": "Typ",
         "Group": "Skupina",
-        "Order": "",
-        "Show in kanban": ""
+        "Order": "Pořadí",
+        "Show in kanban": "Zobrazit v kanbanu",
+        "Add Workflow": "Přidat workflow"
     },
     "Models\\WorkflowStep": {
         "Name": "Název",
-        "Order": "Objednávka",
+        "Order": "Pořadí",
         "Color": "Barva",
         "Probability": "Pravděpodobnost",
         "Workflow": "Workflow",
-        "Set result of a deal to": "Stanovit výsledek obchodu",
-        "Tag": "Štítek"
-    },
-    "Controllers\\Home": {
-        "Workflow": "Workflow",
-        "Manage workflows": "Spravovat workflows",
-        "Add deal": "Přidat obchod"
-    },
-    "Controllers\\Workflows": {
-        "Settings": "Nastavení",
-        "Workflows": "Workflows"
+        "Set result of a deal to": "Nastavit výsledek dealu na",
+        "Tag": "Značka",
+        "Add Workflow Step": "Přidat krok workflow"
     },
     "Models\\WorkflowHistory": {
-        "Model": "",
-        "Record Id": "",
-        "Changed": "",
-        "User": "",
-        "Workflow": "",
-        "Workflow Step": ""
+        "Model": "Model",
+        "Record Id": "ID záznamu",
+        "Changed": "Změněno",
+        "User": "Uživatel",
+        "Workflow": "Workflow",
+        "Workflow Step": "Krok"
+    },
+    "Components\\FormWorkflow": {
+        "Workflow": "Workflow",
+        "Steps": "Kroky"
+    },
+    "Components\\FormWorkflowStep": {
+        "Workflow step": "Krok workflow"
     }
 }

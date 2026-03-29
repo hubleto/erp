@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Tools": "Narzędzia",
+        "Management of internal maintenance tools.": "Zarządzanie narzędziami konserwacji"
+    },
+    "Controllers\\Dashboard": {
+        "Tools": "Narzędzia"
+    }
+}

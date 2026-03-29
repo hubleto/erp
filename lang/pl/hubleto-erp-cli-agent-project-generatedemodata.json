@@ -1,0 +1,27 @@
+{
+    "GenerateDemoData": {
+        "Follow-up call": "Follow-up call",
+        "Lead created": "Lead utworzony",
+        "Converted to a deal": "Przekształcony w deal",
+        "Newsletter subscribers": "Subskrybenci newslettera",
+        "Cold calling - SMEs": "Cold calling - małe i średnie przedsiębiorstwa",
+        "Website visitors filling 'Subscribe to our newsletter'.": "Odwiedzający stronę, którzy wypełnili formularz 'Zapisz się do newslettera'.",
+        "SMEs reached out by cold calling.": "Małe i średnie przedsiębiorstwa pozyskane przez cold calling.",
+        "Meeting": "Spotkanie",
+        "Business Trip": "Podróż służbowa",
+        "Call": "Rozmowa",
+        "Email": "E-mail",
+        "Other": "Inne",
+        "Chief Officer": "Dyrektor",
+        "Manager": "Menedżer",
+        "Employee": "Pracownik",
+        "Assistant": "Asystent",
+        "External": "Zewnętrzny",
+        "TV": "TV",
+        "Internet": "Internet",
+        "Fiber": "Światłowód",
+        "Landline": "Telefon stacjonarny",
+        "Marketing": "Marketing",
+        "Virtual Server": "Serwer wirtualny"
+    }
+}

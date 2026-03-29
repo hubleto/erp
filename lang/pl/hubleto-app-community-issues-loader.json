@@ -1,0 +1,28 @@
+{
+    "manifest": {
+        "Issues": "Problemy",
+        "Issue management": "Zarządzanie problemami",
+        "Mail accounts": "Konta e-mail",
+        "Issues Mail Accounts": "Konta e-mail problemów"
+    },
+    "root": {
+        "Issues": "Problemy",
+        "Mail accounts": "Konta e-mail"
+    },
+    "Controllers\\Issues": {
+        "Issues": "Problemy"
+    },
+    "Controllers\\MailAccounts": {
+        "Issues": "Problemy",
+        "Mail accounts": "Konta e-mail"
+    },
+    "Models\\Issue": {
+        "Title": "Tytuł",
+        "Problem description": "Opis problemu"
+    },
+    "Models\\MailAccount": {
+        "Mail account (requires Mail app)": "Konto e-mail (wymaga aplikacji Mail)",
+        "Configuration": "Konfiguracja",
+        "Notes": "Notatki"
+    }
+}

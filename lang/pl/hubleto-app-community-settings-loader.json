@@ -1,209 +1,355 @@
 {
-    "models.user": {
-        "First name": "Imię",
-        "Middle name": "Drugie imię",
-        "Last name": "Nazwisko",
-        "Email": "E-mail",
-        "Language": "Język",
-        "Active profile": "Aktywny profil",
-        "Login": "Login",
-        "Password": "Hasło",
-        "Active": "Aktywny",
-        "Time of last login": "Czas ostatniego logowania",
-        "Last login IP": "IP ostatniego logowania",
-        "Time of last access": "Czas ostatniego dostępu",
-        "Last access IP": "IP ostatniego dostępu"
-    },
-    "models.country": {
-        "Country Name": "Kraj",
-        "Code": "Kod"
-    },
-    "models.profile": {
-        "Company": "Firma"
-    },
-    "models.activityType": {
-        "Type Name": "Nazwa typu",
-        "Color": "Kolor",
-        "Shown in Calendar": "Widoczny w kalendarzu",
-        "Icon": "Ikona"
-    },
-    "models.currency": {
-        "Currency Name": "Waluta",
-        "Currency Code": "Kod waluty"
-    },
-    "models.workflow": {
-        "Name": "Nazwa",
-        "Description": "Opis"
-    },
-    "models.workflowStep": {
-        "Name": "Nazwa",
-        "Order": "Kolejność",
-        "Company": "Firma"
-    },
-    "models.tag": {
-        "Name": "Nazwa",
-        "Color": "Kolor"
-    },
-    "models.setting": {
-        "Key": "Klucz",
-        "Value": "Wartość",
-        "Only for user": "Tylko dla użytkownika"
-    },
-    "models.invoiceProfile": {
-        "Name": "Nazwa",
-        "Phone": "Telefon",
-        "E-mail": "E-mail",
-        "WWW": "WWW",
-        "Company ID": "REGON \/ Numer firmy",
-        "Tax ID": "NIP",
-        "VAT ID": "Numer VAT",
-        "Street, line 1": "Adres (linia 1)",
-        "Street, line 2": "Adres (linia 2)",
-        "ZIP": "Kod pocztowy",
-        "City": "Miasto",
-        "Country": "Kraj",
-        "Bank name": "Nazwa banku",
-        "Account number": "Numer konta",
-        "Account IBAN": "IBAN",
-        "SWIFT": "SWIFT \/ BIC",
-        "Numbering pattern": "Schemat numeracji"
-    },
-    "models.userRole": {
-        "Role": "Rola",
-        "Grant all permissions": "Przyznaj wszystkie uprawnienia"
-    },
-    "models.rolePermission": {
-        "Permission": "Uprawnienie",
-        "Role": "Rola"
-    },
-    "models.permission": {
-        "Permission": "Uprawnienie"
-    },
-    "controllers.dashboard": {
-        "Settings": "Ustawienia",
-        "Users": "Użytkownicy",
-        "User Roles": "Role użytkowników",
-        "Profiles": "Profile",
-        "Permissions": "Uprawnienia",
-        "Tags": "Tagi",
-        "Activity Types": "Typy aktywności",
-        "Contact Types": "Typy kontaktów",
-        "Countries": "Kraje",
-        "Currencies": "Waluty",
-        "Lead Statuses": "Statusy leadów",
-        "Deal Statuses": "Statusy szans sprzedaży",
-        "Workflows": "Procesy (Workflows)",
-        "Invoice profiles": "Profile fakturowania"
-    },
-    "controllers.userRoles": {
-        "Settings": "Ustawienia",
-        "User Roles": "Role użytkowników"
-    },
-    "controllers.countries": {
-        "Settings": "Ustawienia",
-        "Countries": "Kraje"
-    },
-    "loader": {
-        "Settings": "Ustawienia"
-    },
-    "input": {
-        "Upload file": "Prześlij plik"
-    },
-    "Models\\User": {
-        "First name": "Imię",
-        "Last name": "Nazwisko",
-        "Nick": "Pseudonim",
-        "Email": "E-mail",
-        "Language": "Język",
-        "Default company": "Domyślna firma"
-    },
-    "Models\\UserRole": {
-        "Role": "Rola",
-        "Grant all permissions (administrator role)": "Przyznaj wszystkie uprawnienia (rola administratora)",
-        "Description": "Opis",
-        "Is default role (cannot be modified)": "Rola domyślna (brak możliwości modyfikacji)"
-    },
-    "Models\\UserHasRole": {
-        "User": "Użytkownik",
-        "Role": "Rola"
-    },
-    "Models\\RolePermission": {
-        "Permission": "Uprawnienie",
-        "Role": "Rola"
-    },
-    "manifest": {
-        "Settings": "Ustawienia",
-        "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania Twojego Hubleto.",
-        "Settings and tools": "Ustawienia i narzędzia",
-        "Users": "Użytkownicy",
-        "Roles": "Role",
-        "Your companies": "Twoje firmy",
-        "General settings": "Ustawienia ogólne",
-        "Permissions list": "Lista uprawnień",
-        "Role permissions": "Uprawnienia ról",
-        "Activity types": "Typy aktywności",
-        "Countries": "Kraje",
-        "Currencies": "Waluty",
-        "Platform config": "Konfiguracja platformy",
-        "Sidebar": "Pasek boczny",
-        "Teams": "Zespoły",
-        "Log viewer": ""
-    },
-    "root": {
-        "Users": "Użytkownicy",
-        "Roles": "Role",
-        "Your companies": "Twoje firmy",
-        "General settings": "Ustawienia ogólne",
-        "Permissions list": "Lista uprawnień",
-        "Role permissions": "Uprawnienia ról",
-        "Activity types": "Typy aktywności",
-        "Countries": "Kraje",
-        "Currencies": "Waluty",
-        "Invoice profiles": "Profile faktur",
-        "Platform config": "Konfiguracja platformy",
-        "Sidebar": "Pasek boczny",
-        "Teams": "Zespoły"
-    },
-    "Models\\Country": {
-        "Country": "Kraj",
-        "Code": "Kod"
-    },
-    "Models\\Company": {
-        "Company": "Firma",
-        "Tax ID": "NIP",
-        "VAT ID": "VAT ID",
-        "Street, line 1": "Adres (linia 1)",
-        "Street, line 2": "Adres (linia 2)",
-        "ZIP": "Kod pocztowy",
-        "City": "Miasto",
-        "Country": "Kraj",
-        "Registration ID": "REGON",
-        "Business register": "Rejestr przedsiębiorców (KRS)",
-        "Logo": "Logo",
-        "Brand color - primary": "Główny kolor marki",
-        "Brand color - secondary": "Dodatkowy kolor marki",
-        "Region": ""
-    },
-    "Models\\ActivityType": {
-        "Type": "Typ",
-        "Color": "Kolor",
-        "Show in calendar": "Pokaż w kalendarzu",
-        "Icon": "Ikona"
-    },
-    "Models\\Currency": {
-        "Currency": "Waluta",
-        "Code": "Kod",
-        "Symbol": "Symbol"
-    },
-    "Models\\Team": {
-        "Team name": "Nazwa zespołu",
-        "Team color": "Kolor zespołu",
-        "Description": "Opis",
-        "Manager": "Kierownik \/ Menedżer"
-    },
-    "Models\\Setting": {
-        "Key": "Klucz",
-        "Value": "Wartość",
-        "Only for user": "Tylko dla użytkownika"
-    }
+  "manifest": {
+    "Settings": "Ustawienia",
+    "Settings and control panel for your Hubleto.": "Ustawienia konta Hubleto.",
+    "Settings and tools": "Ustawienia i narzędzia",
+    "Users": "Użytkownicy",
+    "Roles": "Role",
+    "Your companies": "Twoje firmy",
+    "General settings": "Ustawienia ogólne",
+    "Permissions list": "Lista uprawnień",
+    "Role permissions": "Uprawnienia ról",
+    "Activity types": "Typy aktywności",
+    "Countries": "Kraje",
+    "Currencies": "Waluty",
+    "Invoice profiles": "Profile fakturowania",
+    "Platform config": "Konfiguracja platformy",
+    "Sidebar": "Lewe menu",
+    "Teams": "Zespoły",
+    "Meeting": "Spotkanie",
+    "Business Trip": "Podróż służbowa",
+    "Call": "Połączenie",
+    "Email": "Email",
+    "Other": "Inne",
+    "Log viewer": "Przeglądarka logów"
+  },
+  "Models\\User": {
+    "First name": "Imię",
+    "Middle name": "Drugie imię",
+    "Last name": "Nazwisko",
+    "Email": "Email",
+    "Language": "Język",
+    "Active profile": "Aktywny profil",
+    "Login": "Login",
+    "Password": "Hasło",
+    "Active": "Konto jest aktywne",
+    "Time of last login": "Czas ostatniego logowania",
+    "Last login IP": "Adres IP ostatniego logowania",
+    "Time of last access": "Czas ostatniego dostępu",
+    "Last access IP": "Adres IP ostatniego dostępu",
+    "Nick": "Pseudonim",
+    "Default company": "Firma",
+    "Roles": "Role",
+    "Teams": "Zespoły",
+    "Type": "Typ",
+    "Apps": "Aplikacje",
+    "Add User": "Dodaj użytkownika"
+  },
+  "Models\\Country": {
+    "Country Name": "Kraj",
+    "Code": "Kod",
+    "Country": "Kraj",
+    "Countries": "Kraje",
+    "Add Country": "Dodaj kraj"
+  },
+  "Models\\Profile": {
+    "Company": "Firma"
+  },
+  "Models\\ActivityType": {
+    "Type Name": "Typ",
+    "Color": "Kolor",
+    "Shown in Calendar": "Pokaż w kalendarzu",
+    "Icon": "Ikona",
+    "Type": "Typ",
+    "Show in calendar": "Pokaż w kalendarzu",
+    "Activity Types": "Typy aktywności",
+    "Add Activity Type": "Dodaj typ aktywności"
+  },
+  "Models\\Currency": {
+    "Currency Name": "Waluta",
+    "Currency Code": "Kod",
+    "Currency": "Waluta",
+    "Code": "Kodowanie",
+    "Symbol": "Symbol",
+    "Currencies": "Waluty",
+    "Add currency": "Dodaj walutę",
+    "New currency": "Nowa waluta",
+    "Adding": "Dodawanie",
+    "Editing": "Edycja"
+  },
+  "Models\\Workflow": {
+    "Name": "Nazwa",
+    "Description": "Opis"
+  },
+  "Models\\WorkflowStep": {
+    "Name": "Nazwa",
+    "Order": "Kolejność",
+    "Company": "Kolor",
+    "Workflow": "Kanał",
+    "Color": "Kolor",
+    "Set result of a deal to": ""
+  },
+  "Models\\Tag": {
+    "Name": "Nazwa",
+    "Color": "Kolor"
+  },
+  "Models\\Setting": {
+    "Key": "Parametr",
+    "Value": "Wartość",
+    "Only for user": "Tylko dla użytkownika",
+    "Settings": "Ustawienia",
+    "Add Setting": "Dodaj ustawienie"
+  },
+  "Models\\InvoiceProfile": {
+    "Name": "Nazwa",
+    "Phone": "Telefon",
+    "E-mail": "Email",
+    "WWW": "WWW",
+    "Company ID": "NIP",
+    "Tax ID": "NIP",
+    "VAT ID": "Nr VAT",
+    "Street, line 1": "Ulica, wiersz nr 1",
+    "Street, line 2": "Ulica, wiersz nr 2",
+    "ZIP": "Kod pocztowy",
+    "City": "Miasto",
+    "Country": "Kraj",
+    "Bank name": "Nazwa banku",
+    "Account number": "Numer konta",
+    "Account IBAN": "IBAN",
+    "SWIFT": "SWIFT",
+    "Numbering pattern": "Wzorzec numeracji",
+    "Customer ID": "ID klienta",
+    "Supplier": "Dostawca"
+  },
+  "Models\\UserRole": {
+    "Role": "Rola",
+    "Grant all permissions": "Nadaj wszystkie uprawnienia (administrator)",
+    "Grant all permissions (administrator role)": "Nadaj wszystkie uprawnienia (rola administratora)",
+    "Description": "Opis",
+    "Is default role (cannot be modified)": "Jest rolą domyślną (nie można modyfikować)"
+  },
+  "Models\\RolePermission": {
+    "Permission": "Uprawnienie",
+    "Role": "Rola",
+    "Assign permission to role": "Przypisz uprawnienie do roli"
+  },
+  "Models\\Permission": {
+    "Permission": "Uprawnienie",
+    "Permissions": "Uprawnienia"
+  },
+  "Models\\Company": {
+    "Company": "Firma",
+    "Tax ID": "NIP",
+    "VAT ID": "Nr VAT",
+    "Street, line 1": "Ulica, wiersz 1",
+    "Street, line 2": "Ulica, wiersz 2",
+    "ZIP": "Kod pocztowy",
+    "City": "Miasto",
+    "Country": "Kraj",
+    "Registration ID": "REGON",
+    "Business register": "Rejestr handlowy",
+    "Logo": "Logo",
+    "Brand color - primary": "Podstawowy kolor marki",
+    "Brand color - secondary": "Dodatkowy kolor marki",
+    "Region": "Region",
+    "Add company": "Dodaj firmę"
+  },
+  "Models\\Team": {
+    "Team name": "Nazwa zespołu",
+    "Team color": "Kolor zespołu",
+    "Description": "Opis",
+    "Team manager": "Kierownik zespołu",
+    "Manager": "Kierownik",
+    "Members": "Członkowie",
+    "Teams": "Zespoły",
+    "Add team": "Dodaj zespół"
+  },
+  "Models\\TeamMember": {
+    "Team": "Zespół",
+    "Member": "Członek",
+    "Add member to team": "Dodaj członka do zespołu"
+  },
+  "Controllers\\Dashboard": {
+    "Settings": "Ustawienia",
+    "Users": "Użytkownicy",
+    "User Roles": "Role użytkowników",
+    "Profiles": "Profile",
+    "Permissions": "Uprawnienia",
+    "Tags": "Tagi",
+    "Activity Types": "Typy aktywności",
+    "Contact Types": "Typy kontaktów",
+    "Countries": "Kraje",
+    "Currencies": "Waluty",
+    "Lead Statuses": "Statusy leadów",
+    "Deal Statuses": "Statusy transakcji",
+    "Workflows": "Workflow",
+    "Invoice profiles": "Profile fakturowania",
+    "Manage installed apps": "Zarządzaj zainstalowanymi aplikacjami",
+    "Disable": "Dezaktywuj",
+    "Uninstall": "Odinstaluj",
+    "Open": "Otwórz",
+    "Most common settings": "Najczęstsze ustawienia",
+    "Manage users": "Zarządzaj użytkownikami",
+    "Manage apps": "Zarządzaj aplikacjami",
+    "All settings": "Wszystkie ustawienia",
+    "Change theme": "Zmień motyw",
+    "Locale": "Lokalizacja",
+    "Sign out from Hubleto": "Wyloguj z Hubleto",
+    "Default currency and timezone": "Domyślna waluta i strefa czasowa",
+    "Date (short / long) and time formats": "Formaty daty (krótki / długi) i czasu",
+    "Decimals and thousands separator": "Miejsca dziesiętne i separator tysięcy",
+    "Search settings...": "Szukaj w ustawieniach..."
+  },
+  "Controllers\\UserRoles": {
+    "Settings": "Ustawienia",
+    "User Roles": "Role użytkowników"
+  },
+  "Controllers\\Countries": {
+    "Settings": "Ustawienia",
+    "Countries": "Kraje"
+  },
+  "Controllers\\Users": {
+    "Settings": "Ustawienia",
+    "Users": "Użytkownicy"
+  },
+  "Controllers\\Activitytypes": {
+    "Settings": "Ustawienia",
+    "Activity Types": "Typy aktywności"
+  },
+  "Controllers\\Companies": {
+    "Settings": "Ustawienia",
+    "Companies": "Firmy"
+  },
+  "Controllers\\Currencies": {
+    "Settings": "Ustawienia",
+    "Currencies": "Waluty"
+  },
+  "Controllers\\Teams": {
+    "Settings": "Ustawienia",
+    "Teams": "Zespoły"
+  },
+  "Controllers\\Theme": {
+    "Settings": "Ustawienia",
+    "Theme": "Motyw"
+  },
+  "Controllers\\Permissions": {
+    "Settings": "Ustawienia",
+    "Permissions": "Uprawnienia"
+  },
+  "Controllers\\RolePermissions": {
+    "Role permissions": "Uprawnienia ról"
+  },
+  "Controllers\\UpdateDefaultPermissions": {
+    "Settings": "Ustawienia",
+    "Update default permissions": "Aktualizuj domyślne uprawnienia"
+  },
+  "Controllers\\Config": {
+    "Settings": "Ustawienia",
+    "Platform config": "Konfiguracja platformy"
+  },
+  "Controllers\\General": {
+    "Settings": "Ustawienia",
+    "General settings": "Ustawienia ogólne"
+  },
+  "Controllers\\Sidebar": {
+    "Settings": "Ustawienia",
+    "Sidebar": "Panel boczny",
+    "Save sidebar configuration": "Zapisz konfigurację panelu bocznego"
+  },
+  "Controllers\\Apps": {
+    "Settings": "Ustawienia",
+    "Apps": "Aplikacje",
+    "Open": "Otwórz",
+    "Disable": "Wyłącz",
+    "Install": "Zainstaluj",
+    "Go to app": "Przejdź do aplikacji",
+    "Enable": "Aktywuj",
+    "Activate Premium account": "Aktywuj konto Premium",
+    "Installed apps": "Zainstalowane aplikacje",
+    "Available apps": "Dostępne aplikacje",
+    "(Search) Type app name and press Enter...": "(Szukaj) Wpisz nazwę aplikacji i naciśnij Enter...",
+    "Community": "Community",
+    "Enterprise": "Enterprise",
+    "External": "Zewnętrzna",
+    "Custom": "Własna",
+    "You can install Premium apps only in Premium account.": "Aplikacje Premium można instalować tylko na koncie Premium."
+  },
+  "Controllers\\LogViewer": {
+    "Settings": "Ustawienia",
+    "Log Viewer": "Przeglądarka logów"
+  },
+  "Controllers\\MyAccount": {
+    "Settings": "Ustawienia",
+    "Company": "Firma"
+  },
+  "Controllers\\Profile": {
+    "Settings": "Ustawienia",
+    "Profile": "Profil"
+  },
+  "Controllers\\InvoiceProfiles": {
+    "Settings": "Ustawienia",
+    "Invoice profiles": "Faktura"
+  },
+  "Components\\FormUserRole": {
+    "Save": "Zapisz",
+    "User role": "Rola użytkownika",
+    "Permissions for records with designated owner, manager or team": "Uprawnienia dla rekordów z określonym właścicielem, kierownikiem lub zespołem",
+    "Reading": "Odczyt",
+    "Modifying": "Edycja",
+    "Can read only owned records": "Może odczytywać tylko własne rekordy",
+    "Can read only owned and managed records": "Może odczytywać tylko własne i zarządzane rekordy",
+    "Can read all records": "Może odczytywać wszystkie rekordy",
+    "Can modify only owned records": "Może modyfikować tylko własne rekordy",
+    "Can modify only owned and managed records": "Może modyfikować tylko własne i zarządzane rekordy",
+    "Can modify all records": "Może modyfikować wszystkie rekordy"
+  },
+  "Components\\FormUser": {
+    "About the user": "O użytkowniku",
+    "User": "Użytkownik",
+    "You may add new users only in Premium account.": "Nowych użytkowników można dodawać tylko na koncie Premium.",
+    "Activate Premium account": "Aktywuj konto Premium",
+    "Access to Hubleto": "Dostęp do Hubleto",
+    "Roles": "Role",
+    "First create user, then you will be prompted to assign roles.": "Najpierw utwórz użytkownika, następnie zostaniesz poproszony o przypisanie ról.",
+    "Permissions for records with designated owner or manager": "Uprawnienia dla rekordów z określonym właścicielem lub kierownikiem",
+    "Reading": "Odczyt",
+    "Modifying": "Edycja",
+    "Can read only owned records": "Może odczytywać tylko własne rekordy",
+    "Can read only owned and managed records": "Może odczytywać tylko własne i zarządzane rekordy",
+    "Can read all records": "Może odczytywać wszystkie rekordy",
+    "Can modify only owned records": "Może modyfikować tylko własne rekordy",
+    "Can modify only owned and managed records": "Może modyfikować tylko własne i zarządzane rekordy",
+    "Can modify all records": "Może modyfikować wszystkie rekordy",
+    "Access to apps": "Dostęp do aplikacji"
+  },
+  "Components\\FormTeam": {
+    "Team": "Zespół",
+    "Team members": "Członkowie zespołu",
+    "First create team, then you will be prompted to add members.": "Najpierw utwórz zespół, następnie zostaniesz poproszony o dodanie członków."
+  },
+  "root": {
+    "Users": "Użytkownicy",
+    "User roles": "Role użytkowników",
+    "Your companies": "Moje firmy",
+    "General settings": "Ustawienia ogólne",
+    "Permissions": "Uprawnienia",
+    "Tags": "Tagi",
+    "Activity types": "Typy aktywności",
+    "Contact types": "Typy kontaktów",
+    "Countries": "Kraje",
+    "Currencies": "Waluty",
+    "Workflows": "Workflows",
+    "Invoice profiles": "Profile fakturowania",
+    "Platform config": "Konfiguracja platformy",
+    "Contact Categories": "Kategorie kontaktów",
+    "Roles": "Role",
+    "Permissions list": "Lista uprawnień",
+    "Role permissions": "Uprawnienie",
+    "Sidebar": "Panel boczny",
+    "Teams": "Zespoły"
+  },
+  "Models\\UserHasRole": {
+    "User": "Użytkownik",
+    "Role": "Rola"
+  }
 }

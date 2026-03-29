@@ -1,0 +1,42 @@
+{
+    "manifest": {
+        "Notifications": "Oznámení",
+        "Internal team notifications": "Týmová oznámení"
+    },
+    "Models\\Notification": {
+        "Priority": "Priorita",
+        "Category": "Kategorie",
+        "From": "Od",
+        "To": "Příjemce",
+        "Subject": "Předmět",
+        "Body": "Zpráva",
+        "Color": "Barva",
+        "Tags": "Štítky",
+        "Sent": "Odesláno",
+        "Read": "Přečteno",
+        "URL": "URL",
+        "No category": "Bez kategorie"
+    },
+    "Controllers\\Notifications": {
+        "Notifications": "Oznámení"
+    },
+    "Controllers\\All": {
+        "Notifications": "Oznámení",
+        "All": "Vše"
+    },
+    "Controllers\\Inbox": {
+        "Notifications": "Oznámení",
+        "Inbox": "Přijaté"
+    },
+    "Controllers\\Sent": {
+        "Notifications": "Oznámení",
+        "Sent": "Odesláno"
+    },
+    "Components\\TableNotifications": {
+        "Mark as unread": "Označit jako nepřečtené",
+        "Mark as read": "Označit jako přečtené"
+    },
+    "Components\\FormNotification": {
+        "Notification": "Oznámení"
+    }
+}

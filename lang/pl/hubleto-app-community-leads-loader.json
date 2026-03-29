@@ -1,135 +1,251 @@
 {
-    "loaders": {
-        "Leads": "Leady",
-        "Leads Archive": "Archiwum leadów"
-    },
-    "controllers.leads": {
-        "Sales": "Sprzedaż",
-        "Leads": "Leady"
-    },
-    "controllers.leadsArchive": {
-        "Sales": "Sprzedaż",
-        "Leads": "Leady",
-        "Archive": "Archiwum"
-    },
-    "manifest": {
-        "Leads": "Leady",
-        "Management of leads, cold contacts. Convert leads to deals.": "Zarządzanie leadami i zimnymi kontaktami. Konwertuj leady na szanse sprzedaży.",
-        "Lead Levels": "Poziomy leadów",
-        "Lead Tags": "Tagi leadów",
-        "Lead Lost Reasons": "Przyczyny utraty leadów",
-        "Active leads": "Aktywne leady",
-        "Archived leads": "Zarchiwizowane leady",
-        "Lead value by score": "",
-        "Lead warnings": ""
-    },
-    "root": {
-        "Lead Tags": "Tagi leadów",
-        "Lead Lost Reasons": "Przyczyny utraty leadów",
-        "Active leads": "Aktywne leady",
-        "Archived leads": "Zarchiwizowane leady"
-    },
-    "Models\\LeadActivity": {
-        "Subject": "Temat",
-        "Activity type": "Typ aktywności",
-        "Start date": "Data rozpoczęcia",
-        "Start time": "Godzina rozpoczęcia",
-        "End date": "Data zakończenia",
-        "End time": "Godzina zakończenia",
-        "All day": "Cały dzień",
-        "Completed": "Zakończono",
-        "Created by": "Utworzone przez",
-        "Lead": "Lead",
-        "Contact": "Kontakt",
-        "Meeting minutes (link)": "Notatka ze spotkania (link)",
-        "Location": "Lokalizacja",
-        "Online meeting link": "Link do spotkania online",
-        "Description": "Opis",
-        "Recurrence": "Cykliczność",
-        "Long meeting minutes (link to external document)": "Pełna notatka ze spotkania (link zewnętrzny)",
-        "Short meeting minutes": "Krótka notatka ze spotkania"
-    },
-    "Models\\Lead": {
-        "Lead Identifier": "Identyfikator leada",
-        "Title": "Tytuł",
-        "Customer": "Klient",
-        "Contact": "Kontakt",
-        "Price": "Cena",
-        "Currency": "Waluta",
-        "Score": "Ocena (Score)",
-        "Expected close date": "Przewidywana data zamknięcia",
-        "Owner": "Właściciel",
-        "Created": "Utworzono",
-        "Status": "Status",
-        "Reason for Lost": "Przyczyna utraty",
-        "Notes": "Uwagi",
-        "Source channel": "Kanał źródłowy",
-        "Archived": "Zarchiwizowane",
-        "Add lead": "Dodaj lead",
-        "Manager": "Opiekun \/ Menedżer",
-        "Specific subject (if any)": "Temat szczegółowy",
-        "Email": "E-mail",
-        "Phone number": "Numer telefonu",
-        "Team": "Zespół",
-        "Workflow": "Proces \/ Lejek",
-        "Workflow step": "Etap procesu",
-        "Closed": "Zamknięte",
-        "Tags": "Tagi",
-        "Open \/ Closed": "Otwarte \/ Zamknięte",
-        "Open": "Otwarte",
-        "All": "Wszystkie",
-        "Add Lead": "Dodaj lead",
-        "Phone": "",
-        "Advertisement": "",
-        "Partner": "",
-        "Web": "",
-        "Cold call": "",
-        "E-mail": "",
-        "Referral": "",
-        "Other": "",
-        "Online document folder": ""
-    },
-    "Models\\LostReason": {
-        "Lost Reason": "Przyczyna utraty"
-    },
-    "Models\\LeadHistory": {
-        "Change Date": "Data zmiany",
-        "Lead": "Lead",
-        "Description": "Opis"
-    },
-    "Models\\LeadTag": {
-        "Lead": "Lead",
-        "Tag": "Tag"
-    },
-    "Models\\LeadProduct": {
-        "Lead": "Lead",
-        "Product": "Produkt",
-        "Unit Price": "Cena jednostkowa",
-        "Amount": "Ilość",
-        "Vat": "VAT",
-        "Discount": "Rabat",
-        "Sum": "Suma"
-    },
-    "Models\\LeadDocument": {
-        "Lead": "Lead",
-        "Document": "Dokument"
-    },
-    "Models\\Tag": {
-        "Name": "Nazwa",
-        "Color": "Kolor"
-    },
-    "Controllers\\Leads": {
-        "Leads": "Leady"
-    },
-    "Models\\LeadCampaign": {
-        "Lead": "Lead",
-        "Campaign": "Kampania"
-    },
-    "Models\\LeadTask": {
-        "Lead": "Lead",
-        "Task": "Zadanie"
-    },
-    "Controllers\\Boards\\LeadWarnings": {
-        "Open leads without future plan": "Otwarte leady bez zaplanowanych działań"
-    }
+  "manifest": {
+    "Leads": "Leady",
+    "Management of leads, cold contacts. Convert leads to deals.": "Zarządzanie leadami, zimnymi kontaktami. Konwersja leadów na deale.",
+    "Lead Levels": "Poziomy leadów",
+    "Lead Tags": "Tagi leadów",
+    "Lead Lost Reasons": "Powody utraty leadu",
+    "Active leads": "Aktywne leady",
+    "Archived leads": "Zarchiwizowane leady",
+    "Lead value by score": "Wartość leadów według wyniku",
+    "Lead warnings": "Ostrzeżenia dotyczące leadów",
+    "Complex": "Złożony",
+    "Great opportunity": "Świetna okazja",
+    "Duplicate": "Duplikat",
+    "Needs attention": "Wymaga uwagi",
+    "Cold": "Zimny",
+    "Warm": "Ciepły",
+    "Hot": "Gorący",
+    "Marketing qualified": "Kwalifikowany marketingowo",
+    "Sales qualified": "Kwalifikowany sprzedażowo",
+    "Price": "Cena",
+    "Solution": "Rozwiązanie",
+    "Demand canceled by customer": "Zapytanie anulowane przez klienta",
+    "Other": "Inne"
+  },
+  "Controllers\\Leads": {
+    "Sales": "Sprzedaż",
+    "Leads": "Leady"
+  },
+  "Controllers\\LeadsArchive": {
+    "Sales": "Sprzedaż",
+    "Leads": "Leady",
+    "Archive": "Archiwum"
+  },
+  "Controllers\\Levels": {
+    "Settings": "Ustawienia",
+    "Lead Levels": "Poziomy leadów",
+    "Leads": "Leady",
+    "Levels": "Poziomy"
+  },
+  "Controllers\\LostReasons": {
+    "Settings": "Ustawienia",
+    "Lead Lost Reasons": "Powody utraty leadu"
+  },
+  "Controllers\\Tags": {
+    "Settings": "Ustawienia",
+    "Lead Tags": "Tagi leadów"
+  },
+  "Controllers\\Settings": {
+    "Leads": "Leady",
+    "Settings": "Ustawienia",
+    "Settings saved.": "Ustawienia zapisane.",
+    "Calendar color": "Kolor kalendarza",
+    "Lead Prefix": "Prefiks leadu",
+    "Lead tags": "Tagi leadów",
+    "Lead statuses": "Statusy leadów",
+    "Campaigns": "Kampanie"
+  },
+  "Controllers\\Boards\\LeadValueByScore": {
+    "No leads found.": "Nie znaleziono leadów.",
+    "Add lead": "Dodaj lead"
+  },
+  "Controllers\\Boards\\LeadWarnings": {
+    "Open leads without future plan": "Otwarte leady bez przyszłego planu",
+    "No warnings for leads.": "Brak ostrzeżeń dla leadów."
+  },
+  "Models\\LeadActivity": {
+    "Activity type": "Typ aktywności",
+    "Subject": "Temat",
+    "Lead": "Lead",
+    "Contact person": "Osoba kontaktowa",
+    "Start date": "Data rozpoczęcia",
+    "Start time": "Godzina rozpoczęcia",
+    "End date": "Data zakończenia",
+    "End time": "Godzina zakończenia",
+    "All day": "Cały dzień",
+    "Completed": "Ukończona",
+    "Created by": "Utworzone przez",
+    "Contact": "Kontakt",
+    "Meeting minutes (link)": "Protokół ze spotkania (link)",
+    "Location": "Miejsce",
+    "Online meeting link": "Link do spotkania online",
+    "Description": "Opis",
+    "Recurrence": "Powtarzanie",
+    "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
+    "Short meeting minutes": "Krótki protokół ze spotkania"
+  },
+  "Models\\Lead": {
+    "Add Lead": "Dodaj lead",
+    "Lead Identifier": "Identyfikator",
+    "Title": "Nazwa",
+    "Customer": "Klient",
+    "Contact person": "Osoba kontaktowa",
+    "Price": "Cena",
+    "Currency": "Waluta",
+    "Expected close date": "Przewidywana data zamknięcia",
+    "Assigned user": "Odpowiedzialny",
+    "Date created": "Utworzony",
+    "Status": "Status",
+    "Notes": "Notatki",
+    "Source channel": "Źródło",
+    "Archived": "Zarchiwizowany",
+    "Link to shared folder (online storage) with related documents": "Link do udostępnionego folderu",
+    "Score": "Wynik",
+    "Contact": "Kontakt",
+    "Created": "Utworzony",
+    "Reason for Lost": "Powód utraty",
+    "Add lead": "Dodaj lead",
+    "Owner": "Właściciel",
+    "Identifier": "Identyfikator",
+    "Specific subject (if any)": "Temat",
+    "Campaign": "Kampania",
+    "Email": "Email",
+    "Phone number": "Telefon",
+    "Level": "Poziom",
+    "Manager": "Menedżer",
+    "Team": "Zespół",
+    "Workflow": "Workflow",
+    "Workflow step": "Krok workflow",
+    "Closed": "Zamknięty",
+    "Tags": "Tagi",
+    "Open \\/ Closed": "Otwarte \\/ Zamknięte",
+    "Open": "Otwarte",
+    "All": "Wszystkie",
+    "Deal": "Deal",
+    "Phone": "Telefon",
+    "Advertisement": "Reklama",
+    "Partner": "Partner",
+    "Web": "Web",
+    "Cold call": "Cold call",
+    "E-mail": "E-mail",
+    "Referral": "Polecenie",
+    "Other": "Inne",
+    "Online document folder": "Folder dokumentów online",
+    "Profile link #1": "Link do profilu #1",
+    "Profile link #2": "Link do profilu #2",
+    "Profile link #3": "Link do profilu #3",
+    "Ownership": "Własność",
+    "Owned by me": "Moje leady",
+    "Managed by me": "Zarządzane przeze mnie",
+    "None": "Brak",
+    "changed from": "zmienione z",
+    "to": "na",
+    "Yes": "Tak",
+    "No": "Nie",
+    "Lead created": "Lead utworzony"
+  },
+  "root": {
+    "Lead statuses": "Statusy leadów",
+    "Lead Tags": "Tagi leadów",
+    "Active leads": "Aktywne leady",
+    "Archived leads": "Zarchiwizowane leady",
+    "Lead Lost Reasons": "Powody utraty leadu",
+    "Lead Levels": "Poziomy leadów"
+  },
+  "Models\\LeadHistory": {
+    "Change Date": "Data zmiany",
+    "Lead": "Lead",
+    "Description": "Opis"
+  },
+  "Models\\LeadTag": {
+    "Lead": "Lead",
+    "Tag": "Tag",
+    "Lead Tags": "Tagi leadów"
+  },
+  "Models\\LeadDocument": {
+    "Lead": "Lead",
+    "Document": "Dokument"
+  },
+  "Models\\LeadTask": {
+    "Lead": "Lead",
+    "Task": "Zadanie",
+    "Lead Tasks": "Zadania leadu"
+  },
+  "Models\\LeadCampaign": {
+    "Lead": "Lead",
+    "Campaign": "Kampania",
+    "Campaign Leads": "Leady kampanii",
+    "Add lead": "Dodaj lead"
+  },
+  "Models\\Tag": {
+    "Name": "Nazwa",
+    "Color": "Kolor",
+    "Lead Tags": "Tagi leadów",
+    "Add Lead Tag": "Dodaj tag leadu"
+  },
+  "Models\\Level": {
+    "Name": "Nazwa",
+    "Color": "Kolor",
+    "Lead Levels": "Poziomy leadów",
+    "Add Lead Level": "Dodaj poziom leadu",
+    "Lead level": "Poziom leadu"
+  },
+  "Models\\LostReason": {
+    "Lost Reason": "Powód utraty",
+    "Lead Lost Reasons": "Powody utraty leadu",
+    "Add Reason": "Dodaj powód"
+  },
+  "Models\\LeadProduct": {
+    "Lead": "Lead",
+    "Product": "Produkt",
+    "Unit Price": "Cena jednostkowa",
+    "Amount": "Ilość",
+    "Dicount (%)": "Rabat (%)",
+    "Vat (%)": "VAT (%)",
+    "Vat": "VAT",
+    "Discount": "Rabat",
+    "Sum": "Suma"
+  },
+  "Components\\FormLead": {
+    "Lead": "Lead",
+    "Documents": "Dokumenty",
+    "Calendar": "Kalendarz",
+    "Shared documents": "Dokumenty udostępnione",
+    "History": "Historia",
+    "Local documents": "Dokumenty",
+    "Go to deal": "Przejdź do dealu",
+    "Show leads": "Pokaż leady",
+    "Type recent activity here": "Wpisz ostatnią aktywność tutaj",
+    "Enter = Log completed activity": "Enter = zapisz zakończoną aktywność",
+    "Shift+Enter = Schedule": "Shift+Enter = zaplanuj aktywność na później",
+    "Most recent activities": "Ostatnie aktywności",
+    "Not completed yet": "Nieukończona",
+    "Tasks": "Zadania",
+    "Log completed activity": "Zarejestruj wykonaną czynność",
+    "Enter": "Enter",
+    "Schedule activity": "Zaplanuj aktywność",
+    "Shift+Enter": "Shift+Enter",
+    "Campaign": "Kampania",
+    "Tags": "Tagi",
+    "Description": "Opis",
+    "Change Date": "Data zmiany"
+  },
+  "Components\\FormLevel": {
+    "Level": "Poziom",
+    "Record": "Rekord"
+  },
+  "Components\\FormActivity": {
+    "End": "Koniec",
+    "Start": "Początek",
+    "Contact": "Kontakt",
+    "Lead": "Lead"
+  },
+  "Components\\TableLeads": {
+    "Deal": "Deal"
+  },
+  "Calendar": {
+    "Leads": "Leady",
+    "Add new activity linked to lead": "Dodaj nową aktywność dla leadu"
+  }
 }

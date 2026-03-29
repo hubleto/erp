@@ -1,0 +1,39 @@
+{
+    "manifest": {
+        "Inventory": "Sklad",
+        "Management of inventory items in warehouses.": "Správa skladů a skladových položek.",
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby"
+    },
+    "root": {
+        "Warehouses": "Sklady",
+        "Transactions": "Pohyby"
+    },
+    "Models\\Inventory": {
+        "Product": "Produkt",
+        "Location in warehouse": "Umístění ve skladu",
+        "Status": "Stav",
+        "Quantity": "Množství",
+        "Batch number": "Číslo šarže",
+        "Serial number": "Sériové číslo",
+        "Expiration": "Expirace",
+        "Received": "Přijato",
+        "Last moved": "Poslední pohyb",
+        "Location": "Umístění",
+        "Add item": "Přidat položku"
+    },
+    "Models\\Status": {
+        "Name": "Název"
+    },
+    "Models\\Transaction": {
+        "Transaction UID": "UID pohybu",
+        "Type": "Typ",
+        "Date and time of transaction": "Datum a čas",
+        "Product": "Produkt",
+        "Quantity": "Množství",
+        "Reference document #1": "Referenční dokument č. 1",
+        "Reference document #2": "Referenční dokument č. 2",
+        "Reference document #3": "Referenční dokument č. 3",
+        "Notes": "Poznámky"
+    }
+}

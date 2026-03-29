@@ -1,205 +1,260 @@
 {
     "manifest": {
-        "Deals": "Obchody",
-        "Deal management. From deal to purchase.": "Správa obchodů. Od obchodu k nákupu.",
-        "Deal Tags": "Štitky obchodů",
-        "Deal Lost Reasons": "Důvody zraty obchodů",
-        "Deal warnings": "Upozornění obchodů",
-        "Most valuable deals": "Nejcennejší obchody",
-        "Deal value by result": "Hodnota obchodu podle výsledku",
-        "Active deals": "Aktivní obchody",
-        "Archived deals": "Archivované obchody"
+        "Deals": "Dealy",
+        "Deal management. From deal to purchase.": "Správa obchodních případů až po vytvoření nabídky.",
+        "Deal Tags": "Štítky dealů",
+        "Deal Lost Reasons": "Důvody ztráty dealu",
+        "Deal warnings": "Upozornění na dealy",
+        "Most valuable deals": "Nejhodnotnější dealy",
+        "Deal value by result": "Hodnota dealů podle výsledku",
+        "Active deals": "Aktivní dealy",
+        "Archived deals": "Archivované dealy",
+        "Create deal": "Vytvořit deal",
+        "Important": "Důležitý",
+        "ASAP": "Co nejdříve",
+        "Extenstion": "Rozšíření",
+        "New Customer": "Nový zákazník",
+        "Existing Customer": "Stávající zákazník",
+        "Price": "Cena",
+        "Solution": "Řešení",
+        "Demand canceled by customer": "Poptávka zrušena zákazníkem",
+        "Other": "Jiné"
     },
-    "root": {
-        "Deal Tags": "Štítky obchodu",
-        "Deal Lost Reasons": "Důvody zraty obchodů",
-        "Most valuable deals": "Nejcennější obchody",
-        "Deal value by result": "Hodnota obchodu podle výsledku",
-        "Active deals": "Aktivní obchody",
-        "Archived deals": "Archivované obchody",
-        "Deal warnings": "Upozornění obchodů"
+    "Controllers\\Deals": {
+        "Sales": "Prodej",
+        "Deals": "Dealy",
+        "Open deals": "Otevřené nabídky",
+        "Total value": "Celková hodnota"
     },
-    "Models\\DealActivity": {
-        "Subject": "Předmět",
-        "Activity type": "Typ aktivity",
-        "Start date": "Datum zahájení",
-        "Start time": "Čas zahájení",
-        "End date": "Datum ukončení",
-        "End time": "Čas ukončení",
-        "All day": "Celý den",
-        "Completed": "Dokončeno",
-        "Created by": "Vytvořeno",
-        "Deal": "Obchod",
-        "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisy z setkání (odkaz)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+    "Controllers\\DealsArchive": {
+        "Sales": "Prodej",
+        "Deals": "Dealy",
+        "Archive": "Archiv",
+        "Archived deals": "Archivované dealy"
+    },
+    "Controllers\\ReportGoal": {
+        "Sales": "Prodej",
+        "Goals": "Cíle"
+    },
+    "Controllers\\Api\\DailyDigest": {
+        "Missing plan": "Chybí plán",
+        "You should schedule further activity for this deal.": "Pro tento deal byste měli naplánovat další aktivitu."
     },
     "Models\\Deal": {
-        "Deal Identifier": "Identifikátor obchodu",
-        "Title": "Titul",
+        "Deal Identifier": "Identifikátor",
+        "Title": "Název",
         "Customer": "Zákazník",
-        "Contact": "Kontakt",
-        "Lead": "Potenciální obchod",
+        "Contact person": "Kontaktní osoba",
+        "Lead": "Lead",
         "Price": "Cena",
         "Currency": "Měna",
-        "Expected close date": "Očekávané datum uzavření",
-        "Owner": "Vlastník",
-        "Created": "Vytvořené",
+        "Expected close date": "Předpokládané datum uzavření",
+        "Assigned user": "Zodpovědný",
+        "Date created": "Vytvořen",
         "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Notes": "Poznámky",
-        "Source channel": "Zdrojový kanál",
-        "Archived": "Archivováno",
-        "Deal Result": "Výsledek obchodu",
-        "Reason for Lost": "Důvod pro ztracení",
+        "Source channel": "Zdroj",
+        "Archived": "Archivován",
+        "Status": "Stav",
+        "Link to shared folder (online storage) with related documents": "Odkaz na sdílený dokument",
+        "Unknown": "Neznámý",
+        "Won": "Vyhraný",
+        "Lost": "Prohraný",
+        "New": "Nový",
+        "Existing": "Stávající",
+        "Deal Result": "Výsledek dealu",
         "Date of result update": "Datum aktualizace výsledku",
         "New Customer": "Nový zákazník",
-        "Business type": "Typ obchodu",
-        "Manager": "Manažér",
-        "Closed": "Uzavřené",
-        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku (online úložiště) se souvisejícími dokumenty",
-        "Add Deal": "Přidat obchod",
-        "Result": "Výsledek",
-        "All": "Všechno",
-        "Ownership": "Vlastnictví",
-        "Owned by me": "Vlastněno mnou",
-        "Managed by me": "Spravováno mnou",
-        "Open \/ Closed": "Otevřené \/ Uzavřené",
-        "Open": "Otevřené",
-        "Active": "Aktivní",
-        "Deal created": "Obchod vytvořen",
-        " changed from ": " změnil z ",
-        " to ": " na ",
-        "Customer' order number": "Číslo objednávky zákazníka",
+        "Business type": "Typ businessu",
+        "Contact": "Kontakt",
+        "Owner": "Vlastník",
+        "Created": "Vytvořen",
+        "Reason for Lost": "Důvod ztráty",
+        "Add Deal": "Přidat deal",
         "Version": "Verze",
         "Price excl. VAT": "Cena bez DPH",
         "Price incl. VAT": "Cena s DPH",
+        "Manager": "Manažer",
         "Template for quotation": "Šablona pro nabídku",
-        "Customer's order number": "Čislo objednávky zákazníka",
-        "Shared with": ""
-    },
-    "Controllers\\Boards\\MostValuableDeals": {
-        "Open deal": "Otevřený obchod"
-    },
-    "Models\\LostReason": {
-        "Lost Reason": "Důvod ztracení",
-        "Deal Lost Reasons": "Důvod ztracení obchodů",
-        "Add Reason": "Přidat důvod"
+        "Customer's order number": "Číslo objednávky u zákazníka",
+        "Closed": "Uzavřen",
+        "Result": "Výsledek",
+        "All": "Všechny",
+        "Ownership": "Vlastnictví",
+        "Owned by me": "Moje",
+        "Managed by me": "Mnou spravované",
+        "Open \\/ Closed": "Otevřené \\/ Zavřené",
+        "Open": "Otevřené",
+        "Active": "Aktivní",
+        " changed from ": " změněno z ",
+        " to ": " na ",
+        "Shared with": "Sdíleno s",
+        "Advertisement": "Reklama",
+        "Partner": "Partner",
+        "Web": "Web",
+        "Cold call": "Cold call",
+        "E-mail": "E-mail",
+        "Referral": "Doporučení",
+        "Other": "Jiné",
+        "Shared folder (online document storage)": "Sdílená složka (online úložiště dokumentů)",
+        "Deal created": "Deal vytvořen",
+        "Yes": "Ano",
+        "No": "Ne"
     },
     "Models\\DealHistory": {
         "Change Date": "Datum změny",
-        "Deal": "Obchod",
-        "Description": "Popis"
+        "Deal": "Deal",
+        "Description": "Popis",
+        "Deals": "Dealy",
+        "Add Deal": "Přidat deal"
     },
     "Models\\DealTag": {
-        "Deal": "Obchod",
-        "Tag": "Štítek"
+        "Deal": "Deal",
+        "Tag": "Označení",
+        "Deal Tags": "Štítky dealů"
     },
-    "Models\\Item": {
-        "Deal": "Obchod",
-        "Product": "Produkt",
-        "Unit Price": "Jednotková cena",
-        "Amount": "Množství",
-        "Vat": "DPH",
-        "Discount": "Sleva",
-        "Sum": "Součet",
-        "Order": "Objednávka",
+    "Models\\DealActivity": {
+        "Deal": "Deal",
+        "Contact person": "Kontaktní osoba",
+        "Activity type": "Typ aktivity",
+        "Subject": "Předmět",
+        "Start date": "Datum začátku",
+        "Start time": "Začátek",
+        "End date": "Datum",
+        "End time": "Čas",
+        "All day": "Celý den",
+        "Completed": "Dokončena",
+        "Created by": "Vytvořeno",
+        "Contact": "Kontakt",
+        "Meeting minutes (link)": "Zápis ze schůzky (odkaz)",
+        "Location": "Místo",
+        "Online meeting link": "Odkaz na online schůzku",
         "Description": "Popis",
-        "Sales Price": "Prodejná cena",
-        "Price excl. VAT": "Cena bez DPH",
-        "Price incl. VAT": "Cena s DPH"
+        "Recurrence": "Opakování",
+        "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
+        "Short meeting minutes": "Stručný zápis ze schůzky"
     },
     "Models\\DealDocument": {
-        "Deal": "Obchod",
+        "Deal": "Deal",
         "Document": "Dokument"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Důvod ztráty",
+        "Deal Lost Reasons": "Důvody ztráty dealu",
+        "Add Reason": "Přidat důvod"
     },
     "Models\\Tag": {
         "Name": "Název",
         "Color": "Barva",
-        "Deal Tags": "Štítky obchodů",
-        "Add Deal Tag": "Přidat štítky obchodů"
+        "Deal Tags": "Štítky dealů",
+        "Add Deal Tag": "Přidat štítek dealu"
     },
-    "Controllers\\Boards\\DealWarnings": {
-        "Pending deals without future plan": "Čekající obchody bez budoucího plánu",
-        "Open deals without future plan": "Otevřené obchody bez budoucího plánu"
+    "Models\\Item": {
+        "Deal": "Deal",
+        "Product": "Produkt",
+        "Unit Price": "Jednotková cena",
+        "Amount": "Výše",
+        "Vat": "DPH",
+        "Discount": "Slevu",
+        "Sum": "Součet",
+        "Order": "Objednávka",
+        "Description": "Popis",
+        "Price excl. VAT": "Cena bez DPH",
+        "Price incl. VAT": "Cena s DPH",
+        "Sales Price": "Prodejní cena"
     },
-    "Controllers\\Deals": {
-        "Deals": "Obchody",
-        "Open deals": "Otevřené obchody",
-        "Total value": "Celková hodnota"
+    "Models\\DealLead": {
+        "Deal": "Deal",
+        "Lead": "Lead",
+        "Add Deal": "Přidat deal"
+    },
+    "Models\\DealTask": {
+        "Deal": "Deal",
+        "Task": "Úkol",
+        "Add Deal": "Přidat deal"
+    },
+    "root": {
+        "Deal statuses": "Stavy dealů",
+        "Deal Tags": "Štítky dealů",
+        "Deal value by result": "Hodnota dealů podle výsledku",
+        "Most valuable deals": "Nejhodnotnější dealy",
+        "Active deals": "Aktivní dealy",
+        "Archived deals": "Archivované dealy",
+        "Deal Lost Reasons": "Důvody ztráty dealu",
+        "Deal warnings": "Upozornění"
     },
     "Components\\FormDeal": {
-        "Log completed activity": "Zaznamenat dokončenou aktivitu",
-        "Type recent activity here": "Zde napište nedávnou aktivitu",
+        "Calendar": "Kalendář",
+        "Local documents": "Dokumenty",
+        "Shared documents": "Sdílené dokumenty",
+        "History": "Historie",
+        "Go to original lead": "Přejít na původní lead",
+        "Documents": "Dokumenty",
+        "Show deals": "Zobrazit dealy",
+        "Enter = Log completed activity": "Enter = zapsat ukončenou aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovat aktivitu na později",
+        "Type recent activity here": "Zadejte poslední aktivitu zde",
+        "Not completed yet": "Nedokončena",
+        "Most recent activities": "Nejnovější aktivity",
+        "Deal": "Deal",
+        "Lead": "Lead",
+        "Log completed activity": "Zaznamenat aktivitu",
         "Enter": "Enter",
-        "Most recent activities": "Nedávné aktivity",
         "Schedule activity": "Naplánovat aktivitu",
         "Shift+Enter": "Shift+Enter",
-        "Go to original lead": "Přejít k původnímu potenciálnimu obchodu",
-        "Not completed yet": "Zatím nedokončeno",
-        "Calendar": "Kalendář",
-        "Local documents": "Lokální dokumenty",
-        "Documents": "Dokumenty",
-        "History": "Historie",
-        "Show deals": "Ukázat obchody",
-        "Deal": "Obchod",
-        "Deal value:": "Hodnota obchodu:",
-        "Products & Services": "Produkty a služby",
-        "The sums of product and services prices will be updated after saving": "Součty cen produktů a služeb budou aktualizovány po uložení",
-        "Add product": "Přidat produkt",
-        "Add service": "Přidat službu",
-        "Add document": "Přidat dokument",
-        "The price is locked because the deal has some products or services": "Cena je uzamčená, protože se v obchodu nachází produkt nebo služba",
+        "Deal value:": "Hodnota dealu",
+        "Weighted profit": "Vážená hodnota dealu",
+        "Tasks": "Úkoly",
+        "Products": "Produkty",
+        "Items": "Položky",
+        "Select parent lead": "Vybrat nadřazený lead",
         "Customer": "Zákazník",
-        "Service Price": "Cena služby",
-        "Service": "Služba",
-        "Commitment": "Vázanost",
-        "Vat (%)": "DPH (%)",
-        "Discount (%)": "Sleva (%)",
-        "Sum": "Součet",
-        "Unit Price": "Jednotková cena",
-        "Product": "Produkt",
-        "Amount": "Množství",
-        "Link": "Odkaz",
-        "Document": "Dokument",
+        "Contact": "Kontakt",
         "Description": "Popis",
         "Change Date": "Datum změny",
-        "No steps exist for this workflow": "Neexistujú kroky pro tuto workflow",
-        "Weighted profit": "Vážený zisk",
-        "Tasks": "Úlohy",
-        "Go to deal": "Přejít na obchod"
+        "Generate quotation (PDF)": "Generovat cenovou nabídku (PDF)",
+        "Price is calculated from items.": "Cena je vypočítána z položek."
     },
-    "Components\\FormActivity": {
-        "Start": "Začátek",
-        "End": "Konec",
-        "Deal": "Obchod",
-        "Contact": "Kontakt"
-    },
-    "Controllers\\Boards\\DealValueByResult": {
-        "Unknown": "Neznámé",
-        "Pending": "Čekající",
-        "Won": "Vyhráto",
-        "Lost": "Prohráto"
+    "Components\\TableDeals": {
+        "Hide filter": "Skrýt filtr"
     },
     "Controllers\\LostReasons": {
         "Settings": "Nastavení",
-        "Deal Lost Reasons": "Důvody ztraceného obchod"
+        "Deal Lost Reasons": "Důvody ztráty dealu"
     },
-    "Controllers\\Tags": {
+    "Controllers\\Settings": {
+        "Deals": "Dealy",
         "Settings": "Nastavení",
-        "Deal Tags": "Štítky obchodů"
+        "Settings saved.": "Nastavení uloženo.",
+        "Show 'Deal warnings' in dashboard": "Zobrazit 'Upozornění na dealy' na dashboardu",
+        "Show 'Most valuable deals' in dashboard": "Zobrazit 'Nejhodnotnější dealy' na dashboardu",
+        "Show 'Deal value by result' in dashboard": "Zobrazit 'Hodnotu dealu podle výsledku' na dashboardu",
+        "Calendar color": "Barva kalendáře",
+        "Deals Prefix": "Prefix dealu"
     },
-    "Models\\DealLead": {
-        "Deal": "Obchod",
-        "Lead": "Potenciální obchod"
+    "Controllers\\Boards\\DealWarnings": {
+        "Pending deals without future plan": "Čekající dealy bez budoucího plánu",
+        "No warnings for deals.": "Žádná upozornění pro dealy.",
+        "No notifications for deals.": "Žádná oznámení o dealech.",
+        "Open deal": "Deal",
+        "Open deals without future plan": "Otevřené dealy bez budoucího plánu"
     },
-    "Models\\DealTask": {
-        "Deal": "Obchod",
-        "Task": "Úloha"
+    "Controllers\\Boards\\DealValueByResult": {
+        "Unknown": "Neznámý",
+        "Pending": "V procesu",
+        "Won": "Vyhraný",
+        "Lost": "Prohraný",
+        "No deals found.": "Žádné dealy nenalezeny.",
+        "Add deal": "Přidat deal"
+    },
+    "Controllers\\Boards\\MostValuableDeals": {
+        "Open deal": "Otevřít deal",
+        "No deals found.": "Žádné dealy nenalezeny.",
+        "Add deal": "Přidat deal"
+    },
+    "Calendar": {
+        "Deals": "Dealy",
+        "Add new activity linked to deal": "Přidat novou aktivitu ke dealu"
     }
 }

@@ -1,4 +1,20 @@
 {
+    "RecordManager": {
+        "Cannot read record. Not enough permissions.": "Záznam nelze číst. Nedostatečná oprávnění.",
+        "Cannot delete. Not enough permissions.": "Smazání není možné. Nedostatečná oprávnění.",
+        "Cannot save. Not enough permissions.": "Uložení není možné. Nedostatečná oprávnění.",
+        "A field contains a value that already exists.": "Pole obsahuje hodnotu, která již existuje.",
+        "Value '{{ value }}' for {{ field }} already exists.": "Hodnota '{{ value }}' pro {{ field }} již existuje.",
+        "{{ field }} is required.": "{{ field }} je povinné.",
+        "{{ field }} contains invalid value.": "{{ field }} obsahuje neplatnou hodnotu."
+    },
+    "HubletoReactUi": {
+        "Some inputs need your attention": "Některá pole vyžadují vaši pozornost",
+        "Duplicate entry error": "Chyba duplicitního záznamu",
+        "OK, I understand": "OK, rozumím",
+        "Warning": "Upozornění",
+        "Confirm": "Potvrdit"
+    },
     "Components\\Form": {
         "Add": "Přidat",
         "Save": "Uložit",
@@ -6,32 +22,151 @@
         "Delete": "Smazat",
         "Confirm delete": "Potvrďte smazání",
         "Edit": "Upravit",
-        "Adding record": "Přidávání záznamu",
+        "Adding record": "Přidat záznam",
         "Editing record": "Úprava záznamu",
         "Record": "Záznam",
-        "New record": "Nový záznam"
+        "New record": "Nový záznam",
+        "Saved": "Uloženo",
+        "You have unsaved changes. Are you sure to close?": "Máte neuložené změny. Opravdu chcete zavřít?"
+    },
+    "Components\\FormExtended": {
+        "Copy link to clipboard": "Zkopírovat odkaz do schránky",
+        "unsaved changes": "neuložené změny",
+        "Open in new tab": "Otevřít v novém okně"
+    },
+    "Components\\ErpWorkflowSelector": {
+        "Change workflow": "Změnit workflow",
+        "Last update: {{ date }} by {{ user }}": "Poslední aktualizace: {{ date }} od {{ user }}",
+        "unknown": "neznámý"
     },
     "Components\\Input": {
         "Upload file": "Nahrát soubor"
     },
+    "Components\\Inputs\\JsonKeyValue": {
+        "Add value": "Přidat hodnotu"
+    },
+    "Components\\Inputs\\File": {
+        "Upload file": "Nahrát soubor"
+    },
+    "Components\\Inputs\\DateTime": {
+        "Year-Month-Day": "Rok-Měsíc-Den",
+        "Year-Month-Day Hour:Min:Sec": "Rok-Měsíc-Den Hodina:Min:Sek"
+    },
+    "Components\\Inputs\\SharedWith": {
+        "Share": "Sdílet",
+        "Default access based on ownership": "Výchozí přístup podle vlastnictví",
+        "Can only read": "Může pouze číst",
+        "Can read and modify": "Může číst a upravovat",
+        "Apply": "Použít"
+    },
     "Components\\Table": {
-        "You are about to delete the record. Press OK to confirm.": "Chystáte se smazat záznam. Potvrďte stisknutím OK.",
-        "Yes, delete": "Ano, smazat",
-        "No, do not delete": "Ne, nesmazat",
         "Delete": "Smazat",
-        "Start typing to search...": "Začnete psát pro vyhledávaní..."
+        "Start typing to search...": "Začněte vyhledávat...",
+        "Search...": "Hledat",
+        "No data.": "Žádná data.",
+        "More options": "Nastavení",
+        "Show\\/Hide filter": "Zobrazit\\/skrýt filtr",
+        "Hide filter": "Skrýt filtr",
+        "Show as plain table": "Zobrazit jako jednoduchou tabulku",
+        "Show as standard table": "Zobrazit jako standardní tabulku",
+        "Delete record": "Smazání záznamu",
+        "Cancel": "Zrušit",
+        "Are you sure you want to delete this record?": "Opravdu chcete smazat tento záznam?",
+        "Copy cell content to clipboard": "Kopírovat obsah buňky do schránky",
+        "records were hidden based on your permissions.": "záznamy byly skryty na základě vašich oprávnění."
+    },
+    "Components\\TableExtended": {
+        "Add new": "Přidat",
+        "Customize Columns": "Přizpůsobit sloupce"
+    },
+    "Components\\TableExtendedColumnsCustomize": {
+        "Customize Columns": "Přizpůsobit sloupce",
+        "Save": "Uložit",
+        "Reset to default": "Výchozí nastavení"
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Zůstat přihlášen"
     },
-    "Model": {
-        "Export to CSV": "",
-        "Import from CSV": "",
-        "Columns": ""
+    "Controllers\\SignIn": {
+        "Your email": "E-mail",
+        "Password": "Heslo",
+        "Keep signed in": "Zůstat přihlášen",
+        "Sign in": "Přihlásit se",
+        "Forgot password?": "Zapomněl jsem heslo"
+    },
+    "Components\\Inputs\\Image": {
+        "Choose image": "Nahrát obrázek"
+    },
+    "Components\\Inputs\\TextareaWithHtmlPreview": {
+        "Toggle fullscreen": "Přepnout celou obrazovku",
+        "Preview": "Náhled"
+    },
+    "Components\\Inputs\\Password": {
+        "New password": "Nové heslo",
+        "Confirm new password": "Potvrdit nové heslo"
+    },
+    "Components\\ErpSearch": {
+        "[Ctrl+K] Search in Hubleto...": "[Ctrl+K] Hledat v Hubleto...",
+        "No options": "Žádné možnosti"
     },
     "Controllers\\NotFound": {
-        "Page Not Found": "",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
-        "Home": ""
+        "Page Not Found": "Stránka nenalezena",
+        "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Stránku, kterou hledáte, jsme nenašli.",
+        "Home": "Úvod"
+    },
+    "Controllers\\AccessForbidden": {
+        "Access Forbidden": "Přístup odepřen",
+        "Home": "Úvod",
+        "You have no access to {{ appName }}.": "Nemáte přístup k {{ appName }}."
+    },
+    "EmailProvider": {
+        "Hello from Hubleto!": "Dobrý den od Hubleto!",
+        "Dear {{ name }},": "Vážený/á {{ name }},",
+        "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Obdrželi jsme žádost o obnovení vašeho hesla. Pokud jste o to požádali, klikněte na tlačítko níže a nastavte si nové heslo:",
+        "Reset password": "Obnovit heslo",
+        "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Pokud jste o obnovení hesla nežádali, tento e-mail ignorujte. Vaše heslo zůstane nezměněno.",
+        "For security reasons, this link will expire in 15 minutes.": "Z bezpečnostních důvodů platnost tohoto odkazu vyprší za 15 minut.",
+        "Reset your password | Hubleto": "Obnovení hesla | Hubleto",
+        "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "Děkujeme za registraci! Jsme rádi, že jste se připojili. Klikněte na tlačítko níže pro potvrzení účtu a začněte pracovat.",
+        "Get started": "Začít",
+        "If you didn't sign up for this account, you can safely ignore this email.": "Pokud jste si účet nezaložili, tento e-mail můžete ignorovat.",
+        "Your Hubleto account has been created!": "Váš Hubleto účet byl vytvořen!"
+    },
+    "Emails\\EmailProvider": {
+        "Hello from Hubleto!": "Dobrý den od Hubleto!",
+        "Dear {{ name }},": "Vážený/á {{ name }},",
+        "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Obdrželi jsme žádost o obnovení vašeho hesla. Pokud jste o to požádali, klikněte na tlačítko níže a nastavte si nové heslo:",
+        "Reset password": "Obnovit heslo",
+        "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Pokud jste o obnovení hesla nežádali, tento e-mail ignorujte. Vaše heslo zůstane nezměněno.",
+        "For security reasons, this link will expire in 15 minutes.": "Z bezpečnostních důvodů platnost tohoto odkazu vyprší za 15 minut.",
+        "Reset your password | Hubleto": "Obnovení hesla | Hubleto",
+        "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "Děkujeme za registraci! Jsme rádi, že jste se připojili. Klikněte na tlačítko níže pro potvrzení účtu a začněte pracovat.",
+        "Get started": "Začít",
+        "If you didn't sign up for this account, you can safely ignore this email.": "Pokud jste si účet nezaložili, tento e-mail můžete ignorovat.",
+        "Your Hubleto account has been created!": "Váš Hubleto účet byl vytvořen!"
+    },
+    "Model": {
+        "Export to CSV": "Exportovat do CSV",
+        "Import from CSV": "Importovat z CSV",
+        "Columns": "Sloupce"
+    },
+    "Renderer": {
+        "Oops! Something went wrong with the database.": "Jejda! Něco se pokazilo v databázi.",
+        "{{ modelName }} cannot be deleted because other data is linked to it.": "{{ modelName }} nelze smazat, protože jsou k němu navázána jiná data.",
+        "You are trying to save a record that is already existing.": "Pokoušíte se uložit záznam, který již existuje.",
+        "You cannot delete record that is linked with another records. Delete the linked records first.": "Nelze smazat záznam, který je propojen s jinými záznamy. Nejprve smažte propojené záznamy.",
+        "Show error details": "Zobrazit podrobnosti chyby",
+        "Oops! Something went wrong.": "Jejda! Něco se pokazilo."
+    },
+    "Controllers\\Api\\FileUpload\\Upload": {
+        "The file has been successfully uploaded": "Soubor byl úspěšně nahrán",
+        "This file type cannot be uploaded": "Tento typ souboru nelze nahrát",
+        "The file already exists": "Soubor již existuje",
+        "An error occurred during the file upload": "Při nahrávání souboru došlo k chybě"
+    },
+    "Controllers\\Api\\FileUpload\\Delete": {
+        "The deletion of the file encountered an error": "Při mazání souboru došlo k chybě",
+        "File not found": "Soubor nebyl nalezen",
+        "The file has been successfully deleted": "Soubor byl úspěšně smazán"
     }
 }

@@ -1,0 +1,50 @@
+{
+  "manifest": {
+    "Calendar sources": "Zdroje kalendářů",
+    "Add calendar source": "Přidat zdroj kalendáře"
+  },
+  "Calendar": {
+    "Error fetching events": "Chyba při načítání událostí",
+    "No Title": "Bez názvu",
+    "Error fetching ICS file": "Chyba při načítání ICS souboru"
+  },
+  "Models\\Source": {
+    "Name": "Název",
+    "Calendar ID": "ID kalendáře",
+    "Type": "Typ",
+    "Google Calendar": "Google Kalendář",
+    ".ics Url": ".ics URL",
+    "Color": "Barva",
+    "Active": "Aktivní",
+    "Calendar sources": "Zdroje kalendářů",
+    "Add calendar source": "Přidat zdroj kalendáře"
+  },
+  "Controllers\\Google": {
+    "Settings": "Nastavení",
+    "Calendar Sources": "Zdroje kalendářů",
+    "Google Calendars": "Google Kalendáře",
+    "Google Calendar": "Google Kalendář",
+    "When using Google Calendar integration, also make sure to have $config['google-api-key'] defined in your ConfigEnv.php.": "Při používání integrace Google Kalendáře se ujistěte, že máte $config['google-api-key'] definován ve vašem ConfigEnv.php.",
+    "Visit": "Navštivte",
+    "for details on how to get and configure your Google Calendar API key.": "pro podrobnosti o tom, jak získat a nastavit váš API klíč Google Kalendáře."
+  },
+  "Controllers\\Home": {
+    "Settings": "Nastavení",
+    "Calendar Sources": "Zdroje kalendářů",
+    "Manage Google Calendars": "Spravovat Google Kalendáře",
+    "Manage online .ics Calendars": "Spravovat online .ics Kalendáře"
+  },
+  "Controllers\\Ics": {
+    "Settings": "Nastavení",
+    "Calendar Sources": "Zdroje kalendářů",
+    ".ics Calendars": ".ics Kalendáře",
+    "Online .ics Calendar": "Online .ics Kalendář"
+  },
+  "Components\\FormSource": {
+    "Enter the Calendar ID from the settings of your calendar in Google Calendar (look at the bottom of the page).": "Zadejte ID kalendáře z nastavení vašeho kalendáře v Google Kalendáři (viz dolní část stránky).",
+    "It should be in the form of": "Mělo by mít tvar",
+    "The calendar must also be set to public or the API Key specified in the config file must have access to it.": "Kalendář musí být nastaven jako veřejný nebo API klíč uvedený v konfiguračním souboru musí mít k němu přístup.",
+    "Enter the URL that points to an ICS file.": "Zadejte URL adresu, která odkazuje na ICS soubor.",
+    "When using Google calendar, make sure you define an API key in ConfigEnv.php: $config['google-api-key'] = ...": "Při používání Google Kalendáře se ujistěte, že máte definován API klíč v ConfigEnv.php: $config['google-api-key'] = ..."
+  }
+}

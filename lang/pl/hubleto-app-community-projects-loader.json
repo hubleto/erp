@@ -1,0 +1,190 @@
+{
+  "manifest": {
+    "Projects": "Projekty",
+    "Project management": "Zarządzanie projektami",
+    "Phases": "Fazy",
+    "Monthly summary": "Miesięczne podsumowanie",
+    "Milestones": "Kamienie milowe",
+    "Task assignment": "Przypisanie zadań",
+    "Sample project #1": "Przykładowy projekt #1",
+    "Sample project #1 for demonstration purposes.": "Przykładowy projekt #1 do celów demonstracyjnych.",
+    "Sample project #2": "Przykładowy projekt #2",
+    "Sample project #2 for demonstration purposes.": "Przykładowy projekt #2 do celów demonstracyjnych.",
+    "Create project": "Utwórz projekt"
+  },
+  "root": {
+    "Projects": "Projekty",
+    "Phases": "Fazy"
+  },
+  "Models\\Project": {
+    "Deal": "Deal",
+    "Customer": "Klient",
+    "Contact": "Kontakt",
+    "Identifier": "Identyfikator",
+    "Leave empty to generate automatically.": "Pozostaw puste, aby wygenerować automatycznie.",
+    "Title": "Tytuł",
+    "Description": "Opis",
+    "Main developer": "Główny programista",
+    "Account manager": "Opiekun klienta",
+    "Priority": "Priorytet",
+    "Start": "Start",
+    "Deadline": "Termin",
+    "Budget": "Budżet",
+    "Workflow": "Workflow",
+    "Workflow step": "Stan workflow",
+    "Closed": "Zamknięty",
+    "Color": "Kolor",
+    "Online documentation folder": "Folder dokumentacji online",
+    "Notes": "Uwagi",
+    "Created": "Utworzono",
+    "Open \\/ Closed": "Otwarte \\/ Zamknięte",
+    "Open": "Otwarte",
+    "All": "Wszystkie",
+    "Average hourly costs": "Średnie koszty godzinowe",
+    "Project manager": "Kierownik projektu",
+    "Shared with": "Udostępniono dla",
+    "Add Project": "Dodaj projekt"
+  },
+  "Models\\Phase": {
+    "Name": "Nazwa",
+    "Order": "Kolejność",
+    "Color": "Kolor"
+  },
+  "Models\\MilestoneReport": {
+    "Milestone": "Kamień milowy",
+    "Summary": "Podsumowanie",
+    "Details": "Szczegóły",
+    "Progress": "Postęp",
+    "Reported on": "Data raportu",
+    "Reported by": "Zgłosił",
+    "Add milestone report": "Dodaj raport do kamienia milowego"
+  },
+  "Models\\Expense": {
+    "Project": "Projekt",
+    "Reason": "Powód",
+    "Date": "Data",
+    "Amount": "Kwota",
+    "Approved by": "Zatwierdził",
+    "Spent by": "Wydał",
+    "Add expense": "Dodaj wydatek"
+  },
+  "Models\\ProjectTask": {
+    "Project": "Projekt",
+    "Task": "Zadanie",
+    "Assign task to project": "Przypisz zadanie do projektu"
+  },
+  "Models\\ProjectDeal": {
+    "Project": "Projekt",
+    "Deal": "Deal",
+    "Project Deals": "Deale projektu",
+    "Add deal": "Dodaj deal"
+  },
+  "Models\\ProjectOrder": {
+    "Project": "Projekt",
+    "Order": "Zamówienie",
+    "Order Projects": "Projekty zamówienia",
+    "Add project": "Dodaj projekt"
+  },
+  "Components\\FormProject": {
+    "Projects": "Projekty",
+    "Worksheet": "Zestawienie pracy",
+    "Project": "Projekt",
+    "Documents": "Dokumenty",
+    "Milestones": "Kamienie milowe",
+    "Tasks": "Zadania",
+    "Expenses": "Wydatki",
+    "Statistics": "Statystyki",
+    "Open tasks": "Otwarte zadania",
+    "Discussions": "Dyskusje",
+    "Project:": "Projekt:",
+    "Order": "Zamówienie",
+    "Select parent order": "Wybierz nadrzędne zamówienie",
+    "First create the project, then you will be prompted to add tasks.": "Najpierw utwórz projekt, następnie będziesz mógł dodawać zadania.",
+    "Worked hours & costs by month": "Przepracowane godziny i koszty według miesiąca",
+    "Chargeable hours by month": "Godziny do fakturowania według miesiąca",
+    "Labor costs calculator": "Kalkulator kosztów pracy",
+    "Total": "Łącznie",
+    "User": "Użytkownik",
+    "Worked hours": "Przepracowane godziny",
+    "Salary": "Wynagrodzenie",
+    "Labor costs": "Koszty pracy",
+    "hours": "godzin"
+  },
+  "Components\\FormMilestone": {
+    "Milestone": "Kamień milowy",
+    "Reports": "Raporty"
+  },
+  "Components\\FormMilestoneReport": {
+    "Milestone report": "Raport do kamienia milowego"
+  },
+  "Components\\FormExpense": {
+    "Expense": "Wydatek"
+  },
+  "Models\\ProjectActivity": {
+    "Subject": "Temat",
+    "Location": "Miejsce",
+    "Online meeting link": "Link do spotkania online",
+    "Description": "Opis",
+    "Activity type": "Typ aktywności",
+    "Start date": "Data rozpoczęcia",
+    "Start time": "Godzina rozpoczęcia",
+    "End date": "Data zakończenia",
+    "End time": "Godzina zakończenia",
+    "Recurrence": "Powtarzanie",
+    "All day": "Cały dzień",
+    "Completed": "Ukończona",
+    "Long meeting minutes (link to external document)": "Szczegółowy protokół (link do zewnętrznego dokumentu)",
+    "Short meeting minutes": "Krótki protokół",
+    "Created by": "Utworzył",
+    "Project": "Projekt",
+    "Contact": "Kontakt"
+  },
+  "Controllers\\Projects": {
+    "Projects": "Projekty"
+  },
+  "Controllers\\Dashboard": {
+    "Projects": "Projekty",
+    "Current date and time is": "Aktualna data i czas to",
+    "Go to contacts": "Przejdź do kontaktów"
+  },
+  "Controllers\\Contacts": {
+    "Projects": "Projekty",
+    "Contacts": "Kontakty"
+  },
+  "Controllers\\Settings": {
+    "Projects": "Projekty",
+    "Settings": "Ustawienia",
+    "Create your custom settings page here": "Utwórz tutaj swoją niestandardową stronę ustawień"
+  },
+  "Models\\Milestone": {
+    "Title": "Tytuł",
+    "Due date": "Termin realizacji",
+    "Expected output": "Oczekiwany wynik",
+    "Description of activities": "Opis działań",
+    "Color": "Kolor",
+    "Closed": "Zamknięte",
+    "Last report": "Ostatni raport",
+    "Last progress": "Ostatni postęp",
+    "Add milestone": "Dodaj kamień milowy",
+    "Project": "Projekt"
+  },
+  "Controllers\\Milestones": {
+    "Milestones": "Kamienie milowe"
+  },
+  "Controllers\\ProjectsTasks": {
+    "Projects": "Projekty",
+    "Assignment of tasks": "Przypisanie zadań"
+  },
+  "Controllers\\MonthlySummary": {
+    "Projects": "Projekty",
+    "Monthly summary": "Miesięczne podsumowanie",
+    "Search project": "Szukaj projektu",
+    "No project found.": "Nie znaleziono żadnego projektu.",
+    "projects found": "znalezione projekty",
+    "hours": "godzin"
+  },
+  "Calendar": {
+    "Projects": "Projekty",
+    "Add new activity linked to Projects": "Dodaj nową aktywność dla projektu"
+  }
+}

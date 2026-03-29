@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Crypto": "Crypto",
+        "Manage security keys and other security settings.": "Zarządzanie kluczami bezpieczeństwa."
+    },
+    "Controllers\\Dashboard": {
+        "Crypto": "Crypto"
+    }
+}

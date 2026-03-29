@@ -1,0 +1,9 @@
+{
+    "manifest": {
+        "Tools": "Nástroje",
+        "Management of internal maintenance tools.": "Správa nástrojů pro údržbu"
+    },
+    "Controllers\\Dashboard": {
+        "Tools": "Nástroje"
+    }
+}

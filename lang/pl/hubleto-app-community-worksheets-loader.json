@@ -1,0 +1,82 @@
+{
+    "manifest": {
+        "Worksheets": "Ewidencja czasu",
+        "Worksheet log": "Ewidencja przepracowanych godzin",
+        "Activity types": "Typy czynności",
+        "Daily chart": "Dzienny przegląd",
+        "Monthly summary": "Podsumowanie miesięczne"
+    },
+    "root": {
+        "Worksheets": "Ewidencja czasu",
+        "Activity types": "Typy aktywności"
+    },
+    "Models\\Activity": {
+        "Worker": "Pracownik",
+        "Task": "Zadanie",
+        "Type": "Typ czynności",
+        "Day": "Dzień",
+        "Worked hours": "Przepracowane",
+        "Description": "Opis",
+        "Approved": "Zatwierdzone",
+        "Is chargeable": "Płatne",
+        "Created": "Utworzono",
+        "Period": "Okres",
+        "All": "Wszystko",
+        "Today": "Dziś",
+        "This week": "Ten tydzień",
+        "Last week": "Poprzedni tydzień",
+        "This month": "Ten miesiąc",
+        "Last month": "Poprzedni miesiąc",
+        "This year": "Ten rok",
+        "Last year": "Poprzedni rok",
+        "Yesterday": "Wczoraj",
+        "Last 7 days": "Ostatnie 7 dni",
+        "Last 14 days": "Ostatnie 14 dni",
+        "Month before last": "Przedostatni miesiąc",
+        "Month": "Miesiąc",
+        "Customer": "Klient",
+        "Deal": "Transakcja",
+        "Project": "Projekt",
+        "Group by": "Grupuj według",
+        "Total worked hours": "Łącznie przepracowanych godzin",
+        "Add Activity": "Dodaj aktywność"
+    },
+    "Models\\ActivityType": {
+        "Varchar": "Tekst",
+        "Color": "Kolor",
+        "Add ActivityType": "Dodaj typ aktywności"
+    },
+    "Components\\TableActivities": {
+        "Worked total": "Przepracowane łącznie",
+        "hours": "godzin"
+    },
+    "Components\\FormActivity": {
+        "Activity": "Aktywność"
+    },
+    "Components\\FormActivityType": {
+        "ActivityType": "Typ aktywności",
+        "Record #": "Rekord nr"
+    },
+    "Components\\FormType": {
+        "Type": "Typ",
+        "Record #": "Rekord nr"
+    },
+    "Controllers\\Activities": {
+        "Worksheets": "Ewidencja czasu",
+        "Activities": "Aktywności"
+    },
+    "Controllers\\ActivityTypes": {
+        "Worksheets": "Ewidencja czasu",
+        "Activity types": "Typy aktywności"
+    },
+    "Controllers\\Boards\\DailyChart": {
+        "Show/Hide details": "Pokaż/Ukryj szczegóły"
+    },
+    "Controllers\\Boards\\MonthlySummary": {
+        "No employee with email address '{{ employeeEmail }}' found.": "Nie znaleziono pracownika z adresem e-mail '{{ employeeEmail }}'.",
+        "No summary available for this employee.": "Brak dostępnego podsumowania dla tego pracownika."
+    },
+    "Controllers\\Api\\DailyActivityChart": {
+        "Daily activity": "Dzienna aktywność"
+    }
+}

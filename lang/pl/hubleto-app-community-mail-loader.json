@@ -1,0 +1,172 @@
+{
+    "root": {
+        "Active Mail": "Aktywna poczta",
+        "Templates": "Szablony",
+        "Drafts": "Wersje robocze",
+        "Accounts": "Konta"
+    },
+    "manifest": {
+        "Mail": "Poczta",
+        "Email client": "Klient poczty",
+        "Active Mail": "Aktywna poczta",
+        "Templates": "Szablony",
+        "Accounts": "Konta",
+        "Sent": "Wysłane",
+        "Scheduled to send": "Zaplanowane do wysłania",
+        "Sent from Hubleto": "Wysłane z Hubleto",
+        "Get emails": "Pobierz wiadomości",
+        "Manage accounts": "Zarządzaj kontami",
+        "Internal emails": "Wiadomości wewnętrzne",
+        "External accounts": "Konta zewnętrzne",
+        "Account is not used for receiving emails.": "Konto nie jest używane do odbierania wiadomości.",
+        "Account has no mailboxes.": "Konto nie ma żadnych skrzynek pocztowych."
+    },
+    "Models\\Mail": {
+        "Mail Id": "ID wiadomości",
+        "Mail Number": "Numer wiadomości",
+        "Mailbox": "Skrzynka pocztowa",
+        "Priority": "Priorytet",
+        "Created": "Utworzona",
+        "Sent": "Wysłana",
+        "Read": "Przeczytana",
+        "Subject": "Temat",
+        "From": "Nadawca",
+        "To": "Odbiorca",
+        "Cc": "CC",
+        "Bcc": "BCC",
+        "Body (Text)": "Treść (Tekst)",
+        "Body (HTML)": "Treść (HTML)",
+        "Color": "Kolor",
+        "Draft": "Wersja robocza",
+        "Template": "Szablon",
+        "Account": "Konto",
+        "Scheduled to send": "Zaplanowane do wysłania",
+        "Reply to": "Odpowiedz",
+        "Save draft": "Zapisz wersję roboczą",
+        "Email ID is missing.": "Brak ID wiadomości.",
+        "Email has already been sent.": "Wiadomość została już wysłana.",
+        "Email is scheduled to be sent later.": "Wiadomość jest zaplanowana do późniejszego wysłania.",
+        "Email has no subject.": "Wiadomość nie ma tematu.",
+        "No SMTP email account configured.": "Nie skonfigurowano żadnego konta SMTP.",
+        "Email's account SMTP is not properly configured.": "Ustawienia SMTP konta e-mail nie są poprawnie skonfigurowane.",
+        "Email's account sender is not properly configured.": "Nadawca konta e-mail nie jest poprawnie skonfigurowany.",
+        "Recipient contains invalid email address.": "Odbiorca zawiera nieprawidłowy adres e-mail.",
+        "Mailer Error": "Błąd wysyłania",
+        "Failed to create the email.": "Nie udało się utworzyć wiadomości."
+    },
+    "Models\\Account": {
+        "Name": "Nazwa",
+        "Color": "Kolor",
+        "Sender email address": "Adres e-mail nadawcy",
+        "Sender name": "Nazwa nadawcy",
+        "IMAP host": "Host IMAP",
+        "IMAP port": "Port IMAP",
+        "IMAP encryption": "Szyfrowanie IMAP",
+        "IMAP username": "Nazwa użytkownika IMAP",
+        "IMAP password": "Hasło IMAP",
+        "SMTP host": "Host SMTP",
+        "SMTP port": "Port SMTP",
+        "SMTP encryption": "Szyfrowanie SMTP",
+        "SMTP username": "Nazwa użytkownika SMTP",
+        "SMTP password": "Hasło SMTP",
+        "Owner": "Właściciel",
+        "Manager": "Menedżer",
+        "Add account": "Dodaj konto"
+    },
+    "Models\\Mailbox": {
+        "Account": "Konto",
+        "Name": "Nazwa",
+        "Attributes": "Atrybuty"
+    },
+    "Controllers\\Home": {
+        "Mail": "Poczta"
+    },
+    "Controllers\\Templates": {
+        "Mail": "Poczta",
+        "Templates": "Szablony"
+    },
+    "Controllers\\Drafts": {
+        "Mail": "Poczta",
+        "Drafts": "Wersje robocze"
+    },
+    "Models\\Template": {
+        "Subject": "Temat",
+        "Body (Text)": "Treść (Tekst)",
+        "Body (HTML)": "Treść (HTML)",
+        "Add template": "Dodaj szablon"
+    },
+    "Controllers\\Scheduled": {
+        "Scheduled": "Zaplanowane",
+        "Mail": "Poczta",
+        "Send scheduled emails now": "Wyślij zaplanowane wiadomości teraz",
+        "Show sent emails": "Pokaż wysłane wiadomości",
+        "Scheduled to send": "Zaplanowane do wysłania"
+    },
+    "Controllers\\SendScheduled": {
+        "Mail": "Poczta",
+        "Send scheduled": "Wyślij zaplanowane",
+        "Mails scheduled to send were sent.": "Zaplanowane wiadomości zostały wysłane.",
+        "Scheduled": "Zaplanowane"
+    },
+    "Controllers\\Sent": {
+        "Sent": "Wysłane",
+        "Mail": "Poczta"
+    },
+    "Controllers\\Get": {
+        "Mail": "Poczta",
+        "Get": "Pobierz"
+    },
+    "Controllers\\Accounts": {
+        "Mail": "Poczta",
+        "Accounts": "Konta"
+    },
+    "Controllers\\Mailboxes": {
+        "Mail": "Poczta",
+        "Mailboxes": "Skrzynki pocztowe"
+    },
+    "Models\\Index": {
+        "Mail": "Poczta",
+        "From": "Nadawca",
+        "To": "Odbiorca",
+        "Cc": "CC",
+        "Bcc": "BCC"
+    },
+    "Models\\Attachment": {
+        "Mail": "Poczta",
+        "Name": "Nazwa",
+        "File": "Plik"
+    },
+    "Components\\FormTemplate": {
+        "Template": "Szablon"
+    },
+    "Components\\FormMail": {
+        "Template": "Szablon",
+        "Send now": "Wyślij",
+        "Mail": "Poczta"
+    },
+    "Components\\FormAccount": {
+        "Email account": "Konto e-mail",
+        "Receiving (IMAP)": "Odbieranie (IMAP)",
+        "Sending (SMTP)": "Wysyłanie (SMTP)",
+        "Account": "Konto"
+    },
+    "Components\\ListFolder": {
+        "Mark as unread": "Oznacz jako nieprzeczytane",
+        "Mark as read": "Oznacz jako przeczytane"
+    },
+    "Components\\TableMails": {
+        "Mark as unread": "Oznacz jako nieprzeczytane",
+        "Mark as read": "Oznacz jako przeczytane"
+    },
+    "Components\\TableAccounts": {
+        "Mark as unread": "Oznacz jako nieprzeczytane",
+        "Mark as read": "Oznacz jako przeczytane"
+    },
+    "Mailer": {
+        "Getting emails from {{ count }} account(s).": "Pobieranie wiadomości z {{ count }} konta/kont.",
+        "Checking account {{ name }}": "Sprawdzanie konta {{ name }}",
+        "Mailbox {{ account }} -> {{ mailbox }}": "Skrzynka pocztowa {{ account }} -> {{ mailbox }}",
+        "Found mail {{ number }} {{ id }}": "Znaleziono wiadomość {{ number }} {{ id }}",
+        "Creating mail in database": "Zapisywanie wiadomości w bazie danych"
+    }
+}

@@ -61,10 +61,10 @@ class Item extends \Hubleto\Erp\Model
     $description->ui["addButtonText"] = $this->translate("Add item");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
 
-    // $description->ui['orderBy'] = [
-    //   'field' => ['id_invoice_item', 'date_due' ],
-    //   'direction' => [ 'asc', 'asc' ]
-    // ];
+    $description->ui['orderBy'] = [
+      'field' => ['id_invoice_item', 'date_due' ],
+      'direction' => [ 'asc', 'asc' ]
+    ];
 
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];

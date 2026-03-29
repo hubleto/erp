@@ -18,7 +18,7 @@
         <td>{{ o.CUSTOMER.name }}</td>
         <td>{{ o['_ENUM[payment_period]'] }}</td>
         <td>
-          {% for i in o.ITEMS %}
+          {% for i in o.ITEMS %} {% if i.id_invoice_item == 0 %}
             <div class="flex">
                <div class="badge badge-info">{{ hubleto.locale().formatDateShort(i.date_due) }}</div>
                <div class="badge badge-yellow">{{ i.title }}</div>
@@ -28,7 +28,7 @@
                 {{ hubleto.locale().formatNumber(i.amount, 2) }}
               </div>
             </div>
-          {% endfor %}
+          {% endif %}{% endfor %}
         </td>
       </tr>
     {% endfor %}

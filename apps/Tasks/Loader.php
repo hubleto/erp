@@ -37,6 +37,10 @@ class Loader extends \Hubleto\Erp\App
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $boards->addBoard( $this, $this->translate('My recent tasks'), 'tasks/boards/my-recent-tasks');
 
+    /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
+    $calendarManager->addCalendar($this, 'tasks', $this->configAsString('calendarColor'), Calendar::class);
+
   }
 
   // upgradeSchema
@@ -84,6 +88,10 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="text">' . $this->translate('Todo') . '</span>
           ' . ($myDueTodo > 0 ? '<span class="badge badge-danger ml-auto">' . $myDueTodo . '</span>' : '') . '
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=tasks">
+          <span class="icon"><i class="fas fa-calendar-days"></i></span>
+          <span class="text">' . $this->translate('Calendar') . '</span>
         </a>
       </div>
     ';

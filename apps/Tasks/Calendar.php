@@ -14,11 +14,61 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     ];
   }
 
+  public function loadEvent(int $id): array
+  {
+    return $this->prepareLoadActivityQuery($this->getModel(Models\Todo::class), $id)->first()?->toArray();
+  }
+
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
-    // Implement your functionality for loading calendar events.
+    $events = [];
 
-    return [];
+    /** @var Models\Task */
+    $mTask = $this->getModel(Models\Task::class);
+
+    /** @var Models\Todo */
+    $mTodo = $this->getModel(Models\Todo::class);
+
+    // tasks
+    $tasks = $mTask->record->prepareReadQuery()
+      ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd])
+      ->get();
+
+    foreach ($tasks as $task) { //@phpstan-ignore-line
+      $events[] = [
+        'id' => (int) ($task->id ?? 0),
+        'start' => date("Y-m-d", strtotime($task->date_deadline)),
+        'end' => date("Y-m-d", strtotime($task->date_deadline)),
+        'allDay' => true,
+        'title' => 'TASK ' . $task->identifier . ' ' . $task->title,
+        'color' => $task->is_closed ? '#DDDDDD' : '#1A8404',
+        'source' => 'tasks',
+        'id_owner' => $task->id_developer,
+        'completed' => $task->is_closed,
+      ];
+    }
+
+    // todos
+    $todos = $mTodo->record->prepareReadQuery()
+      ->whereRaw("`{$mTodo->table}`.`date_deadline` >= ? AND `{$mTodo->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd])
+      ->with('TASK')->get();
+
+    foreach ($todos as $todo) { //@phpstan-ignore-line
+      $events[] = [
+        'id' => (int) ($todo->id ?? 0),
+        'start' => date("Y-m-d", strtotime($todo->date_deadline)),
+        'end' => date("Y-m-d", strtotime($todo->date_deadline)),
+        'allDay' => true,
+        'title' => 'TODO ' . (string) ($todo->todo ?? ''),
+        'color' => $todo->is_closed ? '#DDDDDD' : '#8401A4',
+        'source' => 'tasks',
+        'id_owner' => $todo->id_responsible,
+        'completed' => $todo->is_closed,
+      ];
+    }
+
+
+    return $events;
   }
 
 }

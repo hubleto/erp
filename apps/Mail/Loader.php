@@ -81,7 +81,14 @@ class Loader extends \Hubleto\Erp\App
     /** @var Models\Mail */
     $mMail = $this->getModel(Mail::class);
 
-    $accounts = $mAccount->record->prepareReadQuery()->with('MAILBOXES')->get();
+    $accounts = $mAccount->record->prepareReadQuery()
+      ->whereNotNull('imap_host')
+      ->whereNotNull('imap_port')
+      ->whereNotNull('imap_encryption')
+      ->whereNotNull('imap_username')
+      ->whereNotNull('imap_password')
+      ->with('MAILBOXES')->get()
+    ;
 
     $accountsHtml = '';
     foreach ($accounts as $account) {

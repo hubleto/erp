@@ -31,8 +31,16 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
     // tasks
     $tasks = $mTask->record->prepareReadQuery()
-      ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd])
-      ->get();
+      ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd]);
+
+    if (isset($filter['idUser']) && $filter['idUser'] > 0) {
+      $tasks = $tasks->where($mTask->table . '.id_developer', $filter['idUser']);
+    }
+    if (isset($filter['completed'])) {
+      $tasks = $tasks->where('is_closed', $filter['completed']);
+    }
+
+    $tasks = $tasks->get();
 
     foreach ($tasks as $task) { //@phpstan-ignore-line
       $events[] = [
@@ -51,7 +59,16 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     // todos
     $todos = $mTodo->record->prepareReadQuery()
       ->whereRaw("`{$mTodo->table}`.`date_deadline` >= ? AND `{$mTodo->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd])
-      ->with('TASK')->get();
+      ->with('TASK');
+
+    if (isset($filter['idUser']) && $filter['idUser'] > 0) {
+      $todos = $todos->where($mTodo->table . '.id_responsible', $filter['idUser']);
+    }
+    if (isset($filter['completed'])) {
+      $todos = $todos->where('is_closed', $filter['completed']);
+    }
+
+    $todos = $todos->get();
 
     foreach ($todos as $todo) { //@phpstan-ignore-line
       $events[] = [

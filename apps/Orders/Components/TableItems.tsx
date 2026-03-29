@@ -90,15 +90,14 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
                 yesText: this.translate('Yes, prepare for invoice'),
                 yesButtonClass: 'btn-warning',
                 onYes: () => {
-                  request.post('orders/api/prepare-item-for-invoice',
+                  request.get('orders/api/prepare-item-for-invoice',
                     {
                       idOrder: data['id_order'],
                       idItem: data['id'],
                     },
-                    {},
                     (data: any) => {
                       this.reload();
-                      globalThis.window.open(globalThis.hubleto.config.projectUrl + '/invoices/items/' + data.idInvoiceItem);
+                      // globalThis.window.open(globalThis.hubleto.config.projectUrl + '/invoices/items/' + data.idInvoiceItem);
                     }
                   );
                 },

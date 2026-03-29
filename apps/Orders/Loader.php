@@ -84,7 +84,6 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\OrderDeal::class)->upgradeSchema();
       $this->getModel(Models\OrderDocument::class)->upgradeSchema();
       $this->getModel(Models\OrderActivity::class)->upgradeSchema();
-      $this->getModel(Models\Item::class)->upgradeSchema();
       $this->getModel(Models\History::class)->upgradeSchema();
       $this->getModel(Models\Payment::class)->upgradeSchema();
     }

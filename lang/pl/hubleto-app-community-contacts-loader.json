@@ -1,89 +1,192 @@
 {
-    "Models\\Contact": {
-        "Salutation": "Zwrot grzecznościowy",
-        "Title before": "Tytuł przed nazwiskiem",
-        "First name": "Imię",
-        "Middle name": "Drugie imię",
-        "Last name": "Nazwisko",
-        "Title after": "Tytuł po nazwisku",
-        "Customer": "Klient",
-        "Primary Contact": "Kontakt główny",
-        "Notes": "Uwagi",
-        "Date Created": "Data utworzenia",
-        "Active": "Aktywny",
-        "Add contact": "Dodaj kontakt",
-        "Emails": "Adresy e-mail",
-        "Phone Numbers": "Numery telefonów",
-        "Valid": "Poprawny",
-        "Tags": "Tagi",
-        "Invoicing Contact": ""
-    },
-    "Models\\Value": {
-        "Contact": "Kontakt",
-        "Category": "Kategoria",
-        "Type": "Typ",
-        "Email": "E-mail",
-        "Number": "Numer",
-        "URL": "Adres URL",
-        "Other": "Inne",
-        "Value": "Wartość",
-        "Contacts": "Kontakty",
-        "Add Customer": "Dodaj klienta"
-    },
-    "Models\\ContactTag": {
-        "Contact": "Kontakt",
-        "Tag": "Tag"
-    },
-    "Models\\Category": {
-        "Type": "Typ"
-    },
-    "Models\\Tag": {
-        "Name": "Nazwa",
-        "Color": "Kolor"
-    },
-    "manifest": {
-        "Contacts": "Kontakty",
-        "Default customer management and addressbook.": "Domyślne zarządzanie klientami i książka adresowa.",
-        "Contact Categories": "Kategorie kontaktów",
-        "Contact Tags": "Tagi kontaktów",
-        "Import contacts": "Importuj kontakty"
-    },
-    "Controllers\\Contacts": {
-        "Contacts": "Kontakty"
-    },
-    "Controllers\\Import": {
-        "Import": "",
-        "Contacts": "",
-        "Step 1: Prepare list of contacts": "",
-        "Contacts can be imported from a ": "",
-        " or ": "",
-        " file. The file for import must comply with following rules": "",
-        "The file can contain unlimited number of lines.": "",
-        "Values in file must be separated by semicolon": "",
-        "First line of the file must be the header containig names of the columns.": "",
-        "Following lines contain ": "",
-        "persons": "",
-        "First 3 columns must be ": "",
-        "First name": "",
-        "Middle name": "",
-        " and ": "",
-        "Last name": "",
-        " of the person": "",
-        "Following columns contain contact information. Each column represents one contact information.": "",
-        "Each person can contain any number of contact information.": "",
-        "The import automatically detects ": "",
-        "emails": "",
-        "phone numbers": "",
-        "links": "",
-        "Example CSV file": "",
-        "You may also": "",
-        "Export your addressbook": "",
-        "modify it and re-import again": "",
-        "Step 2: Upload the file with contacts": "",
-        "Step 3: Give a tag to new imported contacts": "",
-        "Step 4: Check the import": "",
-        "Check the import now": "",
-        "Step 5: Run the import": "",
-        "You will be able to run the import after its check": ""
-    }
+  "manifest": {
+    "Contacts": "Kontakty",
+    "Default customer management and addressbook.": "Książka adresowa i zarządzanie klientami.",
+    "Contact Categories": "Kategorie kontaktów",
+    "Contact Tags": "Znaczniki kontaktów",
+    "Import contacts": "Importuj kontakty",
+    "Work": "Praca",
+    "Home": "Dom",
+    "Other": "Inne"
+  },
+  "Components\\FormPerson": {
+    "Edit": "Edytuj",
+    "Save": "Zapisz",
+    "Delete": "Usuń",
+    "Personal Information": "Dane osobowe",
+    "Category": "Kategoria",
+    "Type": "Typ",
+    "Email": "Email",
+    "Phone Number": "Telefon",
+    "Customer": "Klient",
+    "Tags": "Tagi",
+    "Value": "Wartość",
+    "Add contact": "Dodaj kontakt",
+    "No contacts for this person yet.": "Brak kontaktów dla tej osoby"
+  },
+  "Components\\TablePersons": {
+    "Start typing to search...": "Szukaj..."
+  },
+  "Models\\Person": {
+    "First name": "Imię",
+    "Last name": "Nazwisko",
+    "Customer": "Klient",
+    "Main Contact": "Główny kontakt",
+    "Notes": "Uwagi",
+    "Active": "Aktywny",
+    "Date Created": "Utworzono",
+    "Contacts": "Kontakty",
+    "Add Contact": "Dodaj kontakt",
+    "Emails": "Emaile",
+    "Phone Numbers": "Telefony",
+    "Add": "Dodaj",
+    "Primary Contact": "Kontakt główny"
+  },
+  "Models\\Value": {
+    "Person": "Kontakt",
+    "Contact Category": "Kategoria",
+    "Type": "Typ",
+    "Email": "Email",
+    "Phone Number": "Telefon",
+    "Other": "Inne",
+    "Value": "Wartość",
+    "Contact": "Kontakt",
+    "Category": "Kategoria",
+    "Number": "Liczba",
+    "URL": "Adres URL",
+    "Contacts": "Kontakty",
+    "Add Customer": "Dodaj klienta"
+  },
+  "Models\\PersonTag": {
+    "Person": "Kontakt",
+    "Tag": "Znacznik"
+  },
+  "Models\\Address": {
+    "Person": "Osoba",
+    "Street Line 1": "Adres, wiersz 1",
+    "Street Line 2": "Adres, wiersz 2",
+    "Region": "Region",
+    "City": "Miasto",
+    "Postal Code": "Kod pocztowy",
+    "Country": "Kraj"
+  },
+  "root": {
+    "Contact Categories": "Kategorie kontaktów",
+    "Contact Tags": "Znaczniki kontaktów",
+    "Contacts": "Kontakty",
+    "Import contacts": "Importuj kontakty"
+  },
+  "Models\\Contact": {
+    "Salutation": "Pozdrowienie",
+    "Title before": "Tytuł przed",
+    "First name": "Imię",
+    "Middle name": "Drugie imię",
+    "Last name": "Nazwisko",
+    "Title after": "Tytuł po",
+    "Customer": "Klient",
+    "Primary Contact": "Kontakt główny",
+    "Notes": "Uwagi",
+    "Date Created": "Utworzono",
+    "Active": "Aktywny",
+    "Add contact": "Dodaj kontakt",
+    "Emails": "Emaile",
+    "Phone Numbers": "Numery telefonów",
+    "Mr.": "Pan",
+    "Mrs.": "Pani",
+    "Valid": "Ważny",
+    "Tags": "Znaczniki",
+    "Invoicing Contact": "Kontakt fakturowy"
+  },
+  "Controllers\\Contacts": {
+    "Contacts": "Kontakty"
+  },
+  "Components\\FormContact": {
+    "No contacts yet.": "Brak kontaktów.",
+    "Email": "Email",
+    "Type": "Typ",
+    "Phone Number": "Telefon",
+    "Other": "Inne",
+    "Value": "Wartość",
+    "Category": "Kategoria",
+    "Add contact": "Dodaj kontakt",
+    "Customer": "Klient",
+    "Tags": "Znaczniki",
+    "Primary Contact": "Kontakt główny",
+    "Contact": "Kontakt",
+    "Contacts": "Kontakty"
+  },
+  "Components\\TableContacts": {
+    "Primary": "Główny",
+    "Invoicing": "Fakturowanie",
+    "Copy cell content to clipboard": ""
+  },
+  "Controllers\\Import": {
+    "Import": "Import",
+    "Contacts": "Kontakty",
+    "Step 1: Prepare list of contacts": "Krok 1: Przygotuj listę kontaktów",
+    "Contacts can be imported from a ": "Kontakty można importować z ",
+    " or ": " lub ",
+    " file. The file for import must comply with following rules": " pliku. Plik do importu musi spełniać następujące zasady",
+    "The file can contain unlimited number of lines.": "Plik może zawierać nieograniczoną liczbę wierszy.",
+    "Values in file must be separated by semicolon": "Wartości w pliku muszą być oddzielone średnikiem",
+    "First line of the file must be the header containig names of the columns.": "Pierwszy wiersz pliku musi być nagłówkiem zawierającym nazwy kolumn.",
+    "Following lines contain ": "Następne wiersze zawierają ",
+    "persons": "osoby",
+    "First 3 columns must be ": "Pierwsze 3 kolumny muszą być ",
+    "First name": "Imię",
+    "Middle name": "Drugie imię",
+    " and ": " i ",
+    "Last name": "Nazwisko",
+    " of the person": " osoby",
+    "Following columns contain contact information. Each column represents one contact information.": "Następne kolumny zawierają informacje kontaktowe. Każda kolumna reprezentuje jedną informację kontaktową.",
+    "Each person can contain any number of contact information.": "Każda osoba może zawierać dowolną liczbę informacji kontaktowych.",
+    "The import automatically detects ": "Import automatycznie rozpoznaje ",
+    "emails": "e-maile",
+    "phone numbers": "numery telefonów",
+    "links": "linki",
+    "Example CSV file": "Przykładowy plik CSV",
+    "You may also": "Możesz też",
+    "Export your addressbook": "Wyeksportować swoją książkę adresową",
+    "modify it and re-import again": "zmodyfikować ją i zaimportować ponownie",
+    "Step 2: Upload the file with contacts": "Krok 2: Prześlij plik z kontaktami",
+    "Step 3: Give a tag to new imported contacts": "Krok 3: Przypisz znacznik nowym zaimportowanym kontaktom",
+    "Step 4: Check the import": "Krok 4: Sprawdź import",
+    "Check the import now": "Sprawdź import teraz",
+    "Step 5: Run the import": "Krok 5: Uruchom import",
+    "You will be able to run the import after its check": "Import będzie można uruchomić po jego sprawdzeniu",
+    "This was only check of the import. Check the log and if you are satisfied, upload the CSV file again run the import now.": "To była tylko kontrola importu. Sprawdź log i jeśli jesteś zadowolony, prześlij plik CSV ponownie i uruchom import.",
+    "Run import": "Uruchom import",
+    "Import finished, see log below": "Import zakończony, patrz log poniżej",
+    "Test of import, see log below": "Test importu, patrz log poniżej",
+    "File:": "Plik:",
+    "Tag:": "Znacznik:"
+  },
+  "Controllers\\Categories": {
+    "Contacts": "Kontakty",
+    "Categories": "Kategorie"
+  },
+  "Controllers\\Tags": {
+    "Settings": "Ustawienia",
+    "Contact Tags": "Znaczniki kontaktów"
+  },
+  "Controllers\\Api\\CheckPrimaryContact": {
+    "Some request data were missing": "Brakowało niektórych danych żądania",
+    "There already exists a primary contact for this customer for these tags:": "Dla tego klienta istnieje już kontakt główny dla tych znaczników:"
+  },
+  "Models\\Category": {
+    "Type": "Typ",
+    "Contact Categories": "Kategorie kontaktów",
+    "Add Contact Category": "Dodaj kategorię kontaktu"
+  },
+  "Models\\Tag": {
+    "Name": "Nazwa",
+    "Color": "Kolor",
+    "Contact Tags": "Znaczniki kontaktów",
+    "Add Contact Tag": "Dodaj znacznik kontaktu"
+  },
+  "Models\\ContactTag": {
+    "Contact": "Kontakt",
+    "Tag": "Znacznik",
+    "Contact tags": "Znaczniki kontaktów"
+  }
 }

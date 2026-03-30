@@ -1,5 +1,8 @@
 {
-    "loader": {
+    "manifest": {
         "Support": "Wsparcie"
+    },
+    "Controllers\\Dashboard": {
+        "Support...": "Wsparcie..."
     }
 }

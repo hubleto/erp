@@ -1,50 +1,89 @@
 {
-    "loader": {
-        "Documents": "Dokumenty"
-    },
     "manifest": {
         "Documents": "Dokumenty",
         "Free document management.": "Bezpłatne zarządzanie dokumentami.",
         "Browse": "Przeglądaj",
-        "Show as list": "Widok listy",
+        "List": "Lista",
+        "Templates": "Szablony",
+        "Show as list": "Pokaż jako listę",
         "Manage folders": "Zarządzaj folderami",
-        "Templates": "Szablony"
-    },
-    "root": {
-        "Browse": "Przeglądaj",
-        "List": "Lista"
+        "Marketing materials": "Materiały marketingowe",
+        "Customer profiles": "Profile klientów",
+        "Quotation": "Oferta cenowa",
+        "Proforma invoice": "Faktura proforma",
+        "Advance invoice": "Faktura zaliczkowa",
+        "Standard invoice": "Faktura końcowa",
+        "Credit note": "Nota kredytowa",
+        "Debit note": "Nota debetowa",
+        "Proforma faktúra": "Faktura proforma",
+        "Zálohová faktúra": "Faktura zaliczkowa",
+        "Vyúčtovacia faktúra s DPH": "Faktura końcowa z VAT",
+        "Dobropis s DPH": "Nota kredytowa z VAT",
+        "Ťarchopis": "Nota debetowa"
     },
     "Models\\Document": {
-        "Uid": "UID",
-        "Folder": "Folder",
         "Document name": "Nazwa dokumentu",
         "File": "Plik",
         "File Link": "Link do pliku",
         "Origin Link": "Link źródłowy",
-        "Add Document": "Dodaj dokument"
+        "Uid": "Uid",
+        "Folder": "Folder",
+        "Add Document": "Dodaj dokument",
+        "Public": "Publiczny"
     },
-    "Models\\Template": {
-        "Name": "Nazwa",
-        "Used For": "Zastosowanie",
-        "Content": "Treść",
-        "Notes": "Uwagi",
-        "Add template": ""
+    "Controllers\\Documents": {
+        "Documents": "Dokumenty"
     },
-    "Controllers\\Browse": {
+    "root": {
         "Browse": "Przeglądaj",
+        "List": "Lista",
+        "Templates": "Szablony"
+    },
+    "Controllers\\Table": {
         "Documents": "Dokumenty"
     },
     "Models\\Folder": {
-        "Uid": "UID",
+        "Uid": "Uid",
         "Parent folder": "Folder nadrzędny",
         "Folder name": "Nazwa folderu",
-        "Add Folder": ""
+        "Add Folder": "Dodaj folder"
+    },
+    "Models\\Template": {
+        "Name": "Nazwa",
+        "Content": "Treść",
+        "Notes": "Notatki",
+        "Used For": "Używane do",
+        "Add template": "Dodaj szablon"
+    },
+    "Controllers\\Browse": {
+        "Documents": "Dokumenty",
+        "Browse": "Przeglądaj"
     },
     "Controllers\\Folders": {
-        "Folders": ""
+        "Folders": "Foldery"
+    },
+    "Components\\Browser": {
+        "Add folder": "Dodaj folder",
+        "Add document": "Dodaj dokument",
+        "Move": "Przenieś",
+        "Move selected": "Przenieś zaznaczone",
+        "Confirm delete": "Potwierdź usunięcie",
+        "Delete": "Usuń",
+        "Public": "Publiczny"
+    },
+    "Components\\FormDocument": {
+        "Document": "Dokument",
+        "Download": "Pobierz",
+        "Preview": "Podgląd"
+    },
+    "Components\\FormTemplate": {
+        "Document template": "Szablon dokumentu"
     },
     "Controllers\\Templates": {
-        "Templates": "",
-        "Documents": ""
-    }
+        "Templates": "Szablony",
+        "Documents": "Dokumenty"
+    },
+    "Components\\TableDocuments": {},
+    "Components\\TableFolders": {},
+    "Components\\TableTemplates": {}
 }

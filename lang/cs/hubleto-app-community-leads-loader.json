@@ -1,162 +1,251 @@
 {
     "manifest": {
-        "Leads": "Potenciální obchody",
-        "Management of leads, cold contacts. Convert leads to deals.": "Správa potenciálních obchodů, chladných kontaktů. Převést potenciální obchody k obchodům.",
-        "Lead Levels": "Úrovně potenciálních obchodů",
-        "Lead Tags": "Štítky potienciálních obchodů",
-        "Lead Lost Reasons": "Důvody zraty potienciálních obchodů",
-        "Active leads": "Aktivní potenciální obchody",
-        "Archived leads": "Archivované potenciální obchody",
-        "Lead value by score": "",
-        "Lead warnings": ""
+        "Leads": "Leady",
+        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadů. Konverze do dealů.",
+        "Lead Levels": "Úrovně leadů",
+        "Lead Tags": "Štítky leadů",
+        "Lead Lost Reasons": "Důvody ztráty leadu",
+        "Active leads": "Aktivní leady",
+        "Archived leads": "Archivované leady",
+        "Lead value by score": "Hodnota leadů podle skóre",
+        "Lead warnings": "Upozornění na leady",
+        "Complex": "Komplexní",
+        "Great opportunity": "Skvělá příležitost",
+        "Duplicate": "Duplikát",
+        "Needs attention": "Vyžaduje pozornost",
+        "Cold": "Studený",
+        "Warm": "Teplý",
+        "Hot": "Horký",
+        "Marketing qualified": "Marketingově kvalifikovaný",
+        "Sales qualified": "Obchodně kvalifikovaný",
+        "Price": "Cena",
+        "Solution": "Řešení",
+        "Demand canceled by customer": "Poptávka zrušená zákazníkem",
+        "Other": "Jiné"
     },
-    "root": {
-        "Lead Tags": "Štítky potenciálních obchodů",
-        "Lead Lost Reasons": "Důvody zraty potienciálních obchodů",
-        "Active leads": "Aktivní potenciální obchody",
-        "Archived leads": "Archivované potenciální obchody",
-        "Lead Levels": "Úrovně potenciálních obchodů"
+    "Controllers\\Leads": {
+        "Sales": "Obchod",
+        "Leads": "Leady"
+    },
+    "Controllers\\LeadsArchive": {
+        "Sales": "Obchod",
+        "Leads": "Leady",
+        "Archive": "Archiv"
+    },
+    "Controllers\\Levels": {
+        "Settings": "Nastavení",
+        "Lead Levels": "Úrovně leadů",
+        "Leads": "Leady",
+        "Levels": "Úrovně"
+    },
+    "Controllers\\LostReasons": {
+        "Settings": "Nastavení",
+        "Lead Lost Reasons": "Důvody ztráty leadu"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Nastavení",
+        "Lead Tags": "Štítky leadů"
+    },
+    "Controllers\\Settings": {
+        "Leads": "Leady",
+        "Settings": "Nastavení",
+        "Settings saved.": "Nastavení uložena.",
+        "Calendar color": "Barva kalendáře",
+        "Lead Prefix": "Prefix leadu",
+        "Lead tags": "Štítky leadů",
+        "Lead statuses": "Stavy leadů",
+        "Campaigns": "Kampaně"
+    },
+    "Controllers\\Boards\\LeadValueByScore": {
+        "No leads found.": "Žádné leady nenalezeny.",
+        "Add lead": "Přidat lead"
+    },
+    "Controllers\\Boards\\LeadWarnings": {
+        "Open leads without future plan": "Otevřené leady bez budoucího plánu",
+        "No warnings for leads.": "Žádná upozornění pro leady."
     },
     "Models\\LeadActivity": {
-        "Subject": "Předmět",
         "Activity type": "Typ aktivity",
-        "Start date": "Datum zahájení",
-        "Start time": "Čas zahájení",
-        "End date": "Datum ukončení",
-        "End time": "Čas ukončení",
+        "Subject": "Předmět",
+        "Lead": "Lead",
+        "Contact person": "Kontaktní osoba",
+        "Start date": "Datum začátku",
+        "Start time": "Čas začátku",
+        "End date": "Datum konce",
+        "End time": "Čas konce",
         "All day": "Celý den",
-        "Completed": "Dokončeno",
-        "Created by": "Vytvořeno",
-        "Lead": "Potenciální ochod",
+        "Completed": "Dokončená",
+        "Created by": "Vytvořil",
         "Contact": "Kontakt",
-        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Meeting minutes (link)": "Zápis ze schůzky (odkaz)",
+        "Location": "Místo",
+        "Online meeting link": "Odkaz na online schůzku",
+        "Description": "Popis",
+        "Recurrence": "Opakování",
+        "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
+        "Short meeting minutes": "Stručný zápis ze schůzky"
     },
     "Models\\Lead": {
-        "Lead Identifier": "Identifikátor potenciálniho obchodu",
-        "Title": "Titul",
+        "Add Lead": "Přidat lead",
+        "Lead Identifier": "Identifikátor",
+        "Title": "Název",
         "Customer": "Zákazník",
-        "Contact": "Kontakt",
+        "Contact person": "Kontaktní osoba",
         "Price": "Cena",
         "Currency": "Měna",
-        "Score": "Skóre",
-        "Expected close date": "Očekávané datum uzavření",
-        "Owner": "Majitel",
-        "Created": "Vytvořené",
-        "Status": "Status",
-        "Reason for Lost": "Důvod pro ztracení",
+        "Expected close date": "Předpokládané datum uzavření",
+        "Assigned user": "Zodpovědný",
+        "Date created": "Vytvořen",
+        "Status": "Stav",
         "Notes": "Poznámky",
-        "Source channel": "Zdrojový kanál",
+        "Source channel": "Zdroj",
         "Archived": "Archivovaný",
+        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku",
+        "Score": "Skóre",
+        "Contact": "Kontakt",
+        "Created": "Vytvořen",
+        "Reason for Lost": "Důvod ztráty",
+        "Add lead": "Přidat lead",
+        "Owner": "Vlastník",
         "Identifier": "Identifikátor",
-        "Specific subject (if any)": "Název",
+        "Specific subject (if any)": "Předmět",
         "Campaign": "Kampaň",
-        "Email": "Email",
-        "Phone number": "Telefoní číslo",
+        "Email": "E-mail",
+        "Phone number": "Telefon",
         "Level": "Úroveň",
-        "Manager": "Manažér",
-        "Team": "Tím",
-        "Add lead": "Přidat potenciální obchod",
-        "Add Lead": "Přidat potenciální obchod",
+        "Manager": "Manažer",
+        "Team": "Tým",
         "Workflow": "Workflow",
-        "Workflow step": "Workflow krok",
-        "Closed": "Uzavření",
-        "Tags": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": "",
-        "Phone": "",
-        "Advertisement": "",
-        "Partner": "",
-        "Web": "",
-        "Cold call": "",
-        "E-mail": "",
-        "Referral": "",
-        "Other": "",
-        "Online document folder": ""
+        "Workflow step": "Krok workflow",
+        "Closed": "Uzavřený",
+        "Tags": "Štítky",
+        "Open \\/ Closed": "Otevřené \\/ Uzavřené",
+        "Open": "Otevřené",
+        "All": "Vše",
+        "Deal": "Deal",
+        "Phone": "Telefon",
+        "Advertisement": "Reklama",
+        "Partner": "Partner",
+        "Web": "Web",
+        "Cold call": "Cold call",
+        "E-mail": "E-mail",
+        "Referral": "Doporučení",
+        "Other": "Jiné",
+        "Online document folder": "Online složka dokumentů",
+        "Profile link #1": "Odkaz na profil č. 1",
+        "Profile link #2": "Odkaz na profil č. 2",
+        "Profile link #3": "Odkaz na profil č. 3",
+        "Ownership": "Vlastnictví",
+        "Owned by me": "Moje leady",
+        "Managed by me": "Spravované mnou",
+        "None": "Žádné",
+        "changed from": "změněno z",
+        "to": "na",
+        "Yes": "Ano",
+        "No": "Ne",
+        "Lead created": "Lead vytvořen"
     },
-    "Models\\LostReason": {
-        "Lost Reason": "Důvod ztracení"
+    "root": {
+        "Lead statuses": "Stavy leadů",
+        "Lead Tags": "Štítky leadů",
+        "Active leads": "Aktivní leady",
+        "Archived leads": "Archivované leady",
+        "Lead Lost Reasons": "Důvody ztráty leadu",
+        "Lead Levels": "Úrovně leadů"
     },
     "Models\\LeadHistory": {
         "Change Date": "Datum změny",
-        "Lead": "Potenciální obchod",
+        "Lead": "Lead",
         "Description": "Popis"
     },
     "Models\\LeadTag": {
-        "Lead": "Potenciální obchod",
-        "Tag": "Štítek"
+        "Lead": "Lead",
+        "Tag": "Štítek",
+        "Lead Tags": "Štítky leadů"
+    },
+    "Models\\LeadDocument": {
+        "Lead": "Lead",
+        "Document": "Dokument"
+    },
+    "Models\\LeadTask": {
+        "Lead": "Lead",
+        "Task": "Úkol",
+        "Lead Tasks": "Úkoly leadu"
+    },
+    "Models\\LeadCampaign": {
+        "Lead": "Lead",
+        "Campaign": "Kampaň",
+        "Campaign Leads": "Leady kampaně",
+        "Add lead": "Přidat lead"
+    },
+    "Models\\Tag": {
+        "Name": "Název",
+        "Color": "Barva",
+        "Lead Tags": "Štítky leadů",
+        "Add Lead Tag": "Přidat štítek leadu"
+    },
+    "Models\\Level": {
+        "Name": "Název",
+        "Color": "Barva",
+        "Lead Levels": "Úrovně leadů",
+        "Add Lead Level": "Přidat úroveň leadu",
+        "Lead level": "Úroveň leadu"
+    },
+    "Models\\LostReason": {
+        "Lost Reason": "Důvod ztráty",
+        "Lead Lost Reasons": "Důvody ztráty leadu",
+        "Add Reason": "Přidat důvod"
     },
     "Models\\LeadProduct": {
-        "Lead": "Potenciální obchod",
+        "Lead": "Lead",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Množství",
+        "Dicount (%)": "Sleva (%)",
+        "Vat (%)": "DPH (%)",
         "Vat": "DPH",
         "Discount": "Sleva",
         "Sum": "Součet"
     },
-    "Models\\LeadDocument": {
-        "Lead": "Potenciální obchod",
-        "Document": "Dokument"
-    },
-    "Models\\Tag": {
-        "Name": "Název",
-        "Color": "Barva"
-    },
-    "Models\\Level": {
-        "Name": "Název",
-        "Color": "Barva"
-    },
-    "Controllers\\Boards\\LeadWarnings": {
-        "Open leads without future plan": "Otevřít potenciální obchod bez budoucího plánu",
-        "No warnings for leads.": "Žádné upozornění pro potenciální obchody"
-    },
-    "Controllers\\Leads": {
-        "Leads": "Potenciální obchody"
-    },
     "Components\\FormLead": {
-        "Log completed activity": "Zoznamenat dokončenou aktivitu",
-        "Type recent activity here": "Zde zadejte nedávnou aktivitu",
+        "Lead": "Lead",
+        "Documents": "Dokumenty",
+        "Calendar": "Kalendář",
+        "Shared documents": "Sdílené dokumenty",
+        "History": "Historie",
+        "Local documents": "Dokumenty",
+        "Go to deal": "Přejít na deal",
+        "Show leads": "Zobrazit leady",
+        "Type recent activity here": "Zadejte poslední aktivitu zde",
+        "Enter = Log completed activity": "Enter = zaznamenat dokončenou aktivitu",
+        "Shift+Enter = Schedule": "Shift+Enter = naplánovat aktivitu na později",
+        "Most recent activities": "Nejnovější aktivity",
+        "Not completed yet": "Nedokončená",
+        "Tasks": "Úkoly",
+        "Log completed activity": "Zaznamenat provedenou činnost",
         "Enter": "Enter",
         "Schedule activity": "Naplánovat aktivitu",
         "Shift+Enter": "Shift+Enter",
-        "Most recent activities": "Nejnovější aktivity",
-        "Not completed yet": "Zatím nedokončeno",
-        "Lead": "Potenciální obchod",
-        "Go to deal": "Přejít na obchod",
-        "Calendar": "Kalendář",
-        "Documents": "Dokumenty",
-        "Local documents": "Lokální dokumenty",
-        "History": "Historie",
-        "Show leads": "Ukázat potenciální obchody",
-        "Add document": "Přidat dokument",
-        "Link": "Odkaz",
-        "Document": "Dokument",
+        "Campaign": "Kampaň",
+        "Tags": "Štítky",
         "Description": "Popis",
         "Change Date": "Datum změny"
     },
+    "Components\\FormLevel": {
+        "Level": "Úroveň",
+        "Record": "Záznam"
+    },
     "Components\\FormActivity": {
-        "Start": "Začátek",
         "End": "Konec",
-        "Lead": "Potenciální obchod",
-        "Contact": "Kontakt"
+        "Start": "Začátek",
+        "Contact": "Kontakt",
+        "Lead": "Lead"
     },
-    "Controllers\\LostReasons": {
-        "Settings": "Nastavení",
-        "Lead Lost Reasons": "Důvody pro ztrátu potenciálních obchodů"
+    "Components\\TableLeads": {
+        "Deal": "Deal"
     },
-    "Models\\LeadCampaign": {
-        "Lead": "Potenciální obchod",
-        "Campaign": "Kampaň"
-    },
-    "Models\\LeadTask": {
-        "Lead": "Potenciální obchod",
-        "Task": "Úloha"
+    "Calendar": {
+        "Leads": "Leady",
+        "Add new activity linked to lead": "Přidat novou aktivitu pro lead"
     }
 }

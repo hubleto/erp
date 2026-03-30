@@ -1,0 +1,42 @@
+{
+    "manifest": {
+        "Notifications": "Powiadomienia",
+        "Internal team notifications": "Powiadomienia wewnętrzne zespołu"
+    },
+    "Models\\Notification": {
+        "Priority": "Priorytet",
+        "Category": "Kategoria",
+        "From": "Od",
+        "To": "Odbiorca",
+        "Subject": "Temat",
+        "Body": "Treść",
+        "Color": "Kolor",
+        "Tags": "Tagi",
+        "Sent": "Wysłane",
+        "Read": "Przeczytane",
+        "URL": "URL",
+        "No category": "Bez kategorii"
+    },
+    "Controllers\\Notifications": {
+        "Notifications": "Powiadomienia"
+    },
+    "Controllers\\All": {
+        "Notifications": "Powiadomienia",
+        "All": "Wszystkie"
+    },
+    "Controllers\\Inbox": {
+        "Notifications": "Powiadomienia",
+        "Inbox": "Odebrane"
+    },
+    "Controllers\\Sent": {
+        "Notifications": "Powiadomienia",
+        "Sent": "Wysłane"
+    },
+    "Components\\TableNotifications": {
+        "Mark as unread": "Oznacz jako nieprzeczytane",
+        "Mark as read": "Oznacz jako przeczytane"
+    },
+    "Components\\FormNotification": {
+        "Notification": "Powiadomienie"
+    }
+}

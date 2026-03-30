@@ -1,111 +1,150 @@
 {
-    "loader": {
-        "Cloud": "Chmura"
-    },
-    "manifest": {
-        "Cloud": "Chmura",
-        "Management of cloud Hubleto account.": "Zarządzanie kontem Hubleto w chmurze"
-    },
-    "Models\\Log": {
-        "Log datetime": "Data i godzina logu",
-        "Active users": "Aktywni użytkownicy",
-        "Paid apps": "Płatne aplikacje",
-        "Premium expected": "Oczekiwane premium"
-    },
-    "Models\\Payment": {
-        "Charged": "Obciążono",
-        "Discount": "Rabat",
-        "Full amount": "Kwota pełna",
-        "Discounted amount": "Kwota po rabacie",
-        "Type": "Typ",
-        "Details": "Szczegóły",
-        "Has invoice": "Posiada fakturę",
-        "Billing account": "Konto rozliczeniowe",
-        "UUID": "UUID"
-    },
-    "Models\\Credit": {
-        "Recalculated": "Przeliczone",
-        "Credit": "Saldo"
-    },
-    "root": {
-        "Free trial expires in": "Bezpłatny okres próbny wygasa za",
-        "days": "dni"
-    },
-    "Models\\BillingAccount": {
-        "Name": "",
-        "Phone": "",
-        "E-mail": "",
-        "Tax ID": "",
-        "VAT ID": "",
-        "Street, line 1": "",
-        "Street, line 2": "",
-        "ZIP": "",
-        "City": "",
-        "Country": "",
-        "Is active": "",
-        "Created": ""
-    },
-    "Models\\Discount": {
-        "Year": "",
-        "Month": "",
-        "Discount": "",
-        "Notes": "",
-        "Billing account": ""
-    },
-    "Controllers\\Dashboard": {
-        "welcome to Hubleto cloud.": "",
-        "We are happy you decided to use Hubleto.": "",
-        "Before you start, you should first read, understand and accept our": "",
-        "Terms of use": "",
-        "and": "",
-        "Privacy policy": "",
-        "Therefore, we kindly ask you to go through these documents and appoint your consent": "",
-        "by ticking the checkbox below.": "",
-        "I have read, undestrood and agree to the": "",
-        "of Hubleto cloud": "",
-        "Continue to the dashboard": "",
-        "You are upgraded to Premium": "",
-        "Free trial expires in": "",
-        "days": "",
-        "Automatic subscription renewal is active": "",
-        "Access to your Premium account will be automaticaly renewed next month.": "",
-        "Extend subscription": "",
-        "You will be redirected to the payment provider": "",
-        "Your Premium benefits": "",
-        "unlimited users": "",
-        "more apps & features": "",
-        "premium support": "",
-        "Add new users or install new apps": "",
-        "Your Hubleto partner": "",
-        "Technical support": "",
-        "Sales": "",
-        "Show payments and download invoices": "",
-        "Manage billing accounts": "",
-        "Usage info": "",
-        "Month": "",
-        "Active users": "",
-        "Paid apps": "",
-        "Show details": "",
-        "Price for this month": "",
-        "Terms of use and privacy policy accepted": "",
-        "Subscription active until": "",
-        "Premium account activated": "",
-        "Free trial until": "",
-        "Account UID": "",
-        "Variable symbol for payments": "",
-        "Price is calculated based on maximum number of active users or paid apps during this month.": "",
-        "Deactivate subscription renewal": ""
-    },
-    "Controllers\\BillingAccounts": {
-        "Billing accounts": ""
-    },
-    "Controllers\\PaymentsAndInvoices": {
-        "Payments and invoices": "",
-        "Charged": "",
-        "UUID": "",
-        "Type": "",
-        "Amount": "",
-        "Details": "",
-        "Invoice": ""
-    }
+  "manifest": {
+    "Cloud": "Cloud",
+    "Management of cloud Hubleto account.": "Zarządzanie kontem Hubleto w chmurze."
+  },
+  "Models\\Log": {
+    "Date": "Data",
+    "Active users": "Aktywni użytkownicy",
+    "Paid apps": "Płatne aplikacje",
+    "Premium expected": "Konto Premium wymagane",
+    "Log datetime": "Dziennik DateTime"
+  },
+  "Models\\Credit": {
+    "Recalculated": "Data",
+    "Credit": "Kredyt"
+  },
+  "Models\\Payment": {
+    "Charged": "Data i czas płatności",
+    "Discount": "Rabat",
+    "Full amount": "Pełna kwota",
+    "Discounted amount": "Kwota po rabacie",
+    "Type": "Typ",
+    "Details": "Szczegóły",
+    "Has invoice": "Ma fakturę",
+    "Billing account": "Profil rozliczeniowy",
+    "UUID": "Uuid"
+  },
+  "Models\\Discount": {
+    "Year": "Rok",
+    "Month": "Miesiąc",
+    "Discount": "Rabat",
+    "Notes": "Uwagi",
+    "Billing account": "Profil rozliczeniowy"
+  },
+  "Models\\BillingAccount": {
+    "Name": "Nazwa",
+    "Phone": "Telefon",
+    "E-mail": "E-mail",
+    "Tax ID": "NIP",
+    "VAT ID": "NIP VAT",
+    "Street, line 1": "Ulica, wiersz 1",
+    "Street, line 2": "Ulica, wiersz 2",
+    "ZIP": "Kod pocztowy",
+    "City": "Miasto",
+    "Country": "Kraj",
+    "Is active": "Jest aktywny",
+    "Created": "Utworzono"
+  },
+  "Controllers\\Dashboard": {
+    "welcome to Hubleto cloud.": "witamy w Hubleto cloud.",
+    "We are happy you decided to use Hubleto.": "Cieszymy się, że zdecydowałeś się używać Hubleto.",
+    "Before you start, you should first read, understand and accept our": "Przed rozpoczęciem prosimy o przeczytanie, zrozumienie i zaakceptowanie naszych",
+    "Terms of use": "Warunki użytkowania",
+    "and": "i",
+    "Privacy policy": "Polityka prywatności",
+    "Therefore, we kindly ask you to go through these documents and appoint your consent": "Dlatego prosimy o zapoznanie się z tymi dokumentami i wyrażenie zgody",
+    "by ticking the checkbox below.": "przez zaznaczenie pola wyboru poniżej.",
+    "I have read, undestrood and agree to the": "Przeczytałem/-am, rozumiem i zgadzam się z",
+    "of Hubleto cloud": "Hubleto cloud",
+    "Continue to the dashboard": "Przejdź do pulpitu nawigacyjnego",
+    "You are upgraded to Premium": "Masz aktywowane konto Premium",
+    "Free trial expired.": "Okres próbny wygasł.",
+    "Free trial expires in": "Okres próbny zakończy się za",
+    "days": "dni",
+    "Your subscription is inactive": "Twoja subskrypcja jest nieaktywna",
+    "Make a payment to reactivate it again.": "Dokonaj płatności, aby ją ponownie aktywować.",
+    "Automatic subscription renewal is active": "Automatyczne odnowienie subskrypcji jest aktywne",
+    "Access to your Premium account will be automaticaly renewed next month.": "Dostęp do Twojego konta Premium zostanie automatycznie przedłużony w przyszłym miesiącu.",
+    "Automatic subscription renewal is deactivated": "Automatyczne odnowienie subskrypcji jest dezaktywowane",
+    "Access to your Premium account will be blocked on ": "Dostęp do Twojego konta Premium zostanie zablokowany dnia ",
+    "Activate subscription renewal": "Aktywuj automatyczne odnowienie subskrypcji",
+    "Extend subscription": "Przedłuż subskrypcję",
+    "You will be redirected to the payment provider": "Zostaniesz przekierowany do dostawcy płatności",
+    "Your Premium benefits": "Twoje korzyści Premium",
+    "unlimited users": "nieograniczona liczba użytkowników",
+    "more apps & features": "więcej aplikacji i funkcji",
+    "premium support": "wsparcie premium",
+    "Add new users or install new apps": "Dodaj użytkowników i instaluj aplikacje",
+    "Your Hubleto partner": "Twój partner Hubleto",
+    "Technical support": "Wsparcie techniczne",
+    "Sales": "Sprzedaż",
+    "You are using free personal account": "Korzystasz z bezpłatnego konta osobistego",
+    "Upgrade to Premium and you'll get": "Uaktualniając do Premium otrzymasz",
+    "Activate Premium account": "Aktywuj konto Premium",
+    "You will be given": "Otrzymasz",
+    "30 days of free": "30 dni bezpłatnego",
+    "trial period": "okresu próbnego",
+    "to configure payment method.": "na skonfigurowanie metody płatności.",
+    "Please type your account's email address below": "Wpisz adres e-mail swojego konta poniżej",
+    "to confirm that you realy want to activate Premium account": "aby potwierdzić, że naprawdę chcesz aktywować konto Premium",
+    "To confirm, type your email address here.": "Aby potwierdzić, wpisz swój adres e-mail.",
+    "Go! Activate premium account now.": "Aktywuj konto Premium teraz.",
+    "Show payments and download invoices": "Pokaż płatności i pobierz faktury",
+    "Manage billing accounts": "Zarządzaj profilami rozliczeniowymi",
+    "Usage info": "Informacje o użyciu",
+    "Month": "Miesiąc",
+    "Active users": "Aktywni użytkownicy",
+    "Paid apps": "Płatne aplikacje",
+    "Show details": "Pokaż szczegóły",
+    "Price for this month": "Cena za ten miesiąc",
+    "Terms of use and privacy policy accepted": "Warunki użytkowania zaakceptowane",
+    "Subscription active until": "Subskrypcja aktywna do",
+    "Premium account activated": "Konto Premium aktywowane",
+    "Free trial until": "Okres próbny do",
+    "Account UID": "Identyfikator konta",
+    "Variable symbol for payments": "Symbol zmienny dla płatności",
+    "Price is calculated based on maximum number of active users or paid apps during this month.": "Cena jest obliczana na podstawie maksymalnej liczby aktywnych użytkowników lub płatnych aplikacji w danym miesiącu.",
+    "Deactivate subscription renewal": "Dezaktywuj automatyczne przedłużenie subskrypcji",
+    "Configure your payment method.": "Skonfiguruj metodę płatności.",
+    "Configure payment with card": "Skonfiguruj płatność kartą",
+    "Charge credit via bank transfer": "Doładuj kredyt przelewem bankowym"
+  },
+  "Controllers\\BillingAccounts": {
+    "Billing accounts": "Profile rozliczeniowe"
+  },
+  "Controllers\\MakePayment": {
+    "Make payment": "Dokonaj płatności",
+    "You ran out of credit. Please make a payment.": "Skończył Ci się kredyt. Proszę dokonaj płatności.",
+    "TEST: Make random payment": "TEST: Symuluj losową płatność"
+  },
+  "Controllers\\Test\\ClearCredit": {
+    "Test -> Clear Credit": "Test -> Wyczyść kredyt",
+    "Credit was cleared": "Kredyt został wyczyszczony"
+  },
+  "Controllers\\Test\\MakeRandomPayment": {
+    "Payment": "Płatność",
+    "Random payment of": "Losowa płatność w wysokości",
+    "was simulated.": "została zasymulowana."
+  },
+  "Controllers\\Log": {
+    "Usage log": "Dziennik użycia",
+    "Datetime": "Data i czas",
+    "Active users": "Aktywni użytkownicy",
+    "Paid apps": "Płatne aplikacje"
+  },
+  "Controllers\\PaymentsAndInvoices": {
+    "Payments and invoices": "Płatności i faktury",
+    "Charged": "Data i czas płatności",
+    "UUID": "UUID",
+    "Type": "Typ",
+    "Amount": "Kwota",
+    "Details": "Szczegóły",
+    "Invoice": "Faktura",
+    "Download invoice": "Pobierz fakturę"
+  },
+  "root": {
+    "Free trial expires in": "Okres próbny zakończy się za",
+    "days": "dni"
+  }
 }

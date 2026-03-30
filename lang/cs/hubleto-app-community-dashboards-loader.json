@@ -1,52 +1,56 @@
 {
     "manifest": {
-        "Dashboards": "Panely",
-        "Free dashboards app": "Panelová aplikace zdarma",
-        "Preview Dashboards": "",
-        "Manage": ""
+        "Dashboards": "Dashboardy",
+        "Free dashboards app": "Bezplatná aplikace pro dashboardy",
+        "Manage": "Spravovat",
+        "My dashboard": "Můj dashboard"
     },
     "root": {
-        "Dashboards": "Panely"
-    },
-    "Controllers\\Dashboards": {
-        "Dashboards": "Panely",
-        "Manage dashboards": "Spravovat panely",
-        "Preview Dashboards": "",
-        "Add dashboard": ""
+        "Dashboards": "Dashboardy"
     },
     "Models\\Dashboard": {
         "Owner": "Vlastník",
         "Title": "Název",
-        "Slug": "Slug",
+        "Slug": "URL cesta",
         "Color": "Barva",
-        "Is default": "Je výchozí",
-        "Add dashboard": "Přidat panel",
-        "By turning this on you will change the dashboard shown on the Homepage": ""
+        "Is default": "Výchozí",
+        "Add dashboard": "Přidat dashboard",
+        "By turning this on you will change the dashboard shown on the Homepage": "Zapnutím této možnosti změníte dashboard zobrazený na úvodní stránce"
     },
     "Models\\Panel": {
-        "Dashboard": "Panel",
-        "Board": "Tabule",
+        "Dashboard": "Dashboard",
+        "Board": "Zdroj",
         "Title": "Název",
         "Configuration": "Konfigurace",
-        "-- Select board to be displayed in panel --": "Vyberte tabuli, ktorá se zobrazí v panelu",
-        "Add panel": "Přidat tabuli",
+        "-- Select board to be displayed in panel --": "-- Vyberte panel k zobrazení --",
         "Width": "Šířka",
         "Order": "Pořadí",
-        "Position": ""
-    },
-    "Controllers\\Settings": {
-        "Dashboards": "Panely",
-        "Settings": "Nastavení"
-    },
-    "Components\\FormDashboard": {
-        "Panels": "Tabule"
+        "Position": "Pozice",
+        "Add panel": "Přidat panel"
     },
     "Components\\Dashboard": {
-        "Add new panel": "Přidat novou tabuli",
-        "Configure this dashboard": ""
+        "Add new panel": "Přidat panel",
+        "Configure this dashboard": "Konfigurovat tento dashboard"
+    },
+    "Controllers\\Dashboards": {
+        "Dashboards": "Dashboardy",
+        "Add dashboard": "Přidat dashboard",
+        "Manage": "Spravovat",
+        "Active": "Aktivní"
     },
     "Controllers\\DashboardsManage": {
-        "Manage": "",
-        "Dashboards": ""
+        "Dashboards": "Dashboardy",
+        "Settings": "Nastavení",
+        "Manage": "Spravovat"
+    },
+    "Components\\FormDashboard": {
+        "Panels": "Panely",
+        "Preview": "Náhled",
+        "Advanced options": "Pokročilá nastavení",
+        "Preview available after saving": "Náhled dostupný po uložení",
+        "First create the dashboard, then you will be prompted to add panels.": "Nejprve vytvořte dashboard, poté budete vyzváni k přidání panelů."
+    },
+    "Components\\FormPanel": {
+        "Dashboard panel": "Panel dashboardu"
     }
 }

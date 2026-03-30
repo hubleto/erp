@@ -1,13 +1,24 @@
 {
     "manifest": {
-        "Help": "Pomoc",
+        "Help": "Nápověda",
         "Help and user guide for Hubleto.": "Nápověda a uživatelská příručka pro Hubleto.",
         "About": "O Hubleto",
-        "About your Hubleto": "O Vašem Hubleto"
+        "About your Hubleto": "O Hubleto"
     },
     "Controllers\\About": {
         "About": "O Hubleto",
-        "About your Hubleto": "O Vašem Hubleto",
-        "Useful links": ""
+        "About your Hubleto": "O vašem Hubleto",
+        "Useful links": "Užitečné odkazy",
+        "Package": "Balíček",
+        "Version": "Verze",
+        "Commit": "Commit",
+        "Privacy policy": "Zásady ochrany osobních údajů",
+        "Terms of use": "Podmínky používání",
+        "Website": "Webová stránka",
+        "User guide": "Uživatelská příručka",
+        "Community discussion forum": "Komunitní diskusní fórum",
+        "Developer's guide": "Příručka vývojáře",
+        "Source code": "Zdrojový kód",
+        "Packages": "Balíčky"
     }
 }

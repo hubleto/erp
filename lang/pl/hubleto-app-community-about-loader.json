@@ -1,12 +1,24 @@
 {
     "manifest": {
         "Help": "Pomoc",
-        "Help and user guide for Hubleto.": "Pomoc i podręcznik użytkownika Hubleto",
-        "About": "Informacje",
-        "About your Hubleto": "Informacje o Hubleto"
+        "Help and user guide for Hubleto.": "Pomocnik i przewodnik użytkownika dla Hubleto.",
+        "About": "O Hubleto",
+        "About your Hubleto": "O Hubleto"
     },
     "Controllers\\About": {
-        "About your Hubleto": "",
-        "Useful links": ""
+        "About": "O Hubleto",
+        "About your Hubleto": "O twoim Hubleto",
+        "Useful links": "Przydatne linki",
+        "Package": "Pakiet",
+        "Version": "Wersja",
+        "Commit": "Commit",
+        "Privacy policy": "Polityka prywatności",
+        "Terms of use": "Warunki użytkowania",
+        "Website": "Strona internetowa",
+        "User guide": "Przewodnik użytkownika",
+        "Community discussion forum": "Forum dyskusyjne społeczności",
+        "Developer's guide": "Przewodnik dla programistów",
+        "Source code": "Kod źródłowy",
+        "Packages": "Pakiety"
     }
 }

@@ -1,0 +1,72 @@
+{
+    "manifest": {
+        "Cashdesk": "Kasa",
+        "Cash registers": "Kasy fiskalne",
+        "Receipts": "Paragony",
+        "Cashdesk and receipts.": "Kasy fiskalne i paragony."
+    },
+    "Controllers\\Home": {
+        "Cashdesk": "Kasa",
+        "Cash registers": "Kasy fiskalne",
+        "Receipts": "Paragony"
+    },
+    "Controllers\\CashRegisters": {
+        "Cashdesk": "Kasa",
+        "Cash registers": "Kasy fiskalne"
+    },
+    "Controllers\\Receipts": {
+        "Cashdesk": "Kasa",
+        "Receipts": "Paragony"
+    },
+    "Models\\CashRegister": {
+        "Cash register": "Kasa fiskalna",
+        "Company": "Firma",
+        "Shop": "Sklep",
+        "Identifier": "Identyfikator",
+        "Description": "Opis",
+        "Add cash register": "Dodaj kasę fiskalną"
+    },
+    "Models\\Receipt": {
+        "Receipt": "Paragon",
+        "Number": "Numer",
+        "Company": "Firma",
+        "Cash register": "Kasa fiskalna",
+        "Total price excl. VAT": "Cena całkowita bez VAT",
+        "Total price incl. VAT": "Cena całkowita z VAT",
+        "Created": "Utworzono",
+        "Sent to cash register": "Wysłano do kasy fiskalnej",
+        "Add receipt": "Dodaj paragon"
+    },
+    "Models\\ReceiptItem": {
+        "Receipt": "Paragon",
+        "Product": "Produkt",
+        "VAT": "VAT",
+        "Unit price excl. VAT": "Cena jednostkowa bez VAT",
+        "Unit VAT": "Jednostkowy VAT",
+        "Unit price incl. VAT": "Cena jednostkowa z VAT",
+        "Quantity": "Ilość",
+        "Total price excl. VAT": "Cena całkowita bez VAT",
+        "Total VAT": "Łączny VAT",
+        "Total price incl. VAT": "Cena całkowita z VAT"
+    },
+    "Components\\FormCashRegister": {
+        "Cash register": "Kasa fiskalna"
+    },
+    "Components\\FormReceipt": {
+        "Receipt": "Paragon",
+        "Product": "Produkt",
+        "Qty.": "Ilość",
+        "Unit price incl. VAT (€)": "Cena jedn. z VAT (€)",
+        "VAT (%)": "VAT (%)",
+        "Total price incl. VAT (€)": "Cena całkowita z VAT (€)",
+        "Add item": "Dodaj pozycję",
+        "Send to cash register": "Wyślij do kasy fiskalnej",
+        "TAX ID:": "NIP:",
+        "VAT ID:": "Nr VAT:",
+        "RECEIPT": "PARAGON",
+        "TOTAL:": "RAZEM:",
+        "Cash register identifier:": "Identyfikator kasy fiskalnej:"
+    },
+    "Components\\TableCashRegisters": [],
+    "Components\\TableReceipts": []
+}

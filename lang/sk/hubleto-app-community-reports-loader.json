@@ -4,9 +4,9 @@
         "Free report generator app.": "Správa reportov zdarma."
     },
     "Models\\Report": {
-        "Title": "",
-        "Model": "",
-        "Query": "",
-        "Notes": ""
+        "Title": "Názov",
+        "Model": "Model",
+        "Query": "Dotaz",
+        "Notes": "Poznámky"
     }
 }

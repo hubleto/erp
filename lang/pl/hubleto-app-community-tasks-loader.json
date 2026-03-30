@@ -1,0 +1,84 @@
+{
+    "manifest": {
+        "Tasks": "Zadania",
+        "Task management app": "Aplikacja do zarządzania zadaniami",
+        "Todo": "Todo",
+        "My recent tasks": "Moje ostatnie zadania"
+    },
+    "Models\\Task": {
+        "Identifier": "Identyfikator",
+        "Title": "Tytuł",
+        "Description": "Opis",
+        "Developer": "Deweloper",
+        "Tester": "Tester",
+        "Priority": "Priorytet",
+        "Estimation": "Szacowanie pracochłonności",
+        "Duration": "Czas trwania",
+        "Start": "Start",
+        "Deadline": "Termin",
+        "Workflow": "Workflow",
+        "Workflow step": "Etap Workflow",
+        "Is milestone": "Kamień milowy",
+        "Closed": "Zamknięte",
+        "Notes": "Notatki",
+        "Created": "Utworzone",
+        "External Model": "Model zewnętrzny",
+        "External ID": "Zewnętrzne ID",
+        "Worked": "Przepracowane",
+        "Customer": "Klient",
+        "Contact": "Kontakt",
+        "Is chargeable": "Płatne",
+        "Related to": "Powiązane z",
+        "Open \\/ Closed": "Otwarte \\/ Zamknięte",
+        "Open": "Otwarte",
+        "All": "Wszystkie",
+        "Estimated workhours": "Szacowane godziny pracy",
+        "Estimated duration": "Szacowany czas trwania",
+        "Add Task": "Dodaj zadanie",
+        "Leave empty to generate automatically.": "Pozostaw puste, aby wygenerować automatycznie.",
+        "Shared folder (online document storage)": "Folder współdzielony (magazyn dokumentów online)",
+        "Status": "Status"
+    },
+    "Models\\Todo": {
+        "To do": "Todo",
+        "Task": "Zadanie",
+        "Responsible": "Odpowiedzialny",
+        "Closed": "Zamknięte",
+        "Deadline": "Termin",
+        "Add Todo": "Dodaj Todo"
+    },
+    "Controllers\\Boards\\MyRecentTasks": {
+        "You did not work on any task since last 2 weeks.": "Nie pracowałeś nad żadnym zadaniem przez ostatnie 2 tygodnie."
+    },
+    "Controllers\\Tasks": {
+        "Tasks": "Zadania"
+    },
+    "Components\\FormTask": {
+        "Task": "Zadanie",
+        "unsaved changes": "niezapisane zmiany",
+        "Todo": "Todo",
+        "Press ENTER to add new Todo": "Naciśnij ENTER, aby dodać nowe Todo",
+        "Worksheet": "Karta pracy",
+        "Orders": "Zamówienia",
+        "Deals": "Transakcje",
+        "Projects": "Projekty",
+        "What to do?": "Co należy zrobić?",
+        "Add new todo...": "Dodaj nowe todo..."
+    },
+    "Components\\TableTasks": {
+        "Copy cell content to clipboard": "Kopiuj zawartość komórki do schowka",
+        "Add activity": "Dodaj aktywność"
+    },
+    "Controllers\\Todos": {
+        "Tasks": "Zadania",
+        "Todo": "Todo"
+    },
+    "Components\\FormTodo": {
+        "Todo": "Todo"
+    },
+    "Components\\TableTodos": {},
+    "Calendar": {
+        "Tasks": "Zadania",
+        "Add new activity linked to Tasks": "Dodaj nową aktywność powiązaną z zadaniem"
+    }
+}

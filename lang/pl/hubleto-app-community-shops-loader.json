@@ -1,0 +1,26 @@
+{
+    "manifest": {
+        "Shops": "Sklepy",
+        "Retail shop management": "Zarządzanie sklepami detalicznymi"
+    },
+    "Models\\Shop": {
+        "Shop": "Sklep",
+        "Name": "Nazwa",
+        "Color": "Kolor",
+        "Address": "Adres",
+        "Photo #1": "Zdjęcie #1",
+        "Photo #2": "Zdjęcie #2",
+        "Photo #3": "Zdjęcie #3",
+        "Photo #4": "Zdjęcie #4",
+        "Photo #5": "Zdjęcie #5",
+        "Add shop": "Dodaj sklep",
+        "Short description": "Krótki opis",
+        "Long description": "Długi opis"
+    },
+    "Controllers\\Shops": {
+        "Shops": "Sklepy"
+    },
+    "Components\\FormShop": {
+        "Shop": "Sklep"
+    }
+}

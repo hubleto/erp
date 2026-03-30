@@ -1,0 +1,39 @@
+{
+    "manifest": {
+        "Inventory": "Magazyn",
+        "Management of inventory items in warehouses.": "Zarządzanie magazynami i pozycjami magazynowymi.",
+        "Warehouses": "Magazyny",
+        "Transactions": "Ruchy"
+    },
+    "root": {
+        "Warehouses": "Magazyny",
+        "Transactions": "Ruchy"
+    },
+    "Models\\Inventory": {
+        "Product": "Produkt",
+        "Location in warehouse": "Lokalizacja w magazynie",
+        "Status": "Status",
+        "Quantity": "Ilość",
+        "Batch number": "Numer partii",
+        "Serial number": "Numer seryjny",
+        "Expiration": "Data ważności",
+        "Received": "Przyjęte",
+        "Last moved": "Ostatni ruch",
+        "Location": "Lokalizacja",
+        "Add item": "Dodaj pozycję"
+    },
+    "Models\\Status": {
+        "Name": "Nazwa"
+    },
+    "Models\\Transaction": {
+        "Transaction UID": "UID transakcji",
+        "Type": "Typ",
+        "Date and time of transaction": "Data i godzina",
+        "Product": "Produkt",
+        "Quantity": "Ilość",
+        "Reference document #1": "Dokument referencyjny #1",
+        "Reference document #2": "Dokument referencyjny #2",
+        "Reference document #3": "Dokument referencyjny #3",
+        "Notes": "Notatki"
+    }
+}

@@ -1,12 +1,33 @@
 {
     "manifest": {
         "Help": "Pomoc",
-        "Help and user guide for Hubleto.": "Podręcznik pomocy i użytkownika dla Hubleto."
+        "Help and user guide for Hubleto.": "Pomoc i przewodnik użytkownika dla Hubleto."
     },
     "Controllers\\Help": {
-        "Need help using Hubleto?": "",
-        "Found a bug?": "",
-        "Need help with development?": "",
-        "Just looking around?": ""
+        "Help": "Pomoc",
+        "Help center": "Centrum pomocy",
+        "Search knowledgebase...": "Szukaj w bazie wiedzy...",
+        "Browse knowledgebase": "Przeglądaj bazę wiedzy",
+        "Need help using Hubleto?": "Potrzebujesz pomocy z używaniem Hubleto?",
+        "Found a bug?": "Znalazłeś błąd?",
+        "Need help with development?": "Potrzebujesz pomocy przy tworzeniu?",
+        "Just looking around?": "Tylko się rozglądasz?"
+    },
+    "Controllers\\Search": {
+        "Help": "Pomoc",
+        "Search": "Wyszukiwanie",
+        "Bring search to the brand new level.": "Przenieś wyszukiwanie na zupełnie nowy poziom.",
+        "Hubleto fulltext search provides powerful functionality to enhance search capabilities.": "Wyszukiwanie pełnotekstowe Hubleto zapewnia zaawansowane funkcje rozszerzające możliwości wyszukiwania.",
+        "Ctrl+K shortcut": "Skrót Ctrl+K",
+        "Type {ctrlK} to start searching at any time.": "Naciśnij {ctrlK}, aby w dowolnym momencie rozpocząć wyszukiwanie.",
+        "App selectors": "Selektory aplikacji",
+        "{appSelectors} are special tags like, e.g. {codeExample}, filtering what app should be used to search. Using app selectors makes search faster and more effective because it directly points to a certain app and ignores searching in other apps.": "{appSelectors} to specjalne znaczniki, np. {codeExample}, filtrujące, w której aplikacji ma być przeprowadzone wyszukiwanie. Używanie selektorów aplikacji przyspiesza i zwiększa skuteczność wyszukiwania, ponieważ bezpośrednio wskazuje określoną aplikację i pomija pozostałe.",
+        "Example:": "Przykład:",
+        "will invoke search in {dealsApp} app with expression {expression}.": "uruchomi wyszukiwanie w aplikacji {dealsApp} z wyrażeniem {expression}.",
+        "The app selectors are intuitive, try using {contacts} or {tasks}.": "Selektory aplikacji są intuicyjne, spróbuj użyć {contacts} lub {tasks}.",
+        "Switches": "Przełączniki",
+        "{switches} behave a bit differently from {appSelectors}. By providing a switch (e.g, {codeExample}), you may directly specify, what kind of data you want to search. One switch may be assigned with more than one app.": "{switches} działają nieco inaczej niż {appSelectors}. Podając przełącznik (np. {codeExample}), możesz bezpośrednio określić, jakiego rodzaju danych chcesz szukać. Jeden przełącznik może być przypisany do więcej niż jednej aplikacji.",
+        "will search for tasks (or related data) across the whole Hubleto, containing identifier {identifier}.": "wyszuka zadania (lub powiązane dane) w całym Hubleto zawierające identyfikator {identifier}.",
+        "Switches can have their shorthand variants, e.g. {short} is equal to {long}.": "Przełączniki mogą mieć skrócone warianty, np. {short} jest równoznaczne z {long}."
     }
 }

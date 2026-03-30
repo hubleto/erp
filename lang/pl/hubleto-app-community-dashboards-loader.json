@@ -1,0 +1,56 @@
+{
+    "manifest": {
+        "Dashboards": "Dashboardy",
+        "Free dashboards app": "Bezpłatna aplikacja dashboardów",
+        "Manage": "Zarządzaj",
+        "My dashboard": "Mój dashboard"
+    },
+    "root": {
+        "Dashboards": "Dashboardy"
+    },
+    "Models\\Dashboard": {
+        "Owner": "Właściciel",
+        "Title": "Tytuł",
+        "Slug": "Ścieżka URL",
+        "Color": "Kolor",
+        "Is default": "Domyślny",
+        "Add dashboard": "Dodaj dashboard",
+        "By turning this on you will change the dashboard shown on the Homepage": "Włączenie tej opcji zmieni dashboard wyświetlany na stronie głównej"
+    },
+    "Models\\Panel": {
+        "Dashboard": "Dashboard",
+        "Board": "Źródło",
+        "Title": "Tytuł",
+        "Configuration": "Konfiguracja",
+        "-- Select board to be displayed in panel --": "-- Wybierz panel do wyświetlenia --",
+        "Width": "Szerokość",
+        "Order": "Kolejność",
+        "Position": "Pozycja",
+        "Add panel": "Dodaj panel"
+    },
+    "Components\\Dashboard": {
+        "Add new panel": "Dodaj nowy panel",
+        "Configure this dashboard": "Skonfiguruj ten dashboard"
+    },
+    "Controllers\\Dashboards": {
+        "Dashboards": "Dashboardy",
+        "Add dashboard": "Dodaj dashboard",
+        "Manage": "Zarządzaj",
+        "Active": "Aktywny"
+    },
+    "Controllers\\DashboardsManage": {
+        "Dashboards": "Dashboardy",
+        "Settings": "Ustawienia",
+        "Manage": "Zarządzaj"
+    },
+    "Components\\FormDashboard": {
+        "Panels": "Panele",
+        "Preview": "Podgląd",
+        "Advanced options": "Opcje zaawansowane",
+        "Preview available after saving": "Podgląd dostępny po zapisaniu",
+        "First create the dashboard, then you will be prompted to add panels.": "Najpierw utwórz dashboard, a następnie zostaniesz poproszony o dodanie paneli."
+    },
+    "Components\\FormPanel": {
+        "Dashboard panel": "Panel dashboardu"
+    }
+}

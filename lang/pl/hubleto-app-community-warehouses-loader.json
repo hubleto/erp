@@ -1,0 +1,197 @@
+{
+  "manifest": {
+    "Warehouses": "Magazyny",
+    "Management of individual warehouses or storage facilities.": "Zarządzanie magazynami",
+    "Warehouse types": "Typy magazynów",
+    "Warehouse locations types": "Typy lokalizacji",
+    "Locations": "Lokalizacje",
+    "Transactions": "Ruchy",
+    "Inventory": "Inwentarz",
+    "Create transaction": "Zarejestruj ruch",
+    "Locations types": "Typy lokalizacji",
+    "All items": "Wszystkie pozycje",
+    "Area": "Strefa",
+    "Aisle": "Przejście",
+    "Rack": "Regał",
+    "Shelf": "Półka",
+    "Bin": "Pojemnik",
+    "Main": "Główny",
+    "Regional": "Regionalny",
+    "External": "Zewnętrzny",
+    "Main Distribution Center": "Główne centrum dystrybucji",
+    "Main warehouse used for supplying the most important customers.": "Główny magazyn używany do zaopatrywania najważniejszych klientów.",
+    "Regional Hub East": "Regionalne centrum wschodnie",
+    "Regional warehouse used for supplying the regional customers.": "Regionalny magazyn używany do zaopatrywania regionalnych klientów.",
+    "Settings": "Ustawienia",
+    "Types of warehouses": "Typy magazynów",
+    "Types of locations": "Typy lokalizacji"
+  },
+  "root": {
+    "Warehouses": "Magazyny",
+    "Locations": "Lokalizacje"
+  },
+  "Models\\Warehouse": {
+    "Name": "Nazwa",
+    "Warehouse type": "Typ",
+    "Address": "Adres",
+    "Address Plus code": "'Plus kod' adresu",
+    "Contact person": "Osoba kontaktowa",
+    "Contact email": "Kontaktowy email",
+    "Contact phone": "Kontaktowy telefon",
+    "Coordinates: longitude": "Położenie: Lng",
+    "Coordinates: latitude": "Położenie: Lat",
+    "Description": "Opis",
+    "Capacity": "Pojemność",
+    "Capacity unit": "Jednostka pojemności",
+    "Operational status": "Status operacyjny",
+    "Photo #1": "Zdjęcie #1",
+    "Photo #2": "Zdjęcie #2",
+    "Photo #3": "Zdjęcie #3",
+    "Manager of operation": "Kierownik operacji",
+    "Current stock status": "Aktualny stan magazynu",
+    "Add warehouse": "Dodaj magazyn",
+    "Type": "Typ",
+    "Automatically calculated as total capacity of all locations in warehouse.": "Obliczane automatycznie jako łączna pojemność wszystkich miejsc w magazynie.",
+    "Active": "Aktywny",
+    "Inactive": "Nieaktywny",
+    "Maintenance": "Konserwacja"
+  },
+  "Models\\WarehouseType": {
+    "Name": "Nazwa"
+  },
+  "Models\\Location": {
+    "Warehouse": "Magazyn",
+    "Location code": "Kod lokalizacji",
+    "Location type": "Typ lokalizacji",
+    "Description": "Opis",
+    "Capacity": "Pojemność",
+    "Operational status": "Status operacyjny",
+    "Placement": "Położenie",
+    "Photo #1": "Zdjęcie #1",
+    "Photo #2": "Zdjęcie #2",
+    "Photo #3": "Zdjęcie #3",
+    "Manager of operation": "Kierownik operacji",
+    "Current stock status": "Aktualny stan",
+    "Add location": "Dodaj lokalizację",
+    "Type": "Typ",
+    "Active": "Aktywny",
+    "Inactive": "Nieaktywny",
+    "Maintenance": "Konserwacja",
+    "JSON-formatted information about placement of location inside the warehouse.": "Informacje o umiejscowieniu lokalizacji w magazynie w formacie JSON."
+  },
+  "Models\\LocationType": {
+    "Name": "Nazwa"
+  },
+  "Models\\Inventory": {
+    "Product": "Produkt",
+    "Location in warehouse": "Lokalizacja",
+    "Quantity": "Ilość",
+    "Batch number": "Numer partii",
+    "Serial number": "Numer seryjny",
+    "Expiration": "Ważność",
+    "Received": "Przyjęto",
+    "Last moved": "Ostatni ruch",
+    "Location": "Lokalizacja",
+    "Add item": "Dodaj pozycję"
+  },
+  "Models\\Transaction": {
+    "Transaction UID": "UID ruchu",
+    "Direction": "Kierunek",
+    "Type": "Typ",
+    "Supplier": "Dostawca",
+    "Supplier invoice number": "Numer faktury u dostawcy",
+    "Supplier order number": "Numer zamówienia u dostawcy",
+    "Batch number": "Numer partii",
+    "Serial number": "Numer seryjny",
+    "Reference document #1": "Dokument referencyjny #1",
+    "Reference document #2": "Dokument referencyjny #2",
+    "Reference document #3": "Dokument referencyjny #3",
+    "Notes": "Uwagi",
+    "Date and time of transaction": "Data i czas ruchu",
+    "Who performed the transaction": "Ruch zarejestrował",
+    "Add transaction": "Dodaj ruch",
+    "Inbound": "Przyjęcie",
+    "Outbound": "Wydanie",
+    "Old location": "Poprzednia lokalizacja",
+    "New location": "Nowa lokalizacja",
+    "Receipt": "Odbiór",
+    "Shipment": "Wysyłka",
+    "Transfer In": "Przeniesienie do wewnątrz",
+    "Transfer Out": "Przeniesienie na zewnątrz",
+    "Adjustment In": "Korekta zapasów (przyjęcie)",
+    "Adjustment Out": "Korekta zapasów (wydanie)",
+    "Return": "Zwrot"
+  },
+  "Models\\TransactionItem": {
+    "Transaction": "Ruch",
+    "Product": "Produkt",
+    "Purchase price": "Cena zakupu",
+    "Quantity": "Ilość",
+    "Original location": "Poprzednia lokalizacja",
+    "New location": "Nowa lokalizacja"
+  },
+  "Controllers\\Warehouses": {
+    "Warehouses": "Magazyny"
+  },
+  "Controllers\\Locations": {
+    "Warehouses": "Magazyny",
+    "Locations": "Lokalizacje"
+  },
+  "Controllers\\Inventory": {
+    "Warehouses": "Magazyny",
+    "Inventory": "Inwentarz"
+  },
+  "Controllers\\Transactions": {
+    "Warehouses": "Magazyny",
+    "Transactions": "Ruchy"
+  },
+  "Controllers\\TransactionItems": {
+    "Warehouses": "Magazyny",
+    "Transactions": "Ruchy",
+    "Items": "Pozycje"
+  },
+  "Controllers\\WarehouseTypes": {
+    "Warehouses": "Magazyny",
+    "Settings": "Ustawienia",
+    "Warehouse types": "Typy magazynów"
+  },
+  "Controllers\\LocationTypes": {
+    "Warehouses": "Magazyny",
+    "Settings": "Ustawienia",
+    "Location types": "Typy lokalizacji"
+  },
+  "Components\\FormWarehouse": {
+    "Contact": "Kontakt",
+    "Capacity and stock status": "Pojemność i stan",
+    "Address": "Adres",
+    "More information": "Więcej informacji",
+    "Locations": "Lokalizacje",
+    "Warehouse": "Magazyn",
+    "First create warehouse, then you will be prompted to add its locations.": "Najpierw utwórz magazyn, następnie zostaniesz poproszony o dodanie jego lokalizacji."
+  },
+  "Components\\FormLocation": {
+    "Capacity and stock status": "Pojemność i stan",
+    "Placement": "Położenie",
+    "More information": "Więcej informacji",
+    "Location": "Lokalizacja"
+  },
+  "Components\\FormInventory": {
+    "Inventory": "Magazyn"
+  },
+  "Components\\FormTransaction": {
+    "Transaction": "Transakcja",
+    "Product": "Produkt",
+    "Purchase price": "Cena zakupu",
+    "Qty.": "Ilość",
+    "Add item": "Dodaj pozycję"
+  },
+  "Components\\FormTransactionItem": {
+    "Transaction item": "Pozycja ruchu"
+  },
+  "Components\\TableInventory": {
+    "Total quantity": "Łączna ilość"
+  },
+  "Components\\TableTransactionItems": {
+    "Total quantity": "Łączna ilość"
+  }
+}

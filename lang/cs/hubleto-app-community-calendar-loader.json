@@ -1,79 +1,120 @@
 {
     "manifest": {
         "Calendar": "Kalendář",
-        "Free calendar app.": "Aplikace kalendáře zdarma.",
+        "Free calendar app.": "Bezplatný kalendář.",
         "Reminders": "Připomínky",
-        "Share": "Zdílet"
-    },
-    "root": {
-        "Events for today": "Události pro dnešek",
-        "Reminders": "Připomínky"
-    },
-    "Models\\Activity": {
-        "Subject": "Předmět",
-        "Activity type": "Typ aktivity",
-        "Start date": "Datum zahájení",
-        "Start time": "Čas zahájení",
-        "End date": "Datum ukončení",
-        "End time": "Čas ukončení",
-        "All day": "Celý den",
-        "Completed": "Dokončeno",
-        "Created by": "Vytvořeno",
-        "Meeting minutes (link)": "Zápisy ze setkání (odkaz)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
-    },
-    "Controllers\\Boards\\Reminders": {
-        "All-day": "Celý den",
-        "Open event details": "Otevřít podrobnosti o události",
-        "events for tomorrow": "Události pro zítřek",
-        "events later": "Události později",
-        "Open reminder details": "Otevřít podrobnosti o připomínkách",
-        "Let's have a break. You have nothing to do for today.": "Dejte si pauzu. Dneska nemáte co dělat.",
-        "reminders later": "připonínek později",
-        "Later": "Později",
-        "reminders tomorrow": "",
-        "Tomorrow": ""
+        "Share": "Sdílet"
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalendář"
     },
-    "Components\\CalendarMain": {
-        "Calendars": "Kalendáře",
-        "Ownership": "Vlastík",
-        "All": "Všichni",
-        "My activities": "Moje aktivity",
-        "New activity": "Nová aktivita",
-        "Export calendar": ""
+    "Models\\Activity": {
+        "Subject": "Předmět",
+        "Activity type": "Typ",
+        "Start date": "Začátek",
+        "Start time": "Čas začátku",
+        "End date": "Konec",
+        "End time": "Čas konce",
+        "All day": "Celodenní",
+        "Completed": "Dokončeno",
+        "Created by": "Vytvořil",
+        "Meeting minutes (link)": "Zápis ze schůzky (odkaz)",
+        "Location": "Místo",
+        "Online meeting link": "Odkaz na online schůzku",
+        "Description": "Popis",
+        "Recurrence": "Opakování",
+        "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
+        "Short meeting minutes": "Stručný zápis ze schůzky"
     },
-    "Components\\FormActivity": {
-        "Start": "Začátek",
-        "End": "Konec"
+    "Controllers\\Boards\\Reminders": {
+        "Open event details": "Zobrazit podrobnosti",
+        "All-day": "Celodenní",
+        "events for tomorrow": "Události na zítřek",
+        "events later": "Události později",
+        "reminders later": "připomínek později",
+        "Later": "Později",
+        "reminders tomorrow": "připomínek zítra",
+        "Tomorrow": "Zítra",
+        "Today": "Dnes",
+        "Let's have a break. You have nothing to do for today.": "Odpočiňte si. Na dnešek nemáte nic naplánováno."
+    },
+    "Controllers\\Api\\DailyDigest": {
+        "Today": "Dnes",
+        "Tomorrow": "Zítra",
+        "Later": "Později"
+    },
+    "Controllers\\Share": {
+        "Share": "Sdílet",
+        "Calendar: Settings": "Kalendář: Nastavení",
+        "Settings saved.": "Nastavení uložena."
+    },
+    "root": {
+        "Events for today": "Dnešní události",
+        "Reminders": "Připomínky"
+    },
+    "Components\\CalendarMain": {
+        "New activity": "Nová aktivita",
+        "All": "Vše",
+        "Ownership": "Vlastnictví",
+        "My activities": "Moje aktivity",
+        "Calendars": "Kalendáře",
+        "Export calendar": "Exportovat kalendář"
+    },
+    "Components\\CalendarShareTable": {
+        "You are about to remove all shared access to the calendar \"{calendar}\". Do you want to continue?": "Chystáte se odebrat veškerý sdílený přístup ke kalendáři \"{calendar}\". Chcete pokračovat?",
+        "Stop sharing": "Zastavit sdílení",
+        "Stop sharing \"{calendar}\"": "Zastavit sdílení \"{calendar}\"",
+        "Yes, remove all shares": "Ano, odebrat veškeré sdílení",
+        "No, keep current sharing": "Ne, ponechat aktuální sdílení",
+        "Share calendar": "Sdílet kalendář",
+        "again": "znovu",
+        "List of all created shares": "Seznam všech vytvořených sdílení",
+        "Shared 1 time": "Sdíleno 1krát",
+        "Shared {count} times": "Sdíleno {count}krát",
+        "Share calendar as ICS": "Sdílet kalendář jako ICS",
+        "Loading...": "Načítá se..."
+    },
+    "Models\\SharedCalendar": {
+        "Created by": "Vytvořil",
+        "Calendar ID": "ID kalendáře",
+        "Share key": "Klíč pro sdílení",
+        "Display details": "Zobrazit podrobnosti",
+        "Enabled": "Povoleno",
+        "Date from": "Od",
+        "Date to": "Do"
     },
     "Components\\FormActivitySelector": {
         "New event": "Nová událost",
-        "Choose calendar to which the event should be created.": "Vyberte kalendář, ve kterém vytvořít událost"
+        "Choose the calendar where you want to create the event.": "Vyberte kalendář, ve kterém chcete vytvořit událost.",
+        "Save": "Uložit"
     },
-    "Controllers\\Settings": {
-        "Calendar": "Kalendář",
-        "Settings": "Nastavení",
-        "Calendar: Settings": "Kalendář: Nastavení"
+    "Components\\FormActivity": {
+        "Start - End": "Začátek - Konec",
+        "Repeats": "Opakuje se",
+        "Does not repeat": "Neopakuje se",
+        "Configure custom recurrence": "Nastavit vlastní opakování",
+        "Meeting minutes": "Zápis ze schůzky",
+        "Duration": "Trvání",
+        "Repeat every": "Opakovat každých",
+        "does not repeat": "neopakuje se",
+        "day": "den",
+        "week": "týden",
+        "month": "měsíc",
+        "year": "rok",
+        "End after": "Ukončit po",
+        "occurences.": "opakováních.",
+        "Repeats from {{ dateFrom }} to {{ dateTo }}.": "Opakuje se od {{ dateFrom }} do {{ dateTo }}.",
+        "day(s)": "den/dní",
+        "hours": "hodin",
+        "minutes": "minut"
     },
-    "Controllers\\Share": {
-        "Share": "",
-        "Calendar: Settings": ""
+    "Components\\FormSharedCalendar": {
+        "Shared calendar": "Sdílený kalendář",
+        "unsaved changes": "neuložené změny",
+        "Copy share link": "Kopírovat odkaz na sdílení"
     },
-    "Models\\SharedCalendar": {
-        "Created by": "",
-        "Calendar ID": "",
-        "Share key": "",
-        "Display details": "",
-        "Enabled": "",
-        "Date from": "",
-        "Date to": ""
+    "Calendar": {
+        "Default": "Výchozí",
+        "Add a simple event": "Přidat jednoduchou událost"
     }
 }

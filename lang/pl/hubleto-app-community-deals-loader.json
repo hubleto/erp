@@ -1,151 +1,260 @@
 {
-    "loader": {
-        "Deals": "Szanse sprzedaży",
-        "Deals Archive": "Archiwum szans sprzedaży"
-    },
-    "controllers.deals": {
-        "Sales": "Sprzedaż",
-        "Deals": "Szanse sprzedaży"
-    },
-    "controllers.dealsArchive": {
-        "Sales": "Sprzedaż",
-        "Deals": "Szanse sprzedaży",
-        "Archive": "Archiwum"
-    },
-    "manifest": {
-        "Deals": "Szanse sprzedaży",
-        "Deal management. From deal to purchase.": "Zarządzanie transakcjami. Od szansy do zakupu.",
-        "Deal Tags": "Tagi szans sprzedaży",
-        "Deal Lost Reasons": "Przyczyny utraty szans",
-        "Deal warnings": "Ostrzeżenia dotyczące szans",
-        "Most valuable deals": "Najcenniejsze szanse sprzedaży",
-        "Deal value by result": "Wartość szans według wyniku"
-    },
-    "root": {
-        "Deal Tags": "Tagi szans sprzedaży",
-        "Deal Lost Reasons": "Przyczyny utraty szans",
-        "Most valuable deals": "Najcenniejsze szanse sprzedaży",
-        "Deal value by result": "Wartość szans według wyniku",
-        "Active deals": "Aktywne szanse",
-        "Archived deals": "Zarchiwizowane szanse",
-        "Deal warnings": "Ostrzeżenia dotyczące szans"
-    },
-    "Models\\Deal": {
-        "Deal Identifier": "Identyfikator szansy",
-        "Title": "Tytuł",
-        "Customer": "Klient",
-        "Contact": "Kontakt",
-        "Lead": "Lead",
-        "Price": "Cena",
-        "Currency": "Waluta",
-        "Expected close date": "Przewidywana data zamknięcia",
-        "Owner": "Właściciel",
-        "Created": "Utworzono",
-        "Workflow": "Etap lejka \/ Proces",
-        "Workflow step": "Krok procesu",
-        "Notes": "Uwagi",
-        "Source channel": "Kanał źródłowy",
-        "Archived": "Zarchiwizowane",
-        "Deal Result": "Wynik szansy",
-        "Reason for Lost": "Przyczyna utraty",
-        "Date of result update": "Data aktualizacji wyniku",
-        "New Customer": "Nowy klient",
-        "Business type": "Typ biznesu",
-        "Link to shared folder (online storage) with related documents": "Link do udostępnionego folderu z dokumentami",
-        "Add Deal": "Dodaj szansę sprzedaży",
-        "Manager": "Opiekun \/ Menedżer",
-        "Version": "Wersja",
-        "Price excl. VAT": "Cena netto",
-        "Price incl. VAT": "Cena brutto",
-        "Template for quotation": "Szablon oferty",
-        "Customer's order number": "Numer zamówienia klienta",
-        "Closed": "Zamknięte",
-        "Ownership": "Własność",
-        "All": "Wszystkie",
-        "Owned by me": "Moje (własność)",
-        "Managed by me": "Zarządzane przeze mnie",
-        "Open \/ Closed": "Otwarte \/ Zamknięte",
-        "Open": "Otwarte",
-        "Shared with": ""
-    },
-    "Controllers\\Boards\\MostValuableDeals": {
-        "Open deal": "Otwarta szansa sprzedaży"
-    },
-    "Models\\DealActivity": {
-        "Subject": "Temat",
-        "Activity type": "Typ aktywności",
-        "Start date": "Data rozpoczęcia",
-        "Start time": "Godzina rozpoczęcia",
-        "End date": "Data zakończenia",
-        "End time": "Godzina zakończenia",
-        "All day": "Cały dzień",
-        "Completed": "Zakończono",
-        "Created by": "Utworzone przez",
-        "Deal": "Szansa sprzedaży",
-        "Contact": "Kontakt",
-        "Meeting minutes (link)": "Notatka ze spotkania (link)",
-        "Location": "Lokalizacja",
-        "Online meeting link": "Link do spotkania online",
-        "Description": "Opis",
-        "Recurrence": "Cykliczność",
-        "Long meeting minutes (link to external document)": "Pełna notatka ze spotkania (link zewnętrzny)",
-        "Short meeting minutes": "Krótka notatka ze spotkania"
-    },
-    "Models\\LostReason": {
-        "Lost Reason": "Przyczyna utraty"
-    },
-    "Models\\DealHistory": {
-        "Change Date": "Data zmiany",
-        "Deal": "Szansa sprzedaży",
-        "Description": "Opis"
-    },
-    "Models\\DealTag": {
-        "Deal": "Szansa sprzedaży",
-        "Tag": "Tag"
-    },
-    "Models\\Item": {
-        "Deal": "Szansa sprzedaży",
-        "Product": "Produkt",
-        "Unit Price": "Cena jednostkowa",
-        "Amount": "Ilość",
-        "Vat": "VAT",
-        "Discount": "Rabat",
-        "Sum": "Suma",
-        "Order": "Kolejność",
-        "Description": "Opis",
-        "Sales Price": "Cena sprzedaży",
-        "Price excl. VAT": "Cena netto",
-        "Price incl. VAT": "Cena brutto"
-    },
-    "Models\\DealDocument": {
-        "Deal": "Szansa sprzedaży",
-        "Document": "Dokument"
-    },
-    "Models\\Tag": {
-        "Name": "Nazwa",
-        "Color": "Kolor"
-    },
-    "Controllers\\Boards\\DealWarnings": {
-        "Pending deals without future plan": "Oczekujące szanse bez zaplanowanych działań",
-        "Open deals without future plan": "Otwarte szanse bez zaplanowanych działań"
-    },
-    "Models\\DealLead": {
-        "Deal": "Szansa sprzedaży",
-        "Lead": "Lead"
-    },
-    "Models\\DealTask": {
-        "Deal": "Szansa sprzedaży",
-        "Task": "Zadanie"
-    },
-    "Controllers\\Deals": {
-        "Deals": "Szanse sprzedaży",
-        "Open deals": "Otwarte szanse",
-        "Total value": "Łączna wartość"
-    },
-    "Controllers\\Boards\\DealValueByResult": {
-        "Unknown": "Nieznany",
-        "Pending": "W toku",
-        "Won": "Wygrane",
-        "Lost": "Przegrane"
-    }
+  "manifest": {
+    "Deals": "Deale",
+    "Deal management. From deal to purchase.": "Zarządzanie transakcjami handlowymi aż do stworzenia oferty.",
+    "Deal Tags": "Tagi deali",
+    "Deal Lost Reasons": "Powody utraty dealu",
+    "Deal warnings": "Ostrzeżenia dotyczące deali",
+    "Most valuable deals": "Najcenniejsze deale",
+    "Deal value by result": "Wartość deali według wyniku",
+    "Active deals": "Aktywne deale",
+    "Archived deals": "Zarchiwizowane deale",
+    "Create deal": "Utwórz deal",
+    "Important": "Ważny",
+    "ASAP": "Jak najszybciej",
+    "Extenstion": "Rozszerzenie",
+    "New Customer": "Nowy klient",
+    "Existing Customer": "Istniejący klient",
+    "Price": "Cena",
+    "Solution": "Rozwiązanie",
+    "Demand canceled by customer": "Zapytanie anulowane przez klienta",
+    "Other": "Inne"
+  },
+  "Controllers\\Deals": {
+    "Sales": "Sprzedaż",
+    "Deals": "Deale",
+    "Open deals": "Otwarte oferty",
+    "Total value": "Łączna wartość"
+  },
+  "Controllers\\DealsArchive": {
+    "Sales": "Sprzedaż",
+    "Deals": "Deale",
+    "Archive": "Archiwum",
+    "Archived deals": "Zarchiwizowane deale"
+  },
+  "Controllers\\ReportGoal": {
+    "Sales": "Sprzedaż",
+    "Goals": "Cele"
+  },
+  "Controllers\\Api\\DailyDigest": {
+    "Missing plan": "Brak planu",
+    "You should schedule further activity for this deal.": "Powinieneś zaplanować dalszą aktywność dla tego dealu."
+  },
+  "Models\\Deal": {
+    "Deal Identifier": "Identyfikator",
+    "Title": "Nazwa",
+    "Customer": "Klient",
+    "Contact person": "Osoba kontaktowa",
+    "Lead": "Lead",
+    "Price": "Cena",
+    "Currency": "Waluta",
+    "Expected close date": "Przewidywana data zamknięcia",
+    "Assigned user": "Odpowiedzialny",
+    "Date created": "Utworzony",
+    "Workflow": "Workflow",
+    "Workflow step": "Krok workflow",
+    "Notes": "Notatki",
+    "Source channel": "Źródło",
+    "Archived": "Zarchiwizowany",
+    "Status": "Status",
+    "Link to shared folder (online storage) with related documents": "Link do udostępnionego dokumentu",
+    "Unknown": "Nieznany",
+    "Won": "Wygrany",
+    "Lost": "Przegrany",
+    "New": "Nowy",
+    "Existing": "Istniejący",
+    "Deal Result": "Wynik dealu",
+    "Date of result update": "Data aktualizacji wyniku",
+    "New Customer": "Nowy klient",
+    "Business type": "Typ biznesu",
+    "Contact": "Kontakt",
+    "Owner": "Właściciel",
+    "Created": "Utworzony",
+    "Reason for Lost": "Powód utraty",
+    "Add Deal": "Dodaj deal",
+    "Version": "Wersja",
+    "Price excl. VAT": "Cena bez VAT",
+    "Price incl. VAT": "Cena z VAT",
+    "Manager": "Menedżer",
+    "Template for quotation": "Szablon oferty",
+    "Customer's order number": "Numer zamówienia klienta",
+    "Closed": "Zamknięty",
+    "Result": "Wynik",
+    "All": "Wszystkie",
+    "Ownership": "Własność",
+    "Owned by me": "Moje",
+    "Managed by me": "Zarządzane przeze mnie",
+    "Open \\/ Closed": "Otwarte \\/ Zamknięte",
+    "Open": "Otwarte",
+    "Active": "Aktywne",
+    " changed from ": " zmienione z ",
+    " to ": " na ",
+    "Shared with": "Udostępnione dla",
+    "Advertisement": "Reklama",
+    "Partner": "Partner",
+    "Web": "Web",
+    "Cold call": "Cold call",
+    "E-mail": "E-mail",
+    "Referral": "Polecenie",
+    "Other": "Inne",
+    "Shared folder (online document storage)": "Udostępniony folder (magazyn dokumentów online)",
+    "Deal created": "Deal utworzony",
+    "Yes": "Tak",
+    "No": "Nie"
+  },
+  "Models\\DealHistory": {
+    "Change Date": "Data zmiany",
+    "Deal": "Deal",
+    "Description": "Opis",
+    "Deals": "Deale",
+    "Add Deal": "Dodaj deal"
+  },
+  "Models\\DealTag": {
+    "Deal": "Deal",
+    "Tag": "Oznaczenie",
+    "Deal Tags": "Tagi deali"
+  },
+  "Models\\DealActivity": {
+    "Deal": "Deal",
+    "Contact person": "Osoba kontaktowa",
+    "Activity type": "Typ aktywności",
+    "Subject": "Temat",
+    "Start date": "Data rozpoczęcia",
+    "Start time": "Początek",
+    "End date": "Data",
+    "End time": "Czas",
+    "All day": "Cały dzień",
+    "Completed": "Ukończona",
+    "Created by": "Utworzone przez",
+    "Contact": "Kontakt",
+    "Meeting minutes (link)": "Protokół ze spotkania (link)",
+    "Location": "Miejsce",
+    "Online meeting link": "Link do spotkania online",
+    "Description": "Opis",
+    "Recurrence": "Powtarzanie",
+    "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
+    "Short meeting minutes": "Krótki protokół ze spotkania"
+  },
+  "Models\\DealDocument": {
+    "Deal": "Deal",
+    "Document": "Dokument"
+  },
+  "Models\\LostReason": {
+    "Lost Reason": "Powód utraty",
+    "Deal Lost Reasons": "Powody utraty dealu",
+    "Add Reason": "Dodaj powód"
+  },
+  "Models\\Tag": {
+    "Name": "Nazwa",
+    "Color": "Kolor",
+    "Deal Tags": "Tagi deali",
+    "Add Deal Tag": "Dodaj tag dealu"
+  },
+  "Models\\Item": {
+    "Deal": "Deal",
+    "Product": "Produkt",
+    "Unit Price": "Cena jednostkowa",
+    "Amount": "Kwota",
+    "Vat": "VAT",
+    "Discount": "Rabat",
+    "Sum": "Suma",
+    "Order": "Zamówienie",
+    "Description": "Opis",
+    "Price excl. VAT": "Cena bez VAT",
+    "Price incl. VAT": "Cena z VAT",
+    "Sales Price": "Cena sprzedaży"
+  },
+  "Models\\DealLead": {
+    "Deal": "Deal",
+    "Lead": "Lead",
+    "Add Deal": "Dodaj deal"
+  },
+  "Models\\DealTask": {
+    "Deal": "Deal",
+    "Task": "Zadanie",
+    "Add Deal": "Dodaj deal"
+  },
+  "root": {
+    "Deal statuses": "Statusy deali",
+    "Deal Tags": "Tagi deali",
+    "Deal value by result": "Wartość deali według wyniku",
+    "Most valuable deals": "Najcenniejsze deale",
+    "Active deals": "Aktywne deale",
+    "Archived deals": "Zarchiwizowane deale",
+    "Deal Lost Reasons": "Powody utraty dealu",
+    "Deal warnings": "Ostrzeżenia"
+  },
+  "Components\\FormDeal": {
+    "Calendar": "Kalendarz",
+    "Local documents": "Dokumenty",
+    "Shared documents": "Dokumenty udostępnione",
+    "History": "Historia",
+    "Go to original lead": "Przejdź do oryginalnego leadu",
+    "Documents": "Dokumenty",
+    "Show deals": "Pokaż deale",
+    "Enter = Log completed activity": "Enter = zapisz zakończoną aktywność",
+    "Shift+Enter = Schedule": "Shift+Enter = zaplanuj aktywność na później",
+    "Type recent activity here": "Wpisz ostatnią aktywność tutaj",
+    "Not completed yet": "Nieukończona",
+    "Most recent activities": "Ostatnie aktywności",
+    "Deal": "Deal",
+    "Lead": "Lead",
+    "Log completed activity": "Zarejestruj aktywność",
+    "Enter": "Enter",
+    "Schedule activity": "Zaplanuj aktywność",
+    "Shift+Enter": "Shift+Enter",
+    "Deal value:": "Wartość dealu",
+    "Weighted profit": "Ważona wartość dealu",
+    "Tasks": "Zadania",
+    "Products": "Produkty",
+    "Items": "Pozycje",
+    "Select parent lead": "Wybierz nadrzędny lead",
+    "Customer": "Klient",
+    "Contact": "Kontakt",
+    "Description": "Opis",
+    "Change Date": "Data zmiany",
+    "Generate quotation (PDF)": "Generuj ofertę cenową (PDF)",
+    "Price is calculated from items.": "Cena jest obliczana z pozycji."
+  },
+  "Components\\TableDeals": {
+    "Hide filter": "Ukryj filtr"
+  },
+  "Controllers\\LostReasons": {
+    "Settings": "Ustawienia",
+    "Deal Lost Reasons": "Powody utraty dealu"
+  },
+  "Controllers\\Settings": {
+    "Deals": "Deale",
+    "Settings": "Ustawienia",
+    "Settings saved.": "Ustawienia zapisane.",
+    "Show 'Deal warnings' in dashboard": "Pokaż 'Ostrzeżenia dotyczące deali' na pulpicie",
+    "Show 'Most valuable deals' in dashboard": "Pokaż 'Najcenniejsze deale' na pulpicie",
+    "Show 'Deal value by result' in dashboard": "Pokaż 'Wartość deali według wyniku' na pulpicie",
+    "Calendar color": "Kolor kalendarza",
+    "Deals Prefix": "Prefiks dealu"
+  },
+  "Controllers\\Boards\\DealWarnings": {
+    "Pending deals without future plan": "Oczekujące deale bez przyszłego planu",
+    "No warnings for deals.": "Brak ostrzeżeń dla deali.",
+    "No notifications for deals.": "Brak powiadomień dotyczących deali.",
+    "Open deal": "Deal",
+    "Open deals without future plan": "Otwarte deale bez przyszłego planu"
+  },
+  "Controllers\\Boards\\DealValueByResult": {
+    "Unknown": "Nieznany",
+    "Pending": "W trakcie",
+    "Won": "Wygrany",
+    "Lost": "Przegrany",
+    "No deals found.": "Nie znaleziono żadnych deali.",
+    "Add deal": "Dodaj deal"
+  },
+  "Controllers\\Boards\\MostValuableDeals": {
+    "Open deal": "Otwórz deal",
+    "No deals found.": "Nie znaleziono żadnych deali.",
+    "Add deal": "Dodaj deal"
+  },
+  "Calendar": {
+    "Deals": "Deale",
+    "Add new activity linked to deal": "Dodaj nową aktywność dla dealu"
+  }
 }

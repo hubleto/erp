@@ -1,0 +1,15 @@
+{
+    "manifest": {
+        "Billing": "Fakturace"
+    },
+    "Controllers\\BillingAccounts": {
+        "Customers": "Zákazníci",
+        "Billing Accounts": "Fakturační účty"
+    },
+    "Models\\BillingAccount": {
+        "Customer": "Zákazník",
+        "Description": "Popis",
+        "Billing Account": "Fakturační účet",
+        "Add Billing Account": "Přidat fakturační účet"
+    }
+}

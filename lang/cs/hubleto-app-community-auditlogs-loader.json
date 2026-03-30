@@ -1,0 +1,32 @@
+{
+    "manifest": {
+        "Audit Logs": "Audit logy",
+        "Internal audit logs": "Interní audit logy"
+    },
+    "Models\\AuditLog": {
+        "Datetime": "Datum a čas",
+        "Type": "Typ",
+        "Context": "Kontext",
+        "Model": "Model",
+        "RecordId": "ID záznamu",
+        "Message": "Zpráva",
+        "Priority": "Priorita",
+        "User": "Uživatel",
+        "IP": "IP adresa",
+        "create": "Vytvoření",
+        "update": "Aktualizace",
+        "delete": "Smazání"
+    },
+    "Controllers\\AuditLogs": {
+        "AuditLogs": "Audit logy"
+    },
+    "Components\\FormAuditLog": {
+        "Audit Log": "Záznam auditu"
+    },
+    "Crons\\DailyDigest": {
+        "Hubleto: Your Daily Digest": "Hubleto: Váš denní přehled"
+    },
+    "Digest": {
+        "Hi {{ name }}, here is your daily digest": "Dobrý den {{ name }}, zde je váš denní přehled"
+    }
+}

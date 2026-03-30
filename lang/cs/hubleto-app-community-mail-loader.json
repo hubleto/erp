@@ -1,0 +1,172 @@
+{
+    "root": {
+        "Active Mail": "Aktivní e-mail",
+        "Templates": "Šablony",
+        "Drafts": "Koncepty",
+        "Accounts": "Účty"
+    },
+    "manifest": {
+        "Mail": "E-mail",
+        "Email client": "E-mailový klient",
+        "Active Mail": "Aktivní e-mail",
+        "Templates": "Šablony",
+        "Accounts": "Účty",
+        "Sent": "Odesláno",
+        "Scheduled to send": "Naplánováno k odeslání",
+        "Sent from Hubleto": "Odesláno z Hubleto",
+        "Get emails": "Načíst e-maily",
+        "Manage accounts": "Spravovat účty",
+        "Internal emails": "Interní e-maily",
+        "External accounts": "Externí účty",
+        "Account is not used for receiving emails.": "Účet není používán k přijímání e-mailů.",
+        "Account has no mailboxes.": "Účet nemá žádné poštovní schránky."
+    },
+    "Models\\Mail": {
+        "Mail Id": "ID zprávy",
+        "Mail Number": "Číslo zprávy",
+        "Mailbox": "Poštovní schránka",
+        "Priority": "Priorita",
+        "Created": "Vytvořena",
+        "Sent": "Odesláno",
+        "Read": "Přečtena",
+        "Subject": "Předmět",
+        "From": "Odesílatel",
+        "To": "Příjemce",
+        "Cc": "CC",
+        "Bcc": "BCC",
+        "Body (Text)": "Zpráva (Text)",
+        "Body (HTML)": "Zpráva (HTML)",
+        "Color": "Barva",
+        "Draft": "Koncept",
+        "Template": "Šablona",
+        "Account": "Účet",
+        "Scheduled to send": "Naplánováno k odeslání",
+        "Reply to": "Odpovědět",
+        "Save draft": "Uložit koncept",
+        "Email ID is missing.": "Chybí ID e-mailu.",
+        "Email has already been sent.": "E-mail již byl odeslán.",
+        "Email is scheduled to be sent later.": "E-mail je naplánován k odeslání na později.",
+        "Email has no subject.": "E-mail nemá předmět.",
+        "No SMTP email account configured.": "Není nakonfigurován žádný SMTP účet.",
+        "Email's account SMTP is not properly configured.": "SMTP nastavení e-mailového účtu nejsou správně nakonfigurována.",
+        "Email's account sender is not properly configured.": "Odesílatel e-mailového účtu není správně nakonfigurován.",
+        "Recipient contains invalid email address.": "Příjemce obsahuje neplatnou e-mailovou adresu.",
+        "Mailer Error": "Chyba odesílání",
+        "Failed to create the email.": "Nepodařilo se vytvořit e-mail."
+    },
+    "Models\\Account": {
+        "Name": "Název",
+        "Color": "Barva",
+        "Sender email address": "E-mailová adresa odesílatele",
+        "Sender name": "Jméno odesílatele",
+        "IMAP host": "IMAP host",
+        "IMAP port": "IMAP port",
+        "IMAP encryption": "IMAP šifrování",
+        "IMAP username": "IMAP uživatelské jméno",
+        "IMAP password": "IMAP heslo",
+        "SMTP host": "SMTP host",
+        "SMTP port": "SMTP port",
+        "SMTP encryption": "SMTP šifrování",
+        "SMTP username": "SMTP uživatelské jméno",
+        "SMTP password": "SMTP heslo",
+        "Owner": "Vlastník",
+        "Manager": "Manažer",
+        "Add account": "Přidat účet"
+    },
+    "Models\\Mailbox": {
+        "Account": "Účet",
+        "Name": "Název",
+        "Attributes": "Atributy"
+    },
+    "Controllers\\Home": {
+        "Mail": "E-mail"
+    },
+    "Controllers\\Templates": {
+        "Mail": "E-mail",
+        "Templates": "Šablony"
+    },
+    "Controllers\\Drafts": {
+        "Mail": "E-mail",
+        "Drafts": "Koncepty"
+    },
+    "Models\\Template": {
+        "Subject": "Předmět",
+        "Body (Text)": "Zpráva (Text)",
+        "Body (HTML)": "Zpráva (HTML)",
+        "Add template": "Přidat šablonu"
+    },
+    "Controllers\\Scheduled": {
+        "Scheduled": "Naplánováno",
+        "Mail": "E-mail",
+        "Send scheduled emails now": "Odeslat naplánované e-maily nyní",
+        "Show sent emails": "Zobrazit odeslané e-maily",
+        "Scheduled to send": "Naplánováno k odeslání"
+    },
+    "Controllers\\SendScheduled": {
+        "Mail": "E-mail",
+        "Send scheduled": "Odeslat naplánované",
+        "Mails scheduled to send were sent.": "Naplánované e-maily byly odeslány.",
+        "Scheduled": "Naplánováno"
+    },
+    "Controllers\\Sent": {
+        "Sent": "Odesláno",
+        "Mail": "E-mail"
+    },
+    "Controllers\\Get": {
+        "Mail": "E-mail",
+        "Get": "Načíst"
+    },
+    "Controllers\\Accounts": {
+        "Mail": "E-mail",
+        "Accounts": "Účty"
+    },
+    "Controllers\\Mailboxes": {
+        "Mail": "E-mail",
+        "Mailboxes": "Poštovní schránky"
+    },
+    "Models\\Index": {
+        "Mail": "E-mail",
+        "From": "Odesílatel",
+        "To": "Příjemce",
+        "Cc": "CC",
+        "Bcc": "BCC"
+    },
+    "Models\\Attachment": {
+        "Mail": "E-mail",
+        "Name": "Název",
+        "File": "Soubor"
+    },
+    "Components\\FormTemplate": {
+        "Template": "Šablona"
+    },
+    "Components\\FormMail": {
+        "Template": "Šablona",
+        "Send now": "Odeslat",
+        "Mail": "E-mail"
+    },
+    "Components\\FormAccount": {
+        "Email account": "E-mailový účet",
+        "Receiving (IMAP)": "Přijímání (IMAP)",
+        "Sending (SMTP)": "Odesílání (SMTP)",
+        "Account": "Účet"
+    },
+    "Components\\ListFolder": {
+        "Mark as unread": "Označit jako nepřečtené",
+        "Mark as read": "Označit jako přečtené"
+    },
+    "Components\\TableMails": {
+        "Mark as unread": "Označit jako nepřečtené",
+        "Mark as read": "Označit jako přečtené"
+    },
+    "Components\\TableAccounts": {
+        "Mark as unread": "Označit jako nepřečtené",
+        "Mark as read": "Označit jako přečtené"
+    },
+    "Mailer": {
+        "Getting emails from {{ count }} account(s).": "Načítám e-maily z {{ count }} účtu/účtů.",
+        "Checking account {{ name }}": "Kontroluji účet {{ name }}",
+        "Mailbox {{ account }} -> {{ mailbox }}": "Poštovní schránka {{ account }} -> {{ mailbox }}",
+        "Found mail {{ number }} {{ id }}": "Nalezen e-mail {{ number }} {{ id }}",
+        "Creating mail in database": "Ukládám e-mail do databáze"
+    }
+}

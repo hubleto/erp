@@ -67,6 +67,19 @@ class Todo extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
+    $description->addFilter(
+      'fTodoClosed',
+      [
+        'title' => $this->translate('Open / Closed'),
+        'options' => [
+          0 => $this->translate('Open'),
+          1 => $this->translate('Closed'),
+          2 => $this->translate('All'),
+        ],
+        'default' => 0,
+      ]
+    );
+
     $fUserOptions = [];
     foreach ($this->getModel(User::class)->record->where('is_active', true)->get() as $value) {
       $fUserOptions[$value->id] = $value->nick;

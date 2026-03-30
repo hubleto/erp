@@ -144,8 +144,11 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
               {this.inputWrapper('notes')}
               {this.inputWrapper('date_created')}
             </div>
-            {this.state.id <= 0 ? null :
-              <div className='flex-1'>
+            {this.state.id <= 0 ? null : 
+              <div className='flex-1 flex gap-2 flex-col'>
+                <div className='text-2xl'>
+                  {globalThis.hubleto.numberFormat(R.virt_worked, 2)} h
+                </div>
                 <div className='card card-info'>
                   <div className='card-header'>
                     <div className="flex w-full justify-between">

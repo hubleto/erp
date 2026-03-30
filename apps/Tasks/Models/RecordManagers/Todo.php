@@ -38,6 +38,11 @@ class Todo extends \Hubleto\Erp\RecordManager
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $filters = $hubleto->router()->urlParamAsArray("filters");
 
+    if (isset($filters["fTodoClosed"])) {
+      if ($filters["fTodoClosed"] == 0) $query = $query->where($this->table . '.is_closed', false);
+      if ($filters["fTodoClosed"] == 1) $query = $query->where($this->table . '.is_closed', true);
+    }
+
     if (isset($filters['fResponsible']) && is_array($filters['fResponsible']) && count($filters['fResponsible']) > 0) {
       $query = $query->whereIn($this->table . '.id_responsible', $filters['fResponsible']);
     }

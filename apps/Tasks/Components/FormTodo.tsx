@@ -9,7 +9,6 @@ export default class FormTodo<P, S> extends FormExtended<FormTodoProps, FormTodo
     ...FormExtended.defaultProps,
     icon: 'fas fa-list-check',
     model: 'Hubleto/App/Community/Tasks/Models/Todo',
-    renderWorkflowUi: true,
   }
 
   props: FormTodoProps;

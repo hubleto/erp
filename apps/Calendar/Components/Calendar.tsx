@@ -78,13 +78,7 @@ export default class Calendar extends Component {
       color = eventInfo.event.backgroundColor;
     }
 
-    return <>
-      {/* {eventInfo.event.extendedProps.icon ?
-        <i
-          style={{color: color}}
-          className={"ml-2 " + eventInfo.event.extendedProps.icon}
-        ></i>
-      : null} */}
+    const cellContent = <>
       {eventInfo.event.extendedProps.completed ? <i className='fas fa-check ml-1'></i> : null}
       <b className="ml-2">{eventInfo.timeText}</b>
       <span className="ml-2">{eventInfo.event.title}</span>
@@ -93,7 +87,13 @@ export default class Calendar extends Component {
           <i>{eventInfo.event.extendedProps.details}</i>
         </small></div>
       : null}
-    </>
+    </>;
+
+    if (eventInfo.event.url) {
+      return <a href={eventInfo.event.url} target="_blank">{cellContent}</a>;
+    } else {
+      return cellContent;
+    }
   }
 
   render(): JSX.Element {

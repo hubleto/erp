@@ -100,7 +100,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                       className='badge badge-violet text-lg'
                       href={globalThis.hubleto.config.projectUrl + '/orders/' + item.id}
                       target='_blank'
-                    >{item.identifier}</a> : '#');
+                    >{item.identifier} {item.title}</a> : '#');
                   })}</FormInput>
                   : null}
                 {R.DEALS && R.DEALS.length > 0 ?
@@ -110,7 +110,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                       className='badge badge-violet text-lg'
                       href={globalThis.hubleto.config.projectUrl + '/deals/' + item.id}
                       target='_blank'
-                    >{item.identifier}</a> : '#');
+                    >{item.identifier} {item.title}</a> : '#');
                   })}</FormInput>
                 : null}
                 {R.PROJECTS && R.PROJECTS.length > 0 ?
@@ -120,7 +120,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                       className='badge badge-violet text-lg'
                       href={globalThis.hubleto.config.projectUrl + '/projects/' + item.id}
                       target='_blank'
-                    >{item.identifier}</a> : '#');
+                    >{item.identifier} {item.title}</a> : '#');
                   })}</FormInput>
                 : null}
               </div>

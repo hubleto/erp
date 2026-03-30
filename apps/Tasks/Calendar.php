@@ -79,7 +79,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($todo->date_deadline)),
         'end' => date("Y-m-d", strtotime($todo->date_deadline)),
         'allDay' => true,
-        'title' => $task->virt_related_to . ' TODO ' . $todo->todo,
+        'title' => $todo->TASK->virt_related_to . ' TODO ' . $todo->todo,
         'color' => $todo->is_closed ? '#DDDDDD' : '#8401A4',
         'source' => 'tasks',
         'id_owner' => $todo->id_responsible,

@@ -190,17 +190,6 @@ class Deal extends \Hubleto\Erp\Model
       ],
     ];
 
-    unset($description->columns['note']);
-    unset($description->columns['id_contact']);
-    unset($description->columns['source_channel']);
-    unset($description->columns['id_lead']);
-    unset($description->columns['id_workflow']);
-    unset($description->columns['shared_folder']);
-    unset($description->columns['date_result_update']);
-    unset($description->columns['lost_reason']);
-    unset($description->columns['is_new_customer']);
-    unset($description->columns['business_type']);
-
     return $description;
   }
 

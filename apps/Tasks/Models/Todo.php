@@ -66,6 +66,17 @@ class Todo extends \Hubleto\Erp\Model
     $description->ui['addButtonText'] = $this->translate('Add Todo');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
+
+    $fUserOptions = [];
+    foreach ($this->getModel(User::class)->record->where('is_active', true)->get() as $value) {
+      $fUserOptions[$value->id] = $value->nick;
+    }
+    $description->addFilter('fResponsible', [
+      'title' => $this->translate('Responsible'),
+      'type' => 'multipleSelectButtons',
+      'options' => $fUserOptions,
+    ]);
+
     return $description;
   }
 

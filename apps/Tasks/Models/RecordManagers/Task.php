@@ -102,6 +102,10 @@ class Task extends \Hubleto\Erp\RecordManager
       if ($filters["fTaskClosed"] == 1) $query = $query->where("tasks.is_closed", true);
     }
 
+    if (isset($filters['fDeveloper']) && is_array($filters['fDeveloper']) && count($filters['fDeveloper']) > 0) {
+      $query = $query->whereIn($this->table . '.id_developer', $filters['fDeveloper']);
+    }
+
     return $query;
   }
 

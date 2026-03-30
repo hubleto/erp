@@ -21,4 +21,27 @@ class Todo extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Task::class, 'id_task', 'id');
   }
 
+  /**
+   * [Description for prepareReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return mixed
+   * 
+   */
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+
+    if (isset($filters['fResponsible']) && is_array($filters['fResponsible']) && count($filters['fResponsible']) > 0) {
+      $query = $query->whereIn($this->table . '.id_responsible', $filters['fResponsible']);
+    }
+
+    return $query;
+  }
 }

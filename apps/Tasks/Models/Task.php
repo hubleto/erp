@@ -136,9 +136,14 @@ class Task extends \Hubleto\Erp\Model
         $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
         $description->hide(['footer']);
 
-        $description->ui['filters'] = [
-          'fTaskWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Status')),
-          'fTaskClosed' => [
+        $description->addFilter(
+          'fTaskWorkflowStep',
+          Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Status'))
+        );
+
+        $description->addFilter(
+          'fTaskClosed',
+          [
             'title' => $this->translate('Open / Closed'),
             'options' => [
               0 => $this->translate('Open'),
@@ -146,8 +151,19 @@ class Task extends \Hubleto\Erp\Model
               2 => $this->translate('All'),
             ],
             'default' => 0,
-          ],
-        ];
+          ]
+        );
+
+        $fUserOptions = [];
+        foreach ($this->getModel(User::class)->record->where('is_active', true)->get() as $value) {
+          $fUserOptions[$value->id] = $value->nick;
+        }
+        $description->addFilter('fDeveloper', [
+          'title' => $this->translate('Developer'),
+          'type' => 'multipleSelectButtons',
+          'options' => $fUserOptions,
+        ]);
+        
       break;
     }
 

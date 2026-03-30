@@ -31,6 +31,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
     // tasks
     $tasks = $mTask->record->prepareReadQuery()
+      ->where($mTask->table . '.is_closed', 0)
       ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd]);
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
@@ -59,6 +60,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
     // todos
     $todos = $mTodo->record->prepareReadQuery()
+      ->where($mTodo->table . '.is_closed', 0)
       ->whereRaw("`{$mTodo->table}`.`date_deadline` >= ? AND `{$mTodo->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd])
       ->with('TASK');
 

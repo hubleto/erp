@@ -17,12 +17,18 @@
     <table class="table-default">
       <tbody>
         <tr>
-          <td>{{ translate("Google Gemini API Key") }}</td>
+          <td>
+            {{ translate("Google Gemini API Key") }}
+            {% if viewParams.app.configAsString('apiKey') != '' %}
+              <span class="text-green-500 ml-1" title="{{ translate('API Key is set') }}">●</span>
+            {% endif %}
+          </td>
           <td>
             <input
               type="password" name="apiKey"
               class="hubleto component input"
-              value="{{ viewParams.app.configAsString('apiKey') }}"
+              value=""
+              placeholder="{{ viewParams.app.configAsString('apiKey') != '' ? '********' : '' }}"
             />
           </td>
         </tr>

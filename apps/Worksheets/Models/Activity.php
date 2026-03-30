@@ -102,6 +102,7 @@ class Activity extends \Hubleto\Erp\Model
       if (in_array('deal', $fGroupBy)) $showOnlyColumns[] = 'virt_deal';
       if (in_array('worker', $fGroupBy)) $showOnlyColumns[] = 'id_worker';
       if (in_array('month', $fGroupBy)) $showOnlyColumns[] = 'virt_month';
+      if (in_array('date_worked', $fGroupBy)) $showOnlyColumns[] = 'date_worked';
 
       $description->showOnlyColumns($showOnlyColumns);
 
@@ -141,6 +142,7 @@ class Activity extends \Hubleto\Erp\Model
         'deal' => $this->translate('Deal'),
         'worker' => $this->translate('Worker'),
         'month' => $this->translate('Month'),
+        'date_worked' => $this->translate('Day'),
       ]
     ]);
 

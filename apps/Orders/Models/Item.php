@@ -55,6 +55,9 @@ class Item extends \Hubleto\Erp\Model
 
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
+    $filters = $this->router()->urlParamAsArray("filters");
+    $view = $this->router()->urlParamAsString("view");
+
     $description = parent::describeTable();
 
     $description->ui['title'] = 'Order Items';
@@ -65,6 +68,12 @@ class Item extends \Hubleto\Erp\Model
       'field' => ['id_invoice_item', 'date_due' ],
       'direction' => [ 'asc', 'asc' ]
     ];
+
+    if ($view == 'invoicing') {
+      $description->permissions = [false, false, false, false];
+      $description->ui['selectionMode'] = 'multiple';
+      $description->hide(['header', 'columnSearch']);
+    }
 
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];
@@ -86,30 +95,32 @@ class Item extends \Hubleto\Erp\Model
 
     }
 
-    $description->addFilter('fStatus', [
-      'title' => $this->translate('Status'),
-      'options' => [
-        1 => $this->translate('Not-prepared to invoice'),
-        2 => $this->translate('Prepared to invoice'),
-      ]
-    ]);
+    if ($view != 'invoicing') {
+      $description->addFilter('fStatus', [
+        'title' => $this->translate('Status'),
+        'options' => [
+          1 => $this->translate('Not-prepared to invoice'),
+          2 => $this->translate('Prepared to invoice'),
+        ]
+      ]);
 
-    $description->addFilter('fDue', [
-      'title' => $this->translate('Due / Not due'),
-      'direction' => 'horizontal',
-      'options' => [
-        1 => $this->translate('Due'),
-        2 => $this->translate('Not due'),
-      ]
-    ]);
+      $description->addFilter('fDue', [
+        'title' => $this->translate('Due / Not due'),
+        'direction' => 'horizontal',
+        'options' => [
+          1 => $this->translate('Due'),
+          2 => $this->translate('Not due'),
+        ]
+      ]);
 
-    $description->addFilter('fGroupBy', [
-      'title' => $this->translate('Group by'),
-      'type' => 'multipleSelectButtons',
-      'options' => [
-        'order' => $this->translate('Order'),
-      ]
-    ]);
+      $description->addFilter('fGroupBy', [
+        'title' => $this->translate('Group by'),
+        'type' => 'multipleSelectButtons',
+        'options' => [
+          'order' => $this->translate('Order'),
+        ]
+      ]);
+    }
 
     return $description;
   }

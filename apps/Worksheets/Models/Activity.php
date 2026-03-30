@@ -53,19 +53,19 @@ class Activity extends \Hubleto\Erp\Model
         ->setProperty('sql', "concat(YEAR(`date_worked`), '-', LPAD(MONTH(`date_worked`), 2, '0'))"),
       'virt_customer' => (new Virtual($this, $this->translate('Customer')))->setDefaultVisible()
         ->setProperty('sql', "
-          SELECT `c`.`identifier` FROM `tasks` `t`
+          SELECT  concat(`c`.`identifier`, ' ', `c`.`name`) FROM `tasks` `t`
           LEFT JOIN `customers` `c` ON `c`.`id` = `t`.`id_customer`
           WHERE `t`.`id` = `worksheet_activities`.`id_task`
         "),
       'virt_deal' => (new Virtual($this, $this->translate('Deal')))->setDefaultVisible()
         ->setProperty('sql', "
-          SELECT `d`.`identifier` FROM `deals_tasks` `dt`
+          SELECT concat(`d`.`identifier`, ' ', `d`.`title`) FROM `deals_tasks` `dt`
           LEFT JOIN `deals` `d` ON `d`.`id` = `dt`.`id_deal`
           WHERE `dt`.`id_task` = `worksheet_activities`.`id_task`
         "),
       'virt_project' => (new Virtual($this, $this->translate('Project')))->setDefaultVisible()
         ->setProperty('sql', "
-          SELECT `p`.`identifier` FROM `projects_tasks` `pt`
+          SELECT concat(`p`.`identifier`, ' ', `p`.`title`) FROM `projects_tasks` `pt`
           LEFT JOIN `projects` `p` ON `p`.`id` = `pt`.`id_project`
           WHERE `pt`.`id_task` = `worksheet_activities`.`id_task`
         "),

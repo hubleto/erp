@@ -40,10 +40,11 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
   props: FormOrderProps;
   state: FormOrderState;
 
-  refLogActivityInput: any;
-  refActivityModal: any;
-  refActivityForm: any;
-  refPreview: any;
+  refLogActivityInput: any = React.createRef();
+  refActivityModal: any = React.createRef();
+  refActivityForm: any = React.createRef();
+  refPreview: any = React.createRef();
+  refTableItemsInvoicing: any = React.createRef();
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\FormOrder';
@@ -52,11 +53,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
 
   constructor(props: FormOrderProps) {
     super(props);
-
-    this.refLogActivityInput = React.createRef();
-    this.refActivityModal = React.createRef();
-    this.refActivityForm = React.createRef();
-    this.refPreview = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -75,10 +71,11 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       tabs: [
         { uid: 'default', title: <b>{this.translate('Order')}</b> },
         { uid: 'items', title: this.translate('Items') },
-        { uid: 'quotes', title: this.translate('Quotes') },
-        { uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') },
         { uid: 'calendar', title: this.translate('Calendar') },
-        { uid: 'payments', title: this.translate('Payments') },
+        { uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') },
+        { uid: 'quotes', title: this.translate('Quotes') },
+        // { uid: 'payments', title: this.translate('Payments') },
+        { uid: 'invoicing', title: this.translate('Invoicing') },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
@@ -577,14 +574,52 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
         />;
       break;
 
-      case 'payments':
-        return <TablePayments
-          key={"table_order_payment"}
-          tag={"table_order_payment"}
-          parentForm={this}
-          uid={this.props.uid + "_table_order_payment"}
-          idOrder={R.id}
-        />;
+      // case 'payments':
+      //   return <TablePayments
+      //     key={"table_order_payment"}
+      //     tag={"table_order_payment"}
+      //     parentForm={this}
+      //     uid={this.props.uid + "_table_order_payment"}
+      //     idOrder={R.id}
+      //   />;
+
+      // break;
+
+      case 'invoicing':
+        return <div className='flex flex-col gap-2'>
+          <TableItems
+            key={"table_order_items_invoicing"}
+            tag={"table_order_items_invoicing"}
+            ref={this.refTableItemsInvoicing}
+            parentForm={this}
+            uid={this.props.uid + "_table_order_items_invoicing"}
+            idOrder={R.id}
+            view="invoicing"
+          />
+          <div>
+            <button
+              className='btn btn-primary btn-large'
+              onClick={() => {
+                const selection = this.refTableItemsInvoicing.current.state.selection;
+                const idItems = selection.map((item) => item.id);
+                request.post(
+                  'orders/api/prepare-items-for-invoice',
+                  {
+                    idOrder: this.state.record.id,
+                    idItems: idItems,
+                  },
+                  {},
+                  (result: any) => {
+                    this.refTableItemsInvoicing.current.reload();
+                  }
+                );
+              }}
+            >
+              <span className='icon'><i className='fas fa-file-invoice'></i></span>
+              <span className='text'>{this.translate('Prepare selected for invoice')}</span>
+            </button>
+          </div>
+        </div>;
 
       break;
 

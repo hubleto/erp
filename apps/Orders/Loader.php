@@ -27,6 +27,7 @@ class Loader extends \Hubleto\Erp\App
       '/^orders\/api\/set-parent-deal\/?$/' => Controllers\Api\SetParentDeal::class,
       '/^orders\/api\/get-item\/?$/' => Controllers\Api\GetItem::class,
       '/^orders\/api\/prepare-item-for-invoice\/?$/' => Controllers\Api\PrepareItemForInvoice::class,
+      '/^orders\/api\/prepare-items-for-invoice\/?$/' => Controllers\Api\PrepareItemsForInvoice::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 

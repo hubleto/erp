@@ -102,8 +102,6 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
       const activityId = this.state.showActivity.split(',')[1];
       let calendar = this.state.calendars[activityCalendar];
 
-      console.log(activityCalendar, activityId, calendar, this.state);
-
       eventForm = globalThis.hubleto.renderReactElement(calendar.formComponent,
         {
           ref: this.refActivityForm,
@@ -199,9 +197,14 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
             });
           }}
           onEventClick={(info) => {
-            this.setState({
-              showActivity: info.event.extendedProps.source + ',' + info.event.id,
-            });
+            if (info.event.url) {
+              globalThis.window.open(globalThis.hubleto.config.projectUrl + '/' + info.event.url);
+            } else {
+              this.setState({
+                showActivity: info.event.extendedProps.source + ',' + info.event.id,
+              });
+            }
+
             info.jsEvent.preventDefault();
           }}
         ></Calendar>

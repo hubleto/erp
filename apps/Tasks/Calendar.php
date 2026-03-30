@@ -53,6 +53,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'source' => 'tasks',
         'id_owner' => $task->id_developer,
         'completed' => $task->is_closed,
+        'url' => 'tasks/' . $task->id,
       ];
     }
 
@@ -81,6 +82,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'source' => 'tasks',
         'id_owner' => $todo->id_responsible,
         'completed' => $todo->is_closed,
+        'url' => 'tasks/todo/' . $todo->id,
       ];
     }
 

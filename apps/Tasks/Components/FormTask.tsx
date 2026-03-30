@@ -73,14 +73,15 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
   }
 
   addTodo(todo: any, R: any) {
-    if (todo.todo.trim() != '') {
+    // if (todo.todo.trim() != '') {
       let newR = R;
-      newR.TODO.push({ id_task: R.id, todo: todo.todo, id_responsible: todo.id_responsible, date_deadine: todo.date_deadline });
-      this.refInputNewTodoTodo.current.value = '';
-      this.refInputNewTodoResponsible.current.value = globalThis.hubleto.idUser;
+      let newTodo = { id_task: R.id, todo: '', id_responsible: globalThis.hubleto.idUser, date_deadline: moment().add(1, 'week').format('YYYY-MM-DD') };
+      newR.TODO.push(newTodo);
+      // this.refInputNewTodoTodo.current.value = '';
+      // this.refInputNewTodoResponsible.current.value = globalThis.hubleto.idUser;
       this.updateRecord(newR);
-      this.setState({newTodo: {todo: '', id_responsible: globalThis.hubleto.idUser, date_deadline: moment().add(1, 'week').format('YYYY-MM-DD')}})
-    }
+      // this.setState({newTodo: {todo: '', id_responsible: globalThis.hubleto.idUser, date_deadline: moment().add(1, 'week').format('YYYY-MM-DD')}})
+    // }
   }
 
   renderTab(tabUid: string) {
@@ -149,14 +150,14 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                   <div className='card-header'>
                     <div className="flex w-full justify-between">
                       <div>{this.translate('Todo')}</div>
-                      <div className="text-sm">{this.translate("Press ENTER to add new Todo")}</div>
+                      {/* <div className="text-sm">{this.translate("Press ENTER to add new Todo")}</div> */}
                     </div>
                   </div>
                   <div className='card-body btn-list'>
                     {R.TODO && R.TODO.map((item, key) => {
                       const refInputTodo = React.createRef();
 
-                      return <div className={'btn-list-item items-center flex gap-2' + (item._toBeDeleted_ ? ' bg-red-100' : '')} key={key}>
+                      return <div className={'btn-list-item items-center flex gap-2 items-start' + (item._toBeDeleted_ ? ' bg-red-100' : '')} key={key}>
                         <div>
                           <input
                             type='checkbox'
@@ -172,7 +173,10 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                           <div className='w-full line-through'>{item.todo}</div>
                         : <div className='w-full flex flex-col gap-2'>
                           <textarea
-                            className={'w-full field-sizing-content dark:bg-slate-600 ' + (this.state.record.is_closed ? 'bg-slate-100 text-slate-400' : 'bg-yellow-50')}
+                            className={
+                              'w-full field-sizing-content dark:bg-slate-600 '
+                              + (this.state.record.is_closed ? 'bg-slate-100 text-slate-400' : 'bg-yellow-50')
+                            }
                             readOnly={this.state.record.is_closed}
                             ref={refInputTodo}
                             value={item.todo}
@@ -235,55 +239,68 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
                       </div>;
                     })}
                     {!this.state.record.is_closed ?
-                      <div className='btn-list-item flex gap-2'>
-                        <div className='flex flex-col gap-2'>
-                          <textarea
-                            className='w-full field-sizing-content bg-yellow-50 dark:bg-slate-600'
-                            ref={this.refInputNewTodoTodo}
-                            placeholder={this.translate('Add new todo...')}
-                            onChange={(e) => {
-                              this.setState({newTodo: {...this.state.newTodo, todo: this.refInputNewTodoTodo.current.value}});
-                            }}
-                            onKeyDown={(e) => {
-                              if (e.key !== 'Enter' || e.shiftKey || e.ctrlKey) return;
-                              e.preventDefault();
-                              this.addTodo(this.state.newTodo, R);
-                            }}
-                          ></textarea>
-                          <div className='flex gap-2'>
-                            <div>
-                              <UserSelect
-                                uid='new_todo_id_responsible'
-                                ref={this.refInputNewTodoResponsible}
-                                value={this.state.newTodo.id_responsible ?? 0}
-                                onChange={(input: any) => {
-                                  this.setState({newTodo: {...this.state.newTodo, id_responsible: input.state.value}});
-                                }}
-                              />
-                            </div>
-                            <div>
-                              <DateTime
-                                uid='new_todo_deadline'
-                                type='date'
-                                ref={this.refInputNewTodoDeadline}
-                                value={this.state.newTodo.date_deadline ?? moment().add(1, 'week').format('YYYY-MM-DD')}
-                                onChange={(input: any) => {
-                                  this.setState({newTodo: {...this.state.newTodo, idd_responsible: input.state.value}});
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <button
-                            className='btn btn-add'
-                            onClick={(e) => {
-                              e.preventDefault();
-                              this.addTodo(this.state.newTodo, R);
-                            }}
-                          ><span className='icon'><i className='fas fa-plus'></i></span></button>
-                        </div>
-                      </div>
+                      // <div className='btn-list-item flex items-start gap-2 mt-4 bg-blue-50'>
+                      //   <div className='flex flex-col gap-2'>
+                      //     <textarea
+                      //       className='w-full field-sizing-content bg-yellow-50 dark:bg-slate-600'
+                      //       ref={this.refInputNewTodoTodo}
+                      //       placeholder={this.translate('Add new todo...')}
+                      //       onChange={(e) => {
+                      //         this.setState({newTodo: {...this.state.newTodo, todo: this.refInputNewTodoTodo.current.value}});
+                      //       }}
+                      //       onKeyDown={(e) => {
+                      //         if (e.key !== 'Enter' || e.shiftKey || e.ctrlKey) return;
+                      //         e.preventDefault();
+                      //         this.addTodo(this.state.newTodo, R);
+                      //       }}
+                      //     ></textarea>
+                      //     <div className='flex gap-2'>
+                      //       <div>
+                      //         <UserSelect
+                      //           uid='new_todo_id_responsible'
+                      //           ref={this.refInputNewTodoResponsible}
+                      //           value={this.state.newTodo.id_responsible ?? 0}
+                      //           onChange={(input: any) => {
+                      //             this.setState({newTodo: {...this.state.newTodo, id_responsible: input.state.value}});
+                      //           }}
+                      //         />
+                      //       </div>
+                      //       <div>
+                      //         <DateTime
+                      //           uid='new_todo_deadline'
+                      //           type='date'
+                      //           ref={this.refInputNewTodoDeadline}
+                      //           value={this.state.newTodo.date_deadline ?? moment().add(1, 'week').format('YYYY-MM-DD')}
+                      //           onChange={(input: any) => {
+                      //             this.setState({newTodo: {...this.state.newTodo, idd_responsible: input.state.value}});
+                      //           }}
+                      //         />
+                      //       </div>
+                      //     </div>
+                      //   </div>
+                      //   <div>
+                      //     <button
+                      //       className='btn btn-add'
+                      //       onClick={(e) => {
+                      //         e.preventDefault();
+                      //         this.addTodo(this.state.newTodo, R);
+                      //       }}
+                      //     >
+                      //       <span className='icon'><i className='fas fa-plus'></i></span>
+                      //       <span className='text'>{this.translate('Add todo')}</span>
+                      //     </button>
+                      //   </div>
+                      // </div>
+                      <button
+                        className='btn btn-add-outline'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.addTodo(this.state.newTodo, R);
+                        }}
+                      >
+                        <span className='icon'><i className='fas fa-plus'></i></span>
+                        <span className='text'>{this.translate('Add todo')}</span>
+                      </button>
                     : <></>}
                   </div>
                 </div>

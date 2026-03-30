@@ -93,7 +93,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
       hoursDuration = 0;
       minutesDuration = 0;
     }
-console.log('s', this.state);
+
     return <>
       <div className='flex gap-2'>
         {customInputs ? <div className="grow p-2 mb-2 bg-blue-50 dark:bg-gray-900/50 rounded">{customInputs}</div> : null}

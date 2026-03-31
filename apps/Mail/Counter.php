@@ -21,7 +21,7 @@ class Counter extends Core
     /** @var Models\Mail */
     $mMail = $this->getModel(Models\Mail::class);
 
-    $accounts = $mAccount->record->prepareReadQuery()->with('MAILBOXES')->get();
+    $accounts = $mAccount->record->with('MAILBOXES')->get();
 
     $idMailboxes = [];
 

@@ -27,8 +27,10 @@ class CreateFromMail extends ApiController
           'title' => $mail->subject,
           'description' => $mail->body_text,
           'id_developer' => $this->authProvider()->getUserId(),
+          'id_tester' => $this->authProvider()->getUserId(),
+          'date_created' => date("Y-m-d"),
           'date_start' => date("Y-m-d")
-        ])['id'];
+       ])['id'];
       }
     }
 

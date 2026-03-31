@@ -19,6 +19,7 @@ class Counter extends Core
     return $mItem->record->prepareReadQuery()
       ->where('tasks_todo.id_responsible', $this->authProvider()->getUserId())
       ->whereDate('tasks_todo.date_deadline', '<', date("Y-m-d"))
+      ->where('tasks_todo.is_closed', false)
       ->count()
     ;
   }

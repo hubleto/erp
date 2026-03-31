@@ -22,6 +22,9 @@ class Calendar extends \Hubleto\Erp\Controller
     /** @var \Hubleto\App\Community\Calendar\Loader */
     $calendarApp = $this->getService(\Hubleto\App\Community\Calendar\Loader::class);
 
+    /** @var Controllers\Api\GetCalendarEvents */
+    $getCalendarEvents = $this->getController(Api\GetCalendarEvents::class);
+
     $this->viewParams['initialView'] = $calendarApp->getInitialView();
 
     /** @var Manager */
@@ -31,6 +34,7 @@ class Calendar extends \Hubleto\Erp\Controller
       $calendarConfig = $calendar->getCalendarConfig();
       $calendarConfig['color'] = $calendar->getColor();
       $calendarConfig['show'] = empty($show) || $show == $calendarName;
+
       $this->viewParams["calendars"][$calendarName] = $calendarConfig;
     }
 

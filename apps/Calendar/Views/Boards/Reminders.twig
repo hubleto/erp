@@ -1,6 +1,6 @@
 {% macro reminder(reminder) %}
   <a
-    href="calendar?showActivity={{ reminder.source }},{{ reminder.id }}"
+    href="{{ reminder.url ?? "calendar?showActivity={{ reminder.source }},{{ reminder.id }}" }}"
     class="btn btn-list-item btn-transparent flex-col items-start md:flex-row"
     target="_blank"
   >

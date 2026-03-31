@@ -31,8 +31,8 @@ class Loader extends \Hubleto\Erp\App
       '/^leads\/lost-reasons\/?$/' => Controllers\LostReasons::class,
     ]);
 
-    $this->addSearchSwitch('l', 'leads');
-    $this->addSearchSwitch('t', 'taskleads');
+    // $this->addSearchSwitch('l', 'leads');
+    // $this->addSearchSwitch('t', 'taskleads');
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [

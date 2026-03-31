@@ -18,17 +18,17 @@ class Settings extends \Hubleto\Erp\Controller
     parent::prepareView();
 
     $settingsChanged = $this->router()->urlParamAsBool('settingsChanged');
+    $aiApp = $this->appManager()->getApp(\Hubleto\App\Community\AiAssistent\Loader::class);
 
     if ($settingsChanged) {
       $apiKey = $this->router()->urlParamAsString('apiKey');
       $sensitivityLevel = $this->router()->urlParamAsInteger('sensitivityLevel');
       $model = $this->router()->urlParamAsString('model');
 
-      /** @var \Hubleto\App\Community\AiAssistent\Loader $aiApp */
-      $aiApp = $this->appManager()->getApp(\Hubleto\App\Community\AiAssistent\Loader::class);
-
-      $aiApp->setConfigAsString('apiKey', $apiKey);
-      $aiApp->saveConfig('apiKey', $apiKey);
+      if (!empty($apiKey)) {
+        $aiApp->setConfigAsString('apiKey', $apiKey);
+        $aiApp->saveConfig('apiKey', $apiKey);
+      }
       
       $aiApp->setConfigAsInteger('sensitivityLevel', $sensitivityLevel);
       $aiApp->saveConfig('sensitivityLevel', $sensitivityLevel);
@@ -38,6 +38,7 @@ class Settings extends \Hubleto\Erp\Controller
 
       $this->viewParams['settingsSaved'] = true;
     }
+    $this->viewParams['app'] = $aiApp;
 
     $this->setView('@Hubleto:App:Community:AiAssistent/Settings.twig');
   }

@@ -145,6 +145,11 @@ class Task extends \Hubleto\Erp\Model
         $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
         $description->hide(['footer']);
 
+        $description->ui['orderBy'] = [
+          'field' => [ 'is_closed', 'id' ],
+          'direction' => [ 'asc', 'asc' ]
+        ];
+
         $description->addFilter(
           'fTaskWorkflowStep',
           Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Status'))
@@ -159,7 +164,7 @@ class Task extends \Hubleto\Erp\Model
               1 => $this->translate('Closed'),
               2 => $this->translate('All'),
             ],
-            'default' => 0,
+            'default' => 2,
           ]
         );
 

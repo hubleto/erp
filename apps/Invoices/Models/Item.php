@@ -16,7 +16,16 @@ class Item extends \Hubleto\Erp\Model
 
   public string $table = 'invoice_items';
   public string $recordManagerClass = RecordManagers\Item::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.item';
+  public ?string $lookupSqlValue = '
+    concat(
+      ifnull({%TABLE%}.item, ""),
+      " ",
+      ifnull(
+        (select `i`.`number` from `invoices` `i` where `i`.`id` = {%TABLE%}.`id_invoice`),
+        ""
+      )
+    )
+  ';
   public ?string $lookupUrlAdd = 'invoices/items/add';
   public ?string $lookupUrlDetail = 'invoices/items/{%ID%}';
 

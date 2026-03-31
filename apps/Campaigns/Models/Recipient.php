@@ -97,9 +97,9 @@ class Recipient extends \Hubleto\Erp\Model
       );
 
       $description->ui['orderBy'] = [
-      'field' => [ 'clicks_count', 'bot_score' ],
-      'direction' => [ 'desc', 'asc' ]
-    ];
+        'field' => [ 'clicks_count', 'bot_score' ],
+        'direction' => [ 'desc', 'asc' ]
+      ];
 
     }
 

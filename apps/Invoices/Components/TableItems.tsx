@@ -57,7 +57,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
         onClick={() => {
           return globalThis.hubleto.showDialogConfirm(
             <>
-              <div className='font-bold'>{data.CUSTOMER.name}</div>
+              <div className='font-bold'>{data.CUSTOMER?.name}</div>
               <div className='font-bold'>{data.item}</div>
               <div className='font-bold'>{data.unit_price} € x {data.amount} pcs</div>
               <div className='mt-4'>{this.translate('Create invoice from this item? Press OK to confirm.')}</div>

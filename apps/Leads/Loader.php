@@ -135,41 +135,41 @@ class Loader extends \Hubleto\Erp\App
     ';
   }
 
-  /**
-   * Implements fulltext search functionality for tasks
-   *
-   * @param array $expressions List of expressions to be searched and glued with logical 'or'.
-   * 
-   * @return array
-   * 
-   */
-  public function search(array $expressions): array
-  {
-    $mLead = $this->getModel(Models\Lead::class);
-    $qLeads = $mLead->record->prepareReadQuery();
+  // /**
+  //  * Implements fulltext search functionality for tasks
+  //  *
+  //  * @param array $expressions List of expressions to be searched and glued with logical 'or'.
+  //  * 
+  //  * @return array
+  //  * 
+  //  */
+  // public function search(array $expressions): array
+  // {
+  //   $mLead = $this->getModel(Models\Lead::class);
+  //   $qLeads = $mLead->record->prepareReadQuery();
     
-    foreach ($expressions as $e) {
-      $qLeads = $qLeads->where(function($q) use ($e) {
-        $q->orWhere('leads.id', 'like', '%' . $e . '%');
-        $q->orWhere('leads.title', 'like', '%' . $e . '%');
-      })
-      ->where('leads.is_closed', false);
-    }
+  //   foreach ($expressions as $e) {
+  //     $qLeads = $qLeads->where(function($q) use ($e) {
+  //       $q->orWhere('leads.id', 'like', '%' . $e . '%');
+  //       $q->orWhere('leads.title', 'like', '%' . $e . '%');
+  //     })
+  //     ->where('leads.is_closed', false);
+  //   }
 
-    $leads = $qLeads->get()->toArray();
+  //   $leads = $qLeads->get()->toArray();
 
-    $results = [];
+  //   $results = [];
 
-    foreach ($leads as $lead) {
-      $results[] = [
-        "id" => $lead['id'],
-        "label" => $lead['id'] . ' ' . $lead['title'],
-        "url" => 'leads/' . $lead['id'],
-        // "description" => $task[''],
-      ];
-    }
+  //   foreach ($leads as $lead) {
+  //     $results[] = [
+  //       "id" => $lead['id'],
+  //       "label" => $lead['id'] . ' ' . $lead['title'],
+  //       "url" => 'leads/' . $lead['id'],
+  //       // "description" => $task[''],
+  //     ];
+  //   }
 
-    return $results;
-  }
+  //   return $results;
+  // }
 
 }

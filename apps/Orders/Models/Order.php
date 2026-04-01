@@ -15,6 +15,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Settings\Models\Setting;
@@ -120,6 +121,20 @@ class Order extends \Hubleto\Erp\Model
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'virt_last_item' => (new Virtual($this, $this->translate('Last item')))->setDefaultVisible()
+        ->setProperty('sql', "
+          SELECT
+            JSON_OBJECT(
+              'title', title,
+              'unit_price', unit_price,
+              'amount', amount,
+              'date_due', date_due
+            )
+          FROM `orders_items` `oi`
+          WHERE `oi`.`id_order` = `orders`.`id`
+          ORDER BY `oi`.`date_due` desc
+          LIMIT 1
+        "),
     ]);
   }
 

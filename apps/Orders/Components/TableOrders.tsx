@@ -57,6 +57,21 @@ export default class TableOrders extends TableExtended<TableOrdersProps, TableOr
     return elements;
   }
 
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "virt_last_item") {
+      if (data.virt_last_item) {
+        let lastItem: any = {};
+        try { lastItem = JSON.parse(data.virt_last_item); } catch (ex) { }
+        return <div className='flex gap-1 text-xs items-center'>
+          {lastItem.date_due}
+          <div className='badge'>{lastItem.title}</div> {globalThis.hubleto.currencyFormat(lastItem.unit_price, 2)} x {lastItem.amount}
+        </div>;
+      } else {
+        return null;
+      }
+    } else return super.renderCell(columnName, column, data, options);
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormOrderProps;
     return <FormOrder {...formProps}/>;

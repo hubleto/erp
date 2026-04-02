@@ -56,11 +56,11 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
       'recentlyContacted' => []
     ];
 
-    $contactIds = $mRecipient->record->where('id_campaign', $idCampaign)->pluck('id_contact');
+    $emailsInCampaign = $mRecipient->record->where('id_campaign', $idCampaign)->pluck('email');
 
     $recentlyContacted = $mRecipient->record
       ->where('id_campaign', '!=', $idCampaign)
-      ->whereIn('id_contact', $contactIds)
+      ->whereIn('email', $emailsInCampaign)
       ->whereHas('MAIL', function($q) {
         return $q->where('datetime_sent', '>=', date('Y-m-d H:i:s', strtotime('-1 month')));
       })

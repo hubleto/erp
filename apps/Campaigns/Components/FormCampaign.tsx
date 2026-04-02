@@ -112,7 +112,10 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         this.setState({campaignLaunchInfo: null}, () => {
           request.post(
             'campaigns/api/get-campaign-launch-info',
-            { idCampaign: this.state.record.id },
+            {
+              idCampaign: this.state.record.id,
+              recentlyContactedPeriod: 3,
+            },
             {},
             (data: any) => {
               this.setState({campaignLaunchInfo: data});
@@ -602,7 +605,13 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
           </> : null}
 
           {R.id_launched_by ?
-            <div className='alert alert-warning'>{this.translate('Campaign was already launched by {{ email }} on {{ datetime }}.', {email: R.LAUNCHED_BY.email, datetime: R.datetime_launched})}</div>
+            <div className='alert alert-warning'>
+              {this.translate(
+                'Campaign was already launched by {{ email }} on {{ datetime }}.',
+                this.translationContext,
+                this.translationContextInner,
+                {email: R.LAUNCHED_BY.email, datetime: R.datetime_launched}
+              )}</div>
           : null}
 
           <div className='flex flex-col md:flex-row gap-2 w-full'>

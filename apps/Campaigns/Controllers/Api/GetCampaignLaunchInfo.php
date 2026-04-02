@@ -56,6 +56,7 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
 
     $recentlyContacted = $mRecipient->record
       ->where('id_campaign', '!=', $idCampaign)
+      ->whereNotNull('id_mail')
       ->whereIn('email', $emailsInCampaign)
       ->whereHas('MAIL', function($q) use ($recentlyContactedPeriod) {
         return $q->where('datetime_sent', '>=', date('Y-m-d H:i:s', strtotime('-' . $recentlyContactedPeriod . ' month')));
@@ -67,11 +68,10 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
 
     foreach ($recentlyContacted as $tmp) {
       $launchInfo['recentlyContacted'][] = [
-        'CAMPAIGN' => [
-          'id' => $tmp->CAMPAIGN->id,
-          'name' => $tmp->CAMPAIGN->name,
-        ],
-        'CONTACT' => $tmp->CONTACT,
+        'campaignId' => $tmp->CAMPAIGN->id,
+        'campaignName' => $tmp->CAMPAIGN->name,
+        'recipientEmail' => $tmp->email,
+        'mailSent' => $tmp->MAIL->datetime_sent,
       ];
     }
 

@@ -67,10 +67,9 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
     ;
 
     foreach ($recentlyContacted as $tmp) {
-      $launchInfo['recentlyContacted'][] = [
+      $launchInfo['recentlyContacted'][$tmp->email] = [
         'campaignId' => $tmp->CAMPAIGN->id,
         'campaignName' => $tmp->CAMPAIGN->name,
-        'recipientEmail' => $tmp->email,
         'mailSent' => $tmp->MAIL->datetime_sent,
       ];
     }

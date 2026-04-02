@@ -707,6 +707,8 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           botScoreTotal += click.bot_score;
                         });
 
+                        let recentlyContacted = this.state.campaignLaunchInfo.recentlyContacted[item.email];
+
                         return <tr>
                           <td className='text-nowrap'>{key+1}</td>
                           <td className={'text-nowrap' + (item.CLICKS.length > 0 ? ' bg-green-100' : '')}>{item.email}</td>
@@ -719,6 +721,9 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                             </> : <div className='badge'>{this.translate('Not scheduled yet')}</div>}
                             {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>{this.translate('Unsubscribed')}</div> : null}
                             {item.STATUS?.is_invalid ? <div className='badge badge-warning'>{this.translate('Invalid')}</div> : null}
+                            {recentlyContacted ? <div>
+                              Contacted {recentlyContacted.mailSent} in <i>{recentlyContacted.campaignName}</i>
+                            </div> : null}
                           </td>
                           <td>
                             {item.CLICKS.length > 0 ? item.CLICKS.length : null}

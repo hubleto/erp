@@ -11,9 +11,7 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): array
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
-
-    /** @var Campaign */
-    $mCampaign = $this->getModel(Campaign::class);
+    $recentlyContactedPeriod = $this->router()->urlParamAsInteger('recentlyContactedPeriod', 3);
 
     /** @var Recipient */
     $mRecipient = $this->getModel(Recipient::class);
@@ -31,8 +29,6 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
       unset($recipients[$key]['MAIL']['body_text']);
       unset($recipients[$key]['MAIL']['body_html']);
 
-      $clickGroups = [];
-      $botScoreGroups = [];
       $grouppingInterval = 2000; // 2-second interval to group the clicks
 
       if (is_array($recipient['CLICKS'])) {
@@ -61,8 +57,8 @@ class GetCampaignLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
     $recentlyContacted = $mRecipient->record
       ->where('id_campaign', '!=', $idCampaign)
       ->whereIn('email', $emailsInCampaign)
-      ->whereHas('MAIL', function($q) {
-        return $q->where('datetime_sent', '>=', date('Y-m-d H:i:s', strtotime('-1 month')));
+      ->whereHas('MAIL', function($q) use ($recentlyContactedPeriod) {
+        return $q->where('datetime_sent', '>=', date('Y-m-d H:i:s', strtotime('-' . $recentlyContactedPeriod . ' month')));
       })
       ->with('CAMPAIGN')
       ->with('CONTACT.VALUES')

@@ -25,6 +25,7 @@ export interface FormCampaignState extends FormExtendedState {
   activityDate: string,
   activitySubject: string,
   activityAllDay: boolean,
+  recentlyContactedPeriod?: number,
 }
 
 export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, FormCampaignState> {
@@ -65,6 +66,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       activityAllDay: false,
       campaignTestInfo: null,
       campaignLaunchInfo: null,
+      recentlyContactedPeriod: 1,
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign')}</b> },
         { uid: 'documents', title: this.translate('Documents') },
@@ -91,37 +93,49 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
+  updateCampaignTestInfo() {
+    this.setState({campaignTestInfo: null}, () => {
+      request.post(
+        'campaigns/api/get-campaign-test-info',
+        {
+          idCampaign: this.state.record.id,
+          recentlyContactedPeriod: this.state.recentlyContactedPeriod,
+        },
+        {},
+        (data: any) => {
+          this.setState({campaignTestInfo: data});
+        }
+      );
+    });
+  }
+
+  updateCampaignLaunchInfo() {
+    this.setState({campaignLaunchInfo: null}, () => {
+      request.post(
+        'campaigns/api/get-campaign-launch-info',
+        {
+          idCampaign: this.state.record.id,
+          recentlyContactedPeriod: this.state.recentlyContactedPeriod,
+        },
+        {},
+        (data: any) => {
+          this.setState({campaignLaunchInfo: data});
+        }
+      );
+    });
+
+  }
+
   onTabChange() {
     super.onTabChange();
 
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
       case 'test':
-        this.setState({campaignTestInfo: null}, () => {
-          request.post(
-            'campaigns/api/get-campaign-test-info',
-            { idCampaign: this.state.record.id },
-            {},
-            (data: any) => {
-              this.setState({campaignTestInfo: data});
-            }
-          );
-        });
+        this.updateCampaignTestInfo();
       break;
       case 'launch':
-        this.setState({campaignLaunchInfo: null}, () => {
-          request.post(
-            'campaigns/api/get-campaign-launch-info',
-            {
-              idCampaign: this.state.record.id,
-              recentlyContactedPeriod: 3,
-            },
-            {},
-            (data: any) => {
-              this.setState({campaignLaunchInfo: data});
-            }
-          );
-        });
+        this.updateCampaignLaunchInfo();
       break;
     }
   }
@@ -492,9 +506,26 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                     return <div key={key} className='alert alert-warning'>{item}</div>;
                   })
                 }
-                {this.state.campaignTestInfo.recentlyContacted.length == 0 ? null : <div>
+                <div className='flex gap-1'>
                   <b>Recently contacted</b>
-                  <table className='table-default dense'>
+                  
+                </div>
+                {Object.keys(this.state.campaignTestInfo.recentlyContacted).length == 0
+                  ? <div className='flex gap-1 items-center'>
+                      No recipients contacted in last
+                      <input
+                        type='number'
+                        className='w-8'
+                        value={this.state.recentlyContactedPeriod}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                          this.setState({recentlyContactedPeriod: event.target.value}, () => {
+                            this.updateCampaignTestInfo();
+                          });
+                        }}
+                      ></input>
+                      months found.
+                    </div>
+                  : <table className='table-default dense'>
                     <thead>
                       <tr>
                         <th>#</th>
@@ -515,7 +546,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                       })}
                     </tbody>
                   </table>
-                </div>}
+                }
               </> : <div className='alert alert-warning'>{ this.translate('Analysing campaign...') }</div>}
             </div>
           </div>

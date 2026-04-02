@@ -11,6 +11,7 @@ class GetCampaignTestInfo extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): array
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
+    $recentlyContactedPeriod = $this->router()->urlParamAsInteger('recentlyContactedPeriod', 3);
 
     $testInfo = ['warnings' => []];
 
@@ -46,12 +47,35 @@ class GetCampaignTestInfo extends \Hubleto\Erp\Controllers\ApiController
       ->first()
     ;
 
+    $emailsInCampaign = $mRecipient->record->where('id_campaign', $idCampaign)->pluck('email');
+
+    $recentlyContacted = $mRecipient->record
+      ->where('id_campaign', '!=', $idCampaign)
+      ->whereNotNull('id_mail')
+      ->whereIn('email', $emailsInCampaign)
+      ->whereHas('MAIL', function($q) use ($recentlyContactedPeriod) {
+        return $q->where('datetime_sent', '>=', date('Y-m-d H:i:s', strtotime('-' . $recentlyContactedPeriod . ' month')));
+      })
+      ->with('CAMPAIGN')
+      ->with('CONTACT.VALUES')
+      ->get()
+    ;
+
+    $testInfo['recentlyContacted'] = [];
+    foreach ($recentlyContacted as $tmp) {
+      $testInfo['recentlyContacted'][$tmp->email] = [
+        'campaignId' => $tmp->CAMPAIGN->id,
+        'campaignName' => $tmp->CAMPAIGN->name,
+        'mailSent' => $tmp->MAIL->datetime_sent,
+      ];
+    }
+
     if (!$campaign->MAIL_ACCOUNT) {
       $testInfo['warnings'][] = $this->translate('Mail template is not set.');
     }
 
     if (empty($campaign->mail_subject) || empty($campaign->mail_body)) {
-      $testInfo['warnings'][] = $this->translate('Mail template is not set.');
+      $testInfo['warnings'][] = $this->translate('Mail has no subject.');
     } else {
       $bodyHtml = $campaign->mail_body;
 

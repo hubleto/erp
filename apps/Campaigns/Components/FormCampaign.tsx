@@ -491,7 +491,31 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                   this.state.campaignTestInfo.warnings.map((item, key) => {
                     return <div key={key} className='alert alert-warning'>{item}</div>;
                   })
-              }
+                }
+                {this.state.campaignTestInfo.recentlyContacted.length == 0 ? null : <div>
+                  <b>Recently contacted</b>
+                  <table className='table-default dense'>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>{ this.translate('Email') }</th>
+                        <th>{ this.translate('When') }</th>
+                        <th>{ this.translate('Campaign') }</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Object.keys(this.state.campaignTestInfo.recentlyContacted).map((email, key) => {
+                        const details = this.state.campaignTestInfo.recentlyContacted[email];
+                        return <tr>
+                          <td className='text-nowrap'>{key+1}</td>
+                          <td className='text-nowrap'>{email}</td>
+                          <td className='text-nowrap'>{details.mailSent}</td>
+                          <td className='text-nowrap'>{details.campaignName}</td>
+                        </tr>;
+                      })}
+                    </tbody>
+                  </table>
+                </div>}
               </> : <div className='alert alert-warning'>{ this.translate('Analysing campaign...') }</div>}
             </div>
           </div>
@@ -721,7 +745,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                             </> : <div className='badge'>{this.translate('Not scheduled yet')}</div>}
                             {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>{this.translate('Unsubscribed')}</div> : null}
                             {item.STATUS?.is_invalid ? <div className='badge badge-warning'>{this.translate('Invalid')}</div> : null}
-                            {recentlyContacted ? <div>
+                            {recentlyContacted ? <div className='badge'>
                               Contacted {recentlyContacted.mailSent} in <i>{recentlyContacted.campaignName}</i>
                             </div> : null}
                           </td>

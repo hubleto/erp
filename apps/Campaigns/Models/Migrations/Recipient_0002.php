@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Campaigns\Models\Migrations;
 
 use Hubleto\Framework\Migration;
 
-class Recipient_0001 extends Migration
+class Recipient_0002 extends Migration
 {
 
   public function upgradeSchema(): void

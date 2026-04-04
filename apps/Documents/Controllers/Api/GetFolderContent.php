@@ -9,7 +9,7 @@ class GetFolderContent extends \Hubleto\Erp\Controllers\ApiController
     $folderUid = $this->router()->urlParamAsString('folderUid');
 
     $mFolder = $this->getModel(\Hubleto\App\Community\Documents\Models\Folder::class);
-    $mDocument = $this->getModel(\Hubleto\App\Community\Documents\Models\Document::class);
+    $mFile = $this->getModel(\Hubleto\App\Community\Documents\Models\File::class);
 
     $folder = $mFolder->record->with('PARENT_FOLDER')->where('uid', $folderUid)->first()->toArray();
     $subFolders = $mFolder->record
@@ -20,13 +20,13 @@ class GetFolderContent extends \Hubleto\Erp\Controllers\ApiController
       ->get()
       ->toArray()
     ;
-    $documents = $mDocument->record->where('id_folder', $folder['id'])->get()->toArray();
+    $files = $mFile->record->where('id_folder', $folder['id'])->get()->toArray();
 
     return [
       "folderUid" => $folderUid,
       "folder" => $folder,
       "subFolders" => $subFolders,
-      "documents" => $documents,
+      "files" => $files,
     ];
   }
 }

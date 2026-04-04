@@ -2,10 +2,10 @@
 
 namespace Hubleto\App\Community\Documents\Controllers;
 
-use Hubleto\App\Community\Documents\Models\Document;
+use Hubleto\App\Community\Documents\Models\File;
 use Hubleto\App\Community\Documents\Models\Folder;
 
-class Download extends \Hubleto\Erp\Controller
+class DownloadFile extends \Hubleto\Erp\Controller
 {
 
   public bool $requiresAuthenticatedUser = false;
@@ -13,28 +13,28 @@ class Download extends \Hubleto\Erp\Controller
 
   public function render(): string
   {
-    $folderUid = $this->router()->urlParamAsString('f');
-    $documentUid = $this->router()->urlParamAsString('d');
+    $folderUid = $this->router()->urlParamAsString('fld');
+    $fileUid = $this->router()->urlParamAsString('fil');
 
     /** @var Folder */
     $mFolder = $this->getModel(Folder::class);
 
-    /** @var Document */
-    $mDocument = $this->getModel(Document::class);
+    /** @var File */
+    $mFile = $this->getModel(File::class);
     
     $folder = $mFolder->record->where('uid', $folderUid)->first();
-    $document = $mDocument->record->where('uid', $documentUid)->first();
+    $file = $mFile->record->where('uid', $fileUid)->first();
 
-    $filePath = $this->env()->uploadFolder . '/' . $document?->file;
+    $filePath = $this->env()->uploadFolder . '/' . $file?->file;
 
     if (
       false
       || (!empty($folderUid) && !$folder)
-      || !$document
-      || (!empty($folderUid) && $document->id_folder != $folder->id)
-      || empty($document->file)
+      || !$file
+      || (!empty($folderUid) && $file->id_folder != $folder->id)
+      || empty($file->file)
       || !file_exists($filePath)
-      || ($this->authProvider()->getUserId() <= 0 && !$document->is_public)
+      || ($this->authProvider()->getUserId() <= 0 && !$file->is_public)
     ) {
       http_response_code(404);
       return '';

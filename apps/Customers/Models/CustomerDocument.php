@@ -24,17 +24,6 @@ class CustomerDocument extends \Hubleto\Erp\Model
     ]);
   }
 
-  public function describeInput(string $columnName): \Hubleto\Framework\Description\Input
-  {
-    $description = parent::describeInput($columnName);
-    switch ($columnName) {
-      case 'hyperlink':
-        $description->setReactComponent('InputHyperlink');
-        break;
-    }
-    return $description;
-  }
-
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();

@@ -1,0 +1,10 @@
+<h1 class="app-main-title">{{ translate("Documents") }} > {{ translate("Uploaded files") }}</h1>
+
+<hblreact-documents-table-files
+  string:tag="documents-table-files"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
+  json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
+></hblreact-documents-table-files>

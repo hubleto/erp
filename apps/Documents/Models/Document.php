@@ -2,10 +2,8 @@
 
 namespace Hubleto\App\Community\Documents\Models;
 
-use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\Framework\Db\Column\Integer;
 
 class Document extends \Hubleto\Erp\Model
 {
@@ -16,19 +14,15 @@ class Document extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'documents/{%ID%}';
 
   public array $relations = [
-    'FOLDER' => [ self::BELONGS_TO, Folder::class, 'id_folder', 'id'],
   ];
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
-      'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->router()->urlParamAsInteger('idFolder'))->setDefaultVisible(),
+      'model' => (new Varchar($this, $this->translate('Model')))->setReadonly()->setDefaultVisible(),
+      'record_id' => (new Integer($this, $this->translate('RecordId')))->setDefaultVisible(),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'file' => (new File($this, $this->translate('File')))->setDefaultVisible(),
-      'hyperlink' => (new Varchar($this, $this->translate('File Link')))->setReactComponent('InputHyperlink'),
-      'origin_link' => (new Varchar($this, $this->translate('Origin Link'))),
-      'is_public' => (new Boolean($this, $this->translate('Public')))->setDefaultVisible(),
     ]);
   }
 
@@ -58,36 +52,5 @@ class Document extends \Hubleto\Erp\Model
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
     return $savedRecord;
-  }
-
-  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
-  {
-    if ($originalRecord["file"] != $savedRecord["file"]) {
-      $localFilename = ltrim((string) $originalRecord["file"], "./");
-      $fullPath = $this->config()->getAsString('uploadFolder') . "/" . $localFilename;
-      if (!is_dir($fullPath) && file_exists($fullPath)) {
-        unlink($fullPath);
-      }
-    }
-
-    return parent::onAfterUpdate($originalRecord, $savedRecord);
-  }
-
-  public function onBeforeDelete(int $id): int
-  {
-    $document = (array) $this->record->find($id)->toArray();
-
-    $localFilename = ltrim((string) $document["file"], "./");
-    $fullPath = $this->config()->getAsString('uploadFolder') . "/" . $localFilename;
-    if (!is_dir($fullPath) && file_exists($fullPath)) {
-      unlink($fullPath);
-    }
-
-    return $id;
-  }
-
-  public function getRelationsIncludedInLoadFormData(): array|null
-  {
-    return ['FOLDER'];
   }
 }

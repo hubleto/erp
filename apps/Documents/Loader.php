@@ -18,16 +18,19 @@ class Loader extends \Hubleto\Erp\App
     $this->router()->get([
       '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
 
-      '/^documents\/?$/' => Controllers\Browse::class,
-      '/^documents\/browse\/?$/' => Controllers\Browse::class,
-      '/^documents\/list\/?$/' => Controllers\Documents::class,
+      '/^documents\/?$/' => Controllers\Documents::class,
 
-      '/^documents\/(?<recordId>\d+)\/?$/' => Controllers\Documents::class,
+      '/^documents\/files\/?$/' => Controllers\FileBrowser::class,
+      '/^documents\/files\/list\/?$/' => Controllers\Files::class,
+      '/^documents\/files\/download\/?$/' => Controllers\DownloadFile::class,
+
+      '/^documents(\/(?<recordId>\d+))?\/?$/' => Controllers\Documents::class,
       '/^documents\/add\/?$/' => ['controller' => Controllers\Documents::class, 'vars' => ['recordId' => -1]],
 
-      '/^documents\/download\/?$/' => Controllers\Download::class,
+      '/^documents\/versions(\/(?<recordId>\d+))?\/?$/' => Controllers\DocumentVersions::class,
+      '/^documents\/versions\/add\/?$/' => ['controller' => Controllers\DocumentVersions::class, 'vars' => ['recordId' => -1]],
 
-      '/^documents\/folders\/?$/' => Controllers\Folders::class,
+      '/^documents\/folders\/?(?<recordId>\d+)\/?$/' => Controllers\Folders::class,
       '/^documents\/folders\/add\/?$/' => ['controller' => Controllers\Folders::class, 'vars' => ['recordId' => -1]],
 
       '/^documents\/templates(\/(?<recordId>\d+))?\/?$/' => Controllers\Templates::class,
@@ -59,7 +62,9 @@ class Loader extends \Hubleto\Erp\App
         'name' => '_ROOT_',
       ]);
 
+      $this->getModel(Models\File::class)->upgradeSchema();
       $this->getModel(Models\Document::class)->upgradeSchema();
+      $this->getModel(Models\DocumentVersion::class)->upgradeSchema();
       $this->getModel(Models\Template::class)->upgradeSchema();
     }
 
@@ -68,10 +73,10 @@ class Loader extends \Hubleto\Erp\App
   public function generateDemoData(): void
   {
     $mFolder = $this->getModel(Models\Folder::class);
-    $mDocument = $this->getModel(Models\Document::class);
+    $mFile = $this->getModel(Models\File::class);
     $mTemplate = $this->getModel(Models\Template::class);
 
-    $mDocument->record->recordCreate([
+    $mFile->record->recordCreate([
       'id_folder' => $this->getRootFolderId(),
       'name' => 'bid_template.docx',
       'hyperlink' => 'https://www.google.com',
@@ -83,14 +88,14 @@ class Loader extends \Hubleto\Erp\App
 
     $idFolderCU = $mFolder->record->recordCreate([ 'id_parent_folder' => $this->getRootFolderId(), 'name' => $this->translate('Customer profiles') ])['id'];
 
-    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM, 'name' => 'logo.png', 'hyperlink' => 'https://www.google.com' ]);
-    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM1, 'name' => 'post_image_1.png', 'hyperlink' => 'https://www.google.com' ]);
-    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM1, 'name' => 'post_image_2.png', 'hyperlink' => 'https://www.google.com' ]);
-    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM2, 'name' => 'analytics_report_1.pdf', 'hyperlink' => 'https://www.google.com' ]);
-    $mDocument->record->recordCreate([ 'id_folder' => $idFolderMM2, 'name' => 'analytics_report_2.pdf', 'hyperlink' => 'https://www.google.com' ]);
+    $mFile->record->recordCreate([ 'id_folder' => $idFolderMM, 'name' => 'logo.png', 'hyperlink' => 'https://www.google.com' ]);
+    $mFile->record->recordCreate([ 'id_folder' => $idFolderMM1, 'name' => 'post_image_1.png', 'hyperlink' => 'https://www.google.com' ]);
+    $mFile->record->recordCreate([ 'id_folder' => $idFolderMM1, 'name' => 'post_image_2.png', 'hyperlink' => 'https://www.google.com' ]);
+    $mFile->record->recordCreate([ 'id_folder' => $idFolderMM2, 'name' => 'analytics_report_1.pdf', 'hyperlink' => 'https://www.google.com' ]);
+    $mFile->record->recordCreate([ 'id_folder' => $idFolderMM2, 'name' => 'analytics_report_2.pdf', 'hyperlink' => 'https://www.google.com' ]);
 
-    $mDocument->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_1.pdf', 'hyperlink' => 'https://www.google.com' ]);
-    $mDocument->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_2.pdf', 'hyperlink' => 'https://www.google.com' ]);
+    $mFile->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_1.pdf', 'hyperlink' => 'https://www.google.com' ]);
+    $mFile->record->recordCreate([ 'id_folder' => $idFolderCU, 'name' => 'customer_profile_2.pdf', 'hyperlink' => 'https://www.google.com' ]);
 
     $templates = [
       'en-quotation' => ['name' => 'Quotation', 'file' => 'en/Quotation.twig'],
@@ -134,9 +139,17 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
           <span class="text">' . $this->translate('Documents') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/list">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/versions">
           <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('Show as list') . '</span>
+          <span class="text">' . $this->translate('Document versions') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/files">
+          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="text">' . $this->translate('File browser') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/files/list">
+          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="text">' . $this->translate('Uploaded files') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/folders">
           <span class="icon"><i class="fas fa-folder"></i></span>

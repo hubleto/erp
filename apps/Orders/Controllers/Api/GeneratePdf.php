@@ -14,9 +14,10 @@ class GeneratePdf extends \Hubleto\Erp\Controllers\ApiController
     /** @var Order */
     $mOrder = $this->getModel(Order::class);
 
-    $idDocument = $mOrder->generatePdf($idOrder);
+    $pdfFile = $mOrder->generatePdf($idOrder);
+
     return [
-      'idDocument' => $idDocument
+      'pdfFile' => $pdfFile
     ];
   }
 }

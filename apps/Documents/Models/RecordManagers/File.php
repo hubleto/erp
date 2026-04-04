@@ -4,9 +4,15 @@ namespace Hubleto\App\Community\Documents\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Document extends \Hubleto\Erp\RecordManager
+class File extends \Hubleto\Erp\RecordManager
 {
-  public $table = 'documents';
+  public $table = 'files';
+
+  /** @return BelongsTo<Customer, covariant BillingAccount> */
+  public function FOLDER(): BelongsTo
+  {
+    return $this->belongsTo(Folder::class, 'id_folder', 'id');
+  }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {

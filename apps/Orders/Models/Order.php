@@ -423,12 +423,14 @@ class Order extends \Hubleto\Erp\Model
    *
    * @param int $idOrder Order for which the PDF should be generated.
    * 
-   * @return int ID of generated document.
+   * @return string Output filename.
    * 
    */
-  public function generatePdf(int $idOrder): int
+  public function generatePdf(int $idOrder): string
   {
+    /** @var Order */
     $mOrder = $this->getService(Order::class);
+
     $order = $mOrder->record->prepareReadQuery()->where('orders.id', $idOrder)->first();
     if (!$order) throw new \Exception('Order was not found.');
 
@@ -440,8 +442,12 @@ class Order extends \Hubleto\Erp\Model
 
     $orderOutputFilename = 'order-' . $order->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
 
+    /** @var Generator */
     $generator = $this->getService(Generator::class);
-    $idDocument = $generator->createPdfFromTemplate(
+
+    $idDocument = $generator->createPdfDocumentFromTemplate(
+      Order::class,
+      $idOrder,
       $template->id,
       $orderOutputFilename,
       $vars
@@ -451,7 +457,7 @@ class Order extends \Hubleto\Erp\Model
       'pdf' => $orderOutputFilename,
     ]);
 
-    return $idDocument;
+    return $orderOutputFilename;
   }
 
   /**

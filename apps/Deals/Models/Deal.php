@@ -466,7 +466,9 @@ class Deal extends \Hubleto\Erp\Model
    */
   public function generatePdf(int $idDeal): int
   {
+    /** @var Deal */
     $mDeal = $this->getService(Deal::class);
+
     $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
     if (!$deal) throw new \Exception('Deal was not found.');
 
@@ -478,8 +480,11 @@ class Deal extends \Hubleto\Erp\Model
 
     $dealOutputFilename = 'deal-' . $deal->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
 
+    /** @var Generator */
     $generator = $this->getService(Generator::class);
-    $idDocument = $generator->createPdfFromTemplate(
+    $idDocument = $generator->createPdfDocumentFromTemplate(
+      Deal::class,
+      $idDeal,
       $template->id,
       $dealOutputFilename,
       $vars

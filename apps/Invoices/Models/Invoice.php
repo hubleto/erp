@@ -666,7 +666,7 @@ class Invoice extends \Hubleto\Erp\Model {
    *
    * @param int $idInvoice Invoice for which the PDF should be generated.
    * 
-   * @return int Output filename.
+   * @return string Output filename.
    * 
    */
   public function generatePdf(int $idInvoice): string
@@ -707,7 +707,10 @@ class Invoice extends \Hubleto\Erp\Model {
 
     /** @var Generator */
     $generator = $this->getService(Generator::class);
-    $generator->generatePdfFromTemplate(
+
+    $generator->createPdfDocumentFromTemplate(
+      Invoice::class,
+      $idInvoice,
       $template->id,
       $invoiceOutputFilename,
       $vars

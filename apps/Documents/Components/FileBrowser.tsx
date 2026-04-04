@@ -2,65 +2,65 @@ import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import Form, { FormProps } from '@hubleto/react-ui/core/Form';
-import FormDocument from './FormDocument';
+import FormFile from './FormFile';
 import { ProgressBar } from 'primereact/progressbar';
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
-interface BrowserProps extends TableProps {
+interface FileBrowserProps extends TableProps {
   folderUid?: string,
-  documentUid?: string,
+  fileUid?: string,
   path?: Array<any>,
 }
-interface BrowserState extends TableState {
+interface FileBrowserState extends TableState {
   folderUid: string,
-  documentUid?: string,
+  fileUid?: string,
   folderContent: any,
   path: Array<any>,
   showFolderProperties: number,
   selectedFolders: Array<number>,
-  selectedDocuments: Array<number>,
+  selectedFiles: Array<number>,
   deletingRecord?: boolean,
   deleteButtonDisabled?: boolean,
   showBulkMove?: boolean,
 }
 
-export default class Browser extends Table<BrowserProps, BrowserState> {
+export default class FileBrowser extends Table<FileBrowserProps, FileBrowserState> {
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Documents/Models/Document',
+    model: 'Hubleto/App/Community/Documents/Models/File',
   }
 
-  props: BrowserProps;
-  state: BrowserState;
+  props: FileBrowserProps;
+  state: FileBrowserState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
-  translationContextInner: string = 'Components\\Browser';
+  translationContextInner: string = 'Components\\FileBrowser';
 
   refFolderPropertiesModal: any;
   refBulkMoveFolderLookup: any;
 
-  constructor(props: BrowserProps) {
+  constructor(props: FileBrowserProps) {
     super(props);
     this.refFolderPropertiesModal = React.createRef();
     this.refBulkMoveFolderLookup = React.createRef();
     this.state = {
       ...this.getStateFromProps(props),
       folderUid: this.props.folderUid ? this.props.folderUid : '_ROOT_',
-      documentUid: this.props.documentUid,
+      fileUid: this.props.fileUid,
       folderContent: null,
       path: this.props.path ?? [],
       showFolderProperties: 0,
       selectedFolders: [],
-      selectedDocuments: [],
+      selectedFiles: [],
       deletingRecord: false,
       deleteButtonDisabled: false,
       showBulkMove: false,
     };
   }
 
-  getStateFromProps(props: BrowserProps) {
+  getStateFromProps(props: FileBrowserProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -84,7 +84,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
         folderUid: '_ROOT_',
         path: [],
         showFolderProperties: 0,
-      } as BrowserState, () => { this.loadData(); });
+      } as FileBrowserState, () => { this.loadData(); });
     }
   }
 
@@ -92,7 +92,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
     this.setState({
       loadingData: true,
       selectedFolders: [],
-      selectedDocuments: [],
+      selectedFiles: [],
       deletingRecord: false,
       showBulkMove: false,
     }, () => {
@@ -107,7 +107,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
           this.setState({
             loadingData: false,
             folderContent: folderContent,
-          } as BrowserState);
+          } as FileBrowserState);
         }
       );
     });
@@ -122,7 +122,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
     formProps.customEndpointParams = {idFolder: this.state.folderContent.folder.id};
-    return <FormDocument {...formProps}/>;
+    return <FormFile {...formProps}/>;
   }
 
   changeFolder(newFolderUid: string, newPath: Array<string>) {
@@ -134,7 +134,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
     };
     
     window.history.pushState(newState, "", '?folderUid=' + newFolderUid);
-    this.setState(newState as BrowserState, () => { this.loadData(); });
+    this.setState(newState as FileBrowserState, () => { this.loadData(); });
   }
 
   createSubFolder() {
@@ -143,7 +143,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
     });
   }
 
-  toggleSelection(id: number, type: 'selectedFolders' | 'selectedDocuments') {
+  toggleSelection(id: number, type: 'selectedFolders' | 'selectedFiles') {
     const sel = this.state[type].includes(id)
       ? this.state[type].filter(i => i !== id)
       : [...this.state[type], id];
@@ -154,7 +154,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
     this.setState({deletingRecord: false, deleteButtonDisabled: false });
     const items = [
       ...this.state.selectedFolders.map(id => ({ id, model: 'Hubleto/App/Community/Documents/Models/Folder' })),
-      ...this.state.selectedDocuments.map(id => ({ id, model: 'Hubleto/App/Community/Documents/Models/Document' }))
+      ...this.state.selectedFiles.map(id => ({ id, model: 'Hubleto/App/Community/Documents/Models/File' }))
     ];
         const promises = items.map(item => new Promise(resolve => {
       request.delete('api/record/delete', item, resolve, resolve);
@@ -164,9 +164,9 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
 
   bulkMove() {
     const idFolder = Number(this.refBulkMoveFolderLookup.current?.state?.value ?? 0);
-    const promises = this.state.selectedDocuments.map(id => new Promise(resolve => {
-      const doc = this.state.folderContent.documents.find((d: any) => d.id === id);
-      request.post( 'api/record/save', { model: 'Hubleto/App/Community/Documents/Models/Document', record: { ...doc, id_folder: idFolder  }, },
+    const promises = this.state.selectedFiles.map(id => new Promise(resolve => {
+      const doc = this.state.folderContent.files.find((d: any) => d.id === id);
+      request.post( 'api/record/save', { model: 'Hubleto/App/Community/Documents/Models/File', record: { ...doc, id_folder: idFolder  }, },
         {},
         resolve,
         resolve,
@@ -218,7 +218,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
           <span className="icon"><i className="fas fa-plus"></i></span>
           <span className="text">{this.translate('Add folder')}</span>
         </button>
-        {this.state.selectedDocuments.length > 0 ? (
+        {this.state.selectedFiles.length > 0 ? (
           <>
             <button
               onClick={() => {
@@ -249,7 +249,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             ) : null}
           </>
         ) : null}
-        {this.state.selectedFolders.length > 0 || this.state.selectedDocuments.length > 0 ? (
+        {this.state.selectedFolders.length > 0 || this.state.selectedFiles.length > 0 ? (
           <button
             onClick={() => {
               if (!this.state.deleteButtonDisabled) {
@@ -296,8 +296,8 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
             <div className="text line-clamp-2 w-full break-words">{item.name ?? ''}</div>
           </button>
         }) : null}
-        {this.state.folderContent.documents ? this.state.folderContent.documents.map((item, index) => {
-          const isSelected = this.state.selectedDocuments.includes(item.id);
+        {this.state.folderContent.files ? this.state.folderContent.files.map((item, index) => {
+          const isSelected = this.state.selectedFiles.includes(item.id);
           return <button
             key={index}
             className={"relative btn btn-square w-32 " + (isSelected ? "btn-primary dark:bg-blue-900" : "btn-primary-outline dark:bg-transparent")}
@@ -309,7 +309,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
               type="checkbox" 
               className="absolute top-2 left-2 cursor-pointer w-4 h-4" 
               checked={isSelected}
-              onChange={() => this.toggleSelection(item.id, 'selectedDocuments')}
+              onChange={() => this.toggleSelection(item.id, 'selectedFiles')}
               onClick={(e) => e.stopPropagation()}
             />
             <span className="icon"><i className="fas fa-file"></i></span>
@@ -326,7 +326,7 @@ export default class Browser extends Table<BrowserProps, BrowserState> {
           }}
         >
           <span className="icon"><i className="fas fa-plus"></i></span>
-          <span className="text">{this.translate('Add document')}</span>
+          <span className="text">{this.translate('Add file')}</span>
         </button>
       </div>
       {this.renderFormModal()}

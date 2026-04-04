@@ -132,9 +132,6 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       "id_role" => \Hubleto\App\Community\Auth\Models\UserRole::ROLE_EXTERNAL,
     ]);
 
-    //Documents
-    $mDocuments = $this->getModel(\Hubleto\App\Community\Documents\Models\Document::class);
-
     //Customers & Contacts
     $mCustomer            = $this->getModel(\Hubleto\App\Community\Customers\Models\Customer::class);
     $mContact             = $this->getModel(\Hubleto\App\Community\Contacts\Models\Contact::class);

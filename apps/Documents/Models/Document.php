@@ -20,9 +20,9 @@ class Document extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
-      'model' => (new Varchar($this, $this->translate('Model')))->setReadonly()->setDefaultVisible(),
-      'record_id' => (new Integer($this, $this->translate('RecordId')))->setDefaultVisible(),
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'model' => (new Varchar($this, $this->translate('Model')))->setReadonly()->setDefaultVisible(),
+      'record_id' => (new Integer($this, $this->translate('RecordId')))->setReadonly()->setDefaultVisible(),
     ]);
   }
 

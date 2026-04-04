@@ -60,6 +60,7 @@ class Generator extends \Hubleto\Erp\Core
   /**
    * Generates PDF document from template and returns ID of the generated document.
    *
+   * @param string $documentName
    * @param string $model Model (full class name) which the document is related to.
    * @param int $recordId ID of the record in the model.
    * @param int $idTemplate ID of template to be used for generating the document.
@@ -70,6 +71,7 @@ class Generator extends \Hubleto\Erp\Core
    * 
    */
   public function generatePdfDocumentFromTemplate(
+    string $documentName,
     string $model,
     int $recordId,
     int $idTemplate,
@@ -145,7 +147,7 @@ class Generator extends \Hubleto\Erp\Core
         $idDocument = $mDocument->record->recordCreate([
           'model' => $model,
           'record_id' => $recordId,
-          'name' => $outputFilename,
+          'name' => $documentName,
         ])['id'] ?? 0;
       }
 
@@ -164,6 +166,7 @@ class Generator extends \Hubleto\Erp\Core
   /**
    * Shorthand for generatePdfDocumentFromTemplate with $createDocumentEntry set to true.
    *
+   * @param string $documentName
    * @param string $model
    * @param int $recordId
    * @param int $idTemplate
@@ -174,6 +177,7 @@ class Generator extends \Hubleto\Erp\Core
    * 
    */
   public function createPdfDocumentFromTemplate(
+    string $documentName,
     string $model,
     int $recordId,
     int $idTemplate,
@@ -181,6 +185,14 @@ class Generator extends \Hubleto\Erp\Core
     array $vars
   ): int
   {
-    return $this->generatePdfDocumentFromTemplate($model, $recordId, $idTemplate, $outputFilename, $vars, true);
+    return $this->generatePdfDocumentFromTemplate(
+      $documentName,
+      $model,
+      $recordId,
+      $idTemplate,
+      $outputFilename,
+      $vars,
+      true
+    );
   }
 }

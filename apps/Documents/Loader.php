@@ -33,7 +33,7 @@ class Loader extends \Hubleto\Erp\App
       '/^documents\/reviews(\/(?<recordId>\d+))?\/?$/' => Controllers\DocumentReviews::class,
       '/^documents\/reviews\/add\/?$/' => ['controller' => Controllers\DocumentReviews::class, 'vars' => ['recordId' => -1]],
 
-      '/^documents\/folders\/?(?<recordId>\d+)\/?$/' => Controllers\Folders::class,
+      '/^documents\/folders(\/(?<recordId>\d+))?\/?$/' => Controllers\Folders::class,
       '/^documents\/folders\/add\/?$/' => ['controller' => Controllers\Folders::class, 'vars' => ['recordId' => -1]],
 
       '/^documents\/templates(\/(?<recordId>\d+))?\/?$/' => Controllers\Templates::class,
@@ -144,28 +144,21 @@ class Loader extends \Hubleto\Erp\App
           <span class="text">' . $this->translate('Documents') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/versions">
-          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="icon"><i class="fas fa-arrow-down-1-9"></i></span>
           <span class="text">' . $this->translate('Versions') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/reviews">
-          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="icon"><i class="fas fa-spell-check"></i></span>
           <span class="text">' . $this->translate('Reviews') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/files">
-          <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('File browser') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/files/list">
-          <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('Uploaded files') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/folders">
-          <span class="icon"><i class="fas fa-folder"></i></span>
-          <span class="text">' . $this->translate('Manage folders') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/templates">
           <span class="icon"><i class="fas fa-file"></i></span>
           <span class="text">' . $this->translate('Templates') . '</span>
+        </a>
+        <br/>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/files">
+          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="text">' . $this->translate('File manager') . '</span>
         </a>
       </div>
     ';

@@ -20,7 +20,7 @@ class xxxGeneratePdfFromTemplate extends \Hubleto\Erp\Controllers\ApiController
     /** @var Generator */
     $generator = $this->getService(Generator::class);
     $idDocument = $generator->createPdfDocumentFromTemplate(
-      '',
+      'Test',
       0,
       $template->id,
       $outpuFilename,

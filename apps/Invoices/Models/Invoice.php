@@ -709,6 +709,7 @@ class Invoice extends \Hubleto\Erp\Model {
     $generator = $this->getService(Generator::class);
 
     $generator->createPdfDocumentFromTemplate(
+      'Invoice ' . $invoice->number,
       Invoice::class,
       $idInvoice,
       $template->id,

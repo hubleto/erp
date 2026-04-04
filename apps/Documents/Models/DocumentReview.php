@@ -39,9 +39,9 @@ class DocumentReview extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = $this->translate('Add document review');
-    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
-    $description->hide(['footer']);
+    $description->ui['addButtonText'] = $this->translate('Request review');
+    $description->show(['header', 'fulltextSearch', 'moreActionsButton']);
+    $description->hide(['columnSearch', 'footer']);
 
     return $description;
   }

@@ -446,6 +446,7 @@ class Order extends \Hubleto\Erp\Model
     $generator = $this->getService(Generator::class);
 
     $idDocument = $generator->createPdfDocumentFromTemplate(
+      'Order ' . $order->identifier,
       Order::class,
       $idOrder,
       $template->id,

@@ -483,6 +483,7 @@ class Deal extends \Hubleto\Erp\Model
     /** @var Generator */
     $generator = $this->getService(Generator::class);
     $idDocument = $generator->createPdfDocumentFromTemplate(
+      'Deal ' . $deal->identifier,
       Deal::class,
       $idDeal,
       $template->id,

@@ -26,6 +26,7 @@ final class GenerateDocumentTest extends TestCase
     $generator = $hubleto->getService(Generator::class);
 
     $generator->createPdfDocumentFromTemplate(
+      'Test',
       '',
       0,
       $template['id'],

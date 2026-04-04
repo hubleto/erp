@@ -29,7 +29,6 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Document')}</b> },
-        { uid: 'reviews', title: <b>{this.translate('Reviews')}</b> },
       ]
     };
   }
@@ -50,31 +49,38 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
 
     switch (tabUid) {
       case 'default':
-        return <div className='flex flex-col gap-2'>
-          <div className='flex-1'>
+        return <div className='flex gap-2'>
+          <div className='flex-2'>
             {this.inputWrapper('uid', {readonly: true})}
-            {this.inputWrapper('model')}
-            {this.inputWrapper('record_id')}
+            <div className='flex gap-2'>
+              {this.inputWrapper('model')}
+              {this.inputWrapper('record_id')}
+            </div>
             {this.inputWrapper('name', {cssClass: 'text-2xl'})}
+            <div className='card'>
+              <div className='card-header'>{this.translate('Versions')}</div>
+              <div className='card-body'>
+                <TableDocumentVersions
+                  key={"table_documents_versions"}
+                  tag={"table_documents_versions"}
+                  parentForm={this}
+                  readonly={true}
+                  uid={this.props.uid + "_table_documents_versions"}
+                  idDocument={R.id}
+                />
+              </div>
+            </div>
           </div>
-          {this.divider(this.translate('Versions'))}
-          <TableDocumentVersions
-            key={"table_documents_versions"}
-            tag={"table_documents_versions"}
-            parentForm={this}
-            uid={this.props.uid + "_table_documents_versions"}
-            idDocument={R.id}
-          />
+          <div className='flex-1'>
+            <TableDocumentReviews
+              key={"table_documents_reviews"}
+              tag={"table_documents_reviews"}
+              parentForm={this}
+              uid={this.props.uid + "_table_documents_reviews"}
+              idDocument={R.id}
+            />
+          </div>
         </div>
-      break;
-      case 'reviews':
-        return <TableDocumentReviews
-          key={"table_documents_reviews"}
-          tag={"table_documents_reviews"}
-          parentForm={this}
-          uid={this.props.uid + "_table_documents_reviews"}
-          idDocument={R.id}
-        />
       break;
     };
   }

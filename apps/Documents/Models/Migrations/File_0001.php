@@ -21,9 +21,8 @@ class File_0001 extends Migration
         `hyperlink` varchar(255) ,
         `origin_link` varchar(255) ,
         index `id` (`id`),
-        index `id_folder` (`id_folder`))
-        ENGINE = InnoDB
-      ;
+        index `id_folder` (`id_folder`)
+      ) ENGINE = InnoDB;
       SET foreign_key_checks = 1;
     ");
   }

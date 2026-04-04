@@ -30,6 +30,9 @@ class Loader extends \Hubleto\Erp\App
       '/^documents\/versions(\/(?<recordId>\d+))?\/?$/' => Controllers\DocumentVersions::class,
       '/^documents\/versions\/add\/?$/' => ['controller' => Controllers\DocumentVersions::class, 'vars' => ['recordId' => -1]],
 
+      '/^documents\/reviews(\/(?<recordId>\d+))?\/?$/' => Controllers\DocumentReviews::class,
+      '/^documents\/reviews\/add\/?$/' => ['controller' => Controllers\DocumentReviews::class, 'vars' => ['recordId' => -1]],
+
       '/^documents\/folders\/?(?<recordId>\d+)\/?$/' => Controllers\Folders::class,
       '/^documents\/folders\/add\/?$/' => ['controller' => Controllers\Folders::class, 'vars' => ['recordId' => -1]],
 
@@ -65,6 +68,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\File::class)->upgradeSchema();
       $this->getModel(Models\Document::class)->upgradeSchema();
       $this->getModel(Models\DocumentVersion::class)->upgradeSchema();
+      $this->getModel(Models\DocumentReview::class)->upgradeSchema();
       $this->getModel(Models\Template::class)->upgradeSchema();
     }
 
@@ -141,7 +145,11 @@ class Loader extends \Hubleto\Erp\App
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/versions">
           <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('Document versions') . '</span>
+          <span class="text">' . $this->translate('Versions') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/reviews">
+          <span class="icon"><i class="fas fa-list"></i></span>
+          <span class="text">' . $this->translate('Reviews') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/documents/files">
           <span class="icon"><i class="fas fa-list"></i></span>

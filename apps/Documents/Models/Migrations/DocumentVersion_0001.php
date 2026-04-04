@@ -18,9 +18,8 @@ class DocumentVersion_0001 extends Migration
         `id_document` int(8) NULL default NULL,
         `file` varchar(255) ,
         index `id` (`id`),
-        index `id_document` (`id_document`))
-        ENGINE = InnoDB
-      ;
+        index `id_document` (`id_document`)
+      ) ENGINE = InnoDB;
       SET foreign_key_checks = 1;
     ");
   }
@@ -44,6 +43,6 @@ class DocumentVersion_0001 extends Migration
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `documents` DROP FOREIGN KEY `fk__id_document`");
+    $this->db->execute("ALTER TABLE `documents_versions` DROP FOREIGN KEY `fk__id_document`");
   }
 }

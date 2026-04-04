@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableDocumentVersions from './TableDocumentVersions';
+import TableDocumentReviews from './TableDocumentReviews';
 
 export interface FormDocumentProps extends FormExtendedProps {
 }
@@ -28,6 +29,7 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Document')}</b> },
+        { uid: 'reviews', title: <b>{this.translate('Reviews')}</b> },
       ]
     };
   }
@@ -64,6 +66,15 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
             idDocument={R.id}
           />
         </div>
+      break;
+      case 'reviews':
+        return <TableDocumentReviews
+          key={"table_documents_reviews"}
+          tag={"table_documents_reviews"}
+          parentForm={this}
+          uid={this.props.uid + "_table_documents_reviews"}
+          idDocument={R.id}
+        />
       break;
     };
   }

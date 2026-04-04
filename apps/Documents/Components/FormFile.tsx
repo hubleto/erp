@@ -33,12 +33,12 @@ export default class FormFile<P, S> extends FormExtended<FormFileProps,FormFileS
   }
 
   getRecordFormUrl(): string {
-    return 'documents/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+    return 'documents/files/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.translate("Document")}</small>
+      <small>{this.translate("File")}</small>
       <h2>{this.state.record.name ? this.state.record.name : '-'}</h2>
     </>;
   }

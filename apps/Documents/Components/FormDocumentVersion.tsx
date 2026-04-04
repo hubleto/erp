@@ -33,12 +33,12 @@ export default class FormDocumentVersion<P, S> extends FormExtended<FormDocument
   }
 
   getRecordFormUrl(): string {
-    return 'documents/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+    return 'documents/versions/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.translate("Document")}</small>
+      <small>{this.translate("Document version")}</small>
       <h2>{this.state.record.name ? this.state.record.name : '-'}</h2>
     </>;
   }

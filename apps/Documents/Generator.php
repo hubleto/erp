@@ -134,14 +134,23 @@ class Generator extends \Hubleto\Erp\Core
       /** @var DocumentVersion */
       $mDocumentVersion = $this->getModel(Models\DocumentVersion::class);
 
-      $document = $mDocument->record->recordCreate([
-        'model' => $model,
-        'record_id' => $recordId,
-        'name' => $outputFilename,
-      ]);
+      $document = $mDocument->record
+        ->where('model', $model)
+        ->where('record_id', $recordId)
+        ->first();
+      
+      if ($document) {
+        $idDocument = $document->id;
+      } else {
+        $idDocument = $mDocument->record->recordCreate([
+          'model' => $model,
+          'record_id' => $recordId,
+          'name' => $outputFilename,
+        ])['id'] ?? 0;
+      }
 
       $version = $mDocumentVersion->record->recordCreate([
-        'id_document' => $document['id'],
+        'id_document' => $idDocument,
         'name' => $outputFilename,
         'file' => $outputFilename,
       ]);

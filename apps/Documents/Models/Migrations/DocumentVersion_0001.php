@@ -18,6 +18,7 @@ class DocumentVersion_0001 extends Migration
         `id_document` int(8) NULL default NULL,
         `file` varchar(255) ,
         index `id` (`id`),
+        index `uid` (`uid`),
         index `id_document` (`id_document`)
       ) ENGINE = InnoDB;
       SET foreign_key_checks = 1;
@@ -36,8 +37,10 @@ class DocumentVersion_0001 extends Migration
   public function upgradeForeignKeys(): void
   {
     $this->db->execute("
+      set foreign_key_checks = 0;
       ALTER TABLE `documents_versions` ADD CONSTRAINT `fk__id_document` FOREIGN KEY (`id_document`)
-        REFERENCES `documents` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+        REFERENCES `documents` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+      set foreign_key_checks = 1;
     ");
   }
 

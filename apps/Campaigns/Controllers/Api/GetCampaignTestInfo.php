@@ -80,15 +80,15 @@ class GetCampaignTestInfo extends \Hubleto\Erp\Controllers\ApiController
       $bodyHtml = $campaign->mail_body;
 
       if (!strpos($bodyHtml, '{{ botDetectorHiddenLink }}')) {
-        $testInfo['warnings'][] = $this->translate('Mail template does not contain {{ placeholder }} placeholder.', ['placeholder' => 'botDetectorHiddenLink']);
+        $testInfo['warnings'][] = $this->translate('Mail does not contain {{ botDetectorHiddenLink }} placeholder.');
       }
 
       if (!strpos($bodyHtml, '{{ unsubscribeHref }}')) {
-        $testInfo['warnings'][] = $this->translate('Mail template does not contain {{ placeholder }} placeholder.', ['placeholder' => 'unsubscribeHref']);
+        $testInfo['warnings'][] = $this->translate('Mail does not contain {{ unsubscribeHref }} placeholder.');
       }
 
       if (!strpos($bodyHtml, '{{ viewInBrowserHref }}')) {
-        $testInfo['warnings'][] = $this->translate('Mail template does not contain {{ placeholder }} placeholder.', ['placeholder' => 'viewInBrowserHref']);
+        $testInfo['warnings'][] = $this->translate('Mail does not contain {{ viewInBrowserHref }} placeholder.');
       }
 
       $allVarsUsedInTemplate = true;

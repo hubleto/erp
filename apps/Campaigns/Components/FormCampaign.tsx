@@ -507,24 +507,19 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                   })
                 }
                 <div className='flex gap-1'>
-                  <b>Recently contacted</b>
-                  
+                  <b className='flex gap-1 items-center'>Recipients contacted in last <input
+                    type='number'
+                    className='w-12'
+                    value={this.state.recentlyContactedPeriod}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                      this.setState({recentlyContactedPeriod: event.target.value}, () => {
+                        this.updateCampaignTestInfo();
+                      });
+                    }}
+                  ></input> months</b>
                 </div>
                 {Object.keys(this.state.campaignTestInfo.recentlyContacted).length == 0
-                  ? <div className='flex gap-1 items-center'>
-                      No recipients contacted in last
-                      <input
-                        type='number'
-                        className='w-8'
-                        value={this.state.recentlyContactedPeriod}
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                          this.setState({recentlyContactedPeriod: event.target.value}, () => {
-                            this.updateCampaignTestInfo();
-                          });
-                        }}
-                      ></input>
-                      months found.
-                    </div>
+                  ? <div className='flex gap-1 items-center'>No recipients found.</div>
                   : <table className='table-default dense'>
                     <thead>
                       <tr>

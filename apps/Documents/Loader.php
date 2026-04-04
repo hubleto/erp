@@ -27,6 +27,9 @@ class Loader extends \Hubleto\Erp\App
       '/^documents(\/(?<recordId>\d+))?\/?$/' => Controllers\Documents::class,
       '/^documents\/add\/?$/' => ['controller' => Controllers\Documents::class, 'vars' => ['recordId' => -1]],
 
+      '/^documents\/review-results(\/(?<recordId>\d+))?\/?$/' => Controllers\ReviewResults::class,
+      '/^documents\/review-results\/add\/?$/' => ['controller' => Controllers\ReviewResults::class, 'vars' => ['recordId' => -1]],
+
       '/^documents\/versions(\/(?<recordId>\d+))?\/?$/' => Controllers\DocumentVersions::class,
       '/^documents\/versions\/add\/?$/' => ['controller' => Controllers\DocumentVersions::class, 'vars' => ['recordId' => -1]],
 
@@ -40,6 +43,13 @@ class Loader extends \Hubleto\Erp\App
       '/^documents\/templates\/add\/?$/' => ['controller' => Controllers\Templates::class, 'vars' => ['recordId' => -1]],
     ]);
 
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('Document review results'),
+      'icon' => 'fas fa-spell-check',
+      'url' => 'documents/review-results',
+    ]);
   }
 
   public function getRootFolderId(): int|null
@@ -65,6 +75,7 @@ class Loader extends \Hubleto\Erp\App
         'name' => '_ROOT_',
       ]);
 
+      $this->getModel(Models\ReviewResult::class)->upgradeSchema();
       $this->getModel(Models\File::class)->upgradeSchema();
       $this->getModel(Models\Document::class)->upgradeSchema();
       $this->getModel(Models\DocumentVersion::class)->upgradeSchema();

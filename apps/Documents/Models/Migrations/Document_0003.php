@@ -10,8 +10,6 @@ class Document_0003 extends Migration
   public function upgradeSchema(): void
   {
     $this->db->execute("set foreign_key_checks = 0");
-    $this->db->execute('alter table `documents` drop constraint `fk_19b414ad9db15a0afa56e50f18bfe615`');
-    $this->db->execute('alter table `documents` drop `id_folder`');
     $this->db->execute('alter table `documents` drop `is_public`');
     $this->db->execute('alter table `documents` drop `file`');
     $this->db->execute('alter table `documents` drop `hyperlink`');
@@ -23,8 +21,6 @@ class Document_0003 extends Migration
   {
     $this->db->execute('alter table `documents` add `is_public` int(1)');
     $this->db->execute('alter table `documents` add index (`is_public`)');
-    $this->db->execute('alter table `documents` add `id_folder` int(1)');
-    $this->db->execute('alter table `documents` add index (`id_folder`)');
 
     $this->db->execute('alter table `documents` add `file` varchar(255)');
     $this->db->execute('alter table `documents` add `hyperlink` varchar(255)');
@@ -37,9 +33,5 @@ class Document_0003 extends Migration
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("
-      ALTER TABLE `files` ADD CONSTRAINT `fk__id_folder` FOREIGN KEY (`id_folder`)
-        REFERENCES `folders` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-    ");
   }
 }

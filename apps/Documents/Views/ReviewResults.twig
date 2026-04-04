@@ -1,0 +1,10 @@
+<h1 class="app-main-title">{{ translate("Documents") }} > {{ translate("Review results") }}</h1>
+
+<hblreact-documents-table-document-review-results
+  string:tag="table-document-reviews"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
+  json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
+></hblreact-documents-table-document-review-results>

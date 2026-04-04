@@ -16,13 +16,12 @@ set foreign_key_checks = 1;");
 create table `documents` (
  `id` int(8) primary key auto_increment,
  `uid` varchar(255) ,
- `id_folder` int(8) NULL default NULL,
  `name` varchar(255) ,
  `file` varchar(255) ,
  `hyperlink` varchar(255) ,
  `origin_link` varchar(255) ,
- index `id` (`id`),
- index `id_folder` (`id_folder`)) ENGINE = InnoDB;
+ index `id` (`id`)
+ ) ENGINE = InnoDB;
 SET foreign_key_checks = 1;");
   }
 
@@ -35,17 +34,9 @@ set foreign_key_checks = 1;");
 
   public function upgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `documents`
-          ADD CONSTRAINT `fk_19b414ad9db15a0afa56e50f18bfe615`
-          FOREIGN KEY (`id_folder`)
-          REFERENCES `folders` (`id`)
-          ON DELETE RESTRICT
-          ON UPDATE RESTRICT;");
   }
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `documents`
-          DROP FOREIGN KEY `fk_19b414ad9db15a0afa56e50f18bfe615`;");
   }
 }

@@ -22,8 +22,8 @@ class DocumentReview_0001 extends Migration
         `id_reviewed_by` int(8) NULL default NULL,
         `comments` text,
         index `id` (`id`),
-        index `id_document` (`id_document`)),
-        index `id_requested_by` (`id_requested_by`)),
+        index `id_document` (`id_document`),
+        index `id_requested_by` (`id_requested_by`),
         index `id_reviewed_by` (`id_reviewed_by`)
       ) ENGINE = InnoDB;
       SET foreign_key_checks = 1;

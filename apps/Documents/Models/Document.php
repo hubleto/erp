@@ -17,7 +17,6 @@ class Document extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'documents/{%ID%}';
 
   public array $relations = [
-    'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id'],
     'CREATED_BY' => [ self::BELONGS_TO, User::class, 'id_created_by', 'id'],
   ];
 

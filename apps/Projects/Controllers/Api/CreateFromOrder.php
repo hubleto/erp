@@ -38,7 +38,6 @@ class CreateFromOrder extends \Hubleto\Erp\Controllers\ApiController
       $project = $mProject->record->recordCreate([
         "id_customer" => $order->id_customer,
         "title" => $order->title,
-        "identifier" => $order->identifier,
       ]);
 
       $mProjectOrder->record->recordCreate([

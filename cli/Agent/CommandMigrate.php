@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp\Cli\Agent;
 
-use Hubleto\Framework\Db\ModelSQLCommandsGenerator;
+use Hubleto\Framework\Exceptions\DBException;
 use Hubleto\Framework\Enums\InstalledMigrationEnum;
 use Hubleto\Framework\Interfaces\ModelInterface;
 
@@ -51,68 +51,74 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
       $this->terminal()->yellow("\nThis is dry run. I will not install any migration.\n");
     }
 
-    $tplFolder = __DIR__ . '/../../Templates/snippets';
-    $this->renderer()->addNamespace($tplFolder, 'snippets');
+    try {
+      $this->db()->startTransaction();
 
-    for ($round = 1; $round <= ($dryRun ? 1 : 2); $round++) {
-      if (!$dryRun) {
-        if ($round == 1) {
-          $this->terminal()->yellow("\nInstalling tables...\n");
-        } else {
-          $this->terminal()->yellow("\nInstalling foreign keys...\n");
-        }
-      }
-
-      foreach ($appQueue as $app) {
-        if (empty($model)) {
-          $queue = $app->getAvailableModelClasses();
-        } else {
-          $queue = [$appNamespace . '\\Models\\' . $model];
-        }
-
-        foreach ($queue as $class) {
-          $classObject = new $class;
-
-          if (!($classObject instanceof ModelInterface)) {
-            throw new \Exception("Class '{$class}' does not implement ModelInterface.");
-          }
-
-          $className = basename(str_replace('\\', '/', $class));
-
-          if (!is_file($app->srcFolder . '/Models/' . $className . '.php')) {
-            throw new \Exception("Model '{$class}' does not exist in app '{$appNamespace}'.");
-          }
-
+      for ($round = 1; $round <= ($dryRun ? 1 : 2); $round++) {
+        if (!$dryRun) {
           if ($round == 1) {
-            $pendingMigrations = $classObject->getPendingMigrations(InstalledMigrationEnum::TABLES);
-            $pendingMigrationsCount = sizeof($pendingMigrations);
+            $this->terminal()->yellow("\nInstalling tables...\n");
           } else {
-            $pendingMigrations = $classObject->getPendingMigrations(InstalledMigrationEnum::FOREIGN_KEYS);
-            $pendingMigrationsCount = sizeof($pendingMigrations);
+            $this->terminal()->yellow("\nInstalling foreign keys...\n");
+          }
+        }
+
+        foreach ($appQueue as $app) {
+          if (empty($model)) {
+            $queue = $app->getAvailableModelClasses();
+          } else {
+            $queue = [$appNamespace . '\\Models\\' . $model];
           }
 
-          $plural = $pendingMigrationsCount > 1 ? 's' : '';
+          foreach ($queue as $mClass) {
+            $mObj = new $mClass;
 
-          if ($pendingMigrationsCount > 0) {
-            $this->terminal()->cyan("{$class} has {$pendingMigrationsCount} pending migration{$plural}\n");
-            foreach ($pendingMigrations as $migration) {
-              $this->terminal()->cyan("  -> " . get_class($migration) . "\n");
+            if (!($mObj instanceof ModelInterface)) {
+              throw new \Exception("Class '{$mClass}' does not implement ModelInterface.");
             }
- 
-            if ($dryRun) {
+
+            $className = basename(str_replace('\\', '/', $mClass));
+
+            if (!is_file($app->srcFolder . '/Models/' . $className . '.php')) {
+              throw new \Exception("Model '{$mClass}' does not exist in app '{$appNamespace}'.");
+            }
+
+            if ($round == 1) {
+              $pendingMigrations = $mObj->getPendingMigrations(InstalledMigrationEnum::TABLES);
+              $pendingMigrationsCount = sizeof($pendingMigrations);
             } else {
-              if ($round == 1) {
-                $classObject->upgradeSchema();
+              $pendingMigrations = $mObj->getPendingMigrations(InstalledMigrationEnum::FOREIGN_KEYS);
+              $pendingMigrationsCount = sizeof($pendingMigrations);
+            }
+
+            $plural = $pendingMigrationsCount > 1 ? 's' : '';
+
+            if ($pendingMigrationsCount > 0) {
+              $this->terminal()->cyan("{$mClass} has {$pendingMigrationsCount} pending migration{$plural}\n");
+              foreach ($pendingMigrations as $migration) {
+                $this->terminal()->cyan("  -> " . get_class($migration) . "\n");
+              }
+  
+              if ($dryRun) {
               } else {
-                $classObject->upgradeForeignKeys();
+                if ($round == 1) {
+                  $mObj->upgradeSchema();
+                } else {
+                  $mObj->upgradeForeignKeys();
+                }
               }
             }
           }
         }
       }
-    }
 
-    $this->terminal()->green("\nPending migrations successfully applied!\n");
+      $this->terminal()->green("\nPending migrations successfully applied!\n");
+
+      $this->db()->commit();
+    } catch (DBException $e) {
+      $this->db()->rollback();
+      throw new DBException($e->getMessage());
+    } 
   }
 
 }

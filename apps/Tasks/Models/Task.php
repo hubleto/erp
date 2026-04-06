@@ -138,7 +138,7 @@ class Task extends \Hubleto\Erp\Model
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
         $description->hide(['header', 'footer']);
-        $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_workflow_step', 'virt_worked']);
+        $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_workflow_step', 'virt_worked', 'hours_estimation']);
       break;
       default:
         $description->ui['addButtonText'] = $this->translate('Add Task');

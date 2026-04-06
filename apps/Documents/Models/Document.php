@@ -4,6 +4,9 @@ namespace Hubleto\App\Community\Documents\Models;
 
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\DateTime;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Document extends \Hubleto\Erp\Model
 {
@@ -14,6 +17,8 @@ class Document extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'documents/{%ID%}';
 
   public array $relations = [
+    'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id'],
+    'CREATED_BY' => [ self::BELONGS_TO, User::class, 'id_created_by', 'id'],
   ];
 
   public function describeColumns(): array
@@ -23,6 +28,8 @@ class Document extends \Hubleto\Erp\Model
       'name' => (new Varchar($this, $this->translate('Document name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'model' => (new Varchar($this, $this->translate('Model')))->setReadonly()->setDefaultVisible(),
       'record_id' => (new Integer($this, $this->translate('RecordId')))->setReadonly()->setDefaultVisible(),
+      'created_on' => (new DateTime($this, $this->translate('Created on')))->setReadonly()->setDefaultVisible(),
+      'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultVisible(),
     ]);
   }
 

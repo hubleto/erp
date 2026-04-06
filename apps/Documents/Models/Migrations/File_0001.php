@@ -41,13 +41,13 @@ class File_0001 extends Migration
   public function upgradeForeignKeys(): void
   {
     $this->db->execute("
-      ALTER TABLE `files` ADD CONSTRAINT `fk__id_folder` FOREIGN KEY (`id_folder`)
+      ALTER TABLE `files` ADD CONSTRAINT `fk__files__id_folder` FOREIGN KEY (`id_folder`)
         REFERENCES `folders` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
     ");
   }
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `folders` DROP FOREIGN KEY `fk_id_folder`");
+    $this->db->execute("ALTER TABLE `folders` DROP FOREIGN KEY `fk__files__id_folder`");
   }
 }

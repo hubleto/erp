@@ -42,23 +42,23 @@ class DocumentReview_0001 extends Migration
   public function upgradeForeignKeys(): void
   {
     $this->db->execute("
-      ALTER TABLE `documents_reviews` ADD CONSTRAINT `fk__id_document` FOREIGN KEY (`id_document`)
+      ALTER TABLE `documents_reviews` ADD CONSTRAINT `fk__documents_reviews__id_document` FOREIGN KEY (`id_document`)
         REFERENCES `documents` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
     ");
     $this->db->execute("
-      ALTER TABLE `documents_reviews` ADD CONSTRAINT `fk__id_requested_by` FOREIGN KEY (`id_requested_by`)
+      ALTER TABLE `documents_reviews` ADD CONSTRAINT `fk__documents_reviews__id_requested_by` FOREIGN KEY (`id_requested_by`)
         REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
     ");
     $this->db->execute("
-      ALTER TABLE `documents_reviews` ADD CONSTRAINT `fk__id_reviewed_by` FOREIGN KEY (`id_reviewed_by`)
+      ALTER TABLE `documents_reviews` ADD CONSTRAINT `fk__documents_reviews__id_reviewed_by` FOREIGN KEY (`id_reviewed_by`)
         REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
     ");
   }
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `documents_reviews` DROP FOREIGN KEY `fk__id_document`");
-    $this->db->execute("ALTER TABLE `documents_reviews` DROP FOREIGN KEY `fk__id_requested_by`");
-    $this->db->execute("ALTER TABLE `documents_reviews` DROP FOREIGN KEY `fk__id_reviewed_by`");
+    $this->db->execute("ALTER TABLE `documents_reviews` DROP FOREIGN KEY `fk__documents_reviews__id_document`");
+    $this->db->execute("ALTER TABLE `documents_reviews` DROP FOREIGN KEY `fk__documents_reviews__id_requested_by`");
+    $this->db->execute("ALTER TABLE `documents_reviews` DROP FOREIGN KEY `fk__documents_reviews__id_reviewed_by`");
   }
 }

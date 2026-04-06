@@ -38,7 +38,7 @@ class DocumentVersion_0001 extends Migration
   {
     $this->db->execute("
       set foreign_key_checks = 0;
-      ALTER TABLE `documents_versions` ADD CONSTRAINT `fk__id_document` FOREIGN KEY (`id_document`)
+      ALTER TABLE `documents_versions` ADD CONSTRAINT `fk__documents_versions__id_document` FOREIGN KEY (`id_document`)
         REFERENCES `documents` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
       set foreign_key_checks = 1;
     ");
@@ -46,6 +46,6 @@ class DocumentVersion_0001 extends Migration
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `documents_versions` DROP FOREIGN KEY `fk__id_document`");
+    $this->db->execute("ALTER TABLE `documents_versions` DROP FOREIGN KEY `fk__documents_versions__id_document`");
   }
 }

@@ -53,13 +53,13 @@ class AuditLog_0001 extends Migration
   public function upgradeForeignKeys(): void
   {
     $this->db->execute("
-      ALTER TABLE `audit_logs` ADD CONSTRAINT `fk__id_user` FOREIGN KEY (`id_user`)
+      ALTER TABLE `audit_logs` ADD CONSTRAINT `fk__audit_logs__id_user` FOREIGN KEY (`id_user`)
         REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
     ");
   }
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `audit_logs` DROP FOREIGN KEY `fk__id_user`;");
+    $this->db->execute("ALTER TABLE `audit_logs` DROP FOREIGN KEY `fk__audit_logs__id_user`;");
   }
 }

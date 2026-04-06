@@ -29,13 +29,13 @@ class DocumentVersion_0002 extends Migration
   public function upgradeForeignKeys(): void
   {
     $this->db->execute("
-      ALTER TABLE `documents_versions` ADD CONSTRAINT `fk__id_created_by` FOREIGN KEY (`id_created_by`)
+      ALTER TABLE `documents_versions` ADD CONSTRAINT `fk__documents_versions__id_created_by` FOREIGN KEY (`id_created_by`)
         REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
     ");
   }
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `documents_versions` DROP FOREIGN KEY `fk__id_created_by`");
+    $this->db->execute("ALTER TABLE `documents_versions` DROP FOREIGN KEY `fk__documents_versions__id_created_by`");
   }
 }

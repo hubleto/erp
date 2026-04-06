@@ -56,6 +56,10 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
               {this.inputWrapper('model')}
               {this.inputWrapper('record_id')}
             </div>
+            <div className='flex gap-2'>
+              {this.inputWrapper('id_created_by')}
+              {this.inputWrapper('created_on')}
+            </div>
             {this.inputWrapper('name', {cssClass: 'text-2xl'})}
             <div className='card'>
               <div className='card-header'>{this.translate('Versions')}</div>

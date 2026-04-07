@@ -30,7 +30,6 @@ export interface FormDealState extends FormExtendedState {
   tableDealDocumentsDescription: any,
   tablesKey: number,
   selectParentLead?: boolean,
-  htmlPreview?: any,
 }
 
 export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealState> {
@@ -40,6 +39,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
     model: 'Hubleto/App/Community/Deals/Models/Deal',
     renderWorkflowUi: true,
     renderOwnerManagerUi: true,
+    renderPreviewUi: true,
   };
 
   props: FormDealProps;
@@ -79,65 +79,67 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
     this.onCreateActivityCallback = this.onCreateActivityCallback.bind(this);
   }
 
-  getStateFromProps(props: FormDealProps) {
-    return {
-      ...super.getStateFromProps(props),
-      tabs: [
-        { uid: 'default', title: <b>{this.translate('Deal')}</b> },
-        { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
-        { uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') },
-        { uid: 'documents', title: this.translate('Documents') },
-        { uid: 'calendar', title: this.translate('Calendar') },
-        { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
-        { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
-        { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
-        ...this.getCustomTabs()
-      ],
-    };
+  getTabsLeft() {
+    return [
+      { uid: 'default', title: <b>{this.translate('Deal')}</b> },
+      { uid: 'items', title: this.translate('Items'), showCountFor: 'ITEMS' },
+      { uid: 'documents', title: this.translate('Documents') },
+      { uid: 'calendar', title: this.translate('Calendar') },
+      ...super.getTabsLeft(),
+    ];
+  }
+
+  getTabsRight() {
+    return [
+      { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
+      { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
+      { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
+      ...super.getTabsRight(),
+    ];
   }
 
   getRecordFormUrl(): string {
     return 'deals/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  onTabChange() {
-    super.onTabChange();
+  // onTabChange() {
+  //   super.onTabChange();
 
-    const tabUid = this.state.activeTabUid;
-    switch (tabUid) {
-      case 'preview':
-        this.updateDealPreview(this.state.record.id_template);
-      break;
-    }
-  }
+  //   const tabUid = this.state.activeTabUid;
+  //   switch (tabUid) {
+  //     case 'preview':
+  //       this.updateDealPreview(this.state.record.id_template);
+  //     break;
+  //   }
+  // }
 
-  updateDealPreview(idTemplate: number) {
-    request.post(
-      'deals/api/get-preview-html',
-      {
-        idDeal: this.state.record.id,
-        idTemplate: idTemplate,
-      },
-      {},
-      (result: any) => {
-        this.setState({htmlPreview: result.html});
-      }
-    );
-  }
+  // updateDealPreview(idTemplate: number) {
+  //   request.post(
+  //     'deals/api/get-preview-html',
+  //     {
+  //       idDeal: this.state.record.id,
+  //       idTemplate: idTemplate,
+  //     },
+  //     {},
+  //     (result: any) => {
+  //       this.setState({htmlPreview: result.html});
+  //     }
+  //   );
+  // }
 
-  showDealPreviewVars() {
-    request.post(
-      'deals/api/get-preview-vars',
-      {
-        idDeal: this.state.record.id,
-        idTemplate: this.state.record.id_template,
-      },
-      {},
-      (vars: any) => {
-        this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
-      }
-    );
-  }
+  // showDealPreviewVars() {
+  //   request.post(
+  //     'deals/api/get-preview-vars',
+  //     {
+  //       idDeal: this.state.record.id,
+  //       idTemplate: this.state.record.id_template,
+  //     },
+  //     {},
+  //     (vars: any) => {
+  //       this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
+  //     }
+  //   );
+  // }
 
   onAfterLoadFormDescription(description: any) {
     request.get(
@@ -380,12 +382,6 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
 
       case 'items':
 
-        const getLookupData = (lookupElement) => {
-          if (lookupElement.current) {
-            lookupData = lookupElement.current.state.data;
-          }
-        }
-
         return <>
           <div className='w-full h-full overflow-x-auto'>
             <div>{this.inputWrapper('description_before')}</div>
@@ -404,85 +400,85 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
 
       break;
 
-      case 'preview':
-        return <div className='flex gap-2 h-full'>
-          <div className='flex-1 w-72 flex flex-col gap-2'>
-            <div className='grow'>
-              {this.inputWrapper('id_template', {
-                uiStyle: 'buttons-vertical',
-                onChange: (input: any) => {
-                  this.updateDealPreview(input.state.value);
-                }
-              })}
-            </div>
-          </div>
-          <div className='flex-3 flex flex-col'>
-            <div className='flex gap-2 align-center justify-end'>
-              <div>
-                {this.input('pdf', {readonly: true})}
-              </div>
-              <div className='flex gap-2'>
-                <button
-                  className='btn btn-transparent mb-4'
-                  onClick={() => {
-                    request.post(
-                      'deals/api/generate-pdf',
-                      {idDeal: this.state.record.id},
-                      {},
-                      (result: any) => {
-                        // if (result.idDocument) {
-                        //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
-                        // }
-                        // this.reload();
-                        if (result && result.pdfFile) {
-                          this.updateRecord({pdf: result.pdfFile});
-                        }
-                      }
-                    );
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-download'></i></span>
-                  <span className='text'>{this.translate('Export to PDF')}</span>
-                </button>
-                <button
-                  className='btn btn-transparent mb-4'
-                  onClick={() => {
-                    const iframe = window.frames[this.props.uid + '_deal_preview'];
-                    const origDocumentTitle = document.title;
+      // case 'preview':
+      //   return <div className='flex gap-2 h-full'>
+      //     <div className='flex-1 w-72 flex flex-col gap-2'>
+      //       <div className='grow'>
+      //         {this.inputWrapper('id_template', {
+      //           uiStyle: 'buttons-vertical',
+      //           onChange: (input: any) => {
+      //             this.updateDealPreview(input.state.value);
+      //           }
+      //         })}
+      //       </div>
+      //     </div>
+      //     <div className='flex-3 flex flex-col'>
+      //       <div className='flex gap-2 align-center justify-end'>
+      //         <div>
+      //           {this.input('pdf', {readonly: true})}
+      //         </div>
+      //         <div className='flex gap-2'>
+      //           <button
+      //             className='btn btn-transparent mb-4'
+      //             onClick={() => {
+      //               request.post(
+      //                 'deals/api/generate-pdf',
+      //                 {idDeal: this.state.record.id},
+      //                 {},
+      //                 (result: any) => {
+      //                   // if (result.idDocument) {
+      //                   //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
+      //                   // }
+      //                   // this.reload();
+      //                   if (result && result.pdfFile) {
+      //                     this.updateRecord({pdf: result.pdfFile});
+      //                   }
+      //                 }
+      //               );
+      //             }}
+      //           >
+      //             <span className='icon'><i className='fas fa-download'></i></span>
+      //             <span className='text'>{this.translate('Export to PDF')}</span>
+      //           </button>
+      //           <button
+      //             className='btn btn-transparent mb-4'
+      //             onClick={() => {
+      //               const iframe = window.frames[this.props.uid + '_deal_preview'];
+      //               const origDocumentTitle = document.title;
 
-                    document.title += 'Deal ' + R.number + ' ' + R.CUSTOMER.name;
+      //               document.title += 'Deal ' + R.number + ' ' + R.CUSTOMER.name;
 
-                    iframe.contentWindow.focus();
-                    iframe.contentWindow.print();
+      //               iframe.contentWindow.focus();
+      //               iframe.contentWindow.print();
 
-                    document.title = origDocumentTitle;
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-print'></i></span>
-                  <span className='text'>{this.translate('Print')}</span>
-                </button>
-              </div>
-            </div>
-            <div className='w-full h-full card mt-2'>
-              <div className="card-body">
-                <HtmlFrame
-                  className='w-full h-full'
-                  iframeId={this.props.uid + '_deal_preview'}
-                  content={this.state.htmlPreview}
-                />
-              </div>
-              <div className='card-footer'>
-                <a
-                  href='#'
-                  onClick={() => {
-                    this.showDealPreviewVars();
-                  }}
-                >{this.translate('Show variables available in template')}</a>
-              </div>
-            </div>
-          </div>
-        </div>;
-      break;
+      //               document.title = origDocumentTitle;
+      //             }}
+      //           >
+      //             <span className='icon'><i className='fas fa-print'></i></span>
+      //             <span className='text'>{this.translate('Print')}</span>
+      //           </button>
+      //         </div>
+      //       </div>
+      //       <div className='w-full h-full card mt-2'>
+      //         <div className="card-body">
+      //           <HtmlFrame
+      //             className='w-full h-full'
+      //             iframeId={this.props.uid + '_deal_preview'}
+      //             content={this.state.htmlPreview}
+      //           />
+      //         </div>
+      //         <div className='card-footer'>
+      //           <a
+      //             href='#'
+      //             onClick={() => {
+      //               this.showDealPreviewVars();
+      //             }}
+      //           >{this.translate('Show variables available in template')}</a>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   </div>;
+      // break;
 
       case 'documents':
         let iframeUrl = '';
@@ -758,7 +754,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

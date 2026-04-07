@@ -17,6 +17,9 @@ class Loader extends \Hubleto\Erp\App
 
     $this->router()->get([
       '/^documents\/api\/get-folder-content\/?$/' => Controllers\Api\GetFolderContent::class,
+      '/^documents\/api\/get-preview-html\/?$/' => Controllers\Api\GetPreviewHtml::class,
+      '/^documents\/api\/get-preview-vars\/?$/' => Controllers\Api\GetPreviewVars::class,
+      '/^documents\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
 
       '/^documents\/?$/' => Controllers\Documents::class,
 

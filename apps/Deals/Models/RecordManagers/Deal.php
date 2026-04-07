@@ -7,6 +7,7 @@ use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Document;
 use Hubleto\App\Community\Leads\Models\RecordManagers\Lead;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
@@ -125,6 +126,12 @@ class Deal extends \Hubleto\Erp\RecordManager
   public function TEMPLATE(): HasOne
   {
     return $this->hasOne(Template::class, 'id', 'id_template');
+  }
+
+  /** @return hasOne<Currency, covariant Lead> */
+  public function DOCUMENT(): HasOne
+  {
+    return $this->hasOne(Document::class, 'id', 'id_document');
   }
 
   /**

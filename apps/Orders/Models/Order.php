@@ -20,8 +20,8 @@ use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Settings\Models\Setting;
 
-use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Models\Document;
 use Hubleto\App\Community\Projects\Models\ProjectOrder;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
@@ -50,6 +50,7 @@ class Order extends \Hubleto\Erp\Model
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
+    'DOCUMENT' => [ self::HAS_ONE, Document::class, 'id', 'id_document'],
 
     'ITEMS' => [ self::HAS_MANY, Item::class, 'id_order', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, OrderDocument::class, 'id_order', 'id' ],
@@ -119,6 +120,7 @@ class Order extends \Hubleto\Erp\Model
         ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
       ,
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
       'virt_last_item' => (new Virtual($this, $this->translate('Last item')))->setDefaultVisible()
@@ -365,58 +367,58 @@ class Order extends \Hubleto\Erp\Model
    * @return array
    * 
    */
-  public function getPreviewVars(int $idOrder): array
-  {
-    /** @var Order */
-    $mOrder = $this->getModel(Order::class);
+  // public function getPreviewVars(int $idOrder): array
+  // {
+  //   /** @var Order */
+  //   $mOrder = $this->getModel(Order::class);
 
-    $order = $mOrder->record->prepareReadQuery()->where('orders.id', $idOrder)->first();
-    if (!$order) throw new \Exception('Order was not found.');
+  //   $order = $mOrder->record->prepareReadQuery()->where('orders.id', $idOrder)->first();
+  //   if (!$order) throw new \Exception('Order was not found.');
 
-    $vars = $order->toArray();
-    $vars['hubleto'] = $this;
-    $vars['user'] = $this->authProvider()->getUser();
-    $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
+  //   $vars = $order->toArray();
+  //   $vars['hubleto'] = $this;
+  //   $vars['user'] = $this->authProvider()->getUser();
+  //   $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
 
-    unset($vars['CUSTOMER']['CONTACTS']);
-    unset($vars['CUSTOMER']['OWNER']);
-    unset($vars['CUSTOMER']['MANAGER']);
-    unset($vars['CUSTOMER']['ACTIVITIES']);
-    unset($vars['CUSTOMER']['DOCUMENTS']);
-    unset($vars['CUSTOMER']['TAGS']);
-    unset($vars['CUSTOMER']['LEADS']);
-    unset($vars['CUSTOMER']['DEALS']);
-    unset($vars['PROFILE']['COMPANY']);
-    unset($vars['PROFILE']['TEMPLATE']);
-    unset($vars['OWNER']['ROLES']);
-    unset($vars['OWNER']['TEAMS']);
-    unset($vars['OWNER']['DEFAULT_COMPANY']);
-    unset($vars['MANAGER']['ROLES']);
-    unset($vars['MANAGER']['TEAMS']);
-    unset($vars['MANAGER']['DEFAULT_COMPANY']);
-    unset($vars['WORKFLOW']);
-    unset($vars['WORKFLOW_STEP']);
-    unset($vars['TEMPLATE']);
+  //   unset($vars['CUSTOMER']['CONTACTS']);
+  //   unset($vars['CUSTOMER']['OWNER']);
+  //   unset($vars['CUSTOMER']['MANAGER']);
+  //   unset($vars['CUSTOMER']['ACTIVITIES']);
+  //   unset($vars['CUSTOMER']['DOCUMENTS']);
+  //   unset($vars['CUSTOMER']['TAGS']);
+  //   unset($vars['CUSTOMER']['LEADS']);
+  //   unset($vars['CUSTOMER']['DEALS']);
+  //   unset($vars['PROFILE']['COMPANY']);
+  //   unset($vars['PROFILE']['TEMPLATE']);
+  //   unset($vars['OWNER']['ROLES']);
+  //   unset($vars['OWNER']['TEAMS']);
+  //   unset($vars['OWNER']['DEFAULT_COMPANY']);
+  //   unset($vars['MANAGER']['ROLES']);
+  //   unset($vars['MANAGER']['TEAMS']);
+  //   unset($vars['MANAGER']['DEFAULT_COMPANY']);
+  //   unset($vars['WORKFLOW']);
+  //   unset($vars['WORKFLOW_STEP']);
+  //   unset($vars['TEMPLATE']);
 
-    return $vars;
+  //   return $vars;
 
-  }
+  // }
 
-  public function getPreviewHtml(int $idOrder): string
-  {
+  // public function getPreviewHtml(int $idOrder): string
+  // {
 
-    $vars = $this->getPreviewVars($idOrder);
+  //   $vars = $this->getPreviewVars($idOrder);
 
-    /** @var Template */
-    $mTemplate = $this->getService(Template::class);
+  //   /** @var Template */
+  //   $mTemplate = $this->getService(Template::class);
 
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
-    if (!$template) throw new \Exception('Template was not found.');
+  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
+  //   if (!$template) throw new \Exception('Template was not found.');
 
-    /** @var Generator */
-    $generator = $this->getService(Generator::class);
-    return $generator->renderTemplate($vars['id_template'], $vars);
-  }
+  //   /** @var Generator */
+  //   $generator = $this->getService(Generator::class);
+  //   return $generator->renderTemplate($vars['id_template'], $vars);
+  // }
 
   /**
    * Generates PDF document from given order and returns ID of generated document
@@ -426,40 +428,40 @@ class Order extends \Hubleto\Erp\Model
    * @return string Output filename.
    * 
    */
-  public function generatePdf(int $idOrder): string
-  {
-    /** @var Order */
-    $mOrder = $this->getService(Order::class);
+  // public function generatePdf(int $idOrder): string
+  // {
+  //   /** @var Order */
+  //   $mOrder = $this->getService(Order::class);
 
-    $order = $mOrder->record->prepareReadQuery()->where('orders.id', $idOrder)->first();
-    if (!$order) throw new \Exception('Order was not found.');
+  //   $order = $mOrder->record->prepareReadQuery()->where('orders.id', $idOrder)->first();
+  //   if (!$order) throw new \Exception('Order was not found.');
 
-    $mTemplate = $this->getService(Template::class);
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $order->id_template)->first();
-    if (!$template) throw new \Exception('Template was not found.');
+  //   $mTemplate = $this->getService(Template::class);
+  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $order->id_template)->first();
+  //   if (!$template) throw new \Exception('Template was not found.');
 
-    $vars = $this->getPreviewVars($idOrder);
+  //   $vars = $this->getPreviewVars($idOrder);
 
-    $orderOutputFilename = 'order-' . $order->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
+  //   $orderOutputFilename = 'order-' . $order->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
 
-    /** @var Generator */
-    $generator = $this->getService(Generator::class);
+  //   /** @var Generator */
+  //   $generator = $this->getService(Generator::class);
 
-    $idDocument = $generator->createPdfDocumentFromTemplate(
-      'Order ' . $order->identifier,
-      Order::class,
-      $idOrder,
-      $template->id,
-      $orderOutputFilename,
-      $vars
-    );
+  //   $idDocument = $generator->createPdfDocumentFromTemplate(
+  //     'Order ' . $order->identifier,
+  //     Order::class,
+  //     $idOrder,
+  //     $template->id,
+  //     $orderOutputFilename,
+  //     $vars
+  //   );
 
-    $mOrder->record->find($idOrder)->update([
-      'pdf' => $orderOutputFilename,
-    ]);
+  //   $mOrder->record->find($idOrder)->update([
+  //     'pdf' => $orderOutputFilename,
+  //   ]);
 
-    return $orderOutputFilename;
-  }
+  //   return $orderOutputFilename;
+  // }
 
   /**
    * Generates invoice for given order.

@@ -407,7 +407,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

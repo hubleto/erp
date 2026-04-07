@@ -444,7 +444,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

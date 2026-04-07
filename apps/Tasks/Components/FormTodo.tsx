@@ -68,7 +68,7 @@ export default class FormTodo<P, S> extends FormExtended<FormTodoProps, FormTodo
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

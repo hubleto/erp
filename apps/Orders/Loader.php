@@ -18,9 +18,9 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^orders\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
-      '/^orders\/api\/get-preview-html\/?$/' => Controllers\Api\GetPreviewHtml::class,
-      '/^orders\/api\/get-preview-vars\/?$/' => Controllers\Api\GetPreviewVars::class,
+      // '/^orders\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
+      // '/^orders\/api\/get-preview-html\/?$/' => Controllers\Api\GetPreviewHtml::class,
+      // '/^orders\/api\/get-preview-vars\/?$/' => Controllers\Api\GetPreviewVars::class,
       '/^orders\/api\/generate-invoice\/?$/' => Controllers\Api\GenerateInvoice::class,
       '/^orders\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^orders\/api\/create-from-deal\/?$/' => Controllers\Api\CreateFromDeal::class,

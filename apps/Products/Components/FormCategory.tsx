@@ -88,7 +88,7 @@ export default class FormCategory<P, S> extends FormExtended<FormCategoryProps,F
         );
       break;
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

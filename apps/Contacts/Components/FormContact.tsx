@@ -265,7 +265,7 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
         </>;
       break;
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

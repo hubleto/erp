@@ -198,7 +198,7 @@ export default class FormReceipt<P, S> extends FormExtended<FormReceiptProps, Fo
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

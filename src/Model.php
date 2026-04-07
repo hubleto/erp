@@ -134,4 +134,21 @@ class Model extends \Hubleto\Framework\Model
     return [];
   }
 
+  /**
+   * Loads data for Document->getPreviewVars()
+   *
+   * @param int $recordId
+   * 
+   * @return array
+   * 
+   */
+  public function loadDocumentPreviewVars(int $recordId): array {
+    $query = $this->record->prepareReadQuery()->where($this->table . '.id', $recordId);
+    foreach ($this->relations as $relName => $relConfig) {
+      $query = $query->with($relName);
+    }
+    $data = $query->first();
+    return $data ? $data->toArray() : [];
+  }
+
 }

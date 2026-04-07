@@ -25,7 +25,6 @@ export interface FormOrderState extends FormExtendedState {
   activitySubject: string,
   activityAllDay: boolean,
   selectParentDeal?: boolean,
-  htmlPreview?: any,
 }
 
 export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrderState> {
@@ -35,6 +34,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
     model: 'Hubleto/App/Community/Orders/Models/Order',
     renderWorkflowUi: true,
     renderOwnerManagerUi: true,
+    renderPreviewUi: true,
   };
 
   props: FormOrderProps;
@@ -43,7 +43,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
   refLogActivityInput: any = React.createRef();
   refActivityModal: any = React.createRef();
   refActivityForm: any = React.createRef();
-  refPreview: any = React.createRef();
   refTableItemsInvoicing: any = React.createRef();
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
@@ -65,21 +64,29 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
     };
   }
 
+  getTabsLeft() {
+    return [
+      { uid: 'default', title: <b>{this.translate('Order')}</b> },
+      { uid: 'items', title: this.translate('Items') },
+      { uid: 'calendar', title: this.translate('Calendar') },
+      { uid: 'quotes', title: this.translate('Quotes') },
+      // { uid: 'payments', title: this.translate('Payments') },
+      { uid: 'invoicing', title: this.translate('Invoicing') },
+      ...super.getTabsLeft(),
+    ];
+  }
+
+  getTabsRight() {
+    return [
+      { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
+      { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
+      ...super.getTabsRight(),
+    ]
+  }
+
   getStateFromProps(props: FormOrderProps) {
     return {
       ...super.getStateFromProps(props),
-      tabs: [
-        { uid: 'default', title: <b>{this.translate('Order')}</b> },
-        { uid: 'items', title: this.translate('Items') },
-        { uid: 'calendar', title: this.translate('Calendar') },
-        { uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') },
-        { uid: 'quotes', title: this.translate('Quotes') },
-        // { uid: 'payments', title: this.translate('Payments') },
-        { uid: 'invoicing', title: this.translate('Invoicing') },
-        { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
-        { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
-        ...this.getCustomTabs()
-      ]
     };
   }
 
@@ -90,45 +97,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'bg-slate-100' : '';
-  }
-
-  onTabChange() {
-    super.onTabChange();
-
-    const tabUid = this.state.activeTabUid;
-    switch (tabUid) {
-      case 'preview':
-        this.updateOrderPreview(this.state.record.id_template);
-      break;
-    }
-  }
-
-  updateOrderPreview(idTemplate: number) {
-    request.post(
-      'orders/api/get-preview-html',
-      {
-        idOrder: this.state.record.id,
-        idTemplate: idTemplate,
-      },
-      {},
-      (result: any) => {
-        this.setState({htmlPreview: result.html});
-      }
-    );
-  }
-
-  showOrderPreviewVars() {
-    request.post(
-      'orders/api/get-preview-vars',
-      {
-        idOrder: this.state.record.id,
-        idTemplate: this.state.record.id_template,
-      },
-      {},
-      (vars: any) => {
-        this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
-      }
-    );
   }
 
   renderTitle(): JSX.Element {
@@ -274,132 +242,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
             </div>
           </div>
         </>;
-      break;
-
-      // case 'preview':
-      //   return <div className='flex gap-2 h-full'>
-      //     <div className='flex-1 w-72 flex flex-col gap-2'>
-      //       <div className='grow'>
-      //         {this.inputWrapper('id_template', {
-      //           uiStyle: 'buttons-vertical',
-      //           onChange: (input: any) => {
-      //             this.updatePreview(input.state.value);
-      //           }
-      //         })}
-      //       </div>
-      //       <div className='grow'>
-      //         <button
-      //           className='btn btn-transparent btn-large mb-4'
-      //           onClick={() => {
-      //             request.post(
-      //               'orders/api/generate-pdf',
-      //               {idOrder: this.state.record.id},
-      //               {},
-      //               (result: any) => {
-      //                 this.reload();
-      //               }
-      //             );
-      //           }}
-      //         >
-      //           <span className='icon'><i className='fas fa-print'></i></span>
-      //           <span className='text'>{this.translate('Export to PDF')}</span>
-      //         </button>
-      //         {this.inputWrapper('pdf', {readonly: true})}
-      //       </div>
-      //     </div>
-      //     <div className="flex-3 gap-2 h-full card card-body">
-      //       <HtmlFrame
-      //         ref={this.refPreview}
-      //         className='w-full h-full'
-      //       />
-      //       <a
-      //         href='#'
-      //         onClick={() => {
-      //           this.showPreviewVars();
-      //         }}
-      //       >{this.translate('Show variables available in template')}</a>
-      //     </div>
-      //   </div>;
-      // break;
-
-      case 'preview':
-        return <div className='flex gap-2 h-full'>
-          <div className='flex-1 w-72 flex flex-col gap-2'>
-            <div className='grow'>
-              {this.inputWrapper('id_template', {
-                uiStyle: 'buttons-vertical',
-                onChange: (input: any) => {
-                  this.updateOrderPreview(input.state.value);
-                }
-              })}
-            </div>
-          </div>
-          <div className='flex-3 flex flex-col'>
-            <div className='flex gap-2 align-center justify-end'>
-              <div>
-                {this.input('pdf', {readonly: true})}
-              </div>
-              <div className='flex gap-2'>
-                <button
-                  className='btn btn-transparent mb-4'
-                  onClick={() => {
-                    request.post(
-                      'orders/api/generate-pdf',
-                      {idOrder: this.state.record.id},
-                      {},
-                      (result: any) => {
-                        // if (result.idDocument) {
-                        //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
-                        // }
-                        // this.reload();
-                        if (result && result.pdfFile) {
-                          this.updateRecord({pdf: result.pdfFile});
-                        }
-                      }
-                    );
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-download'></i></span>
-                  <span className='text'>{this.translate('Export to PDF')}</span>
-                </button>
-                <button
-                  className='btn btn-transparent mb-4'
-                  onClick={() => {
-                    const iframe = window.frames[this.props.uid + '_order_preview'];
-                    const origDocumentTitle = document.title;
-
-                    document.title += 'Order ' + R.number + ' ' + R.CUSTOMER.name;
-
-                    iframe.contentWindow.focus();
-                    iframe.contentWindow.print();
-
-                    document.title = origDocumentTitle;
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-print'></i></span>
-                  <span className='text'>{this.translate('Print')}</span>
-                </button>
-              </div>
-            </div>
-            <div className='w-full h-full card mt-2'>
-              <div className="card-body">
-                <HtmlFrame
-                  className='w-full h-full'
-                  iframeId={this.props.uid + '_order_preview'}
-                  content={this.state.htmlPreview}
-                />
-              </div>
-              <div className='card-footer'>
-                <a
-                  href='#'
-                  onClick={() => {
-                    this.showOrderPreviewVars();
-                  }}
-                >{this.translate('Show variables available in template')}</a>
-              </div>
-            </div>
-          </div>
-        </div>;
       break;
 
       case 'calendar':
@@ -574,17 +416,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
         />;
       break;
 
-      // case 'payments':
-      //   return <TablePayments
-      //     key={"table_order_payment"}
-      //     tag={"table_order_payment"}
-      //     parentForm={this}
-      //     uid={this.props.uid + "_table_order_payment"}
-      //     idOrder={R.id}
-      //   />;
-
-      // break;
-
       case 'invoicing':
         return <div className='flex flex-col gap-2'>
           <TableItems
@@ -693,7 +524,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

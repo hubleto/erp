@@ -122,7 +122,7 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

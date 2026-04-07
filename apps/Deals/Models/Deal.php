@@ -29,8 +29,8 @@ use Hubleto\App\Community\Auth\Models\User;
 
 use Hubleto\Framework\Helper;
 
-use Hubleto\App\Community\Documents\Generator;
 use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\App\Community\Documents\Models\Document;
 
 class Deal extends \Hubleto\Erp\Model
 {
@@ -70,6 +70,7 @@ class Deal extends \Hubleto\Erp\Model
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'TEMPLATE_QUOTATION' => [ self::HAS_ONE, Template::class, 'id', 'id_template_quotation'],
     'TEMPLATE' => [ self::HAS_ONE, Template::class, 'id', 'id_template'],
+    'DOCUMENT' => [ self::HAS_ONE, Document::class, 'id', 'id_document'],
 
     'HISTORY' => [ self::HAS_MANY, DealHistory::class, 'id_deal', 'id'],
     'TAGS' => [ self::HAS_MANY, DealTag::class, 'id_deal', 'id' ],
@@ -137,6 +138,7 @@ class Deal extends \Hubleto\Erp\Model
       ,
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
+      'id_document' => (new Lookup($this, $this->translate('Document'), Document::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
     ]);
   }
@@ -432,70 +434,70 @@ class Deal extends \Hubleto\Erp\Model
 
   }
 
-  /**
-   * [Description for getPreviewHtml]
-   *
-   * @param int $idDeal
-   * 
-   * @return string
-   * 
-   */
-  public function getPreviewHtml(int $idDeal): string
-  {
+  // /**
+  //  * [Description for getPreviewHtml]
+  //  *
+  //  * @param int $idDeal
+  //  * 
+  //  * @return string
+  //  * 
+  //  */
+  // public function getPreviewHtml(int $idDeal): string
+  // {
 
-    $vars = $this->getPreviewVars($idDeal);
+  //   $vars = $this->getPreviewVars($idDeal);
 
-    /** @var Template */
-    $mTemplate = $this->getService(Template::class);
+  //   /** @var Template */
+  //   $mTemplate = $this->getService(Template::class);
 
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
-    if (!$template) throw new \Exception('Template was not found.');
+  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
+  //   if (!$template) throw new \Exception('Template was not found.');
 
-    /** @var Generator */
-    $generator = $this->getService(Generator::class);
-    return $generator->renderTemplate($vars['id_template'], $vars);
-  }
+  //   /** @var Generator */
+  //   $generator = $this->getService(Generator::class);
+  //   return $generator->renderTemplate($vars['id_template'], $vars);
+  // }
 
-  /**
-   * Generates PDF document from given deal and returns ID of generated document
-   *
-   * @param int $idDeal Deal for which the PDF should be generated.
-   * 
-   * @return int ID of generated document.
-   * 
-   */
-  public function generatePdf(int $idDeal): int
-  {
-    /** @var Deal */
-    $mDeal = $this->getService(Deal::class);
+  // /**
+  //  * Generates PDF document from given deal and returns ID of generated document
+  //  *
+  //  * @param int $idDeal Deal for which the PDF should be generated.
+  //  * 
+  //  * @return int ID of generated document.
+  //  * 
+  //  */
+  // public function generatePdf(int $idDeal): int
+  // {
+  //   /** @var Deal */
+  //   $mDeal = $this->getService(Deal::class);
 
-    $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
-    if (!$deal) throw new \Exception('Deal was not found.');
+  //   $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
+  //   if (!$deal) throw new \Exception('Deal was not found.');
 
-    $mTemplate = $this->getService(Template::class);
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $deal->id_template)->first();
-    if (!$template) throw new \Exception('Template was not found.');
+  //   $mTemplate = $this->getService(Template::class);
+  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $deal->id_template)->first();
+  //   if (!$template) throw new \Exception('Template was not found.');
 
-    $vars = $this->getPreviewVars($idDeal);
+  //   $vars = $this->getPreviewVars($idDeal);
 
-    $dealOutputFilename = 'deal-' . $deal->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
+  //   $dealOutputFilename = 'deal-' . $deal->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
 
-    /** @var Generator */
-    $generator = $this->getService(Generator::class);
-    $idDocument = $generator->createPdfDocumentFromTemplate(
-      'Deal ' . $deal->identifier,
-      Deal::class,
-      $idDeal,
-      $template->id,
-      $dealOutputFilename,
-      $vars
-    );
+  //   /** @var Generator */
+  //   $generator = $this->getService(Generator::class);
+  //   $idDocument = $generator->createPdfDocumentFromTemplate(
+  //     'Deal ' . $deal->identifier,
+  //     Deal::class,
+  //     $idDeal,
+  //     $template->id,
+  //     $dealOutputFilename,
+  //     $vars
+  //   );
 
-    $mDeal->record->find($idDeal)->update([
-      'pdf' => $dealOutputFilename,
-    ]);
+  //   $mDeal->record->find($idDeal)->update([
+  //     'pdf' => $dealOutputFilename,
+  //   ]);
 
-    return $idDocument;
-  }
+  //   return $idDocument;
+  // }
 
 }

@@ -10,6 +10,7 @@ use Hubleto\App\Community\Invoices\Models\RecordManagers\Profile;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Hubleto\App\Community\Documents\Models\RecordManagers\Template;
+use Hubleto\App\Community\Documents\Models\RecordManagers\Document;
 use Hubleto\App\Community\Invoices\Models\RecordManagers\Payment;
 use Hubleto\App\Community\Suppliers\Models\RecordManagers\Supplier;
 
@@ -67,6 +68,12 @@ class Invoice extends \Hubleto\Erp\RecordManager {
   public function TEMPLATE(): HasOne
   {
     return $this->hasOne(Template::class, 'id', 'id_template');
+  }
+
+  /** @return hasOne<Currency, covariant Lead> */
+  public function DOCUMENT(): HasOne
+  {
+    return $this->hasOne(Document::class, 'id', 'id_document');
   }
 
   /** @return HasMany<Item, covariant Invoice> */

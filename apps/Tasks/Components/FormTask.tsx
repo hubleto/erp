@@ -344,7 +344,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

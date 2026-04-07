@@ -498,7 +498,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

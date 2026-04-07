@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import FormExtended, {FormExtendedProps, FormExtendedState} from "@hubleto/react-ui/ext/FormExtended";
-// import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
-import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
 import request from '@hubleto/react-ui/core/Request';
 import TableItems from './TableItems';
@@ -27,6 +25,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     },
+    renderPreviewUi: true,
   }
 
   props: FormInvoiceProps;
@@ -41,21 +40,22 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     super(props);
   }
 
-  getStateFromProps(props: FormInvoiceProps) {
+  getTabsLeft() {
     let tabs = [];
-    
     if (this.props.id > 0) {
       tabs.push({ uid: 'default', title: <b>{this.translate('Invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice')}</b> });
-      tabs.push({ uid: 'preview', title: this.translate('Preview, download, print', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') });
-      // tabs.push({ uid: 'documents', title: this.translate('Documents') });
       tabs.push({ uid: 'payments', title: this.translate('Payments', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') });
       tabs.push({ uid: 'email', title: this.translate('Email', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') });
     }
-    tabs = [...tabs, ...this.getCustomTabs()];
+    return [
+      tabs,
+      ...super.getTabsLeft(),
+    ];
+  }
 
+  getStateFromProps(props: FormInvoiceProps) {
     return {
       ...super.getStateFromProps(props),
-      tabs: tabs,
       linkPreparedItem: false,
       sendInvoiceEmailType: 'send-invoice',
     };
@@ -68,31 +68,6 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     }
   }
 
-  // getHeaderButtons()
-  // {
-  //   let buttons = super.getHeaderButtons();
-  //   if (this.state.id > 0) {
-  //     buttons.push(
-  //       {
-  //         title: 'Print to PDF',
-  //         onClick: () => {
-  //           request.post(
-  //             'invoices/api/generate-pdf',
-  //             {idInvoice: this.state.record.id},
-  //             {},
-  //             (result: any) => {
-  //               if (result.idDocument) {
-  //                 window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
-  //               }
-  //             }
-  //           );
-  //         }
-  //       }
-  //     );
-  //   }
-  //   return buttons;
-  // }
-
   getRecordFormUrl(): string {
     return 'invoices/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
@@ -100,43 +75,11 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
   onTabChange() {
     super.onTabChange();
 
-    const tabUid = this.state.activeTabUid;
-    switch (tabUid) {
-      case 'preview':
-        this.updateInvoicePreview(this.state.record.id_template);
-      break;
+    switch (this.state.activeTabUid) {
       case 'email':
         this.updateEmailPreview();
       break;
     }
-  }
-
-  updateInvoicePreview(idTemplate: number) {
-    request.post(
-      'invoices/api/get-preview-html',
-      {
-        idInvoice: this.state.record.id,
-        idTemplate: idTemplate,
-      },
-      {},
-      (result: any) => {
-        this.setState({htmlPreview: result.html});
-      }
-    );
-  }
-
-  showInvoicePreviewVars() {
-    request.post(
-      'invoices/api/get-preview-vars',
-      {
-        idInvoice: this.state.record.id,
-        idTemplate: this.state.record.id_template,
-      },
-      {},
-      (vars: any) => {
-        this.setState({htmlPreview: '<pre>' + JSON.stringify(vars.vars, null, 2) + '</pre>'});
-      }
-    );
   }
 
   updateEmailPreview() {
@@ -507,107 +450,6 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
         }
       break;
 
-      case 'preview':
-        return <div className='flex gap-2 h-full'>
-          <div className='flex-1 w-72 flex flex-col gap-2'>
-            <div className='grow'>
-              {this.inputWrapper('id_template', {
-                uiStyle: 'buttons-vertical',
-                onChange: (input: any) => {
-                  this.updateInvoicePreview(input.state.value);
-                }
-              })}
-            </div>
-          </div>
-          <div className='flex-3 flex flex-col'>
-            <div className='flex gap-2 align-center justify-end'>
-              <div>
-                {this.input('pdf', {readonly: true})}
-              </div>
-              <div className='flex gap-2'>
-                <button
-                  className='btn btn-transparent mb-4'
-                  onClick={() => {
-                    request.post(
-                      'invoices/api/generate-pdf',
-                      {idInvoice: this.state.record.id},
-                      {},
-                      (result: any) => {
-                        // if (result.idDocument) {
-                        //   window.open(globalThis.hubleto.config.projectUrl + '/documents/' + result.idDocument);
-                        // }
-                        // this.reload();
-                        if (result && result.pdfFile) {
-                          this.updateRecord({pdf: result.pdfFile});
-                        }
-                      }
-                    );
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-download'></i></span>
-                  <span className='text'>{this.translate('Export to PDF')}</span>
-                </button>
-                <button
-                  className='btn btn-transparent mb-4'
-                  onClick={() => {
-                    const iframe = window.frames[this.props.uid + '_invoice_preview'];
-                    const origDocumentTitle = document.title;
-
-                    switch (R.type) {
-                      case 1: case '1': document.title = 'Proforma Invoice'; break;
-                      case 2: case '2': document.title = 'Advance Invoice'; break;
-                      case 3: case '3': document.title = 'Invoice'; break;
-                      case 4: case '4': document.title = 'Credit Note'; break;
-                      case 5: case '5': document.title = 'Debit Note'; break;
-                    }
-                    document.title += ' ' + R.number + ' ' + R.CUSTOMER.name;
-
-                    iframe.contentWindow.focus();
-                    iframe.contentWindow.print();
-
-                    document.title = origDocumentTitle;
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-print'></i></span>
-                  <span className='text'>{this.translate('Print')}</span>
-                </button>
-              </div>
-            </div>
-            <div className='w-full h-full card mt-2'>
-              <div className="card-body">
-                <HtmlFrame
-                  className='w-full h-full'
-                  iframeId={this.props.uid + '_invoice_preview'}
-                  content={this.state.htmlPreview}
-                />
-              </div>
-              <div className='card-footer'>
-                <a
-                  href='#'
-                  onClick={() => {
-                    this.showInvoicePreviewVars();
-                  }}
-                >{this.translate('Show variables available in template')}</a>
-              </div>
-            </div>
-          </div>
-        </div>;
-      break;
-
-      // case 'documents':
-      //   return <>
-      //     <TableDocuments
-      //       uid={this.props.uid + "_table_invoice_documents"}
-      //       tag={'table_invoice_documents'}
-      //       parentForm={this}
-      //       junctionModel='Hubleto\App\Community\Invoices\Models\InvoiceDocument'
-      //       junctionSourceColumn='id_invoice'
-      //       junctionDestinationColumn='id_document'
-      //       junctionSourceRecordId={R.id}
-      //     />
-      //   </>
-      // break;
-
       case 'payments':
         return <TablePayments
           uid={this.props.uid + "_table_invoice_payments"}
@@ -754,6 +596,9 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
         </>;
       break;
 
+      default:
+        return super.renderTab(tabUid);
+      break;
     }
   }
 }

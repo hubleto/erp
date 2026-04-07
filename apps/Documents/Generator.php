@@ -6,6 +6,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 use Hubleto\App\Community\Documents\Models\Template;
+use Hubleto\Framework\Helper;
 
 class Generator extends \Hubleto\Erp\Core
 {
@@ -57,6 +58,75 @@ class Generator extends \Hubleto\Erp\Core
     return $twigTemplate->render($vars);
   }
 
+  public function getPreviewHtml(string $model, int $recordId, int $idTemplate): string
+  {
+    $vars = $this->getPreviewVars($model, $recordId);
+
+    /** @var Template */
+    $mTemplate = $this->getService(Template::class);
+
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $idTemplate)->first();
+    if (!$template) throw new \Exception('Template was not found.');
+
+    return $this->renderTemplate($idTemplate, $vars);
+
+  }
+
+  public function getPreviewVars(string $model, int $recordId): array
+  {
+    /** @var Hubleto\Erp\Model */
+    $mObj = $this->getModel($model);
+
+    $vars = $mObj->loadDocumentPreviewVars($recordId);
+
+    $vars['hubleto'] = $this;
+    $vars['user'] = $this->authProvider()->getUser();
+    $vars['now'] = new \DateTimeImmutable()->format('Y-m-d H:i:s');
+
+    return $vars;
+
+  }
+
+  /**
+   * [Description for generatePdf]
+   *
+   * @param string $model
+   * @param int $recordId
+   * @param string $documentName
+   * 
+   * @return array
+   * 
+   */
+  public function generatePdf(string $model, int $recordId, string $documentName): array
+  {
+    /** @var Hubleto\ErpModel */
+    $mObj = $this->getService($model);
+
+    $record = $mObj->record->prepareReadQuery()->where($mObj->table . '.id', $recordId)->first();
+    if (!$record) throw new \Exception('Record to generate PDF from was not found.');
+
+    $mTemplate = $this->getService(Template::class);
+    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $record->id_template)->first();
+    if (!$template) throw new \Exception('Template was not found.');
+
+    $vars = $this->getPreviewVars($model, $recordId);
+
+    $outputFilename = Helper::str2url($documentName) . '-' . new \DateTimeImmutable()->format('Ymd-His') . '.pdf';
+
+    $idDocument = $this->createPdfDocumentFromTemplate(
+      $documentName,
+      $model,
+      $recordId,
+      $template->id,
+      $outputFilename,
+      $vars
+    );
+
+    $mObj->record->find($recordId)->update([ 'pdf' => $outputFilename, 'id_document' => $idDocument ]);
+
+    return [$idDocument, $outputFilename];
+  }
+  
   /**
    * Generates PDF document from template and returns ID of the generated document.
    *
@@ -157,7 +227,7 @@ class Generator extends \Hubleto\Erp\Core
         'file' => $outputFilename,
       ]);
 
-      return (int) $version['id'];
+      return $idDocument;
     } else {
       return 0;
     }

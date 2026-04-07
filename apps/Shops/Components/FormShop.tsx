@@ -77,7 +77,7 @@ export default class FormShop<P, S> extends FormExtended<FormShopProps, FormShop
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

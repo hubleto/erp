@@ -71,7 +71,7 @@ export default class FormCashRegister<P, S> extends FormExtended<FormCashRegiste
       break;
 
       default:
-        super.renderTab(tabUid);
+        return super.renderTab(tabUid);
       break;
     }
   }

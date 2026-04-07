@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow\EventListeners;
 
+use Hubleto\App\Community\Workflow\AutomatManager;
 use Hubleto\Framework\Interfaces\ModelInterface;
 
 class WorkflowAutomat extends \Hubleto\Framework\EventListener implements \Hubleto\Framework\Interfaces\EventListenerInterface
@@ -11,76 +12,41 @@ class WorkflowAutomat extends \Hubleto\Framework\EventListener implements \Huble
   {
     if (!$model || !$savedRecord) return;
 
-    $workflows = $this->config()->get('workflowAutomats');
-    if (is_string($workflows)) $workflows = @json_decode($workflows, true);
-    if (!is_array($workflows)) $workflows = [];
+    foreach (AutomatManager::getAutomats('onModelAfterUpdate') as $automat) {
 
-    foreach ($workflows as $workflow) {
+      try {
+        $conditions = $automat['conditions'] ?? [];
 
-      $wModel = $workflow['model'] ?? '';
-      $wModelObj = $this->getService($wModel);
-      $wData = $wModelObj->record->where('id', $savedRecord['id'] ?? 0)->first();
-      $wConditions = $workflow['conditions'] ?? [];
-      $wActions = $workflow['actions'] ?? [];
-      if ($wData) {
         $match = true;
-        foreach ($wConditions as $condition) {
-          $column = $condition['column'] ?? '';
-          $operator = $condition['operator'] ?? 'equals';
-          $value1 = $condition['value'] ?? null;
+        foreach ($conditions as $condition) {
+          /** @var Hubleto\App\Community\Workflow\Interfaces\AutomatEvaluatorInterface */
+          $evaluator = $this->getService($condition['evaluator'] ?? '');
 
-          $dots = substr_count($column, '.');
+          $arguments = $condition['arguments'] ?? [];
+          $arguments['updatedModel'] = get_class($model);
+          $arguments['updatedRecord'] = $savedRecord;
 
-          if ($dots == 0) {
-            $value2 = $wData->$column;
-          } else if ($dots == 1) {
-            [$tmp1, $tmp2] = explode('.', $column, 2);
-            $value2 = $wData->$tmp1->$tmp2 ?? null;
-          } else if ($dots == 2) {
-            [$tmp1, $rest] = explode('.', $column, 2);
-            [$tmp2, $tmp3] = explode('.', $rest, 2);
-            $value2 = $wData->$tmp1->$tmp2->$tmp3 ?? null;
-          } else {
-            $value2 = null;
-          }
-
-          switch ($operator) {
-            case '==': if ($value1 != $value2) $match = false; break;
-            case '!=': if ($value1 == $value2) $match = false; break;
-            case '>': if ($value1 <= $value2) $match = false; break;
-            case '>=': if ($value1 < $value2) $match = false; break;
-            case '<': if ($value1 >= $value2) $match = false; break;
-            case '<=': if ($value1 > $value2) $match = false; break;
-          }
+          $match = $evaluator->matches($arguments);
+          if (!$match) break;
         }
 
         if ($match) {
-          foreach ($wActions as $action) {
-            $actionType = $action['type'] ?? '';
-            switch ($actionType) {
-              case 'updateColumn':
-                $column = $action['column'] ?? '';
-                $value = $action['value'] ?? null;
-                $wModelObj->record->where('id', $savedRecord['id'] ?? 0)->update([
-                  $column => $value,
-                ]);
-              break;
-              case 'setWorkflowStep':
-                $idWorkflow = $action['id_workflow'] ?? 0;
-                $idWorkflowStep = $action['id_workflow_step'] ?? 0;
-                $wModelObj->record->where('id', $savedRecord['id'] ?? 0)->update([
-                  'id_workflow' => $idWorkflow,
-                  'id_workflow_step' => $idWorkflowStep,
-                ]);
-              break;
-              case 'logMessage':
-                $message = $action['message'] ?? '';
-                $this->logger()->info("WorkflowProcessor: " . $message);
-              break;
-            }
+          $actions = $automat['actions'] ?? [];
+          foreach ($actions as $action) {
+            /** @var Hubleto\App\Community\Workflow\Interfaces\AutomatActionInterface */
+            $actionObject = $this->getService($action['action'] ?? '');
+
+            $arguments = $action['arguments'] ?? [];
+            $arguments['updatedModel'] = get_class($model);
+            $arguments['updatedRecord'] = $savedRecord;
+
+            $actionObject->execute($arguments);
           }
         }
+      } catch (\Throwable $e) {
+        //
       }
+
     }
   }
 

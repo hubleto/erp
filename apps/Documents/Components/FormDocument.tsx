@@ -11,6 +11,7 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
   static defaultProps: any = {
     ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/Documents/Models/Document',
+    renderWorkflowUi: true,
   };
 
   props: FormDocumentProps;

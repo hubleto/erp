@@ -3,6 +3,12 @@
 namespace Hubleto\App\Community\Workflow;
 
 use Hubleto\App\Community\Deals\Models\Deal;
+use Hubleto\App\Community\Orders\Models\Order;
+use Hubleto\App\Community\Workflow\Automats\Actions\SetWorkflow;
+use Hubleto\App\Community\Workflow\Automats\Actions\UpdateRecord;
+use Hubleto\App\Community\Workflow\Automats\Evaluators\RecordCompare;
+use Hubleto\App\Community\Workflow\Automats\Evaluators\WorkflowCompare;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
 class Loader extends \Hubleto\Erp\App
 {
@@ -25,6 +31,10 @@ class Loader extends \Hubleto\Erp\App
 
       '/^workflow\/?$/' => Controllers\Workflow::class,
       '/^workflow(\/(?<idWorkflow>\d+))?\/?$/' => Controllers\Workflow::class,
+
+      '/^workflow\/automats(\/(?<recordId>\d+))?\/?$/' => Controllers\Automats::class,
+      '/^workflow\/automats\/add\/?$/' => ['controller' => Controllers\Automats::class, 'vars' => ['recordId' => -1]],
+
       '/^workflow\/history\/?$/' => Controllers\History::class,
       '/^settings\/workflows\/?$/' => Controllers\Workflows::class,
     ]);
@@ -70,7 +80,7 @@ class Loader extends \Hubleto\Erp\App
       $workflowButtonsHtml .= '
         <a
           class="
-            btn ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
+            btn btn-small ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
           "
           href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"
         >
@@ -79,15 +89,6 @@ class Loader extends \Hubleto\Erp\App
         </a>
       ';
     }
-    $workflowButtonsHtml .= '
-      <a
-        class="btn btn-transparent"
-        href="' . $this->env()->projectUrl . '/settings/workflows"
-      >
-        <span class="icon"><i class="fas fa-cog"></i></span>
-        <span class="text">' . $this->translate('Manage workflows') . '</span>
-      </a>
-    ';
 
     return '
       <div class="flex flex-col gap-2">
@@ -96,6 +97,14 @@ class Loader extends \Hubleto\Erp\App
           <span class="text">' . $this->translate('Workflow') . '</span>
         </a>
         ' . $workflowButtonsHtml . '
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/settings/workflows">
+          <span class="icon"><i class="fas fa-cog"></i></span>
+          <span class="text">' . $this->translate('Workflows') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/automats">
+          <span class="icon"><i class="fas fa-robot"></i></span>
+          <span class="text">' . $this->translate('Automats') . '</span>
+        </a>
       </div>
     ';
   }
@@ -114,10 +123,12 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflow = $this->getModel(Models\Workflow::class);
       $mWorkflowStep = $this->getModel(Models\WorkflowStep::class);
       $mWorkflowHistory = $this->getModel(Models\WorkflowHistory::class);
+      $mAutomat = $this->getModel(Models\Automat::class);
 
       $mWorkflow->upgradeSchema();
       $mWorkflowStep->upgradeSchema();
       $mWorkflowHistory->upgradeSchema();
+      $mAutomat->upgradeSchema();
 
       $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Campaigns'), "show_in_kanban" => 1, "order" => 1, "group" => "campaigns" ])['id'];
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Preparation'), 'order' => 1, 'color' => '#344556', 'tag' => 'campaign-preparation']);
@@ -137,8 +148,8 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflowStep->record->recordCreate([ 'name' => $this->translate('Quote Sent'), 'order' => 3, 'color' => '#d1cf79', 'id_workflow' => $idWorkflow, "set_result" => Deal::RESULT_UNKNOWN, "probability" => 30, 'tag' => 'deal-quote-sent']);
       $mWorkflowStep->record->recordCreate([ 'name' => $this->translate('Under Review'), 'order' => 5, 'color' => '#82b3d8', 'id_workflow' => $idWorkflow, "set_result" => Deal::RESULT_UNKNOWN, "probability" => 70, 'tag' => 'deal-under-review']);
       $mWorkflowStep->record->recordCreate([ 'name' => $this->translate('Contracting'), 'order' => 6, 'color' => '#82d88b', 'id_workflow' => $idWorkflow, "set_result" => Deal::RESULT_UNKNOWN, "probability" => 85, 'tag' => 'deal-contracting']);
-      $mWorkflowStep->record->recordCreate([ 'name' => $this->translate('WON'), 'order' => 7, 'color' => '#008000', 'id_workflow' => $idWorkflow, "set_result" => Deal::RESULT_WON, "probability" => 100, 'tag' => 'deal-wON']);
-      $mWorkflowStep->record->recordCreate([ 'name' => $this->translate('LOST'), 'order' => 8, 'color' => '#f50c0c', 'id_workflow' => $idWorkflow, "set_result" => Deal::RESULT_LOST, "probability" => 0, 'tag' => 'deal-lOST']);
+      $mWorkflowStep->record->recordCreate([ 'name' => $this->translate('WON'), 'order' => 7, 'color' => '#008000', 'id_workflow' => $idWorkflow, "set_result" => Deal::RESULT_WON, "probability" => 100, 'tag' => 'deal-won']);
+      $mWorkflowStep->record->recordCreate([ 'name' => $this->translate('LOST'), 'order' => 8, 'color' => '#f50c0c', 'id_workflow' => $idWorkflow, "set_result" => Deal::RESULT_LOST, "probability" => 0, 'tag' => 'deal-lost']);
 
       $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Orders'), "show_in_kanban" => 1, "order" => 4, "group" => "orders" ])['id'];
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('In progress'), 'order' => 1, 'color' => '#344556', 'tag' => 'order-in-progress']);
@@ -161,6 +172,70 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Ready to deploy'), 'order' => 5, 'color' => '#a38f9a', 'tag' => 'task-ready-to-deploy']);
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Deployed'), 'order' => 6, 'color' => '#44879a', 'tag' => 'task-deployed']);
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Accepted'), 'order' => 7, 'color' => '#74809a', 'tag' => 'task-accepted']);
+
+      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Documents'), "show_in_kanban" => 0, "order" => 7, "group" => "documents" ])['id'];
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('New'), 'order' => 1, 'color' => '#344556', 'tag' => 'document-new']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Under review'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'document-under-review']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Approved'), 'order' => 3, 'color' => '#3068a5', 'tag' => 'document-approved']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Rejected'), 'order' => 4, 'color' => '#ae459f', 'tag' => 'document-rejected']);
+
+      $mAutomat->record->recordCreate([
+        'name' => 'setOrderWorkflowStepToPaid',
+        'trigger' => 'onModelAfterUpdate',
+        'conditions' => json_encode([
+          [
+            'evaluator' => RecordCompare::class,
+            'arguments' => [
+              'model' => Order::class,
+              'column' => 'is_closed',
+              'operator' => '=',
+              'value' => 1,
+            ],
+          ],
+        ]),
+        'actions' => json_encode([
+          [
+            'action' => SetWorkflow::class,
+            'arguments' => [
+              'tag' => 'order-paid',
+            ]
+          ],
+        ]),
+      ]);
+
+      $mAutomat->record->recordCreate([
+        'name' => 'setDealClosedIfWon',
+        'trigger' => 'onModelAfterUpdate',
+        'conditions' => json_encode([
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIs' => 'deal-won' ] ],
+        ]),
+        'actions' => json_encode([
+          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
+        ]),
+      ]);
+
+      $mAutomat->record->recordCreate([
+        'name' => 'setDealClosedIfLost',
+        'trigger' => 'onModelAfterUpdate',
+        'conditions' => json_encode([
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIs' => 'deal-lost' ] ],
+        ]),
+        'actions' => json_encode([
+          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
+        ]),
+      ]);
+
+      $mAutomat->record->recordCreate([
+        'name' => 'setDealClosed',
+        'trigger' => 'onModelAfterUpdate',
+        'conditions' => json_encode([
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIsNot' => 'deal-won' ] ],
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIsNot' => 'deal-lost' ] ],
+        ]),
+        'actions' => json_encode([
+          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 0 ] ],
+        ]),
+      ]);
     }
   }
 

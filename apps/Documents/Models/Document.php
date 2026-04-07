@@ -7,6 +7,8 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Workflow\Models\Workflow;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 
 class Document extends \Hubleto\Erp\Model
 {
@@ -17,6 +19,8 @@ class Document extends \Hubleto\Erp\Model
   public ?string $lookupUrlDetail = 'documents/{%ID%}';
 
   public array $relations = [
+    'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
     'CREATED_BY' => [ self::BELONGS_TO, User::class, 'id_created_by', 'id'],
   ];
 
@@ -29,6 +33,8 @@ class Document extends \Hubleto\Erp\Model
       'record_id' => (new Integer($this, $this->translate('RecordId')))->setReadonly()->setDefaultVisible(),
       'created_on' => (new DateTime($this, $this->translate('Created on')))->setReadonly()->setDefaultVisible(),
       'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultVisible(),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
     ]);
   }
 
@@ -40,7 +46,7 @@ class Document extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
-    unset($description->columns["origin_link"]);
+    $description->addFilter('fOrderWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'));
 
     return $description;
   }

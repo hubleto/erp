@@ -20,7 +20,7 @@ export default class TableWorkflowSteps extends Table<TableWorkflowStepsProps, T
   props: TableWorkflowStepsProps;
   state: TableWorkflowStepsState;
 
-  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader\\Loader';
+  translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader';
   translationContextInner: string = 'Components\\TableWorkflowSteps';
 
   constructor(props: TableWorkflowStepsProps) {

@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
-import FormWorkflow from './FormWorkflow';
+import FormAutomat from './FormAutomat';
 
-interface TableWorkflowsProps extends TableProps {
+interface TableAutomatsProps extends TableProps {
 }
 
-interface TableWorkflowsState extends TableState {
+interface TableAutomatsState extends TableState {
 }
 
-export default class TableWorkflows extends Table<TableWorkflowsProps, TableWorkflowsState> {
+export default class TableAutomats extends Table<TableAutomatsProps, TableAutomatsState> {
   static defaultProps = {
     ...Table.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Workflow/Models/Workflow',
+    model: 'Hubleto/App/Community/Workflow/Models/Automat',
   }
 
-  props: TableWorkflowsProps;
-  state: TableWorkflowsState;
+  props: TableAutomatsProps;
+  state: TableAutomatsState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Workflow\\Loader';
-  translationContextInner: string = 'Components\\TableWorkflows';
+  translationContextInner: string = 'Components\\TableAutomats';
 
-  constructor(props: TableWorkflowsProps) {
+  constructor(props: TableAutomatsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
@@ -35,6 +35,6 @@ export default class TableWorkflows extends Table<TableWorkflowsProps, TableWork
 
   renderForm(): JSX.Element {
     let formDescription = this.getFormProps();
-    return <FormWorkflow {...formDescription}/>;
+    return <FormAutomat {...formDescription}/>;
   }
 }

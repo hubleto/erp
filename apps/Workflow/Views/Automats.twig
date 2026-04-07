@@ -1,10 +1,10 @@
-<h1 class='app-main-title'>{{ translate('Settings') }} > {{ translate('Workflows') }}</h1>
+<h1 class='app-main-title'>{{ translate('Workflow') }} > {{ translate('Automats') }}</h1>
 
-<hblreact-workflow-table-workflows
-  string:tag="table-workflows"
+<hblreact-workflow-table-automats
+  string:tag="table-workflow-automats"
   int:record-id="{{ viewParams.recordId }}"
   string:fulltext-search='{{ viewParams.q }}'
   json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'
   string:form-active-tab-uid='{{ viewParams.tab }}'
-></hblreact-workflow-table-workflows>
+></hblreact-settings-workflow-table-automats>

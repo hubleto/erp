@@ -8,6 +8,16 @@ use Hubleto\App\Community\Auth\Controllers\SignIn;
 use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\DependencyInjection;
 
+// autoloader for Hubleto\App\Custom
+spl_autoload_register(function($className) {
+  if (strpos($className, 'Hubleto\\App\\Custom\\') === 0) {
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $className = str_replace('Hubleto\\App\\Custom\\', '', $className);
+    $filename = $hubleto->env()->projectFolder . '/src/apps/' . str_replace('\\', '/', $className) . '.php';
+    if (is_file($filename)) require($filename);
+  }
+});
+
 class Loader extends \Hubleto\Framework\Loader
 {
 

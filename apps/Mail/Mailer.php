@@ -161,23 +161,28 @@ class Mailer extends \Hubleto\Erp\Core
 
                 foreach ($attachments as $attachment) {
                   // $attachment is instance of \Ddeboer\Imap\Message\Attachment
+                  $mailDate = $message->getDate()->format("Ymd-His");
 
                   $tmp = pathinfo($attachment->getFilename());
-                  $attachmentFilename = 
-                    $message->getDate()->format("Ymd-His")
-                    . '-'
-                    . Helper::str2url($tmp['filename'])
-                    . '.' . $tmp['extension']
-                  ;
+                  $attachmentFilename = Helper::str2url($tmp['filename']) . '.' . $tmp['extension'];
+                  $uploadSubfolder = 'MAIL_ATTACHMENTS/' . $mailDate;
+
+                  if (!is_dir($this->env()->uploadFolder . '/MAIL_ATTACHMENTS')) {
+                    mkdir($this->env()->uploadFolder . '/MAIL_ATTACHMENTS', 0775);
+                  }
+
+                  if (!is_dir($this->env()->uploadFolder . '/MAIL_ATTACHMENTS/' . $mailDate)) {
+                    mkdir($this->env()->uploadFolder . '/MAIL_ATTACHMENTS/' . $mailDate, 0775);
+                  }
 
                   if (($attachment->getSize() ?? 0) > $maxAttachmentSize) {
                     file_put_contents(
-                      $this->env()->uploadFolder . '/' . $attachmentFilename,
+                      $this->env()->uploadFolder . '/' . $uploadSubfolder . '/' . $attachmentFilename,
                       'Attachment size exceeded maximum limit (' . $account['max_attachment_size'] . ' MB)'
                     );
                   } else {
                     file_put_contents(
-                      $this->env()->uploadFolder . '/' . $attachmentFilename,
+                      $this->env()->uploadFolder . '/' . $uploadSubfolder . '/' . $attachmentFilename,
                       $attachment->getDecodedContent()
                     );
                   }
@@ -186,7 +191,7 @@ class Mailer extends \Hubleto\Erp\Core
                     'id_mail' => $idMail,
                     'name' => $attachment->getFilename(),
                     'size' => $attachment->getSize(),
-                    'file' => $attachmentFilename,
+                    'file' => $uploadSubfolder . '/' . $attachmentFilename,
                   ]);
                 }
               }

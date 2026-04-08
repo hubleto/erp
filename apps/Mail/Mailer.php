@@ -162,8 +162,6 @@ class Mailer extends \Hubleto\Erp\Core
                 foreach ($attachments as $attachment) {
                   // $attachment is instance of \Ddeboer\Imap\Message\Attachment
 
-                  if (($attachment->getSize() ?? 0) > $maxAttachmentSize) continue;
-
                   $tmp = pathinfo($attachment->getFilename());
                   $attachmentFilename = 
                     $message->getDate()->format("Ymd-His")
@@ -172,10 +170,17 @@ class Mailer extends \Hubleto\Erp\Core
                     . '.' . $tmp['extension']
                   ;
 
-                  file_put_contents(
-                    $this->env()->uploadFolder . '/' . $attachmentFilename,
-                    $attachment->getDecodedContent()
-                  );
+                  if (($attachment->getSize() ?? 0) > $maxAttachmentSize) {
+                    file_put_contents(
+                      $this->env()->uploadFolder . '/' . $attachmentFilename,
+                      'Attachment size exceeded maximum limit (' . $account['max_attachment_size'] . ' MB)'
+                    );
+                  } else {
+                    file_put_contents(
+                      $this->env()->uploadFolder . '/' . $attachmentFilename,
+                      $attachment->getDecodedContent()
+                    );
+                  }
 
                   $mAttachment->record->recordCreate([
                     'id_mail' => $idMail,

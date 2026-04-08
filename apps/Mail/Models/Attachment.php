@@ -6,9 +6,7 @@ namespace Hubleto\App\Community\Mail\Models;
 use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Lookup;
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use Hubleto\Framework\Db\Column\Integer;
 
 class Attachment extends \Hubleto\Erp\Model
 {
@@ -32,6 +30,7 @@ class Attachment extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_mail' => (new Lookup($this, $this->translate('Mail'), Mail::class))->setReadonly(),
       'name' => (new Varchar($this, $this->translate('Name')))->setDefaultVisible(),
+      'size' => (new Integer($this, $this->translate('Size')))->setDefaultVisible(),
       'file' => (new File($this, $this->translate('File')))->setDefaultVisible(),
     ]);
   }

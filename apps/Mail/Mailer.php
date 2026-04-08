@@ -6,6 +6,7 @@ use Hubleto\App\Community\Mail\Models\Account;
 use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\App\Community\Mail\Models\Mailbox;
 use Ddeboer\Imap\Server;
+use Hubleto\App\Community\Mail\Models\Attachment;
 use Hubleto\Framework\Helper;
 
 class Mailer extends \Hubleto\Erp\Core
@@ -46,7 +47,12 @@ class Mailer extends \Hubleto\Erp\Core
 
       /** @var Mailbox */
       $mMailbox = $this->getModel(Mailbox::class);
+
+      /** @var Mail */
       $mMail = $this->getModel(Mail::class);
+
+      /** @var Attachment */
+      $mAttachment = $this->getModel(Attachment::class);
 
       $this->logger()->info('GetMails: getting emails from ' . count($accounts) . ' account(s).');
       $result['log'][] = $this->translate('Getting emails from {{ count }} account(s).', ['count' => count($accounts)]);
@@ -130,7 +136,8 @@ class Mailer extends \Hubleto\Erp\Core
             ) {
               $this->logger()->info('GetMails: creating mail in database');
               $result['log'][] = $this->translate('Creating mail in database');
-              $mMail->record->recordCreate([
+
+              $idMail = $mMail->record->recordCreate([
                 'id_account' => $account['id'],
                 'id_mailbox' => $localMailbox['id'],
                 'mail_id' => $mailId,
@@ -145,7 +152,39 @@ class Mailer extends \Hubleto\Erp\Core
                 'body_html' => $message->getBodyHtml(),
                 'datetime_created' => date("Y-m-d H:i:s"),
                 'datetime_sent' => $message->getDate()->format("Y-m-d H:i:s"),
-              ]);
+              ])['id'];
+
+              $maxAttachmentSize = ($account['max_attachment_size'] ?? 0) * 1024 * 1024;
+
+              if ($maxAttachmentSize > 0) {
+                $attachments = $message->getAttachments();
+
+                foreach ($attachments as $attachment) {
+                  // $attachment is instance of \Ddeboer\Imap\Message\Attachment
+
+                  if (($attachment->getSize() ?? 0) > $maxAttachmentSize) continue;
+
+                  $tmp = pathinfo($attachment->getFilename());
+                  $attachmentFilename = 
+                    $message->getDate()->format("Ymd-His")
+                    . '-'
+                    . Helper::str2url($tmp['filename'])
+                    . '.' . $tmp['extension']
+                  ;
+
+                  file_put_contents(
+                    $this->env()->uploadFolder . '/' . $attachmentFilename,
+                    $attachment->getDecodedContent()
+                  );
+
+                  $mAttachment->record->recordCreate([
+                    'id_mail' => $idMail,
+                    'name' => $attachment->getFilename(),
+                    'size' => $attachment->getSize(),
+                    'file' => $attachmentFilename,
+                  ]);
+                }
+              }
             }
           }
         }

@@ -19,7 +19,6 @@ class WorkflowCompare extends Core implements AutomatEvaluatorInterface
    */
   public function matches(array $condition): bool
   {
-    $updatedModel = $condition['updatedModel'] ?? '';
     $updatedRecord = $condition['updatedRecord'] ?? [];
     $tagIs = $condition['tagIs'] ?? '';
     $tagIsNot = $condition['tagIsNot'] ?? '';

@@ -34,6 +34,7 @@ class Account extends \Hubleto\Erp\Model
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'sender_email' => (new Varchar($this, $this->translate('Sender email address'))),
       'sender_name' => (new Varchar($this, $this->translate('Sender name'))),
+      'max_attachment_size' => (new Integer($this, $this->translate('Max. attachment size')))->setUnit("MB"),
       'imap_host' => (new Varchar($this, $this->translate('IMAP host'))),
       'imap_port' => (new Integer($this, $this->translate('IMAP port'))),
       'imap_encryption' => (new Varchar($this, $this->translate('IMAP encryption')))->setEnumValues(['ssl' => 'ssl', 'tls' => 'tls']),

@@ -18,14 +18,10 @@ class RecordCompare extends Core implements AutomatEvaluatorInterface
    */
   public function matches(array $condition): bool
   {
-    $updatedModel = $condition['updatedModel'] ?? '';
     $updatedRecord = $condition['updatedRecord'] ?? '';
-    $model = $condition['model'] ?? '';
     $column = $condition['column'] ?? '';
     $operator = $condition['operator'] ?? 'equals';
     $rightOperand = $condition['value'] ?? null;
-
-    if ($model !== $updatedModel) return false;
 
     $match = true;
 

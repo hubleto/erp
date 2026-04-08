@@ -98,6 +98,25 @@ export default class TableExtendedMails extends TableExtended<TableExtendedMails
     }
   }
 
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "subject") {
+      return <>
+        <div>{data['subject']}</div>
+        {data.ATTACHMENTS ? <div className='flex gap-1'>{data.ATTACHMENTS.map((att, key) => {
+          return <a
+            href={globalThis.hubleto.config.uploadUrl + '/' + att.file}
+            target='_blank'
+            className='font-normal text-xs text-blue-500'
+          >
+            {att.name}
+          </a>
+        })}</div> : null}
+      </>;
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
   renderForm(): JSX.Element {
     let formProps: FormProps = this.getFormProps();
     if (this.props.showOnlyTemplates) {

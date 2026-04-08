@@ -53,6 +53,7 @@ export default class FormAccount<P, S> extends FormExtended<FormAccountProps,For
           {this.inputWrapper('imap_encryption')}
           {this.inputWrapper('imap_username')}
           {this.inputWrapper('imap_password')}
+          {this.inputWrapper('max_attachment_size')}
         </>;
       break
 

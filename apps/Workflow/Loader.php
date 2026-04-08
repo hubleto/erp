@@ -182,32 +182,21 @@ class Loader extends \Hubleto\Erp\App
       $mAutomat->record->recordCreate([
         'name' => 'setOrderWorkflowStepToPaid',
         'trigger' => 'onModelAfterUpdate',
+        'triggerConditions' => [ 'updatedModel' => Order::class ],
         'conditions' => json_encode([
-          [
-            'evaluator' => RecordCompare::class,
-            'arguments' => [
-              'model' => Order::class,
-              'column' => 'is_closed',
-              'operator' => '=',
-              'value' => 1,
-            ],
-          ],
+          [ 'evaluator' => RecordCompare::class, 'arguments' => [ 'column' => 'is_closed', 'operator' => '=', 'value' => 1 ], ],
         ]),
         'actions' => json_encode([
-          [
-            'action' => SetWorkflow::class,
-            'arguments' => [
-              'tag' => 'order-paid',
-            ]
-          ],
+          [ 'action' => SetWorkflow::class, 'arguments' => [ 'tag' => 'order-paid' ] ],
         ]),
       ]);
 
       $mAutomat->record->recordCreate([
         'name' => 'setDealClosedIfWon',
         'trigger' => 'onModelAfterUpdate',
+        'triggerConditions' => [ 'updatedModel' => Deal::class ],
         'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIs' => 'deal-won' ] ],
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-won' ] ],
         ]),
         'actions' => json_encode([
           [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
@@ -218,7 +207,7 @@ class Loader extends \Hubleto\Erp\App
         'name' => 'setDealClosedIfLost',
         'trigger' => 'onModelAfterUpdate',
         'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIs' => 'deal-lost' ] ],
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-lost' ] ],
         ]),
         'actions' => json_encode([
           [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
@@ -228,9 +217,10 @@ class Loader extends \Hubleto\Erp\App
       $mAutomat->record->recordCreate([
         'name' => 'setDealClosed',
         'trigger' => 'onModelAfterUpdate',
+        'triggerConditions' => [ 'updatedModel' => Deal::class ],
         'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIsNot' => 'deal-won' ] ],
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'model' => Deal::class, 'tagIsNot' => 'deal-lost' ] ],
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-won' ] ],
+          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-lost' ] ],
         ]),
         'actions' => json_encode([
           [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 0 ] ],

@@ -105,6 +105,28 @@ class Mail extends \Hubleto\Erp\Model
   }
 
   /**
+   * [Description for getRelationsIncludedInLoadTableData]
+   *
+   * @return array|null
+   * 
+   */
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['ATTACHMENTS'];
+  }
+
+  /**
+   * [Description for getMaxReadLevelForLoadTableData]
+   *
+   * @return int
+   * 
+   */
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
+  }
+
+  /**
    * [Description for validateBeforeSending]
    *
    * @param array $mail
@@ -270,6 +292,15 @@ class Mail extends \Hubleto\Erp\Model
     return $idMail;
   }
 
+  /**
+   * [Description for createAndSend]
+   *
+   * @param array $mailData
+   * @param array $attachments
+   * 
+   * @return int
+   * 
+   */
   public function createAndSend(array $mailData, array $attachments = []): int
   {
     $idMail = $this->create($mailData, $attachments);

@@ -48,7 +48,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
       tabs.push({ uid: 'email', title: this.translate('Email', 'Hubleto\\App\\Community\\Invoices\\Loader', 'Components\\FormInvoice') });
     }
     return [
-      tabs,
+      ...tabs,
       ...super.getTabsLeft(),
     ];
   }

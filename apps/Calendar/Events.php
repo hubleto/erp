@@ -13,14 +13,14 @@ class Events extends \Hubleto\Erp\Core
     $remindersToday = $getCalendarEvents->loadEventsFromMultipleCalendars(
       date("Y-m-d", strtotime("-1 year")),
       date("Y-m-d"),
-      ['fCompleted' => false, 'idUser' => $idUser]
+      ['fCompleted' => 1, 'idUser' => $idUser]
     );
 
     $dateTomorrow = date("Y-m-d", time() + 24 * 3600);
     $remindersTomorrow = $getCalendarEvents->loadEventsFromMultipleCalendars(
       $dateTomorrow,
       $dateTomorrow,
-      ['fCompleted' => false, 'idUser' => $idUser]
+      ['fCompleted' => 1, 'idUser' => $idUser]
     );
 
     $dateLaterStart = date("Y-m-d", time() + 24 * 3600 * 2);
@@ -28,7 +28,7 @@ class Events extends \Hubleto\Erp\Core
     $remindersLater = $getCalendarEvents->loadEventsFromMultipleCalendars(
       $dateLaterStart,
       $dateLaterEnd,
-      ['fCompleted' => false, 'idUser' => $idUser]
+      ['fCompleted' => 1, 'idUser' => $idUser]
     );
 
     return [$remindersToday, $remindersTomorrow, $remindersLater];

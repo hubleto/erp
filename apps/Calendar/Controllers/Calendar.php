@@ -38,7 +38,7 @@ class Calendar extends \Hubleto\Erp\Controller
       $missedActivities = $getCalendarEvents->loadEventsFromMultipleCalendars(
         "2000-01-01",
         date("Y-m-d"),
-        ['fCompleted' => false, 'idUser' => $this->authProvider()->getUserId()],
+        ['fCompleted' => 1, 'idUser' => $this->authProvider()->getUserId()],
         [$calendarName]
       );
 

@@ -53,8 +53,8 @@ class Calendar extends \Hubleto\Erp\Calendar
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
       $query = $query->where($mActivity->table . '.id_owner', $filter['idUser']);
     }
-    if (isset($filter['completed'])) {
-      $query = $query->where('completed', $filter['completed']);
+    if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
+      $query = $query->where('completed', $filter['fCompleted'] == 2);
     }
     if (isset($filter['all_day'])) {
       $query = $query->where('all_day', $filter['all_day']);

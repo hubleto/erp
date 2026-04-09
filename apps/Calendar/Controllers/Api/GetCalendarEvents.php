@@ -34,6 +34,7 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
   {
     $filter = [
       'fOwnership' => $this->router()->urlParamAsInteger('fOwnership'),
+      'fCompleted' => $this->router()->urlParamAsInteger('fCompleted'),
     ];
 
     if ($this->router()->isUrlParam('calendar')) {

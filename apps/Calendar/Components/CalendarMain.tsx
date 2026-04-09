@@ -34,6 +34,7 @@ interface CalendarMainState {
   newActivity: boolean,
   calendars: any,
   fOwnership: number,
+  fCompleted: number,
 }
 
 export default class CalendarComponent extends TranslatedComponent<CalendarMainProps, CalendarMainState> {
@@ -68,13 +69,15 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
       newActivity: false,
       calendars: this.props.calendars,
       fOwnership: 0,
+      fCompleted: 0,
     };
   }
 
   getCalenActivitiesEndpointUrl(showActivity?: string, eventId?: number): string {
     return (
-      'calendar/api/get-calendar-events?fOwnership='
-      + this.state.fOwnership
+      'calendar/api/get-calendar-events?'
+      + 'fOwnership=' + this.state.fOwnership
+      + '&fCompleted=' + this.state.fCompleted
       + '&' + Object.keys(this.state.calendars)
         .filter((calendarName) => this.state.calendars[calendarName].show)
         .map((calendarName) => 'calendars[]=' + calendarName)
@@ -162,7 +165,6 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           })}
         </div>
 
-        <b>{this.translate("Ownership")}</b>
         <div className="list">
           <button
             className={"btn btn-small btn-list-item " + (this.state.fOwnership == 0 ? "btn-primary" : "btn-transparent")}
@@ -171,7 +173,22 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           <button
             className={"btn btn-small btn-list-item " + (this.state.fOwnership == 1 ? "btn-primary" : "btn-transparent")}
             onClick={() => { this.setState({fOwnership: 1}); }}
-          ><span className="text">{this.translate("My activities")}</span></button>
+          ><span className="text">{this.translate("My")}</span></button>
+        </div>
+
+        <div className="list">
+          <button
+            className={"btn btn-small btn-list-item " + (this.state.fCompleted == 0 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { this.setState({fCompleted: 0}); }}
+          ><span className="text">{this.translate("All")}</span></button>
+          <button
+            className={"btn btn-small btn-list-item " + (this.state.fCompleted == 1 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { this.setState({fCompleted: 1}); }}
+          ><span className="text">{this.translate("Open")}</span></button>
+          <button
+            className={"btn btn-small btn-list-item " + (this.state.fCompleted == 2 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { this.setState({fCompleted: 2}); }}
+          ><span className="text">{this.translate("Completed")}</span></button>
         </div>
 
         <a

@@ -155,6 +155,9 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
             >
               <span className="icon"><input type="checkbox" checked={this.state.calendars[calendarName].show}></input></span>
               <span className="text">{calendar.title}</span>
+              {calendar.missedActivities > 0 ?
+                <div className="badge badge-small badge-red ml-auto mr-1">{calendar.missedActivities}</div>
+              : null}
             </button>;
           })}
         </div>

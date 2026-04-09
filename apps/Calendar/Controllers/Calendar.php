@@ -35,6 +35,15 @@ class Calendar extends \Hubleto\Erp\Controller
       $calendarConfig['color'] = $calendar->getColor();
       $calendarConfig['show'] = empty($show) || $show == $calendarName;
 
+      $missedActivities = $getCalendarEvents->loadEventsFromMultipleCalendars(
+        "2000-01-01",
+        date("Y-m-d"),
+        ['completed' => false, 'idUser' => $this->authProvider()->getUserId()],
+        [$calendarName]
+      );
+
+      $calendarConfig['missedActivities'] = count($missedActivities);
+
       $this->viewParams["calendars"][$calendarName] = $calendarConfig;
     }
 

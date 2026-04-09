@@ -24,6 +24,12 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
 
   }
 
+  /**
+   * [Description for renderJson]
+   *
+   * @return array
+   * 
+   */
   public function renderJson(): array
   {
     $filter = [
@@ -55,6 +61,17 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
     }
   }
 
+  /**
+   * [Description for loadEventsFromMultipleCalendars]
+   *
+   * @param string $dateStart
+   * @param string $dateEnd
+   * @param array $filter
+   * @param array|null|null $sources
+   * 
+   * @return array
+   * 
+   */
   public function loadEventsFromMultipleCalendars(
     string $dateStart,
     string $dateEnd,

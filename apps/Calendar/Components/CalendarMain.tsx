@@ -129,7 +129,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
     return <div className="flex gap-2 flex-col md:flex-row">
       <div className="flex flex-col gap-2 text-nowrap">
         <button
-          className="btn btn-primary-outline mb-2"
+          className="btn btn-add-outline mb-2"
           onClick={() => {
             this.setState({
               showActivity: 'calendar,-1',
@@ -195,8 +195,8 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           className="btn btn-primary-outline mt-2"
           href={globalThis.hubleto.config.projectUrl + "/calendar/share"}
         >
-          <span className="icon"><i className="fa-solid fa-share-from-square"></i></span>
-          <span className="text">{this.translate("Export calendar")}</span>
+          <span className="icon"><i className="fa-solid fa-share-nodes"></i></span>
+          <span className="text">{this.translate("Share calendar")}</span>
         </a>
       </div>
       <div className="w-full">

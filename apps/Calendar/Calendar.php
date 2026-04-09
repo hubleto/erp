@@ -11,6 +11,8 @@ class Calendar extends \Hubleto\Erp\Calendar
   public function getCalendarConfig(): array
   {
     return [
+      'position' => 0,
+      'color' => '#000000',
       'title' => $this->translate('Default'),
       'addNewActivityButtonText' => $this->translate('Add a simple event'),
       'formComponent' => 'CalendarFormActivity',

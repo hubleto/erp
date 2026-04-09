@@ -60,7 +60,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
-    $calendarManager->addCalendar($this, 'orders', $this->configAsString('calendarColor'), Calendar::class);
+    $calendarManager->addCalendar($this, 'orders', Calendar::class);
 
     /** @var \Hubleto\App\Community\Dashboards\Manager $dashboardManager */
     $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);

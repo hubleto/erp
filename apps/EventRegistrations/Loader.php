@@ -33,7 +33,6 @@ class Loader extends \Hubleto\Erp\App
     $calendarManager->addCalendar(
       $this,
       'EventRegistrations-calendar', // UID of your app's calendar. Will be referenced as "source" when fetching app's events.
-      '#008000', // your app's calendar color
       Calendar::class // your app's Calendar class
     );
   }

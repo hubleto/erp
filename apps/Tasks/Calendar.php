@@ -7,6 +7,8 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
   public function getCalendarConfig(): array
   {
     return [
+      'position' => 2,
+      'color' => '#7a23dc',
       'title' => $this->translate('Tasks'),
       'addNewActivityButtonText' => $this->translate('Add new activity linked to Tasks'),
       'icon' => 'fas fa-calendar',
@@ -31,14 +33,13 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
     // tasks
     $tasks = $mTask->record->prepareReadQuery()
-      ->where($mTask->table . '.is_closed', 0)
       ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd]);
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
       $tasks = $tasks->where($mTask->table . '.id_developer', $filter['idUser']);
     }
-    if (isset($filter['completed'])) {
-      $tasks = $tasks->where($mTask->table . '.is_closed', $filter['completed']);
+    if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
+      $tasks = $tasks->where($mTask->table . '.is_closed', $filter['fCompleted'] == 2);
     }
 
     $tasks = $tasks->get();
@@ -80,7 +81,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'end' => date("Y-m-d", strtotime($todo->date_deadline)),
         'allDay' => true,
         'title' => $todo->TASK->virt_related_to . ' TODO ' . $todo->todo,
-        'color' => $todo->is_closed ? '#DDDDDD' : '#8401A4',
+        'color' => $todo->is_closed ? '#DDDDDD' : '#1A8404',
         'source' => 'tasks',
         'id_owner' => $todo->id_responsible,
         'completed' => $todo->is_closed,

@@ -166,7 +166,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
       </div>
       <div className="card w-1/2 m-auto mt-2">
         <div className="card-header">
-          {this.translate('List of all created shares')}
+          {this.translate('Shared calendars')}
         </div>
         <div className="card-body">
           { this.state.loading ?

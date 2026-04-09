@@ -4,9 +4,12 @@ namespace Hubleto\App\Community\Orders;
 
 class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {
+
   public function getCalendarConfig(): array
   {
     return [
+      'position' => 6,
+      'color' => '#f50ab9',
       'title' => $this->translate('Orders'),
       'addNewActivityButtonText' => $this->translate('Add new activity linked to order'),
       'icon' => 'fas fa-handshake',

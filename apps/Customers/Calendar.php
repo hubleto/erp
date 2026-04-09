@@ -8,6 +8,8 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
   public function getCalendarConfig(): array
   {
     return [
+      'position' => 1,
+      'color' => '#7a23dc',
       'title' => $this->translate('Customers'),
       'addNewActivityButtonText' => $this->translate('Add new activity linked to customer'),
       'icon' => 'fas fa-users-viewfinder',

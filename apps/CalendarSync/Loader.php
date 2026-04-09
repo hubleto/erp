@@ -40,7 +40,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
-    $calendarManager->addCalendar($this, 'sync', 'yellow', Calendar::class);
+    $calendarManager->addCalendar($this, 'sync', Calendar::class);
   }
 
   public function installApp(int $round): void

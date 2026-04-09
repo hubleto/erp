@@ -30,7 +30,7 @@ class Calendar extends \Hubleto\Erp\Controller
     /** @var Manager */
     $calendarManager = $this->getService(Manager::class);
 
-    foreach ($calendarManager->getCalendars() as $calendarName => $calendar) {
+    foreach ($calendarManager->getCalendarsSorted() as $calendarName => $calendar) {
       $calendarConfig = $calendar->getCalendarConfig();
       $calendarConfig['color'] = $calendar->getColor();
       $calendarConfig['show'] = empty($show) || $show == $calendarName;

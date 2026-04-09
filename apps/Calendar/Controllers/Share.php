@@ -23,7 +23,7 @@ class Share extends \Hubleto\Erp\Controller
 
     $mSharedCalendar = new SharedCalendar();
 
-    foreach ($calendarManager->getCalendars() as $source => $calendar) {
+    foreach ($calendarManager->getCalendarsSorted() as $source => $calendar) {
       $calendarConfig = $calendar->getCalendarConfig();
       $calendarConfig['color'] = $calendar->getColor();
       $calendarConfig['shared'] = $mSharedCalendar->where('calendar', $source)->count();

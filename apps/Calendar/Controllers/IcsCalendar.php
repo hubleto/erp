@@ -42,7 +42,7 @@ class IcsCalendar extends \Hubleto\Erp\Controller
 
     $calendar = $calendarManager->getCalendar($calendarSource);
 
-    foreach ($calendar->loadEvents($dateFrom, $dateTo) as $event) {
+    foreach ($calendar->loadEvents($dateFrom, $dateTo, ['fCompleted' => 1]) as $event) {
       $dtStart = (new \DateTime($event['start']))->setTimezone(new \DateTimeZone('UTC'))->format('Ymd\THis\Z');
 
       if ($event['allDay'] ?? false) {

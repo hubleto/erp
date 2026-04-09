@@ -33,7 +33,7 @@ class IcsCalendar extends \Hubleto\Erp\Controller
     if ($sharedCalendar == null) {
       $this->router()->redirectTo('/404');
     }
-    $calendarSource = $sharedCalendar->get('calendar')[0]['calendar'];
+    $calendarSource = $sharedCalendar->get('calendar')->toArray()[0]['calendar'];
 
     // permissions
     $viewDetails = $sharedCalendar->get('view_details')->toArray()[0]['view_details'];

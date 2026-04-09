@@ -68,8 +68,8 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
       $todos = $todos->where($mTodo->table . '.id_responsible', $filter['idUser']);
     }
-    if (isset($filter['completed'])) {
-      $todos = $todos->where($mTodo->table . '.is_closed', $filter['completed']);
+    if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
+      $todos = $todos->where($mTodo->table . '.is_closed', $filter['fCompleted'] == 2);
     }
 
     $todos = $todos->get();

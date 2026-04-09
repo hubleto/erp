@@ -21,7 +21,7 @@ class Counter extends Core
     $missedActivities = $getCalendarEvents->loadEventsFromMultipleCalendars(
       "2000-01-01",
       date("Y-m-d"),
-      ['completed' => false, 'idUser' => $this->authProvider()->getUserId()]
+      ['fCompleted' => false, 'idUser' => $this->authProvider()->getUserId()]
     );
 
     return count($missedActivities);

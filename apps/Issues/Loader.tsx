@@ -1,11 +1,16 @@
-// How to add any React Component to be usable in Twig templates as '<hblreact-*></hblreact-*>' HTML tag.
-// -> Replace 'MyModel' with the name of your model in the examples below
+import App from '@hubleto/react-ui/core/App'
+import TableIssues from "./Components/TableIssues"
+import TablePosts from "./Components/TablePosts"
 
-// 1. import the component
-// import TableMyModel from "./Components/TableMyModel"
+class IssuesApp extends App {
+  init() {
+    super.init();
 
-// 2. Register the React Component into Hubleto framework
-// globalThis.hubleto.registerReactComponent('EventFeedbackTableMyModel', TableMyModel);
+    // register react components
+    globalThis.hubleto.registerReactComponent('IssuesTableIssues', TableIssues);
+    globalThis.hubleto.registerReactComponent('IssuesTablePosts', TablePosts);
+  }
+}
 
-// 3. Use the component in any of your Twig views:
-// <hblreact-eventfeedback-table-my-model string:some-property="some-value"></hblreact-eventfeedback-table-my-model>
+// register app
+globalThis.hubleto.registerApp('Hubleto/App/Community/Issues', new IssuesApp());

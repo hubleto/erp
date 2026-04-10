@@ -16,20 +16,18 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^issues\/?$/' => Controllers\Issues::class,
-      '/^issues\/mail-accounts\/?$/' => Controllers\MailAccounts::class,
+      '/^issues(\/(?<recordId>\d+))?\/?$/' => Controllers\Issues::class,
+      '/^issues\/add\/?$/' => ['controller' => Controllers\Issues::class, 'vars' => ['recordId' => -1]],
+
+      '/^issues\/posts(\/(?<recordId>\d+))?\/?$/' => Controllers\Posts::class,
+      '/^issues\/posts\/add\/?$/' => ['controller' => Controllers\Posts::class, 'vars' => ['recordId' => -1]],
     ]);
 
-    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    $settingsApp->addSetting($this, [
-      'title' => $this->translate('Issues Mail Accounts'),
-      'icon' => 'fas fa-table',
-      'url' => 'issues/mail-accounts',
-    ]);
+    $this->eventManager()->addEventListener(
+      'onMailReceived',
+      $this->getService(EventListeners\CreateIssueFromMail::class)
+    );
 
-    $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
-    $appMenu->addItem($this, 'issues', $this->translate('Issues'), 'fas fa-table');
-    $appMenu->addItem($this, 'issues/mail-accounts', $this->translate('Mail accounts'), 'fas fa-list');
   }
 
   // upgradeSchema
@@ -37,7 +35,7 @@ class Loader extends \Hubleto\Erp\App
   {
     if ($round == 1) {
       $this->getModel(Models\Issue::class)->upgradeSchema();
-      $this->getModel(Models\MailAccount::class)->upgradeSchema();
+      $this->getModel(Models\IssueTask::class)->upgradeSchema();
    }
   }
 

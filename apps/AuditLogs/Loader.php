@@ -19,8 +19,6 @@ class Loader extends \Hubleto\Erp\App
       '/^audit-logs\/?$/' => Controllers\AuditLogs::class,
     ]);
 
-    $this->cronManager()->addCron(Crons\DailyDigest::class);
-
     $this->eventManager()->addEventListener(
       'onModelAfterCreate',
       $this->getService(EventListeners\LogCreatedRecord::class)

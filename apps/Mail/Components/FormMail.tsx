@@ -94,6 +94,7 @@ export default class FormMail<P, S> extends FormExtended<FormMailProps,FormMailS
           {this.inputWrapper('cc')}
           {this.inputWrapper('bcc')}
           {this.inputWrapper('reply_to')}
+          {this.inputWrapper('in_reply_to')}
           {this.inputWrapper('datetime_created', {readonly: true})}
           {this.inputWrapper('datetime_scheduled_to_send', {readonly: true})}
           {this.inputWrapper('datetime_sent', {readonly: true})}

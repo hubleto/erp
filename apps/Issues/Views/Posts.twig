@@ -1,10 +1,10 @@
-<h1 class="app-main-title">{{ translate("Issues") }}</h1>
+<h1 class="app-main-title">{{ translate("Issues") }} > {{ translate("Posts") }}</h1>
 
-<hblreact-issues-table-issues
-  string:tag="table-issues"
+<hblreact-issues-table-posts
+  string:tag="table-posts"
   int:record-id="{{ viewParams.recordId }}"
   string:fulltext-search='{{ viewParams.q }}'
   json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'
   string:form-active-tab-uid='{{ viewParams.tab }}'
-></hblreact-issues-table-issues>
+></hblreact-issues-table-posts>

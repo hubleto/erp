@@ -126,6 +126,11 @@ class Mailer extends \Hubleto\Erp\Core
             $mailNumber = $message->getNumber();
             $mailId = $message->getId();
             $mailHeaders = $message->getHeaders();
+            $rawHeaders = $message->getRawHeaders();
+
+            $rawHeadersNoNewlines = str_replace("\\r", "", str_replace("\\n", "", $rawHeaders));
+            preg_match('/In-Reply-To:\s+(.*?)\s+/', $rawHeadersNoNewlines, $m);
+            $inReplyTo = $m[1] ?? '';
 
             $this->logger()->info('GetMails: found mail ' . $mailNumber . ' ' . $mailId);
             $result['log'][] = $this->translate('Found mail {{ number }} {{ id }}', ['number' => $mailNumber, 'id' => $mailId]);
@@ -137,7 +142,7 @@ class Mailer extends \Hubleto\Erp\Core
               $this->logger()->info('GetMails: creating mail in database');
               $result['log'][] = $this->translate('Creating mail in database');
 
-              $idMail = $mMail->record->recordCreate([
+              $mail = $mMail->record->recordCreate([
                 'id_account' => $account['id'],
                 'id_mailbox' => $localMailbox['id'],
                 'mail_id' => $mailId,
@@ -148,16 +153,19 @@ class Mailer extends \Hubleto\Erp\Core
                 'to' => $this->compileEmailAddresses($mailHeaders['to']),
                 // 'cc' => $this->compileEmailAddresses($mailHeaders['cc']),
                 // 'sent' => $this->compileEmailAddresses($mailHeaders['cc']),
+                'in_reply_to' => $inReplyTo,
                 'body_text' => $message->getBodyText(),
                 'body_html' => $message->getBodyHtml(),
                 'datetime_created' => date("Y-m-d H:i:s"),
                 'datetime_sent' => $message->getDate()->format("Y-m-d H:i:s"),
-              ])['id'];
+              ]);
+
+              $idMail = $mail['id'];
 
               $maxAttachmentSize = ($account['max_attachment_size'] ?? 0) * 1024 * 1024;
+              $attachments = $message->getAttachments();
 
               if ($maxAttachmentSize > 0) {
-                $attachments = $message->getAttachments();
 
                 foreach ($attachments as $attachment) {
                   // $attachment is instance of \Ddeboer\Imap\Message\Attachment
@@ -195,6 +203,8 @@ class Mailer extends \Hubleto\Erp\Core
                   ]);
                 }
               }
+
+              $this->eventManager()->fire('onMailReceived', [ $mail, $attachments ]);
             }
           }
         }

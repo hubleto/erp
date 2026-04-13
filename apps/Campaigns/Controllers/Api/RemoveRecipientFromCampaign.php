@@ -11,7 +11,7 @@ class RemoveRecipientFromCampaign extends \Hubleto\Erp\Controllers\ApiController
   public function renderJson(): array
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
-    $email = $this->router()->urlParamAsInteger('email');
+    $email = $this->router()->urlParamAsString('email');
 
     /** @var Recipient */
     $mRecipient = $this->getModel(Recipient::class);
@@ -23,7 +23,11 @@ class RemoveRecipientFromCampaign extends \Hubleto\Erp\Controllers\ApiController
         ->delete()
       ;
 
-      return ["status" => "success", "recipientsDeleted" => $recipientsDeleted];
+      return [
+        "status" => "success",
+        "email" => $email,
+        "recipientsDeleted" => $recipientsDeleted,
+      ];
     } catch (\Throwable $e) {
       return [
         "status" => "failed",

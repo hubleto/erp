@@ -74,6 +74,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'contacts', title: this.translate('Contacts') },
         { uid: 'mail', title: this.translate('Mail') },
+        { uid: 'call', title: this.translate('Call') },
         { uid: 'recipients', title: this.translate('Recipients') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'test', title: this.translate('Test') },
@@ -452,6 +453,12 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             }}
           />
         </div>;
+      break;
+
+      case 'call':
+        return <>
+          {this.inputWrapper('call_script')}
+        </>
       break;
 
       case 'mail':

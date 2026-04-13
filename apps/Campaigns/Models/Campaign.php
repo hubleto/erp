@@ -71,6 +71,7 @@ class Campaign extends \Hubleto\Erp\Model
       ,
       'mail_subject' => (new Varchar($this, $this->translate('Subject')))->setCssClass('font-bold')->setDefaultVisible(),
       'mail_body' => (new Text($this, $this->translate('Body')))->setReactComponent('InputTextareaWithHtmlPreview'),
+      'call_script' => (new Text($this, $this->translate('Call script'))),
       'reply_to' => (new Varchar($this, $this->translate('Reply to'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),

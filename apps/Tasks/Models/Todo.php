@@ -4,24 +4,10 @@ namespace Hubleto\App\Community\Tasks\Models;
 
 
 use Hubleto\Framework\Db\Column\Boolean;
-use Hubleto\Framework\Db\Column\Color;
-use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Date;
-use Hubleto\Framework\Db\Column\DateTime;
-use Hubleto\Framework\Db\Column\File;
-use Hubleto\Framework\Db\Column\Image;
-use Hubleto\Framework\Db\Column\Integer;
-use Hubleto\Framework\Db\Column\Json;
 use Hubleto\Framework\Db\Column\Lookup;
-use Hubleto\Framework\Db\Column\Password;
-use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\Framework\Db\Column\Virtual;
 
-use Hubleto\App\Community\Workflow\Models\Workflow;
-use Hubleto\App\Community\Workflow\Models\WorkflowStep;
-use Hubleto\App\Community\Contacts\Models\Contact;
-use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Auth\Models\User;
 
 class Todo extends \Hubleto\Erp\Model

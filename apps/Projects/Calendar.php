@@ -31,14 +31,22 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
     // milestones
     $milestones = $mMilestone->record->prepareReadQuery()
-      ->whereRaw("`{$mMilestone->table}`.`date_due` >= ? AND `{$mMilestone->table}`.`date_due` <= ?", [$dateStart, $dateEnd]);
+      ->whereRaw("`{$mMilestone->table}`.`date_due` >= ? AND `{$mMilestone->table}`.`date_due` <= ?", [$dateStart, $dateEnd])
+      ->with('PROJECT')
+    ;
 
     if ($idProject > 0) {
       $milestones = $milestones->where($mMilestone->table . '.id_project', $idProject);
     }
 
+    if (isset($filter['idUser']) && $filter['idUser'] > 0) {
+      $milestones = $milestones->where($mMilestone->table . '.id_responsible', $filter['idUser']);
+    }
     if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
       $milestones = $milestones->where($mMilestone->table . '.is_closed', $filter['fCompleted'] == 2);
+    }
+    if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
+      $milestones = $milestones->where($mMilestone->table . ".id_responsible", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
     }
 
     $milestones = $milestones->get();
@@ -49,11 +57,11 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($milestone->date_due)),
         'end' => date("Y-m-d", strtotime($milestone->date_due)),
         'allDay' => true,
-        'title' => 'MILESTONE ' . $milestone->title,
+        'title' => 'MILESTONE ' . $milestone->title . '(' . $milestone->PROJECT->title . ')',
         'color' => '#20689f',
         'source' => 'projects',
-        'id_owner' => 0,
-        'completed' => 0,
+        'id_owner' => $milestone->id_responsible,
+        'completed' => $milestone->is_closed,
         'url' => 'projects/milestones/' . $milestone->id,
       ];
     }

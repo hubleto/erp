@@ -33,13 +33,18 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
     // tasks
     $tasks = $mTask->record->prepareReadQuery()
-      ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd]);
+      ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd])
+      ->with('PROJECT')
+    ;
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
       $tasks = $tasks->where($mTask->table . '.id_developer', $filter['idUser']);
     }
     if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
       $tasks = $tasks->where($mTask->table . '.is_closed', $filter['fCompleted'] == 2);
+    }
+    if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
+      $tasks = $tasks->where($mTask->table . ".id_developer", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
     }
 
     $tasks = $tasks->get();
@@ -50,7 +55,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($task->date_deadline)),
         'end' => date("Y-m-d", strtotime($task->date_deadline)),
         'allDay' => true,
-        'title' => $task->virt_related_to . ' TASK ' . $task->identifier . ' ' . $task->title,
+        'title' => $task->virt_related_to . ' TASK ' . $task->identifier . ' ' . $task->title . '(' . $task->PROJECT->title . ')',
         'color' => $task->is_closed ? '#DDDDDD' : '#1A8404',
         'source' => 'tasks',
         'id_owner' => $task->id_developer,
@@ -80,7 +85,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($todo->date_deadline)),
         'end' => date("Y-m-d", strtotime($todo->date_deadline)),
         'allDay' => true,
-        'title' => $todo->TASK->virt_related_to . ' TODO ' . $todo->todo,
+        'title' => $todo->TASK->virt_related_to . ' TODO ' . $todo->todo . '(' . $todo->TASK->id . ' ' . $todo->TASK->title . ')',
         'color' => $todo->is_closed ? '#DDDDDD' : '#1A8404',
         'source' => 'tasks',
         'id_owner' => $todo->id_responsible,

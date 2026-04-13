@@ -9,6 +9,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Db\Column\Boolean;
+use Hubleto\App\Community\Auth\Models\User;
 
 class Milestone extends \Hubleto\Erp\Model
 {
@@ -19,6 +20,7 @@ class Milestone extends \Hubleto\Erp\Model
 
   public array $relations = [
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
+    'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id' ],
     'REPORTS' => [ self::HAS_MANY, MilestoneReport::class, 'id_milestone', 'id' ],
   ];
 
@@ -26,6 +28,9 @@ class Milestone extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setRequired(),
+      'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()
+        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+      ,
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired(),
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setRequired(),
       'expected_output' => (new Text($this, $this->translate('Expected output')))->setDefaultVisible()->setRequired(),
@@ -71,6 +76,30 @@ class Milestone extends \Hubleto\Erp\Model
       default:
         $description->ui['addButtonText'] = $this->translate('Add milestone');
         $description->show(['header', 'fulltextSearch', 'columnSearch']);
+
+        $description->addFilter(
+          'fMilestoneClosed',
+          [
+            'title' => $this->translate('Open / Closed'),
+            'options' => [
+              0 => $this->translate('Open'),
+              1 => $this->translate('Closed'),
+              2 => $this->translate('All'),
+            ],
+            'default' => 0,
+          ]
+        );
+
+        $fUserOptions = [];
+        foreach ($this->getModel(User::class)->record->where('is_active', true)->get() as $value) {
+          $fUserOptions[$value->id] = $value->nick;
+        }
+        $description->addFilter('fResponsible', [
+          'title' => $this->translate('Responsible'),
+          'type' => 'multipleSelectButtons',
+          'options' => $fUserOptions,
+        ]);
+
       break;
     }
 

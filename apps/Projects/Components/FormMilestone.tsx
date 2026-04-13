@@ -36,6 +36,7 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
         return <div className='flex gap-2'>
           <div className='grow'>
             {this.inputWrapper('id_project')}
+            {this.inputWrapper('id_responsible')}
             {this.inputWrapper('title')}
             {this.inputWrapper('date_due')}
             {this.inputWrapper('expected_output')}

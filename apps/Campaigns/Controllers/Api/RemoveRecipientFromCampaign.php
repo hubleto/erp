@@ -12,20 +12,34 @@ class RemoveRecipientFromCampaign extends \Hubleto\Erp\Controllers\ApiController
   {
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $email = $this->router()->urlParamAsString('email');
+    $emails = $this->router()->urlParamAsArray('emails');
 
     /** @var Recipient */
     $mRecipient = $this->getModel(Recipient::class);
 
     try {
-      $recipientsDeleted = $mRecipient->record
-        ->where('id_campaign', $idCampaign)
-        ->where('email', $email)
-        ->delete()
-      ;
+      $recipientsDeleted = 0;
+
+      if (!empty($email)) {
+        $recipientsDeleted += $mRecipient->record
+          ->where('id_campaign', $idCampaign)
+          ->where('email', $email)
+          ->delete()
+        ;
+      }
+
+      foreach ($emails as $tmpEmail) {
+        if (!empty($tmpEmail)) {
+          $recipientsDeleted += $mRecipient->record
+            ->where('id_campaign', $idCampaign)
+            ->where('email', $tmpEmail)
+            ->delete()
+          ;
+        }
+      }
 
       return [
         "status" => "success",
-        "email" => $email,
         "recipientsDeleted" => $recipientsDeleted,
       ];
     } catch (\Throwable $e) {

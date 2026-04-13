@@ -110,6 +110,22 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     });
   }
 
+  removeRecipients(emails: Array<string>) {
+    this.setState({campaignTestInfo: null}, () => {
+      request.post(
+        'campaigns/api/remove-recipient-from-campaign',
+        {
+          idCampaign: this.state.record.id,
+          emails: emails,
+        },
+        {},
+        (data: any) => {
+          this.updateCampaignTestInfo();
+        }
+      );
+    });
+  }
+
   updateCampaignTestInfo() {
     this.setState({campaignTestInfo: null}, () => {
       request.post(
@@ -534,6 +550,19 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                       });
                     }}
                   ></input> months</b>
+                  <button
+                    className='btn btn-delete-outline btn-small'
+                    onClick={() => {
+                      let emails = [];
+                      Object.keys(this.state.campaignTestInfo.recentlyContacted).map((email, key) => {
+                        emails.push(email)
+                      });
+                      this.removeRecipients(emails);
+                    }}
+                  >
+                    <span className='icon'><i className='fas fa-trash-can'></i></span>
+                    <span className='text'>Remove all</span>
+                  </button>
                 </div>
                 {Object.keys(this.state.campaignTestInfo.recentlyContacted).length == 0
                   ? <div className='flex gap-1 items-center'>No recipients found.</div>

@@ -557,7 +557,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           <td className='text-nowrap'>{details.campaignName}</td>
                           <td>
                             <button
-                              className='btn btn-delete-outline'
+                              className='btn btn-delete-outline btn-small'
                               onClick={() => {
                                 this.removeRecipient(email);
                               }}

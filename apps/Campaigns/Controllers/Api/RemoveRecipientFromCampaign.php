@@ -17,13 +17,13 @@ class RemoveRecipientFromCampaign extends \Hubleto\Erp\Controllers\ApiController
     $mRecipient = $this->getModel(Recipient::class);
 
     try {
-      $mRecipient->record
+      $recipientsDeleted = $mRecipient->record
         ->where('id_campaign', $idCampaign)
         ->where('email', $email)
         ->delete()
       ;
 
-      return ["status" => "success"];
+      return ["status" => "success", "recipientsDeleted" => $recipientsDeleted];
     } catch (\Throwable $e) {
       return [
         "status" => "failed",

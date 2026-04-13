@@ -11,6 +11,7 @@ import CampaignFormActivity, { CampaignFormActivityProps, CampaignFormActivitySt
 import moment, { Moment } from "moment";
 import Calendar from '../../Calendar/Components/Calendar';
 import { updateFormWorkflowByTag } from '@hubleto/react-ui/ext/ErpWorkflowSelector';
+import FormItem from '@hubleto/apps/Orders/Components/FormItem';
 
 export interface FormCampaignProps extends FormExtendedProps {}
 export interface FormCampaignState extends FormExtendedState {
@@ -91,6 +92,22 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'bg-slate-100' : '';
+  }
+
+  removeRecipient(email: string) {
+    this.setState({campaignTestInfo: null}, () => {
+      request.post(
+        'campaigns/api/remove-recipient-from-campaign',
+        {
+          idCampaign: this.state.record.id,
+          email: email,
+        },
+        {},
+        (data: any) => {
+          this.updateCampaignTestInfo();
+        }
+      );
+    });
   }
 
   updateCampaignTestInfo() {
@@ -527,6 +544,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                         <th>{ this.translate('Email') }</th>
                         <th>{ this.translate('When') }</th>
                         <th>{ this.translate('Campaign') }</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -537,6 +555,16 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                           <td className='text-nowrap'>{email}</td>
                           <td className='text-nowrap'>{details.mailSent}</td>
                           <td className='text-nowrap'>{details.campaignName}</td>
+                          <td>
+                            <button
+                              className='btn btn-delete-outline'
+                              onClick={() => {
+                                this.removeRecipient(email);
+                              }}
+                            >
+                              <span className='icon'><i className='fas fa-trash-can'></i></span>
+                            </button>
+                          </td>
                         </tr>;
                       })}
                     </tbody>

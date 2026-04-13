@@ -34,7 +34,6 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     // tasks
     $tasks = $mTask->record->prepareReadQuery()
       ->whereRaw("`{$mTask->table}`.`date_deadline` >= ? AND `{$mTask->table}`.`date_deadline` <= ?", [$dateStart, $dateEnd])
-      ->with('PROJECT')
     ;
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
@@ -55,7 +54,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($task->date_deadline)),
         'end' => date("Y-m-d", strtotime($task->date_deadline)),
         'allDay' => true,
-        'title' => $task->virt_related_to . ' TASK ' . $task->identifier . ' ' . $task->title . '(' . $task->PROJECT->title . ')',
+        'title' => $task->virt_related_to . ' TASK ' . $task->identifier . ' ' . $task->title,
         'color' => $task->is_closed ? '#DDDDDD' : '#1A8404',
         'source' => 'tasks',
         'id_owner' => $task->id_developer,

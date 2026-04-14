@@ -47,11 +47,11 @@ export default class TableCustomers extends TableExtended<TableCustomersProps, T
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "virt_tags") {
-      return <>
+      return <div className='flex gap-1'>
         {data.TAGS.map((tag, key) => {
-          return <div style={{backgroundColor: tag.TAG?.color ?? 'white'}} className='badge' key={'tag-' + data.id + '-' + key}>{tag.TAG?.name}</div>;
+          return <div style={{borderLeft: '2px solid ' + (tag.TAG?.color ?? 'white')}} className='badge badge-small px-1' key={key}>{tag.TAG?.name}</div>;
         })}
-      </>;
+      </div>;
     } else {
       return super.renderCell(columnName, column, data, options);
     }

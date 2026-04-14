@@ -63,7 +63,7 @@ class Customer extends Model
       'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)"))->setCssClass('text-violet-800'),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
-        ->setProperty('sql',"
+        ->setProperty('sql', "
           SELECT
             GROUP_CONCAT(DISTINCT customer_tags.name ORDER BY customer_tags.name SEPARATOR ', ')
           FROM `cross_customer_tags`
@@ -124,17 +124,30 @@ class Customer extends Model
       'default' => 0,
     ]);
 
+    $fTagColors = [];
+    $fTagOptions = [];
+    foreach ($this->getModel(Tag::class)->record->get() as $value) {
+      $fTagColors[$value->id] = $value->color;
+      $fTagOptions[$value->id] = $value->name;
+    }
+    $description->addFilter('fTag', [
+      'title' => $this->translate('Tag'),
+      'type' => 'multipleSelectButtons',
+      'colors' => $fTagColors,
+      'options' => $fTagOptions,
+    ]);
+
     return $description;
   }
 
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['TAGS'];
+    return ['TAGS', 'TAGS.TAG'];
   }
 
   public function getMaxReadLevelForLoadTableData(): int
   {
-    return 1;
+    return 2;
   }
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array

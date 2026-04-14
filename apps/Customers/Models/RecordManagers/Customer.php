@@ -78,12 +78,19 @@ class Customer extends \Hubleto\Erp\RecordManager
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
+
     if (isset($filters["fCustomerActive"])) {
       if ($filters["fCustomerActive"] == 1) {
         $query = $query->where("customers.is_active", false);
       } else {
         $query = $query->where("customers.is_active", true);
       }
+    }
+
+    if (isset($filters['fTag']) && is_array($filters['fTag']) && count($filters['fTag']) > 0) {
+      $query = $query->whereHas('TAGS', function($q) use ($filters) {
+        $q->whereIn('cross_customer_tags.id_tag', $filters['fTag']);
+      });
     }
 
     // Virtual tag count

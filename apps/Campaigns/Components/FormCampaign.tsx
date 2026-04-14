@@ -27,6 +27,7 @@ export interface FormCampaignState extends FormExtendedState {
   activitySubject: string,
   activityAllDay: boolean,
   recentlyContactedPeriod?: number,
+  subTab: string,
 }
 
 export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, FormCampaignState> {
@@ -73,16 +74,19 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         { uid: 'documents', title: this.translate('Documents') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'contacts', title: this.translate('Contacts') },
-        { uid: 'mail', title: this.translate('Mail') },
-        { uid: 'call', title: this.translate('Call') },
         { uid: 'recipients', title: this.translate('Recipients') },
+        { uid: 'mail', title: this.translate('Mail'), subTabs: [
+          { uid: 'content', title: this.translate('Content') },
+          { uid: 'test', title: this.translate('Test') },
+          { uid: 'launch', title: this.translate('Launch') },
+          { uid: 'clicks', title: this.translate('Clicks') },
+        ] },
+        { uid: 'call', title: this.translate('Call') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
-        { uid: 'test', title: this.translate('Test') },
-        { uid: 'launch', title: this.translate('Launch') },
-        { uid: 'clicks', title: this.translate('Clicks') },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
         ...this.getCustomTabs()
-      ]
+      ],
+      subTab: '',
     };
   }
 
@@ -165,10 +169,10 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
 
     const tabUid = this.state.activeTabUid;
     switch (tabUid) {
-      case 'test':
+      case 'mail.test':
         this.updateCampaignTestInfo();
       break;
-      case 'launch':
+      case 'mail.launch':
         this.updateCampaignLaunchInfo();
       break;
     }
@@ -461,76 +465,14 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         </>
       break;
 
-      case 'mail':
+      case 'mail.content':
         return <>
           {this.inputWrapper('mail_subject')}
           {this.inputWrapper('mail_body')}
         </>
       break;
 
-      case 'recipients':
-        return <div className='flex gap-2'>
-          <div className='flex-3'>
-            <TableRecipients
-              tag='table_campaign_recipients'
-              ref={this.refTableRecipients}
-              parentForm={this}
-              uid={this.props.uid + "_table_campaign_recipient"}
-              idCampaign={R.id}
-              view='briefOverview'
-              onAfterLoadData={(table: any) => {
-                this.setState({ recipients: table.state.data.records });
-              }}
-            />
-          </div>
-          <div className='flex-1'>
-            <div className='card'>
-              <div className='card-header'>{this.translate('Import emails')}</div>
-              <div className='card-body'>
-                <textarea
-                  className='w-full h-80'
-                  placeholder={this.translate('One email per line.')}
-                  ref={this.refEmails}
-                ></textarea>
-                <button
-                  className='btn btn-add-outline mt-2 w-full'
-                  onClick={() => {
-                    request.post(
-                      'campaigns/api/import-emails',
-                      {
-                        idCampaign: R.id,
-                        emails: this.refEmails.current.value,
-                      },
-                      {},
-                      (data: any) => {
-                        this.refTableRecipients.current.reload();
-                      }
-                    )
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-upload'></i></span>
-                  <span className='text'>{this.translate('Import emails')}</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>;
-      break;
-
-      case 'tasks':
-        return <TableTasks
-          tag={"table_campaign_task"}
-          parentForm={this}
-          uid={this.props.uid + "_table_campaign_task"}
-          junctionTitle='Campaign'
-          junctionModel='Hubleto/App/Community/Campaigns/Models/CampaignTask'
-          junctionSourceColumn='id_campaign'
-          junctionSourceRecordId={R.id}
-          junctionDestinationColumn='id_task'
-        />;
-      break;
-
-      case 'test':
+      case 'mail.test':
         return <div className='flex gap-2'>
           <div className='card flex-1'>
             <div className='card-header'>{ this.translate('Analysis & warnings') }</div>
@@ -662,7 +604,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         </div>;
       break;
 
-      case 'launch':
+      case 'mail.launch':
         let invalidRecipientsCount = 0;
         let unsubscribedRecipientsCount = 0;
         let emailsSent = 0;
@@ -862,7 +804,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         </>;
       break;
 
-      case 'clicks':
+      case 'mail.clicks':
         return <TableClicks
           parentForm={this}
           tag="table_campaign_click"
@@ -871,7 +813,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         />;
       break;
 
-      case 'timeline':
+      case 'mail.timeline':
         return this.renderTimeline([
           {
             data: (thisForm) => thisForm.state.record.ACTIVITIES,
@@ -890,6 +832,68 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             userNameFormatter: (entry) => entry.USER?.nick,
           },
         ]);
+      break;
+
+      case 'recipients':
+        return <div className='flex gap-2'>
+          <div className='flex-3'>
+            <TableRecipients
+              tag='table_campaign_recipients'
+              ref={this.refTableRecipients}
+              parentForm={this}
+              uid={this.props.uid + "_table_campaign_recipient"}
+              idCampaign={R.id}
+              view='briefOverview'
+              onAfterLoadData={(table: any) => {
+                this.setState({ recipients: table.state.data.records });
+              }}
+            />
+          </div>
+          <div className='flex-1'>
+            <div className='card'>
+              <div className='card-header'>{this.translate('Import emails')}</div>
+              <div className='card-body'>
+                <textarea
+                  className='w-full h-80'
+                  placeholder={this.translate('One email per line.')}
+                  ref={this.refEmails}
+                ></textarea>
+                <button
+                  className='btn btn-add-outline mt-2 w-full'
+                  onClick={() => {
+                    request.post(
+                      'campaigns/api/import-emails',
+                      {
+                        idCampaign: R.id,
+                        emails: this.refEmails.current.value,
+                      },
+                      {},
+                      (data: any) => {
+                        this.refTableRecipients.current.reload();
+                      }
+                    )
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-upload'></i></span>
+                  <span className='text'>{this.translate('Import emails')}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>;
+      break;
+
+      case 'tasks':
+        return <TableTasks
+          tag={"table_campaign_task"}
+          parentForm={this}
+          uid={this.props.uid + "_table_campaign_task"}
+          junctionTitle='Campaign'
+          junctionModel='Hubleto/App/Community/Campaigns/Models/CampaignTask'
+          junctionSourceColumn='id_campaign'
+          junctionSourceRecordId={R.id}
+          junctionDestinationColumn='id_task'
+        />;
       break;
 
       default:

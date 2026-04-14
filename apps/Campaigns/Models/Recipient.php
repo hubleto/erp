@@ -32,18 +32,19 @@ class Recipient extends \Hubleto\Erp\Model
       'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired()->setReadonly()->setDefaultVisible(),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'email' => (new Varchar($this, $this->translate('Email')))->setDefaultVisible(),
+      'phone_number' => (new Varchar($this, $this->translate('Phone number')))->setDefaultVisible(),
       'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
       'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
       'variables' => (new Json($this, $this->translate('Variables')))->setDefaultVisible()->setReactComponent('InputJsonKeyValue'),
-      'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly()->setDefaultVisible(),
-      'virt_utm_source' => (new Virtual($this, $this->translate('UTM: source')))->setDefaultVisible()
+      'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly(),
+      'virt_utm_source' => (new Virtual($this, $this->translate('UTM: source')))
         ->setProperty('sql', "SELECT `c`.`utm_source` FROM `campaigns` `c` WHERE `c`.`id` = `campaigns_recipients`.`id_campaign`"),
-      'virt_utm_campaign' => (new Virtual($this, $this->translate('UTM: campaign')))->setDefaultVisible()
+      'virt_utm_campaign' => (new Virtual($this, $this->translate('UTM: campaign')))
         ->setProperty('sql', "SELECT `c`.`utm_campaign` FROM `campaigns` `c` WHERE `c`.`id` = `campaigns_recipients`.`id_campaign`"),
-      'virt_utm_term' => (new Virtual($this, $this->translate('UTM: term')))->setDefaultVisible()
+      'virt_utm_term' => (new Virtual($this, $this->translate('UTM: term')))
         ->setProperty('sql', "SELECT `c`.`utm_term` FROM `campaigns` `c` WHERE `c`.`id` = `campaigns_recipients`.`id_campaign`"),
-      'virt_status' => (new Virtual($this, $this->translate('Status')))->setDefaultVisible()
+      'virt_status' => (new Virtual($this, $this->translate('Status')))
         ->setProperty('sql',"
           SELECT
             concat(if(`is_unsubscribed`, 'unsubscribed', ''), ',', if(`is_invalid`, 'invalid', '')) 

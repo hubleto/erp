@@ -57,7 +57,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($milestone->date_due)),
         'end' => date("Y-m-d", strtotime($milestone->date_due)),
         'allDay' => true,
-        'title' => 'MILESTONE ' . $milestone->title . '(' . $milestone->PROJECT->title . ')',
+        'title' => 'MILESTONE ' . $milestone->title . '(' . ($milestone->PROJECT?->title ?? '?') . ')',
         'color' => '#20689f',
         'source' => 'projects',
         'id_owner' => $milestone->id_responsible,

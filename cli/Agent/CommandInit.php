@@ -528,8 +528,10 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("  -> Reinitializing Hubleto after installation.\n");
     $this->appManager()->init();
 
-    $this->terminal()->cyan("  -> Applying default configuration: {$defaultConfiguration}\n");
-    $installer->applyDefaultConfiguration((string) $defaultConfiguration);
+    if (!empty($defaultConfiguration)) {
+      $this->terminal()->cyan("  -> Applying default configuration: {$defaultConfiguration}\n");
+      $installer->applyDefaultConfiguration((string) $defaultConfiguration);
+    }
 
     if ($generateDemoData) {
       $this->terminal()->cyan("  -> Generating demo data.\n");

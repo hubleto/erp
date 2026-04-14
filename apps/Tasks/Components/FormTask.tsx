@@ -91,58 +91,64 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
       case 'default':
         return <>
           <div className='w-full flex gap-2 flex-col md:flex-row'>
-            <div className='flex-1 border-r border-gray-100'>
-              <div className='flex gap-2'>
-                {R.ORDERS && R.ORDERS.length > 0 ?
-                  <FormInput title={this.translate("Orders")}>{R.ORDERS.map((item, key) => {
-                    return (item ? <a
-                      key={key}
-                      className='badge badge-violet text-lg'
-                      href={globalThis.hubleto.config.projectUrl + '/orders/' + item.id}
-                      target='_blank'
-                    >{item.identifier} {item.title}</a> : '#');
-                  })}</FormInput>
-                  : null}
-                {R.DEALS && R.DEALS.length > 0 ?
-                  <FormInput title={this.translate("Deals")}>{R.DEALS.map((item, key) => {
-                    return (item ? <a
-                      key={key}
-                      className='badge badge-violet text-lg'
-                      href={globalThis.hubleto.config.projectUrl + '/deals/' + item.id}
-                      target='_blank'
-                    >{item.identifier} {item.title}</a> : '#');
-                  })}</FormInput>
-                : null}
-                {R.PROJECTS && R.PROJECTS.length > 0 ?
-                  <FormInput title={this.translate("Projects")}>{R.PROJECTS.map((item, key) => {
-                    return (item ? <a
-                      key={key}
-                      className='badge badge-violet text-lg'
-                      href={globalThis.hubleto.config.projectUrl + '/projects/' + item.id}
-                      target='_blank'
-                    >{item.identifier} {item.title}</a> : '#');
-                  })}</FormInput>
-                : null}
+            <div className='flex-2'>
+              <div className='flex gap-2 flex-col md:flex-row'>
+                <div className='flex-1 border-r border-gray-100'>
+                  <div className='flex gap-2'>
+                    {R.ORDERS && R.ORDERS.length > 0 ?
+                      <FormInput title={this.translate("Orders")}>{R.ORDERS.map((item, key) => {
+                        return (item ? <a
+                          key={key}
+                          className='badge badge-violet text-lg'
+                          href={globalThis.hubleto.config.projectUrl + '/orders/' + item.id}
+                          target='_blank'
+                        >{item.identifier} {item.title}</a> : '#');
+                      })}</FormInput>
+                      : null}
+                    {R.DEALS && R.DEALS.length > 0 ?
+                      <FormInput title={this.translate("Deals")}>{R.DEALS.map((item, key) => {
+                        return (item ? <a
+                          key={key}
+                          className='badge badge-violet text-lg'
+                          href={globalThis.hubleto.config.projectUrl + '/deals/' + item.id}
+                          target='_blank'
+                        >{item.identifier} {item.title}</a> : '#');
+                      })}</FormInput>
+                    : null}
+                    {R.PROJECTS && R.PROJECTS.length > 0 ?
+                      <FormInput title={this.translate("Projects")}>{R.PROJECTS.map((item, key) => {
+                        return (item ? <a
+                          key={key}
+                          className='badge badge-violet text-lg'
+                          href={globalThis.hubleto.config.projectUrl + '/projects/' + item.id}
+                          target='_blank'
+                        >{item.identifier} {item.title}</a> : '#');
+                      })}</FormInput>
+                    : null}
+                  </div>
+                  {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
+                  {this.inputWrapper('title', {cssClass: 'text-2xl'})}
+                  {this.inputWrapper('description')}
+                  {this.inputWrapper('shared_folder')}
+                  {this.inputWrapper('hours_estimation')}
+                </div>
+                <div className='flex-1'>
+                  {this.inputWrapper('id_customer')}
+                  {this.inputWrapper('id_contact')}
+                  {this.inputWrapper('id_developer')}
+                  {this.inputWrapper('id_tester')}
+                  {this.inputWrapper('priority')}
+                  {this.inputWrapper('duration_days')}
+                  {this.inputWrapper('date_start')}
+                  {this.inputWrapper('date_deadline')}
+                  {this.inputWrapper('is_chargeable')}
+                  {this.inputWrapper('is_milestone')}
+                  {this.inputWrapper('date_created')}
+                </div>
               </div>
-              {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
-              {this.inputWrapper('title', {cssClass: 'text-2xl'})}
-              {this.inputWrapper('description')}
-              {this.inputWrapper('shared_folder')}
-              {this.inputWrapper('hours_estimation')}
-            </div>
-            <div className='flex-1'>
-              {this.inputWrapper('id_customer')}
-              {this.inputWrapper('id_contact')}
-              {this.inputWrapper('id_developer')}
-              {this.inputWrapper('id_tester')}
-              {this.inputWrapper('priority')}
-              {this.inputWrapper('duration_days')}
-              {this.inputWrapper('date_start')}
-              {this.inputWrapper('date_deadline')}
-              {this.inputWrapper('is_chargeable')}
-              {this.inputWrapper('is_milestone')}
-              {this.inputWrapper('notes')}
-              {this.inputWrapper('date_created')}
+              <div>
+                {this.inputWrapper('notes', {cssClass: 'border border-orange-200'})}
+              </div>
             </div>
             {this.state.id <= 0 ? null : 
               <div className='flex-1 flex gap-2 flex-col'>

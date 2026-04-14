@@ -9,7 +9,7 @@ class Loader extends \Hubleto\Erp\App
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
    * @return void
-   * 
+   *
    */
   public function init(): void
   {
@@ -36,6 +36,7 @@ class Loader extends \Hubleto\Erp\App
     if ($round == 1) {
       $this->getModel(Models\Issue::class)->upgradeSchema();
       $this->getModel(Models\IssueTask::class)->upgradeSchema();
+      $this->getModel(Models\Post::class)->upgradeSchema();
    }
   }
 

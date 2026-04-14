@@ -37,6 +37,7 @@ class Counter extends Core
     $lastDayOfPreviousMonth = date("Y-m-t", strtotime("-2 month"));
 
     return $mOrder->record
+      ->prepareReadQuery()
       ->selectRaw('
         orders.id,
         ifnull(max(orders_items.date_due), "2000-01-01") as last_item_date_due

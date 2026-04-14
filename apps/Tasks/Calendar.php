@@ -54,7 +54,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($task->date_deadline)),
         'end' => date("Y-m-d", strtotime($task->date_deadline)),
         'allDay' => true,
-        'title' => $task->virt_related_to . ' TASK ' . $task->identifier . ' ' . $task->title,
+        'title' => 'TASK ' . $task->identifier . ' ' . $task->title . '(' . $task->virt_related_to . ')',
         'color' => $task->is_closed ? '#DDDDDD' : '#7a23dc',
         'source' => 'tasks',
         'id_owner' => $task->id_developer,

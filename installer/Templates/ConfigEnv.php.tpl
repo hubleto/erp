@@ -24,7 +24,7 @@ $config['uploadUrl'] = '{{ projectUrl }}/upload';
 $config['assetsUrl'] = '{{ assetsUrl }}';
 
 if (is_dir(__DIR__ . '/assets/compiled')) $config['assetsCompiledUrl'] = '{{ projectUrl }}/assets/compiled';
-else $config['assetsCompiledUrl'] = '{{ projectUrl }}/vendor/hubleto/assets/compiled';
+else $config['assetsCompiledUrl'] = '{{ assetsUrl }}/compiled';
 
 // sanitize dirs and urls based on used release
 $config['releaseFolder'] = str_replace('__RELEASE__', $config['release'], $config['releaseFolder']);

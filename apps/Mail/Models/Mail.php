@@ -80,8 +80,10 @@ class Mail extends \Hubleto\Erp\Model
     $description->permissions['canUpdate'] = false;
 
     $description->ui['orderBy'] = [
-      'field' => [ 'datetime_read', 'datetime_sent' ],
-      'direction' => [ 'asc', 'desc' ]
+      // 'field' => [ 'datetime_read', 'datetime_sent' ],
+      // 'direction' => [ 'asc', 'desc' ]
+      'field' => 'datetime_sent',
+      'direction' => 'desc',
     ];
 
     return $description;

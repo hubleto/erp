@@ -93,7 +93,7 @@ class Migration extends \Hubleto\Erp\Cli\Agent\Command
         mkdir($app->srcFolder . '/Models/Migrations');
       }
 
-      file_put_contents($app->srcFolder . '/Models/Migrations/' . $className . '_' . str_pad((string) $migrationCounter, 4, '0', STR_PAD_LEFT) . '.php', $this->renderer()->renderView('@snippets/Migration.php.twig', $tplVars));
+      file_put_contents($app->srcFolder . '/Models/Migrations/' . $className . '_' . str_pad((string) $migrationCounter, 4, '0', STR_PAD_LEFT) . '.php', $this->renderer()->renderView('@snippets/ModelMigration.php.twig', $tplVars));
 
       $this->terminal()->white("\n");
       $this->terminal()->cyan("Migration " . $class . '_' . date('Ymd') . '_0001.php' . " in '{$appNamespace}' created successfully.\n");

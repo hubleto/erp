@@ -18,7 +18,8 @@
         "Price": "Cena",
         "Solution": "Řešení",
         "Demand canceled by customer": "Poptávka zrušena zákazníkem",
-        "Other": "Jiné"
+        "Other": "Jiné",
+        "Calendar": "Kalendář"
     },
     "Controllers\\Deals": {
         "Sales": "Prodej",
@@ -84,7 +85,7 @@
         "Ownership": "Vlastnictví",
         "Owned by me": "Moje",
         "Managed by me": "Mnou spravované",
-        "Open \\/ Closed": "Otevřené \\/ Zavřené",
+        "Open \/ Closed": "Otevřené \/ Zavřené",
         "Open": "Otevřené",
         "Active": "Aktivní",
         " changed from ": " změněno z ",
@@ -98,6 +99,11 @@
         "Referral": "Doporučení",
         "Other": "Jiné",
         "Shared folder (online document storage)": "Sdílená složka (online úložiště dokumentů)",
+        "Description\/notes before the list of items": "Popis\/poznámky před seznamem položek",
+        "Description\/notes after the list of items": "Popis\/poznámky za seznamem položek",
+        "Template": "Šablona",
+        "Document": "Dokument",
+        "PDF": "PDF",
         "Deal created": "Deal vytvořen",
         "Yes": "Ano",
         "No": "Ne"

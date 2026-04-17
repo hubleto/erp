@@ -13,6 +13,14 @@ require_once(__DIR__ . "/ConfigEnv.php");
 // load autoloaders
 require(($config['releaseFolder'] ?? '.') . "/vendor/autoload.php");
 
+if (is_array($config['appRepositories']) && count($config['appRepositories']) > 0) {
+    foreach ($config['appRepositories'] as $appRepository) {
+        if (is_dir($appRepository)) {
+            require($appRepository . '/autoload.php');
+        }
+    }
+}
+
 // init main class
 $hubleto = new \Hubleto\Erp\Loader($config);
 $hubleto->init();

@@ -16,6 +16,8 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
+      '/^warehouses\/api\/get-product-info\/?$/' => Controllers\Api\GetProductInfo::class,
+
       '/^warehouses(\/(?<recordId>\d+))?\/?$/' => Controllers\Warehouses::class,
       '/^warehouses\/add?\/?$/' => ['controller' => Controllers\Warehouses::class, 'vars' => [ 'recordId' => -1 ]],
 

@@ -71,7 +71,7 @@ class StockStatus extends \Hubleto\Erp\Core
         `wl`.`id_warehouse` = :idWarehouse
     ', ['idWarehouse' => $idWarehouse]);
 
-    // recalculate inventory
+    // update inventory information
     $this->db()->execute('
       update `warehouses_inventory` `wi` set
         `quantity` =

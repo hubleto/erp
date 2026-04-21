@@ -36,24 +36,17 @@ class Transaction extends \Hubleto\Erp\Model
     'ITEMS' => [ self::HAS_MANY, TransactionItem::class, 'id_transaction', 'id' ],
   ];
 
-  public const TYPE_RECEIPT = 1;
-  public const TYPE_SHIPMENT = 2;
-  public const TYPE_TRANSFER_IN = 3;
-  public const TYPE_TRANSFER_OUT = 4;
-  public const TYPE_ADJUSTMENT_IN = 5;
-  public const TYPE_ADJUSTMENT_OUT = 6;
-  public const TYPE_RETURN = 7;
+  public const TYPE_INBOUND = 1;
+  public const TYPE_OUTBOUND = 2;
+  public const TYPE_INTERNAL = 3;
+  public const TYPE_ADJUSTMENT = 4;
 
   public const TYPES = [
-    self::TYPE_RECEIPT => 'Receipt',
-    self::TYPE_SHIPMENT => 'Shipment',
-    self::TYPE_TRANSFER_IN => 'Transfer In',
-    self::TYPE_TRANSFER_OUT => 'Transfer Out',
-    self::TYPE_ADJUSTMENT_IN => 'Adjustment In',
-    self::TYPE_ADJUSTMENT_OUT => 'Adjustment Out',
-    self::TYPE_RETURN => 'Return',
+    self::TYPE_INBOUND => 'Inbound',
+    self::TYPE_OUTBOUND => 'Outbound',
+    self::TYPE_INTERNAL => 'Internal transfer',
+    self::TYPE_ADJUSTMENT => 'Stock adjustment',
   ];
-
 
   public function describeColumns(): array
   {
@@ -61,15 +54,16 @@ class Transaction extends \Hubleto\Erp\Model
       'uid' => (new Varchar($this, $this->translate('Transaction UID')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4())->addIndex('INDEX `uid` (`uid`)'),
       'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()
         ->setEnumValues(array_map(fn($v) => $this->translate($v), self::TYPES))
-        ->setDefaultValue(self::TYPE_RECEIPT)
+        ->setDefaultValue(self::TYPE_INBOUND)
       ,
-      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
-      'supplier_invoice_number' => (new Varchar($this, $this->translate('Supplier invoice number'))),
-      'supplier_order_number' => (new Varchar($this, $this->translate('Supplier order number'))),
+      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class)),
+      // 'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class)),
+      // 'supplier_invoice_number' => (new Varchar($this, $this->translate('Supplier invoice number'))),
+      // 'supplier_order_number' => (new Varchar($this, $this->translate('Supplier order number'))),
       'batch_number' => (new Varchar($this, $this->translate('Batch number')))->setDefaultVisible(),
       'serial_number' => (new Varchar($this, $this->translate('Serial number')))->setDefaultVisible(),
-      'id_location_old' => (new Lookup($this, $this->translate('Old location'), Location::class))->setDefaultVisible(),
-      'id_location_new' => (new Lookup($this, $this->translate('New location'), Location::class))->setDefaultVisible(),
+      'id_location_old' => (new Lookup($this, $this->translate('Shipped from'), Location::class))->setDefaultVisible(),
+      'id_location_new' => (new Lookup($this, $this->translate('Recevied at'), Location::class))->setDefaultVisible(),
       'document_1' => (new File($this, $this->translate('Reference document #1'))),
       'document_2' => (new File($this, $this->translate('Reference document #2'))),
       'document_3' => (new File($this, $this->translate('Reference document #3'))),

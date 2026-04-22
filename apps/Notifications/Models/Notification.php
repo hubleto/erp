@@ -55,6 +55,8 @@ class Notification extends \Hubleto\Erp\Model
       'url' => (new Varchar($this, $this->translate('URL')))->setReactComponent('InputHyperlink')->setDefaultVisible(),
       'category' => (new Integer($this, $this->translate('Category')))->setRequired()->setEnumValues(array_map(fn($v) => $this->translate($v), self::getCategories())),
       'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'model' => (new Varchar($this, $this->translate('Model')))->setRequired()->setReadonly()->setDefaultVisible(),
+      'record_id' => (new Integer($this, $this->translate('RecordId')))->setRequired()->setDefaultVisible(),
       'tags' => (new Json($this, $this->translate('Tags'))),
       'datetime_sent' => (new DateTime($this, $this->translate('Sent')))->setRequired()->setReadonly()->setDefaultValue(date('Y-m-d H:i:s'))->setDefaultVisible(),
       'datetime_read' => (new DateTime($this, $this->translate('Read'))),

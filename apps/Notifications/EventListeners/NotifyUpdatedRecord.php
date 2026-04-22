@@ -17,6 +17,7 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
 
     $idOwner = (int) ($savedRecord['id_owner'] ?? 0);
     $idManager = (int) ($savedRecord['id_manager'] ?? 0);
+    $recordId = (int) ($savedRecord['id'] ?? 0);
 
     $diff = $model->diffRecords($originalRecord, $savedRecord);
 
@@ -31,6 +32,8 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
         $sender->send(
           945, // category
           [$model->shortName, $model->fullName],
+          $model->fullName,
+          $recordId,
           $idOwner, // to
           $model->shortName . ' updated', // subject
           $body,
@@ -42,6 +45,8 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
         $sender->send(
           945, // category
           [$model->shortName, $model->fullName],
+          $model->fullName,
+          $recordId,
           $idManager, // to
           $model->shortName . ' updated', // subject
           $body,

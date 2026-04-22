@@ -41,6 +41,8 @@ export default class FormNotification<P, S> extends FormExtended<FormNotificatio
           {this.inputWrapper('id_to')}
           {this.inputWrapper('subject')}
           {this.inputWrapper('url')}
+          {this.inputWrapper('model')}
+          {this.inputWrapper('record_id')}
           {this.inputWrapper('body')}
         </div>
         <div className='flex-1'>

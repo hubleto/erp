@@ -142,11 +142,12 @@ class Model extends \Hubleto\Framework\Model
    * @return array
    * 
    */
-  public function loadDocumentPreviewVars(int $recordId): array {
+  public function loadDocumentPreviewVars(int $recordId, array $relations = []): array {
     $query = $this->record->prepareReadQuery()->where($this->table . '.id', $recordId);
     foreach ($this->relations as $relName => $relConfig) {
       $query = $query->with($relName);
     }
+    foreach ($relations as $relName) $query = $query->with($relName);
     $data = $query->first();
     return $data ? $data->toArray() : [];
   }

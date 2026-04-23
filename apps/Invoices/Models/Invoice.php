@@ -533,9 +533,9 @@ class Invoice extends \Hubleto\Erp\Model {
    * @return array
    * 
    */
-  public function loadDocumentPreviewVars(int $idInvoice): array
+  public function loadDocumentPreviewVars(int $idInvoice, $relations = []): array
   {
-    $vars = parent::loadDocumentPreviewVars($idInvoice);
+    $vars = parent::loadDocumentPreviewVars($idInvoice, ['PROFILE.COMPANY']);
 
     // render PayBySquare QR code
     try {

@@ -58,6 +58,16 @@ class Generator extends \Hubleto\Erp\Core
     return $twigTemplate->render($vars);
   }
 
+  /**
+   * [Description for getPreviewHtml]
+   *
+   * @param string $model
+   * @param int $recordId
+   * @param int $idTemplate
+   * 
+   * @return string
+   * 
+   */
   public function getPreviewHtml(string $model, int $recordId, int $idTemplate): string
   {
     $vars = $this->getPreviewVars($model, $recordId);
@@ -72,6 +82,15 @@ class Generator extends \Hubleto\Erp\Core
 
   }
 
+  /**
+   * [Description for getPreviewVars]
+   *
+   * @param string $model
+   * @param int $recordId
+   * 
+   * @return array
+   * 
+   */
   public function getPreviewVars(string $model, int $recordId): array
   {
     /** @var Hubleto\Erp\Model */

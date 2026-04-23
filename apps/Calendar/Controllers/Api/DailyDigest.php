@@ -10,7 +10,7 @@ class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
       'color' => $color,
       'category' => $category,
       'text' => $reminder['title'],
-      'url' => 'calendar?showActivity=' . $reminder['source'] . ',' . $reminder['id'],
+      'url' => empty($reminder['url']) ? 'calendar?showActivity=' . $reminder['source'] . ',' . $reminder['id'] : $reminder['url'],
       'description' => $reminder['details'],
     ];
   }

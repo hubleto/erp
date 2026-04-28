@@ -434,70 +434,153 @@ class Deal extends \Hubleto\Erp\Model
 
   }
 
-  // /**
-  //  * [Description for getPreviewHtml]
-  //  *
-  //  * @param int $idDeal
-  //  * 
-  //  * @return string
-  //  * 
-  //  */
-  // public function getPreviewHtml(int $idDeal): string
-  // {
+  /**
+   * [Description for getDocumentDefaultTemplate]
+   *
+   * @param array $vars
+   * 
+   * @return string
+   * 
+   */
+  public function getDocumentDefaultTemplate(array $vars = []): string
+  {
+    return '
+      <html>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Ponuka {{ user.DEFAULT_COMPANY.name }} {{ number }}</title>
+        <style>
+          {% if PDF_EXPORT %}
+            * { font-family: Dejavu Sans !important; line-height: 0.95em; font-size: 10pt; }
+          {% else %}
+            * { font-family: Verdana !important; font-size: 10pt; }
+          {% endif %} 
+          .fbigger { font-size: 12pt; }
+          table { width: 100%; border-collapse: collapse; }
+          table td { vertical-align: top; }
+          .dmain { border: 0.2mm solid #444444; margin-top: 0.5em; }
+          .dcolumn { width: 50%; float: left; }
+          .content { padding: 4pt; }
+          .odberatel { border: 0.5mm solid #444444; }
+          .dodod_info { color: #777; text-transform: uppercase; padding-bottom: 2mm; text-align: left; }
+          .dodod_info span { border-bottom: 0.2mm solid #777; font-size: 8pt; font-style: italic; }
+          .faktura_info { padding: 16pt 2pt 6pt 2pt; text-align: left; }
+          table.polozky td { padding: 0.8pt; font-size: 9pt; vertical-align: middle; }
+          table.polozky tr.header td { font-weight: bold; border-bottom: 0px solid #777; }
+          table.polozky tr.sep td { width: 100%; height: 4pt; }
+          .sumar { width: 100%; float: right; }
+          .sumar table td { padding: 0.8pt; vertical-align: middle; }
+          .sumar table tr.sep td { width: 100%; height: 10pt; }
+          .sumar table tr.suma td { border-top: 0.2mm solid #777; padding-top: 1mm; }
+          .text-right { text-align: right; }
+        </style>
+      </head>
+      <body>
+        <!-- TOP -->
+        <div>Deal # <b>{{ identifier }}</b></div>
+        <br/>
+        <div class="dmain">
+          <div class="dcolumn">
+            <div class="content">
+              <div>
+                <b>SUPPLIER</b><br/>
+                <br/>
+                <b>{{ user.DEFAULT_COMPANY.name }}</b><br/>
+                {{ user.DEFAULT_COMPANY.street_1 }}<br/>
+                {% if user.DEFAULT_COMPANY.street_2 %} {{ user.DEFAULT_COMPANY.street_2 }}<br/> {% endif %}
+                {{ user.DEFAULT_COMPANY.zip }} {{ user.DEFAULT_COMPANY.city }}<br/>
+                {% if user.DEFAULT_COMPANY.country %} {{ user.DEFAULT_COMPANY.country }}<br/> {% endif %}
+                <br/>
+                {% if user.DEFAULT_COMPANY.registration_id %} IČO: {{ user.DEFAULT_COMPANY.registration_id }}<br/> {% endif %}
+                {% if user.DEFAULT_COMPANY.tax_id %} DIČ: {{ user.DEFAULT_COMPANY.tax_id }}<br/> {% endif %}
+                {% if user.DEFAULT_COMPANY.vat_id %} IČDPH: {{ user.DEFAULT_COMPANY.vat_id }}<br/> {% endif %}
+                <br/>
+                {{ user.DEFAULT_COMPANY.business_register }}<br/>
+              </div>
+            </div>
+          </div>
+          <div class="dcolumn">
+            <div class="content odberatel">
+              <b>CUSTOMER</b><br/>
+              <br/>
+              <b>{{ CUSTOMER.name }}</b><br/>
+              {{ CUSTOMER.street_line_1 }}<br/>
+              {% if CUSTOMER.street_line_2 %} {{ CUSTOMER.street_line_2 }}<br/> {% endif %}
+              {% if CUSTOMER.region %} {{ CUSTOMER.region }}<br/> {% endif %}
+              {{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}<br/>
+              {% if CUSTOMER.country %} {{ CUSTOMER.country }}<br/> {% endif %}
+              <br/>
+              {% if CUSTOMER.customer_id %} IČO: {{ CUSTOMER.customer_id }}<br/> {% endif %}
+              {% if CUSTOMER.tax_id %} DIČ: {{ CUSTOMER.tax_id }}<br/> {% endif %}
+              {% if CUSTOMER.vat_id %} IČDPH: {{ CUSTOMER.vat_id }}<br/> {% endif %}
+            </div>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
 
-  //   $vars = $this->getPreviewVars($idDeal);
+        {% if description_before %}
+          <div style="text-align:left;margin:1em 0em;color:blue">{{ description_before }}</div>
+        {% endif %}
 
-  //   /** @var Template */
-  //   $mTemplate = $this->getService(Template::class);
+        <div class="dmain">
+          <div class="content">
+            <table class="polozky">
+              <thead>
+                <tr class="header" style="background:#EEEEEE">
+                  <td style="width:100%;padding:5pt 5pt 5pt 5pt">
+                    <table style="width:100%">
+                      <tbody>
+                        <tr>
+                          <td style="width:50%">Item</td>
+                          <td style="width:50%;text-align:right">Unit price × Amount = Price</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in ITEMS %}
+                  <tr>
+                    <td style="width:100%;">
+                      <table style="width:100%">
+                        <tbody>
+                          <tr>
+                            <td style="width:50%;color:blue">
+                              <i>{{ i.title }}</i>
+                              <div style="color:#444444;font-size:8pt">{{ i.description }}<div>
+                            </td>
+                            <td style="width:50%;text-align:right">
+                              <span>{{ hubleto.locale().formatCurrency(i.unit_price * (100 - i.discount)/100, CURRENCY.symbol) }}</span>
+                              ×
+                              {{ hubleto.locale().formatNumber(i.amount, 4) }}
+                              = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> excl. VAT</b>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
-  //   if (!$template) throw new \Exception('Template was not found.');
+        {% if description_after %}
+          <div style="text-align:left;margin:1em 0em;white-space:pre-wrap;">{{ description_after }}</div>
+        {% endif %}
 
-  //   /** @var Generator */
-  //   $generator = $this->getService(Generator::class);
-  //   return $generator->renderTemplate($vars['id_template'], $vars);
-  // }
-
-  // /**
-  //  * Generates PDF document from given deal and returns ID of generated document
-  //  *
-  //  * @param int $idDeal Deal for which the PDF should be generated.
-  //  * 
-  //  * @return int ID of generated document.
-  //  * 
-  //  */
-  // public function generatePdf(int $idDeal): int
-  // {
-  //   /** @var Deal */
-  //   $mDeal = $this->getService(Deal::class);
-
-  //   $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
-  //   if (!$deal) throw new \Exception('Deal was not found.');
-
-  //   $mTemplate = $this->getService(Template::class);
-  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $deal->id_template)->first();
-  //   if (!$template) throw new \Exception('Template was not found.');
-
-  //   $vars = $this->getPreviewVars($idDeal);
-
-  //   $dealOutputFilename = 'deal-' . $deal->id . '-' . new DateTimeImmutable()->format('Ymd-His') . '.pdf';
-
-  //   /** @var Generator */
-  //   $generator = $this->getService(Generator::class);
-  //   $idDocument = $generator->createPdfDocumentFromTemplate(
-  //     'Deal ' . $deal->identifier,
-  //     Deal::class,
-  //     $idDeal,
-  //     $template->id,
-  //     $dealOutputFilename,
-  //     $vars
-  //   );
-
-  //   $mDeal->record->find($idDeal)->update([
-  //     'pdf' => $dealOutputFilename,
-  //   ]);
-
-  //   return $idDocument;
-  // }
+        <br/>
+        <br/>
+        Issued by {{ user.first_name }} {{ user.last_name }} {{ now }}.<br/>
+        Generated in ERP Hubleto.
+        https://www.hubleto.eu<br/>
+      </body>
+    ';
+  }
 
 }

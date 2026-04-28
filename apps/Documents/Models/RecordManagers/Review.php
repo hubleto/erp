@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Documents\Models\RecordManagers;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DocumentReview extends \Hubleto\Erp\RecordManager
+class Review extends \Hubleto\Erp\RecordManager
 {
   public $table = 'documents_reviews';
 
@@ -13,6 +13,12 @@ class DocumentReview extends \Hubleto\Erp\RecordManager
   public function DOCUMENT(): BelongsTo
   {
     return $this->belongsTo(Document::class, 'id_document', 'id');
+  }
+
+  /** @return BelongsTo<Customer, covariant BillingAccount> */
+  public function VERSION(): BelongsTo
+  {
+    return $this->belongsTo(DocumentVersion::class, 'id_version', 'id');
   }
 
   /** @return BelongsTo<Customer, covariant BillingAccount> */

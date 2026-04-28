@@ -142,7 +142,7 @@ class Model extends \Hubleto\Framework\Model
    * @return array
    * 
    */
-  public function loadDocumentPreviewVars(int $recordId, array $relations = []): array {
+  public function getDocumentPreviewVars(int $recordId, array $relations = []): array {
     $query = $this->record->prepareReadQuery()->where($this->table . '.id', $recordId);
     foreach ($this->relations as $relName => $relConfig) {
       $query = $query->with($relName);
@@ -150,6 +150,36 @@ class Model extends \Hubleto\Framework\Model
     foreach ($relations as $relName) $query = $query->with($relName);
     $data = $query->first();
     return $data ? $data->toArray() : [];
+  }
+
+  /**
+   * [Description for getDocumentDefaultTemplate]
+   *
+   * @param array $vars
+   * 
+   * @return string
+   * 
+   */
+  public function getDocumentDefaultTemplate(array $vars = []): string
+  {
+    $template = "
+      <h1>{$this->shortName}</h1>
+      <small>Record #{{ id }}</small>
+      <br/>
+      <br/>
+      <table class='table table-dense'>
+    ";
+    foreach ($vars as $varName => $varValue) {
+      $template .= "
+        <tr>
+          <td>{$varName}</td>
+        </tr>
+      ";
+    }
+    $template .= "
+      </table>
+    ";
+    return $template;
   }
 
 }

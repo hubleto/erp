@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableDocumentVersions from './TableDocumentVersions';
-import TableDocumentReviews from './TableDocumentReviews';
+import TableReviews from './TableReviews';
 
 export interface FormDocumentProps extends FormExtendedProps {
 }
@@ -77,7 +77,7 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
             </div>
           </div>
           <div className='flex-1'>
-            <TableDocumentReviews
+            <TableReviews
               key={"table_documents_reviews"}
               tag={"table_documents_reviews"}
               parentForm={this}

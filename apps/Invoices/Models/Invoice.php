@@ -526,16 +526,16 @@ class Invoice extends \Hubleto\Erp\Model {
   }
 
   /**
-   * [Description for loadDocumentPreviewVars]
+   * [Description for getDocumentPreviewVars]
    *
    * @param int $idInvoice
    * 
    * @return array
    * 
    */
-  public function loadDocumentPreviewVars(int $idInvoice, $relations = []): array
+  public function getDocumentPreviewVars(int $idInvoice, $relations = []): array
   {
-    $vars = parent::loadDocumentPreviewVars($idInvoice, ['PROFILE.COMPANY']);
+    $vars = parent::getDocumentPreviewVars($idInvoice, ['PROFILE.COMPANY']);
 
     // render PayBySquare QR code
     try {
@@ -611,92 +611,5 @@ class Invoice extends \Hubleto\Erp\Model {
     return $vars;
 
   }
-
-  // /**
-  //  * [Description for getPreviewHtml]
-  //  *
-  //  * @param int $idInvoice
-  //  * 
-  //  * @return string
-  //  * 
-  //  */
-  // public function getPreviewHtml(int $idInvoice): string
-  // {
-
-  //   $vars = $this->getPreviewVars($idInvoice);
-
-  //   /** @var Template */
-  //   $mTemplate = $this->getService(Template::class);
-
-  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $vars['id_template'])->first();
-  //   if (!$template) throw new \Exception('Template was not found.');
-
-  //   /** @var Generator */
-  //   $generator = $this->getService(Generator::class);
-  //   return $generator->renderTemplate($vars['id_template'], $vars);
-  // }
-
-  // /**
-  //  * Generates PDF document from given invoice and returns ID of generated document
-  //  *
-  //  * @param int $idInvoice Invoice for which the PDF should be generated.
-  //  * 
-  //  * @return string Output filename.
-  //  * 
-  //  */
-  // public function generatePdf(int $idInvoice): string
-  // {
-  //   /** @var Invoice */
-  //   $mInvoice = $this->getModel(Invoice::class);
-
-  //   $invoice = $mInvoice->record->prepareReadQuery()
-  //     ->with('CUSTOMER')
-  //     ->where('invoices.id', $idInvoice)
-  //     ->first()
-  //   ;
-  //   if (!$invoice) throw new \Exception('Invoice was not found.');
-
-  //   /** @var Template */
-  //   $mTemplate = $this->getService(Template::class);
-
-  //   $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $invoice->id_template)->first();
-  //   if (!$template) throw new \Exception('Template was not found.');
-
-  //   $vars = $this->getPreviewVars($idInvoice);
-
-  //   switch ($invoice->type) {
-  //     case 1: $invoiceOutputFilename = 'Proforma Invoice'; break;
-  //     case 2: $invoiceOutputFilename = 'Advance Invoice'; break;
-  //     case 3: $invoiceOutputFilename = 'Invoice'; break;
-  //     case 4: $invoiceOutputFilename = 'Credit Note'; break;
-  //     case 5: $invoiceOutputFilename = 'Debit Note'; break;
-  //   }
-
-  //   $invoiceOutputFilename = strtolower(
-  //     $invoiceOutputFilename
-  //     . '-' . Helper::str2url($invoice->number)
-  //     . '-' . date('Ymd', strtotime($invoice->date_issue))
-  //     . '-' . Helper::str2url($invoice->CUSTOMER?->name ?? '')
-  //     . '.pdf'
-  //   );
-
-  //   /** @var Generator */
-  //   $generator = $this->getService(Generator::class);
-
-  //   $generator->createPdfDocumentFromTemplate(
-  //     'Invoice ' . $invoice->number,
-  //     Invoice::class,
-  //     $idInvoice,
-  //     $template->id,
-  //     $invoiceOutputFilename,
-  //     $vars
-  //   );
-
-  //   $mInvoice->record->find($idInvoice)->update([
-  //     'pdf' => $invoiceOutputFilename,
-  //   ]);
-
-  //   return $invoiceOutputFilename;
-  // }
 
 }

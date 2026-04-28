@@ -14,22 +14,27 @@ class Generator extends \Hubleto\Erp\Core
   /**
    * [Description for renderTemplate]
    *
+   * @param string $model
    * @param int $idTemplate
    * @param array $vars
    * 
    * @return string
    * 
    */
-  public function renderTemplate(int $idTemplate, array $vars): string
+  public function renderTemplate(string $model, int $idTemplate, array $vars): string
   {
+
     /** @var Template */
     $mTemplate = $this->getService(Template::class);
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $idTemplate)->first();
-    if (!$template) throw new \Exception('Template was not found.');
+    if ($template) {
+      $templateContent = $template->content;
+    } else {
+      /** @var Hubleto\Erp\Model */
+      $mObj = $this->getModel($model);
 
-    /** @var Models\Template */
-    $mTemplate = $this->getModel(Models\Template::class);
-    $template = $mTemplate->record->prepareReadQuery()->where('id', $idTemplate)->first();
+      $templateContent = $mObj->getDocumentDefaultTemplate($vars);
+    }
 
     $vars['defaultStyle'] = "
       <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
@@ -54,7 +59,7 @@ class Generator extends \Hubleto\Erp\Core
       </head>
     ";
 
-    $twigTemplate = $this->renderer()->getTwig()->createTemplate($template->content);
+    $twigTemplate = $this->renderer()->getTwig()->createTemplate($templateContent);
     return $twigTemplate->render($vars);
   }
 
@@ -72,13 +77,13 @@ class Generator extends \Hubleto\Erp\Core
   {
     $vars = $this->getPreviewVars($model, $recordId);
 
-    /** @var Template */
-    $mTemplate = $this->getService(Template::class);
+    // /** @var Template */
+    // $mTemplate = $this->getService(Template::class);
 
-    $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $idTemplate)->first();
-    if (!$template) throw new \Exception('Template was not found.');
+    // $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $idTemplate)->first();
+    // if (!$template) throw new \Exception('Template was not found.');
 
-    return $this->renderTemplate($idTemplate, $vars);
+    return $this->renderTemplate($model, $idTemplate, $vars);
 
   }
 
@@ -96,7 +101,7 @@ class Generator extends \Hubleto\Erp\Core
     /** @var Hubleto\Erp\Model */
     $mObj = $this->getModel($model);
 
-    $vars = $mObj->loadDocumentPreviewVars($recordId);
+    $vars = $mObj->getDocumentPreviewVars($recordId);
 
     $vars['hubleto'] = $this;
     $vars['user'] = $this->authProvider()->getUser();
@@ -172,7 +177,7 @@ class Generator extends \Hubleto\Erp\Core
     $pdfGeneratorEndpoint = $this->config()->getAsString('pdfGeneratorEndpoint');
 
     $vars['PDF_EXPORT'] = true;
-    $htmlString = $this->renderTemplate($idTemplate, $vars);
+    $htmlString = $this->renderTemplate($model, $idTemplate, $vars);
     $pdfString = '';
 
     if (!empty($pdfGeneratorEndpoint)) {

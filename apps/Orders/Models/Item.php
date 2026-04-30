@@ -7,6 +7,7 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
@@ -43,6 +44,9 @@ class Item extends \Hubleto\Erp\Model
 
       'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
+
+      'attachment_1' => new File($this, $this->translate('Attachment #1'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
+      'attachment_2' => new File($this, $this->translate('Attachment #2'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
 
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),

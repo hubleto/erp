@@ -45,6 +45,19 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       . '.pdf'
     ;
 
+    $attachments = [
+      [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
+    ];
+
+    foreach ($invoice->ITEMS as $item) {
+      if (!empty($item->attachment_1)) {
+        $attachments[] = [ 'name' => pathinfo($item->attachment_1, PATHINFO_BASENAME), 'file' => $item->attachment_1 ];
+      }
+      if (!empty($item->attachment_2)) {
+        $attachments[] = [ 'name' => pathinfo($item->attachment_2, PATHINFO_BASENAME), 'file' => $item->attachment_2 ];
+      }
+    }
+
     if ($prepare) {
       $subject = '';
       $bodyHtml = '';
@@ -85,19 +98,6 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
         
       }
 
-      $attachments = [
-        [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
-      ];
-
-      foreach ($invoice->ITEMS as $item) {
-        if (!empty($item->attachment_1)) {
-          $attachments[] = [ 'name' => pathinfo($item->attachment_1, PATHINFO_BASENAME), 'file' => $item->attachment_1 ];
-        }
-        if (!empty($item->attachment_2)) {
-          $attachments[] = [ 'name' => pathinfo($item->attachment_2, PATHINFO_BASENAME), 'file' => $item->attachment_2 ];
-        }
-      }
-
       return [
         'senderAccount' => $invoice->PROFILE->SENDER_ACCOUNT,
         'subject' => $subject,
@@ -128,9 +128,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
             'cc' => $cc,
             'bcc' => $bcc,
           ],
-          [
-            [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
-          ]
+          $attachments
         );
 
         if ($idMailSent > 0) {

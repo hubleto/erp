@@ -20,7 +20,7 @@ class Item extends \Hubleto\Erp\Model
     concat(
       ifnull(
         concat("[", (select `i`.`number` from `invoices` `i` where `i`.`id` = {%TABLE%}.`id_invoice`), "]"),
-        ""
+        "--PREPARED--"
       ),
       " ",
       ifnull({%TABLE%}.item, "")

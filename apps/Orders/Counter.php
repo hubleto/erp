@@ -44,7 +44,7 @@ class Counter extends Core
       ')
       ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
       ->groupBy('orders.id')
-      ->whereRaw('orders.payment_period > 0')
+      ->whereRaw('orders.payment_period > 0 and ifnull(orders.is_closed, 0) = 0')
       ->havingRaw('last_item_date_due <= "' . $lastDayOfPreviousMonth . '"')
       ->pluck('id')
       ?->toArray()

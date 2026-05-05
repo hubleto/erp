@@ -53,14 +53,14 @@ class Customer extends Model
       'postal_code' => (new Varchar($this, $this->translate('Postal Code'))),
       'id_country' => (new Lookup($this, $this->translate('Country'), Country::class)),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),
-      'customer_id' => (new Varchar($this, $this->translate('Customer ID')))->setRequired()->setDefaultVisible(),
+      'company_id' => (new Varchar($this, $this->translate('Company ID')))->setRequired()->setDefaultVisible(),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
       'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setDefaultVisible()->setDefaultValue(1),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
-      'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
+      'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'shared_folder' => new Varchar($this, $this->translate("Shared folder (online document storage)"))->setCssClass('text-violet-800'),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql', "
@@ -85,10 +85,10 @@ class Customer extends Model
           ],
         ],
       ],
-      "customer_id" => [
+      "company_id" => [
         "type" => "unique",
         "columns" => [
-          "customer_id" => [
+          "company_id" => [
             "order" => "asc",
           ],
         ],
@@ -197,7 +197,7 @@ class Customer extends Model
         return [
           'name' => $customer->name,
           'vat_id' => $customer->vat_id,
-          'customer_id' => $customer->customer_id,
+          'company_id' => $customer->company_id,
           'tax_id' => $customer->tax_id,
         ];
       break;
@@ -205,7 +205,7 @@ class Customer extends Model
         return [
           'name' => $customer->name,
           'vat_id' => $customer->vat_id,
-          'customer_id' => $customer->customer_id,
+          'company_id' => $customer->company_id,
           'tax_id' => $customer->tax_id,
           'street_line_1' => $customer->street_line_1,
           'street_line_2' => $customer->street_line_2,

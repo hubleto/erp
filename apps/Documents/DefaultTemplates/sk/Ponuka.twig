@@ -56,7 +56,7 @@
           {{ user.DEFAULT_COMPANY.zip }} {{ user.DEFAULT_COMPANY.city }}<br/>
           {% if user.DEFAULT_COMPANY.country %} {{ user.DEFAULT_COMPANY.country }}<br/> {% endif %}
           <br/>
-          {% if user.DEFAULT_COMPANY.registration_id %} IČO: {{ user.DEFAULT_COMPANY.registration_id }}<br/> {% endif %}
+          {% if user.DEFAULT_COMPANY.company_id %} IČO: {{ user.DEFAULT_COMPANY.company_id }}<br/> {% endif %}
           {% if user.DEFAULT_COMPANY.tax_id %} DIČ: {{ user.DEFAULT_COMPANY.tax_id }}<br/> {% endif %}
           {% if user.DEFAULT_COMPANY.vat_id %} IČDPH: {{ user.DEFAULT_COMPANY.vat_id }}<br/> {% endif %}
           <br/>
@@ -76,7 +76,7 @@
         {{ CUSTOMER.postal_code }} {{ CUSTOMER.city }}<br/>
         {% if CUSTOMER.country %} {{ CUSTOMER.country }}<br/> {% endif %}
         <br/>
-        {% if CUSTOMER.customer_id %} IČO: {{ CUSTOMER.customer_id }}<br/> {% endif %}
+        {% if CUSTOMER.company_id %} IČO: {{ CUSTOMER.company_id }}<br/> {% endif %}
         {% if CUSTOMER.tax_id %} DIČ: {{ CUSTOMER.tax_id }}<br/> {% endif %}
         {% if CUSTOMER.vat_id %} IČDPH: {{ CUSTOMER.vat_id }}<br/> {% endif %}
       </div>

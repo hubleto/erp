@@ -225,7 +225,7 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
       $idCustomer = $mCustomer->record->recordCreate([
         "id_country" => $customer[0],
-        "customer_id" => $customer[1],
+        "company_id" => $customer[1],
         "name" => $customer[2],
         "postal_code" => $customer[3],
         "street_line_1" => $customer[4],

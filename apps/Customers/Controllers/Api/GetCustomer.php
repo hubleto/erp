@@ -25,7 +25,7 @@ class GetCustomer extends \Hubleto\Erp\Controllers\ApiController
         $customers
           ->where("name", "LIKE", "%" . $search . "%")
           ->orWhere("tax_id", "LIKE", "%" . $search . "%")
-          ->orWhere("customer_id", "LIKE", "%" . $search . "%")
+          ->orWhere("company_id", "LIKE", "%" . $search . "%")
           ->orWhere("vat_id", "LIKE", "%" . $search . "%")
         ;
       }

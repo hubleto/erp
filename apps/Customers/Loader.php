@@ -91,7 +91,7 @@ class Loader extends \Hubleto\Erp\App
         $q->orWhere('customers.city', 'like', '%' . $e . '%');
         $q->orWhere('customers.vat_id', 'like', '%' . $e . '%');
         $q->orWhere('customers.tax_id', 'like', '%' . $e . '%');
-        $q->orWhere('customers.customer_id', 'like', '%' . $e . '%');
+        $q->orWhere('customers.company_id', 'like', '%' . $e . '%');
       });
     }
 
@@ -104,7 +104,7 @@ class Loader extends \Hubleto\Erp\App
         "id" => $customer['id'],
         "label" => $customer['name'],
         "url" => 'customers/' . $customer['id'],
-        "description" => $customer['customer_id'] . ' ' . $customer['city'],
+        "description" => $customer['company_id'] . ' ' . $customer['city'],
       ];
     }
 

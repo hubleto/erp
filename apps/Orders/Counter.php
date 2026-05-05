@@ -19,6 +19,7 @@ class Counter extends Core
     return $mItem->record->prepareReadQuery()
       ->whereDate('orders_items.date_due', '<', date("Y-m-d"))
       ->whereNull('orders_items.id_invoice_item')
+      ->where('orders_items.price_excl_vat', '>', 0)
       ->count()
     ;
   }

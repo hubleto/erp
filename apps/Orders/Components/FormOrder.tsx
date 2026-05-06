@@ -4,7 +4,6 @@ import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/rea
 import TableItems from './TableItems';
 import TableQuotes from './TableQuotes';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
-import TablePayments from './TablePayments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
 import FormInput from '@hubleto/react-ui/core/FormInput';
@@ -13,12 +12,14 @@ import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import Calendar from '../../Calendar/Components/Calendar';
 import moment, { Moment } from "moment";
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
-import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
+import { ProgressBar } from 'primereact/progressbar';
 
 export interface FormOrderProps extends FormExtendedProps {
 }
 
 export interface FormOrderState extends FormExtendedState {
+  statistics?: any,
+  salaries?: any,
   showIdActivity: number,
   activityTime: string,
   activityDate: string,
@@ -27,7 +28,7 @@ export interface FormOrderState extends FormExtendedState {
   selectParentDeal?: boolean,
 }
 
-export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrderState> {
+export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOrderState> {
   static defaultProps: any = {
     ...FormExtended.defaultProps,
     icon: 'fas fa-money-check-dollar',
@@ -72,6 +73,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
       { uid: 'quotes', title: this.translate('Quotes') },
       // { uid: 'payments', title: this.translate('Payments') },
       { uid: 'invoicing', title: this.translate('Invoicing') },
+      { uid: 'statistics', title: this.translate('Statistics') },
       ...super.getTabsLeft(),
     ];
   }
@@ -87,6 +89,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
   getStateFromProps(props: FormOrderProps) {
     return {
       ...super.getStateFromProps(props),
+      salaries: {},
     };
   }
 
@@ -97,6 +100,24 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
   contentClassName(): string
   {
     return this.state.record.is_closed ? 'bg-slate-100' : '';
+  }
+
+  onTabChange() {
+    super.onTabChange();
+
+    const tabUid = this.state.activeTabUid;
+    switch (tabUid) {
+      case 'statistics':
+        request.post(
+          'orders/api/get-statistics',
+          { idOrder: this.state.record.id },
+          {},
+          (data: any) => {
+            this.setState({statistics: data});
+          }
+        )
+      break;
+    }
   }
 
   renderTitle(): JSX.Element {
@@ -452,6 +473,121 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps,FormOrd
           </div>
         </div>;
 
+      break;
+
+      case 'statistics':
+        if (this.state.statistics) {
+          let totalWorkedHours = 0;
+          let totalChargeableHours = 0;
+          let totalCostsByWorker = 0;
+
+          if (!this.state.statistics || !this.state.statistics.projects) return null;
+
+          return <div>{Object.keys(this.state.statistics.projects).map((idProject) => {
+            const P = this.state.statistics.projects[idProject];
+            return <div>
+              <div className='flex gap-2'>
+                <div className='card'>
+                  <div className='card-header'>{this.translate('Worked hours & costs by month')}</div>
+                  <div className='card-body'>
+                    <table className='table-default dense'>
+                      <tbody>
+                        {P.workedByMonth.map((item, key) => {
+                          totalWorkedHours += parseFloat(item.worked_hours);
+                          return <tr key={key}>
+                            <td>{item.year}-{item.month}</td>
+                            <td>{item.worked_hours} {this.translate('hours')}</td>
+                          </tr>;
+                        })}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                          <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalWorkedHours)} {this.translate('hours')}</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+
+                <div className='card'>
+                  <div className='card-header'>{this.translate('Chargeable hours by month')}</div>
+                  <div className='card-body'>
+                    <table className='table-default dense'>
+                      <tbody>
+                        {P.chargeableByMonth.map((item, key) => {
+                          totalChargeableHours += parseFloat(item.worked_hours);
+                          return <tr key={key}>
+                            <td>{item.year}-{item.month}</td>
+                            <td>{item.worked_hours} {this.translate('hours')}</td>
+                          </tr>;
+                        })}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                          <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalChargeableHours)} {this.translate('hours')}</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-2 mt-2">
+                <div className='card'>
+                  <div className='card-header'>{this.translate('Labor costs calculator')}</div>
+                  <div className='card-body'>
+                    <table className='table-default dense'>
+                      <thead>
+                        <tr>
+                          <th>{this.translate('User')}</th>
+                          <th>{this.translate('Worked hours')}</th>
+                          <th>{this.translate('Salary')}</th>
+                          <th>{this.translate('Labor costs')}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {P.workedByUser.map((item, key) => {
+                          let workerCosts = item.worked_hours * this.state.salaries[item.id_worker];
+                          totalCostsByWorker += workerCosts;
+                          return <tr key={key}>
+                            <td>{item.worker_name}</td>
+                            <td>{item.worked_hours} {this.translate('hours')}</td>
+                            <td><div className="flex gap-2 items-center">
+                              <input
+                                value={this.state.salaries[item.id_worker] ?? ''}
+                                className="w-12 bg-white"
+                                onChange={(e) => {
+                                  let salaries = this.state.salaries;
+                                  salaries[item.id_worker] = e.currentTarget.value;
+                                  this.setState({salaries: salaries});
+                                }}
+                              /> €/h
+                            </div></td>
+                            <td>
+                              {globalThis.hubleto.currencyFormat(workerCosts)}
+                            </td>
+                          </tr>;
+                        })}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                          <td className='bg-primary text-white p-2'>&nbsp;</td>
+                          <td className='bg-primary text-white p-2'>&nbsp;</td>
+                          <td className='bg-primary text-white p-2'>{globalThis.hubleto.currencyFormat(totalCostsByWorker)}</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>;
+          })}</div>;
+        } else {
+          return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+        }
       break;
 
       case 'documents':

@@ -28,6 +28,7 @@ class Loader extends \Hubleto\Erp\App
       '/^orders\/api\/get-item\/?$/' => Controllers\Api\GetItem::class,
       '/^orders\/api\/prepare-item-for-invoice\/?$/' => Controllers\Api\PrepareItemForInvoice::class,
       '/^orders\/api\/prepare-items-for-invoice\/?$/' => Controllers\Api\PrepareItemsForInvoice::class,
+      '/^orders\/api\/get-statistics\/?$/' => Controllers\Api\GetStatistics::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
 

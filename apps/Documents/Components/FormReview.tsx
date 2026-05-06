@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 
-export interface FormDocumentReviewProps extends FormExtendedProps {
+export interface FormReviewProps extends FormExtendedProps {
 }
-export interface FormDocumentReviewState extends FormExtendedState {}
+export interface FormReviewState extends FormExtendedState {}
 
-export default class FormDocumentReview<P, S> extends FormExtended<FormDocumentReviewProps,FormDocumentReviewState> {
+export default class FormReview<P, S> extends FormExtended<FormReviewProps,FormReviewState> {
   static defaultProps: any = {
     ...FormExtended.defaultProps,
-    model: 'Hubleto/App/Community/Documents/Models/DocumentReview',
+    model: 'Hubleto/App/Community/Documents/Models/Review',
   };
 
-  props: FormDocumentReviewProps;
-  state: FormDocumentReviewState;
+  props: FormReviewProps;
+  state: FormReviewState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
-  translationContextInner: string = 'Components\\FormDocumentReview';
+  translationContextInner: string = 'Components\\FormReview';
 
-  constructor(props: FormDocumentReviewProps) {
+  constructor(props: FormReviewProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: FormDocumentReviewProps) {
+  getStateFromProps(props: FormReviewProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
@@ -50,6 +50,7 @@ export default class FormDocumentReview<P, S> extends FormExtended<FormDocumentR
         return <div className='flex gap-2 h-full'>
           <div className='flex-1'>
             {this.inputWrapper('id_document')}
+            {this.inputWrapper('id_version')}
             {this.inputWrapper('requested_on')}
             {this.inputWrapper('id_requested_by')}
             {this.inputWrapper('reviewed_on')}

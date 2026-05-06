@@ -73,6 +73,8 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
               {this.inputWrapper('amount')}
               {this.inputWrapper('discount')}
               {this.inputWrapper('vat')}
+              {this.inputWrapper('attachment_1')}
+              {this.inputWrapper('attachment_2')}
               {this.inputWrapper('position')}
             </div>
             <div className='flex-1'>

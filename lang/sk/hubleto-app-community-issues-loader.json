@@ -1,28 +1,70 @@
 {
-    "manifest": {
-        "Issues": "Problémy",
-        "Issue management": "Správa problémov",
-        "Mail accounts": "Emailové účty",
-        "Issues Mail Accounts": "Emailové účty problémov"
-    },
-    "root": {
-        "Issues": "Problémy",
-        "Mail accounts": "Emailové účty"
-    },
-    "Controllers\\Issues": {
-        "Issues": "Problémy"
-    },
-    "Controllers\\MailAccounts": {
-        "Issues": "Problémy",
-        "Mail accounts": "Emailové účty"
-    },
-    "Models\\Issue": {
-        "Title": "Názov",
-        "Problem description": "Popis problému"
-    },
-    "Models\\MailAccount": {
-        "Mail account (requires Mail app)": "Emailový účet (vyžaduje aplikáciu Mail)",
-        "Configuration": "Konfigurácia",
-        "Notes": "Poznámky"
-    }
+  "manifest": {
+    "Issues": "Problémy",
+    "Issue management": "Správa problémov",
+    "Mail accounts": "Emailové účty",
+    "Issues Mail Accounts": "Emailové účty problémov"
+  },
+  "root": {
+    "Issues": "Problémy",
+    "Mail accounts": "Emailové účty"
+  },
+  "Controllers\\Issues": {
+    "Issues": "Problémy"
+  },
+  "Controllers\\Posts": {
+    "Issues": "Problémy",
+    "Posts": "Príspevky"
+  },
+  "Controllers\\MailAccounts": {
+    "Issues": "Problémy",
+    "Mail accounts": "Emailové účty"
+  },
+  "Models\\Issue": {
+    "Title": "Názov",
+    "From": "Od",
+    "Problem description": "Popis problému",
+    "Notess": "Poznámky",
+    "Customer": "Zákazník",
+    "Workflow": "Workflow",
+    "Workflow step": "Krok workflow",
+    "Owner": "Vlastník",
+    "Manager": "Manažér",
+    "Shared with": "Zdieľané s",
+    "Closed": "Uzavreté",
+    "Thread UID": "UID vlákna",
+    "Add issue": "Pridať problém",
+    "Open / Closed": "Otvorené / Uzavreté",
+    "Open": "Otvorené",
+    "All": "Všetky",
+    "Ownership": "Vlastníctvo",
+    "Owned by me": "Moje",
+    "Managed by me": "Mnou riadené",
+    "Stage": "Fáza"
+  },
+  "Models\\IssueTask": {
+    "Issue": "Problém",
+    "Task": "Úloha",
+    "Assign task to issue": "Priradiť úlohu k problému"
+  },
+  "Models\\Post": {
+    "Issue": "Problém",
+    "From": "Od",
+    "Content": "Obsah",
+    "Thread UID": "UID vlákna",
+    "Originating mail": "Pôvodný email",
+    "Add post": "Pridať príspevok"
+  },
+  "Models\\MailAccount": {
+    "Mail account (requires Mail app)": "Emailový účet (vyžaduje aplikáciu Mail)",
+    "Configuration": "Konfigurácia",
+    "Notes": "Poznámky"
+  },
+  "Components\\FormIssue": {
+    "Issue": "Problém",
+    "Tasks": "Úlohy"
+  },
+  "Components\\FormPost": {
+    "Post": "Príspevok"
+  }
 }

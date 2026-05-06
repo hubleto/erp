@@ -32,7 +32,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
     switch ($invoice->type) {
       case 1: $attachmentName = 'Proforma Invoice'; break;
       case 2: $attachmentName = 'Advance Invoice'; break;
-      case 3: $attachmentName = 'Invoice'; break;
+      case 3: default: $attachmentName = 'Invoice'; break;
       case 4: $attachmentName = 'Credit Note'; break;
       case 5: $attachmentName = 'Debit Note'; break;
     }
@@ -44,6 +44,19 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       . Helper::str2url($invoice->CUSTOMER?->name ?? '')
       . '.pdf'
     ;
+
+    $attachments = [
+      [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
+    ];
+
+    foreach ($invoice->ITEMS as $item) {
+      if (!empty($item->attachment_1)) {
+        $attachments[] = [ 'name' => pathinfo($item->attachment_1, PATHINFO_BASENAME), 'file' => $item->attachment_1 ];
+      }
+      if (!empty($item->attachment_2)) {
+        $attachments[] = [ 'name' => pathinfo($item->attachment_2, PATHINFO_BASENAME), 'file' => $item->attachment_2 ];
+      }
+    }
 
     if ($prepare) {
       $subject = '';
@@ -92,9 +105,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
         'to' => join(', ', $recipients),
         'cc' => $cc,
         'bcc' => $bcc,
-        'attachments' => [
-          [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
-        ]
+        'attachments' => $attachments,
       ];
     } else {
       $idSenderAccount = $this->router()->urlParamAsInteger('idSenderAccount');
@@ -117,9 +128,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
             'cc' => $cc,
             'bcc' => $bcc,
           ],
-          [
-            [ 'name' => $attachmentName, 'file' => $invoice->pdf ]
-          ]
+          $attachments
         );
 
         if ($idMailSent > 0) {

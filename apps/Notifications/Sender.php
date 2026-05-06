@@ -24,6 +24,8 @@ class Sender extends Core
   public function send(
     int $category,
     array $tags,
+    string $model,
+    int $recordId,
     int $idTo,
     string $subject,
     string $body,
@@ -46,6 +48,8 @@ class Sender extends Core
         'body' => $body,
         'url' => $url,
         'color' => $color,
+        'model' => $model,
+        'record_id' => $recordId,
       ])->toArray();
       return $notification;
     } else {

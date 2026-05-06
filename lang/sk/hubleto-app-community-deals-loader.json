@@ -18,7 +18,8 @@
         "Price": "Cena",
         "Solution": "Riešenie",
         "Demand canceled by customer": "Dopyt zrušený zákazníkom",
-        "Other": "Iné"
+        "Other": "Iné",
+        "Calendar": "Kalendár"
     },
     "Controllers\\Deals": {
         "Sales": "Predaj",
@@ -98,6 +99,11 @@
         "Referral": "Odporúčanie",
         "Other": "Iné",
         "Shared folder (online document storage)": "Zdieľaný priečinok (online úložisko dokumentov)",
+        "Description\/notes before the list of items": "Popis\/poznámky pred zoznamom položiek",
+        "Description\/notes after the list of items": "Popis\/poznámky za zoznamom položiek",
+        "Template": "Šablóna",
+        "Document": "Dokument",
+        "PDF": "PDF",
         "Deal created": "Deal vytvorený",
         "Yes": "Áno",
         "No": "Nie"

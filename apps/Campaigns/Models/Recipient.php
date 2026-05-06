@@ -37,6 +37,7 @@ class Recipient extends \Hubleto\Erp\Model
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
       'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
       'variables' => (new Json($this, $this->translate('Variables')))->setDefaultVisible()->setReactComponent('InputJsonKeyValue'),
+      'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly(),
       'virt_utm_source' => (new Virtual($this, $this->translate('UTM: source')))
         ->setProperty('sql', "SELECT `c`.`utm_source` FROM `campaigns` `c` WHERE `c`.`id` = `campaigns_recipients`.`id_campaign`"),

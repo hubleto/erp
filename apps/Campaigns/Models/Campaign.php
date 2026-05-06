@@ -22,6 +22,8 @@ class Campaign extends \Hubleto\Erp\Model
   public string $table = 'campaigns';
   public string $recordManagerClass = RecordManagers\Campaign::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlAdd = 'campaigns/add';
+  public ?string $lookupUrlDetail = 'campaigns/{%ID%}';
 
   public array $relations = [
     'MAIL_ACCOUNT' => [ self::HAS_ONE, Account::class, 'id_mail_account', 'id' ],

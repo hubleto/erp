@@ -19,6 +19,7 @@ class Counter extends Core
     return $mItem->record->prepareReadQuery()
       ->whereDate('orders_items.date_due', '<', date("Y-m-d"))
       ->whereNull('orders_items.id_invoice_item')
+      ->where('orders_items.price_excl_vat', '>', 0)
       ->count()
     ;
   }
@@ -44,7 +45,7 @@ class Counter extends Core
       ')
       ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
       ->groupBy('orders.id')
-      ->whereRaw('orders.payment_period > 0')
+      ->whereRaw('orders.payment_period > 0 and ifnull(orders.is_closed, 0) = 0')
       ->havingRaw('last_item_date_due <= "' . $lastDayOfPreviousMonth . '"')
       ->pluck('id')
       ?->toArray()

@@ -1,31 +1,32 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
-import FormDocumentReview, { FormDocumentReviewProps } from './FormDocumentReview';
+import FormReview, { FormReviewProps } from './FormReview';
 
-interface TableDocumentReviewsProps extends TableExtendedProps {
+interface TableReviewsProps extends TableExtendedProps {
   idDocument?: number,
+  idVersion?: number,
 }
-interface TableDocumentReviewsState extends TableExtendedState {}
+interface TableReviewsState extends TableExtendedState {}
 
-export default class TableDocumentReviews extends TableExtended<TableDocumentReviewsProps, TableDocumentReviewsState> {
+export default class TableReviews extends TableExtended<TableReviewsProps, TableReviewsState> {
   static defaultProps = {
     ...TableExtended.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/Documents/Models/DocumentReview',
+    model: 'Hubleto/App/Community/Documents/Models/Review',
   }
 
-  props: TableDocumentReviewsProps;
-  state: TableDocumentReviewsState;
+  props: TableReviewsProps;
+  state: TableReviewsState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
-  translationContextInner: string = 'Components\\TableDocumentReviews';
+  translationContextInner: string = 'Components\\TableReviews';
 
-  constructor(props: TableDocumentReviewsProps) {
+  constructor(props: TableReviewsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableDocumentReviewsProps) {
+  getStateFromProps(props: TableReviewsProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -41,6 +42,7 @@ export default class TableDocumentReviews extends TableExtended<TableDocumentRev
     return {
       ...super.getEndpointParams(),
       idDocument: this.props.idDocument,
+      idVersion: this.props.idVersion,
     }
   }
   setRecordFormUrl(id: number) {
@@ -66,10 +68,11 @@ export default class TableDocumentReviews extends TableExtended<TableDocumentRev
   }
 
   renderForm(): JSX.Element {
-    let formProps: FormDocumentReviewProps = this.getFormProps();
+    let formProps: FormReviewProps = this.getFormProps();
     formProps.customEndpointParams.idDocument = this.props.idDocument;
+    formProps.customEndpointParams.idVersion = this.props.idVersion;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_document: this.props.idDocument };
-    return <FormDocumentReview {...formProps}/>;
+    formProps.description.defaultValues = { id_document: this.props.idDocument, id_version: this.props.idVersion };
+    return <FormReview {...formProps}/>;
   }
 }

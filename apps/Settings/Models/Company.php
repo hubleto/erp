@@ -16,7 +16,7 @@ class Company extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Company')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'registration_id' => (new Varchar($this, $this->translate('Registration ID'))),
+      'company_id' => (new Varchar($this, $this->translate('Registration ID'))),
       'business_register' => (new Varchar($this, $this->translate('Business register'))),
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'vat_id' => (new Varchar($this, $this->translate('VAT ID'))),

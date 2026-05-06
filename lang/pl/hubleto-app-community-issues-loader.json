@@ -12,17 +12,59 @@
     "Controllers\\Issues": {
         "Issues": "Problemy"
     },
+    "Controllers\\Posts": {
+        "Issues": "Problemy",
+        "Posts": "Posty"
+    },
     "Controllers\\MailAccounts": {
         "Issues": "Problemy",
         "Mail accounts": "Konta e-mail"
     },
     "Models\\Issue": {
         "Title": "Tytuł",
-        "Problem description": "Opis problemu"
+        "From": "Od",
+        "Problem description": "Opis problemu",
+        "Notess": "Notatki",
+        "Customer": "Klient",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
+        "Owner": "Właściciel",
+        "Manager": "Menedżer",
+        "Shared with": "Udostępnione dla",
+        "Closed": "Zamknięte",
+        "Thread UID": "UID wątku",
+        "Add issue": "Dodaj problem",
+        "Open / Closed": "Otwarte / Zamknięte",
+        "Open": "Otwarte",
+        "All": "Wszystkie",
+        "Ownership": "Własność",
+        "Owned by me": "Moje",
+        "Managed by me": "Zarządzane przeze mnie",
+        "Stage": "Etap"
+    },
+    "Models\\IssueTask": {
+        "Issue": "Problem",
+        "Task": "Zadanie",
+        "Assign task to issue": "Przypisz zadanie do problemu"
+    },
+    "Models\\Post": {
+        "Issue": "Problem",
+        "From": "Od",
+        "Content": "Treść",
+        "Thread UID": "UID wątku",
+        "Originating mail": "Źródłowy e-mail",
+        "Add post": "Dodaj post"
     },
     "Models\\MailAccount": {
         "Mail account (requires Mail app)": "Konto e-mail (wymaga aplikacji Mail)",
         "Configuration": "Konfiguracja",
         "Notes": "Notatki"
+    },
+    "Components\\FormIssue": {
+        "Issue": "Problem",
+        "Tasks": "Zadania"
+    },
+    "Components\\FormPost": {
+        "Post": "Post"
     }
 }

@@ -79,7 +79,7 @@ export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps
               {this.inputWrapper('last_name')}
               {this.inputWrapper('salutation')}
               {this.inputWrapper('variables')}
-              {this.inputWrapper('id_mail')}
+              {this.inputWrapper('notes')}
             </div>
             <div className='flex-1'>
               <div className='card'>

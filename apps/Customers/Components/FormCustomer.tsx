@@ -116,7 +116,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
     //Delete all spaces in identifiers
     if (record.tax_id) record.tax_id = record.tax_id.replace(/\s+/g, "");
     if (record.vat_id) record.vat_id = record.vat_id.replace(/\s+/g, "");
-    if (record.customer_id) record.customer_id = record.customer_id.replace(/\s+/g, "");
+    if (record.company_id) record.company_id = record.company_id.replace(/\s+/g, "");
 
     return record;
   }
@@ -331,7 +331,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
                 <div>
                   {this.inputWrapper("name", {cssClass: 'text-2xl'})}
                   {this.inputWrapper("identifier")}
-                  {this.inputWrapper("customer_id")}
+                  {this.inputWrapper("company_id")}
                   {this.inputWrapper("street_line_1")}
                   {this.inputWrapper("street_line_2")}
                   {this.inputWrapper("postal_code")}

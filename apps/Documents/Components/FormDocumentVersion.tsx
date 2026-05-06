@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import { getUrlParam } from '@hubleto/react-ui/core/Helper';
+import TableReviews from './TableReviews';
 
 export interface FormDocumentVersionProps extends FormExtendedProps {
 }
@@ -49,13 +49,23 @@ export default class FormDocumentVersion<P, S> extends FormExtended<FormDocument
     switch (tabUid) {
       case 'default':
         return <div className='flex gap-2 h-full'>
-          <div className='flex-1'>
+          <div className='flex-3'>
             {this.inputWrapper('uid', {readonly: true})}
             {this.inputWrapper('id_document')}
             {this.inputWrapper('version')}
             {this.inputWrapper('file')}
             {this.inputWrapper('created_on')}
             {this.inputWrapper('id_created_by')}
+          </div>
+          <div className='flex-1'>
+            <TableReviews
+              key={"table_documents_versions_reviews"}
+              tag={"table_documents_versions_reviews"}
+              parentForm={this}
+              uid={this.props.uid + "_table_documents_versions_reviews"}
+              idDocument={R.id}
+              idVersion={R.id}
+            />
           </div>
         </div>
       ;

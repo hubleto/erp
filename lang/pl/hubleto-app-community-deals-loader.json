@@ -18,7 +18,8 @@
     "Price": "Cena",
     "Solution": "Rozwiązanie",
     "Demand canceled by customer": "Zapytanie anulowane przez klienta",
-    "Other": "Inne"
+    "Other": "Inne",
+    "Calendar": "Kalendarz"
   },
   "Controllers\\Deals": {
     "Sales": "Sprzedaż",
@@ -84,7 +85,7 @@
     "Ownership": "Własność",
     "Owned by me": "Moje",
     "Managed by me": "Zarządzane przeze mnie",
-    "Open \\/ Closed": "Otwarte \\/ Zamknięte",
+    "Open \/ Closed": "Otwarte \/ Zamknięte",
     "Open": "Otwarte",
     "Active": "Aktywne",
     " changed from ": " zmienione z ",
@@ -98,6 +99,11 @@
     "Referral": "Polecenie",
     "Other": "Inne",
     "Shared folder (online document storage)": "Udostępniony folder (magazyn dokumentów online)",
+    "Description\/notes before the list of items": "Opis\/notatki przed listą pozycji",
+    "Description\/notes after the list of items": "Opis\/notatki po liście pozycji",
+    "Template": "Szablon",
+    "Document": "Dokument",
+    "PDF": "PDF",
     "Deal created": "Deal utworzony",
     "Yes": "Tak",
     "No": "Nie"

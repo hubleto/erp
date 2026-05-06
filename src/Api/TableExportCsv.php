@@ -13,7 +13,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     $model = $this->router()->urlParamAsString('model');
     $this->model = $this->getModel($model);
 
-    $records = $this->model->record->loadTableData(
+    $data = $this->model->record->loadTableData(
       $this->router()->urlParamAsString('fulltextSearch'),
       $this->router()->urlParamAsArray('columnSearch'),
       $this->router()->urlParamAsArray('orderBy'),
@@ -23,7 +23,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     );
 
     $separator = $this->router()->urlParamAsString('separator', ',');
-    $data = $records['data'] ?? [];
+    $records = $data['records'] ?? [];
 
     $csvContent = "";
     $columns = $this->model->getColumns();
@@ -34,15 +34,15 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     }
     $csvContent .= join($separator, $cols) . "\n";
 
-    foreach ($data as $row) {
+    foreach ($records as $record) {
       $cols = [];
       foreach ($columns as $columnName => $column) {
         $valueStr = '';
 
         if ($column instanceof \Hubleto\Framework\Db\Column\Lookup) {
-          $value = $row['_LOOKUP[' . $columnName . ']'] ?? '';
+          $value = $record['_LOOKUP[' . $columnName . ']'] ?? '';
         } else {
-          $value = $row[$columnName] ?? '';
+          $value = $record[$columnName] ?? '';
         }
 
         if (is_array($value)) {

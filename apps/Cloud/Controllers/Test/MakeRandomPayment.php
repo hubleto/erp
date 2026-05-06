@@ -15,7 +15,7 @@ class MakeRandomPayment extends \Hubleto\Erp\Controller
 
     $amount = rand(15, 20) / 2;
 
-    /** @var \Hubleto\App\Community\Cloud\Models\Payment */
+    /** @var \Hubleto\App\Community\Cloud\Models\Payment $mPayment */
     $mPayment = $this->getModel(Payment::class);
     $mPayment->addPayment(date('Y-m-d H:i:s'), $amount, 'TEST: random payment');
 

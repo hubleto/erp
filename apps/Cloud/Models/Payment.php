@@ -71,13 +71,15 @@ class Payment extends \Hubleto\Erp\Model
     return $description;
   }
 
-  public function makePayment(string $date, int $amount, string $details, int $type) {
+  public function makePayment(string $timestamp, int $amount, string $details, string $UUID, int $type): void
+  {
+
     $this->record->recordCreate([
-      'datetime_charged' => date('Y-m-d H:i:s', strtotime($date)),
+      'datetime_charged' => date('Y-m-d H:i:s', (int) ($timestamp / 1000)),
       'full_amount' => $amount,
       'details' => $details,
       'type' => $type,
-      'uuid' => \Hubleto\Framework\Helper::generateUuidV4(),
+      'uuid' => $UUID,
     ]);
   }
 

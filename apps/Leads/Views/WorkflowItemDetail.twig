@@ -2,9 +2,9 @@
   <div class="flex flex-col">
     <div class="flex gap-2">
       <div class="text-primary">{{ item.OWNER.nick }}</div>
-      <div class="grow flex gap-2">
+      <div class="text-gray-400 text-nowrap">
         {% for c in item.CAMPAIGNS %}
-          <div class="badge badge-lime badge-small text-nowrap">{{ c.CAMPAIGN.name }}</div>
+          {{ c.CAMPAIGN.name }}
         {% endfor %}
       </div>
     </div>

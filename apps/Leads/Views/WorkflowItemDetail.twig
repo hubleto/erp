@@ -1,18 +1,17 @@
-<div class="card-header rounded flex flex-col p-2 text-sm font-normal">
-  <div class="flex justify-between w-full">
-    <div class="flex flex-col truncate">
-      <div class="flex gap-2">
-        <div class="grow flex gap-2">
-          {% for c in item.CAMPAIGNS %}
-            <div class="badge badge-lime badge-small">{{ c.CAMPAIGN.name }}</div>
-          {% endfor %}
-        </div>
-        <div class="text-primary">{{ item.OWNER.nick }}</div>
+<div class="p-2 text-sm font-normal">
+  <div class="flex flex-col">
+    <div class="flex gap-2">
+      <div class="text-primary">{{ item.OWNER.nick }}</div>
+      <div class="grow flex gap-2">
+        {% for c in item.CAMPAIGNS %}
+          <div class="badge badge-lime badge-small">{{ c.CAMPAIGN.name }}</div>
+        {% endfor %}
       </div>
-      <div class="font-bold">
-        {{ item.email }}
-        {{ item.phone }}
-      </div>
+    </div>
+    <div class="font-bold">
+      {{ item.title }}
+      {{ item.email }}
+      {{ item.phone }}
     </div>
   </div>
 </div>

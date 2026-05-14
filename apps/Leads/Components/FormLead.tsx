@@ -202,7 +202,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                   return <div key={key}>{item.value}</div>;
                 })}
               </div> : null} */}
-              {/* {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})} */}
+              {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})}
               {/* {this.inputWrapper('id_level', {readonly: R.is_closed, uiStyle: 'buttons'})}
               {this.inputWrapper('status', {readonly: R.is_closed, uiStyle: 'buttons', onChange: (input: any, value: any) => {this.updateRecord({lost_reason: null})}})} */}
               {this.inputWrapper('email')}

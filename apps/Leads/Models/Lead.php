@@ -87,7 +87,7 @@ class Lead extends \Hubleto\Erp\Model
       'profile_link_2' => (new Varchar($this, $this->translate('Profile link #2')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
       'profile_link_3' => (new Varchar($this, $this->translate('Profile link #3')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
-      // 'title' => (new Varchar($this, $this->translate('Specific subject (if any)')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
       // 'virt_email' => (new Virtual($this, $this->translate('Email')))->setDefaultVisible()
       //   ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")

@@ -485,8 +485,9 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
 
           return <div>{Object.keys(this.state.statistics.projects).map((idProject) => {
             const P = this.state.statistics.projects[idProject];
-            return <div>
-              <div className='flex gap-2'>
+            return <div className='card'>
+              <div className='card-header'>{P.project.identifier} {P.project.title}</div>
+              <div className='card-body flex gap-2'>
                 <div className='card'>
                   <div className='card-header'>{this.translate('Worked hours & costs by month')}</div>
                   <div className='card-body'>
@@ -532,9 +533,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
                     </table>
                   </div>
                 </div>
-              </div>
-
-              <div className="flex gap-2 mt-2">
                 <div className='card'>
                   <div className='card-header'>{this.translate('Labor costs calculator')}</div>
                   <div className='card-body'>

@@ -267,42 +267,48 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           {this.inputWrapper('identifier', {cssClass: 'text-2xl', readonly: R.is_closed})}
           {this.inputWrapper('title', {cssClass: 'text-2xl', readonly: R.is_closed})}
           {this.inputWrapper('version')}
-          <FormInput title={this.translate('Customer')}>
-            <Lookup {...this.getInputProps("id_customer")}
-              model='Hubleto/App/Community/Customers/Models/Customer'
-              urlAdd='customers/add'
-              value={R.id_customer}
-              readonly={R.is_closed}
-              onChange={(input: any, value: any) => {
-                this.updateRecord({ id_customer: value, id_contact: null });
-                if (R.id_customer == 0) {
-                  R.id_customer = null;
-                  this.setState({record: R});
-                }
-              }}
-            ></Lookup>
-          </FormInput>
-          <FormInput title={this.translate('Contact')}>
-            <Lookup {...this.getInputProps("id_contact")}
-              model='Hubleto/App/Community/Contacts/Models/Contact'
-              customEndpointParams={{idCustomer: R.id_customer}}
-              value={R.id_contact}
-              urlAdd='contacts/add'
-              readonly={R.is_closed}
-              onChange={(input: any, value: any) => {
-                this.updateRecord({ id_contact: value })
-                if (R.id_contact == 0) {
-                  R.id_contact = null;
-                  this.setState({record: R})
-                }
-              }}
-            ></Lookup>
-          </FormInput>
-          {R.CONTACT && R.CONTACT.VALUES ? <div className="ml-4 text-sm p-2 bg-lime-100 text-lime-900 mb-2">
-            {R.CONTACT.VALUES.map((item, key) => {
-              return <div key={key}>{item.value}</div>;
-            })}
-          </div> : null}
+          <div className='gap-2 xl:flex xl:items-center'>
+            <div>
+              <FormInput title={this.translate('Customer')}>
+                <Lookup {...this.getInputProps("id_customer")}
+                  model='Hubleto/App/Community/Customers/Models/Customer'
+                  urlAdd='customers/add'
+                  value={R.id_customer}
+                  readonly={R.is_closed}
+                  onChange={(input: any, value: any) => {
+                    this.updateRecord({ id_customer: value, id_contact: null });
+                    if (R.id_customer == 0) {
+                      R.id_customer = null;
+                      this.setState({record: R});
+                    }
+                  }}
+                ></Lookup>
+              </FormInput>
+              <FormInput title={this.translate('Contact')}>
+                <Lookup {...this.getInputProps("id_contact")}
+                  model='Hubleto/App/Community/Contacts/Models/Contact'
+                  customEndpointParams={{idCustomer: R.id_customer}}
+                  value={R.id_contact}
+                  urlAdd='contacts/add'
+                  readonly={R.is_closed}
+                  onChange={(input: any, value: any) => {
+                    this.updateRecord({ id_contact: value })
+                    if (R.id_contact == 0) {
+                      R.id_contact = null;
+                      this.setState({record: R})
+                    }
+                  }}
+                ></Lookup>
+              </FormInput>
+            </div>
+            <div>
+              {R.CONTACT && R.CONTACT.VALUES ? <div className="text-sm p-2 card">
+                {R.CONTACT.VALUES.map((item, key) => {
+                  return <div key={key}>{item.value}</div>;
+                })}
+              </div> : null}
+            </div>
+          </div>
           <div className='flex flex-row *:w-1/2'>
             {this.inputWrapper('price_excl_vat', {
               cssClass: 'text-2xl',
@@ -321,8 +327,8 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
               </div>
             : <></>}
           </div>
-          {this.inputWrapper('customer_order_number', {readonly: R.is_closed})}
-          {this.inputWrapper('id_template_quotation', {readonly: R.is_closed})}
+          {/* {this.inputWrapper('customer_order_number', {readonly: R.is_closed})} */}
+          {/* {this.inputWrapper('id_template_quotation', {readonly: R.is_closed})} */}
           {this.inputWrapper('date_expected_close', {readonly: R.is_closed})}
           {this.inputWrapper('date_created')}
         </>;
@@ -363,7 +369,26 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
               }
             )}
           </div>
-          {this.inputWrapper('note', {cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: R.is_closed})}
+          {this.inputWrapper('note', {cssClass: 'border border-orange-200', readonly: R.is_closed})}
+          {R.id > 0 ?
+            <div className='card card-info mt-2'>
+              <div className='card-header'>{this.translate('Open tasks')}</div>
+              <div className='card-body'>
+                <TableTasks
+                  tag={"table_deal_task"}
+                  parentForm={this}
+                  uid={this.props.uid + "_table_deal_task"}
+                  idCustomer={R.id_customer}
+                  junctionTitle='Deal'
+                  junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
+                  junctionSourceColumn='id_deal'
+                  junctionSourceRecordId={R.id}
+                  junctionDestinationColumn='id_task'
+                  view='briefOverview'
+                />
+              </div>
+            </div>
+          : null}
           {this.state.record.deal_result == 2 ? this.inputWrapper('lost_reason', {readonly: R.is_closed}): null}
         </>;
 

@@ -255,7 +255,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
                     </div>
                     {this.inputWrapper('note', {cssClass: 'bg-yellow-50 border-none'})}
                     {this.divider(null)}
-                    {this.divider(null)}
                     {this.inputWrapper('shipping_info')}
                   </div>
                 </div>

@@ -13,7 +13,7 @@ class Counter extends Core
    * @return int
    * 
    */
-  public function missedIncompleteActivities(): int
+  public function missedIncompleteActivities(array|null $sources): int
   {
     /** @var Controllers\Api\GetCalendarEvents */
     $getCalendarEvents = $this->getController(Controllers\Api\GetCalendarEvents::class);
@@ -21,7 +21,8 @@ class Counter extends Core
     $missedActivities = $getCalendarEvents->loadEventsFromMultipleCalendars(
       "2000-01-01",
       date("Y-m-d"),
-      ['fCompleted' => 1, 'idUser' => $this->authProvider()->getUserId()]
+      ['fCompleted' => 1, 'idUser' => $this->authProvider()->getUserId()],
+      $sources
     );
 
     return count($missedActivities);

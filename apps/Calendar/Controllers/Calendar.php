@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar\Controllers;
 
+use Hubleto\App\Community\Calendar\Counter;
 use \Hubleto\App\Community\Calendar\Manager;
 
 class Calendar extends \Hubleto\Erp\Controller
@@ -19,11 +20,11 @@ class Calendar extends \Hubleto\Erp\Controller
 
     $show = $this->router()->urlParamAsString('show');
 
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
     /** @var \Hubleto\App\Community\Calendar\Loader */
     $calendarApp = $this->getService(\Hubleto\App\Community\Calendar\Loader::class);
-
-    /** @var Controllers\Api\GetCalendarEvents */
-    $getCalendarEvents = $this->getController(Api\GetCalendarEvents::class);
 
     $this->viewParams['initialView'] = $calendarApp->getInitialView();
 
@@ -34,15 +35,7 @@ class Calendar extends \Hubleto\Erp\Controller
       $calendarConfig = $calendar->getCalendarConfig();
       $calendarConfig['color'] = $calendar->getColor();
       $calendarConfig['show'] = empty($show) || $show == $calendarName;
-
-      $missedActivities = $getCalendarEvents->loadEventsFromMultipleCalendars(
-        "2000-01-01",
-        date("Y-m-d"),
-        ['fCompleted' => 1, 'idUser' => $this->authProvider()->getUserId()],
-        [$calendarName]
-      );
-
-      $calendarConfig['missedActivities'] = count($missedActivities);
+      $calendarConfig['missedActivities'] = $counter->missedIncompleteActivities([$calendarName]);
 
       $this->viewParams["calendars"][$calendarName] = $calendarConfig;
     }

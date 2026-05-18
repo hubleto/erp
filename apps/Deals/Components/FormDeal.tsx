@@ -373,7 +373,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           {R.id > 0 ?
             <div className='card card-info mt-2'>
               <div className='card-header'>{this.translate('Open tasks')}</div>
-              <div className='card-body'>
+              <div className='card-body overflow-auto'>
                 <TableTasks
                   tag={"table_deal_task"}
                   parentForm={this}
@@ -396,9 +396,9 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           <div className='flex gap-2 flex-col md:flex-row'>
             <div className='flex-2'>
               <div className='card card-body flex flex-col md:flex-row gap-2'>
-                <div className='grow'>{inputsColumnLeft}</div>
+                <div className='grow max-w-1/2'>{inputsColumnLeft}</div>
                 <div className='border-t md:border-l border-gray-200'></div>
-                <div className='grow'>{inputsColumnRight}</div>
+                <div className='grow max-w-1/2'>{inputsColumnRight}</div>
               </div>
             </div>
           </div>

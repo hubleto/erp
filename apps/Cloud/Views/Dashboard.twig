@@ -112,7 +112,7 @@
           {% endif %}
         {% endif %}
         <div class="flex gap-2 w-full mt-2">
-          <a href="https://pay.hubleto.eu/?accountUid={{ config.accountUid }}&partnerUid={{ config.partnerUid }}&monthlyPrice={{ viewParams.priceForThisMonth }}" class="flex-1 btn btn-add-outline btn-square btn-large" target="_blank">
+          <a href="https://pay.hubleto.eu/?accountUid={{ config.accountUid }}&partnerUid={{ config.partnerUid }}&users={{ viewParams.activeUsers }}&paidApps=users={{ viewParams.paidApps }}" class="flex-1 btn btn-add-outline btn-square btn-large" target="_blank">
             <span class="icon text-4xl p-8"><i class="fas fa-credit-card"></i></span>
             <span class="text">{{ translate('Extend subscription') }}</span>
             <span class="text text-xs">{{ translate('You will be redirected to the payment provider') }}</span>

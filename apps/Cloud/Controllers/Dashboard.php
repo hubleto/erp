@@ -34,7 +34,9 @@ class Dashboard extends \Hubleto\Erp\Controller
 
     $this->viewParams['freeTrialInfo'] = $premiumAccount->getFreeTrialInfo();
     $this->viewParams['subscriptionInfo'] = $premiumAccount->getSubscriptionInfo();
-    $this->viewParams['priceForThisMonth'] = $premiumAccount->getPrice($premiumInfo['activeUsers'], $premiumInfo['paidApps'], 0);
+    $this->viewParams['priceForThisMonth'] = $premiumAccount->getPrice($premiumInfo['activeUsers'], $premiumInfo['paidApps'], 0); # TODO: Deprecated!
+    $this->viewParams['activeUsers'] = $premiumInfo['activeUsers'];
+    $this->viewParams['paidApps'] = $premiumInfo['paidApps'];
 
     $this->setView('@Hubleto:App:Community:Cloud/Dashboard.twig');
   }

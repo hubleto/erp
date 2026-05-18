@@ -9,7 +9,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     return [
       'position' => 2,
       'color' => '#7a23dc',
-      'title' => $this->translate('Tasks'),
+      'title' => $this->translate('Tasks and todo'),
       'addNewActivityButtonText' => $this->translate('Add new activity linked to Tasks'),
       'icon' => 'fas fa-calendar',
       'formComponent' => 'TasksFormActivity',
@@ -74,6 +74,9 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     }
     if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
       $todos = $todos->where($mTodo->table . '.is_closed', $filter['fCompleted'] == 2);
+    }
+    if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
+      $todos = $todos->where($mTodo->table . ".id_responsible", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
     }
 
     $todos = $todos->get();

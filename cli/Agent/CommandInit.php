@@ -101,6 +101,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       exit;
     }
 
+    $accountUid = bin2hex(random_bytes(18));
     $rewriteBase = null;
     $projectFolder = null;
     $releaseFolder = null;
@@ -153,6 +154,9 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $config = $this->initConfig;
     }
 
+    if (isset($config['accountUid'])) {
+      $accountUid = $config['accountUid'];
+    }
     if (isset($config['rewriteBase'])) {
       $rewriteBase = $config['rewriteBase'];
     }
@@ -375,6 +379,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     $this->terminal()->cyan("Initializing with following config:\n");
+    $this->terminal()->cyan('  -> accountUid = ' . (string) $accountUid . "\n");
     $this->terminal()->cyan('  -> rewriteBase = ' . (string) $rewriteBase . "\n");
     $this->terminal()->cyan('  -> projectFolder = ' . (string) $projectFolder . "\n");
     $this->terminal()->cyan('  -> releaseFolder = ' . (string) $releaseFolder . "\n");
@@ -418,7 +423,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     // install
     $installer = new \Hubleto\Erp\Installer\Installer(
       'local-env',
-      bin2hex(random_bytes(18)), // uid
+      (string) $accountUid, // uid
       (string) $accountFullName,
       (string) $adminName,
       (string) $adminFamilyName,

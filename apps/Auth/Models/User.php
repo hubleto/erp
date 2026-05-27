@@ -29,10 +29,10 @@ class User extends UserModel implements UserModelInterface
   public const int TYPE_EXTERNAL = 6;
 
   public const TYPE_ENUM_VALUES = [
-    self::TYPE_NOT_SPECIFIED => 'NOT_SPECIFIED',
-    self::TYPE_ADMINISTRATOR => 'ADMINISTRATOR',
-    self::TYPE_CHIEF_OFFICER => 'Chief Officer (CEO, CFO, CTO, ...)',
-    self::TYPE_MANAGER => 'Manager (Sales, Project, ...)',
+    self::TYPE_NOT_SPECIFIED => '---',
+    self::TYPE_ADMINISTRATOR => 'Administrator',
+    self::TYPE_CHIEF_OFFICER => 'Chief Officer',
+    self::TYPE_MANAGER => 'Manager',
     self::TYPE_EMPLOYEE => 'Employee',
     self::TYPE_ASSISTANT => 'Assistant',
     self::TYPE_EXTERNAL => 'External',

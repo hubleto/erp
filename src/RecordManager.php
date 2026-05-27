@@ -38,7 +38,10 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       $userTeams[] = $team['id'] ?? 0;
     }
 
-    if ($authProvider->getUserType() == User::TYPE_MANAGER) {
+    if (
+      $authProvider->getUserType() == User::TYPE_MANAGER
+      || $authProvider->getUserType() == User::TYPE_CHIEF_OFFICER
+    ) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
         $query = $query->where(function ($q) use ($idUser, $userTeams) {
           $q

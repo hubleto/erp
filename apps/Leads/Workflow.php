@@ -9,6 +9,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
   {
     $fOwner = (int) ($filters['fOwner'] ?? 0);
 
+    /** @var Models\Lead */
     $mLead = $this->getModel(Models\Lead::class);
     $items = $mLead->record->prepareReadQuery()
       ->where($mLead->table . ".id_workflow", $idWorkflow)

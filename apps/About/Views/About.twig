@@ -7,9 +7,19 @@
         {{ translate('About your Hubleto') }}
       </div>
       <div class="card-body">
-        <div>IP address of your server</div>
-        <div class="text-3xl text-primary pb-4">
-          {{ viewParams.SERVER.REMOTE_ADDR }}
+        <div class="flex gap-2 w-full justify-around">
+          <div class="text-center">
+            <div>Your IP address</div>
+            <div class="text-3xl text-primary pb-4">
+              {{ viewParams.SERVER.SERVER_ADDR }}
+            </div>
+          </div>
+          <div class="text-center">
+            <div>Server's IP address</div>
+            <div class="text-3xl text-primary pb-4">
+              {{ viewParams.SERVER.SERVER_ADDR }}
+            </div>
+          </div>
         </div>
         <table class="table-default dense">
           <thead>

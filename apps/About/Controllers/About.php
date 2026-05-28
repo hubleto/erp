@@ -27,6 +27,7 @@ class About extends \Hubleto\Erp\Controller
       ];
     }
 
+    $this->viewParams['SERVER'] = $_SERVER;
     $this->viewParams['packages'] = $packages;
 
     $this->setView('@Hubleto:App:Community:About/About.twig');

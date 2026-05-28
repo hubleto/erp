@@ -171,7 +171,7 @@ class Renderer extends \Hubleto\Framework\Renderer
             'message' => $e->getMessage(),
           ];
         }
-        $return = json_encode($returnArray);
+        $return = json_encode($returnArray, JSON_INVALID_UTF8_SUBSTITUTE);
       } elseif ($controllerObject->returnType == Controller::RETURN_TYPE_STRING) {
         $return = $controllerObject->renderString();
       } elseif ($controllerObject->returnType == Controller::RETURN_TYPE_NONE) {

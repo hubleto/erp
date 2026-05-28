@@ -68,6 +68,13 @@
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/font-gabarito.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
+
+  {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
+    <style>
+      :root { --color-primary: {{ user.DEFAULT_COMPANY.brand_color_primary }} !important; }
+    </style>
+  {% endif %}
+  
 </head>
 
 <body id="page-top">
@@ -427,12 +434,6 @@
 
   <script> globalThis.dictionary = JSON.parse(atob('{{ viewParams.dictionaryString }}')); </script>
 
-  {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
-    <style>
-      :root { --color-primary: {{ user.DEFAULT_COMPANY.brand_color_primary }} !important; }
-    </style>
-  {% endif %}
-  
 </body>
 
 </html>

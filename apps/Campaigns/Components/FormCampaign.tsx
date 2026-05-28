@@ -849,7 +849,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               }}
             />
           </div>
-          <div className='flex-1'>
+          <div className='flex-1 gap-2'>
             <div className='card'>
               <div className='card-header'>{this.translate('Import emails')}</div>
               <div className='card-body'>
@@ -876,6 +876,29 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 >
                   <span className='icon'><i className='fas fa-upload'></i></span>
                   <span className='text'>{this.translate('Import emails')}</span>
+                </button>
+              </div>
+            </div>
+            <div className='card'>
+              <div className='card-body'>
+                <button
+                  className='btn btn-danger'
+                  onClick={() => {
+                    if (confirm('Are you sure to delete all recipients in this campaign?')) {
+                      request.post(
+                        'campaigns/api/remove-all-recipients',
+                        {
+                          idCampaign: R.id                      },
+                        {},
+                        (data: any) => {
+                          this.refTableRecipients.current.reload();
+                        }
+                      );
+                    }
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-trash'></i></span>
+                  <span className='text'>{this.translate('Remove all recipients')}</span>
                 </button>
               </div>
             </div>

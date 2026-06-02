@@ -21,6 +21,7 @@ use Hubleto\Framework\Model;
  *   login: string,
  *   email: string,
  *   language: string,
+ *   force_signout: bool,
  *   apps: string,
  *   ROLES: array<mixed>,
  *   TEAMS: array<mixed>,
@@ -72,6 +73,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       'first_name' => (string) ($tmp['first_name'] ?? ''),
       'last_name' => (string) ($tmp['last_name'] ?? ''),
       'is_active' => (bool) ($tmp['is_active'] ?? false),
+      'force_signout' => (bool) ($tmp['force_signout'] ?? false),
       'language' => (string) ($tmp['language'] ?? false),
       'timezone' => (string) ($tmp['timezone'] ?? false),
       'position' => (string) ($tmp['position'] ?? false),
@@ -104,6 +106,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       'first_name' => (string) ($user['first_name'] ?? ''),
       'last_name' => (string) ($user['last_name'] ?? ''),
       'is_active' => (bool) ($user['is_active'] ?? false),
+      'force_signout' => (bool) ($user['force_signout'] ?? false),
       'language' => (string) ($user['language'] ?? false),
       'timezone' => (string) ($user['timezone'] ?? false),
       'position' => (string) ($user['position'] ?? false),
@@ -127,15 +130,21 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
   {
     $mUser = $this->createUserModel();
 
-    return $this->normalizeUserProfile(
-      $mUser->record
-        ->where($mUser->table . '.id', $this->getUserId())
-        ->with('ROLES')
-        ->with('TEAMS')
-        ->with('DEFAULT_COMPANY')
-        ->first()
-        ->toArray()
-    );
+    $user = $mUser->record
+      ->where($mUser->table . '.id', $this->getUserId())
+      ->with('ROLES')
+      ->with('TEAMS')
+      ->with('DEFAULT_COMPANY')
+      ->first()
+      ->toArray();
+
+    if ($user['force_signout']) {
+      $mUser->record->where($mUser->table . '.id', $user['id'])->update(['force_signout' => 0]);
+      $this->signOut();
+      return [];
+    }
+
+    return $this->normalizeUserProfile($user);
   }
 
   /**

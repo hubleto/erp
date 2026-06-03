@@ -35,7 +35,7 @@ class Item extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON)->setRequired(true),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible(),
 
       'unit_price' => new Decimal($this, $this->translate('Unit price'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
@@ -51,6 +51,7 @@ class Item extends \Hubleto\Erp\Model
       'attachment_1' => new File($this, $this->translate('Attachment #1'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
       'attachment_2' => new File($this, $this->translate('Attachment #2'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
 
+      'date_delivery' => (new Date($this, $this->translate('Delivery date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), InvoiceItem::class))->setDefaultVisible(),

@@ -16,7 +16,7 @@ class Item_0004 extends Migration
 
   public function downgradeSchema(): void
   {
-    $this->db->execute('alter table `documents` drop `is_chargeable`');
+    $this->db->execute('alter table `orders_items` drop `is_chargeable`');
   }
 
   public function upgradeForeignKeys(): void

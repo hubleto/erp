@@ -37,6 +37,7 @@ class PrepareItemForInvoice extends \Hubleto\Erp\Controllers\ApiController
         'vat' => $orderItem['vat'],
         'attachment_1' => $orderItem['attachment_1'],
         'attachment_2' => $orderItem['attachment_2'],
+        'date_delivery' => $orderItem['date_delivery'],
       ])['id'];
 
       $mOrderItem->record

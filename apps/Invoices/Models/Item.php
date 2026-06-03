@@ -7,6 +7,7 @@ use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\File;
+use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\App\Community\Customers\Models\Customer;
 
@@ -54,6 +55,7 @@ class Item extends \Hubleto\Erp\Model
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setReadonly(),
       'attachment_1' => new File($this, $this->translate('Attachment #1'))->setFolderPath('invoices/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
       'attachment_2' => new File($this, $this->translate('Attachment #2'))->setFolderPath('invoices/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
+      'date_delivery' => (new Date($this, $this->translate('Delivery date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
     ]);
   }
 

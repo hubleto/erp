@@ -409,8 +409,8 @@ class Invoice extends \Hubleto\Erp\Model {
     $record['vs'] = preg_replace('/[^0-9]/', '', $record['number']);
     $record['cs'] = '0308';
     $record['date_issue'] = date('Y-m-d');
-    $record['date_delivery'] = date('Y-m-d');
     $record['date_due'] = date('Y-m-d', strtotime('+' . $dueDays . ' days'));
+    if (strtotime($record['date_delivery']) < 1000) $record['date_delivery'] = date('Y-m-d');
 
     return $record;
   }

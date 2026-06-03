@@ -15,7 +15,6 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
     description: {
       ui: { headerClassName: 'bg-indigo-50', },
     },
-    renderOwnerManagerUi: true,
   }
 
   props: FormItemProps;
@@ -57,28 +56,43 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
     </>;
   }
 
+  prepareRecordCopy() {
+    return {
+      ...this.state.record,
+      title: 'Copy of ' + (this.state.record.title ?? ''),
+      id_invoice_item: null,
+      date_due: null,
+      attachment_1: null,
+      attachment_2: null,
+      notes: null,
+      id: -1
+    };
+  }
+
   renderTab(tabUid: string) {
     const R = this.state.record;
 
     switch (tabUid) {
       case 'default':
         return <>
-          {this.inputWrapper('title')}
+          <div className="flex gap-2 mt-2">
+            <div className='flex-5'>
+              {this.inputWrapper('title')}
+            </div>
+            <div className='flex-1'>
+              {this.renderOwnerManagerUi()}
+            </div>
+          </div>
           <div className="flex gap-2 mt-2">
             <div className='flex-1'>
               {this.inputWrapper('id_order')}
               {this.inputWrapper('id_product')}
               {this.inputWrapper('date_due')}
+              {this.inputWrapper('date_delivery')}
               {this.inputWrapper('unit_price')}
               {this.inputWrapper('amount')}
               {this.inputWrapper('discount')}
               {this.inputWrapper('vat')}
-              {this.inputWrapper('attachment_1')}
-              {this.inputWrapper('attachment_2')}
-              {this.inputWrapper('position')}
-            </div>
-            <div className='flex-1'>
-              {this.inputWrapper('notes')}
               <div className='bg-slate-50 p-2'>
                 <b>{this.translate('Summary')}</b><br/>
                 <table className='table-default dense w-full'>
@@ -120,6 +134,12 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
                   </tbody>
                 </table>
               </div>
+            </div>
+            <div className='flex-1'>
+              {this.inputWrapper('notes')}
+              {this.inputWrapper('attachment_1')}
+              {this.inputWrapper('attachment_2')}
+              {this.inputWrapper('position')}
               {this.inputWrapper('is_chargeable')}
               {this.inputWrapper('id_invoice_item')}
             </div>

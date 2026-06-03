@@ -31,6 +31,7 @@ class CreateInvoiceFromPreparedItem extends \Hubleto\Erp\Controllers\ApiControll
         'type' => Invoice::TYPE_STANDARD,
         'id_issued_by' => $this->authProvider()->getUserId(),
         'id_customer' => $item->id_customer,
+        'date_delivery' => $item->date_delivery,
       ])['id'];
 
       $item = $mItem->record

@@ -63,10 +63,10 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
     switch (tabUid) {
       case 'default':
         return <>
+          {this.inputWrapper('title')}
           <div className="flex gap-2 mt-2">
             <div className='flex-1'>
               {this.inputWrapper('id_order')}
-              {this.inputWrapper('title')}
               {this.inputWrapper('id_product')}
               {this.inputWrapper('date_due')}
               {this.inputWrapper('unit_price')}
@@ -120,6 +120,7 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
                   </tbody>
                 </table>
               </div>
+              {this.inputWrapper('is_chargeable')}
               {this.inputWrapper('id_invoice_item')}
             </div>
           </div>

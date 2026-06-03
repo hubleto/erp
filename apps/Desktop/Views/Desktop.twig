@@ -77,6 +77,8 @@
   
 </head>
 
+{{ config.gaTag|raw }}
+
 <body id="page-top">
   <div id="ajax-loader"></div>
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}

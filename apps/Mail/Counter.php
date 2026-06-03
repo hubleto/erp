@@ -8,12 +8,12 @@ class Counter extends Core
 {
 
   /**
-   * [Description for dueItemsNotPreparedForInvoice]
+   * [Description for allUnreadMails]
    *
    * @return int
    * 
    */
-  public function alUnreadMails(): int
+  public function allUnreadMails(): int
   {
     /** @var Models\Account */
     $mAccount = $this->getModel(Models\Account::class);

@@ -8,17 +8,18 @@ class Counter extends Core
 {
 
   /**
-   * [Description for dueItemsNotPreparedForInvoice]
+   * [Description for dueAndChargeableItemsNotPreparedForInvoice]
    *
    * @return int
    * 
    */
-  public function dueItemsNotPreparedForInvoice(): int
+  public function dueAndChargeableItemsNotPreparedForInvoice(): int
   {
     $mItem = $this->getModel(Models\Item::class);
     return $mItem->record->prepareReadQuery()
       ->whereDate('orders_items.date_due', '<', date("Y-m-d"))
       ->whereNull('orders_items.id_invoice_item')
+      ->where('orders_items.is_chargeable', 1)
       ->where('orders_items.price_excl_vat', '>', 0)
       ->count()
     ;

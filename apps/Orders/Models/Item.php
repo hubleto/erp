@@ -6,6 +6,7 @@ use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Text;
@@ -44,6 +45,8 @@ class Item extends \Hubleto\Erp\Model
 
       'price_excl_vat' => new Decimal($this, $this->translate('Price excl. VAT'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
+
+      'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
 
       'attachment_1' => new File($this, $this->translate('Attachment #1'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
       'attachment_2' => new File($this, $this->translate('Attachment #2'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
@@ -105,6 +108,14 @@ class Item extends \Hubleto\Erp\Model
         'options' => [
           1 => $this->translate('Not-prepared to invoice'),
           2 => $this->translate('Prepared to invoice'),
+        ]
+      ]);
+
+      $description->addFilter('fChargeable', [
+        'title' => $this->translate('Chargeable'),
+        'options' => [
+          1 => $this->translate('Chargeable'),
+          2 => $this->translate('Non-chargeable'),
         ]
       ]);
 

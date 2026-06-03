@@ -72,7 +72,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     if (columnName == "id_invoice_item") {
       if (data['INVOICE_ITEM']) {
         return super.renderCell(columnName, column, data, options);;
-      } else {
+      } else if (data['is_chargeable']) {
         return <button
           className='btn btn-yellow btn-small'
           onClick={() => {

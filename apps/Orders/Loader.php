@@ -114,7 +114,7 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
 
     return
-      $counter->dueItemsNotPreparedForInvoice()
+      $counter->dueAndChargeableItemsNotPreparedForInvoice()
       + count($counter->periodicalOrdersMissingItems())
     ;
   }
@@ -130,7 +130,7 @@ class Loader extends \Hubleto\Erp\App
     /** @var Counter */
     $counter = $this->getService(Counter::class);
 
-    $dueItemsCount = $counter->dueItemsNotPreparedForInvoice();
+    $dueAndChargeableItemsCount = $counter->dueAndChargeableItemsNotPreparedForInvoice();
     $periodicalOrdersMissingItems = $counter->periodicalOrdersMissingItems();
 
     return '
@@ -149,7 +149,7 @@ class Loader extends \Hubleto\Erp\App
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/items">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Items') . '</span>
-          ' . ($dueItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $dueItemsCount . '</span>' : '') . '
+          ' . ($dueAndChargeableItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $dueAndChargeableItemsCount . '</span>' : '') . '
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/quotes">
           <span class="icon"><i class="fas fa-receipt"></i></span>

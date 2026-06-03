@@ -61,7 +61,7 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
 
     return
-      $counter->alUnreadMails()
+      $counter->allUnreadMails()
     ;
   }
 

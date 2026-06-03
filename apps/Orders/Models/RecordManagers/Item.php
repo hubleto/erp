@@ -91,6 +91,11 @@ class Item extends \Hubleto\Erp\RecordManager
       case 2: $query = $query->where($this->table . ".id_invoice_item", ">", 0); break;
     }
 
+    switch ($filters["fChargeable"] ?? 0) {
+      case 1: $query = $query->where($this->table . ".is_chargeable", 1); break;
+      case 2: $query = $query->where($this->table . ".is_chargeable", 0); break;
+    }
+
     switch ($filters["fDue"] ?? 0) {
       case 1: $query = $query->whereDate($this->table . ".date_due", "<=", date("Y-m-d")); break;
       case 2: $query = $query->whereDate($this->table . ".date_due", ">", date("Y-m-d")); break;

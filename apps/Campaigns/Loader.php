@@ -22,6 +22,7 @@ class Loader extends \Hubleto\Erp\App
       '/^campaigns\/api\/get-campaign-launch-info\/?$/' => Controllers\Api\GetCampaignLaunchInfo::class,
       '/^campaigns\/api\/remove-recipient-from-campaign\/?$/' => Controllers\Api\RemoveRecipientFromCampaign::class,
       '/^campaigns\/api\/import-emails\/?$/' => Controllers\Api\ImportEmails::class,
+      '/^campaigns\/api\/remove-all-recipients\/?$/' => Controllers\Api\RemoveAllRecipients::class,
       '/^campaigns\/api\/send-test-email\/?$/' => Controllers\Api\SendTestEmail::class,
       '/^campaigns\/api\/launch\/?$/' => Controllers\Api\Launch::class,
       '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,

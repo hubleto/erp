@@ -18,6 +18,9 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
         $csvData = base64_decode(str_replace('data:text/csv;base64,', '', $csvData));
       }
 
+      // sanitize $csvData for UTF-16 BOM
+      $csvData = trim($csvData, "\xEF\xBB\xBF");
+
       $model = $this->getModel($modelName);
 
       $foundRecords = [];

@@ -68,9 +68,13 @@
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/font-gabarito.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
+
   {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
-    <style> :root { --color-primary: {{ user.DEFAULT_COMPANY.brand_color_primary }} !important; } </style>
+    <style>
+      :root { --color-primary: {{ user.DEFAULT_COMPANY.brand_color_primary }} !important; }
+    </style>
   {% endif %}
+  
 </head>
 
 <body id="page-top">
@@ -354,6 +358,39 @@
   {% endfor %}
 
   <script>
+
+    (function () {
+      const getDropdowns = () => Array.from(document.querySelectorAll('.btn-dropdown'));
+
+      function closeAll() {
+        getDropdowns().forEach(el => el.classList.remove('open'));
+      }
+
+      document.addEventListener('click', (event) => {
+        const clicked = event.target;
+        const btn = clicked.closest('.btn-dropdown');
+
+        if (!btn) {
+          closeAll();
+          return;
+        }
+
+        const insideMenu = clicked.closest('.menu');
+        if (insideMenu && btn.contains(insideMenu)) {
+          closeAll();
+          return;
+        }
+
+        event.preventDefault();
+        const wasOpen = btn.classList.contains('open');
+        closeAll();
+        if (!wasOpen) btn.classList.add('open');
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeAll();
+      });
+    })();
 
     function lchr(show) {
       if (show) {

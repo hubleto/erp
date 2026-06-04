@@ -75,20 +75,20 @@ class Loader extends \Hubleto\Erp\App
   {
     $mWorkflow = $this->getModel(Models\Workflow::class);
 
-    $workflowButtonsHtml = '';
+    $workflowButtonsHtml = '<div class="list dense">';
     foreach ($mWorkflow->record->where('show_in_kanban', true)->orderBy('order')->get() as $workflow) {
       $workflowButtonsHtml .= '
         <a
           class="
-            btn btn-small ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
+            btn btn-small btn-list-item ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
           "
           href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"
         >
-          <span class="icon"><i class="fas fa-bars-progress"></i></span>
           <span class="text">' . $workflow->name . '</span>
         </a>
       ';
     }
+    $workflowButtonsHtml .= '</div>';
 
     return '
       <div class="flex flex-col gap-2">

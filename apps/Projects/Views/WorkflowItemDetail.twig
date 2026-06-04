@@ -7,7 +7,7 @@
       </div>
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
       {% if item.MILESTONES|length <= 0 %}
-        <div class="text-red-800">{{ translate('Project has no milestones.') }}</div>
+        <div>{{ translate('Project has no milestones.') }}</div>
       {% else %}
         <div class="list dense">
           {% for m in item.MILESTONES %}

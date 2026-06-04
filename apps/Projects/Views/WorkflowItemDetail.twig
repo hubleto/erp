@@ -30,7 +30,7 @@
               </a>
             {% endif %}
             {% if m.is_closed %}
-              <div class="btn btn-transparent btn-list-item"><span class="text">{{ translate('Closed milestone') }}: {{ m.title }}</span></div>
+              <div class="btn btn-transparent btn-list-item"><span class="text line-through">{{ hubleto.locale().formatDateShort(m.date_due) }} {{ m.title }}</span></div>
             {% endif %}
           {% endfor %}
         </div>

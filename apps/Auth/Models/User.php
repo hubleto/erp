@@ -176,12 +176,21 @@ class User extends UserModel implements UserModelInterface
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    if (array_key_exists('is_active', $savedRecord)) {
-      if ((int) $savedRecord['is_active'] === 1) {
-        $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 0]);
-      } else if ((int) ($originalRecord['is_active'] ?? 0) === 1) {
-        $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 1]);
-      }
+    $reactivatedUser = array_key_exists('is_active', $savedRecord)
+      && (int) ($originalRecord['is_active'] ?? 0) === 0
+      && (int) $savedRecord['is_active'] === 1;
+
+    $forceSignout = (
+      (array_key_exists('is_active', $savedRecord) && (int) $savedRecord['is_active'] === 0)
+      || (array_key_exists('apps', $savedRecord) && (string) ($savedRecord['apps'] ?? '') !== (string) ($originalRecord['apps'] ?? ''))
+      || (array_key_exists('permissions', $savedRecord) && (string) ($savedRecord['permissions'] ?? '') !== (string) ($originalRecord['permissions'] ?? ''))
+      || (array_key_exists('password', $savedRecord) && is_array($savedRecord['password']) && (string) ($savedRecord['password'][0] ?? '') !== '')
+    );
+
+    if ($reactivatedUser) {
+      $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 0]);
+    } else if ($forceSignout) {
+      $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 1]);
     }
     return $savedRecord;
   }

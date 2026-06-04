@@ -11,7 +11,7 @@ class User_0002 extends Migration
   {
     $this->db->execute('alter table `users` add `force_signout` int(1) after `is_active`');
     $this->db->execute('alter table `users` add index (`force_signout`)');
-    $this->db->execute('update `users` set `force_signout` = 0 where `force_signout` is null');
+    $this->db->execute('update `users` set `force_signout` = 0');
   }
 
   public function downgradeSchema(): void

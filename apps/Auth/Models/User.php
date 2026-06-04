@@ -175,8 +175,13 @@ class User extends UserModel implements UserModelInterface
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
-    if (array_key_exists('is_active', $savedRecord) && !empty($originalRecord['is_active']) && empty($savedRecord['is_active'])) {
-      $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 1]);
+
+    if (array_key_exists('is_active', $savedRecord)) {
+      if ((int) $savedRecord['is_active'] === 1) {
+        $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 0]);
+      } else if ((int) ($originalRecord['is_active'] ?? 0) === 1) {
+        $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 1]);
+      }
     }
     return $savedRecord;
   }

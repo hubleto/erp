@@ -106,6 +106,7 @@ class User extends UserModel implements UserModelInterface
       'login' => new Varchar($this, 'Login'),
       'password' => new Password($this, 'Password'),
       'is_active' => new Boolean($this, 'Active'),
+      'force_signout' => (new Boolean($this, 'Force signout'))->setHidden(),
       'last_login_time' => new DateTime($this, 'Time of last login'),
       'last_login_ip' => new Varchar($this, 'Last login IP'),
       'last_access_time' => new DateTime($this, 'Time of last access'),
@@ -169,6 +170,29 @@ class User extends UserModel implements UserModelInterface
   {
     $description = parent::describeForm();
     return $description;
+  }
+
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    $reactivatedUser = array_key_exists('is_active', $savedRecord)
+      && (int) ($originalRecord['is_active'] ?? 0) === 0
+      && (int) $savedRecord['is_active'] === 1;
+
+    $forceSignout = (
+      (array_key_exists('is_active', $savedRecord) && (int) $savedRecord['is_active'] === 0)
+      || (array_key_exists('apps', $savedRecord) && (string) ($savedRecord['apps'] ?? '') !== (string) ($originalRecord['apps'] ?? ''))
+      || (array_key_exists('permissions', $savedRecord) && (string) ($savedRecord['permissions'] ?? '') !== (string) ($originalRecord['permissions'] ?? ''))
+      || (array_key_exists('password', $savedRecord) && is_array($savedRecord['password']) && (string) ($savedRecord['password'][0] ?? '') !== '')
+    );
+
+    if ($reactivatedUser) {
+      $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 0]);
+    } else if ($forceSignout) {
+      $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 1]);
+    }
+    return $savedRecord;
   }
 
   /**

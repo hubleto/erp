@@ -15,7 +15,9 @@ class GetWorkflowStepByTag extends \Hubleto\Erp\Controllers\ApiController
 
     $mWorkflowStep = $this->getService(WorkflowStep::class);
 
-    return $mWorkflowStep->record->where('id_workflow', $idWorkflow)->where('tag', $tag)->first()?->toArray();
+    $step = $mWorkflowStep->record->where('id_workflow', $idWorkflow)->where('tag', $tag)->first()?->toArray();
+
+    return (is_array($step) ? $step : []);
   }
 
 }

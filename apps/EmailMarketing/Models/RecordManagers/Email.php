@@ -1,0 +1,94 @@
+<?php
+
+namespace Hubleto\App\Community\EmailMarketing\Models\RecordManagers;
+
+
+use Hubleto\App\Community\Mail\Models\RecordManagers\Account;
+use Hubleto\App\Community\Mail\Models\RecordManagers\Template;
+use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
+use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+
+class Email extends \Hubleto\Erp\RecordManager
+{
+  public $table = 'email_marketing_emails';
+
+  /** @return BelongsTo<User, covariant Lead> */
+  public function OWNER(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_owner', 'id');
+  }
+
+  /** @return BelongsTo<User, covariant Lead> */
+  public function MANAGER(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_manager', 'id');
+  }
+
+  /** @return BelongsTo<User, covariant Lead> */
+  public function LAUNCHED_BY(): BelongsTo
+  {
+    return $this->belongsTo(User::class, 'id_launched_by', 'id');
+  }
+
+  /** @return HasOne<Account, covariant Deal> */
+  public function SENDER_ACCOUNT(): HasOne
+  {
+    return $this->hasOne(Account::class, 'id', 'id_sender_account');
+  }
+
+  /** @return HasOne<Workflow, covariant Deal> */
+  public function WORKFLOW(): HasOne
+  {
+    return $this->hasOne(Workflow::class, 'id', 'id_workflow');
+  }
+
+  /** @return HasOne<WorkflowStep, covariant Deal> */
+  public function WORKFLOW_STEP(): HasOne
+  {
+    return $this->hasOne(WorkflowStep::class, 'id', 'id_workflow_step');
+  }
+
+  /** @return HasMany<DealTask, covariant Deal> */
+  public function RECIPIENTS(): HasMany
+  {
+    return $this->hasMany(EmailRecipient::class, 'id_email', 'id');
+  }
+
+  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
+  {
+    $query = parent::prepareReadQuery($query, $level, $includeRelations);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+
+    $query = Workflow::applyWorkflowStepFilter(
+      $this->model,
+      $query,
+      (array) ($filters['fEmailWorkflowStep'] ?? [])
+    );
+
+    if (isset($filters["fEmailOwnership"])) {
+      /** @var \Hubleto\Framework\AuthProvider */
+      $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
+      $idUser = $authProvider->getUserId();
+
+      switch ($filters["fEmailOwnership"]) {
+        case 1: $query = $query->where("email_marketing_emails.id_owner", $idUser); break;
+        case 2: $query = $query->where("email_marketing_emails.id_manager", $idUser); break;
+      }
+    }
+
+    if (isset($filters["fEmailClosed"])) {
+      if ($filters["fEmailClosed"] == 0) $query = $query->where("email_marketing_emails.is_closed", false);
+      if ($filters["fEmailClosed"] == 1) $query = $query->where("email_marketing_emails.is_closed", true);
+    }
+
+    return $query;
+  }
+
+}

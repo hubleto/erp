@@ -497,10 +497,6 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
     \Hubleto\App\Community\Leads\Models\LeadActivity $mLeadActivity,
   ): void {
 
-    $mCampaign = $this->getModel(\Hubleto\App\Community\Campaigns\Models\Campaign::class);
-    $mCampaign->record->recordCreate(["name" => $this->translate("Newsletter subscribers"), "target_audience" => $this->translate("Website visitors filling 'Subscribe to our newsletter'."), "color" => "#AB149E" ]);
-    $mCampaign->record->recordCreate(["name" => $this->translate("Cold calling - SMEs"), "target_audience" => $this->translate("SMEs reached out by cold calling."), "color" => "#68CCCA" ]);
-
     $customers = $mCustomer->record
       ->with("CONTACTS")
       ->get()
@@ -523,7 +519,6 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
       $idLead = $mLead->record->recordCreate([
         "identifier" => $identifierPrefixes[rand(0, 2)] . rand(1, 3000),
         "title" => $titles[rand(0, count($titles) - 1)],
-        "id_campaign" => rand(1, 2),
         "id_customer" => $customer->id,
         "id_contact" => $contact->id,
         "price" => rand(10, 100) * rand(1, 5) * 1.12,

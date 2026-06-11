@@ -8,7 +8,7 @@ class Manager extends \Hubleto\Erp\Core
   /** @var array<string, Workflow> */
   protected array $workflowLoaders = [];
 
-  public function addWorkflow(\Hubleto\Framework\Interfaces\AppInterface $app, string $group, string $workflowClass): void
+  public function addWorkflowGroup(\Hubleto\Framework\Interfaces\AppInterface $app, string $group, string $workflowClass): void
   {
     $workflow = $this->getService($workflowClass);
     if ($workflow instanceof Workflow) {

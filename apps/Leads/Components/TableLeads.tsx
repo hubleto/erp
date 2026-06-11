@@ -6,7 +6,6 @@ import request from '@hubleto/react-ui/core/Request';
 
 export interface TableLeadsProps extends TableExtendedProps {
   idCustomer?: number,
-  idCampaign?: number,
 }
 
 export interface TableLeadsState extends TableExtendedState {
@@ -48,7 +47,6 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
     return {
       ...super.getEndpointParams(),
       idCustomer: this.props.idCustomer,
-      idCampaign: this.props.idCampaign,
     }
   }
 
@@ -97,7 +95,6 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormLeadProps;
     formProps.customEndpointParams.idCustomer = this.props.idCustomer;
-    formProps.customEndpointParams.idCampaign = this.props.idCampaign;
     return <FormLead {...formProps}/>;
   }
 

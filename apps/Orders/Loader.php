@@ -50,7 +50,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
-    $workflowManager->addWorkflow($this, 'orders', Workflow::class);
+    $workflowManager->addWorkflowGroup($this, 'orders', Workflow::class);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [

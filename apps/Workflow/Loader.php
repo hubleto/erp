@@ -130,10 +130,10 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflowHistory->upgradeSchema();
       $mAutomat->upgradeSchema();
 
-      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Campaigns'), "show_in_kanban" => 1, "order" => 1, "group" => "campaigns" ])['id'];
-      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Preparation'), 'order' => 1, 'color' => '#344556', 'tag' => 'campaign-preparation']);
-      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Launched'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'campaign-launched']);
-      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Analysis'), 'order' => 3, 'color' => '#008000', 'tag' => 'campaign-analysis']);
+      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Email marketing'), "show_in_kanban" => 1, "order" => 1, "group" => "email-marketing" ])['id'];
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Preparation'), 'order' => 1, 'color' => '#344556', 'tag' => 'email-marketing-preparation']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Launched'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'email-marketing-launched']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Analysis'), 'order' => 3, 'color' => '#008000', 'tag' => 'email-marketing-analysis']);
 
       $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Leads'), "show_in_kanban" => 1, "order" => 2, "group" => "leads" ])['id'];
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Subscriber'), 'order' => 1, 'color' => '#344556', 'tag' => 'lead-subscriber']);

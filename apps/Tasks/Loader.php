@@ -31,7 +31,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Workflow\Manager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
-    $workflowManager->addWorkflow($this, 'tasks', Workflow::class);
+    $workflowManager->addWorkflowGroup($this, 'tasks', Workflow::class);
 
     /** @var \Hubleto\App\Community\Dashboards\ */
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);

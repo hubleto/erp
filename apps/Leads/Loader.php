@@ -57,7 +57,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Workflow\Manager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
-    $workflowManager->addWorkflow($this, 'leads', Workflow::class);
+    $workflowManager->addWorkflowGroup($this, 'leads', Workflow::class);
 
     /** @var \Hubleto\App\Community\Dashboards\Manager */
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
@@ -79,7 +79,6 @@ class Loader extends \Hubleto\Erp\App
       $mLeadTag = $this->getModel(Models\Tag::class);
       $mCrossLeadTag = $this->getModel(Models\LeadTag::class);
       $mLeadTask = $this->getModel(Models\LeadTask::class);
-      $mLeadCampaign = $this->getModel(Models\LeadCampaign::class);
       $mLeadActivity = $this->getModel(Models\LeadActivity::class);
       $mLeadDocument = $this->getModel(Models\LeadDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
@@ -92,7 +91,6 @@ class Loader extends \Hubleto\Erp\App
       $mCrossLeadTag->upgradeSchema();
       $mLeadActivity->upgradeSchema();
       $mLeadDocument->upgradeSchema();
-      $mLeadCampaign->upgradeSchema();
       $mLeadTask->upgradeSchema();
 
       $mLeadTag->record->recordCreate([ 'name' => $this->translate("Complex"), 'color' => '#2196f3' ]);

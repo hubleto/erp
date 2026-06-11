@@ -5,7 +5,6 @@ namespace Hubleto\App\Community\Leads\Models\RecordManagers;
 
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 
-use Hubleto\App\Community\Campaigns\Models\RecordManagers\Campaign;
 use Hubleto\App\Community\Contacts\Models\RecordManagers\Contact;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Deals\Models\RecordManagers\Deal;
@@ -21,12 +20,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Lead extends \Hubleto\Erp\RecordManager
 {
   public $table = 'leads';
-
-  /** @return belongsTo<Campaign, covariant Lead> */
-  public function CAMPAIGN(): BelongsTo
-  {
-    return $this->belongsTo(Campaign::class, 'id_campaign', 'id');
-  }
 
   /** @return hasOne<Deal, covariant Lead> */
   public function DEAL(): HasOne
@@ -112,12 +105,6 @@ class Lead extends \Hubleto\Erp\RecordManager
     return $this->hasMany(LeadDocument::class, 'id_lead', 'id');
   }
 
-  /** @return hasMany<LeadDocument, covariant Lead> */
-  public function CAMPAIGNS(): HasMany
-  {
-    return $this->hasMany(LeadCampaign::class, 'id_lead', 'id');
-  }
-
   /** @return HasMany<DealTask, covariant Deal> */
   public function TASKS(): HasMany
   {
@@ -132,10 +119,6 @@ class Lead extends \Hubleto\Erp\RecordManager
 
     if ($hubleto->router()->urlParamAsInteger("idCustomer") > 0) {
       $query = $query->where("leads.id_customer", $hubleto->router()->urlParamAsInteger("idCustomer"));
-    }
-
-    if ($hubleto->router()->urlParamAsInteger("idCampaign") > 0) {
-      $query = $query->where("leads.id_campaign", $hubleto->router()->urlParamAsInteger("idCampaign"));
     }
 
     $filters = $hubleto->router()->urlParamAsArray("filters");

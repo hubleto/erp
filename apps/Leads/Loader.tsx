@@ -13,23 +13,6 @@ class LeadsApp extends App {
     globalThis.hubleto.registerReactComponent('LeadsTableLevels', TableLevels);
     globalThis.hubleto.registerReactComponent('LeadFormActivity', LeadFormActivity);
 
-    // miscellaneous
-    globalThis.hubleto.getApp('Hubleto/App/Community/Campaigns').addCustomFormTab({
-      uid: 'leads',
-      title: globalThis.hubleto.translate('Leads', 'Hubleto\\App\\Community\\Leads\\Loader', 'manifest'),
-      onRender: (form: any) => {
-        return <TableLeads
-          tag={"table_campaign_lead"}
-          parentForm={form}
-          uid={form.props.uid + "_table_campaign_lead"}
-          junctionTitle='Campaign'
-          junctionModel='Hubleto/App/Community/Leads/Models/LeadCampaign'
-          junctionSourceColumn='id_campaign'
-          junctionSourceRecordId={form.state.record.id}
-          junctionDestinationColumn='id_lead'
-        />;
-      },
-    });
   }
 }
 

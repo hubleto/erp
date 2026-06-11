@@ -68,7 +68,6 @@ class Lead extends \Hubleto\Erp\Model
     'TAGS' => [ self::HAS_MANY, LeadTag::class, 'id_lead', 'id' ],
     'ACTIVITIES' => [ self::HAS_MANY, LeadActivity::class, 'id_lead', 'id' ],
     'DOCUMENTS' => [ self::HAS_MANY, LeadDocument::class, 'id_lead', 'id'],
-    'CAMPAIGNS' => [ self::HAS_MANY, LeadCampaign::class, 'id_lead', 'id'],
     'TASKS' => [ self::HAS_MANY, LeadTask::class, 'id_deal', 'id'],
   ];
 

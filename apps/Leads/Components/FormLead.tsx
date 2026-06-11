@@ -42,6 +42,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
 
   refLogActivityInput: any;
   refActivityModal: any;
+  refActivityForm: any;
 
   translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
   translationContextInner: string = 'Components\\FormLead';
@@ -53,6 +54,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
 
     this.refLogActivityInput = React.createRef();
     this.refActivityModal = React.createRef();
+    this.refActivityForm = React.createRef();
 
     this.state = {
       ...this.getStateFromProps(props),
@@ -170,17 +172,6 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
         return <>
           <div className='card card-body flex flex-row gap-2'>
             <div className='grow'>
-              <FormInput title={ this.translate("Campaign") }>
-                {R.CAMPAIGNS ? R.CAMPAIGNS.map((item, key) => {
-                  if (!item.CAMPAIGN) return null;
-                  return <a
-                    key={key}
-                    className='badge'
-                    href={globalThis.hubleto.config.projectUrl + '/campaigns/' + item.CAMPAIGN.id}
-                    target='_blank'
-                  >{item.CAMPAIGN.name}</a>;
-                }) : null}
-              </FormInput>
               {/* <FormInput title={"Contact"} required={true}>
                 <Lookup {...this.getInputProps('id_contact')}
                   model='Hubleto/App/Community/Contacts/Models/Contact'
@@ -376,11 +367,13 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
           {this.state.showIdActivity == 0 ? null :
             <ModalForm
               ref={this.refActivityModal}
+              form={this.refActivityForm}
               uid='activity_form'
               isOpen={true}
               type='right'
             >
               <LeadFormActivity
+                ref={this.refActivityForm}
                 modal={this.refActivityModal}
                 id={this.state.showIdActivity}
                 isInlineEditing={true}

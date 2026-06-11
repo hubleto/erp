@@ -37,7 +37,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
-    $workflowManager->addWorkflow($this, 'projects', Workflow::class);
+    $workflowManager->addWorkflowGroup($this, 'projects', Workflow::class);
 
     $this->addSearchSwitch('p', 'projects');
 

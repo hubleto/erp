@@ -31,15 +31,11 @@ class Task extends \Hubleto\Erp\Model
   const VIRT_RELATED_TO_SQL = "(
     select
       concat(
-        group_concat(ifnull(campaigns.name, '') separator ', '),
         group_concat(ifnull(leads.title, '') separator ', '),
         group_concat(ifnull(concat(deals.identifier, ' ', deals.title), '') separator ', '),
         group_concat(ifnull(concat(projects.identifier, ' ', projects.title), '') separator ', ')
       )
     from tasks t2
-
-    left join campaigns_tasks on campaigns_tasks.id_task = t2.id
-    left join campaigns on campaigns.id = campaigns_tasks.id_campaign
 
     left join leads_tasks on leads_tasks.id_task = t2.id
     left join leads on leads.id = leads_tasks.id_lead
@@ -53,8 +49,7 @@ class Task extends \Hubleto\Erp\Model
     where
       t2.id = tasks.id 
       and (
-        campaigns_tasks.id_task = tasks.id
-        or leads_tasks.id_task = tasks.id
+        leads_tasks.id_task = tasks.id
         or deals_tasks.id_task = tasks.id
         or projects_tasks.id_task = tasks.id
       )

@@ -1,0 +1,9 @@
+namespace: Hubleto\App\Community\EmailMarketing
+appType: community
+sidebarGroup: marketing
+rootUrlSlug: email-marketing
+name: Email marketing
+icon: fas fa-users-viewfinder
+author:
+  company: "wai.blue"
+highlight: Full-featured email marketing

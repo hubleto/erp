@@ -34,6 +34,7 @@ class Loader extends \Hubleto\Erp\App
       '/^cloud\/api\/charge-credit\/?$/' => Controllers\Api\ChargeCredit::class,
       '/^cloud\/api\/pay-monthly\/?$/' => Controllers\Api\PayMonthly::class,
       '/^cloud\/log\/?$/' => Controllers\Log::class,
+      '/^cloud\/credit\/?$/' => Controllers\Credit::class,
       '/^cloud\/test\/make-random-payment\/?$/' => Controllers\Test\MakeRandomPayment::class,
       '/^cloud\/test\/clear-credit\/?$/' => Controllers\Test\ClearCredit::class,
       '/^cloud\/activate-subscription-renewal\/?$/' => Controllers\ActivateSubscriptionRenewal::class,

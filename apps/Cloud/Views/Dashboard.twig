@@ -274,6 +274,10 @@
         <div class="card-body">
           <table class="table-default dense">
             <tr>
+              <td>{{ translate('Your current credit') }}</td>
+              <td><b>{{ viewParams.currentCredit|number_format(2, ",", " ") }} €</b> <sup>(*)</sup></td>
+            </tr>
+            <tr>
               <td>{{ translate('Price') }}</td>
               <td><b>{{ viewParams.priceForPreviousMonth|number_format(2, ",", " ") }} €</b> <sup>(*)</sup></td>
             </tr>

@@ -18,6 +18,7 @@ class Dashboard extends \Hubleto\Erp\Controller
     $this->viewParams['currentCredit'] = $currentCredit;
 
     $premiumInfo = $premiumAccount->getPremiumInfo();
+    $premiumInfoPreviusMonth = $premiumAccount->getPremiumInfoForPreviousMonth();
 
     $mLog = $this->getModel(\Hubleto\App\Community\Cloud\Models\Log::class);
     $this->viewParams['log'] = $mLog->record
@@ -34,7 +35,7 @@ class Dashboard extends \Hubleto\Erp\Controller
 
     $this->viewParams['freeTrialInfo'] = $premiumAccount->getFreeTrialInfo();
     $this->viewParams['subscriptionInfo'] = $premiumAccount->getSubscriptionInfo();
-    $this->viewParams['priceForThisMonth'] = $premiumAccount->getPrice($premiumInfo['activeUsers'], $premiumInfo['paidApps'], 0); # TODO: Deprecated!
+    $this->viewParams['priceForPreviousMonth'] = $premiumAccount->getPrice($premiumInfoPreviusMonth['activeUsers'], $premiumInfoPreviusMonth['paidApps'], 0);
     $this->viewParams['activeUsers'] = $premiumInfo['activeUsers'];
     $this->viewParams['paidApps'] = $premiumInfo['paidApps'];
 

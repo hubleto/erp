@@ -161,6 +161,12 @@ class PremiumAccount extends \Hubleto\Erp\Core
     return (float) ($tmp['credit'] ?? 0);
   }
 
+  public function getPremiumInfoForPreviousMonth(): array {
+    $month = date('m', strtotime('-1 month'));
+    $year = date('Y', strtotime('-1 month'));
+    return $this->getPremiumInfo($month, $year);
+  }
+
   public function getPremiumInfo(int $month = 0, int $year = 0): array
   {
     $mDiscount = $this->getModel(Models\Discount::class);

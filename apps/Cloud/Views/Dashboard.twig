@@ -274,8 +274,8 @@
         <div class="card-body">
           <table class="table-default dense">
             <tr>
-              <td>{{ translate('Price for this month') }}</td>
-              <td><b>{{ viewParams.priceForThisMonth|number_format(2, ",", " ") }} €</b> <sup>(*)</sup></td>
+              <td>{{ translate('Price') }}</td>
+              <td><b>{{ viewParams.priceForPreviousMonth|number_format(2, ",", " ") }} €</b> <sup>(*)</sup></td>
             </tr>
             <tr>
               <td>{{ translate('Terms of use and privacy policy accepted') }}</td>
@@ -302,7 +302,7 @@
               <td><b>{{ viewParams.app.getPaymentVariableSymbol() }}</b></td>
             </tr>
           </table>
-          <small class="text-gray-500">(*) {{ translate('Price is calculated based on maximum number of active users or paid apps during this month.') }}</small>
+          <small class="text-gray-500">(*) {{ translate('Price is calculated based on maximum number of active users or paid apps previous month.') }}</small>
           <div class="mt-2">
             <a class="btn btn-transparent" href="{{ config.projectUrl }}/cloud/deactivate-subscription-renewal">
               <span class="icon"><i class="fas fa-stop"></i></span>

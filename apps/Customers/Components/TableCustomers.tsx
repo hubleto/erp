@@ -49,7 +49,10 @@ export default class TableCustomers extends TableExtended<TableCustomersProps, T
     if (columnName == "virt_tags") {
       return <div className='flex gap-1'>
         {data.TAGS.map((tag, key) => {
-          return <div style={{borderLeft: '2px solid ' + (tag.TAG?.color ?? 'white')}} className='badge badge-small px-1' key={key}>{tag.TAG?.name}</div>;
+          return <div key={key} className="text-nowrap mr-2">
+            <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+            {tag.TAG?.name}
+          </div>;
         })}
       </div>;
     } else {

@@ -74,11 +74,10 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "virt_tags") {
       return data.TAGS.map((tag, key) => {
-        return <div
-          key={key}
-          style={{backgroundColor: tag.TAG?.color}}
-          className='badge'
-        >{tag.TAG?.name}</div>;
+        return <div key={key} className="text-nowrap mr-2">
+          <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+          {tag.TAG?.name}
+        </div>;
       });
     } else if (data.VALUES && data.VALUES.length > 0) {
       if (columnName == "virt_email") {
@@ -159,13 +158,10 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
                   </div>
                   <div className="flex gap-2">
                     {item.TAGS.map((tag, index) => {
-                      return <div
-                        key={index}
-                        className="rounded"
-                        style={{color: tag.TAG?.color, border: '1px solid ' + tag.TAG?.color, padding: '0 3px'}}
-                      >
-                        <small>{tag.TAG?.name}</small>
-                      </div>
+                      return <div key={index} className="text-nowrap mr-2">
+                        <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+                        {tag.TAG?.name}
+                      </div>;
                     })}
                   </div>
                   {item.VALUES.map((value, index) => {

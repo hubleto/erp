@@ -108,7 +108,7 @@ class Contact extends \Hubleto\Erp\Model
 
   public function getMaxReadLevelForLoadTableData(): int
   {
-    return 1;
+    return 2;
   }
 
   public function onBeforeCreate(array $record): array

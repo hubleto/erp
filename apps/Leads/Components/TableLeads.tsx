@@ -56,13 +56,12 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "virt_tags") {
-      return (
-        <>
-          {data.TAGS.map((tag, key) => {
-            return <div style={{backgroundColor: tag.TAG?.color}} className='badge' key={data.id + '-tags-' + key}>{tag.TAG?.name}</div>;
-          })}
-        </>
-      );
+      return data.TAGS.map((tag, key) => {
+        return <div key={key} className="text-nowrap mr-2">
+          <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+          {tag.TAG?.name}
+        </div>
+      });
     } else if (columnName == "DEAL") {
       if (data.DEAL) {
         return <>

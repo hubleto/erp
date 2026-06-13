@@ -278,7 +278,7 @@ class Lead extends \Hubleto\Erp\Model
    */
   public function getMaxReadLevelForLoadTableData(): int
   {
-    return 1;
+    return 2;
   }
 
   /**

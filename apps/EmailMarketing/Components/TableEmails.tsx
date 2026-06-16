@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormEmail, { FormEmailProps } from './FormEmail';
 
-interface TableEmailsProps extends TableExtendedProps {}
+interface TableEmailsProps extends TableExtendedProps {
+  idCampaign?: number,
+}
 interface TableEmailsState extends TableExtendedState {}
 
 export default class TableEmails extends TableExtended<TableEmailsProps, TableEmailsState> {
@@ -34,6 +36,13 @@ export default class TableEmails extends TableExtended<TableEmailsProps, TableEm
       ...super.getFormModalProps(),
       type: 'right wide',
     };
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      idCampaign: this.props.idCampaign,
+    }
   }
 
   rowClassName(rowData: any): string {

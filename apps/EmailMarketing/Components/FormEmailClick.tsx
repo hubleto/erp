@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 
 export interface FormEmailClickProps extends FormExtendedProps {}
-export interface FormEmailClickState extends FormExtendedState {
-  mailPreviewInfo?: any,
-}
+export interface FormEmailClickState extends FormExtendedState {}
 
 export default class FormEmailClick<P, S> extends FormExtended<FormEmailClickProps, FormEmailClickState> {
   static defaultProps: any = {
@@ -47,7 +45,6 @@ export default class FormEmailClick<P, S> extends FormExtended<FormEmailClickPro
 
   renderTab(tabUid: string) {
     const R = this.state.record;
-    const mailPreviewInfo: any = this.state.mailPreviewInfo;
 
     switch (tabUid) {
       case 'default':

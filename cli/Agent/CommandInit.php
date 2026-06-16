@@ -516,8 +516,6 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("    -> Creating tables, round #3. (Creating foreign keys.)\n");
     $installer->installApps(3);
 
-    $this->terminal()->cyan("    -> Creating foreign keys.\n");
-
     $this->terminal()->cyan("  -> Adding default company and admin user.\n");
     $installer->addCompanyAndAdminUser();
 

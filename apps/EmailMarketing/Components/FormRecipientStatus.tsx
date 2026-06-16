@@ -3,9 +3,7 @@ import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/rea
 import request from '@hubleto/react-ui/core/Request';
 
 export interface FormRecipientStatusProps extends FormExtendedProps {}
-export interface FormRecipientStatusState extends FormExtendedState {
-  mailPreviewInfo?: any,
-}
+export interface FormRecipientStatusState extends FormExtendedState {}
 
 export default class FormRecipientStatus<P, S> extends FormExtended<FormRecipientStatusProps, FormRecipientStatusState> {
   static defaultProps: any = {
@@ -48,8 +46,7 @@ export default class FormRecipientStatus<P, S> extends FormExtended<FormRecipien
 
   renderTab(tabUid: string) {
     const R = this.state.record;
-    const mailPreviewInfo: any = this.state.mailPreviewInfo;
-
+    
     switch (tabUid) {
       case 'default':
         return <>

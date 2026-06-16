@@ -180,6 +180,7 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
         return <>
           <div className='w-full flex flex-col md:flex-row gap-2'>
             <div className='flex-4 border-r border-gray-100'>
+              {this.inputWrapper('title')}
               {this.inputWrapper('id_sender_account')}
               {this.inputWrapper('reply_to')}
               {this.inputWrapper('mail_subject')}

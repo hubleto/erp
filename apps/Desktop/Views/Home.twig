@@ -58,6 +58,21 @@
   {% endif %}
 </div>
 
+{% for m in viewParams.welcomeScreenMessages %}
+  <div class="alert alert-{{ m.class }} items-center flex gap-4 my-1">
+    {% if m.icon %}
+      <div><i class="{{ m.icon }} text-4xl"></i></div>
+    {% endif %}
+    <div class='grow'>
+      {% if m.title %}<p><b>{{ m.title|raw }}</b></p>{% endif %}
+      {{ m.content|raw }}
+    </div>
+    {% if m.button %}
+      <div>{{ m.button|raw }}</div>
+    {% endif %}
+  </div>
+{% endfor %}
+
 <div class="mt-2">
   <h1 style="color: {{ dashboard.color }}">{{ dashboard.title }}</h1>
   <hblreact-dashboards-dashboard

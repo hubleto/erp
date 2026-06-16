@@ -21,6 +21,8 @@ class Home extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    $enabledApps = $this->appManager()->getEnabledApps();
+
     $dashboardsApp = $this->appManager()->getApp(\Hubleto\App\Community\Dashboards\Loader::class);
     if ($dashboardsApp) {
       $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
@@ -35,6 +37,20 @@ class Home extends \Hubleto\Erp\Controller
       $this->viewParams['defaultDashboard'] = $defaultDashboard;
 
     }
+
+    $welcomeScreenMessages = [];
+    foreach ($enabledApps as $appNamespace => $app) {
+      try {
+        $welcomeScreenMessages = array_merge(
+          $welcomeScreenMessages,
+          $app->getWelcomeScreenMessages()
+        );
+      } catch (\Throwable $e) {
+        //
+      }
+    }
+
+    $this->viewParams['welcomeScreenMessages'] = $welcomeScreenMessages;
 
     $this->setView('@Hubleto:App:Community:Desktop/Home.twig');
   }

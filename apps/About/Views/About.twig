@@ -7,38 +7,24 @@
         {{ translate('About your Hubleto') }}
       </div>
       <div class="card-body">
-        <div class="flex gap-2 w-full justify-around">
-          <div class="text-center">
-            <div>Your IP address</div>
-            <div class="text-3xl text-primary pb-4">
-              {{ viewParams.SERVER.REMOTE_ADDR }}
-            </div>
-          </div>
-          <div class="text-center">
-            <div>Server's IP address</div>
-            <div class="text-3xl text-primary pb-4">
-              {{ viewParams.SERVER.SERVER_ADDR }}
-            </div>
-          </div>
-        </div>
         <table class="table-default dense">
-          <thead>
-            <tr>
-              <td>{{ translate('Package') }}</td>
-              <td>{{ translate('Version') }}</td>
-              <td>{{ translate('Commit') }}</td>
-            </tr>
-          </thead>
           <tbody>
-            {% for pName, pInfo in viewParams.packages %}
-              {% if pName starts with 'hubleto' %}
-                <tr>
-                  <td>{{ pName }}</td>
-                  <td>{{ pInfo.version }}</td>
-                  <td>{{ pInfo.reference }}</td>
-                </tr>
-              {% endif %}
-            {% endfor %}
+            <tr>
+              <td>{{ translate('Account UID') }}</td>
+              <td class="text-primary text-xl">{{ config.accountUid }}</td>
+            </tr>
+            <tr>
+              <td>{{ translate('Account full name') }}</td>
+              <td class="text-primary text-xl">{{ config.accountFullName }}</td>
+            </tr>
+            <tr>
+              <td>{{ translate('Your IP address') }}</td>
+              <td class="text-primary text-xl">{{ viewParams.SERVER.REMOTE_ADDR }}</td>
+            </tr>
+            <tr>
+              <td>{{ translate('Server IP address') }}</td>
+              <td class="text-primary text-xl">{{ viewParams.SERVER.SERVER_ADDR }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -63,10 +49,37 @@
       </div>
     </div>
   </div>
-  <div class="grow">
+  <div class="grow flex flex-col gap-2">
     <div class="card">
       <div class="card-header">
-        {{ translate('Packages') }}
+        {{ translate('Hubleto packages') }}
+      </div>
+      <div class="card-body">
+        <table class="table-default dense">
+          <thead>
+            <tr>
+              <td>{{ translate('Package') }}</td>
+              <td>{{ translate('Version') }}</td>
+              <td>{{ translate('Commit') }}</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pName, pInfo in viewParams.packages %}
+              {% if pName starts with 'hubleto' %}
+                <tr>
+                  <td>{{ pName }}</td>
+                  <td>{{ pInfo.version }}</td>
+                  <td>{{ pInfo.reference }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        {{ translate('External packages') }}
       </div>
       <div class="card-body">
         <table class="table-default dense">

@@ -26,7 +26,7 @@ class Loader extends \Hubleto\Erp\App
       '/^email-marketing\/api\/send-test-email\/?$/' => Controllers\Api\SendTestEmail::class,
       '/^email-marketing\/api\/launch\/?$/' => Controllers\Api\Launch::class,
 
-      '/^email-marketing\/?$/' => Controllers\Home::class,
+      '/^email-marketing\/?$/' => Controllers\Campaigns::class,
 
       '/^email-marketing\/campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
       '/^email-marketing\/campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],
@@ -50,6 +50,14 @@ class Loader extends \Hubleto\Erp\App
 
   }
 
+  /**
+   * [Description for installApp]
+   *
+   * @param int $round
+   * 
+   * @return void
+   * 
+   */
   public function installApp(int $round): void
   {
     if ($round == 1) {

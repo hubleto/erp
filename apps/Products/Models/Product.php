@@ -42,6 +42,8 @@ class Product extends \Hubleto\Erp\Model
   public array $relations = [
     'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_group'],
     'CATEGORY' => [ self::HAS_ONE, Category::class, 'id', 'id_category'],
+    'UNIT' => [ self::HAS_ONE, Unit::class, 'id', 'id_unit'],
+    'PACKAGING' => [ self::HAS_MANY, ProductPackaging::class, 'id_product', 'id'],
   ];
 
   public function describeColumns(): array
@@ -78,13 +80,11 @@ class Product extends \Hubleto\Erp\Model
       'description' => new Text($this, $this->translate('Description')),
       'notes' => new Text($this, $this->translate('Internal notes')),
       'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
-      'unit' => new Varchar($this, $this->translate('Unit'))->setDefaultVisible(),
+      'id_unit' => (new Lookup($this, $this->translate('Base unit'), Unit::class))->setDefaultVisible(),
       'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%")->setColorScale('bg-light-blue-to-dark-blue'),
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
       'qr_code_data' => new Varchar($this, $this->translate('Data ')),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
-      'package_unit' => new Varchar($this, $this->translate('Packaging unit'))->setDescription($this->translate('E.g.: palette, box, bag')),
-      'package_amount' => new Decimal($this, $this->translate('Amount of items in package')),
       'package_length' => new Decimal($this, $this->translate('Package length'))->setUnit('m'),
       'package_width' => new Decimal($this, $this->translate('Package width'))->setUnit('m'),
       'package_height' => new Decimal($this, $this->translate('Package height'))->setUnit('m'),
@@ -155,6 +155,7 @@ class Product extends \Hubleto\Erp\Model
       ->where('products.id', $recordId)
       ->with('GROUP')
       ->with('CATEGORY')
+      ->with('UNIT')
       ->first()
     ;
 
@@ -173,10 +174,8 @@ class Product extends \Hubleto\Erp\Model
       'Product image #5' => $this->env()->uploadUrl . '/' . $product->image_5,
       'Product description' => $product->description,
       'Product sales price' => $product->sales_price,
-      'Product sales unit' => $product->unit,
+      'Product base unit' => $product->UNIT?->name,
       'Product sales margin' => $product->margin,
-      'Product package unit' => $product->package_unit,
-      'Product package amount' => $product->package_amount,
       'Product package length' => $product->package_length,
       'Product package width' => $product->package_width,
       'Product package height' => $product->package_height,

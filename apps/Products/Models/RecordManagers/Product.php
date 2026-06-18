@@ -3,21 +3,34 @@
 namespace Hubleto\App\Community\Products\Models\RecordManagers;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends \Hubleto\Erp\RecordManager
 {
   public $table = 'products';
 
-  /** @return HasOne<Group, covariant Product> */
+  /** @return BelongsTo */
   public function GROUP(): BelongsTo
   {
     return $this->belongsTo(Group::class, 'id_group', 'id');
   }
 
-  /** @return HasOne<Group, covariant Product> */
+  /** @return BelongsTo */
   public function CATEGORY(): BelongsTo
   {
     return $this->belongsTo(Category::class, 'id_category', 'id');
+  }
+
+  /** @return BelongsTo */
+  public function UNIT(): BelongsTo
+  {
+    return $this->belongsTo(Unit::class, 'id_unit', 'id');
+  }
+
+  /** @return HasMany */
+  public function PACKAGING(): HasMany
+  {
+    return $this->hasMany(ProductPackaging::class, 'id_product', 'id')->orderBy('sort')->with('UNIT');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed

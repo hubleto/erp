@@ -43,7 +43,7 @@ class Manager extends \Hubleto\Erp\Core
     uasort($calendars, function($a, $b) {
       $cfgA = $a->getCalendarConfig();
       $cfgB = $b->getCalendarConfig();
-      return $cfgA['position'] > $cfgB['position'];
+      return ($cfgA['position'] ?? 0) > ($cfgB['position'] ?? 0);
     });
 
     return $calendars;

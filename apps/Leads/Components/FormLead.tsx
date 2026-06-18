@@ -170,7 +170,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
     switch (tabUid) {
       case 'default':
         return <>
-          <div className='card card-body flex flex-row gap-2'>
+          <div className='card card-body flex flex-col gap-2 md:flex-row'>
             <div className='grow'>
               {/* <FormInput title={"Contact"} required={true}>
                 <Lookup {...this.getInputProps('id_contact')}

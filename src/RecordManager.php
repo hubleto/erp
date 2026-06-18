@@ -27,6 +27,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $hasIdOwner = $this->model->hasColumn('id_owner');
     $hasIdManager = $this->model->hasColumn('id_manager');
     $hasIdTeam = $this->model->hasColumn('id_team');
+    $hasSharedWith = $this->model->hasColumn('shared_with');
 
     $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
 
@@ -51,22 +52,47 @@ class RecordManager extends \Hubleto\Framework\RecordManager
           ;
         });
       } elseif ($hasIdOwner && $hasIdManager) {
-        $query = $query->where(function ($q) use ($idUser) {
+        $query = $query->where(function ($q) use ($idUser, $hasSharedWith) {
           $q
             ->where($this->table . '.id_owner', $idUser)
-            ->orWhere($this->table . '.id_manager', $idUser);
+            ->orWhere($this->table . '.id_manager', $idUser)
+          ;
+          if ($hasSharedWith) {
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+          }
         });
       } elseif ($hasIdOwner) {
-        $query = $query->where($this->table . '.id_owner', $idUser);
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+          $q->where($this->table . '.id_owner', $idUser);
+          if ($hasSharedWith) {
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+          }
+        });
       } elseif ($hasIdManager) {
-        $query = $query->where($this->table . '.id_manager', $idUser);
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+          $q->where($this->table . '.id_manager', $idUser);
+          if ($hasSharedWith) {
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+          }
+        });
       } elseif ($hasIdTeam) {
-        $query = $query->whereIn($this->table . '.id_team', $userTeams);
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+          $q->where($this->table . '.id_team', $idUser);
+          if ($hasSharedWith) {
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+          }
+        });
       }
-    } elseif ($authProvider->getUserType() == User::TYPE_EMPLOYEE && $hasIdOwner) {
-      $query = $query->where($this->table . '.id_owner', $idUser);
-    } elseif ($authProvider->getUserType() == User::TYPE_ASSISTANT && $hasIdOwner) {
-      $query = $query->where($this->table . '.id_owner', $idUser);
+    } elseif (
+      ($authProvider->getUserType() == User::TYPE_EMPLOYEE || $authProvider->getUserType() == User::TYPE_ASSISTANT)
+      && $hasIdOwner
+    ) {
+      $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+        $q->where($this->table . '.id_owner', $idUser);
+        if ($hasSharedWith) {
+          $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+        }
+      });
     }
 
     // junctions

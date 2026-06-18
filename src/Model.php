@@ -112,8 +112,8 @@ class Model extends \Hubleto\Framework\Model
     }
 
     if (isset($sharedWith[$idUser])) {
-      if ($sharedWith[$idUser] == 'read' || $sharedWith[$idUser] == 'modify') $canRead = true;
-      if ($sharedWith[$idUser] == 'modify') $canModify = true;
+      $canRead = ($sharedWith[$idUser] == 'read' || $sharedWith[$idUser] == 'modify');
+      $canModify = $sharedWith[$idUser] == 'modify';
     }
 
     $permissions = [true, $canRead, $canModify, $canModify];

@@ -192,6 +192,14 @@ class Lead extends \Hubleto\Erp\Model
       ],
     ];
 
+    $description->addFilter('fLeadWithPlan', [
+      'title' => $this->translate('Planning'),
+      'options' => [
+        1 => $this->translate('With plan'),
+        2 => $this->translate('Without plan')
+      ]
+    ]);
+
     $description->ui['addButtonText'] = $this->translate('Add lead');
 
     return $description;

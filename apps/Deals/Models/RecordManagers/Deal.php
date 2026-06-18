@@ -188,6 +188,27 @@ class Deal extends \Hubleto\Erp\RecordManager
       if ($filters["fDealClosed"] == 1) $query = $query->where("deals.is_closed", true);
     }
 
+    if (isset($filters["fDealWithPlan"])) {
+      switch ($filters["fDealWithPlan"]) {
+        case 1:
+          $query = $query
+            ->whereHas('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+        case 2:
+          $query = $query
+            ->whereDoesntHave('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+      }
+    }
+
     return $query;
   }
 

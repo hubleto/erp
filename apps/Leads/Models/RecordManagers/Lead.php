@@ -151,6 +151,27 @@ class Lead extends \Hubleto\Erp\RecordManager
         ->selectRaw("COUNT(DISTINCT lead_tags.id)");
     }, 'tags_count');
 
+    if (isset($filters["fLeadWithPlan"])) {
+      switch ($filters["fLeadWithPlan"]) {
+        case 1:
+          $query = $query
+            ->whereHas('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+        case 2:
+          $query = $query
+            ->whereDoesntHave('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+      }
+    }
+
     return $query;
   }
 

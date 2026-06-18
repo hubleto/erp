@@ -105,6 +105,22 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
+   * [Description for getSidebarBadgeNumber]
+   *
+   * @return int
+   *
+   */
+  public function getSidebarBadgeNumber(): int
+  {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    return
+      $counter->openDealsWithoutFuturePlan()
+    ;
+  }
+
+  /**
    * [Description for renderSecondSidebar]
    *
    * @return string
@@ -112,6 +128,10 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderSecondSidebar(): string
   {
+    $counter = $this->getService(Counter::class);
+
+    $openDealsWithoutFuturePlan = $counter->openDealsWithoutFuturePlan();
+
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/deals">
@@ -122,6 +142,12 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-calendar-days"></i></span>
           <span class="text">' . $this->translate('Calendar') . '</span>
         </a>
+        ' . ($openDealsWithoutFuturePlan > 0 ? '
+          <a
+            href="' . $this->env()->projectUrl . '/deals?filters%5BfDealClosed%5D=0&filters%5BfDealWithPlan%5D=2"
+            class="badge badge-danger text-xs"
+          >' . $openDealsWithoutFuturePlan . ' ' . $this->translate('open deals without future plan') . '</a>
+        ' : '') . '
       </div>
     ';
   }

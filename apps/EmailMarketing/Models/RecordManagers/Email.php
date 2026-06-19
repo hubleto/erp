@@ -58,9 +58,16 @@ class Email extends \Hubleto\Erp\RecordManager
     return $this->hasMany(Recipient::class, 'id_email', 'id');
   }
 
+  /** @return HasMany<DealTask, covariant Deal> */
+  public function CAMPAIGNS(): HasMany
+  {
+    return $this->hasMany(CampaignSchedule::class, 'id_email', 'id');
+  }
+
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
+    $query = $query->whereDoesntHave('CAMPAIGNS');
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 

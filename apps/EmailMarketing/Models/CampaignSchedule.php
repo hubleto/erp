@@ -39,6 +39,7 @@ class CampaignSchedule extends \Hubleto\Erp\Model
 
     $description->ui['title'] = '';
     $description->ui['addButtonText'] = 'Add schedule';
+    $description->setOrderBy('day', 'asc');
     $description->show(['header']);
     $description->hide(['footer']);
 

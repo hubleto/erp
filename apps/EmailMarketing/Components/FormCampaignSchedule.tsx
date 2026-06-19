@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import TableCampaignsSchedulesRecipients from '@hubleto/apps/EmailMarketing/Components/TableCampaignsSchedulesRecipients';
+import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 
 export interface FormCampaignScheduleProps extends FormExtendedProps {}
 export interface FormCampaignScheduleState extends FormExtendedState {}
@@ -19,6 +19,8 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
 
   parentApp: string = 'Hubleto/App/Community/EmailMarketing';
 
+  refPreview: any = React.createRef();
+
   constructor(props: FormCampaignScheduleProps) {
     super(props);
     this.state = this.getStateFromProps(props);
@@ -29,7 +31,6 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign schedule')}</b> },
-        { uid: 'recipients', title: this.translate('Recipients') },
       ]
     };
   }
@@ -41,7 +42,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
   renderTitle(): JSX.Element {
     return <>
       <small>{this.translate("Campaign schedule")}</small>
-      <h2>{this.state.record.email ?? '-'}</h2>
+      <h2>{this.state.record.CAMPAIGN?.title ?? '-'}</h2>
     </>;
   }
 
@@ -51,20 +52,18 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
     switch (tabUid) {
       case 'default':
         return <>
-          {this.inputWrapper('id_campaign')}
           {this.inputWrapper('day')}
           {this.inputWrapper('id_email')}
-          {/* <br/>
-          <TableCampaignsSchedulesRecipients
-            tag='table_email_recipients'
-            parentForm={this}
-            uid={this.props.uid + "_table_email_recipient"}
-            idCampaignSchedule={R.id}
-            view='briefOverview'
-            onAfterLoadData={(table: any) => {
-              this.setState({ recipients: table.state.data.records });
-            }}
-          /> */}
+          <div className='card mt-2'>
+            <div className='card-header'>{R.EMAIL?.mail_subject}</div>
+            <div className='card-body'>
+              <HtmlFrame
+                ref={this.refPreview}
+                className='w-full h-full'
+                content={R.EMAIL?.mail_body}
+              />
+            </div>
+          </div>
         </>;
       break
 

@@ -54,7 +54,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
           {this.inputWrapper('id_campaign')}
           {this.inputWrapper('day')}
           {this.inputWrapper('id_email')}
-          <br/>
+          {/* <br/>
           <TableCampaignsSchedulesRecipients
             tag='table_email_recipients'
             parentForm={this}
@@ -64,7 +64,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
             onAfterLoadData={(table: any) => {
               this.setState({ recipients: table.state.data.records });
             }}
-          />
+          /> */}
         </>;
       break
 

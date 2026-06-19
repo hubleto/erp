@@ -82,7 +82,7 @@ export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps
               {this.inputWrapper('variables')}
               {this.inputWrapper('notes')}
             </div>
-            <div className='flex-1'>
+            <div className='flex-1 gap-2'>
               <div className='card'>
                 <div className='card-header'>{this.translate('Mail preview')}</div>
                 <div className='card-body'>
@@ -95,6 +95,21 @@ export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps
                   </div>}
                 </div>
               </div>
+              {mailPreviewInfo && mailPreviewInfo.scheduledMails && Object.keys(mailPreviewInfo.scheduledMails).length > 0 ? <>
+                <div className='card'>
+                  <div className='card-header'>{this.translate('Scheduled emails')}</div>
+                  <div className='card-body flex gap-2'>
+                    {Object.keys(mailPreviewInfo.scheduledMails).map((key) => {
+                      const schedule = mailPreviewInfo.scheduledMails[key];
+                      return <div className='badge' key={key}>
+                        {schedule.MAIL.datetime_scheduled_to_send}
+                        &nbsp;
+                        <b>{schedule.MAIL.subject}</b>
+                      </div>;
+                    })}
+                  </div>
+                </div>
+              </> : null}
             </div>
           </div>
         </>;

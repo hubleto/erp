@@ -47,7 +47,7 @@ class GetEmailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 
     return [
       'CAMPAIGN' => $recipient->CAMPAIGN->toArray(),
-      'schedule' => $campaignSchedule?->toArray(),
+      'scheduledMails' => $campaignSchedule?->toArray(),
       'bodyHtml' => $bodyHtml,
     ];
   }

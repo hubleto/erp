@@ -605,10 +605,10 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
                   className='btn btn-add-outline mt-2 w-full'
                   onClick={() => {
                     request.post(
-                      'email-marketing/api/import-emails',
+                      'email-marketing/api/import-recipients',
                       {
                         idEmail: R.id,
-                        emails: this.refEmails.current.value,
+                        recipients: this.refEmails.current.value,
                       },
                       {},
                       (data: any) => {

@@ -101,19 +101,21 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             <div className='card'>
               <div className='card-header'>{this.translate('Import emails')}</div>
               <div className='card-body'>
+                <div className='badge badge-info block'>
+                  {this.translate('One email per line or one JSON per line: ["recipient@example.com", {"name": "John Smith", "age": 21}]')}
+                </div>
                 <textarea
-                  className='w-full h-80'
-                  placeholder={this.translate('One email per line.')}
+                  className='w-full h-80 mt-2'
                   ref={this.refEmails}
                 ></textarea>
                 <button
                   className='btn btn-add-outline mt-2 w-full'
                   onClick={() => {
                     request.post(
-                      'email-marketing/api/import-emails',
+                      'email-marketing/api/import-recipients',
                       {
                         idCampaign: R.id,
-                        emails: this.refEmails.current.value,
+                        recipients: this.refEmails.current.value,
                       },
                       {},
                       (data: any) => {

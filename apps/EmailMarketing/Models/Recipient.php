@@ -31,16 +31,16 @@ class Recipient extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired()->setReadonly()->setDefaultVisible(),
+      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired()->setReadonly(),
       'id_email' => (new Lookup($this, $this->translate('Email'), Email::class))->setRequired()->setReadonly(),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'email' => (new Varchar($this, $this->translate('Email')))->setDefaultVisible(),
-      'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
-      'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
-      'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
+      // 'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
+      // 'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
+      // 'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
       'variables' => (new Json($this, $this->translate('Variables')))->setDefaultVisible()->setReactComponent('InputJsonKeyValue'),
       'date_added' => (new Date($this, $this->translate('Added')))->setDefaultVisible()->setDefaultValue(date('Y-m-d')),
-      'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
+      'notes' => (new Text($this, $this->translate('Notes'))),
       'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly(),
       'virt_utm_source' => (new Virtual($this, $this->translate('UTM: source')))
         ->setProperty('sql', "SELECT `e`.`utm_source` FROM `email_marketing_emails` `e` WHERE `e`.`id` = `email_marketing_recipients`.`id_email`"),
@@ -61,6 +61,7 @@ class Recipient extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $filters = $this->router()->urlParamAsArray("filters");
+    $view = $this->router()->urlParamAsString("view");
 
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate('Add recipient');
@@ -108,18 +109,20 @@ class Recipient extends \Hubleto\Erp\Model
 
     }
 
-    $description->addFilter('fGroupBy', [
-      'title' => $this->translate('Group by'),
-      'type' => 'multipleSelectButtons',
-      'options' => [
-        'id_email' => $this->translate('Email'),
-        'virt_utm_source' => $this->translate('UTM: source'),
-        'virt_utm_campaign' => $this->translate('UTM: campaign'),
-        'virt_utm_term' => $this->translate('UTM: term'),
-        'virt_status' => $this->translate('Status'),
-        'email' => $this->translate('Email'),
-      ]
-    ]);
+    if ($view != "briefOverview") {
+      $description->addFilter('fGroupBy', [
+        'title' => $this->translate('Group by'),
+        'type' => 'multipleSelectButtons',
+        'options' => [
+          'id_email' => $this->translate('Email'),
+          'virt_utm_source' => $this->translate('UTM: source'),
+          'virt_utm_campaign' => $this->translate('UTM: campaign'),
+          'virt_utm_term' => $this->translate('UTM: term'),
+          'virt_status' => $this->translate('Status'),
+          'email' => $this->translate('Email'),
+        ]
+      ]);
+    }
 
     return $description;
   }

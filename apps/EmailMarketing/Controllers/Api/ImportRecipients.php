@@ -7,11 +7,11 @@ use Hubleto\App\Community\EmailMarketing\Models\Email;
 use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\EmailMarketing\Lib;
 
-class ImportEmails extends \Hubleto\Erp\Controllers\ApiController
+class ImportRecipients extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
-    $emails = $this->router()->urlParamAsString('emails');
+    $recipients = $this->router()->urlParamAsString('recipients');
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $idEmail = $this->router()->urlParamAsInteger('idEmail');
 
@@ -22,8 +22,16 @@ class ImportEmails extends \Hubleto\Erp\Controllers\ApiController
 
     try {
 
-      foreach (explode("\n", $emails) as $email) {
-        $email = strtolower(trim($email));
+      foreach (explode("\n", $recipients) as $recipient) {
+        $recipientParsed = @json_decode($recipient, true);
+
+        if (is_array($recipientParsed)) {
+          $email = strtolower(trim($recipientParsed[0]));
+          $variables = $recipientParsed[1] ?? [];
+        } else {
+          $email = strtolower(trim($recipient));
+          $variables = [];
+        }
 
         if (empty($email)) continue;
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) continue;
@@ -39,6 +47,7 @@ class ImportEmails extends \Hubleto\Erp\Controllers\ApiController
             'id_campaign' => $idCampaign,
             'id_email' => $idEmail,
             'email' => $email,
+            'variables' => json_encode($variables),
             'date_added' => date('Y-m-d'),
           ]);
           $recipientsImported++;

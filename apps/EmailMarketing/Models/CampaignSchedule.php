@@ -46,4 +46,28 @@ class CampaignSchedule extends \Hubleto\Erp\Model
     return $description;
   }
 
+
+  /**
+   * [Description for getRelationsIncludedInLoadFormData]
+   *
+   * @return array|null
+   * 
+   */
+  public function getRelationsIncludedInLoadFormData(): array|null
+  {
+    return ['CAMPAIGN', 'EMAIL', 'EMAIL.SENDER_ACCOUNT'];
+  }
+
+
+  /**
+   * [Description for getMaxReadLevelForLoadFormData]
+   *
+   * @return int
+   * 
+   */
+  public function getMaxReadLevelForLoadFormData(): int
+  {
+    return 2;
+  }
+
 }

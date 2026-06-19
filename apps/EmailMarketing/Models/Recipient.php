@@ -137,4 +137,25 @@ class Recipient extends \Hubleto\Erp\Model
     return 1;
   }
 
+
+  public function onBeforeDelete(int $id): int
+  {
+    // zmaz vsetky maily, ktore ma recipient naplanovane ku kampani
+
+    /** @var CampaignScheduleRecipient */
+    $mCampaignScheduleRecipient = $this->getModel(CampaignScheduleRecipient::class);
+
+    /** @var Mail */
+    $mMail = $this->getModel(Mail::class);
+
+    $idMails = $mCampaignScheduleRecipient->record
+      ->where('id_recipient', $id)
+      ->pluck('id_mail');
+
+    $mCampaignScheduleRecipient->record->where('id_recipient', $id)->delete();
+    $mMail->record->whereIn('id', $idMails)->delete();
+
+    return 0;
+  }
+
 }

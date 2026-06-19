@@ -12,6 +12,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/EmailMarketing/Models/Campaign',
     renderOwnerManagerUi: true,
+    renderWorkflowUi: true,
   };
 
   props: FormCampaignProps;

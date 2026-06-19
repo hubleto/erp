@@ -98,7 +98,7 @@ export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps
               {mailPreviewInfo && mailPreviewInfo.scheduledMails && Object.keys(mailPreviewInfo.scheduledMails).length > 0 ? <>
                 <div className='card'>
                   <div className='card-header'>{this.translate('Scheduled emails')}</div>
-                  <div className='card-body flex gap-2'>
+                  <div className='card-body flex flex-col gap-2'>
                     {Object.keys(mailPreviewInfo.scheduledMails).map((key) => {
                       const schedule = mailPreviewInfo.scheduledMails[key];
                       return <div className='badge' key={key}>

@@ -56,6 +56,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
           {this.inputWrapper('id_email')}
           <div className='card mt-2'>
             <div className='card-header'>{R.EMAIL?.mail_subject}</div>
+            <div className='card-header'>From: {R.EMAIL?.SENDER_ACCOUNT?.name}</div>
             <div className='card-body'>
               <HtmlFrame
                 ref={this.refPreview}

@@ -97,6 +97,14 @@ class Email extends \Hubleto\Erp\Model
           2 => $this->translate('Managed by me') 
         ] 
       ],
+      'fEmailScheduledInCampaign' => [
+        'title' => $this->translate('Campaign'),
+        'options' => [
+          1 => $this->translate('In campaign'),
+          2 => $this->translate('Not in campaign'),
+        ],
+        'default' => 0,
+      ],
       'fEmailClosed' => [
         'title' => $this->translate('Open / Closed'),
         'options' => [

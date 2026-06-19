@@ -67,7 +67,6 @@ class Email extends \Hubleto\Erp\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
-    $query = $query->whereDoesntHave('CAMPAIGNS');
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
@@ -88,6 +87,11 @@ class Email extends \Hubleto\Erp\RecordManager
         case 1: $query = $query->where("email_marketing_emails.id_owner", $idUser); break;
         case 2: $query = $query->where("email_marketing_emails.id_manager", $idUser); break;
       }
+    }
+
+    if (isset($filters["fEmailScheduledInCampaign"])) {
+      if ($filters["fEmailScheduledInCampaign"] == 1) $query = $query->whereHas('CAMPAIGNS');
+      if ($filters["fEmailScheduledInCampaign"] == 2) $query = $query->whereDoesntHave('CAMPAIGNS');
     }
 
     if (isset($filters["fEmailClosed"])) {

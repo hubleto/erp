@@ -2,17 +2,18 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Models\RecordManagers;
 
+use Hubleto\App\Community\Mail\Models\RecordManagers\Mail;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class EmailClick extends \Hubleto\Erp\RecordManager
+class CampaignScheduleRecipient extends \Hubleto\Erp\RecordManager
 {
-  public $table = 'email_marketing_email_clicks';
+  public $table = 'email_marketing_campaigns_schedule_recipients';
 
   /** @return BelongsTo<Tag, covariant LeadTag> */
-  public function EMAIL(): BelongsTo
+  public function CAMPAIGN_SCHEDULE(): BelongsTo
   {
-    return $this->belongsTo(Email::class, 'id_email', 'id');
+    return $this->belongsTo(CampaignSchedule::class, 'id_campaign_schedule', 'id');
   }
 
   /** @return BelongsTo<Tag, covariant LeadTag> */
@@ -21,15 +22,21 @@ class EmailClick extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Recipient::class, 'id_recipient', 'id');
   }
 
+  /** @return BelongsTo<Tag, covariant LeadTag> */
+  public function MAIL(): BelongsTo
+  {
+    return $this->belongsTo(Mail::class, 'id_mail', 'id');
+  }
+
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
-    if ($hubleto->router()->isUrlParam("idEmail")) {
-      $query = $query->where($this->table . '.id_email', $hubleto->router()->urlParamAsInteger("idEmail"));
-    }
+    $idCampaignSchedule = $hubleto->router()->urlParamAsInteger("idCampaignSchedule");
+
+    if ($idCampaignSchedule > 0) $query = $query->where($this->table . '.id_campaign_schedule', $idCampaignSchedule);
 
     return $query;
   }

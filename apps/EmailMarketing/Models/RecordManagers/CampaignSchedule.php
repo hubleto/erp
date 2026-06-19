@@ -30,7 +30,7 @@ class CampaignSchedule extends \Hubleto\Erp\RecordManager
     $idCampaign = $hubleto->router()->urlParamAsInteger("idCampaign");
     $idEmail = $hubleto->router()->urlParamAsInteger("idEmail");
 
-    if ($idCampaign > 0) $query = $query->where($this->table . '.id_email', $idCampaign);
+    if ($idCampaign > 0) $query = $query->where($this->table . '.id_campaign', $idCampaign);
     if ($idEmail > 0) $query = $query->where($this->table . '.id_email', $idEmail);
 
     return $query;

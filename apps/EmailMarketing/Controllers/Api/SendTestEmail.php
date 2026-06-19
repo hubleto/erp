@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\EmailMarketing\Controllers\Api;
 
 
 use Hubleto\App\Community\EmailMarketing\Models\Email;
-use Hubleto\App\Community\EmailMarketing\Models\EmailRecipient;
+use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\App\Community\EmailMarketing\Lib;
 

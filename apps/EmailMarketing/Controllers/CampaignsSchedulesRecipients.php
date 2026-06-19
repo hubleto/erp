@@ -2,12 +2,11 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Controllers;
 
-class EmailRecipients extends \Hubleto\Erp\Controller
+class CampaignsSchedulesRecipients extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'recipients', 'content' => $this->translate('Email recipients') ]
     ]);
   }
 
@@ -15,7 +14,7 @@ class EmailRecipients extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $this->setView('@Hubleto:App:Community:EmailMarketing/EmailRecipients.twig');
+    $this->setView('@Hubleto:App:Community:EmailMarketing/CampaignsSchedulesRecipients.twig');
   }
 
 }

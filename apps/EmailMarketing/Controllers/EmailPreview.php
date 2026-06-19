@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\EmailMarketing\Controllers;
 
 use Hubleto\App\Community\EmailMarketing\Models\Email;
-use Hubleto\App\Community\EmailMarketing\Models\EmailRecipient;
+use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\EmailMarketing\Lib;
 
 class EmailPreview extends \Hubleto\Erp\Controller
@@ -26,8 +26,8 @@ class EmailPreview extends \Hubleto\Erp\Controller
     /** @var Email */
     $mEmail = $this->getModel(Email::class);
 
-    /** @var EmailRecipient */
-    $mRecipient = $this->getModel(EmailRecipient::class);
+    /** @var Recipient */
+    $mRecipient = $this->getModel(Recipient::class);
 
     $email = $mEmail->record->where('uid', $emailUid)->first();
 

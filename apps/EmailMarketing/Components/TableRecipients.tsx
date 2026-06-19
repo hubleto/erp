@@ -1,31 +1,32 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
-import FormEmailRecipient, { FormEmailRecipientProps } from './FormEmailRecipient';
+import FormRecipient, { FormRecipientProps } from './FormRecipient';
 
-interface TableEmailRecipientsProps extends TableExtendedProps {
-  idEmail: number
+interface TableRecipientsProps extends TableExtendedProps {
+  idCampaign?: number,
+  idEmail?: number
 }
-interface TableEmailRecipientsState extends TableExtendedState {}
+interface TableRecipientsState extends TableExtendedState {}
 
-export default class TableEmailRecipients extends TableExtended<TableEmailRecipientsProps, TableEmailRecipientsState> {
+export default class TableRecipients extends TableExtended<TableRecipientsProps, TableRecipientsState> {
   static defaultProps = {
     ...TableExtended.defaultProps,
     formUseModalSimple: true,
-    model: 'Hubleto/App/Community/EmailMarketing/Models/EmailRecipient',
+    model: 'Hubleto/App/Community/EmailMarketing/Models/Recipient',
   }
 
-  props: TableEmailRecipientsProps;
-  state: TableEmailRecipientsState;
+  props: TableRecipientsProps;
+  state: TableRecipientsState;
 
   translationContext: string = 'Hubleto\\App\\Community\\EmailMarketing\\Loader';
-  translationContextInner: string = 'Components\\TableEmailRecipients';
+  translationContextInner: string = 'Components\\TableRecipients';
 
-  constructor(props: TableEmailRecipientsProps) {
+  constructor(props: TableRecipientsProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableEmailRecipientsProps) {
+  getStateFromProps(props: TableRecipientsProps) {
     return {
       ...super.getStateFromProps(props),
     }
@@ -41,7 +42,8 @@ export default class TableEmailRecipients extends TableExtended<TableEmailRecipi
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      idEmail: this.props.idEmail
+      idCampaign: this.props.idCampaign,
+      idEmail: this.props.idEmail,
     }
   }
 
@@ -49,6 +51,7 @@ export default class TableEmailRecipients extends TableExtended<TableEmailRecipi
     return {
       model: this.props.model,
       defaultCsvImportValues: {
+        id_campaign: this.props.idCampaign,
         id_email: this.props.idEmail,
       }
     }
@@ -77,9 +80,12 @@ export default class TableEmailRecipients extends TableExtended<TableEmailRecipi
   }
 
   renderForm(): JSX.Element {
-    let formProps = this.getFormProps() as FormEmailRecipient;
+    let formProps = this.getFormProps() as FormRecipient;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_email: this.props.idEmail };
-    return <FormEmailRecipient {...formProps}/>;
+    formProps.description.defaultValues = {
+      id_campaign: this.props.idCampaign,
+      id_email: this.props.idEmail,
+    };
+    return <FormRecipient {...formProps}/>;
   }
 }

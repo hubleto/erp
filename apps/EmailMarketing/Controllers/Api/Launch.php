@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\EmailMarketing\Controllers\Api;
 
 use Hubleto\App\Community\EmailMarketing\Models\Email;
-use Hubleto\App\Community\EmailMarketing\Models\EmailRecipient;
+use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\App\Community\EmailMarketing\Lib;
 
@@ -18,7 +18,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
     try {
 
       $mEmail = $this->getModel(Email::class);
-      $mEmailRecipient = $this->getModel(EmailRecipient::class);
+      $mRecipient = $this->getModel(Recipient::class);
       $mMail = $this->getModel(Mail::class);
 
       $email = $mEmail->record->prepareReadQuery()
@@ -61,7 +61,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
         $mail = $mMail->record->recordCreate($mailData);
         $createdMails++;
 
-        $mEmailRecipient->record
+        $mRecipient->record
           ->where('id', $recipient->id)
           ->update(['id_mail' => (int) $mail['id']])
         ;

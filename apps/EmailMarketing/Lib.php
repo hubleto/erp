@@ -2,7 +2,9 @@
 
 namespace Hubleto\App\Community\EmailMarketing;
 
+use Hubleto\App\Community\Mail\Models\Mail;
 use \Hubleto\Erp\Core;
+use Hubleto\Framework\Core as FrameworkCore;
 use \Hubleto\Framework\Env;
 
 class Lib extends Core
@@ -212,6 +214,89 @@ class Lib extends Core
     );
 
     return $body;
+  }
+
+  /**
+   * [Description for scheduleMissingEmailsInCampaign]
+   *
+   * @param int $idCampaign
+   * 
+   * @return void
+   * 
+   */
+  public static function scheduleMissingEmailsInCampaign(int $idCampaign): void
+  {
+    /** @var Models\Campaign */
+    $mCampaign = FrameworkCore::getServiceStatic(Models\Campaign::class);
+
+    /** @var Models\CampaignSchedule */
+    $mCampaignSchedule = FrameworkCore::getServiceStatic(Models\CampaignSchedule::class);
+
+    /** @var Models\Recipient */
+    $mRecipient = FrameworkCore::getServiceStatic(Models\Recipient::class);
+
+    /** @var Models\CampaignScheduleRecipient */
+    $mCampaignScheduleRecipient = FrameworkCore::getServiceStatic(Models\CampaignScheduleRecipient::class);
+
+    /** @var Mail */
+    $mMail = FrameworkCore::getServiceStatic(Mail::class);
+
+    $campaign = $mCampaign->record->where('id', $idCampaign)->first();
+    if (!$campaign) return;
+
+    $campaignSchedules = $mCampaignSchedule->record
+      ->where('id_campaign', $idCampaign)
+      ->with('EMAIL')
+      ->with('EMAIL.SENDER_ACCOUNT')
+      ->get();
+
+    $recipients = $mRecipient->record->with('STATUS')->where('id_campaign', $idCampaign)->get();
+
+    foreach ($campaignSchedules as $campaignSchedule) {
+      foreach ($recipients as $recipient) {
+        if (!$campaignSchedule->EMAIL) continue;
+
+        $day = $campaignSchedule->day;
+        $email = $campaignSchedule->EMAIL;
+
+        $r = $mCampaignScheduleRecipient->record
+          ->where('id_campaign_schedule', $campaignSchedule->id)
+          ->where('id_recipient', $recipient->id)
+          ->first();
+
+        if (!$r) {
+
+          $bodyHtml = Lib::getMailPreview(
+            $email->toArray(),
+            $recipient->toArray(),
+          );
+
+          if (!filter_var($recipient->email, FILTER_VALIDATE_EMAIL)) continue;
+          if ($recipient->STATUS?->is_unsubscribed ?? false) continue;
+          if ($recipient->STATUS?->is_invalid ?? false) continue;
+          if ($recipient->id_mail > 0) continue;
+
+          $mailData = [
+            'subject' => $email->mail_subject,
+            'body_html' => $bodyHtml,
+            'id_account' => $email->id_sender_account,
+            'from' => $email->SENDER_ACCOUNT->sender_email ?? '',
+            'to' => $recipient->email,
+            'datetime_created' => date('Y-m-d H:i:s'),
+            'datetime_scheduled_to_send' => date('Y-m-d H:i:s', strtotime($recipient->date_added) + $day*3600*24),
+          ];
+
+          $mail = $mMail->record->recordCreate($mailData);
+
+          $mCampaignScheduleRecipient->record->insert([
+            'id_campaign_schedule' => $campaignSchedule->id,
+            'id_recipient' => $recipient->id,
+            'id_mail' => $mail['id'],
+          ]);
+        }
+      }
+    }
+
   }
 
 }

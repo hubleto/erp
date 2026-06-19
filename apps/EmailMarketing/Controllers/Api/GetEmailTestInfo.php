@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Controllers\Api;
 
-use Hubleto\App\Community\EmailMarketing\Models\EmailRecipient;
+use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\EmailMarketing\Models\Email;
 
 class GetEmailTestInfo extends \Hubleto\Erp\Controllers\ApiController
@@ -17,10 +17,10 @@ class GetEmailTestInfo extends \Hubleto\Erp\Controllers\ApiController
     /** @var Email */
     $mEmail = $this->getModel(Email::class);
 
-    /** @var EmailRecipient */
-    $mEmailRecipient = $this->getModel(EmailRecipient::class);
+    /** @var Recipient */
+    $mRecipient = $this->getModel(Recipient::class);
 
-    $recipients = $mEmailRecipient->record
+    $recipients = $mRecipient->record
       ->where('id_email', $idEmail)
       ->with('STATUS')
       ->with('CLICKS')
@@ -45,9 +45,9 @@ class GetEmailTestInfo extends \Hubleto\Erp\Controllers\ApiController
       ->first()
     ;
 
-    $emailsInEmail = $mEmailRecipient->record->where('id_email', $idEmail)->pluck('email');
+    $emailsInEmail = $mRecipient->record->where('id_email', $idEmail)->pluck('email');
 
-    $recentlyContacted = $mEmailRecipient->record
+    $recentlyContacted = $mRecipient->record
       ->where('id_email', '!=', $idEmail)
       ->whereNotNull('id_mail')
       ->whereIn('email', $emailsInEmail)

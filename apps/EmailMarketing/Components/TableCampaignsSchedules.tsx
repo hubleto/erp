@@ -2,30 +2,30 @@ import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormCampaignSchedule, { FormCampaignScheduleProps } from './FormCampaignSchedule';
 
-interface TableCampaignSchedulesProps extends TableExtendedProps {
+interface TableCampaignsSchedulesProps extends TableExtendedProps {
   idCampaign?: number,
 }
-interface TableCampaignSchedulesState extends TableExtendedState {}
+interface TableCampaignsSchedulesState extends TableExtendedState {}
 
-export default class TableCampaignSchedules extends TableExtended<TableCampaignSchedulesProps, TableCampaignSchedulesState> {
+export default class TableCampaignsSchedules extends TableExtended<TableCampaignsSchedulesProps, TableCampaignsSchedulesState> {
   static defaultProps = {
     ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/EmailMarketing/Models/CampaignSchedule',
   }
 
-  props: TableCampaignSchedulesProps;
-  state: TableCampaignSchedulesState;
+  props: TableCampaignsSchedulesProps;
+  state: TableCampaignsSchedulesState;
 
   translationContext: string = 'Hubleto\\App\\Community\\EmailMarketing\\Loader';
-  translationContextInner: string = 'Components\\TableCampaignSchedules';
+  translationContextInner: string = 'Components\\TableCampaignsSchedules';
 
-  constructor(props: TableCampaignSchedulesProps) {
+  constructor(props: TableCampaignsSchedulesProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: TableCampaignSchedulesProps) {
+  getStateFromProps(props: TableCampaignsSchedulesProps) {
     return {
       ...super.getStateFromProps(props),
       idCampaign: this.props.idCampaign,

@@ -31,11 +31,17 @@ class Loader extends \Hubleto\Erp\App
       '/^email-marketing\/campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
       '/^email-marketing\/campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],
 
+      '/^email-marketing\/campaigns\/schedules(\/(?<recordId>\d+))?\/?$/' => Controllers\CampaignsSchedules::class,
+      '/^email-marketing\/campaigns\/schedules\/add?\/?$/' => ['controller' => Controllers\CampaignsSchedules::class, 'vars' => [ 'recordId' => -1 ]],
+
+      '/^email-marketing\/campaigns\/schedules\/recipients(\/(?<recordId>\d+))?\/?$/' => Controllers\CampaignsSchedulesRecipients::class,
+      '/^email-marketing\/campaigns\/schedules\/recipients\/add?\/?$/' => ['controller' => Controllers\CampaignsSchedulesRecipients::class, 'vars' => [ 'recordId' => -1 ]],
+
       '/^email-marketing\/emails(\/(?<recordId>\d+))?\/?$/' => Controllers\Emails::class,
       '/^email-marketing\/emails\/add?\/?$/' => ['controller' => Controllers\Emails::class, 'vars' => [ 'recordId' => -1 ]],
 
-      '/^email-marketing\/recipients(\/(?<recordId>\d+))?\/?$/' => Controllers\EmailRecipients::class,
-      '/^email-marketing\/recipients\/add?\/?$/' => ['controller' => Controllers\EmailRecipients::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^email-marketing\/recipients(\/(?<recordId>\d+))?\/?$/' => Controllers\Recipients::class,
+      '/^email-marketing\/recipients\/add?\/?$/' => ['controller' => Controllers\Recipients::class, 'vars' => [ 'recordId' => -1 ]],
       '/^email-marketing\/recipients\/statuses(\/(?<recordId>\d+))?\/?$/' => Controllers\RecipientStatuses::class,
       '/^email-marketing\/recipients\/statuses\/add?\/?$/' => ['controller' => Controllers\RecipientStatuses::class, 'vars' => [ 'recordId' => -1 ]],
 
@@ -63,10 +69,11 @@ class Loader extends \Hubleto\Erp\App
     if ($round == 1) {
       $this->getModel(Models\Campaign::class)->upgradeSchema();
       $this->getModel(Models\Email::class)->upgradeSchema();
-      $this->getModel(Models\EmailRecipient::class)->upgradeSchema();
+      $this->getModel(Models\Recipient::class)->upgradeSchema();
       $this->getModel(Models\EmailClick::class)->upgradeSchema();
       $this->getModel(Models\RecipientStatus::class)->upgradeSchema();
       $this->getModel(Models\CampaignSchedule::class)->upgradeSchema();
+      $this->getModel(Models\CampaignScheduleRecipient::class)->upgradeSchema();
     }
   }
 

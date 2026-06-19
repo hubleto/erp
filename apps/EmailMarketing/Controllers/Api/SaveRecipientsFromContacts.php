@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\EmailMarketing\Controllers\Api;
 
 use Hubleto\App\Community\Contacts\Models\Contact;
-use Hubleto\App\Community\EmailMarketing\Models\EmailRecipient;
+use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 
 class SaveRecipientsFromContacts extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -12,10 +12,10 @@ class SaveRecipientsFromContacts extends \Hubleto\Erp\Controllers\ApiController
     $idEmail = $this->router()->urlParamAsInteger('idEmail');
     $contactIds = $this->router()->urlParamAsArray('contactIds');
 
-    /** @var EmailRecipient */
-    $mEmailRecipient = $this->getModel(EmailRecipient::class);
+    /** @var Recipient */
+    $mRecipient = $this->getModel(Recipient::class);
 
-    $recipients = $mEmailRecipient->record->where('id_email', $idEmail)->pluck('id_contact')?->toArray();
+    $recipients = $mRecipient->record->where('id_email', $idEmail)->pluck('id_contact')?->toArray();
     if (!is_array($recipients)) $recipients = [];
 
     /** @var Contact */
@@ -39,7 +39,7 @@ class SaveRecipientsFromContacts extends \Hubleto\Erp\Controllers\ApiController
           break;
         }
       }
-      $mEmailRecipient->record->recordCreate([
+      $mRecipient->record->recordCreate([
         'id_email' => $idEmail,
         'id_contact' => $idContact,
         'email' => $email,
@@ -53,7 +53,7 @@ class SaveRecipientsFromContacts extends \Hubleto\Erp\Controllers\ApiController
 
     foreach ($recipients as $idContact) {
       if (!in_array($idContact, $contactIds)) {
-        $mEmailRecipient->record
+        $mRecipient->record
           ->where('id_email', $idEmail)
           ->where('id_contact', $idContact)
           ->delete()
@@ -61,7 +61,7 @@ class SaveRecipientsFromContacts extends \Hubleto\Erp\Controllers\ApiController
       }
     }
 
-    $recipients = $mEmailRecipient->record->where('id_email', $idEmail)->get();
+    $recipients = $mRecipient->record->where('id_email', $idEmail)->get();
 
     return $recipients->toArray();
   }

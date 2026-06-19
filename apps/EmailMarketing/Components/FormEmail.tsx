@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
-import TableEmailRecipients from '@hubleto/apps/EmailMarketing/Components/TableEmailRecipients';
+import TableRecipients from '@hubleto/apps/EmailMarketing/Components/TableRecipients';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/TableEmailClicks';
 import request from '@hubleto/react-ui/core/Request';
 import InputJsonKeyValue from "@hubleto/react-ui/core/Inputs/JsonKeyValue";
@@ -41,12 +41,12 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
 
   parentApp: string = 'Hubleto/App/Community/EmailMarketing';
 
-  refTestEmailRecipientInput: any = React.createRef();
+  refTestRecipientInput: any = React.createRef();
   refLogActivityInput: any = React.createRef();
   refActivityModal: any = React.createRef();
   refActivityForm: any = React.createRef();
   refEmails: any = React.createRef();
-  refTableEmailRecipients: any = React.createRef();
+  refTableRecipients: any = React.createRef();
 
   constructor(props: FormEmailProps) {
     super(props);
@@ -320,7 +320,7 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
             <div className='card-body'>
               { this.translate('Test email recipient:') }
               <input
-                ref={this.refTestEmailRecipientInput}
+                ref={this.refTestRecipientInput}
                 className="ml-2"
                 type="text"
                 placeholder={ this.translate("Recipient email") }
@@ -340,7 +340,7 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
                     'email-marketing/api/send-test-email',
                     {
                       idEmail: this.state.record.id,
-                      to: this.refTestEmailRecipientInput.current.value,
+                      to: this.refTestRecipientInput.current.value,
                       variables: this.state.testEmailVariables,
                     },
                     {},
@@ -580,9 +580,9 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
       case 'recipients':
         return <div className='flex gap-2'>
           <div className='flex-3'>
-            <TableEmailRecipients
+            <TableRecipients
               tag='table_email_recipients'
-              ref={this.refTableEmailRecipients}
+              ref={this.refTableRecipients}
               parentForm={this}
               uid={this.props.uid + "_table_email_recipient"}
               idEmail={R.id}
@@ -612,7 +612,7 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
                       },
                       {},
                       (data: any) => {
-                        this.refTableEmailRecipients.current.reload();
+                        this.refTableRecipients.current.reload();
                       }
                     )
                   }}
@@ -634,7 +634,7 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
                           idEmail: R.id                      },
                         {},
                         (data: any) => {
-                          this.refTableEmailRecipients.current.reload();
+                          this.refTableRecipients.current.reload();
                         }
                       );
                     }

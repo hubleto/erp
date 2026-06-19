@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Controllers\Api;
 
-use Hubleto\App\Community\EmailMarketing\Models\EmailRecipient;
+use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 
 class RemoveRecipientFromEmail extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -12,14 +12,14 @@ class RemoveRecipientFromEmail extends \Hubleto\Erp\Controllers\ApiController
     $email = $this->router()->urlParamAsString('email');
     $emails = $this->router()->urlParamAsArray('emails');
 
-    /** @var EmailRecipient */
-    $mEmailRecipient = $this->getModel(EmailRecipient::class);
+    /** @var Recipient */
+    $mRecipient = $this->getModel(Recipient::class);
 
     try {
       $recipientsDeleted = 0;
 
       if (!empty($email)) {
-        $recipientsDeleted += $mEmailRecipient->record
+        $recipientsDeleted += $mRecipient->record
           ->where('id_email', $idEmail)
           ->where('email', $email)
           ->delete()
@@ -28,7 +28,7 @@ class RemoveRecipientFromEmail extends \Hubleto\Erp\Controllers\ApiController
 
       foreach ($emails as $tmpEmail) {
         if (!empty($tmpEmail)) {
-          $recipientsDeleted += $mEmailRecipient->record
+          $recipientsDeleted += $mRecipient->record
             ->where('id_email', $idEmail)
             ->where('email', $tmpEmail)
             ->delete()

@@ -33,9 +33,9 @@ class BelongsToEmail extends BelongsTo
 
 }
 
-class EmailRecipient extends \Hubleto\Erp\RecordManager
+class Recipient extends \Hubleto\Erp\RecordManager
 {
-  public $table = 'email_marketing_email_recipients';
+  public $table = 'email_marketing_recipients';
 
   public function belongsToEmail($related, $foreignKey = null, $ownerKey = null, $relation = null)
   {
@@ -47,6 +47,11 @@ class EmailRecipient extends \Hubleto\Erp\RecordManager
     );
   }
 
+  /** @return BelongsTo<Tag, covariant LeadTag> */
+  public function CAMPAIGN(): BelongsTo
+  {
+    return $this->belongsTo(Campaign::class, 'id_campaign', 'id');
+  }
 
   /** @return BelongsTo<Tag, covariant LeadTag> */
   public function EMAIL(): BelongsTo
@@ -121,9 +126,11 @@ class EmailRecipient extends \Hubleto\Erp\RecordManager
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $filters = $hubleto->router()->urlParamAsArray("filters");
 
-    if ($hubleto->router()->isUrlParam("idCampaign")) {
-      $query = $query->where($this->table . '.id_campaign', $hubleto->router()->urlParamAsInteger("idCampaign"));
-    }
+    $idCampaign = $hubleto->router()->urlParamAsInteger("idCampaign");
+    if ($idCampaign > 0) $query = $query->where($this->table . '.id_campaign', $idCampaign);
+
+    $idEmail = $hubleto->router()->urlParamAsInteger("idEmail");
+    if ($idEmail > 0) $query = $query->where($this->table . '.id_email', $idEmail);
 
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];

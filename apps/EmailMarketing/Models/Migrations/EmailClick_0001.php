@@ -47,7 +47,7 @@ class EmailClick_0001 extends Migration
       ON DELETE RESTRICT ON UPDATE RESTRICT;
 
       ALTER TABLE `email_marketing_email_clicks` ADD CONSTRAINT `fk__email_marketing_email_clicks__id_recipient`
-      FOREIGN KEY (`id_recipient`) REFERENCES `email_marketing_email_recipients` (`id`)
+      FOREIGN KEY (`id_recipient`) REFERENCES `email_marketing_recipients` (`id`)
       ON DELETE RESTRICT ON UPDATE RESTRICT;
     ");
   }

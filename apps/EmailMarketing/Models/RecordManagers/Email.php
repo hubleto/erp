@@ -55,7 +55,7 @@ class Email extends \Hubleto\Erp\RecordManager
   /** @return HasMany<DealTask, covariant Deal> */
   public function RECIPIENTS(): HasMany
   {
-    return $this->hasMany(EmailRecipient::class, 'id_email', 'id');
+    return $this->hasMany(Recipient::class, 'id_email', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
@@ -63,12 +63,6 @@ class Email extends \Hubleto\Erp\RecordManager
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-
-    $idCampaign = $hubleto->router()->urlParamAsInteger("idCampaign");
-
-    if ($idCampaign > 0) {
-      $query = $query->where($this->table . '.id_campaign', $idCampaign);
-    }
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
 

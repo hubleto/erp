@@ -5,19 +5,21 @@ namespace Hubleto\App\Community\EmailMarketing\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Json;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Mail\Models\Mail;
 
-class EmailRecipient extends \Hubleto\Erp\Model
+class Recipient extends \Hubleto\Erp\Model
 {
-  public string $table = 'email_marketing_email_recipients';
-  public string $recordManagerClass = RecordManagers\EmailRecipient::class;
+  public string $table = 'email_marketing_recipients';
+  public string $recordManagerClass = RecordManagers\Recipient::class;
   public ?string $lookupSqlValue = '{%TABLE%}.email';
 
   public array $relations = [
+    'CAMPAIGN' => [ self::BELONGS_TO, Campaign::class, 'id_campaign', 'id' ],
     'EMAIL' => [ self::BELONGS_TO, Email::class, 'id_email', 'id' ],
     'CONTACT' => [ self::BELONGS_TO, Contact::class, 'id_contact', 'id' ],
     'MAIL' => [ self::BELONGS_TO, Mail::class, 'id_mail', 'id' ],
@@ -29,6 +31,7 @@ class EmailRecipient extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setRequired()->setReadonly()->setDefaultVisible(),
       'id_email' => (new Lookup($this, $this->translate('Email'), Email::class))->setRequired()->setReadonly(),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'email' => (new Varchar($this, $this->translate('Email')))->setDefaultVisible(),
@@ -36,20 +39,21 @@ class EmailRecipient extends \Hubleto\Erp\Model
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
       'salutation' => (new Varchar($this, $this->translate('Salutation')))->setDefaultVisible(),
       'variables' => (new Json($this, $this->translate('Variables')))->setDefaultVisible()->setReactComponent('InputJsonKeyValue'),
+      'date_added' => (new Date($this, $this->translate('Added')))->setDefaultVisible()->setDefaultValue(date('Y-m-d')),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_mail' => (new Lookup($this, $this->translate('Reference to mail sent'), Mail::class))->setReadonly(),
       'virt_utm_source' => (new Virtual($this, $this->translate('UTM: source')))
-        ->setProperty('sql', "SELECT `e`.`utm_source` FROM `email_marketing_emails` `e` WHERE `e`.`id` = `email_marketing_email_recipients`.`id_email`"),
+        ->setProperty('sql', "SELECT `e`.`utm_source` FROM `email_marketing_emails` `e` WHERE `e`.`id` = `email_marketing_recipients`.`id_email`"),
       'virt_utm_campaign' => (new Virtual($this, $this->translate('UTM: campaign')))
-        ->setProperty('sql', "SELECT `e`.`utm_campaign` FROM `email_marketing_emails` `e` WHERE `e`.`id` = `email_marketing_email_recipients`.`id_email`"),
+        ->setProperty('sql', "SELECT `e`.`utm_campaign` FROM `email_marketing_emails` `e` WHERE `e`.`id` = `email_marketing_recipients`.`id_email`"),
       'virt_utm_term' => (new Virtual($this, $this->translate('UTM: term')))
-        ->setProperty('sql', "SELECT `e`.`utm_term` FROM `email_marketing_emails` `e` WHERE `e`.`id` = `email_marketing_email_recipients`.`id_email`"),
+        ->setProperty('sql', "SELECT `e`.`utm_term` FROM `email_marketing_emails` `e` WHERE `e`.`id` = `email_marketing_recipients`.`id_email`"),
       'virt_status' => (new Virtual($this, $this->translate('Status')))
         ->setProperty('sql',"
           SELECT
             concat(if(`is_unsubscribed`, 'unsubscribed', ''), ',', if(`is_invalid`, 'invalid', '')) 
           FROM `email_marketing_recipient_statuses` `crs`
-          WHERE `crs`.`email` in (`email_marketing_email_recipients`.`email`)
+          WHERE `crs`.`email` in (`email_marketing_recipients`.`email`)
         "),
     ]);
   }

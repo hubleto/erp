@@ -1,0 +1,10 @@
+<h1 class="app-main-title">{{ translate('Email marketing') }} > {{ translate('Campaigns') }} > {{ translate('Schedules') }} > {{ translate('Recipients') }}</h1>
+
+<hblreact-email-marketing-table-campaigns-schedules-recipients
+  string:tag="table-email-marketing-table-campaigns-schedules-recipients"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
+  json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
+></hblreact-email-marketing-table-campaigns-schedules-recipients>

@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Controllers\Api;
 
-use Hubleto\App\Community\EmailMarketing\Models\EmailRecipient;
+use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\EmailMarketing\Models\Email;
 use Hubleto\App\Community\EmailMarketing\Lib;
 
@@ -14,7 +14,7 @@ class GetEmailLaunchInfo extends \Hubleto\Erp\Controllers\ApiController
     $recentlyContactedPeriod = $this->router()->urlParamAsInteger('recentlyContactedPeriod', 3);
 
     /** @var Recipient */
-    $mRecipient = $this->getModel(EmailRecipient::class);
+    $mRecipient = $this->getModel(Recipient::class);
 
     $recipients = $mRecipient->record
       ->where('id_email', $idEmail)

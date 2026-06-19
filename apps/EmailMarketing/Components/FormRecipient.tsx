@@ -2,31 +2,31 @@ import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import request from '@hubleto/react-ui/core/Request';
 
-export interface FormEmailRecipientProps extends FormExtendedProps {}
-export interface FormEmailRecipientState extends FormExtendedState {
+export interface FormRecipientProps extends FormExtendedProps {}
+export interface FormRecipientState extends FormExtendedState {
   mailPreviewInfo?: any,
 }
 
-export default class FormEmailRecipient<P, S> extends FormExtended<FormEmailRecipientProps, FormEmailRecipientState> {
+export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps, FormRecipientState> {
   static defaultProps: any = {
     ...FormExtended.defaultProps,
     model: 'Hubleto/App/Community/EmailMarketing/Models/Recipient',
   };
 
-  props: FormEmailRecipientProps;
-  state: FormEmailRecipientState;
+  props: FormRecipientProps;
+  state: FormRecipientState;
 
   translationContext: string = 'Hubleto\\App\\Community\\EmailMarketing\\Loader';
-  translationContextInner: string = 'Components\\FormEmailRecipient';
+  translationContextInner: string = 'Components\\FormRecipient';
 
   parentApp: string = 'Hubleto/App/Community/EmailMarketing';
 
-  constructor(props: FormEmailRecipientProps) {
+  constructor(props: FormRecipientProps) {
     super(props);
     this.state = this.getStateFromProps(props);
   }
 
-  getStateFromProps(props: FormEmailRecipientProps) {
+  getStateFromProps(props: FormRecipientProps) {
     return {
       ...super.getStateFromProps(props),
       tabs: [
@@ -71,6 +71,7 @@ export default class FormEmailRecipient<P, S> extends FormExtended<FormEmailReci
         return <>
           <div className='w-full flex gap-2'>
             <div className='flex-1 border-r border-gray-100'>
+              {this.inputWrapper('id_campaign')}
               {this.inputWrapper('id_email')}
               {this.inputWrapper('id_contact')}
               {this.inputWrapper('email')}

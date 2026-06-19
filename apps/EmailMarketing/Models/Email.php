@@ -32,7 +32,7 @@ class Email extends \Hubleto\Erp\Model
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step' ],
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
-    'RECIPIENTS' => [ self::HAS_MANY, EmailRecipient::class, 'id_email', 'id' ],
+    'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_email', 'id' ],
   ];
 
   /**

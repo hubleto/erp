@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import TableCampaignsSchedulesRecipients from '@hubleto/apps/EmailMarketing/Components/TableCampaignsSchedulesRecipients';
 
 export interface FormCampaignScheduleProps extends FormExtendedProps {}
 export interface FormCampaignScheduleState extends FormExtendedState {}
@@ -28,6 +29,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Campaign schedule')}</b> },
+        { uid: 'recipients', title: this.translate('Recipients') },
       ]
     };
   }
@@ -52,6 +54,17 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
           {this.inputWrapper('id_campaign')}
           {this.inputWrapper('day')}
           {this.inputWrapper('id_email')}
+          <br/>
+          <TableCampaignsSchedulesRecipients
+            tag='table_email_recipients'
+            parentForm={this}
+            uid={this.props.uid + "_table_email_recipient"}
+            idCampaignSchedule={R.id}
+            view='briefOverview'
+            onAfterLoadData={(table: any) => {
+              this.setState({ recipients: table.state.data.records });
+            }}
+          />
         </>;
       break
 

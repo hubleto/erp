@@ -53,4 +53,35 @@ export default class TableCampaignsSchedules extends TableExtended<TableCampaign
     formProps.description.defaultValues = { id_campaign: this.props.idCampaign };
     return <FormCampaignSchedule {...formProps}/>;
   }
+
+  renderRecords(): JSX.Element {
+    return <div className='list'>
+      {this.state.data?.records.map((record, key) => {
+        console.log(record);
+        return <button
+          key={key}
+          className='btn btn-transparent btn-list-item'
+          onClick={() => this.openForm(record.id)}
+        >
+          <div className='icon text-center bg-primary/20 rounded-sm h-full'>
+            Day<br/>
+            <b>{record.day}</b>
+          </div>
+          <div className='text'>
+            {record.id_email > 0 ? <>
+              <div className='text-gray-300'>
+                From: {record.EMAIL?.SENDER_ACCOUNT?.name ?? <span className='text-red-800'>n/a</span>}
+              </div>
+              <div className='text-gray-300'>
+                {record.EMAIL?.title ?? ''}
+              </div>
+              <div className='fond-bold'>
+                {record.EMAIL?.mail_subject ?? '-'}
+              </div>
+            </> : <div className='text-red-800'>No email selected</div>}
+          </div>
+        </button>;
+      })}
+    </div>
+  }
 }

@@ -34,7 +34,6 @@ export default class FormCalendarSyncSource<P, S> extends Form<FormProps, FormSt
             {this.translate('Enter the URL that points to an ICS file.')}
           </div>
           : <></> }
-        {this.inputWrapper('color')}
         {this.inputWrapper('active')}
         { this.state.record.type == 'google' ?
           <div className="alert-warning mt-1">

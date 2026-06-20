@@ -46,7 +46,6 @@ export default class FormAccount<P, S> extends FormExtended<FormAccountProps,For
       case 'default':
         return <>
           {this.inputWrapper('name')}
-          {this.inputWrapper('color')}
           {this.divider(this.translate('Receiving (IMAP)'))}
           {this.inputWrapper('imap_host')}
           {this.inputWrapper('imap_port')}

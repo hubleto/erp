@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
+import FormEmail from './FormEmail';
 
 export interface FormCampaignScheduleProps extends FormExtendedProps {}
 export interface FormCampaignScheduleState extends FormExtendedState {}
@@ -30,7 +31,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
     return {
       ...super.getStateFromProps(props),
       tabs: [
-        { uid: 'default', title: <b>{this.translate('Campaign schedule')}</b> },
+        { uid: 'default', title: <b>{this.translate('Schedule')}</b> },
       ]
     };
   }
@@ -41,7 +42,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
 
   renderTitle(): JSX.Element {
     return <>
-      <small>{this.translate("Campaign schedule")}</small>
+      <small>{this.translate("Campaign")} &raquo; {this.translate("Scheduled email")}</small>
       <h2>{this.state.record.CAMPAIGN?.title ?? '-'}</h2>
     </>;
   }
@@ -51,21 +52,20 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
 
     switch (tabUid) {
       case 'default':
-        return <>
-          {this.inputWrapper('day')}
-          {this.inputWrapper('id_email')}
-          <div className='card mt-2'>
-            <div className='card-header'>{R.EMAIL?.mail_subject}</div>
-            <div className='card-header'>From: {R.EMAIL?.SENDER_ACCOUNT?.name}</div>
-            <div className='card-body'>
-              <HtmlFrame
-                ref={this.refPreview}
-                className='w-full h-full'
-                content={R.EMAIL?.mail_body}
-              />
-            </div>
+        return <div>
+          <div className='flex gap-2'>
+            <div>{this.inputWrapper('day')}</div>
+            <div className='grow'>{this.inputWrapper('id_email')}</div>
           </div>
-        </>;
+          <div className='mt-4'>
+            {R.id_email > 0 ?
+              <FormEmail
+                id={R.id_email}
+                showFooter={false}
+              />
+            : <div className='alert alert-warning'>Select email to be sent on <b>day {R.day}</b></div>}
+          </div>
+        </div>;
       break
 
       default:

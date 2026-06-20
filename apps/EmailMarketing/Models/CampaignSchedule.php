@@ -38,7 +38,7 @@ class CampaignSchedule extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add schedule';
+    $description->ui['addButtonText'] = 'Schedule email';
     $description->setOrderBy('day', 'asc');
     $description->show(['header']);
     $description->hide(['footer']);
@@ -46,6 +46,27 @@ class CampaignSchedule extends \Hubleto\Erp\Model
     return $description;
   }
 
+  /**
+   * [Description for getRelationsIncludedInLoadTableData]
+   *
+   * @return array|null
+   * 
+   */
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['CAMPAIGN', 'EMAIL', 'EMAIL.SENDER_ACCOUNT'];
+  }
+
+  /**
+   * [Description for getMaxReadLevelForLoadTableData]
+   *
+   * @return int
+   * 
+   */
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 3;
+  }
 
   /**
    * [Description for getRelationsIncludedInLoadFormData]
@@ -57,7 +78,6 @@ class CampaignSchedule extends \Hubleto\Erp\Model
   {
     return ['CAMPAIGN', 'EMAIL', 'EMAIL.SENDER_ACCOUNT'];
   }
-
 
   /**
    * [Description for getMaxReadLevelForLoadFormData]

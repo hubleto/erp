@@ -50,7 +50,6 @@ export default class FormWorkflowStep<P, S> extends FormExtended<FormWorkflowSte
       {this.inputWrapper('id_workflow')}
       {this.inputWrapper('name')}
       {this.inputWrapper('order')}
-      {this.inputWrapper('color')}
       {this.inputWrapper('tag')}
       {this.inputWrapper('probability')}
     </div>;

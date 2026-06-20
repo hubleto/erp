@@ -237,7 +237,6 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 {this.inputWrapper('utm_term')}
                 {this.inputWrapper('utm_content')}
               </div>
-              {this.inputWrapper('color')}
               {this.inputWrapper('datetime_created')}
               {this.inputWrapper('uid')}
             </div>

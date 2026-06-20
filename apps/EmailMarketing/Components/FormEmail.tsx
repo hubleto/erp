@@ -195,7 +195,6 @@ export default class FormEmail<P, S> extends FormExtended<FormEmailProps, FormEm
               {this.inputWrapper('utm_campaign')}
               {this.inputWrapper('utm_term')}
               {this.inputWrapper('utm_content')}
-              {this.inputWrapper('color')}
               {this.inputWrapper('datetime_created')}
               {this.inputWrapper('uid')}
             </div>

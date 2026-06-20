@@ -180,7 +180,6 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
               </> : null}
               {this.inputWrapper('id_customer')}
               {this.inputWrapper('id_contact')}
-              {this.inputWrapper('color')}
               {this.inputWrapper('notes')}
               {this.inputWrapper('average_hourly_costs')}
               {/* {this.inputWrapper('id_deal')} */}

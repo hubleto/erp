@@ -63,12 +63,6 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
             {this.inputWrapper('target_audience')}
             {this.inputWrapper('goal')}
             {this.inputWrapper('notes')}
-            {this.inputWrapper('color')}
-            {this.inputWrapper('id_workflow')}
-            {this.inputWrapper('id_workflow_step')}
-            {this.inputWrapper('id_owner')}
-            {this.inputWrapper('id_manager')}
-            {this.inputWrapper('is_closed')}
           </div>
           {this.state.id <= 0 ? null : <>
             <div className='grow'>

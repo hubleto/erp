@@ -51,8 +51,7 @@ export default class FormNotification<P, S> extends FormExtended<FormNotificatio
           {this.inputWrapper('category')}
           {this.inputWrapper('tags')}
           {this.inputWrapper('datetime_sent')}
-          {this.inputWrapper('color')}
-        </div>
+4        </div>
       </div>
     </>;
   }

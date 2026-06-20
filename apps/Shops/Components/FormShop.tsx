@@ -61,7 +61,6 @@ export default class FormShop<P, S> extends FormExtended<FormShopProps, FormShop
             <div className='flex-1 border-r border-gray-100'>
               {this.inputWrapper('name', {cssClass: 'text-2xl'})}
               {this.inputWrapper('address', {cssClass: 'text-2xl'})}
-              {this.inputWrapper('color')}
               {this.inputWrapper('short_description')}
               {this.inputWrapper('long_description')}
             </div>

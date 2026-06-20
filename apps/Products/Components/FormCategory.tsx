@@ -57,7 +57,6 @@ export default class FormCategory<P, S> extends FormExtended<FormCategoryProps,F
           <div className='grow'>
             {this.inputWrapper('name', {cssClass: 'text-2xl'})}
             {this.inputWrapper('id_parent')}
-            {this.inputWrapper('color')}
             {this.inputWrapper('short_description')}
             {this.inputWrapper('url_slug')}
           </div>

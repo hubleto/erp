@@ -37,7 +37,6 @@ export default class FormTeam<P, S> extends FormExtended<FormTeamProps, FormTeam
         </div>
         <div className="flex-6">
           {this.inputWrapper('name')}
-          {this.inputWrapper('color')}
           {this.inputWrapper('description')}
           {this.inputWrapper('id_manager')}
           {this.divider(this.translate('Team members'))}

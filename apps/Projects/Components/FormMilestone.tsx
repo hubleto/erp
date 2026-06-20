@@ -41,7 +41,6 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
             {this.inputWrapper('date_due')}
             {this.inputWrapper('expected_output')}
             {this.inputWrapper('description')}
-            {this.inputWrapper('color')}
             {this.inputWrapper('is_closed')}
           </div>
           {R.id > 0 ?

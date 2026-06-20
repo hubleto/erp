@@ -32,6 +32,13 @@ export default class TableCampaignsSchedules extends TableExtended<TableCampaign
     }
   }
 
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      idCampaign: this.props.idCampaign
+    }
+  }
+
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),
@@ -57,7 +64,6 @@ export default class TableCampaignsSchedules extends TableExtended<TableCampaign
   renderRecords(): JSX.Element {
     return <div className='list'>
       {this.state.data?.records.map((record, key) => {
-        console.log(record);
         return <button
           key={key}
           className='btn btn-transparent btn-list-item'

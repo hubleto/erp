@@ -94,7 +94,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
           </div>
           <div className='flex-1 gap-2'>
             <div className='card'>
-              <div className='card-header'>{this.translate('Import emails')}</div>
+              <div className='card-header'>{this.translate('Import recipients')}</div>
               <div className='card-body'>
                 <div className='badge badge-info block'>
                   {this.translate('One email per line or one JSON per line: ["recipient@example.com", {"name": "John Smith", "age": 21}]')}
@@ -120,7 +120,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                   }}
                 >
                   <span className='icon'><i className='fas fa-upload'></i></span>
-                  <span className='text'>{this.translate('Import emails')}</span>
+                  <span className='text'>{this.translate('Import recipients')}</span>
                 </button>
               </div>
             </div>

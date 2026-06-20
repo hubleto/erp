@@ -75,10 +75,6 @@ export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps
               {this.inputWrapper('id_email')}
               {this.inputWrapper('id_contact')}
               {this.inputWrapper('email')}
-              {this.inputWrapper('phone_number')}
-              {this.inputWrapper('first_name')}
-              {this.inputWrapper('last_name')}
-              {this.inputWrapper('salutation')}
               {this.inputWrapper('variables')}
               {this.inputWrapper('notes')}
             </div>

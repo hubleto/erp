@@ -52,12 +52,12 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
 
     switch (tabUid) {
       case 'default':
-        return <div>
+        return <div className='flex flex-col h-full'>
           <div className='flex gap-2'>
             <div>{this.inputWrapper('day')}</div>
-            <div className='grow'>{this.inputWrapper('id_email')}</div>
+            <div className='grow'>{this.inputWrapper('id_email', {wrapperCssClass: 'flex gap-2'})}</div>
           </div>
-          <div className='mt-4'>
+          <div className='mt-8 w-[80%] m-auto overflow-auto'>
             {R.id_email > 0 ?
               <FormEmail
                 id={R.id_email}

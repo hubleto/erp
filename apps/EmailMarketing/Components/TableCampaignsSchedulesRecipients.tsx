@@ -32,6 +32,13 @@ export default class TableCampaignsSchedulesRecipients extends TableExtended<Tab
     }
   }
 
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      idCampaignSchedule: this.props.idCampaignSchedule
+    }
+  }
+
   getFormModalProps() {
     return {
       ...super.getFormModalProps(),

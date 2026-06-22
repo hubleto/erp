@@ -137,7 +137,7 @@ class Installer extends \Hubleto\Erp\Core
     $this->db()->init();
 
     $this->db()->execute("drop database if exists `{$this->dbName}`");
-    $this->db()->execute("create database `{$this->dbName}` character set utf8 collate utf8_general_ci");
+    $this->db()->execute("create database `{$this->dbName}` character set utf8mb4 collate utf8mb4_general_ci");
 
     $this->config()->set('db_name', $this->dbName);
     $this->config()->set('db_codepage', "utf8mb4");

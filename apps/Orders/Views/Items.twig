@@ -1,5 +1,15 @@
 <h1 class="app-main-title">{{ translate('Orders') }} > {{ translate('Items') }}</h1>
 
+{% if viewParams.dueAndChargeableItemsNotPreparedForInvoice|length > 0 %}
+  {% for i in viewParams.dueAndChargeableItemsNotPreparedForInvoice %}
+    <div class="alert alert-warning">
+      <a href="{{ hubleto.env().projectUrl }}/orders/{{ i.ORDER.id }}?tab=items" target="_blank">
+        {{ i.ORDER.identifier }} {{ i.ORDER.title }}, <b>{{ i.title }}</b>, {{ i.unit_price }} {{ i.ORDER.CURRENCY.symbol }} x {{ i.amount }} is ready to be invoiced.
+      </a>
+    </div>
+  {% endfor %}
+{% endif %}
+
 <hblreact-orders-table-items
   string:tag="table-items"
   string:view="{{ viewParams.view }}"

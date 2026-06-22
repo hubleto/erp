@@ -418,6 +418,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
             key={"table_order_item"}
             tag={"table_order_item"}
             parentForm={this}
+            view={"orderOverview"}
             uid={this.props.uid + "_table_order_item"}
             idOrder={R.id}
           />

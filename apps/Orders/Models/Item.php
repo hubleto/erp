@@ -35,7 +35,7 @@ class Item extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON)->setRequired(true),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON)->setRequired(true)->setCssClass('font-bold'),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setDefaultVisible(),
 
       'unit_price' => new Decimal($this, $this->translate('Unit price'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
@@ -68,7 +68,7 @@ class Item extends \Hubleto\Erp\Model
 
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Order Items';
+    $description->ui['title'] = '';
     $description->ui["addButtonText"] = $this->translate("Add item");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
 
@@ -103,7 +103,7 @@ class Item extends \Hubleto\Erp\Model
 
     }
 
-    if ($view != 'invoicing') {
+    if ($view != 'invoicing' && $view != 'orderOverview') {
       $description->addFilter('fStatus', [
         'title' => $this->translate('Status'),
         'options' => [

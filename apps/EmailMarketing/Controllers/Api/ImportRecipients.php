@@ -43,13 +43,16 @@ class ImportRecipients extends \Hubleto\Erp\Controllers\ApiController
         $recipientExists = $query->count() > 0;
 
         if (!$recipientExists) {
-          $mRecipient->record->create([
-            'id_campaign' => $idCampaign,
-            'id_email' => $idEmail,
+          $recipientData = [
             'email' => $email,
             'variables' => json_encode($variables),
             'date_added' => date('Y-m-d'),
-          ]);
+          ];
+
+          if ($idCampaign > 0) $recipientData['id_campaign'] = $idCampaign;
+          if ($idEmail > 0) $recipientData['id_email'] = $idEmail;
+
+          $mRecipient->record->create($recipientData);
           $recipientsImported++;
         }
       }

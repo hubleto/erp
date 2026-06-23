@@ -3,9 +3,12 @@
 <div class="list">
   {% for a in viewParams.futureActivities %}
     <a class="btn btn-list-item btn-transparent" href="../calendar?showActivity=leads,{{ a.id }}" target="_blank">
-      <span class="icon bg-gray-100 h-full">
+      <span class="icon bg-gray-100 h-full rounded-sm">
         <div>{{ hubleto.locale().formatDateShort(a.date_start) }}</div>
         <div>{{ hubleto.locale().formatTimeShort(a.time_start) }}</div>
+      </span>
+      <span class="icon bg-gray-100 h-full ml-2 rounded-sm">
+        {{ a.OWNER.nick }}
       </span>
       <span class="text">
         <div class="font-bold">

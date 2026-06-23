@@ -1,6 +1,8 @@
 # Hubleto CHANGELOG
 
+
 For releases v0.10 and later, check release notes at https://github.com/hubleto/erp/releases.
+
 
 ## Release v0.9
 

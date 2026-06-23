@@ -6,6 +6,7 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Json;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Db\Column\Integer;
 
 class EmailClick extends \Hubleto\Erp\Model
@@ -27,6 +28,8 @@ class EmailClick extends \Hubleto\Erp\Model
       'datetime_clicked' => (new DateTime($this, $this->translate('Clicked')))->setDefaultVisible(),
       'log' => (new Json($this, $this->translate('Log'))),
       'bot_score' => (new Integer($this, $this->translate('Bot Score')))->setDefaultVisible(),
+      'virt_campaign' => (new Virtual($this, $this->translate('Campaign')))->setDefaultVisible()
+        ->setProperty('sql', "SELECT `c`.`title` FROM `campaigns` `c` WHERE `c`.`id` = `email_marketing_email_clicks`.`id_campaign`"),
     ]);
   }
 

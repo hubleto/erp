@@ -1,0 +1,10 @@
+<h1 class="app-main-title">{{ translate('Emails') }} > {{ translate('Clicks') }}</h1>
+
+<hblreact-email-marketing-table-email-clicks
+  string:tag="table-email-marketing-table-email-clicks"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
+  json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
+></hblreact-email-marketing-table-email-clicks>

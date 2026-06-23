@@ -40,6 +40,8 @@ class Loader extends \Hubleto\Erp\App
       '/^email-marketing\/emails(\/(?<recordId>\d+))?\/?$/' => Controllers\Emails::class,
       '/^email-marketing\/emails\/add?\/?$/' => ['controller' => Controllers\Emails::class, 'vars' => [ 'recordId' => -1 ]],
 
+      '/^email-marketing\/emails\/clicks(\/(?<recordId>\d+))?\/?$/' => Controllers\EmailClicks::class,
+
       '/^email-marketing\/recipients(\/(?<recordId>\d+))?\/?$/' => Controllers\Recipients::class,
       '/^email-marketing\/recipients\/add?\/?$/' => ['controller' => Controllers\Recipients::class, 'vars' => [ 'recordId' => -1 ]],
       '/^email-marketing\/recipients\/statuses(\/(?<recordId>\d+))?\/?$/' => Controllers\RecipientStatuses::class,
@@ -94,6 +96,10 @@ class Loader extends \Hubleto\Erp\App
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails">
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span class="text">' . $this->translate('Emails') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails/clicks">
+          <span class="icon"><i class="fas fa-hand-pointer"></i></span>
+          <span class="text">' . $this->translate('Clicks') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/recipients">
           <span class="icon"><i class="fas fa-paper-plane"></i></span>

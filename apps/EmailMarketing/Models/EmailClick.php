@@ -29,7 +29,13 @@ class EmailClick extends \Hubleto\Erp\Model
       'log' => (new Json($this, $this->translate('Log'))),
       'bot_score' => (new Integer($this, $this->translate('Bot Score')))->setDefaultVisible(),
       'virt_campaign' => (new Virtual($this, $this->translate('Campaign')))->setDefaultVisible()
-        ->setProperty('sql', "SELECT `c`.`title` FROM `campaigns` `c` WHERE `c`.`id` = `email_marketing_email_clicks`.`id_campaign`"),
+        ->setProperty('sql', "
+          SELECT
+            group_concat(`c`.`title`)
+          FROM `email_marketing_campaigns_schedule` `cs`
+          LEFT JOIN `email_marketing_campaigns` `c` on `c`.`id` = `cs`.`id_campaign`
+          WHERE `cs`.`id_email` = `email_marketing_email_clicks`.`id_email`
+        "),
     ]);
   }
 

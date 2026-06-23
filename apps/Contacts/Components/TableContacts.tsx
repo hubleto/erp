@@ -132,7 +132,9 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
       return <>
         <div className='flex gap-2'>
           {this.renderHeaderButtons()}
-          {this.renderFulltextSearch()}
+          <div className='[&_.table-header-search]:flex'>
+            {this.renderFulltextSearch()}
+          </div>
         </div>
         {this.renderFormModal()}
         <div className="md:grid md:grid-cols-2 gap-2 mt-2">

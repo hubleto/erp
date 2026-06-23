@@ -34,6 +34,8 @@ class Loader extends \Hubleto\Erp\App
       '/^deals\/tags\/?$/' => Controllers\Tags::class,
       '/^deals\/lost-reasons\/?$/' => Controllers\LostReasons::class,
       // '/^deals\/settings\/?$/' => Controllers\Settings::class,
+
+      '/^deals\/plan\/?$/' => Controllers\Plan::class,
     ]);
     
     $this->addSearchSwitch('d', 'deals');
@@ -137,6 +139,10 @@ class Loader extends \Hubleto\Erp\App
         <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/deals">
           <span class="icon"><i class="fas fa-handshake"></i></span>
           <span class="text">' . $this->translate('Deals') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/deals/plan">
+          <span class="icon"><i class="fas fa-list-ol"></i></span>
+          <span class="text">' . $this->translate('Plan') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=deals">
           <span class="icon"><i class="fas fa-calendar-days"></i></span>

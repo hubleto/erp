@@ -1,0 +1,21 @@
+<h1 class="app-main-title flex">{{ translate('Leads') }} > {{ translate('Plan') }}</h1>
+
+<div class="list">
+  {% for a in viewParams.futureActivities %}
+    <a class="btn btn-list-item btn-transparent" href="../calendar?showActivity=leads,{{ a.id }}" target="_blank">
+      <span class="icon bg-gray-100 h-full">
+        <div>{{ hubleto.locale().formatDateShort(a.date_start) }}</div>
+        <div>{{ hubleto.locale().formatTimeShort(a.time_start) }}</div>
+      </span>
+      <span class="text">
+        <div class="font-bold">
+          {{ a.LEAD.identifier }}
+          {{ a.LEAD.title }}
+        </div>
+        <div>
+          {{ a.subject }}
+        </div>
+      </span>
+    </a>
+  {% endfor %}
+</div>

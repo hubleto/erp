@@ -58,28 +58,28 @@ class RecordManager extends \Hubleto\Framework\RecordManager
             ->orWhere($this->table . '.id_manager', $idUser)
           ;
           if ($hasSharedWith) {
-            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
         });
       } elseif ($hasIdOwner) {
         $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
           $q->where($this->table . '.id_owner', $idUser);
           if ($hasSharedWith) {
-            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
         });
       } elseif ($hasIdManager) {
         $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
           $q->where($this->table . '.id_manager', $idUser);
           if ($hasSharedWith) {
-            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
         });
       } elseif ($hasIdTeam) {
         $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
           $q->where($this->table . '.id_team', $idUser);
           if ($hasSharedWith) {
-            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+            $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
         });
       }
@@ -90,7 +90,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
         $q->where($this->table . '.id_owner', $idUser);
         if ($hasSharedWith) {
-          $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.{$idUser}')");
+          $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
         }
       });
     }

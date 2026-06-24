@@ -33,18 +33,7 @@ class Lead extends \Hubleto\Erp\Model
 {
   public string $table = 'leads';
   public string $recordManagerClass = RecordManagers\Lead::class;
-  public ?string $lookupSqlValue = '
-    concat(
-      "#",
-      `{%TABLE%}`.id,
-      " ",
-      `{%TABLE%}`.email,
-      " ",
-      `{%TABLE%}`.profile_link_1,
-      " ",
-      `{%TABLE%}`.phone
-    )
-  ';
+  public ?string $lookupSqlValue = '`{%TABLE%}`.title';
   public ?string $lookupUrlDetail = 'leads/{%ID%}';
 
   public const STATUS_NO_INTERACTION_YET = 0;

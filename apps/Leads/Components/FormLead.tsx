@@ -121,18 +121,9 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
   renderTitle(): JSX.Element {
     const R = this.state.record;
 
-    let values = [];
-    if (R && R.CONTACT) {
-      if (R.CONTACT.first_name) values.push(R.CONTACT.first_name);
-      if (R.CONTACT.last_name) values.push(R.CONTACT.last_name);
-      if (R.CONTACT.VALUES) R.CONTACT.VALUES.map((item, key) => {
-        values.push(item.value);
-      });
-    }
-
     return <>
       <small>{this.translate('Lead')}</small>
-      <h2>{values && values.length > 0 ? values.join(', ') : '-'}</h2>
+      <h2>{R.title ? R.title : '-'}</h2>
     </>;
   }
 

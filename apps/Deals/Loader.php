@@ -5,6 +5,8 @@ namespace Hubleto\App\Community\Deals;
 class Loader extends \Hubleto\Erp\App
 {
 
+  private int $openDealsWithoutFuturePlan = 0;
+
   /**
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
@@ -66,6 +68,11 @@ class Loader extends \Hubleto\Erp\App
     $dashboardManager->addBoard($this, $this->translate('Deal warnings'), 'deals/boards/deal-warnings');
     $dashboardManager->addBoard($this, $this->translate('Most valuable deals'), 'deals/boards/most-valuable-deals');
     $dashboardManager->addBoard($this, $this->translate('Deal value by result'), 'deals/boards/deal-value-by-result');
+
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $this->openDealsWithoutFuturePlan = $counter->openDealsWithoutFuturePlan();
   }
 
   public function installApp(int $round): void
@@ -114,11 +121,25 @@ class Loader extends \Hubleto\Erp\App
    */
   public function getSidebarBadgeNumber(): int
   {
-    /** @var Counter */
-    $counter = $this->getService(Counter::class);
+    return $this->openDealsWithoutFuturePlan;
+  }
 
-    return
-      $counter->openDealsWithoutFuturePlan()
+  /**
+   * [Description for renderPriorityNotifications]
+   *
+   * @return string
+   *
+   */
+  public function renderPriorityNotifications(): string
+  {
+    return 
+      ''
+      . ($this->openDealsWithoutFuturePlan > 0 ? '
+        <a
+          href="' . $this->env()->projectUrl . '/deals?filters%5BfDealClosed%5D=0&filters%5BfDealWithPlan%5D=2"
+          class="block alert alert-danger"
+        >' . $this->openDealsWithoutFuturePlan . ' ' . $this->translate('open deals without future plan') . '</a>
+      ' : '')
     ;
   }
 
@@ -130,10 +151,6 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderSecondSidebar(): string
   {
-    $counter = $this->getService(Counter::class);
-
-    $openDealsWithoutFuturePlan = $counter->openDealsWithoutFuturePlan();
-
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/deals">
@@ -148,12 +165,6 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-calendar-days"></i></span>
           <span class="text">' . $this->translate('Calendar') . '</span>
         </a>
-        ' . ($openDealsWithoutFuturePlan > 0 ? '
-          <a
-            href="' . $this->env()->projectUrl . '/deals?filters%5BfDealClosed%5D=0&filters%5BfDealWithPlan%5D=2"
-            class="badge badge-danger text-xs"
-          >' . $openDealsWithoutFuturePlan . ' ' . $this->translate('open deals without future plan') . '</a>
-        ' : '') . '
       </div>
     ';
   }

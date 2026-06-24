@@ -1,5 +1,4 @@
 {{ setTranslationContext('hubleto-app-community-desktop-loader', 'Controllers\\Desktop') }}
-{% set secondSidebar = viewParams.activatedApp.renderSecondSidebar() %}
 {% set isPremium = hubleto.env().isPremium() %}
 
 {% macro appBtn(app, inGroup, badgeNumber) %}
@@ -335,17 +334,22 @@
           <a href="https://www.hubleto.eu/en/terms-of-use" target="_blank">{{ translate('Terms of use') }}</a>
         </div>
       </nav>
-      {% if secondSidebar != '' %}
+      {% if viewParams.secondSidebar != '' %}
         <div class="second-sidebar">
-          {{ secondSidebar|raw }}
+          {{ viewParams.secondSidebar|raw }}
+          <div class="flex mt-2">{{ viewParams.priorityNotifications|raw }}</div>
         </div>
       {% endif %}
     </aside>
 
     <div
       id="app-main-content"
-      class="{% if secondSidebar != '' %} sidebar-two-levels {% endif %}"
+      class="{% if viewParams.secondSidebar != '' %} sidebar-two-levels {% endif %}"
     >
+      {% if viewParams.priorityNotifications != '' %}
+        <div class="block md:hidden">{{ viewParams.priorityNotifications|raw }}</div>
+      {% endif %}
+
       {{ contentHtml|raw }}
     </div>
 

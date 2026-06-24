@@ -86,13 +86,16 @@ class Desktop extends \Hubleto\Erp\Controller
       }
     }
 
-    /** @var AuthProvider $authProvider */
+    /** @var \Hubleto\Framework\AuthProvider $authProvider */
     $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
     $this->viewParams['user'] = $authProvider->getUserFromSession();
 
     $dictionary = $this->translator()->loadFullDictionary($this, $this->authProvider()->getUserLanguage());
 
     $this->viewParams['dictionaryString'] = base64_encode(json_encode($dictionary));
+
+    $this->viewParams['secondSidebar'] = $activatedApp ? $activatedApp->renderSecondSidebar() : '';
+    $this->viewParams['priorityNotifications'] = $activatedApp ? $activatedApp->renderPriorityNotifications() : '';
 
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');
   }

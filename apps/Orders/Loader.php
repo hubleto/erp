@@ -120,6 +120,28 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
+   * [Description for renderPriorityNotifications]
+   *
+   * @return string
+   *
+   */
+  public function renderPriorityNotifications(): string
+  {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $periodicalOrdersMissingItems = $counter->periodicalOrdersMissingItems();
+
+    return 
+      (count($periodicalOrdersMissingItems) > 0 ? '
+        <a  href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders" class="badge badge-danger ml-auto">
+          ' . count($periodicalOrdersMissingItems) . ' ' . $this->translate('periodical orders require your attention') . '
+        </a>
+      ' : '')
+    ;
+  }
+
+  /**
    * [Description for renderSecondSidebar]
    *
    * @return string
@@ -131,7 +153,6 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
 
     $dueAndChargeableItemsCount = $counter->dueAndChargeableItemsNotPreparedForInvoice();
-    $periodicalOrdersMissingItems = $counter->periodicalOrdersMissingItems();
 
     return '
       <div class="flex flex-col gap-2">
@@ -139,13 +160,6 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
           <span class="text">' . $this->translate('Orders') . '</span>
         </a>
-        <div class="flex flex-col">
-          ' . (count($periodicalOrdersMissingItems) > 0 ? '
-            <a  href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders" class="badge badge-danger ml-auto">
-              ' . count($periodicalOrdersMissingItems) . ' ' . $this->translate('periodical orders require your attention') . '
-            </a>
-          ' : '') . '
-        </div>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/items">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Items') . '</span>

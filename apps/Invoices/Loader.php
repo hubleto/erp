@@ -5,6 +5,11 @@ namespace Hubleto\App\Community\Invoices;
 class Loader extends \Hubleto\Erp\App
 {
 
+  private int $preparedItemsCount = 0;
+  private int $notPaidInvoicesCount = 0;
+  private int $dueAndNotPaidInvoicesCount = 0;
+  private int $unsentInvoicesCount = 0;
+
   /**
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
@@ -41,6 +46,14 @@ class Loader extends \Hubleto\Erp\App
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflowGroup($this, 'invoices', Workflow::class);
+
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $this->preparedItemsCount = $counter->preparedItems();
+    $this->notPaidInvoicesCount = $counter->notPaidInvoices();
+    $this->dueAndNotPaidInvoicesCount = $counter->dueAndNotPaidInvoices();
+    $this->unsentInvoicesCount = $counter->unsentInvoices();
 
   }
 
@@ -104,9 +117,40 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
 
     return
-      $counter->preparedItems()
-      + $counter->dueAndNotPaidInvoices()
-      + $counter->unsentInvoices()
+      $this->preparedItemsCount
+      + $this->dueAndNotPaidInvoicesCount
+      + $this->unsentInvoicesCount
+    ;
+  }
+
+  /**
+   * [Description for renderPriorityNotifications]
+   *
+   * @return string
+   *
+   */
+  public function renderPriorityNotifications(): string
+  {
+
+    return 
+      ($this->notPaidInvoicesCount > 0 ? '
+        <a
+          href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
+          class="badge badge-warning text-xs"
+        >' . $this->translate('Not paid') . ': ' . $this->notPaidInvoicesCount . '</a>
+      ' : '')
+      . ($this->dueAndNotPaidInvoicesCount > 0 ? '
+        <a
+          href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
+          class="badge badge-danger text-xs"
+        >' . $this->translate('Due and not paid') . ': ' . $this->dueAndNotPaidInvoicesCount . '</a>
+      ' : '')
+      . ($this->unsentInvoicesCount > 0 ? '
+        <a
+          href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
+          class="badge badge-danger text-xs"
+        >' . $this->translate('Not sent') . ': ' . $this->unsentInvoicesCount . '</a>
+      ' : '')
     ;
   }
 
@@ -118,45 +162,16 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderSecondSidebar(): string
   {
-    /** @var Counter */
-    $counter = $this->getService(Counter::class);
-
-    $preparedItemsCount = $counter->preparedItems();
-    $notPaidInvoicesCount = $counter->notPaidInvoices();
-    $dueAndNotPaidInvoicesCount = $counter->dueAndNotPaidInvoices();
-    $unsentInvoicesCount = $counter->unsentInvoices();
-
     return '
       <div class="flex flex-col gap-2">
         <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/invoices">
           <span class="icon"><i class="fas fa-file-invoice"></i></span>
           <span class="text">' . $this->translate('Invoices') . '</span>
         </a>
-        <div class="flex flex-col">
-          ' . ($notPaidInvoicesCount > 0 ? '
-            <a
-              href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
-              class="badge badge-warning text-xs"
-            >' . $this->translate('Not paid') . ': ' . $notPaidInvoicesCount . '</a>
-          ' : '') . '
-          ' . ($dueAndNotPaidInvoicesCount > 0 ? '
-            <a
-              href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
-              class="badge badge-danger text-xs"
-            >' . $this->translate('Due and not paid') . ': ' . $dueAndNotPaidInvoicesCount . '</a>
-          ' : '') . '
-          ' . ($unsentInvoicesCount > 0 ? '
-            <a
-              href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
-              class="badge badge-danger text-xs"
-            >' . $this->translate('Not sent') . ': ' . $unsentInvoicesCount . '</a>
-          ' : '') . '
-        </div>
-
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Items') . '</span>
-        ' . ($preparedItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $preparedItemsCount . '</span>' : '') . '
+        ' . ($this->preparedItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $this->preparedItemsCount . '</span>' : '') . '
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payments">
           <span class="icon"><i class="fas fa-euro-sign"></i></span>

@@ -44,6 +44,17 @@ export default class TableCampaigns extends TableExtended<TableCampaignsProps, T
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/email-marketing/campaigns/' + (id > 0 ? id : 'add'));
   }
 
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "virt_tags") {
+      return data.TAGS.map((tag, key) => {
+        return <div key={key} className="text-nowrap mr-2">
+          <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+          {tag.TAG?.name}
+        </div>;
+      });
+    } else return super.renderCell(columnName, column, data, options);
+  }
+
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormCampaignProps;
     return <FormCampaign {...formProps}/>;

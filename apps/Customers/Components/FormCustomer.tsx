@@ -369,7 +369,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
                       model="Hubleto/App/Community/Customers/Models/Tag"
                       targetColumn="id_customer"
                       sourceColumn="id_tag"
-                      colorColumn="color"
+                      colorColumn="_LOOKUP_COLOR"
                       onChange={(input: any, value: any) => {
                         R.TAGS = value;
                         this.setState({record: R});

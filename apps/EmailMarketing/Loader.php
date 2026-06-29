@@ -47,6 +47,9 @@ class Loader extends \Hubleto\Erp\App
       '/^email-marketing\/recipients\/statuses(\/(?<recordId>\d+))?\/?$/' => Controllers\RecipientStatuses::class,
       '/^email-marketing\/recipients\/statuses\/add?\/?$/' => ['controller' => Controllers\RecipientStatuses::class, 'vars' => [ 'recordId' => -1 ]],
 
+      '/^email-marketing\/tags\/?$/' => Controllers\Tags::class,
+      '/^email-marketing\/tags\/add\/?$/' => Controllers\Tags::class, 'vars' => [ 'recordId' => -1 ],
+
       '/^email-marketing\/click-tracker\/?$/' => Controllers\ClickTracker::class,
       '/^email-marketing\/email-preview\/?$/' => Controllers\EmailPreview::class,
       '/^email-marketing\/unsubscribe\/?$/' => Controllers\Unsubscribe::class,
@@ -55,6 +58,14 @@ class Loader extends \Hubleto\Erp\App
     /** @var \Hubleto\App\Community\Workflow\Manager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflowGroup($this, 'email-marketing', Workflow::class);
+
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('Email marketing tags'),
+      'icon' => 'fas fa-tags',
+      'url' => 'email-marketing/tags',
+    ]);
 
   }
 

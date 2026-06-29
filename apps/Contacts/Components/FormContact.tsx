@@ -151,7 +151,7 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
                     model='Hubleto/App/Community/Contacts/Models/Tag'
                     targetColumn='id_contact'
                     sourceColumn='id_tag'
-                    colorColumn='color'
+                    colorColumn='_LOOKUP_COLOR'
                     onChange={(input: any, value: any) => {
                       // if (this.state.record.is_primary == 1) {
                       //   this.setState({primaryContactMessage: true} as FormContactState);

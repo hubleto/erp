@@ -3,6 +3,8 @@ import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/rea
 import TableCampaignsSchedules from '@hubleto/apps/EmailMarketing/Components/TableCampaignsSchedules';
 import TableRecipients from '@hubleto/apps/EmailMarketing/Components/TableRecipients';
 import request from '@hubleto/react-ui/core/Request';
+import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
+import FormInput from '@hubleto/react-ui/core/FormInput';
 
 export interface FormCampaignProps extends FormExtendedProps {}
 export interface FormCampaignState extends FormExtendedState {}
@@ -41,6 +43,13 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     };
   }
 
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      saveRelations: ['TAGS'],
+    }
+  }
+
   getRecordFormUrl(): string {
     return 'email-marketing/campaigns/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
@@ -60,6 +69,25 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
         return <div className='flex gap-2 flex-col md:flex-row'>
           <div className='grow'>
             {this.inputWrapper('title')}
+
+
+            <FormInput title={this.translate('Tags')}>
+              <InputTags2 {...this.getInputProps('id_tag')}
+                value={this.state.record.TAGS}
+                model='Hubleto/App/Community/EmailMarketing/Models/Tag'
+                targetColumn='id_campaign'
+                sourceColumn='id_tag'
+                colorColumn='_LOOKUP_COLOR'
+                onChange={(input: any, value: any) => {
+                  R.TAGS = value;
+                  this.updateRecord(R);
+                }}
+                onNewTag={(title: string) => {
+                  return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+                }}
+              ></InputTags2>
+            </FormInput>
+
             {this.inputWrapper('target_audience')}
             {this.inputWrapper('goal')}
             {this.inputWrapper('notes')}

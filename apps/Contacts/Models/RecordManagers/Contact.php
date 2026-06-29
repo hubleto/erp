@@ -50,25 +50,25 @@ class Contact extends \Hubleto\Erp\RecordManager
     return $query;
   }
 
-   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
-   {
-     if (($orderBy['field'] ?? null) === 'virt_tags') {
-       return $query->orderBy('tags_count', $orderBy['direction']);
-     }
-     return parent::addOrderByToQuery($query, $orderBy);
-   }
+  public function addOrderByToQuery(mixed $query, array $orderBy): mixed
+  {
+    if (($orderBy['field'] ?? null) === 'virt_tags') {
+      return $query->orderBy('tags_count', $orderBy['direction']);
+    }
+    return parent::addOrderByToQuery($query, $orderBy);
+  }
 
-   public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
-   {
-     if (!empty($fulltextSearch)) {
-       $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
-       $like = "%{$fulltextSearch}%";
-       $query->orHaving('virt_tags', 'like', "%{$like}%");
-       $query->orHaving('virt_email', 'like', "%{$like}%");
-       $query->orHaving('virt_number', 'like', "%{$like}%");
-     }
-     return $query;
-   }
+  public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
+  {
+    if (!empty($fulltextSearch)) {
+      $query = parent::addFulltextSearchToQuery($query, $fulltextSearch);
+      $like = "%{$fulltextSearch}%";
+      $query->orHaving('virt_tags', 'like', "%{$like}%");
+      $query->orHaving('virt_email', 'like', "%{$like}%");
+      $query->orHaving('virt_number', 'like', "%{$like}%");
+    }
+    return $query;
+  }
 
   public function prepareLookupQuery(string $search): mixed
   {

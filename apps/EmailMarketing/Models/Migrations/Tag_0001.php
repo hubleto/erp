@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\Contacts\Models\Migrations;
+namespace Hubleto\App\Community\EmailMarketing\Models\Migrations;
 
 use Hubleto\Framework\Migration;
 
@@ -11,8 +11,8 @@ class Tag_0001 extends Migration
   {
     $this->db->execute("
       set foreign_key_checks = 0;
-      drop table if exists `contact_tags`;
-      create table `contact_tags` (
+      drop table if exists `email_marketing_tags`;
+      create table `email_marketing_tags` (
         `id` int(8) primary key auto_increment,
         `name` varchar(255) ,
         `color` char(10) ,
@@ -26,7 +26,7 @@ class Tag_0001 extends Migration
   {
     $this->db->execute("
       set foreign_key_checks = 0;
-      drop table if exists `contact_tags`;
+      drop table if exists `email_marketing_tags`;
       set foreign_key_checks = 1;
     ");
   }

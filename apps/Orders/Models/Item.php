@@ -47,6 +47,8 @@ class Item extends \Hubleto\Erp\Model
       'price_incl_vat' => new Decimal($this, $this->translate('Price incl. VAT'))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
 
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
+      'charged_period_start' => (new Date($this, $this->translate('Charged period - start'))),
+      'charged_period_end' => (new Date($this, $this->translate('Charged period - end'))),
 
       'attachment_1' => new File($this, $this->translate('Attachment #1'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),
       'attachment_2' => new File($this, $this->translate('Attachment #2'))->setFolderPath('orders/attachments')->setRenamePattern('{%FILENAME_ASCII%}__{%Y%}{%M%}{%D%}_{%H%}{%I%}{%S%}.{%EXT%}'),

@@ -87,8 +87,6 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
             <div className='flex-1'>
               {this.inputWrapper('id_order')}
               {this.inputWrapper('id_product')}
-              {this.inputWrapper('date_due')}
-              {this.inputWrapper('date_delivery')}
               {this.inputWrapper('unit_price')}
               {this.inputWrapper('amount')}
               {this.inputWrapper('discount')}
@@ -136,6 +134,18 @@ export default class FormItem extends FormExtended<FormItemProps, FormItemState>
               </div>
             </div>
             <div className='flex-1'>
+              <div className='card'>
+                <div className='card-header'>
+                  Dates
+                </div>
+                <div className='card-body'>
+                  {this.inputWrapper('date_due')}
+                  {this.inputWrapper('date_delivery')}
+                  {this.divider('')}
+                  {this.inputWrapper('charged_period_start')}
+                  {this.inputWrapper('charged_period_end')}
+                </div>
+              </div>
               {this.inputWrapper('notes')}
               {this.inputWrapper('attachment_1')}
               {this.inputWrapper('attachment_2')}

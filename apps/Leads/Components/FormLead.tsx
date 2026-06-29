@@ -200,7 +200,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                   model='Hubleto/App/Community/Leads/Models/Tag'
                   targetColumn='id_lead'
                   sourceColumn='id_tag'
-                  colorColumn='color'
+                  colorColumn='_LOOKUP_COLOR'
                   onChange={(input: any, value: any) => {
                     R.TAGS = value;
                     this.setState({record: R});

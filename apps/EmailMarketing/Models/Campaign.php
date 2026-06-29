@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\EmailMarketing\Models;
 
 
 use Hubleto\App\Community\Mail\Models\Template;
-use Hubleto\App\Community\Mail\Models\Account;
+use Hubleto\Framework\Helper;
 use Hubleto\Framework\Db\Column\Json;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -12,7 +12,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
-use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Auth\Models\User;
@@ -31,6 +31,7 @@ class Campaign extends \Hubleto\Erp\Model
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
     'SCHEDULES' => [ self::HAS_MANY, CampaignSchedule::class, 'id_campaign', 'id' ],
+    'TAGS' => [ self::HAS_MANY, CampaignTag::class, 'id_campaign', 'id' ],
   ];
 
   /**
@@ -52,7 +53,15 @@ class Campaign extends \Hubleto\Erp\Model
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
+      'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
+      'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
+        ->setProperty('sql',"
+          SELECT
+            GROUP_CONCAT(DISTINCT email_marketing_tags.name ORDER BY email_marketing_tags.name SEPARATOR ', ')
+          FROM `email_marketing_campaign_tags`
+          INNER join `email_marketing_tags` ON `email_marketing_tags`.`id` = `email_marketing_campaign_tags`.`id_tag`
+          WHERE `email_marketing_campaign_tags`.`id_campaign` = `email_marketing_campaigns`.`id`
+        "),
     ]);
   }
 
@@ -121,8 +130,14 @@ class Campaign extends \Hubleto\Erp\Model
   public function getRelationsIncludedInLoadTableData(): array|null
   {
     $recordId = $this->router()->urlParamAsInteger('recordId');
-    if ($recordId > 0) return ['EMAILS'];
-    else return [];
+    $relations = ['TAGS', 'TAGS.TAG'];
+    if ($recordId > 0) $relations[] = ['EMAILS'];
+    return $relations;
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 3;
   }
 
   /**
@@ -147,4 +162,20 @@ class Campaign extends \Hubleto\Erp\Model
     return parent::onAfterCreate($savedRecord);
   }
 
+  public function onAfterUpdate(array $originalRecord, array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
+
+    if (isset($savedRecord["TAGS"])) {
+      $helper = $this->getService(Helper::class);
+      $helper->deleteTags(
+        array_column($savedRecord["TAGS"], "id"),
+        $this->getModel("Hubleto/App/Community/EmailMarketing/Models/CampaignTag"),
+        "id_campaign",
+        $savedRecord["id"]
+      );
+    }
+
+    return $savedRecord;
+  }
 }

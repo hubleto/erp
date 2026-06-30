@@ -106,6 +106,9 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
       break
 
       case 'recipients':
+        const example1 = ["recipient@example.com", {"name": "John Smith", "age": 21}];
+        const example2 = ["john.smith@example.com", {"name": "John Smith"}];
+
         return <div className='flex gap-2'>
           <div className='flex-3'>
             <TableRecipients
@@ -120,16 +123,21 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
               }}
             />
           </div>
-          <div className='flex-1 gap-2'>
+          <div className='flex-2 gap-2'>
             <div className='card'>
               <div className='card-header'>{this.translate('Import recipients')}</div>
               <div className='card-body'>
                 <div className='badge badge-info block'>
-                  {this.translate('One email per line or one JSON per line: ["recipient@example.com", {"name": "John Smith", "age": 21}]')}
+                  {this.translate('One email per line or one JSON per line.')}<br/>
+                  {this.translate('Examples:')}<br/>
+                  <br/>
+                  <div className='font-mono'>{JSON.stringify(example1)}</div>
+                  <div className='font-mono'>{JSON.stringify(example2)}</div>
                 </div>
                 <textarea
                   className='w-full h-80 mt-2'
                   ref={this.refEmails}
+                  placeholder={this.translate('One email per line or one JSON per line.')}
                 ></textarea>
                 <button
                   className='btn btn-add-outline mt-2 w-full'

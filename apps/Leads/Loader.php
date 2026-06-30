@@ -39,15 +39,15 @@ class Loader extends \Hubleto\Erp\App
     // $this->addSearchSwitch('t', 'taskleads');
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    $settingsApp->addSetting($this, [
-      'title' => $this->translate('Lead Levels'),
-      'icon' => 'fas fa-layer-group',
-      'url' => 'leads/levels',
-    ]);
+    // $settingsApp->addSetting($this, [
+    //   'title' => $this->translate('Lead Levels'),
+    //   'icon' => 'fas fa-layer-group',
+    //   'url' => 'leads/levels',
+    // ]);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
-      'url' => 'leads/levels',
+      'url' => 'leads/tags',
     ]);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Lost Reasons'),

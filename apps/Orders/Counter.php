@@ -43,7 +43,6 @@ class Counter extends Core
    */
   public function periodicalOrdersMissingItems(): array
   {
-    // TODO nacitavat iba notifikacie k objednavkam, ku ktorym mam pristup
     $mOrder = $this->getModel(Models\Order::class);
 
     $lastDayOfPreviousMonth = date("Y-m-t", strtotime("-2 month"));

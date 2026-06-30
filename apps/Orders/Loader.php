@@ -134,7 +134,10 @@ class Loader extends \Hubleto\Erp\App
 
     return 
       (count($periodicalOrdersMissingItems) > 0 ? '
-        <a  href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders" class="badge badge-danger ml-auto">
+        <a
+          href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders"
+          class="block alert alert-danger"
+        >
           ' . count($periodicalOrdersMissingItems) . ' ' . $this->translate('periodical orders require your attention') . '
         </a>
       ' : '')

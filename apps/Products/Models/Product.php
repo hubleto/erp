@@ -33,6 +33,43 @@ class Product extends \Hubleto\Erp\Model
     self::INVOICING_POLICY_MANUAL => "Manual",
   ];
 
+  // The base unit is a fixed measure, not a DB row. measure -> what it counts; symbol -> how it shows.
+  public const BASE_MEASURE_COUNT = 1;
+  public const BASE_MEASURE_MASS = 2;
+  public const BASE_MEASURE_VOLUME = 3;
+  public const BASE_MEASURE_LENGTH = 4;
+
+  const BASE_MEASURE_ENUM_VALUES = [
+    self::BASE_MEASURE_COUNT => "Count (pieces)",
+    self::BASE_MEASURE_MASS => "Mass (weight)",
+    self::BASE_MEASURE_VOLUME => "Volume (capacity)",
+    self::BASE_MEASURE_LENGTH => "Length (distance)",
+  ];
+
+  const BASE_MEASURE_SYMBOLS = [
+    self::BASE_MEASURE_COUNT => 'pcs',
+    self::BASE_MEASURE_MASS => 'kg',
+    self::BASE_MEASURE_VOLUME => 'l',
+    self::BASE_MEASURE_LENGTH => 'm',
+  ];
+
+  public function baseMeasureSymbol(?int $measure): string
+  {
+    return self::BASE_MEASURE_SYMBOLS[$measure ?? self::BASE_MEASURE_COUNT] ?? 'pcs';
+  }
+
+  protected function physicalFacts(?float $length, ?float $width, ?float $height, ?float $weight): array
+  {
+    $volume = ($length > 0 && $width > 0 && $height > 0) ? $length * $width * $height : null;
+    return array_filter([
+      $length > 0 ? $this->translate('length') . ' ' . $length . ' m' : null,
+      $width > 0 ? $this->translate('width') . ' ' . $width . ' m' : null,
+      $height > 0 ? $this->translate('height') . ' ' . $height . ' m' : null,
+      $volume !== null ? $this->translate('volume') . ' ' . round($volume, 4) . ' m3' : null,
+      $weight > 0 ? $this->translate('weight') . ' ' . $weight . ' kg' : null,
+    ]);
+  }
+
   public string $table = 'products';
   public string $recordManagerClass = RecordManagers\Product::class;
   public ?string $lookupSqlValue = 'concat("[", ifnull({%TABLE%}.ean, ""), "] ", ifnull({%TABLE%}.name, ""))';
@@ -42,7 +79,6 @@ class Product extends \Hubleto\Erp\Model
   public array $relations = [
     'GROUP' => [ self::HAS_ONE, Group::class, 'id', 'id_group'],
     'CATEGORY' => [ self::HAS_ONE, Category::class, 'id', 'id_category'],
-    'UNIT' => [ self::HAS_ONE, Unit::class, 'id', 'id_unit'],
     'PACKAGING' => [ self::HAS_MANY, ProductPackaging::class, 'id_product', 'id'],
   ];
 
@@ -65,7 +101,7 @@ class Product extends \Hubleto\Erp\Model
     ;
 
     return array_merge(parent::describeColumns(), [
-      'ean' => (new Varchar($this, $this->translate('EAN')))->setRequired()->setDefaultVisible(),
+      'ean' => (new Varchar($this, $this->translate('EAN')))->setDefaultVisible(),
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_group' => (new Lookup($this, $this->translate('Group'), Group::class)),
       'id_category' => (new Lookup($this, $this->translate('Category'), Category::class)),
@@ -79,19 +115,16 @@ class Product extends \Hubleto\Erp\Model
       'image_5' => new Image($this, $this->translate('Image 5')),
       'description' => new Text($this, $this->translate('Description')),
       'notes' => new Text($this, $this->translate('Internal notes')),
-      'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setRequired()->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
-      'id_unit' => (new Lookup($this, $this->translate('Base unit'), Unit::class))->setDefaultVisible(),
+      'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
+      'base_measure' => (new Integer($this, $this->translate('Base unit')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::BASE_MEASURE_ENUM_VALUES))->setDefaultValue(self::BASE_MEASURE_COUNT)->setDefaultVisible(),
+      'base_weight' => (new Decimal($this, $this->translate('Base unit weight')))->setUnit('kg'),
+      'base_length' => (new Decimal($this, $this->translate('Base unit length')))->setUnit('m'),
+      'base_width' => (new Decimal($this, $this->translate('Base unit width')))->setUnit('m'),
+      'base_height' => (new Decimal($this, $this->translate('Base unit height')))->setUnit('m'),
       'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%")->setColorScale('bg-light-blue-to-dark-blue'),
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
       'qr_code_data' => new Varchar($this, $this->translate('Data ')),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
-      'package_length' => new Decimal($this, $this->translate('Package length'))->setUnit('m'),
-      'package_width' => new Decimal($this, $this->translate('Package width'))->setUnit('m'),
-      'package_height' => new Decimal($this, $this->translate('Package height'))->setUnit('m'),
-      'package_volume' => new Decimal($this, $this->translate('Package volume'))->setUnit('m3'),
-      'package_mass' => new Decimal($this, $this->translate('Package mass'))->setUnit('kg'),
-      'package_discount' => new Decimal($this, $this->translate('Package discount'))->setUnit('%'),
-      'package_description' => new Text($this, $this->translate('Package description')),
       'sale_ended' => new Date($this, $this->translate('Sale ended')),
       'show_price' => new Boolean($this, $this->translate('Show price to customer')),
       'price_after_reweight' => new Boolean($this, $this->translate('Set price after reweight?')),
@@ -155,13 +188,14 @@ class Product extends \Hubleto\Erp\Model
       ->where('products.id', $recordId)
       ->with('GROUP')
       ->with('CATEGORY')
-      ->with('UNIT')
+      ->with('PACKAGING')
+      ->with('PACKAGING.UNIT')
       ->first()
     ;
 
     if (!$product) return [];
 
-    return [
+    $context = [
       'EAN code' => $product->ean,
       'Product name' => $product->name,
       'Product group' => $product->GROUP?->name,
@@ -174,15 +208,18 @@ class Product extends \Hubleto\Erp\Model
       'Product image #5' => $this->env()->uploadUrl . '/' . $product->image_5,
       'Product description' => $product->description,
       'Product sales price' => $product->sales_price,
-      'Product base unit' => $product->UNIT?->name,
+      'Product base unit' => $this->baseMeasureSymbol($product->base_measure),
+      'Product base unit size' => implode(', ', $this->physicalFacts($product->base_length, $product->base_width, $product->base_height, $product->base_weight)),
       'Product sales margin' => $product->margin,
-      'Product package length' => $product->package_length,
-      'Product package width' => $product->package_width,
-      'Product package height' => $product->package_height,
-      'Product package volume' => $product->package_volume,
-      'Product package mass' => $product->package_mass,
-      'Product package discount' => $product->package_discount,
-      'Product package description' => $product->package_description,
     ];
+
+    foreach ($product->PACKAGING ?? [] as $packaging) {
+      $packagingUnitName = $packaging->UNIT?->name ?? $this->translate('package');
+      $packagingFacts = $this->physicalFacts($packaging->length, $packaging->width, $packaging->height, $packaging->weight);
+      if ($packaging->description) $packagingFacts[] = $packaging->description;
+      $context['Packaging: ' . $packagingUnitName] = implode(', ', $packagingFacts);
+    }
+
+    return $context;
   }
 }

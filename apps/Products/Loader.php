@@ -217,13 +217,9 @@ class Loader extends \Hubleto\Erp\App
     ];
 
     $units = [
-      [ 'name' => 'pcs', 'category' => Models\Unit::CATEGORY_BASE ],
-      [ 'name' => 'kg', 'category' => Models\Unit::CATEGORY_BASE ],
-      [ 'name' => 'l', 'category' => Models\Unit::CATEGORY_BASE ],
-      [ 'name' => 'm', 'category' => Models\Unit::CATEGORY_BASE ],
-      [ 'name' => 'box', 'category' => Models\Unit::CATEGORY_CONTAINER ],
-      [ 'name' => 'carton', 'category' => Models\Unit::CATEGORY_CONTAINER ],
-      [ 'name' => 'pallet', 'category' => Models\Unit::CATEGORY_CONTAINER ],
+      [ 'name' => 'box' ],
+      [ 'name' => 'carton' ],
+      [ 'name' => 'pallet' ],
     ];
 
     $mCategory = $this->getModel(Models\Category::class);
@@ -242,7 +238,7 @@ class Loader extends \Hubleto\Erp\App
 
     $firstProductId = 0;
     foreach ($products as $i => $product) {
-      $product['id_unit'] = $unitIds['pcs'];
+      $product['base_measure'] = Models\Product::BASE_MEASURE_COUNT;
       $created = $mProduct->record->recordCreate($product);
       if ($i === 0) $firstProductId = (int) $created['id'];
     }

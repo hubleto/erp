@@ -21,12 +21,6 @@ class Product extends \Hubleto\Erp\RecordManager
     return $this->belongsTo(Category::class, 'id_category', 'id');
   }
 
-  /** @return BelongsTo */
-  public function UNIT(): BelongsTo
-  {
-    return $this->belongsTo(Unit::class, 'id_unit', 'id');
-  }
-
   /** @return HasMany */
   public function PACKAGING(): HasMany
   {

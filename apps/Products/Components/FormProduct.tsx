@@ -4,6 +4,7 @@ import TableProductSuppliers from './TableProductSuppliers';
 import Barcode from 'react-barcode';
 import Int from '@hubleto/react-ui/core/Inputs/Int';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import Varchar from '@hubleto/react-ui/core/Inputs/Varchar';
 import request from '@hubleto/react-ui/core/Request';
 
 export interface FormProductProps extends FormExtendedProps {}
@@ -12,8 +13,13 @@ export interface FormProductState extends FormExtendedState {
 }
 
 export default class FormProduct<P, S> extends FormExtended<FormProductProps,FormProductState> {
-  static UNIT_CATEGORY_BASE = 1;
-  static UNIT_CATEGORY_CONTAINER = 2;
+  // Mirrors Models\Product::BASE_MEASURE_* (the base unit's measure + display symbol).
+  static MEASURE_COUNT = 1;
+  static MEASURE_MASS = 2;
+  static MEASURE_VOLUME = 3;
+  static MEASURE_LENGTH = 4;
+
+  static MEASURE_SYMBOLS: Record<number, string> = { 1: 'pcs', 2: 'kg', 3: 'l', 4: 'm' };
 
   static defaultProps: any = {
     ...FormExtended.defaultProps,
@@ -56,15 +62,24 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
       { model: 'Hubleto/App/Community/Products/Models/Unit', search: '', __IS_AJAX__: '1' },
       {},
       (data: any) => {
-        const map: any = {};
-        Object.keys(data ?? {}).forEach((id) => { map[id] = data[id]?._LOOKUP ?? ''; });
-        this.setState({ unitsById: map });
+        const nameById: any = {};
+        Object.keys(data ?? {}).forEach((id) => { nameById[id] = data[id]?._LOOKUP ?? ''; });
+        this.setState({ unitsById: nameById });
       }
     );
   }
 
   unitName(id: any): string {
     return (id && this.state.unitsById) ? (this.state.unitsById[id] ?? '') : '';
+  }
+
+  // What the base unit measures (count/mass/volume/length); the symbol it shows (pcs/kg/l/m).
+  baseUnitMeasureType(): number {
+    return Number(this.state.record?.base_measure ?? FormProduct.MEASURE_COUNT);
+  }
+
+  baseUnitSymbol(): string {
+    return FormProduct.MEASURE_SYMBOLS[this.baseUnitMeasureType()] ?? 'pcs';
   }
 
   getRecordFormUrl(): string {
@@ -96,6 +111,86 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
     this.updateRecord(newRecord);
   }
 
+  updateBaseUnitPhysical(changedValues: any) {
+    const map: any = { length: 'base_length', width: 'base_width', height: 'base_height', weight: 'base_weight' };
+    const out: any = {};
+    Object.keys(changedValues).forEach((key) => { out[map[key] ?? key] = changedValues[key]; });
+    this.updateRecord(out);
+  }
+
+  packageVolume(physical: any): number {
+    const length = parseFloat(physical.length);
+    const width = parseFloat(physical.width);
+    const height = parseFloat(physical.height);
+    return [length, width, height].every((value) => isFinite(value) && value > 0) ? length * width * height : 0;
+  }
+
+  renderPhysicalFields(physical: any, onFieldChange: (changedValues: any) => void, dimensions: string[] = ['length', 'width', 'height'], showWeight: boolean = true, showNote: boolean = true): React.JSX.Element {
+    const numberField = (field: string, label: string, unit: string) => <div>
+      <label className='text-sm text-gray-500'>{this.translate(label)} ({unit})</label>
+      <Int
+        value={physical[field]}
+        description={{decimals: 4}}
+        onChange={(input: any, value: any) => { onFieldChange({[field]: value}); }}
+      ></Int>
+    </div>;
+    const dimensionLabels: any = { length: 'Length', width: 'Width', height: 'Height' };
+    const volume = this.packageVolume(physical);
+    return <div className='grid grid-cols-4 gap-2 mt-1'>
+      {dimensions.map((field) => <React.Fragment key={field}>{numberField(field, dimensionLabels[field], 'm')}</React.Fragment>)}
+      {showWeight ? numberField('weight', 'Weight', 'kg') : null}
+      <div className='col-span-4 text-sm text-gray-500'>
+        {this.translate('Volume')}: <span className='font-bold'>{volume > 0 ? globalThis.hubleto.numberFormat(volume, 4) : '—'}</span> m³
+        <span className='ml-1'>({this.translate('length × width × height')})</span>
+      </div>
+      {showNote ? <div className='col-span-4'>
+        <label className='text-sm text-gray-500'>{this.translate('Package note')}</label>
+        <Varchar
+          value={physical.description}
+          onChange={(input: any, value: any) => { onFieldChange({description: value}); }}
+        ></Varchar>
+      </div> : null}
+    </div>;
+  }
+
+  renderBaseUnitCard(record: any): React.JSX.Element {
+    const note = (text: string) => <div className='badge badge-info'>{text}</div>;
+    const symbol = this.baseUnitSymbol();
+    const editBaseUnit = (changedValues: any) => this.updateBaseUnitPhysical(changedValues);
+    const physical: any = {
+      length: record.base_length, width: record.base_width, height: record.base_height, weight: record.base_weight,
+    };
+    let body: React.JSX.Element;
+
+    switch (this.baseUnitMeasureType()) {
+      case FormProduct.MEASURE_MASS:
+        body = note(this.translate('Measured by weight - one') + ' ' + symbol + ' ' + this.translate('has no fixed shape. Put the real box or bag size on a packaging level below.'));
+        break;
+      case FormProduct.MEASURE_VOLUME:
+        body = note(this.translate('Measured by volume - one') + ' ' + symbol + ' ' + this.translate('has no fixed shape. Put the real container size on a packaging level below.'));
+        break;
+      case FormProduct.MEASURE_LENGTH:
+        body = <>
+          <p className='text-sm text-gray-500 mb-2'>
+            {this.translate('Measured by length - one') + ' ' + symbol + ' ' + this.translate('is 1 m long, so give its cross-section and weight per') + ' ' + symbol + '.'}
+          </p>
+          {this.renderPhysicalFields({ ...physical, length: 1 }, editBaseUnit, ['width', 'height'], true, false)}
+        </>;
+        break;
+      default: // MEASURE_COUNT
+        body = this.renderPhysicalFields(physical, editBaseUnit, ['length', 'width', 'height'], true, false);
+        break;
+    }
+
+    return <div className='mb-4'>
+      <h3 className='font-bold'>{this.translate('Base unit')} ({symbol})</h3>
+      <p className='text-sm text-gray-500 mb-2'>
+        {this.translate('The single sellable piece - the foundation that every packaging level wraps.')}
+      </p>
+      {body}
+    </div>;
+  }
+
   renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Product')}</small>
@@ -122,7 +217,7 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
               {this.inputWrapper('id_category')}
               {this.inputWrapper('vat')}
               {this.inputWrapper('margin')}
-              {this.inputWrapper('id_unit', { customEndpointParams: { unitCategory: FormProduct.UNIT_CATEGORY_BASE } })}
+              {this.inputWrapper('base_measure')}
               {this.inputWrapper('description')}
               {this.inputWrapper('is_single_order_possible')}
               {this.inputWrapper('show_price')}
@@ -139,23 +234,30 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
         </>;
       break;
       case 'packaging': {
-        const pkg = R.PACKAGING ?? [];
-        const baseUnitName = this.unitName(R.id_unit) || (R.UNIT?.name ?? this.translate('Base unit'));
-        let acc = 1;
-        let accValid = true;
-        const baseCounts = pkg.map((row: any) => {
-          if (row._toBeDeleted_) return null;
-          const q = parseFloat(row.qty_per_lower);
-          if (!accValid || !isFinite(q) || q <= 0) { accValid = false; return null; }
-          acc = acc * q;
-          return acc;
+        const allLevels = R.PACKAGING ?? [];
+        const baseUnitName = this.baseUnitSymbol();
+
+        // every packaging row is a container level now; the base unit lives in the card above
+        const containers = allLevels.map((item: any, realIndex: number) => ({ item, realIndex }));
+
+        let runningBaseUnits = 1;
+        let runningValid = true;
+        const baseUnitCounts = containers.map(({ item }: any) => {
+          if (item._toBeDeleted_) return null;
+          const qtyPerPackage = parseFloat(item.qty_per_lower);
+          if (!runningValid || !isFinite(qtyPerPackage) || qtyPerPackage <= 0) { runningValid = false; return null; }
+          runningBaseUnits = runningBaseUnits * qtyPerPackage;
+          return runningBaseUnits;
         });
-        const fmtBase = (n: number) => globalThis.hubleto.numberFormat(n, Number.isInteger(n) ? 0 : 2);
+        const formatBaseUnits = (value: number) => globalThis.hubleto.numberFormat(value, Number.isInteger(value) ? 0 : 2);
+
         return <>
+          {this.renderBaseUnitCard(R)}
+          <hr className='my-4'/>
           <div className='mb-4'>
             <h3 className='font-bold'>{this.translate('Packaging levels')}</h3>
             <p className='text-sm text-gray-500 mb-2'>
-              {this.translate('Each level wraps the one above it. The base unit is the foundation (always 1).')}
+              {this.translate('Each level packs several of the unit below it. The base unit is the foundation (always 1).')}
             </p>
             <table className='table-default dense mt-2 w-full' style={{tableLayout: 'fixed'}}>
               <thead>
@@ -168,70 +270,77 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
                 </tr>
               </thead>
               <tbody>
-                {pkg.map((item, index) => {
-                  const lowerName = index === 0
+                {containers.map(({ item, realIndex }: any, position: number) => {
+                  const lowerLevelName = position === 0
                     ? baseUnitName
-                    : (this.unitName(pkg[index - 1]?.id_unit) || pkg[index - 1]?.UNIT?.name || this.translate('level above'));
-                  return <tr key={index} className={item._toBeDeleted_ ? 'bg-red-100 line-through' : ''}>
-                    <td>
-                      <div className='flex flex-col items-center'>
-                        <button
-                          className='btn btn-small btn-transparent'
-                          disabled={index === 0}
-                          onClick={() => { this.movePackaging(index, -1); }}
-                        >
-                          <span className='icon'><i className='fas fa-chevron-up'></i></span>
-                        </button>
-                        <button
-                          className='btn btn-small btn-transparent'
-                          disabled={index >= ((R.PACKAGING?.length ?? 0) - 1)}
-                          onClick={() => { this.movePackaging(index, 1); }}
-                        >
-                          <span className='icon'><i className='fas fa-chevron-down'></i></span>
-                        </button>
-                      </div>
-                    </td>
-                    <td>
-                      <div className='flex items-center gap-2'>
-                        <span className='text-gray-500'>1</span>
-                        <div className='lookup-wrap flex-1'>
-                          <Lookup
-                            model='Hubleto/App/Community/Products/Models/Unit'
-                            customEndpointParams={{ unitCategory: FormProduct.UNIT_CATEGORY_CONTAINER }}
-                            value={item.id_unit}
-                            onChange={(input: any, value: any) => { this.updatePackaging(index, item, {id_unit: value}); }}
-                          ></Lookup>
+                    : (this.unitName(containers[position - 1].item.id_unit) || containers[position - 1].item.UNIT?.name || this.translate('level below'));
+                  return <React.Fragment key={realIndex}>
+                    <tr className={item._toBeDeleted_ ? 'bg-red-100 line-through' : ''}>
+                      <td>
+                        <div className='flex flex-col items-center'>
+                          <button
+                            className='btn btn-small btn-transparent'
+                            disabled={position === 0}
+                            onClick={() => { this.movePackaging(realIndex, -1); }}
+                          >
+                            <span className='icon'><i className='fas fa-chevron-up'></i></span>
+                          </button>
+                          <button
+                            className='btn btn-small btn-transparent'
+                            disabled={position >= (containers.length - 1)}
+                            onClick={() => { this.movePackaging(realIndex, 1); }}
+                          >
+                            <span className='icon'><i className='fas fa-chevron-down'></i></span>
+                          </button>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className='flex items-center gap-2'>
-                        <div style={{width: '7rem'}}>
-                          <Int
-                            value={item.qty_per_lower}
-                            description={{decimals: 4}}
-                            onChange={(input: any, value: any) => { this.updatePackaging(index, item, {qty_per_lower: value}); }}
-                          ></Int>
+                      </td>
+                      <td>
+                        <div className='flex items-center gap-2'>
+                          <span className='text-gray-500'>1</span>
+                          <div className='lookup-wrap flex-1'>
+                            <Lookup
+                              model='Hubleto/App/Community/Products/Models/Unit'
+                              value={item.id_unit}
+                              onChange={(input: any, value: any) => { this.updatePackaging(realIndex, item, {id_unit: value}); }}
+                            ></Lookup>
+                          </div>
                         </div>
-                        <span className='text-gray-500'>{lowerName}</span>
-                      </div>
-                    </td>
-                    <td className='align-middle'>
-                      {baseCounts[index] != null ? <>{fmtBase(baseCounts[index])} <span className='text-gray-500'>{baseUnitName}</span></> : '—'}
-                    </td>
-                    <td>
-                      <button
-                        className={'btn ' + (item._toBeDeleted_ ? 'btn-primary' : 'btn-danger')}
-                        onClick={() => {
-                          let newR = this.state.record;
-                          newR.PACKAGING[index]._toBeDeleted_ = !newR.PACKAGING[index]._toBeDeleted_;
-                          this.updateRecord(newR);
-                        }}
-                      >
-                        <span className='icon'><i className={'fas ' + (item._toBeDeleted_ ? 'fa-rotate-left' : 'fa-trash')}></i></span>
-                      </button>
-                    </td>
-                  </tr>
+                      </td>
+                      <td>
+                        <div className='flex items-center gap-2'>
+                          <div style={{width: '7rem'}}>
+                            <Int
+                              value={item.qty_per_lower}
+                              description={{decimals: 4}}
+                              onChange={(input: any, value: any) => { this.updatePackaging(realIndex, item, {qty_per_lower: value}); }}
+                            ></Int>
+                          </div>
+                          <span className='text-gray-500'>{lowerLevelName}</span>
+                        </div>
+                      </td>
+                      <td className='align-middle'>
+                        {baseUnitCounts[position] != null ? <>{formatBaseUnits(baseUnitCounts[position])} <span className='text-gray-500'>{baseUnitName}</span></> : '—'}
+                      </td>
+                      <td>
+                        <button
+                          className={'btn ' + (item._toBeDeleted_ ? 'btn-primary' : 'btn-danger')}
+                          onClick={() => {
+                            let newR = this.state.record;
+                            newR.PACKAGING[realIndex]._toBeDeleted_ = !newR.PACKAGING[realIndex]._toBeDeleted_;
+                            this.updateRecord(newR);
+                          }}
+                        >
+                          <span className='icon'><i className={'fas ' + (item._toBeDeleted_ ? 'fa-rotate-left' : 'fa-trash')}></i></span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className={item._toBeDeleted_ ? 'bg-red-100' : ''}>
+                      <td></td>
+                      <td colSpan={4}>
+                        {this.renderPhysicalFields(item, (changedValues: any) => this.updatePackaging(realIndex, item, changedValues), ['length', 'width', 'height'], false)}
+                      </td>
+                    </tr>
+                  </React.Fragment>;
                 })}
               </tbody>
             </table>
@@ -248,15 +357,6 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
               <span className='text'>{this.translate('Add packaging level')}</span>
             </button>
           </div>
-          <hr className='my-4'/>
-          <h3 className='font-bold'>{this.translate('Physical package')}</h3>
-          {this.inputWrapper('package_length')}
-          {this.inputWrapper('package_width')}
-          {this.inputWrapper('package_height')}
-          {this.inputWrapper('package_volume')}
-          {this.inputWrapper('package_mass')}
-          {this.inputWrapper('package_discount')}
-          {this.inputWrapper('package_description')}
         </>;
       }
       break;

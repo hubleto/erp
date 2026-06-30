@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\Products\Models;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
+use Hubleto\Framework\Db\Column\Text;
 
 class ProductPackaging extends \Hubleto\Erp\Model
 {
@@ -23,6 +24,11 @@ class ProductPackaging extends \Hubleto\Erp\Model
       'id_unit' => (new Lookup($this, $this->translate('Packaging unit'), Unit::class))->setRequired()->setDefaultVisible(),
       'qty_per_lower' => (new Decimal($this, $this->translate('Quantity per lower level')))->setDefaultVisible(),
       'sort' => (new Integer($this, $this->translate('Order'))),
+      'length' => (new Decimal($this, $this->translate('Length')))->setUnit('m'),
+      'width' => (new Decimal($this, $this->translate('Width')))->setUnit('m'),
+      'height' => (new Decimal($this, $this->translate('Height')))->setUnit('m'),
+      'weight' => (new Decimal($this, $this->translate('Weight')))->setUnit('kg'),
+      'description' => (new Text($this, $this->translate('Package description'))),
     ]);
   }
 }

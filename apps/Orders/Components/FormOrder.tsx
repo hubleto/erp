@@ -3,6 +3,7 @@ import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableItems from './TableItems';
 import TableQuotes from './TableQuotes';
+import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
@@ -72,6 +73,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
       { uid: 'calendar', title: this.translate('Calendar') },
       { uid: 'quotes', title: this.translate('Quotes') },
       // { uid: 'payments', title: this.translate('Payments') },
+      { uid: 'worksheet', title: this.translate('Worksheet') },
       { uid: 'invoicing', title: this.translate('Invoicing') },
       { uid: 'statistics', title: this.translate('Statistics') },
       ...super.getTabsLeft(),
@@ -600,6 +602,17 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
           junctionSourceRecordId={R.id}
           junctionDestinationColumn='id_document'
           readonly={!this.state.isInlineEditing}
+        />;
+
+      break;
+
+      case 'worksheet':
+        return <TableActivities
+          key={"table_order_activities"}
+          parentForm={this}
+          uid={this.props.uid + "_table_order_activities"}
+          idOrder={R.id}
+          readonly={true}
         />;
 
       break;

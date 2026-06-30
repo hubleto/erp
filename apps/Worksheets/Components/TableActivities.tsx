@@ -5,6 +5,7 @@ import FormActivity from './FormActivity';
 interface TableActivitiesProps extends TableExtendedProps {
   idTask?: number,
   idProject?: number,
+  idOrder?: number,
 }
 
 interface TableActivitiesState extends TableExtendedState {
@@ -45,6 +46,7 @@ export default class TableActivities extends TableExtended<TableActivitiesProps,
       ...super.getEndpointParams(),
       idTask: this.props.idTask,
       idProject: this.props.idProject,
+      idOrder: this.props.idOrder,
     }
   }
 

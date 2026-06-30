@@ -19,8 +19,8 @@ class ProjectOrder extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setRequired(),
-      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired(),
+      'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setRequired()->setDefaultVisible(),
+      'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setRequired()->setDefaultVisible(),
     ]);
   }
 
@@ -28,8 +28,8 @@ class ProjectOrder extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = $this->translate('Order Projects');
-    $description->ui["addButtonText"] = $this->translate("Add project");
+    $description->ui['title'] = '';
+    $description->ui["addButtonText"] = $this->translate("Assing project to order");
 
     if ($this->router()->urlParamAsInteger('idOrder') > 0) {
       $description->columns = [];

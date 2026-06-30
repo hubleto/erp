@@ -1,10 +1,10 @@
-<h1 class="app-main-title">{{ translate('Projects') }} > {{ translate('Assign tasks to projects') }}</h1>
+<h1 class="app-main-title">{{ translate('Projects') }} > {{ translate('Assign projects to orders') }}</h1>
 
 <hblreact-table
-  string:model="Hubleto/App/Community/Projects/Models/ProjectTask"
-  string:tag="table-projects-tasks"
+  string:model="Hubleto/App/Community/Projects/Models/ProjectOrder"
+  string:tag="table-projects-orders"
   int:record-id="{{ viewParams.recordId }}"
-  json:custom-endpoint-params='{"idTask": {{ viewParams.idTask ?? 0 }} }'
+  json:custom-endpoint-params='{"idOrder": {{ viewParams.idOrder ?? 0 }} }'
   string:fulltext-search='{{ viewParams.q }}'
   json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'

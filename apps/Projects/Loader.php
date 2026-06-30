@@ -26,8 +26,11 @@ class Loader extends \Hubleto\Erp\App
       '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
       '/^projects\/add?\/?$/' => ['controller' => Controllers\Projects::class, 'vars' => [ 'recordId' => -1 ]],
 
-      '/^projects\/task-assignment(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsTasks::class,
-      '/^projects\/task-assignment\/add?\/?$/' => ['controller' => Controllers\ProjectsTasks::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^projects\/tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsTasks::class,
+      '/^projects\/tasks\/add?\/?$/' => ['controller' => Controllers\ProjectsTasks::class, 'vars' => [ 'recordId' => -1 ]],
+
+      '/^projects\/orders(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsOrders::class,
+      '/^projects\/orders\/add?\/?$/' => ['controller' => Controllers\ProjectsOrders::class, 'vars' => [ 'recordId' => -1 ]],
 
       '/^projects\/milestones(\/(?<recordId>\d+))?\/?$/' => Controllers\Milestones::class,
       '/^projects\/milestones\/add?\/?$/' => ['controller' => Controllers\Milestones::class, 'vars' => [ 'recordId' => -1 ]],
@@ -113,9 +116,13 @@ class Loader extends \Hubleto\Erp\App
           <span class="icon"><i class="fas fa-calendar-check"></i></span>
           <span class="text">' . $this->translate('Milestones') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/task-assignment">
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/tasks">
           <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Task assignment') . '</span>
+          <span class="text">' . $this->translate('Assign task to project') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/orders">
+          <span class="icon"><i class="fas fa-check-double"></i></span>
+          <span class="text">' . $this->translate('Assign projects to orders') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/monthly-summary">
           <span class="icon"><i class="fas fa-chart-bar"></i></span>

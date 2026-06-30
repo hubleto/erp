@@ -7,6 +7,7 @@ use Hubleto\App\Community\Projects\Models\ProjectTask;
 use Hubleto\App\Community\Tasks\Models\RecordManagers\Task;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+use Hubleto\App\Community\Projects\Models\ProjectOrder;
 
 class Activity extends \Hubleto\Erp\RecordManager
 {
@@ -69,6 +70,7 @@ class Activity extends \Hubleto\Erp\RecordManager
     $filters = $hubleto->router()->urlParamAsArray("filters");
     $idTask = $hubleto->router()->urlParamAsInteger("idTask");
     $idProject = $hubleto->router()->urlParamAsInteger("idProject");
+    $idOrder = $hubleto->router()->urlParamAsInteger("idOrder");
 
     if ($idTask > 0) {
       $query = $query->where($this->table . '.id_task', $idTask);
@@ -79,6 +81,25 @@ class Activity extends \Hubleto\Erp\RecordManager
 
       $projectTasksIds = $mProjectTask->record->prepareReadQuery()
         ->where($mProjectTask->table . '.id_project', $idProject)
+        ->pluck('id_task')
+        ?->toArray()
+      ;
+
+      if (count($projectTasksIds) == 0) $projectTasksIds = [0];
+
+      $query = $query->whereIn($this->table . '.id_task', $projectTasksIds);
+    }
+
+    if ($idOrder > 0) {
+      $mProjectOrder = $hubleto->getService(ProjectOrder::class);
+      $mProjectTask = $hubleto->getService(ProjectTask::class);
+
+      $idProjects = $mProjectOrder->record->prepareReadQuery()
+        ->where($mProjectOrder->table . '.id_order', $idOrder)
+        ->pluck('id_project');
+
+      $projectTasksIds = $mProjectTask->record->prepareReadQuery()
+        ->whereIn($mProjectTask->table . '.id_project', $idProjects)
         ->pluck('id_task')
         ?->toArray()
       ;

@@ -46,6 +46,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
   refActivityModal: any = React.createRef();
   refActivityForm: any = React.createRef();
   refTableItemsInvoicing: any = React.createRef();
+  refTableActivities: any = React.createRef();
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\FormOrder';
@@ -608,13 +609,37 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
       break;
 
       case 'worksheet':
-        return <TableActivities
-          key={"table_order_activities"}
-          parentForm={this}
-          uid={this.props.uid + "_table_order_activities"}
-          idOrder={R.id}
-          readonly={true}
-        />;
+        let latestItemDue = moment('2000-01-01');
+
+        if (R.ITEMS) {
+          Object.keys(R.ITEMS).map((key) => {
+            const item = R.ITEMS[key];
+            if (moment(item.date_due).isAfter(latestItemDue)) {
+              latestItemDue = moment(item.date_due);
+            }
+          });
+        }
+        return <div>
+          <button
+            className='btn btn-add-outline mb-2'
+            onClick={() => {
+              this.refTableActivities.current.setColumnSearch(
+                'date_worked', '>' + latestItemDue.format('YYYY-MM-DD')
+              );
+            }}
+          >
+            <span className='icon'><i className='fas fa-calendar'></i></span>
+            <span className='text'>Show activities since the latest item due ({latestItemDue.format('YYYY-MM-DD')})</span>
+          </button>
+          <TableActivities
+            ref={this.refTableActivities}
+            key={"table_order_activities"}
+            parentForm={this}
+            uid={this.props.uid + "_table_order_activities"}
+            idOrder={R.id}
+            readonly={true}
+          />
+        </div>;
 
       break;
 

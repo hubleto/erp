@@ -6,6 +6,7 @@ use Hubleto\App\Community\EmailMarketing\Models\CampaignScheduleRecipient;
 use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Description\Form;
 use Hubleto\Framework\Description\Table;
@@ -20,8 +21,8 @@ class SentEmails extends \Hubleto\Framework\Controllers\CrudController
     $description->addColumn('from', (new Varchar(null, 'From'))->setDefaultVisible());
     $description->addColumn('to', (new Varchar(null, 'To'))->setDefaultVisible());
     $description->addColumn('cc', (new Varchar(null, 'CC'))->setDefaultVisible());
-    $description->addColumn('datetime_scheduled_to_send', (new Date(null, 'Scheduled to send'))->setDefaultVisible());
-    $description->addColumn('datetime_sent', (new Date(null, 'Sent'))->setDefaultVisible());
+    $description->addColumn('datetime_scheduled_to_send', (new DateTime(null, 'Scheduled to send'))->setDefaultVisible());
+    $description->addColumn('datetime_sent', (new DateTime(null, 'Sent'))->setDefaultVisible());
     return $description;
   }
 

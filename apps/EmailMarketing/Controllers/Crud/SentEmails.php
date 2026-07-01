@@ -50,9 +50,10 @@ class SentEmails extends \Hubleto\Framework\Controllers\CrudController
     $mMail = $this->getModel(Mail::class);
 
     $query = $mMail->record->prepareReadQuery()
-      ->join($mRecipientEmail->table, $mRecipientEmail->table . '.id_mail', '=', $mMail->table . '.id')
-      ->join($mRecipientCampaign->table, $mRecipientCampaign->table . '.id_mail', '=', $mMail->table . '.id')
+      ->leftJoin($mRecipientEmail->table, $mRecipientEmail->table . '.id_mail', '=', $mMail->table . '.id')
+      ->leftJoin($mRecipientCampaign->table, $mRecipientCampaign->table . '.id_mail', '=', $mMail->table . '.id')
       ->select(
+        $mMail->table . '.id',
         $mMail->table . '.subject',
         $mMail->table . '.from',
         $mMail->table . '.to',

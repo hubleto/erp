@@ -35,10 +35,33 @@ class Product extends \Hubleto\Erp\RecordManager
     $idCategory = $hubleto->router()->urlParamAsInteger('idCategory');
 
     if ($idCategory > 0) {
-      $query = $query->where($this->table . '.id_category', $idCategory);
+      $query = $query->whereIn($this->table . '.id_category', $this->categorySubtreeIds($idCategory));
     }
 
     return $query;
+  }
+
+  protected function categorySubtreeIds(int $idRootCategory): array
+  {
+    $categoryRows = \Hubleto\Erp\Loader::getGlobalApp()
+      ->getModel(\Hubleto\App\Community\Products\Models\Category::class)
+      ->record->get(['id', 'id_parent'])->toArray();
+
+    $childrenByParent = [];
+    foreach ($categoryRows as $categoryRow) {
+      $childrenByParent[(int) ($categoryRow['id_parent'] ?? 0)][] = (int) $categoryRow['id'];
+    }
+
+    $subtreeIds = [];
+    $queue = [$idRootCategory];
+    while (!empty($queue)) {
+      $currentId = array_shift($queue);
+      if (isset($subtreeIds[$currentId])) continue;
+      $subtreeIds[$currentId] = true;
+      foreach ($childrenByParent[$currentId] ?? [] as $childId) $queue[] = $childId;
+    }
+
+    return array_keys($subtreeIds);
   }
 
   public function prepareLookupQuery(string $search): mixed

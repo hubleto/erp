@@ -41,6 +41,7 @@ class Loader extends \Hubleto\Erp\App
       '/^email-marketing\/emails\/add?\/?$/' => ['controller' => Controllers\Emails::class, 'vars' => [ 'recordId' => -1 ]],
 
       '/^email-marketing\/emails\/clicks(\/(?<recordId>\d+))?\/?$/' => Controllers\EmailClicks::class,
+      '/^email-marketing\/emails\/sent\/?$/' => Controllers\SentEmails::class,
 
       '/^email-marketing\/recipients(\/(?<recordId>\d+))?\/?$/' => Controllers\Recipients::class,
       '/^email-marketing\/recipients\/add?\/?$/' => ['controller' => Controllers\Recipients::class, 'vars' => [ 'recordId' => -1 ]],
@@ -107,6 +108,10 @@ class Loader extends \Hubleto\Erp\App
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails">
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span class="text">' . $this->translate('Emails') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails/sent">
+          <span class="icon"><i class="fas fa-envelope"></i></span>
+          <span class="text">' . $this->translate('Sent emails') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails/clicks">
           <span class="icon"><i class="fas fa-hand-pointer"></i></span>

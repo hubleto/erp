@@ -1,0 +1,11 @@
+<h1 class="app-main-title">{{ translate('Email marketing') }} > {{ translate('Sent emails') }}</h1>
+
+<hblreact-table
+  string:tag="table-email-marketing-sent-emails"
+  string:crud-controller="Hubleto/App/Community/EmailMarketing/Controllers/Crud/SentEmails"
+  boolean:readonly="true"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
+  json:filters='{{ viewParams.filters|json_encode }}'
+></hblreact-table>

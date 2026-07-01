@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Controllers\Crud;
 
+use Hubleto\App\Community\EmailMarketing\Models\CampaignScheduleRecipient;
 use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\Mail\Models\Mail;
 use Hubleto\Framework\Db\Column\Date;
@@ -40,13 +41,17 @@ class SentEmails extends \Hubleto\Framework\Controllers\CrudController
   ): array
   {
     /** @var Recipient */
-    $mRecipient = $this->getModel(Recipient::class);
+    $mRecipientEmail = $this->getModel(Recipient::class);
+    
+    /** @var CampaignScheduleRecipient */
+    $mRecipientCampaign = $this->getModel(CampaignScheduleRecipient::class);
 
     /** @var Mail */
     $mMail = $this->getModel(Mail::class);
 
     $query = $mMail->record->prepareReadQuery()
-      ->join($mRecipient->table, $mRecipient->table . '.id_mail', '=', $mMail->table . '.id')
+      ->join($mRecipientEmail->table, $mRecipientEmail->table . '.id_mail', '=', $mMail->table . '.id')
+      ->join($mRecipientCampaign->table, $mRecipientCampaign->table . '.id_mail', '=', $mMail->table . '.id')
       ->select(
         $mMail->table . '.subject',
         $mMail->table . '.from',
@@ -55,7 +60,8 @@ class SentEmails extends \Hubleto\Framework\Controllers\CrudController
         $mMail->table . '.datetime_scheduled_to_send',
         $mMail->table . '.datetime_sent',
       )
-      ->whereNotNull($mRecipient->table . '.id')
+      ->whereNotNull($mRecipientEmail->table . '.id')
+      ->orWhereNotNull($mRecipientCampaign->table . '.id')
       ->orderBy('datetime_sent', 'desc')
     ;
 

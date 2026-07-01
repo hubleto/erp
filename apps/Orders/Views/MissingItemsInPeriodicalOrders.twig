@@ -6,6 +6,7 @@
       <th>{{ translate('Order') }}</th>
       <th>{{ translate('Customer') }}</th>
       <th>{{ translate('Payment period') }}</th>
+      <th>{{ translate('Next invoice expected on') }}</th>
       <th>{{ translate('Items') }}</th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
         </td>
         <td>{{ o.CUSTOMER.name }}</td>
         <td>{{ o['_ENUM[payment_period]'] }}</td>
+        <td>{{ hubleto.locale().formatDateShort(o.date_next_invoice_expected) }}</td>
         <td>
           {% for i in o.ITEMS %} {% if i.id_invoice_item == 0 %}
             <div class="flex">

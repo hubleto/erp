@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Invoices\Models\Dto;
 
 class Invoice {
-  private function __construct(
+  function __construct(
     public int $idProfile,
     public int $idIssuedBy,
     public int $idCustomer,

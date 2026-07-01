@@ -243,6 +243,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
                     {this.inputWrapper('date_order')}
                     {this.inputWrapper('required_delivery_date')}
                     {this.inputWrapper('date_expiration')}
+                    {this.inputWrapper('date_next_invoice_expected')}
                     {this.divider(null)}
                     {this.inputWrapper('shared_folder')}
                   </div>

@@ -15,6 +15,7 @@ import moment, { Moment } from "moment";
 import TableLeadHistory from './TableLeadHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
+import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/TableEmailClicks';
 
 export interface FormLeadProps extends FormExtendedProps {}
 
@@ -79,6 +80,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
       tabs: [
         { uid: 'default', title: <b>{this.translate('Lead')}</b> },
         { uid: 'calendar', title: this.translate('Calendar') },
+        { uid: 'email_clicks', title: this.translate('Email Clicks') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
         { uid: 'history', icon: 'fas fa-clock-rotate-left', position: 'right' },
         { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
@@ -390,6 +392,15 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
             </ModalForm>
           }
         </>;
+      break;
+
+      case 'email_clicks':
+        return <TableEmailClicks
+          tag={"table_email_clicks"}
+          parentForm={this}
+          uid={this.props.uid + "_table_email_clicks"}
+          email={R.email}
+        />;
       break;
 
       case 'documents':

@@ -26,10 +26,11 @@ class EmailClick extends \Hubleto\Erp\RecordManager
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+    $idEmail = $hubleto->router()->urlParamAsInteger("idEmail");
+    $email = $hubleto->router()->urlParamAsString("email");
 
-    if ($hubleto->router()->isUrlParam("idEmail")) {
-      $query = $query->where($this->table . '.id_email', $hubleto->router()->urlParamAsInteger("idEmail"));
-    }
+    if ($idEmail > 0) $query = $query->where($this->table . '.id_email', $idEmail);
+    if (!empty($email)) $query = $query->whereHas('RECIPIENT', function($q) use ($email) { $q->where('email', $email); });
 
     return $query;
   }

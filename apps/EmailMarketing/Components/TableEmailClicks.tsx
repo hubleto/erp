@@ -3,7 +3,8 @@ import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/
 import FormEmailClick, { FormEmailClickProps } from './FormEmailClick';
 
 interface TableEmailClicksProps extends TableExtendedProps {
-  idEmail: number
+  idEmail?: number,
+  email?: string,
 }
 interface TableEmailClicksState extends TableExtendedState {}
 
@@ -42,7 +43,8 @@ export default class TableEmailClicks extends TableExtended<TableEmailClicksProp
   getEndpointParams(): any {
     return {
       ...super.getEndpointParams(),
-      idEmail: this.props.idEmail
+      idEmail: this.props.idEmail,
+      email: this.props.email,
     }
   }
 

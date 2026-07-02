@@ -22,7 +22,7 @@ class EmailClick extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_email' => (new Lookup($this, $this->translate('Email'), Email::class))->setRequired(),
+      'id_email' => (new Lookup($this, $this->translate('Email'), Email::class))->setRequired()->setDefaultVisible(),
       'id_recipient' => (new Lookup($this, $this->translate('Recipient'), Recipient::class))->setDefaultVisible(),
       'url' => (new Varchar($this, $this->translate('Url')))->setDefaultVisible(),
       'datetime_clicked' => (new DateTime($this, $this->translate('Clicked')))->setDefaultVisible(),

@@ -172,6 +172,21 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
 
     switch (tabUid) {
       case 'default':
+        let nextActivity = null;
+        let nextActivityDate = null;
+
+        if (R.ACTIVITIES) {
+          Object.keys(R.ACTIVITIES).map((key) => {
+            if (nextActivityDate !== null) return;
+            const activity = R.ACTIVITIES[key];
+            const dateStart = moment(activity.date_start);
+            if (dateStart.isAfter()) {
+              nextActivity = activity;
+              nextActivityDate = dateStart;
+            }
+          });
+        }
+
         return <>
           {this.input('purchase_sales', { uiStyle: 'buttons' })}
           <div className='card mt-2'>
@@ -249,6 +264,20 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
                     {this.inputWrapper('shared_folder')}
                   </div>
                   <div className='grow'>
+                    {this.state.id > 0 ? <>
+                      {nextActivityDate ?
+                        <div className='block alert alert-success'>
+                          <i className='fas fa-calendar mr-2'></i>
+                          Next activity is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+                          <br/>
+                          <i>{nextActivity.subject}</i>
+                        </div>
+                      : <div className='block alert alert-danger'>
+                          <i className='fas fa-calendar mr-2'></i>
+                          No future activity is planned.
+                        </div>
+                      }
+                    </> : null}
                     {this.inputWrapper('identifier_external', {wrapperCssClass: 'flex gap-2'})}
                     <div className='flex gap-2 items-center w-full'>
                       <div className='grow'>

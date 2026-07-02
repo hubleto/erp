@@ -16,7 +16,6 @@ import TableItems from './TableItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TableDealHistory from './TableDealHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
-import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
 
 export interface FormDealProps extends FormExtendedProps {}
 
@@ -223,6 +222,20 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
 
     switch (tabUid) {
       case 'default':
+        let nextActivity = null;
+        let nextActivityDate = null;
+
+        if (R.ACTIVITIES) {
+          Object.keys(R.ACTIVITIES).map((key) => {
+            if (nextActivityDate !== null) return;
+            const activity = R.ACTIVITIES[key];
+            const dateStart = moment(activity.date_start);
+            if (dateStart.isAfter()) {
+              nextActivity = activity;
+              nextActivityDate = dateStart;
+            }
+          });
+        }
 
         const inputsColumnLeft = <>
           <FormInput title={this.translate("Lead")}>
@@ -334,7 +347,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
         </>;
 
         const inputsColumnRight = <>
-          {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
+          {/* {this.state.id > 0 ? <div className='flex gap-2 mb-2'>
             <div className="badge badge-violet">
               {this.translate("Deal value:")} {globalThis.hubleto.numberFormat(R.price_excl_vat, 2, ",", " ")} {R.CURRENCY?.code}
             </div>
@@ -344,7 +357,21 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
                 <strong> {globalThis.hubleto.numberFormat(this.calculateWeightedProfit(R.WORKFLOW_STEP?.probability, R.price_excl_vat), 2, ',', ' ')} {R.CURRENCY.code}</strong>
               </div>
             : null}
-          </div> : null}
+          </div> : null} */}
+          {this.state.id > 0 ? <>
+            {nextActivityDate ?
+              <div className='block alert alert-success'>
+                <i className='fas fa-calendar mr-2'></i>
+                Next activity is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+                <br/>
+                <i>{nextActivity.subject}</i>
+              </div>
+            : <div className='block alert alert-danger'>
+                <i className='fas fa-calendar mr-2'></i>
+                No future activity is planned.
+              </div>
+            }
+          </> : null}
           <div className="flex gap-2">
             {this.inputWrapper('source_channel', {readonly: R.is_closed})}
             {this.inputWrapper('is_new_customer', {readonly: R.is_closed, onChange: (input: any, value: any) => {

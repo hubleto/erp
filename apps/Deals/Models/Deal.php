@@ -11,6 +11,7 @@ use Hubleto\App\Community\Settings\PermissionsManager;
 use Hubleto\Framework\Db\Column\Json;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
@@ -140,6 +141,17 @@ class Deal extends \Hubleto\Erp\Model
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'id_document' => (new Lookup($this, $this->translate('Document'), Document::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
+      'virt_next_activity_date' => (new Virtual($this, $this->translate('Next activity')))->setDefaultVisible()
+        ->setProperty('sql', "
+          select `a`.`date_start`
+          from `deal_activities` `a`
+          where
+            `a`.`id_deal` = `deals`.`id`
+            and `a`.`date_start` >= now()
+          order by
+            `a`.`date_start` asc
+          limit 1
+        "),
     ]);
   }
 

@@ -139,6 +139,17 @@ class Order extends \Hubleto\Erp\Model
           ORDER BY `oi`.`date_due` desc
           LIMIT 1
         "),
+      'virt_next_activity_date' => (new Virtual($this, $this->translate('Next activity')))->setDefaultVisible()
+        ->setProperty('sql', "
+          select `a`.`date_start`
+          from `order_activities` `a`
+          where
+            `a`.`id_order` = `orders`.`id`
+            and `a`.`date_start` >= now()
+          order by
+            `a`.`date_start` asc
+          limit 1
+        "),
     ]);
   }
 

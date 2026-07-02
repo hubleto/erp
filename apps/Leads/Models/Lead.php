@@ -133,6 +133,17 @@ class Lead extends \Hubleto\Erp\Model
           INNER JOIN `lead_tags` ON `lead_tags`.`id` = `cross_lead_tags`.`id_tag`
           WHERE `cross_lead_tags`.`id_lead` = `leads`.`id`
         "),
+      'virt_next_activity_date' => (new Virtual($this, $this->translate('Next activity')))->setDefaultVisible()
+        ->setProperty('sql', "
+          select `a`.`date_start`
+          from `lead_activities` `a`
+          where
+            `a`.`id_lead` = `leads`.`id`
+            and `a`.`date_start` >= now()
+          order by
+            `a`.`date_start` asc
+          limit 1
+        "),
     ]);
   }
 

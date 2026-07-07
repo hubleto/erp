@@ -70,9 +70,8 @@ class Counter extends Core
       ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
       ->groupBy('orders.id')
       ->whereRaw('
-        orders.payment_period > 0
-        and ifnull(orders.is_closed, 0) = 0
-        and ifnull(orders.date_next_invoice_expected, "2000-01-01") <= now()
+        ifnull(orders.is_closed, 0) = 0
+        and ifnull(orders.date_next_invoice_expected, "2100-01-01") <= now()
       ')
       ->pluck('id')
       ?->toArray()

@@ -11,7 +11,7 @@ class OrdersAwaitingInvoice extends \Hubleto\Erp\Controller
   {
     return array_merge(parent::getBreadcrumbs(), [
       [ 'url' => 'orders', 'content' => $this->translate('Orders') ],
-      [ 'url' => '', 'content' => $this->translate('Missing items in periodical orders') ],
+      [ 'url' => '', 'content' => $this->translate('Orders awaiting invoice') ],
     ]);
   }
 

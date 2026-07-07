@@ -41,7 +41,7 @@ class Loader extends \Hubleto\Erp\App
       '/^orders\/quotes(\/(?<recordId>\d+))?\/?$/' => Controllers\Quotes::class,
       '/^orders\/quotes\/add\/?$/' => ['controller' => Controllers\Quotes::class, 'vars' => ['recordId' => -1]],
 
-      '/^orders\/missing-items-in-periodical-orders\/?$/' => Controllers\MissingItemsInPeriodicalOrders::class,
+      '/^orders\/orders-awaiting-invoice\/?$/' => Controllers\OrdersAwaitingInvoice::class,
 
       '/^orders\/states\/?$/' => Controllers\States::class,
     ]);
@@ -115,7 +115,7 @@ class Loader extends \Hubleto\Erp\App
 
     return
       $counter->dueAndChargeableItemsNotPreparedForInvoice()
-      + count($counter->periodicalOrdersMissingItems())
+      + count($counter->ordersAwaitingInvoice())
     ;
   }
 
@@ -130,15 +130,15 @@ class Loader extends \Hubleto\Erp\App
     /** @var Counter */
     $counter = $this->getService(Counter::class);
 
-    $periodicalOrdersMissingItems = $counter->periodicalOrdersMissingItems();
+    $ordersAwaitingInvoice = $counter->ordersAwaitingInvoice();
 
     return 
-      (count($periodicalOrdersMissingItems) > 0 ? '
+      (count($ordersAwaitingInvoice) > 0 ? '
         <a
-          href="' . $this->env()->projectUrl . '/orders/missing-items-in-periodical-orders"
+          href="' . $this->env()->projectUrl . '/orders/orders-awaiting-invoice"
           class="block alert alert-danger"
         >
-          ' . count($periodicalOrdersMissingItems) . ' ' . $this->translate('periodical orders require your attention') . '
+          ' . count($ordersAwaitingInvoice) . ' ' . $this->translate('orders are awaiting invoice') . '
         </a>
       ' : '')
     ;

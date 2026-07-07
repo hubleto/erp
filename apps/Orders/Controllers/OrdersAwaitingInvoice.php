@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Orders\Controllers;
 use Hubleto\App\Community\Orders\Counter;
 use Hubleto\App\Community\Orders\Models\Order;
 
-class MissingItemsInPeriodicalOrders extends \Hubleto\Erp\Controller
+class OrdersAwaitingInvoice extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
@@ -22,20 +22,20 @@ class MissingItemsInPeriodicalOrders extends \Hubleto\Erp\Controller
     /** @var Counter */
     $counter = $this->getService(Counter::class);
 
-    $periodicalOrdersMissingItems = $counter->periodicalOrdersMissingItems();
+    $ordersAwaitingInvoice = $counter->ordersAwaitingInvoice();
 
     /** @var Order */
     $mOrder = $this->getModel(Order::class);
 
     $orders = $mOrder->record->prepareReadQuery()
-      ->whereIn('orders.id', $periodicalOrdersMissingItems)
+      ->whereIn('orders.id', $ordersAwaitingInvoice)
       ->get()
       ?->toArray()
     ;
 
     $this->viewParams['orders'] = $orders;
 
-    $this->setView('@Hubleto:App:Community:Orders/MissingItemsInPeriodicalOrders.twig');
+    $this->setView('@Hubleto:App:Community:Orders/OrdersAwaitingInvoice.twig');
 
   }
 

@@ -36,12 +36,12 @@ class Counter extends Core
   }
 
   /**
-   * [Description for periodicalOrdersMissingItems]
+   * [Description for ordersAwaitingInvoice]
    *
    * @return array
    * 
    */
-  public function periodicalOrdersMissingItems(): array
+  public function ordersAwaitingInvoice(): array
   {
     $mOrder = $this->getModel(Models\Order::class);
 

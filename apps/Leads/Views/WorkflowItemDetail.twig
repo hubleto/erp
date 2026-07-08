@@ -1,7 +1,8 @@
-<div class="p-2 text-sm font-normal">
+<div class="flex flex-col p-2 text-sm font-normal">
   <div class="flex flex-col">
-    <div class="flex gap-2">
-      <div class="text-primary">{{ item.OWNER.nick ?? item.OWNER.email }}</div>
+    <div class="flex gap-1">
+      <div class="text-primary">{{ item.OWNER.nick ?? (item.OWNER.email ?? '<div class="badge badge-danger text-xs">?</div>') }}</div>
+      <div class="text-gray-200">/ {{ item.MANAGER.nick ?? (item.MANAGER.email ?? '<div class="badge badge-danger text-xs">?</div>') }}</div>
     </div>
     <div class="font-bold">
       {{ item.title }}

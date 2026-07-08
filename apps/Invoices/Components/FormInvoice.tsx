@@ -98,6 +98,21 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     );
   }
 
+  getTitleAsText() {
+    const R = this.state.record;
+    let title = (this.state.record.inbound_outbound == 1 ? this.translate('Inbound') : this.translate('Outbound'));
+
+    switch (R.type) {
+      case 1: case '1': title += ' ' + this.translate('Proforma Invoice'); break;
+      case 2: case '2': title += ' ' + this.translate('Advance Invoice'); break;
+      case 3: case '3': title += ' ' + this.translate('Invoice'); break;
+      case 4: case '4': title += ' ' + this.translate('Credit Note'); break;
+      case 5: case '5': title += ' ' + this.translate('Debit Note'); break;
+    }
+
+    return title + ' ' + R.number;
+  }
+
   renderTitle(): JSX.Element {
     const R = this.state.record;
     let title = (this.state.record.inbound_outbound == 1 ? this.translate('Inbound') : this.translate('Outbound'));

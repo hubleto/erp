@@ -1,11 +1,9 @@
-<div class="card-header rounded flex flex-col p-2 text-sm font-normal">
-  <div class="flex justify-between w-full">
-    <div class="flex flex-col truncate">
-      <div class="text-gray-400">{{ item.CUSTOMER.name }}</div>
-      <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
-      <div class="text-primary">{{ item.OWNER.email }}</div>
-    </div>
+<div class="flex flex-col p-2 text-sm font-normal">
+  <div class="flex gap-2">
+    <div class="text-primary">{{ item.OWNER.nick ?? item.OWNER.email }}</div>
+    <div class="text-gray-400 text-nowrap">{{ item.CUSTOMER.name }}</div>
   </div>
+  <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
   {% if item.virt_next_activity_date == '' %}
     <div class="badge badge-danger text-xs">
       <i class="fas fa-calendar mr-2"></i>

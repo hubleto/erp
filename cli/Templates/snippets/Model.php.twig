@@ -42,7 +42,7 @@ class {{ model }} extends \Hubleto\Framework\Model
   public string $recordManagerClass = RecordManagers\{{ model }}::class;
 
   public ?string $lookupSqlValue = 'concat("{{ model }} #", {{ '{%' }}TABLE{{ '%}' }}.id)';
-  public ?string $lookupUrlDetail = '{{ modelPluralFormKebab }}/{{ '{%' }}ID{{ '%}' }}';
+  public ?string $lookupUrlDetail = '{{ appRootUrlSlug }}/{{ modelPluralFormKebab }}/{{ '{%' }}ID{{ '%}' }}';
 
   // Definition of model's relations.
   // For more details see https://developer.hubleto.eu/docs/models/relations

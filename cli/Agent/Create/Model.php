@@ -2,6 +2,8 @@
 
 namespace Hubleto\Erp\Cli\Agent\Create;
 
+use Hubleto\Framework\Helper;
+
 class Model extends \Hubleto\Erp\Cli\Agent\Command
 {
   public function run(): void
@@ -37,12 +39,17 @@ class Model extends \Hubleto\Erp\Cli\Agent\Command
     $tplFolder = __DIR__ . '/../../Templates/snippets';
     $this->renderer()->addNamespace($tplFolder, 'snippets');
 
+    $appNamespace = trim($appNamespace, '\\');
+    $appNamespaceParts = explode('\\', $appNamespace);
+    $appName = $appNamespaceParts[count($appNamespaceParts) - 1];
+
     $tplVars = [
       'appNamespace' => $appNamespace,
       'model' => $model,
       'sqlTable' => strtolower($modelPluralForm),
       'modelPluralFormKebab' => $modelPluralFormKebab,
       'migrationCounter' => '0001',
+      'appRootUrlSlug' => Helper::str2url($appName),
     ];
 
     if (!is_dir($app->srcFolder . '/Models')) {

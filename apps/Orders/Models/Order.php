@@ -237,6 +237,14 @@ class Order extends \Hubleto\Erp\Model
       'type' => 'multipleSelectButtons',
       'options' => $fCustomerOptions,
     ]);
+
+    $description->addFilter('fOrderWithPlan', [
+      'title' => $this->translate('Planning'),
+      'options' => [
+        1 => $this->translate('With plan'),
+        2 => $this->translate('Without plan')
+      ]
+    ]);
     
     return $description;
   }

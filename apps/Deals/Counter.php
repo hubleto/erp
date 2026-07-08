@@ -8,15 +8,14 @@ class Counter extends Core
 {
 
   /**
-   * [Description for openDealsWithoutFuturePlan]
+   * [Description for queryForOpenDealsWithoutFuturePlan]
    *
-   * @return int
+   * @return mixed
    * 
    */
-  public function openDealsWithoutFuturePlan(): int
+  public function queryForOpenDealsWithoutFuturePlan(): mixed
   {
     $mDeal = $this->getModel(Models\Deal::class);
-    $idUser = $this->authProvider()->getUserId();
 
     return $mDeal->record->prepareReadQuery()
       ->whereDoesntHave('ACTIVITIES', function($q) {
@@ -24,13 +23,19 @@ class Counter extends Core
         $q->whereDate('date_start', '>=', date("Y-m-d"));
       })
       ->where($mDeal->table . '.is_closed', false)
-      ->where(function($q) use ($mDeal, $idUser) {
-        $q->where($mDeal->table . '.id_owner', $idUser);
-        $q->orWhere($mDeal->table . '.id_manager', $idUser);
-      })
-      ->count()
     ;
 
+  }
+
+  /**
+   * [Description for openDealsWithoutFuturePlan]
+   *
+   * @return int
+   * 
+   */
+  public function openDealsWithoutFuturePlan(): int
+  {
+    return $this->queryForOpenDealsWithoutFuturePlan()->count();
   }
 
 }

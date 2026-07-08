@@ -177,6 +177,27 @@ class Order extends \Hubleto\Erp\RecordManager
       if (in_array('workflow_step', $fGroupBy)) $query = $query->groupBy('id_workflow_step');
     }
 
+    if (isset($filters["fOrderWithPlan"])) {
+      switch ($filters["fOrderWithPlan"]) {
+        case 1:
+          $query = $query
+            ->whereHas('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+        case 2:
+          $query = $query
+            ->whereDoesntHave('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+      }
+    }
+
     return $query;
   }
 

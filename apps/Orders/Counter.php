@@ -36,30 +36,45 @@ class Counter extends Core
   }
 
   /**
-   * [Description for ordersAwaitingInvoice]
+   * [Description for queryForOpenOrdersWithoutFuturePlan]
    *
-   * @return array
+   * @return mixed
    * 
    */
-  public function ordersAwaitingInvoice(): array
+  public function queryForOpenOrdersWithoutFuturePlan(): mixed
   {
     $mOrder = $this->getModel(Models\Order::class);
 
-    // $lastDayOfPreviousMonth = date("Y-m-t", strtotime("-1 month"));
+    return $mOrder->record->prepareReadQuery()
+      ->whereDoesntHave('ACTIVITIES', function($q) {
+        $q->where('completed', false);
+        $q->whereDate('date_start', '>=', date("Y-m-d"));
+      })
+      ->where($mOrder->table . '.is_closed', false)
+    ;
 
-    // return $mOrder->record
-    //   ->prepareReadQuery()
-    //   ->selectRaw('
-    //     orders.id,
-    //     ifnull(max(orders_items.charged_period_end), "2000-01-01") as last_charged_period_end
-    //   ')
-    //   ->leftJoin('orders_items', 'orders_items.id_order', '=', 'orders.id')
-    //   ->groupBy('orders.id')
-    //   ->whereRaw('orders.payment_period > 0 and ifnull(orders.is_closed, 0) = 0')
-    //   ->havingRaw('last_charged_period_end <= "' . $lastDayOfPreviousMonth . '"')
-    //   ->pluck('id')
-    //   ?->toArray()
-    // ;
+  }
+
+  /**
+   * [Description for openOrdersWithoutFuturePlan]
+   *
+   * @return int
+   * 
+   */
+  public function openOrdersWithoutFuturePlan(): int
+  {
+    return $this->queryForOpenOrdersWithoutFuturePlan()->count();
+  }
+
+  /**
+   * [Description for queryForOrdersAwaitingInvoice]
+   *
+   * @return mixed
+   * 
+   */
+  public function queryForOrdersAwaitingInvoice(): mixed
+  {
+    $mOrder = $this->getModel(Models\Order::class);
 
     return $mOrder->record
       ->prepareReadQuery()
@@ -74,8 +89,18 @@ class Counter extends Core
         and ifnull(orders.date_next_invoice_expected, "2100-01-01") <= now()
       ')
       ->pluck('id')
-      ?->toArray()
     ;
+  }
+
+  /**
+   * [Description for ordersAwaitingInvoice]
+   *
+   * @return int
+   * 
+   */
+  public function ordersAwaitingInvoice(): int
+  {
+    return $this->queryForOrdersAwaitingInvoice()->count();
   }
 
 }

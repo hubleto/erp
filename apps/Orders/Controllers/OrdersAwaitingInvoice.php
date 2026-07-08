@@ -22,7 +22,7 @@ class OrdersAwaitingInvoice extends \Hubleto\Erp\Controller
     /** @var Counter */
     $counter = $this->getService(Counter::class);
 
-    $ordersAwaitingInvoice = $counter->ordersAwaitingInvoice();
+    $ordersAwaitingInvoice = $counter->queryForOrdersAwaitingInvoice()?->toArray();
 
     /** @var Order */
     $mOrder = $this->getModel(Order::class);

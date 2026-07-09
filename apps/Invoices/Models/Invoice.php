@@ -311,8 +311,6 @@ class Invoice extends \Hubleto\Erp\Model {
       && count($payments) > 0
     ) {
       $dataToUpdate['date_payment'] = date("Y-m-d", $lastPaymentTs);
-    } else {
-      $dataToUpdate['date_payment'] = null;
     }
 
     // update

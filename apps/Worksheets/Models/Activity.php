@@ -80,7 +80,7 @@ class Activity extends \Hubleto\Erp\Model
 
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
-        $description->showOnlyColumns(['identifier', 'title', 'id_developer', 'virt_worked']);
+        $description->showOnlyColumns(['identifier', 'title', 'id_developer', 'worked_hours']);
       break;
       default:
         $description->ui['addButtonText'] = $this->translate('Add Activity');

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
 import TableMilestoneReports from './TableMilestoneReports';
+import TableMilestoneTasks from './TableMilestoneTasks';
 
 interface FormMilestoneProps extends FormExtendedProps { }
 interface FormMilestoneState extends FormExtendedState { }
@@ -39,11 +40,23 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
             {this.inputWrapper('id_responsible')}
             {this.inputWrapper('title')}
             {this.inputWrapper('date_due')}
-            {this.inputWrapper('expected_output')}
             {this.inputWrapper('description')}
             {this.inputWrapper('is_closed')}
+            {R.id > 0 ? <>
+              <div className='grow card'>
+                <div className='card-header'>{this.translate('Tasks')}</div>
+                <div className='card-body'>
+                  <TableMilestoneTasks
+                    tag={"table_project_milestone_task"}
+                    parentForm={this}
+                    uid={this.props.uid + "_table_project_milestone_task"}
+                    idMilestone={R.id}
+                  />
+                </div>
+              </div>
+            </> : null}
           </div>
-          {R.id > 0 ?
+          {R.id > 0 ? <>
             <div className='grow card'>
               <div className='card-header'>{this.translate('Reports')}</div>
               <div className='card-body'>
@@ -55,7 +68,7 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
                 />
               </div>
             </div>
-          : null}
+          </> : null}
         </div>;
       break;
     }

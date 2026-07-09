@@ -29,6 +29,9 @@ class Loader extends \Hubleto\Erp\App
       '/^projects\/tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsTasks::class,
       '/^projects\/tasks\/add?\/?$/' => ['controller' => Controllers\ProjectsTasks::class, 'vars' => [ 'recordId' => -1 ]],
 
+      '/^projects\/tasks\/milestones(\/(?<recordId>\d+))?\/?$/' => Controllers\MilestonesTasks::class,
+      '/^projects\/tasks\/milestones\/add?\/?$/' => ['controller' => Controllers\MilestonesTasks::class, 'vars' => [ 'recordId' => -1 ]],
+
       '/^projects\/orders(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsOrders::class,
       '/^projects\/orders\/add?\/?$/' => ['controller' => Controllers\ProjectsOrders::class, 'vars' => [ 'recordId' => -1 ]],
 
@@ -69,6 +72,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\ProjectTask::class)->upgradeSchema();
       $this->getModel(Models\ProjectActivity::class)->upgradeSchema();
       $this->getModel(Models\Expense::class)->upgradeSchema();
+      $this->getModel(Models\MilestoneTask::class)->upgradeSchema();
     }
   }
 
@@ -123,6 +127,10 @@ class Loader extends \Hubleto\Erp\App
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/orders">
           <span class="icon"><i class="fas fa-check-double"></i></span>
           <span class="text">' . $this->translate('Assign projects to orders') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/tasks/milestones">
+          <span class="icon"><i class="fas fa-check-double"></i></span>
+          <span class="text">' . $this->translate('Assign task to milestone') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/monthly-summary">
           <span class="icon"><i class="fas fa-chart-bar"></i></span>

@@ -719,6 +719,8 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
           tag={"table_deal_task"}
           parentForm={this}
           uid={this.props.uid + "_table_deal_task"}
+          idCustomer={R.id_customer}
+          idContact={R.id_contact}
           junctionTitle='Deal'
           junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
           junctionSourceColumn='id_deal'

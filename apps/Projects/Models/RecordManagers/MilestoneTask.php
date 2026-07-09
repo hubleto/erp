@@ -2,23 +2,23 @@
 
 namespace Hubleto\App\Community\Projects\Models\RecordManagers;
 
-use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+use Hubleto\App\Community\Tasks\Models\RecordManagers\Task;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class MilestoneReport extends \Hubleto\Erp\RecordManager
+class MilestoneTask extends \Hubleto\Erp\RecordManager
 {
-  public $table = 'projects_milestone_reports';
+  public $table = 'projects_milestones_tasks';
 
-  /** @return BelongsTo<Deal, covariant ProjectActivity> */
+  /** @return BelongsTo<Tag, covariant LeadTag> */
   public function MILESTONE(): BelongsTo
   {
     return $this->belongsTo(Milestone::class, 'id_milestone', 'id');
   }
 
-  /** @return BelongsTo<Deal, covariant ProjectActivity> */
-  public function REPORTED_BY(): BelongsTo
+  /** @return BelongsTo<Task, covariant LeadTag> */
+  public function TASK(): BelongsTo
   {
-    return $this->belongsTo(User::class, 'id_reported_by', 'id');
+    return $this->belongsTo(Task::class, 'id_task', 'id');
   }
 
   /**
@@ -42,5 +42,4 @@ class MilestoneReport extends \Hubleto\Erp\RecordManager
 
     return $query;
   }
-
 }

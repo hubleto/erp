@@ -111,7 +111,7 @@ class Task extends \Hubleto\Erp\Model
       'shared_folder' => (new Varchar($this, $this->translate('Shared folder (online document storage)')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
-      'virt_worked' => (new Virtual($this, $this->translate('Worked')))->setDefaultVisible()->setUnit("hours")
+      'virt_worked_hours' => (new Virtual($this, $this->translate('Worked')))->setDefaultVisible()->setUnit("hours")->setSearchAlgorithm('number')
         ->setProperty('sql', "select sum(ifnull(worked_hours, 0)) from worksheet_activities where id_task = tasks.id")
       ,
       'virt_related_to' => (new Virtual($this, $this->translate('Related to')))->setDefaultVisible()
@@ -133,7 +133,7 @@ class Task extends \Hubleto\Erp\Model
     switch ($this->router()->urlParamAsString('view')) {
       case 'briefOverview':
         $description->hide(['header', 'footer']);
-        $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_workflow_step', 'virt_worked', 'hours_estimation']);
+        $description->showOnlyColumns(['identifier', 'title', 'id_main_developer', 'id_workflow_step', 'virt_worked_hours', 'hours_estimation']);
       break;
       default:
         $description->ui['addButtonText'] = $this->translate('Add Task');

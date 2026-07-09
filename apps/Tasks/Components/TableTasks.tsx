@@ -6,6 +6,7 @@ import FormActivity from '@hubleto/apps/Worksheets/Components/FormActivity';
 
 interface TableTasksProps extends TableExtendedProps {
   idCustomer?: any,
+  idContact?: any,
 }
 
 interface TableTasksState extends TableExtendedState {
@@ -52,6 +53,7 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
     return {
       ...super.getEndpointParams(),
       idCustomer: this.props.idCustomer,
+      idContact: this.props.idContact,
     }
   }
 
@@ -95,8 +97,12 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     formProps.idCustomer = this.props.idCustomer;
+    formProps.idContact = this.props.idContact;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_customer: this.props.idCustomer };
+    formProps.description.defaultValues = {
+      id_customer: this.props.idCustomer,
+      id_contact: this.props.idContact,
+    };
     return <FormTask {...formProps}/>;
   }
 

@@ -22,6 +22,7 @@ class Milestone extends \Hubleto\Erp\Model
     'PROJECT' => [ self::BELONGS_TO, Project::class, 'id_project', 'id' ],
     'RESPONSIBLE' => [ self::BELONGS_TO, User::class, 'id_responsible', 'id' ],
     'REPORTS' => [ self::HAS_MANY, MilestoneReport::class, 'id_milestone', 'id' ],
+    'TASKS' => [ self::HAS_MANY, MilestoneTask::class, 'id_milestone', 'id'],
   ];
 
   public function describeColumns(): array
@@ -35,7 +36,7 @@ class Milestone extends \Hubleto\Erp\Model
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setRequired(),
       'expected_output' => (new Text($this, $this->translate('Expected output')))->setDefaultVisible()->setRequired(),
       'description' => (new Text($this, $this->translate('Description of activities')))->setDefaultVisible(),
-      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
+      // 'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
 
       'virt_last_report_date' => (new Virtual($this, $this->translate('Last report')))
@@ -71,7 +72,7 @@ class Milestone extends \Hubleto\Erp\Model
       case 'briefOverview':
         $description->hide(['header', 'footer']);
         $description->showOnlyColumns(['title', 'date_due', 'virt_last_report_date', 'virt_last_progress_percent']);
-        $description->permissions = [false, true, false, false];
+        $description->permissions = ['canCreate' => false, 'canRead' => true, 'canUpdate' => false, 'canDelete' => false];
       break;
       default:
         $description->ui['addButtonText'] = $this->translate('Add milestone');

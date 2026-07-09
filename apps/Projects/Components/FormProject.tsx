@@ -244,6 +244,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
             parentForm={this}
             uid={this.props.uid + "_table_project_task"}
             idCustomer={R.id_customer}
+            idContact={R.id_contact}
             junctionTitle='Project'
             junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
             junctionSourceColumn='id_project'

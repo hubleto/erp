@@ -180,7 +180,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
             if (nextActivityDate !== null) return;
             const activity = R.ACTIVITIES[key];
             const dateStart = moment(activity.date_start);
-            if (dateStart.isAfter()) {
+            if (!activity.completed && dateStart.isAfter()) {
               nextActivity = activity;
               nextActivityDate = dateStart;
             }

@@ -144,7 +144,8 @@ class Order extends \Hubleto\Erp\Model
           select `a`.`date_start`
           from `order_activities` `a`
           where
-            `a`.`id_order` = `orders`.`id`
+            `a`.`completed` = 0
+            and `a`.`id_order` = `orders`.`id`
             and `a`.`date_start` >= now()
           order by
             `a`.`date_start` asc

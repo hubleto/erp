@@ -230,7 +230,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
             if (nextActivityDate !== null) return;
             const activity = R.ACTIVITIES[key];
             const dateStart = moment(activity.date_start);
-            if (dateStart.isAfter()) {
+            if (!activity.completed && dateStart.isAfter()) {
               nextActivity = activity;
               nextActivityDate = dateStart;
             }

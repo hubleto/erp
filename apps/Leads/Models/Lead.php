@@ -138,7 +138,8 @@ class Lead extends \Hubleto\Erp\Model
           select `a`.`date_start`
           from `lead_activities` `a`
           where
-            `a`.`id_lead` = `leads`.`id`
+            `a`.`completed` = 0
+            and `a`.`id_lead` = `leads`.`id`
             and `a`.`date_start` >= now()
           order by
             `a`.`date_start` asc

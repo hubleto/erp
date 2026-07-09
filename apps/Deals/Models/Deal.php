@@ -146,7 +146,8 @@ class Deal extends \Hubleto\Erp\Model
           select `a`.`date_start`
           from `deal_activities` `a`
           where
-            `a`.`id_deal` = `deals`.`id`
+            `a`.`completed` = 0
+            and `a`.`id_deal` = `deals`.`id`
             and `a`.`date_start` >= now()
           order by
             `a`.`date_start` asc

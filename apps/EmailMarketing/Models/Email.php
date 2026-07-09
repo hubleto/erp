@@ -5,6 +5,7 @@ namespace Hubleto\App\Community\EmailMarketing\Models;
 
 use Hubleto\App\Community\Mail\Models\Template;
 use Hubleto\App\Community\Mail\Models\Account;
+use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\Framework\Db\Column\Json;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -68,6 +69,12 @@ class Email extends \Hubleto\Erp\Model
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s'))->setReadonly(),
       'id_launched_by' => (new Lookup($this, $this->translate('Lanuched by'), User::class))->setReadonly(true),
       'datetime_launched' => (new DateTime($this, $this->translate('Launched')))->setReadonly(true)->setDefaultVisible(),
+      'virt_recipients_count' => (new Virtual($this, $this->translate('Recipients')))->setDefaultVisible()
+        ->setSearchAlgorithm('number')
+        ->setProperty('sql',"
+          SELECT count(`r`.`id`) FROM `email_marketing_recipients` `r`
+          WHERE `r`.`id_email` = `email_marketing_emails`.`id`
+        "),
     ]);
   }
 

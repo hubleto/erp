@@ -126,10 +126,11 @@
     </div>
     <div style="clear:both;"></div>
   </div>
-  <!-- FAKTURACNY TITUL -->
-  {% if description %}
-    <div style="text-align:left;margin:1em 0em;color:blue">{{ description }}</div>
+
+  {% if description_before %}
+    <div style="text-align:left;margin:1em 0em;color:blue">{{ description_before }}</div>
   {% endif %}
+
   <!-- POLOZKY -->
   <div class="dmain">
     <div class="content">
@@ -238,6 +239,11 @@
       </tr>
     </tbody>
   </table>
+
+  {% if description_after %}
+    <div style="text-align:left;margin:1em 0em;color:blue">{{ description_after }}</div>
+  {% endif %}
+
   <br/>
   <br/>
   Vystavil {{ ISSUED_BY.first_name }} {{ ISSUED_BY.last_name }}.

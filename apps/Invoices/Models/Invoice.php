@@ -177,7 +177,7 @@ class Invoice extends \Hubleto\Erp\Model {
     }
 
     $description->addFilter('fInboundOutbound', [
-      'title' => $this->translate('Inbound / Outbound'),
+      // 'title' => $this->translate('Inbound / Outbound'),
       'direction' => 'horizontal',
       'options' => [
         self::INBOUND_INVOICE => $this->translate('Inbound'),
@@ -185,17 +185,13 @@ class Invoice extends \Hubleto\Erp\Model {
       ]
     ]);
 
-    $description->addFilter('fSent', [
-      'title' => $this->translate('Sent / Not sent'),
-      'direction' => 'horizontal',
-      'options' => [
-        1 => $this->translate('Sent'),
-        2 => $this->translate('Not sent'),
-      ]
+    $description->addFilter('fType', [
+      // 'title' => $this->translate('Type'),
+      'options' => array_map(fn($v) => $this->translate($v), self::TYPES)
     ]);
 
     $description->addFilter('fDue', [
-      'title' => $this->translate('Due / Not due'),
+      // 'title' => $this->translate('Due / Not due'),
       'direction' => 'horizontal',
       'options' => [
         1 => $this->translate('Due'),
@@ -203,8 +199,17 @@ class Invoice extends \Hubleto\Erp\Model {
       ]
     ]);
 
+    $description->addFilter('fSent', [
+      // 'title' => $this->translate('Sent / Not sent'),
+      'direction' => 'horizontal',
+      'options' => [
+        1 => $this->translate('Sent'),
+        2 => $this->translate('Not sent'),
+      ]
+    ]);
+
     $description->addFilter('fPaid', [
-      'title' => $this->translate('Paid / Not paid'),
+      // 'title' => $this->translate('Paid / Not paid'),
       'direction' => 'horizontal',
       'options' => [
         1 => $this->translate('Paid'),
@@ -224,12 +229,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'default' => 0,
     ]);
 
-    $description->addFilter('fType', [
-      'title' => $this->translate('Type'),
-      'options' => array_map(fn($v) => $this->translate($v), self::TYPES)
-    ]);
-
-    $description->addFilter('fInvoiceWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Workflow step'));
+    // $description->addFilter('fInvoiceWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Workflow step'));
 
     return $description;
   }

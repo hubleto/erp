@@ -2,7 +2,7 @@
   <div class="flex gap-2">
     <div class="bg-gray-50 p-1">
       <div class="text-primary">{{ item.DEVELOPER.nick ?? (item.DEVELOPER.email ?? '<div class="text-red-800 text-xs">?</div>') }}</div>
-      <div class="text-primary">{{ item.TESTER.nick ?? (item.TESTER.email ?? '<div class="text-red-800 text-xs">?</div>') }}</div>
+      {# <div class="text-primary">{{ item.TESTER.nick ?? (item.TESTER.email ?? '<div class="text-red-800 text-xs">?</div>') }}</div> #}
     </div>
     <div>
       <div class="text-gray-400 text-nowrap">{{ item.CUSTOMER.name ?? '?' }}</div>

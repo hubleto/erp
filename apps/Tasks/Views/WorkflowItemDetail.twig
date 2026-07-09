@@ -9,9 +9,18 @@
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
     </div>
   </div>
-  <div class="badge badge-info text-xs">
-    <i class="fas fa-clock mr-2"></i>
-    {{ hubleto.locale().formatNumber(item.virt_worked_hours, 2) }} h
+  <div>
+    <span
+      class="badge badge-info text-xs border border-blue-200 inline-block text-nowrap"
+      style="
+        width:{{ item.virt_worked_hours/2 }}px;
+        max-width:360px;
+        overflow: visible;
+      "
+    >
+      <i class="fas fa-clock mr-2"></i>
+      {{ hubleto.locale().formatNumber(item.virt_worked_hours, 2) }} h
+    </span>
   </div>
   {% for t in item.TODO %}
     {% if not t.is_closed %}

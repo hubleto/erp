@@ -137,7 +137,7 @@ class Loader extends \Hubleto\Erp\App
       . ($this->openLeadsWithoutFuturePlan > 0 ? '
           <a
             href="' . $this->env()->projectUrl . '/leads?filters%5BfLeadClosed%5D=0&filters%5BfLeadWithPlan%5D=2"
-          class="block alert alert-danger"
+          class="block badge badge-danger"
           >' . $this->openLeadsWithoutFuturePlan . ' ' . $this->translate('open leads without future plan') . '</a>
         ' : '')
     ;

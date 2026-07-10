@@ -125,8 +125,8 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
 
     return
-      $this->countDueAndChargeableItemsNotPreparedForInvoice
-      + $this->countOrdersAwaitingInvoice
+      // $this->countDueAndChargeableItemsNotPreparedForInvoice
+      $this->countOrdersAwaitingInvoice
       + $this->countOpenOrdersWithoutFuturePlan
     ;
   }
@@ -143,7 +143,7 @@ class Loader extends \Hubleto\Erp\App
       ($this->countOrdersAwaitingInvoice > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/orders/orders-awaiting-invoice"
-          class="block alert alert-danger"
+          class="block badge badge-danger"
         >
           ' . $this->countOrdersAwaitingInvoice . ' ' . $this->translate('orders are awaiting invoice') . '
         </a>
@@ -151,7 +151,7 @@ class Loader extends \Hubleto\Erp\App
       . ($this->countOpenOrdersWithoutFuturePlan > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/orders?filters%5BfOrderClosed%5D=1&filters%5BfOrderWithPlan%5D=2"
-          class="block alert alert-danger"
+          class="block badge badge-danger"
         >
           ' . $this->countOpenOrdersWithoutFuturePlan . ' ' . $this->translate('orders without future plan') . '
         </a>

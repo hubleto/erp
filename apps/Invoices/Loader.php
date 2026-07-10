@@ -136,19 +136,19 @@ class Loader extends \Hubleto\Erp\App
       ($this->notPaidInvoicesCount > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
-          class="block alert alert-warning"
+          class="block badge badge-warning"
         >' . $this->translate('Not paid') . ': ' . $this->notPaidInvoicesCount . '</a>
       ' : '')
       . ($this->dueAndNotPaidInvoicesCount > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
-          class="block alert alert-danger"
+          class="block badge badge-danger"
         >' . $this->translate('Due and not paid') . ': ' . $this->dueAndNotPaidInvoicesCount . '</a>
       ' : '')
       . ($this->unsentInvoicesCount > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
-          class="block alert alert-danger"
+          class="block badge badge-danger"
         >' . $this->translate('Not sent') . ': ' . $this->unsentInvoicesCount . '</a>
       ' : '')
     ;

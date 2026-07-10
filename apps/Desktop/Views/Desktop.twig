@@ -347,7 +347,7 @@
       class="{% if viewParams.secondSidebar != '' %} sidebar-two-levels {% endif %}"
     >
       {% if viewParams.priorityNotifications != '' %}
-        <div class="block md:hidden">{{ viewParams.priorityNotifications|raw }}</div>
+        <div class="block md:hidden pb-2">{{ viewParams.priorityNotifications|raw }}</div>
       {% endif %}
 
       {{ contentHtml|raw }}

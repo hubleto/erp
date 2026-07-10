@@ -137,7 +137,7 @@ class Loader extends \Hubleto\Erp\App
       . ($this->openDealsWithoutFuturePlan > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/deals?filters%5BfDealClosed%5D=0&filters%5BfDealWithPlan%5D=2"
-          class="block alert alert-danger"
+          class="block badge badge-danger"
         >' . $this->openDealsWithoutFuturePlan . ' ' . $this->translate('open deals without future plan') . '</a>
       ' : '')
     ;

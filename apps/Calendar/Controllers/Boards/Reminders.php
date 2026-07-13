@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Calendar\Controllers\Boards;
 
+use \Hubleto\App\Community\Calendar\Events;
+
 class Reminders extends \Hubleto\Erp\Controller
 {
   public bool $hideDefaultDesktop = true;
@@ -10,8 +12,9 @@ class Reminders extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    $events = $this->getService(\Hubleto\App\Community\Calendar\Events::class);
-    list($remindersToday, $remindersTomorrow, $remindersLater) = $events->loadRemindersSummary();
+    /** @var Events */
+    $events = $this->getService(Events::class);
+    list($remindersToday, $remindersTomorrow, $remindersLater) = $events->loadRemindersSummary($this->authProvider()->getUserId());
 
     $this->viewParams['today'] = date("Y-m-d");
     $this->viewParams['remindersToday'] = $remindersToday;

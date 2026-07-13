@@ -2,6 +2,8 @@
 
 namespace Hubleto\App\Community\Calendar\Controllers\Api;
 
+use \Hubleto\App\Community\Calendar\Events;
+
 class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
 {
   public function formatReminder(string $category, string $color, array $reminder): array
@@ -19,8 +21,9 @@ class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
   {
     $digest = [];
 
-    $events = $this->getService(\Hubleto\App\Community\Calendar\Events::class);
-    list($remindersToday, $remindersTomorrow, $remindersLater) = $events->loadRemindersSummary($this->user['id'] ?? 0);
+    /** @var Events */
+    $events = $this->getService(Events::class);
+    list($remindersToday, $remindersTomorrow, $remindersLater) = $events->loadRemindersSummary($this->authProvider()->getUserId());
 
     foreach ($remindersToday as $reminder) {
       $digest[] = $this->formatReminder($this->translate('Today'), '#EED202', $reminder);

@@ -42,7 +42,11 @@ class LeadValueByScore extends \Hubleto\Erp\Controller
       $chartData['labels'][] = 'Score ' . $lead['score'];
       $chartData['values'][] = $lead['price'];
 
-      $scoreNormalized = $lead['score'] / $maxScore;
+      if ($maxScore > 0) {
+        $scoreNormalized = $lead['score'] / $maxScore;
+      } else {
+        $scoreNormalized = $lead['score'];
+      }
 
       $chartData['colors'][] = 'rgb('
         . (40 + $scoreNormalized * 160)

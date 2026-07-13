@@ -30,12 +30,26 @@
   {% endif %}
 {% endmacro %}
 
-{% if viewParams.warningsTotal == 0 %}
-  <div class="alert alert-info">
-    {{ translate('No warnings for leads.') }}<br/>
+<div class="flex flex-col gap-2 md:flex-row">
+  <div class="flex-1 flex flex-col gap-2 items-center">
+    <button
+      class="btn btn-transparent"
+      onclick="$('#{{ viewParams.panelUid }}_details').slideToggle()"
+    >
+      <div class="text-[3em] p-4 text-primary">{{ viewParams.warningsTotal|length }}</div>
+    </button>
+    lead warnings
   </div>
-{% else %}
-  {% for warnings in viewParams.warnings %}
-    {{ _self.showWarnings(warnings, viewParams, user) }}
-  {% endfor %}
-{% endif %}
+</div>
+
+<div id="{{ viewParams.panelUid }}_details" style="display:none">
+  {% if viewParams.warningsTotal == 0 %}
+    <div class="alert alert-info">
+      {{ translate('No warnings for leads.') }}<br/>
+    </div>
+  {% else %}
+    {% for warnings in viewParams.warnings %}
+      {{ _self.showWarnings(warnings, viewParams, user) }}
+    {% endfor %}
+  {% endif %}
+</div>

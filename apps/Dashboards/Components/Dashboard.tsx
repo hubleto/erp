@@ -5,6 +5,7 @@ import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import FormPanel from "./FormPanel";
 import FormDashboard from './FormDashboard';
+import * as uuid from 'uuid';
 
 export interface Panel {
   id: number,
@@ -74,6 +75,8 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
       }
 
       configuration.idPanel = panels[i].id;
+      configuration.panelUrlSlug = panels[i].board_url_slug;
+      configuration.panelUid = uuid.v4();
 
       if (!panels[i].contentLoaded) {
         request.post(

@@ -218,6 +218,8 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
                   targetColumn='id_lead'
                   sourceColumn='id_tag'
                   colorColumn='_LOOKUP_COLOR'
+                  showSelect={false}
+                  showTagButtons={true}
                   onChange={(input: any, value: any) => {
                     R.TAGS = value;
                     this.setState({record: R});

@@ -25,47 +25,78 @@
   </div>
 {% endmacro %}
 
-
-{% if viewParams.remindersToday|length > 0 %}
-  <b>{{ translate('Today') }}</b><br/>
-  {{ _self.reminders(viewParams.remindersToday, viewParams, user) }}
-{% else %}
-  <div class="alert alert-info">
-    {{ translate("Let's have a break. You have nothing to do for today.") }} 🎉<br/>
+<div class="flex flex-col gap-2 md:flex-row">
+  <div class="flex-1 flex flex-col gap-2 items-center">
+    <button
+      class="btn btn-transparent"
+      onclick="$('#{{ viewParams.panelUid }}_details').slideToggle()"
+    >
+      <div class="text-[3em] p-4 text-primary">{{ viewParams.remindersToday|length }}</div>
+    </button>
+    today
   </div>
-{% endif %}
-
-<div class="flex gap-2 mt-2 items-center flex-wrap">
-  {% if viewParams.remindersTomorrow|length > 0 %}
+  <div class="flex-1 flex flex-col gap-2 items-center">
     <button
       class="btn btn-transparent"
-      onclick="$('#reminders-tomorrow').slideToggle();"
+      onclick="$('#{{ viewParams.panelUid }}_details').slideToggle()"
     >
-      <span class="icon"><i class="fas fa-ellipsis"></i></span>
-      <span class="text">{{ viewParams.remindersTomorrow|length }} {{ translate('reminders tomorrow') }}</span>
+      <div class="text-[3em] p-4 text-primary">{{ viewParams.remindersTomorrow|length }}</div>
     </button>
-  {% endif %}
-  {% if viewParams.remindersLater|length > 0 %}
+    tomorrow
+  </div>
+  <div class="flex-1 flex flex-col gap-2 items-center">
     <button
       class="btn btn-transparent"
-      onclick="$('#reminders-later').slideToggle();"
+      onclick="$('#{{ viewParams.panelUid }}_details').slideToggle()"
     >
-      <span class="icon"><i class="fas fa-ellipsis"></i></span>
-      <span class="text">{{ viewParams.remindersLater|length }} {{ translate('reminders later') }}</span>
+      <div class="text-[3em] p-4 text-primary">{{ viewParams.remindersLater|length }}</div>
     </button>
-  {% endif %}
+    later
+  </div>
 </div>
 
-{% if viewParams.remindersTomorrow|length > 0 %}
-  <div id="reminders-tomorrow" style="display:none" class="mt-2">
-    <b>{{translate("Tomorrow")}}</b><br/>
-    {{ _self.reminders(viewParams.remindersTomorrow, viewParams, user) }}
-  </div>
-{% endif %}
+<div id="{{ viewParams.panelUid }}_details" style="display:none">
+  {% if viewParams.remindersToday|length > 0 %}
+    <b>{{ translate('Today') }}</b><br/>
+    {{ _self.reminders(viewParams.remindersToday, viewParams, user) }}
+  {% else %}
+    <div class="alert alert-info">
+      {{ translate("Let's have a break. You have nothing to do for today.") }} 🎉<br/>
+    </div>
+  {% endif %}
 
-{% if viewParams.remindersLater|length > 0 %}
-  <div id="reminders-later" style="display:none" class="mt-2">
-    <b>{{translate("Later")}}</b><br/>
-    {{ _self.reminders(viewParams.remindersLater, viewParams, user) }}
+  <div class="flex gap-2 mt-2 items-center flex-wrap">
+    {% if viewParams.remindersTomorrow|length > 0 %}
+      <button
+        class="btn btn-transparent"
+        onclick="$('#reminders-tomorrow').slideToggle();"
+      >
+        <span class="icon"><i class="fas fa-ellipsis"></i></span>
+        <span class="text">{{ viewParams.remindersTomorrow|length }} {{ translate('reminders tomorrow') }}</span>
+      </button>
+    {% endif %}
+    {% if viewParams.remindersLater|length > 0 %}
+      <button
+        class="btn btn-transparent"
+        onclick="$('#reminders-later').slideToggle();"
+      >
+        <span class="icon"><i class="fas fa-ellipsis"></i></span>
+        <span class="text">{{ viewParams.remindersLater|length }} {{ translate('reminders later') }}</span>
+      </button>
+    {% endif %}
   </div>
-{% endif %}
+
+  {% if viewParams.remindersTomorrow|length > 0 %}
+    <div id="reminders-tomorrow" style="display:none" class="mt-2">
+      <b>{{translate("Tomorrow")}}</b><br/>
+      {{ _self.reminders(viewParams.remindersTomorrow, viewParams, user) }}
+    </div>
+  {% endif %}
+
+  {% if viewParams.remindersLater|length > 0 %}
+    <div id="reminders-later" style="display:none" class="mt-2">
+      <b>{{translate("Later")}}</b><br/>
+      {{ _self.reminders(viewParams.remindersLater, viewParams, user) }}
+    </div>
+  {% endif %}
+</div>

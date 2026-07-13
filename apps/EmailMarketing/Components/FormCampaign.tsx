@@ -78,6 +78,8 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
                 targetColumn='id_campaign'
                 sourceColumn='id_tag'
                 colorColumn='_LOOKUP_COLOR'
+                showSelect={false}
+                showTagButtons={true}
                 onChange={(input: any, value: any) => {
                   R.TAGS = value;
                   this.updateRecord(R);

@@ -16,9 +16,10 @@
     >
       <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
       <span class="text">{{ app.manifest.nameTranslated }}</span>
-      {% if badgeNumber > 0 %}
-        <div class="badge badge-small badge-red ml-auto mr-1">{{ badgeNumber }}</div>
-      {% endif %}
+      <div
+        id="app_bn_{{ app.manifest.namespace|replace({'\\': '_'}) }}"
+        class="badge badge-small badge-red ml-auto mr-1"
+      ></div>
     </a>
   </div>
 {% endmacro %}
@@ -455,7 +456,27 @@
 
       $.get(
         window.ConfigEnv.projectUrl + '/desktop/api/set-sidebar-group-collapsed',
-        { group: sgid, isCollapsed: sg.data('is-collapsed')}
+        { group: sgid, isCollapsed: sg.data('is-collapsed') }
+      );
+    }
+
+    function getSidebarBadgeNumbers() {
+      $.getJSON(
+        window.ConfigEnv.projectUrl + '/desktop/api/get-sidebar-badge-numbers',
+        {},
+        (data) => {
+          const sbn = data.sidebarBadgeNumbers;
+          if (!sbn) return;
+          Object.keys(sbn).map((app) => {
+            const number = sbn[app];
+            const badge = $('#app_bn_' + app.replaceAll('\\', '_'));
+            if (number > 0) {
+              badge.text(number).show();
+            } else {
+              badge.hide();
+            }
+          })
+        }
       );
     }
 
@@ -475,6 +496,7 @@
     }
 
     applyTheme();
+    setTimeout(function() { getSidebarBadgeNumbers(); }, 1000);
 
   </script>
 

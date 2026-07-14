@@ -19,32 +19,10 @@ class Desktop extends \Hubleto\Erp\Controller
     /** @var Loader */
     $desktopApp = $this->getService(Loader::class);
 
-    $appsInSidebar = $this->appManager()->getEnabledApps();
-    $activatedApp = null;
-
-    foreach ($appsInSidebar as $appNamespace => $app) {
-      if (
-        !$this->getService(PermissionsManager::class)->isAppPermittedForActiveUser($app)
-        || $app->configAsInteger('sidebarOrder') <= 0
-      ) {
-        unset($appsInSidebar[$appNamespace]);
-      }
-      if ($app->isActivated) {
-        $activatedApp = $app;
-      }
-    }
-
-    if ($activatedApp === null) {
-      $activatedApp = $this->appManager()->getApp(\Hubleto\App\Community\Desktop\Loader::class);
-    }
-
-    uasort($appsInSidebar, function ($a, $b) {
-      $aOrder = $a->configAsInteger('sidebarOrder');
-      $bOrder = $b->configAsInteger('sidebarOrder');
-      return $aOrder <=> $bOrder;
-    });
-
+    $appsInSidebar = $desktopApp->getAppsInSidebar();
+    $activatedApp = $desktopApp->getActivatedApp();
     $sidebarGroups = $desktopApp->getSidebarGroups();
+
     $activatedSidebarGroup = [];
     $activatedSidebarGroupUrlSlug = '';
     if ($activatedApp && !empty($activatedApp->manifest['sidebarGroup'])) {
@@ -62,17 +40,7 @@ class Desktop extends \Hubleto\Erp\Controller
       $sidebarGroups[$gUrlSlug]['isCollapsed'] = $sidebarGroupsCollapsed[$gUrlSlug] ?? false;
     } 
 
-    $sidebarBadgeNumbers = [];
-    foreach ($appsInSidebar as $appNamespace => $app) {
-      try {
-        $sidebarBadgeNumbers[$appNamespace] = $app->getSidebarBadgeNumber();
-      } catch (\Throwable $e) {
-        //
-      }
-    }
-
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
-    $this->viewParams['sidebarBadgeNumbers'] = $sidebarBadgeNumbers;
     $this->viewParams['activatedApp'] = $activatedApp;
     $this->viewParams['activatedSidebarGroup'] = $activatedSidebarGroup;
     $this->viewParams['activatedSidebarGroupUrlSlug'] = $activatedSidebarGroupUrlSlug;
@@ -91,8 +59,7 @@ class Desktop extends \Hubleto\Erp\Controller
       }
     }
 
-    /** @var \Hubleto\Framework\AuthProvider $authProvider */
-    $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
+    $authProvider = $this->authProvider();
     $this->viewParams['user'] = $authProvider->getUserFromSession();
 
     $dictionary = $this->translator()->loadFullDictionary($this, $this->authProvider()->getUserLanguage());

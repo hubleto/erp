@@ -2,7 +2,8 @@
 
 namespace Hubleto\App\Community\Desktop;
 
-use Hubleto\Framework\DependencyInjection;
+use Hubleto\App\Community\Settings\PermissionsManager;
+use Hubleto\Erp\App;
 
 class Loader extends \Hubleto\Erp\App
 {
@@ -37,13 +38,14 @@ class Loader extends \Hubleto\Erp\App
 
     $this->router()->get([
       '/^$/' => Controllers\Home::class,
+      '/^desktop\/api\/set-sidebar-group-collapsed\/?$/' => Controllers\Api\SetSidebarGroupCollapsed::class,
+      '/^desktop\/api\/get-sidebar-badge-numbers\/?$/' => Controllers\Api\GetSidebarBadgeNumbers::class,
     ]);
 
     $sidebarGroups = $this->getSidebarGroups();
     foreach ($sidebarGroups as $key => $group) {
       $this->router()->get([
         '/^~\/' . $key . '$/' => ['controller' => $group['controller'] ?? Controllers\SidebarGroup::class, 'vars' => ['group' => $key]],
-        '/^desktop\/api\/set-sidebar-group-collapsed\/?$/' => Controllers\Api\SetSidebarGroupCollapsed::class,
       ]);
     }
 
@@ -52,6 +54,12 @@ class Loader extends \Hubleto\Erp\App
     $this->appMenu = $this->collectExtendibles('AppMenu');
   }
 
+  /**
+   * [Description for getSidebarGroups]
+   *
+   * @return [type]
+   * 
+   */
   public function getSidebarGroups() {
     return $this->config()->getAsArray('sidebarGroups', [
       'crm' => [ 'color' => '#7a23dc', 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
@@ -75,6 +83,58 @@ class Loader extends \Hubleto\Erp\App
       'website' => [ 'color' => '#888888', 'title' => $this->translate('Website'), 'icon' => 'fas fa-globe' ],
       'reporting' => [ 'color' => '#888888', 'title' => $this->translate('Reporting'), 'icon' => 'fas fa-chart-line' ],
     ]);
-}
+  }
+
+  /**
+   * [Description for getAppsInSidebar]
+   *
+   * @return array
+   * 
+   */
+  public function getAppsInSidebar(): array
+  {
+    $appsInSidebar = $this->appManager()->getEnabledApps();
+
+    foreach ($appsInSidebar as $appNamespace => $app) {
+      if (
+        !$this->getService(PermissionsManager::class)->isAppPermittedForActiveUser($app)
+        || $app->configAsInteger('sidebarOrder') <= 0
+      ) {
+        unset($appsInSidebar[$appNamespace]);
+      }
+    }
+
+    uasort($appsInSidebar, function ($a, $b) {
+      $aOrder = $a->configAsInteger('sidebarOrder');
+      $bOrder = $b->configAsInteger('sidebarOrder');
+      return $aOrder <=> $bOrder;
+    });
+
+    return $appsInSidebar;
+  }
+
+  /**
+   * [Description for getActivatedApp]
+   *
+   * @return App|null
+   * 
+   */
+  public function getActivatedApp(): App|null
+  {
+    $activatedApp = null;
+
+    foreach ($this->getAppsInSidebar() as $app) {
+      if ($app->isActivated) {
+        $activatedApp = $app;
+      }
+    }
+
+    if ($activatedApp === null) {
+      $activatedApp = $this->appManager()->getApp(\Hubleto\App\Community\Desktop\Loader::class);
+    }
+
+    return $activatedApp;
+
+  }
 
 }

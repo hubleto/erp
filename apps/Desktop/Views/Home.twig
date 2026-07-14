@@ -1,4 +1,4 @@
-{% set dashboard = viewParams.defaultDashboard %}
+{% set defaultDashboard = viewParams.defaultDashboard %}
 {% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
 <div class="w-full flex gap-2">
@@ -59,9 +59,9 @@
 </div>
 
 {% for m in viewParams.welcomeScreenMessages %}
-  <div class="alert alert-{{ m.class }} items-center flex gap-4 my-1">
+  <div class="alert alert-{{ m.class }} mb-2">
     {% if m.icon %}
-      <div><i class="{{ m.icon }} text-4xl"></i></div>
+      <div class="icon"><i class="{{ m.icon }}"></i></div>
     {% endif %}
     <div class='grow'>
       {% if m.title %}<p><b>{{ m.title|raw }}</b></p>{% endif %}
@@ -73,15 +73,26 @@
   </div>
 {% endfor %}
 
-<div class="mt-2">
-  <h1 style="color: {{ dashboard.color }}">{{ dashboard.title }}</h1>
-  <hblreact-dashboards-dashboard
-    int:id-dashboard='{{ dashboard.id }}'
-    string:redirect-url='{{ config.projectUrl }}'
-    json:panels='{{ dashboard.PANELS|json_encode|raw }}'
-    bool:show-add-new-panel-button='true'
-  ></hblreact-dashboards-dashboard>
-</div>
+{% if defaultDashboard.id == 0 %}
+  <div class="alert alert-info">
+    <div class="icon"><i class="fas fa-table"></i></div>
+    <div class="grow">You do not have default dashboard configured.</div>
+    <div>
+      <a href="{{ config.projectUrl }}/dashboards/manage" class="btn btn-primary">
+        <span class="text">Manage dashboards</span>
+      </a>
+    </div>
+  </div>
+{% else %}
+  <div class="mt-2">
+    <hblreact-dashboards-dashboard
+      int:id-dashboard='{{ defaultDashboard.id }}'
+      string:redirect-url='{{ config.projectUrl }}'
+      json:panels='{{ defaultDashboard.PANELS|json_encode|raw }}'
+      bool:show-add-new-panel-button='true'
+    ></hblreact-dashboards-dashboard>
+  </div>
+{% endif %}
 
 <div class="mx-auto pt-20">
   <img src="{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">

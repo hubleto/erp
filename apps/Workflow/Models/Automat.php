@@ -26,8 +26,8 @@ class Automat extends \Hubleto\Erp\Model
       'trigger' => (new Varchar($this, $this->translate('Trigger')))->setRequired()->setDefaultVisible()->setEnumValues(self::ENUM_TRIGGERS),
       'execution_order' => (new Integer($this, $this->translate('Execution order')))->setRequired()->setDefaultVisible(),
       'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
-      'conditions' => (new Json($this, $this->translate('Conditions')))->setDefaultVisible(),
-      'actions' => (new Json($this, $this->translate('Actions')))->setDefaultVisible(),
+      'conditions' => (new Json($this, $this->translate('Conditions')))->setDefaultVisible()->setReactComponent('InputJson'),
+      'actions' => (new Json($this, $this->translate('Actions')))->setDefaultVisible()->setReactComponent('InputJson'),
     ]);
   }
 

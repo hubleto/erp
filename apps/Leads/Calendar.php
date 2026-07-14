@@ -36,8 +36,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       function (array $activity) {
         if (isset($activity['LEAD'])) {
           $lead = $activity['LEAD'];
-          $customer = $lead['CUSTOMER'] ?? [];
-          return 'Lead #' . $lead['id'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
+          return 'Lead ' . $lead['title'];
         } else {
           return '';
         }

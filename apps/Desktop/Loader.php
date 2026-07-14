@@ -43,6 +43,7 @@ class Loader extends \Hubleto\Erp\App
     foreach ($sidebarGroups as $key => $group) {
       $this->router()->get([
         '/^~\/' . $key . '$/' => ['controller' => $group['controller'] ?? Controllers\SidebarGroup::class, 'vars' => ['group' => $key]],
+        '/^desktop\/api\/set-sidebar-group-collapsed\/?$/' => Controllers\Api\SetSidebarGroupCollapsed::class,
       ]);
     }
 

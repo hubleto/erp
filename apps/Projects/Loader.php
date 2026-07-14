@@ -126,7 +126,7 @@ class Loader extends \Hubleto\Erp\App
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/orders">
           <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Assign projects to orders') . '</span>
+          <span class="text">' . $this->translate('Assign project to order') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/tasks/milestones">
           <span class="icon"><i class="fas fa-check-double"></i></span>

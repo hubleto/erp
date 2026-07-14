@@ -21,8 +21,20 @@ class AppMenu extends \Hubleto\Framework\Extendible
       ],
       [
         'app' => $this->app,
-        'url' => 'projects/task-assignment',
-        'title' => $this->app->translate('Task assignment'),
+        'url' => 'projects/tasks',
+        'title' => $this->app->translate('Assign task to project'),
+        'icon' => 'fas fa-check-double',
+      ],
+      [
+        'app' => $this->app,
+        'url' => 'projects/orders',
+        'title' => $this->app->translate('Assign project to order'),
+        'icon' => 'fas fa-check-double',
+      ],
+      [
+        'app' => $this->app,
+        'url' => 'projects/milestone',
+        'title' => $this->app->translate('Assign task to milestone'),
         'icon' => 'fas fa-check-double',
       ],
       [

@@ -6,6 +6,7 @@ use Hubleto\App\Community\Worksheets\Models\Activity;
 
 class MonthlySummary extends \Hubleto\Erp\Controller
 {
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

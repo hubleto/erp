@@ -57,6 +57,11 @@ class Desktop extends \Hubleto\Erp\Controller
       }
     }
 
+    $sidebarGroupsCollapsed = $this->config()->getAsJson('sidebarGroupsCollapsed') ?? [];
+    foreach ($sidebarGroups as $gUrlSlug => $gData) {
+      $sidebarGroups[$gUrlSlug]['isCollapsed'] = $sidebarGroupsCollapsed[$gUrlSlug] ?? false;
+    } 
+
     $sidebarBadgeNumbers = [];
     foreach ($appsInSidebar as $appNamespace => $app) {
       try {

@@ -100,8 +100,8 @@
       {% endfor %}
     </div></div>
 
-    <nav id="default-navbar"><div>
-      <div class="flex items-center">
+    <nav id="default-navbar"><div class="flex items-center gap-2">
+      <div class="flex items-center gap-2">
         <div class="flex flex-row justify-around md:gap-2">
           <a class="flex" href="{{ config.projectUrl }}/" class="w-8 h-8">
             <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
@@ -112,28 +112,37 @@
           </button>
         </div>
       </div>
-      <div class="flex-1 ml-2 max-w-72 hidden md:block">
+      <div class="flex-1 max-w-72 hidden md:block">
         <hblreact-search string:endpoint='api/search'></hblreact-search>
       </div>
-      <div class="ml-2 hidden md:block">
-        <a class="btn btn-transparent text-primary" href="{{ config.projectUrl }}/ai-assistant" data-pr-tooltip="AIAssistant">
-          <span class="icon"><i class="fas fa-robot text-xl"></i></span>
-        </a>
+      <div class="hidden sm:block">
+        <button
+          class="btn btn-transparent"
+          onclick="lchr(true);"
+        >
+          {# <span class="icon"><i class="fas fa-table-cells-large"></i></span> #}
+          <span class="text">{{ translate('Apps') }}</span>
+        </button>
+      </div>
+      <div class="hidden md:block">
+        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
+        </svg>
       </div>
       {% if viewParams.activatedSidebarGroup %}
-        <div class="ml-2 hidden md:block">
+        <div class="hidden md:block">
           <a
             class="btn btn-transparent"
-            style="border-left: 4px solid {{ viewParams.activatedSidebarGroup.color }}"
+            {# style="border-left: 4px solid {{ viewParams.activatedSidebarGroup.color }}" #}
             href="{{ config.projectUrl }}/~/{{ viewParams.activatedSidebarGroupUrlSlug }}"
           >
-            <span class="icon"><i class="{{ viewParams.activatedSidebarGroup.icon }}"></i></span>
+            {# <span class="icon"><i class="{{ viewParams.activatedSidebarGroup.icon }}"></i></span> #}
             <span class="text">{{ viewParams.activatedSidebarGroup.title }}</span>
           </a>
         </div>
-        <div class="ml-2 hidden md:block">
+        <div class="hidden md:block">
           <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m1 9 4-4-4-4"/>
           </svg>
         </div>
       {% endif %}
@@ -142,13 +151,7 @@
           {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
         {% endif %}
       </div>
-      <div class="hidden sm:block ml-2">
-        <button class="btn btn-transparent" onclick="lchr(true);">
-          <span class="icon"><i class="fas fa-table-cells-large"></i></span>
-          <span class="text">{{ translate('Apps') }}</span>
-        </button>
-      </div>
-      <div class="flex-1 ml-2">
+      <div class="flex-1">
         <ul class="flex font-sm gap-1 justify-end">
           {% if viewParams.availableLanguages|length > 0 %}
             <li class="mr-2 hidden md:block">
@@ -173,6 +176,13 @@
                   <img src="{{ hubleto.env().assetsUrl }}/images/flags/{{ (user.language ?: 'en')|lower }}.jpg" style="max-height:1em;max-width:1em;" />
                 </span>
               </button>
+            </li>
+          {% endif %}
+          {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\AiAssistent') %}
+            <li class="mr-2 block">
+              <a class="btn btn-transparent" href="{{ config.projectUrl }}/ai-assistant" data-pr-tooltip="AIAssistant">
+                <span class="icon"><i class="fas fa-robot text-xl"></i></span>
+              </a>
             </li>
           {% endif %}
           {% if viewParams.contextHelpUrl %}
@@ -278,24 +288,43 @@
             {% if appBtns|length == 0 %}
             {% else %}
               <div
-                class="sidebar-group {% if hasActivatedApp %} activated {% endif %}"
+                id="sg_{{ sidebarGroup }}"
+                class="
+                  sidebar-group
+                  {% if hasActivatedApp %} activated {% endif %}
+                  {% if sidebarGroupData.isCollapsed %} collapsed {% endif %}
+                "
                 style="
                   border-left:5px solid {{ sidebarGroupData.color }};
                   border-top:1px solid {{ sidebarGroupData.color }}20;
                   margin-top:1px;
                 "
+                data-is-collapsed="{{ sidebarGroupData.isCollapsed }}"
               >
-                <a
-                  class="sidebar-group-title"
-                  onclick="
-                    $('.sidebar-group').removeClass('activated');
-                    $(this).closest('.sidebar-group').addClass('activated');
-                  "
-                  href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
+                <div class="flex align-justify">
+                  <a
+                    class="sidebar-group-title grow"
+                    onclick="
+                      $('.sidebar-group').removeClass('activated');
+                      $(this).closest('.sidebar-group').addClass('activated');
+                    "
+                    href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
+                  >
+                    {{ sidebarGroupData.title }}
+                  </a>
+                  <button
+                    class="sidebar-group-collapse-expand-btn"
+                    onclick="toggleSidebarGroup('{{ sidebarGroup }}');"
+                  >
+                    <span class="icon icon-collapsed text-[8px]"><i class="fas fa-arrow-down"></i></span>
+                    <span class="icon icon-expanded text-[8px]"><i class="fas fa-arrow-up"></i></span>
+                  </button>
+                </div>
+                <div
+                  id="sg_{{ sidebarGroup }}_btns"
+                  class="sidebar-group-btns"
+                  data-is-collapsed="{{ sidebarGroupData.isCollapsed }}"
                 >
-                  {{ sidebarGroupData.title }}
-                </a>
-                <div id="sg_{{ sidebarGroup }}_btns" class="sidebar-group-btns">
                   <div class="inner">{{ appBtns|join('')|raw }}</div>
                 </div>
               </div>
@@ -400,6 +429,7 @@
         $('#app-launcher').removeClass('visible');
       }
     }
+
     function smis(e, q, b) {
       if (q == '') b.slideDown(100); else {
         let r = new RegExp(q, "i");
@@ -411,6 +441,22 @@
 
     function toggleSidebar() {
       $("#default-sidebar").toggleClass('visible');
+    }
+
+    function toggleSidebarGroup(sgid) {
+      const sg = $('#sg_' + sgid);
+      const btns = sg.find('.sidebar-group-btns');
+      const isCollapsed = sg.data('is-collapsed') == '1';
+
+      sg.data('is-collapsed', !sg.data('is-collapsed'));
+
+      if (sg.data('is-collapsed')) sg.addClass('collapsed');
+      else sg.removeClass('collapsed');
+
+      $.get(
+        window.ConfigEnv.projectUrl + '/desktop/api/set-sidebar-group-collapsed',
+        { group: sgid, isCollapsed: sg.data('is-collapsed')}
+      );
     }
 
     function applyTheme() {

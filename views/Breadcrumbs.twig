@@ -2,12 +2,12 @@
   <ol class="inline-flex items-center md:space-x-2 rtl:space-x-reverse">
     <li>
       <button
-        class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %} btn-primary"
+        class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %}"
         {% if viewParams.appMenu|length == 0 %}
           onclick="location.href='{{ config.projectUrl }}/{{ viewParams.activatedApp.manifest.rootUrlSlug }}';"
         {% endif %}
       >
-        <span class="icon"><i class="{{ viewParams.activatedApp.manifest.icon }}"></i></span>
+        {# <span class="icon"><i class="{{ viewParams.activatedApp.manifest.icon }}"></i></span> #}
         <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>
         {% if viewParams.appMenu|length > 0 %}
           <span class="icon"><i class="fas fa-chevron-down"></i></span>

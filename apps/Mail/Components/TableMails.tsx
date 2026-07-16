@@ -122,6 +122,7 @@ export default class TableExtendedMails extends TableExtended<TableExtendedMails
     if (this.props.showOnlyTemplates) {
       formProps.description = {};
       formProps.description.defaultValues = {
+        ...formProps.description.defaultValues ?? {},
         'is_template': true
       };
     }

@@ -5,6 +5,14 @@ namespace Hubleto\App\Community\Calendar;
 class Events extends \Hubleto\Erp\Core
 {
 
+  /**
+   * [Description for loadRemindersSummary]
+   *
+   * @param int $idUser
+   * 
+   * @return array
+   * 
+   */
   public function loadRemindersSummary(int $idUser = 0): array
   {
     /** @var Controllers\Api\GetCalendarEvents */

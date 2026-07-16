@@ -119,7 +119,7 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
   renderForm(): JSX.Element {
     let formProps: FormContactProps = this.getFormProps();
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = {id_customer: this.props.idCustomer};
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_customer: this.props.idCustomer };
     return <FormContact {...formProps}/>;
   }
 

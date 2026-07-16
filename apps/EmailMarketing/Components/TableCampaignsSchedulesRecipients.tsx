@@ -57,7 +57,7 @@ export default class TableCampaignsSchedulesRecipients extends TableExtended<Tab
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormCampaignScheduleProps;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_campaign_schedule: this.props.idCampaignSchedule };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_campaign_schedule: this.props.idCampaignSchedule };
     return <FormCampaignSchedule {...formProps}/>;
   }
 }

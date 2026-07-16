@@ -62,7 +62,7 @@ export default class TableKeys extends TableExtended<TableKeysProps, TableKeysSt
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idKey;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_key: this.props.idKey };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_key: this.props.idKey };
     return <FormKey {...formProps}/>;
   }
 }

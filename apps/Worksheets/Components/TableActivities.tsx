@@ -73,7 +73,7 @@ export default class TableActivities extends TableExtended<TableActivitiesProps,
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idTask = this.props.idTask;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_task: this.props.idTask };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_task: this.props.idTask };
     return <FormActivity {...formProps}/>;
   }
 }

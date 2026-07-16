@@ -62,7 +62,7 @@ export default class TableQuotes extends TableExtended<TableQuotesProps, TableQu
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idOrder = this.props.idOrder;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_order: this.props.idOrder };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_order: this.props.idOrder };
     return <FormQuote {...formProps}/>;
   }
 }

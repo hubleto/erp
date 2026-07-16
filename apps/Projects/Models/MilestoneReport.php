@@ -39,7 +39,7 @@ class MilestoneReport extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate('Add milestone report');
-    $description->show(['header', 'fulltextSearch']);
+    $description->show(['header', 'fulltextSearch', 'insertRow']);
     $description->hide(['footer']);
     return $description;
   }

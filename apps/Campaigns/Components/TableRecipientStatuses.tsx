@@ -65,7 +65,7 @@ export default class TableRecipientStatuses extends TableExtended<TableRecipient
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormRecipientStatusProps;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_campaign: this.props.idCampaign };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_campaign: this.props.idCampaign };
     return <FormRecipientStatus {...formProps}/>;
   }
 }

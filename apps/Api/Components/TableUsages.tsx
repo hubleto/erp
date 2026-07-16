@@ -55,7 +55,7 @@ export default class TableUsages extends TableExtended<TableUsagesProps, TableUs
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idKey
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_key: this.props.idKey };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_key: this.props.idKey };
     return <FormUsage {...formProps}/>;
   }
 }

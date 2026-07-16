@@ -50,7 +50,7 @@ export default class TableEventAttendees extends TableExtended<TableEventAttende
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idEvent = this.props.idEvent;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_event: this.props.idEvent };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_event: this.props.idEvent };
     return <FormEventAttendee {...formProps}/>;
   }
 }

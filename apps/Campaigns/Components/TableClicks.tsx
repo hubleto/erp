@@ -66,7 +66,7 @@ export default class TableClicks extends TableExtended<TableClicksProps, TableCl
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormClickProps;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_campaign: this.props.idCampaign };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_campaign: this.props.idCampaign };
     return <FormClick {...formProps}/>;
   }
 }

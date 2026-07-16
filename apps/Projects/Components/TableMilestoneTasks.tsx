@@ -50,7 +50,7 @@ export default class TableMilestoneTasks extends TableExtended<TableMilestoneTas
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idMilestone = this.props.idMilestone;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_milestone: this.props.idMilestone };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_milestone: this.props.idMilestone };
     return <FormMilestoneTask {...formProps}/>;
   }
 }

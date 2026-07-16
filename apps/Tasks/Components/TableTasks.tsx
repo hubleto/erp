@@ -100,6 +100,7 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
     formProps.idContact = this.props.idContact;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = {
+      ...formProps.description.defaultValues ?? {},
       id_customer: this.props.idCustomer,
       id_contact: this.props.idContact,
     };

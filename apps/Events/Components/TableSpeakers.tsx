@@ -52,7 +52,7 @@ export default class TableSpeakers extends TableExtended<TableSpeakersProps, Tab
     let formProps = this.getFormProps();
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { id_customer: this.props.idCustomer };
+    // formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_customer: this.props.idCustomer };
     return <FormSpeaker {...formProps}/>;
   }
 }

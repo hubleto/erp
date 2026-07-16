@@ -68,7 +68,7 @@ export default class TableEmailClicks extends TableExtended<TableEmailClicksProp
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormEmailClickProps;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_email: this.props.idEmail };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_email: this.props.idEmail };
     return <FormEmailClick {...formProps}/>;
   }
 }

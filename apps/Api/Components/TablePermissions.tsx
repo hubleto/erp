@@ -54,7 +54,7 @@ export default class TablePermissions extends TableExtended<TablePermissionsProp
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idKey
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_key: this.props.idKey };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_key: this.props.idKey };
     return <FormPermission {...formProps}/>;
   }
 }

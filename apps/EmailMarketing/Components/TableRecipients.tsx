@@ -83,6 +83,7 @@ export default class TableRecipients extends TableExtended<TableRecipientsProps,
     let formProps = this.getFormProps() as FormRecipient;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = {
+      ...formProps.description.defaultValues ?? {},
       id_campaign: this.props.idCampaign,
       id_email: this.props.idEmail,
     };

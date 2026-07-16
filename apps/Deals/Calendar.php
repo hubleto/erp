@@ -5,6 +5,12 @@ namespace Hubleto\App\Community\Deals;
 class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {
   
+  /**
+   * [Description for getCalendarConfig]
+   *
+   * @return array
+   * 
+   */
   public function getCalendarConfig(): array
   {
     return [
@@ -17,11 +23,29 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     ];
   }
 
+  /**
+   * [Description for loadEvent]
+   *
+   * @param int $id
+   * 
+   * @return array
+   * 
+   */
   public function loadEvent(int $id): array
   {
     return $this->prepareLoadActivityQuery($this->getModel(Models\DealActivity::class), $id)->first()?->toArray();
   }
 
+  /**
+   * [Description for loadEvents]
+   *
+   * @param string $dateStart
+   * @param string $dateEnd
+   * @param array $filter
+   * 
+   * @return array
+   * 
+   */
   public function loadEvents(string $dateStart, string $dateEnd, array $filter = []): array
   {
     $idDeal = $this->router()->urlParamAsInteger('idDeal');

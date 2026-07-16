@@ -37,7 +37,10 @@
       {% endif %}
       {% for t in item.TASKS %}
         {% if t.TASK.identifier > 0 %}
-          <div class="text-sm text-primary">{{ t.TASK.identifier }} {{ t.TASK.title }}</div>
+          <div class="text-sm">
+            <span class="badge badge-primary">{{ t.TASK.identifier }}</span>
+            <span class="text-primary">{{ t.TASK.title }}</span>
+          </div>
         {% endif %}
       {% endfor %}
     </div>

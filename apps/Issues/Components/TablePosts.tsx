@@ -52,7 +52,7 @@ export default class TablePosts extends TableExtended<TablePostsProps, TablePost
     let formProps: FormPostProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idIssue
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_issue: this.props.idIssue };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_issue: this.props.idIssue };
     return <FormPost {...formProps}/>;
   }
 }

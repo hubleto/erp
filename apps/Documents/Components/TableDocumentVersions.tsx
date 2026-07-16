@@ -69,7 +69,7 @@ export default class TableDocumentVersions extends TableExtended<TableDocumentVe
     let formProps: FormDocumentVersionProps = this.getFormProps();
     formProps.customEndpointParams.idDocument = this.props.idDocument;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_document: this.props.idDocument };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_document: this.props.idDocument };
     return <FormDocumentVersion {...formProps}/>;
   }
 }

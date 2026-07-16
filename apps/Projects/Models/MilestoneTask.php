@@ -27,7 +27,7 @@ class MilestoneTask extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate('Assign task to milestone');
-    $description->show(['header', 'fulltextSearch']);
+    $description->show(['header', 'fulltextSearch', 'insertRow']);
     $description->hide(['footer']);
     return $description;
   }

@@ -178,7 +178,7 @@ class Lead extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'insertRow']);
     $description->hide(['footer']);
 
     $description->ui['filters'] = [

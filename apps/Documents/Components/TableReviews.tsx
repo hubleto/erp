@@ -72,7 +72,7 @@ export default class TableReviews extends TableExtended<TableReviewsProps, Table
     formProps.customEndpointParams.idDocument = this.props.idDocument;
     formProps.customEndpointParams.idVersion = this.props.idVersion;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_document: this.props.idDocument, id_version: this.props.idVersion };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_document: this.props.idDocument, id_version: this.props.idVersion };
     return <FormReview {...formProps}/>;
   }
 }

@@ -35,7 +35,7 @@ export default class TableDashboards extends Table<TableDashboardsProps, TableDa
   renderForm(): JSX.Element {
     let formProps = this.getFormProps();
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { idDashboard: this.state.recordId };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, idDashboard: this.state.recordId };
     return <FormDashboard {...formProps}/>;
   }
 }

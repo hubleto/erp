@@ -52,7 +52,7 @@ export default class TableAttendees extends TableExtended<TableAttendeesProps, T
     let formProps = this.getFormProps();
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { idDashboard: this.props.idDashboard };
+    // formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, idDashboard: this.props.idDashboard };
     return <FormAttendee {...formProps}/>;
   }
 }

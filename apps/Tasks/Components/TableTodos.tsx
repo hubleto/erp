@@ -62,7 +62,7 @@ export default class TableTodos extends TableExtended<TableTodosProps, TableTodo
     let formProps = this.getFormProps();
     // formProps.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};
-    // formProps.description.defaultValues = { id_customer: this.props.idCustomer };
+    // formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_customer: this.props.idCustomer };
     return <FormTodo {...formProps}/>;
   }
 

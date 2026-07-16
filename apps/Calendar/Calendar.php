@@ -19,12 +19,28 @@ class Calendar extends \Hubleto\Erp\Calendar
     ];
   }
 
-  public function prepareLoadActivityQuery(\Hubleto\App\Community\Calendar\Models\Activity $mActivity, int $id): mixed
+  public function prepareLoadActivityQuery(Activity $mActivity, int $id): mixed
   {
     return $mActivity->record->prepareReadQuery()->where("{$mActivity->table}.id", $id);
   }
 
-  public function prepareLoadActivitiesQuery(\Hubleto\App\Community\Calendar\Models\Activity $mActivity, string $dateStart, string $dateEnd, array $filter = []): mixed
+  /**
+   * [Description for prepareLoadActivitiesQuery]
+   *
+   * @param Activity $mActivity
+   * @param string $dateStart
+   * @param string $dateEnd
+   * @param array $filter
+   * 
+   * @return mixed
+   * 
+   */
+  public function prepareLoadActivitiesQuery(
+    Activity $mActivity,
+    string $dateStart,
+    string $dateEnd,
+    array $filter = []
+  ): mixed
   {
     $dates = [];
     $tsStart = strtotime($dateStart);

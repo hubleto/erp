@@ -50,7 +50,7 @@ export default class TableExpenses extends TableExtended<TableExpensesProps, Tab
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idProject = this.props.idProject;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_project: this.props.idProject };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_project: this.props.idProject };
     return <FormExpense {...formProps}/>;
   }
 }

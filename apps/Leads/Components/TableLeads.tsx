@@ -29,6 +29,7 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
 
   constructor(props: TableLeadsProps) {
     super(props);
+    this.props = props;
     this.state = {
       ...this.getStateFromProps(props),
       // showSetStatusDialog: false,
@@ -56,12 +57,12 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
 
   renderCell(columnName: string, column: any, data: any, options: any) {
     if (columnName == "virt_tags") {
-      return data.TAGS.map((tag, key) => {
+      return data.TAGS ? data.TAGS.map((tag: any, key: any) => {
         return <div key={key} className="text-nowrap mr-2">
           <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
           {tag.TAG?.name}
         </div>
-      });
+      }) : null;
     } else if (columnName == "DEAL") {
       if (data.DEAL) {
         return <>

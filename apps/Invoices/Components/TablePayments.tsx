@@ -53,7 +53,7 @@ export default class TablePayments extends TableExtended<TablePaymentsProps, Tab
   renderForm(): JSX.Element {
     let formProps = this.getFormProps() as FormPaymentProps;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_invoice: this.props.idInvoice };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_invoice: this.props.idInvoice };
     return <FormPayment {...formProps}/>;
   }
 }

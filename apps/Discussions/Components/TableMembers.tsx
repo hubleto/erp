@@ -50,7 +50,7 @@ export default class TableMembers extends TableExtended<TableMembersProps, Table
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idDiscussion = this.props.idDiscussion;
     if (!formProps.description) formProps.description = {};
-    formProps.description.defaultValues = { id_discussion: this.props.idDiscussion };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_discussion: this.props.idDiscussion };
     return <FormMember {...formProps}/>;
   }
 }

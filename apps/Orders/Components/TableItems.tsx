@@ -124,7 +124,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     let formProps = this.getFormProps() as FormItemProps;
     if (!formProps.description) formProps.description = {};
     formProps.idOrder = this.props.idOrder;
-    formProps.description.defaultValues = { id_order: this.props.idOrder };
+    formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_order: this.props.idOrder };
     return <FormItem {...formProps}/>;
   }
 

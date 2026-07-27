@@ -12,7 +12,12 @@ class DailyDigest extends \Hubleto\Erp\Cron
   {
     $emailsSent = [];
     $users = $this->getService(\Hubleto\Framework\AuthProvider::class)->getActiveUsers();
+
     foreach ($users as $user) {
+
+      $sendDailyDigest = $this->config()->getAsBool('user/' . $user['id'] . '/Hubleto\App\Community\Notifications/sendDailyDigest', true);
+
+      if (!$sendDailyDigest) continue;
 
       /** @var \Hubleto\App\Community\Notifications\Digest $digest */
       $digest = $this->getService(\Hubleto\App\Community\Notifications\Digest::class);

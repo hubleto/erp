@@ -72,35 +72,13 @@ class Lead extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'email' => (new Varchar($this, $this->translate('Email')))->setCssClass('font-bold')->setIcon(self::COLUMN_EMAIL_DEFAULT_ICON)->setDefaultVisible(),
       'phone' => (new Varchar($this, $this->translate('Phone')))->setCssClass('font-bold')->setIcon(self::COLUMN_PHONE_DEFAULT_ICON)->setDefaultVisible(),
-      'profile_link_1' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
-      'profile_link_2' => (new Varchar($this, $this->translate('Profile link #2')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
-      'profile_link_3' => (new Varchar($this, $this->translate('Profile link #3')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible(),
+      'profile_link_1' => (new Varchar($this, $this->translate('Profile link #1')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible()->setReactComponent('InputHyperlink'),
+      'profile_link_2' => (new Varchar($this, $this->translate('Profile link #2')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible()->setReactComponent('InputHyperlink'),
+      'profile_link_3' => (new Varchar($this, $this->translate('Profile link #3')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible()->setReactComponent('InputHyperlink'),
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
       'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
-      // 'virt_email' => (new Virtual($this, $this->translate('Email')))->setDefaultVisible()
-      //   ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'email' LIMIT 1")
-      // ,
-      // 'virt_phone_number' => (new Virtual($this, $this->translate('Phone number')))
-      //   ->setProperty('sql', "select value from contact_values cv where cv.id_contact = leads.id_contact and cv.type = 'number' LIMIT 1")
-      // ,
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultValue(null)->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
-      // 'id_level' => (new Lookup($this, $this->translate('Level'), Level::class))->setDefaultVisible(),
-      // 'status' => (new Integer($this, $this->translate('Status')))->setDefaultVisible()->setEnumValues(
-      //   [
-      //     $this::STATUS_NO_INTERACTION_YET => 'No interaction yet',
-      //     $this::STATUS_CONTACTED => 'Contacted',
-      //     $this::STATUS_IN_PROGRESS => 'In Progress',
-      //     $this::STATUS_CLOSED => 'Closed',
-      //     $this::STATUS_CONVERTED_TO_DEAL => 'Converted to deal',
-      //   ]
-      // )->setEnumCssClasses([
-      //   self::STATUS_NO_INTERACTION_YET => 'bg-slate-100 text-slate-800',
-      //   self::STATUS_CONTACTED => 'bg-blue-100 text-blue-800',
-      //   self::STATUS_IN_PROGRESS => 'bg-yellow-100 text-yellow-800',
-      //   self::STATUS_CLOSED => 'bg-slate-100 text-slate-800',
-      //   self::STATUS_CONVERTED_TO_DEAL => 'bg-green-100 text-green-800',
-      // ]),
       'price' => (new Decimal($this, $this->translate('Price')))->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
       'score' => (new Integer($this, $this->translate('Score')))->setDefaultVisible()->setColorScale('bg-light-blue-to-dark-blue'),

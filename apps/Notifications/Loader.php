@@ -17,6 +17,7 @@ class Loader extends \Hubleto\Erp\App
 
     $this->router()->get([
       '/^notifications\/?$/' => Controllers\Notifications::class,
+      '/^notifications\/settings\/?$/' => Controllers\Settings::class,
       '/^notifications\/inbox\/?$/' => Controllers\Inbox::class,
       '/^notifications\/sent\/?$/' => Controllers\Sent::class,
       '/^notifications\/all\/?$/' => Controllers\All::class,
@@ -30,6 +31,14 @@ class Loader extends \Hubleto\Erp\App
       'onModelAfterUpdate',
       $this->getService(EventListeners\NotifyUpdatedRecord::class)
     );
+
+    /** @var \Hubleto\App\Community\Settings\Loader */
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('Notifications'),
+      'icon' => 'fas fa-bell',
+      'url' => 'notifications/settings',
+    ]);
   }
 
   /**

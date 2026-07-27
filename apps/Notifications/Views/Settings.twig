@@ -1,0 +1,26 @@
+<h1 class="app-main-title">{{ translate('Notifications') }} > {{ translate('Settings') }}</h1>
+
+<form method="POST">
+  <input type="hidden" name="submitted" value="1" />
+
+  <div style="max-width:600px;margin:auto">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>Send daily digest</td>
+          <td>
+            <input
+              type="checkbox"
+              name="sendDailyDigest"
+              {% if viewParams.sendDailyDigest %} checked {% endif %}
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary mt-2">
+      <span class="icon"><i class="fas fa-save"></i></span>
+      <span class="text">Save</span>
+    </button>
+  </div>
+</form>

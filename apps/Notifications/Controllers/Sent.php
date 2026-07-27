@@ -7,7 +7,6 @@ class Sent extends \Hubleto\Erp\Controller
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [
-      [ 'url' => 'notifications', 'content' => $this->translate('Notifications') ],
       [ 'url' => 'sent', 'content' => $this->translate('Sent') ],
     ]);
   }

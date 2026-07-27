@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
 import FormContact, { FormContactProps, FormContactState } from './FormContact';
-import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import request from '@hubleto/react-ui/core/Request';
-import { ProgressBar } from 'primereact/progressbar';
+import Spinner from "@hubleto/react-ui/core/Spinner";
 
 interface TableContactsProps extends TableExtendedProps {
   idCustomer: number,
@@ -21,8 +20,8 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
     model: 'Hubleto/App/Community/Contacts/Models/Contact',
   }
 
-  props: TableContactsProps;
-  state: TableContactsState;
+  declare props: TableContactsProps;
+  declare state: TableContactsState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader';
   translationContextInner: string = 'Components\\TableContacts';
@@ -116,17 +115,17 @@ export default class TableContacts extends TableExtended<TableContactsProps, Tab
     } else return super.renderCell(columnName, column, data, options);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormContactProps = this.getFormProps();
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_customer: this.props.idCustomer };
     return <FormContact {...formProps}/>;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     if (this.props.showAsCards) {
       if (!this.state.data) {
-        return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+        return <Spinner content="Loading..." />;
       }
 
       return <>

@@ -4,11 +4,8 @@ import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import Calendar from '../../Calendar/Components/Calendar';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 import ModalForm from '@hubleto/react-ui/core/ModalForm';
-import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from './LeadFormActivity';
-import Hyperlink from '@hubleto/react-ui/core/Inputs/Hyperlink';
 import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
 import moment, { Moment } from "moment";
 
@@ -53,6 +50,8 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
   constructor(props: FormLeadProps) {
     super(props);
 
+    this.props = props;
+
     this.refLogActivityInput = React.createRef();
     this.refActivityModal = React.createRef();
     this.refActivityForm = React.createRef();
@@ -79,6 +78,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
       ...super.getStateFromProps(props),
       tabs: [
         { uid: 'default', title: <b>{this.translate('Lead')}</b> },
+        { uid: 'todo', title: this.translate('Todo') },
         { uid: 'calendar', title: this.translate('Calendar') },
         { uid: 'email_clicks', title: this.translate('Email Clicks') },
         { uid: 'tasks', title: this.translate('Tasks'), showCountFor: 'TASKS' },
@@ -162,8 +162,8 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
 
     switch (tabUid) {
       case 'default':
-        let nextActivity = null;
-        let nextActivityDate = null;
+        let nextActivity: any = null;
+        let nextActivityDate: any = null;
 
         if (R.ACTIVITIES) {
           Object.keys(R.ACTIVITIES).map((key) => {
@@ -287,7 +287,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
           initialView='dayGridMonth'
           headerToolbar={{ start: 'title', center: '', end: 'prev,today,next' }}
           eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=leads&idLead=' + R.id}
-          onDateClick={(date, time, info) => {
+          onDateClick={(date: any, time: any, info: any) => {
             this.setState({
               activityDate: date,
               activityTime: time,
@@ -295,7 +295,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
               showIdActivity: -1,
             } as FormLeadState);
           }}
-          onEventClick={(info) => {
+          onEventClick={(info: any) => {
             this.setState({
               showIdActivity: parseInt(info.event.id),
             } as FormLeadState);
@@ -340,7 +340,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
               </button>
             </div>
             {this.divider(this.translate('Most recent activities'))}
-            {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item, index) => {
+            {R.ACTIVITIES ? <div className="list">{R.ACTIVITIES.reverse().slice(0, 7).map((item: any, index: string) => {
               return <>
                 <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
                   onClick={() => this.setState({showIdActivity: item.id} as FormLeadState)}
@@ -363,7 +363,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
           initialView='timeGridWeek'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           eventsEndpoint={globalThis.hubleto.config.projectUrl + '/calendar/api/get-calendar-events?calendar=leads&idLead=' + R.id}
-          onDateClick={(date, time, info) => {
+          onDateClick={(date: any, time: any, info: any) => {
             this.setState({
               activityDate: date,
               activityTime: time,
@@ -371,7 +371,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
               showIdActivity: -1,
             } as FormLeadState);
           }}
-          onEventClick={(info) => {
+          onEventClick={(info: any) => {
             this.setState({
               showIdActivity: parseInt(info.event.id),
             } as FormLeadState);
@@ -505,20 +505,20 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
       case 'timeline':
         return this.renderTimeline([
           {
-            data: (thisForm) => thisForm.state.record.ACTIVITIES,
+            data: (thisForm: any) => thisForm.state.record.ACTIVITIES,
             icon: 'fas fa-calendar',
             color: '#32678fff',
-            timestampFormatter: (entry) => entry.date_start,
-            valueFormatter: (entry) => entry.subject,
-            userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
+            timestampFormatter: (entry: any) => entry.date_start,
+            valueFormatter: (entry: any) => entry.subject,
+            userNameFormatter: (entry: any) => entry['_LOOKUP[id_owner]'],
           },
           { 
-            data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
+            data: (thisForm: any) => thisForm.state.record.WORKFLOW_HISTORY,
             icon: 'fas fa-timeline',
             color: '#8f3248ff',
-            timestampFormatter: (entry) => entry.datetime_change,
-            valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
-            userNameFormatter: (entry) => entry.USER?.nick,
+            timestampFormatter: (entry: any) => entry.datetime_change,
+            valueFormatter: (entry: any) => entry.WORKFLOW_STEP?.name ?? '---',
+            userNameFormatter: (entry: any) => entry.USER?.nick,
           },
         ]);
       break;

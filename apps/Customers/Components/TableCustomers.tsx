@@ -22,8 +22,8 @@ export default class TableCustomers extends TableExtended<TableCustomersProps, T
     model: 'Hubleto/App/Community/Customers/Models/Customer',
   }
 
-  props: TableCustomersProps;
-  state: TableCustomersState;
+  declare props: TableCustomersProps;
+  declare state: TableCustomersState;
 
   translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
   translationContextInner: string = 'Components\\TableCustomers';
@@ -105,7 +105,7 @@ export default class TableCustomers extends TableExtended<TableCustomersProps, T
     return description;
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormCustomerProps = this.getFormProps() as FormCustomerProps;
     formProps.uid = 'form_customer';
     formProps.tableContactsDescription = this.state.tableContactsDescription;

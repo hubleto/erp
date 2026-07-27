@@ -3,15 +3,12 @@ import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/rea
 import InputTags2 from "@hubleto/react-ui/core/Inputs/Tags2";
 import FormInput from "@hubleto/react-ui/core/FormInput";
 import TableContacts from "../../Contacts/Components/TableContacts";
-import { TabPanel, TabView } from "primereact/tabview";
 import CustomerFormActivity, {CustomerFormActivityProps, CustomerFormActivityState} from "./CustomerFormActivity";
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import { FormDealState } from "../../Deals/Components/FormDeal";
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
-import FormContact, {FormContactProps, FormContactState} from "../../Contacts/Components/FormContact";
 import Calendar from '../../Calendar/Components/Calendar'
-import Hyperlink from "@hubleto/react-ui/core/Inputs/Hyperlink";
 import request from "@hubleto/react-ui/core/Request";
 import { FormProps, FormState } from "@hubleto/react-ui/core/Form";
 import moment from "moment";
@@ -47,8 +44,8 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
     model: "Hubleto/App/Community/Customers/Models/Customer"
   };
 
-  props: FormCustomerProps;
-  state: FormCustomerState;
+  declare props: FormCustomerProps;
+  declare state: FormCustomerState;
 
   refLogActivityInput: any;
   refDocumentModal: any;
@@ -64,6 +61,8 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
   constructor(props: FormCustomerProps) {
     super(props);
 
+    this.props = props;
+
     this.refLogActivityInput = React.createRef();
     this.refDocumentModal = React.createRef();
     this.refDocumentForm = React.createRef();
@@ -72,7 +71,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
 
     this.state = {
       ...this.getStateFromProps(props),
-      highlightIdActivity: this.props.highlightIdActivity ?? 0,
+      highlightIdActivity: props.highlightIdActivity ?? 0,
       createNewLead: false,
       createNewDeal: false,
       createNewContact: false,
@@ -121,7 +120,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
     return record;
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Customer')}</small>
       <h2>{this.state.record.name ? this.state.record.name : ''}</h2>
@@ -141,7 +140,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
     );
   }
 
-  renderActivityForm(R: any): JSX.Element {
+  renderActivityForm(R: any): React.JSX.Element {
     return (
       <ModalForm
         ref={this.refActivityModal}
@@ -175,7 +174,7 @@ export default class FormCustomer<P, S> extends FormExtended<FormCustomerProps, 
      )
   }
 
-  renderDocumentForm(): JSX.Element{
+  renderDocumentForm(): React.JSX.Element{
     return (
       <ModalForm
         ref={this.refDocumentModal}

@@ -38,7 +38,7 @@ export default class FormDocument<P, S> extends FormExtended<FormDocumentProps,F
     return 'documents/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Document")}</small>
       <h2>{this.state.record.name ? this.state.record.name : '-'}</h2>

@@ -43,7 +43,7 @@ export default class TableDiscussions extends TableExtended<TableDiscussionsProp
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     return <FormDiscussion {...formProps}/>;
   }

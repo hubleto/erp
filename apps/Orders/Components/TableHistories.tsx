@@ -43,8 +43,8 @@ export default class TableHistories extends Table<TableHistoriesProps, TableHist
     }
   }
 
-  renderHeaderRight(): Array<JSX.Element> {
-    let elements: Array<JSX.Element> = super.renderHeaderRight();
+  renderHeaderRight(): Array<React.JSX.Element> {
+    let elements: Array<React.JSX.Element> = super.renderHeaderRight();
 
     return elements;
   }

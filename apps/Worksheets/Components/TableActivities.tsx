@@ -54,7 +54,7 @@ export default class TableActivities extends TableExtended<TableActivitiesProps,
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/worksheets/' + (id > 0 ? id : 'add'));
   }
 
-  renderFooter(): JSX.Element {
+  renderFooter(): React.JSX.Element {
     let workedTotal = 0;
     for (let i in this.state.data?.records) {
       const row = this.state.data?.records[i];
@@ -69,7 +69,7 @@ export default class TableActivities extends TableExtended<TableActivitiesProps,
     </>
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idTask = this.props.idTask;
     if (!formProps.description) formProps.description = {};

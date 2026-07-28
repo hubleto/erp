@@ -53,7 +53,7 @@ export default class TableEmails extends TableExtended<TableEmailsProps, TableEm
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/email-marketing/emails/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormEmailProps;
     return <FormEmail {...formProps}/>;
   }

@@ -3,7 +3,7 @@ import request from "@hubleto/react-ui/core/Request";
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import Form, { FormProps } from '@hubleto/react-ui/core/Form';
 import FormFile from './FormFile';
-import { ProgressBar } from 'primereact/progressbar';
+import Spinner from '@hubleto/react-ui/fc/Spinner';
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
@@ -32,8 +32,8 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
     model: 'Hubleto/App/Community/Documents/Models/File',
   }
 
-  props: FileBrowserProps;
-  state: FileBrowserState;
+  props: FileBrowserProps = null;
+  state: FileBrowserState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Documents\\Loader';
   translationContextInner: string = 'Components\\FileBrowser';
@@ -43,10 +43,15 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
 
   constructor(props: FileBrowserProps) {
     super(props);
+    this.props = props;
     this.refFolderPropertiesModal = React.createRef();
     this.refBulkMoveFolderLookup = React.createRef();
-    this.state = {
-      ...this.getStateFromProps(props),
+    this.state = this.getStateFromProps(props);
+  }
+
+  getStateFromProps(props: FileBrowserProps) {
+    return {
+      ...super.getStateFromProps(props),
       folderUid: this.props.folderUid ? this.props.folderUid : '_ROOT_',
       fileUid: this.props.fileUid,
       folderContent: null,
@@ -57,12 +62,6 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
       deletingRecord: false,
       deleteButtonDisabled: false,
       showBulkMove: false,
-    };
-  }
-
-  getStateFromProps(props: FileBrowserProps) {
-    return {
-      ...super.getStateFromProps(props),
     }
   }
 
@@ -119,7 +118,7 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
     return params;
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormProps = this.getFormProps();
     formProps.customEndpointParams = {idFolder: this.state.folderContent.folder.id};
     return <FormFile {...formProps}/>;
@@ -175,10 +174,10 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
     Promise.all(promises).then(() => this.loadData());
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
 
     if (!this.state.folderContent) {
-      return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+      return <Spinner></Spinner>;
     }
 
     return <>

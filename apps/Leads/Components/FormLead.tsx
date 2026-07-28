@@ -120,7 +120,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
     return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     const R = this.state.record;
 
     return <>
@@ -129,7 +129,7 @@ export default class FormLead<P, S> extends FormExtended<FormLeadProps,FormLeadS
     </>;
   }
 
-  renderSubTitle(): JSX.Element {
+  renderSubTitle(): React.JSX.Element {
     return <small>{this.translate('Lead')}</small>;
   }
 

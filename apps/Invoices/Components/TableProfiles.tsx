@@ -50,7 +50,7 @@ export default class TableProfiles extends TableExtended<TableProfilesProps, Tab
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/profiles/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormProfileProps;
     return <FormProfile {...formProps}/>;
   }

@@ -46,7 +46,7 @@ export default class FormTodo<P, S> extends FormExtended<FormTodoProps, FormTodo
     return 'tasks/todo/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Todo')}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>

@@ -50,7 +50,7 @@ export default class FormCashRegister<P, S> extends FormExtended<FormCashRegiste
     }
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Cash register')}</small>
       <h2>{this.state.record.identifier ? this.state.record.identifier : ''}</h2>

@@ -31,7 +31,7 @@ export default class FormMail<P, S> extends FormExtended<FormMailProps,FormMailS
     return 'mail/' + this.state.record.id_mailbox + '/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): null|JSX.Element {
+  renderTitle(): null|React.JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
       <small>{this.translate('Mail')}</small>
@@ -41,7 +41,7 @@ export default class FormMail<P, S> extends FormExtended<FormMailProps,FormMailS
   sendMail() {
   }
 
-  // renderSaveButton(): null|JSX.Element {
+  // renderSaveButton(): null|React.JSX.Element {
   //   return <>
   //     <button onClick={() => this.saveRecord()} className="btn btn-add-outline">
   //       <span className="icon"><i className="fa-solid fa-file-pen"></i></span>
@@ -50,7 +50,7 @@ export default class FormMail<P, S> extends FormExtended<FormMailProps,FormMailS
   //   </>;
   // }
 
-  renderHeaderLeft(): null|JSX.Element {
+  renderHeaderLeft(): null|React.JSX.Element {
     const R = this.state.record;
     const isSent = (R.datetime_sent !== null);
 
@@ -65,7 +65,7 @@ export default class FormMail<P, S> extends FormExtended<FormMailProps,FormMailS
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
     const isSent = (R.datetime_sent !== null);
     const readonly = isSent;

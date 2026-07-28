@@ -42,7 +42,7 @@ export default class TableTeams extends Table<TableTeamsProps, TableTeamsState> 
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formDescription = this.getFormProps();
     return <FormTeam {...formDescription}/>;
   }

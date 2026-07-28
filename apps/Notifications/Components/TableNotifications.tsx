@@ -92,7 +92,7 @@ export default class TableNotifications extends TableExtended<TableNotifications
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormNotification {...formProps}/>;
   }

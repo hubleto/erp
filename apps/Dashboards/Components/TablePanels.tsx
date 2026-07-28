@@ -41,7 +41,7 @@ export default class TablePanels extends Table<TablePanelsProps, TablePanelsStat
     this.state = this.getStateFromProps(props);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     return <FormPanel {...formProps}/>;
   }

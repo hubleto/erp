@@ -20,7 +20,7 @@ export default class FormMilestoneTask<P, S> extends FormExtended<FormMilestoneT
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Milestone task')}</small>
       <h2>{this.state.record.id_task ?? '-'}</h2>

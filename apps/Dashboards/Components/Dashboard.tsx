@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import { ProgressBar } from 'primereact/progressbar';
+import Spinner from '@hubleto/react-ui/fc/Spinner';
 import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
 import FormPanel from "./FormPanel";
@@ -220,7 +220,7 @@ export default class DesktopDashboard extends TranslatedComponent<DesktopDashboa
         <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
       :
         <div className="card-body">
-          <ProgressBar mode="indeterminate" style={{ height: '2em' }}></ProgressBar>
+          <Spinner size="sm" />
         </div>
       )}
     </div>

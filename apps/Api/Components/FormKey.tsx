@@ -61,7 +61,7 @@ export default class FormKey<P, S> extends FormExtended<FormKeyProps, FormKeySta
     return 'api/keys/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('API Key')}</small>
       <h2>{this.state.record.key ?? '-'}</h2>

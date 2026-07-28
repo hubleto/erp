@@ -33,7 +33,7 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps, 
     return 'worksheets/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small></small>
       <h2>{this.translate('Activity')}</h2>

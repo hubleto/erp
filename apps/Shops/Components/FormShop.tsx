@@ -44,7 +44,7 @@ export default class FormShop<P, S> extends FormExtended<FormShopProps, FormShop
     return 'shops/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Shop','Hubleto\\App\\Community\\Shops\\Loader','Components\\FormShop')}</small>
       <h2>{this.state.record.address ?? '-'}</h2>

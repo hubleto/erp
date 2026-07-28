@@ -32,7 +32,7 @@ export default class FormAccount<P, S> extends FormExtended<FormAccountProps,For
     };
   }
 
-  renderTitle(): null|JSX.Element {
+  renderTitle(): null|React.JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
       <small>{this.translate('Account')}</small>

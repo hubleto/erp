@@ -47,7 +47,7 @@ export default class FormPayment extends FormExtended<FormPaymentProps, FormPaym
     return 'orderss/paymentss/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     const R = this.state.record;
     return <>
       <small>{this.translate('Payment')}</small>

@@ -34,14 +34,14 @@ export default class FormAutomat<P, S> extends FormExtended<FormAutomatProps, Fo
     }
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Workflow automat')}</small>
       <h2>{this.state.record.name ?? '-'}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
 
     return <div className="flex flex-col gap-2" >

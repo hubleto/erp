@@ -65,7 +65,7 @@ export default class TableEmailClicks extends TableExtended<TableEmailClicksProp
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/email-marketing/emails/clicks/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormEmailClickProps;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_email: this.props.idEmail };

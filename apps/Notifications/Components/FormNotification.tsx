@@ -27,14 +27,14 @@ export default class FormNotification<P, S> extends FormExtended<FormNotificatio
     };
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Notification')}</small>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     return <>
       <div className='flex gap-2'>
         <div className='flex-3'>

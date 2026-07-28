@@ -41,7 +41,7 @@ export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps
     };
   }
 
-  renderHeaderRight(): null | JSX.Element {
+  renderHeaderRight(): null|React.JSX.Element {
     if (this.state.recordChanged) {
       return <>
         <div
@@ -66,13 +66,13 @@ export default class FormDashboard<P, S> extends FormExtended<FormDashboardProps
 
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <h2>{this.state.record.title ?? ''}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

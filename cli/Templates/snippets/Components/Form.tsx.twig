@@ -42,7 +42,7 @@ export default class Form{{ modelSingularForm }}<P, S> extends FormExtended<Form
     return '{{ modelPluralFormKebab }}/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     const R = this.state.record;
     return <>
       <small>{this.translate('{{ model }}')}</small>

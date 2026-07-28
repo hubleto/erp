@@ -99,7 +99,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     }
   }
 
-  renderFooter(): JSX.Element {
+  renderFooter(): React.JSX.Element {
     let totalExclVat = 0;
     let totalVat = 0;
     let totalInclVat = 0;

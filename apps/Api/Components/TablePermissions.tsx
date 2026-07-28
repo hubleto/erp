@@ -16,14 +16,15 @@ export default class TablePermissions extends TableExtended<TablePermissionsProp
     model: 'Hubleto/App/Community/Api/Models/Permission',
   }
 
-  props: TablePermissionsProps;
-  state: TablePermissionsState;
+  props: TablePermissionsProps = null;
+  state: TablePermissionsState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
   translationContextInner: string = 'Components\\TablePermissions';
 
   constructor(props: TablePermissionsProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 
@@ -50,7 +51,7 @@ export default class TablePermissions extends TableExtended<TablePermissionsProp
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idKey
     if (!formProps.description) formProps.description = {};

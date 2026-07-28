@@ -94,7 +94,7 @@ export default class TableAccounts extends Table<TableAccountsProps, TableAccoun
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormAccount {...formProps}/>;
   }

@@ -17,14 +17,16 @@ export default class CampaignFormActivity<P, S> extends FormActivity<CampaignFor
     model: 'Hubleto/App/Community/Campaigns/Models/CampaignActivity',
   };
 
-  props: CampaignFormActivityProps;
-  state: CampaignFormActivityState;
+  props: CampaignFormActivityProps = null;
+  state: CampaignFormActivityState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Campaigns\\Loader';
   translationContextInner: string = 'Components\\FormActivity';
 
   constructor(props: CampaignFormActivityProps) {
     super(props);
+    this.props = props;
+    this.state = this.getStateFromProps(props);
   }
 
   getActivitySourceReadable(): string
@@ -32,7 +34,7 @@ export default class CampaignFormActivity<P, S> extends FormActivity<CampaignFor
     return this.translate('Campaign');
   }
 
-  renderCustomInputs(): JSX.Element {
+  renderCustomInputs(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

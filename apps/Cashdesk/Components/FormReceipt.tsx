@@ -59,7 +59,7 @@ export default class FormReceipt<P, S> extends FormExtended<FormReceiptProps, Fo
     this.updateRecord(newRecord);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Receipt')}</small>
       <h2>{this.state.record.number ? this.state.record.number : ''}</h2>

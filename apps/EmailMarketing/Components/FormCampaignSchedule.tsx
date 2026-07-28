@@ -40,7 +40,7 @@ export default class FormCampaignSchedule<P, S> extends FormExtended<FormCampaig
     return 'email-marketing/campaign/schedules/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Campaign")} &raquo; {this.translate("Scheduled email")}</small>
       <h2>{this.state.record.CAMPAIGN?.title ?? '-'}</h2>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
-import { ProgressBar } from 'primereact/progressbar';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import Spinner from '@hubleto/react-ui/fc/Spinner';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
 
 interface TableValuesProps extends TableProps {
@@ -17,14 +16,15 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
     model: 'Hubleto/App/Community/Contacts/Models/Value',
   }
 
-  props: TableValuesProps;
-  state: TableValuesState;
+  props: TableValuesProps = null;
+  state: TableValuesState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Contacts\\Loader';
   translationContextInner: string = 'Components\\TableValues';
 
   constructor(props: TableValuesProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 
@@ -55,9 +55,9 @@ export default class TableValues extends Table<TableValuesProps, TableValuesStat
     }
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     if (!this.state.data) {
-      return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+      return <Spinner />;
     }
 
     return <>

@@ -37,7 +37,7 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
     return description;
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     let title = ((this.state.record.first_name ?? '') + ' ' + (this.state.record.middle_name ?? '') + ' ' + (this.state.record.last_name ?? '')).trim();
     return <>
       <small>{this.translate('User')}</small>
@@ -45,7 +45,7 @@ export default class FormUser<P, S> extends FormExtended<FormUserProps, FormUser
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
 
     let permissions: any = {};

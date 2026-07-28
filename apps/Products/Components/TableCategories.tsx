@@ -47,13 +47,13 @@ export default class TableCategories extends TableExtended<TableCategoriesProps,
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/products/categories/' + (id > 0 ? id : 'add'));
   }
 
-  renderHeaderRight(): Array<JSX.Element> {
-    let elements: Array<JSX.Element> = super.renderHeaderRight();
+  renderHeaderRight(): Array<React.JSX.Element> {
+    let elements: Array<React.JSX.Element> = super.renderHeaderRight();
 
     return elements;
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     return <FormCategory {...formProps}/>;
   }

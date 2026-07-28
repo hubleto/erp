@@ -26,7 +26,7 @@ export default class CustomerFormActivity<P, S> extends FormActivity<CustomerFor
     return this.translate('Customer');
   }
 
-  renderCustomInputs(): JSX.Element {
+  renderCustomInputs(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

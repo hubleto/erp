@@ -79,7 +79,7 @@ export default class TableRecipients extends TableExtended<TableRecipientsProps,
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormRecipient;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = {

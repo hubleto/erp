@@ -3,7 +3,7 @@ import request from "@hubleto/react-ui/core/Request";
 import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
 import Form, { FormProps } from '@hubleto/react-ui/core/Form';
 import FormMail from './FormMail';
-import { ProgressBar } from 'primereact/progressbar';
+import Spinner from '@hubleto/react-ui/fc/Spinner';
 import ModalForm from "@hubleto/react-ui/core/ModalForm";
 
 interface ListFolderProps extends TableProps {
@@ -83,7 +83,7 @@ export default class ListFolder extends Table<ListFolderProps, ListFolderState> 
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormMail {...formProps}/>;
   }

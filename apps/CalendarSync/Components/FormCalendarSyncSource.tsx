@@ -15,7 +15,7 @@ export default class FormCalendarSyncSource<P, S> extends Form<FormProps, FormSt
   translationContext: string = 'Hubleto\\App\\Community\\CalendarSync\\Loader';
   translationContextInner: string = 'Components\\FormSource';
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
 
     return (
       <>

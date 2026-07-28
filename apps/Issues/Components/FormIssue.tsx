@@ -57,7 +57,7 @@ export default class FormIssue<P, S> extends FormExtended<FormIssueProps,FormIss
     return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Issue')}</small>
       <h2>{this.state.record.title ?? '-'}</h2>

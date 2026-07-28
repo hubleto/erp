@@ -7,7 +7,7 @@ import TableExpenses from './TableExpenses';
 import FormInput from '@hubleto/react-ui/core/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
-import { ProgressBar } from 'primereact/progressbar';
+import Spinner from '@hubleto/react-ui/fc/Spinner';
 
 export interface FormProjectProps extends FormExtendedProps { }
 export interface FormProjectState extends FormExtendedState {
@@ -80,7 +80,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
     }
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Project')}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>
@@ -381,7 +381,7 @@ export default class FormProject<P, S> extends FormExtended<FormProjectProps, Fo
             </div>
           </div>;
         } else {
-          return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+          return <Spinner></Spinner>;
         }
       break;
 

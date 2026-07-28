@@ -40,7 +40,7 @@ export default class TableTemplates extends TableExtended<TableTemplatesProps, T
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/documents/templates/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormTemplate {...formProps}/>;
   }

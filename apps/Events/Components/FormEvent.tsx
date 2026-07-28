@@ -23,14 +23,14 @@ export default class FormEvent<P, S> extends FormExtended<FormEventProps, FormEv
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Event')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     // This is an example code to render content of the form.
     // You should develop your own render content.
     return <>

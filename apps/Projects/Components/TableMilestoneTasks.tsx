@@ -46,7 +46,7 @@ export default class TableMilestoneTasks extends TableExtended<TableMilestoneTas
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idMilestone = this.props.idMilestone;
     if (!formProps.description) formProps.description = {};

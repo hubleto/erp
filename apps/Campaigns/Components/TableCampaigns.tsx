@@ -44,7 +44,7 @@ export default class TableCampaigns extends TableExtended<TableCampaignsProps, T
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/campaigns/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormCampaignProps;
     return <FormCampaign {...formProps}/>;
   }

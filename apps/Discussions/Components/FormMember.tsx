@@ -21,7 +21,7 @@ export default class FormMember<P, S> extends FormExtended<FormMemberProps, Form
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Member')}</small>
       <h2>{this.translate('Record #')}{ this.state.record.id ?? '0'}</h2>

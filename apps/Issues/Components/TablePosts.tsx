@@ -48,7 +48,7 @@ export default class TablePosts extends TableExtended<TablePostsProps, TablePost
     globalThis.window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/issues/posts/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormPostProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idIssue
     if (!formProps.description) formProps.description = {};

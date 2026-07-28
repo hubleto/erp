@@ -39,7 +39,7 @@ export default class TableReceipts extends TableExtended<TableReceiptsProps, Tab
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/cashdesk/receipts/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormReceiptProps = this.getFormProps() as FormReceiptProps;
     return <FormReceipt {...formProps}/>;
   }

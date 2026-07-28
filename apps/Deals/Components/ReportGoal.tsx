@@ -19,7 +19,7 @@ export default class ReportGoal extends Component<ReportGoalProps,ReportGoalStat
     };
   }
 
-render(): JSX.Element {
+render(): React.JSX.Element {
     return (
       <>
         <Chart type={this.state.selectedGraph} data={this.state.data} />

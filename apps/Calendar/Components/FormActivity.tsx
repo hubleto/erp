@@ -44,18 +44,18 @@ export default class FormActivity<P, S> extends FormExtended<FormActivityProps,F
 
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.getActivitySourceReadable()}</small>
       <h2>{this.state.record.subject ?? ''}</h2>
     </>;
   }
 
-  renderCustomInputs(): JSX.Element|null {
+  renderCustomInputs(): React.JSX.Element|null {
     return null;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
     const customInputs = this.renderCustomInputs();
 

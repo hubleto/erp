@@ -51,8 +51,8 @@ export default class TableOrders extends TableExtended<TableOrdersProps, TableOr
     return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
   }
 
-  renderHeaderRight(): Array<JSX.Element> {
-    let elements: Array<JSX.Element> = super.renderHeaderRight();
+  renderHeaderRight(): Array<React.JSX.Element> {
+    let elements: Array<React.JSX.Element> = super.renderHeaderRight();
 
     return elements;
   }
@@ -72,7 +72,7 @@ export default class TableOrders extends TableExtended<TableOrdersProps, TableOr
     } else return super.renderCell(columnName, column, data, options);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormOrderProps;
     return <FormOrder {...formProps}/>;
   }

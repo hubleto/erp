@@ -58,7 +58,7 @@ export default class TableQuotes extends TableExtended<TableQuotesProps, TableQu
     );
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idOrder = this.props.idOrder;
     if (!formProps.description) formProps.description = {};

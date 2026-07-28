@@ -39,7 +39,7 @@ export default class FormRecipient<P, S> extends FormExtended<FormRecipientProps
     return 'campaigns/recipients/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Recipient")}</small>
       <h2>{this.state.record.email ?? '-'}</h2>

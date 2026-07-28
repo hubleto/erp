@@ -20,7 +20,7 @@ export default class FormSharedCalendar<P, S> extends FormExtended<FormSharedCal
   translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
   translationContextInner: string = 'Components\\FormSharedCalendar';
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Shared calendar')}</small>
       <h2>{this.state.record.subject ?? ''}</h2>
@@ -37,7 +37,7 @@ export default class FormSharedCalendar<P, S> extends FormExtended<FormSharedCal
     this.props.onUpdate();
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
 
     return <>
       {this.inputWrapper("id_owner")}

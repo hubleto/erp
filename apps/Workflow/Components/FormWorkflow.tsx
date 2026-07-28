@@ -45,7 +45,7 @@ export default class FormWorkflow<P, S> extends FormExtended<FormWorkflowProps, 
     }
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Workflow')}</small>
       <h2>{this.state.record.name ?? '-'}</h2>
@@ -56,7 +56,7 @@ export default class FormWorkflow<P, S> extends FormExtended<FormWorkflowProps, 
     if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({tablesKey: Math.random()} as FormWorkflowState)
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
 
     return <div className="flex gap-2" >

@@ -117,7 +117,7 @@ export default class TableExtendedMails extends TableExtended<TableExtendedMails
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormProps = this.getFormProps();
     if (this.props.showOnlyTemplates) {
       formProps.description = {};

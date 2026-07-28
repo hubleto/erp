@@ -49,7 +49,7 @@ export default class TableUsers extends Table<TableUsersProps, TableUsersState> 
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formDescription = this.getFormProps();
     return <FormUser {...formDescription}/>;
   }

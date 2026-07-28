@@ -14,7 +14,7 @@ The whole platform consists of several repositories, check them all to get the f
   * [hubleto/apps](https://github.com/hubleto/apps) - set of freely available apps covering features like CRM, retail or project management.
   * [hubleto/erp](https://github.com/hubleto/erp) - repo for installation of production-ready Hubleto ERP with `composer create-project`.
   * [hubleto/framework](https://github.com/hubleto/framework) - PHP-based low level MVC framework.
-  * [hubleto/react-ui](https://github.com/hubleto/react-ui) - React-based UI using other libraries like primereact but modified and tailored for Hubleto ERP.
+  * [hubleto/react-ui](https://github.com/hubleto/react-ui) - React-based UI.
   * [hubleto/terminal](https://github.com/hubleto/terminal) - a simple command-line tool for PHP.
 
 ```

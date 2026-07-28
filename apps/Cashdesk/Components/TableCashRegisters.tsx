@@ -39,12 +39,12 @@ export default class TableCashRegisters extends TableExtended<TableCashRegisters
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/cashdesk/cash-registers/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormCashRegisterProps = this.getFormProps() as FormCashRegisterProps;
     return <FormCashRegister {...formProps}/>;
   }
   
-  renderTable(): JSX.Element {
+  renderTable(): React.JSX.Element {
     return <div className='grid grid-cols-4 gap-2'>
       {this.state.data.records.map((row, index) => {
         return <button

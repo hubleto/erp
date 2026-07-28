@@ -170,14 +170,14 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
     return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Deal")}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>
     </>;
   }
 
-  renderSubTitle(): JSX.Element {
+  renderSubTitle(): React.JSX.Element {
     return <small>{this.translate('Deal')}</small>;
   }
 
@@ -813,7 +813,7 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
     }
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
     return <>
       {super.renderContent()}

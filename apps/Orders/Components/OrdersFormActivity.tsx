@@ -28,7 +28,7 @@ export default class OrdersFormActivity<P, S> extends FormActivity<OrdersFormAct
     return this.translate('Order');
   }
 
-  renderCustomInputs(): JSX.Element {
+  renderCustomInputs(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

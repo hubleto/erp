@@ -55,7 +55,7 @@ export default class TableCampaigns extends TableExtended<TableCampaignsProps, T
     } else return super.renderCell(columnName, column, data, options);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormCampaignProps;
     return <FormCampaign {...formProps}/>;
   }

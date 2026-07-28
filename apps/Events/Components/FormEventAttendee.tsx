@@ -21,7 +21,7 @@ export default class FormEventAttendee<P, S> extends FormExtended<FormEventAtten
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Event attendee')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>

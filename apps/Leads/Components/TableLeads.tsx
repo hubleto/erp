@@ -92,7 +92,7 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
     return description;
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormLeadProps;
     formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     return <FormLead {...formProps}/>;
@@ -122,7 +122,7 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
   //   }
   // }
 
-  // renderContent(): JSX.Element {
+  // renderContent(): React.JSX.Element {
 
   //   let saveButton = <>
   //     <button className='btn btn-edit' onClick={() => this.saveBulkStatusChange()}>
@@ -176,17 +176,17 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
   //             description={{
   //               columns: {
   //                 identifier: {type: "varchar", title: this.translate("Identifier"), readonly: true,
-  //                   cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
+  //                   cellRenderer: ( table: TableLeads, data: any, options: any): React.JSX.Element => (
   //                     <>{data.identifier}</>
   //                   )
   //                 },
   //                 title: {type: "varchar", title: this.translate("Title"), readonly: true,
-  //                   cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
+  //                   cellRenderer: ( table: TableLeads, data: any, options: any): React.JSX.Element => (
   //                     <>{data.title}</>
   //                   )
   //                 },
   //                 company_name: {type: "varchar", title: this.translate("Company"), readonly: true,
-  //                   cellRenderer: ( table: TableLeads, data: any, options: any): JSX.Element => (
+  //                   cellRenderer: ( table: TableLeads, data: any, options: any): React.JSX.Element => (
   //                     <>{data.CUSTOMER.name}</>
   //                   )
   //                 },

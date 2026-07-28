@@ -58,7 +58,7 @@ export default class TableTodos extends TableExtended<TableTodosProps, TableTodo
     return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     // formProps.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};

@@ -32,7 +32,7 @@ export default class TableActivities extends Table<TableActivitiesProps, TableAc
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formDescription = this.getFormProps();
     return <CustomerFormActivity {...formDescription}/>;
   }

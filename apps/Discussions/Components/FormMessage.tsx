@@ -32,7 +32,7 @@ export default class FormMessage<P, S> extends FormExtended<FormMessageProps, Fo
     }
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Message')}</small>
       <h2>{this.translate('Record #')}{ this.state.record.id ?? '0'}</h2>

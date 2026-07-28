@@ -16,25 +16,15 @@ export default class TableBillingAccountServices extends Table<TableBillingAccou
     model: 'Hubleto/App/Community/Billing/Models/BillingAccountService',
   }
 
-  declare props: TableBillingAccountServicesProps;
-  declare state: TableBillingAccountServicesState;
+  props: TableBillingAccountServicesProps = null;
+  state: TableBillingAccountServicesState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Billing\\Loader';
   translationContextInner: string = 'Components\\TableBillingAccountServices';
 
   constructor(props: TableBillingAccountServicesProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
-
-//   getStateFromProps(props: TableBillingAccountServicesProps) {
-//     return {
-//       ...super.getStateFromProps(props),
-//     }
-//   }
-
-//   renderForm(): JSX.Element {
-//     let formDescription = this.getFormProps();
-//     return <FormActivity {...formDescription}/>;
-//   }
 }

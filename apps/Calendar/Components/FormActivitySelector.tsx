@@ -10,13 +10,13 @@ export interface FormActivitySelectorProps {
 }
 
 export interface FormActivitySelectorState {
-  formSelected?: JSX.Element;
+  formSelected?: React.JSX.Element;
 }
 
 export default class FormActivitySelector<P, S> extends TranslatedComponent<FormActivitySelectorProps, FormActivitySelectorState>{
 
-  props: FormActivitySelectorProps;
-  state: FormActivitySelectorState;
+  props: FormActivitySelectorProps = null;
+  state: FormActivitySelectorState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
   translationContextInner: string = 'Components\\FormActivitySelector';
@@ -25,11 +25,13 @@ export default class FormActivitySelector<P, S> extends TranslatedComponent<Form
 
   constructor(props: FormActivitySelectorProps) {
     super(props);
+    this.props = props;
+    this.state = {};
 
     this.refActivityModal = React.createRef();
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     var calendarConfigs = this.props.calendarConfigs;
     return (
       <>

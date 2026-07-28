@@ -29,7 +29,7 @@ interface CalendarMainState {
   showIdActivity?: number,
   dateClicked?: string,
   timeClicked?: string,
-  activityFormComponent?: JSX.Element,
+  activityFormComponent?: React.JSX.Element,
   activityFormModalProps?: any,
   newActivity: boolean,
   calendars: any,
@@ -52,7 +52,9 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
   // refActivityForm: any;
 
   constructor(props) {
-    super(props);
+    super();
+
+    this.props = props;
 
     this.refCalendar = React.createRef();
     this.refActivityModal = React.createRef();
@@ -61,19 +63,19 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
     // this.refActivityForm = React.createRef();
 
     this.state = {
-      showActivity: this.props.showActivity ?? '',
+      showActivity: props.showActivity ?? '',
       events: [],
       showIdActivity: 0,
       dateClicked: "",
       timeClicked: "",
       newActivity: false,
-      calendars: this.props.calendars,
+      calendars: props.calendars,
       fOwnership: 0,
       fCompleted: 0,
     };
   }
 
-  getCalenActivitiesEndpointUrl(showActivity?: string, eventId?: number): string {
+  getActivitiesEndpointUrl(showActivity?: string, eventId?: number): string {
     return (
       'calendar/api/get-calendar-events?'
       + 'fOwnership=' + this.state.fOwnership
@@ -82,7 +84,6 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
         .filter((calendarName) => this.state.calendars[calendarName].show)
         .map((calendarName) => 'calendars[]=' + calendarName)
         .join('&')
-      // + (showActivity ? '&source=' + showActivity : '')
       + (eventId ? '&id=' + eventId : '')
     );
   }
@@ -95,7 +96,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
     </>;
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     let eventForm = null;
     if (this.state.showActivity) {
 
@@ -121,7 +122,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           onClose:() => {this.setState({showActivity: ''})},
           onSaveCallback:() => {this.setState({showActivity: ''})}
         }
-      )
+      );
     } else {
       deleteUrlParam('showActivity');
     }
@@ -206,7 +207,7 @@ export default class CalendarComponent extends TranslatedComponent<CalendarMainP
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
           height={this.props.height}
           initialView={this.props.initialView ?? "timeGridWeek"}
-          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/' + this.getCalenActivitiesEndpointUrl(this.props.showActivity)}
+          eventsEndpoint={globalThis.hubleto.config.projectUrl + '/' + this.getActivitiesEndpointUrl(this.props.showActivity)}
           onEventsLoaded={(events) => {
           }}
           onDateClick={(date, time, info) => {

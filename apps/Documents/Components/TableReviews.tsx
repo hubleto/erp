@@ -67,7 +67,7 @@ export default class TableReviews extends TableExtended<TableReviewsProps, Table
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormReviewProps = this.getFormProps();
     formProps.customEndpointParams.idDocument = this.props.idDocument;
     formProps.customEndpointParams.idVersion = this.props.idVersion;

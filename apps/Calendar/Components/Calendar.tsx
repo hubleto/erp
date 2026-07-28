@@ -1,6 +1,18 @@
 import React, { Component } from "react";
-import FullCalendar from '@fullcalendar/react'
+import FullCalendar from '@fullcalendar/react';
+import themePlugin from "@fullcalendar/react/themes/forma";
+import dayGridPlugin from '@fullcalendar/react/daygrid';
+import timeGridPlugin from '@fullcalendar/react/timegrid';
+import interactionPlugin from '@fullcalendar/react/interaction';
+import listPlugin from '@fullcalendar/react/list';
 import request from "@hubleto/react-ui/core/Request";
+
+//@ts-ignore
+import '@fullcalendar/react/skeleton.css'; // ALWAYS NEED SKELETON
+//@ts-ignore
+import '@fullcalendar/react/themes/forma/theme.css'; // YOUR THEME
+//@ts-ignore
+import '@fullcalendar/react/themes/forma/palettes/blue.css'; // YOUR THEME'S PALETTE
 
 // const localeMap = {
 //   'sk': skLocale,
@@ -43,12 +55,13 @@ export default class Calendar extends Component {
 
   constructor(props) {
     super(props);
+    this.props = props;
 
     this.state = {
       events: [],
       dateClicked: "",
       timeClicked: "",
-      headerToolbar: this.props.headerToolbar ?? {
+      headerToolbar: props.headerToolbar ?? {
         left: 'prev,next today',
         center: 'title',
         right: this.props.views ?? 'timeGridDay,timeGridWeek,dayGridMonth'
@@ -77,20 +90,21 @@ export default class Calendar extends Component {
       : null}
     </>;
 
-    if (eventInfo.event.url) {
-      return <a href={eventInfo.event.url} target="_blank">{cellContent}</a>;
-    } else {
-      return cellContent;
-    }
+    // if (eventInfo.event.url) {
+    //   return <a href={eventInfo.event.url} target="_blank">{cellContent}</a>;
+    // } else {
+    //   return cellContent;
+    // }
+    return cellContent;
   }
 
   render(): React.JSX.Element {
     return (
       <div>
         <FullCalendar
-          eventClassNames={"truncate cursor-pointer"}
+          // eventClassNames={"truncate cursor-pointer"}
           height={this.props.height}
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+          plugins={[themePlugin, dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
           firstDay={1}
           scrollTime='10:30:00'
           headerToolbar={this.state.headerToolbar}

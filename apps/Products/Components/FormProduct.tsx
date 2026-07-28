@@ -44,7 +44,7 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
     return 'products/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Product')}</small>
       <h2>{this.state.record.ean ?? '-'} {this.state.record.name ?? '-'}</h2>

@@ -36,7 +36,7 @@ export default class FormDocumentVersion<P, S> extends FormExtended<FormDocument
     return 'documents/versions/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Document version")}</small>
       <h2>{this.state.record.name ? this.state.record.name : '-'}</h2>

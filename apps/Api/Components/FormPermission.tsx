@@ -24,7 +24,7 @@ export default class FormPermission<P, S> extends FormExtended<FormPermissionPro
     return 'api/permissions/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Permission')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>

@@ -63,7 +63,7 @@ export default class TableClicks extends TableExtended<TableClicksProps, TableCl
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/campaigns/clicks/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormClickProps;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_campaign: this.props.idCampaign };

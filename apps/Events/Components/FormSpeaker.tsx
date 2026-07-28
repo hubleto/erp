@@ -21,7 +21,7 @@ export default class FormSpeaker<P, S> extends FormExtended<FormSpeakerProps, Fo
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Speaker')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>

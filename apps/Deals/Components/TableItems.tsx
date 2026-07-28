@@ -33,7 +33,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.description = {
       defaultValues: { id_deal: this.props.idDeal }

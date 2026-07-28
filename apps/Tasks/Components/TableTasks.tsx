@@ -94,7 +94,7 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.idCustomer = this.props.idCustomer;
     formProps.idContact = this.props.idContact;
@@ -107,7 +107,7 @@ export default class TableTasks extends TableExtended<TableTasksProps, TableTask
     return <FormTask {...formProps}/>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     return <>
       {super.renderContent()}
       {this.state.addActivityForIdTask > 0 ?

@@ -32,7 +32,7 @@ export default class TableUserRoles extends Table<TableUserRolesProps, TableUser
     this.state = this.getStateFromProps(props);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formDescription = this.getFormProps();
     return <FormUserRole {...formDescription}/>;
   }

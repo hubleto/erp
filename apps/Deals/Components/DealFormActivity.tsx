@@ -28,7 +28,7 @@ export default class DealFormActivity<P, S> extends FormActivity<DealFormActivit
     return this.translate('Deal');
   }
 
-  renderCustomInputs(): JSX.Element {
+  renderCustomInputs(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

@@ -40,7 +40,7 @@ export default class FormQuote<P, S> extends FormExtended<FormQuoteProps, FormQu
     return 'quotes/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     const R = this.state.record;
     return <>
       <small>{this.translate('Quote')}</small>

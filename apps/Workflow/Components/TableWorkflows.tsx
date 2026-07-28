@@ -33,7 +33,7 @@ export default class TableWorkflows extends Table<TableWorkflowsProps, TableWork
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formDescription = this.getFormProps();
     return <FormWorkflow {...formDescription}/>;
   }

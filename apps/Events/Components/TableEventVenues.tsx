@@ -46,7 +46,7 @@ export default class TableEventVenues extends TableExtended<TableEventVenuesProp
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idEvent = this.props.idEvent;
     if (!formProps.description) formProps.description = {};

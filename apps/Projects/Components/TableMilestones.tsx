@@ -46,7 +46,7 @@ export default class TableMilestones extends TableExtended<TableMilestonesProps,
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idProject = this.props.idProject;
     if (!formProps.description) formProps.description = {};

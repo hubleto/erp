@@ -62,7 +62,7 @@ export default class TableRecipientStatuses extends TableExtended<TableRecipient
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/campaigns/recipients/statuses/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormRecipientStatusProps;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_campaign: this.props.idCampaign };

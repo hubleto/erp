@@ -12,17 +12,19 @@ export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps
     model: 'Hubleto/App/Community/Projects/Models/Milestone',
   }
 
-  props: FormMilestoneProps;
-  state: FormMilestoneState;
+  props: FormMilestoneProps = null;
+  state: FormMilestoneState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
   translationContextInner: string = 'Components\\FormMilestone';
 
   constructor(props: FormMilestoneProps) {
     super(props);
+    this.props = props;
+    this.state = this.getStateFromProps(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Milestone','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormMilestone')}</small>
       <h2>{this.state.record.title ?? '-'}</h2>

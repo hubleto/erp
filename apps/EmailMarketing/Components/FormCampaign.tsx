@@ -54,7 +54,7 @@ export default class FormCampaign<P, S> extends FormExtended<FormCampaignProps, 
     return 'email-marketing/campaigns/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Campaign")}</small>
       <h2>{this.state.record.email ?? '-'}</h2>

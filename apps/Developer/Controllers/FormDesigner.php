@@ -23,7 +23,7 @@ class FormDesigner extends \Hubleto\Erp\Controller
     switch ($template) {
       case 'one-column':
         $renderContentCode = <<<EOL
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     return <>
       {this.divider(this.translate('Divider #1'))}
       {this.inputWrapper('input_for_column_1')}
@@ -39,7 +39,7 @@ EOL;
         break;
       case 'two-columns':
         $renderContentCode = <<<EOL
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     return <>
       <div className='w-full flex gap-2'>
         <div className='flex-1 border-r border-gray-100'>

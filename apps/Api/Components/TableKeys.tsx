@@ -58,7 +58,7 @@ export default class TableKeys extends TableExtended<TableKeysProps, TableKeysSt
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idKey;
     if (!formProps.description) formProps.description = {};

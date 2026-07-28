@@ -41,7 +41,7 @@ export default class FormCategory<P, S> extends FormExtended<FormCategoryProps,F
     return 'products/categories/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Category')}</small>
       <h2>{this.state.record.title ?? '-'}</h2>

@@ -45,7 +45,7 @@ export default class TableProjects extends TableExtended<TableProjectsProps, Tab
     return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormProjectProps;
     formProps.customEndpointParams.idDeal = this.props.idDeal;
     if (!formProps.description) formProps.description = {};

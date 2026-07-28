@@ -57,7 +57,7 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
     }
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Contact')}</small>
       <h2>{this.state.record.first_name ?? ''}&nbsp;{this.state.record.last_name ?? ''}</h2>
@@ -102,7 +102,7 @@ export default class FormContact<P, S> extends FormExtended<FormContactProps,For
     if (prevState.isInlineEditing != this.state.isInlineEditing) this.setState({contactsTableKey: Math.random()} as FormContactState)
   }
 
-  renderTab(tabUid: string): JSX.Element {
+  renderTab(tabUid: string): React.JSX.Element {
     const R = this.state.record;
     const showAdditional = R.id > 0 ? true : false;
     // const customInputs = this.renderCustomInputs();

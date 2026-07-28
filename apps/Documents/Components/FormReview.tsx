@@ -35,7 +35,7 @@ export default class FormReview<P, S> extends FormExtended<FormReviewProps,FormR
     return 'documents/reviews/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Document review")}</small>
       <h2>{this.state.record.name ? this.state.record.name : '-'}</h2>

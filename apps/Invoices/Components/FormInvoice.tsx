@@ -113,7 +113,7 @@ export default class FormInvoice extends FormExtended<FormInvoiceProps, FormInvo
     return title + ' ' + R.number;
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     const R = this.state.record;
     let title = (this.state.record.inbound_outbound == 1 ? this.translate('Inbound') : this.translate('Outbound'));
 

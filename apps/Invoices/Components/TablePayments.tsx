@@ -50,7 +50,7 @@ export default class TablePayments extends TableExtended<TablePaymentsProps, Tab
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/payments/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormPaymentProps;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_invoice: this.props.idInvoice };

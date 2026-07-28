@@ -29,7 +29,7 @@ export default class FormGroup<P, S> extends FormExtended<FormGroupProps,FormGro
     return 'products/groups/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Group')}</small>
       <h2>{this.state.record.title ?? '-'}</h2>

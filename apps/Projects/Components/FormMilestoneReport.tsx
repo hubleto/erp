@@ -20,7 +20,7 @@ export default class FormMilestoneReport<P, S> extends FormExtended<FormMileston
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Milestone report')}</small>
       <h2>{this.state.record.date_report ?? '-'}</h2>

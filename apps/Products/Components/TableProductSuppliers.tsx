@@ -44,13 +44,13 @@ export default class TableProductSuppliers extends Table<TableProductSuppliersPr
     }
   }
 
-  renderHeaderRight(): Array<JSX.Element> {
-    let elements: Array<JSX.Element> = super.renderHeaderRight();
+  renderHeaderRight(): Array<React.JSX.Element> {
+    let elements: Array<React.JSX.Element> = super.renderHeaderRight();
 
     return elements;
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.description = {
       defaultValues: { id_product: this.props.idProduct }

@@ -57,7 +57,7 @@ export default class TableDocuments extends TableExtended<TableDocumentsProps, T
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormDocumentProps = this.getFormProps();
     return <FormDocument {...formProps}/>;
   }

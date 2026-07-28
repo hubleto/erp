@@ -48,7 +48,7 @@ export default class TableLevels extends TableExtended<TableLevelsProps, TableLe
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     // formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     // if (!formProps.description) formProps.description = {};

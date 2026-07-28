@@ -52,13 +52,13 @@ export default class TableProducts extends TableExtended<TableProductsProps, Tab
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/products/' + (id > 0 ? id : 'add'));
   }
 
-  renderHeaderRight(): Array<JSX.Element> {
-    let elements: Array<JSX.Element> = super.renderHeaderRight();
+  renderHeaderRight(): Array<React.JSX.Element> {
+    let elements: Array<React.JSX.Element> = super.renderHeaderRight();
 
     return elements;
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     return <FormProduct {...formProps}/>;
   }

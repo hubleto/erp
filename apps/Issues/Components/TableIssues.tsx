@@ -39,7 +39,7 @@ export default class TableIssues extends TableExtended<TableIssuesProps, TableIs
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/issues/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormIssueProps = this.getFormProps();
     return <FormIssue {...formProps}/>;
   }

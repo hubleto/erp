@@ -17,14 +17,15 @@ export default class TableUsages extends TableExtended<TableUsagesProps, TableUs
     readonly: true,
   }
 
-  props: TableUsagesProps;
-  state: TableUsagesState;
+  props: TableUsagesProps = null;
+  state: TableUsagesState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Api\\Loader';
   translationContextInner: string = 'Components\\TableUsages';
 
   constructor(props: TableUsagesProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 
@@ -51,7 +52,7 @@ export default class TableUsages extends TableExtended<TableUsagesProps, TableUs
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/api/usages/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idKey = this.props.idKey
     if (!formProps.description) formProps.description = {};

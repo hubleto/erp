@@ -28,7 +28,7 @@ export default class ProjectsFormActivity<P, S> extends FormActivity<ProjectsFor
     return this.translate('Project');
   }
 
-  renderCustomInputs(): JSX.Element {
+  renderCustomInputs(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

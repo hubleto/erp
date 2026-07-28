@@ -16,14 +16,15 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     model: 'Hubleto/App/Community/Orders/Models/Item',
   }
 
-  props: TableItemsProps;
-  state: TableItemsState;
+  props: TableItemsProps = null;
+  state: TableItemsState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
   translationContextInner: string = 'Components\\TableItems';
 
   constructor(props: TableItemsProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 
@@ -120,7 +121,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
     }
   }
   
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormItemProps;
     if (!formProps.description) formProps.description = {};
     formProps.idOrder = this.props.idOrder;

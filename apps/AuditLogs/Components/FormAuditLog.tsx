@@ -10,14 +10,15 @@ export default class FormAuditLog<P, S> extends FormExtended<FormAuditLogProps,F
     model: 'Hubleto/App/Community/AuditLogs/Models/AuditLog',
   };
 
-  props: FormAuditLogProps;
-  state: FormAuditLogState;
+  props: FormAuditLogProps = null;
+  state: FormAuditLogState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\AuditLogs\\Loader';
   translationContextInner: string = 'Components\\FormAuditLog';
 
   constructor(props: FormAuditLogProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 
@@ -27,7 +28,7 @@ export default class FormAuditLog<P, S> extends FormExtended<FormAuditLogProps,F
     };
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Audit Log')}</small>
       <h2>{this.state.record.context}</h2>
@@ -35,7 +36,7 @@ export default class FormAuditLog<P, S> extends FormExtended<FormAuditLogProps,F
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     return <>
       {this.inputWrapper('datetime')}
       {this.inputWrapper('type')}

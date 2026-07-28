@@ -154,7 +154,7 @@ export default class TableInvoices extends TableExtended<TableInvoicesProps, Tab
     }
   }
 
-  renderFooter(): JSX.Element {
+  renderFooter(): React.JSX.Element {
     let totalExclVat = 0;
     let totalVat = 0;
     let totalInclVat = 0;
@@ -175,7 +175,7 @@ export default class TableInvoices extends TableExtended<TableInvoicesProps, Tab
     </>
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.description = {
       defaultValues: {

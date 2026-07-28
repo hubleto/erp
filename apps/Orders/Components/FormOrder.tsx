@@ -13,7 +13,8 @@ import ModalForm from '@hubleto/react-ui/core/ModalForm';
 import Calendar from '../../Calendar/Components/Calendar';
 import moment, { Moment } from "moment";
 import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
-import { ProgressBar } from 'primereact/progressbar';
+import Spinner from '@hubleto/react-ui/fc/Spinner';
+import { FormDescription } from '@hubleto/react-ui/core/Form';
 
 export interface FormOrderProps extends FormExtendedProps {
 }
@@ -56,8 +57,13 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
   constructor(props: FormOrderProps) {
     super(props);
 
-    this.state = {
-      ...this.getStateFromProps(props),
+    this.state = this.getStateFromProps(props);
+  }
+
+  getStateFromProps(props: FormOrderProps) {
+    return {
+      ...super.getStateFromProps(props),
+      salaries: {},
       showIdActivity: 0,
       activityTime: '',
       activityDate: '',
@@ -89,13 +95,6 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
     ]
   }
 
-  getStateFromProps(props: FormOrderProps) {
-    return {
-      ...super.getStateFromProps(props),
-      salaries: {},
-    };
-  }
-
   getRecordFormUrl(): string {
     return 'orders/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
@@ -123,7 +122,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
     }
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.state.record.purchase_sales == 1 ? this.translate('Purchase Order') : this.translate('Sales Order')}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>
@@ -618,7 +617,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
             </div>;
           })}</div>;
         } else {
-          return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+          return <Spinner></Spinner>;
         }
       break;
 
@@ -732,7 +731,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
     }
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
     return <>
       {super.renderContent()}

@@ -18,14 +18,16 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
     model: 'Hubleto/App/Community/Leads/Models/LeadActivity',
   };
 
-  props: LeadFormActivityProps;
-  state: LeadFormActivityState;
+  props: LeadFormActivityProps = null;
+  state: LeadFormActivityState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
   translationContextInner: string = 'Components\\FormActivity';
 
   constructor(props: LeadFormActivityProps) {
     super(props);
+    this.props = props;
+    this.state = this.getStateFromProps(props);
   }
 
   getActivitySourceReadable(): string
@@ -33,7 +35,7 @@ export default class LeadFormActivity<P, S> extends FormActivity<LeadFormActivit
     return this.translate('Lead');
   }
 
-  renderCustomInputs(): JSX.Element {
+  renderCustomInputs(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

@@ -54,7 +54,7 @@ export default class TableCampaignsSchedulesRecipients extends TableExtended<Tab
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/email-marketing/campaigns/schedules/recipients' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormCampaignScheduleProps;
     if (!formProps.description) formProps.description = {};
     formProps.description.defaultValues = { ...formProps.description.defaultValues ?? {}, id_campaign_schedule: this.props.idCampaignSchedule };

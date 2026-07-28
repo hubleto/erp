@@ -49,7 +49,7 @@ export default class TableWorkflowSteps extends Table<TableWorkflowStepsProps, T
     };
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.description = {
       defaultValues: {

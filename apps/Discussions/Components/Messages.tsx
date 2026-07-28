@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
-import { ProgressBar } from 'primereact/progressbar';
+import Spinner from '@hubleto/react-ui/fc/Spinner';
 import request from "@hubleto/react-ui/core/Request";
 import Markdown from 'marked-react';
 
@@ -18,8 +18,8 @@ export default class Messages extends TableExtended<MessagesProps, MessagesState
     model: 'Hubleto/App/Community/Discussions/Models/Message',
   }
 
-  props: MessagesProps;
-  state: MessagesState;
+  props: MessagesProps = null;
+  state: MessagesState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Discussions\\Loader';
   translationContextInner: string = 'Components\\Messages';
@@ -28,6 +28,7 @@ export default class Messages extends TableExtended<MessagesProps, MessagesState
 
   constructor(props: MessagesProps) {
     super(props);
+    this.props = props;
     this.refMessageTextarea = React.createRef();
     this.state = this.getStateFromProps(props);
   }
@@ -53,7 +54,7 @@ export default class Messages extends TableExtended<MessagesProps, MessagesState
 
   render() {
     if (!this.state.data) {
-      return <ProgressBar mode="indeterminate" style={{ height: '8px' }}></ProgressBar>;
+      return <Spinner></Spinner>;
     }
 
     return <>

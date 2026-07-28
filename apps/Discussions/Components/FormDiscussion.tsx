@@ -44,7 +44,7 @@ export default class FormDiscussion<P, S> extends FormExtended<FormDiscussionPro
     } as FormDiscussionState;
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Discussion')}</small>
       <h2>{this.state.record.topic ?? '-'}</h2>

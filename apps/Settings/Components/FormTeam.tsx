@@ -22,14 +22,14 @@ export default class FormTeam<P, S> extends FormExtended<FormTeamProps, FormTeam
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Team')}</small>
       <h2>{this.state.record.name ?? '-'}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     return <>
       <div className='w-full flex gap-2'>
         <div className="p-4 flex-1 text-center">

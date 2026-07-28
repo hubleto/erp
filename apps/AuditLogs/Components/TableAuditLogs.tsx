@@ -17,17 +17,16 @@ export default class TableAuditLogs extends TableExtended<TableAuditLogsProps, T
     model: 'Hubleto/App/Community/AuditLogs/Models/AuditLog',
   }
 
-  props: TableAuditLogsProps;
-  state: TableAuditLogsState;
+  props: TableAuditLogsProps = null;
+  state: TableAuditLogsState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\AuditLogs\\Loader';
   translationContextInner: string = 'Components\\TableAuditLogs';
 
   constructor(props: TableAuditLogsProps) {
     super(props);
-    this.state = {
-      ...this.getStateFromProps(props),
-    };
+    this.props = props;
+    this.state = this.getStateFromProps(props);
   }
 
   getEndpointParams() {
@@ -43,7 +42,7 @@ export default class TableAuditLogs extends TableExtended<TableAuditLogsProps, T
     return params;
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormProps = this.getFormProps();
     return <FormAuditLog {...formProps}/>;
   }

@@ -24,7 +24,7 @@ export default class FormUsage<P, S> extends FormExtended<FormUsageProps, FormUs
     return 'api/usages/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Usage')}</small>
       <h2>Record #{this.state.record.id ?? '0'}</h2>

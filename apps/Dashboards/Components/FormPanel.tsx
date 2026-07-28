@@ -27,14 +27,14 @@ export default class FormPanel<P, S> extends FormExtended<FormPanelProps,FormPan
     };
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Dashboard panel')}</small>
       <h2>{this.state.record.title ? this.state.record.title : '-'}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
 
     return <>

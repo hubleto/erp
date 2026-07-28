@@ -65,7 +65,7 @@ export default class TableDocumentVersions extends TableExtended<TableDocumentVe
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps: FormDocumentVersionProps = this.getFormProps();
     formProps.customEndpointParams.idDocument = this.props.idDocument;
     if (!formProps.description) formProps.description = {};

@@ -31,7 +31,7 @@ export default class FormTemplate<P, S> extends FormExtended<FormTemplateProps,F
     return 'mail/templates/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): null|JSX.Element {
+  renderTitle(): null|React.JSX.Element {
     return <>
       <h2>{this.state.record.subject ? this.state.record.subject : ''}</h2>
       <small>{this.translate('Template')}</small>
@@ -41,7 +41,7 @@ export default class FormTemplate<P, S> extends FormExtended<FormTemplateProps,F
   sendMail() {
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
 
     return <>
       {this.inputWrapper('subject')}

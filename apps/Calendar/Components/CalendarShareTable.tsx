@@ -15,15 +15,15 @@ interface CalendarShareTableState {
 
 export default class CalendarShareTable extends TranslatedComponent<CalendarShareTableProps, CalendarShareTableState> {
 
-  props: CalendarShareTableProps;
-  state: CalendarShareTableState;
+  props: CalendarShareTableProps = null;
+  state: CalendarShareTableState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Calendar\\Loader';
   translationContextInner: string = 'Components\\CalendarShareTable';
 
   constructor(props) {
     super(props);
-
+    this.props = props;
     this.state = {
       configs: props.configs,
       loading: false,
@@ -148,7 +148,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
     ));
   }
 
-  render(): JSX.Element {
+  render(): React.JSX.Element {
     let calendars = this.renderCalendars(Object.entries(this.state.configs));
 
     return <>

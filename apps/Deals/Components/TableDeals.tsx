@@ -71,7 +71,7 @@ export default class TableDeals extends TableExtended<TableDealsProps, TableDeal
     window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/deals/' + (id > 0 ? id : 'add'));
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps() as FormDealProps;
     formProps.customEndpointParams.idCustomer = this.props.idCustomer;
     return <FormDeal {...formProps}/>;

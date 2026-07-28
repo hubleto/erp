@@ -53,7 +53,7 @@ export default class TableShops extends TableExtended<TableShopsProps, TableShop
     return rowData.is_closed ? 'bg-slate-300' : super.rowClassName(rowData);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     return <FormShop {...formProps}/>;
   }

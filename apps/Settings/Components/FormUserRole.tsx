@@ -27,14 +27,14 @@ export default class FormUserRole<P, S> extends FormExtended<FormUserRoleProps,F
     };
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('User role')}</small>
       <h2>{this.state.record.role ?? '-'}</h2>
     </>;
   }
 
-  renderContent(): JSX.Element {
+  renderContent(): React.JSX.Element {
     const R = this.state.record;
 
     let permissions: any = {};

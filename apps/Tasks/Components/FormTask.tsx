@@ -65,7 +65,7 @@ export default class FormTask<P, S> extends FormExtended<FormTaskProps, FormTask
     return this.state.record.is_closed ? 'bg-slate-100' : '';
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Task')}</small>
       <h2>{this.state.record.identifier ?? '-'}</h2>

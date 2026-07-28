@@ -46,7 +46,7 @@ export default class TableMembers extends TableExtended<TableMembersProps, Table
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formProps = this.getFormProps();
     formProps.customEndpointParams.idDiscussion = this.props.idDiscussion;
     if (!formProps.description) formProps.description = {};

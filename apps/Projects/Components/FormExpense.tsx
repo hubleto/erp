@@ -20,7 +20,7 @@ export default class FormExpense<P, S> extends FormExtended<FormExpenseProps, Fo
     super(props);
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate('Expense')}</small>
       <h2>{this.state.record.reason ?? '-'}</h2>

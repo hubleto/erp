@@ -39,7 +39,7 @@ export default class FormClick<P, S> extends FormExtended<FormClickProps, FormCl
     return 'campaigns/clicks/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
   }
 
-  renderTitle(): JSX.Element {
+  renderTitle(): React.JSX.Element {
     return <>
       <small>{this.translate("Click")}</small>
       <h2>{this.state.record.email ?? '-'}</h2>

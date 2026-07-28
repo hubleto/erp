@@ -17,18 +17,19 @@ export default class TableCalendarSyncSources extends Table<TableSourcesProps, T
     model: 'Hubleto/App/Community/CalendarSync/Models/Source',
   }
 
-  props: TableSourcesProps;
-  state: TableSourcesState;
+  props: TableSourcesProps = null;
+  state: TableSourcesState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\CalendarSync\\Loader';
   translationContextInner: string = 'Components\\TableSources';
 
   constructor(props: TableSourcesProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formDescription = this.getFormProps();
     return <FormCalendarSyncSource {...formDescription}/>;
   }

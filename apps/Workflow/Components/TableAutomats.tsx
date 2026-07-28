@@ -33,7 +33,7 @@ export default class TableAutomats extends Table<TableAutomatsProps, TableAutoma
     }
   }
 
-  renderForm(): JSX.Element {
+  renderForm(): React.JSX.Element {
     let formDescription = this.getFormProps();
     return <FormAutomat {...formDescription}/>;
   }

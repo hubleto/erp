@@ -69,6 +69,17 @@ class Desktop extends \Hubleto\Erp\Controller
     $this->viewParams['secondSidebar'] = $activatedApp ? $activatedApp->renderSecondSidebar() : '';
     $this->viewParams['priorityNotifications'] = $activatedApp ? $activatedApp->renderPriorityNotifications() : '';
 
+    /** @var \Hubleto\App\Enterprise\Cloud\AccountManager */
+    try {
+      $accountManager = $this->getService(\Hubleto\App\Enterprise\Cloud\AccountManager::class);
+
+      if ($accountManager) {
+        $this->viewParams['subscriptionPlan'] = $accountManager->getSubscriptionPlan();
+      }
+    } catch (\Throwable $e) {
+      $this->viewParams['subscriptionPlan'] = '';
+    }
+
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');
   }
 

@@ -1,6 +1,6 @@
 {{ setTranslationContext('hubleto-app-community-desktop-loader', 'Controllers\\Desktop') }}
 {% set isPremium = hubleto.env().isPremium() %}
-{% set subscriptionPlan = hubleto.getService('Hubleto/App/Enterprise/Cloud/AccountManager').getSubscriptionPlan() %}
+{% set subscriptionPlan = viewParams.subscriptionPlan %}
 
 {% macro appBtn(app, inGroup, badgeNumber) %}
   <div class="flex gap-1">

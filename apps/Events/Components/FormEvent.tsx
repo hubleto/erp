@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableEventVenues from './TableEventVenues';
 import TableEventAttendees from './TableEventAttendees';
 import TableEventSpeakers from './TableEventSpeakers';

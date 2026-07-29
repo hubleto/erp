@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
 import FormLead, { FormLeadProps } from './FormLead';
-import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
+import ModalSimple from "@hubleto/react-ui/components/cc/ModalSimple";
 import request from '@hubleto/react-ui/core/Request';
 
 export interface TableLeadsProps extends TableExtendedProps {

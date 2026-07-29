@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
-import Spinner from '@hubleto/react-ui/fc/Spinner';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import Spinner from '@hubleto/react-ui/components/cc/Spinner';
 import request from "@hubleto/react-ui/core/Request";
 import Markdown from 'marked-react';
 

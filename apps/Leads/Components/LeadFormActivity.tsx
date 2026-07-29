@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/Calendar/Components/FormActivity'
-import FormInput from '@hubleto/react-ui/core/FormInput';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 
 export interface LeadFormActivityProps extends FormActivityProps {
   idLead: number,

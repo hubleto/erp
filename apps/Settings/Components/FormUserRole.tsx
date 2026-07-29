@@ -1,6 +1,6 @@
 import React, { Component, createRef, RefObject } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
 
 interface FormUserRoleProps extends FormExtendedProps {}
 interface FormUserRoleState extends FormExtendedState {}

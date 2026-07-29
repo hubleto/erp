@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
-import { FormProps } from '@hubleto/react-ui/core/Form';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import { FormProps } from '@hubleto/react-ui/components/cc/Form';
 import FormTemplate from './FormTemplate';
 
 interface TableTemplatesProps extends TableExtendedProps {}

@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent } from "react";
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import Int from '@hubleto/react-ui/core/Inputs/Int';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import Int from '@hubleto/react-ui/components/cc/Inputs/Int';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 
 export interface FormCashRegisterProps extends FormExtendedProps { }
 export interface FormCashRegisterState extends FormExtendedState { }

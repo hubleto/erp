@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableCampaignsSchedules from '@hubleto/apps/EmailMarketing/Components/TableCampaignsSchedules';
 import TableRecipients from '@hubleto/apps/EmailMarketing/Components/TableRecipients';
 import request from '@hubleto/react-ui/core/Request';
-import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import InputTags2 from '@hubleto/react-ui/components/cc/Inputs/Tags2';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 
 export interface FormCampaignProps extends FormExtendedProps {}
 export interface FormCampaignState extends FormExtendedState {}

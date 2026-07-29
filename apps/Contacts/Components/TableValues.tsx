@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
-import Spinner from '@hubleto/react-ui/fc/Spinner';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+import Spinner from '@hubleto/react-ui/components/cc/Spinner';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 
 interface TableValuesProps extends TableProps {
 }

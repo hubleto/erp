@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import FormExtended, {FormExtendedProps, FormExtendedState} from "@hubleto/react-ui/ext/FormExtended";
+import FormExtended, {FormExtendedProps, FormExtendedState} from "@hubleto/react-ui/components/cc/FormExtended";
 import { InputFactory } from "@hubleto/react-ui/core/InputFactory";
 import request from '@hubleto/react-ui/core/Request';
 import TableItems from './TableItems';
 import TablePayments from './TablePayments';
-import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
-import TextareaWithHtmlPreview from "@hubleto/react-ui/core/Inputs/TextareaWithHtmlPreview";
+import ModalSimple from "@hubleto/react-ui/components/cc/ModalSimple";
+import TextareaWithHtmlPreview from "@hubleto/react-ui/components/cc/Inputs/TextareaWithHtmlPreview";
 
 interface FormInvoiceProps extends FormExtendedProps {
 }

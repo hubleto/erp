@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableProductSuppliers from './TableProductSuppliers';
 import Barcode from 'react-barcode';
 

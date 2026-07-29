@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import TableMilestones from './TableMilestones';
 import TableExpenses from './TableExpenses';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import request from '@hubleto/react-ui/core/Request';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
-import Spinner from '@hubleto/react-ui/fc/Spinner';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
+import Spinner from '@hubleto/react-ui/components/cc/Spinner';
 
 export interface FormProjectProps extends FormExtendedProps { }
 export interface FormProjectState extends FormExtendedState {

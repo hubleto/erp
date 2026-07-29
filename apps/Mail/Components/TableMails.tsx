@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
-import { FormProps } from '@hubleto/react-ui/core/Form';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import { FormProps } from '@hubleto/react-ui/components/cc/Form';
 import FormMail from './FormMail';
 
 interface TableExtendedMailsProps extends TableExtendedProps {

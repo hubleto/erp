@@ -1,12 +1,12 @@
 import React, { Component, ChangeEvent } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
 import TableRecipients from '@hubleto/apps/EmailMarketing/Components/TableRecipients';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/TableEmailClicks';
 import request from '@hubleto/react-ui/core/Request';
-import InputJsonKeyValue from "@hubleto/react-ui/core/Inputs/JsonKeyValue";
+import InputJsonKeyValue from "@hubleto/react-ui/components/cc/Inputs/JsonKeyValue";
 import moment, { Moment } from "moment";
-import { updateFormWorkflowByTag } from '@hubleto/react-ui/ext/ErpWorkflowSelector';
+import { updateFormWorkflowByTag } from '@hubleto/react-ui/components/cc/ErpWorkflowSelector';
 
 export interface FormEmailProps extends FormExtendedProps {}
 export interface FormEmailState extends FormExtendedState {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
 import FormContact, { FormContactProps, FormContactState } from './FormContact';
 import request from '@hubleto/react-ui/core/Request';
-import Spinner from "@hubleto/react-ui/core/Spinner";
+import Spinner from "@hubleto/react-ui/components/cc/Spinner";
 
 interface TableContactsProps extends TableExtendedProps {
   idCustomer: number,

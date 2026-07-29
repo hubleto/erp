@@ -1,20 +1,20 @@
 import React, { Component, createRef, useRef, ChangeEvent } from 'react';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableItems from './TableItems';
 import TableQuotes from './TableQuotes';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import OrdersFormActivity, { OrdersFormActivityProps, OrdersFormActivityState } from './OrdersFormActivity';
-import ModalForm from '@hubleto/react-ui/core/ModalForm';
+import ModalForm from '@hubleto/react-ui/components/cc/ModalForm';
 import Calendar from '../../Calendar/Components/Calendar';
 import moment, { Moment } from "moment";
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
-import Spinner from '@hubleto/react-ui/fc/Spinner';
-import { FormDescription } from '@hubleto/react-ui/core/Form';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
+import Spinner from '@hubleto/react-ui/components/cc/Spinner';
+import { FormDescription } from '@hubleto/react-ui/components/cc/Form';
 
 export interface FormOrderProps extends FormExtendedProps {
 }

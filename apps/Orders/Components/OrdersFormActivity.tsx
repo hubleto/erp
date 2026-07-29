@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FormInput from '@hubleto/react-ui/core/FormInput';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 import FormActivity, { FormActivityProps, FormActivityState } from '@hubleto/apps/Calendar/Components/FormActivity'
 
 export interface OrdersFormActivityProps extends FormActivityProps {

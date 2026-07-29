@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import Spinner from '@hubleto/react-ui/fc/Spinner';
-import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
-import ModalForm from "@hubleto/react-ui/core/ModalForm";
+import Spinner from '@hubleto/react-ui/components/cc/Spinner';
+import TranslatedComponent from "@hubleto/react-ui/components/cc/TranslatedComponent";
+import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
 import FormPanel from "./FormPanel";
 import FormDashboard from './FormDashboard';
 import * as uuid from 'uuid';

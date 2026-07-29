@@ -1,12 +1,12 @@
 import React, { Component, createRef, ChangeEvent } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import InputTags2 from '@hubleto/react-ui/components/cc/Inputs/Tags2';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import Calendar from '../../Calendar/Components/Calendar';
-import ModalForm from '@hubleto/react-ui/core/ModalForm';
+import ModalForm from '@hubleto/react-ui/components/cc/ModalForm';
 import LeadFormActivity, { LeadFormActivityProps, LeadFormActivityState } from './LeadFormActivity';
-import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
+import { FormProps, FormState } from '@hubleto/react-ui/components/cc/Form';
 import moment, { Moment } from "moment";
 
 import TableLeadHistory from './TableLeadHistory';

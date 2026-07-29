@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
 import FormPayment, { FormPaymentProps } from './FormPayment';
 import request from '@hubleto/react-ui/core/Request';
 import moment from "moment";

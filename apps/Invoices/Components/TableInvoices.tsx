@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { setUrlParam, getUrlParam, deleteUrlParam } from '@hubleto/react-ui/core/Helper';
-import { TableDescription } from '@hubleto/react-ui/core/Table';
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
+import { TableDescription } from '@hubleto/react-ui/components/cc/Table';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
 import FormInvoice from './FormInvoice';
 import moment from "moment";
 

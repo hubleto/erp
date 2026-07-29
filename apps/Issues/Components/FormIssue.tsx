@@ -1,5 +1,5 @@
 import React, { Component, createRef, useRef, ChangeEvent } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TablePosts from './TablePosts';
 

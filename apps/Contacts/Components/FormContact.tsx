@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { deepObjectMerge, getUrlParam } from '@hubleto/react-ui/core/Helper';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import InputTags2 from '@hubleto/react-ui/core/Inputs/Tags2';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import InputTags2 from '@hubleto/react-ui/components/cc/Inputs/Tags2';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import TableValues from './TableValues';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
-import Boolean from '@hubleto/react-ui/core/Inputs/Boolean';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
+import Boolean from '@hubleto/react-ui/components/cc/Inputs/Boolean';
 import request from '@hubleto/react-ui/core/Request';
-import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
+import { FormProps, FormState } from '@hubleto/react-ui/components/cc/Form';
 
 export interface FormContactProps extends FormExtendedProps {
   newEntryId?: number,

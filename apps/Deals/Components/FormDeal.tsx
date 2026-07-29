@@ -1,17 +1,17 @@
 import React, { Component, createRef, ChangeEvent } from 'react';
 import { deepObjectMerge, getUrlParam } from '@hubleto/react-ui/core/Helper';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import request from '@hubleto/react-ui/core/Request';
 import moment, { Moment } from "moment";
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 
 import Calendar from '../../Calendar/Components/Calendar';
 import FormDocument, { FormDocumentProps, FormDocumentState } from '../../Documents/Components/FormDocument';
 import DealFormActivity, { DealFormActivityProps, DealFormActivityState } from './DealFormActivity';
-import ModalForm from '@hubleto/react-ui/core/ModalForm';
-import Hyperlink from '@hubleto/react-ui/core/Inputs/Hyperlink';
-import { FormProps, FormState } from '@hubleto/react-ui/core/Form';
+import ModalForm from '@hubleto/react-ui/components/cc/ModalForm';
+import Hyperlink from '@hubleto/react-ui/components/cc/Inputs/Hyperlink';
+import { FormProps, FormState } from '@hubleto/react-ui/components/cc/Form';
 import TableItems from './TableItems';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
 import TableDealHistory from './TableDealHistory';

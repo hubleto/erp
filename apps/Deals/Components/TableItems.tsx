@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
-import FormExtended from '@hubleto/react-ui/ext/FormExtended';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import FormExtended from '@hubleto/react-ui/components/cc/FormExtended';
 
 interface TableItemsProps extends TableExtendedProps {
   idDeal: number

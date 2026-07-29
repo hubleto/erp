@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
-import FormInput from '@hubleto/react-ui/core/FormInput';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import moment from 'moment';
-import UserSelect from '@hubleto/react-ui/core/Inputs/UserSelect';
-import DateTime from '@hubleto/react-ui/core/Inputs/DateTime';
+import UserSelect from '@hubleto/react-ui/components/cc/Inputs/UserSelect';
+import DateTime from '@hubleto/react-ui/components/cc/Inputs/DateTime';
 
 interface FormTaskProps extends FormExtendedProps {
   idCustomer?: any,

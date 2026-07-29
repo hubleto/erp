@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { deepObjectMerge, getUrlParam } from "@hubleto/react-ui/core/Helper";
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import { FormProps, FormState } from "@hubleto/react-ui/core/Form";
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import { FormProps, FormState } from "@hubleto/react-ui/components/cc/Form";
 
 interface FormAutomatProps extends FormExtendedProps {}
 

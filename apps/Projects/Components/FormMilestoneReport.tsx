@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 
 interface FormMilestoneReportProps extends FormExtendedProps { }
 interface FormMilestoneReportState extends FormExtendedState { }

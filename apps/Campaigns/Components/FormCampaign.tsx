@@ -1,16 +1,16 @@
 import React, { Component, ChangeEvent } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
 import TableRecipients from '@hubleto/apps/Campaigns/Components/TableRecipients';
 import TableClicks from '@hubleto/apps/Campaigns/Components/TableClicks';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import request from '@hubleto/react-ui/core/Request';
-import InputJsonKeyValue from "@hubleto/react-ui/core/Inputs/JsonKeyValue";
-import ModalForm from '@hubleto/react-ui/core/ModalForm';
+import InputJsonKeyValue from "@hubleto/react-ui/components/cc/Inputs/JsonKeyValue";
+import ModalForm from '@hubleto/react-ui/components/cc/ModalForm';
 import CampaignFormActivity, { CampaignFormActivityProps, CampaignFormActivityState } from './CampaignFormActivity';
 import moment, { Moment } from "moment";
 import Calendar from '../../Calendar/Components/Calendar';
-import { updateFormWorkflowByTag } from '@hubleto/react-ui/ext/ErpWorkflowSelector';
+import { updateFormWorkflowByTag } from '@hubleto/react-ui/components/cc/ErpWorkflowSelector';
 import FormItem from '@hubleto/apps/Orders/Components/FormItem';
 
 export interface FormCampaignProps extends FormExtendedProps {}

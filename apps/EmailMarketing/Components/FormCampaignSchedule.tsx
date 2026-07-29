@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import HtmlFrame from "@hubleto/react-ui/core/HtmlFrame";
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import FormEmail from './FormEmail';
 
 export interface FormCampaignScheduleProps extends FormExtendedProps {}

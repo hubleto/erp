@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Form, { FormProps, FormState } from '@hubleto/react-ui/core/Form';
-import FormInput from '@hubleto/react-ui/core/FormInput';
-import Lookup from '@hubleto/react-ui/core/Inputs/Lookup';
+import Form, { FormProps, FormState } from '@hubleto/react-ui/components/cc/Form';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 
 export default class FormCalendarSyncSource<P, S> extends Form<FormProps, FormState> {
   static defaultProps: any = {

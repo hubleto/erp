@@ -1,7 +1,7 @@
 import React from "react";
 import request from "@hubleto/react-ui/core/Request";
-import Table from "@hubleto/react-ui/core/Table";
-import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import Table from "@hubleto/react-ui/components/cc/Table";
+import TranslatedComponent from "@hubleto/react-ui/components/cc/TranslatedComponent";
 
 interface CalendarShareTableProps {
   configs?: any,

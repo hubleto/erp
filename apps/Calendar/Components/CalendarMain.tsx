@@ -1,11 +1,11 @@
 import React, { Component, useState } from "react";
 import { setUrlParam, deleteUrlParam } from "@hubleto/react-ui/core/Helper";
 import Calendar from "./Calendar";
-import ModalForm from "@hubleto/react-ui/core/ModalForm";
+import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
 import FormActivitySelector from "./FormActivitySelector";
 import request from "@hubleto/react-ui/core/Request";
 import moment from 'moment';
-import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import TranslatedComponent from "@hubleto/react-ui/components/cc/TranslatedComponent";
 import FormActivity from "./FormActivity";
 
 

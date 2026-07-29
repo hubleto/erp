@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
-import { FormProps } from '@hubleto/react-ui/core/Form';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+import { FormProps } from '@hubleto/react-ui/components/cc/Form';
 import FormAccount from './FormAccount';
 
 interface TableAccountsProps extends TableProps {

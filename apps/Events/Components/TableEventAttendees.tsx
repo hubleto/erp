@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
 import FormEventAttendee from './FormEventAttendee';
 
 interface TableEventAttendeesProps extends TableExtendedProps {

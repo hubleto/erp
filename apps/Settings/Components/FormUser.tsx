@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { deepObjectMerge } from "@hubleto/react-ui/core/Helper";
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
 import request from '@hubleto/react-ui/core/Request';
 
 interface FormUserProps extends FormExtendedProps { }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/ext/TableExtended';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
 import FormCustomer, { FormCustomerProps } from './FormCustomer';
 import { getUrlParam } from '@hubleto/react-ui/core/Helper';
-import { FormProps } from '@hubleto/react-ui/core/Form';
+import { FormProps } from '@hubleto/react-ui/components/cc/Form';
 import request from '@hubleto/react-ui/core/Request';
 
 interface TableCustomersProps extends TableExtendedProps {

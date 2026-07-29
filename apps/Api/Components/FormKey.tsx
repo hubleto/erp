@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/ext/FormExtended';
-import Varchar from '@hubleto/react-ui/core/Inputs/Varchar';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import Varchar from '@hubleto/react-ui/components/cc/Inputs/Varchar';
 import TablePermissions from './TablePermissions';
 import TableUsages from './TableUsages';
 import request from '@hubleto/react-ui/core/Request';

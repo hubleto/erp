@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
 import FormWorkflow from './FormWorkflow';
 
 interface TableWorkflowsProps extends TableProps {

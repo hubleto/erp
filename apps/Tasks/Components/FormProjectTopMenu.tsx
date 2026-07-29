@@ -1,9 +1,9 @@
 import React, { Component, createRef } from 'react';
 import FormProject, { FormProjectProps, FormProjectState } from '@hubleto/apps/Projects/Components/FormProject'
-import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import TranslatedComponent from "@hubleto/react-ui/components/cc/TranslatedComponent";
 import request from '@hubleto/react-ui/core/Request';
 import TableTasks from './TableTasks';
-import ModalSimple from "@hubleto/react-ui/core/ModalSimple";
+import ModalSimple from "@hubleto/react-ui/components/cc/ModalSimple";
 
 interface P {
   form: FormProject<FormProjectProps, FormProjectState>

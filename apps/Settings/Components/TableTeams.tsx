@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
-import FormTeam from './FormTeam';
+import FormTeam from './FC/FormTeam';
 
 interface TableTeamsProps extends TableProps {
 }
@@ -15,14 +15,15 @@ export default class TableTeams extends Table<TableTeamsProps, TableTeamsState> 
     model: 'Hubleto/App/Community/Settings/Models/Team',
   }
 
-  props: TableTeamsProps;
-  state: TableTeamsState;
+  props: TableTeamsProps = null;
+  state: TableTeamsState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
   translationContextInner: string = 'Components\\TableTeams';
 
   constructor(props: TableTeamsProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 

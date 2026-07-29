@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
-import FormUsage from './FormUsage';
+import FormUsage from './FC/FormUsage';
 
 interface TableUsagesProps extends TableExtendedProps {
   idKey?: number,
@@ -14,7 +14,7 @@ export default class TableUsages extends TableExtended<TableUsagesProps, TableUs
     ...TableExtended.defaultProps,
     formUseModalSimple: true,
     model: 'Hubleto/App/Community/Api/Models/Usage',
-    readonly: true,
+    // readonly: true,
   }
 
   props: TableUsagesProps = null;

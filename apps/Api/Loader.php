@@ -22,8 +22,8 @@ class Loader extends \Hubleto\Erp\App
       '/^api\/keys\/add?\/?$/' => ['controller' => Controllers\Keys::class, 'vars' => [ 'recordId' => -1 ]],
       '/^api\/permissions(\/(?<recordId>\d+))?\/?$/' => Controllers\Permissions::class,
       '/^api\/permissions\/add?\/?$/' => ['controller' => Controllers\Permissions::class, 'vars' => [ 'recordId' => -1 ]],
-      '/^api\/usage(\/(?<recordId>\d+))?\/?$/' => Controllers\Usages::class,
-      '/^api\/usage\/add?\/?$/' => ['controller' => Controllers\Usages::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^api\/usages(\/(?<recordId>\d+))?\/?$/' => Controllers\Usages::class,
+      '/^api\/usages\/add?\/?$/' => ['controller' => Controllers\Usages::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
 

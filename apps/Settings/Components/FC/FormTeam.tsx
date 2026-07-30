@@ -3,22 +3,18 @@ import Form, { FormProps } from '@hubleto/react-ui/components/fc/Form';
 import { useTranslation } from '@hubleto/react-ui/components/fc/TranslatedComponent';
 import Table from '@hubleto/react-ui/components/cc/Table';
 
-const FormTeam = React.memo((props: FormProps) => {
-  const { translate } = useTranslation(
-    'Hubleto\\App\\Community\\Settings\\Loader',
-    'Components\\FormTeam'
-  );
+const FormTeam = (props: FormProps) => {
 
   return <Form
     {...props}
     componentName='FormTeam'
     model='Hubleto/App/Community/Settings/Models/Team'
-    getRecordFormUrl={(form: any): string => {
-      return 'settings/teams/' + (form.record.id > 0 ? form.record.id : 'add');
-    }}
+    translationContext='Hubleto\\App\\Community\\Settings\\Loader'
+    translationContextInner='Components\\FormTeam'
+    urlSlug='settings/teams'
     renderTitle={(form: any): any => {
       return <>
-        <small>{translate('Team')}</small>
+        <small>{form.translate('Team')}</small>
         <h2>{form.record.name ?? '-'}</h2>
       </>;
     }}
@@ -31,9 +27,9 @@ const FormTeam = React.memo((props: FormProps) => {
           {form.renderInputWrapper('name')}
           {form.renderInputWrapper('description')}
           {form.renderInputWrapper('id_manager')}
-          {form.renderDivider(translate('Team members'))}
+          {form.renderDivider(form.translate('Team members'))}
           {form.id < 0 ?
-            <div className="badge badge-info">{translate('First create team, then you will be prompted to add members.')}</div>
+            <div className="badge badge-info">{form.translate('First create team, then you will be prompted to add members.')}</div>
           :
             <Table
               uid='teams_members'
@@ -46,6 +42,6 @@ const FormTeam = React.memo((props: FormProps) => {
       </div>;
     }}
   ></Form>;
-});
+};
 
 export default FormTeam;

@@ -15,14 +15,15 @@ export default class TableProductSuppliers extends Table<TableProductSuppliersPr
     model: 'Hubleto/App/Community/Products/Models/ProductSupplier',
   }
 
-  props: TableProductSuppliersProps;
-  state: TableProductSuppliersState;
+  props: TableProductSuppliersProps = null;
+  state: TableProductSuppliersState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader';
   translationContextInner: string = 'Components\\TableProductSuppliers';
 
   constructor(props: TableProductSuppliersProps) {
     super(props);
+    this.props = props
     this.state = this.getStateFromProps(props);
   }
 

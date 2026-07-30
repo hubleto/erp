@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
-import FormProduct from './FormProduct';
+import FormProduct from './FC/FormProduct';
 
 interface TableProductsProps extends TableExtendedProps {
   idCategory?: number,
@@ -18,14 +18,15 @@ export default class TableProducts extends TableExtended<TableProductsProps, Tab
     model: 'Hubleto/App/Community/Products/Models/Product',
   }
 
-  props: TableProductsProps;
-  state: TableProductsState;
+  props: TableProductsProps = null;
+  state: TableProductsState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Products\\Loader';
   translationContextInner: string = 'Components\\TableProducts';
 
   constructor(props: TableProductsProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 

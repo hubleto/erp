@@ -81,7 +81,7 @@
 {{ config.gaTag|raw }}
 
 <body id="page-top">
-  <div id="ajax-loader"></div>
+  
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
 
     <div id="app-launcher" onclick="lchr(false);">
@@ -262,6 +262,9 @@
           <span class="icon"><i class="fas fa-home"></i></span>
           <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
         </a>
+          <div class="h-2 w-4 mx-auto">
+            <div id="ajax-loader"></div>
+          </div>
         <div class="nav-inner">
           {% for app in hubleto.appManager().getEnabledApps() %}
             {% if hubleto.appManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}

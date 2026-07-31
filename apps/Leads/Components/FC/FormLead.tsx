@@ -22,15 +22,15 @@ const translate = new Translator(
   'Components\\FormLead'
 ).translate;
 
-const FormTitle = () => {
+const Title = () => {
   return <>
     <small>{translate('Lead')}</small>
     <h2>{useRecordField(r => r.title) ?? '-'}</h2>
   </>;
 };
 
-const FormTabContent = () => {
-  const R = React.useContext(FormRecordStoreContext);
+const TabDefault = () => {
+  const record = React.useContext(FormRecordStoreContext);
   const description = React.useContext(FormDescriptionContext);
   const meta = React.useContext(FormMetaContext);
 
@@ -62,7 +62,7 @@ const FormLead = (props: FormLeadProps) => {
     parentApp='Hubleto/App/Community/Leads'
     model='Hubleto/App/Community/Leads/Models/Lead'
     urlSlug='leads'
-    getContentClassName={(form: any): string => form.record.is_closed ? 'bg-slate-100' : ''}
+    // getContentClassName={(form: any): string => form.record.is_closed ? 'bg-slate-100' : ''}
     customEndpointParams={{saveRelations: ['TAGS'] }}
     getTabs={(form: any) => [
       { uid: 'default', title: <b>{translate('Lead')}</b> },
@@ -79,8 +79,41 @@ const FormLead = (props: FormLeadProps) => {
     showOwnerManagerUi={true}
 
     uiComponents={{
-      title: () => <FormTitle />,
-      tabContent: () => <FormTabContent />,
+      title: () => <Title />,
+      tabs: {
+        default: {
+          title: <b>{translate('Lead')}</b>,
+          content: () => <TabDefault />,
+        },
+        todo: {
+          title: translate('Todo'),
+          content: () => <div>Tab: Todo</div>,
+        },
+        calendar: {
+          title: translate('Calendar'),
+          content: () => <div>Tab: Calendar</div>,
+        },
+        email_clicks: {
+          title: translate('Email Clicks'),
+          content: () => <div>Tab: Email Clicks</div>,
+        },
+        tasks: {
+          title: translate('Tasks'),
+          showCountFor: 'TASKS',
+          content: () => <div>Tab: Tasks</div>,
+        },
+        history: {
+          icon: 'fas fa-clock-rotate-left',
+          position: 'right',
+          content: () => <div>Tab: History</div>,
+        },
+        timeline: {
+          icon: 'fas fa-timeline',
+          position: 'right',
+          content: () => <div>Tab: Timeline</div>,
+        },
+      },
+      
     }}
 
   ></Form>;

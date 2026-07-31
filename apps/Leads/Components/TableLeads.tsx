@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
-import FormLead, { FormLeadProps } from './FormLead';
-import ModalSimple from "@hubleto/react-ui/components/cc/ModalSimple";
-import request from '@hubleto/react-ui/core/Request';
+import FormLead, { FormLeadProps } from './FC/FormLead';
 
 export interface TableLeadsProps extends TableExtendedProps {
   idCustomer?: number,
@@ -21,8 +19,8 @@ export default class TableLeads extends TableExtended<TableLeadsProps, TableLead
     model: 'Hubleto/App/Community/Leads/Models/Lead',
   }
 
-  props: TableLeadsProps;
-  state: TableLeadsState;
+  props: TableLeadsProps = null;
+  state: TableLeadsState = null;
 
   translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
   translationContextInner: string = 'Components\\TableLeads';

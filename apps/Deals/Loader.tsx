@@ -3,7 +3,7 @@ import App from '@hubleto/react-ui/core/App'
 import TableDeals from "./Components/TableDeals"
 import DealFormActivity from "./Components/DealFormActivity"
 import request from "@hubleto/react-ui/core/Request";
-import FormLead from '@hubleto/apps/Leads/Components/FormLead';
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 
 class DealsApp extends App {
   init() {
@@ -34,7 +34,8 @@ class DealsApp extends App {
       },
     });
 
-    FormLead.addFormHeaderButton(
+    FormCustomizer.addFormHeaderButton(
+      'FormLead',
       globalThis.hubleto.translate('Create deal', 'Hubleto\\App\\Community\\Deals\\Loader', 'manifest'),
       '',
       (form: any) => {

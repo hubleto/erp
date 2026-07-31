@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Form, { FormProps } from '@hubleto/react-ui/components/fc/Form';
-import { useTranslation } from '@hubleto/react-ui/components/fc/TranslatedComponent';
 import Table from '@hubleto/react-ui/components/cc/Table';
 
 const FormTeam = (props: FormProps) => {

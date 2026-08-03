@@ -41,25 +41,20 @@ const translate = new Translator(
   'Components\\FormActivity'
 ).translate;
 
-const renderCustomInputs = (form: any): React.JSX.Element|null => {
-  // if (props.renderCustomInputs) props.renderCustomInputs(form);
-  // return null;
-  return <div>custom inputs</div>;
-}
-
-
-
-const Title = (props: { activitySource: string }): React.JSX.Element => <>
+const Title = (props: FormActivityProps): React.JSX.Element => <>
   <small>{props.activitySource ?? 'Event'}</small>
-  <h2>{useRecordField(r => r.subject) ?? ''}</h2>
+  <h2>{useRecordField(r => r.subject) ?? '-'}</h2>
 </>;
 
-const Content = (): React.JSX.Element => {
+const Content = (props: FormActivityProps): React.JSX.Element => {
+  const { renderCustomInputs, activitySource } = props;
   const R = React.useContext(FormRecordStoreContext).getRecord();
   const form = React.useContext(FormMetaContext);
-  console.log('FormActivity.content', R);
 
-  const customInputs = renderCustomInputs(form);
+  const description = React.useContext(FormDescriptionContext);
+  console.log('FormActivity.description', description);
+
+  const customInputs = props.renderCustomInputs(form) ?? null;
 
   let recurrence: Recurrence = {
     period: '',
@@ -98,7 +93,7 @@ const Content = (): React.JSX.Element => {
 
   return <>
     <div className='flex gap-2'>
-      {/* {customInputs ? <div className="grow p-2 mb-2 bg-blue-50 dark:bg-gray-900/50 rounded">{customInputs}</div> : null} */}
+      {customInputs ? <div className="grow p-2 mb-2 bg-blue-50 dark:bg-gray-900/50 rounded">{customInputs}</div> : null}
       <div className='flex gap-2 flex-col'>
         <div className='w-full'><FormInput name='completed'></FormInput></div>
         <div className='w-full'><FormInput name='id_owner'></FormInput></div>
@@ -116,7 +111,7 @@ const Content = (): React.JSX.Element => {
         <FormInput name='description'></FormInput>
       </div>
     </div>
-    <FormInput name='all_day'></FormInput>
+    <FormInput name='all_day' debug></FormInput>
     <div className='flex gap-2 w-full flex-col md:flex-row'>
       <div className='w-1/2'>
         <Divider>{translate('Start - End','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>
@@ -125,15 +120,15 @@ const Content = (): React.JSX.Element => {
             form.changeRecord({date_end: moment(value).add(daysDuration, 'days').format('YYYY-MM-DD')})
           }
         }}></FormInput>
-        <FormInput renderOnlyInput name='time_start' customInputProperties={{
+        {R.all_day ? null : <FormInput renderOnlyInput name='time_start' customInputProperties={{
           onChange: (input: any, value: any) => {
             console.log(value, moment(R.date_end + ' ' + value + ':00'), moment(R.date_end + ' ' + value + ':00').add(minutesDuration, 'minutes').format('HH:mm:ss'))
             form.changeRecord({time_end: moment(R.date_end + ' ' + value + ':00').add(minutesDuration, 'minutes').format('HH:mm:ss')})
           }
-        }}></FormInput>
+        }}></FormInput>}
 
         <FormInput renderOnlyInput name='date_end' />
-        <FormInput renderOnlyInput name='time_end' />
+        {R.all_day ? null : <FormInput renderOnlyInput name='time_end' />}
 
         <div className="mt-2 alert alert-info">
           {translate('Duration','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}: {daysDuration > 0 && daysDuration + " " + translate('day(s)','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " " + translate('hours','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " " + translate('minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}
@@ -231,8 +226,8 @@ const FormActivity = (props: FormActivityProps) => {
     {...props}
     model='Hubleto/App/Community/Calendar/Models/Activity'
     uiComponents={{
-      title: <Title activitySource={props.activitySource} />,
-      content: Content,
+      title: <Title {...props} />,
+      content: <Content {...props}/>,
     }}
   ></Form>;
 }

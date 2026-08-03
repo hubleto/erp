@@ -57,15 +57,16 @@ const LeadFormActivity = (props: LeadFormActivityProps) => {
     id={id}
     model='Hubleto/App/Community/Leads/Models/LeadActivity'
     activitySource='Leadx'
-    // renderCustomInputs={(form: typeof FormMetaContext): React.JSX.Element =>
-    //   <LeadFormActivityCustomInputs
-    //     form={form}
-    //     id={id}
-    //     idCustomer={idCustomer}
-    //     idContact={idContact}
-    //     idLead={idLead}
-    //   />
-    // }
+    renderCustomInputs={(form: typeof FormMetaContext): React.JSX.Element => {
+      console.log('renderCustomInputs', form);
+      return <LeadFormActivityCustomInputs
+        form={form}
+        id={id}
+        idCustomer={idCustomer}
+        idContact={idContact}
+        idLead={idLead}
+      />;
+    }}
   ></FormActivity>;
 }
 

@@ -22,12 +22,12 @@ const translate = new Translator(
   'Components\\FormLead'
 ).translate;
 
-const Title = () => <>
+const Title = (props: FormLeadProps) => <>
   <small>{translate('Lead')}</small>
   <h2>{useRecordField(r => r.title) ?? '-'}</h2>
 </>;
 
-const TabDefault = () => <div className='card card-body flex flex-col gap-2 md:flex-row'>
+const TabDefault = (props: FormLeadProps) => <div className='card card-body flex flex-col gap-2 md:flex-row'>
   <div className='grow'>
     <FormInput name='title' />
     <FormInput name='email' />
@@ -96,9 +96,9 @@ const FormLead = (props: FormLeadProps) => {
     showOwnerManagerUi={true}
 
     uiComponents={{
-      title: <Title />,
+      title: <Title {...props} />,
       tabs: {
-        default: { title: <b>{translate('Lead')}</b>, content: () => <TabDefault /> },
+        default: { title: <b>{translate('Lead')}</b>, content: () => <TabDefault {...props} /> },
         todo: { title: translate('Todo'), content: () => <TabTodo /> },
         calendar: { title: translate('Calendar'), content: () => <TabCalendar /> },
         email_clicks: { title: translate('Email Clicks'), content: () => <TabEmailClicks /> },

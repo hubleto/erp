@@ -50,7 +50,6 @@ const LeadFormActivity = (props: LeadFormActivityProps) => {
   const { form, id, idCustomer, idContact, idLead } = props;
 
   return <FormActivity
-    {...props}
     id={id}
     model='Hubleto/App/Community/Leads/Models/LeadActivity'
     activitySource='Leadx'
@@ -63,6 +62,7 @@ const LeadFormActivity = (props: LeadFormActivityProps) => {
         idLead={idLead}
       />;
     }}
+    {...props}
   ></FormActivity>;
 }
 

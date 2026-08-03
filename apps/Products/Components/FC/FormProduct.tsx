@@ -5,7 +5,6 @@ import Barcode from 'react-barcode';
 
 const FormProduct = (props: FormProps) => {
   return <Form
-    {...props}
     componentName='FormProduct'
     parentApp='Hubleto/App/Community/Products'
     model='Hubleto/App/Community/Products/Models/Product'
@@ -98,6 +97,7 @@ const FormProduct = (props: FormProps) => {
         break;
       }
     }}
+    {...props}
   />;
 }
 

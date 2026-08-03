@@ -218,12 +218,12 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
   
 const FormActivity = (props: FormActivityProps) => {
   return <Form
-    {...props}
-    model={props.model ?? 'Hubleto/App/Community/Calendar/Models/Activity'}
+    model={'Hubleto/App/Community/Calendar/Models/Activity'}
     uiComponents={{
       title: <Title {...props} />,
       content: <Content {...props}/>,
     }}
+    {...props}
   ></Form>;
 }
 

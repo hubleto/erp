@@ -9,7 +9,6 @@ const FormTeam = React.memo((props: FormProps) => {
   );
 
   return <Form
-    {...props}
     componentName='FormUsage'
     model='Hubleto/App/Community/Api/Models/Usage'
     getRecordFormUrl={(form: any): string => {
@@ -34,6 +33,7 @@ const FormTeam = React.memo((props: FormProps) => {
         break;
       }
     }}
+    {...props}
   ></Form>;
 });
 

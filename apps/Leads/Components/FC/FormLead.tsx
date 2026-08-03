@@ -283,7 +283,6 @@ const TabTimeline = (props: FormLeadProps) => {
 const FormLead = (props: FormLeadProps) => {
 
   return <Form
-    {...props}
     componentName='FormTeam'
     parentApp='Hubleto/App/Community/Leads'
     model='Hubleto/App/Community/Leads/Models/Lead'
@@ -306,7 +305,7 @@ const FormLead = (props: FormLeadProps) => {
       // saveButton: () => <div>save</div>,
       // closeButton: () => <div>close</div>,
     }}
-
+    {...props}
   ></Form>;
 }
 

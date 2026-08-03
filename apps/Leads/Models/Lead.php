@@ -89,7 +89,7 @@ class Lead extends \Hubleto\Erp\Model
       'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
-      'shared_folder' => new Varchar($this, $this->translate("Online document folder"))->setCssClass('text-violet-800'),
+      'shared_folder' => new Varchar($this, $this->translate("Online document folder")),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),

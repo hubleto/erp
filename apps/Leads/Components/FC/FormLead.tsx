@@ -4,8 +4,7 @@ import Form, { FormDescriptionContext, FormMetaContext } from '@hubleto/react-ui
 import { useRecordField, FormRecordStoreContext, getRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import FormInput from '@hubleto/react-ui/components/fc/FormComponents/Input';
-import InputTags2 from '@hubleto/react-ui/components/cc/Inputs/Tags2';
-// import FormInput from '@hubleto/react-ui/components/cc/FormInput';
+import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
 import CalendarTab, { CalendarTabContext } from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
 import LeadFormActivity from './LeadFormActivity';
 import moment from "moment";
@@ -33,9 +32,7 @@ const Title = (props: FormLeadProps) => <>
   <h2>{useRecordField(r => r.title) ?? '-'}</h2>
 </>;
 
-const PrintPreview = (props: FormLeadProps) => <PrintPreviewUi
-  
-/>;
+const PrintPreview = (props: FormLeadProps) => <PrintPreviewUi/>;
 
 /**
  * TabDefault
@@ -76,7 +73,7 @@ const TabDefault = (props: FormLeadProps) => {
         <FormInput name='profile_link_3' />
         <FormInput name='source_channel' customInputProperties={{readonly: isClosed}} />
         <FormInput name='tags' title={ translate('Tags') }>
-          <InputTags2 {...form.getInputProps('tags_input')}
+          <InputTags {...form.getInputProps('tags_input')}
             value={TAGS}
             readonly={isClosed}
             model='Hubleto/App/Community/Leads/Models/Tag'
@@ -93,7 +90,7 @@ const TabDefault = (props: FormLeadProps) => {
             onNewTag={(title: string) => {
               return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
             }}
-          ></InputTags2>
+          ></InputTags>
         </FormInput>
         <FormInput name='note' customInputProperties={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
         {status == 4 ? <FormInput name='lost_reason' customInputProperties={{readonly: isClosed}} />: null}
@@ -283,6 +280,7 @@ const TabTimeline = (props: FormLeadProps) => {
 const FormLead = (props: FormLeadProps) => {
 
   return <Form
+    {...props}
     componentName='FormTeam'
     parentApp='Hubleto/App/Community/Leads'
     model='Hubleto/App/Community/Leads/Models/Lead'
@@ -305,7 +303,6 @@ const FormLead = (props: FormLeadProps) => {
       // saveButton: () => <div>save</div>,
       // closeButton: () => <div>close</div>,
     }}
-    {...props}
   ></Form>;
 }
 

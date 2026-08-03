@@ -7,7 +7,7 @@ import FormInput from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags2 from '@hubleto/react-ui/components/cc/Inputs/Tags2';
 // import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import CalendarTab, { CalendarTabContext } from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
-import LeadFormActivity from '../LeadFormActivity';
+import LeadFormActivity from './LeadFormActivity';
 import moment from "moment";
 
 import TableLeadHistory from '../TableLeadHistory';
@@ -22,35 +22,57 @@ const translate = new Translator(
   'Components\\FormLead'
 ).translate;
 
-const Title = () => {
-  return <>
-    <small>{translate('Lead')}</small>
-    <h2>{useRecordField(r => r.title) ?? '-'}</h2>
-  </>;
-};
+const Title = () => <>
+  <small>{translate('Lead')}</small>
+  <h2>{useRecordField(r => r.title) ?? '-'}</h2>
+</>;
 
-const TabDefault = () => {
-  const record = React.useContext(FormRecordStoreContext);
-  const description = React.useContext(FormDescriptionContext);
-  const meta = React.useContext(FormMetaContext);
-
-  return <>
-    <div className='card card-body flex flex-col gap-2 md:flex-row'>
-      <div className='grow'>
-        <FormInput name='title' />
-        <FormInput name='email' />
-        <FormInput name='phone' />
-        <FormInput name='profile_link_1' />
-        <FormInput name='profile_link_2' />
-        <FormInput name='profile_link_3' />
-        <FormInput name='source_channel' customInputProps={{readonly: useRecordField(r => r.is_closed)}} />
-      </div>
-    </div>
-  </>;
-};
+const TabDefault = () => <div className='card card-body flex flex-col gap-2 md:flex-row'>
+  <div className='grow'>
+    <FormInput name='title' />
+    <FormInput name='email' />
+    <FormInput name='phone' />
+    <FormInput name='profile_link_1' />
+    <FormInput name='profile_link_2' />
+    <FormInput name='profile_link_3' />
+    <FormInput name='source_channel' customInputProps={{readonly: useRecordField(r => r.is_closed)}} />
+  </div>
+</div>;
 
 const TabTodo = () => <>TabTodo</>;
-const TabCalendar = () => <>TabCalendar</>;
+const TabCalendar = () => <CalendarTab
+  renderActivityForm={(calendarTab: any) => {
+    const id = useRecordField(r => r.id);
+    const idCustomer = useRecordField(r => r.id_customer);
+    const idContact = useRecordField(r => r.id_contact);
+
+    console.log('calendarTab', calendarTab, calendarTab.showIdActivity)
+    
+    return <LeadFormActivity
+        id={calendarTab.showIdActivity}
+        description={{
+          defaultValues: {
+            id_lead: id,
+            id_contact: idContact,
+            date_start: calendarTab.activityDate,
+            time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
+            date_end: calendarTab.activityDate,
+            all_day: calendarTab.activityAllDay,
+            subject: calendarTab.activitySubject,
+          }
+        }}
+        idCustomer={idCustomer}
+        idContact={idContact}
+        onClose={() => { calendarTab.setShowIdActivity(0) }}
+        // onSaveCallback={(form: any, saveResponse: any) => {
+        //   if (saveResponse.status == "success") {
+        //     calendarTab.setShowIdActivity(0);
+        //   }
+        // }}
+      ></LeadFormActivity>
+    ;
+  }}
+></CalendarTab>;
 const TabEmailClicks = () => <>TabEmailClicks</>;
 const TabTasks = () => <>TabTasks</>;
 const TabHistory = () => <>TabHistory</>;
@@ -69,13 +91,12 @@ const FormLead = (props: FormLeadProps) => {
     parentApp='Hubleto/App/Community/Leads'
     model='Hubleto/App/Community/Leads/Models/Lead'
     urlSlug='leads'
-    // getContentClassName={(form: any): string => form.record.is_closed ? 'bg-slate-100' : ''}
     customEndpointParams={{saveRelations: ['TAGS'] }}
     showWorkflowUi={true}
     showOwnerManagerUi={true}
 
     uiComponents={{
-      title: () => <Title />,
+      title: <Title />,
       tabs: {
         default: { title: <b>{translate('Lead')}</b>, content: () => <TabDefault /> },
         todo: { title: translate('Todo'), content: () => <TabTodo /> },

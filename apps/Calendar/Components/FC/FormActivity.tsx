@@ -52,8 +52,6 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
   const form = React.useContext(FormMetaContext);
 
   const description = React.useContext(FormDescriptionContext);
-  console.log('FormActivity.description', description);
-
   const customInputs = props.renderCustomInputs(form) ?? null;
 
   let recurrence: Recurrence = {
@@ -122,7 +120,6 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
         }}></FormInput>
         {R.all_day ? null : <FormInput renderOnlyInput name='time_start' customInputProperties={{
           onChange: (input: any, value: any) => {
-            console.log(value, moment(R.date_end + ' ' + value + ':00'), moment(R.date_end + ' ' + value + ':00').add(minutesDuration, 'minutes').format('HH:mm:ss'))
             form.changeRecord({time_end: moment(R.date_end + ' ' + value + ':00').add(minutesDuration, 'minutes').format('HH:mm:ss')})
           }
         }}></FormInput>}
@@ -220,11 +217,9 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 };
   
 const FormActivity = (props: FormActivityProps) => {
-  console.log('FormProps', props);
-
   return <Form
     {...props}
-    model='Hubleto/App/Community/Calendar/Models/Activity'
+    model={props.model ?? 'Hubleto/App/Community/Calendar/Models/Activity'}
     uiComponents={{
       title: <Title {...props} />,
       content: <Content {...props}/>,

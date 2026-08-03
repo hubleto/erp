@@ -46,31 +46,28 @@ const TabCalendar = () => <CalendarTab
     const idCustomer = useRecordField(r => r.id_customer);
     const idContact = useRecordField(r => r.id_contact);
 
-    console.log('calendarTab', calendarTab, calendarTab.showIdActivity)
-    
     return <LeadFormActivity
-        id={calendarTab.showIdActivity}
-        description={{
-          defaultValues: {
-            id_lead: id,
-            id_contact: idContact,
-            date_start: calendarTab.activityDate,
-            time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
-            date_end: calendarTab.activityDate,
-            all_day: calendarTab.activityAllDay,
-            subject: calendarTab.activitySubject,
-          }
-        }}
-        idCustomer={idCustomer}
-        idContact={idContact}
-        onClose={() => { calendarTab.setShowIdActivity(0) }}
-        // onSaveCallback={(form: any, saveResponse: any) => {
-        //   if (saveResponse.status == "success") {
-        //     calendarTab.setShowIdActivity(0);
-        //   }
-        // }}
-      ></LeadFormActivity>
-    ;
+      id={calendarTab.showIdActivity}
+      description={{
+        defaultValues: {
+          id_lead: id,
+          id_contact: idContact,
+          date_start: calendarTab.activityDate,
+          time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
+          date_end: calendarTab.activityDate,
+          all_day: calendarTab.activityAllDay,
+          subject: calendarTab.activitySubject,
+        }
+      }}
+      idCustomer={idCustomer}
+      idContact={idContact}
+      onClose={() => { calendarTab.setShowIdActivity(0) }}
+      onAfterSaveRecord={(form: any, saveResponse: any) => {
+        if (saveResponse.status == "success") {
+          calendarTab.setShowIdActivity(0);
+        }
+      }}
+    ></LeadFormActivity>;
   }}
 ></CalendarTab>;
 const TabEmailClicks = () => <>TabEmailClicks</>;

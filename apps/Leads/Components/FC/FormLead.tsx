@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Translator from "@hubleto/react-ui/core/Translator";
 import Form, { FormDescriptionContext, FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
-import { useRecordField, FormRecordStoreContext, getRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
+import { useRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import FormInput from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
@@ -29,7 +29,7 @@ const translate = new Translator(
  */
 const Title = (props: FormLeadProps) => <>
   <small>{translate('Lead')}</small>
-  <h2>{useRecordField(r => r.title) ?? '-'}</h2>
+  <h2>{useRecord().title ?? '-'}</h2>
 </>;
 
 const PrintPreview = (props: FormLeadProps) => <PrintPreviewUi/>;
@@ -41,11 +41,11 @@ const PrintPreview = (props: FormLeadProps) => <PrintPreviewUi/>;
  */
 const TabDefault = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  const R = getRecord();
-  const ACTIVITIES = useRecordField(r => r.ACTIVITIES);
-  const TAGS = useRecordField(r => r.TAGS);
-  const status = useRecordField(r => r.status);
-  const isClosed = useRecordField(r => r.is_closed);
+  const R = useRecord();
+  const ACTIVITIES = R.ACTIVITIES;
+  const TAGS = R.TAGS;
+  const status = R.status;
+  const isClosed = R.is_closed;
 
   let nextActivity: any = null;
   let nextActivityDate: any = null;
@@ -134,9 +134,10 @@ const TabDefault = (props: FormLeadProps) => {
  */
 const TabCalendar = () => <CalendarTab
   renderActivityForm={(calendarTab: any) => {
-    const id = useRecordField(r => r.id);
-    const idCustomer = useRecordField(r => r.id_customer);
-    const idContact = useRecordField(r => r.id_contact);
+    const R = useRecord();
+    const id = R.id;
+    const idCustomer = R.id_customer;
+    const idContact = R.id_contact;
 
     return <LeadFormActivity
       id={calendarTab.showIdActivity}
@@ -288,7 +289,8 @@ const FormLead = (props: FormLeadProps) => {
     showWorkflowUi={true}
     showOwnerManagerUi={true}
     onAfterFormInitialized={(form: any) => {
-      form.setReadonly(form.record.is_closed == 1);
+      console.log('onafa', form, form.recordStore, form.recordStore.getField('is_closed'));
+      form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
 
     uiComponents={{

@@ -65,7 +65,7 @@ const TabDefault = (props: FormLeadProps) => {
   return <>
     <div className='card card-body flex flex-col gap-2 md:flex-row'>
       <div className='grow'>
-        <FormInput name='title' customInputProperties={{cssClass: 'text-2xl', readonly: isClosed}} />
+        <FormInput name='title' customInputProperties={{cssClass: 'text-2xl'}} />
         <FormInput name='email' />
         <FormInput name='phone' />
         <FormInput name='profile_link_1' />
@@ -73,7 +73,7 @@ const TabDefault = (props: FormLeadProps) => {
         <FormInput name='profile_link_3' />
         <FormInput name='source_channel' customInputProperties={{readonly: isClosed}} />
         <FormInput name='tags' title={ translate('Tags') }>
-          <InputTags {...form.getInputProps('tags_input')}
+          <InputTags 
             value={TAGS}
             readonly={isClosed}
             model='Hubleto/App/Community/Leads/Models/Tag'
@@ -278,7 +278,6 @@ const TabTimeline = (props: FormLeadProps) => {
  * @var [type]
  */
 const FormLead = (props: FormLeadProps) => {
-
   return <Form
     {...props}
     componentName='FormTeam'
@@ -288,6 +287,9 @@ const FormLead = (props: FormLeadProps) => {
     customEndpointParams={{saveRelations: ['TAGS'] }}
     showWorkflowUi={true}
     showOwnerManagerUi={true}
+    onAfterFormInitialized={(form: any) => {
+      form.setReadonly(form.record.is_closed == 1);
+    }}
 
     uiComponents={{
       title: <Title {...props} />,

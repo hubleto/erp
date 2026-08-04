@@ -28,8 +28,8 @@ const LeadFormActivityCustomInputs = (props: LeadFormActivityProps) => {
 
   return <>
     <FormInput name='id_lead' customInputProperties={{ readonly: id > 0 }}></FormInput>
-    <FormInput title={translate("Contact")}>
-      <Lookup {...form.getInputProps('id_contact')}
+    <FormInput name='id_contact' title={translate("Contact")}>
+      <Lookup
         model='Hubleto/App/Community/Contacts/Models/Contact'
         endpoint={`contacts/api/get-customer-contacts`}
         customEndpointParams={{ id_customer: idCustomer }}

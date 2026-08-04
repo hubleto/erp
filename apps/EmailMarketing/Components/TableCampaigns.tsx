@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
-import FormCampaign, { FormCampaignProps } from './FormCampaign';
+import FormCampaign, { FormCampaignProps } from './FC/FormCampaign';
 
 interface TableCampaignsProps extends TableExtendedProps {}
 interface TableCampaignsState extends TableExtendedState {}

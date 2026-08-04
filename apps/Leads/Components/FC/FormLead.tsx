@@ -3,9 +3,8 @@ import Translator from "@hubleto/react-ui/core/Translator";
 import Form, { FormMeta, FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { useRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import FormInput from '@hubleto/react-ui/components/fc/FormComponents/Input';
+import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
-import InputVarchar from '@hubleto/react-ui/components/fc/Inputs/Varchar';
 import CalendarTab, { CalendarTabContext } from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
 import LeadFormActivity from './LeadFormActivity';
 import moment from "moment";
@@ -66,16 +65,16 @@ const TabDefault = (props: FormLeadProps) => {
   return <>
     <div className='card card-body flex flex-col gap-2 md:flex-row'>
       <div className='grow'>
-        <FormInput name='title' customInputProperties={{cssClass: 'text-2xl'}} />
-        <FormInput name='email' />
-        <FormInput name='phone' />
-        <FormInput name='profile_link_1' />
-        <FormInput name='profile_link_2' />
-        <FormInput name='profile_link_3' />
-        <FormInput name='source_channel' customInputProperties={{readonly: isClosed}} />
-        <FormInput title={translate('Tags')}>
+        <Input field='title' customInputProperties={{cssClass: 'text-2xl'}} />
+        <Input field='email' />
+        <Input field='phone' />
+        <Input field='profile_link_1' />
+        <Input field='profile_link_2' />
+        <Input field='profile_link_3' />
+        <Input field='source_channel' customInputProperties={{readonly: isClosed}} />
+        <Input title={translate('Tags')}>
           <InputTags
-            inputName='TAGS'
+            field='TAGS'
             value={TAGS}
             readonly={isClosed}
             model='Hubleto/App/Community/Leads/Models/Tag'
@@ -91,9 +90,9 @@ const TabDefault = (props: FormLeadProps) => {
               return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
             }}
           ></InputTags>
-        </FormInput>
-        <FormInput name='note' customInputProperties={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
-        {status == 4 ? <FormInput name='lost_reason' customInputProperties={{readonly: isClosed}} />: null}
+        </Input>
+        <Input field='note' customInputProperties={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
+        {status == 4 ? <Input field='lost_reason' customInputProperties={{readonly: isClosed}} />: null}
       </div>
       <div className='border-l border-gray-200'></div>
       <div className='grow'>
@@ -112,16 +111,16 @@ const TabDefault = (props: FormLeadProps) => {
           }
         </> : null}
         <div className='flex flex-row *:w-1/2'>
-          <FormInput name='price' customInputProperties={{ cssClass: 'text-2xl', readonly: isClosed }} />
-          <FormInput name='id_currency' />
+          <Input fieldame='price' customInputProperties={{ cssClass: 'text-2xl', readonly: isClosed }} />
+          <Input fieldame='id_currency' />
         </div>
-        <FormInput name='score' customInputProperties={{readonly: isClosed}} />
-        <FormInput name='id_team' customInputProperties={{readonly: isClosed}} />
-        <FormInput name='date_expected_close' customInputProperties={{readonly: isClosed}} />
-        <FormInput name='id_customer' />
-        <FormInput name='id_contact' />
-        <FormInput name='shared_folder' customInputProperties={{readonly: isClosed}} />
-        <FormInput name='date_created' />
+        <Input field='score' customInputProperties={{readonly: isClosed}} />
+        <Input field='id_team' customInputProperties={{readonly: isClosed}} />
+        <Input field='date_expected_close' customInputProperties={{readonly: isClosed}} />
+        <Input field='id_customer' />
+        <Input field='id_contact' />
+        <Input field='shared_folder' customInputProperties={{readonly: isClosed}} />
+        <Input field='date_created' />
       </div>
     </div>
   </>

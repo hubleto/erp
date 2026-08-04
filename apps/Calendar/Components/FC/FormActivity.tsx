@@ -4,7 +4,7 @@ import moment from 'moment';
 import Translator from "@hubleto/react-ui/core/Translator";
 import Form from '@hubleto/react-ui/components/fc/Form';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import FormInput from '@hubleto/react-ui/components/fc/FormComponents/Input';
+import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Divider from '@hubleto/react-ui/components/fc/FormComponents/Divider';
 import { FormMetaContext, FormDescriptionContext } from '@hubleto/react-ui/components/fc/Form';
 import { useRecordField, FormRecordStoreContext } from '@hubleto/react-ui/components/fc/FormRecordStore';
@@ -43,7 +43,7 @@ const translate = new Translator(
 
 const Title = (props: FormActivityProps): React.JSX.Element => <>
   <small>{props.activitySource ?? 'Event'}</small>
-  <h2>{useRecordField(r => r.subject) ?? '-'}</h2>
+  <h2>{useRecordField('subject') ?? '-'}</h2>
 </>;
 
 const Content = (props: FormActivityProps): React.JSX.Element => {
@@ -93,39 +93,39 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
     <div className='flex gap-2'>
       {customInputs ? <div className="grow p-2 mb-2 bg-blue-50 dark:bg-gray-900/50 rounded">{customInputs}</div> : null}
       <div className='flex gap-2 flex-col'>
-        <div className='w-full'><FormInput name='completed'></FormInput></div>
-        <div className='w-full'><FormInput name='id_owner'></FormInput></div>
+        <div className='w-full'><Input field='completed'></Input></div>
+        <div className='w-full'><Input field='id_owner'></Input></div>
       </div>
     </div>
 
     <div className="flex gap-2 flex-col md:flex-row">
       <div className='grow'>
-        <FormInput name='subject' cssClass='text-primary text-2xl'></FormInput>
-        <FormInput name='id_activity_type'></FormInput>
-        <FormInput name='online_meeting_link'></FormInput>
+        <Input field='subject' cssClass='text-primary text-2xl'></Input>
+        <Input field='id_activity_type'></Input>
+        <Input field='online_meeting_link'></Input>
       </div>
       <div className='grow'>
-        <FormInput name='location'></FormInput>
-        <FormInput name='description'></FormInput>
+        <Input field='location'></Input>
+        <Input field='description'></Input>
       </div>
     </div>
-    <FormInput name='all_day' debug></FormInput>
+    <Input field='all_day' debug></Input>
     <div className='flex gap-2 w-full flex-col md:flex-row'>
       <div className='w-1/2'>
         <Divider>{translate('Start - End','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>
-        <FormInput renderOnlyInput name='date_start' customInputProperties={{
+        <Input renderOnlyInput name='date_start' customInputProperties={{
           onChange: (input: any, value: any) => {
             form.changeRecord({date_end: moment(value).add(daysDuration, 'days').format('YYYY-MM-DD')})
           }
-        }}></FormInput>
-        {R.all_day ? null : <FormInput renderOnlyInput name='time_start' customInputProperties={{
+        }}></Input>
+        {R.all_day ? null : <Input renderOnlyInput name='time_start' customInputProperties={{
           onChange: (input: any, value: any) => {
             form.changeRecord({time_end: moment(R.date_end + ' ' + value + ':00').add(minutesDuration, 'minutes').format('HH:mm:ss')})
           }
-        }}></FormInput>}
+        }}></Input>}
 
-        <FormInput renderOnlyInput name='date_end' />
-        {R.all_day ? null : <FormInput renderOnlyInput name='time_end' />}
+        <Input renderOnlyInput name='date_end' />
+        {R.all_day ? null : <Input renderOnlyInput name='time_end' />}
 
         <div className="mt-2 alert alert-info">
           {translate('Duration','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}: {daysDuration > 0 && daysDuration + " " + translate('day(s)','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " " + translate('hours','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " " + translate('minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}
@@ -133,7 +133,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
       </div>
       <div className='w-1/2'>
         <Divider>{translate('Repeats','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>
-        <FormInput name='recurrence' content={<div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
+        <Input field='recurrence' content={<div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
           {recurrence && recurrence.period == '' ?
             <select
               value={recurrence.period}
@@ -207,12 +207,12 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
             </div>
           </>}
         </div>}
-        ></FormInput>
+        ></Input>
       </div>
     </div>
     <Divider>{translate('Meeting minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>
-    <FormInput name='meeting_minutes'></FormInput>
-    <FormInput name='meeting_minutes_link'></FormInput>
+    <Input field='meeting_minutes'></Input>
+    <Input field='meeting_minutes_link'></Input>
   </>;
 };
   

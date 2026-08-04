@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
-import FormCampaignSchedule, { FormCampaignScheduleProps } from './FormCampaignSchedule';
+import FormCampaignSchedule, { FormCampaignScheduleProps } from './FC/FormCampaignSchedule';
 
 interface TableCampaignsSchedulesRecipientsProps extends TableExtendedProps {
   idCampaignSchedule?: number,

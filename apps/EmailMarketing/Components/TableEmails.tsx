@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
-import FormEmail, { FormEmailProps } from './FormEmail';
+import FormEmail, { FormEmailProps } from './FC/FormEmail';
 
 interface TableEmailsProps extends TableExtendedProps {
   idCampaign?: number,
@@ -22,6 +22,7 @@ export default class TableEmails extends TableExtended<TableEmailsProps, TableEm
 
   constructor(props: TableEmailsProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 

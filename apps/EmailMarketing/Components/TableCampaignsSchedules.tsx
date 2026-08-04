@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
-import FormCampaignSchedule, { FormCampaignScheduleProps } from './FormCampaignSchedule';
+import FormCampaignSchedule, { FormCampaignScheduleProps } from './FC/FormCampaignSchedule';
 
 interface TableCampaignsSchedulesProps extends TableExtendedProps {
   idCampaign?: number,
@@ -22,6 +22,7 @@ export default class TableCampaignsSchedules extends TableExtended<TableCampaign
 
   constructor(props: TableCampaignsSchedulesProps) {
     super(props);
+    this.props = props;
     this.state = this.getStateFromProps(props);
   }
 
@@ -51,7 +52,7 @@ export default class TableCampaignsSchedules extends TableExtended<TableCampaign
   }
 
   setRecordFormUrl(id: number) {
-    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/email-marketing/campaigns/schedule' + (id > 0 ? id : 'add'));
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/email-marketing/campaigns/schedules/' + (id > 0 ? id : 'add'));
   }
 
   renderForm(): React.JSX.Element {
@@ -62,7 +63,7 @@ export default class TableCampaignsSchedules extends TableExtended<TableCampaign
   }
 
   renderRecords(): React.JSX.Element {
-    return <div className='list'>
+    return <div className='list mt-2'>
       {this.state.data?.records.map((record, key) => {
         return <button
           key={key}

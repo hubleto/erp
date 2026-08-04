@@ -89,6 +89,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\CampaignSchedule::class)->upgradeSchema();
       $this->getModel(Models\CampaignScheduleRecipient::class)->upgradeSchema();
       $this->getModel(Models\CampaignTag::class)->upgradeSchema();
+      $this->getModel(Models\Tag::class)->upgradeSchema();
     }
   }
 

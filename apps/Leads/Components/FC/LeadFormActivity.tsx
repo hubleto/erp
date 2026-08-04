@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import FormActivity from '@hubleto/apps/Calendar/Components/FC/FormActivity'
-import FormInput from '@hubleto/react-ui/components/fc/FormComponents/Input';
+import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 import Translator from "@hubleto/react-ui/core/Translator";
-import { FormActivityProps } from '@hubleto/apps/Calendar/Components/FC/FormActivity';
 import { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
-import { useRecordField, FormRecordStoreContext, getRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
-import ModalForm from '@hubleto/react-ui/components/cc/ModalForm';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
 export interface LeadFormActivityProps extends FormProps {
@@ -27,8 +24,8 @@ const LeadFormActivityCustomInputs = (props: LeadFormActivityProps) => {
   ).translate;
 
   return <>
-    <FormInput name='id_lead' customInputProperties={{ readonly: id > 0 }}></FormInput>
-    <FormInput name='id_contact' title={translate("Contact")}>
+    <Input field='id_lead' customInputProperties={{ readonly: id > 0 }}></Input>
+    <Input field='id_contact' title={translate("Contact")}>
       <Lookup
         model='Hubleto/App/Community/Contacts/Models/Contact'
         endpoint={`contacts/api/get-customer-contacts`}
@@ -42,7 +39,7 @@ const LeadFormActivityCustomInputs = (props: LeadFormActivityProps) => {
           // }
         }}
       ></Lookup>
-    </FormInput>
+    </Input>
   </>;
 };
 

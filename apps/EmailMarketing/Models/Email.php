@@ -56,7 +56,7 @@ class Email extends \Hubleto\Erp\Model
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
-      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'color' => (new Color($this, $this->translate('Color'))),
       'id_sender_account' => (new Lookup($this, $this->translate('Sender account'), Account::class)),
       'reply_to' => (new Varchar($this, $this->translate('Reply to'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),

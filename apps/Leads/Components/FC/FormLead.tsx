@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Translator from "@hubleto/react-ui/core/Translator";
-import Form, { FormDescriptionContext, FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMeta, FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { useRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import FormInput from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
+import InputVarchar from '@hubleto/react-ui/components/fc/Inputs/Varchar';
 import CalendarTab, { CalendarTabContext } from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
 import LeadFormActivity from './LeadFormActivity';
 import moment from "moment";
@@ -40,7 +41,7 @@ const PrintPreview = (props: FormLeadProps) => <PrintPreviewUi/>;
  * @var [type]
  */
 const TabDefault = (props: FormLeadProps) => {
-  const form = React.useContext(FormMetaContext);
+  const form: FormMeta = React.useContext(FormMetaContext);
   const R = useRecord();
   const ACTIVITIES = R.ACTIVITIES;
   const TAGS = R.TAGS;
@@ -72,8 +73,9 @@ const TabDefault = (props: FormLeadProps) => {
         <FormInput name='profile_link_2' />
         <FormInput name='profile_link_3' />
         <FormInput name='source_channel' customInputProperties={{readonly: isClosed}} />
-        <FormInput name='tags' title={ translate('Tags') }>
-          <InputTags 
+        <FormInput title={translate('Tags')}>
+          <InputTags
+            inputName='TAGS'
             value={TAGS}
             readonly={isClosed}
             model='Hubleto/App/Community/Leads/Models/Tag'
@@ -83,9 +85,7 @@ const TabDefault = (props: FormLeadProps) => {
             showSelect={false}
             showTagButtons={true}
             onChange={(input: any, value: any) => {
-              let newRecord = R;
-              newRecord.TAGS = value;
-              form.changeRecord(newRecord);
+              form.changeField(input, value);
             }}
             onNewTag={(title: string) => {
               return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
@@ -171,12 +171,10 @@ const TabCalendar = () => <CalendarTab
  */
 const TabEmailClicks = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  
   return <TableEmailClicks
     tag={"table_email_clicks"}
     parentForm={form}
     uid={form.uid + "_table_email_clicks"}
-    email={form.record.email}
   />;
 };
 
@@ -196,7 +194,7 @@ const TabTasks = (props: FormLeadProps) => {
     junctionTitle='Lead'
     junctionModel='Hubleto/App/Community/Leads/Models/LeadTask'
     junctionSourceColumn='id_lead'
-    junctionSourceRecordId={form.record.id}
+    junctionSourceRecordId={form.id}
     junctionDestinationColumn='id_task'
   />;
 }
@@ -207,8 +205,7 @@ const TabTasks = (props: FormLeadProps) => {
  * @var [type]
  */
 const TabHistory = (props: FormLeadProps) => {
-  const form = React.useContext(FormMetaContext);
-  const R = form.record;
+  const R = useRecord();
   
   if (R.HISTORY && R.HISTORY.length > 0) {
     if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
@@ -251,7 +248,7 @@ const TabHistory = (props: FormLeadProps) => {
  */
 const TabTimeline = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  const R = form.record;
+  const R = useRecord();
   
   return form.renderTimeline([
     {
@@ -289,7 +286,6 @@ const FormLead = (props: FormLeadProps) => {
     showWorkflowUi={true}
     showOwnerManagerUi={true}
     onAfterFormInitialized={(form: any) => {
-      console.log('onafa', form, form.recordStore, form.recordStore.getField('is_closed'));
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
 

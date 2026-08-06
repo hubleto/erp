@@ -1,5 +1,5 @@
 import App from '@hubleto/react-ui/core/App'
-import TableCampaigns from "./Components/TableCampaigns"
+import TableCampaigns from "./Components/FC/TableCampaigns"
 import TableCampaignsSchedules from "./Components/TableCampaignsSchedules"
 import TableCampaignsSchedulesRecipients from "./Components/TableCampaignsSchedulesRecipients"
 import TableEmails from "./Components/TableEmails"

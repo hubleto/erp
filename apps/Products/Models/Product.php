@@ -121,6 +121,8 @@ class Product extends \Hubleto\Erp\Model
       'base_length' => (new Decimal($this, $this->translate('Base unit length')))->setUnit('m'),
       'base_width' => (new Decimal($this, $this->translate('Base unit width')))->setUnit('m'),
       'base_height' => (new Decimal($this, $this->translate('Base unit height')))->setUnit('m'),
+      'is_lot_tracked' => (new Boolean($this, $this->translate('Track lots/batches')))->setDefaultValue(false)
+        ->setDescription($this->translate('Stock of this product is identified per lot/batch.')),
       'margin' => (new Decimal($this, $this->translate('Margin')))->setUnit("%")->setColorScale('bg-light-blue-to-dark-blue'),
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
       'qr_code_data' => new Varchar($this, $this->translate('Data ')),

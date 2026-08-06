@@ -218,6 +218,7 @@ export default class FormProduct<P, S> extends FormExtended<FormProductProps,For
               {this.inputWrapper('vat')}
               {this.inputWrapper('margin')}
               {this.inputWrapper('base_measure')}
+              {this.inputWrapper('is_lot_tracked')}
               {this.inputWrapper('description')}
               {this.inputWrapper('is_single_order_possible')}
               {this.inputWrapper('show_price')}

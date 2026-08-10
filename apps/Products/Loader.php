@@ -27,12 +27,16 @@ class Loader extends \Hubleto\Erp\App
 
       '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Groups::class,
       '/^products\/groups\/add?\/?$/' => ['controller' => Controllers\Groups::class, 'vars' => [ 'recordId' => -1 ]],
+
+      '/^products\/units(\/(?<recordId>\d+))?\/?$/' => Controllers\Units::class,
+      '/^products\/units\/add?\/?$/' => ['controller' => Controllers\Units::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'products', $this->translate('Products'), 'fas fa-cart-shopping');
     $appMenu->addItem($this, 'products/groups', $this->translate('Groups'), 'fas fa-burger');
     $appMenu->addItem($this, 'products/categories', $this->translate('Categories'), 'fas fa-tag');
+    $appMenu->addItem($this, 'products/units', $this->translate('Units'), 'fas fa-ruler');
 
     $this->productTypes = $this->collectExtendibles('ProductTypes');
   }
@@ -48,10 +52,12 @@ class Loader extends \Hubleto\Erp\App
   public function installApp(int $round): void
   {
     if ($round == 1) {
+      $this->getModel(Models\Unit::class)->upgradeSchema();
       $this->getModel(Models\Group::class)->upgradeSchema();
       $this->getModel(Models\Category::class)->upgradeSchema();
       $this->getModel(Models\Product::class)->upgradeSchema();
       $this->getModel(Models\ProductSupplier::class)->upgradeSchema();
+      $this->getModel(Models\ProductPackaging::class)->upgradeSchema();
     }
   }
 
@@ -210,15 +216,38 @@ class Loader extends \Hubleto\Erp\App
       [ 'id_category' => 730, 'name' => 'Wireless Charging Puck, Multi-Device Charging Stand' ],
     ];
 
+    $units = [
+      [ 'name' => 'box' ],
+      [ 'name' => 'carton' ],
+      [ 'name' => 'pallet' ],
+    ];
+
     $mCategory = $this->getModel(Models\Category::class);
     $mProduct = $this->getModel(Models\Product::class);
+    $mUnit = $this->getModel(Models\Unit::class);
+
+    $unitIds = [];
+    foreach ($units as $unit) {
+      $created = $mUnit->record->recordCreate($unit);
+      $unitIds[$unit['name']] = (int) $created['id'];
+    }
 
     foreach ($categories as $category) {
       $mCategory->record->recordCreate($category, true);
     }
-    
-    foreach ($products as $product) {
-      $mProduct->record->recordCreate($product);
+
+    $firstProductId = 0;
+    foreach ($products as $i => $product) {
+      $product['base_measure'] = Models\Product::BASE_MEASURE_COUNT;
+      $created = $mProduct->record->recordCreate($product);
+      if ($i === 0) $firstProductId = (int) $created['id'];
+    }
+
+    // showcase the packaging hierarchy on one product: 1 carton = 10 pcs, 1 pallet = 24 cartons
+    if ($firstProductId > 0) {
+      $mPackaging = $this->getModel(Models\ProductPackaging::class);
+      $mPackaging->record->recordCreate([ 'id_product' => $firstProductId, 'id_unit' => $unitIds['carton'], 'qty_per_lower' => 10, 'sort' => 0 ]);
+      $mPackaging->record->recordCreate([ 'id_product' => $firstProductId, 'id_unit' => $unitIds['pallet'], 'qty_per_lower' => 24, 'sort' => 1 ]);
     }
   }
 

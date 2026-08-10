@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import TableCampaignsSchedules from '@hubleto/apps/EmailMarketing/Components/TableCampaignsSchedules';
+import TableCampaignsSchedules from './TableCampaignsSchedules';
 import TableRecipients from '@hubleto/apps/EmailMarketing/Components/TableRecipients';
 import request from '@hubleto/react-ui/core/Request';
 import Translator from "@hubleto/react-ui/core/Translator";

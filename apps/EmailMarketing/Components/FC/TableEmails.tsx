@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import FormCampaign, { FormCampaignProps } from './FormCampaign';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
+import FormEmail, { FormEmailProps } from './FormEmail';
 
-const TableCampaigns = (props: TableProps) => {
+interface TableEmailsProps extends TableProps {
+  idCampaign?: number,
+}
+
+const TableEmails = (props: TableEmailsProps) => {
   return <Table
-    componentName='TableCampaigns'
-    model='Hubleto/App/Community/EmailMarketing/Models/Campaign'
-    formUrlSlug='email-marketing/campaigns'
+    componentName='TableEmails'
+    model='Hubleto/App/Community/EmailMarketing/Models/Email'
+    formUrlSlug='email-marketing/emails'
     formModalProps={{type: 'right wide'}}
     getRowClassName={(table: TableMeta, rowData: any): string => {
       return rowData.is_closed ? 'bg-slate-300' : table.getDefaultRowClassName(rowData);
@@ -23,10 +28,10 @@ const TableCampaigns = (props: TableProps) => {
       } else return table.renderDefaultCell(columnName, column, data, options);
     }}
     renderForm={(table: TableMeta): React.JSX.Element => {
-      return <FormCampaign {...table.getDefaultFormProps()}/>;
+      return <FormEmail {...table.getDefaultFormProps()}/>;
     }}
     {...props}
   ></Table>
 }
 
-export default TableCampaigns;
+export default TableEmails;

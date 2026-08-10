@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
-import FormCampaign, { FormCampaignProps } from './FormCampaign';
+import FormCampaignSchedule, { FormCampaignScheduleProps } from './FormCampaignSchedule';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 
-const TableCampaigns = (props: TableProps) => {
+interface TableCampaignsSchedulesProps extends TableProps {
+  idCampaign?: number,
+}
+
+const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
   return <Table
-    componentName='TableCampaigns'
-    model='Hubleto/App/Community/EmailMarketing/Models/Campaign'
-    formUrlSlug='email-marketing/campaigns'
+    componentName='TableCampaignsSchedules'
+    model='Hubleto/App/Community/EmailMarketing/Models/CampaignSchedule'
+    formUrlSlug='email-marketing/schedules'
     formModalProps={{type: 'right wide'}}
+    formDefaultValues={{id_campaign: props.idCampaign}}
     getRowClassName={(table: TableMeta, rowData: any): string => {
       return rowData.is_closed ? 'bg-slate-300' : table.getDefaultRowClassName(rowData);
     }}
@@ -23,10 +28,10 @@ const TableCampaigns = (props: TableProps) => {
       } else return table.renderDefaultCell(columnName, column, data, options);
     }}
     renderForm={(table: TableMeta): React.JSX.Element => {
-      return <FormCampaign {...table.getDefaultFormProps()}/>;
+      return <FormCampaignSchedule {...table.getDefaultFormProps()}/>;
     }}
     {...props}
   ></Table>
 }
 
-export default TableCampaigns;
+export default TableCampaignsSchedules;

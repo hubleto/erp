@@ -14,24 +14,11 @@ const translate = new Translator(
 ).translate;
 
 /**
- * Title
- *
- * @var [type]
- */
-const Title = (props: FormRecipientProps) => <>
-  <small>{translate('Recipient')}</small>
-  <h2>{useRecordField('email') ?? '-'}</h2>
-</>;
-
-/**
  * TabDefault
  *
  * @var [type]
  */
 const TabDefault = ({ parent }) => {
-  const idEmail: number = useRecordField('id_email');
-  const day: number = useRecordField('day');
-
   return <div className='w-full flex gap-2'>
     <div className='flex-1 border-r border-gray-100'>
       <Input field='id_campaign' />
@@ -105,14 +92,9 @@ const FormRecipient = (props: FormRecipientProps) => {
         (result: any) => { setMailPreviewInfo(result); }
       );
     }}
+    title={{'field': 'email', sub: translate('Recipient')}}
+    tabs={{default: {content: () => <TabDefault parent={myself} />}}}
     {...props}
-    
-    uiComponents={{
-      title: <Title {...props} />,
-      tabs: {
-        default: { content: () => <TabDefault parent={myself} /> },
-      },
-    }}
   ></Form>;
 }
 

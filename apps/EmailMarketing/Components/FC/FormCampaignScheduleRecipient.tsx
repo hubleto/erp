@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import FormEmail from './FormEmail';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
@@ -13,16 +13,6 @@ const translate = new Translator(
   'Hubleto\\App\\Community\\EmailMarketing\\Loader',
   'Components\\FormCampaignScheduleRecipient'
 ).translate;
-
-/**
- * Title
- *
- * @var [type]
- */
-const Title = (props: FormCampaignScheduleRecipientProps) => <>
-  <small>{translate('Campaign')} » {translate('Scheduled email recipient')}</small>
-  <h2>{useRecordField('email') ?? '-'}</h2>
-</>;
 
 /**
  * TabDefault
@@ -52,14 +42,9 @@ const FormCampaignScheduleRecipient = (props: FormCampaignScheduleRecipientProps
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
+    title={{'field': 'title', sub: <>{translate('Campaign')} » {translate('Scheduled email recipient')}</>}}
+    tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
-
-    uiComponents={{
-      title: <Title {...props} />,
-      tabs: {
-        default: { content: () => <TabDefault {...props} /> },
-      },
-    }}
   ></Form>;
 }
 

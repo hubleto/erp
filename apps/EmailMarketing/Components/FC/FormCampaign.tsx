@@ -63,7 +63,7 @@ const TabDefault = (props: FormCampaignProps) => {
       <div className='grow'>
         <TableCampaignsSchedules
           tag='table_campaign_schedules'
-          parentForm={this}
+          parentForm={form}
           uid={form.uid + "_table_campaign_schedules"}
           idCampaign={form.id}
         />
@@ -86,7 +86,7 @@ const TabRecipients = (props: FormCampaignProps) => {
   const refTableRecipients = useRef(null);
   const refEmails = useRef(null);
 
-  const [recipients, setRecipients] = useState([]);
+  // const [recipients, setRecipients] = useState([]);
 
   return <div className='flex gap-2'>
     <div className='flex-3'>
@@ -98,9 +98,9 @@ const TabRecipients = (props: FormCampaignProps) => {
         uid={form.uid + "_table_email_recipient"}
         idCampaign={form.id}
         view='briefOverview'
-        onAfterLoadData={(table: any) => {
-          setRecipients(table.state.data.records);
-        }}
+        // onAfterLoadData={(table: any) => {
+        //   setRecipients(table.state.data.records);
+        // }}
       />
     </div>
     <div className='flex-2 gap-2'>
@@ -189,13 +189,9 @@ const FormCampaign = (props: FormCampaignProps) => {
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
+    title={{'field': 'title', sub: translate('Campaign')}}
     tabs={tabs}
     {...props}
-    
-    renderTitle={(form: FormMeta) => <>
-      <small>{translate('Campaign')}</small>
-      <h2>{useRecordField('title')}</h2>
-    </>}
   ></Form>;
 }
 

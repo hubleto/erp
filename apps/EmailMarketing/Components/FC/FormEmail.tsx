@@ -5,7 +5,7 @@ import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/TableEmail
 import request from '@hubleto/react-ui/core/Request';
 import InputJsonKeyValue from "@hubleto/react-ui/components/cc/Inputs/JsonKeyValue";
 import moment from "moment";
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
@@ -17,16 +17,6 @@ const translate = new Translator(
   'Hubleto\\App\\Community\\EmailMarketing\\Loader',
   'Components\\FormEmail'
 ).translate;
-
-/**
- * Title
- *
- * @var [type]
- */
-const Title = (props: FormEmailProps) => <>
-  <small>{translate('Email')}</small>
-  <h2>{useRecordField('name') ?? '-'}</h2>
-</>;
 
 /**
  * TabDefault
@@ -639,64 +629,17 @@ const FormEmail = (props: FormEmailProps) => {
         break;
       }
     }}
-    uiComponents={{
-      title: <Title {...props} />,
-      tabs: {
-        default: { title: <b>{translate('Email')}</b>, content: () => <TabDefault formEmail={formEmail} /> },
-        contacts: { title: translate('Contacts'), content: () => <TabContacts formEmail={formEmail} /> },
-        recipients: { title: translate('Recipients'), content: () => <TabRecipients formEmail={formEmail} /> },
-        test: { title: translate('Test'), content: () => <TabTest formEmail={formEmail} /> },
-        launch: { title: translate('Launch'), content: () => <TabLaunch formEmail={formEmail} /> },
-        clicks: { title: translate('Clicks'), content: () => <TabClicks formEmail={formEmail} /> },
-      },
+    title={{'field': 'title', sub: translate('Email')}}
+    tabs={{
+      default: { title: <b>{translate('Email')}</b>, content: () => <TabDefault formEmail={formEmail} /> },
+      contacts: { title: translate('Contacts'), content: () => <TabContacts formEmail={formEmail} /> },
+      recipients: { title: translate('Recipients'), content: () => <TabRecipients formEmail={formEmail} /> },
+      test: { title: translate('Test'), content: () => <TabTest formEmail={formEmail} /> },
+      launch: { title: translate('Launch'), content: () => <TabLaunch formEmail={formEmail} /> },
+      clicks: { title: translate('Clicks'), content: () => <TabClicks formEmail={formEmail} /> },
     }}
     {...props}
   ></Form>
 }
 
 export default FormEmail;
-
-//   parentApp: string = 'Hubleto/App/Community/EmailMarketing';
-
-//   refTestRecipientInput: any = React.createRef();
-//   refLogActivityInput: any = React.createRef();
-//   refActivityModal: any = React.createRef();
-//   refActivityForm: any = React.createRef();
-//   refEmails: any = React.createRef();
-//   refTableRecipients: any = React.createRef();
-
-
-
-//   onTabChange() {
-//     super.onTabChange();
-
-
-//   renderTab(tabUid: string) {
-//     const R = this.state.record;
-
-//     switch (tabUid) {
-//       case 'default':
-//       break
-
-//       case 'contacts':
-//       break;
-
-//       case 'test':
-//       break;
-
-//       case 'launch':
-//       break;
-
-//       case 'clicks':
-//       break;
-
-//       case 'recipients':
-//       break;
-
-//       default:
-//         return super.renderTab(tabUid);
-//       break;
-//     }
-//   }
-// }
-

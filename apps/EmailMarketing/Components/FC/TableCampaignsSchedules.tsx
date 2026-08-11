@@ -11,6 +11,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
   return <Table
     componentName='TableCampaignsSchedules'
     model='Hubleto/App/Community/EmailMarketing/Models/CampaignSchedule'
+    endpointParams={{idCampaign: props.idCampaign}}
     formUrlSlug='email-marketing/schedules'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_campaign: props.idCampaign}}

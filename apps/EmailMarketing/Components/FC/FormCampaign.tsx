@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import TableCampaignsSchedules from './TableCampaignsSchedules';
-import TableRecipients from '@hubleto/apps/EmailMarketing/Components/TableRecipients';
+import TableRecipients from './TableRecipients';
 import request from '@hubleto/react-ui/core/Request';
 import Translator from "@hubleto/react-ui/core/Translator";
-import Form, { FormMeta, FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { FormProps, FormTabs } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
@@ -187,7 +188,7 @@ const FormCampaign = (props: FormCampaignProps) => {
     parentApp='Hubleto/App/Community/EmailMarketing'
     model='Hubleto/App/Community/EmailMarketing/Models/Campaign'
     urlSlug='email-marketing/campaigns'
-    customEndpointParams={{saveRelations: ['TAGS'] }}
+    endpointParams={{saveRelations: ['TAGS'] }}
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}

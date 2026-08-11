@@ -12,8 +12,10 @@ const TableEmails = (props: TableEmailsProps) => {
   return <Table
     componentName='TableEmails'
     model='Hubleto/App/Community/EmailMarketing/Models/Email'
+    endpointParams={{idCampaign: props.idCampaign}}
     formUrlSlug='email-marketing/emails'
     formModalProps={{type: 'right wide'}}
+    formDefaultValues={{id_campaign: props.idCampaign}}
     getRowClassName={(table: TableMeta, rowData: any): string => {
       return rowData.is_closed ? 'bg-slate-300' : table.getDefaultRowClassName(rowData);
     }}

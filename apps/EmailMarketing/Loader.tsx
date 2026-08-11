@@ -4,7 +4,7 @@ import TableCampaignsSchedules from "./Components/FC/TableCampaignsSchedules"
 import TableCampaignsSchedulesRecipients from "./Components/FC/TableCampaignsSchedulesRecipients"
 import TableEmails from "./Components/FC/TableEmails"
 import TableEmailClicks from "./Components/TableEmailClicks"
-import TableRecipients from "./Components/TableRecipients"
+import TableRecipients from "./Components/FC/TableRecipients"
 import TableRecipientStatuses from "./Components/TableRecipientStatuses"
 
 class EmailMarketingApp extends App {

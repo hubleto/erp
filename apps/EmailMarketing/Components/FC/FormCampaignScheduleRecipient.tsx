@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import FormEmail from './FormEmail';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import Form, { FormMeta, FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
@@ -48,7 +48,7 @@ const FormCampaignScheduleRecipient = (props: FormCampaignScheduleRecipientProps
     parentApp='Hubleto/App/Community/EmailMarketing'
     model='Hubleto/App/Community/EmailMarketing/Models/CampaignSchedule'
     urlSlug='email-marketing/campaign/schedules/recipients'
-    customEndpointParams={{saveRelations: ['TAGS'] }}
+    endpointParams={{saveRelations: ['TAGS'] }}
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}

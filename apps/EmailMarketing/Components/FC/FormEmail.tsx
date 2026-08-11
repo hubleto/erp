@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
-import TableRecipients from '@hubleto/apps/EmailMarketing/Components/TableRecipients';
+import TableRecipients from './TableRecipients';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/TableEmailClicks';
 import request from '@hubleto/react-ui/core/Request';
 import InputJsonKeyValue from "@hubleto/react-ui/components/cc/Inputs/JsonKeyValue";
-import moment, { Moment } from "moment";
+import moment from "moment";
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';

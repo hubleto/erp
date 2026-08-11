@@ -17,15 +17,12 @@ const translate = new Translator(
   'Components\\FormCampaign'
 ).translate;
 
-/**
- * Title
- *
- * @var [type]
- */
-const Title = (props: FormCampaignProps) => <>
-  <small>{translate('Campaign')}</small>
-  <h2>{useRecordField('title') ?? '-'}</h2>
-</>;
+// /**
+//  * Title
+//  *
+//  * @var [type]
+//  */
+// const Title = (props: FormCampaignProps) => ;
 
 /**
  * TabDefault
@@ -192,12 +189,13 @@ const FormCampaign = (props: FormCampaignProps) => {
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
+    tabs={tabs}
     {...props}
     
-    uiComponents={{
-      title: <Title {...props} />,
-      tabs: tabs,
-    }}
+    renderTitle={(form: FormMeta) => <>
+      <small>{translate('Campaign')}</small>
+      <h2>{useRecordField('title')}</h2>
+    </>}
   ></Form>;
 }
 

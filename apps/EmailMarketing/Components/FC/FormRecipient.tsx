@@ -92,7 +92,7 @@ const FormRecipient = (props: FormRecipientProps) => {
         (result: any) => { setMailPreviewInfo(result); }
       );
     }}
-    title={{'field': 'email', sub: translate('Recipient')}}
+    title={{field: 'email', sub: translate('Recipient')}}
     tabs={{default: {content: () => <TabDefault parent={myself} />}}}
     {...props}
   ></Form>;

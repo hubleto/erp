@@ -189,7 +189,7 @@ const FormCampaign = (props: FormCampaignProps) => {
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
-    title={{'field': 'title', sub: translate('Campaign')}}
+    title={{field: 'title', sub: translate('Campaign')}}
     tabs={tabs}
     {...props}
   ></Form>;

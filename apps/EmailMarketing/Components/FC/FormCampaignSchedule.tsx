@@ -19,16 +19,30 @@ const translate = new Translator(
  * @var [type]
  */
 const TabDefault = (props: FormCampaignScheduleProps) => {
-  const idEmail: number = useRecordField('id_email');
+  const EMAIL: any = useRecordField('EMAIL');
   const day: number = useRecordField('day');
+
+  console.log('EMAIL', EMAIL);
 
   return <div className='flex flex-col h-full'>
     <div className='flex gap-2'>
       <div><Input field='day' /></div>
       <div className='grow'><Input field='id_email' wrapperCssClass='flex gap-2' /></div>
     </div>
-    <div className='mt-8 w-[80%] m-auto overflow-auto'>
-      {idEmail > 0 ? <FormEmail id={idEmail} />
+    <div className='mt-8'>
+      {/* {idEmail > 0 ? <FormEmail id={idEmail} readonly />
+      : <div className='alert alert-warning'>Select email to be sent on <b>day {day}</b></div>} */}
+      {EMAIL ? <div className='card'>
+        <div className='card-header'>From: {EMAIL.SENDER_ACCOUNT?.name}</div>
+        <div className='card-header'>Subject: {EMAIL.mail_subject}</div>
+        <div className='card-body'>
+          <iframe
+            src="about:blank"
+            className='w-full min-h-96'
+            srcDoc={EMAIL.mail_body}
+          />
+        </div>
+      </div>
       : <div className='alert alert-warning'>Select email to be sent on <b>day {day}</b></div>}
     </div>
   </div>;
@@ -49,7 +63,7 @@ const FormCampaignSchedule = (props: FormCampaignScheduleProps) => {
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
-    title={{'field': 'title', sub: <>{translate('Campaign')} » {translate('Scheduled email')}</>}}
+    title={{main: <>{translate('Campaign')} » {translate('Scheduled email')}</>}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

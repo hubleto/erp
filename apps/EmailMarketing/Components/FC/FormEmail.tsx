@@ -629,7 +629,7 @@ const FormEmail = (props: FormEmailProps) => {
         break;
       }
     }}
-    title={{'field': 'title', sub: translate('Email')}}
+    title={{field: 'title', sub: translate('Email')}}
     tabs={{
       default: { title: <b>{translate('Email')}</b>, content: () => <TabDefault formEmail={formEmail} /> },
       contacts: { title: translate('Contacts'), content: () => <TabContacts formEmail={formEmail} /> },

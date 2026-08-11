@@ -31,6 +31,35 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormCampaignSchedule {...table.getDefaultFormProps()}/>;
     }}
+    renderRecords={(table: TableMeta): React.JSX.Element => {
+      return <div className='list mt-2'>
+        {table.data?.records.map((record, key) => {
+          return <button
+            key={key}
+            className='btn btn-transparent btn-list-item'
+            onClick={() => table.openForm(record.id)}
+          >
+            <div className='icon text-center bg-primary/20 rounded-sm h-full'>
+              Day<br/>
+              <b>{record.day}</b>
+            </div>
+            <div className='text'>
+              {record.id_email > 0 ? <>
+                <div className='text-gray-300'>
+                  From: {record.EMAIL?.SENDER_ACCOUNT?.name ?? <span className='text-red-800'>n/a</span>}
+                </div>
+                <div className='text-gray-300'>
+                  {record.EMAIL?.title ?? ''}
+                </div>
+                <div className='fond-bold'>
+                  {record.EMAIL?.mail_subject ?? '-'}
+                </div>
+              </> : <div className='text-red-800'>No email selected</div>}
+            </div>
+          </button>;
+        })}
+      </div>
+    }}
     {...props}
   ></Table>
 }

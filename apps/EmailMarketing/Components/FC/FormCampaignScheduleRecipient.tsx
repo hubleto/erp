@@ -42,7 +42,7 @@ const FormCampaignScheduleRecipient = (props: FormCampaignScheduleRecipientProps
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
-    title={{'field': 'title', sub: <>{translate('Campaign')} » {translate('Scheduled email recipient')}</>}}
+    title={{field: 'title', sub: <>{translate('Campaign')} » {translate('Scheduled email recipient')}</>}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
-import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
+import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
 import TableMilestones from './TableMilestones';
 import TableExpenses from './TableExpenses';
 import FormInput from '@hubleto/react-ui/components/cc/FormInput';

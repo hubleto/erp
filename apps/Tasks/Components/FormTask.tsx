@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
-import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
+import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
 import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import moment from 'moment';
 import UserSelect from '@hubleto/react-ui/components/cc/Inputs/UserSelect';

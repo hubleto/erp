@@ -3,7 +3,7 @@ import { getUrlParam } from '@hubleto/react-ui/core/Helper';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import TableItems from './TableItems';
 import TableQuotes from './TableQuotes';
-import TableActivities from '@hubleto/apps/Worksheets/Components/TableActivities';
+import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
 import TableDocuments from '@hubleto/apps/Documents/Components/FC/TableDocuments';
 import request from "@hubleto/react-ui/core/Request";
 import TableHistories from './TableHistories';

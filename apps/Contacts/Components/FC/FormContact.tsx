@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
@@ -42,7 +42,7 @@ const TabDefault = (props: FormContactProps) => {
     }
   }
 
-return <>
+  return <>
     <div className='card'>
       <div className='card-body flex flex-col md:flex-row gap-2'>
         <div className="flex-3">
@@ -51,6 +51,11 @@ return <>
               <i className="fas fa-user text-2xl p-4 text-gray-500"></i>
             </div>
             <div className="w-full">
+              <div className='flex gap-2'>
+                <Input field='is_primary' renderOnlyInputField customInputProps={{yesText: 'Primary'}} />
+                <Input field='is_for_invoicing' renderOnlyInputField customInputProps={{yesText: 'Send invoices'}} />
+                <Input field='is_valid' renderOnlyInputField customInputProps={{yesText: 'Valid'}} />
+              </div>
               <Input field='salutation' />
               <Input field='title_before' />
               <Input field='first_name' />
@@ -62,8 +67,6 @@ return <>
         </div>
         <div className="flex-1">
           <Input field='id_customer' />
-          <Input field='is_primary' customInputProps={{yesText: 'Primary'}} />
-          <Input field='is_for_invoicing' customInputProps={{yesText: 'Send invoices'}} />
           <Input title={T.translate('Tags')}>
             <InputTags
               field='TAGS'
@@ -82,24 +85,23 @@ return <>
               }}
             ></InputTags>
           </Input>
-          <Input field='note' customInputProperties={{cssClass: 'bg-yellow-50 dark:bg-slate-600'}} />
-          <Input field='is_valid' />
-          <Input field='date_created' />
+          <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600'}} />
         </div>
       </div>
     </div>
     <Divider>{T.translate('Contacts')}</Divider>
-    {VALUES ? VALUES.map((item, key) => {
+    {VALUES ? <div className='flex flex-col gap-2'>{VALUES.map((item, key) => {
       const itemType = getType(item.value);
       return <div key={key} className={'flex gap-2 w-full items-center' + (item._toBeDeleted_ ? ' bg-red-100' : '')}>
         <div className='w-8 text-center'><i className={"fas fa-" + getIcon(item.value)}></i></div>
         <div className='grow'>
           <VarcharInput
+            field='VALUES'
             onChange={(input: any, newValue: any) => {
               let newValues = VALUES;
               newValues[key].value = newValue;
               newValues[key].type = getType(newValue);
-              form.changeRecord({ VALUES: newValues });
+              form.changeField(input, newValues);
             }}
             value={item.value}
           />
@@ -112,7 +114,7 @@ return <>
             onChange={(input: any, value: any) => {
               let newValues = VALUES;
               newValues[key].id_category = value;
-              form.updateRecord({ VALUES: newValues });
+              form.changeRecord({ VALUES: newValues });
             }}
           ></LookupInput>
         </div>
@@ -131,7 +133,7 @@ return <>
           <span className="icon"><i className={'fas ' + (item._toBeDeleted_ ? 'fa-times' : 'fa-trash-can')}></i></span>
         </button>
       </div>;
-    }) : null}
+    })}</div> : null}
     <a
       className="btn btn-add-outline mt-2"
       onClick={() => {
@@ -162,10 +164,10 @@ const FormContact = (props: FormContactProps) => {
       const firstName = useRecordField('first_name', '');
       const lastName = useRecordField('last_name', '');
 
-      return <>
-        <small>{T.translate('Contact')}</small>
+      return <div>
         <h2>{firstName}&nbsp;{lastName}</h2>
-      </>;
+        <small>{T.translate('Contact')}</small>
+      </div>;
     }}
 
     tabs={{default: {content: () => <TabDefault {...props} />}}}

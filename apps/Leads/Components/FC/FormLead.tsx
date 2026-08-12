@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Translator from "@hubleto/react-ui/core/Translator";
-import Form, { FormMeta, FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { useRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
 import CalendarTab, { CalendarTabContext } from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
@@ -16,22 +16,10 @@ import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEm
 
 export interface FormLeadProps extends FormProps {}
 
-const translate = new Translator(
+const T = new Translator(
   'Hubleto\\App\\Community\\Leads\\Loader',
   'Components\\FormLead'
-).translate;
-
-/**
- * Title
- *
- * @var [type]
- */
-const Title = (props: FormLeadProps) => <>
-  <small>{translate('Lead')}</small>
-  <h2>{useRecord().title ?? '-'}</h2>
-</>;
-
-const PrintPreview = (props: FormLeadProps) => <PrintPreviewUi/>;
+);
 
 /**
  * TabDefault
@@ -64,14 +52,14 @@ const TabDefault = (props: FormLeadProps) => {
   return <>
     <div className='card card-body flex flex-col gap-2 md:flex-row'>
       <div className='grow'>
-        <Input field='title' customInputProperties={{cssClass: 'text-2xl'}} />
+        <Input field='title' customInputProps={{cssClass: 'text-2xl'}} />
         <Input field='email' />
         <Input field='phone' />
         <Input field='profile_link_1' />
         <Input field='profile_link_2' />
         <Input field='profile_link_3' />
-        <Input field='source_channel' customInputProperties={{readonly: isClosed}} />
-        <Input title={translate('Tags')}>
+        <Input field='source_channel' customInputProps={{readonly: isClosed}} />
+        <Input title={T.translate('Tags')}>
           <InputTags
             field='TAGS'
             value={TAGS}
@@ -90,8 +78,8 @@ const TabDefault = (props: FormLeadProps) => {
             }}
           ></InputTags>
         </Input>
-        <Input field='note' customInputProperties={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
-        {status == 4 ? <Input field='lost_reason' customInputProperties={{readonly: isClosed}} />: null}
+        <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
+        {status == 4 ? <Input field='lost_reason' customInputProps={{readonly: isClosed}} />: null}
       </div>
       <div className='border-l border-gray-200'></div>
       <div className='grow'>
@@ -110,15 +98,15 @@ const TabDefault = (props: FormLeadProps) => {
           }
         </> : null}
         <div className='flex flex-row *:w-1/2'>
-          <Input fieldame='price' customInputProperties={{ cssClass: 'text-2xl', readonly: isClosed }} />
+          <Input fieldame='price' customInputProps={{ cssClass: 'text-2xl', readonly: isClosed }} />
           <Input fieldame='id_currency' />
         </div>
-        <Input field='score' customInputProperties={{readonly: isClosed}} />
-        <Input field='id_team' customInputProperties={{readonly: isClosed}} />
-        <Input field='date_expected_close' customInputProperties={{readonly: isClosed}} />
+        <Input field='score' customInputProps={{readonly: isClosed}} />
+        <Input field='id_team' customInputProps={{readonly: isClosed}} />
+        <Input field='date_expected_close' customInputProps={{readonly: isClosed}} />
         <Input field='id_customer' />
         <Input field='id_contact' />
-        <Input field='shared_folder' customInputProperties={{readonly: isClosed}} />
+        <Input field='shared_folder' customInputProps={{readonly: isClosed}} />
         <Input field='date_created' />
       </div>
     </div>
@@ -227,12 +215,12 @@ const TabHistory = (props: FormLeadProps) => {
         showHeader: false,
       },
       columns: {
-        description: { type: "varchar", title: translate("Description")},
-        change_date: { type: "date", title: translate("Change Date")},
+        description: { type: "varchar", title: T.translate("Description")},
+        change_date: { type: "date", title: T.translate("Change Date")},
       },
       inputs: {
-        description: { type: "varchar", title: translate("Description"), readonly: true},
-        change_date: { type: "date", title: translate("Change Date")},
+        description: { type: "varchar", title: T.translate("Description"), readonly: true},
+        change_date: { type: "date", title: T.translate("Change Date")},
       },
     }}
     readonly={true}
@@ -280,57 +268,22 @@ const FormLead = (props: FormLeadProps) => {
     parentApp='Hubleto/App/Community/Leads'
     model='Hubleto/App/Community/Leads/Models/Lead'
     urlSlug='leads'
-    customEndpointParams={{saveRelations: ['TAGS'] }}
+    endpointParams={{saveRelations: ['TAGS'] }}
     showWorkflowUi={true}
     showOwnerManagerUi={true}
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
-
-    uiComponents={{
-      title: <Title {...props} />,
-      // printPreviewUi: <PrintPreview {...props} />,
-      tabs: {
-        default: { title: <b>{translate('Lead')}</b>, content: () => <TabDefault {...props} /> },
-        calendar: { title: translate('Calendar'), content: () => <TabCalendar /> },
-        email_clicks: { title: translate('Email Clicks'), content: () => <TabEmailClicks {...props} /> },
-        tasks: { title: translate('Tasks'), content: () => <TabTasks {...props} /> },
-        history: { icon: 'fas fa-clock-rotate-left', position: 'right', content: () => <TabHistory /> },
-        timeline: { icon: 'fas fa-timeline', position: 'right', content: () => <TabTimeline {...props} /> },
-      },
-      // saveButton: () => <div>save</div>,
-      // closeButton: () => <div>close</div>,
+    tabs={{
+      default: { title: <b>{T.translate('Lead')}</b>, content: () => <TabDefault {...props} /> },
+      calendar: { title: T.translate('Calendar'), content: () => <TabCalendar /> },
+      email_clicks: { title: T.translate('Email Clicks'), content: () => <TabEmailClicks {...props} /> },
+      tasks: { title: T.translate('Tasks'), content: () => <TabTasks {...props} /> },
+      history: { icon: 'fas fa-clock-rotate-left', position: 'right', content: () => <TabHistory /> },
+      timeline: { icon: 'fas fa-timeline', position: 'right', content: () => <TabTimeline {...props} /> },
     }}
+    title={{field: 'title', sub: T.translate('Lead')}}
   ></Form>;
 }
 
 export default FormLead;
-
-
-  // const FormTab = React.memo(({ record, activeTabUid }) => {
-  //   const R = record;
-
-
-  //     case 'documents':
-  //       return <TableDocuments
-  //         tag={"table_lead_document"}
-  //         parentForm={this}
-  //         uid={props.uid + "_table_lead_document"}
-  //         junctionTitle='Lead'
-  //         junctionModel='Hubleto/App/Community/Leads/Models/LeadDocument'
-  //         junctionSourceColumn='id_lead'
-  //         junctionSourceRecordId={R.id}
-  //         junctionDestinationColumn='id_document'
-  //       />;
-  //     break;
-
-  //     case 'history':
-
-  //     break;
-
-  //     case 'timeline':
-  //       return 
-  //     break;
-
-  //   }
-  // });

@@ -32,18 +32,22 @@ class Loader extends \Hubleto\Erp\App
       '/^workflow\/?$/' => Controllers\Workflow::class,
       '/^workflow(\/(?<idWorkflow>\d+))?\/?$/' => Controllers\Workflow::class,
 
+      '/^workflow\/workflows(\/(?<recordId>\d+))?\/?$/' => Controllers\Workflows::class,
+      '/^workflow\/workflows\/add\/?$/' => ['controller' => Controllers\Workflows::class, 'vars' => ['recordId' => -1]],
+
+      '/^workflow\/workflows\/steps(\/(?<recordId>\d+))?\/?$/' => Controllers\WorkflowSteps::class,
+      '/^workflow\/workflows\/steps\/add\/?$/' => ['controller' => Controllers\WorkflowSteps::class, 'vars' => ['recordId' => -1]],
+
       '/^workflow\/automats(\/(?<recordId>\d+))?\/?$/' => Controllers\Automats::class,
       '/^workflow\/automats\/add\/?$/' => ['controller' => Controllers\Automats::class, 'vars' => ['recordId' => -1]],
 
-      '/^workflow\/history\/?$/' => Controllers\History::class,
-      '/^settings\/workflows\/?$/' => Controllers\Workflows::class,
     ]);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Workflows'),
       'icon' => 'fas fa-bars-progress',
-      'url' => 'settings/workflows'
+      'url' => 'workflow/workflows'
     ]);
 
     /** @var \Hubleto\App\Community\Dashboards\Manager */
@@ -97,9 +101,13 @@ class Loader extends \Hubleto\Erp\App
           <span class="text">' . $this->translate('Workflow') . '</span>
         </a>
         ' . $workflowButtonsHtml . '
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/settings/workflows">
-          <span class="icon"><i class="fas fa-cog"></i></span>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/workflows">
+          <span class="icon"><i class="fas fa-timeline"></i></span>
           <span class="text">' . $this->translate('Workflows') . '</span>
+        </a>
+        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/workflows/steps">
+          <span class="icon"><i class="fas fa-circle-dot"></i></span>
+          <span class="text">' . $this->translate('Steps') . '</span>
         </a>
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/automats">
           <span class="icon"><i class="fas fa-robot"></i></span>

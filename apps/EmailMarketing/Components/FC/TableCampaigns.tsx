@@ -3,10 +3,14 @@ import FormCampaign, { FormCampaignProps } from './FormCampaign';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 
+const componentName = 'TableCampaigns';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+
 const TableCampaigns = (props: TableProps) => {
   return <Table
-    componentName='TableCampaigns'
-    model='Hubleto/App/Community/EmailMarketing/Models/Campaign'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/Campaign'}
     formUrlSlug='email-marketing/campaigns'
     formModalProps={{type: 'right wide'}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

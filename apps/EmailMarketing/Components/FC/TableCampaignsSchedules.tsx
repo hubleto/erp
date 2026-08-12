@@ -7,10 +7,14 @@ interface TableCampaignsSchedulesProps extends TableProps {
   idCampaign?: number,
 }
 
+const componentName = 'TableCampaignsSchedules';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+
 const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
   return <Table
-    componentName='TableCampaignsSchedules'
-    model='Hubleto/App/Community/EmailMarketing/Models/CampaignSchedule'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/CampaignSchedule'}
     endpointParams={{idCampaign: props.idCampaign}}
     formUrlSlug='email-marketing/schedules'
     formModalProps={{type: 'right wide'}}

@@ -12,23 +12,11 @@ import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
 
 export interface FormCampaignProps extends FormProps {}
 
-const translate = new Translator(
-  'Hubleto\\App\\Community\\EmailMarketing\\Loader',
-  'Components\\FormCampaign'
-).translate;
+const componentName = 'FormCampaign';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+const T = new Translator(parentApp + '/Loader', 'Components/FormCampaign');
 
-// /**
-//  * Title
-//  *
-//  * @var [type]
-//  */
-// const Title = (props: FormCampaignProps) => ;
-
-/**
- * TabDefault
- *
- * @var [type]
- */
+/** TabDefault */
 const TabDefault = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
   const TAGS = useRecordField('TAGS');
@@ -36,11 +24,11 @@ const TabDefault = (props: FormCampaignProps) => {
   return <div className='flex gap-2 flex-col md:flex-row'>
     <div className='grow'>
       <Input field='title' />
-      <Input title={translate('Tags')}>
+      <Input title={T.translate('Tags')}>
         <InputTags
           field='TAGS'
           value={TAGS}
-          model='Hubleto/App/Community/EmailMarketing/Models/Tag'
+          model={parentApp + '/Models/Tag'}
           targetColumn='id_campaign'
           sourceColumn='id_tag'
           colorColumn='_LOOKUP_COLOR'
@@ -86,8 +74,6 @@ const TabRecipients = (props: FormCampaignProps) => {
   const refTableRecipients = useRef(null);
   const refEmails = useRef(null);
 
-  // const [recipients, setRecipients] = useState([]);
-
   return <div className='flex gap-2'>
     <div className='flex-3'>
       <TableRecipients
@@ -98,18 +84,15 @@ const TabRecipients = (props: FormCampaignProps) => {
         uid={form.uid + "_table_email_recipient"}
         idCampaign={form.id}
         view='briefOverview'
-        // onAfterLoadData={(table: any) => {
-        //   setRecipients(table.state.data.records);
-        // }}
       />
     </div>
     <div className='flex-2 gap-2'>
       <div className='card'>
-        <div className='card-header'>{translate('Import recipients')}</div>
+        <div className='card-header'>{T.translate('Import recipients')}</div>
         <div className='card-body'>
           <div className='badge badge-info block'>
-            {translate('One email per line or one JSON per line.')}<br/>
-            {translate('Examples:')}<br/>
+            {T.translate('One email per line or one JSON per line.')}<br/>
+            {T.translate('Examples:')}<br/>
             <br/>
             <div className='font-mono'>{JSON.stringify(example1)}</div>
             <div className='font-mono'>{JSON.stringify(example2)}</div>
@@ -117,7 +100,7 @@ const TabRecipients = (props: FormCampaignProps) => {
           <textarea
             className='w-full h-80 mt-2'
             ref={refEmails}
-            placeholder={translate('One email per line or one JSON per line.')}
+            placeholder={T.translate('One email per line or one JSON per line.')}
           ></textarea>
           <button
             className='btn btn-add-outline mt-2 w-full'
@@ -136,7 +119,7 @@ const TabRecipients = (props: FormCampaignProps) => {
             }}
           >
             <span className='icon'><i className='fas fa-upload'></i></span>
-            <span className='text'>{translate('Import recipients')}</span>
+            <span className='text'>{T.translate('Import recipients')}</span>
           </button>
         </div>
       </div>
@@ -158,7 +141,7 @@ const TabRecipients = (props: FormCampaignProps) => {
             }}
           >
             <span className='icon'><i className='fas fa-trash'></i></span>
-            <span className='text'>{translate('Remove all recipients')}</span>
+            <span className='text'>{T.translate('Remove all recipients')}</span>
           </button>
         </div>
       </div>
@@ -166,30 +149,26 @@ const TabRecipients = (props: FormCampaignProps) => {
   </div>;
 }
 
-/**
- * FormCampaign
- *
- * @var [type]
- */
+/** FormCampaign */
 const FormCampaign = (props: FormCampaignProps) => {
   let tabs: FormTabs = {
-    default: { title: <b>{translate('Campaign')}</b>, content: () => <TabDefault {...props} /> },
+    default: { title: <b>{T.translate('Campaign')}</b>, content: () => <TabDefault {...props} /> },
   }
 
   if (props.id > 0) {
-    tabs['calendar'] ={ title: translate('Recipients'), content: () => <TabRecipients /> };
+    tabs['calendar'] ={ title: T.translate('Recipients'), content: () => <TabRecipients /> };
   }
 
   return <Form
-    componentName='FormTeam'
-    parentApp='Hubleto/App/Community/EmailMarketing'
-    model='Hubleto/App/Community/EmailMarketing/Models/Campaign'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/Campaign'}
     urlSlug='email-marketing/campaigns'
     endpointParams={{saveRelations: ['TAGS'] }}
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
-    title={{field: 'title', sub: translate('Campaign')}}
+    title={{field: 'title', sub: T.translate('Campaign')}}
     tabs={tabs}
     {...props}
   ></Form>;

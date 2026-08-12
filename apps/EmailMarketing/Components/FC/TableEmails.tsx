@@ -8,10 +8,13 @@ interface TableEmailsProps extends TableProps {
   idCampaign?: number,
 }
 
+const componentName = 'TableEmails';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+
 const TableEmails = (props: TableEmailsProps) => {
   return <Table
-    componentName='TableEmails'
-    model='Hubleto/App/Community/EmailMarketing/Models/Email'
+    componentName={componentName}
+    model={parentApp + '/Models/Email'}
     endpointParams={{idCampaign: props.idCampaign}}
     formUrlSlug='email-marketing/emails'
     formModalProps={{type: 'right wide'}}

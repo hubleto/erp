@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
-import FormEmail from './FormEmail';
-import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
-import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 
 export interface FormCampaignScheduleRecipientProps extends FormProps {}
 
-const translate = new Translator(
-  'Hubleto\\App\\Community\\EmailMarketing\\Loader',
-  'Components\\FormCampaignScheduleRecipient'
-).translate;
+const componentName = 'FormCampaignScheduleRecipient';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+const T = new Translator(parentApp + '/Loader', 'Components/FormCampaignScheduleRecipient');
 
-/**
- * TabDefault
- *
- * @var [type]
- */
+/** TabDefault */
 const TabDefault = (props: FormCampaignScheduleRecipientProps) => {
   return <>
     <Input field='id_campaign_schedule' />
@@ -27,22 +19,18 @@ const TabDefault = (props: FormCampaignScheduleRecipientProps) => {
   </>;
 }
 
-/**
- * FormCampaignScheduleRecipient
- *
- * @var [type]
- */
+/** FormCampaignScheduleRecipient */
 const FormCampaignScheduleRecipient = (props: FormCampaignScheduleRecipientProps) => {
   return <Form
-   componentName='FormCampaignScheduleRecipient'
-    parentApp='Hubleto/App/Community/EmailMarketing'
-    model='Hubleto/App/Community/EmailMarketing/Models/CampaignSchedule'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/CampaignSchedule'}
     urlSlug='email-marketing/campaign/schedules/recipients'
     endpointParams={{saveRelations: ['TAGS'] }}
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
-    title={{field: 'title', sub: <>{translate('Campaign')} » {translate('Scheduled email recipient')}</>}}
+    title={{field: 'title', sub: <>{T.translate('Campaign')} » {T.translate('Scheduled email recipient')}</>}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

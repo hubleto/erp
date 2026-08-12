@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
 import TableRecipients from './TableRecipients';
-import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/TableEmailClicks';
+import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
 import request from '@hubleto/react-ui/core/Request';
 import InputJsonKeyValue from "@hubleto/react-ui/components/cc/Inputs/JsonKeyValue";
 import moment from "moment";
@@ -13,16 +13,11 @@ import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 
 export interface FormEmailProps extends FormProps {}
 
-const translate = new Translator(
-  'Hubleto\\App\\Community\\EmailMarketing\\Loader',
-  'Components\\FormEmail'
-).translate;
+const componentName = 'FormEmail';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+const T = new Translator(parentApp + '/Loader', 'Components/FormEmail');
 
-/**
- * TabDefault
- *
- * @var [type]
- */
+/** TabDefault */
 const TabDefault = ({ formEmail }) => {
   return <>
     <div className='w-full flex flex-col md:flex-row gap-2'>
@@ -49,18 +44,14 @@ const TabDefault = ({ formEmail }) => {
   </>;
 }
 
-/**
- * TabContacts
- *
- * @var [type]
- */
+/** TabContacts */
 const TabContacts = ({ formEmail }) => {
   const form = React.useContext(FormMetaContext);
   const RECIPIENTS: Array<any> = useRecordField('RECIPIENTS');
 
   return <div>
     <div>
-      { translate('Select contacts which will be added as recipients') }
+      {T.translate('Select contacts which will be added as recipients')}
     </div>
     <TableContacts
       tag={"table_email_contact"}
@@ -90,11 +81,7 @@ const TabContacts = ({ formEmail }) => {
   </div>;
 }
 
-/**
- * TabRecipients
- *
- * @var [type]
- */
+/** TabRecipients */
 const TabRecipients = ({ formEmail }) => {
   const form = React.useContext(FormMetaContext);
   const refTableRecipients: any = React.createRef();
@@ -117,11 +104,11 @@ const TabRecipients = ({ formEmail }) => {
     </div>
     <div className='flex-1 gap-2'>
       <div className='card'>
-        <div className='card-header'>{translate('Import emails')}</div>
+        <div className='card-header'>{T.translate('Import emails')}</div>
         <div className='card-body'>
           <textarea
             className='w-full h-80'
-            placeholder={translate('One email per line.')}
+            placeholder={T.translate('One email per line.')}
             ref={refEmails}
           ></textarea>
           <button
@@ -141,7 +128,7 @@ const TabRecipients = ({ formEmail }) => {
             }}
           >
             <span className='icon'><i className='fas fa-upload'></i></span>
-            <span className='text'>{translate('Import emails')}</span>
+            <span className='text'>{T.translate('Import emails')}</span>
           </button>
         </div>
       </div>
@@ -164,7 +151,7 @@ const TabRecipients = ({ formEmail }) => {
             }}
           >
             <span className='icon'><i className='fas fa-trash'></i></span>
-            <span className='text'>{translate('Remove all recipients')}</span>
+            <span className='text'>{T.translate('Remove all recipients')}</span>
           </button>
         </div>
       </div>
@@ -172,23 +159,19 @@ const TabRecipients = ({ formEmail }) => {
   </div>;
 }
 
-/**
- * TabTest
- *
- * @var [type]
- */
+/** TabTest */
 const TabTest = ({ formEmail }) => {
   const refTestRecipientInput: any = React.createRef();
 
   return <div className='flex gap-2'>
     <div className='card flex-1'>
-      <div className='card-header'>{ translate('Analysis & warnings') }</div>
+      <div className='card-header'>{T.translate('Analysis & warnings')}</div>
       <div className='card-body'>
         {formEmail.emailTestInfo ? <>
           {formEmail.emailTestInfo.warnings.length == 0 ? 
             <div className='alert alert-success'>
               <i className='fas fa-check mr-2'></i>
-              { translate('No warnings') }
+              {T.translate('No warnings')}
             </div>
           :
             formEmail.emailTestInfo.warnings.map((item, key) => {
@@ -225,9 +208,9 @@ const TabTest = ({ formEmail }) => {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>{translate('Email')}</th>
-                  <th>{translate('When')}</th>
-                  <th>{translate('Email')}</th>
+                  <th>{T.translate('Email')}</th>
+                  <th>{T.translate('When')}</th>
+                  <th>{T.translate('Email')}</th>
                   <th></th>
                 </tr>
               </thead>
@@ -254,21 +237,21 @@ const TabTest = ({ formEmail }) => {
               </tbody>
             </table>
           }
-        </> : <div className='alert alert-warning'>{ translate('Analysing email...') }</div>}
+        </> : <div className='alert alert-warning'>{T.translate('Analysing email...')}</div>}
       </div>
     </div>
     <div className='card flex-1'>
-      <div className='card-header'>{ translate('Send test email') }</div>
+      <div className='card-header'>{T.translate('Send test email')}</div>
       <div className='card-body'>
-        { translate('Test email recipient:') }
+        {T.translate('Test email recipient:')}
         <input
           ref={refTestRecipientInput}
           className="ml-2"
           type="text"
-          placeholder={ translate("Recipient email") }
+          placeholder={T.translate("Recipient email")}
         />
         <br/>
-        { translate("Test email variables:") }
+        {T.translate("Test email variables:")}
         <InputJsonKeyValue uid="test-email-variables"
           onChange={(input: any, value: any) => {
             // input.setState({value: value});
@@ -293,14 +276,14 @@ const TabTest = ({ formEmail }) => {
           }}
         >
           <span className="icon"><i className="fas fa-envelope"></i></span>
-          <span className="text">{translate('Send test email')}</span>
+          <span className="text">{T.translate('Send test email')}</span>
         </button>
         {formEmail.testEmailSendResult && formEmail.testEmailSendResult.status == 'success' ?
-          <div className='alert alert-success mt-2'>{translate('Test email was sent to you.')}</div>
+          <div className='alert alert-success mt-2'>{T.translate('Test email was sent to you.')}</div>
         : null}
         {formEmail.testEmailSendResult && formEmail.testEmailSendResult.status != 'success' ?
           <div className='alert alert-danger mt-2'>
-            { translate('Error occured when sending a test email to you.') }
+            {T.translate('Error occured when sending a test email to you.')}
             <br/>
             <b>{formEmail.testEmailSendResult.message}</b>
           </div>
@@ -310,11 +293,7 @@ const TabTest = ({ formEmail }) => {
   </div>;
 }
 
-/**
- * TabLaunch
- *
- * @var [type]
- */
+/** TabLaunch */
 const TabLaunch = ({ formEmail }) => {
   const idLaunchedBy: number = useRecordField('id_launched_by');
   const datetimeLaunched: any = useRecordField('datetime_launched');
@@ -352,7 +331,7 @@ const TabLaunch = ({ formEmail }) => {
     {formEmail.emailLaunchInfo ? <>
       {formEmail.emailLaunchInfo.recentlyContacted
         && formEmail.emailLaunchInfo.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
-        <b>{translate('Recently contacted')}</b>
+        <b>{T.translate('Recently contacted')}</b>
         {formEmail.emailLaunchInfo.recentlyContacted.map((item, key) => {
           if (!item.CONTACT) return null;
           return <div key={key}>
@@ -366,7 +345,7 @@ const TabLaunch = ({ formEmail }) => {
                   return null;
                 }
               }) : null}
-            </code> {translate('in email')} <a
+            </code> {T.translate('in email')} <a
               href={globalThis.hubleto.config.projectUrl + '/email-marketing/emails/' + item.EMAIL.id}
               target='_blank'
             >{item.EMAIL.subject}</a>.
@@ -377,7 +356,7 @@ const TabLaunch = ({ formEmail }) => {
 
     {idLaunchedBy ?
       <div className='alert alert-warning'>
-        {translate(
+        {T.translate(
           'Email was already launched by {{ email }} on {{ datetime }}.',
           null,
           null,
@@ -401,34 +380,34 @@ const TabLaunch = ({ formEmail }) => {
           }}
         >
           <span className="icon"><i className="fas fa-paper-plane"></i></span>
-          <span className="text">{translate('Send email now!')}</span>
+          <span className="text">{T.translate('Send email now!')}</span>
         </button>
         <div className='mt-2 alert alert-info'>
-          {translate('Emails will be sent only to recipients who did not receive email yet.')}
+          {T.translate('Emails will be sent only to recipients who did not receive email yet.')}
         </div>
         <div className='mt-2 alert alert-info'>
-          {translate('Unsubscribed and invalid recipients will be ignored.')}
+          {T.translate('Unsubscribed and invalid recipients will be ignored.')}
         </div>
         {formEmail.emailLaunchInfo && formEmail.emailLaunchInfo.recipients ? <>
           <div className='card mt-2'>
-            <div className='card-header'>{translate('Statistics')}</div>
+            <div className='card-header'>{T.translate('Statistics')}</div>
             <div className='card-body flex flex-col gap-1'>
               <div className='badge'>
-                {translate('Recipients')}: {formEmail.emailLaunchInfo.recipients.length}
+                {T.translate('Recipients')}: {formEmail.emailLaunchInfo.recipients.length}
               </div>
               <div className='badge'>
-                {translate('Emails sent')}: {emailsSent}
+                {T.translate('Emails sent')}: {emailsSent}
               </div>
               <div className='badge badge-warning'>
-                {translate('Invalid recipients')}: {invalidRecipientsCount} ({Math.round(invalidRecipientsCount / formEmail.emailLaunchInfo.recipients.length * 100)} %)
+                {T.translate('Invalid recipients')}: {invalidRecipientsCount} ({Math.round(invalidRecipientsCount / formEmail.emailLaunchInfo.recipients.length * 100)} %)
               </div>
               <div className='badge badge-danger'>
-                {translate('Unsubscribed recipients')}: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / formEmail.emailLaunchInfo.recipients.length * 100)} %)
+                {T.translate('Unsubscribed recipients')}: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / formEmail.emailLaunchInfo.recipients.length * 100)} %)
               </div>
             </div>
           </div>
           <div className='card mt-2'>
-            <div className='card-header'>{translate('Potential leads')}</div>
+            <div className='card-header'>{T.translate('Potential leads')}</div>
             <div className='card-body flex flex-wrap gap-1'>
               {potentialLeads.map((email, key) => {
                 return <div key={key} className='badge'>{email}</div>;
@@ -438,31 +417,31 @@ const TabLaunch = ({ formEmail }) => {
         </> : null}
 
         {formEmail.launchResult && formEmail.launchResult.status == 'success' ?
-          <div className='alert alert-success mt-2'>{translate('Email was sent.')}</div>
+          <div className='alert alert-success mt-2'>{T.translate('Email was sent.')}</div>
         : null}
         {formEmail.launchResult && formEmail.launchResult.status != 'success' ?
           <div className='alert alert-danger mt-2'>
-            {translate('Error occured when launching the email.')}<br/>
+            {T.translate('Error occured when launching the email.')}<br/>
             <b>{formEmail.launchResult.message}</b>
           </div>
         : null}
       </div>
       <div className='card grow'>
-        <div className='card-header'>{translate('Recipients')}</div>
+        <div className='card-header'>{T.translate('Recipients')}</div>
         <div className='card-body'>
           {formEmail.emailLaunchInfo && formEmail.emailLaunchInfo.recipients ? 
             <table className='table-default dense'>
               <thead>
                 <tr>
                   <th rowSpan={2}>#</th>
-                  <th rowSpan={2}>{translate('Email')}</th>
-                  <th rowSpan={2}>{translate('Status')}</th>
-                  <th rowSpan={2}>{translate('Clicks')}</th>
-                  <th colSpan={2}>{translate('Bot score')}</th>
+                  <th rowSpan={2}>{T.translate('Email')}</th>
+                  <th rowSpan={2}>{T.translate('Status')}</th>
+                  <th rowSpan={2}>{T.translate('Clicks')}</th>
+                  <th colSpan={2}>{T.translate('Bot score')}</th>
                 </tr>
                 <tr>
-                  <th>{translate('Total')}</th>
-                  <th>{translate('Details')}</th>
+                  <th>{T.translate('Total')}</th>
+                  <th>{T.translate('Details')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -480,12 +459,12 @@ const TabLaunch = ({ formEmail }) => {
                     <td className='text-nowrap'>
                       {item.id_mail > 0 ? <>
                         {item.MAIL?.datetime_sent
-                          ? <div className='badge badge-success'>{translate('Sent')} {item.MAIL?.datetime_sent}</div>
-                          : <div className='badge badge-warning'>{translate('Scheduled')} {item.MAIL?.datetime_scheduled_to_send}</div>
+                          ? <div className='badge badge-success'>{T.translate('Sent')} {item.MAIL?.datetime_sent}</div>
+                          : <div className='badge badge-warning'>{T.translate('Scheduled')} {item.MAIL?.datetime_scheduled_to_send}</div>
                         }
-                      </> : <div className='badge'>{translate('Not scheduled yet')}</div>}
-                      {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>{translate('Unsubscribed')}</div> : null}
-                      {item.STATUS?.is_invalid ? <div className='badge badge-warning'>{translate('Invalid')}</div> : null}
+                      </> : <div className='badge'>{T.translate('Not scheduled yet')}</div>}
+                      {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>{T.translate('Unsubscribed')}</div> : null}
+                      {item.STATUS?.is_invalid ? <div className='badge badge-warning'>{T.translate('Invalid')}</div> : null}
                       {recentlyContacted ? <div className='badge'>
                         Contacted {recentlyContacted.mailSent} in <i>{recentlyContacted.emailName}</i>
                       </div> : null}
@@ -506,13 +485,14 @@ const TabLaunch = ({ formEmail }) => {
                 })}
               </tbody>
             </table>
-          : <div className='alert alert-warning'>{translate('Loading information about recipients and launch status.')}</div>}
+          : <div className='alert alert-warning'>{T.translate('Loading information about recipients and launch status.')}</div>}
         </div>
       </div>
     </div>
   </>;
 }
 
+/** TabClicks */
 const TabClicks = ({ formEmail }) => {
   return <TableEmailClicks
     parentForm={this}
@@ -522,11 +502,7 @@ const TabClicks = ({ formEmail }) => {
   />;
 }
 
-/**
- * FormEmail
- *
- * @var [type]
- */
+/** FormEmail */
 const FormEmail = (props: FormEmailProps) => {
 
   const [testEmailVariables, setTestEmailVariables] = useState([]);
@@ -615,9 +591,9 @@ const FormEmail = (props: FormEmailProps) => {
   };
 
   return <Form
-    componentName='FormEmail'
-    parentApp='Hubleto/App/Community/EmailMarketing'
-    model='Hubleto/App/Community/EmailMarketing/Models/Email'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/Email'}
     urlSlug='email-marketing/emails'
     onTabChange={(form: any) => {
       switch (form.activeTabUid) {
@@ -629,14 +605,14 @@ const FormEmail = (props: FormEmailProps) => {
         break;
       }
     }}
-    title={{field: 'title', sub: translate('Email')}}
+    title={{field: 'title', sub: T.translate('Email')}}
     tabs={{
-      default: { title: <b>{translate('Email')}</b>, content: () => <TabDefault formEmail={formEmail} /> },
-      contacts: { title: translate('Contacts'), content: () => <TabContacts formEmail={formEmail} /> },
-      recipients: { title: translate('Recipients'), content: () => <TabRecipients formEmail={formEmail} /> },
-      test: { title: translate('Test'), content: () => <TabTest formEmail={formEmail} /> },
-      launch: { title: translate('Launch'), content: () => <TabLaunch formEmail={formEmail} /> },
-      clicks: { title: translate('Clicks'), content: () => <TabClicks formEmail={formEmail} /> },
+      default: { title: <b>{T.translate('Email')}</b>, content: () => <TabDefault formEmail={formEmail} /> },
+      contacts: { title: T.translate('Contacts'), content: () => <TabContacts formEmail={formEmail} /> },
+      recipients: { title: T.translate('Recipients'), content: () => <TabRecipients formEmail={formEmail} /> },
+      test: { title: T.translate('Test'), content: () => <TabTest formEmail={formEmail} /> },
+      launch: { title: T.translate('Launch'), content: () => <TabLaunch formEmail={formEmail} /> },
+      clicks: { title: T.translate('Clicks'), content: () => <TabClicks formEmail={formEmail} /> },
     }}
     {...props}
   ></Form>

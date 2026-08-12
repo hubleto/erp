@@ -9,16 +9,15 @@ interface TableRecipientsProps extends TableProps {
   idEmail?: number
 }
 
-
-const translate = new Translator(
-  'Hubleto\\App\\Community\\EmailMarketing\\Loader',
-  'Components\\TableRecipients'
-).translate;
+const componentName = 'TableRecipients';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+const T = new Translator(parentApp + '/Loader', 'Components/TableRecipients');
 
 const TableRecipients = (props: TableRecipientsProps) => {
   return <Table
-    componentName='TableRecipients'
-    model='Hubleto/App/Community/EmailMarketing/Models/Recipient'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/Recipient'}
     endpointParams={{idCampaign: props.idCampaign, idEmail: props.idEmail}}
     formUrlSlug='email-marketing/recipients'
     formModalProps={{type: 'right wide'}}
@@ -32,8 +31,8 @@ const TableRecipients = (props: TableRecipientsProps) => {
         const isUnsubscribed = status[0] == 'unsubscribed';
         const isInvalid = status[1] == 'invalid';
         return <>
-          {isUnsubscribed ? <div className='badge badge-danger'>{translate('Unsubscribed')}</div> : null}
-          {isInvalid ? <div className='badge'>{translate('Invalid')}</div> : null}
+          {isUnsubscribed ? <div className='badge badge-danger'>{T.translate('Unsubscribed')}</div> : null}
+          {isInvalid ? <div className='badge'>{T.translate('Invalid')}</div> : null}
         </>;
       } else return table.renderDefaultCell(columnName, column, data, options);
     }}

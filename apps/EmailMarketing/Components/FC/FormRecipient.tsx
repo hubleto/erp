@@ -8,16 +8,11 @@ import request from '@hubleto/react-ui/core/Request';
 
 export interface FormRecipientProps extends FormProps {}
 
-const translate = new Translator(
-  'Hubleto\\App\\Community\\EmailMarketing\\Loader',
-  'Components\\FormRecipient'
-).translate;
+const componentName = 'FormRecipient';
+const parentApp = 'Hubleto/App/Community/EmailMarketing';
+const T = new Translator(parentApp + '/Loader', 'Components/FormRecipient');
 
-/**
- * TabDefault
- *
- * @var [type]
- */
+/** TabDefault */
 const TabDefault = ({ parent }) => {
   return <div className='w-full flex gap-2'>
     <div className='flex-1 border-r border-gray-100'>
@@ -30,20 +25,20 @@ const TabDefault = ({ parent }) => {
     </div>
     <div className='flex-1 gap-2'>
       <div className='card'>
-        <div className='card-header'>{translate('Mail preview')}</div>
+        <div className='card-header'>{T.translate('Mail preview')}</div>
         <div className='card-body'>
           {parent.mailPreviewInfo && parent.mailPreviewInfo.bodyHtml != '' ? <>
             <div
               dangerouslySetInnerHTML={{__html: parent.mailPreviewInfo.bodyHtml}}
             ></div>
           </> : <div>
-            {translate('No mail preview available.')}
+            {T.translate('No mail preview available.')}
           </div>}
         </div>
       </div>
       {parent.mailPreviewInfo && parent.mailPreviewInfo.scheduledMails && Object.keys(parent.mailPreviewInfo.scheduledMails).length > 0 ? <>
         <div className='card'>
-          <div className='card-header'>{translate('Scheduled emails')}</div>
+          <div className='card-header'>{T.translate('Scheduled emails')}</div>
           <div className='card-body flex flex-col gap-2'>
             {Object.keys(parent.mailPreviewInfo.scheduledMails).map((key) => {
               const schedule = parent.mailPreviewInfo.scheduledMails[key];
@@ -60,11 +55,7 @@ const TabDefault = ({ parent }) => {
   </div>;
 }
 
-/**
- * FormRecipient
- *
- * @var [type]
- */
+/** FormRecipient */
 const FormRecipient = (props: FormRecipientProps) => {
 
   const [mailPreviewInfo, setMailPreviewInfo] = useState(null);
@@ -76,9 +67,9 @@ const FormRecipient = (props: FormRecipientProps) => {
   }
 
   return <Form
-   componentName='FormRecipient'
-    parentApp='Hubleto/App/Community/EmailMarketing'
-    model='Hubleto/App/Community/EmailMarketing/Models/Recipient'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/Recipient'}
     urlSlug='email-marketing/emails/recipients'
     endpointParams={{saveRelations: ['TAGS'] }}
     onAfterFormInitialized={(form: FormMeta) => {
@@ -92,7 +83,7 @@ const FormRecipient = (props: FormRecipientProps) => {
         (result: any) => { setMailPreviewInfo(result); }
       );
     }}
-    title={{field: 'email', sub: translate('Recipient')}}
+    title={{field: 'email', sub: T.translate('Recipient')}}
     tabs={{default: {content: () => <TabDefault parent={myself} />}}}
     {...props}
   ></Form>;

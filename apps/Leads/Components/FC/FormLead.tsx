@@ -13,7 +13,7 @@ import PrintPreviewUi from '@hubleto/react-ui/components/fc/FormComponents/Print
 import TableLeadHistory from '../TableLeadHistory';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
 import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
-import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/TableEmailClicks';
+import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
 
 export interface FormLeadProps extends FormProps {}
 

@@ -5,7 +5,7 @@ namespace Hubleto\App\Community\Documents\Models\RecordManagers;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DocumentVersion extends \Hubleto\Erp\RecordManager
+class Version extends \Hubleto\Erp\RecordManager
 {
   public $table = 'documents_versions';
 

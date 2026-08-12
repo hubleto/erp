@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Documents\Models\Migrations;
 
 use Hubleto\Framework\Migration;
 
-class DocumentVersion_0001 extends Migration
+class Version_0001 extends Migration
 {
 
   public function upgradeSchema(): void

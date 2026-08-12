@@ -227,8 +227,8 @@ class Generator extends \Hubleto\Erp\Core
       /** @var Document */
       $mDocument = $this->getModel(Models\Document::class);
 
-      /** @var DocumentVersion */
-      $mDocumentVersion = $this->getModel(Models\DocumentVersion::class);
+      /** @var Version */
+      $mVersion = $this->getModel(Models\Version::class);
 
       $document = $mDocument->record
         ->where('model', $model)
@@ -245,7 +245,7 @@ class Generator extends \Hubleto\Erp\Core
         ])['id'] ?? 0;
       }
 
-      $version = $mDocumentVersion->record->recordCreate([
+      $version = $mVersion->record->recordCreate([
         'id_document' => $idDocument,
         'name' => $outputFilename,
         'file' => $outputFilename,

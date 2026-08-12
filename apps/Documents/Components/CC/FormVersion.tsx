@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
-import TableReviews from './TableReviews';
+import TableReviews from './FC/TableReviews';
 
 export interface FormDocumentVersionProps extends FormExtendedProps {
 }

@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Documents\Controllers;
 
-class DocumentVersions extends \Hubleto\Erp\Controller
+class Versions extends \Hubleto\Erp\Controller
 {
   public function getBreadcrumbs(): array
   {
@@ -14,7 +14,7 @@ class DocumentVersions extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:Documents/DocumentVersions.twig');
+    $this->setView('@Hubleto:App:Community:Documents/Versions.twig');
   }
 
 }

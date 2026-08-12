@@ -33,8 +33,8 @@ class Loader extends \Hubleto\Erp\App
       '/^documents\/review-results(\/(?<recordId>\d+))?\/?$/' => Controllers\ReviewResults::class,
       '/^documents\/review-results\/add\/?$/' => ['controller' => Controllers\ReviewResults::class, 'vars' => ['recordId' => -1]],
 
-      '/^documents\/versions(\/(?<recordId>\d+))?\/?$/' => Controllers\DocumentVersions::class,
-      '/^documents\/versions\/add\/?$/' => ['controller' => Controllers\DocumentVersions::class, 'vars' => ['recordId' => -1]],
+      '/^documents\/versions(\/(?<recordId>\d+))?\/?$/' => Controllers\Versions::class,
+      '/^documents\/versions\/add\/?$/' => ['controller' => Controllers\Versions::class, 'vars' => ['recordId' => -1]],
 
       '/^documents\/reviews(\/(?<recordId>\d+))?\/?$/' => Controllers\Reviews::class,
       '/^documents\/reviews\/add\/?$/' => ['controller' => Controllers\Reviews::class, 'vars' => ['recordId' => -1]],
@@ -81,7 +81,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\ReviewResult::class)->upgradeSchema();
       $this->getModel(Models\File::class)->upgradeSchema();
       $this->getModel(Models\Document::class)->upgradeSchema();
-      $this->getModel(Models\DocumentVersion::class)->upgradeSchema();
+      $this->getModel(Models\Version::class)->upgradeSchema();
       $this->getModel(Models\Review::class)->upgradeSchema();
       $this->getModel(Models\Template::class)->upgradeSchema();
     }

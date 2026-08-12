@@ -18,7 +18,7 @@ class Review extends \Hubleto\Erp\RecordManager
   /** @return BelongsTo<Customer, covariant BillingAccount> */
   public function VERSION(): BelongsTo
   {
-    return $this->belongsTo(DocumentVersion::class, 'id_version', 'id');
+    return $this->belongsTo(Version::class, 'id_version', 'id');
   }
 
   /** @return BelongsTo<Customer, covariant BillingAccount> */

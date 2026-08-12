@@ -6,8 +6,8 @@ import TableContacts from "../../Contacts/Components/TableContacts";
 import CustomerFormActivity, {CustomerFormActivityProps, CustomerFormActivityState} from "./CustomerFormActivity";
 import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
 import { FormDealState } from "../../Deals/Components/FormDeal";
-import TableDocuments from '@hubleto/apps/Documents/Components/TableDocuments';
-import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FormDocument";
+import TableDocuments from '@hubleto/apps/Documents/Components/FC/TableDocuments';
+import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FC/FormDocument";
 import Calendar from '../../Calendar/Components/Calendar'
 import request from "@hubleto/react-ui/core/Request";
 import { FormProps, FormState } from "@hubleto/react-ui/components/cc/Form";

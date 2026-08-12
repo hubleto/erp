@@ -9,10 +9,10 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\DateTime;
 
-class DocumentVersion extends \Hubleto\Erp\Model
+class Version extends \Hubleto\Erp\Model
 {
   public string $table = 'documents_versions';
-  public string $recordManagerClass = RecordManagers\DocumentVersion::class;
+  public string $recordManagerClass = RecordManagers\Version::class;
   public ?string $lookupSqlValue = '{%TABLE%}.version';
   public ?string $lookupUrlAdd = 'documents/versions/add';
   public ?string $lookupUrlDetail = 'documents/versions/{%ID%}';

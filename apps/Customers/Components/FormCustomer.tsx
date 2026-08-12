@@ -2,12 +2,12 @@ import React, { Component, ChangeEvent } from "react";
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import InputTags2 from "@hubleto/react-ui/components/cc/Inputs/Tags2";
 import FormInput from "@hubleto/react-ui/components/cc/FormInput";
-import TableContacts from "../../Contacts/Components/TableContacts";
+import TableContacts from "../../Contacts/Components/FC/TableContacts";
 import CustomerFormActivity, {CustomerFormActivityProps, CustomerFormActivityState} from "./CustomerFormActivity";
 import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
 import { FormDealState } from "../../Deals/Components/FormDeal";
 import TableDocuments from '@hubleto/apps/Documents/Components/FC/TableDocuments';
-import FormDocument, {FormDocumentProps, FormDocumentState} from "../../Documents/Components/FC/FormDocument";
+import FormDocument, {FormDocumentProps} from "../../Documents/Components/FC/FormDocument";
 import Calendar from '../../Calendar/Components/Calendar'
 import request from "@hubleto/react-ui/core/Request";
 import { FormProps, FormState } from "@hubleto/react-ui/components/cc/Form";

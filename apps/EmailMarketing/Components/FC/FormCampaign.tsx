@@ -34,9 +34,9 @@ const TabDefault = (props: FormCampaignProps) => {
           colorColumn='_LOOKUP_COLOR'
           showSelect={false}
           showTagButtons={true}
-            onChange={(input: any, value: any) => {
-              form.changeField(input, value);
-            }}
+          onChange={(input: any, value: any) => {
+            form.changeField(input, value);
+          }}
           onNewTag={(title: string) => {
             return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
           }}

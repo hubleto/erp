@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
+import TableContacts from '@hubleto/apps/Contacts/Components/FC/TableContacts';
 import TableRecipients from './TableRecipients';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
 import request from '@hubleto/react-ui/core/Request';

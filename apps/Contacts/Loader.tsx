@@ -1,5 +1,5 @@
 import App from '@hubleto/react-ui/core/App'
-import TableContacts from "./Components/TableContacts"
+import TableContacts from "./Components/FC/TableContacts"
 
 class ContactsApp extends App {
   init() {

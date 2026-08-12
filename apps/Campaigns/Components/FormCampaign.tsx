@@ -1,6 +1,6 @@
 import React, { Component, ChangeEvent } from 'react';
 import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
-import TableContacts from '@hubleto/apps/Contacts/Components/TableContacts';
+import TableContacts from '@hubleto/apps/Contacts/Components/FC/TableContacts';
 import TableRecipients from '@hubleto/apps/Campaigns/Components/TableRecipients';
 import TableClicks from '@hubleto/apps/Campaigns/Components/TableClicks';
 import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';

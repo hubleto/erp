@@ -168,6 +168,9 @@ const FormCampaign = (props: FormCampaignProps) => {
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
+    getContentClassName={(form: FormMeta) => {
+      return useRecordField('is_closed') == 1 ? '' : 'bg-gray-200';
+    }}
     title={{field: 'title', sub: T.translate('Campaign')}}
     tabs={tabs}
     {...props}

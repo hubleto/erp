@@ -1,45 +1,50 @@
 import React, { Component } from 'react'
-import Form, { FormProps } from '@hubleto/react-ui/components/fc/Form';
-import Table from '@hubleto/react-ui/components/cc/Table';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Table from '@hubleto/react-ui/components/fc/Table';
+import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Translator from '@hubleto/react-ui/core/Translator';
+import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
+
+const componentName = 'FormTeam';
+const parentApp = 'Hubleto/App/Community/Settings';
+const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
+
+/** TabDefault */
+const TabDefault = (props: FormProps) => {
+  const form = React.useContext(FormMetaContext);
+
+  return <div className='w-full flex gap-2'>
+    <div className="p-4 flex-1 text-center">
+      <i className="fas fa-users text-primary" style={{fontSize: '8em'}}></i>
+    </div>
+    <div className="flex-6">
+      <Input field='name' />
+      <Input field='description' />
+      <Input field='id_manager' />
+      {props.id < 0 ?
+        <div className="badge badge-info">{T.translate('First create team, then you will be prompted to add members.')}</div>
+      :
+        <Table
+          uid='teams_members'
+          model='Hubleto/App/Community/Settings/Models/TeamMember'
+          parentForm={form}
+          endpointParams={{idTeam: props.id}}
+          itemsPerPage={35}
+        ></Table>
+      }
+    </div>
+  </div>;
+}
 
 const FormTeam = (props: FormProps) => {
 
   return <Form
-    {...props}
-    componentName='FormTeam'
-    model='Hubleto/App/Community/Settings/Models/Team'
-    translationContext='Hubleto\\App\\Community\\Settings\\Loader'
-    translationContextInner='Components\\FormTeam'
+    componentName={componentName}
+    model={parentApp + '/Models/Team'}
     urlSlug='settings/teams'
-    renderTitle={(form: any): any => {
-      return <>
-        <small>{form.translate('Team')}</small>
-        <h2>{form.record.name ?? '-'}</h2>
-      </>;
-    }}
-    renderContent={(form: any): React.JSX.Element => {
-      return <div className='w-full flex gap-2'>
-        <div className="p-4 flex-1 text-center">
-          <i className="fas fa-users text-primary" style={{fontSize: '8em'}}></i>
-        </div>
-        <div className="flex-6">
-          {form.renderInputWrapper('name')}
-          {form.renderInputWrapper('description')}
-          {form.renderInputWrapper('id_manager')}
-          {form.renderDivider(form.translate('Team members'))}
-          {form.id < 0 ?
-            <div className="badge badge-info">{form.translate('First create team, then you will be prompted to add members.')}</div>
-          :
-            <Table
-              uid='teams_members'
-              model='Hubleto/App/Community/Settings/Models/TeamMember'
-              customEndpointParams={{idTeam: form.id}}
-              itemsPerPage={35}
-            ></Table>
-          }
-        </div>
-      </div>;
-    }}
+    title={{field: 'name', sub: T.translate('Team')}}
+    tabs={{default: {content: () => <TabDefault {...props} />}}}
+    {...props}
   ></Form>;
 };
 

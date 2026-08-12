@@ -38,7 +38,7 @@ const FormActivity = (props: FormActivityProps) => {
     urlSlug='worksheets'
     endpointParams={{}}
     onAfterFormInitialized={(form: any) => {}}
-    title={{field: 'id', sub: T.translate('Activity')}}
+    title={{field: 'description', sub: T.translate('Activity')}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

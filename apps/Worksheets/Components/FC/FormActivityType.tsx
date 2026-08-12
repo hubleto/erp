@@ -24,8 +24,6 @@ const FormActivityType = (props: FormActivityTypeProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/ActivityType'}
     urlSlug='worksheet/activity-types'
-    endpointParams={{}}
-    onAfterFormInitialized={(form: any) => {}}
     title={{field: 'name', sub: T.translate('Activity type')}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}

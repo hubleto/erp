@@ -8,6 +8,7 @@ import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Divider from '@hubleto/react-ui/components/fc/FormComponents/Divider';
 import { FormMetaContext, FormDescriptionContext } from '@hubleto/react-ui/components/fc/Form';
 import { useRecordField, FormRecordStoreContext } from '@hubleto/react-ui/components/fc/FormRecordStore';
+import Modal from '@hubleto/react-ui/components/fc/Modal';
 
 export interface FormActivityProps extends FormProps {
   renderCustomInputs?: (form: typeof FormMetaContext) => React.JSX.Element,
@@ -90,8 +91,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
     <div className='flex gap-2'>
       {customInputs ? <div className="grow p-2 mb-2 bg-blue-50 dark:bg-gray-900/50 rounded">{customInputs}</div> : null}
       <div className='flex gap-2 flex-col'>
-        <div className='w-full'><Input field='completed'></Input></div>
-        <div className='w-full'><Input field='id_owner'></Input></div>
+        <div className='w-full'><Input field='completed' customInputProps={{yesText: T.translate('Completed')}}></Input></div>
       </div>
     </div>
 
@@ -106,7 +106,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
         <Input field='description'></Input>
       </div>
     </div>
-    <Input field='all_day' debug></Input>
+    <Input field='all_day' customInputProps={{yesText: T.translate('All-day')}}></Input>
     <div className='flex gap-2 w-full flex-col md:flex-row'>
       <div className='w-1/2'>
         <Divider>{T.translate('Start - End','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>
@@ -216,7 +216,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 const FormActivity = (props: FormActivityProps) => {
   return <Form
     model='Hubleto/App/Community/Calendar/Models/Activity'
-    title={{sub: props.activitySource ?? 'Event', field: 'subject'}}
+    title={{sub: props.activitySource ? 'Activity for ' + props.activitySource : 'Event', field: 'subject'}}
     {...props}
   >
     <Content {...props}/>

@@ -41,7 +41,7 @@ class Activity extends \Hubleto\Erp\Model
       'completed' => (new Boolean($this, $this->translate('Completed')))->setDefaultValue(0),
       'meeting_minutes_link' => (new Varchar($this, $this->translate('Long meeting minutes (link to external document)')))->setReactComponent('InputHyperlink'),
       'meeting_minutes' => (new Text($this, $this->translate('Short meeting minutes')))->setReactComponent('InputWysiwyg'),
-      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
     ]);
   }
 }

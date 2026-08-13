@@ -1,9 +1,9 @@
 import App from '@hubleto/react-ui/core/App'
-import TableFiles from "./Components/TableFiles"
+import TableFiles from "./Components/FC/TableFiles"
 import TableDocuments from "./Components/FC/TableDocuments"
 import TableVersions from "./Components/FC/TableVersions"
 import TableReviews from "./Components/FC/TableReviews"
-import TableTemplates from "./Components/TableTemplates"
+import TableTemplates from "./Components/FC/TableTemplates"
 import FileBrowser from "./Components/FileBrowser"
 
 class DocumentsApp extends App {

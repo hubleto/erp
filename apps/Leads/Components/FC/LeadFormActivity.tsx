@@ -24,7 +24,7 @@ const LeadFormActivityCustomInputs = (props: LeadFormActivityProps) => {
   ).translate;
 
   return <>
-    <Input field='id_lead' customInputProperties={{ readonly: id > 0 }}></Input>
+    <Input field='id_lead' customInputProps={{ readonly: id > 0 }}></Input>
     <Input field='id_contact' title={translate("Contact")}>
       <Lookup
         model='Hubleto/App/Community/Contacts/Models/Contact'

@@ -45,11 +45,8 @@ const Title = (props: FormActivityProps): React.JSX.Element => <>
 </>;
 
 const Content = (props: FormActivityProps): React.JSX.Element => {
-  const { renderCustomInputs, activitySource } = props;
   const R = React.useContext(FormRecordStoreContext).getRecord();
   const form = React.useContext(FormMetaContext);
-
-  const description = React.useContext(FormDescriptionContext);
   const customInputs = props.renderCustomInputs(form) ?? null;
 
   let recurrence: Recurrence = {
@@ -89,9 +86,10 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 
   return <>
     <div className='flex gap-2'>
-      {customInputs ? <div className="grow p-2 mb-2 bg-blue-50 dark:bg-gray-900/50 rounded">{customInputs}</div> : null}
+      {customInputs ? <div className="grow">{customInputs}</div> : null}
       <div className='flex gap-2 flex-col'>
         <div className='w-full'><Input field='completed' customInputProps={{yesText: T.translate('Completed')}}></Input></div>
+        <Input field='id_owner'></Input>
       </div>
     </div>
 
@@ -110,19 +108,19 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
     <div className='flex gap-2 w-full flex-col md:flex-row'>
       <div className='w-1/2'>
         <Divider>{T.translate('Start - End','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>
-        <Input renderOnlyInput name='date_start' customInputProperties={{
+        <Input renderOnlyInput field='date_start' customInputProps={{
           onChange: (input: any, value: any) => {
             form.changeRecord({date_end: moment(value).add(daysDuration, 'days').format('YYYY-MM-DD')})
           }
         }}></Input>
-        {R.all_day ? null : <Input renderOnlyInput name='time_start' customInputProperties={{
+        {R.all_day ? null : <Input renderOnlyInput field='time_start' customInputProps={{
           onChange: (input: any, value: any) => {
             form.changeRecord({time_end: moment(R.date_end + ' ' + value + ':00').add(minutesDuration, 'minutes').format('HH:mm:ss')})
           }
         }}></Input>}
 
-        <Input renderOnlyInput name='date_end' />
-        {R.all_day ? null : <Input renderOnlyInput name='time_end' />}
+        <Input renderOnlyInput field='date_end' />
+        {R.all_day ? null : <Input renderOnlyInput field='time_end' />}
 
         <div className="mt-2 alert alert-info">
           {T.translate('Duration','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}: {daysDuration > 0 && daysDuration + " " + T.translate('day(s)','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(daysDuration > 0 && (hoursDuration > 0 || minutesDuration > 0)) && ", "}{ hoursDuration > 0 && hoursDuration + " " + T.translate('hours','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}{(hoursDuration > 0 && minutesDuration > 0) && ", "}{ minutesDuration > 0 && minutesDuration + " " + T.translate('minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}

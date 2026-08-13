@@ -119,6 +119,9 @@ const TabDefault = (props: FormLeadProps) => {
  * @var [type]
  */
 const TabCalendar = () => <CalendarTab
+  calendarSource='leads'
+  externalIdColumn='idLead'
+  logActivityEndpoint='leads/api/log-activity'
   renderActivityForm={(calendarTab: any) => {
     const R = useRecord();
     const id = R.id;
@@ -263,14 +266,11 @@ const TabTimeline = (props: FormLeadProps) => {
  */
 const FormLead = (props: FormLeadProps) => {
   return <Form
-    {...props}
     componentName='FormTeam'
     parentApp='Hubleto/App/Community/Leads'
     model='Hubleto/App/Community/Leads/Models/Lead'
     urlSlug='leads'
     endpointParams={{saveRelations: ['TAGS'] }}
-    showWorkflowUi={true}
-    showOwnerManagerUi={true}
     onAfterFormInitialized={(form: any) => {
       form.setReadonly(form.recordStore.getField('is_closed') == 1);
     }}
@@ -283,6 +283,7 @@ const FormLead = (props: FormLeadProps) => {
       timeline: { icon: 'fas fa-timeline', position: 'right', content: () => <TabTimeline {...props} /> },
     }}
     title={{field: 'title', sub: T.translate('Lead')}}
+    {...props}
   ></Form>;
 }
 

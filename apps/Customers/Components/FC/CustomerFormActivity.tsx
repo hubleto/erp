@@ -20,7 +20,7 @@ const CustomerFormActivity = (props: CustomerFormActivityProps) => {
     activitySource='Customer'
     renderCustomInputs={(form: typeof FormMetaContext): React.JSX.Element => {
       return <>
-        <Input field='id_customer' customInputProperties={{ readonly: props.id > 0 }}></Input>
+        <Input field='id_customer' customInputProps={{ readonly: props.id > 0 }}></Input>
       </>;
     }}
     {...props}

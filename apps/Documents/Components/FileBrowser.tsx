@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
 import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
 import Form, { FormProps } from '@hubleto/react-ui/components/cc/Form';
-import FormFile from './FormFile';
+import FormFile from './FC/FormFile';
 import Spinner from '@hubleto/react-ui/components/cc/Spinner';
 import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
 import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';

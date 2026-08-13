@@ -34,7 +34,7 @@ class DealsApp extends App {
       },
     });
 
-    FormCustomizer.addFormHeaderButton(
+    FormCustomizer.addFormHeaderExtraButton(
       'FormLead',
       globalThis.hubleto.translate('Create deal', 'Hubleto\\App\\Community\\Deals\\Loader', 'manifest'),
       '',

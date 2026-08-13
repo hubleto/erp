@@ -20,8 +20,8 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^mail\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Home::class,
-      '/^mail\/?(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Home::class,
+      '/^mail\/?(?<idAccount>\d+)?\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Mails::class,
+      '/^mail\/?(?<idAccount>\d+)?\/?(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Mails::class,
 
       '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
       '/^mail\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
@@ -31,9 +31,6 @@ class Loader extends \Hubleto\Erp\App
       '/^mail\/sent\/?$/' => Controllers\Sent::class,
       '/^mail\/get\/?$/' => Controllers\Get::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
-      // '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
-      // '/^mail\/mails\/add\/?$/' => ['controller' => Controllers\Mails::class, 'vars' => ['recordId' => -1]],
-      // '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
 
       '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,
       '/^mail\/templates\/add\/?$/' => ['controller' => Controllers\Templates::class, 'vars' => ['recordId' => -1]],

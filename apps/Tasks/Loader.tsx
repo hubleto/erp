@@ -1,8 +1,8 @@
 import App from '@hubleto/react-ui/core/App'
 import TableTasks from './Components/TableTasks'
 import TableTodos from './Components/TableTodos'
-import FormMail from '@hubleto/apps/Mail/Components/FormMail';
 import request from "@hubleto/react-ui/core/Request";
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 
 class Tasks extends App {
   init() {
@@ -12,7 +12,8 @@ class Tasks extends App {
     globalThis.hubleto.registerReactComponent('TasksTableTasks', TableTasks);
     globalThis.hubleto.registerReactComponent('TasksTableTodos', TableTodos);
 
-    FormMail.addFormFooterButton(
+    FormCustomizer.addFormFooterExtraButton(
+      'FormMail',
       'Create task',
       'fas fas fa-list-check',
       (form: any) => {

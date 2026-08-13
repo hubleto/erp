@@ -1,0 +1,40 @@
+<?php
+
+namespace Hubleto\App\Community\Dashboards\Controllers;
+
+class Dashboard extends \Hubleto\Erp\Controller
+{
+  public function getBreadcrumbs(): array
+  {
+    $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
+    if (!empty($dashboardSlug)) {
+      return array_merge(parent::getBreadcrumbs(), [
+        [ 'url' => 'dashboards/' . $dashboardSlug, 'content' => $this->translate('Manage') ],
+      ]);
+    } else {
+      return array_merge(parent::getBreadcrumbs(), []);
+    }
+  }
+
+  public function prepareView(): void
+  {
+    parent::prepareView();
+
+    $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
+
+    $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
+
+    $dashboards = $mDashboard->record->prepareReadQuery()
+      ->where('id_owner', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+      ->with('PANELS')
+      ->get()
+      ?->toArray();
+    ;
+
+    $this->viewParams['dashboards'] = $dashboards;
+    $this->viewParams['dashboardSlug'] = $dashboardSlug;
+
+    $this->setView('@Hubleto:App:Community:Dashboards/Dashboard.twig');
+  }
+
+}

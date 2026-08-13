@@ -19,18 +19,10 @@ class Loader extends \Hubleto\Erp\App
       '/^dashboards\/api\/sort-panels\/?$/' => Controllers\Api\SortPanels::class,
       '/^dashboards\/api\/set-panel-width\/?$/' => Controllers\Api\SetPanelWidth::class,
 
-      '/^dashboards(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboards::class,
-      '/^dashboards\/manage?\/?$/' => Controllers\DashboardsManage::class,
+      '/^dashboards\/~(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboard::class,
+      '/^dashboards(\/(?<recordId>\d+))?\/?$/' => Controllers\Dashboards::class,
+      '/^dashboards\/add\/?$/' => ['controller' => Controllers\Dashboards::class, 'vars' => ['recordId' => -1]],
     ]);
-
-    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    // $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    // $settingsApp->addSetting($this, [
-    //   'title' => $this->translate('Dashboards'),
-    //   'icon' => 'fas fa-table',
-    //   'url' => 'dashboards/manage',
-    // ]);
-
   }
 
   /**

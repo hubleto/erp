@@ -3,8 +3,8 @@ import request from "@hubleto/react-ui/core/Request";
 import Spinner from '@hubleto/react-ui/components/cc/Spinner';
 import TranslatedComponent from "@hubleto/react-ui/components/cc/TranslatedComponent";
 import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
-import FormPanel from "./FormPanel";
-import FormDashboard from './FormDashboard';
+import FormPanel from "./FC/FormPanel";
+import FormDashboard from './FC/FormDashboard';
 import * as uuid from 'uuid';
 
 export interface Panel {

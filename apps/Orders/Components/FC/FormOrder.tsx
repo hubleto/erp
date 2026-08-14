@@ -451,15 +451,6 @@ const FormOrder = (props: FormOrderProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Order'}
     urlSlug='orders'
-    endpointParams={{}}
-    getContentClassName={(form: FormMeta) => {
-      const isClosed = useRecordField('is_closed');
-      return isClosed ? 'bg-slate-100' : '';
-    }}
-    onAfterFormInitialized={(form: FormMeta) => {
-      const isClosed = useRecordField('is_closed');
-      form.setReadonly(isClosed == 1);
-    }}
     title={{fields: ['identifier', 'title'], sub: T.translate('Order')}}
     tabs={{
       default: {title: <b>{T.translate('Order')}</b>, content: () => <TabDefault {...props} />},

@@ -1,10 +1,8 @@
 import React from 'react';
 import App from '@hubleto/react-ui/core/App'
-import TableProjects from "./Components/TableProjects"
-import TableMilestones from './Components/TableMilestones'
-import ProjectsFormActivity from './Components/ProjectsFormActivity'
+import TableProjects from "./Components/FC/TableProjects"
+import TableMilestones from './Components/FC/TableMilestones'
 import request from "@hubleto/react-ui/core/Request";
-import FormOrder from '@hubleto/apps/Orders/Components/FC/FormOrder';
 import FormTask from '@hubleto/apps/Tasks/Components/FormTask';
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 class ProjectsApp extends App {
@@ -14,7 +12,6 @@ class ProjectsApp extends App {
     // register react components
     globalThis.hubleto.registerReactComponent('ProjectsTableProjects', TableProjects);
     globalThis.hubleto.registerReactComponent('ProjectsTableMilestones', TableMilestones);
-    globalThis.hubleto.registerReactComponent('ProjectsFormActivity', ProjectsFormActivity);
 
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addCustomFormTab({

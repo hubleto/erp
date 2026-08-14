@@ -78,7 +78,7 @@ class Project extends \Hubleto\Erp\Model
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
       'online_documentation_folder' => (new Varchar($this, $this->translate('Online documentation folder')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),

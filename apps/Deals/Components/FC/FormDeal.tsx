@@ -349,14 +349,6 @@ const FormDeal = (props: FormDealProps) => {
     model={parentApp + '/Models/Deal'}
     urlSlug='deals'
     endpointParams={{}}
-    getContentClassName={(form: FormMeta) => {
-      const isClosed = useRecordField('is_closed');
-      return isClosed ? 'bg-slate-100' : '';
-    }}
-    onAfterFormInitialized={(form: any) => {
-      const isClosed = useRecordField('is_closed');
-      form.setReadonly(isClosed == 1);
-    }}
     title={{fields: ['identifier', 'title'], sub: T.translate('Deal')}}
     tabs={{
       default: {title: <b>{T.translate('Deal')}</b>, content: () => <TabDefault {...props} />},

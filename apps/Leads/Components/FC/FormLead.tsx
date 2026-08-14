@@ -235,14 +235,6 @@ const FormLead = (props: FormLeadProps) => {
     model='Hubleto/App/Community/Leads/Models/Lead'
     urlSlug='leads'
     endpointParams={{saveRelations: ['TAGS'] }}
-    getContentClassName={(form: FormMeta) => {
-      const isClosed = useRecordField('is_closed');
-      return isClosed ? 'bg-slate-100' : '';
-    }}
-    onAfterFormInitialized={(form: FormMeta) => {
-      const isClosed = useRecordField('is_closed');
-      form.setReadonly(isClosed == 1);
-    }}
     tabs={{
       default: { title: <b>{T.translate('Lead')}</b>, content: () => <TabDefault {...props} /> },
       calendar: { title: T.translate('Calendar'), content: () => <TabCalendar /> },

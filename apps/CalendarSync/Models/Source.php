@@ -17,7 +17,7 @@ class Source extends \Hubleto\Erp\Model
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'link' => (new Varchar($this, $this->translate('Calendar ID')))->setRequired(),
       'type' => (new Varchar($this, $this->translate('Type')))->setRequired()->setEnumValues(['google' => $this->translate('Google Calendar'), 'ics' => $this->translate('.ics Url')]),
-      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired(),
       'active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(true),
     ]);
   }

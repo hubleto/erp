@@ -1,7 +1,7 @@
 import App from '@hubleto/react-ui/core/App'
-import TableKeys from './Components/TableKeys'
-import TablePermissions from './Components/TablePermissions'
-import TableUsages from './Components/TableUsages'
+import TableKeys from './Components/FC/TableKeys'
+import TablePermissions from './Components/FC/TablePermissions'
+import TableUsages from './Components/FC/TableUsages'
 
 class ApiApp extends App {
   init() {

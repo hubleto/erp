@@ -1,3 +1,3 @@
-import TableAuditLogs from "./Components/TableAuditLogs"
+import TableAuditLogs from "./Components/FC/TableAuditLogs"
 
 globalThis.hubleto.registerReactComponent('AuditLogsTableAuditLogs', TableAuditLogs);

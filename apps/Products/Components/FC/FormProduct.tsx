@@ -1,101 +1,103 @@
 import React, { Component } from 'react'
-import Form, { FormProps } from '@hubleto/react-ui/components/fc/Form';
-import TableProductSuppliers from '../TableProductSuppliers';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import TableProductSuppliers from './TableProductSuppliers';
 import Barcode from 'react-barcode';
+import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Translator from '@hubleto/react-ui/core/Translator';
+import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
+import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
+
+const componentName = 'FormProduct'; // must be the same as the exported const
+const parentApp = 'Hubleto/App/Community/Products';
+const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
+
+/** TabDefault */
+const TabDefault = (props: FormProps) => {
+  const ean = useRecordField('ean');
+
+  return <div className='grid grid-cols-2 gap-2'>
+    <div className='border-r border-gray-200'>
+      <div className='flex gap-2'>
+        <div className='flex grow'><Input field='ean' /></div>
+        <div className='flex grow'><Barcode value={ean} height={30} /></div>
+      </div>
+      <Input field='name' customInputProps={{cssClass: 'text-2xl'}} />
+      <Input field='is_on_sale' customInputProps={{yesText: 'On sale'}} />
+      <Input field='sales_price' />
+      <Input field='id_group' />
+      <Input field='id_category' />
+      <Input field='vat' />
+      <Input field='margin' />
+      <Input field='unit' />
+      <Input field='description' />
+      <Input field='is_single_order_possible' customInputProps={{yesText: 'Single unit order possible'}} />
+      <Input field='show_price' customInputProps={{yesText: 'Show price to customer'}} />
+      <Input field='needs_reordering' customInputProps={{yesText: 'Needs reordering'}} />
+    </div>
+    <div className=''>
+      <Input field='type' />
+      <Input field='invoicing_policy' />
+      <Input field='sale_ended' />
+      <Input field='price_after_reweight' />
+      <Input field='storage_rules' />
+    </div>
+  </div>;
+}
+
+/** TabPackaging */
+const TabPackaging = (props: FormProps) => {
+  return <>
+    <Input field='package_unit' />
+    <Input field='package_amount' />
+    <Input field='package_length' />
+    <Input field='package_width' />
+    <Input field='package_height' />
+    <Input field='package_volume' />
+    <Input field='package_mass' />
+    <Input field='package_discount' />
+    <Input field='package_description' />
+  </>;
+}
+
+/** TabGallery */
+const TabGallery = (props: FormProps) => {
+  return <>
+    <Input field='image_1' />
+    <Input field='image_2' />
+    <Input field='image_3' />
+    <Input field='image_4' />
+    <Input field='image_5' />
+  </>;
+}
+
+/** TabSuppliers */
+const TabSuppliers = (props: FormProps) => {
+  const form = React.useContext(FormMetaContext);
+  
+  return (props.id < 0 ?
+    <div className="badge badge-info">{T.translate("First create the product.")}</div>
+  :
+    <TableProductSuppliers
+      uid={props.uid + "_table_suppliers"}
+      tag="ProductSuppliers"
+      parentForm={form}
+      idProduct={props.id}
+    />
+  );
+}
 
 const FormProduct = (props: FormProps) => {
   return <Form
-    componentName='FormProduct'
-    parentApp='Hubleto/App/Community/Products'
-    model='Hubleto/App/Community/Products/Models/Product'
-    translationContext='Hubleto\\App\\Community\\Products\\Loader'
-    translationContextInner='Components\\FormProduct'
+    componentName={componentName}
+    parentApp={parentApp}
+    model={parentApp + '/Models/Product'}
     urlSlug='products'
-    getTabs={(form: any) => {
-      return [
-        { uid: 'default', title: <b>{form.translate('Product')}</b> },
-        { uid: 'packaging', title: form.translate('Packaging') },
-        { uid: 'gallery', title: form.translate('Gallery') },
-        { uid: 'suppliers', title: form.translate('Suppliers') },
-        ...form.getCustomTabs(),
-      ];
-    }}
-    renderTitle={(form: any): React.JSX.Element => {
-      return <>
-        <small>{form.translate('Product')}</small>
-        <h2>{form.record.ean ?? '-'} {form.record.name ?? '-'}</h2>
-      </>;
-    }}
-    renderTab={(form: any): React.JSX.Element => {
-      const R = form.record;
-
-      switch (form.activeTabUid) {
-        case 'default':
-          return <>
-            <div className='grid grid-cols-2 gap-2'>
-              <div className='border-r border-gray-200'>
-                <div className='flex gap-2'>
-                  <div className='flex grow'>{form.renderInputWrapper('ean')}</div>
-                  <div className='flex grow'><Barcode value={R.ean} height={30} /></div>
-                </div>
-                {form.renderInputWrapper('name', {cssClass: 'text-2xl'})}
-                {form.renderInputWrapper('is_on_sale')}
-                {form.renderInputWrapper('sales_price')}
-                {form.renderInputWrapper('id_group')}
-                {form.renderInputWrapper('id_category')}
-                {form.renderInputWrapper('vat')}
-                {form.renderInputWrapper('margin')}
-                {form.renderInputWrapper('unit')}
-                {form.renderInputWrapper('description')}
-                {form.renderInputWrapper('is_single_order_possible')}
-                {form.renderInputWrapper('show_price')}
-                {form.renderInputWrapper('needs_reordering')}
-              </div>
-              <div className=''>
-                {form.renderInputWrapper('type')}
-                {form.renderInputWrapper('invoicing_policy')}
-                {form.renderInputWrapper('sale_ended')}
-                {form.renderInputWrapper('price_after_reweight')}
-                {form.renderInputWrapper('storage_rules')}
-              </div>
-            </div>
-          </>;
-        break;
-        case 'packaging':
-          return <>
-            {form.renderInputWrapper('package_unit')}
-            {form.renderInputWrapper('package_amount')}
-            {form.renderInputWrapper('package_length')}
-            {form.renderInputWrapper('package_width')}
-            {form.renderInputWrapper('package_height')}
-            {form.renderInputWrapper('package_volume')}
-            {form.renderInputWrapper('package_mass')}
-            {form.renderInputWrapper('package_discount')}
-            {form.renderInputWrapper('package_description')}
-          </>;
-        break;
-        case 'gallery':
-          return <>
-            {form.renderInputWrapper('image_1')}
-            {form.renderInputWrapper('image_2')}
-            {form.renderInputWrapper('image_3')}
-            {form.renderInputWrapper('image_4')}
-            {form.renderInputWrapper('image_5')}
-          </>;
-        break;
-        case 'suppliers':
-          return (form.id < 0 ?
-            <div className="badge badge-info">{form.translate("First create the product.")}</div>
-          :
-            <TableProductSuppliers
-              uid={form.uid + "_table_suppliers"}
-              tag="ProductSuppliers"
-              parentForm={this}
-              idProduct={R.id}
-            />
-          );
-        break;
-      }
+    title={{fields: ['ean', 'name'], sub: T.translate('Product')}}
+    tabs={{
+      default: {title: <b>{T.translate('Product')}</b>, content: () => <TabDefault {...props} />},
+      packaging: {title: T.translate('Packaging'), content: () => <TabPackaging {...props} />},
+      gallery: {title: T.translate('Gallery'), content: () => <TabGallery {...props} />},
+      suppliers: {title: T.translate('Suppliers'), content: () => <TabSuppliers {...props} />},
     }}
     {...props}
   />;

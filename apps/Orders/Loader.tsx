@@ -1,11 +1,10 @@
 import React from 'react';
 import App from '@hubleto/react-ui/core/App'
 import request from "@hubleto/react-ui/core/Request";
-import TableOrders from "./Components/TableOrders";
-import OrdersFormActivity from "./Components/OrdersFormActivity"
-import TableItems from "./Components/TableItems"
-import TableQuotes from './Components/TableQuotes';
-import FormDeal from '@hubleto/apps/Deals/Components/FormDeal';
+import TableOrders from "./Components/FC/TableOrders";
+import TableItems from "./Components/FC/TableItems"
+import TableQuotes from './Components/FC/TableQuotes';
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 
 class OrdersApp extends App {
   init() {
@@ -13,7 +12,6 @@ class OrdersApp extends App {
 
     // register react components
     globalThis.hubleto.registerReactComponent('OrdersTableOrders', TableOrders);
-    globalThis.hubleto.registerReactComponent('OrdersFormActivity', OrdersFormActivity);
     globalThis.hubleto.registerReactComponent('OrdersTableItems', TableItems);
     globalThis.hubleto.registerReactComponent('OrdersTableQuotes', TableQuotes);
 
@@ -38,7 +36,8 @@ class OrdersApp extends App {
       },
     });
 
-    FormDeal.addFormHeaderButton(
+    FormCustomizer.addFormHeaderExtraButton(
+      'FormDeal',
       globalThis.hubleto.translate('Create order', 'Hubleto\\App\\Community\\Orders\\Loader', 'manifest'),
       '',
       (form: any) => {

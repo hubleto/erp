@@ -1,8 +1,8 @@
 import React from 'react';
 import App from '@hubleto/react-ui/core/App'
-import TableCategories from "./Components/TableCategories";
-import TableGroups from "./Components/TableGroups";
-import TableProducts from "./Components/TableProducts";
+import TableCategories from "./Components/FC/TableCategories";
+import TableGroups from "./Components/FC/TableGroups";
+import TableProducts from "./Components/FC/TableProducts";
 
 class ProductsApp extends App {
   init() {

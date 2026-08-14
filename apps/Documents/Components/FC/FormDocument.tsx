@@ -1,7 +1,7 @@
 import React from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import Form from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 
 import TableVersions from './TableVersions';
@@ -15,6 +15,8 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 /** TabDefault */
 const TabDefault = (props: FormDocumentProps) => {
+  const form = React.useContext(FormMetaContext);
+
   return <div className='flex gap-2'>
     <div className='flex-2'>
       <Input field='uid' customInputProps={{readonly: true}} />
@@ -32,7 +34,7 @@ const TabDefault = (props: FormDocumentProps) => {
         <div className='card-body'>
           <TableVersions
             tag={"table_documents_versions"}
-            parentForm={this}
+            parentForm={form}
             readonly={true}
             uid={props.uid + "_table_documents_versions"}
             idDocument={props.id}
@@ -43,7 +45,7 @@ const TabDefault = (props: FormDocumentProps) => {
     <div className='flex-1'>
       <TableReviews
         tag={"table_documents_reviews"}
-        parentForm={this}
+        parentForm={form}
         uid={props.uid + "_table_documents_reviews"}
         idDocument={props.id}
       />

@@ -89,7 +89,7 @@ const TabDefault = (props: FormCustomerProps) => {
       {props.id > 0 ? <div>
         <TableContacts
           uid={props.uid + "_table_contacts"}
-          parentForm={this}
+          parentForm={form}
           showAsCards={true}
           idCustomer={props.id}
         ></TableContacts>

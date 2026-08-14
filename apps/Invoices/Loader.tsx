@@ -4,7 +4,7 @@ import TableProfiles from "./Components/TableProfiles"
 import TableInvoices from "./Components/TableInvoices"
 import TableItems from "./Components/TableItems"
 import TablePayments from "./Components/TablePayments"
-import FormOrder from '@hubleto/apps/Orders/Components/FormOrder';
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 
 class InvoicesApp extends App {
   init() {
@@ -16,7 +16,8 @@ class InvoicesApp extends App {
     globalThis.hubleto.registerReactComponent('InvoicesTableItems', TableItems);
     globalThis.hubleto.registerReactComponent('InvoicesTablePayments', TablePayments);
 
-    FormOrder.addFormHeaderButton(
+    FormCustomizer.addFormHeaderExtraButton(
+      'FormOrder',
       globalThis.hubleto.translate('Create invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'manifest'),
       '',
       (form: any) => {

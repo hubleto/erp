@@ -55,7 +55,7 @@ const TabContacts = ({ formEmail }) => {
     </div>
     <TableContacts
       tag={"table_email_contact"}
-      parentForm={this}
+      parentForm={form}
       uid={formEmail.props.uid + "_table_email_contact"}
       selectionMode='multiple'
       readonly={true}
@@ -494,8 +494,10 @@ const TabLaunch = ({ formEmail }) => {
 
 /** TabClicks */
 const TabClicks = ({ formEmail }) => {
+  const form = React.useContext(FormMetaContext);
+
   return <TableEmailClicks
-    parentForm={this}
+    parentForm={form}
     tag="table_email_click"
     uid={formEmail.uid + "_table_email_click"}
     idEmail={formEmail.props.id}

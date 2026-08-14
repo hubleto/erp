@@ -4,8 +4,9 @@ import TableProjects from "./Components/TableProjects"
 import TableMilestones from './Components/TableMilestones'
 import ProjectsFormActivity from './Components/ProjectsFormActivity'
 import request from "@hubleto/react-ui/core/Request";
-import FormOrder from '@hubleto/apps/Orders/Components/FormOrder';
+import FormOrder from '@hubleto/apps/Orders/Components/FC/FormOrder';
 import FormTask from '@hubleto/apps/Tasks/Components/FormTask';
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 class ProjectsApp extends App {
   init() {
     super.init();
@@ -36,7 +37,8 @@ class ProjectsApp extends App {
       },
     });
 
-    FormOrder.addFormHeaderButton(
+    FormCustomizer.addFormHeaderExtraButton(
+      'FormOrder',
       globalThis.hubleto.translate('Create project', 'Hubleto\\App\\Community\\Projects\\Loader', 'manifest'),
       '',
       (form: any) => {

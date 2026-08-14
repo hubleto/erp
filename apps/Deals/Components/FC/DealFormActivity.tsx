@@ -6,25 +6,25 @@ import Translator from "@hubleto/react-ui/core/Translator";
 import { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
-export interface LeadFormActivityProps extends FormProps {
+export interface DealFormActivityProps extends FormProps {
   form?: any,
   id?: number,
   idCustomer?: number,
   idContact?: number,
-  idLead?: number,
+  idDeal?: number,
   showIdActivity?: number,
 }
 
 const T = new Translator(
-  'HubletoApp\\Community\\Leads\\Loader',
-  'Components\\LeadFormActivity'
+  'HubletoApp\\Community\\Deals\\Loader',
+  'Components\\DealFormActivity'
 );
 
-const LeadFormActivityCustomInputs = (props: LeadFormActivityProps) => {
-  const { form, id, idCustomer, idContact, idLead } = props;
+const DealFormActivityCustomInputs = (props: DealFormActivityProps) => {
+  const { form, id, idCustomer, idContact, idDeal } = props;
 
   return <>
-    <Input field='id_lead' customInputProps={{ readonly: id > 0 }}></Input>
+    <Input field='id_deal' customInputProps={{ readonly: id > 0 }}></Input>
     <Input field='id_contact' title={T.translate("Contact")}>
       <Lookup
         model='Hubleto/App/Community/Contacts/Models/Contact'
@@ -43,24 +43,24 @@ const LeadFormActivityCustomInputs = (props: LeadFormActivityProps) => {
   </>;
 };
 
-const LeadFormActivity = (props: LeadFormActivityProps) => {
-  const { form, id, idCustomer, idContact, idLead } = props;
+const DealFormActivity = (props: DealFormActivityProps) => {
+  const { form, id, idCustomer, idContact, idDeal } = props;
 
   return <FormActivity
     id={id}
-    model='Hubleto/App/Community/Leads/Models/LeadActivity'
-    activitySource='Lead'
+    model='Hubleto/App/Community/Deals/Models/DealActivity'
+    activitySource='Deal'
     renderCustomInputs={(form: typeof FormMetaContext): React.JSX.Element => {
-      return <LeadFormActivityCustomInputs
+      return <DealFormActivityCustomInputs
         form={form}
         id={id}
         idCustomer={idCustomer}
         idContact={idContact}
-        idLead={idLead}
+        idDeal={idDeal}
       />;
     }}
     {...props}
   ></FormActivity>;
 }
 
-export default LeadFormActivity;
+export default DealFormActivity;

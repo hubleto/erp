@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Translator from "@hubleto/react-ui/core/Translator";
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
-import { useRecord } from '@hubleto/react-ui/components/fc/FormRecordStore';
+import { useRecord, useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
@@ -21,11 +21,7 @@ const T = new Translator(
   'Components\\FormLead'
 );
 
-/**
- * TabDefault
- *
- * @var [type]
- */
+/** TabDefault */
 const TabDefault = (props: FormLeadProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
   const R = useRecord();
@@ -49,90 +45,82 @@ const TabDefault = (props: FormLeadProps) => {
     });
   }
 
-  return <>
-    <div className='card card-body flex flex-col gap-2 md:flex-row'>
-      <div className='grow'>
-        <Input field='title' customInputProps={{cssClass: 'text-2xl'}} />
-        <Input field='email' />
-        <Input field='phone' />
-        <Input field='profile_link_1' />
-        <Input field='profile_link_2' />
-        <Input field='profile_link_3' />
-        <Input field='source_channel' customInputProps={{readonly: isClosed}} />
-        <Input title={T.translate('Tags')}>
-          <InputTags
-            field='TAGS'
-            value={TAGS}
-            readonly={isClosed}
-            model='Hubleto/App/Community/Leads/Models/Tag'
-            targetColumn='id_lead'
-            sourceColumn='id_tag'
-            colorColumn='_LOOKUP_COLOR'
-            showSelect={false}
-            showTagButtons={true}
-            onChange={(input: any, value: any) => {
-              form.changeField(input, value);
-            }}
-            onNewTag={(title: string) => {
-              return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
-            }}
-          ></InputTags>
-        </Input>
-        <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
-        {status == 4 ? <Input field='lost_reason' customInputProps={{readonly: isClosed}} />: null}
-      </div>
-      <div className='border-l border-gray-200'></div>
-      <div className='grow'>
-        {form.id > 0 ? <>
-          {nextActivityDate ?
-            <div className='block alert alert-success'>
-              <i className='fas fa-calendar mr-2'></i>
-              Next activity is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
-              <br/>
-              <i>{nextActivity.subject}</i>
-            </div>
-          : <div className='block alert alert-danger'>
-              <i className='fas fa-calendar mr-2'></i>
-              No future activity is planned.
-            </div>
-          }
-        </> : null}
-        <div className='flex flex-row *:w-1/2'>
-          <Input fieldame='price' customInputProps={{ cssClass: 'text-2xl', readonly: isClosed }} />
-          <Input fieldame='id_currency' />
-        </div>
-        <Input field='score' customInputProps={{readonly: isClosed}} />
-        <Input field='id_team' customInputProps={{readonly: isClosed}} />
-        <Input field='date_expected_close' customInputProps={{readonly: isClosed}} />
-        <Input field='id_customer' />
-        <Input field='id_contact' />
-        <Input field='shared_folder' customInputProps={{readonly: isClosed}} />
-        <Input field='date_created' />
-      </div>
+  return <div className='card card-body flex flex-col gap-2 md:flex-row'>
+    <div className='grow'>
+      <Input field='title' customInputProps={{cssClass: 'text-2xl'}} />
+      <Input field='email' />
+      <Input field='phone' />
+      <Input field='profile_link_1' />
+      <Input field='profile_link_2' />
+      <Input field='profile_link_3' />
+      <Input field='source_channel' customInputProps={{readonly: isClosed}} />
+      <Input title={T.translate('Tags')}>
+        <InputTags
+          field='TAGS'
+          value={TAGS}
+          readonly={isClosed}
+          model='Hubleto/App/Community/Leads/Models/Tag'
+          targetColumn='id_lead'
+          sourceColumn='id_tag'
+          colorColumn='_LOOKUP_COLOR'
+          showSelect={false}
+          showTagButtons={true}
+          onChange={(input: any, value: any) => {
+            form.changeField(input, value);
+          }}
+          onNewTag={(title: string) => {
+            return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+          }}
+        ></InputTags>
+      </Input>
+      <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
+      {status == 4 ? <Input field='lost_reason' customInputProps={{readonly: isClosed}} />: null}
     </div>
-  </>
+    <div className='border-l border-gray-200'></div>
+    <div className='grow'>
+      {form.id > 0 ? <>
+        {nextActivityDate ?
+          <div className='block alert alert-success'>
+            <i className='fas fa-calendar mr-2'></i>
+            Next activity is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+            <br/>
+            <i>{nextActivity.subject}</i>
+          </div>
+        : <div className='block alert alert-danger'>
+            <i className='fas fa-calendar mr-2'></i>
+            No future activity is planned.
+          </div>
+        }
+      </> : null}
+      <div className='flex flex-row *:w-1/2'>
+        <Input fieldame='price' customInputProps={{ cssClass: 'text-2xl', readonly: isClosed }} />
+        <Input fieldame='id_currency' />
+      </div>
+      <Input field='score' customInputProps={{readonly: isClosed}} />
+      <Input field='id_team' customInputProps={{readonly: isClosed}} />
+      <Input field='date_expected_close' customInputProps={{readonly: isClosed}} />
+      <Input field='id_customer' />
+      <Input field='id_contact' />
+      <Input field='shared_folder' customInputProps={{readonly: isClosed}} />
+      <Input field='date_created' />
+    </div>
+  </div>;
 }
 
-/**
- * TabCalendar
- *
- * @var [type]
- */
-const TabCalendar = () => <CalendarTab
+/** TabCalendar */
+const TabCalendar = (props: FormProps) => <CalendarTab
   calendarSource='leads'
   externalIdColumn='idLead'
   logActivityEndpoint='leads/api/log-activity'
   renderActivityForm={(calendarTab: any) => {
-    const R = useRecord();
-    const id = R.id;
-    const idCustomer = R.id_customer;
-    const idContact = R.id_contact;
+    const idCustomer: number = useRecordField('id_customer', 0);
+    const idContact: number = useRecordField('id_contact', 0);
 
     return <LeadFormActivity
       id={calendarTab.showIdActivity}
       description={{
         defaultValues: {
-          id_lead: id,
+          id_lead: props.id,
           id_contact: idContact,
           date_start: calendarTab.activityDate,
           time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
@@ -153,11 +141,7 @@ const TabCalendar = () => <CalendarTab
   }}
 ></CalendarTab>;
 
-/**
- * TabEmailClicks
- *
- * @var [type]
- */
+/** TabEmailClicks */
 const TabEmailClicks = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
   return <TableEmailClicks
@@ -168,17 +152,13 @@ const TabEmailClicks = (props: FormLeadProps) => {
 };
 
 
-/**
- * TabTasks
- *
- * @var [type]
- */
+/** TabTasks */
 const TabTasks = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
   
   return <TableTasks
     tag={"table_lead_task"}
-    parentForm={this}
+    parentForm={form}
     uid={props.uid + "_table_lead_task"}
     junctionTitle='Lead'
     junctionModel='Hubleto/App/Community/Leads/Models/LeadTask'
@@ -188,22 +168,13 @@ const TabTasks = (props: FormLeadProps) => {
   />;
 }
 
-/**
- * TabHistory
- *
- * @var [type]
- */
+/** TabHistory */
 const TabHistory = (props: FormLeadProps) => {
-  const R = useRecord();
-  
-  if (R.HISTORY && R.HISTORY.length > 0) {
-    if (R.HISTORY.length > 1 && (R.HISTORY[0].id < R.HISTORY[R.HISTORY.length-1].id))
-      R.HISTORY = R.HISTORY.reverse();
-  }
+  const HISTORY: any = useRecordField('HISTORY', {});
 
   return <TableLeadHistory
     uid={props.uid + "_table_lead_history"}
-    data={{ records: R.HISTORY }}
+    data={{ records: HISTORY }}
     descriptionSource="props"
     onRowClick={(table) => {}}
     description={{
@@ -230,18 +201,15 @@ const TabHistory = (props: FormLeadProps) => {
   ></TableLeadHistory>;
 }
 
-/**
- * TabTimeline
- *
- * @var [type]
- */
+/** TabTimeline */
 const TabTimeline = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  const R = useRecord();
+  const ACTIVITIES: any = useRecordField('ACTIVITIES', {});
+  const WORKFLOW_HISTORY: any = useRecordField('WORKFLOW_HISTORY', {});
   
   return form.renderTimeline([
     {
-      data: (thisForm: any) => R.ACTIVITIES,
+      data: (thisForm: any) => ACTIVITIES,
       icon: 'fas fa-calendar',
       color: '#32678fff',
       timestampFormatter: (entry: any) => entry.date_start,
@@ -249,7 +217,7 @@ const TabTimeline = (props: FormLeadProps) => {
       userNameFormatter: (entry: any) => entry['_LOOKUP[id_owner]'],
     },
     { 
-      data: (thisForm: any) => R.WORKFLOW_HISTORY,
+      data: (thisForm: any) => WORKFLOW_HISTORY,
       icon: 'fas fa-timeline',
       color: '#8f3248ff',
       timestampFormatter: (entry: any) => entry.datetime_change,
@@ -259,11 +227,7 @@ const TabTimeline = (props: FormLeadProps) => {
   ]);
 }
 
-/**
- * FormLead
- *
- * @var [type]
- */
+/** FormLead */
 const FormLead = (props: FormLeadProps) => {
   return <Form
     componentName='FormTeam'
@@ -271,8 +235,13 @@ const FormLead = (props: FormLeadProps) => {
     model='Hubleto/App/Community/Leads/Models/Lead'
     urlSlug='leads'
     endpointParams={{saveRelations: ['TAGS'] }}
-    onAfterFormInitialized={(form: any) => {
-      form.setReadonly(form.recordStore.getField('is_closed') == 1);
+    getContentClassName={(form: FormMeta) => {
+      const isClosed = useRecordField('is_closed');
+      return isClosed ? 'bg-slate-100' : '';
+    }}
+    onAfterFormInitialized={(form: FormMeta) => {
+      const isClosed = useRecordField('is_closed');
+      form.setReadonly(isClosed == 1);
     }}
     tabs={{
       default: { title: <b>{T.translate('Lead')}</b>, content: () => <TabDefault {...props} /> },
@@ -282,7 +251,7 @@ const FormLead = (props: FormLeadProps) => {
       history: { icon: 'fas fa-clock-rotate-left', position: 'right', content: () => <TabHistory /> },
       timeline: { icon: 'fas fa-timeline', position: 'right', content: () => <TabTimeline {...props} /> },
     }}
-    title={{field: 'title', sub: T.translate('Lead')}}
+    title={{fields: ['identifier', 'title'], sub: T.translate('Lead')}}
     {...props}
   ></Form>;
 }

@@ -80,7 +80,7 @@ const TabRecipients = (props: FormCampaignProps) => {
         tag='table_email_recipients'
         //@ts-ignore
         ref={refTableRecipients}
-        parentForm={this}
+        parentForm={form}
         uid={form.uid + "_table_email_recipient"}
         idCampaign={form.id}
         view='briefOverview'

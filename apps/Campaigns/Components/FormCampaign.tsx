@@ -11,7 +11,6 @@ import CampaignFormActivity, { CampaignFormActivityProps, CampaignFormActivitySt
 import moment, { Moment } from "moment";
 import Calendar from '../../Calendar/Components/Calendar';
 import { updateFormWorkflowByTag } from '@hubleto/react-ui/components/cc/ErpWorkflowSelector';
-import FormItem from '@hubleto/apps/Orders/Components/FormItem';
 
 export interface FormCampaignProps extends FormExtendedProps {}
 export interface FormCampaignState extends FormExtendedState {

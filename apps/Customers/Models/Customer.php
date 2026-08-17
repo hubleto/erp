@@ -121,7 +121,7 @@ class Customer extends Model
     $description->addFilter('fCustomerActive', [
       'title' => $this->translate('Active'),
       'options' => [ 0 => $this->translate('Active'), 1 => $this->translate('Non-active') ],
-      'default' => 0,
+      // 'default' => 0,
     ]);
 
     $fTagColors = [];

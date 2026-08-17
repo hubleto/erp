@@ -1,9 +1,9 @@
 import App from '@hubleto/react-ui/core/App'
 import request from "@hubleto/react-ui/core/Request";
-import TableProfiles from "./Components/TableProfiles"
-import TableInvoices from "./Components/TableInvoices"
-import TableItems from "./Components/TableItems"
-import TablePayments from "./Components/TablePayments"
+import TableProfiles from "./Components/FC/TableProfiles"
+import TableInvoices from "./Components/FC/TableInvoices"
+import TableItems from "./Components/FC/TableItems"
+import TablePayments from "./Components/FC/TablePayments"
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 
 class InvoicesApp extends App {

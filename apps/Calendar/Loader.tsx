@@ -1,6 +1,6 @@
 import App from '@hubleto/react-ui/core/App'
-import CalendarMain from "./Components/CalendarMain";
-import CalendarFormActivity from "./Components/FormActivity";
+import CalendarMain from "./Components/FC/CalendarMain";
+import CalendarFormActivity from "./Components/FC/FormActivity";
 import CalendarShareTable from "./Components/CalendarShareTable";
 import FormSharedCalendar from "./Components/FormSharedCalendar";
 

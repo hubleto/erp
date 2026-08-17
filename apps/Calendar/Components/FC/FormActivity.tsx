@@ -47,7 +47,7 @@ const Title = (props: FormActivityProps): React.JSX.Element => <>
 const Content = (props: FormActivityProps): React.JSX.Element => {
   const R = React.useContext(FormRecordStoreContext).getRecord();
   const form = React.useContext(FormMetaContext);
-  const customInputs = props.renderCustomInputs(form) ?? null;
+  const customInputs = props.renderCustomInputs ? props.renderCustomInputs(form) : null;
 
   let recurrence: Recurrence = {
     period: '',

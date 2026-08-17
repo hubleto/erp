@@ -1,6 +1,6 @@
 import App from '@hubleto/react-ui/core/App'
 import TableDashboards from "./Components/FC/TableDashboards"
-import Dashboard from "./Components/Dashboard"
+import Dashboard from "./Components/FC/Dashboard"
 
 class DashboardsApp extends App {
   init() {

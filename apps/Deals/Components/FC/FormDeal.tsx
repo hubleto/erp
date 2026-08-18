@@ -7,7 +7,7 @@ import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore'
 import moment, { Moment } from "moment";
 import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
 import request from '@hubleto/react-ui/core/Request';
-import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
+import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
 import CalendarTab from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
 import DealFormActivity from './DealFormActivity';
 import TableItems from './TableItems';

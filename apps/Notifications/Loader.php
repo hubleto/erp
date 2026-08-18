@@ -18,9 +18,6 @@ class Loader extends \Hubleto\Erp\App
     $this->router()->get([
       '/^notifications\/?$/' => Controllers\Notifications::class,
       '/^notifications\/settings\/?$/' => Controllers\Settings::class,
-      '/^notifications\/inbox\/?$/' => Controllers\Inbox::class,
-      '/^notifications\/sent\/?$/' => Controllers\Sent::class,
-      '/^notifications\/all\/?$/' => Controllers\All::class,
       '/^notifications\/api\/mark-as-read\/?$/' => Controllers\Api\MarkAsRead::class,
       '/^notifications\/api\/mark-as-unread\/?$/' => Controllers\Api\MarkAsUnread::class,
     ]);

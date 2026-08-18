@@ -1,6 +1,6 @@
 import App from '@hubleto/react-ui/core/App'
-import TableTasks from './Components/TableTasks'
-import TableTodos from './Components/TableTodos'
+import TableTasks from './Components/FC/TableTasks'
+import TableTodos from './Components/FC/TableTodos'
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 

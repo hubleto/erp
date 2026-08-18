@@ -3,7 +3,6 @@ import App from '@hubleto/react-ui/core/App'
 import TableProjects from "./Components/FC/TableProjects"
 import TableMilestones from './Components/FC/TableMilestones'
 import request from "@hubleto/react-ui/core/Request";
-import FormTask from '@hubleto/apps/Tasks/Components/FormTask';
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 class ProjectsApp extends App {
   init() {
@@ -51,7 +50,8 @@ class ProjectsApp extends App {
       }
     );
 
-    FormTask.addFormFooterButton(
+    FormCustomizer.addFormFooterExtraButton(
+      'FormTask',
       'Assign task to project',
       'fas fa-check-double',
       (form: any) => {

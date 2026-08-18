@@ -7,7 +7,7 @@ import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore'
 import request from '@hubleto/react-ui/core/Request';
 import TableMilestones from './TableMilestones';
 import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
-import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
+import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
 import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
 import TableExpenses from './TableExpenses';
 import Spinner from '@hubleto/react-ui/components/fc/Spinner';

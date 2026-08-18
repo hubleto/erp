@@ -10,9 +10,9 @@ import LeadFormActivity from './LeadFormActivity';
 import moment from "moment";
 import PrintPreviewUi from '@hubleto/react-ui/components/fc/FormComponents/PrintPreviewUi';
 
-import TableLeadHistory from '../TableLeadHistory';
-import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
+import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
+import Table from '@hubleto/react-ui/components/fc/Table';
 
 export interface FormLeadProps extends FormProps {}
 
@@ -170,35 +170,14 @@ const TabTasks = (props: FormLeadProps) => {
 
 /** TabHistory */
 const TabHistory = (props: FormLeadProps) => {
-  const HISTORY: any = useRecordField('HISTORY', {});
-
-  return <TableLeadHistory
+  const form = React.useContext(FormMetaContext);
+  return <Table
+    parentForm={form}
     uid={props.uid + "_table_lead_history"}
-    data={{ records: HISTORY }}
-    descriptionSource="props"
-    onRowClick={(table) => {}}
-    description={{
-      permissions: {
-        canCreate: false,
-        canDelete: false,
-        canRead: true,
-        canUpdate: false,
-      },
-      ui: {
-        showFooter: false,
-        showHeader: false,
-      },
-      columns: {
-        description: { type: "varchar", title: T.translate("Description")},
-        change_date: { type: "date", title: T.translate("Change Date")},
-      },
-      inputs: {
-        description: { type: "varchar", title: T.translate("Description"), readonly: true},
-        change_date: { type: "date", title: T.translate("Change Date")},
-      },
-    }}
+    model={'Hubleto/App/Community/Leads/Models/LeadHistory'}
+    endpointParams={{idLead: props.id}}
     readonly={true}
-  ></TableLeadHistory>;
+  ></Table>;
 }
 
 /** TabTimeline */
@@ -243,7 +222,7 @@ const FormLead = (props: FormLeadProps) => {
       history: { icon: 'fas fa-clock-rotate-left', position: 'right', content: () => <TabHistory /> },
       timeline: { icon: 'fas fa-timeline', position: 'right', content: () => <TabTimeline {...props} /> },
     }}
-    title={{fields: ['identifier', 'title'], sub: T.translate('Lead')}}
+    title={{fields: ['title'], sub: T.translate('Lead')}}
     {...props}
   ></Form>;
 }

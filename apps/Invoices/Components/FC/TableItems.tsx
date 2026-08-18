@@ -10,7 +10,7 @@ interface TableItemsProps extends TableProps {
 }
 
 const componentName = 'TableItems'; // must be the same as the exported const
-const parentApp = 'Hubleto/App/Community/AppXXX';
+const parentApp = 'Hubleto/App/Community/Invoices';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 const TableItems = (props: TableItemsProps) => {
@@ -22,7 +22,6 @@ const TableItems = (props: TableItemsProps) => {
     formUrlSlug='invoices/items'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_invoice: props.idInvoice}}
-    // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "id_invoice" && !data['INVOICE']) {
         return <button

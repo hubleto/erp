@@ -14,6 +14,7 @@ import VarcharInput from '@hubleto/react-ui/components/fc/Inputs/Varchar';
 import IntInput from '@hubleto/react-ui/components/fc/Inputs/Int';
 import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
 import FileInput from '@hubleto/react-ui/components/fc/Inputs/File';
+import ModalHeader from '@hubleto/react-ui/components/fc/ModalComponents/Header';
 
 export interface FormInvoiceProps extends FormProps {}
 
@@ -64,11 +65,11 @@ const TabDefault = (props: FormInvoiceProps) => {
           : <Input field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2'}} />}
         </div>
       </div>
-      <div className='flex flex-col md:flex-row gap-2 mt-2'>
-        <div className="flex flex-5 gap-2 mt-2">
+      <div className='flex flex-col md:flex-row gap-2'>
+        <div className="flex flex-5 gap-2">
           <div className='flex-1 min-w-80'>
             {props.id == -1 ? null : <>
-              <div className='p-2 grow'>
+              <div className='grow'>
                 <Input field='number' customInputProps={{wrapperCssClass: 'block', cssClass: 'text-xl'}} />
               </div>
               <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
@@ -136,8 +137,8 @@ const TabDefault = (props: FormInvoiceProps) => {
                       cssClass='bg-white text-blue-500'
                       onChange={(input: any, value: any) => {
                         let newItems = ITEMS;
-                        newItems[key].item = input.value;
-                        form.changeRecord(newItems);
+                        newItems[key].item = value;
+                        form.changeRecord({ITEMS: newItems});
                       }}
                     ></VarcharInput>
                     <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
@@ -184,8 +185,8 @@ const TabDefault = (props: FormInvoiceProps) => {
                         description={{unit: currencySymbol + '/unit'}}
                         onChange={(input: any, value: any) => {
                           let newItems = ITEMS;
-                          newItems[key].unit_price = input.value;
-                          form.changeRecord(newItems);
+                          newItems[key].unit_price = value;
+                          form.changeRecord({ITEMS: newItems});
                         }}
                       ></IntInput>
                     </div>
@@ -197,8 +198,8 @@ const TabDefault = (props: FormInvoiceProps) => {
                         description={{unit: 'units'}}
                         onChange={(input: any, value: any) => {
                           let newItems = ITEMS;
-                          newItems[key].amount = input.value;
-                          form.changeRecord(newItems);
+                          newItems[key].amount = value;
+                          form.changeRecord({ITEMS: newItems});
                         }}
                       ></IntInput>
                     </div>
@@ -212,8 +213,8 @@ const TabDefault = (props: FormInvoiceProps) => {
                         }}
                         onChange={(input: any, value: any) => {
                           let newItems = ITEMS;
-                          newItems[key].id_order = input.value;
-                          form.changeRecord(newItems);
+                          newItems[key].id_order = value;
+                          form.changeRecord({ITEMS: newItems});
                         }}
                       ></LookupInput>
                       {item.id_order > 0 ?
@@ -231,7 +232,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                               (data: any) => {
                                 const P = data.item;
                                 let newItems = ITEMS;
-                                newItems[key].id_order_item = input.value;
+                                newItems[key].id_order_item = value;
                                 newItems[key].item = P?.title ?? '';
                                 newItems[key].unit_price = P?.sales_price ?? 0;
                                 newItems[key].amount = P?.amount ?? 0;
@@ -239,7 +240,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                                 newItems[key].price_incl_vat = P?.price_incl_vat ?? 0;
                                 newItems[key].vat = P?.vat ?? 0;
                                 newItems[key].discount = P?.discount ?? 0;
-                                form.changeRecord(newItems);
+                                form.changeRecord({ITEMS: newItems});
                               }
                             )
                           }}
@@ -254,8 +255,8 @@ const TabDefault = (props: FormInvoiceProps) => {
                         description={{unit: '%'}}
                         onChange={(input: any, value: any) => {
                           let newItems = ITEMS;
-                          newItems[key].discount = input.value;
-                          form.changeRecord(newItems);
+                          newItems[key].discount = value;
+                          form.changeRecord({ITEMS: newItems});
                         }}
                       ></IntInput>
                     </div>
@@ -267,8 +268,8 @@ const TabDefault = (props: FormInvoiceProps) => {
                         description={{unit: '%'}}
                         onChange={(input: any, value: any) => {
                           let newItems = ITEMS;
-                          newItems[key].vat = input.value;
-                          form.changeRecord(newItems);
+                          newItems[key].vat = value;
+                          form.changeRecord({ITEMS: newItems});
                         }}
                       ></IntInput>
                     </div>
@@ -277,21 +278,19 @@ const TabDefault = (props: FormInvoiceProps) => {
                       <FileInput
                         value={item.attachment_1}
                         cssClass='bg-white w-auto'
-                        description={{unit: 'units'}}
                         onChange={(input: any, value: any) => {
                           let newItems = ITEMS;
-                          newItems[key].attachment_1 = input.value;
-                          form.changeRecord(newItems);
+                          newItems[key].attachment_1 = value;
+                          form.changeRecord({ITEMS: newItems});
                         }}
                       ></FileInput>
                       <FileInput
                         value={item.attachment_2}
                         cssClass='bg-white w-auto'
-                        description={{unit: 'units'}}
                         onChange={(input: any, value: any) => {
                           let newItems = ITEMS;
-                          newItems[key].attachment_2 = input.value;
-                          form.changeRecord(newItems);
+                          newItems[key].attachment_2 = value;
+                          form.changeRecord({ITEMS: newItems});
                         }}
                       ></FileInput>
                     </div>
@@ -303,12 +302,10 @@ const TabDefault = (props: FormInvoiceProps) => {
               <button
                 className='btn btn-add mt-2'
                 onClick={() => {
-                  let newItems = ITEMS;
-                  newItems.push({
+                  form.changeRecord({ITEMS: [...ITEMS, {
                     id_invoice: props.id,
                     id_customer: idCustomer,
-                  });
-                  form.changeRecord(newItems);
+                  }]});
                 }}
               >
                 <span className='icon'><i className='fas fa-plus'></i></span>
@@ -341,6 +338,7 @@ const TabDefault = (props: FormInvoiceProps) => {
             setLinkPreparedItem(false);
           }}
         >
+          <ModalHeader></ModalHeader>
           <TableItems
             uid={props.uid + "_table_link_not_invoiced_items"}
             tag={"link_not_invoiced_items"}

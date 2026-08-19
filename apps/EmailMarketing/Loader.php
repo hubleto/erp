@@ -102,11 +102,10 @@ class Loader extends \Hubleto\Erp\App
   public function renderSecondSidebar(): string
   {
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/email-marketing/campaigns">
-          <span class="icon"><i class="fas fa-users-viewfinder"></i></span>
-          <span class="text">' . $this->translate('Campaigns') . '</span>
-        </a>
+      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/email-marketing/campaigns">
+        <span class="text">' . $this->translate('Email marketing') . '</span>
+      </a></div>
+      <div class="app-sidebar-buttons">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails">
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span class="text">' . $this->translate('Emails') . '</span>

@@ -2,7 +2,7 @@
   <ol class="inline-flex items-center md:space-x-2 rtl:space-x-reverse">
     <li>
       <button
-        class="btn btn-transparent {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %}"
+        class="btn btn-white {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %}"
         {% if viewParams.appMenu|length == 0 %}
           onclick="location.href='{{ config.projectUrl }}/{{ viewParams.activatedApp.manifest.rootUrlSlug }}';"
         {% endif %}

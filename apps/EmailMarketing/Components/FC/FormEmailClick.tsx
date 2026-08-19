@@ -28,7 +28,7 @@ const FormEmailClick = (props: FormEmailClickProps) => {
   return <Form
     componentName={componentName}
     parentApp={parentApp}
-    model={parentApp + '/Models/Click'}
+    model={parentApp + '/Models/EmailClick'}
     urlSlug={'email-marketing/emails/clicks'}
     endpointParams={{}}
     onAfterFormInitialized={(form: any) => {}}

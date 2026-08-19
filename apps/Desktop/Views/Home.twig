@@ -1,99 +1,104 @@
 {% set defaultDashboard = viewParams.defaultDashboard %}
 {% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
-<div class="w-full flex gap-2">
-  <div class="grow bg-slate-50 dark:bg-slate-800 p-2 mb-2 flex flex-col md:flex-row gap-2 rounded">
-    {% if user.DEFAULT_COMPANY.logo != '' %}
-      <div class="flex items-center">
-        <img
-          src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
-          class="max-h-32 max-w-32 m-8"
-        />
-      </div>
-    {% endif %}
-    <div class="m-8 dark:text-white">
-      <h1 class="pt-0 m-0 pb-4">
-        {{ translate('Welcome') }}, {{ user.first_name ?? user.email }}
-      </h1>
-      <div class="flex">
-        {% if user.photo %}
-          <div class="mr-8">
-            <img
-              src="{{ config.uploadUrl }}/{{ user.photo }}"
-              class='max-w-48 max-h-24 rounded-4xl'
-            />
-          </div>
-        {% endif %}
-        <div>
-          <div>
-            <b>{{ user.first_name }} {{ user.last_name }}</b>
-            <a href="settings/my-account" class="btn btn-transparent">
-              <span class="icon"><i class="fas fa-pencil"></i></span>
-            </a>
-          </div>
-          <div><b>{{ user.DEFAULT_COMPANY.name }}</b></div>
-          {% if user.position %} <div class="badge">{{ user.position }}</div> {% endif %}
-          <div class="mt-2">{{ user.email }}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Usage') %}
-    {% set recentlyUsed = hubleto.getService('Hubleto\\App\\Community\\Usage\\Logger').getRecentlyUsedAppNamespaces() %}
-    {% if recentlyUsed|length > 0 %}
-      <div class="mb-2 hidden m:block dark:text-gray-200">
-        <div><small>{{ translate('Recently used apps') }}</small></div>
-        <div class="list">
-          {% for appNamespace in recentlyUsed %}
-            {% set manifest = hubleto.appManager().getApp(appNamespace).manifest %}
-            <a href="{{ manifest.rootUrlSlug }}" class="btn btn-list-item btn-transparent">
-              <span class="icon"><i class="{{ manifest.icon }}"></i></span>
-              <span class="text">{{ manifest.nameTranslated }}</span>
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-  {% endif %}
+<div class="app-main-title">
+  {{ translate('Welcome') }}, {{ user.first_name ?? user.email }}
 </div>
 
-{% for m in viewParams.welcomeScreenMessages %}
-  <div class="alert alert-{{ m.class }} mb-2">
-    {% if m.icon %}
-      <div class="icon"><i class="{{ m.icon }}"></i></div>
-    {% endif %}
-    <div class='grow'>
-      {% if m.title %}<p><b>{{ m.title|raw }}</b></p>{% endif %}
-      {{ m.content|raw }}
-    </div>
-    {% if m.button %}
-      <div>{{ m.button|raw }}</div>
-    {% endif %}
-  </div>
-{% endfor %}
+<div class="w-full h-full flex">
+  <div class="grow">
+    {% for m in viewParams.welcomeScreenMessages %}
+      <div class="alert alert-{{ m.class }} mb-2">
+        {% if m.icon %}
+          <div class="icon"><i class="{{ m.icon }}"></i></div>
+        {% endif %}
+        <div class='grow'>
+          {% if m.title %}<p><b>{{ m.title|raw }}</b></p>{% endif %}
+          {{ m.content|raw }}
+        </div>
+        {% if m.button %}
+          <div>{{ m.button|raw }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
 
-{% if defaultDashboard.id == 0 %}
-  <div class="alert alert-info">
-    <div class="icon"><i class="fas fa-table"></i></div>
-    <div class="grow">You do not have default dashboard configured</div>
-    <div>
-      <a href="{{ config.projectUrl }}/dashboards/manage" class="btn btn-primary">
-        <span class="text">Manage dashboards</span>
-      </a>
+    {% if defaultDashboard.id == 0 %}
+      <div class="alert alert-info">
+        <div class="icon"><i class="fas fa-table"></i></div>
+        <div class="grow">You do not have default dashboard configured</div>
+        <div>
+          <a href="{{ config.projectUrl }}/dashboards/manage" class="btn btn-primary">
+            <span class="text">Manage dashboards</span>
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="mt-2">
+        <hblreact-dashboards-dashboard
+          int:id-dashboard='{{ defaultDashboard.id }}'
+          string:redirect-url='{{ config.projectUrl }}'
+          json:panels='{{ defaultDashboard.PANELS|json_encode|raw }}'
+          bool:show-add-new-panel-button='true'
+        ></hblreact-dashboards-dashboard>
+      </div>
+    {% endif %}
+
+    <div class="mx-auto pt-20">
+      <img src="{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">
     </div>
   </div>
-{% else %}
-  <div class="mt-2">
-    <hblreact-dashboards-dashboard
-      int:id-dashboard='{{ defaultDashboard.id }}'
-      string:redirect-url='{{ config.projectUrl }}'
-      json:panels='{{ defaultDashboard.PANELS|json_encode|raw }}'
-      bool:show-add-new-panel-button='true'
-    ></hblreact-dashboards-dashboard>
-  </div>
-{% endif %}
 
-<div class="mx-auto pt-20">
-  <img src="{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">
+  <div class="flex gap-2 border-l border-l-gray-200 h-full">
+    <div class="grow p-2 mb-2 flex flex-col md:flex-row gap-2">
+      <div class="m-8 dark:text-white">
+        <div class="flex">
+          {% if user.photo %}
+            <div class="mr-8">
+              <img
+                src="{{ config.uploadUrl }}/{{ user.photo }}"
+                class='max-w-48 max-h-24 rounded-4xl'
+              />
+            </div>
+          {% endif %}
+          <div>
+            <div>
+              <b>{{ user.first_name }} {{ user.last_name }}</b>
+              <a href="settings/my-account" class="btn btn-transparent">
+                <span class="icon"><i class="fas fa-pencil"></i></span>
+              </a>
+            </div>
+            <div><b>{{ user.DEFAULT_COMPANY.name }}</b></div>
+            {% if user.position %} <div class="badge">{{ user.position }}</div> {% endif %}
+            <div class="mt-2">{{ user.email }}</div>
+          </div>
+        </div>
+      </div>
+      {% if user.DEFAULT_COMPANY.logo != '' %}
+        <div class="flex items-center">
+          <img
+            src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
+            class="max-h-32 max-w-32 m-8"
+          />
+        </div>
+      {% endif %}
+    </div>
+
+    {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Usage') %}
+      {% set recentlyUsed = hubleto.getService('Hubleto\\App\\Community\\Usage\\Logger').getRecentlyUsedAppNamespaces() %}
+      {% if recentlyUsed|length > 0 %}
+        <div class="mb-2 hidden m:block dark:text-gray-200">
+          <div><small>{{ translate('Recently used apps') }}</small></div>
+          <div class="list">
+            {% for appNamespace in recentlyUsed %}
+              {% set manifest = hubleto.appManager().getApp(appNamespace).manifest %}
+              <a href="{{ manifest.rootUrlSlug }}" class="btn btn-list-item btn-transparent">
+                <span class="icon"><i class="{{ manifest.icon }}"></i></span>
+                <span class="text">{{ manifest.nameTranslated }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
 </div>

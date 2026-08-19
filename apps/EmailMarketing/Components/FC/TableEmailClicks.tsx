@@ -15,7 +15,7 @@ const parentApp = 'Hubleto/App/Community/EmailMarketing';
 const TableEmailClicks = (props: TableEmailClicksProps) => {
   return <Table
     componentName={componentName}
-    model={parentApp + '/Models/Click'}
+    model={parentApp + '/Models/EmailClick'}
     endpointParams={{idEmail: props.idEmail, email: props.email}}
     formUrlSlug='email-marketing/emails/clicks'
     formModalProps={{type: 'right wide'}}

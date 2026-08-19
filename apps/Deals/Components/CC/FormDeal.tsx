@@ -359,13 +359,13 @@ export default class FormDeal<P, S> extends FormExtended<FormDealProps,FormDealS
             {nextActivityDate ?
               <div className='block alert alert-success'>
                 <i className='fas fa-calendar mr-2'></i>
-                Next activity is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+                Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
                 <br/>
                 <i>{nextActivity.subject}</i>
               </div>
             : <div className='block alert alert-danger'>
                 <i className='fas fa-calendar mr-2'></i>
-                No future activity is planned.
+                No follow-up is planned.
               </div>
             }
           </> : null}

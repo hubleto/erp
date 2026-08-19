@@ -77,9 +77,8 @@ const TabDefault = (props: FormTaskProps) => {
           <Input field='duration_days' />
           <Input field='date_start' />
           <Input field='date_deadline' />
-          <Input field='is_chargeable' />
-          <Input field='is_milestone' />
-          <Input field='date_created' />
+          <Input field='is_chargeable' customInputProps={{yesText: 'Chargeable'}} />
+          <Input field='is_milestone' customInputProps={{yesText: 'Milestone'}}  />
         </div>
       </div>
       <div>

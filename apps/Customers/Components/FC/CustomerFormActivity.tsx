@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormActivity from '@hubleto/apps/Calendar/Components/FC/FormActivity'
+import FormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity'
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
@@ -12,7 +12,7 @@ export interface CustomerFormActivityProps extends FormProps {
 }
 
 const CustomerFormActivity = (props: CustomerFormActivityProps) => {
-  const { form, id, idCustomer } = props;
+  const { id } = props;
 
   return <FormActivity
     id={id}

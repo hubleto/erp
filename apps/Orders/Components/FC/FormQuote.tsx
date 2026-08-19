@@ -18,7 +18,6 @@ const TabDefault = (props: FormQuoteProps) => {
       <Input field='id_order' />
       <Input field='version' />
       <Input field='summary' />
-      <Input field='date_created' />
       <Input field='date_sent' />
       <Input field='id_approved_by' />
       <Input field='date_approved' />

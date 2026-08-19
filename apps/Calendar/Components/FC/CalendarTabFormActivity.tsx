@@ -8,11 +8,11 @@ import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Divider from '@hubleto/react-ui/components/fc/FormComponents/Divider';
 import { FormMetaContext, FormDescriptionContext } from '@hubleto/react-ui/components/fc/Form';
 import { useRecordField, FormRecordStoreContext } from '@hubleto/react-ui/components/fc/FormRecordStore';
-import Modal from '@hubleto/react-ui/components/fc/Modal';
 
 export interface FormActivityProps extends FormProps {
-  renderCustomInputs?: (form: typeof FormMetaContext) => React.JSX.Element,
-  activitySource?: string,
+  calendarTab: any,
+  customInputFields: Array<string>,
+  defaultValues: any,
 }
 
 interface Recurrence {
@@ -39,15 +39,9 @@ const expandRecurrenceDates = (recurrence: Recurrence): Array<string> => {
 
 const T = new Translator('HubletoApp\\Community\\Calendar\\Loader', 'Components\\FormActivity');
 
-const Title = (props: FormActivityProps): React.JSX.Element => <>
-  <small>{props.activitySource ?? 'Event'}</small>
-  <h2>{useRecordField('subject') ?? '-'}</h2>
-</>;
-
 const Content = (props: FormActivityProps): React.JSX.Element => {
   const R = React.useContext(FormRecordStoreContext).getRecord();
   const form = React.useContext(FormMetaContext);
-  const customInputs = props.renderCustomInputs ? props.renderCustomInputs(form) : null;
 
   let recurrence: Recurrence = {
     period: '',
@@ -86,7 +80,11 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 
   return <>
     <div className='flex gap-2'>
-      {customInputs ? <div className="grow">{customInputs}</div> : null}
+      <div className="grow">
+        {props.customInputFields.map((customInputField, key) => {
+          return <Input key={key} field={customInputField} readonly></Input>;
+        })}
+      </div>
       <div className='flex gap-2 flex-col'>
         <div className='w-full'><Input field='completed' customInputProps={{yesText: T.translate('Completed')}}></Input></div>
         <Input field='id_owner'></Input>
@@ -211,14 +209,32 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
   </>;
 };
   
-const FormActivity = (props: FormActivityProps) => {
+const CalendarTabFormActivity = (props: FormActivityProps) => {
   return <Form
+    id={props.calendarTab.showIdActivity}
     model='Hubleto/App/Community/Calendar/Models/Activity'
-    title={{sub: props.activitySource ? 'Activity for ' + props.activitySource : 'Event', field: 'subject'}}
+    title={{sub: 'Activity', field: 'subject'}}
+    renderTopInputs={() => null}
+    onClose={() => { props.calendarTab.setShowIdActivity(0) }}
+    onAfterSaveRecord={(form: any, saveResponse: any) => {
+      if (saveResponse.status == "success") {
+        props.calendarTab.setShowIdActivity(0);
+      }
+    }}
+    description={{
+      defaultValues: {
+        ...props.defaultValues,
+        date_start: props.calendarTab.activityDate,
+        time_start: props.calendarTab.activityTime == "00:00:00" ? null : props.calendarTab.activityTime,
+        date_end: props.calendarTab.activityDate,
+        all_day: props.calendarTab.activityAllDay,
+        subject: props.calendarTab.activitySubject,
+      }
+    }}
     {...props}
   >
     <Content {...props}/>
   </Form>;
 }
 
-export default FormActivity;
+export default CalendarTabFormActivity;

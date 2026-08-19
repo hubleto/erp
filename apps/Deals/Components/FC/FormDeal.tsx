@@ -8,9 +8,10 @@ import moment, { Moment } from "moment";
 import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
 import request from '@hubleto/react-ui/core/Request';
 import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
-import CalendarTab from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
+import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
 import DealFormActivity from './DealFormActivity';
 import TableItems from './TableItems';
+import CalendarTabFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
 
 export interface FormDealProps extends FormProps {}
 
@@ -113,7 +114,6 @@ const TabDefault = (props: FormDealProps) => {
       : <></>}
     </div>
     <Input field='date_expected_close' customInputProps={{readonly: isClosed}} />
-    <Input field='date_created' />
   </>;
 
   const inputsColumnRight = <>
@@ -121,13 +121,13 @@ const TabDefault = (props: FormDealProps) => {
       {nextActivityDate ?
         <div className='block alert alert-success'>
           <i className='fas fa-calendar mr-2'></i>
-          Next activity is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+          Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
           <br/>
           <i>{nextActivity.subject}</i>
         </div>
       : <div className='block alert alert-danger'>
           <i className='fas fa-calendar mr-2'></i>
-          No future activity is planned.
+          No future follow-up is planned.
         </div>
       }
     </> : null}
@@ -246,36 +246,48 @@ const TabDocuments = (props: FormDealProps) => {
 }
 
 /** TabCalendar */
-const TabCalendar = (props: FormProps) => <CalendarTab
-  calendarSource='deals'
-  externalIdColumn='idDeal'
-  logActivityEndpoint='deals/api/log-activity'
-  renderActivityForm={(calendarTab: any) => {
-    const idCustomer: number = useRecordField('id_customer', 0);
-    const idContact: number = useRecordField('id_contact', 0);
+// const TabCalendar = (props: FormProps) => <CalendarTab
+//   calendarSource='deals'
+//   externalIdColumn='idDeal'
+//   logActivityEndpoint='deals/api/log-activity'
+//   renderActivityForm={(calendarTab: any) => {
+//     const idCustomer: number = useRecordField('id_customer', 0);
+//     const idContact: number = useRecordField('id_contact', 0);
 
-    return <DealFormActivity
-      id={calendarTab.showIdActivity}
-      description={{
-        defaultValues: {
-          id_deal: props.id,
-          id_contact: idContact,
-          date_start: calendarTab.activityDate,
-          time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
-          date_end: calendarTab.activityDate,
-          all_day: calendarTab.activityAllDay,
-          subject: calendarTab.activitySubject,
-        }
-      }}
-      idCustomer={idCustomer}
-      idContact={idContact}
-      onClose={() => { calendarTab.setShowIdActivity(0) }}
-      onAfterSaveRecord={(form: any, saveResponse: any) => {
-        if (saveResponse.status == "success") {
-          calendarTab.setShowIdActivity(0);
-        }
-      }}
-    ></DealFormActivity>;
+//     return <DealFormActivity
+//       id={calendarTab.showIdActivity}
+//       description={{
+//         defaultValues: {
+//           id_deal: props.id,
+//           id_contact: idContact,
+//           date_start: calendarTab.activityDate,
+//           time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
+//           date_end: calendarTab.activityDate,
+//           all_day: calendarTab.activityAllDay,
+//           subject: calendarTab.activitySubject,
+//         }
+//       }}
+//       idCustomer={idCustomer}
+//       idContact={idContact}
+//       onClose={() => { calendarTab.setShowIdActivity(0) }}
+//       onAfterSaveRecord={(form: any, saveResponse: any) => {
+//         if (saveResponse.status == "success") {
+//           calendarTab.setShowIdActivity(0);
+//         }
+//       }}
+//     ></DealFormActivity>;
+//   }}
+// ></CalendarTab>;
+const TabCalendar = (props: FormProps) => <CalendarTab
+  loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=deals&idDeal=' + props.id}
+  logActivityEndpoint={'deals/api/log-activity?idDeal=' + props.id}
+  renderActivityForm={(calendarTab: any) => {
+    return <CalendarTabFormActivity
+      calendarTab={calendarTab}
+      customInputFields={['id_deal']}
+      defaultValues={{id_deal: props.id}}
+      model='Hubleto/App/Community/Deals/Models/DealActivity'
+    ></CalendarTabFormActivity>;
   }}
 ></CalendarTab>;
 

@@ -5,9 +5,10 @@ import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
-import CalendarTab from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
+import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
 import CustomerFormActivity from './CustomerFormActivity';
 import TableContacts from '@hubleto/apps/Contacts/Components/FC/TableContacts';
+import CalendarTabFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
 
 export interface FormCustomerProps extends FormProps {}
 
@@ -97,33 +98,42 @@ const TabDefault = (props: FormCustomerProps) => {
 }
 
 /** TabCalendar */
-const TabCalendar = (props: FormCustomerProps) => <CalendarTab
-  calendarSource='customers'
-  externalIdColumn='idCustomer'
-  logActivityEndpoint='customers/api/log-activity'
+// const TabCalendar = (props: FormCustomerProps) => <CalendarTab
+//   calendarSource='customers'
+//   externalIdColumn='idCustomer'
+//   logActivityEndpoint='customers/api/log-activity'
+//   renderActivityForm={(calendarTab: any) => {
+//     return <CustomerFormActivity
+//       id={calendarTab.showIdActivity}
+//       description={{
+//         defaultValues: {
+//           id_customer: props.id,
+//           date_start: calendarTab.activityDate,
+//           time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
+//           date_end: calendarTab.activityDate,
+//           all_day: calendarTab.activityAllDay,
+//           subject: calendarTab.activitySubject,
+//         }
+//       }}
+//       onClose={() => { calendarTab.setShowIdActivity(0) }}
+//       onAfterSaveRecord={(form: any, saveResponse: any) => {
+//         if (saveResponse.status == "success") {
+//           calendarTab.setShowIdActivity(0);
+//         }
+//       }}
+//     ></CustomerFormActivity>;
+//   }}
+// ></CalendarTab>;
+const TabCalendar = (props: FormProps) => <CalendarTab
+  loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=customers&idCustomer=' + props.id}
+  logActivityEndpoint={'customers/api/log-activity?idCustomer=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    const idCustomer: number = useRecordField('id_customer');
-
-    return <CustomerFormActivity
-      id={calendarTab.showIdActivity}
-      description={{
-        defaultValues: {
-          id_customer: props.id,
-          date_start: calendarTab.activityDate,
-          time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
-          date_end: calendarTab.activityDate,
-          all_day: calendarTab.activityAllDay,
-          subject: calendarTab.activitySubject,
-        }
-      }}
-      idCustomer={idCustomer}
-      onClose={() => { calendarTab.setShowIdActivity(0) }}
-      onAfterSaveRecord={(form: any, saveResponse: any) => {
-        if (saveResponse.status == "success") {
-          calendarTab.setShowIdActivity(0);
-        }
-      }}
-    ></CustomerFormActivity>;
+    return <CalendarTabFormActivity
+      calendarTab={calendarTab}
+      customInputFields={['id_customer']}
+      defaultValues={{id_customer: props.id}}
+      model='Hubleto/App/Community/Customers/Models/CustomerActivity'
+    ></CalendarTabFormActivity>;
   }}
 ></CalendarTab>;
 

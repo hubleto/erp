@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import Translator from "@hubleto/react-ui/core/Translator";
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
-import { useRecord, useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
+import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
-import CalendarTab, { CalendarTabContext } from '@hubleto/react-ui/components/fc/FormComponents/CalendarTab';
-import LeadFormActivity from './LeadFormActivity';
+import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
 import moment from "moment";
-import PrintPreviewUi from '@hubleto/react-ui/components/fc/FormComponents/PrintPreviewUi';
 
 import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
 import Table from '@hubleto/react-ui/components/fc/Table';
+import CalendarTabFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
 
 export interface FormLeadProps extends FormProps {}
 
@@ -81,13 +80,13 @@ const TabDefault = (props: FormLeadProps) => {
         {nextActivityDate ?
           <div className='block alert alert-success'>
             <i className='fas fa-calendar mr-2'></i>
-            Next activity is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+            Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
             <br/>
             <i>{nextActivity.subject}</i>
           </div>
         : <div className='block alert alert-danger'>
             <i className='fas fa-calendar mr-2'></i>
-            No future activity is planned.
+            No future follow-up is planned.
           </div>
         }
       </> : null}
@@ -101,42 +100,21 @@ const TabDefault = (props: FormLeadProps) => {
       <Input field='id_customer' />
       <Input field='id_contact' />
       <Input field='shared_folder' customInputProps={{readonly: isClosed}} />
-      <Input field='date_created' />
     </div>
   </div>;
 }
 
 /** TabCalendar */
 const TabCalendar = (props: FormProps) => <CalendarTab
-  calendarSource='leads'
-  externalIdColumn='idLead'
-  logActivityEndpoint='leads/api/log-activity'
+  loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=leads&idLead=' + props.id}
+  logActivityEndpoint={'leads/api/log-activity?idLead=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    const idCustomer: number = useRecordField('id_customer', 0);
-    const idContact: number = useRecordField('id_contact', 0);
-
-    return <LeadFormActivity
-      id={calendarTab.showIdActivity}
-      description={{
-        defaultValues: {
-          id_lead: props.id,
-          id_contact: idContact,
-          date_start: calendarTab.activityDate,
-          time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
-          date_end: calendarTab.activityDate,
-          all_day: calendarTab.activityAllDay,
-          subject: calendarTab.activitySubject,
-        }
-      }}
-      idCustomer={idCustomer}
-      idContact={idContact}
-      onClose={() => { calendarTab.setShowIdActivity(0) }}
-      onAfterSaveRecord={(form: any, saveResponse: any) => {
-        if (saveResponse.status == "success") {
-          calendarTab.setShowIdActivity(0);
-        }
-      }}
-    ></LeadFormActivity>;
+    return <CalendarTabFormActivity
+      calendarTab={calendarTab}
+      customInputFields={['id_lead']}
+      defaultValues={{id_lead: props.id}}
+      model='Hubleto/App/Community/Leads/Models/LeadActivity'
+    ></CalendarTabFormActivity>;
   }}
 ></CalendarTab>;
 
@@ -215,7 +193,7 @@ const FormLead = (props: FormLeadProps) => {
     endpointParams={{saveRelations: ['TAGS'] }}
     tabs={{
       default: { title: <b>{T.translate('Lead')}</b>, content: () => <TabDefault {...props} /> },
-      calendar: { title: T.translate('Calendar'), content: () => <TabCalendar /> },
+      calendar: { title: T.translate('Calendar'), content: () => <TabCalendar {...props} /> },
       email_clicks: { title: T.translate('Email Clicks'), content: () => <TabEmailClicks {...props} /> },
       tasks: { title: T.translate('Tasks'), content: () => <TabTasks {...props} /> },
       history: { icon: 'fas fa-clock-rotate-left', position: 'right', content: () => <TabHistory /> },

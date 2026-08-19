@@ -173,11 +173,10 @@ class Loader extends \Hubleto\Erp\App
     $dueAndChargeableItemsCount = $counter->dueAndChargeableItemsNotPreparedForInvoice();
 
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/orders">
-          <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
-          <span class="text">' . $this->translate('Orders') . '</span>
-        </a>
+      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/orders">
+        ' . $this->translate('Orders') . '
+      </a></div>
+      <div class="app-sidebar-buttons">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/items">
           <span class="icon"><i class="fas fa-list"></i></span>
           <span class="text">' . $this->translate('Items') . '</span>

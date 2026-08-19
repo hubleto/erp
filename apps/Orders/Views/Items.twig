@@ -1,5 +1,3 @@
-<h1 class="app-main-title">{{ translate('Orders') }} > {{ translate('Items') }}</h1>
-
 {% if viewParams.dueAndChargeableItemsNotPreparedForInvoice|length > 0 %}
   {% for i in viewParams.dueAndChargeableItemsNotPreparedForInvoice %}
     <div class="alert alert-warning">
@@ -11,6 +9,7 @@
 {% endif %}
 
 <hblreact-orders-table-items
+  string:title="{{ translate('Items') }}"
   string:tag="table-items"
   string:view="{{ viewParams.view }}"
   int:record-id="{{ viewParams.recordId }}"

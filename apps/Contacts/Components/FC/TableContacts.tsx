@@ -92,12 +92,14 @@ const TableContacts = (props: TableContactsProps) => {
                   className="btn btn-transparent w-full"
                   onClick={() => { table.setRecordId(item.id); }}
                 >
-                  <span className="icon flex flex-col gap-2">
-                    <i className="fas fa-user text-2xl"></i>
-                    {item.is_primary ? <div className="badge badge-violet">{T.translate("Primary")}</div> : null}
-                    {item.is_for_invoicing ? <div className="badge badge-green">{T.translate("Invoicing")}</div> : null}
+                  <span className="icon">
+                    <i className="fas fa-user text-2xl m-2"></i>
                   </span>
                   <span className="text" style={{maxHeight: "10em"}}>
+                    <div className="flex gap-1">
+                      {item.is_primary ? <div className="badge badge-small badge-violet">{T.translate("Primary")}</div> : null}
+                      {item.is_for_invoicing ? <div className="badge badge-small badge-green">{T.translate("Invoicing")}</div> : null}
+                    </div>
                     <div className="flex gap-2">
                       {item.salutation ?? ''}
                       <b>{item.first_name ?? ''}</b>

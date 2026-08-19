@@ -162,7 +162,6 @@ const TabDefault = (props: FormDealProps) => {
             tag={"table_deal_task"}
             parentForm={form}
             uid={props.uid + "_table_deal_task"}
-            idCustomer={idCustomer}
             junctionTitle='Deal'
             junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
             junctionSourceColumn='id_deal'
@@ -290,8 +289,6 @@ const TabTasks = (props: FormDealProps) => {
     tag={"table_deal_task"}
     parentForm={form}
     uid={props.uid + "_table_deal_task"}
-    idCustomer={idCustomer}
-    idContact={idContact}
     junctionTitle='Deal'
     junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
     junctionSourceColumn='id_deal'

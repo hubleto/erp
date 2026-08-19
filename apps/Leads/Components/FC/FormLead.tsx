@@ -24,11 +24,10 @@ const T = new Translator(
 /** TabDefault */
 const TabDefault = (props: FormLeadProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
-  const R = useRecord();
-  const ACTIVITIES = R.ACTIVITIES;
-  const TAGS = R.TAGS;
-  const status = R.status;
-  const isClosed = R.is_closed;
+  const ACTIVITIES: any = useRecordField('ACTIVITIES', {});
+  const TAGS: Array<any> = useRecordField('TAGS', []);
+  const status: number = useRecordField('status', 0);
+  const isClosed: boolean = useRecordField('is_closed', false);
 
   let nextActivity: any = null;
   let nextActivityDate: any = null;

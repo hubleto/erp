@@ -19,9 +19,9 @@ const T = new Translator(parentApp + '/Loader', 'Components/FormCampaign');
 /** TabDefault */
 const TabDefault = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
-  const TAGS = useRecordField('TAGS');
+  const TAGS: Array<any> = useRecordField('TAGS', []);
 
-  return <div className='flex gap-2 flex-col md:flex-row'>
+return <div className='flex gap-2 flex-col md:flex-row'>
     <div className='grow'>
       <Input field='title' />
       <Input title={T.translate('Tags')}>

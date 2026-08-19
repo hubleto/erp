@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
@@ -18,8 +18,11 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 /** TabDefault */
 const TabDefault = (props: FormContactProps) => {
   const form = React.useContext(FormMetaContext);
-  const TAGS: Array<any> = useRecordField('TAGS');
-  const VALUES: Array<any> = useRecordField('VALUES');
+  const middleName: string = useRecordField('middle_name', '');
+  const TAGS: Array<any> = useRecordField('TAGS', []);
+  const VALUES: Array<any> = useRecordField('VALUES', []);
+
+  const [showMiddleNameInput, setShowMiddleNameInput] = useState(middleName != '');
 
   const getType = (value: string) => {
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
@@ -45,7 +48,7 @@ const TabDefault = (props: FormContactProps) => {
   return <>
     <div className='card'>
       <div className='card-body flex flex-col md:flex-row gap-2'>
-        <div className="flex-3">
+        <div className="flex-1">
           <div className="flex gap-2 w-full">
             <div>
               <i className="fas fa-user text-2xl p-4 text-gray-500"></i>
@@ -59,7 +62,10 @@ const TabDefault = (props: FormContactProps) => {
               <Input field='salutation' />
               <Input field='title_before' />
               <Input field='first_name' />
-              <Input field='middle_name' />
+              {showMiddleNameInput ? <Input field='middle_name' />
+              : <button className='btn btn-small btn-transparent'
+                onClick={() => setShowMiddleNameInput(true)}
+              ><span className='text'>Add middle name</span></button>}
               <Input field='last_name' />
               <Input field='title_after' />
             </div>
@@ -137,13 +143,14 @@ const TabDefault = (props: FormContactProps) => {
     <a
       className="btn btn-add-outline mt-2"
       onClick={() => {
+        console.log('add contact', VALUES);
         let newValues: Array<any> = VALUES || [];
         newValues.push({
           id: -1,
           id_contact: { _useMasterRecordId_: true },
           type: 'email',
         });
-        form.changeRecord({VALUES: newValues});
+        form.changeRecord({VALUES: [...newValues]});
       }}
     >
       <span className="icon"><i className="fas fa-add"></i></span>
@@ -160,16 +167,7 @@ const FormContact = (props: FormContactProps) => {
     model={parentApp + '/Models/Contact'}
     urlSlug='contacts'
     endpointParams={{saveRelations: ['VALUES', 'TAGS']}}
-    renderTitle={(): React.JSX.Element => {
-      const firstName = useRecordField('first_name', '');
-      const lastName = useRecordField('last_name', '');
-
-      return <div>
-        <h2>{firstName}&nbsp;{lastName}</h2>
-        <small>{T.translate('Contact')}</small>
-      </div>;
-    }}
-
+    title={{fields: ['first_name', 'middle_name', 'last_name'], sub: T.translate('Contact')}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

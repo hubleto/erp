@@ -21,7 +21,7 @@ const TabDefault = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
   const TAGS: Array<any> = useRecordField('TAGS', []);
 
-return <div className='flex gap-2 flex-col md:flex-row'>
+  return <div className='flex gap-2 flex-col md:flex-row'>
     <div className='grow'>
       <Input field='title' />
       <Input title={T.translate('Tags')}>
@@ -156,7 +156,7 @@ const FormCampaign = (props: FormCampaignProps) => {
   }
 
   if (props.id > 0) {
-    tabs['calendar'] ={ title: T.translate('Recipients'), content: () => <TabRecipients /> };
+    tabs['recipients'] = { title: T.translate('Recipients'), content: () => <TabRecipients /> };
   }
 
   return <Form
@@ -165,12 +165,6 @@ const FormCampaign = (props: FormCampaignProps) => {
     model={parentApp + '/Models/Campaign'}
     urlSlug='email-marketing/campaigns'
     endpointParams={{saveRelations: ['TAGS'] }}
-    onAfterFormInitialized={(form: any) => {
-      form.setReadonly(form.recordStore.getField('is_closed') == 1);
-    }}
-    getContentClassName={(form: FormMeta) => {
-      return useRecordField('is_closed') == 1 ? '' : 'bg-gray-200';
-    }}
     title={{field: 'title', sub: T.translate('Campaign')}}
     tabs={tabs}
     {...props}

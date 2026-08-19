@@ -44,7 +44,7 @@ const TabDefault = (props: FormLeadProps) => {
   }
 
   return <div className='card card-body flex flex-col gap-2 md:flex-row'>
-    <div className='grow'>
+    <div className='flex-1'>
       <Input field='title' customInputProps={{cssClass: 'text-2xl'}} />
       <Input field='email' />
       <Input field='phone' />
@@ -74,8 +74,7 @@ const TabDefault = (props: FormLeadProps) => {
       <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600', readonly: isClosed}} />
       {status == 4 ? <Input field='lost_reason' customInputProps={{readonly: isClosed}} />: null}
     </div>
-    <div className='border-l border-gray-200'></div>
-    <div className='grow'>
+    <div className='flex-1'>
       {form.id > 0 ? <>
         {nextActivityDate ?
           <div className='block alert alert-success'>

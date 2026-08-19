@@ -5,9 +5,8 @@
 {% macro appBtn(app, inGroup, badgeNumber) %}
   <div class="flex gap-1">
     <a
-      type="button"
       class="
-        btn
+        sidebar-btn
         {% if app.isActivated %} btn-active {% else %}
         {% if notificationsCount > 0 %} text-yellow-100 {% endif %} {% endif %} flex-10 truncate
       "
@@ -84,7 +83,7 @@
   
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
 
-    <div id="app-launcher" onclick="lchr(false);">
+    <div class="app-launcher" onclick="lchr(false);">
       <div>
       <div class="app-launcher-header">
         <input placeholder="{{ translate("Search app...") }}" onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
@@ -100,7 +99,7 @@
       {% endfor %}
     </div></div>
 
-    <nav id="default-navbar"><div class="flex items-center gap-2">
+    <nav class="app-navbar"><div class="flex items-center gap-2">
       <div class="flex items-center gap-2">
         <div class="flex flex-row justify-around md:gap-2">
           <a class="flex" href="{{ config.projectUrl }}/" class="w-8 h-8">
@@ -256,127 +255,122 @@
       </div>
     </div></nav>
 
-    <aside id="default-sidebar">
-      <nav>
-        <a class="btn btn-primary-outline {{ hubleto.router().getRoute() == '' ? "btn-active" : "" }}" href="{{ config.projectUrl }}/">
-          <span class="icon"><i class="fas fa-home"></i></span>
-          <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
-        </a>
-          <div class="h-2 w-4 mx-auto">
-            <div id="ajax-loader"></div>
-          </div>
-        <div class="nav-inner">
-          {% for app in hubleto.appManager().getEnabledApps() %}
-            {% if hubleto.appManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
-              {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}
-            {% endif %}
-          {% endfor %}
-
-          {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
-            {% set appBtns = [] %}
-            {% set hasActivatedApp = false %}
-            {% for app in viewParams.appsInSidebar %}
-              {% if sidebarGroup in app.manifest.sidebarGroup|split(',') %}
-                {% set appBtns = appBtns|merge([_self.appBtn(app, true, viewParams.sidebarBadgeNumbers[app.manifest.namespace])]) %}
-                {% if app.isActivated %}
-                  {% set hasActivatedApp = true %}
-                {% endif %}
+    <div class="app-desktop">
+      <aside class="app-sidebar">
+        <div class="first-sidebar">
+          <div class="app-main-title"><a href="{{ config.projectUrl }}/">
+            <span class="text">{{ user.DEFAULT_COMPANY.name }}</span>
+          </a></div>
+          <div class="app-loader-bar"></div>
+          <div class="app-buttons">
+            {% for app in hubleto.appManager().getEnabledApps() %}
+              {% if hubleto.appManager().apps.canAppDangerouslyInjectDesktopHtmlContent(app.namespace) %}
+                {{ app.dangerouslyInjectDesktopHtmlContent('beforeSidebar')|raw }}
               {% endif %}
             {% endfor %}
 
-            {% if hubleto.router().getRoute() == 'desktop/' ~ sidebarGroup %}
-              {% set hasActivatedApp = true %}
-            {% endif %}
+            {% for sidebarGroup, sidebarGroupData in viewParams.sidebarGroups %}
+              {% set appBtns = [] %}
+              {% set hasActivatedApp = false %}
+              {% for app in viewParams.appsInSidebar %}
+                {% if sidebarGroup in app.manifest.sidebarGroup|split(',') %}
+                  {% set appBtns = appBtns|merge([_self.appBtn(app, true, viewParams.sidebarBadgeNumbers[app.manifest.namespace])]) %}
+                  {% if app.isActivated %}
+                    {% set hasActivatedApp = true %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
 
-            {% if appBtns|length == 0 %}
-            {% else %}
-              <div
-                id="sg_{{ sidebarGroup }}"
-                class="
-                  sidebar-group
-                  {% if hasActivatedApp %} activated {% endif %}
-                  {% if sidebarGroupData.isCollapsed %} collapsed {% endif %}
-                "
-                style="
-                  border-left:5px solid {{ sidebarGroupData.color }};
-                  border-top:1px solid {{ sidebarGroupData.color }}20;
-                  margin-top:1px;
-                "
-                data-is-collapsed="{{ sidebarGroupData.isCollapsed }}"
-              >
-                <div class="flex align-justify">
-                  <a
-                    class="sidebar-group-title grow"
-                    onclick="
-                      $('.sidebar-group').removeClass('activated');
-                      $(this).closest('.sidebar-group').addClass('activated');
-                    "
-                    href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
-                  >
-                    {{ sidebarGroupData.title }}
-                  </a>
-                  <button
-                    class="sidebar-group-collapse-expand-btn"
-                    onclick="toggleSidebarGroup('{{ sidebarGroup }}');"
-                  >
-                    <span class="icon icon-collapsed text-[8px]"><i class="fas fa-arrow-down"></i></span>
-                    <span class="icon icon-expanded text-[8px]"><i class="fas fa-arrow-up"></i></span>
-                  </button>
-                </div>
+              {% if hubleto.router().getRoute() == 'desktop/' ~ sidebarGroup %}
+                {% set hasActivatedApp = true %}
+              {% endif %}
+
+              {% if appBtns|length == 0 %}
+              {% else %}
                 <div
-                  id="sg_{{ sidebarGroup }}_btns"
-                  class="sidebar-group-btns"
+                  id="sg_{{ sidebarGroup }}"
+                  class="
+                    sidebar-group
+                    {% if hasActivatedApp %} activated {% endif %}
+                    {% if sidebarGroupData.isCollapsed %} collapsed {% endif %}
+                  "
+                  style="
+                    border-left:5px solid {{ sidebarGroupData.color }};
+                    margin-top:1px;
+                  "
                   data-is-collapsed="{{ sidebarGroupData.isCollapsed }}"
                 >
-                  <div class="inner">{{ appBtns|join('')|raw }}</div>
+                  <div class="flex align-justify">
+                    <a
+                      class="sidebar-group-title grow"
+                      onclick="
+                        $('.sidebar-group').removeClass('activated');
+                        $(this).closest('.sidebar-group').addClass('activated');
+                      "
+                      href="{{ config.projectUrl }}/~/{{ sidebarGroup }}" data-pr-tooltip="{{ sidebarGroupData.title }}"
+                    >
+                      {{ sidebarGroupData.title }}
+                    </a>
+                    <button
+                      class="sidebar-group-collapse-expand-btn"
+                      onclick="toggleSidebarGroup('{{ sidebarGroup }}');"
+                    >
+                      <span class="icon icon-collapsed text-[8px]"><i class="fas fa-arrow-down"></i></span>
+                      <span class="icon icon-expanded text-[8px]"><i class="fas fa-arrow-up"></i></span>
+                    </button>
+                  </div>
+                  <div
+                    id="sg_{{ sidebarGroup }}_btns"
+                    class="sidebar-group-btns"
+                    data-is-collapsed="{{ sidebarGroupData.isCollapsed }}"
+                  >
+                    <div class="inner">{{ appBtns|join('')|raw }}</div>
+                  </div>
                 </div>
+              {% endif %}
+            {% endfor %}
+            {% set i = 0 %}
+            {% for app in viewParams.appsInSidebar %}
+              {% if app.manifest.sidebarGroup is empty %} {{ _self.appBtn(app, false) }} {% endif %}
+              {% set i = i + 1 %}
+            {% endfor %}
+          </div>
+          <div class='app-release-info'>
+            {% if user.DEFAULT_COMPANY.logo != '' %}
+              <div class="m-4">
+                <img
+                  src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
+                  class="max-h-4 m-auto"
+                />
               </div>
             {% endif %}
-          {% endfor %}
-          {% set i = 0 %}
-          {% for app in viewParams.appsInSidebar %}
-            {% if app.manifest.sidebarGroup is empty %} {{ _self.appBtn(app, false) }} {% endif %}
-            {% set i = i + 1 %}
-          {% endfor %}
-        </div>
-        <div class='nav-release-info text-center'>
-          {% if user.DEFAULT_COMPANY.logo != '' %}
-            <div class="m-4">
-              <img
-                src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
-                class="max-h-4 m-auto"
-              />
+            <div>
+              [{{ viewParams.release }}]
+              {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Enterprise\\Cloud') %}
+                [<a href="{{ config.projectUrl }}/cloud">{{ subscriptionPlan }}</a>]
+              {% endif %}
             </div>
-          {% endif %}
-          <div>
-            [{{ viewParams.release }}]
-            {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Enterprise\\Cloud') %}
-              [<a href="{{ config.projectUrl }}/cloud">{{ subscriptionPlan }}</a>]
-            {% endif %}
-          </div>
-          <div>
-            <a href="https://www.hubleto.eu/en/privacy-policy" target="_blank">{{ translate('Privacy policy') }}</a>
-            <a href="https://www.hubleto.eu/en/terms-of-use" target="_blank">{{ translate('Terms of use') }}</a>
+            <div>
+              <a href="https://www.hubleto.eu/en/privacy-policy" target="_blank">{{ translate('Privacy policy') }}</a>
+              <a href="https://www.hubleto.eu/en/terms-of-use" target="_blank">{{ translate('Terms of use') }}</a>
+            </div>
           </div>
         </div>
-      </nav>
-      {% if viewParams.secondSidebar != '' %}
-        <div class="second-sidebar">
-          {{ viewParams.secondSidebar|raw }}
-          <div class="flex flex-col mt-2">{{ viewParams.priorityNotifications|raw }}</div>
-        </div>
-      {% endif %}
-    </aside>
+        {% if viewParams.secondSidebar != '' %}
+          <div class="second-sidebar">
+            {{ viewParams.secondSidebar|raw }}
+            <div class="flex flex-col m-2">{{ viewParams.priorityNotifications|raw }}</div>
+          </div>
+        {% endif %}
+      </aside>
 
-    <div
-      id="app-main-content"
-      class="{% if viewParams.secondSidebar != '' %} sidebar-two-levels {% endif %}"
-    >
-      {% if viewParams.priorityNotifications != '' %}
-        <div class="block md:hidden pb-2">{{ viewParams.priorityNotifications|raw }}</div>
-      {% endif %}
+      <div class="app-content {% if viewParams.secondSidebar != '' %} with-second-sidebar {% endif %}">
+        {% if viewParams.priorityNotifications != '' %}
+          <div class="block md:hidden m-2">{{ viewParams.priorityNotifications|raw }}</div>
+        {% endif %}
 
-      {{ contentHtml|raw }}
+        {{ contentHtml|raw }}
+      </div>
     </div>
 
     <div id="app-dialogs"></div>
@@ -426,10 +420,10 @@
 
     function lchr(show) {
       if (show) {
-        $('#app-launcher').addClass('visible');
-        $('#app-launcher > div .app-launcher-header input').focus();
+        $('.app-launcher').addClass('visible');
+        $('.app-launcher > div .app-launcher-header input').focus();
       } else {
-        $('#app-launcher').removeClass('visible');
+        $('.app-launcher').removeClass('visible');
       }
     }
 
@@ -443,7 +437,7 @@
     }
 
     function toggleSidebar() {
-      $("#default-sidebar").toggleClass('visible');
+      $(".default-sidebar").toggleClass('visible');
     }
 
     function toggleSidebarGroup(sgid) {

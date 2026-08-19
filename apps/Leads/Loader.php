@@ -137,11 +137,10 @@ class Loader extends \Hubleto\Erp\App
   {
 
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/leads">
-          <span class="icon"><i class="fas fa-people-arrows"></i></span>
-          <span class="text">' . $this->translate('Leads') . '</span>
-        </a>
+      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/leads">
+        ' . $this->translate('Leads') . '
+      </a></div>
+      <div class="app-sidebar-buttons">
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/leads/plan">
           <span class="icon"><i class="fas fa-list-ol"></i></span>
           <span class="text">' . $this->translate('Plan') . '</span>

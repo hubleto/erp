@@ -41,7 +41,7 @@ const TableContacts = (props: TableContactsProps) => {
                 if (value.type == "email" && contactsRendered < 2) {
                   contactsRendered += 1;
                   return (
-                    <div className='border border-gray-400 rounded px-1' key={data.id + '-email-' + key}>
+                    <div key={data.id + '-email-' + key}>
                       {value.value} {value.CATEGORY ? <>({value.CATEGORY.name})</> : null}
                     </div>
                   );
@@ -57,7 +57,7 @@ const TableContacts = (props: TableContactsProps) => {
                 if (value.type == "number" && contactsRendered < 2) {
                   contactsRendered += 1;
                   return (
-                    <div className='border border-gray-400 rounded px-1' key={data.id + '-number-' + key}>
+                    <div key={data.id + '-number-' + key}>
                       {value.value} {value.CATEGORY ? <>({value.CATEGORY.name})</> : null}
                     </div>
                   );
@@ -77,12 +77,12 @@ const TableContacts = (props: TableContactsProps) => {
         }
 
         return <>
-          <div className='flex gap-2'>
+          {/* <div className='flex gap-2'>
             {table.renderDefaultHeaderButtons()}
             <div className='[&_.table-header-search]:flex'>
               {table.renderDefaultFulltextSearch()}
             </div>
-          </div>
+          </div> */}
           {table.renderDefaultFormModal()}
           <div className="md:grid md:grid-cols-2 gap-2 mt-2">
             {Object.keys(table.data?.records).map((key) => {
@@ -120,6 +120,9 @@ const TableContacts = (props: TableContactsProps) => {
                 </button>
               </div>;
             })}
+            <div>
+              {table.renderDefaultAddButton()}
+            </div>
           </div>
         </>;
       } else {

@@ -29,7 +29,7 @@ const TabDefault = ({ formEmail }) => {
         <Input field='mail_body' />
       </div>
       <div className='flex-1'>
-        <Input field='is_approved' />
+        <Input field='is_approved' customInputProps={{yesText: 'Approved'}} />
         <Input field='target_audience' />
         <Input field='goal' />
         <Input field='notes' />

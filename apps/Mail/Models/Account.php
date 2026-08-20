@@ -19,6 +19,8 @@ class Account extends \Hubleto\Erp\Model
   public string $table = 'mails_accounts';
   public string $recordManagerClass = RecordManagers\Account::class;
   public ?string $lookupSqlValue = '{%TABLE%}.name';
+  public ?string $lookupUrlAdd = 'mail/accounts/add';
+  public ?string $lookupUrlDetail = 'mail/accounts/{%ID%}';
 
   public array $relations = [
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],

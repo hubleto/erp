@@ -43,7 +43,7 @@ const TabDefault = (props: FormLeadProps) => {
     });
   }
 
-  return <div className='card card-body flex flex-col gap-2 md:flex-row'>
+  return <div className='flex flex-col gap-2 md:flex-row'>
     <div className='flex-1'>
       <Input field='title' customInputProps={{cssClass: 'text-2xl'}} />
       <Input field='email' />

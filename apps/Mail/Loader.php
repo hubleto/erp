@@ -142,31 +142,29 @@ class Loader extends \Hubleto\Erp\App
     }
 
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/mail">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span class="text">' . $this->translate('Mail') . '</span>
-        </a>
+      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/mail">
+        ' . $this->translate('Mail') . '
+      </a></div>
+      <div class="app-sidebar-buttons">
 
         ' . $accountsHtml . '
 
-      <div>
         <a
-          class="btn btn-small btn-list-item btn-transparent mt-2"
+          class="btn btn-white"
           href="' . $this->env()->projectUrl . '/mail/get"
         >
           <span class="icon"><i class="fas fa-download"></i></span>
           <span class="text">' . $this->translate('Get emails') . '</span>
         </a>
         <a
-          class="btn btn-small btn-list-item btn-transparent mt-2"
+          class="btn btn-white"
           href="' . $this->env()->projectUrl . '/mail/scheduled"
         >
           <span class="icon"><i class="fas fa-clock"></i></span>
           <span class="text">' . $this->translate('Scheduled to send') . '</span>
         </a>
         <a
-          class="btn btn-small btn-list-item btn-transparent mt-2"
+          class="btn btn-white"
           href="' . $this->env()->projectUrl . '/mail/accounts"
         >
           <span class="icon"><i class="fas fa-cog"></i></span>

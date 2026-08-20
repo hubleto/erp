@@ -79,17 +79,16 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
     $myDueTodo = $counter->myDueTodo();
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-primary-outline btn-square" href="' . $this->env()->projectUrl . '/tasks">
-          <span class="icon"><i class="fas fa-list-check"></i></span>
-          <span class="text text-primary">' . $this->translate('Tasks') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/tasks/todo">
+      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/tasks">
+        ' . $this->translate('Tasks') . '
+      </a></div>
+      <div class="app-sidebar-buttons">
+        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/tasks/todo">
           <span class="icon"><i class="fas fa-receipt"></i></span>
           <span class="text">' . $this->translate('Todo') . '</span>
           ' . ($myDueTodo > 0 ? '<span class="badge badge-danger ml-auto">' . $myDueTodo . '</span>' : '') . '
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=tasks">
+        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/calendar?show=tasks">
           <span class="icon"><i class="fas fa-calendar-days"></i></span>
           <span class="text">' . $this->translate('Calendar') . '</span>
         </a>

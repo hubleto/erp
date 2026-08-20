@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\EmailMarketing
 appType: community
-sidebarGroup: marketing
+sidebarGroup: customer-acquisition
 rootUrlSlug: email-marketing
 name: Email marketing
 icon: fas fa-users-viewfinder

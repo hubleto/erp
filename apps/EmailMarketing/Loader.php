@@ -106,23 +106,23 @@ class Loader extends \Hubleto\Erp\App
         <span class="text">' . $this->translate('Email marketing') . '</span>
       </a></div>
       <div class="app-sidebar-buttons">
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails">
+        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/emails">
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span class="text">' . $this->translate('Emails') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails/sent">
+        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/emails/sent">
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span class="text">' . $this->translate('Sent emails') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails/clicks">
+        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/emails/clicks">
           <span class="icon"><i class="fas fa-hand-pointer"></i></span>
           <span class="text">' . $this->translate('Clicks') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/recipients">
+        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/recipients">
           <span class="icon"><i class="fas fa-paper-plane"></i></span>
           <span class="text">' . $this->translate('Recipients') . '</span>
         </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/recipients/statuses">
+        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/recipients/statuses">
           <span class="icon"><i class="fas fa-check-double"></i></span>
           <span class="text">' . $this->translate('Recipient statuses') . '</span>
         </a>

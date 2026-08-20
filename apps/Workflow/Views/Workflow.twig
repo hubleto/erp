@@ -22,10 +22,11 @@
 
 {% if viewParams.workflow.id > 0 %}
 
+  <div class="app-main-title"><span>{{ viewParams.workflow.name }}</span></div>
+
   <div class="flex gap-2 w-full">
     <div class="grow flex gap-2 flex-col md:flex-row" style="height:calc(100vh - var(--nav-height) - 1rem)">
       <div class="flex flex-col flex-grow overflow-auto">
-        <h1 class="app-main-title">{{ viewParams.workflow.name }}</h1>
 
         <div class="flex gap-2 mb-2">
           <div class="card-header">

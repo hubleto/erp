@@ -22,8 +22,8 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     $items = $items->get()?->toArray();
 
     foreach ($items as $key => $item) {
-      $items[$key]['_DETAIL_URL'] = 'campaigns/' . $item['id'];
-      $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:Campaigns/WorkflowItemDetail.twig';
+      $items[$key]['_DETAIL_URL'] = 'email-marketing/' . $item['id'];
+      $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:EmailMarketing/WorkflowItemDetail.twig';
     }
 
     return $items;

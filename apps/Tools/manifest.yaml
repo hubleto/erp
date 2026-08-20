@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Tools
 appType: community
-sidebarGroup: maintenance
+sidebarGroup: developer
 rootUrlSlug: tools
 name: Tools
 icon: fas fa-screwdriver-wrench

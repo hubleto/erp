@@ -95,11 +95,10 @@ class Loader extends \Hubleto\Erp\App
     $workflowButtonsHtml .= '</div>';
 
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/workflow">
-          <span class="icon"><i class="fas fa-timeline"></i></span>
-          <span class="text">' . $this->translate('Workflow') . '</span>
-        </a>
+      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/workflow">
+        ' . $this->translate('Workflow') . '
+      </a></div>
+      <div class="app-sidebar-buttons">
         ' . $workflowButtonsHtml . '
         <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/workflows">
           <span class="icon"><i class="fas fa-timeline"></i></span>

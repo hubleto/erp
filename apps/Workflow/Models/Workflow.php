@@ -19,7 +19,7 @@ class Workflow extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
       'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
       'show_in_kanban' => (new Boolean($this, $this->translate('Show in kanban')))->setDefaultVisible(),

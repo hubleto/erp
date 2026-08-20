@@ -16,22 +16,22 @@ class InvoicesApp extends App {
     globalThis.hubleto.registerReactComponent('InvoicesTableItems', TableItems);
     globalThis.hubleto.registerReactComponent('InvoicesTablePayments', TablePayments);
 
-    FormCustomizer.addFormHeaderExtraButton(
-      'FormOrder',
-      globalThis.hubleto.translate('Create invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'manifest'),
-      '',
-      (form: any) => {
-        request.get(
-          'invoices/api/create-invoice-from-order',
-          {idOrder: form.state.record.id},
-          (data: any) => {
-            if (data.status == "success") {
-              globalThis.window.open(globalThis.hubleto.config.projectUrl + '/invoices/' + data.idInvoice);
-            }
-          }
-        );
-      }
-    )
+    // FormCustomizer.addFormHeaderExtraButton(
+    //   'FormOrder',
+    //   globalThis.hubleto.translate('Create invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'manifest'),
+    //   '',
+    //   (form: any) => {
+    //     request.get(
+    //       'invoices/api/create-invoice-from-order',
+    //       {idOrder: form.state.record.id},
+    //       (data: any) => {
+    //         if (data.status == "success") {
+    //           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/invoices/' + data.idInvoice);
+    //         }
+    //       }
+    //     );
+    //   }
+    // )
   }
 }
 

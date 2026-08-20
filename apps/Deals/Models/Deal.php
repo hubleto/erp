@@ -93,8 +93,8 @@ class Deal extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Deal Identifier')))->setCssClass('badge badge-info')->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'identifier' => (new Varchar($this, $this->translate('Deal Identifier')))->setCssClass('badge badge-info')->setDefaultVisible(),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'id_lead' => (new Lookup($this, $this->translate('Lead'), Lead::class))->setReadonly(),
@@ -171,7 +171,7 @@ class Deal extends \Hubleto\Erp\Model
       case 'shared_folder':
         $description
           ->setReactComponent('InputHyperlink')
-          ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+          ->setHint($this->translate('Link to shared folder (online storage) with related documents'))
         ;
         break;
     }

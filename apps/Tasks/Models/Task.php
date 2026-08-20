@@ -86,8 +86,8 @@ class Task extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setDescription($this->translate('Leave empty to generate automatically.'))->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setHint($this->translate('Leave empty to generate automatically.')),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description (Scope of Work)'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden()->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),

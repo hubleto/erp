@@ -47,101 +47,107 @@ const TabDefault = (props: FormOrderProps) => {
   }
 
   return <>
-    <Input field='purchase_sales' renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />
-    <div className='card mt-2'>
-      <div className='card-body flex flex-row gap-2'>
-        <div className='grow'>
-          <div className='flex gap-2'>
-            <div className='grow'>
-              <Input field={purchaseSales == 1 ? 'id_supplier' : 'id_customer'} />
-            </div>
-            <div>
-              <Input title={"Deal"}>
-                {selectParentDeal ? <LookupInput
-                  model='Hubleto/App/Community/Deals/Models/Deal'
-                  cssClass='font-bold'
-                  onChange={(input: any, value: any) => {
-                    request.post(
-                      'deals/api/set-parent-deal',
-                      { idOrder: props.id, idDeal: value },
-                      {},
-                      (data: any) => { setSelectParentDeal(false); }
-                    )
-                  }}
-                ></LookupInput>
-                : <>
-                  {DEALS ? DEALS.map((item, key) => {
-                    if (!item.DEAL) return null;
-                    return (item.DEAL ? <a
-                      key={key}
-                      className='badge'
-                      href={globalThis.hubleto.config.projectUrl + '/deals/' + item.DEAL.id}
-                      target='_blank'
-                    >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
-                  }) : null}
-                  <button
-                    className='btn btn-small btn-transparent'
-                    onClick={() => {
-                      setSelectParentDeal(true);
-                    }}
-                  >
-                    <span className='text'>{T.translate('Select parent deal')}</span>
-                  </button>
-                </>}
-              </Input>
-            </div>
+    <div className='flex gap-2'>
+      <div className='flex-6'>
+        <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+      </div>
+      <div className='flex-1 flex'>
+        <Input field='identifier' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+      </div>
+    </div>
+    <div className='flex flex-row gap-2'>
+      <div className='grow'>
+        <div className='flex gap-2'>
+          <div className='grow'>
+            <Input field='purchase_sales' renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />
+            <Input field={purchaseSales == 1 ? 'id_supplier' : 'id_customer'} />
           </div>
-          <div className='flex gap-2'>
-            <div className='grow'>
-              <Input field='identifier' customInputProps={{cssClass: 'text-2xl'}} />
-              <Input field='title' customInputProps={{cssClass: 'text-2xl'}} />
-              <Divider></Divider>
-              <div className='flex gap-2'>
-                <div>
-                  <Input field='price_excl_vat' />
-                  <Input field='price_incl_vat' />
-                </div>
-                <div>
-                  <Input field='id_currency' customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'select'}} />
-                  <Input field='payment_period' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-                </div>
+          <div>
+            <Input title={"Deal"}>
+              {selectParentDeal ? <LookupInput
+                model='Hubleto/App/Community/Deals/Models/Deal'
+                cssClass='font-bold'
+                onChange={(input: any, value: any) => {
+                  request.post(
+                    'deals/api/set-parent-deal',
+                    { idOrder: props.id, idDeal: value },
+                    {},
+                    (data: any) => { setSelectParentDeal(false); }
+                  )
+                }}
+              ></LookupInput>
+              : <>
+                {DEALS ? DEALS.map((item, key) => {
+                  if (!item.DEAL) return null;
+                  return (item.DEAL ? <a
+                    key={key}
+                    className='badge'
+                    href={globalThis.hubleto.config.projectUrl + '/deals/' + item.DEAL.id}
+                    target='_blank'
+                  >#{item.DEAL.identifier}&nbsp;{item.DEAL.title}</a> : '#');
+                }) : null}
+                <button
+                  className='btn btn-small btn-transparent'
+                  onClick={() => {
+                    setSelectParentDeal(true);
+                  }}
+                >
+                  <span className='text'>{T.translate('Select parent deal')}</span>
+                </button>
+              </>}
+            </Input>
+          </div>
+        </div>
+        <div className='flex gap-2'>
+          <div className='grow'>
+            {/* <Input field='identifier' customInputProps={{cssClass: 'text-2xl'}} />
+            <Input field='title' customInputProps={{cssClass: 'text-2xl'}} /> */}
+            {/* <Divider></Divider> */}
+            <div className='flex gap-2'>
+              <div>
+                <Input field='price_excl_vat' />
+                <Input field='price_incl_vat' />
               </div>
-              <Divider></Divider>
-              <Input field='date_order' />
-              <Input field='required_delivery_date' />
-              <Input field='date_expiration' />
-              <Input field='date_next_invoice_expected' />
-              <Divider></Divider>
-              <Input field='shared_folder' />
-            </div>
-            <div className='grow'>
-              {props.id > 0 ? <>
-                {nextActivityDate ?
-                  <div className='block alert alert-success'>
-                    <i className='fas fa-calendar mr-2'></i>
-                    Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
-                    <br/>
-                    <i>{nextActivity.subject}</i>
-                  </div>
-                : <div className='block alert alert-danger'>
-                    <i className='fas fa-calendar mr-2'></i>
-                    No future follow-up is planned.
-                  </div>
-                }
-              </> : null}
-              <Input field='identifier_external' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-              <div className='flex gap-2 items-center w-full'>
-                <div className='grow'>
-                  <Input field='prepaid_working_hours' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-                </div>
-                <div className='grow'>
-                  <Input field='prepaid_working_hours_period' renderOnlyInputField />
-                </div>
+              <div>
+                <Input field='id_currency' customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'select'}} />
+                <Input field='payment_period' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
               </div>
-              <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 border-none'}} />
-              <Divider></Divider>
-              <Input field='shipping_info' />
             </div>
+            <Divider></Divider>
+            <Input field='date_order' />
+            <Input field='required_delivery_date' />
+            <Input field='date_expiration' />
+            <Input field='date_next_invoice_expected' />
+            <Divider></Divider>
+            <Input field='shared_folder' />
+          </div>
+          <div className='grow'>
+            {props.id > 0 ? <>
+              {nextActivityDate ?
+                <div className='block alert alert-success'>
+                  <i className='fas fa-calendar mr-2'></i>
+                  Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+                  <br/>
+                  <i>{nextActivity.subject}</i>
+                </div>
+              : <div className='block alert alert-danger'>
+                  <i className='fas fa-calendar mr-2'></i>
+                  No future follow-up is planned.
+                </div>
+              }
+            </> : null}
+            <Input field='identifier_external' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+            <div className='flex gap-2 items-center w-full'>
+              <div className='grow'>
+                <Input field='prepaid_working_hours' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+              </div>
+              <div className='grow'>
+                <Input field='prepaid_working_hours_period' renderOnlyInputField />
+              </div>
+            </div>
+            <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 border-none'}} />
+            <Divider></Divider>
+            <Input field='shipping_info' />
           </div>
         </div>
       </div>

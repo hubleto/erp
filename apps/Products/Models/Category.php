@@ -20,7 +20,7 @@ class Category extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_parent' => (new Lookup($this, $this->translate("Parent"), Category::class))->setDefaultVisible(),
-      'name' => (new Varchar($this, $this->translate("Name")))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate("Name")))->setDefaultVisible(),
       'color' => (new Color($this, $this->translate("Color")))->setDefaultVisible(),
       'short_description' => (new Text($this, $this->translate("Short description"))),
       'long_description' => (new Text($this, $this->translate("Long description")))->setReactComponent('InputWysiwyg'),

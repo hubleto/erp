@@ -29,11 +29,11 @@ class Dashboard extends \Hubleto\Erp\Model
         ->setRequired()
         ->setDefaultVisible()
         ->setDefaultValue($this->authProvider()->getUserId()),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible(),
       'slug' => (new Varchar($this, $this->translate('Slug')))->setRequired()->setDefaultVisible(),
       'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
       'is_default' => (new Boolean($this, $this->translate('Is default')))->setDefaultVisible()
-        ->setDescription($this->translate("By turning this on you will change the dashboard shown on the Homepage"))
+        ->setHint($this->translate("By turning this on you will change the dashboard shown on the Homepage"))
       ,
     ]);
   }

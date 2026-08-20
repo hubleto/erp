@@ -64,11 +64,11 @@ class Product extends \Hubleto\Erp\Model
 
     return array_merge(parent::describeColumns(), [
       'ean' => (new Varchar($this, $this->translate('EAN')))->setRequired()->setDefaultVisible(),
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'id_group' => (new Lookup($this, $this->translate('Group'), Group::class)),
       'id_category' => (new Lookup($this, $this->translate('Category'), Category::class)),
-      'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setDescription($typeDescription)->setDefaultVisible(),
-      'invoicing_policy' => (new Integer($this, $this->translate('Invoicing policy')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::INVOICING_POLICY_ENUM_VALUES))->setDescription($invoicingPolicyDescription),
+      'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setHint($typeDescription)->setDefaultVisible(),
+      'invoicing_policy' => (new Integer($this, $this->translate('Invoicing policy')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::INVOICING_POLICY_ENUM_VALUES))->setHint($invoicingPolicyDescription),
       'is_on_sale' => new Boolean($this, $this->translate('On sale'))->setDefaultVisible(),
       'image_1' => new Image($this, $this->translate('Image 1')),
       'image_2' => new Image($this, $this->translate('Image 2')),
@@ -83,7 +83,7 @@ class Product extends \Hubleto\Erp\Model
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
       'qr_code_data' => new Varchar($this, $this->translate('Data ')),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
-      'package_unit' => new Varchar($this, $this->translate('Packaging unit'))->setDescription($this->translate('E.g.: palette, box, bag')),
+      'package_unit' => new Varchar($this, $this->translate('Packaging unit'))->setHint($this->translate('E.g.: palette, box, bag')),
       'package_amount' => new Decimal($this, $this->translate('Amount of items in package')),
       'package_length' => new Decimal($this, $this->translate('Package length'))->setUnit('m'),
       'package_width' => new Decimal($this, $this->translate('Package width'))->setUnit('m'),

@@ -43,7 +43,7 @@ class Campaign extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),

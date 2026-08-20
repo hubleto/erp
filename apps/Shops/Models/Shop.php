@@ -28,7 +28,7 @@ class Shop extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate("Name")))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate("Name")))->setDefaultVisible(),
       'color' => (new Color($this, $this->translate("Color")))->setDefaultVisible(),
       'address' => (new Varchar($this, $this->translate('Address')))->setDefaultVisible()->setIcon(self::COLUMN_ADDRESS_DEFAULT_ICON),
       'short_description' => (new Text($this, $this->translate("Short description"))),

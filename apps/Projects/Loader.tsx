@@ -4,6 +4,7 @@ import TableProjects from "./Components/FC/TableProjects"
 import TableMilestones from './Components/FC/TableMilestones'
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
+import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 class ProjectsApp extends App {
   init() {
     super.init();
@@ -36,11 +37,11 @@ class ProjectsApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormOrder',
       globalThis.hubleto.translate('Create project', 'Hubleto\\App\\Community\\Projects\\Loader', 'manifest'),
-      '',
-      (form: any) => {
+      'fas fa-diagram-project',
+      (form: FormMeta) => {
         request.get(
           'projects/api/create-from-order',
-          {idOrder: form.state.record.id},
+          {idOrder: form.id},
           (data: any) => {
             if (data.status == "success") {
               globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/' + data.idProject);

@@ -44,8 +44,8 @@ class Customer extends Model
   public function describeColumns(): array
   {
     return array_merge([
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible(),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
       'region' => (new Varchar($this, $this->translate('Region'))),
@@ -103,7 +103,7 @@ class Customer extends Model
       case 'shared_folder':
         $description
           ->setReactComponent('InputHyperlink')
-          ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+          ->setHint($this->translate('Link to shared folder (online storage) with related documents'))
         ;
         break;
     }

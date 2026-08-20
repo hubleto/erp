@@ -106,7 +106,7 @@ class Invoice extends \Hubleto\Erp\Model {
         self::TYPE_CREDIT_NOTE => 'bg-orange-50 text-slate-700',
         self::TYPE_DEBIT_NOTE => 'bg-violet-50 text-slate-700',
       ]),
-      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
+      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setHint($this->translate('Leave empty to generate automatically.')),
       'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
       'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
       'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),

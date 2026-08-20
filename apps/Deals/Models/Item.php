@@ -25,7 +25,7 @@ class Item extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setRequired(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible(),
       'id_product' => (new Lookup($this, $this->translate('Product'), Product::class))->setFkOnUpdate("CASCADE")->setFkOnDelete("SET NULL")->setDefaultVisible(),
       'position' => (new Integer($this, $this->translate('Position (in the PDF)')))->setDefaultVisible(),
       'description' => (new Text($this, $this->translate('Description')))->setDefaultVisible(),

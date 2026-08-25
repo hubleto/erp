@@ -35,8 +35,8 @@ class Loader extends \Hubleto\Erp\App
       '/^workflow\/workflows(\/(?<recordId>\d+))?\/?$/' => Controllers\Workflows::class,
       '/^workflow\/workflows\/add\/?$/' => ['controller' => Controllers\Workflows::class, 'vars' => ['recordId' => -1]],
 
-      '/^workflow\/workflows\/steps(\/(?<recordId>\d+))?\/?$/' => Controllers\WorkflowSteps::class,
-      '/^workflow\/workflows\/steps\/add\/?$/' => ['controller' => Controllers\WorkflowSteps::class, 'vars' => ['recordId' => -1]],
+      '/^workflow\/steps(\/(?<recordId>\d+))?\/?$/' => Controllers\WorkflowSteps::class,
+      '/^workflow\/steps\/add\/?$/' => ['controller' => Controllers\WorkflowSteps::class, 'vars' => ['recordId' => -1]],
 
       '/^workflow\/automats(\/(?<recordId>\d+))?\/?$/' => Controllers\Automats::class,
       '/^workflow\/automats\/add\/?$/' => ['controller' => Controllers\Automats::class, 'vars' => ['recordId' => -1]],
@@ -95,23 +95,12 @@ class Loader extends \Hubleto\Erp\App
     $workflowButtonsHtml .= '</div>';
 
     return '
-      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/workflow">
-        ' . $this->translate('Workflow') . '
-      </a></div>
+      ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
         ' . $workflowButtonsHtml . '
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/workflows">
-          <span class="icon"><i class="fas fa-timeline"></i></span>
-          <span class="text">' . $this->translate('Workflows') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/workflows/steps">
-          <span class="icon"><i class="fas fa-circle-dot"></i></span>
-          <span class="text">' . $this->translate('Steps') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/automats">
-          <span class="icon"><i class="fas fa-robot"></i></span>
-          <span class="text">' . $this->translate('Automats') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('workflow/workflows', 'fas fa-timeline', 'Workflows') . '
+        ' . $this->secondSidebarButton('workflow/steps', 'fas fa-circle-dot', 'Steps') . '
+        ' . $this->secondSidebarButton('workflow/automats', 'fas fa-robot', 'Automats') . '
       </div>
     ';
   }

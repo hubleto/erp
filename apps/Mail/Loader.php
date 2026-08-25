@@ -142,34 +142,12 @@ class Loader extends \Hubleto\Erp\App
     }
 
     return '
-      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/mail">
-        ' . $this->translate('Mail') . '
-      </a></div>
+      ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
-
         ' . $accountsHtml . '
-
-        <a
-          class="btn btn-white"
-          href="' . $this->env()->projectUrl . '/mail/get"
-        >
-          <span class="icon"><i class="fas fa-download"></i></span>
-          <span class="text">' . $this->translate('Get emails') . '</span>
-        </a>
-        <a
-          class="btn btn-white"
-          href="' . $this->env()->projectUrl . '/mail/scheduled"
-        >
-          <span class="icon"><i class="fas fa-clock"></i></span>
-          <span class="text">' . $this->translate('Scheduled to send') . '</span>
-        </a>
-        <a
-          class="btn btn-white"
-          href="' . $this->env()->projectUrl . '/mail/accounts"
-        >
-          <span class="icon"><i class="fas fa-cog"></i></span>
-          <span class="text">' . $this->translate('Manage accounts') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('mail/get', 'fas fa-download', 'Get emails') . '
+        ' . $this->secondSidebarButton('mail/scheduled', 'fas fa-clock', 'Scheduled to send') . '
+        ' . $this->secondSidebarButton('mail/accounts', 'fas fa-cog', 'Accounts') . '
       </div>
 
     ';

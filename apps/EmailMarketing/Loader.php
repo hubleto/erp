@@ -102,30 +102,13 @@ class Loader extends \Hubleto\Erp\App
   public function renderSecondSidebar(): string
   {
     return '
-      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/email-marketing/campaigns">
-        <span class="text">' . $this->translate('Email marketing') . '</span>
-      </a></div>
+      ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/emails">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span class="text">' . $this->translate('Emails') . '</span>
-        </a>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/emails/sent">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span class="text">' . $this->translate('Sent emails') . '</span>
-        </a>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/emails/clicks">
-          <span class="icon"><i class="fas fa-hand-pointer"></i></span>
-          <span class="text">' . $this->translate('Clicks') . '</span>
-        </a>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/recipients">
-          <span class="icon"><i class="fas fa-paper-plane"></i></span>
-          <span class="text">' . $this->translate('Recipients') . '</span>
-        </a>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/email-marketing/recipients/statuses">
-          <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Recipient statuses') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('email-marketing/emails', 'fas fa-envelope', 'Emails') . '
+        ' . $this->secondSidebarButton('email-marketing/emails/sent', 'fas fa-arrow-right-from-bracket', 'Sent') . '
+        ' . $this->secondSidebarButton('email-marketing/emails/clicks', 'fas fa-hand-pointer', 'Clicks') . '
+        ' . $this->secondSidebarButton('email-marketing/recipients', 'fas fa-paper-plane', 'Recipients') . '
+        ' . $this->secondSidebarButton('email-marketing/recipients/statuses', 'fas fa-check-double', 'Recipient statuses') . '
       </div>
     ';
   }

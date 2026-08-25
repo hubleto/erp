@@ -27,7 +27,7 @@ const FormWorkflowStep = (props: FormWorkflowStepProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/WorkflowStep'}
-    urlSlug='workflow/workflows/steps'
+    urlSlug='workflow/steps'
     endpointParams={{}}
     title={{field: 'name', sub: T.translate('Workflow step')}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}

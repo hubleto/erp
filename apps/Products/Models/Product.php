@@ -110,7 +110,6 @@ class Product extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = $this->translate('Products');
     $description->ui["addButtonText"] = $this->translate("Add product");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);

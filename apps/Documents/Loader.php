@@ -152,27 +152,13 @@ class Loader extends \Hubleto\Erp\App
   public function renderSecondSidebar(): string
   {
     return '
-      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/documents">
-        ' . $this->translate('Documents') . '
-      </a></div>
+      ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/documents/versions">
-          <span class="icon"><i class="fas fa-arrow-down-1-9"></i></span>
-          <span class="text">' . $this->translate('Versions') . '</span>
-        </a>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/documents/reviews">
-          <span class="icon"><i class="fas fa-spell-check"></i></span>
-          <span class="text">' . $this->translate('Reviews') . '</span>
-        </a>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/documents/templates">
-          <span class="icon"><i class="fas fa-file"></i></span>
-          <span class="text">' . $this->translate('Templates') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('documents/versions', 'fas fa-arrow-down-1-9', 'Versions') . '
+        ' . $this->secondSidebarButton('documents/reviews', 'fas fa-spell-check', 'Reviews') . '
+        ' . $this->secondSidebarButton('documents/templates', 'fas fa-file', 'Templates') . '
         <br/>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/documents/files">
-          <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('File manager') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('documents/files', 'fas fa-list', 'File manager') . '
       </div>
     ';
   }

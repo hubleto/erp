@@ -75,15 +75,9 @@ class Loader extends \Hubleto\Erp\App
     $dashboardButtonsHtml .= '</div>';
 
     return '
-      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/dashboards">
-        ' . $this->translate('Dashboards') . '
-      </a></div>
+      ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
         ' . $dashboardButtonsHtml . '
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/dashboards">
-          <span class="icon"><i class="fas fa-table"></i></span>
-          <span class="text">' . $this->translate('Dashboards') . '</span>
-        </a>
       </div>
     ';
   }

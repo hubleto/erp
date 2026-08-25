@@ -17,7 +17,7 @@ const TableWorkflowSteps = (props: TableWorkflowStepsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/WorkflowStep'}
     endpointParams={{idWorkflow: props.idWorkflow}}
-    formUrlSlug='workflow/workflows/steps'
+    formUrlSlug='workflow/steps'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_workflow: props.idWorkflow}}
     renderForm={(table: TableMeta): React.JSX.Element => {

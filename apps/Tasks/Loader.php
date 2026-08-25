@@ -79,19 +79,10 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
     $myDueTodo = $counter->myDueTodo();
     return '
-      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/tasks">
-        ' . $this->translate('Tasks') . '
-      </a></div>
+      ' . $this->secondSidebarTitle() .'
       <div class="app-sidebar-buttons">
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/tasks/todo">
-          <span class="icon"><i class="fas fa-receipt"></i></span>
-          <span class="text">' . $this->translate('Todo') . '</span>
-          ' . ($myDueTodo > 0 ? '<span class="badge badge-danger ml-auto">' . $myDueTodo . '</span>' : '') . '
-        </a>
-        <a class="btn btn-white" href="' . $this->env()->projectUrl . '/calendar?show=tasks">
-          <span class="icon"><i class="fas fa-calendar-days"></i></span>
-          <span class="text">' . $this->translate('Calendar') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('tasks/todo', 'fas fa-receipt', 'Todo', $myDueTodo) . '
+        ' . $this->secondSidebarButton('calendar?show=tasks', 'fas fa-calendar-days', 'Calendar') . '
       </div>
     ';
   }

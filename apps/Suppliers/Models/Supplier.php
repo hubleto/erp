@@ -39,7 +39,6 @@ class Supplier extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = $this->translate('Suppliers');
     $description->ui["addButtonText"] = $this->translate("Add supplier");
 
     $fCountryOptions = [];

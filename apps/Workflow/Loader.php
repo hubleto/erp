@@ -79,7 +79,7 @@ class Loader extends \Hubleto\Erp\App
   {
     $mWorkflow = $this->getModel(Models\Workflow::class);
 
-    $workflowButtonsHtml = '<div class="list dense">';
+    $workflowButtonsHtml = '<div class="list dense border-none">';
     foreach ($mWorkflow->record->where('show_in_kanban', true)->orderBy('order')->get() as $workflow) {
       $workflowButtonsHtml .= '
         <a
@@ -98,6 +98,7 @@ class Loader extends \Hubleto\Erp\App
       ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
         ' . $workflowButtonsHtml . '
+        <br/>
         ' . $this->secondSidebarButton('workflow/workflows', 'fas fa-timeline', 'Workflows') . '
         ' . $this->secondSidebarButton('workflow/steps', 'fas fa-circle-dot', 'Steps') . '
         ' . $this->secondSidebarButton('workflow/automats', 'fas fa-robot', 'Automats') . '

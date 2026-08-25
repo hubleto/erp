@@ -6,7 +6,7 @@ import Form from '@hubleto/react-ui/components/fc/Form';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Divider from '@hubleto/react-ui/components/fc/FormComponents/Divider';
-import { FormMetaContext, FormDescriptionContext } from '@hubleto/react-ui/components/fc/Form';
+import { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { useRecordField, FormRecordStoreContext } from '@hubleto/react-ui/components/fc/FormRecordStore';
 
 export interface FormActivityProps extends FormProps {
@@ -213,18 +213,17 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 const CalendarFormActivity = (props: FormActivityProps) => {
   const id = (props.calendarTab ? props.calendarTab.showIdActivity : props.id);
   const defaultValues = (props.calendarTab ? {
+    ...props.defaultValues,
     date_start: props.calendarTab.activityDate,
     time_start: props.calendarTab.activityTime == "00:00:00" ? null : props.calendarTab.activityTime,
     date_end: props.calendarTab.activityDate,
     all_day: props.calendarTab.activityAllDay,
     subject: props.calendarTab.activitySubject,
-
   } : props.defaultValues)
 
   return <Form
     id={id}
-    model='Hubleto/App/Community/Calendar/Models/Activity'
-    // title={{sub: 'Activity', field: 'subject'}}
+    model={props.model ?? 'Hubleto/App/Community/Calendar/Models/Activity'}
     renderTitle={() => {
       const subject = useRecordField('subject', '');
       const allDay = useRecordField('all_day', 0);
@@ -232,8 +231,6 @@ const CalendarFormActivity = (props: FormActivityProps) => {
       const dateEnd = useRecordField('date_end', '');
       const timeStart = useRecordField('time_start', '');
       const timeEnd = useRecordField('time_end', '');
-
-      console.log('title', dateStart, dateEnd);
 
       let daysDuration = moment(dateEnd).diff(moment(dateStart), 'days');
       let hoursDuration = moment(dateEnd + ' ' + timeEnd).diff(moment(dateEnd + ' ' + timeStart), 'hours');
@@ -277,7 +274,6 @@ const CalendarFormActivity = (props: FormActivityProps) => {
     description={{
       defaultValues: defaultValues,
     }}
-    {...props}
   >
     <Content {...props}/>
   </Form>;

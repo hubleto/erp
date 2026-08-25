@@ -108,7 +108,7 @@ const TabCalendar = (props: FormProps) => <CalendarTab
   loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=leads&idLead=' + props.id}
   logActivityEndpoint={'leads/api/log-activity?idLead=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    return <LeadCalendarActivityForm calendarTab={calendarTab}></LeadCalendarActivityForm>;
+    return <LeadCalendarActivityForm idLead={props.id} calendarTab={calendarTab}></LeadCalendarActivityForm>;
   }}
 ></CalendarTab>;
 

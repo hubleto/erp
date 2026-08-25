@@ -9,9 +9,8 @@ import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
 import request from '@hubleto/react-ui/core/Request';
 import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
 import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
-import DealFormActivity from './DealFormActivity';
+import DealCalendarActivityForm from './DealCalendarActivityForm';
 import TableItems from './TableItems';
-import CalendarFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity';
 
 export interface FormDealProps extends FormProps {}
 
@@ -22,7 +21,6 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 /** TabDefault */
 const TabDefault = (props: FormDealProps) => {
   const form = React.useContext(FormMetaContext);
-  const idCustomer: number = useRecordField('id_customer', 0);
   const isClosed: boolean = useRecordField('is_closed', false);
   const isNewCustomer: boolean = useRecordField('is_new_customer', false);
   const businessType: number = useRecordField('business_type', 0);
@@ -84,35 +82,29 @@ const TabDefault = (props: FormDealProps) => {
     <Input field='identifier' customInputProps={{cssClass: 'text-2xl', readonly: isClosed}} />
     <Input field='title' customInputProps={{cssClass: 'text-2xl', readonly: isClosed}} />
     <Input field='version' />
-    <div className='gap-2 xl:flex xl:items-center'>
-      <Input field='id_customer' />
-      <Input field='id_contact' />
-      <div>
-        {CONTACT && CONTACT.VALUES ? <div className="text-sm p-2 card">
-          {CONTACT.VALUES.map((item, key) => {
-            return <div key={key}>{item.value}</div>;
-          })}
-        </div> : null}
+    <Input field='id_customer' />
+    <Input field='id_contact' />
+    <div>
+      {CONTACT && CONTACT.VALUES ? <div className="text-sm p-2 card">
+        {CONTACT.VALUES.map((item, key) => {
+          return <div key={key}>{item.value}</div>;
+        })}
+      </div> : null}
+    </div>
+    <Input field='id_currency' />
+    <Input field='price_excl_vat' customInputProps={{
+      cssClass: 'text-2xl',
+      readonly: (ITEMS && ITEMS.length > 0) ? true : false,
+    }} />
+    <Input field='price_incl_vat' customInputProps={{
+      readonly: (ITEMS && ITEMS.length > 0) ? true : false,
+    }} />
+    {ITEMS && ITEMS.length > 0 ?
+      <div className='badge badge-warning'>
+        <span className='icon mr-2'><i className='fas fa-warning'></i></span>
+        <span className='text'>{T.translate('Price is calculated from items.')}</span>
       </div>
-    </div>
-    <div className='flex flex-row *:w-1/2'>
-      <Input field='price_excl_vat' customInputProps={{
-        cssClass: 'text-2xl',
-        readonly: (ITEMS && ITEMS.length > 0) ? true : false,
-      }} />
-      <Input field='id_currency' renderOnlyInputField />
-    </div>
-    <div className='flex flex-row *:w-1/2 items-center'>
-      <Input field='price_incl_vat' customInputProps={{
-        readonly: (ITEMS && ITEMS.length > 0) ? true : false,
-      }} />
-      {ITEMS && ITEMS.length > 0 ?
-        <div className='badge badge-warning'>
-          <span className='icon mr-2'><i className='fas fa-warning'></i></span>
-          <span className='text'>{T.translate('Price is calculated from items.')}</span>
-        </div>
-      : <></>}
-    </div>
+    : <></>}
     <Input field='date_expected_close' customInputProps={{readonly: isClosed}} />
   </>;
 
@@ -131,48 +123,31 @@ const TabDefault = (props: FormDealProps) => {
         </div>
       }
     </> : null}
-    <div className="flex gap-2">
-      <Input field='source_channel' customInputProps={{readonly: isClosed}} />
-      <Input field='is_new_customer' customInputProps={{readonly: isClosed, onChange: (input: any, value: any) => {
-        if (isNewCustomer) {
-          form.changeRecord({business_type: 1 /* New */});
-        }
-      }}} />
-    </div>
-    <div className="flex gap-2">
-      <Input field='business_type' customInputProps={{uiStyle: 'buttons', readonly: isClosed, onChange: (input: any, value: any) => {
-        if (businessType == 2 /* Existing */) {
-          form.changeRecord({is_new_customer: false});
-        }
-      }}} />
+    <Input field='source_channel' customInputProps={{readonly: isClosed, uiStyle: 'buttons'}} />
+    <Input field='is_new_customer' customInputProps={{readonly: isClosed, yesText: 'New customer', onChange: (input: any, value: any) => {
+      if (isNewCustomer) {
+        form.changeRecord({
+          is_new_customer: value,
+          business_type: 1 /* New */
+        });
+      }
+    }}} />
+    <Input field='business_type' customInputProps={{uiStyle: 'buttons', readonly: isClosed, onChange: (input: any, value: any) => {
+      if (businessType == 2 /* Existing */) {
+        form.changeRecord({business_type: value, is_new_customer: false});
+      }
+    }}} />
+    <div className='flex-dyn w-full'>
       <Input field='deal_result' customInputProps={{
         uiStyle: 'buttons',
         readonly: isClosed,
         onChange: (input: any, value: any) => {
-          form.changeRecord({lost_reason: null});
+          form.changeRecord({deal_result: value, lost_reason: null});
         }
       }} />
+      {dealResult == 2 ? <Input field='lost_reason' customInputProps={{readonly: isClosed}} />: null}
     </div>
     <Input field='note' customInputProps={{cssClass: 'border border-orange-200', readonly: isClosed}} />
-    {props.id > 0 ?
-      <div className='card card-info mt-2'>
-        <div className='card-header'>{T.translate('Open tasks')}</div>
-        <div className='card-body overflow-auto'>
-          <TableTasks
-            tag={"table_deal_task"}
-            parentForm={form}
-            uid={props.uid + "_table_deal_task"}
-            junctionTitle='Deal'
-            junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
-            junctionSourceColumn='id_deal'
-            junctionSourceRecordId={props.id}
-            junctionDestinationColumn='id_task'
-            view='briefOverview'
-          />
-        </div>
-      </div>
-    : null}
-    {dealResult == 2 ? <Input field='lost_reason' customInputProps={{readonly: isClosed}} />: null}
   </>;
 
   return <div className='flex-dyn'>
@@ -239,48 +214,11 @@ const TabDocuments = (props: FormDealProps) => {
 }
 
 /** TabCalendar */
-// const TabCalendar = (props: FormProps) => <CalendarTab
-//   calendarSource='deals'
-//   externalIdColumn='idDeal'
-//   logActivityEndpoint='deals/api/log-activity'
-//   renderActivityForm={(calendarTab: any) => {
-//     const idCustomer: number = useRecordField('id_customer', 0);
-//     const idContact: number = useRecordField('id_contact', 0);
-
-//     return <DealFormActivity
-//       id={calendarTab.showIdActivity}
-//       description={{
-//         defaultValues: {
-//           id_deal: props.id,
-//           id_contact: idContact,
-//           date_start: calendarTab.activityDate,
-//           time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
-//           date_end: calendarTab.activityDate,
-//           all_day: calendarTab.activityAllDay,
-//           subject: calendarTab.activitySubject,
-//         }
-//       }}
-//       idCustomer={idCustomer}
-//       idContact={idContact}
-//       onClose={() => { calendarTab.setShowIdActivity(0) }}
-//       onAfterSaveRecord={(form: any, saveResponse: any) => {
-//         if (saveResponse.status == "success") {
-//           calendarTab.setShowIdActivity(0);
-//         }
-//       }}
-//     ></DealFormActivity>;
-//   }}
-// ></CalendarTab>;
 const TabCalendar = (props: FormProps) => <CalendarTab
   loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=deals&idDeal=' + props.id}
   logActivityEndpoint={'deals/api/log-activity?idDeal=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    return <CalendarFormActivity
-      calendarTab={calendarTab}
-      customInputFields={['id_deal']}
-      defaultValues={{id_deal: props.id}}
-      model='Hubleto/App/Community/Deals/Models/DealActivity'
-    ></CalendarFormActivity>;
+    return <DealCalendarActivityForm idDeal={props.id} calendarTab={calendarTab}></DealCalendarActivityForm>;
   }}
 ></CalendarTab>;
 

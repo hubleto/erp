@@ -163,33 +163,12 @@ class Loader extends \Hubleto\Erp\App
   public function renderSecondSidebar(): string
   {
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/invoices">
-          <span class="icon"><i class="fas fa-file-invoice"></i></span>
-          <span class="text">' . $this->translate('Invoices') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/items">
-          <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('Items') . '</span>
-        ' . ($this->preparedItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $this->preparedItemsCount . '</span>' : '') . '
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payments">
-          <span class="icon"><i class="fas fa-euro-sign"></i></span>
-          <span class="text">' . $this->translate('Payments') . '</span>
-        </a>
-        <div class="mt-4">
-          <b>' . $this->translate('Settings') . '</b>
-          <div class="btn-group vertical mt-2 w-full">
-            <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/payment-methods">
-              <span class="icon"><i class="fas fa-wallet"></i></span>
-              <span class="text">' . $this->translate('Payment methods') . '</span>
-            </a>
-            <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/invoices/profiles">
-              <span class="icon"><i class="fas fa-address-card"></i></span>
-              <span class="text">' . $this->translate('Invoicing profiles') . '</span>
-            </a>
-          </div>
-        </div>
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('invoices/items', 'fas fa-list', 'Items', $this->preparedItemsCount) . '
+        ' . $this->secondSidebarButton('invoices/payments', 'fas fa-euro-sign', 'Payments') . '
+        ' . $this->secondSidebarButton('invoices/payment-methods', 'fas fa-wallet', 'Payment methods') . '
+        ' . $this->secondSidebarButton('invoices/profiles', 'fas fa-address-card', 'Invoicing profiles') . '
       </div>
     ';
   }

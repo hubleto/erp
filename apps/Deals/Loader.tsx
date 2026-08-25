@@ -1,7 +1,7 @@
 import React from 'react';
 import App from '@hubleto/react-ui/core/App'
 import TableDeals from "./Components/FC/TableDeals"
-// import DealFormActivity from "./Components/FC/DealFormActivity"
+import DealCalendarActivityForm from "./Components/FC/DealCalendarActivityForm"
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 
@@ -11,7 +11,7 @@ class DealsApp extends App {
 
     // register react components
     globalThis.hubleto.registerReactComponent('DealsTableDeals', TableDeals);
-    // globalThis.hubleto.registerReactComponent('DealsFormActivity', DealFormActivity);
+    globalThis.hubleto.registerReactComponent('DealCalendarActivityForm', DealCalendarActivityForm);
 
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Leads').addCustomFormTab({

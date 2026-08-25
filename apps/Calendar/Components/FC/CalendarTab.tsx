@@ -153,15 +153,20 @@ const CalendarTab = (props: CalendarTabProps) => {
         <div className='card'>
           <div className='card-header'>{T.translate('History')}</div>
           <div className='card-body'>
-            {ACTIVITIES ? <div className="list">{ACTIVITIES.reverse().slice(0, 7).map((item: any, index: any) => {
+            {ACTIVITIES ? <div className="list">{ACTIVITIES.map((item: any, index: any) => {
               return <>
-                <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-green-50" : "bg-red-50")}
+                <button key={index} className={"btn btn-small btn-transparent btn-list-item " + (item.completed ? "bg-gray-50" : "")}
                   onClick={() => setShowIdActivity(item.id)}
                 >
+                  <span className="icon">
+                    {item.completed
+                      ? <div className="text-green-600"><i className='fas fa-check'></i></div>
+                      : <div className="text-gray-100"><i className='fas fa-check'></i></div>
+                    }
+                  </span>
                   <span className="icon">{item.date_start} {item.time_start}<br/>@{item['_LOOKUP[id_owner]']}</span>
                   <span className="text">
                     {item.subject}
-                    {item.completed ? null : <div className="text-red-800">{T.translate('Not completed yet')}</div>}
                   </span>
                 </button>
               </>

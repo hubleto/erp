@@ -39,7 +39,7 @@ class OrdersApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormDeal',
       globalThis.hubleto.translate('Create order', 'Hubleto\\App\\Community\\Orders\\Loader', 'manifest'),
-      '',
+      'fas fa-money-check-dollar',
       (form: any) => {
         request.get(
           'orders/api/create-from-deal',

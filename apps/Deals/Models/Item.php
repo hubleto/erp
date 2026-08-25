@@ -38,6 +38,19 @@ class Item extends \Hubleto\Erp\Model
     ]);
   }
 
+  /**
+   * [Description for describeTable]
+   *
+   * @return \Hubleto\Framework\Description\Table
+   * 
+   */
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['addButtonText'] = $this->translate('Add item');
+    return $description;
+  }
+
   public function onBeforeCreate(array $record): array
   {
     $record["price_excl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceExcludingVat(

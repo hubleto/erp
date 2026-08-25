@@ -58,7 +58,7 @@ class Loader extends \Hubleto\Erp\App
       ->get()
     ;
 
-    $dashboardButtonsHtml = '<div class="list dense">';
+    $dashboardButtonsHtml = '<div class="list dense border-none">';
     foreach ($dashboards as $dashboard) {
       $dashboardButtonsHtml .= '
         <a

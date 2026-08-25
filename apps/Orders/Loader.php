@@ -173,23 +173,11 @@ class Loader extends \Hubleto\Erp\App
     $dueAndChargeableItemsCount = $counter->dueAndChargeableItemsNotPreparedForInvoice();
 
     return '
-      <div class="app-main-title"><a href="' . $this->env()->projectUrl . '/orders">
-        ' . $this->translate('Orders') . '
-      </a></div>
+      ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/items">
-          <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('Items') . '</span>
-          ' . ($dueAndChargeableItemsCount > 0 ? '<span class="badge badge-danger ml-auto">' . $dueAndChargeableItemsCount . '</span>' : '') . '
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/orders/quotes">
-          <span class="icon"><i class="fas fa-receipt"></i></span>
-          <span class="text">' . $this->translate('Quotes') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=orders">
-          <span class="icon"><i class="fas fa-calendar-days"></i></span>
-          <span class="text">' . $this->translate('Calendar') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('orders/items', 'fas fa-list', 'Items', $dueAndChargeableItemsCount) . '
+        ' . $this->secondSidebarButton('orders/quotes', 'fas fa-receipt', 'Quotes') . '
+        ' . $this->secondSidebarButton('calendar?show=orders', 'fas fa-calendar-days', 'Calendar') . '
       </div>
     ';
   }

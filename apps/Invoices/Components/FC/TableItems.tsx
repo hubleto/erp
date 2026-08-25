@@ -26,8 +26,9 @@ const TableItems = (props: TableItemsProps) => {
       if (columnName == "id_invoice" && !data['INVOICE']) {
         return <button
           className='btn btn-yellow btn-small'
-          onClick={() => {
-            return globalThis.hubleto.showDialogConfirm(
+          onClick={(e) => {
+            e.stopPropagation();
+            globalThis.hubleto.showDialogConfirm(
               <>
                 <div className='font-bold'>{data.CUSTOMER?.name}</div>
                 <div className='font-bold'>{data.item}</div>

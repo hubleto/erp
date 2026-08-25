@@ -46,8 +46,10 @@ const TableItems = (props: TableItemsProps) => {
         } else if (data['is_chargeable']) {
           return <button
             className='btn btn-yellow btn-small'
-            onClick={() => {
-              return globalThis.hubleto.showDialogConfirm(
+            onClick={(e) => {
+              console.log('ggg');
+              e.stopPropagation();
+              globalThis.hubleto.showDialogConfirm(
                 <>
                   <div>{data.ORDER?.identifier} ({data.ORDER?.title})</div>
                   <div className='font-bold'>{data.title}</div>

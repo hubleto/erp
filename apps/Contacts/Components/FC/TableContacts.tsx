@@ -87,38 +87,37 @@ const TableContacts = (props: TableContactsProps) => {
           <div className="md:grid md:grid-cols-2 gap-2 mt-2">
             {Object.keys(table.data?.records).map((key) => {
               const item = table.data.records[key];
-              return <div key={key}>
-                <button
-                  className="btn btn-transparent w-full"
-                  onClick={() => { table.setRecordId(item.id); }}
-                >
-                  <span className="icon">
-                    <i className="fas fa-user text-2xl m-2"></i>
-                  </span>
-                  <span className="text" style={{maxHeight: "10em"}}>
-                    <div className="flex gap-1">
-                      {item.is_primary ? <div className="badge badge-small badge-violet">{T.translate("Primary")}</div> : null}
-                      {item.is_for_invoicing ? <div className="badge badge-small badge-green">{T.translate("Invoicing")}</div> : null}
-                    </div>
-                    <div className="flex gap-2">
-                      {item.salutation ?? ''}
-                      <b>{item.first_name ?? ''}</b>
-                      <b>{item.last_name ?? ''}</b>
-                    </div>
-                    <div className="flex gap-2">
-                      {item.TAGS.map((tag, index) => {
-                        return <div key={index} className="text-nowrap mr-2">
-                          <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
-                          {tag.TAG?.name}
-                        </div>;
-                      })}
-                    </div>
-                    {item.VALUES.map((value, index) => {
-                      return <div key={index} className='w-full truncate'><small>{value.value}</small></div>
+              return <button
+                key={key}
+                className="btn btn-transparent w-full"
+                onClick={() => { table.setRecordId(item.id); }}
+              >
+                <span className="icon">
+                  <i className="fas fa-user text-2xl m-2"></i>
+                </span>
+                <span className="text flex-col" style={{maxHeight: "10em"}}>
+                  <div className="flex gap-1">
+                    {item.is_primary ? <div className="badge badge-small badge-violet">{T.translate("Primary")}</div> : null}
+                    {item.is_for_invoicing ? <div className="badge badge-small badge-green">{T.translate("Invoicing")}</div> : null}
+                  </div>
+                  <div className="flex gap-2">
+                    {item.salutation ?? ''}
+                    <b>{item.first_name ?? ''}</b>
+                    <b>{item.last_name ?? ''}</b>
+                  </div>
+                  <div className="flex gap-2">
+                    {item.TAGS.map((tag, index) => {
+                      return <div key={index} className="text-nowrap mr-2">
+                        <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+                        {tag.TAG?.name}
+                      </div>;
                     })}
-                  </span>
-                </button>
-              </div>;
+                  </div>
+                  {item.VALUES.map((value, index) => {
+                    return <div key={index} className='w-full truncate'><small>{value.value}</small></div>
+                  })}
+                </span>
+              </button>;
             })}
             <div>
               {table.renderDefaultAddButton()}

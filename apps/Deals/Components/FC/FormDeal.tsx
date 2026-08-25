@@ -27,10 +27,10 @@ const TabDefault = (props: FormDealProps) => {
   const isNewCustomer: boolean = useRecordField('is_new_customer', false);
   const businessType: number = useRecordField('business_type', 0);
   const dealResult: number = useRecordField('deal_result', 0);
-  const ACTIVITIES: any = useRecordField('ACTIVITIES', {});
-  const LEADS: any = useRecordField('LEADS', {});
+  const ACTIVITIES: any = useRecordField('ACTIVITIES', []);
+  const LEADS: any = useRecordField('LEADS', []);
   const CONTACT: any = useRecordField('CONTACT', {});
-  const ITEMS: any = useRecordField('ITEMS', {});
+  const ITEMS: any = useRecordField('ITEMS', []);
 
   const [selectParentLead, setSelectParentLead] = useState(false);
 
@@ -175,17 +175,10 @@ const TabDefault = (props: FormDealProps) => {
     {dealResult == 2 ? <Input field='lost_reason' customInputProps={{readonly: isClosed}} />: null}
   </>;
 
-  return <>
-    <div className='flex gap-2 flex-col md:flex-row'>
-      <div className='flex-2'>
-        <div className='card card-body flex flex-col md:flex-row gap-2'>
-          <div className='grow max-w-1/2'>{inputsColumnLeft}</div>
-          <div className='border-t md:border-l border-gray-200'></div>
-          <div className='grow max-w-1/2'>{inputsColumnRight}</div>
-        </div>
-      </div>
-    </div>
-  </>
+  return <div className='flex-dyn'>
+    <div className='grow max-w-1/2'>{inputsColumnLeft}</div>
+    <div className='grow max-w-1/2'>{inputsColumnRight}</div>
+  </div>;
 }
 
 /** TabItems */

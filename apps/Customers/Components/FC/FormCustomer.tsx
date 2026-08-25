@@ -8,7 +8,7 @@ import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
 import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
 import CustomerFormActivity from './CustomerFormActivity';
 import TableContacts from '@hubleto/apps/Contacts/Components/FC/TableContacts';
-import CalendarTabFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
+import CalendarFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity';
 
 export interface FormCustomerProps extends FormProps {}
 
@@ -128,12 +128,12 @@ const TabCalendar = (props: FormProps) => <CalendarTab
   loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=customers&idCustomer=' + props.id}
   logActivityEndpoint={'customers/api/log-activity?idCustomer=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    return <CalendarTabFormActivity
+    return <CalendarFormActivity
       calendarTab={calendarTab}
       customInputFields={['id_customer']}
       defaultValues={{id_customer: props.id}}
       model='Hubleto/App/Community/Customers/Models/CustomerActivity'
-    ></CalendarTabFormActivity>;
+    ></CalendarFormActivity>;
   }}
 ></CalendarTab>;
 

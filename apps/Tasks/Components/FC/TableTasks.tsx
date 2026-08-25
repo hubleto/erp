@@ -3,7 +3,7 @@ import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 import FormTask, { FormTaskProps } from './FormTask';
-import FormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
+import FormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity';
 
 const componentName = 'TableTasks'; // must be the same as the exported const
 const parentApp = 'Hubleto/App/Community/Tasks';

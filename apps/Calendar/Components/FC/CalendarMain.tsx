@@ -70,7 +70,7 @@ const CalendarMain = (props: CalendarMainProps) => {
         },
         id: activityId,
         onClose: () => setShowActivity(''),
-        onSaveCallback: () => setShowActivity(''),
+        onAfterSaveRecord: () => setShowActivity(''),
       }
     );
   } else {

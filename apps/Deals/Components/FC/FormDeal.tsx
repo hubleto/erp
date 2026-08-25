@@ -11,7 +11,7 @@ import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
 import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
 import DealFormActivity from './DealFormActivity';
 import TableItems from './TableItems';
-import CalendarTabFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
+import CalendarFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity';
 
 export interface FormDealProps extends FormProps {}
 
@@ -282,12 +282,12 @@ const TabCalendar = (props: FormProps) => <CalendarTab
   loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=deals&idDeal=' + props.id}
   logActivityEndpoint={'deals/api/log-activity?idDeal=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    return <CalendarTabFormActivity
+    return <CalendarFormActivity
       calendarTab={calendarTab}
       customInputFields={['id_deal']}
       defaultValues={{id_deal: props.id}}
       model='Hubleto/App/Community/Deals/Models/DealActivity'
-    ></CalendarTabFormActivity>;
+    ></CalendarFormActivity>;
   }}
 ></CalendarTab>;
 

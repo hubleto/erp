@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity'
+import CalendarFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity'
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 import Translator from "@hubleto/react-ui/core/Translator";
@@ -46,7 +46,7 @@ const DealFormActivityCustomInputs = (props: DealFormActivityProps) => {
 const DealFormActivity = (props: DealFormActivityProps) => {
   const { form, id, idCustomer, idContact, idDeal } = props;
 
-  return <FormActivity
+  return <CalendarFormActivity
     id={id}
     model='Hubleto/App/Community/Deals/Models/DealActivity'
     activitySource='Deal'
@@ -60,7 +60,7 @@ const DealFormActivity = (props: DealFormActivityProps) => {
       />;
     }}
     {...props}
-  ></FormActivity>;
+  ></CalendarFormActivity>;
 }
 
 export default DealFormActivity;

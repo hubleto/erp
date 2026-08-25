@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity'
+import FormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity'
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 import Translator from "@hubleto/react-ui/core/Translator";

@@ -1,20 +1,18 @@
 import React, { useState, useEffect, createRef } from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
-import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import request from '@hubleto/react-ui/core/Request';
 import moment from "moment";
-import Divider from '@hubleto/react-ui/components/fc/FormComponents/Divider';
 import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
 import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
 import Spinner from '@hubleto/react-ui/components/fc/Spinner';
 import TableItems from './TableItems';
 import TableQuotes from './TableQuotes';
 import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
-import OrderFormActivity from './OrderFormActivity';
-import CalendarTabFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
+import CalendarFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity';
 
 export interface FormOrderProps extends FormProps {}
 
@@ -189,12 +187,12 @@ const TabCalendar = (props: FormProps) => <CalendarTab
   loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=orders&idOrder=' + props.id}
   logActivityEndpoint={'orders/api/log-activity?idOrder=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    return <CalendarTabFormActivity
+    return <CalendarFormActivity
       calendarTab={calendarTab}
       customInputFields={['id_order']}
       defaultValues={{id_order: props.id}}
       model='Hubleto/App/Community/Orders/Models/OrderActivity'
-    ></CalendarTabFormActivity>;
+    ></CalendarFormActivity>;
   }}
 ></CalendarTab>;
 

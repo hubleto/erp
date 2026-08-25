@@ -12,7 +12,6 @@ import moment from "moment";
 import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
 import Table from '@hubleto/react-ui/components/fc/Table';
-import CalendarTabFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarTabFormActivity';
 
 export interface FormLeadProps extends FormProps {}
 

@@ -65,4 +65,13 @@ class Dashboard extends \Hubleto\Erp\Model
     return parent::onBeforeUpdate($record);
   }
 
+
+  public function getDefaultDashboard(): mixed
+  {
+    return $this->record->prepareReadQuery()
+      ->where('is_default', true)
+      ->with('PANELS')
+      ->first();
+  }
+
 }

@@ -8,7 +8,7 @@
 <div class="w-full h-full flex">
   <div class="grow">
     {% for m in viewParams.welcomeScreenMessages %}
-      <div class="alert alert-{{ m.class }} mb-2">
+      <div class="alert alert-{{ m.class }} m-2">
         {% if m.icon %}
           <div class="icon"><i class="{{ m.icon }}"></i></div>
         {% endif %}
@@ -22,26 +22,14 @@
       </div>
     {% endfor %}
 
-    {% if defaultDashboard.id == 0 %}
-      <div class="alert alert-info">
-        <div class="icon"><i class="fas fa-table"></i></div>
-        <div class="grow">You do not have default dashboard configured</div>
-        <div>
-          <a href="{{ config.projectUrl }}/dashboards/manage" class="btn btn-primary">
-            <span class="text">Manage dashboards</span>
-          </a>
-        </div>
-      </div>
-    {% else %}
-      <div class="mt-2">
-        <hblreact-dashboards-dashboard
-          int:id-dashboard='{{ defaultDashboard.id }}'
-          string:redirect-url='{{ config.projectUrl }}'
-          json:panels='{{ defaultDashboard.PANELS|json_encode|raw }}'
-          bool:show-add-new-panel-button='true'
-        ></hblreact-dashboards-dashboard>
-      </div>
-    {% endif %}
+    <div class="mt-2">
+      <hblreact-dashboards-dashboard
+        int:id-dashboard='{{ defaultDashboard.id }}'
+        string:redirect-url='{{ config.projectUrl }}'
+        json:panels='{{ defaultDashboard.PANELS|json_encode|raw }}'
+        bool:show-add-new-panel-button='true'
+      ></hblreact-dashboards-dashboard>
+    </div>
 
     <div class="mx-auto pt-20">
       <img src="{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">

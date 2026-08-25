@@ -273,7 +273,7 @@ export default class FormOrder<P, S> extends FormExtended<FormOrderProps, FormOr
                         </div>
                       : <div className='block alert alert-danger'>
                           <i className='fas fa-calendar mr-2'></i>
-                          No future follow-up is planned.
+                          No follow-up in your calendar.
                         </div>
                       }
                     </> : null}

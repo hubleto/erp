@@ -74,7 +74,7 @@ const FormDashboard = (props: FormDashboardProps) => {
       return <>
         {form.renderDefaultHeaderLeft()}
         <a
-          className='btn btn-transparent'
+          className='btn btn-transparent btn-square'
           target='_blank'
           href={globalThis.hubleto.config.projectUrl + "/dashboards/~/" + slug}
         >

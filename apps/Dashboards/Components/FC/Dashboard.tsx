@@ -136,7 +136,7 @@ const Dashboard = (props: DashboardProps) => {
     <div className='flex flex-row justify-between'>
       <a
         className='btn btn-transparent'
-        href={"dashboards/" + props.idDashboard}
+        href={"../../dashboards/" + props.idDashboard}
       >
         <span className="icon"><i className="fas fa-cog"></i></span>
         <span className="text text-nowrap">{T.translate('Configure this dashboard')}</span>

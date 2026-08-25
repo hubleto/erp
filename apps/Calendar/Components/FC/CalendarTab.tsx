@@ -115,8 +115,8 @@ const CalendarTab = (props: CalendarTabProps) => {
   ></Calendar>;
 
   return <CalendarTabContext.Provider value={myself}>
-    {form.id > 0 ? <div className='flex gap-2'>
-      <div className='flex-2 flex flex-col gap-2'>
+    {form.id > 0 ? <div className='flex-dyn'>
+      <div className='flex-2 gap-2'>
         <div className='card'>
           <div className='card-header'>Follow-ups</div>
           <div className='card-body'>
@@ -129,7 +129,7 @@ const CalendarTab = (props: CalendarTabProps) => {
         <div className='card'>
           <div className='card-header'>What did you do?</div>
           <div className='card-body'>
-            <div className="hubleto component input"><div className="input-element w-full flex gap-2">
+            <div className="hubleto component input"><div className="input-element w-full gap-2">
               <input
                 className="w-full p-1 mb-2"
                 placeholder={T.translate('Type recent activity here and press Enter')}

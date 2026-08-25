@@ -3,6 +3,7 @@ import Translator from '@hubleto/react-ui/core/Translator';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
+import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 
 export interface FormPanelProps extends FormProps {}
 
@@ -14,13 +15,17 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 const TabDefault = (props: FormPanelProps) => {
   const form = React.useContext(FormMetaContext);
 
-return <>
+  return <>
     <Input field='id_dashboard' />
     <Input field='board_url_slug' customInputProps={{
-      cssClass: 'text-2xl',
+      uiStyle: 'buttons-vertical',
+      cssClass: 'text-primary',
       onChange: (input: any, value: any) => {
-        const enumValues = input.props.enumValues;
-        form.changeRecord({title: enumValues[value] ?? '-'})
+        const enumValues = input.enumValues;
+        form.changeRecord({
+          board_url_slug: value,
+          title: enumValues[value]
+        })
       }
     }} />
     <Input field='title' />

@@ -84,7 +84,7 @@ class Loader extends \Hubleto\Erp\App
       $workflowButtonsHtml .= '
         <a
           class="
-            btn btn-small btn-list-item ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
+            btn btn-list-item ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
           "
           href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"
         >

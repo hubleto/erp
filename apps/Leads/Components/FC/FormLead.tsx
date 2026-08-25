@@ -6,6 +6,7 @@ import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfa
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
 import CalendarTab from '@hubleto/apps/Calendar/Components/FC/CalendarTab';
+import LeadCalendarActivityForm from './LeadCalendarActivityForm';
 import moment from "moment";
 
 import TableTasks from '@hubleto/apps/Tasks/Components/FC/TableTasks';
@@ -85,7 +86,7 @@ const TabDefault = (props: FormLeadProps) => {
           </div>
         : <div className='block alert alert-danger'>
             <i className='fas fa-calendar mr-2'></i>
-            No future follow-up is planned.
+            No follow-up in your calendar.
           </div>
         }
       </> : null}
@@ -108,12 +109,7 @@ const TabCalendar = (props: FormProps) => <CalendarTab
   loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=leads&idLead=' + props.id}
   logActivityEndpoint={'leads/api/log-activity?idLead=' + props.id}
   renderActivityForm={(calendarTab: any) => {
-    return <CalendarTabFormActivity
-      calendarTab={calendarTab}
-      customInputFields={['id_lead']}
-      defaultValues={{id_lead: props.id}}
-      model='Hubleto/App/Community/Leads/Models/LeadActivity'
-    ></CalendarTabFormActivity>;
+    return <LeadCalendarActivityForm calendarTab={calendarTab}></LeadCalendarActivityForm>;
   }}
 ></CalendarTab>;
 

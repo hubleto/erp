@@ -81,9 +81,9 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
   return <>
     <div className='flex gap-2'>
       <div className="grow">
-        {props.customInputFields.map((customInputField, key) => {
+        {props.customInputFields ? props.customInputFields.map((customInputField, key) => {
           return <Input key={key} field={customInputField} readonly></Input>;
-        })}
+        }) : null}
       </div>
       <div className='flex gap-2 flex-col'>
         <div className='w-full'><Input field='completed' customInputProps={{yesText: T.translate('Completed')}}></Input></div>
@@ -210,8 +210,18 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 };
   
 const CalendarTabFormActivity = (props: FormActivityProps) => {
+  const id = (props.calendarTab ? props.calendarTab.showIdActivity : props.id);
+  const defaultValues = (props.calendarTab ? {
+    date_start: props.calendarTab.activityDate,
+    time_start: props.calendarTab.activityTime == "00:00:00" ? null : props.calendarTab.activityTime,
+    date_end: props.calendarTab.activityDate,
+    all_day: props.calendarTab.activityAllDay,
+    subject: props.calendarTab.activitySubject,
+
+  } : props.defaultValues)
+
   return <Form
-    id={props.calendarTab.showIdActivity}
+    id={id}
     model='Hubleto/App/Community/Calendar/Models/Activity'
     title={{sub: 'Activity', field: 'subject'}}
     renderTopInputs={() => null}
@@ -222,14 +232,7 @@ const CalendarTabFormActivity = (props: FormActivityProps) => {
       }
     }}
     description={{
-      defaultValues: {
-        ...props.defaultValues,
-        date_start: props.calendarTab.activityDate,
-        time_start: props.calendarTab.activityTime == "00:00:00" ? null : props.calendarTab.activityTime,
-        date_end: props.calendarTab.activityDate,
-        all_day: props.calendarTab.activityAllDay,
-        subject: props.calendarTab.activitySubject,
-      }
+      defaultValues: defaultValues,
     }}
     {...props}
   >

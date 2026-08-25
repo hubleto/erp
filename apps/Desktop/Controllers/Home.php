@@ -2,6 +2,9 @@
 
 namespace Hubleto\App\Community\Desktop\Controllers;
 
+use \Hubleto\App\Community\Dashboards\Loader as DashboardsApp;
+use \Hubleto\App\Community\Dashboards\Models\Dashboard as DashboardModel;
+
 class Home extends \Hubleto\Erp\Controller
 {
 
@@ -23,18 +26,11 @@ class Home extends \Hubleto\Erp\Controller
 
     $enabledApps = $this->appManager()->getEnabledApps();
 
-    $dashboardsApp = $this->appManager()->getApp(\Hubleto\App\Community\Dashboards\Loader::class);
+    $dashboardsApp = $this->appManager()->getApp(DashboardsApp::class);
     if ($dashboardsApp) {
-      $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
-
-      $defaultDashboard = $mDashboard->record->prepareReadQuery()
-        ->where('is_default', true)
-        ->with('PANELS')
-        ->first()
-        ?->toArray();
-      ;
-
-      $this->viewParams['defaultDashboard'] = $defaultDashboard;
+      /** @var DashboardModel */
+      $mDashboard = $this->getModel(DashboardModel::class);
+      $this->viewParams['defaultDashboard'] = $mDashboard->getDefaultDashboard();
 
     }
 

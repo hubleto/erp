@@ -20,18 +20,17 @@ class Dashboard extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
     $mDashboard = $this->getModel(\Hubleto\App\Community\Dashboards\Models\Dashboard::class);
 
-    $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');
-
-    $dashboards = $mDashboard->record->prepareReadQuery()
-      ->where('id_owner', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+    $dashboard = $mDashboard->record->prepareReadQuery()
+      ->where('slug', $dashboardSlug)
       ->with('PANELS')
-      ->get()
-      ?->toArray();
+      ->first()
+      ?->toArray()
     ;
 
-    $this->viewParams['dashboards'] = $dashboards;
+    $this->viewParams['dashboard'] = $dashboard;
     $this->viewParams['dashboardSlug'] = $dashboardSlug;
 
     $this->setView('@Hubleto:App:Community:Dashboards/Dashboard.twig');

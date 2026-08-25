@@ -6,7 +6,7 @@ import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import request from '@hubleto/react-ui/core/Request';
 import TableItems from './TableItems';
 import TablePayments from './TablePayments';
-import TextareaWithHtmlPreview from "@hubleto/react-ui/components/cc/Inputs/TextareaWithHtmlPreview";
+import TextareaWithHtmlPreview from "@hubleto/react-ui/components/fc/Inputs/TextareaWithHtmlPreview";
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Modal from '@hubleto/react-ui/components/fc/Modal';
 import { ModalMeta } from '@hubleto/react-ui/components/fc/ModalInterfaces';
@@ -15,6 +15,7 @@ import IntInput from '@hubleto/react-ui/components/fc/Inputs/Int';
 import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
 import FileInput from '@hubleto/react-ui/components/fc/Inputs/File';
 import ModalHeader from '@hubleto/react-ui/components/fc/ModalComponents/Header';
+import LoaderBar from '@hubleto/react-ui/components/fc/LoaderBar';
 
 export interface FormInvoiceProps extends FormProps {}
 
@@ -40,14 +41,12 @@ const TabDefault = (props: FormInvoiceProps) => {
   const dateSent: string = useRecordField('date_sent', '');
   const datePayment: string = useRecordField('date_payment', '');
 
-  const ITEMS: any = useRecordField('ITEMS', {});
+  const ITEMS: any = useRecordField('ITEMS', []);
   const CURRENCY: any = useRecordField('CURRENCY', {});
   const currencySymbol = CURRENCY.symbol ?? '';
 
   if (props.id <= 0) {
     return <>
-      <Input field='inbound_outbound' customInputProps={{uiStyle: 'buttons'}} />
-      <Input field='type' customInputProps={{uiStyle: 'buttons'}} />
       {inboundOutbound == 1
         ? <Input field='id_supplier' />
         : <Input field='id_customer' />
@@ -57,8 +56,6 @@ const TabDefault = (props: FormInvoiceProps) => {
   } else {
     return <>
       <div className='flex flex-col md:flex-row gap-2'>
-        <Input field='inbound_outbound' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
-        <Input field='type' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
         <div className='grow'>
           {inboundOutbound == 1 ?
             <Input field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
@@ -68,18 +65,225 @@ const TabDefault = (props: FormInvoiceProps) => {
       <div className='flex flex-col md:flex-row gap-2'>
         <div className="flex flex-5 gap-2">
           <div className='flex-1 min-w-80'>
-            {props.id == -1 ? null : <>
+            {props.id == -1 ? null : <div className='flex-dyn'>
               <div className='grow'>
                 <Input field='number' customInputProps={{wrapperCssClass: 'block', cssClass: 'text-xl'}} />
+                <Input field='vs' />
+                <Input field='cs' />
+                <Input field='ss' />
               </div>
-              <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
-              <Input field='id_payment_method' customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
-              <Input field='id_currency' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-              <Input field='vs' />
-              <Input field='cs' />
-              <Input field='ss' />
-              <Input field='notes' />
-            </>}
+              <div className='grow'>
+                <Input field='notes'  customInputProps={{cssClass: 'border border-orange-200'}} />
+              </div>
+            </div>}
+
+
+            {props.id <= 0 ? null : <div className='card mt-2'>
+              <div className='card-header'>{T.translate('Items')}</div>
+              <div className='card-body'>
+                <div className='flex flex-col gap-2'>
+                  <Input field='description_before' rendeOnlyInputField customInputProps={{cssClass: 'bg-blue-50 text-blue-500'}} />
+                  {ITEMS.map((item, key) => {
+                    const rowBgClass = (key % 2 == 0 ? 'bg-white' : 'bg-gray-50');
+
+                    return <div key={key} className={'card border ' + (item._toBeDeleted_ ? 'border-red-400' : 'border-blue-400')}>
+                        <div className={'card-header ' + rowBgClass}>
+                          <div className='badge text-xl'>{key + 1}</div>
+                          <VarcharInput
+                            value={item.item}
+                            cssClass='bg-white text-blue-500'
+                            onChange={(input: any, value: any) => {
+                              let newItems = ITEMS;
+                              newItems[key].item = value;
+                              form.changeRecord({ITEMS: newItems});
+                            }}
+                          ></VarcharInput>
+                          <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
+                            {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} {T.translate('excl. VAT')}
+                          </div>
+                          <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
+                            {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} {T.translate('incl. VAT')}
+                          </div>
+                          <button
+                            className='btn btn-warning'
+                            onClick={() => {
+                              request.post(
+                                'invoices/api/unlink-prepared-item',
+                                {
+                                  idInvoice: props.id,
+                                  idItem: item.id
+                                },
+                                {},
+                                (result: any) => {
+                                  form.reload();
+                                }
+                              );
+                            }}
+                          >
+                            <span className='icon'><i className='fas fa-link-slash'></i></span>
+                          </button>
+                          <button
+                            className='btn btn-danger'
+                            onClick={() => {
+                              let newItems = ITEMS;
+                              newItems[key]._toBeDeleted_ = true;
+                              form.changeRecord({ITEMS: newItems});
+                            }}
+                          >
+                            <span className='icon'><i className='fas fa-trash'></i></span>
+                          </button>
+                        </div>
+                        <div className='card-body flex flex-col gap-2'>
+                          <div className='flex gap-2 items-center text-nowrap'>
+                            {T.translate('Unit price')}:
+                            <IntInput
+                              value={item.unit_price}
+                              cssClass='bg-white text-blue-500 w-auto'
+                              description={{unit: currencySymbol + '/unit'}}
+                              onChange={(input: any, value: any) => {
+                                let newItems = ITEMS;
+                                newItems[key].unit_price = value;
+                                form.changeRecord({ITEMS: newItems});
+                              }}
+                            ></IntInput>
+                          </div>
+                          <div className='flex gap-2 items-center'>
+                            {T.translate('Amount')}:
+                            <IntInput
+                              value={item.amount}
+                              cssClass='bg-white text-blue-500 w-auto'
+                              description={{unit: 'units'}}
+                              onChange={(input: any, value: any) => {
+                                let newItems = ITEMS;
+                                newItems[key].amount = value;
+                                form.changeRecord({ITEMS: newItems});
+                              }}
+                            ></IntInput>
+                          </div>
+                          <div className='flex gap-2 items-center'>
+                            {T.translate('Order')}:
+                            <LookupInput
+                              value={item.id_order}
+                              cssClass='bg-white w-auto'
+                              description={{
+                                model: 'Hubleto/App/Community/Orders/Models/Order'
+                              }}
+                              onChange={(input: any, value: any) => {
+                                let newItems = ITEMS;
+                                newItems[key].id_order = value;
+                                form.changeRecord({ITEMS: newItems});
+                              }}
+                            ></LookupInput>
+                            {item.id_order > 0 ?
+                              <LookupInput
+                                value={item.id_order_item}
+                                cssClass='bg-white w-auto'
+                                description={{
+                                  model: 'Hubleto/App/Community/Orders/Models/Item'
+                                }}
+                                customEndpointParams={{idOrder: item.id_order}}
+                                onChange={(input: any, value: any) => {
+                                  request.post('orders/api/get-item',
+                                    {idItem: input.value},
+                                    {},
+                                    (data: any) => {
+                                      const P = data.item;
+                                      let newItems = ITEMS;
+                                      newItems[key].id_order_item = value;
+                                      newItems[key].item = P?.title ?? '';
+                                      newItems[key].unit_price = P?.sales_price ?? 0;
+                                      newItems[key].amount = P?.amount ?? 0;
+                                      newItems[key].price_excl_vat = P?.price_excl_vat ?? 0;
+                                      newItems[key].price_incl_vat = P?.price_incl_vat ?? 0;
+                                      newItems[key].vat = P?.vat ?? 0;
+                                      newItems[key].discount = P?.discount ?? 0;
+                                      form.changeRecord({ITEMS: newItems});
+                                    }
+                                  )
+                                }}
+                              ></LookupInput>
+                            : null}
+                          </div>
+                          <div className='flex gap-2 items-center'>
+                            {T.translate('Discount')}:
+                            <IntInput
+                              value={item.discount}
+                              cssClass='bg-white w-auto'
+                              description={{unit: '%'}}
+                              onChange={(input: any, value: any) => {
+                                let newItems = ITEMS;
+                                newItems[key].discount = value;
+                                form.changeRecord({ITEMS: newItems});
+                              }}
+                            ></IntInput>
+                          </div>
+                          <div className='flex gap-2 items-center'>
+                            {T.translate('VAT')}:
+                            <IntInput
+                              value={item.vat}
+                              cssClass='bg-white w-auto'
+                              description={{unit: '%'}}
+                              onChange={(input: any, value: any) => {
+                                let newItems = ITEMS;
+                                newItems[key].vat = value;
+                                form.changeRecord({ITEMS: newItems});
+                              }}
+                            ></IntInput>
+                          </div>
+                          <div className='flex gap-2 items-center'>
+                            {T.translate('Attachments')}:
+                            <FileInput
+                              value={item.attachment_1}
+                              cssClass='bg-white w-auto'
+                              onChange={(input: any, value: any) => {
+                                let newItems = ITEMS;
+                                newItems[key].attachment_1 = value;
+                                form.changeRecord({ITEMS: newItems});
+                              }}
+                            ></FileInput>
+                            <FileInput
+                              value={item.attachment_2}
+                              cssClass='bg-white w-auto'
+                              onChange={(input: any, value: any) => {
+                                let newItems = ITEMS;
+                                newItems[key].attachment_2 = value;
+                                form.changeRecord({ITEMS: newItems});
+                              }}
+                            ></FileInput>
+                          </div>
+                        </div>
+                    </div>;
+                  })}
+                  <div className='flex gap-2'>
+                    <button
+                      className='btn btn-add mt-2'
+                      onClick={() => {
+                        form.changeRecord({ITEMS: [...ITEMS, {
+                          id_invoice: props.id,
+                          id_customer: idCustomer,
+                        }]});
+                      }}
+                    >
+                      <span className='icon'><i className='fas fa-plus'></i></span>
+                      <span className='text'>{T.translate('Add new item')}</span>
+                    </button>
+                    <button
+                      className='btn btn-add-outline mt-2'
+                      onClick={() => {
+                        setLinkPreparedItem(true);
+                      }}
+                    >
+                      <span className='icon'><i className='fas fa-link'></i></span>
+                      <span className='text'>{T.translate('Link prepared item')}</span>
+                    </button>
+                  </div>
+                  <Input field='description_after' renderOnlyInputField customInputProps={{cssClass: 'bg-blue-50 text-blue-500'}} />
+                </div>
+              </div>
+            </div>}
+
+
+
           </div>
         </div>
         <div className='gap-2 flex-1'>
@@ -120,211 +324,6 @@ const TabDefault = (props: FormInvoiceProps) => {
           </div>
         </div>
       </div>
-      {props.id <= 0 ? null : <div className='card mt-2'>
-        <div className='card-header'>{T.translate('Items')}</div>
-        <div className='card-body'>
-          <div className='flex flex-col gap-2'>
-            <Input field='description_before' rendeOnlyInputField customInputProps={{cssClass: 'bg-blue-50 text-blue-500'}} />
-            {ITEMS.map((item, key) => {
-              const rowBgClass = (key % 2 == 0 ? 'bg-white' : 'bg-gray-50');
-
-              return <>
-                <div key={key + '1'} className={'card border ' + (item._toBeDeleted_ ? 'border-red-400' : 'border-blue-400')}>
-                  <div className={'card-header ' + rowBgClass}>
-                    <div className='badge text-xl'>{key + 1}</div>
-                    <VarcharInput
-                      value={item.item}
-                      cssClass='bg-white text-blue-500'
-                      onChange={(input: any, value: any) => {
-                        let newItems = ITEMS;
-                        newItems[key].item = value;
-                        form.changeRecord({ITEMS: newItems});
-                      }}
-                    ></VarcharInput>
-                    <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                      {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} {T.translate('excl. VAT')}
-                    </div>
-                    <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                      {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} {T.translate('incl. VAT')}
-                    </div>
-                    <button
-                      className='btn btn-warning'
-                      onClick={() => {
-                        request.post(
-                          'invoices/api/unlink-prepared-item',
-                          {
-                            idInvoice: props.id,
-                            idItem: item.id
-                          },
-                          {},
-                          (result: any) => {
-                            form.reload();
-                          }
-                        );
-                      }}
-                    >
-                      <span className='icon'><i className='fas fa-link-slash'></i></span>
-                    </button>
-                    <button
-                      className='btn btn-danger'
-                      onClick={() => {
-                        let newItems = ITEMS;
-                        newItems[key]._toBeDeleted_ = true;
-                        form.changeRecord({ITEMS: newItems});
-                      }}
-                    >
-                      <span className='icon'><i className='fas fa-trash'></i></span>
-                    </button>
-                  </div>
-                  <div className='card-body flex flex-col gap-2'>
-                    <div className='flex gap-2 items-center text-nowrap'>
-                      {T.translate('Unit price')}:
-                      <IntInput
-                        value={item.unit_price}
-                        cssClass='bg-white text-blue-500 w-auto'
-                        description={{unit: currencySymbol + '/unit'}}
-                        onChange={(input: any, value: any) => {
-                          let newItems = ITEMS;
-                          newItems[key].unit_price = value;
-                          form.changeRecord({ITEMS: newItems});
-                        }}
-                      ></IntInput>
-                    </div>
-                    <div className='flex gap-2 items-center'>
-                      {T.translate('Amount')}:
-                      <IntInput
-                        value={item.amount}
-                        cssClass='bg-white text-blue-500 w-auto'
-                        description={{unit: 'units'}}
-                        onChange={(input: any, value: any) => {
-                          let newItems = ITEMS;
-                          newItems[key].amount = value;
-                          form.changeRecord({ITEMS: newItems});
-                        }}
-                      ></IntInput>
-                    </div>
-                    <div className='flex gap-2 items-center'>
-                      {T.translate('Order')}:
-                      <LookupInput
-                        value={item.id_order}
-                        cssClass='bg-white w-auto'
-                        description={{
-                          model: 'Hubleto/App/Community/Orders/Models/Order'
-                        }}
-                        onChange={(input: any, value: any) => {
-                          let newItems = ITEMS;
-                          newItems[key].id_order = value;
-                          form.changeRecord({ITEMS: newItems});
-                        }}
-                      ></LookupInput>
-                      {item.id_order > 0 ?
-                        <LookupInput
-                          value={item.id_order_item}
-                          cssClass='bg-white w-auto'
-                          description={{
-                            model: 'Hubleto/App/Community/Orders/Models/Item'
-                          }}
-                          customEndpointParams={{idOrder: item.id_order}}
-                          onChange={(input: any, value: any) => {
-                            request.post('orders/api/get-item',
-                              {idItem: input.value},
-                              {},
-                              (data: any) => {
-                                const P = data.item;
-                                let newItems = ITEMS;
-                                newItems[key].id_order_item = value;
-                                newItems[key].item = P?.title ?? '';
-                                newItems[key].unit_price = P?.sales_price ?? 0;
-                                newItems[key].amount = P?.amount ?? 0;
-                                newItems[key].price_excl_vat = P?.price_excl_vat ?? 0;
-                                newItems[key].price_incl_vat = P?.price_incl_vat ?? 0;
-                                newItems[key].vat = P?.vat ?? 0;
-                                newItems[key].discount = P?.discount ?? 0;
-                                form.changeRecord({ITEMS: newItems});
-                              }
-                            )
-                          }}
-                        ></LookupInput>
-                      : null}
-                    </div>
-                    <div className='flex gap-2 items-center'>
-                      {T.translate('Discount')}:
-                      <IntInput
-                        value={item.discount}
-                        cssClass='bg-white w-auto'
-                        description={{unit: '%'}}
-                        onChange={(input: any, value: any) => {
-                          let newItems = ITEMS;
-                          newItems[key].discount = value;
-                          form.changeRecord({ITEMS: newItems});
-                        }}
-                      ></IntInput>
-                    </div>
-                    <div className='flex gap-2 items-center'>
-                      {T.translate('VAT')}:
-                      <IntInput
-                        value={item.vat}
-                        cssClass='bg-white w-auto'
-                        description={{unit: '%'}}
-                        onChange={(input: any, value: any) => {
-                          let newItems = ITEMS;
-                          newItems[key].vat = value;
-                          form.changeRecord({ITEMS: newItems});
-                        }}
-                      ></IntInput>
-                    </div>
-                    <div className='flex gap-2 items-center'>
-                      {T.translate('Attachments')}:
-                      <FileInput
-                        value={item.attachment_1}
-                        cssClass='bg-white w-auto'
-                        onChange={(input: any, value: any) => {
-                          let newItems = ITEMS;
-                          newItems[key].attachment_1 = value;
-                          form.changeRecord({ITEMS: newItems});
-                        }}
-                      ></FileInput>
-                      <FileInput
-                        value={item.attachment_2}
-                        cssClass='bg-white w-auto'
-                        onChange={(input: any, value: any) => {
-                          let newItems = ITEMS;
-                          newItems[key].attachment_2 = value;
-                          form.changeRecord({ITEMS: newItems});
-                        }}
-                      ></FileInput>
-                    </div>
-                  </div>
-                </div>
-              </>;
-            })}
-            <div className='flex gap-2'>
-              <button
-                className='btn btn-add mt-2'
-                onClick={() => {
-                  form.changeRecord({ITEMS: [...ITEMS, {
-                    id_invoice: props.id,
-                    id_customer: idCustomer,
-                  }]});
-                }}
-              >
-                <span className='icon'><i className='fas fa-plus'></i></span>
-                <span className='text'>{T.translate('Add new item')}</span>
-              </button>
-              <button
-                className='btn btn-add-outline mt-2'
-                onClick={() => {
-                  setLinkPreparedItem(true);
-                }}
-              >
-                <span className='icon'><i className='fas fa-link'></i></span>
-                <span className='text'>{T.translate('Link prepared item')}</span>
-              </button>
-            </div>
-            <Input field='description_after' renderOnlyInputField customInputProps={{cssClass: 'bg-blue-50 text-blue-500'}} />
-          </div>
-        </div>
-      </div>}
       {linkPreparedItem ? <>
         <Modal
           uid={props.uid + '_modal_link_prepared_item'}
@@ -393,6 +392,7 @@ const TabEmail = (props: FormInvoiceProps) => {
   if (sendInvoiceResult) return <div className='alert alert-success'>{T.translate('Email was sent')}</div>;
 
   const updateEmailPreview = () => {
+    console.log('updateEmailPreview', sendInvoiceEmailType);
     setSendInvoicePreparedData(null);
     setSendInvoiceResult(null);
 
@@ -410,7 +410,7 @@ const TabEmail = (props: FormInvoiceProps) => {
     );
   }
 
-  useEffect(() => updateEmailPreview, []);
+  useEffect(() => { updateEmailPreview(); }, [sendInvoiceEmailType]);
 
   return <>
     <div className='btn-group'>
@@ -418,7 +418,6 @@ const TabEmail = (props: FormInvoiceProps) => {
         className={'btn ' + (sendInvoiceEmailType == 'send-invoice' ? 'btn-primary': 'btn-transparent')}
         onClick={() => {
           setSendInvoiceEmailType('send-invoice');
-          updateEmailPreview();
         }}
       >
         <span className='text'>{T.translate('Send invoice')}</span>
@@ -427,7 +426,6 @@ const TabEmail = (props: FormInvoiceProps) => {
         className={'btn ' + (sendInvoiceEmailType == 'notify-due-invoice' ? 'btn-primary': 'btn-transparent')}
         onClick={() => {
           setSendInvoiceEmailType('notify-due-invoice');
-          updateEmailPreview();
         }}
       >
         <span className='text'>{T.translate('Send notification on due invoice')}</span>
@@ -435,7 +433,10 @@ const TabEmail = (props: FormInvoiceProps) => {
     </div>
     <div className='mt-2'>
       {!sendInvoicePreparedData
-        ? <div className='alert alert-warning'>{T.translate('Preparing email...')}</div>
+        ? <div className='alert alert-warning'>
+          {T.translate('Preparing email...')}
+          <LoaderBar></LoaderBar>
+        </div>
         : <>
           <table className='table-default dense'><tbody>
             <tr>
@@ -592,12 +593,21 @@ const FormInvoice = (props: FormInvoiceProps) => {
           case 5: case '5': title += ' ' + T.translate('Debit Note'); break;
         }
 
-        return <>
-          <small>{title}</small>
+        return <div>
           <h2>{number}</h2>
-        </>;
+          <small>{title}</small>
+        </div>;
       }
     }
+    renderTopInputs={() => {
+      return <div className='modal-top-inputs'>
+        <Input field='inbound_outbound' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
+        <Input field='type' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
+        <Input field='id_profile' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
+        <Input field='id_payment_method' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
+        <Input field='id_currency' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+      </div>;
+    }}
     // title={{field: 'some-field-of-the-record', sub: T.translate(componentName)}}
     tabs={tabs}
     {...props}

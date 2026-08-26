@@ -89,7 +89,7 @@ const TabDefault = (props: FormTaskProps) => {
           </div>
         </div>
       </div>
-      {props.id <= 0 ? null : 
+      {form.id <= 0 ? null : 
         <div className='flex-1 flex gap-2 flex-col'>
           <div className='text-2xl'>
             {globalThis.hubleto.numberFormat(virtWorkedHours, 2)} h
@@ -189,7 +189,7 @@ const TabDefault = (props: FormTaskProps) => {
                     e.preventDefault();
                     let newTodo = TODO;
                     newTodo.push({
-                      id_task: props.id,
+                      id_task: form.id,
                       todo: '',
                       id_responsible: globalThis.hubleto.idUser,
                       date_deadline: moment().add(1, 'week').format('YYYY-MM-DD')
@@ -216,7 +216,7 @@ const TabWorksheet = (props: FormTaskProps) => {
     uid={props.uid + "_table_activities"}
     tag="TaskActivities"
     parentForm={form}
-    idTask={props.id}
+    idTask={form.id}
   />;
 }
 

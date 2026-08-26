@@ -64,7 +64,7 @@ const TabDefault = (props: FormOrderProps) => {
             onChange={(input: any, value: any) => {
               request.post(
                 'deals/api/set-parent-deal',
-                { idOrder: props.id, idDeal: value },
+                { idOrder: form.id, idDeal: value },
                 {},
                 (data: any) => { setSelectParentDeal(false); }
               )
@@ -107,7 +107,7 @@ const TabDefault = (props: FormOrderProps) => {
         <Input field='shared_folder' />
       </div>
       <div className='grow'>
-        {props.id > 0 ? <>
+        {form.id > 0 ? <>
           {nextActivityDate ?
             <div className='block alert alert-success'>
               <i className='fas fa-calendar mr-2'></i>
@@ -144,7 +144,7 @@ const TabItems = (props: FormOrderProps) => {
       parentForm={form}
       view={"orderOverview"}
       uid={props.uid + "_table_order_item"}
-      idOrder={props.id}
+      idOrder={form.id}
     />
     <div>
       <Input field='description_after' />
@@ -153,48 +153,21 @@ const TabItems = (props: FormOrderProps) => {
 }
 
 /** TabCalendar */
-// const TabCalendar = (props: FormProps) => <CalendarTab
-//   calendarSource='orders'
-//   externalIdColumn='idOrder'
-//   logActivityEndpoint='orders/api/log-activity'
-//   renderActivityForm={(calendarTab: any) => {
-//     const idCustomer: number = useRecordField('id_customer', 0);
-//     const idContact: number = useRecordField('id_contact', 0);
-
-//     return <OrderFormActivity
-//       id={calendarTab.showIdActivity}
-//       description={{
-//         defaultValues: {
-//           id_order: props.id,
-//           id_contact: idContact,
-//           date_start: calendarTab.activityDate,
-//           time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
-//           date_end: calendarTab.activityDate,
-//           all_day: calendarTab.activityAllDay,
-//           subject: calendarTab.activitySubject,
-//         }
-//       }}
-//       onClose={() => { calendarTab.setShowIdActivity(0) }}
-//       onAfterSaveRecord={(form: any, saveResponse: any) => {
-//         if (saveResponse.status == "success") {
-//           calendarTab.setShowIdActivity(0);
-//         }
-//       }}
-//     ></OrderFormActivity>;
-//   }}
-// ></CalendarTab>;
-const TabCalendar = (props: FormProps) => <CalendarTab
-  loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=orders&idOrder=' + props.id}
-  logActivityEndpoint={'orders/api/log-activity?idOrder=' + props.id}
-  renderActivityForm={(calendarTab: any) => {
-    return <CalendarFormActivity
-      calendarTab={calendarTab}
-      customInputFields={['id_order']}
-      defaultValues={{id_order: props.id}}
-      model='Hubleto/App/Community/Orders/Models/OrderActivity'
-    ></CalendarFormActivity>;
-  }}
-></CalendarTab>;
+const TabCalendar = (props: FormProps) => {
+  const form = React.useContext(FormMetaContext);
+  return <CalendarTab
+    loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=orders&idOrder=' + form.id}
+    logActivityEndpoint={'orders/api/log-activity?idOrder=' + form.id}
+    renderActivityForm={(calendarTab: any) => {
+      return <CalendarFormActivity
+        calendarTab={calendarTab}
+        customInputFields={['id_order']}
+        defaultValues={{id_order: form.id}}
+        model='Hubleto/App/Community/Orders/Models/OrderActivity'
+      ></CalendarFormActivity>;
+    }}
+  ></CalendarTab>;
+}
 
 /** TabQuotes */
 const TabQuotes = (props: FormOrderProps) => {
@@ -204,7 +177,7 @@ const TabQuotes = (props: FormOrderProps) => {
     tag={"table_order_quote"}
     parentForm={form}
     uid={props.uid + "_table_order_quote"}
-    idOrder={props.id}
+    idOrder={form.id}
   />;
 }
 
@@ -240,7 +213,7 @@ const TabWorksheet = (props: FormOrderProps) => {
       ref={refTableActivities}
       parentForm={form}
       uid={props.uid + "_table_order_activities"}
-      idOrder={props.id}
+      idOrder={form.id}
       readonly={true}
     />
   </div>;
@@ -257,7 +230,7 @@ const TabInvoicing = (props: FormOrderProps) => {
       ref={refTableItemsInvoicing}
       parentForm={form}
       uid={props.uid + "_table_order_items_invoicing"}
-      idOrder={props.id}
+      idOrder={form.id}
       view="invoicing"
     />
     <div>
@@ -269,7 +242,7 @@ const TabInvoicing = (props: FormOrderProps) => {
           request.post(
             'orders/api/prepare-items-for-invoice',
             {
-              idOrder: props.id,
+              idOrder: form.id,
               idItems: idItems,
             },
             {},
@@ -288,13 +261,15 @@ const TabInvoicing = (props: FormOrderProps) => {
 
 /** TabStatistics */
 const TabStatistics = (props: FormOrderProps) => {
+  const form = React.useContext(FormMetaContext);
+
   const [salaries, setSalaries] = useState({});
   const [statistics, setStatistics] = useState({});
 
   useEffect(() => {
     request.post(
       'orders/api/get-statistics',
-      { idOrder: props.id },
+      { idOrder: form.id },
       {},
       (data: any) => { setStatistics(data); }
     )

@@ -37,7 +37,7 @@ const TabDefault = (props: FormDocumentProps) => {
             parentForm={form}
             readonly={true}
             uid={props.uid + "_table_documents_versions"}
-            idDocument={props.id}
+            idDocument={form.id}
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ const TabDefault = (props: FormDocumentProps) => {
         tag={"table_documents_reviews"}
         parentForm={form}
         uid={props.uid + "_table_documents_reviews"}
-        idDocument={props.id}
+        idDocument={form.id}
       />
     </div>
   </div>

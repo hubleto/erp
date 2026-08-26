@@ -18,7 +18,7 @@ const parentApp = 'Hubleto/App/Community/EmailMarketing';
 const T = new Translator(parentApp + '/Loader', 'Components/FormEmail');
 
 /** TabDefault */
-const TabDefault = ({ formEmail }) => {
+const TabDefault = () => {
   return <>
     <div className='w-full flex flex-col md:flex-row gap-2'>
       <div className='flex-4 border-r border-gray-100'>
@@ -45,7 +45,7 @@ const TabDefault = ({ formEmail }) => {
 }
 
 /** TabContacts */
-const TabContacts = ({ formEmail }) => {
+const TabContacts = () => {
   const form = React.useContext(FormMetaContext);
   const RECIPIENTS: Array<any> = useRecordField('RECIPIENTS');
 
@@ -56,7 +56,7 @@ const TabContacts = ({ formEmail }) => {
     <TableContacts
       tag={"table_email_contact"}
       parentForm={form}
-      uid={formEmail.props.uid + "_table_email_contact"}
+      uid={form.uid + "_table_email_contact"}
       selectionMode='multiple'
       readonly={true}
       descriptionSource='both'
@@ -68,7 +68,7 @@ const TabContacts = ({ formEmail }) => {
         request.post(
           'email-marketing/api/save-recipients-from-contacts',
           {
-            idEmail: formEmail.props.id,
+            idEmail: form.id,
             contactIds: table.state.selection.map((item) => item.id)
           },
           {},
@@ -94,8 +94,8 @@ const TabRecipients = ({ formEmail }) => {
         //@ts-ignore
         ref={refTableRecipients}
         parentForm={form}
-        uid={formEmail.props.uid + "_table_email_recipient"}
-        idEmail={formEmail.props.id}
+        uid={form.uid + "_table_email_recipient"}
+        idEmail={form.id}
         view='briefOverview'
         onAfterLoadData={(table: any) => {
           formEmail.setRecipients(table.state.data.records);
@@ -117,7 +117,7 @@ const TabRecipients = ({ formEmail }) => {
               request.post(
                 'email-marketing/api/import-recipients',
                 {
-                  idEmail: formEmail.props.id,
+                  idEmail: form.id,
                   recipients: refEmails.current.value,
                 },
                 {},
@@ -141,7 +141,7 @@ const TabRecipients = ({ formEmail }) => {
                 request.post(
                   'email-marketing/api/remove-all-recipients',
                   {
-                    idEmail: formEmail.props.id                  },
+                    idEmail: form.id                  },
                   {},
                   (data: any) => {
                     refTableRecipients.current.reload();
@@ -161,20 +161,41 @@ const TabRecipients = ({ formEmail }) => {
 
 /** TabTest */
 const TabTest = ({ formEmail }) => {
+  const form = React.useContext(FormMetaContext);
   const refTestRecipientInput: any = React.createRef();
+
+  const [testEmailVariables, setTestEmailVariables] = useState([]);
+  const [testEmailSendResult, setTestEmailSendResult] = useState(null);
+  const [emailTestInfo, setEmailTestInfo] = useState(null);
+  const [recentlyContactedPeriod, setRecentlyContactedPeriod] = useState(1);
+
+  const updateEmailTestInfo = () => {
+    setEmailTestInfo(null);
+    request.post(
+      'email-marketing/api/get-email-test-info',
+      {
+        idEmail: form.id,
+        recentlyContactedPeriod: recentlyContactedPeriod,
+      },
+      {},
+      (data: any) => {
+        setEmailTestInfo(data);
+      }
+    );
+  }
 
   return <div className='flex gap-2'>
     <div className='card flex-1'>
       <div className='card-header'>{T.translate('Analysis & warnings')}</div>
       <div className='card-body'>
-        {formEmail.emailTestInfo ? <>
-          {formEmail.emailTestInfo.warnings.length == 0 ? 
+        {emailTestInfo ? <>
+          {emailTestInfo.warnings.length == 0 ? 
             <div className='alert alert-success'>
               <i className='fas fa-check mr-2'></i>
               {T.translate('No warnings')}
             </div>
           :
-            formEmail.emailTestInfo.warnings.map((item, key) => {
+            emailTestInfo.warnings.map((item, key) => {
               return <div key={key} className='alert alert-warning'>{item}</div>;
             })
           }
@@ -182,17 +203,17 @@ const TabTest = ({ formEmail }) => {
             <b className='flex gap-1 items-center'>Recipients contacted in last <input
               type='number'
               className='w-12'
-              value={formEmail.recentlyContactedPeriod}
+              value={recentlyContactedPeriod}
               onChange={(event: any) => {
-                formEmail.setRecentlyContactedPeriod(event.target.value);
-                formEmail.updateEmailTestInfo();
+                setRecentlyContactedPeriod(event.target.value);
+                updateEmailTestInfo();
               }}
             ></input> months</b>
             <button
               className='btn btn-delete-outline btn-small'
               onClick={() => {
                 let emails = [];
-                Object.keys(formEmail.emailTestInfo.recentlyContacted).map((email, key) => {
+                Object.keys(emailTestInfo.recentlyContacted).map((email, key) => {
                   emails.push(email)
                 });
                 formEmail.removeRecipients(emails);
@@ -202,7 +223,7 @@ const TabTest = ({ formEmail }) => {
               <span className='text'>Remove all</span>
             </button>
           </div>
-          {Object.keys(formEmail.emailTestInfo.recentlyContacted).length == 0
+          {Object.keys(emailTestInfo.recentlyContacted).length == 0
             ? <div className='flex gap-1 items-center'>No recipients found.</div>
             : <table className='table-default dense'>
               <thead>
@@ -211,12 +232,12 @@ const TabTest = ({ formEmail }) => {
                   <th>{T.translate('Email')}</th>
                   <th>{T.translate('When')}</th>
                   <th>{T.translate('Email')}</th>
-                  <th></th>
+                  {/* <th></th> */}
                 </tr>
               </thead>
               <tbody>
-                {Object.keys(formEmail.emailTestInfo.recentlyContacted).map((email, key) => {
-                  const details = formEmail.emailTestInfo.recentlyContacted[email];
+                {Object.keys(emailTestInfo.recentlyContacted).map((email, key) => {
+                  const details = emailTestInfo.recentlyContacted[email];
                   return <tr>
                     <td className='text-nowrap'>{key+1}</td>
                     <td className='text-nowrap'>{email}</td>
@@ -255,7 +276,7 @@ const TabTest = ({ formEmail }) => {
         <InputJsonKeyValue uid="test-email-variables"
           onChange={(input: any, value: any) => {
             // input.setState({value: value});
-            formEmail.setTestEmailVariables(value);
+            setTestEmailVariables(value);
           }}
         ></InputJsonKeyValue>
         <button
@@ -264,13 +285,13 @@ const TabTest = ({ formEmail }) => {
             request.post(
               'email-marketing/api/send-test-email',
               {
-                idEmail: formEmail.props.id,
+                idEmail: form.id,
                 to: refTestRecipientInput.current.value,
-                variables: formEmail.testEmailVariables,
+                variables: testEmailVariables,
               },
               {},
               (result: any) => {
-                formEmail.setTestEmailSendResult(result);
+                setTestEmailSendResult(result);
               }
             );
           }}
@@ -278,14 +299,14 @@ const TabTest = ({ formEmail }) => {
           <span className="icon"><i className="fas fa-envelope"></i></span>
           <span className="text">{T.translate('Send test email')}</span>
         </button>
-        {formEmail.testEmailSendResult && formEmail.testEmailSendResult.status == 'success' ?
+        {testEmailSendResult && testEmailSendResult.status == 'success' ?
           <div className='alert alert-success mt-2'>{T.translate('Test email was sent to you.')}</div>
         : null}
-        {formEmail.testEmailSendResult && formEmail.testEmailSendResult.status != 'success' ?
+        {testEmailSendResult && testEmailSendResult.status != 'success' ?
           <div className='alert alert-danger mt-2'>
             {T.translate('Error occured when sending a test email to you.')}
             <br/>
-            <b>{formEmail.testEmailSendResult.message}</b>
+            <b>{testEmailSendResult.message}</b>
           </div>
         : null}
       </div>
@@ -294,18 +315,40 @@ const TabTest = ({ formEmail }) => {
 }
 
 /** TabLaunch */
-const TabLaunch = ({ formEmail }) => {
+const TabLaunch = () => {
+  const form = React.useContext(FormMetaContext);
+
   const idLaunchedBy: number = useRecordField('id_launched_by');
   const datetimeLaunched: any = useRecordField('datetime_launched');
   const LAUNCHED_BY: any = useRecordField('LAUNCHED_BY');
+
+  const [emailLaunchInfo, setEmailLaunchInfo] = useState(null);
+  const [launchResult, setLaunchResult] = useState(null);
+  const [recentlyContactedPeriod, setRecentlyContactedPeriod] = useState(1);
+
+  const updateEmailLaunchInfo = () => {
+    setEmailLaunchInfo(null);
+    request.post(
+      'email-marketing/api/get-email-launch-info',
+      {
+        idEmail: form.id,
+        recentlyContactedPeriod: recentlyContactedPeriod,
+      },
+      {},
+      (data: any) => {
+        setEmailLaunchInfo(data);
+      }
+    );
+
+  }
 
   let invalidRecipientsCount = 0;
   let unsubscribedRecipientsCount = 0;
   let emailsSent = 0;
   let potentialLeads = [];
 
-  if (formEmail.emailLaunchInfo?.recipients) {
-    formEmail.emailLaunchInfo.recipients.map((item, key) => {
+  if (emailLaunchInfo?.recipients) {
+    emailLaunchInfo.recipients.map((item, key) => {
       if (item.STATUS?.is_unsubscribed) unsubscribedRecipientsCount++;
       if (item.STATUS?.is_invalid) invalidRecipientsCount++;
       if (item.MAIL?.datetime_sent) emailsSent++;
@@ -328,11 +371,11 @@ const TabLaunch = ({ formEmail }) => {
   }
 
   return <>
-    {formEmail.emailLaunchInfo ? <>
-      {formEmail.emailLaunchInfo.recentlyContacted
-        && formEmail.emailLaunchInfo.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
+    {emailLaunchInfo ? <>
+      {emailLaunchInfo.recentlyContacted
+        && emailLaunchInfo.recentlyContacted.length > 0 ? <div className='alert alert-warning'>
         <b>{T.translate('Recently contacted')}</b>
-        {formEmail.emailLaunchInfo.recentlyContacted.map((item, key) => {
+        {emailLaunchInfo.recentlyContacted.map((item, key) => {
           if (!item.CONTACT) return null;
           return <div key={key}>
             <code>
@@ -371,10 +414,10 @@ const TabLaunch = ({ formEmail }) => {
           onClick={() => {
             request.post(
               'email-marketing/api/launch',
-              { idEmail: formEmail.props.id },
+              { idEmail: form.id },
               {},
               (result: any) => {
-                formEmail.setLaunchResult(result);
+                setLaunchResult(result);
               }
             );
           }}
@@ -388,21 +431,21 @@ const TabLaunch = ({ formEmail }) => {
         <div className='mt-2 alert alert-info'>
           {T.translate('Unsubscribed and invalid recipients will be ignored.')}
         </div>
-        {formEmail.emailLaunchInfo && formEmail.emailLaunchInfo.recipients ? <>
+        {emailLaunchInfo && emailLaunchInfo.recipients ? <>
           <div className='card mt-2'>
             <div className='card-header'>{T.translate('Statistics')}</div>
             <div className='card-body flex flex-col gap-1'>
               <div className='badge'>
-                {T.translate('Recipients')}: {formEmail.emailLaunchInfo.recipients.length}
+                {T.translate('Recipients')}: {emailLaunchInfo.recipients.length}
               </div>
               <div className='badge'>
                 {T.translate('Emails sent')}: {emailsSent}
               </div>
               <div className='badge badge-warning'>
-                {T.translate('Invalid recipients')}: {invalidRecipientsCount} ({Math.round(invalidRecipientsCount / formEmail.emailLaunchInfo.recipients.length * 100)} %)
+                {T.translate('Invalid recipients')}: {invalidRecipientsCount} ({Math.round(invalidRecipientsCount / emailLaunchInfo.recipients.length * 100)} %)
               </div>
               <div className='badge badge-danger'>
-                {T.translate('Unsubscribed recipients')}: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / formEmail.emailLaunchInfo.recipients.length * 100)} %)
+                {T.translate('Unsubscribed recipients')}: {unsubscribedRecipientsCount} ({Math.round(unsubscribedRecipientsCount / emailLaunchInfo.recipients.length * 100)} %)
               </div>
             </div>
           </div>
@@ -416,20 +459,20 @@ const TabLaunch = ({ formEmail }) => {
           </div>
         </> : null}
 
-        {formEmail.launchResult && formEmail.launchResult.status == 'success' ?
+        {launchResult && launchResult.status == 'success' ?
           <div className='alert alert-success mt-2'>{T.translate('Email was sent.')}</div>
         : null}
-        {formEmail.launchResult && formEmail.launchResult.status != 'success' ?
+        {launchResult && launchResult.status != 'success' ?
           <div className='alert alert-danger mt-2'>
             {T.translate('Error occured when launching the email.')}<br/>
-            <b>{formEmail.launchResult.message}</b>
+            <b>{launchResult.message}</b>
           </div>
         : null}
       </div>
       <div className='card grow'>
         <div className='card-header'>{T.translate('Recipients')}</div>
         <div className='card-body'>
-          {formEmail.emailLaunchInfo && formEmail.emailLaunchInfo.recipients ? 
+          {emailLaunchInfo && emailLaunchInfo.recipients ? 
             <table className='table-default dense'>
               <thead>
                 <tr>
@@ -445,13 +488,13 @@ const TabLaunch = ({ formEmail }) => {
                 </tr>
               </thead>
               <tbody>
-                {formEmail.emailLaunchInfo.recipients.map((item, key) => {
+                {emailLaunchInfo.recipients.map((item, key) => {
                   let botScoreTotal = 0;
                   item.CLICKS.map((click, key) => {
                     botScoreTotal += click.bot_score;
                   });
 
-                  let recentlyContacted = formEmail.emailLaunchInfo.recentlyContacted[item.email];
+                  let recentlyContacted = emailLaunchInfo.recentlyContacted[item.email];
 
                   return <tr>
                     <td className='text-nowrap'>{key+1}</td>
@@ -493,31 +536,24 @@ const TabLaunch = ({ formEmail }) => {
 }
 
 /** TabClicks */
-const TabClicks = ({ formEmail }) => {
+const TabClicks = () => {
   const form = React.useContext(FormMetaContext);
 
   return <TableEmailClicks
     parentForm={form}
     tag="table_email_click"
-    uid={formEmail.uid + "_table_email_click"}
-    idEmail={formEmail.props.id}
+    uid={form.uid + "_table_email_click"}
+    idEmail={form.id}
   />;
 }
 
 /** FormEmail */
 const FormEmail = (props: FormEmailProps) => {
 
-  const [testEmailVariables, setTestEmailVariables] = useState([]);
-  const [testEmailSendResult, setTestEmailSendResult] = useState(null);
-  const [launchResult, setLaunchResult] = useState(null);
-  const [emailTestInfo, setEmailTestInfo] = useState(null);
-  const [emailLaunchInfo, setEmailLaunchInfo] = useState(null);
   const [recipients, setRecipients] = useState([]);
-  const [recentlyContactedPeriod, setRecentlyContactedPeriod] = useState(1);
   const [subTab, setSubTab] = useState('');
 
   const removeRecipient = (email: string) => {
-    setEmailTestInfo(null)
     request.post(
       'email-marketing/api/remove-recipient-from-email',
       {
@@ -525,14 +561,11 @@ const FormEmail = (props: FormEmailProps) => {
         email: email,
       },
       {},
-      (data: any) => {
-        updateEmailTestInfo();
-      }
+      (data: any) => {}
     );
   }
 
   const removeRecipients = (emails: Array<string>) => {
-    setEmailTestInfo(null);
     request.post(
       'email-marketing/api/remove-recipient-from-email',
       {
@@ -540,56 +573,16 @@ const FormEmail = (props: FormEmailProps) => {
         emails: emails,
       },
       {},
-      (data: any) => {
-        updateEmailTestInfo();
-      }
+      (data: any) => {}
     );
-  }
-
-  const updateEmailTestInfo = () => {
-    setEmailTestInfo(null);
-    request.post(
-      'email-marketing/api/get-email-test-info',
-      {
-        idEmail: props.id,
-        recentlyContactedPeriod: recentlyContactedPeriod,
-      },
-      {},
-      (data: any) => {
-        setEmailTestInfo(data);
-      }
-    );
-  }
-
-  const updateEmailLaunchInfo = () => {
-    setEmailLaunchInfo(null);
-    request.post(
-      'email-marketing/api/get-email-launch-info',
-      {
-        idEmail: props.id,
-        recentlyContactedPeriod: recentlyContactedPeriod,
-      },
-      {},
-      (data: any) => {
-        setEmailLaunchInfo(data);
-      }
-    );
-
   }
 
   const formEmail = {
     props,
-    testEmailVariables, setTestEmailVariables,
-    testEmailSendResult, setTestEmailSendResult,
-    launchResult, setLaunchResult,
-    emailTestInfo, setEmailTestInfo,
-    emailLaunchInfo, setEmailLaunchInfo,
     recipients, setRecipients,
-    recentlyContactedPeriod, setRecentlyContactedPeriod,
     subTab, setSubTab,
 
     removeRecipient, removeRecipients,
-    updateEmailTestInfo, updateEmailLaunchInfo
   };
 
   return <Form
@@ -597,24 +590,24 @@ const FormEmail = (props: FormEmailProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Email'}
     urlSlug='email-marketing/emails'
-    onTabChange={(form: any) => {
-      switch (form.activeTabUid) {
-        case 'test':
-          updateEmailTestInfo();
-        break;
-        case 'launch':
-          updateEmailLaunchInfo();
-        break;
-      }
-    }}
+    // onTabChange={(form: any) => {
+    //   switch (form.activeTabUid) {
+    //     case 'test':
+    //       updateEmailTestInfo();
+    //     break;
+    //     case 'launch':
+    //       updateEmailLaunchInfo();
+    //     break;
+    //   }
+    // }}
     title={{field: 'title', sub: T.translate('Email')}}
     tabs={{
-      default: { title: <b>{T.translate('Email')}</b>, content: () => <TabDefault formEmail={formEmail} /> },
-      contacts: { title: T.translate('Contacts'), content: () => <TabContacts formEmail={formEmail} /> },
+      default: { title: <b>{T.translate('Email')}</b>, content: () => <TabDefault /> },
+      contacts: { title: T.translate('Contacts'), content: () => <TabContacts /> },
       recipients: { title: T.translate('Recipients'), content: () => <TabRecipients formEmail={formEmail} /> },
       test: { title: T.translate('Test'), content: () => <TabTest formEmail={formEmail} /> },
-      launch: { title: T.translate('Launch'), content: () => <TabLaunch formEmail={formEmail} /> },
-      clicks: { title: T.translate('Clicks'), content: () => <TabClicks formEmail={formEmail} /> },
+      launch: { title: T.translate('Launch'), content: () => <TabLaunch /> },
+      clicks: { title: T.translate('Clicks'), content: () => <TabClicks /> },
     }}
     {...props}
   ></Form>

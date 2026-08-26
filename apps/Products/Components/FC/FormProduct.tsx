@@ -74,14 +74,14 @@ const TabGallery = (props: FormProps) => {
 const TabSuppliers = (props: FormProps) => {
   const form = React.useContext(FormMetaContext);
   
-  return (props.id < 0 ?
+  return (form.id < 0 ?
     <div className="badge badge-info">{T.translate("First create the product.")}</div>
   :
     <TableProductSuppliers
       uid={props.uid + "_table_suppliers"}
       tag="ProductSuppliers"
       parentForm={form}
-      idProduct={props.id}
+      idProduct={form.id}
     />
   );
 }

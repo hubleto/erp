@@ -44,7 +44,7 @@ const TabDefault = (props: FormProjectProps) => {
             onChange={(input: any, value: any) => {
               request.post(
                 'projects/api/set-parent-order',
-                { idProject: props.id, idOrder: value },
+                { idProject: form.id, idOrder: value },
                 {},
                 (data: any) => { setSelectParentOrder(false); }
               )
@@ -79,7 +79,7 @@ const TabDefault = (props: FormProjectProps) => {
         {/* <Input field='is_closed' /> */}
       </div>
       <div className='flex-1'>
-        {props.id > 0 ? <>
+        {form.id > 0 ? <>
           <div className='card card-warning'>
             <div className='card-header'>{T.translate('Milestones')}</div>
             <div className='card-body'>
@@ -87,7 +87,7 @@ const TabDefault = (props: FormProjectProps) => {
                 tag={"table_project_task"}
                 parentForm={form}
                 uid={props.uid + "_table_project_task"}
-                idProject={props.id}
+                idProject={form.id}
                 view='briefOverview'
               />
             </div>
@@ -102,7 +102,7 @@ const TabDefault = (props: FormProjectProps) => {
                 junctionTitle='Project'
                 junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
                 junctionSourceColumn='id_project'
-                junctionSourceRecordId={props.id}
+                junctionSourceRecordId={form.id}
                 junctionDestinationColumn='id_task'
                 view='briefOverview'
               />
@@ -162,13 +162,13 @@ const TabDocuments = (props: FormProjectProps) => {
 /** TabMilestones */
 const TabMilestones = (props: FormProjectProps) => {
   const form = React.useContext(FormMetaContext);
-  return (props.id < 0
+  return (form.id < 0
     ? <div className="badge badge-info">{T.translate('First create the project, then you will be prompted to add tasks.')}</div>
     : <TableMilestones
       tag={"table_project_milestone"}
       parentForm={form}
       uid={props.uid + "_table_project_milestone"}
-      idProject={props.id}
+      idProject={form.id}
     />
   );
 }
@@ -176,10 +176,8 @@ const TabMilestones = (props: FormProjectProps) => {
 /** TabTasks */
 const TabTasks = (props: FormProjectProps) => {
   const form = React.useContext(FormMetaContext);
-  const idCustomer: number = useRecordField('id_customer', 0);
-  const idContact: number = useRecordField('id_contact', 0);
 
-  return (props.id < 0
+  return (form.id < 0
     ? <div className="badge badge-info">{T.translate('First create the project, then you will be prompted to add tasks.')}</div>
     : <TableTasks
       tag={"table_project_task"}
@@ -188,7 +186,7 @@ const TabTasks = (props: FormProjectProps) => {
       junctionTitle='Project'
       junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
       junctionSourceColumn='id_project'
-      junctionSourceRecordId={props.id}
+      junctionSourceRecordId={form.id}
       junctionDestinationColumn='id_task'
     />
   );
@@ -201,7 +199,7 @@ const TabWorksheet = (props: FormProjectProps) => {
     uid={props.uid + "_table_activities"}
     tag="ProjectActivities"
     parentForm={form}
-    idProject={props.id}
+    idProject={form.id}
     readonly={true}
   />;
 }
@@ -209,26 +207,28 @@ const TabWorksheet = (props: FormProjectProps) => {
 /** TabExpenses */
 const TabExpenses = (props: FormProjectProps) => {
   const form = React.useContext(FormMetaContext);
-  return (props.id < 0
+  return (form.id < 0
     ? <div className="badge badge-info">{T.translate('First create the project, then you will be prompted to add tasks.')}</div>
     : <TableExpenses
       tag={"table_project_expense"}
       parentForm={form}
       uid={props.uid + "_table_project_expense"}
-      idProject={props.id}
+      idProject={form.id}
     />
   );
 }
 
 /** TabStatistics */
 const TabStatistics = (props: FormProjectProps) => {
+  const form = React.useContext(FormMetaContext);
+
   const [statistics, setStatistics] = useState(null);
   const [salaries, setSalaries] = useState(null);
 
   useEffect(() => {
     request.post(
       'projects/api/get-statistics',
-      { idProject: props.id },
+      { idProject: form.id },
       {},
       (data: any) => {
         setStatistics(data);

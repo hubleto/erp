@@ -39,7 +39,7 @@ const TabTest = (props: FormKeyProps) => {
   const refInputController = createRef();
   const refInputVars = createRef();
 
-  return props.id > 0 ? <>
+  return form.id > 0 ? <>
     <table className='table-default dense'>
       <thead>
         <tr><th>{T.translate('Parameter')}</th><th>{T.translate('Value')}</th></tr>
@@ -114,12 +114,12 @@ const TabTest = (props: FormKeyProps) => {
 /** TabPermissions */
 const TabPermissions = (props: FormKeyProps) => {
   const form = React.useContext(FormMetaContext);
-  return props.id > 0 ?
+  return form.id > 0 ?
     <TablePermissions
       uid={props.uid + "_table_permissions"}
       tag={props.uid + "_table_permissions"}
       parentForm={form}
-      idKey={props.id}
+      idKey={form.id}
     />
   : null;
 }
@@ -127,12 +127,12 @@ const TabPermissions = (props: FormKeyProps) => {
 /** TabUsage */
 const TabUsage = (props: FormKeyProps) => {
   const form = React.useContext(FormMetaContext);
-  return props.id > 0 ?
+  return form.id > 0 ?
     <TableUsages
       uid={props.uid + "_table_usage"}
       tag={props.uid + "_table_usage"}
       parentForm={form}
-      idKey={props.id}
+      idKey={form.id}
       readonly={true}
     />
   : null;

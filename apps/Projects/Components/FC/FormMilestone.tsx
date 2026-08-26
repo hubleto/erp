@@ -23,7 +23,7 @@ const TabDefault = (props: FormMilestoneProps) => {
       <Input field='date_due' />
       <Input field='description' />
       <Input field='is_closed' />
-      {props.id > 0 ? <>
+      {form.id > 0 ? <>
         <div className='grow card'>
           <div className='card-header'>{T.translate('Tasks')}</div>
           <div className='card-body'>
@@ -31,13 +31,13 @@ const TabDefault = (props: FormMilestoneProps) => {
               tag={"table_project_milestone_task"}
               parentForm={form}
               uid={props.uid + "_table_project_milestone_task"}
-              idMilestone={props.id}
+              idMilestone={form.id}
             />
           </div>
         </div>
       </> : null}
     </div>
-    {props.id > 0 ? <>
+    {form.id > 0 ? <>
       <div className='grow card'>
         <div className='card-header'>{T.translate('Reports')}</div>
         <div className='card-body'>
@@ -45,7 +45,7 @@ const TabDefault = (props: FormMilestoneProps) => {
             tag={"table_project_milestone_report"}
             parentForm={form}
             uid={props.uid + "_table_project_milestone_report"}
-            idMilestone={props.id}
+            idMilestone={form.id}
           />
         </div>
       </div>

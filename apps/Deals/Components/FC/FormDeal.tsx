@@ -55,7 +55,7 @@ const TabDefault = (props: FormDealProps) => {
         onChange={(input: any, value: any) => {
           request.post(
             'deals/api/set-parent-lead',
-            { idDeal: props.id, idLead: value },
+            { idDeal: form.id, idLead: value },
             {},
             (data: any) => { setSelectParentLead(false); }
           )
@@ -109,7 +109,7 @@ const TabDefault = (props: FormDealProps) => {
   </>;
 
   const inputsColumnRight = <>
-    {props.id > 0 ? <>
+    {form.id > 0 ? <>
       {nextActivityDate ?
         <div className='block alert alert-success'>
           <i className='fas fa-calendar mr-2'></i>
@@ -160,13 +160,13 @@ const TabDefault = (props: FormDealProps) => {
 const TabItems = (props: FormDealProps) => {
   const form = React.useContext(FormMetaContext);
 
-return <div className='w-full h-full overflow-x-auto'>
+  return <div className='w-full h-full overflow-x-auto'>
     <div><Input field='description_before' /></div>
     <TableItems
       uid={props.uid + "_table_deal_items"}
       tag={"deal_items"}
       parentForm={form}
-      idDeal={props.id}
+      idDeal={form.id}
       descriptionSource='both'
     ></TableItems>
     <div><Input field='description_after' /></div>
@@ -214,20 +214,20 @@ const TabDocuments = (props: FormDealProps) => {
 }
 
 /** TabCalendar */
-const TabCalendar = (props: FormProps) => <CalendarTab
-  loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=deals&idDeal=' + props.id}
-  logActivityEndpoint={'deals/api/log-activity?idDeal=' + props.id}
-  renderActivityForm={(calendarTab: any) => {
-    return <DealCalendarActivityForm idDeal={props.id} calendarTab={calendarTab}></DealCalendarActivityForm>;
-  }}
-></CalendarTab>;
+const TabCalendar = (props: FormProps) =>  {
+  const form = React.useContext(FormMetaContext);
+  return <CalendarTab
+    loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=deals&idDeal=' + form.id}
+    logActivityEndpoint={'deals/api/log-activity?idDeal=' + form.id}
+    renderActivityForm={(calendarTab: any) => {
+      return <DealCalendarActivityForm idDeal={form.id} calendarTab={calendarTab}></DealCalendarActivityForm>;
+    }}
+  ></CalendarTab>;
+}
 
 /** TabTasks */
 const TabTasks = (props: FormDealProps) => {
   const form = React.useContext(FormMetaContext);
-  const idCustomer = useRecordField('id_customer');
-  const idContact = useRecordField('id_contact');
-
   return <TableTasks
     tag={"table_deal_task"}
     parentForm={form}
@@ -235,7 +235,7 @@ const TabTasks = (props: FormDealProps) => {
     junctionTitle='Deal'
     junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
     junctionSourceColumn='id_deal'
-    junctionSourceRecordId={props.id}
+    junctionSourceRecordId={form.id}
     junctionDestinationColumn='id_task'
   />;
 }

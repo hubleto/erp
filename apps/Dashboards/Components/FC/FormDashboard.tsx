@@ -31,7 +31,6 @@ const TabDefault = (props: FormDashboardProps) => {
       .replace(/-+$/, '');
   }
 
-
   return <>
     <div className='card'>
       <div className='card-body'>
@@ -45,13 +44,13 @@ const TabDefault = (props: FormDashboardProps) => {
       </div>
     </div>
     <Divider>{T.translate('Panels')}</Divider>
-    {props.id < 0 ?
+    {form.id < 0 ?
       <div className="badge badge-info">{T.translate('First create the dashboard, then you will be prompted to add panels.')}</div>
     :
       <div className='mt-2'>
         <TablePanels
           uid='dashboard_panels'
-          idDashboard={props.id}
+          idDashboard={form.id}
           parentForm={form}
         ></TablePanels>
       </div>

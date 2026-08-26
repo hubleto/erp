@@ -13,6 +13,7 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 /** TabDefault */
 const TabDefault = (props: FormWorkflowProps) => {
+  const form = React.useContext(FormMetaContext);
   return <div className="flex gap-2" >
     <div>
       <div className="card-header">{T.translate('Workflow')}</div>
@@ -30,7 +31,7 @@ const TabDefault = (props: FormWorkflowProps) => {
       <div className="card-body">
         <TableWorkflowSteps
           uid={props.uid + "_table_workflow_steps_input"}
-          idWorkflow={props.id}
+          idWorkflow={form.id}
         ></TableWorkflowSteps>
       </div>
     </div>

@@ -39,14 +39,14 @@ const TabDescription = (props: FormCategoryProps) => {
 const TabProducts = (props: FormCategoryProps) => {
   const form = React.useContext(FormMetaContext);
 
-  return (props.id < 0 ?
+  return (form.id < 0 ?
     <div className="badge badge-info">{T.translate("First create the category.")}</div>
   :
     <TableProducts
       uid={props.uid + "_table_category_products"}
       tag="table_category_products"
       parentForm={form}
-      idCategory={props.id}
+      idCategory={form.id}
     />
   );
 }

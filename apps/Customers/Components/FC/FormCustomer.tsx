@@ -62,79 +62,37 @@ const TabDefault = (props: FormCustomerProps) => {
               </div>
             }
           </div>
-          {/* <Input field='is_active' customInputProps={{yesText: T.translate('Active')}} /> */}
           <Input field='shared_folder' />
-          {/* <Input title={T.translate('Tags')}>
-            <InputTags
-              field='TAGS'
-              value={TAGS}
-              model={parentApp + '/Models/Tag'}
-              targetColumn='id_customer'
-              sourceColumn='id_tag'
-              colorColumn='_LOOKUP_COLOR'
-              showSelect={false}
-              showTagButtons={true}
-              onChange={(input: any, value: any) => {
-                form.changeField(input, value);
-              }}
-              onNewTag={(title: string) => {
-                return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
-              }}
-            ></InputTags>
-          </Input> */}
         </div>
       </div>
     </div>
-    {props.id > 0 ? <div className='flex-2'>
+    {form.id > 0 ? <div className='flex-2'>
       <TableContacts
         uid={props.uid + "_table_contacts"}
         parentForm={form}
         showAsCards={true}
-        idCustomer={props.id}
+        idCustomer={form.id}
       ></TableContacts>
     </div> : null}
   </div>;
 }
 
 /** TabCalendar */
-// const TabCalendar = (props: FormCustomerProps) => <CalendarTab
-//   calendarSource='customers'
-//   externalIdColumn='idCustomer'
-//   logActivityEndpoint='customers/api/log-activity'
-//   renderActivityForm={(calendarTab: any) => {
-//     return <CustomerFormActivity
-//       id={calendarTab.showIdActivity}
-//       description={{
-//         defaultValues: {
-//           id_customer: props.id,
-//           date_start: calendarTab.activityDate,
-//           time_start: calendarTab.activityTime == "00:00:00" ? null : calendarTab.activityTime,
-//           date_end: calendarTab.activityDate,
-//           all_day: calendarTab.activityAllDay,
-//           subject: calendarTab.activitySubject,
-//         }
-//       }}
-//       onClose={() => { calendarTab.setShowIdActivity(0) }}
-//       onAfterSaveRecord={(form: any, saveResponse: any) => {
-//         if (saveResponse.status == "success") {
-//           calendarTab.setShowIdActivity(0);
-//         }
-//       }}
-//     ></CustomerFormActivity>;
-//   }}
-// ></CalendarTab>;
-const TabCalendar = (props: FormProps) => <CalendarTab
-  loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=customers&idCustomer=' + props.id}
-  logActivityEndpoint={'customers/api/log-activity?idCustomer=' + props.id}
-  renderActivityForm={(calendarTab: any) => {
-    return <CalendarFormActivity
-      calendarTab={calendarTab}
-      customInputFields={['id_customer']}
-      defaultValues={{id_customer: props.id}}
-      model='Hubleto/App/Community/Customers/Models/CustomerActivity'
-    ></CalendarFormActivity>;
-  }}
-></CalendarTab>;
+const TabCalendar = (props: FormProps) => {
+  const form = React.useContext(FormMetaContext);
+  return <CalendarTab
+    loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=customers&idCustomer=' + form.id}
+    logActivityEndpoint={'customers/api/log-activity?idCustomer=' + form.id}
+    renderActivityForm={(calendarTab: any) => {
+      return <CalendarFormActivity
+        calendarTab={calendarTab}
+        customInputFields={['id_customer']}
+        defaultValues={{id_customer: form.id}}
+        model='Hubleto/App/Community/Customers/Models/CustomerActivity'
+      ></CalendarFormActivity>;
+    }}
+  ></CalendarTab>;
+}
 
 /** FormCustomer */
 const FormCustomer = (props: FormCustomerProps) => {

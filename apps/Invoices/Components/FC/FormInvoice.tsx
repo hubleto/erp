@@ -45,7 +45,7 @@ const TabDefault = (props: FormInvoiceProps) => {
   const CURRENCY: any = useRecordField('CURRENCY', {});
   const currencySymbol = CURRENCY.symbol ?? '';
 
-  if (props.id <= 0) {
+  if (form.id <= 0) {
     return <>
       {inboundOutbound == 1
         ? <Input field='id_supplier' />
@@ -65,7 +65,7 @@ const TabDefault = (props: FormInvoiceProps) => {
       <div className='flex flex-col md:flex-row gap-2'>
         <div className="flex flex-5 gap-2">
           <div className='flex-1 min-w-80'>
-            {props.id == -1 ? null : <div className='flex-dyn'>
+            {form.id == -1 ? null : <div className='flex-dyn'>
               <div className='grow'>
                 <Input field='number' customInputProps={{wrapperCssClass: 'block', cssClass: 'text-xl'}} />
                 <Input field='vs' />
@@ -78,7 +78,7 @@ const TabDefault = (props: FormInvoiceProps) => {
             </div>}
 
 
-            {props.id <= 0 ? null : <div className='card mt-2'>
+            {form.id <= 0 ? null : <div className='card mt-2'>
               <div className='card-header'>{T.translate('Items')}</div>
               <div className='card-body'>
                 <div className='flex flex-col gap-2'>
@@ -110,7 +110,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                               request.post(
                                 'invoices/api/unlink-prepared-item',
                                 {
-                                  idInvoice: props.id,
+                                  idInvoice: form.id,
                                   idItem: item.id
                                 },
                                 {},
@@ -259,7 +259,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                       className='btn btn-add mt-2'
                       onClick={() => {
                         form.changeRecord({ITEMS: [...ITEMS, {
-                          id_invoice: props.id,
+                          id_invoice: form.id,
                           id_customer: idCustomer,
                         }]});
                       }}
@@ -349,7 +349,7 @@ const TabDefault = (props: FormInvoiceProps) => {
               request.post(
                 'invoices/api/link-prepared-item',
                 {
-                  idInvoice: props.id,
+                  idInvoice: form.id,
                   idItem: row.id
                 },
                 {},
@@ -373,7 +373,7 @@ const TabPayments = (props: FormInvoiceProps) => {
     uid={props.uid + "_table_invoice_payments"}
     tag={'table_invoice_payments'}
     parentForm={form}
-    idInvoice={props.id}
+    idInvoice={form.id}
   />;
 }
 
@@ -399,7 +399,7 @@ const TabEmail = (props: FormInvoiceProps) => {
     request.post(
       'invoices/api/send-invoice-in-email',
       {
-        idInvoice: props.id,
+        idInvoice: form.id,
         emailType: sendInvoiceEmailType,
         prepare: true
       },
@@ -535,7 +535,7 @@ const TabEmail = (props: FormInvoiceProps) => {
               request.post(
                 'invoices/api/send-invoice-in-email',
                 {
-                  idInvoice: props.id,
+                  idInvoice: form.id,
                   idSenderAccount: sendInvoicePreparedData.senderAccount.id,
                   subject: sendInvoicePreparedData.subject,
                   bodyHtml: sendInvoicePreparedData.bodyHtml,

@@ -104,13 +104,16 @@ const TabDefault = (props: FormLeadProps) => {
 }
 
 /** TabCalendar */
-const TabCalendar = (props: FormProps) => <CalendarTab
-  loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=leads&idLead=' + props.id}
-  logActivityEndpoint={'leads/api/log-activity?idLead=' + props.id}
-  renderActivityForm={(calendarTab: any) => {
-    return <LeadCalendarActivityForm idLead={props.id} calendarTab={calendarTab}></LeadCalendarActivityForm>;
-  }}
-></CalendarTab>;
+const TabCalendar = (props: FormProps) => {
+  const form = React.useContext(FormMetaContext);
+  return <CalendarTab
+    loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=leads&idLead=' + form.id}
+    logActivityEndpoint={'leads/api/log-activity?idLead=' + form.id}
+    renderActivityForm={(calendarTab: any) => {
+      return <LeadCalendarActivityForm idLead={form.id} calendarTab={calendarTab}></LeadCalendarActivityForm>;
+    }}
+  ></CalendarTab>;
+}
 
 /** TabEmailClicks */
 const TabEmailClicks = (props: FormLeadProps) => {
@@ -146,7 +149,7 @@ const TabHistory = (props: FormLeadProps) => {
     parentForm={form}
     uid={props.uid + "_table_lead_history"}
     model={'Hubleto/App/Community/Leads/Models/LeadHistory'}
-    endpointParams={{idLead: props.id}}
+    endpointParams={{idLead: form.id}}
     readonly={true}
   ></Table>;
 }

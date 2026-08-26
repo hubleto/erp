@@ -53,7 +53,7 @@ const TabDefault = (props: FormUserProps) => {
 
   return <>
     <div className='w-full flex flex-col md:flex-row gap-2'>
-      {props.id == -1 && !globalThis.hubleto.isPremium ?
+      {form.id == -1 && !globalThis.hubleto.isPremium ?
         <div className="badge badge-warning text-lg w-full block p-8">
           {T.translate('You may add new users only in Premium account.')}<br/>
           <br/>
@@ -87,20 +87,20 @@ const TabDefault = (props: FormUserProps) => {
 
               <Divider>{T.translate('Access to Hubleto')}</Divider>
               <Input field='is_active' customInputProps={{
-                readonly: props.id == globalThis.hubleto.idUser,
+                readonly: form.id == globalThis.hubleto.idUser,
               }} />
               <Input field='password' />
 
               <Divider>{T.translate('Roles')}</Divider>
 
-              {props.id < 0 ?
+              {form.id < 0 ?
                 <div className="badge badge-info">{T.translate('First create user, then you will be prompted to assign roles.')}</div>
               :
                 <Table
                   uid='user_roles'
                   model='Hubleto/App/Community/Auth/Models/UserHasRole'
                   parentForm={form}
-                  endpointParams={{idUser: props.id}}
+                  endpointParams={{idUser: form.id}}
                 ></Table>
               }
             </div>

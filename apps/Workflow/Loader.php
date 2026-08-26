@@ -176,53 +176,53 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Approved'), 'order' => 3, 'color' => '#3068a5', 'tag' => 'document-approved']);
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Rejected'), 'order' => 4, 'color' => '#ae459f', 'tag' => 'document-rejected']);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setOrderWorkflowStepToPaid',
-        'trigger' => 'onModelAfterUpdate',
-        'triggerConditions' => [ 'updatedModel' => Order::class ],
-        'conditions' => json_encode([
-          [ 'evaluator' => RecordCompare::class, 'arguments' => [ 'column' => 'is_closed', 'operator' => '=', 'value' => 1 ], ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => SetWorkflow::class, 'arguments' => [ 'tag' => 'order-paid' ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setOrderWorkflowStepToPaid',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'triggerConditions' => [ 'updatedModel' => Order::class ],
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => RecordCompare::class, 'arguments' => [ 'column' => 'is_closed', 'operator' => '=', 'value' => 1 ], ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => SetWorkflow::class, 'arguments' => [ 'tag' => 'order-paid' ] ],
+      //   ]),
+      // ]);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setDealClosedIfWon',
-        'trigger' => 'onModelAfterUpdate',
-        'triggerConditions' => [ 'updatedModel' => Deal::class ],
-        'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-won' ] ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setDealClosedIfWon',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'triggerConditions' => [ 'updatedModel' => Deal::class ],
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-won' ] ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
+      //   ]),
+      // ]);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setDealClosedIfLost',
-        'trigger' => 'onModelAfterUpdate',
-        'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-lost' ] ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setDealClosedIfLost',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-lost' ] ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
+      //   ]),
+      // ]);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setDealClosed',
-        'trigger' => 'onModelAfterUpdate',
-        'triggerConditions' => [ 'updatedModel' => Deal::class ],
-        'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-won' ] ],
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-lost' ] ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 0 ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setDealClosed',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'triggerConditions' => [ 'updatedModel' => Deal::class ],
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-won' ] ],
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-lost' ] ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 0 ] ],
+      //   ]),
+      // ]);
     }
   }
 

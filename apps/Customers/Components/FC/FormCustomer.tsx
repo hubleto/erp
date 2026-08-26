@@ -24,7 +24,6 @@ const TabDefault = (props: FormCustomerProps) => {
   const city: string = useRecordField('city', '');
   const region: string = useRecordField('region', '');
   const COUNTRY: any = useRecordField('COUNTRY', {});
-  const TAGS: Array<any> = useRecordField('TAGS', []);
 
   let mapAddress = '';
   if (streetLine1 != '' && city != '' && COUNTRY && COUNTRY.name != '') {
@@ -32,12 +31,17 @@ const TabDefault = (props: FormCustomerProps) => {
   }
 
   return <div className='flex flex-col md:flex-row gap-2'>
-    <div className='flex-2 card'>
-      <div className="card-body flex flex-col md:flex-row gap-2">
+    <div className='flex-2'>
+      <Input field='name' customInputProps={{cssClass: 'text-2xl'}} />
+      <div className="flex-dyn">
         <div className='grow'>
-          <Input field='name' customInputProps={{cssClass: 'text-2xl'}} />
           <Input field='identifier' />
           <Input field='company_id' />
+          <Input field='tax_id' />
+          <Input field='vat_id' />
+          <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600'}} />
+        </div>
+        <div className='grow'>
           <Input field='street_line_1' />
           <Input field='street_line_2' />
           <Input field='postal_code' />
@@ -58,14 +62,9 @@ const TabDefault = (props: FormCustomerProps) => {
               </div>
             }
           </div>
-        </div>
-        <div className='grow'>
-          <Input field='tax_id' />
-          <Input field='vat_id' />
-          <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600'}} />
-          <Input field='is_active' customInputProps={{yesText: T.translate('Active')}} />
+          {/* <Input field='is_active' customInputProps={{yesText: T.translate('Active')}} /> */}
           <Input field='shared_folder' />
-          <Input title={T.translate('Tags')}>
+          {/* <Input title={T.translate('Tags')}>
             <InputTags
               field='TAGS'
               value={TAGS}
@@ -82,7 +81,7 @@ const TabDefault = (props: FormCustomerProps) => {
                 return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
               }}
             ></InputTags>
-          </Input>
+          </Input> */}
         </div>
       </div>
     </div>
@@ -146,6 +145,34 @@ const FormCustomer = (props: FormCustomerProps) => {
     urlSlug='customers'
     endpointParams={{saveRelations: ['TAGS']}}
     // onAfterFormInitialized={(form: any) => {}}
+    renderTopInputs={(form: FormMeta) => {
+      const TAGS: Array<any> = useRecordField('TAGS', []);
+      return <div className='modal-top-inputs'>
+        <Input field='is_active' renderOnlyInputField />
+        <Input>
+          <InputTags
+            field='TAGS'
+            value={TAGS}
+            model={parentApp + '/Models/Tag'}
+            targetColumn='id_customer'
+            sourceColumn='id_tag'
+            colorColumn='_LOOKUP_COLOR'
+            showSelect={false}
+            showTagButtons={true}
+            editTagsUrl='customers/tags'
+            onChange={(input: any, value: any) => {
+              form.changeField(input, value);
+            }}
+            onNewTag={(title: string) => {
+              return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+            }}
+          ></InputTags>
+        </Input>
+        <Input field='id_owner' renderOnlyInputField />
+        <Input field='id_manager' renderOnlyInputField />
+        <Input field='shared_with' renderOnlyInputField />
+      </div>
+    }}
     onBeforeSaveRecord={(form: FormMeta, record: any) => {
       if (record.tax_id) record.tax_id = record.tax_id.replace(/\s+/g, "");
       if (record.vat_id) record.vat_id = record.vat_id.replace(/\s+/g, "");

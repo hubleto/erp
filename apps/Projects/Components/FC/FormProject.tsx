@@ -26,89 +26,97 @@ const TabDefault = (props: FormProjectProps) => {
 
   const [selectParentOrder, setSelectParentOrder] = useState(false);
 
-  return <div className='w-full flex gap-2 flex-col md:flex-row'>
-    <div className='flex-1 border-r border-gray-100'>
-      <Input title={T.translate("Order")}>
-        {selectParentOrder ? <LookupInput
-          model='Hubleto/App/Community/Orders/Models/Order'
-          cssClass='font-bold'
-          onChange={(input: any, value: any) => {
-            request.post(
-              'projects/api/set-parent-order',
-              { idProject: props.id, idOrder: value },
-              {},
-              (data: any) => { setSelectParentOrder(false); }
-            )
-          }}
-        ></LookupInput>
-        : <>
-          {ORDERS ? ORDERS.map((item, key) => {
-            if (!item.ORDER) return null;
-            return (item.ORDER ? <a
-              key={key}
-              className='badge'
-              href={globalThis.hubleto.config.projectUrl + '/orders/' + item.ORDER.id}
-              target='_blank'
-            >#{item.ORDER.identifier}&nbsp;{item.ORDER.title}</a> : '#');
-          }) : null}
-          <button
-            className='btn btn-small btn-transparent'
-            onClick={() => { setSelectParentOrder(true); }}
-          >
-            <span className='text'>{T.translate('Select parent order')}</span>
-          </button>
-        </>}
-      </Input>
-      <Input field='identifier' customInputs={{cssClass: 'text-2xl'}} />
-      <Input field='title' customInputs={{cssClass: 'text-2xl'}} />
-      <Input field='description' />
-      <Input field='id_main_developer' />
-      <Input field='id_project_manager' />
-      <Input field='id_account_manager' />
-      <Input field='priority' />
-      <Input field='date_start' />
-      <Input field='date_deadline' />
-      <Input field='budget' />
-      {/* <Input field='is_closed' /> */}
+  return <>
+    <div className='flex-dyn'>
+      <div className='flex-5'>
+        <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+      </div>
+      <div className='flex-1'>
+        <Input field='identifier' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+      </div>
     </div>
-    <div className='flex-1'>
-      {props.id > 0 ? <>
-        <div className='card card-warning'>
-          <div className='card-header'>{T.translate('Milestones')}</div>
-          <div className='card-body'>
-            <TableMilestones
-              tag={"table_project_task"}
-              parentForm={form}
-              uid={props.uid + "_table_project_task"}
-              idProject={props.id}
-              view='briefOverview'
-            />
+    <div className='flex-dyn'>
+      <div className='flex-1 border-r border-gray-100'>
+        <Input title={T.translate("Order")}>
+          {selectParentOrder ? <LookupInput
+            model='Hubleto/App/Community/Orders/Models/Order'
+            cssClass='font-bold'
+            onChange={(input: any, value: any) => {
+              request.post(
+                'projects/api/set-parent-order',
+                { idProject: props.id, idOrder: value },
+                {},
+                (data: any) => { setSelectParentOrder(false); }
+              )
+            }}
+          ></LookupInput>
+          : <>
+            {ORDERS ? ORDERS.map((item, key) => {
+              if (!item.ORDER) return null;
+              return (item.ORDER ? <a
+                key={key}
+                className='badge'
+                href={globalThis.hubleto.config.projectUrl + '/orders/' + item.ORDER.id}
+                target='_blank'
+              >#{item.ORDER.identifier}&nbsp;{item.ORDER.title}</a> : '#');
+            }) : null}
+            <button
+              className='btn btn-small btn-transparent'
+              onClick={() => { setSelectParentOrder(true); }}
+            >
+              <span className='text'>{T.translate('Select parent order')}</span>
+            </button>
+          </>}
+        </Input>
+        <Input field='description' />
+        <Input field='id_main_developer' />
+        <Input field='id_project_manager' />
+        <Input field='id_account_manager' />
+        <Input field='priority' />
+        <Input field='date_start' />
+        <Input field='date_deadline' />
+        <Input field='budget' />
+        {/* <Input field='is_closed' /> */}
+      </div>
+      <div className='flex-1'>
+        {props.id > 0 ? <>
+          <div className='card card-warning'>
+            <div className='card-header'>{T.translate('Milestones')}</div>
+            <div className='card-body'>
+              <TableMilestones
+                tag={"table_project_task"}
+                parentForm={form}
+                uid={props.uid + "_table_project_task"}
+                idProject={props.id}
+                view='briefOverview'
+              />
+            </div>
           </div>
-        </div>
-        <div className='card card-info mt-2'>
-          <div className='card-header'>{T.translate('Open tasks')}</div>
-          <div className='card-body'>
-            <TableTasks
-              tag={"table_project_task"}
-              parentForm={form}
-              uid={props.uid + "_table_project_task"}
-              junctionTitle='Project'
-              junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
-              junctionSourceColumn='id_project'
-              junctionSourceRecordId={props.id}
-              junctionDestinationColumn='id_task'
-              view='briefOverview'
-            />
+          <div className='card card-info mt-2'>
+            <div className='card-header'>{T.translate('Open tasks')}</div>
+            <div className='card-body'>
+              <TableTasks
+                tag={"table_project_task"}
+                parentForm={form}
+                uid={props.uid + "_table_project_task"}
+                junctionTitle='Project'
+                junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
+                junctionSourceColumn='id_project'
+                junctionSourceRecordId={props.id}
+                junctionDestinationColumn='id_task'
+                view='briefOverview'
+              />
+            </div>
           </div>
-        </div>
-      </> : null}
-      <Input field='id_customer' />
-      <Input field='id_contact' />
-      <Input field='notes' />
-      <Input field='average_hourly_costs' />
-      {/* <Input field='id_deal' /> */}
+        </> : null}
+        <Input field='id_customer' />
+        <Input field='id_contact' />
+        <Input field='notes' />
+        <Input field='average_hourly_costs' />
+        {/* <Input field='id_deal' /> */}
+      </div>
     </div>
-  </div>;
+  </>;
 }
 
 /** TabDocuments */

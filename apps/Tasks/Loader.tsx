@@ -12,7 +12,7 @@ class Tasks extends App {
     globalThis.hubleto.registerReactComponent('TasksTableTasks', TableTasks);
     globalThis.hubleto.registerReactComponent('TasksTableTodos', TableTodos);
 
-    FormCustomizer.addFormFooterExtraButton(
+    FormCustomizer.addFormHeaderExtraButton(
       'FormMail',
       'Create task',
       'fas fas fa-list-check',

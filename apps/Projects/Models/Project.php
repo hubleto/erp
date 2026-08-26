@@ -55,8 +55,8 @@ class Project extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setDefaultHidden(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden()->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden(),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setHint($this->translate('Leave empty to generate automatically.')),
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),

@@ -51,7 +51,7 @@ class ProjectsApp extends App {
       }
     );
 
-    FormCustomizer.addFormFooterExtraButton(
+    FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
       'Assign task to project',
       'fas fa-check-double',

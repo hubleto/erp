@@ -26,8 +26,8 @@ const TabDefault = (props: FormOrderProps) => {
   const [selectParentDeal, setSelectParentDeal] = useState(false);
 
   const purchaseSales: number = useRecordField('purchase_sales', 0);
-  const DEALS: any = useRecordField('DEALS', {});
-  const ACTIVITIES: any = useRecordField('ACTIVITIES', {});
+  const DEALS: any = useRecordField('DEALS', []);
+  const ACTIVITIES: any = useRecordField('ACTIVITIES', []);
 
   let nextActivity = null;
   let nextActivityDate = null;

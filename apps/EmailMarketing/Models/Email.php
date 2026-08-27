@@ -22,7 +22,7 @@ class Email extends \Hubleto\Erp\Model
 {
   public string $table = 'email_marketing_emails';
   public string $recordManagerClass = RecordManagers\Email::class;
-  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.title, ""), ": ", ifnull({%TABLE%}.mail_subject, ""))';
+  public ?string $lookupSqlValue = '{%TABLE%}.mail_subject';
   public ?string $lookupUrlAdd = 'email-marketing/emails/add';
   public ?string $lookupUrlDetail = 'email-marketing/emails/{%ID%}';
 

@@ -84,12 +84,12 @@ const TableContacts = (props: TableContactsProps) => {
             </div>
           </div> */}
           {table.renderDefaultFormModal()}
-          <div className="md:grid md:grid-cols-2 gap-2 mt-2">
+          <div className="md:grid md:grid-cols-2 gap-2 mt-1">
             {Object.keys(table.data?.records).map((key) => {
               const item = table.data.records[key];
               return <button
                 key={key}
-                className="btn btn-transparent w-full"
+                className="btn btn-transparent w-full border-gray-300 shadow"
                 onClick={() => { table.setRecordId(item.id); }}
               >
                 <span className="icon">
@@ -119,9 +119,9 @@ const TableContacts = (props: TableContactsProps) => {
                 </span>
               </button>;
             })}
-            <div>
-              {table.renderDefaultAddButton()}
-            </div>
+          </div>
+          <div className='mt-2'>
+            {table.renderDefaultAddButton()}
           </div>
         </>;
       } else {

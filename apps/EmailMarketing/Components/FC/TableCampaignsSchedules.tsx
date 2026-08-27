@@ -47,16 +47,13 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
               Day<br/>
               <b>{record.day}</b>
             </div>
-            <div className='text'>
+            <div className='text block'>
               {record.id_email > 0 ? <>
-                <div className='text-gray-300'>
-                  From: {record.EMAIL?.SENDER_ACCOUNT?.name ?? <span className='text-red-800'>n/a</span>}
-                </div>
-                <div className='text-gray-300'>
-                  {record.EMAIL?.title ?? ''}
-                </div>
                 <div className='fond-bold'>
                   {record.EMAIL?.mail_subject ?? '-'}
+                </div>
+                <div className='text-gray-400'>
+                  Sent from: {record.EMAIL?.SENDER_ACCOUNT?.name ?? <span className='text-red-800'>n/a</span>}
                 </div>
               </> : <div className='text-red-800'>No email selected</div>}
             </div>

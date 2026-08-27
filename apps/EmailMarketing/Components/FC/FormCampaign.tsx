@@ -34,6 +34,7 @@ const TabDefault = (props: FormCampaignProps) => {
           colorColumn='_LOOKUP_COLOR'
           showSelect={false}
           showTagButtons={true}
+          editTagsUrl='email-marketing/tags'
           onChange={(input: any, value: any) => {
             form.changeField(input, value);
           }}

@@ -347,11 +347,7 @@ class Order extends \Hubleto\Erp\Model
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
 
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('orders');
-
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
-
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'orders');
     $this->record->recordUpdate($savedRecord);
 
     $savedRecord = parent::onAfterCreate($savedRecord);

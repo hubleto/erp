@@ -23,7 +23,7 @@ const TabDefault = (props: FormCampaignProps) => {
 
   return <div className='flex gap-2 flex-col md:flex-row'>
     <div className='grow'>
-      <Input field='title' />
+      <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
       <Input title={T.translate('Tags')}>
         <InputTags
           field='TAGS'

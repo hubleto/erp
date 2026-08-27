@@ -386,10 +386,7 @@ class Lead extends \Hubleto\Erp\Model
 
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('leads');
-    $newLead['id_workflow'] = $idWorkflow;
-    $newLead['id_workflow_step'] = $idWorkflowStep;
+    $newLead = $mWorkflow->applyDefaultWorkflow($newLead, 'leads');
 
     if (empty($newLead['identifier'])) {
       $newLead["identifier"] = $newLead["id"];

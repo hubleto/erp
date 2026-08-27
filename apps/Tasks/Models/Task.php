@@ -192,10 +192,7 @@ class Task extends \Hubleto\Erp\Model
 
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('tasks');
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'tasks');
 
     if (empty($savedRecord['identifier'])) {
       $savedRecord["identifier"] = $savedRecord["id"];

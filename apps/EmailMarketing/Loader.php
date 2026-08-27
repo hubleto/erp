@@ -26,7 +26,7 @@ class Loader extends \Hubleto\Erp\App
       '/^email-marketing\/api\/send-test-email\/?$/' => Controllers\Api\SendTestEmail::class,
       '/^email-marketing\/api\/launch\/?$/' => Controllers\Api\Launch::class,
 
-      '/^email-marketing\/?$/' => Controllers\Campaigns::class,
+      '/^email-marketing\/?$/' => Controllers\Home::class,
 
       '/^email-marketing\/campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
       '/^email-marketing\/campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],
@@ -104,6 +104,7 @@ class Loader extends \Hubleto\Erp\App
     return '
       ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('email-marketing/campaigns', 'fas fa-users-viewfinder', 'Campaigns') . '
         ' . $this->secondSidebarButton('email-marketing/emails', 'fas fa-envelope', 'Emails') . '
         ' . $this->secondSidebarButton('email-marketing/emails/sent', 'fas fa-arrow-right-from-bracket', 'Sent') . '
         ' . $this->secondSidebarButton('email-marketing/emails/clicks', 'fas fa-hand-pointer', 'Clicks') . '

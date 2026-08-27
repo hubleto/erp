@@ -427,12 +427,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('invoices');
-
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
-
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'invoices');
     $this->record->recordUpdate($savedRecord);
 
     $this->recalculateTotalsForInvoice((int) $savedRecord['id']);

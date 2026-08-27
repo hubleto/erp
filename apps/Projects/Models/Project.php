@@ -162,9 +162,7 @@ class Project extends \Hubleto\Erp\Model
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
 
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('projects');
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'projects');
 
     if (empty($savedRecord['identifier'])) {
 

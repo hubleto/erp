@@ -32,7 +32,7 @@ const TabDefault = (props: FormCustomerProps) => {
 
   return <div className='flex flex-col md:flex-row gap-2'>
     <div className='flex-2'>
-      <Input field='name' customInputProps={{cssClass: 'text-2xl'}} />
+      <Input field='name' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
       <div className="flex-dyn">
         <div className='grow'>
           <Input field='identifier' />

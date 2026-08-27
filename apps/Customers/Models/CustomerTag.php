@@ -18,7 +18,7 @@ class CustomerTag extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setRequired(),
       'id_tag' => (new Lookup($this, $this->translate('Tag'), Tag::class))->setRequired(),
     ]);
   }

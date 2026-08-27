@@ -46,53 +46,44 @@ const TabDefault = (props: FormContactProps) => {
   }
 
   return <>
-    <div className='card'>
-      <div className='card-body flex flex-col md:flex-row gap-2'>
-        <div className="flex-1">
-          <div className="flex gap-2 w-full">
-            <div>
-              <i className="fas fa-user text-2xl p-4 text-gray-500"></i>
-            </div>
-            <div className="w-full">
-              <div className='flex gap-2'>
-                <Input field='is_primary' renderOnlyInputField customInputProps={{yesText: 'Primary'}} />
-                <Input field='is_for_invoicing' renderOnlyInputField customInputProps={{yesText: 'Send invoices'}} />
-                <Input field='is_valid' renderOnlyInputField customInputProps={{yesText: 'Valid'}} />
-              </div>
-              <Input field='salutation' />
-              <Input field='title_before' />
-              <Input field='first_name' />
-              {showMiddleNameInput ? <Input field='middle_name' />
-              : <button className='btn btn-small btn-transparent'
-                onClick={() => setShowMiddleNameInput(true)}
-              ><span className='text'>Add middle name</span></button>}
-              <Input field='last_name' />
-              <Input field='title_after' />
-            </div>
-          </div>
+    <div className='flex-dyn'>
+      <div className="flex-1">
+        <div className='flex gap-2'>
+          <Input field='is_primary' renderOnlyInputField customInputProps={{yesText: 'Primary'}} />
+          <Input field='is_for_invoicing' renderOnlyInputField customInputProps={{yesText: 'Send invoices'}} />
+          <Input field='is_valid' renderOnlyInputField customInputProps={{yesText: 'Valid'}} />
         </div>
-        <div className="flex-1">
-          <Input field='id_customer' />
-          <Input title={T.translate('Tags')}>
-            <InputTags
-              field='TAGS'
-              value={TAGS}
-              model={parentApp + '/Models/Tag'}
-              targetColumn='id_contact'
-              sourceColumn='id_tag'
-              colorColumn='_LOOKUP_COLOR'
-              showSelect={false}
-              showTagButtons={true}
-              onChange={(input: any, value: any) => {
-                form.changeField(input, value);
-              }}
-              onNewTag={(title: string) => {
-                return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
-              }}
-            ></InputTags>
-          </Input>
-          <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600'}} />
-        </div>
+        <Input field='salutation' renderOnlyInputField />
+        <Input field='title_before' renderOnlyInputField />
+        <Input field='first_name' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+        {showMiddleNameInput ? <Input field='middle_name' />
+        : <button className='btn btn-small btn-transparent'
+          onClick={() => setShowMiddleNameInput(true)}
+        ><span className='text'>Add middle name</span></button>}
+        <Input field='last_name' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+        <Input field='title_after' renderOnlyInputField />
+      </div>
+      <div className="flex-1">
+        <Input field='id_customer' />
+        <Input title={T.translate('Tags')}>
+          <InputTags
+            field='TAGS'
+            value={TAGS}
+            model={parentApp + '/Models/Tag'}
+            targetColumn='id_contact'
+            sourceColumn='id_tag'
+            colorColumn='_LOOKUP_COLOR'
+            showSelect={false}
+            showTagButtons={true}
+            onChange={(input: any, value: any) => {
+              form.changeField(input, value);
+            }}
+            onNewTag={(title: string) => {
+              return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+            }}
+          ></InputTags>
+        </Input>
+        <Input field='note' customInputProps={{cssClass: 'bg-yellow-50 dark:bg-slate-600'}} />
       </div>
     </div>
     <Divider>{T.translate('Contacts')}</Divider>
@@ -116,6 +107,7 @@ const TabDefault = (props: FormContactProps) => {
           <LookupInput
             uid={'value_' + item.id + '_id_category'}
             model='Hubleto/App/Community/Contacts/Models/Category'
+            uiStyle='buttons'
             value={item.id_category}
             onChange={(input: any, value: any) => {
               let newValues = VALUES;
@@ -141,7 +133,7 @@ const TabDefault = (props: FormContactProps) => {
       </div>;
     })}</div> : null}
     <a
-      className="btn btn-add-outline mt-2"
+      className="btn btn-add btn-large mt-2"
       onClick={() => {
         console.log('add contact', VALUES);
         let newValues: Array<any> = VALUES || [];

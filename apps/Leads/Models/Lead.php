@@ -76,7 +76,7 @@ class Lead extends \Hubleto\Erp\Model
       'profile_link_3' => (new Varchar($this, $this->translate('Profile link #3')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible()->setReactComponent('InputHyperlink'),
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
       'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold'),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultValue(null)->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'price' => (new Decimal($this, $this->translate('Price')))->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),

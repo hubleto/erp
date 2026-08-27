@@ -25,7 +25,6 @@ class Tag extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = $this->translate('Email marketing Tags');
     $description->ui['addButtonText'] = $this->translate('Add Email marketing Tag');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

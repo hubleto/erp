@@ -110,6 +110,7 @@ class Loader extends \Hubleto\Erp\App
         ' . $this->secondSidebarButton('email-marketing/emails/clicks', 'fas fa-hand-pointer', 'Clicks') . '
         ' . $this->secondSidebarButton('email-marketing/recipients', 'fas fa-paper-plane', 'Recipients') . '
         ' . $this->secondSidebarButton('email-marketing/recipients/statuses', 'fas fa-check-double', 'Recipient statuses') . '
+        ' . $this->secondSidebarButton('email-marketing/tags', 'fas fa-tag', 'Tags') . '
       </div>
     ';
   }

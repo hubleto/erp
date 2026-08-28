@@ -17,7 +17,7 @@
       <span class="text">{{ app.manifest.nameTranslated }}</span>
       <div
         id="app_bn_{{ app.manifest.namespace|replace({'\\': '_'}) }}"
-        class="badge badge-small badge-red ml-auto mr-1"
+        class="badge"
       ></div>
     </a>
   </div>
@@ -300,7 +300,7 @@
                   "
                   data-is-collapsed="{{ sidebarGroupData.isCollapsed }}"
                 >
-                  <div class="flex align-justify">
+                  <div class="align-justify hidden md:flex">
                     <a
                       class="sidebar-group-title grow"
                       onclick="
@@ -437,7 +437,8 @@
     }
 
     function toggleSidebar() {
-      $(".default-sidebar").toggleClass('visible');
+      $(".app-sidebar").toggleClass('show');
+      $(".first-sidebar").toggleClass('show');
     }
 
     function toggleSidebarGroup(sgid) {

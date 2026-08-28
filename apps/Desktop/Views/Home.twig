@@ -5,7 +5,20 @@
   {{ translate('Welcome') }}, {{ user.first_name ?? user.email }}
 </div>
 
-<div class="w-full h-full flex">
+<div class="block md:hidden grid grid-cols-3 gap-0 m-2">
+  {% for app in viewParams.appsInSidebar %}
+    <a
+      class="btn btn-small btn-transparent rounded-none border-none"
+      href="{{ config.projectUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
+      title="{{ app.manifest.nameTranslated }}"
+    >
+      <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
+      <span class="text">{{ app.manifest.nameTranslated }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+<div class="w-full h-full flex-dyn">
   <div class="grow">
     {% for m in viewParams.welcomeScreenMessages %}
       <div class="alert alert-{{ m.class }} m-2">

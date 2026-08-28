@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Desktop\Controllers;
 
 use \Hubleto\App\Community\Dashboards\Loader as DashboardsApp;
 use \Hubleto\App\Community\Dashboards\Models\Dashboard as DashboardModel;
+use Hubleto\App\Community\Desktop\Loader;
 
 class Home extends \Hubleto\Erp\Controller
 {
@@ -24,7 +25,11 @@ class Home extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    /** @var Loader */
+    $desktopApp = $this->getService(Loader::class);
+
     $enabledApps = $this->appManager()->getEnabledApps();
+    $appsInSidebar = $desktopApp->getAppsInSidebar();
 
     $dashboardsApp = $this->appManager()->getApp(DashboardsApp::class);
     if ($dashboardsApp) {
@@ -46,6 +51,7 @@ class Home extends \Hubleto\Erp\Controller
       }
     }
 
+    $this->viewParams['appsInSidebar'] = $appsInSidebar;
     $this->viewParams['welcomeScreenMessages'] = $welcomeScreenMessages;
 
     $this->setView('@Hubleto:App:Community:Desktop/Home.twig');

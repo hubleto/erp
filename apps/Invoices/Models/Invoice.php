@@ -83,8 +83,8 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     return array_merge(parent::describeColumns(), [
       'inbound_outbound' => (new Integer($this, $this->translate('Inbound / outbound')))->setEnumValues([
-        self::INBOUND_INVOICE => $this->translate('Inbound'),
-        self::OUTBOUND_INVOICE => $this->translate('Outbound'),
+        self::INBOUND_INVOICE => $this->translate('Inbound invoice'),
+        self::OUTBOUND_INVOICE => $this->translate('Outbound invoice'),
       ])->setEnumCssClasses([
         self::INBOUND_INVOICE => 'bg-lime-50 text-slate-700',
         self::OUTBOUND_INVOICE => 'bg-yellow-50 text-slate-700',

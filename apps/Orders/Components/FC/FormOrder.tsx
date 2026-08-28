@@ -56,7 +56,6 @@ const TabDefault = (props: FormOrderProps) => {
     </div>
     <div className='flex-dyn'>
       <div className='grow'>
-        <Input field='purchase_sales' renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />
         <Input field={purchaseSales == 1 ? 'id_supplier' : 'id_customer'} />
         <Input title={"Deal"}>
           {selectParentDeal ? <LookupInput
@@ -417,7 +416,7 @@ const FormOrder = (props: FormOrderProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Order'}
     urlSlug='orders'
-    title={{fields: ['identifier', 'title'], sub: T.translate('Order')}}
+    title={{fields: ['identifier', 'title'], sub: <Input field='purchase_sales'  renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />}}
     tabs={{
       default: {title: <b>{T.translate('Order')}</b>, content: () => <TabDefault {...props} />},
       items: {title: T.translate('Items'), content: () => <TabItems {...props} />},

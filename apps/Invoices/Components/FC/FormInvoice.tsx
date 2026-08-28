@@ -51,7 +51,8 @@ const TabDefault = (props: FormInvoiceProps) => {
         ? <Input field='id_supplier' />
         : <Input field='id_customer' />
       }
-      <Input field='number' customInputProps={{cssClass: 'text-4xl'}} />
+      <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+      
     </>
   } else {
     return <>
@@ -67,7 +68,7 @@ const TabDefault = (props: FormInvoiceProps) => {
           <div className='flex-1 min-w-80'>
             {form.id == -1 ? null : <div className='flex-dyn'>
               <div className='grow'>
-                <Input field='number' customInputProps={{wrapperCssClass: 'block', cssClass: 'text-xl'}} />
+                <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
                 <Input field='vs' />
                 <Input field='cs' />
                 <Input field='ss' />
@@ -579,29 +580,29 @@ const FormInvoice = (props: FormInvoiceProps) => {
     urlSlug='invoices'
     endpointParams={{saveRelations: ['ITEMS']}}
     // onAfterFormInitialized={(form: any) => {}}
-    renderTitle={(): React.JSX.Element => {
-        const type = useRecordField('type', 0);
-        const number = useRecordField('number', '');
-        const inboundOutbound = useRecordField('inbound_outbound', 0);
-        let title = (inboundOutbound == 1 ? T.translate('Inbound') : T.translate('Outbound'));
+    title={{fields: ['number'], sub: <Input field='inbound_outbound'  renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />}}
+    // renderTitle={(): React.JSX.Element => {
+    //     const type = useRecordField('type', 0);
+    //     const number = useRecordField('number', '');
+    //     const inboundOutbound = useRecordField('inbound_outbound', 0);
+    //     let title = (inboundOutbound == 1 ? T.translate('Inbound') : T.translate('Outbound'));
 
-        switch (type) {
-          case 1: case '1': title += ' ' + T.translate('Proforma Invoice'); break;
-          case 2: case '2': title += ' ' + T.translate('Advance Invoice'); break;
-          case 3: case '3': title += ' ' + T.translate('Invoice'); break;
-          case 4: case '4': title += ' ' + T.translate('Credit Note'); break;
-          case 5: case '5': title += ' ' + T.translate('Debit Note'); break;
-        }
+    //     switch (type) {
+    //       case 1: case '1': title += ' ' + T.translate('Proforma Invoice'); break;
+    //       case 2: case '2': title += ' ' + T.translate('Advance Invoice'); break;
+    //       case 3: case '3': title += ' ' + T.translate('Invoice'); break;
+    //       case 4: case '4': title += ' ' + T.translate('Credit Note'); break;
+    //       case 5: case '5': title += ' ' + T.translate('Debit Note'); break;
+    //     }
 
-        return <div>
-          <h2>{number}</h2>
-          <small>{title}</small>
-        </div>;
-      }
-    }
+    //     return <div>
+    //       <h2>{number}</h2>
+    //       <small>{title}</small>
+    //     </div>;
+    //   }
+    // }
     renderTopInputs={() => {
       return <div className='modal-top-inputs'>
-        <Input field='inbound_outbound' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
         <Input field='type' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
         <Input field='id_profile' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
         <Input field='id_payment_method' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />

@@ -106,6 +106,7 @@ const TabDefault = (props: FormLeadProps) => {
 /** TabCalendar */
 const TabCalendar = (props: FormProps) => {
   const form = React.useContext(FormMetaContext);
+  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
   return <CalendarTab
     loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=leads&idLead=' + form.id}
     logActivityEndpoint={'leads/api/log-activity?idLead=' + form.id}
@@ -118,6 +119,7 @@ const TabCalendar = (props: FormProps) => {
 /** TabEmailClicks */
 const TabEmailClicks = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
+  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
   return <TableEmailClicks
     tag={"table_email_clicks"}
     parentForm={form}
@@ -129,7 +131,7 @@ const TabEmailClicks = (props: FormLeadProps) => {
 /** TabTasks */
 const TabTasks = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  
+  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
   return <TableTasks
     tag={"table_lead_task"}
     parentForm={form}
@@ -145,6 +147,7 @@ const TabTasks = (props: FormLeadProps) => {
 /** TabHistory */
 const TabHistory = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
+  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
   return <Table
     parentForm={form}
     uid={props.uid + "_table_lead_history"}

@@ -13,6 +13,7 @@ import TableItems from './TableItems';
 import TableQuotes from './TableQuotes';
 import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
 import CalendarFormActivity from '@hubleto/apps/Calendar/Components/FC/CalendarFormActivity';
+import Table from '@hubleto/react-ui/components/fc/Table';
 
 export interface FormOrderProps extends FormProps {}
 
@@ -135,6 +136,8 @@ const TabDefault = (props: FormOrderProps) => {
 const TabItems = (props: FormOrderProps) => {
   const form = React.useContext(FormMetaContext);
 
+  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+
   return <div className='flex flex-col gap-2'>
     <div>
       <Input field='description_before' />
@@ -155,6 +158,7 @@ const TabItems = (props: FormOrderProps) => {
 /** TabCalendar */
 const TabCalendar = (props: FormProps) => {
   const form = React.useContext(FormMetaContext);
+  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
   return <CalendarTab
     loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=orders&idOrder=' + form.id}
     logActivityEndpoint={'orders/api/log-activity?idOrder=' + form.id}
@@ -172,7 +176,7 @@ const TabCalendar = (props: FormProps) => {
 /** TabQuotes */
 const TabQuotes = (props: FormOrderProps) => {
   const form = React.useContext(FormMetaContext);
-
+  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
   return <TableQuotes
     tag={"table_order_quote"}
     parentForm={form}
@@ -186,6 +190,8 @@ const TabWorksheet = (props: FormOrderProps) => {
   const form = React.useContext(FormMetaContext);
   const ITEMS = useRecordField('ITEMS');
   const refTableActivities = createRef();
+
+  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
 
   let latestItemDue = moment('2000-01-01');
 
@@ -223,6 +229,8 @@ const TabWorksheet = (props: FormOrderProps) => {
 const TabInvoicing = (props: FormOrderProps) => {
   const form = React.useContext(FormMetaContext);
   const refTableItemsInvoicing = createRef();
+
+  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
 
   return <div className='flex flex-col gap-2'>
     <TableItems
@@ -266,6 +274,8 @@ const TabStatistics = (props: FormOrderProps) => {
   const [salaries, setSalaries] = useState({});
   const [statistics, setStatistics] = useState({});
 
+  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+
   useEffect(() => {
     request.post(
       'orders/api/get-statistics',
@@ -280,7 +290,7 @@ const TabStatistics = (props: FormOrderProps) => {
     let totalChargeableHours = 0;
     let totalCostsByWorker = 0;
 
-    if (!statistics.projects) return null;
+    if (!statistics.projects || statistics.projects.length == 0) return <div className='alert alert-warning'>Order has not project assigned yet.</div>;
 
     return <div>{Object.keys(statistics.projects).map((idProject) => {
       const P = statistics.projects[idProject];
@@ -387,6 +397,19 @@ const TabStatistics = (props: FormOrderProps) => {
   }
 }
 
+/** TabHistory */
+const TabHistory = (props: FormOrderProps) => {
+  const form = React.useContext(FormMetaContext);
+  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+  return <Table
+    parentForm={form}
+    uid={props.uid + "_table_order_history"}
+    model={'Hubleto/App/Community/Orders/Models/History'}
+    endpointParams={{idOrder: form.id}}
+    readonly={true}
+  ></Table>;
+}
+
 /** FormOrder */
 const FormOrder = (props: FormOrderProps) => {
   return <Form
@@ -403,6 +426,7 @@ const FormOrder = (props: FormOrderProps) => {
       worksheet: {title: T.translate('Worksheet'), content: () => <TabWorksheet {...props} />},
       invoicing: {title: T.translate('Invoicing'), content: () => <TabInvoicing {...props} />},
       statistics: {title: T.translate('Statistics'), content: () => <TabStatistics {...props} />},
+      history: { title: T.translate('History'), content: () => <TabHistory {...props} /> },
    }}
     {...props}
   ></Form>;

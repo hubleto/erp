@@ -265,7 +265,6 @@ const CalendarFormActivity = (props: FormActivityProps) => {
       <Input field='completed' renderOnlyInputField customInputProps={{yesText: T.translate('Completed')}}></Input>
     </div>}
     onClose={() => { 
-      console.log('onclose');
       if (props.calendarTab) props.calendarTab.setShowIdActivity(0);
       else if (props.onClose) props.onClose();
     }}

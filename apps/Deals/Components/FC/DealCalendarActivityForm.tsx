@@ -7,6 +7,7 @@ const DealCalendarActivityForm = (props: any) => {
     customInputFields={['id_deal']}
     defaultValues={{...props.defaultValues, id_deal: props.idDeal}}
     model='Hubleto/App/Community/Deals/Models/DealActivity'
+    onClose={props.onClose}
   ></CalendarFormActivity>
 }
 

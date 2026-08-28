@@ -248,34 +248,6 @@ const TabHistory = (props: FormDealProps) => {
   return JSON.stringify(HISTORY);
 }
 
-/** TabTimeline */
-const TabTimeline = (props: FormDealProps) => {
-  const form = React.useContext(FormMetaContext);
-  const ACTIVITIES: any = useRecordField('ACTIVITIES', {});
-  const WORKFLOW_HISTORY: any = useRecordField('WORKFLOW_HISTORY', {});
-
-  return form.renderTimeline([
-    {
-      data: (thisForm) => ACTIVITIES,
-      icon: 'fas fa-calendar',
-      color: '#32678fff',
-      timestampFormatter: (entry) => entry.date_start,
-      valueFormatter: (entry) => entry.subject,
-      userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
-    },
-    { 
-      data: (thisForm) => WORKFLOW_HISTORY,
-      icon: 'fas fa-timeline',
-      color: '#8f3248ff',
-      timestampFormatter: (entry) => entry.datetime_change,
-      valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
-      userNameFormatter: (entry) => entry.USER?.nick,
-    },
-  ]);
-}
-
-
-
 /** FormDeal */
 const FormDeal = (props: FormDealProps) => {
 
@@ -297,7 +269,6 @@ const FormDeal = (props: FormDealProps) => {
       calendar: {title: T.translate('Calendar'), content: () => <TabCalendar {...props} />},
       tasks: {title: T.translate('Tasks'), content: () => <TabTasks {...props} />},
       history: {icon: 'fas fa-clock-rotate-left', content: () => <TabHistory {...props} />},
-      timeline: {icon: 'fas fa-timeline', content: () => <TabTimeline {...props} />},
     }}
     {...props}
   ></Form>;

@@ -116,10 +116,10 @@ const TabDefault = (props: FormContactProps) => {
             }}
           ></LookupInput>
         </div>
-        <button
-          className={'btn ' + (item._toBeDeleted_ ? 'btn-primary' : 'btn-danger')}
+        <i
+          className='text-red-700 fas fa-trash-alt hover:text-red-800 p-1'
           onClick={() => {
-            let newValues = VALUES;
+            let newValues = [...VALUES];
             if (newValues[key].id < 0) {
               newValues.splice(Number(key), 1);
             } else {
@@ -127,9 +127,7 @@ const TabDefault = (props: FormContactProps) => {
             }
             form.changeRecord({ VALUES: newValues });
           }}
-        >
-          <span className="icon"><i className={'fas ' + (item._toBeDeleted_ ? 'fa-times' : 'fa-trash-can')}></i></span>
-        </button>
+        ></i>
       </div>;
     })}</div> : null}
     <a

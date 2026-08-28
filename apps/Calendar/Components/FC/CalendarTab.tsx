@@ -200,6 +200,7 @@ const CalendarTab = (props: CalendarTabProps) => {
         uid='activity_form'
         isOpen={true}
         type='right'
+        onClose={() => setShowIdActivity(0)}
       ><ActivityFormRenderer renderer={props.renderActivityForm} calendarTab={myself} /></Modal>
     </>}
   </CalendarTabContext.Provider>;

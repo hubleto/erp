@@ -154,32 +154,6 @@ const TabHistory = (props: FormLeadProps) => {
   ></Table>;
 }
 
-/** TabTimeline */
-const TabTimeline = (props: FormLeadProps) => {
-  const form = React.useContext(FormMetaContext);
-  const ACTIVITIES: any = useRecordField('ACTIVITIES', {});
-  const WORKFLOW_HISTORY: any = useRecordField('WORKFLOW_HISTORY', {});
-  
-  return form.renderTimeline([
-    {
-      data: (thisForm: any) => ACTIVITIES,
-      icon: 'fas fa-calendar',
-      color: '#32678fff',
-      timestampFormatter: (entry: any) => entry.date_start,
-      valueFormatter: (entry: any) => entry.subject,
-      userNameFormatter: (entry: any) => entry['_LOOKUP[id_owner]'],
-    },
-    { 
-      data: (thisForm: any) => WORKFLOW_HISTORY,
-      icon: 'fas fa-timeline',
-      color: '#8f3248ff',
-      timestampFormatter: (entry: any) => entry.datetime_change,
-      valueFormatter: (entry: any) => entry.WORKFLOW_STEP?.name ?? '---',
-      userNameFormatter: (entry: any) => entry.USER?.nick,
-    },
-  ]);
-}
-
 /** FormLead */
 const FormLead = (props: FormLeadProps) => {
   return <Form
@@ -193,8 +167,7 @@ const FormLead = (props: FormLeadProps) => {
       calendar: { title: T.translate('Calendar'), content: () => <TabCalendar {...props} /> },
       email_clicks: { title: T.translate('Email Clicks'), content: () => <TabEmailClicks {...props} /> },
       tasks: { title: T.translate('Tasks'), content: () => <TabTasks {...props} /> },
-      history: { icon: 'fas fa-clock-rotate-left', position: 'right', content: () => <TabHistory /> },
-      timeline: { icon: 'fas fa-timeline', position: 'right', content: () => <TabTimeline {...props} /> },
+      history: { title: T.translate('History'), content: () => <TabHistory {...props} /> },
     }}
     title={{fields: ['title'], sub: T.translate('Lead')}}
     {...props}

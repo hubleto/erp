@@ -46,7 +46,7 @@ class Email extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('UID')))->setReadonly(true),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
+      'title' => (new Varchar($this, $this->translate('Title'))),
       'mail_subject' => (new Varchar($this, $this->translate('Subject')))->setCssClass('font-bold')->setDefaultVisible(),
       'mail_body' => (new Text($this, $this->translate('Body')))->setReactComponent('InputTextareaWithHtmlPreview'),
       'utm_source' => (new Varchar($this, $this->translate('UTM source')))->setDefaultVisible(),

@@ -344,32 +344,6 @@ const TabStatistics = (props: FormProjectProps) => {
   }
 }
 
-/** TabTimeline */
-const TabTimeline = (props: FormProjectProps) => {
-  const form = React.useContext(FormMetaContext);
-  const ACTIVITIES: any = useRecordField('ACTIVITIES', {});
-  const WORKFLOW_HISTORY: any = useRecordField('WORKFLOW_HISTORY', {});
-
-  return form.renderTimeline([
-    {
-      data: (thisForm) => thisForm.state.record.ACTIVITIES,
-      icon: 'fas fa-calendar',
-      color: '#32678fff',
-      timestampFormatter: (entry) => entry.date_start,
-      valueFormatter: (entry) => entry.subject,
-      userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
-    },
-    { 
-      data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
-      icon: 'fas fa-timeline',
-      color: '#8f3248ff',
-      timestampFormatter: (entry) => entry.datetime_change,
-      valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
-      userNameFormatter: (entry) => entry.USER?.nick,
-    },
-  ]);
-}
-
 /** FormProject */
 const FormProject = (props: FormProjectProps) => {
   return <Form
@@ -386,7 +360,6 @@ const FormProject = (props: FormProjectProps) => {
       worksheet: {title: T.translate('Worksheet'), content: () => <TabWorksheet {...props} /> },
       expenses: {title: T.translate('Expenses'), content: () => <TabExpenses {...props} /> },
       statistics: {title: T.translate('Statistics'), content: () => <TabStatistics {...props} /> },
-      timeline: {icon: 'fas fa-timeline', content: () => <TabTimeline {...props} /> },
     }}
     {...props}
   ></Form>;

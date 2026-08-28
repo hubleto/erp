@@ -106,10 +106,11 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
               }
             }}></Input>
             {R.all_day ? null : <Input renderOnlyInputField field='time_start' customInputProps={{
+              hideSeconds: true,
               onChange: (input: any, value: any) => {
                 form.changeRecord({
                   time_start: value,
-                  time_end: moment(R.date_end + ' ' + value + ':00').add(minutesDuration, 'minutes').format('HH:mm:ss')
+                  time_end: moment(R.date_end + ' ' + value + ':00').add(hoursDuration, 'hours').add(minutesDuration, 'minutes').format('HH:mm:ss')
                 })
               }
             }}></Input>}
@@ -117,7 +118,9 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 
           <div className='flex-dyn'>
             <Input renderOnlyInputField field='date_end' />
-            {R.all_day ? null : <Input renderOnlyInputField field='time_end' />}
+            {R.all_day ? null : <Input renderOnlyInputField field='time_end' customInputProps={{
+              hideSeconds: true,
+            }}/>}
           </div>
 
           <Input field='recurrence' content={<div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
@@ -262,6 +265,7 @@ const CalendarFormActivity = (props: FormActivityProps) => {
       <Input field='completed' renderOnlyInputField customInputProps={{yesText: T.translate('Completed')}}></Input>
     </div>}
     onClose={() => { 
+      console.log('onclose');
       if (props.calendarTab) props.calendarTab.setShowIdActivity(0);
       else if (props.onClose) props.onClose();
     }}

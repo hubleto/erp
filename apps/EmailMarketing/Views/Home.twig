@@ -1,3 +1,23 @@
-<div class="mt-20 w-full text-center">
-  <i class="fas fa-users-viewfinder text-primary" style="opacity:0.05;font-size:20em"></i>
+{% set buttons = [
+  ['email-marketing/campaigns', 'fas fa-users-viewfinder', 'Campaigns'],
+  ['email-marketing/emails', 'fas fa-envelope', 'Emails'],
+  ['email-marketing/emails/sent', 'fas fa-arrow-right-from-bracket', 'Sent'],
+  ['email-marketing/emails/clicks', 'fas fa-hand-pointer', 'Clicks'],
+  ['email-marketing/recipients', 'fas fa-paper-plane', 'Recipients'],
+  ['email-marketing/recipients/statuses', 'fas fa-check-double', 'Recipient statuses'],
+  ['email-marketing/tags', 'fas fa-tag', 'Tags'],
+] %}
+
+<div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
+  <div class="card-header">
+    <h1 class="app-main-title">Email marketing</h1>
+  </div>
+  <div class="card-body flex gap-2 flex-wrap grid md:grid-cols-3">
+    {% for btn in buttons %}
+      <a href="{{ config.projectUrl }}/{{ btn[0] }}" class="btn btn-square btn-large btn-transparent">
+        <span class="icon"><i class="{{ btn[1] }}"></i></span>
+        <span class="text">{{ btn[2] }}</span>
+      </a>
+    {% endfor %}
+  </div>
 </div>

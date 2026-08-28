@@ -1,0 +1,33 @@
+{% set buttons = [
+  ['workflow/workflows', 'fas fa-timeline', 'Workflows'],
+  ['workflow/steps', 'fas fa-circle-dot', 'Steps'],
+  ['workflow/automats', 'fas fa-robot', 'Automats'],
+] %}
+
+<div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
+  <div class="card-header">
+    <h1 class="app-main-title">Workflows</h1>
+  </div>
+  <div class="card-body flex gap-2 flex-wrap grid md:grid-cols-3">
+    {% for btn in buttons %}
+      <a href="{{ config.projectUrl }}/{{ btn[0] }}" class="btn btn-square btn-large btn-transparent">
+        <span class="icon"><i class="{{ btn[1] }}"></i></span>
+        <span class="text">{{ btn[2] }}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+<div class="list dense border-none">
+  {% for w in viewParams.workflows %}
+    <a
+      class="btn btn-list-item btn-transparent"
+      href="{{ config.projectUrl }}/workflow/{{ w.id }}"
+    >
+      <span class="text">{{ w.name }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+</div>
+
+

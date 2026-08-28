@@ -29,8 +29,8 @@ class Loader extends \Hubleto\Erp\App
 
       '/^workflow\/boards\/items-with-not-updated-step\/?$/' => Controllers\Boards\ItemsWithNotUpdatedStep::class,
 
-      '/^workflow\/?$/' => Controllers\Workflow::class,
-      '/^workflow(\/(?<idWorkflow>\d+))?\/?$/' => Controllers\Workflow::class,
+      '/^workflow\/?$/' => Controllers\Home::class,
+      '/^workflow\/(?<idWorkflow>\d+)\/?$/' => Controllers\Workflow::class,
 
       '/^workflow\/workflows(\/(?<recordId>\d+))?\/?$/' => Controllers\Workflows::class,
       '/^workflow\/workflows\/add\/?$/' => ['controller' => Controllers\Workflows::class, 'vars' => ['recordId' => -1]],

@@ -13,7 +13,25 @@
     bool:readonly="true"
   ></hblreact-mail-table-mails>
 {% else %}
-  <div class="mt-20 w-full text-center">
-    <i class="fas fa-envelope text-primary" style="opacity:0.05;font-size:20em"></i>
+
+  {% set buttons = [
+    ['mail/get', 'fas fa-download', 'Get emails'],
+    ['mail/scheduled', 'fas fa-clock', 'Scheduled to send'],
+    ['mail/accounts', 'fas fa-cog', 'Accounts'],
+  ] %}
+
+  <div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
+    <div class="card-header">
+      <h1 class="app-main-title">Mail</h1>
+    </div>
+    <div class="card-body flex gap-2 flex-wrap grid md:grid-cols-3">
+      {% for btn in buttons %}
+        <a href="{{ config.projectUrl }}/{{ btn[0] }}" class="btn btn-square btn-large btn-transparent">
+          <span class="icon"><i class="{{ btn[1] }}"></i></span>
+          <span class="text">{{ btn[2] }}</span>
+        </a>
+      {% endfor %}
+    </div>
   </div>
+
 {% endif %}

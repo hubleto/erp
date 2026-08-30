@@ -103,10 +103,12 @@ class Campaign extends \Hubleto\Erp\RecordManager
       }
     }
 
-    $fCampaignClosed = $filters["fCampaignClosed"] ?? 0;
-    switch ($fCampaignClosed) {
-      case 0: $query = $query->where("email_marketing_campaigns.is_closed", false); break;
-      case 1: $query = $query->where("email_marketing_campaigns.is_closed", true); break;
+    if (isset($filters["fCampaignClosed"])) {
+      $fCampaignClosed = $filters["fCampaignClosed"] ?? 0;
+      switch ($fCampaignClosed) {
+        case 0: $query = $query->where("email_marketing_campaigns.is_closed", false); break;
+        case 1: $query = $query->where("email_marketing_campaigns.is_closed", true); break;
+      }
     }
 
     return $query;

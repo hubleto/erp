@@ -116,7 +116,7 @@ const CalendarTab = (props: CalendarTabProps) => {
 
   return <CalendarTabContext.Provider value={myself}>
     {form.id > 0 ? <div className='flex-dyn'>
-      <div className='flex-2 gap-2'>
+      <div className='flex-1 gap-2'>
         <div className='card'>
           <div className='card-header'>Follow-ups</div>
           <div className='card-body'>

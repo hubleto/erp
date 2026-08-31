@@ -225,46 +225,46 @@ const TabWorksheet = (props: FormOrderProps) => {
 }
 
 /** TabInvoicing */
-const TabInvoicing = (props: FormOrderProps) => {
-  const form = React.useContext(FormMetaContext);
-  const refTableItemsInvoicing = createRef();
+// const TabInvoicing = (props: FormOrderProps) => {
+//   const form = React.useContext(FormMetaContext);
+//   const refTableItemsInvoicing = createRef();
 
-  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+//   if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
 
-  return <div className='flex flex-col gap-2'>
-    <TableItems
-      tag={"table_order_items_invoicing"}
-      ref={refTableItemsInvoicing}
-      parentForm={form}
-      uid={props.uid + "_table_order_items_invoicing"}
-      idOrder={form.id}
-      view="invoicing"
-    />
-    <div>
-      <button
-        className='btn btn-primary btn-large'
-        onClick={() => {
-          const selection = refTableItemsInvoicing.current.state.selection;
-          const idItems = selection.map((item) => item.id);
-          request.post(
-            'orders/api/prepare-items-for-invoice',
-            {
-              idOrder: form.id,
-              idItems: idItems,
-            },
-            {},
-            (result: any) => {
-              refTableItemsInvoicing.current.reload();
-            }
-          );
-        }}
-      >
-        <span className='icon'><i className='fas fa-file-invoice'></i></span>
-        <span className='text'>{T.translate('Prepare selected for invoice')}</span>
-      </button>
-    </div>
-  </div>;
-}
+//   return <div className='flex flex-col gap-2'>
+//     <TableItems
+//       tag={"table_order_items_invoicing"}
+//       ref={refTableItemsInvoicing}
+//       parentForm={form}
+//       uid={props.uid + "_table_order_items_invoicing"}
+//       idOrder={form.id}
+//       view="invoicing"
+//     />
+//     <div>
+//       <button
+//         className='btn btn-primary btn-large'
+//         onClick={() => {
+//           const selection = refTableItemsInvoicing.current.state.selection;
+//           const idItems = selection.map((item) => item.id);
+//           request.post(
+//             'orders/api/prepare-items-for-invoice',
+//             {
+//               idOrder: form.id,
+//               idItems: idItems,
+//             },
+//             {},
+//             (result: any) => {
+//               refTableItemsInvoicing.current.reload();
+//             }
+//           );
+//         }}
+//       >
+//         <span className='icon'><i className='fas fa-file-invoice'></i></span>
+//         <span className='text'>{T.translate('Prepare selected for invoice')}</span>
+//       </button>
+//     </div>
+//   </div>;
+// }
 
 /** TabStatistics */
 const TabStatistics = (props: FormOrderProps) => {
@@ -423,7 +423,7 @@ const FormOrder = (props: FormOrderProps) => {
       calendar: {title: T.translate('Calendar'), content: () => <TabCalendar {...props} />},
       quotes: {title: T.translate('Quotes'), content: () => <TabQuotes {...props} />},
       worksheet: {title: T.translate('Worksheet'), content: () => <TabWorksheet {...props} />},
-      invoicing: {title: T.translate('Invoicing'), content: () => <TabInvoicing {...props} />},
+      // invoicing: {title: T.translate('Invoicing'), content: () => <TabInvoicing {...props} />},
       statistics: {title: T.translate('Statistics'), content: () => <TabStatistics {...props} />},
       history: { title: T.translate('History'), content: () => <TabHistory {...props} /> },
    }}

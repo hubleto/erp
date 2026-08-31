@@ -87,6 +87,7 @@ export default class TableItems extends TableExtended<TableItemsProps, TableItem
               {
                 headerClassName: 'dialog-warning-header',
                 contentClassName: 'dialog-warning-content',
+                footerClassName: 'dialog-warning-footer',
                 header: this.translate('Prepare for invoice'),
                 yesText: this.translate('Yes, prepare for invoice'),
                 yesButtonClass: 'btn-warning',

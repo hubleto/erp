@@ -38,6 +38,7 @@ const TableItems = (props: TableItemsProps) => {
               {
                 headerClassName: 'dialog-warning-header',
                 contentClassName: 'dialog-warning-content',
+                footerClassName: 'dialog-warning-footer',
                 header: T.translate('Create invoice'),
                 yesText: T.translate('Yes, create invoice'),
                 yesButtonClass: 'btn-warning',

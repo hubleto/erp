@@ -24,12 +24,8 @@ const TabDefault = (props: FormItemProps) => {
   const vat: number = useRecordField('vat', 0);
 
   return <>
-    <div className="flex gap-2 mt-2">
-      <div className='flex-5'>
-        <Input field='title' />
-      </div>
-    </div>
-    <div className="flex gap-2 mt-2">
+    <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+    <div className="flex-dyn mt-2">
       <div className='flex-1'>
         <Input field='id_order' />
         <Input field='id_product' />
@@ -37,6 +33,15 @@ const TabDefault = (props: FormItemProps) => {
         <Input field='amount' />
         <Input field='discount' />
         <Input field='vat' />
+        <Input field='date_due' />
+        <Input field='date_delivery' />
+        <Input field='charged_period_start' />
+        <Input field='charged_period_end' />
+        <Input field='attachment_1' />
+        <Input field='attachment_2' />
+      </div>
+      <div className='flex-1'>
+        <Input field='notes' />
         <div className='bg-slate-50 p-2'>
           <b>{T.translate('Summary')}</b><br/>
           <table className='table-default dense w-full'>
@@ -78,24 +83,7 @@ const TabDefault = (props: FormItemProps) => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className='flex-1'>
-        <div className='card'>
-          <div className='card-header'>
-            Dates
-          </div>
-          <div className='card-body'>
-            <Input field='date_due' />
-            <Input field='date_delivery' />
-            <Input field='charged_period_start' />
-            <Input field='charged_period_end' />
-          </div>
-        </div>
-        <Input field='notes' />
-        <Input field='attachment_1' />
-        <Input field='attachment_2' />
         <Input field='position' />
-        <Input field='is_chargeable' />
         <Input field='id_invoice_item' />
       </div>
     </div>
@@ -122,7 +110,10 @@ const FormItem = (props: FormItemProps) => {
         id: -1
       };
     }}
-    title={{fields: ['position', 'title'], sub: T.translate('Order Item')}}
+    title={{fields: ['title'], sub: T.translate('Order Item')}}
+    renderTopInputs={() => <div className='modal-top-inputs'>
+      <Input field='is_chargeable' renderOnlyInputField />
+    </div>}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

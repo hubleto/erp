@@ -1,7 +1,7 @@
 import React from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import Form from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import TableWorkflowSteps from './TableWorkflowSteps';
 

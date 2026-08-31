@@ -72,9 +72,9 @@ const TabTest = (props: FormKeyProps) => {
       onClick={() => {
         let testRequest = {
           key: key,
-          app: refInputApp.current.state.value,
-          controller: refInputController.current.state.value,
-          vars: refInputVars.current.state.value,
+          app: refInputApp.current.value,
+          controller: refInputController.current.value,
+          vars: refInputVars.current.value,
         }
 
         setTestRequest(testRequest);

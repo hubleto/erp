@@ -1,0 +1,39 @@
+<h1 class="app-main-title">{{ translate('OAuth') }}</h1>
+
+<form action="" method="POST">
+  <input type="hidden" name="submitted" value="1" />
+  <div class="m-0 md:m-20 card">
+    <div class="card-header">
+      OAuth credentials
+    </div>
+    <div class="card-body flex flex-col gap-2">
+      <div class="alert alert-info flex-col items-start">
+        You need to configure OAuth server access.<br/>
+        Hubleto will use this server to authenticate the user accessing the API.<br/>
+        You may use your own OAuth server or you may use Hubleto authentication service.<br/>
+        <br/>
+        <a href="#" class="btn btn-primary">
+          <span class="text">Create account in Hubleto authentication service</span>
+        </a>
+      </div>
+      <div>
+        <label>Token endpoint</label>
+        <input type="text" name="tokenEndpoint" value="{{ viewParams.tokenEndpoint }}"></input>
+      </div>
+      <div>
+        <label>Client ID</label>
+        <input type="text" name="clientId" value="{{ viewParams.clientId }}"></input>
+      </div>
+      <div>
+        <label>Client Secret</label>
+        <input type="text" name="clientSecret" value="{{ viewParams.clientSecret }}"></input>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-save">
+          <span class="icon"><i class="fas fa-check"></i></span>
+          <span class="text">Save</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

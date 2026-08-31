@@ -20,6 +20,7 @@ namespace Hubleto\App\Community\Api\Controllers;
 use \Hubleto\App\Community\Api\Validator;
 use \Hubleto\App\Community\Api\Models\Usage;
 use \Hubleto\App\Community\Api\Models\Key;
+use Hubleto\App\Community\Api\OAuth;
 
 class Call extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -34,23 +35,32 @@ class Call extends \Hubleto\Erp\Controllers\ApiController
       $controller = $this->router()->urlParamAsString('controller');
       $varsString = $this->router()->urlParamAsString('vars');
 
-      /** @var $validator Validator */
+      $tokenEndpoint = $this->config()->getAsString('api/oauth/tokenEndpoint');
+      $clientId = $this->config()->getAsString('api/oauth/clientId');
+      $clientSecret = $this->config()->getAsString('api/oauth/clientSecret');
+
+      /** @var OAuth */
+      $oauth = new OAuth($tokenEndpoint, $clientId, $clientSecret);
+      $accessTokenRaw = $oauth->obtainAccessToken();
+      $accessToken = $oauth->decodeAccessToken($accessTokenRaw);
+    
+      /** @var Validator */
       $validator = $this->getService(Validator::class);
 
       $validator->validateAppAndController($app, $controller);
       $validator->validateApiKey($app, $controller, $key);
 
-      /** @var $controllerObject \Hubleto\Erp\Controller */
+      /** @var \Hubleto\Erp\Controller */
       $controllerObject = $this->getService($validator->getFullControllerClassName($app, $controller));
       $vars = @json_decode($varsString, true);
       $controllerObject->router()->setRouteVars($vars?? []);
       $output = $controllerObject->renderJson();
 
-      /** @var $mKey Key */
+      /** @var Key */
       $mKey = $this->getModel(Key::class);
       $key = $mKey->record->where('key', $key)->first();
 
-      /** @var $mUsage Usage */
+      /** @var Usage */
       $mUsage = $this->getModel(Usage::class);
       $mUsage->record->recordCreate([
         'id_key' => $key->id,

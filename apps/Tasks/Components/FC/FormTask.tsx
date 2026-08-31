@@ -19,10 +19,10 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 const TabDefault = (props: FormTaskProps) => {
   const form = React.useContext(FormMetaContext);
 
-  const ORDERS: any = useRecordField('ORDERS', {});
-  const DEALS: any = useRecordField('DEALS', {});
-  const PROJECTS: any = useRecordField('PROJECTS', {});
-  const TODO: any = useRecordField('TODO', {});
+  const ORDERS: any = useRecordField('ORDERS', []);
+  const DEALS: any = useRecordField('DEALS', []);
+  const PROJECTS: any = useRecordField('PROJECTS', []);
+  const TODO: any = useRecordField('TODO', []);
   const isClosed: boolean = useRecordField('is_closed', false);
   const virtWorkedHours: number = useRecordField('virt_worked_hours', 0);
 
@@ -212,6 +212,7 @@ const TabDefault = (props: FormTaskProps) => {
 /** TabWorksheet */
 const TabWorksheet = (props: FormTaskProps) => {
   const form = React.useContext(FormMetaContext);
+  if (form.id <= 0) return <div className='alert alert-info'>Create task first</div>;
   return <TableActivities
     uid={props.uid + "_table_activities"}
     tag="TaskActivities"

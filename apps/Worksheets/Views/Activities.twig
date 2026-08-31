@@ -4,5 +4,7 @@
   string:fulltext-search='{{ viewParams.q }}'
   json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'
+  json:form-endpoint-params='{"idTask": {{ viewParams.idTask ?? 0 }} }'
   string:form-active-tab-uid='{{ viewParams.tab }}'
+  int:id-task='{{ viewParams.idTask ?? 0 }}'
 ></hblreact-worksheets-table-activities>

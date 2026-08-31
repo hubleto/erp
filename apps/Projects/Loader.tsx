@@ -36,29 +36,46 @@ class ProjectsApp extends App {
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormOrder',
-      globalThis.hubleto.translate('Create project', 'Hubleto\\App\\Community\\Projects\\Loader', 'manifest'),
-      'fas fa-diagram-project',
-      (form: FormMeta) => {
-        request.get(
-          'projects/api/create-from-order',
-          {idOrder: form.id},
-          (data: any) => {
-            if (data.status == "success") {
-              globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/' + data.idProject);
+      (form: FormMeta) => { return {
+        title: 'Create project',
+        icon: 'fas fa-diagram-project',
+        onClick: (form: FormMeta) => {
+          request.get(
+            'projects/api/create-from-order',
+            {idOrder: form.id},
+            (data: any) => {
+              if (data.status == "success") {
+                globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/' + data.idProject);
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      }}
     );
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
-      'Assign task to project',
-      'fas fa-check-double',
-      (form: any) => {
-        globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/task-assignment/add?idTask=' + form.state.record.id);
-      }
-    )
+      (form: FormMeta) => { return {
+        title: 'Assign task to project',
+        icon: 'fas fa-check-double',
+        onClick: (form: FormMeta) => {
+          globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/tasks/add?idTask=' + form.id);
+        },
+      }},
+      (form: FormMeta) => form.id > 0,
+    );
+
+    FormCustomizer.addFormHeaderExtraButton(
+      'FormTask',
+      (form: FormMeta) => { return {
+        title: 'Assign task to milestone',
+        icon: 'fas fa-check-double',
+        onClick: (form: FormMeta) => {
+          globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/tasks/milestones/add?idTask=' + form.id);
+        },
+      }},
+      (form: FormMeta) => form.id > 0,
+    );
   }
 }
 

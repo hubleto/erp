@@ -163,6 +163,8 @@ class Activity extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
     $description->show(['copyButton']);
+    $idTask = $this->router()->urlParamAsInteger('idTask');
+    $description->setDefaultValue('id_task', $idTask);
     return $description;
   }
 

@@ -21,7 +21,7 @@ const TableActivities = (props: TableActivitiesProps) => {
     model={parentApp + '/Models/Activity'}
     endpointParams={{idTask: props.idTask, idProject: props.idProject, idOrder: props.idOrder}}
     formUrlSlug='worksheets'
-    formModalProps={{type: 'centered theme-secondary'}}
+    formModalProps={{type: 'centered small theme-secondary'}}
     formDefaultValues={{id_task: props.idTask}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
     // renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => { return table.renderDefaultCell(columnName, column, data, options); }}

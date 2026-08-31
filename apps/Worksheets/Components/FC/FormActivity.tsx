@@ -12,20 +12,16 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 /** TabDefault */
 const TabDefault = (props: FormActivityProps) => {
-  return <div className="w-full flex gap-2 md:flex-row">
-    <div className='w-full'>
-      <Input field='id_task' />
-      <Input field='id_type' />
-      <Input field='date_worked' />
-      <Input field='description' />
-      <Input field='worked_hours' />
+  return <div>
+    <div className='flex-dyn w-full'>
+      <div className='grow'><Input field='id_worker' /></div>
+      <div className='grow'><Input field='id_task' /></div>
     </div>
-    <div className='w-full'>
-      <Input field='id_worker' />
-      <Input field='is_approved' />
-      <Input field='is_chargeable' />
-      <Input field='datetime_created' />
+    <div className='flex-dyn w-full'>
+      <div className='grow'><Input field='worked_hours' customInputProps={{cssClass: 'text-[1.5em]'}} /></div>
+      <div className='grow'><Input field='date_worked' /></div>
     </div>
+    <Input field='description' />
   </div>;
 }
 
@@ -36,9 +32,12 @@ const FormActivity = (props: FormActivityProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Activity'}
     urlSlug='worksheets'
-    endpointParams={{}}
-    onAfterFormInitialized={(form: any) => {}}
-    title={{field: 'description', sub: T.translate('Activity')}}
+    title={{fields: ['worked_hours', <>hours, </>, 'description'], sub: T.translate('Activity')}}
+    renderTopInputs={() => <div className='modal-top-inputs'>
+      <Input field='is_approved' renderOnlyInputField />
+      <Input field='is_chargeable' renderOnlyInputField></Input>
+      <Input field='id_type' renderOnlyInputField customInputProps={{uiStyle: 'buttons'}} />
+    </div>}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;

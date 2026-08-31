@@ -2,9 +2,10 @@
   string:model="Hubleto/App/Community/Projects/Models/ProjectOrder"
   string:tag="table-projects-orders"
   int:record-id="{{ viewParams.recordId }}"
-  json:custom-endpoint-params='{"idOrder": {{ viewParams.idOrder ?? 0 }} }'
+  json:endpoint-params='{"idOrder": {{ viewParams.idOrder ?? 0 }} }'
   string:fulltext-search='{{ viewParams.q }}'
   json:column-search='{{ viewParams.search|json_encode }}'
   json:filters='{{ viewParams.filters|json_encode }}'
+  json:form-endpoint-params='{"idOrder": {{ viewParams.idOrder ?? 0 }} }'
   string:form-active-tab-uid='{{ viewParams.tab }}'
 ></hblreact-table

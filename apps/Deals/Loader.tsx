@@ -4,6 +4,7 @@ import TableDeals from "./Components/FC/TableDeals"
 import DealCalendarActivityForm from "./Components/FC/DealCalendarActivityForm"
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
+import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
 class DealsApp extends App {
   init() {
@@ -36,19 +37,21 @@ class DealsApp extends App {
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormLead',
-      globalThis.hubleto.translate('Create deal', 'Hubleto\\App\\Community\\Deals\\Loader', 'manifest'),
-      '',
-      (form: any) => {
-        request.get(
-          'deals/api/create-from-lead',
-          {idLead: form.state.record.id},
-          (data: any) => {
-              if (data.status == "success") {
-              globalThis.window.open(globalThis.hubleto.config.projectUrl + `/deals/${data.idDeal}`)
-              }
-          }
-        );
-      }
+      (form: FormMeta) => { return form.id <= 0 ? false : {
+        title: 'Create deal',
+        icon: 'fas fa-diagram-project',
+        onClick: (form: FormMeta) => {
+          request.get(
+            'deals/api/create-from-lead',
+            {idLead: form.id},
+            (data: any) => {
+                if (data.status == "success") {
+                globalThis.window.open(globalThis.hubleto.config.projectUrl + `/deals/${data.idDeal}`)
+                }
+            }
+          );
+        }
+      }}
     )
   }
 }

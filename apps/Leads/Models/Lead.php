@@ -166,9 +166,7 @@ class Lead extends \Hubleto\Erp\Model
         'options' => [
           0 => $this->translate('Open'),
           1 => $this->translate('Closed'),
-          2 => $this->translate('All'),
         ],
-        'default' => 0,
       ],
     ];
 

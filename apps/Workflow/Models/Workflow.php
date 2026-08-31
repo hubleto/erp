@@ -66,7 +66,11 @@ class Workflow extends \Hubleto\Erp\Model
   public function applyDefaultWorkflow(array $record, string $group): array
   {
     list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $this->getDefaultWorkflowInGroup($group);
-    if ($idWorkflow > 0 && $idWorkflowStep > 0) {
+    if (
+      ($record['id_workflow'] ?? 0) == 0
+      && ($record['id_workflow_step'] ?? 0) == 0
+      && $idWorkflow > 0 && $idWorkflowStep > 0
+    ) {
       $record['id_workflow'] = $idWorkflow;
       $record['id_workflow_step'] = $idWorkflowStep;
     }

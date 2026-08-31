@@ -13,7 +13,8 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 /** TabDefault */
 const TabDefault = (props: FormAutomatProps) => {
   return <div className="flex flex-col gap-2" >
-    <Input field='name' />
+    <Input field='name' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+    <Input field='trigger' />
     <Input field='execution_order' />
     <Input field='description' />
     <Input field='conditions' />

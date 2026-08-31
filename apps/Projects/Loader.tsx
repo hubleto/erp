@@ -13,30 +13,32 @@ class ProjectsApp extends App {
     globalThis.hubleto.registerReactComponent('ProjectsTableProjects', TableProjects);
     globalThis.hubleto.registerReactComponent('ProjectsTableMilestones', TableMilestones);
 
-    // miscellaneous
-    globalThis.hubleto.getApp('Hubleto/App/Community/Orders').addCustomFormTab({
-      uid: 'projects',
-      title: globalThis.hubleto.translate('Projects', 'Hubleto\\App\\Community\\Projects\\Loader', 'manifest'),
-      onRender: (form: any) => {
-        return <TableProjects
-          tag={"table_project_order"}
-          parentForm={form}
-          //@ts-ignore
-          description={{ui: {showHeader:false}}}
-          descriptionSource='both'
-          uid={form.props.uid + "_table_project_order"}
-          junctionTitle='Order'
-          junctionModel='Hubleto/App/Community/Projects/Models/ProjectOrder'
-          junctionSourceColumn='id_order'
-          junctionSourceRecordId={form.state.record.id}
-          junctionDestinationColumn='id_project'
-        />;
-      },
-    });
+    FormCustomizer.addTab(
+      'FormOrder',
+      'projects',
+      (form: FormMeta) => { return form.id <= 0 ? false : {
+        title: 'Projects',
+        content: (form: FormMeta) => {
+          return <TableProjects
+            tag={"table_project_order"}
+            parentForm={form}
+            //@ts-ignore
+            description={{ui: {showHeader:false}}}
+            descriptionSource='both'
+            uid={form.uid + "_table_project_order"}
+            junctionTitle='Order'
+            junctionModel='Hubleto/App/Community/Projects/Models/ProjectOrder'
+            junctionSourceColumn='id_order'
+            junctionSourceRecordId={form.id}
+            junctionDestinationColumn='id_project'
+          />;
+        }
+      }}
+    );
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormOrder',
-      (form: FormMeta) => { return {
+      (form: FormMeta) => { return form.id <= 0 ? false : {
         title: 'Create project',
         icon: 'fas fa-diagram-project',
         onClick: (form: FormMeta) => {
@@ -55,26 +57,24 @@ class ProjectsApp extends App {
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
-      (form: FormMeta) => { return {
+      (form: FormMeta) => { return form.id <= 0 ? false : {
         title: 'Assign task to project',
         icon: 'fas fa-check-double',
         onClick: (form: FormMeta) => {
           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/tasks/add?idTask=' + form.id);
         },
-      }},
-      (form: FormMeta) => form.id > 0,
+      }}
     );
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
-      (form: FormMeta) => { return {
+      (form: FormMeta) => { return form.id <= 0 ? false : {
         title: 'Assign task to milestone',
         icon: 'fas fa-check-double',
         onClick: (form: FormMeta) => {
           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/tasks/milestones/add?idTask=' + form.id);
         },
-      }},
-      (form: FormMeta) => form.id > 0,
+      }}
     );
   }
 }

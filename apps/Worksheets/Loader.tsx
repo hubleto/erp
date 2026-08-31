@@ -14,14 +14,13 @@ class WorksheetsApp extends App {
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
-      (form: FormMeta) => { return {
+      (form: FormMeta) => { return form.id <= 0 ? false : {
         title: 'Add activity',
         icon: 'fas fa-user-clock',
         onClick: (form: FormMeta) => {
           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/worksheets/add?idTask=' + form.id);
         },
-      }},
-      (form: FormMeta) => form.id > 0,
+      }}
     );
   }
 }

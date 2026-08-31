@@ -59,7 +59,7 @@ const CalendarTab = (props: CalendarTabProps) => {
         activity: refLogActivityInput.current.value,
       },
       (result: any) => {
-        form.loadRecord();
+        form.reload();
         refLogActivityInput.current.value = '';
       }
     );

@@ -14,10 +14,12 @@ const T = new Translator(parentApp + '/Loader', 'Components/FormRecipient');
 
 /** TabDefault */
 const TabDefault = ({ parent }) => {
+  const idCampaign = useRecordField('id_campaign', 0);
+
   return <div className='w-full flex gap-2'>
     <div className='flex-1 border-r border-gray-100'>
       <Input field='id_campaign' />
-      <Input field='id_email' />
+      {idCampaign == 0 ? <Input field='id_email' /> : null}
       <Input field='id_contact' />
       <Input field='email' />
       <Input field='variables' />

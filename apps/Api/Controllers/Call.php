@@ -36,7 +36,7 @@ class Call extends \Hubleto\Erp\Controllers\ApiController
       $varsString = $this->router()->urlParamAsString('vars');
 
       $tokenEndpoint = $this->config()->getAsString('api/oauth/tokenEndpoint');
-      $clientId = $this->config()->getAsString('api/oauth/clientId');
+      $clientId = $this->config()->getAsString('api/oauth/clientId', $this->config()->getAsString('accountUid'));
       $clientSecret = $this->config()->getAsString('api/oauth/clientSecret');
 
       /** @var OAuth */

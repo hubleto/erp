@@ -26,15 +26,17 @@ const TabDefault = (props: FormWorkflowProps) => {
       </div>
     </div>
 
-    <div>
-      <div className="card-header">{T.translate('Steps')}</div>
-      <div className="card-body">
-        <TableWorkflowSteps
-          uid={props.uid + "_table_workflow_steps_input"}
-          idWorkflow={form.id}
-        ></TableWorkflowSteps>
+    {form.id <= 0 ? null :
+      <div>
+        <div className="card-header">{T.translate('Steps')}</div>
+        <div className="card-body">
+          <TableWorkflowSteps
+            uid={props.uid + "_table_workflow_steps_input"}
+            idWorkflow={form.id}
+          ></TableWorkflowSteps>
+        </div>
       </div>
-    </div>
+    }
   </div>;
 }
 

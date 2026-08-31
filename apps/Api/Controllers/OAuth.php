@@ -23,7 +23,7 @@ class OAuth extends \Hubleto\Erp\Controller
     }
 
     $this->viewParams['tokenEndpoint'] = $this->config()->getAsString('api/oauth/tokenEndpoint');
-    $this->viewParams['clientId'] = $this->config()->getAsString('api/oauth/clientId');
+    $this->viewParams['clientId'] = $this->config()->getAsString('api/oauth/clientId', $this->config()->getAsString('accountUid'));
     $this->viewParams['clientSecret'] = $this->config()->getAsString('api/oauth/clientSecret');
 
     $this->setView('@Hubleto:App:Community:Api/OAuth.twig');

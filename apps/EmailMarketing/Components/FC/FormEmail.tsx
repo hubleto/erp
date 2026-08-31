@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TableContacts from '@hubleto/apps/Contacts/Components/FC/TableContacts';
 import TableRecipients from './TableRecipients';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
@@ -10,6 +10,7 @@ import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
+import Spinner from '@hubleto/react-ui/components/fc/Spinner';
 
 export interface FormEmailProps extends FormProps {}
 
@@ -97,9 +98,6 @@ const TabRecipients = ({ formEmail }) => {
         uid={form.uid + "_table_email_recipient"}
         idEmail={form.id}
         view='briefOverview'
-        onAfterLoadData={(table: any) => {
-          formEmail.setRecipients(table.state.data.records);
-        }}
       />
     </div>
     <div className='flex-1 gap-2'>
@@ -170,7 +168,6 @@ const TabTest = ({ formEmail }) => {
   const [recentlyContactedPeriod, setRecentlyContactedPeriod] = useState(1);
 
   const updateEmailTestInfo = () => {
-    setEmailTestInfo(null);
     request.post(
       'email-marketing/api/get-email-test-info',
       {
@@ -183,6 +180,8 @@ const TabTest = ({ formEmail }) => {
       }
     );
   }
+
+  if (!emailTestInfo) updateEmailTestInfo();
 
   return <div className='flex gap-2'>
     <div className='card flex-1'>
@@ -199,7 +198,7 @@ const TabTest = ({ formEmail }) => {
               return <div key={key} className='alert alert-warning'>{item}</div>;
             })
           }
-          <div className='flex gap-1'>
+          <div className='flex gap-1 mt-2'>
             <b className='flex gap-1 items-center'>Recipients contacted in last <input
               type='number'
               className='w-12'
@@ -258,7 +257,7 @@ const TabTest = ({ formEmail }) => {
               </tbody>
             </table>
           }
-        </> : <div className='alert alert-warning'>{T.translate('Analysing email...')}</div>}
+        </> : <div className='alert alert-warning'><Spinner></Spinner> {T.translate('Analysing email...')}</div>}
       </div>
     </div>
     <div className='card flex-1'>

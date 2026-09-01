@@ -18,7 +18,7 @@ class MilestoneTask extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_milestone' => (new Lookup($this, $this->translate('Milestone'), Milestone::class))->setRequired(),
+      'id_milestone' => (new Lookup($this, $this->translate('Milestone'), Milestone::class))->setRequired()->setDefaultVisible(),
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setRequired()->setDefaultVisible(),
     ]);
   }
@@ -27,7 +27,7 @@ class MilestoneTask extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate('Assign task to milestone');
-    $description->show(['header', 'fulltextSearch', 'insertRow']);
+    $description->show(['header', 'fulltextSearch']);
     $description->hide(['footer']);
     return $description;
   }

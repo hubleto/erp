@@ -83,14 +83,14 @@
   
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
 
-    <div class="app-launcher" onclick="lchr(false);">
-      <div>
+    <div class="app-launcher" onclick="lchr(false);"><div>
       <div class="app-launcher-header">
-        <input placeholder="{{ translate("Search app...") }}" onkeyup="smis(event, this.value, $('#app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
+        <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
+        <input placeholder="{{ translate("Search Hubleto app...") }}" onkeyup="smis(event, this.value, $('.app-launcher .app-launcher-app-button'));" onclick="event.stopPropagation();" />
       </div>
       {% for app in hubleto.appManager().getEnabledApps() %}
         <a
-          class='btn app-launcher-app-button'
+          class='app-launcher-app-button'
           href="{{ config.projectUrl }}/{{ app.manifest.rootUrlSlug }}" data-pr-tooltip="{{ app.manifest.nameTranslated }}"
         >
           <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>

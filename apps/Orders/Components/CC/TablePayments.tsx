@@ -90,6 +90,7 @@ export default class TablePayments extends TableExtended<TablePaymentsProps, Tab
               {
                 headerClassName: 'dialog-warning-header',
                 contentClassName: 'dialog-warning-content',
+                footerClassName: 'dialog-warning-footer',
                 header: this.translate('Prepare for invoice'),
                 yesText: this.translate('Yes, prepare for invoice'),
                 yesButtonClass: 'btn-warning',

@@ -124,7 +124,7 @@ class Order extends \Hubleto\Erp\Model
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'id_document' => (new Lookup($this, $this->translate('Document'), Document::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'virt_last_item' => (new Virtual($this, $this->translate('Last item')))->setDefaultVisible()
         ->setProperty('sql', "
           SELECT

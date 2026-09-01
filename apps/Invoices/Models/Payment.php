@@ -63,7 +63,7 @@ class Payment extends \Hubleto\Erp\Model
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
 
-    $idInvoice = (int) $savedRecord['id_invoice'];
+    $idInvoice = (int) ($savedRecord['id_invoice'] ?? 0);
 
     if ($idInvoice > 0) {
       /** @var Invoice */
@@ -87,7 +87,7 @@ class Payment extends \Hubleto\Erp\Model
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    $idInvoice = (int) $savedRecord['id_invoice'];
+    $idInvoice = (int) ($savedRecord['id_invoice'] ?? 0);
 
     if ($idInvoice > 0) {
       /** @var Invoice */

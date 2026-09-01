@@ -83,6 +83,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
       {
         headerClassName: 'dialog-danger-header',
         contentClassName: 'dialog-danger-content',
+        footerClassName: 'dialog-danger-footer',
         header: this.translate('Stop sharing "{calendar}"').replace('{calendar}', calendar),
         yesText: this.translate('Yes, remove all shares'),
         yesButtonClass: 'btn-danger',

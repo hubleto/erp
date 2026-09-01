@@ -106,7 +106,7 @@ class Task extends \Hubleto\Erp\Model
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'is_milestone' => (new Boolean($this, $this->translate('Is milestone')))->setDefaultValue(false),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false)->setYesText('Closed')->setNoText(''),
       // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setDefaultVisible(),
       'shared_folder' => (new Varchar($this, $this->translate('Shared folder (online document storage)')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),

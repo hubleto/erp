@@ -45,7 +45,7 @@ class Customer extends Model
   {
     return array_merge([
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible(),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('font-bold')->setDefaultVisible(),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),
       'region' => (new Varchar($this, $this->translate('Region'))),
@@ -57,7 +57,7 @@ class Customer extends Model
       'tax_id' => (new Varchar($this, $this->translate('Tax ID'))),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setDefaultVisible()->setDefaultValue(1),
+      'is_active' => (new Boolean($this, $this->translate('Active')))->setDefaultValue(false)->setDefaultVisible()->setDefaultValue(1)->setYesText('Active')->setNoText(''),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'id_manager' => new Lookup($this, $this->translate('Manager'), User::class)->setReactComponent('InputUserSelect')->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),

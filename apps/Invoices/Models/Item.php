@@ -74,9 +74,9 @@ class Item extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = ''; //$this->translate('Customers');
-    $description->ui['addButtonText'] = $this->translate('Add invoice item');
-    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
-    $description->show(['footer']);
+    // $description->ui['addButtonText'] = $this->translate('Add invoice item');
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
+    $description->hide(['addButton']);
 
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];

@@ -116,7 +116,7 @@ class Deal extends \Hubleto\Erp\Model
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS)),
       'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
       'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_DEAL_RESULTS))
         ->setEnumCssClasses([

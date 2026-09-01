@@ -65,7 +65,7 @@ class Email extends \Hubleto\Erp\Model
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
       'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s'))->setReadonly(),
       'id_launched_by' => (new Lookup($this, $this->translate('Lanuched by'), User::class))->setReadonly(true),
       'datetime_launched' => (new DateTime($this, $this->translate('Launched')))->setReadonly(true)->setDefaultVisible(),

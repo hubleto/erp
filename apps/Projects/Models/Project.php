@@ -77,7 +77,7 @@ class Project extends \Hubleto\Erp\Model
       'budget' => (new Decimal($this, $this->translate('Budget')))->setDefaultVisible()->setUnit('€'),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
       'online_documentation_folder' => (new Varchar($this, $this->translate('Online documentation folder')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),
@@ -115,7 +115,7 @@ class Project extends \Hubleto\Erp\Model
               1 => $this->translate('Closed'),
               2 => $this->translate('All'),
             ],
-            'default' => 0,
+            'default' => 2,
           ],
         ];
       break;

@@ -101,7 +101,7 @@ class Lead extends \Hubleto\Erp\Model
         6 => $this->translate("Referral"),
         7 => $this->translate("Other"),
       ]),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql',"
           SELECT

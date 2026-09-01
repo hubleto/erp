@@ -49,6 +49,7 @@ class Milestone extends \Hubleto\Erp\RecordManager
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $idProject = $hubleto->router()->urlParamAsInteger("idProject");
+    $filters = $hubleto->router()->urlParamAsArray("filters");
 
     if ($idProject > 0) $query = $query->where($this->table . '.id_project', $idProject);
 

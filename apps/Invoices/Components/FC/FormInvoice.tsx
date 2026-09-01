@@ -48,19 +48,18 @@ const TabDefault = (props: FormInvoiceProps) => {
   if (form.id <= 0) {
     return <>
       {inboundOutbound == 1
-        ? <Input field='id_supplier' />
-        : <Input field='id_customer' />
+        ? <Input key='id_supplier' field='id_supplier' />
+        : <Input key='id_customer' field='id_customer' />
       }
       <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
-      
     </>
   } else {
     return <>
       <div className='flex flex-col md:flex-row gap-2'>
         <div className='grow'>
           {inboundOutbound == 1 ?
-            <Input field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-          : <Input field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2'}} />}
+            <Input key='id_supplier' field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+          : <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2'}} />}
         </div>
       </div>
       <div className='flex flex-col md:flex-row gap-2'>

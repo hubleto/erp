@@ -45,6 +45,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
   const R = React.useContext(FormRecordStoreContext).getRecord();
   const form = React.useContext(FormMetaContext);
 
+  const allDay = useRecordField('all_day', 0);
   const dateStart = useRecordField('date_start', '');
   const dateEnd = useRecordField('date_end', '');
   const timeStart = useRecordField('time_start', '');
@@ -105,7 +106,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
                 })
               }
             }}></Input>
-            {R.all_day ? null : <Input renderOnlyInputField field='time_start' customInputProps={{
+            {allDay ? null : <Input renderOnlyInputField field='time_start' customInputProps={{
               hideSeconds: true,
               onChange: (input: any, value: any) => {
                 form.changeRecord({
@@ -118,7 +119,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
 
           <div className='flex-dyn'>
             <Input renderOnlyInputField field='date_end' />
-            {R.all_day ? null : <Input renderOnlyInputField field='time_end' customInputProps={{
+            {allDay ? null : <Input renderOnlyInputField field='time_end' customInputProps={{
               hideSeconds: true,
             }}/>}
           </div>

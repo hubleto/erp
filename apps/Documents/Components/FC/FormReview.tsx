@@ -21,7 +21,7 @@ const FormReview = (props: FormProps) => <Form
     <Input field='id_requested_by' />
     <Input field='reviewed_on' />
     <Input field='id_reviewed_by' />
-    <Input field='comments' />
+    <Input field='comment' />
   </>}}}
   {...props}
 ></Form>;

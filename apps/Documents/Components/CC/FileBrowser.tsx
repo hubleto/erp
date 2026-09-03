@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
 import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
 import Form, { FormProps } from '@hubleto/react-ui/components/cc/Form';
-import FormFile from './FC/FormFile';
+import FormFile from '../CC/FormFile';
 import Spinner from '@hubleto/react-ui/components/cc/Spinner';
 import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
 import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
@@ -131,7 +131,7 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
       path: newPath,
       showFolderProperties: 0,
     };
-    
+
     window.history.pushState(newState, "", '?folderUid=' + newFolderUid);
     this.setState(newState as FileBrowserState, () => { this.loadData(); });
   }
@@ -284,9 +284,9 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
               this.changeFolder(newFolderUid, newPath);
             }}
           >
-            <input 
-              type="checkbox" 
-              className="absolute top-2 left-2 cursor-pointer w-4 h-4" 
+            <input
+              type="checkbox"
+              className="absolute top-2 left-2 cursor-pointer w-4 h-4"
               checked={isSelected}
               onChange={() => this.toggleSelection(item.id, 'selectedFolders')}
               onClick={(e) => e.stopPropagation()}
@@ -304,9 +304,9 @@ export default class FileBrowser extends Table<FileBrowserProps, FileBrowserStat
               this.setState({ recordId: item.id });
             }}
           >
-            <input 
-              type="checkbox" 
-              className="absolute top-2 left-2 cursor-pointer w-4 h-4" 
+            <input
+              type="checkbox"
+              className="absolute top-2 left-2 cursor-pointer w-4 h-4"
               checked={isSelected}
               onChange={() => this.toggleSelection(item.id, 'selectedFiles')}
               onClick={(e) => e.stopPropagation()}

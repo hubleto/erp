@@ -35,7 +35,7 @@ const TabDefault = (props: FormDocumentProps) => {
           <TableVersions
             tag={"table_documents_versions"}
             parentForm={form}
-            readonly={true}
+            // readonly={true}
             uid={props.uid + "_table_documents_versions"}
             idDocument={form.id}
           />

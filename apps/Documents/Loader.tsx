@@ -4,7 +4,7 @@ import TableDocuments from "./Components/FC/TableDocuments"
 import TableVersions from "./Components/FC/TableVersions"
 import TableReviews from "./Components/FC/TableReviews"
 import TableTemplates from "./Components/FC/TableTemplates"
-import FileBrowser from "./Components/FileBrowser"
+import FileBrowser from "./Components/FC/FileBrowser"
 
 class DocumentsApp extends App {
   init() {

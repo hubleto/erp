@@ -17,7 +17,7 @@ class Review extends \Hubleto\Erp\Model
 
   public array $relations = [
     'DOCUMENT' => [ self::BELONGS_TO, Document::class, 'id_document', 'id'],
-    'VERSION' => [ self::BELONGS_TO, DocumentVersion::class, 'id_version', 'id'],
+    'VERSION' => [ self::BELONGS_TO, Version::class, 'id_version', 'id'],
     'REQUESTED_BY' => [ self::BELONGS_TO, User::class, 'id_requested_by', 'id'],
     'REVIEWED_BY' => [ self::BELONGS_TO, User::class, 'id_reviewed_by', 'id'],
     'REVIEW_RESULT' => [ self::BELONGS_TO, ReviewResult::class, 'id_review_result', 'id'],
@@ -27,7 +27,7 @@ class Review extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_document' => (new Lookup($this, $this->translate("Document"), Document::class))->setRequired()->setReadonly(),
-      'id_version' => (new Lookup($this, $this->translate("Version"), DocumentVersion::class))->setRequired()->setReadonly(),
+      'id_version' => (new Lookup($this, $this->translate("Version"), Version::class))->setRequired()->setReadonly(),
       'comment' => (new Varchar($this, $this->translate('Comment')))->setDefaultVisible(),
       'requested_on' => (new DateTime($this, $this->translate('Requested on')))->setReadonly()->setDefaultVisible(),
       'id_requested_by' => (new Lookup($this, $this->translate("Requested by"), User::class))->setDefaultVisible(),

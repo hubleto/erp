@@ -40,12 +40,12 @@ class Contact extends \Hubleto\Erp\Model
       'middle_name' => (new Varchar($this, $this->translate('Middle name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name')))->setDefaultVisible(),
       'title_after' => (new Varchar($this, $this->translate('Title after'))),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
-      'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0),
-      'is_for_invoicing' => (new Boolean($this, $this->translate('Invoicing Contact')))->setDefaultValue(0),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible(),
+      'is_primary' => (new Boolean($this, $this->translate('Primary Contact')))->setDefaultValue(0)->setYesText('Primary')->setNoText(''),
+      'is_for_invoicing' => (new Boolean($this, $this->translate('Invoicing Contact')))->setDefaultValue(0)->setYesText('Invoicing')->setNoText(''),
       'note' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new Date($this, $this->translate('Date Created')))->setReadonly()->setRequired()->setDefaultValue(date("Y-m-d")),
-      'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1)->setDefaultVisible(),
+      'is_valid' => (new Boolean($this, $this->translate('Valid')))->setDefaultValue(1)->setDefaultVisible()->setYesText('Valid')->setNoText('Invalid'),
       'virt_number' => (new Virtual($this, $this->translate('Phone Numbers')))->setDefaultVisible()
         ->setProperty('sql','
           SELECT

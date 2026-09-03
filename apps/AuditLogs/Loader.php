@@ -16,7 +16,7 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^audit-logs\/?$/' => Controllers\AuditLogs::class,
+      '/^audit-logs(\/(?<recordId>\d+))?\/?$/' => Controllers\AuditLogs::class,
     ]);
 
     $this->eventManager()->addEventListener(

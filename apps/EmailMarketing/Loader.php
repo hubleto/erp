@@ -26,7 +26,7 @@ class Loader extends \Hubleto\Erp\App
       '/^email-marketing\/api\/send-test-email\/?$/' => Controllers\Api\SendTestEmail::class,
       '/^email-marketing\/api\/launch\/?$/' => Controllers\Api\Launch::class,
 
-      '/^email-marketing\/?$/' => Controllers\Campaigns::class,
+      '/^email-marketing\/?$/' => Controllers\Home::class,
 
       '/^email-marketing\/campaigns(\/(?<recordId>\d+))?\/?$/' => Controllers\Campaigns::class,
       '/^email-marketing\/campaigns\/add?\/?$/' => ['controller' => Controllers\Campaigns::class, 'vars' => [ 'recordId' => -1 ]],
@@ -89,6 +89,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\CampaignSchedule::class)->upgradeSchema();
       $this->getModel(Models\CampaignScheduleRecipient::class)->upgradeSchema();
       $this->getModel(Models\CampaignTag::class)->upgradeSchema();
+      $this->getModel(Models\Tag::class)->upgradeSchema();
     }
   }
 
@@ -101,31 +102,15 @@ class Loader extends \Hubleto\Erp\App
   public function renderSecondSidebar(): string
   {
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/email-marketing/campaigns">
-          <span class="icon"><i class="fas fa-users-viewfinder"></i></span>
-          <span class="text">' . $this->translate('Campaigns') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span class="text">' . $this->translate('Emails') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails/sent">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span class="text">' . $this->translate('Sent emails') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/emails/clicks">
-          <span class="icon"><i class="fas fa-hand-pointer"></i></span>
-          <span class="text">' . $this->translate('Clicks') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/recipients">
-          <span class="icon"><i class="fas fa-paper-plane"></i></span>
-          <span class="text">' . $this->translate('Recipients') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/email-marketing/recipients/statuses">
-          <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Recipient statuses') . '</span>
-        </a>
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('email-marketing/campaigns', 'fas fa-users-viewfinder', 'Campaigns') . '
+        ' . $this->secondSidebarButton('email-marketing/emails', 'fas fa-envelope', 'Emails') . '
+        ' . $this->secondSidebarButton('email-marketing/emails/sent', 'fas fa-arrow-right-from-bracket', 'Sent') . '
+        ' . $this->secondSidebarButton('email-marketing/emails/clicks', 'fas fa-hand-pointer', 'Clicks') . '
+        ' . $this->secondSidebarButton('email-marketing/recipients', 'fas fa-paper-plane', 'Recipients') . '
+        ' . $this->secondSidebarButton('email-marketing/recipients/statuses', 'fas fa-check-double', 'Recipient statuses') . '
+        ' . $this->secondSidebarButton('email-marketing/tags', 'fas fa-tag', 'Tags') . '
       </div>
     ';
   }

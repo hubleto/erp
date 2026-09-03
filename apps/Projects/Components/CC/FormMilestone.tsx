@@ -1,0 +1,79 @@
+import React, { Component } from 'react'
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import TableMilestoneReports from './TableMilestoneReports';
+import TableMilestoneTasks from './TableMilestoneTasks';
+
+interface FormMilestoneProps extends FormExtendedProps { }
+interface FormMilestoneState extends FormExtendedState { }
+
+export default class FormMilestone<P, S> extends FormExtended<FormMilestoneProps, FormMilestoneState> {
+  static defaultProps: any = {
+    ...FormExtended.defaultProps,
+    model: 'Hubleto/App/Community/Projects/Models/Milestone',
+  }
+
+  props: FormMilestoneProps = null;
+  state: FormMilestoneState = null;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
+  translationContextInner: string = 'Components\\FormMilestone';
+
+  constructor(props: FormMilestoneProps) {
+    super(props);
+    this.props = props;
+    this.state = this.getStateFromProps(props);
+  }
+
+  renderTitle(): React.JSX.Element {
+    return <>
+      <small>{this.translate('Milestone','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormMilestone')}</small>
+      <h2>{this.state.record.title ?? '-'}</h2>
+    </>;
+  }
+
+  renderTab(tabUid: string) {
+    const R = this.state.record;
+
+    switch (tabUid) {
+      case 'default':
+        return <div className='flex gap-2'>
+          <div className='grow'>
+            {this.inputWrapper('id_project')}
+            {this.inputWrapper('id_responsible')}
+            {this.inputWrapper('title')}
+            {this.inputWrapper('date_due')}
+            {this.inputWrapper('description')}
+            {this.inputWrapper('is_closed')}
+            {R.id > 0 ? <>
+              <div className='grow card'>
+                <div className='card-header'>{this.translate('Tasks')}</div>
+                <div className='card-body'>
+                  <TableMilestoneTasks
+                    tag={"table_project_milestone_task"}
+                    parentForm={this}
+                    uid={this.props.uid + "_table_project_milestone_task"}
+                    idMilestone={R.id}
+                  />
+                </div>
+              </div>
+            </> : null}
+          </div>
+          {R.id > 0 ? <>
+            <div className='grow card'>
+              <div className='card-header'>{this.translate('Reports')}</div>
+              <div className='card-body'>
+                <TableMilestoneReports
+                  tag={"table_project_milestone_report"}
+                  parentForm={this}
+                  uid={this.props.uid + "_table_project_milestone_report"}
+                  idMilestone={R.id}
+                />
+              </div>
+            </div>
+          </> : null}
+        </div>;
+      break;
+    }
+  }
+
+}

@@ -19,7 +19,7 @@ class Workflow extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
       'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
       'show_in_kanban' => (new Boolean($this, $this->translate('Show in kanban')))->setDefaultVisible(),
@@ -61,6 +61,20 @@ class Workflow extends \Hubleto\Erp\Model
     }
 
     return [$defaultWorkflow, $idWorkflow, $idWorkflowStep];
+  }
+
+  public function applyDefaultWorkflow(array $record, string $group): array
+  {
+    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $this->getDefaultWorkflowInGroup($group);
+    if (
+      ($record['id_workflow'] ?? 0) == 0
+      && ($record['id_workflow_step'] ?? 0) == 0
+      && $idWorkflow > 0 && $idWorkflowStep > 0
+    ) {
+      $record['id_workflow'] = $idWorkflow;
+      $record['id_workflow_step'] = $idWorkflowStep;
+    }
+    return $record;
   }
 
   public static function buildTableFilterForWorkflowSteps(\Hubleto\Erp\Model $model, string $title): array

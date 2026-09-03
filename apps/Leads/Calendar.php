@@ -12,7 +12,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       'title' => $this->translate('Leads'),
       'addNewActivityButtonText' => $this->translate('Add new activity linked to lead'),
       'icon' => 'fas fa-people-arrows',
-      'formComponent' => 'LeadFormActivity',
+      'formComponent' => 'LeadCalendarActivityForm',
     ];
   }
 

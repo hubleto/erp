@@ -1,10 +1,10 @@
 import App from '@hubleto/react-ui/core/App'
 import request from "@hubleto/react-ui/core/Request";
-import TableProfiles from "./Components/TableProfiles"
-import TableInvoices from "./Components/TableInvoices"
-import TableItems from "./Components/TableItems"
-import TablePayments from "./Components/TablePayments"
-import FormOrder from '@hubleto/apps/Orders/Components/FormOrder';
+import TableProfiles from "./Components/FC/TableProfiles"
+import TableInvoices from "./Components/FC/TableInvoices"
+import TableItems from "./Components/FC/TableItems"
+import TablePayments from "./Components/FC/TablePayments"
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 
 class InvoicesApp extends App {
   init() {
@@ -16,21 +16,22 @@ class InvoicesApp extends App {
     globalThis.hubleto.registerReactComponent('InvoicesTableItems', TableItems);
     globalThis.hubleto.registerReactComponent('InvoicesTablePayments', TablePayments);
 
-    FormOrder.addFormHeaderButton(
-      globalThis.hubleto.translate('Create invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'manifest'),
-      '',
-      (form: any) => {
-        request.get(
-          'invoices/api/create-invoice-from-order',
-          {idOrder: form.state.record.id},
-          (data: any) => {
-            if (data.status == "success") {
-              globalThis.window.open(globalThis.hubleto.config.projectUrl + '/invoices/' + data.idInvoice);
-            }
-          }
-        );
-      }
-    )
+    // FormCustomizer.addFormHeaderExtraButton(
+    //   'FormOrder',
+    //   globalThis.hubleto.translate('Create invoice', 'Hubleto\\App\\Community\\Invoices\\Loader', 'manifest'),
+    //   '',
+    //   (form: any) => {
+    //     request.get(
+    //       'invoices/api/create-invoice-from-order',
+    //       {idOrder: form.state.record.id},
+    //       (data: any) => {
+    //         if (data.status == "success") {
+    //           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/invoices/' + data.idInvoice);
+    //         }
+    //       }
+    //     );
+    //   }
+    // )
   }
 }
 

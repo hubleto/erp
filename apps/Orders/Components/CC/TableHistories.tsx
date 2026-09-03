@@ -1,0 +1,51 @@
+import React, { Component } from 'react'
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+
+interface TableHistoriesProps extends TableProps {
+  sum?: number,
+}
+
+interface TableHistoriesState extends TableState {}
+
+export default class TableHistories extends Table<TableHistoriesProps, TableHistoriesState> {
+  static defaultProps = {
+    ...Table.defaultProps,
+    formUseModalSimple: true,
+    model: 'Hubleto/App/Community/Orders/Models/History',
+  }
+
+  props: TableHistoriesProps;
+  state: TableHistoriesState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Orders\\Loader';
+  translationContextInner: string = 'Components\\TableHistories';
+
+  constructor(props: TableHistoriesProps) {
+    super(props);
+    this.state = this.getStateFromProps(props);
+  }
+
+  getStateFromProps(props: TableHistoriesProps) {
+    return {
+      ...super.getStateFromProps(props)
+    }
+  }
+
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'right';
+    return params;
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+    }
+  }
+
+  renderHeaderRight(): Array<React.JSX.Element> {
+    let elements: Array<React.JSX.Element> = super.renderHeaderRight();
+
+    return elements;
+  }
+}

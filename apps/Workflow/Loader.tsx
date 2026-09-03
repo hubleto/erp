@@ -1,6 +1,7 @@
 import App from '@hubleto/react-ui/core/App'
-import TableWorkflows from "./Components/TableWorkflows"
-import TableAutomats from "./Components/TableAutomats"
+import TableWorkflows from "./Components/FC/TableWorkflows"
+import TableWorkflowSteps from "./Components/FC/TableWorkflowSteps"
+import TableAutomats from "./Components/FC/TableAutomats"
 
 class Workflow extends App {
   init() {
@@ -8,6 +9,7 @@ class Workflow extends App {
 
     // register react components
     globalThis.hubleto.registerReactComponent('WorkflowTableWorkflows', TableWorkflows);
+    globalThis.hubleto.registerReactComponent('WorkflowTableWorkflowSteps', TableWorkflowSteps);
     globalThis.hubleto.registerReactComponent('WorkflowTableAutomats', TableAutomats);
 
   }

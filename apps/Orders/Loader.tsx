@@ -1,11 +1,11 @@
 import React from 'react';
 import App from '@hubleto/react-ui/core/App'
 import request from "@hubleto/react-ui/core/Request";
-import TableOrders from "./Components/TableOrders";
-import OrdersFormActivity from "./Components/OrdersFormActivity"
-import TableItems from "./Components/TableItems"
-import TableQuotes from './Components/TableQuotes';
-import FormDeal from '@hubleto/apps/Deals/Components/FormDeal';
+import TableOrders from "./Components/FC/TableOrders";
+import TableItems from "./Components/FC/TableItems"
+import TableQuotes from './Components/FC/TableQuotes';
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
+import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
 class OrdersApp extends App {
   init() {
@@ -13,45 +13,26 @@ class OrdersApp extends App {
 
     // register react components
     globalThis.hubleto.registerReactComponent('OrdersTableOrders', TableOrders);
-    globalThis.hubleto.registerReactComponent('OrdersFormActivity', OrdersFormActivity);
     globalThis.hubleto.registerReactComponent('OrdersTableItems', TableItems);
     globalThis.hubleto.registerReactComponent('OrdersTableQuotes', TableQuotes);
 
-    // miscellaneous
-    globalThis.hubleto.getApp('Hubleto/App/Community/Deals').addCustomFormTab({
-      uid: 'orders',
-      title: globalThis.hubleto.translate('Orders', 'Hubleto\\App\\Community\\Orders\\Loader', 'manifest'),
-      onRender: (form: any) => {
-        return <TableOrders
-          tag={"table_order_deal"}
-          parentForm={form}
-          //@ts-ignore
-          description={{ui: {showHeader:false}}}
-          descriptionSource='both'
-          uid={form.props.uid + "_table_order_deal"}
-          junctionTitle='Deal'
-          junctionModel='Hubleto/App/Community/Orders/Models/OrderDeal'
-          junctionSourceColumn='id_deal'
-          junctionSourceRecordId={form.state.record.id}
-          junctionDestinationColumn='id_order'
-        />;
-      },
-    });
-
-    FormDeal.addFormHeaderButton(
-      globalThis.hubleto.translate('Create order', 'Hubleto\\App\\Community\\Orders\\Loader', 'manifest'),
-      '',
-      (form: any) => {
-        request.get(
-          'orders/api/create-from-deal',
-          {idDeal: form.state.record.id},
-          (data: any) => {
-            if (data.status == "success") {
-              globalThis.window.open(globalThis.hubleto.config.projectUrl + '/orders/' + data.idOrder);
+    FormCustomizer.addFormHeaderExtraButton(
+      'FormDeal',
+      (form: FormMeta) => { return form.id <= 0 ? false : {
+        title: 'Create order',
+        icon: 'fas fa-money-check-dollar',
+        onClick: (form: FormMeta) => {
+          request.get(
+            'orders/api/create-from-deal',
+            {idDeal: form.id},
+            (data: any) => {
+              if (data.status == "success") {
+                globalThis.window.open(globalThis.hubleto.config.projectUrl + '/orders/' + data.idOrder);
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      }}
     )
   }
 }

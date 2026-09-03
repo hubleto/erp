@@ -55,10 +55,10 @@ class Project extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_deal' => (new Lookup($this, $this->translate('Deal'), Deal::class))->setDefaultHidden(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden()->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setDescription($this->translate('Leave empty to generate automatically.'))->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden(),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setHint($this->translate('Leave empty to generate automatically.')),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
@@ -77,8 +77,8 @@ class Project extends \Hubleto\Erp\Model
       'budget' => (new Decimal($this, $this->translate('Budget')))->setDefaultVisible()->setUnit('€'),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
-      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
+      'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
       'online_documentation_folder' => (new Varchar($this, $this->translate('Online documentation folder')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
@@ -115,7 +115,7 @@ class Project extends \Hubleto\Erp\Model
               1 => $this->translate('Closed'),
               2 => $this->translate('All'),
             ],
-            'default' => 0,
+            'default' => 2,
           ],
         ];
       break;
@@ -162,9 +162,7 @@ class Project extends \Hubleto\Erp\Model
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
 
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('projects');
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'projects');
 
     if (empty($savedRecord['identifier'])) {
 

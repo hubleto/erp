@@ -1,0 +1,37 @@
+{% set account = viewParams.account %}
+{% set mailbox = viewParams.mailbox %}
+
+{% if viewParams.idAccount > 0 and viewParams.idMailbox > 0 %}
+  <h1 class="app-main-title">{{ translate('Mail') }} > {{ account.name }} > {{ mailbox.name }}</h1>
+
+  <hblreact-mail-table-mails
+    string:tag="mail-table-mails-{{ viewParams.account.id }}-{{ viewParams.mailbox.id }}"
+    int:record-id="{{ viewParams.recordId }}"
+    int:id-account="{{ viewParams.account.id }}"
+    int:id-mailbox="{{ viewParams.mailbox.id }}"
+    string:mailbox-name="{{ viewParams.mailbox.name }}"
+    bool:readonly="true"
+  ></hblreact-mail-table-mails>
+{% else %}
+
+  {% set buttons = [
+    ['mail/get', 'fas fa-download', 'Get emails'],
+    ['mail/scheduled', 'fas fa-clock', 'Scheduled to send'],
+    ['mail/accounts', 'fas fa-cog', 'Accounts'],
+  ] %}
+
+  <div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
+    <div class="card-header">
+      <h1 class="app-main-title">Mail</h1>
+    </div>
+    <div class="card-body flex gap-2 flex-wrap grid md:grid-cols-3">
+      {% for btn in buttons %}
+        <a href="{{ config.projectUrl }}/{{ btn[0] }}" class="btn btn-square btn-large btn-transparent">
+          <span class="icon"><i class="{{ btn[1] }}"></i></span>
+          <span class="text">{{ btn[2] }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endif %}

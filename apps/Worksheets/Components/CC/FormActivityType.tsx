@@ -1,0 +1,31 @@
+import React, { Component } from 'react'
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+
+interface FormActivityTypeProps extends FormExtendedProps { }
+interface FormActivityTypeState extends FormExtendedState { }
+
+export default class FormActivityType<P, S> extends FormExtended<FormActivityTypeProps, FormActivityTypeState> {
+  static defaultProps: any = {
+    ...FormExtended.defaultProps,
+    model: 'Hubleto/App/Community/Worksheets/Models/Team',
+  }
+
+  props: FormActivityTypeProps;
+  state: FormActivityTypeState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Worksheets\\Loader';
+  translationContextInner: string = 'Components\\FormActivityType';
+
+  constructor(props: FormActivityTypeProps) {
+    super(props);
+  }
+
+  renderTitle(): React.JSX.Element {
+    return <>
+      <small>{this.translate('ActivityType')}</small>
+      <h2>{this.translate('Record #')}{this.state.record.id ?? '0'}</h2>
+    </>;
+  }
+
+}

@@ -1,0 +1,124 @@
+import React, { Component } from 'react'
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import request from '@hubleto/react-ui/core/Request';
+
+interface TableItemsProps extends TableExtendedProps {
+  idInvoice?: number,
+}
+
+interface TableItemsState extends TableExtendedState {
+}
+
+export default class TableItems extends TableExtended<TableItemsProps, TableItemsState> {
+  static defaultProps = {
+    ...TableExtended.defaultProps,
+    formUseModalSimple: true,
+    model: 'Hubleto/App/Community/Invoices/Models/Item',
+  }
+
+  props: TableItemsProps;
+  state: TableItemsState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader';
+  translationContextInner: string = 'Components\\TableItems';
+
+  constructor(props: TableItemsProps) {
+    super(props);
+    this.state = this.getStateFromProps(props);
+  }
+
+  getStateFromProps(props: TableItemsProps) {
+    return {
+      ...super.getStateFromProps(props),
+    }
+  }
+
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'right wide';
+    return params;
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      idInvoice: this.props.idInvoice,
+    }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/items/' + (id > 0 ? id : 'add'));
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "id_invoice" && !data['INVOICE']) {
+      return <button
+        className='btn btn-yellow btn-small'
+        onClick={() => {
+          return globalThis.hubleto.showDialogConfirm(
+            <>
+              <div className='font-bold'>{data.CUSTOMER?.name}</div>
+              <div className='font-bold'>{data.item}</div>
+              <div className='font-bold'>{data.unit_price} € x {data.amount} pcs</div>
+              <div className='mt-4'>{this.translate('Create invoice from this item? Press OK to confirm.')}</div>
+            </>,
+            {
+              headerClassName: 'dialog-warning-header',
+              contentClassName: 'dialog-warning-content',
+              footerClassName: 'dialog-warning-footer',
+              header: this.translate('Create invoice'),
+              yesText: this.translate('Yes, create invoice'),
+              yesButtonClass: 'btn-warning',
+              onYes: () => {
+                request.post('invoices/api/create-invoice-from-prepared-item',
+                  {
+                    idItem: data['id']
+                  },
+                  {},
+                  (data: any) => {
+                    if (!isNaN(data.idInvoice)) {
+                      window.location.href = globalThis.hubleto.config.projectUrl + '/invoices/' + data.idInvoice;
+                    }
+                  }
+                );
+              },
+              noText: this.translate('Cancel'),
+              noButtonClass: 'btn-transparent',
+              onNo: () => {
+              },
+              onHide: () => {
+              },
+            }
+          );
+        }}
+      >
+        <span className='icon'><i className='fas fa-euro-sign'></i></span>
+        <span className='text'>{this.translate('Create invoice')}</span>
+      </button>;
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
+  renderFooter(): React.JSX.Element {
+    let totalExclVat = 0;
+    let totalVat = 0;
+    let totalInclVat = 0;
+
+    for (let i in this.state.data?.records) {
+      const row = this.state.data?.records[i];
+      totalExclVat += parseFloat(row['price_excl_vat']);
+      totalVat += parseFloat(row['price_incl_vat']) - parseFloat(row['price_excl_vat']);
+      totalInclVat += parseFloat(row['price_incl_vat']);
+    }
+
+    return <>
+      <div className="font-bold">
+        {this.translate('Total excl. VAT')}: {totalExclVat.toFixed(2)} €<br/>
+        {this.translate('Total VAT')}: {totalVat.toFixed(2)} €<br/>
+        {this.translate('Total incl. VAT')}: {totalInclVat.toFixed(2)} €
+      </div>
+    </>
+  }
+
+}

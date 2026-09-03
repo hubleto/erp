@@ -48,7 +48,6 @@ class Lead extends \Hubleto\Erp\Model
     'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id'],
     'TEAM' => [ self::BELONGS_TO, Team::class, 'id_team', 'id'],
-    // 'LEVEL' => [ self::BELONGS_TO, Level::class, 'id_level', 'id'],
     'CONTACT' => [ self::HAS_ONE, Contact::class, 'id', 'id_contact'],
     'CURRENCY' => [ self::HAS_ONE, Currency::class, 'id', 'id_currency'],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow'],
@@ -76,8 +75,8 @@ class Lead extends \Hubleto\Erp\Model
       'profile_link_2' => (new Varchar($this, $this->translate('Profile link #2')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible()->setReactComponent('InputHyperlink'),
       'profile_link_3' => (new Varchar($this, $this->translate('Profile link #3')))->setCssClass('font-bold')->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON)->setDefaultVisible()->setReactComponent('InputHyperlink'),
       // 'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer'))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setCssClass('font-bold'),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultValue($this->router()->urlParamAsInteger('idCustomer')),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultValue(null)->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'price' => (new Decimal($this, $this->translate('Price')))->setDefaultValue(0),
       'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
@@ -89,7 +88,7 @@ class Lead extends \Hubleto\Erp\Model
       'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
-      'shared_folder' => new Varchar($this, $this->translate("Online document folder"))->setCssClass('text-violet-800'),
+      'shared_folder' => new Varchar($this, $this->translate("Online document folder")),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
@@ -102,7 +101,7 @@ class Lead extends \Hubleto\Erp\Model
         6 => $this->translate("Referral"),
         7 => $this->translate("Other"),
       ]),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql',"
           SELECT
@@ -156,7 +155,7 @@ class Lead extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'insertRow']);
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
     $description->ui['filters'] = [
@@ -167,9 +166,7 @@ class Lead extends \Hubleto\Erp\Model
         'options' => [
           0 => $this->translate('Open'),
           1 => $this->translate('Closed'),
-          2 => $this->translate('All'),
         ],
-        'default' => 0,
       ],
     ];
 
@@ -387,10 +384,7 @@ class Lead extends \Hubleto\Erp\Model
 
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('leads');
-    $newLead['id_workflow'] = $idWorkflow;
-    $newLead['id_workflow_step'] = $idWorkflowStep;
+    $newLead = $mWorkflow->applyDefaultWorkflow($newLead, 'leads');
 
     if (empty($newLead['identifier'])) {
       $newLead["identifier"] = $newLead["id"];

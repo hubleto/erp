@@ -1,0 +1,9 @@
+{% set dashboard = viewParams.dashboard %}
+
+<h1 class="app-main-title"><span>{{ dashboard.title }}</span></h1>
+
+<hblreact-dashboards-dashboard
+  int:id-dashboard='{{ dashboard.id }}'
+  bool:show-add-new-panel-button='true'
+  json:panels='{{ dashboard.PANELS|json_encode|raw }}'
+></hblreact-dashboards-dashboard>

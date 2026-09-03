@@ -2,7 +2,6 @@
 
 namespace Hubleto\App\Community\Customers\Models;
 
-use Hubleto\App\Community\Customers\Models\Migrations\Tag_26_02_2026_0001;
 use Hubleto\Framework\Db\Column\Color;
 use Hubleto\Framework\Db\Column\Varchar;
 
@@ -24,7 +23,7 @@ class Tag extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = $this->translate('Customer Tags');
+    // $description->ui['title'] = $this->translate('Customer Tags');
     $description->ui['addButtonText'] = $this->translate('Add Customer Tag');
     $description->ui['showHeader'] = true;
     $description->ui['showFulltextSearch'] = true;

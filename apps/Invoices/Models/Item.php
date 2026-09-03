@@ -42,7 +42,7 @@ class Item extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'id_invoice' => (new Lookup($this, $this->translate('Invoice'), Invoice::class))->setDefaultVisible(),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible(),
       'id_order' => (new Lookup($this, $this->translate('Order'), Order::class))->setDefaultVisible(),
       'id_order_item' => (new Lookup($this, $this->translate('Order Item'), OrderItem::class))->setDefaultVisible(),
       'item' => (new Varchar($this, $this->translate('Item')))->setRequired()->setDefaultVisible(),
@@ -74,9 +74,9 @@ class Item extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = ''; //$this->translate('Customers');
-    $description->ui['addButtonText'] = $this->translate('Add invoice item');
-    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
-    $description->show(['footer']);
+    // $description->ui['addButtonText'] = $this->translate('Add invoice item');
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
+    $description->hide(['addButton']);
 
     if (isset($filters['fGroupBy'])) {
       $fGroupBy = (array) $filters['fGroupBy'];

@@ -42,16 +42,28 @@ class TableImportCsv extends \Hubleto\Erp\Controllers\ApiController
         } else {
           $row = str_getcsv(trim($csvLine), $separator);
 
-          $record = $defaultCsvImportValues;
+          // map the record columns by column titles in CSV file
+          $recordRaw = [];
           foreach ($row as $colNr => $colValue) {
-            $record[$columnsMap[$colNr]] = $colValue;
+            $recordRaw[$columnsMap[$colNr]] = $colValue;
+          }
+
+          // map the record columns by column titles of the model
+          $csvToModelColumnTitles = array_flip(array_map(
+            function($col) { return $col->getTitle(); },
+            $model->getColumns()
+          ));
+
+          $recordModel = $defaultCsvImportValues;
+          foreach ($recordRaw as $colTitle => $colValue) {
+            $recordModel[$csvToModelColumnTitles[$colTitle] ?? $colTitle] = $colValue;
           }
 
           if ($testImport) {
-            $foundRecords[] = $record;
+            $foundRecords[] = $recordModel;
           } else {
             try {
-              $model->record->recordCreate($record);
+              $model->record->recordCreate($recordModel);
               $importedRecords++;
             } catch (\Throwable $e) {
               $failedImports[] = $e->getMessage();

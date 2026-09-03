@@ -55,7 +55,7 @@ class Mail extends \Hubleto\Erp\Model
       'in_reply_to' => (new Varchar($this, $this->translate('Discussion UID')))->setReadonly(),
       'body_text' => (new Text($this, $this->translate('Body (Text)'))),
       'body_html' => (new Text($this, $this->translate('Body (HTML)')))->setReactComponent('InputWysiwyg'),
-      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'color' => (new Color($this, $this->translate('Color'))),
       'is_draft' => (new Boolean($this, $this->translate('Draft')))->setDefaultValue(true),
       'is_template' => (new Boolean($this, $this->translate('Template'))),
     ]);

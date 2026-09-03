@@ -7,9 +7,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
   public array $initConfig = [];
 
   public array $packages = [
-    'core' => [
-      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 0],
-      \Hubleto\App\Community\Crypto\Loader::class => [ ],
+    'crm' => [
+      \Hubleto\App\Community\AiAssistent\Loader::class => [ 'sidebarOrder' => 0 ],
       \Hubleto\App\Community\Desktop\Loader::class => [ 'sidebarOrder' => 0 ],
       \Hubleto\App\Community\Usage\Loader::class => [ 'sidebarOrder' => 0 ],
       \Hubleto\App\Community\Mail\Loader::class => [ 'sidebarOrder' => 125 ],
@@ -22,56 +21,33 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Workflow\Loader::class => [ 'sidebarOrder' => 220 ],
       \Hubleto\App\Community\Tasks\Loader::class => [ 'sidebarOrder' => 195 ],
       \Hubleto\App\Community\Worksheets\Loader::class => [ 'sidebarOrder' => 200 ],
-//      \Hubleto\App\Community\Reports\Loader::class => [ 'sidebarOrder' => 99996 ],
-      \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99990 ],
-      \Hubleto\App\Community\Help\Loader::class => [ 'sidebarOrder' => 99991 ],
-      \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99992 ],
+    ],
+    'maintenance' => [
+      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 0],
+      \Hubleto\App\Community\Crypto\Loader::class => [ ],
       \Hubleto\App\Community\Api\Loader::class => [ 'sidebarOrder' => 99993 ],
       \Hubleto\App\Community\AuditLogs\Loader::class => [ 'sidebarOrder' => 99994 ],
+      \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99990 ],
     ],
-    // 'cloud' => [
-    //   \Hubleto\App\Community\Cloud\Loader::class => [ 'sidebarOrder' => 99998 ],
-    // ],
-    'crm' => [
-      \Hubleto\App\Community\AiAssistent\Loader::class => [ 'sidebarOrder' => 0 ],
-      \Hubleto\App\Community\EmailMarketing\Loader::class => [ 'sidebarOrder' => 202 ],
-      \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Leads\Loader::class => [ 'sidebarOrder' => 210 ],
+    'help' => [
+      \Hubleto\App\Community\Help\Loader::class => [ 'sidebarOrder' => 99991 ],
+      \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99992 ],
     ],
-    'marketing' => [
+    'customer-acquisition' => [
       \Hubleto\App\Community\EmailMarketing\Loader::class => [ 'sidebarOrder' => 202 ],
       \Hubleto\App\Community\Leads\Loader::class => [ 'sidebarOrder' => 200 ],
     ],
     'sales' => [
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\EmailMarketing\Loader::class => [ 'sidebarOrder' => 202 ],
-      \Hubleto\App\Community\Leads\Loader::class => [ 'sidebarOrder' => 210 ],
       \Hubleto\App\Community\Deals\Loader::class => [ 'sidebarOrder' => 210 ],
-      \Hubleto\App\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410 ],
       \Hubleto\App\Community\Orders\Loader::class => [ 'sidebarOrder' => 230 ],
     ],
-    'projects' => [
+    'productivity' => [
       \Hubleto\App\Community\Projects\Loader::class => [ 'sidebarOrder' => 230 ],
-      \Hubleto\App\Community\Worksheets\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Issues\Loader::class => [ 'sidebarOrder' => 240 ],
-    ],
-    'retail' => [
-      \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Shops\Loader::class => [ 'sidebarOrder' => 200 ],
-    ],
-    'e-commerce' => [
-      \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 310 ],
-      \Hubleto\App\Community\Orders\Loader::class => [ 'sidebarOrder' => 320 ],
-      \Hubleto\App\Community\Shops\Loader::class => [ 'sidebarOrder' => 410 ],
     ],
     'finance' => [
-      // \Hubleto\App\Community\Billing\Loader::class => [ 'sidebarOrder' => 400 ],
       \Hubleto\App\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410 ],
-      \Hubleto\App\Community\Cashdesk\Loader::class => [ 'sidebarOrder' => 410 ],
     ],
     'developer' => [
       \Hubleto\App\Community\Developer\Loader::class => [ 'sidebarOrder' => 410 ],
@@ -453,8 +429,8 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     $installer->appsToInstall = [];
 
-    // 'core' is always installed
-    $packagesToInstall = array_merge(['core'], explode(',', (string) $packagesToInstall));
+    // 'crm' is always installed
+    $packagesToInstall = array_merge(['crm'], explode(',', (string) $packagesToInstall));
 
     foreach ($packagesToInstall as $package) {
       $package = trim((string) $package);

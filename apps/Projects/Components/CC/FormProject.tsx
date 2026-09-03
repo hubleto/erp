@@ -1,0 +1,415 @@
+import React, { Component } from 'react'
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import TableTasks from '@hubleto/apps/Tasks/Components/TableTasks';
+import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
+import TableMilestones from './TableMilestones';
+import TableExpenses from './TableExpenses';
+import FormInput from '@hubleto/react-ui/components/cc/FormInput';
+import request from '@hubleto/react-ui/core/Request';
+import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
+import Spinner from '@hubleto/react-ui/components/cc/Spinner';
+
+export interface FormProjectProps extends FormExtendedProps { }
+export interface FormProjectState extends FormExtendedState {
+  statistics?: any,
+  selectParentOrder?: boolean,
+  salaries?: any,
+}
+
+export default class FormProject<P, S> extends FormExtended<FormProjectProps, FormProjectState> {
+  static defaultProps: any = {
+    ...FormExtended.defaultProps,
+    icon: 'fas fa-diagram-project',
+    model: 'Hubleto/App/Community/Projects/Models/Team',
+    renderWorkflowUi: true,
+  }
+
+  props: FormProjectProps;
+  state: FormProjectState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Projects\\Loader';
+  translationContextInner: string = 'Components\\FormProject';
+
+  constructor(props: FormProjectProps) {
+    super(props);
+  }
+
+  getStateFromProps(props: FormProjectProps) {
+    return {
+      ...super.getStateFromProps(props),
+      selectParentOrder: false,
+      salaries: {},
+      tabs: [
+        { uid: 'default', title: <b>{this.translate('Project','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject')}</b> },
+        { uid: 'documents', title: this.translate('Documents','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'milestones', title: this.translate('Milestones','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'tasks', title: this.translate('Tasks','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'worksheet', title: this.translate('Worksheet','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'expenses', title: this.translate('Expenses','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'statistics', title: this.translate('Statistics','Hubleto\\App\\Community\\Projects\\Loader','Components\\FormProject') },
+        { uid: 'timeline', icon: 'fas fa-timeline', position: 'right' },
+        ...this.getCustomTabs()
+      ]
+    }
+  }
+
+  getRecordFormUrl(): string {
+    return 'projects/' + (this.state.record.id > 0 ? this.state.record.id : 'add');
+  }
+
+  contentClassName(): string
+  {
+    return this.state.record.is_closed ? 'bg-slate-100' : '';
+  }
+
+  onTabChange() {
+    super.onTabChange();
+
+    const tabUid = this.state.activeTabUid;
+    switch (tabUid) {
+      case 'statistics':
+        request.post(
+          'projects/api/get-statistics',
+          { idProject: this.state.record.id },
+          {},
+          (data: any) => {
+            this.setState({statistics: data});
+          }
+        )
+      break;
+    }
+  }
+
+  renderTitle(): React.JSX.Element {
+    return <>
+      <small>{this.translate('Project')}</small>
+      <h2>{this.state.record.identifier ?? '-'}</h2>
+    </>;
+  }
+
+  renderTab(tabUid: string) {
+    const R = this.state.record;
+
+    switch (tabUid) {
+      case 'default':
+        return <>
+          <div className='w-full flex gap-2 flex-col md:flex-row'>
+            <div className='flex-1 border-r border-gray-100'>
+              <FormInput title={this.translate("Order")}>
+                {this.state.selectParentOrder ? <>
+                  <Lookup
+                    model='Hubleto/App/Community/Orders/Models/Order'
+                    cssClass='font-bold'
+                    onChange={(input: any, value: any) => {
+                      request.post(
+                        'projects/api/set-parent-order',
+                        {
+                          idProject: this.state.record.id,
+                          idOrder: value,
+                        },
+                        {},
+                        (data: any) => {
+                          this.setState({selectParentOrder: false}, () => this.reload());
+                        }
+                      )
+                    }}
+                  ></Lookup>
+                </> : <>
+                  {R.ORDERS ? R.ORDERS.map((item, key) => {
+                    if (!item.ORDER) return null;
+                    return (item.ORDER ? <a
+                      key={key}
+                      className='badge'
+                      href={globalThis.hubleto.config.projectUrl + '/orders/' + item.ORDER.id}
+                      target='_blank'
+                    >#{item.ORDER.identifier}&nbsp;{item.ORDER.title}</a> : '#');
+                  }) : null}
+                  <button
+                    className='btn btn-small btn-transparent'
+                    onClick={() => {
+                      this.setState({selectParentOrder: true});
+                    }}
+                  >
+                    <span className='text'>{this.translate('Select parent order')}</span>
+                  </button>
+                </>}
+              </FormInput>
+              {this.inputWrapper('identifier', {cssClass: 'text-2xl'})}
+              {this.inputWrapper('title', {cssClass: 'text-2xl'})}
+              {this.inputWrapper('description')}
+              {this.inputWrapper('id_main_developer')}
+              {this.inputWrapper('id_project_manager')}
+              {this.inputWrapper('id_account_manager')}
+              {this.inputWrapper('priority')}
+              {this.inputWrapper('date_start')}
+              {this.inputWrapper('date_deadline')}
+              {this.inputWrapper('budget')}
+              {/* {this.inputWrapper('is_closed')} */}
+            </div>
+            <div className='flex-1'>
+              {R.id > 0 ? <>
+                <div className='card card-warning'>
+                  <div className='card-header'>{this.translate('Milestones')}</div>
+                  <div className='card-body'>
+                    <TableMilestones
+                      tag={"table_project_task"}
+                      parentForm={this}
+                      uid={this.props.uid + "_table_project_task"}
+                      idProject={R.id}
+                      view='briefOverview'
+                    />
+                  </div>
+                </div>
+                <div className='card card-info mt-2'>
+                  <div className='card-header'>{this.translate('Open tasks')}</div>
+                  <div className='card-body'>
+                    <TableTasks
+                      tag={"table_project_task"}
+                      parentForm={this}
+                      uid={this.props.uid + "_table_project_task"}
+                      idCustomer={R.id_customer}
+                      junctionTitle='Project'
+                      junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
+                      junctionSourceColumn='id_project'
+                      junctionSourceRecordId={R.id}
+                      junctionDestinationColumn='id_task'
+                      view='briefOverview'
+                    />
+                  </div>
+                </div>
+              </> : null}
+              {this.inputWrapper('id_customer')}
+              {this.inputWrapper('id_contact')}
+              {this.inputWrapper('notes')}
+              {this.inputWrapper('average_hourly_costs')}
+              {/* {this.inputWrapper('id_deal')} */}
+            </div>
+          </div>
+        </>;
+      break;
+
+      case 'documents':
+        let iframeUrl = '';
+
+        try {
+          let url = new URL(R.online_documentation_folder ?? '');
+          
+          if (
+            url.hostname == 'drive.google.com'
+            && url.pathname.indexOf('/drive/folders') == 0
+          ) {
+
+            // for Google Drive, replacing
+            // https://drive.google.com/drive/folders/FOLDER_ID
+            // with https://drive.google.com/embeddedfolderview?id=FOLDER_ID
+            // makes the folder embeddable
+
+            iframeUrl = 'https://drive.google.com/embeddedfolderview'
+              + '?id=' + url.pathname.replace('/drive/folders/', '')
+              + '&authuser=0'
+            ;
+
+          } else {
+            iframeUrl = R.shared_folder ?? '';
+          }
+        } catch (e) {
+        }
+
+        return <div className='flex flex-col gap-2 h-full'>
+          {this.inputWrapper('online_documentation_folder')}
+          <iframe
+            className='w-full h-full shadow-sm'
+            src={iframeUrl}
+          ></iframe>
+        </div>;
+      break;
+
+      case 'milestones':
+        return (this.state.id < 0
+          ? <div className="badge badge-info">{this.translate('First create the project, then you will be prompted to add tasks.')}</div>
+          : <TableMilestones
+            tag={"table_project_milestone"}
+            parentForm={this}
+            uid={this.props.uid + "_table_project_milestone"}
+            idProject={R.id}
+          />
+        );
+      break;
+
+      case 'tasks':
+        return (this.state.id < 0
+          ? <div className="badge badge-info">{this.translate('First create the project, then you will be prompted to add tasks.')}</div>
+          : <TableTasks
+            tag={"table_project_task"}
+            parentForm={this}
+            uid={this.props.uid + "_table_project_task"}
+            idCustomer={R.id_customer}
+            idContact={R.id_contact}
+            junctionTitle='Project'
+            junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
+            junctionSourceColumn='id_project'
+            junctionSourceRecordId={R.id}
+            junctionDestinationColumn='id_task'
+          />
+        );
+      break;
+
+      case 'worksheet':
+        return <TableActivities
+          uid={this.props.uid + "_table_activities"}
+          tag="ProjectActivities"
+          parentForm={this}
+          idProject={R.id}
+          readonly={true}
+        />;
+      break;
+
+      case 'expenses':
+        return (this.state.id < 0
+          ? <div className="badge badge-info">{this.translate('First create the project, then you will be prompted to add tasks.')}</div>
+          : <TableExpenses
+            tag={"table_project_expense"}
+            parentForm={this}
+            uid={this.props.uid + "_table_project_expense"}
+            idProject={R.id}
+          />
+        );
+      break;
+
+      case 'statistics':
+        if (this.state.statistics) {
+          let totalWorkedHours = 0;
+          let totalChargeableHours = 0;
+          let totalCostsByWorker = 0;
+          return <div>
+            <div className='flex gap-2'>
+              <div className='card'>
+                <div className='card-header'>{this.translate('Worked hours & costs by month')}</div>
+                <div className='card-body'>
+                  <table className='table-default dense'>
+                    <tbody>
+                      {this.state.statistics.workedByMonth.map((item, key) => {
+                        totalWorkedHours += parseFloat(item.worked_hours);
+                        return <tr key={key}>
+                          <td>{item.year}-{item.month}</td>
+                          <td>{item.worked_hours} {this.translate('hours')}</td>
+                        </tr>;
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalWorkedHours)} {this.translate('hours')}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+
+              <div className='card'>
+                <div className='card-header'>{this.translate('Chargeable hours by month')}</div>
+                <div className='card-body'>
+                  <table className='table-default dense'>
+                    <tbody>
+                      {this.state.statistics.chargeableByMonth.map((item, key) => {
+                        totalChargeableHours += parseFloat(item.worked_hours);
+                        return <tr key={key}>
+                          <td>{item.year}-{item.month}</td>
+                          <td>{item.worked_hours} {this.translate('hours')}</td>
+                        </tr>;
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalChargeableHours)} {this.translate('hours')}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-2 mt-2">
+              <div className='card'>
+                <div className='card-header'>{this.translate('Labor costs calculator')}</div>
+                <div className='card-body'>
+                  <table className='table-default dense'>
+                    <thead>
+                      <tr>
+                        <th>{this.translate('User')}</th>
+                        <th>{this.translate('Worked hours')}</th>
+                        <th>{this.translate('Salary')}</th>
+                        <th>{this.translate('Labor costs')}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.statistics.workedByUser.map((item, key) => {
+                        let workerCosts = item.worked_hours * this.state.salaries[item.id_worker];
+                        totalCostsByWorker += workerCosts;
+                        return <tr key={key}>
+                          <td>{item.worker_name}</td>
+                          <td>{item.worked_hours} {this.translate('hours')}</td>
+                          <td><div className="flex gap-2 items-center">
+                            <input
+                              value={this.state.salaries[item.id_worker] ?? ''}
+                              className="w-12 bg-white"
+                              onChange={(e) => {
+                                let salaries = this.state.salaries;
+                                salaries[item.id_worker] = e.currentTarget.value;
+                                this.setState({salaries: salaries});
+                              }}
+                            /> €/h
+                          </div></td>
+                          <td>
+                            {globalThis.hubleto.currencyFormat(workerCosts)}
+                          </td>
+                        </tr>;
+                      })}
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td className='bg-primary text-white p-2'>{this.translate('Total')}</td>
+                        <td className='bg-primary text-white p-2'>&nbsp;</td>
+                        <td className='bg-primary text-white p-2'>&nbsp;</td>
+                        <td className='bg-primary text-white p-2'>{globalThis.hubleto.currencyFormat(totalCostsByWorker)}</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>;
+        } else {
+          return <Spinner></Spinner>;
+        }
+      break;
+
+      case 'timeline':
+        return this.renderTimeline([
+          {
+            data: (thisForm) => thisForm.state.record.ACTIVITIES,
+            icon: 'fas fa-calendar',
+            color: '#32678fff',
+            timestampFormatter: (entry) => entry.date_start,
+            valueFormatter: (entry) => entry.subject,
+            userNameFormatter: (entry) => entry['_LOOKUP[id_owner]'],
+          },
+          { 
+            data: (thisForm) => thisForm.state.record.WORKFLOW_HISTORY,
+            icon: 'fas fa-timeline',
+            color: '#8f3248ff',
+            timestampFormatter: (entry) => entry.datetime_change,
+            valueFormatter: (entry) => entry.WORKFLOW_STEP?.name ?? '---',
+            userNameFormatter: (entry) => entry.USER?.nick,
+          },
+        ]);
+      break;
+
+      default:
+        return super.renderTab(tabUid);
+      break;
+    }
+  }
+
+}

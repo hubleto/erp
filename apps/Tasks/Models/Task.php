@@ -86,10 +86,10 @@ class Task extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setDescription($this->translate('Leave empty to generate automatically.'))->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
-      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'description' => (new Text($this, $this->translate('Description'))),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setDefaultVisible()->setCssClass('badge badge-info')->setHint($this->translate('Leave empty to generate automatically.')),
+      'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
+      'description' => (new Text($this, $this->translate('Description (Scope of Work)'))),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
       'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden()->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
@@ -106,7 +106,7 @@ class Task extends \Hubleto\Erp\Model
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
       'is_milestone' => (new Boolean($this, $this->translate('Is milestone')))->setDefaultValue(false),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false)->setYesText('Closed')->setNoText(''),
       // 'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setDefaultVisible(),
       'shared_folder' => (new Varchar($this, $this->translate('Shared folder (online document storage)')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),
@@ -192,10 +192,7 @@ class Task extends \Hubleto\Erp\Model
 
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('tasks');
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'tasks');
 
     if (empty($savedRecord['identifier'])) {
       $savedRecord["identifier"] = $savedRecord["id"];

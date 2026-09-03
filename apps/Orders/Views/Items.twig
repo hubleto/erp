@@ -1,5 +1,3 @@
-<h1 class="app-main-title">{{ translate('Orders') }} > {{ translate('Items') }}</h1>
-
 {% if viewParams.dueAndChargeableItemsNotPreparedForInvoice|length > 0 %}
   {% for i in viewParams.dueAndChargeableItemsNotPreparedForInvoice %}
     <div class="alert alert-warning">

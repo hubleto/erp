@@ -24,7 +24,7 @@ class File extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
       'id_folder' => (new Lookup($this, $this->translate("Folder"), Folder::class))->setRequired()->setDefaultValue($this->router()->urlParamAsInteger('idFolder'))->setDefaultVisible(),
-      'name' => (new Varchar($this, $this->translate('File name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate('File name')))->setRequired()->setDefaultVisible(),
       'file' => (new ColumnFile($this, $this->translate('File')))->setDefaultVisible(),
       'hyperlink' => (new Varchar($this, $this->translate('File Link')))->setReactComponent('InputHyperlink'),
       'origin_link' => (new Varchar($this, $this->translate('Origin Link'))),

@@ -1,6 +1,5 @@
-<h1 class="app-main-title">{{ translate('Email marketing') }} > {{ translate('Sent emails') }}</h1>
-
 <hblreact-table
+  string:title="{{ translate('Sent emails') }}"
   string:tag="table-email-marketing-sent-emails"
   string:crud-controller="Hubleto/App/Community/EmailMarketing/Controllers/Crud/SentEmails"
   boolean:readonly="true"

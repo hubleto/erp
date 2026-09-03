@@ -29,21 +29,25 @@ class Loader extends \Hubleto\Erp\App
 
       '/^workflow\/boards\/items-with-not-updated-step\/?$/' => Controllers\Boards\ItemsWithNotUpdatedStep::class,
 
-      '/^workflow\/?$/' => Controllers\Workflow::class,
-      '/^workflow(\/(?<idWorkflow>\d+))?\/?$/' => Controllers\Workflow::class,
+      '/^workflow\/?$/' => Controllers\Home::class,
+      '/^workflow\/(?<idWorkflow>\d+)\/?$/' => Controllers\Workflow::class,
+
+      '/^workflow\/workflows(\/(?<recordId>\d+))?\/?$/' => Controllers\Workflows::class,
+      '/^workflow\/workflows\/add\/?$/' => ['controller' => Controllers\Workflows::class, 'vars' => ['recordId' => -1]],
+
+      '/^workflow\/steps(\/(?<recordId>\d+))?\/?$/' => Controllers\WorkflowSteps::class,
+      '/^workflow\/steps\/add\/?$/' => ['controller' => Controllers\WorkflowSteps::class, 'vars' => ['recordId' => -1]],
 
       '/^workflow\/automats(\/(?<recordId>\d+))?\/?$/' => Controllers\Automats::class,
       '/^workflow\/automats\/add\/?$/' => ['controller' => Controllers\Automats::class, 'vars' => ['recordId' => -1]],
 
-      '/^workflow\/history\/?$/' => Controllers\History::class,
-      '/^settings\/workflows\/?$/' => Controllers\Workflows::class,
     ]);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Workflows'),
       'icon' => 'fas fa-bars-progress',
-      'url' => 'settings/workflows'
+      'url' => 'workflow/workflows'
     ]);
 
     /** @var \Hubleto\App\Community\Dashboards\Manager */
@@ -75,12 +79,12 @@ class Loader extends \Hubleto\Erp\App
   {
     $mWorkflow = $this->getModel(Models\Workflow::class);
 
-    $workflowButtonsHtml = '<div class="list dense">';
+    $workflowButtonsHtml = '<div class="list dense border-none">';
     foreach ($mWorkflow->record->where('show_in_kanban', true)->orderBy('order')->get() as $workflow) {
       $workflowButtonsHtml .= '
         <a
           class="
-            btn btn-small btn-list-item ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
+            btn btn-list-item ' . ($workflow->id == $this->router()->urlParamAsInteger('idWorkflow') ? "btn-active" : "btn-transparent") . '
           "
           href="' . $this->env()->projectUrl . '/workflow/' . $workflow->id . '"
         >
@@ -91,20 +95,13 @@ class Loader extends \Hubleto\Erp\App
     $workflowButtonsHtml .= '</div>';
 
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/workflow">
-          <span class="icon"><i class="fas fa-timeline"></i></span>
-          <span class="text">' . $this->translate('Workflow') . '</span>
-        </a>
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
         ' . $workflowButtonsHtml . '
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/settings/workflows">
-          <span class="icon"><i class="fas fa-cog"></i></span>
-          <span class="text">' . $this->translate('Workflows') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/workflow/automats">
-          <span class="icon"><i class="fas fa-robot"></i></span>
-          <span class="text">' . $this->translate('Automats') . '</span>
-        </a>
+        <br/>
+        ' . $this->secondSidebarButton('workflow/workflows', 'fas fa-timeline', 'Workflows') . '
+        ' . $this->secondSidebarButton('workflow/steps', 'fas fa-circle-dot', 'Steps') . '
+        ' . $this->secondSidebarButton('workflow/automats', 'fas fa-robot', 'Automats') . '
       </div>
     ';
   }
@@ -179,53 +176,53 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Approved'), 'order' => 3, 'color' => '#3068a5', 'tag' => 'document-approved']);
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Rejected'), 'order' => 4, 'color' => '#ae459f', 'tag' => 'document-rejected']);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setOrderWorkflowStepToPaid',
-        'trigger' => 'onModelAfterUpdate',
-        'triggerConditions' => [ 'updatedModel' => Order::class ],
-        'conditions' => json_encode([
-          [ 'evaluator' => RecordCompare::class, 'arguments' => [ 'column' => 'is_closed', 'operator' => '=', 'value' => 1 ], ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => SetWorkflow::class, 'arguments' => [ 'tag' => 'order-paid' ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setOrderWorkflowStepToPaid',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'triggerConditions' => [ 'updatedModel' => Order::class ],
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => RecordCompare::class, 'arguments' => [ 'column' => 'is_closed', 'operator' => '=', 'value' => 1 ], ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => SetWorkflow::class, 'arguments' => [ 'tag' => 'order-paid' ] ],
+      //   ]),
+      // ]);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setDealClosedIfWon',
-        'trigger' => 'onModelAfterUpdate',
-        'triggerConditions' => [ 'updatedModel' => Deal::class ],
-        'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-won' ] ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setDealClosedIfWon',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'triggerConditions' => [ 'updatedModel' => Deal::class ],
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-won' ] ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
+      //   ]),
+      // ]);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setDealClosedIfLost',
-        'trigger' => 'onModelAfterUpdate',
-        'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-lost' ] ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setDealClosedIfLost',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIs' => 'deal-lost' ] ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 1 ] ],
+      //   ]),
+      // ]);
 
-      $mAutomat->record->recordCreate([
-        'name' => 'setDealClosed',
-        'trigger' => 'onModelAfterUpdate',
-        'triggerConditions' => [ 'updatedModel' => Deal::class ],
-        'conditions' => json_encode([
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-won' ] ],
-          [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-lost' ] ],
-        ]),
-        'actions' => json_encode([
-          [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 0 ] ],
-        ]),
-      ]);
+      // $mAutomat->record->recordCreate([
+      //   'name' => 'setDealClosed',
+      //   'trigger' => 'onModelAfterUpdate',
+      //   'triggerConditions' => [ 'updatedModel' => Deal::class ],
+      //   'conditions' => json_encode([
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-won' ] ],
+      //     [ 'evaluator' => WorkflowCompare::class, 'arguments' => [ 'tagIsNot' => 'deal-lost' ] ],
+      //   ]),
+      //   'actions' => json_encode([
+      //     [ 'action' => UpdateRecord::class, 'arguments' => [ 'column' => 'is_closed', 'value' => 0 ] ],
+      //   ]),
+      // ]);
     }
   }
 

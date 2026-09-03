@@ -83,8 +83,8 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     return array_merge(parent::describeColumns(), [
       'inbound_outbound' => (new Integer($this, $this->translate('Inbound / outbound')))->setEnumValues([
-        self::INBOUND_INVOICE => $this->translate('Inbound'),
-        self::OUTBOUND_INVOICE => $this->translate('Outbound'),
+        self::INBOUND_INVOICE => $this->translate('Inbound invoice'),
+        self::OUTBOUND_INVOICE => $this->translate('Outbound invoice'),
       ])->setEnumCssClasses([
         self::INBOUND_INVOICE => 'bg-lime-50 text-slate-700',
         self::OUTBOUND_INVOICE => 'bg-yellow-50 text-slate-700',
@@ -94,10 +94,10 @@ class Invoice extends \Hubleto\Erp\Model {
       'id_payment_method' => (new Lookup($this, $this->translate('Payment method'), PaymentMethod::class)),
 
       // used for outbound invoices
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible(),
 
       // used for inbound invoices
-      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
+      'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible(),
 
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::TYPES))->setRequired()->setDefaultValue(3)->setDefaultVisible()->setEnumCssClasses([
         self::TYPE_PROFORMA => 'bg-blue-50 text-slate-700',
@@ -106,7 +106,7 @@ class Invoice extends \Hubleto\Erp\Model {
         self::TYPE_CREDIT_NOTE => 'bg-orange-50 text-slate-700',
         self::TYPE_DEBIT_NOTE => 'bg-violet-50 text-slate-700',
       ]),
-      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setDescription($this->translate('Leave empty to generate automatically.')),
+      'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setHint($this->translate('Leave empty to generate automatically.')),
       'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
       'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
       'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),
@@ -427,12 +427,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('invoices');
-
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
-
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'invoices');
     $this->record->recordUpdate($savedRecord);
 
     $this->recalculateTotalsForInvoice((int) $savedRecord['id']);

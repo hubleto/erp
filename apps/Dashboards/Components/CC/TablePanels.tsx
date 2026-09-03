@@ -1,0 +1,48 @@
+import React, { Component } from 'react'
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+import FormPanel from './FormPanel';
+
+interface TablePanelsProps extends TableProps {
+}
+
+interface TablePanelsState extends TableState {
+}
+
+export default class TablePanels extends Table<TablePanelsProps, TablePanelsState> {
+  static defaultProps = {
+    ...Table.defaultProps,
+    formUseModalSimple: true,
+    model: 'Hubleto/App/Community/Dashboards/Models/Panel',
+  }
+
+  props: TablePanelsProps;
+  state: TablePanelsState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Dashboards\\Loader';
+  translationContextInner: string = 'Components\\TablePanels';
+
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'right';
+    return params;
+  }
+
+  getFormProps(): any {
+    let formProps = super.getFormProps();
+    formProps.onSaveCallback = (form: any, saveResponse: any) => {
+      this.reload();
+      if (this.state.recordId === -1) { this.openForm(-1); } 
+    };
+    return formProps;
+  }
+
+  constructor(props: TablePanelsProps) {
+    super(props);
+    this.state = this.getStateFromProps(props);
+  }
+
+  renderForm(): React.JSX.Element {
+    let formProps = this.getFormProps();
+    return <FormPanel {...formProps}/>;
+  }
+}

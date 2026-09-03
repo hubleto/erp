@@ -1,7 +1,7 @@
 import App from '@hubleto/react-ui/core/App'
-import TableAccounts from "./Components/TableAccounts"
-import TableMails from "./Components/TableMails"
-import TableTemplates from "./Components/TableTemplates"
+import TableAccounts from "./Components/FC/TableAccounts"
+import TableMails from "./Components/FC/TableMails"
+import TableTemplates from "./Components/FC/TableTemplates"
 
 class MailApp extends App {
   init() {

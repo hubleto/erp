@@ -18,12 +18,13 @@ class Loader extends \Hubleto\Erp\App
     $this->router()->get([
       '/^api\/?$/' => Controllers\Home::class,
       '/^api\/call?$/' => Controllers\Call::class,
+      '/^api\/oauth?$/' => Controllers\OAuth::class,
       '/^api\/keys(\/(?<recordId>\d+))?\/?$/' => Controllers\Keys::class,
       '/^api\/keys\/add?\/?$/' => ['controller' => Controllers\Keys::class, 'vars' => [ 'recordId' => -1 ]],
       '/^api\/permissions(\/(?<recordId>\d+))?\/?$/' => Controllers\Permissions::class,
       '/^api\/permissions\/add?\/?$/' => ['controller' => Controllers\Permissions::class, 'vars' => [ 'recordId' => -1 ]],
-      '/^api\/usage(\/(?<recordId>\d+))?\/?$/' => Controllers\Usages::class,
-      '/^api\/usage\/add?\/?$/' => ['controller' => Controllers\Usages::class, 'vars' => [ 'recordId' => -1 ]],
+      '/^api\/usages(\/(?<recordId>\d+))?\/?$/' => Controllers\Usages::class,
+      '/^api\/usages\/add?\/?$/' => ['controller' => Controllers\Usages::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
 
@@ -56,19 +57,11 @@ class Loader extends \Hubleto\Erp\App
   public function renderSecondSidebar(): string
   {
     return '
+      ' . $this->secondSidebarTitle() . '
       <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/api">
-          <span class="icon"><i class="fas fa-arrow-right-arrow-left"></i></span>
-          <span class="text">' . $this->translate('API') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/api/keys">
-          <span class="icon"><i class="fas fa-key"></i></span>
-          <span class="text">' . $this->translate('Keys') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/api/usage">
-          <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Usage log') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('api/oauth', 'fas fa-shield-halved', 'OAuth') . '
+        ' . $this->secondSidebarButton('api/keys', 'fas fa-key', 'Keys') . '
+        ' . $this->secondSidebarButton('api/usage', 'fas fa-check-double', 'Usage log') . '
       </div>
     ';
   }

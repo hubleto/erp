@@ -41,7 +41,7 @@ class Profile extends \Hubleto\Erp\Model
       'headline' => (new Varchar($this, $this->translate('Headline')))->setDefaultVisible(),
       'id_company' => (new Lookup($this, $this->translate('Company'), Company::class))->setDefaultVisible(),
       'numbering_pattern' => (new Varchar($this, $this->translate('Numbering pattern')))
-        ->setDescription($this->translate('T - invoice type, YYYY - 4-digit year, YY - 2-digit year, MM - 2-digit month, DD - 2-digit day, N(repeated) - incremental invoice number'))
+        ->setHint($this->translate('T - invoice type, YYYY - 4-digit year, YY - 2-digit year, MM - 2-digit month, DD - 2-digit day, N(repeated) - incremental invoice number'))
         ->setPredefinedValues([
           'T/YYYYNNNN',
           'TYYNNNNNN',

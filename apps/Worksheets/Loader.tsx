@@ -1,17 +1,29 @@
-// How to add any React Component to be usable in Twig templates as '<hblreact-*></hblreact-*>' HTML tag.
-// -> Replace 'MyModel' with the name of your model in the examples below
+import React from 'react';
+import App from '@hubleto/react-ui/core/App'
+import TableActivities from './Components/FC/TableActivities';
+import TableActivityTypes from './Components/FC/TableActivityTypes';
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
+import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
-// 1. import the component
-// import TableMyModel from "./Components/TableMyModel"
+class WorksheetsApp extends App {
+  init() {
+    super.init();
 
-// 2. Register the React Component into Hubleto framework
-// globalThis.hubleto.registerReactComponent('WorksheetsTableMyModel', TableMyModel);
+    globalThis.hubleto.registerReactComponent('WorksheetsTableActivities', TableActivities);
+    globalThis.hubleto.registerReactComponent('WorksheetsTableActivityTypes', TableActivityTypes);
 
-// 3. Use the component in any of your Twig views:
-// <hblreact-worksheets-table-my-model string:some-property="some-value"></hblreact-worksheets-table-my-model>
+    FormCustomizer.addFormHeaderExtraButton(
+      'FormTask',
+      (form: FormMeta) => { return form.id <= 0 ? false : {
+        title: 'Add activity',
+        icon: 'fas fa-user-clock',
+        onClick: (form: FormMeta) => {
+          globalThis.window.open(globalThis.hubleto.config.projectUrl + '/worksheets/add?idTask=' + form.id);
+        },
+      }}
+    );
+  }
+}
 
-import TableActivities from './Components/TableActivities';
-import TableActivityTypes from './Components/TableActivityTypes';
-
-globalThis.hubleto.registerReactComponent('WorksheetsTableActivities', TableActivities);
-globalThis.hubleto.registerReactComponent('WorksheetsTableActivityTypes', TableActivityTypes);
+// register app
+globalThis.hubleto.registerApp('Hubleto/App/Community/Worksheets', new WorksheetsApp());

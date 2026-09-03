@@ -19,18 +19,10 @@ class Loader extends \Hubleto\Erp\App
       '/^dashboards\/api\/sort-panels\/?$/' => Controllers\Api\SortPanels::class,
       '/^dashboards\/api\/set-panel-width\/?$/' => Controllers\Api\SetPanelWidth::class,
 
-      '/^dashboards(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboards::class,
-      '/^dashboards\/manage?\/?$/' => Controllers\DashboardsManage::class,
+      '/^dashboards\/~(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboard::class,
+      '/^dashboards(\/(?<recordId>\d+))?\/?$/' => Controllers\Dashboards::class,
+      '/^dashboards\/add\/?$/' => ['controller' => Controllers\Dashboards::class, 'vars' => ['recordId' => -1]],
     ]);
-
-    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
-    // $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    // $settingsApp->addSetting($this, [
-    //   'title' => $this->translate('Dashboards'),
-    //   'icon' => 'fas fa-table',
-    //   'url' => 'dashboards/manage',
-    // ]);
-
   }
 
   /**
@@ -49,30 +41,6 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
-  // public function generateDemoData(): void
-  // {
-  //   $mDashboard = $this->getModel(Models\Dashboard::class);
-  //   $mPanel = $this->getModel(Models\Panel::class);
-
-  //   $dashboard = $mDashboard->record->recordCreate([
-  //     'id_owner' => 1,
-  //     'title' => $this->translate('My dashboard'),
-  //     'slug' => 'default',
-  //     'is_default' => true,
-  //   ]);
-
-  //   $boards = $this->getService(Manager::class);
-  //   foreach ($boards->getBoards() as $board) {
-  //     $mPanel->record->recordCreate([
-  //       'id_dashboard' => $dashboard['id'],
-  //       'title' => $board['title'],
-  //       'board_url_slug' => $board['boardUrlSlug'],
-  //       'configuration' => '',
-  //       'width' => rand(2, 3),
-  //     ]);
-  //   }
-  // }
-
   /**
    * [Description for renderSecondSidebar]
    *
@@ -81,18 +49,65 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderSecondSidebar(): string
   {
+    /** @var Models\Dashboard */
+    $mDashboard = $this->getModel(Models\Dashboard::class);
+
+    $dashboards = $mDashboard->record->prepareReadQuery()
+      ->with('PANELS')
+      ->orderBy('is_default')
+      ->get()
+    ;
+
+    $dashboardButtonsHtml = '<div class="list dense border-none">';
+    foreach ($dashboards as $dashboard) {
+      $dashboardButtonsHtml .= '
+        <a
+          class="
+            btn btn-list-item
+            ' . ($dashboard->slug == $this->router()->urlParamAsString('dashboardSlug') ? "btn-active" : "btn-transparent") . '
+          "
+          href="' . $this->env()->projectUrl . '/dashboards/~/' . $dashboard->slug . '"
+        >
+          <span class="text">' . $dashboard->title . '</span>
+        </a>
+      ';
+    }
+    $dashboardButtonsHtml .= '</div>';
+
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/dashboards">
-          <span class="icon"><i class="fas fa-table"></i></span>
-          <span class="text">' . $this->translate('Dashboards') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/dashboards/manage">
-          <span class="icon"><i class="fas fa-list"></i></span>
-          <span class="text">' . $this->translate('Manage') . '</span>
-        </a>
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $dashboardButtonsHtml . '
       </div>
     ';
+  }
+
+  public function getWelcomeScreenMessages(): array
+  {
+    $messages = [];
+
+    /** @var Models\Dashboard */
+    $mDashboard = $this->getModel(Models\Dashboard::class);
+
+    $defaultDashboard = $mDashboard->getDefaultDashboard();
+
+    if (!$defaultDashboard) {
+      $messages[] = [
+        'class' => 'warning',
+        'icon' => 'fas fa-table',
+        'title' => 'No dashboard configured',
+        'content' => '
+          You do not have default dashboard configured.
+        ',
+        'button' => '
+          <a class="btn btn-primary" href="dashboards">
+            <span class="text">Configure your default dashboard</span>
+          </a>
+        ',
+      ];
+    }
+
+    return $messages;
   }
 
 }

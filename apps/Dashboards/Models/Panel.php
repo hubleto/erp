@@ -23,7 +23,7 @@ class Panel extends \Hubleto\Erp\Model
       'id_dashboard' => (new Lookup($this, $this->translate("Dashboard"), Dashboard::class, "CASCADE"))
         ->setRequired()->setReadonly()->setDefaultValue($this->router()->urlParamAsInteger('idDashboard')),
       'board_url_slug' => (new Varchar($this, $this->translate('Board')))->setRequired(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'width' => (new Integer($this, $this->translate('Width')))->setDefaultVisible()->setDefaultValue(1)->setEnumValues(
         [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5, 6 => 6]
       ),

@@ -1,0 +1,116 @@
+import React, { Component } from 'react'
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import FormCustomer, { FormCustomerProps } from './FormCustomer';
+import { getUrlParam } from '@hubleto/react-ui/core/Helper';
+import { FormProps } from '@hubleto/react-ui/components/cc/Form';
+import request from '@hubleto/react-ui/core/Request';
+
+interface TableCustomersProps extends TableExtendedProps {
+}
+
+interface TableCustomersState extends TableExtendedState {
+  tableContactsDescription?: any,
+  tableLeadsDescription?: any,
+  tableDealsDescription?: any,
+  tableDocumentsDescription?: any,
+}
+
+export default class TableCustomers extends TableExtended<TableCustomersProps, TableCustomersState> {
+  static defaultProps = {
+    ...TableExtended.defaultProps,
+    formUseModalSimple: true,
+    model: 'Hubleto/App/Community/Customers/Models/Customer',
+  }
+
+  declare props: TableCustomersProps;
+  declare state: TableCustomersState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Customers\\Loader';
+  translationContextInner: string = 'Components\\TableCustomers';
+
+  getFormModalProps() {
+    return {
+      ...super.getFormModalProps(),
+      type: 'right wide'
+    }
+  }
+
+  getCsvImportEndpointParams(): any {
+    return {
+      model: this.props.model
+    }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/customers/' + (id > 0 ? id : 'add'));
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "virt_tags") {
+      return <div className='flex gap-1'>
+        {data.TAGS.map((tag, key) => {
+          return <div key={key} className="text-nowrap mr-2">
+            <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+            {tag.TAG?.name}
+          </div>;
+        })}
+      </div>;
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
+  onAfterLoadTableDescription(description: any): any {
+    request.get(
+      'api/table/describe',
+      {
+        model: 'Hubleto/App/Community/Contacts/Models/Contact',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableContactsDescription: description} as TableCustomersState);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'Hubleto/App/Community/Leads/Models/Lead',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableLeadsDescription: description} as TableCustomersState);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'Hubleto/App/Community/Deals/Models/Deal',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableDealsDescription: description} as TableCustomersState);
+      }
+    );
+    request.get(
+      'api/table/describe',
+      {
+        model: 'Hubleto/App/Community/Customers/Models/CustomerDocument',
+        idCustomer: this.props.recordId,
+      },
+      (description: any) => {
+        this.setState({tableDocumentsDescription: description} as TableCustomersState);
+      }
+    );
+
+    return description;
+  }
+
+  renderForm(): React.JSX.Element {
+    let formProps: FormCustomerProps = this.getFormProps() as FormCustomerProps;
+    formProps.uid = 'form_customer';
+    formProps.tableContactsDescription = this.state.tableContactsDescription;
+    formProps.tableLeadsDescription = this.state.tableLeadsDescription;
+    formProps.tableDealsDescription = this.state.tableDealsDescription;
+    return <FormCustomer {...formProps}/>;
+  }
+}

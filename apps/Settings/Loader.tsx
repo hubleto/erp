@@ -1,9 +1,9 @@
-import SettingsFormUser from "./Components/FormUser"
-import SettingsTableUsers from "./Components/TableUsers"
-import SettingsTableUserRoles from "./Components/TableUserRoles"
+import SettingsFormUser from "./Components/FC/FormUser"
+import SettingsTableUsers from "./Components/FC/TableUsers"
+import SettingsTableUserRoles from "./Components/FC/TableUserRoles"
 
-import SettingsFormTeam from "./Components/FormTeam"
-import SettingsTableTeams from "./Components/TableTeams"
+import SettingsFormTeam from "./Components/FC/FormTeam"
+import SettingsTableTeams from "./Components/FC/TableTeams"
 
 globalThis.hubleto.registerReactComponent('SettingsFormUser', SettingsFormUser);
 globalThis.hubleto.registerReactComponent('SettingsTableUsers', SettingsTableUsers);

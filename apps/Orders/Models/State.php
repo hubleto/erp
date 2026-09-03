@@ -14,9 +14,9 @@ class State extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired(),
       'code' => (new Varchar($this, $this->translate('Code')))->setRequired(),
-      'color' => (new Color($this, $this->translate('Color')))->setRequired()->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'color' => (new Color($this, $this->translate('Color')))->setRequired(),
     ]);
   }
 

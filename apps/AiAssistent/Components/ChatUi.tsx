@@ -1,6 +1,6 @@
 import React from 'react';
 import request from '@hubleto/react-ui/core/Request';
-import TranslatedComponent from '@hubleto/react-ui/core/TranslatedComponent';
+import TranslatedComponent from '@hubleto/react-ui/components/cc/TranslatedComponent';
 
 export interface ChatUiProps {
   [key: string]: any;

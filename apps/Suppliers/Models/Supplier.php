@@ -21,7 +21,7 @@ class Supplier extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired(),
       'address' => (new Varchar($this, $this->translate('Address')))->setIcon(self::COLUMN_ADDRESS_DEFAULT_ICON),
       'city' => (new Varchar($this, $this->translate('City'))),
       'postal_code' => (new Varchar($this, $this->translate('Postal code'))),
@@ -39,7 +39,6 @@ class Supplier extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = $this->translate('Suppliers');
     $description->ui["addButtonText"] = $this->translate("Add supplier");
 
     $fCountryOptions = [];

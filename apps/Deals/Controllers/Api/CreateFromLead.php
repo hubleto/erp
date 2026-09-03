@@ -34,8 +34,6 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
 
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('deals');
-
     try {
       $lead = $mLead->record->where("id", $idLead)->first();
 
@@ -53,9 +51,9 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
         "source_channel" => $lead->source_channel,
         "id_lead" => $lead->id,
         "deal_result" => $mDeal::RESULT_UNKNOWN,
-        "id_workflow" => $idWorkflow,
-        "id_workflow_step" => $idWorkflowStep,
       ]);
+
+      $deal = $mWorkflow->applyDefaultWorkflow($deal, 'deals');
 
       $mDealLead->record->recordCreate([
         'id_deal' => $deal['id'],

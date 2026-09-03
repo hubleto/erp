@@ -1,0 +1,190 @@
+import React, { Component } from 'react'
+import { setUrlParam, getUrlParam, deleteUrlParam } from '@hubleto/react-ui/core/Helper';
+import { TableDescription } from '@hubleto/react-ui/components/cc/Table';
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import FormInvoice from './FormInvoice';
+import moment from "moment";
+
+interface TableInvoicesProps extends TableExtendedProps {
+  idCustomer?: any,
+  number?: any,
+  vs?: any,
+  dateIssueFrom?: any,
+  dateIssueTo?: any,
+  dateDeliveryFrom?: any,
+  dateDeliveryTo?: any,
+  dateDueFrom?: any,
+  dateDueTo?: any,
+  datePaymentFrom?: any,
+  datePaymentTo?: any,
+}
+
+interface TableInvoicesState extends TableExtendedState {
+  idCustomer: any,
+  number: any,
+  vs: any,
+  dateIssueFrom: any,
+  dateIssueTo: any,
+  dateDeliveryFrom: any,
+  dateDeliveryTo: any,
+  dateDueFrom: any,
+  dateDueTo: any,
+  datePaymentFrom: any,
+  datePaymentTo: any,
+}
+
+export default class TableInvoices extends TableExtended<TableInvoicesProps, TableInvoicesState> {
+  static defaultProps = {
+    ...TableExtended.defaultProps,
+    itemsPerPage: 25,
+    formUseModalSimple: true,
+    model: 'Hubleto/App/Community/Invoices/Models/Invoice',
+    // description: {
+    //   ui: { addButtonText: this.translate('Create invoice') }
+    // },
+  }
+
+  props: TableInvoicesProps;
+  state: TableInvoicesState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Invoices\\Loader';
+  translationContextInner: string = 'Components\\TableInvoices';
+
+  constructor(props: TableInvoicesProps) {
+    super(props);
+    this.state = this.getStateFromProps(props) as TableInvoicesState;
+  }
+
+  getStateFromProps(props: TableInvoicesProps) {
+    return {
+      ...super.getStateFromProps(props),
+      idCustomer: props.idCustomer ?? (getUrlParam('id-customer') ?? 0),
+      number: props.number ?? (getUrlParam('number') ?? ''),
+      vs: props.vs ?? (getUrlParam('vs') ?? ''),
+      dateIssueFrom: props.dateIssueFrom ?? (getUrlParam('date-issue-from') ?? ''),
+      dateIssueTo: props.dateIssueTo ?? (getUrlParam('date-issue-to') ?? ''),
+      dateDeliveryFrom: props.dateDeliveryFrom ?? (getUrlParam('date-delivery-from') ?? ''),
+      dateDeliveryTo: props.dateDeliveryTo ?? (getUrlParam('date-delivery-to') ?? ''),
+      dateDueFrom: props.dateDueFrom ?? (getUrlParam('date-due-from') ?? ''),
+      dateDueTo: props.dateDueTo ?? (getUrlParam('date-due-to') ?? ''),
+      datePaymentFrom: props.datePaymentFrom ?? (getUrlParam('date-payment-from') ?? ''),
+      datePaymentTo: props.datePaymentTo ?? (getUrlParam('date-payment-to') ?? ''),
+    }
+  }
+
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = this.state.recordId == -1 ? 'centered small' : 'right wide';
+    return params;
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      idCustomer: this.state.idCustomer,
+      number: this.state.number,
+      vs: this.state.vs,
+      dateIssueFrom: this.state.dateIssueFrom,
+      dateIssueTo: this.state.dateIssueTo,
+      dateDeliveryFrom: this.state.dateDeliveryFrom,
+      dateDeliveryTo: this.state.dateDeliveryTo,
+      dateDueFrom: this.state.dateDueFrom,
+      dateDueTo: this.state.dateDueTo,
+      datePaymentFrom: this.state.datePaymentFrom,
+      datePaymentTo: this.state.datePaymentTo,
+    }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/invoices/' + (id > 0 ? id : 'add'));
+  }
+
+  cellClassName(columnName: string, column: any, rowData: any) {
+    const cellClassName = super.cellClassName(columnName, column, rowData);
+
+    if (columnName == 'date_due') {
+      const now = moment();
+      const daysDue = moment(now).diff(moment(rowData['date_due']), 'days');
+      const datePayment = moment(rowData['date_payment']);
+
+      if (!datePayment.isValid()) {
+        if (daysDue >= 0) return cellClassName + ' bg-red-200 text-red-800';
+        else if (daysDue > -7) return cellClassName + ' text-yellow-800';
+        else return cellClassName;
+      } else {
+        return cellClassName;
+      }
+    } else {
+      return cellClassName;
+    }
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "date_sent" && !data['date_sent']) {
+      return <div className='badge badge-danger'>{this.translate('Not sent')}</div>;
+    } else if (columnName == "date_payment" && !data['date_payment']) {
+      const now = moment();
+      const dateDue = moment(data['date_due']);
+      const badgeColor = (now > dateDue ? 'danger' : 'warning');
+      return <div className={'badge badge-' + badgeColor}>{this.translate('Not paid')}</div>;
+    } else if (columnName == "virt_items") {
+      try {
+        let items = JSON.parse(data['virt_items']);
+        return <div className='flex flex-col'>{items.map((item, index) => {
+          return <div key={index} className='badge text-xs'>
+            {item.item}: {item.amount ?? 0} ks x {globalThis.hubleto.currencyFormat(item.unit_price)} €
+          </div>
+        })}</div>;
+      } catch (ex) {
+        return null;
+      }
+    } else if (columnName == "virt_payments") {
+      try {
+        let payments = JSON.parse(data['virt_payments']);
+        return <div className='flex flex-col'>{payments.map((payment, index) => {
+          return <div key={index} className='badge text-xs'>
+            {payment.date_payment} {payment.amount ?? 0} €
+          </div>
+        })}</div>;
+      } catch (ex) {
+        return null;
+      }
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
+  renderFooter(): React.JSX.Element {
+    let totalExclVat = 0;
+    let totalVat = 0;
+    let totalInclVat = 0;
+
+    for (let i in this.state.data?.records) {
+      const row = this.state.data?.records[i];
+      totalExclVat += parseFloat(row['total_excl_vat']);
+      totalVat += parseFloat(row['total_incl_vat']) - parseFloat(row['total_excl_vat']);
+      totalInclVat += parseFloat(row['total_incl_vat']);
+    }
+
+    return <>
+      <div className="font-bold">
+        {this.translate('Total excl. VAT')}: {totalExclVat.toFixed(2)} €<br/>
+        {this.translate('Total VAT')}: {totalVat.toFixed(2)} €<br/>
+        {this.translate('Total incl. VAT')}: {totalInclVat.toFixed(2)} €
+      </div>
+    </>
+  }
+
+  renderForm(): React.JSX.Element {
+    let formProps = this.getFormProps();
+    formProps.description = {
+      defaultValues: {
+        id_klient: this.state.idCustomer,
+        id_profil: 1,
+        id_vystavil: globalThis.hubleto.idUser,
+      },
+      ui: { headerClassName: 'bg-indigo-50', },
+    };
+    return <FormInvoice {...formProps}/>;
+  }
+}

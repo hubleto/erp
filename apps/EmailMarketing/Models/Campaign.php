@@ -43,16 +43,16 @@ class Campaign extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
-      'color' => (new Color($this, $this->translate('Color')))->setIcon(self::COLUMN_COLOR_DEFAULT_ICON),
+      'color' => (new Color($this, $this->translate('Color'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setDefaultVisible(),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql',"
@@ -153,10 +153,7 @@ class Campaign extends \Hubleto\Erp\Model
 
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('email_marketing_emails');
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
-
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'email_marketing_emails');
     $this->record->recordUpdate($savedRecord);
 
     return parent::onAfterCreate($savedRecord);

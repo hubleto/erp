@@ -111,35 +111,14 @@ class Loader extends \Hubleto\Erp\App
   public function renderSecondSidebar(): string
   {
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/projects">
-          <span class="icon"><i class="fas fa-diagram-project"></i></span>
-          <span class="text">' . $this->translate('Projects') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/milestones">
-          <span class="icon"><i class="fas fa-calendar-check"></i></span>
-          <span class="text">' . $this->translate('Milestones') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/tasks">
-          <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Assign task to project') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/orders">
-          <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Assign project to order') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/tasks/milestones">
-          <span class="icon"><i class="fas fa-check-double"></i></span>
-          <span class="text">' . $this->translate('Assign task to milestone') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/projects/monthly-summary">
-          <span class="icon"><i class="fas fa-chart-bar"></i></span>
-          <span class="text">' . $this->translate('Monthly summary') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=projects">
-          <span class="icon"><i class="fas fa-calendar-days"></i></span>
-          <span class="text">' . $this->translate('Calendar') . '</span>
-        </a>
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('projects/milestones', 'fas fa-calendar-check', 'Milestones') . '
+        ' . $this->secondSidebarButton('projects/tasks', 'fas fa-check-double', 'Assign task to project') . '
+        ' . $this->secondSidebarButton('projects/tasks/milestones', 'fas fa-check-double', 'Assign task to milestone') . '
+        ' . $this->secondSidebarButton('projects/orders', 'fas fa-check-double', 'Assign project to order') . '
+        ' . $this->secondSidebarButton('projects/monthly-summary', 'fas fa-chart-bar', 'Monthly summary') . '
+        ' . $this->secondSidebarButton('calendar?show=projects', 'fas fa-calendar-days', 'Calendar') . '
       </div>
     ';
   }

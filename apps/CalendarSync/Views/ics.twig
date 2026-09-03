@@ -3,8 +3,9 @@
 
 <hblreact-table-calendar-sync-sources
   int:record-id="{{ viewParams.recordId }}"
-  json:custom-endpoint-params='{"type": "ics"}'
+  json:endpoint-params='{"type": "ics"}'
   json:description='{"ui": { "title": "ICS sources", "addButtonText": "Add ICS url" }}'
+  json:form-endpoint-params='{"type": "ics"}'
   json:form-props='{"descriptionSource": "props", "description": {"inputs": {"type": {"readonly": true}}, "defaultValues": {"type": "ics"}}}'
 ></hblreact-table-calendar-sync-sources>
 <!-- string:model="Hubleto/App/Community/CalendarSync/Models/Source" -->

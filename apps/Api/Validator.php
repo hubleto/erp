@@ -36,7 +36,7 @@ class Validator extends \Hubleto\Erp\Core
       }
     }
 
-    if (!$hasPermission) throw new \Exception('Not enough permissions.');
+    if (!$hasPermission) throw new \Exception('Not enough permissions to run the API controller.');
 
 
   }

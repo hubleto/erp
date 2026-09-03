@@ -19,7 +19,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       'title' => $this->translate('Deals'),
       'addNewActivityButtonText' => $this->translate('Add new activity linked to deal'),
       'icon' => 'fas fa-handshake',
-      'formComponent' => 'DealsFormActivity',
+      'formComponent' => 'DealCalendarActivityForm',
     ];
   }
 

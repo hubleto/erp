@@ -29,21 +29,12 @@ class Loader extends \Hubleto\Erp\App
       '/^leads\/settings\/?$/' => Controllers\Settings::class,
 
       '/^leads\/tags\/?$/' => Controllers\Tags::class,
-      '/^leads\/levels\/?$/' => Controllers\Levels::class,
       '/^leads\/lost-reasons\/?$/' => Controllers\LostReasons::class,
 
       '/^leads\/plan\/?$/' => Controllers\Plan::class,
     ]);
 
-    // $this->addSearchSwitch('l', 'leads');
-    // $this->addSearchSwitch('t', 'taskleads');
-
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    // $settingsApp->addSetting($this, [
-    //   'title' => $this->translate('Lead Levels'),
-    //   'icon' => 'fas fa-layer-group',
-    //   'url' => 'leads/levels',
-    // ]);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Lead Tags'),
       'icon' => 'fas fa-tags',
@@ -81,7 +72,6 @@ class Loader extends \Hubleto\Erp\App
   public function installApp(int $round): void
   {
     if ($round == 1) {
-      $mLevel = $this->getModel(Models\Level::class);
       $mLead = $this->getModel(Models\Lead::class);
       $mLeadHistory = $this->getModel(Models\LeadHistory::class);
       $mLeadTag = $this->getModel(Models\Tag::class);
@@ -91,7 +81,6 @@ class Loader extends \Hubleto\Erp\App
       $mLeadDocument = $this->getModel(Models\LeadDocument::class);
       $mLostReasons = $this->getModel(Models\LostReason::class);
 
-      $mLevel->upgradeSchema();
       $mLostReasons->upgradeSchema();
       $mLead->upgradeSchema();
       $mLeadHistory->upgradeSchema();
@@ -105,12 +94,6 @@ class Loader extends \Hubleto\Erp\App
       $mLeadTag->record->recordCreate([ 'name' => $this->translate("Great opportunity"), 'color' => '#4caf50' ]);
       $mLeadTag->record->recordCreate([ 'name' => $this->translate("Duplicate"), 'color' => '#9e9e9e' ]);
       $mLeadTag->record->recordCreate([ 'name' => $this->translate("Needs attention"), 'color' => '#795548' ]);
-
-      $mLevel->record->recordCreate([ 'name' => $this->translate("Cold"), 'color' => '#2196f3' ]);
-      $mLevel->record->recordCreate([ 'name' => $this->translate("Warm"), 'color' => '#4caf50' ]);
-      $mLevel->record->recordCreate([ 'name' => $this->translate("Hot"), 'color' => '#9e9e9e' ]);
-      $mLevel->record->recordCreate([ 'name' => $this->translate("Marketing qualified"), 'color' => '#795548' ]);
-      $mLevel->record->recordCreate([ 'name' => $this->translate("Sales qualified"), 'color' => '#795548' ]);
 
       $mLostReasons->record->recordCreate(["reason" => $this->translate("Price")]);
       $mLostReasons->record->recordCreate(["reason" => $this->translate("Solution")]);
@@ -154,58 +137,12 @@ class Loader extends \Hubleto\Erp\App
   {
 
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/leads">
-          <span class="icon"><i class="fas fa-people-arrows"></i></span>
-          <span class="text">' . $this->translate('Leads') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/leads/plan">
-          <span class="icon"><i class="fas fa-list-ol"></i></span>
-          <span class="text">' . $this->translate('Plan') . '</span>
-        </a>
-        <a class="btn btn-transparent" href="' . $this->env()->projectUrl . '/calendar?show=leads">
-          <span class="icon"><i class="fas fa-calendar-days"></i></span>
-          <span class="text">' . $this->translate('Calendar') . '</span>
-        </a>
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('leads/plan', 'fas fa-list-ol', 'Plan') . '
+        ' . $this->secondSidebarButton('calendar?show=leads', 'fas fa-calendar-days', 'Calendar') . '
       </div>
     ';
   }
-
-  // /**
-  //  * Implements fulltext search functionality for tasks
-  //  *
-  //  * @param array $expressions List of expressions to be searched and glued with logical 'or'.
-  //  * 
-  //  * @return array
-  //  * 
-  //  */
-  // public function search(array $expressions): array
-  // {
-  //   $mLead = $this->getModel(Models\Lead::class);
-  //   $qLeads = $mLead->record->prepareReadQuery();
-    
-  //   foreach ($expressions as $e) {
-  //     $qLeads = $qLeads->where(function($q) use ($e) {
-  //       $q->orWhere('leads.id', 'like', '%' . $e . '%');
-  //       $q->orWhere('leads.title', 'like', '%' . $e . '%');
-  //     })
-  //     ->where('leads.is_closed', false);
-  //   }
-
-  //   $leads = $qLeads->get()->toArray();
-
-  //   $results = [];
-
-  //   foreach ($leads as $lead) {
-  //     $results[] = [
-  //       "id" => $lead['id'],
-  //       "label" => $lead['id'] . ' ' . $lead['title'],
-  //       "url" => 'leads/' . $lead['id'],
-  //       // "description" => $task[''],
-  //     ];
-  //   }
-
-  //   return $results;
-  // }
 
 }

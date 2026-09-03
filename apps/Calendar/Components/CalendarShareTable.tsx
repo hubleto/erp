@@ -1,7 +1,7 @@
 import React from "react";
 import request from "@hubleto/react-ui/core/Request";
-import Table from "@hubleto/react-ui/core/Table";
-import TranslatedComponent from "@hubleto/react-ui/core/TranslatedComponent";
+import Table from "@hubleto/react-ui/components/cc/Table";
+import TranslatedComponent from "@hubleto/react-ui/components/cc/TranslatedComponent";
 
 interface CalendarShareTableProps {
   configs?: any,
@@ -83,6 +83,7 @@ export default class CalendarShareTable extends TranslatedComponent<CalendarShar
       {
         headerClassName: 'dialog-danger-header',
         contentClassName: 'dialog-danger-content',
+        footerClassName: 'dialog-danger-footer',
         header: this.translate('Stop sharing "{calendar}"').replace('{calendar}', calendar),
         yesText: this.translate('Yes, remove all shares'),
         yesButtonClass: 'btn-danger',

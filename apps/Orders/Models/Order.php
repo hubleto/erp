@@ -77,10 +77,10 @@ class Order extends \Hubleto\Erp\Model
         self::PURCHASE_ORDER => 'bg-lime-50 text-slate-700',
         self::SALES_ORDER => 'bg-yellow-50 text-slate-700',
       ])->setDefaultValue(self::PURCHASE_ORDER)->setDefaultVisible(),
-      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible()->setIcon(self::COLUMN_IDENTIFIER_DEFUALT_ICON),
+      'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('badge badge-info')->setDefaultVisible(),
       'identifier_external' => (new Varchar($this, $this->translate('External identifier')))->setDefaultVisible(),
-      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold')->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
-      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_CUSTOMER_DEFAULT_ICON),
+      'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
+      'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class))->setDefaultVisible(),
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible()->setIcon(self::COLUMN_ID_SUPPLIER_DEFAULT_ICON),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
@@ -119,12 +119,12 @@ class Order extends \Hubleto\Erp\Model
       'note' => (new Text($this, $this->translate('Notes'))),
       'shared_folder' => (new Varchar($this, $this->translate("Shared folder (online document storage)"))->setCssClass('text-violet-800'))
         ->setReactComponent('InputHyperlink')
-        ->setDescription($this->translate('Link to shared folder (online storage) with related documents'))
+        ->setHint($this->translate('Link to shared folder (online storage) with related documents'))
       ,
       'id_template' => (new Lookup($this, $this->translate('Template'), Template::class)),
       'id_document' => (new Lookup($this, $this->translate('Document'), Document::class)),
       'pdf' => (new File($this, $this->translate('PDF'))),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible(),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
       'virt_last_item' => (new Virtual($this, $this->translate('Last item')))->setDefaultVisible()
         ->setProperty('sql', "
           SELECT
@@ -347,11 +347,7 @@ class Order extends \Hubleto\Erp\Model
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
 
-    list($defaultWorkflow, $idWorkflow, $idWorkflowStep) = $mWorkflow->getDefaultWorkflowInGroup('orders');
-
-    $savedRecord['id_workflow'] = $idWorkflow;
-    $savedRecord['id_workflow_step'] = $idWorkflowStep;
-
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'orders');
     $this->record->recordUpdate($savedRecord);
 
     $savedRecord = parent::onAfterCreate($savedRecord);

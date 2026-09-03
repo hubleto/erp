@@ -1,0 +1,214 @@
+import React, { Component } from 'react'
+import TableExtended, { TableExtendedProps, TableExtendedState } from '@hubleto/react-ui/components/cc/TableExtended';
+import FormLead, { FormLeadProps } from './FC/FormLead';
+
+export interface TableLeadsProps extends TableExtendedProps {
+  idCustomer?: number,
+}
+
+export interface TableLeadsState extends TableExtendedState {
+  // showSetStatusDialog: boolean,
+  selectedBulkStatus: number,
+  rerenderKey: number,
+}
+
+export default class TableLeads extends TableExtended<TableLeadsProps, TableLeadsState> {
+  static defaultProps = {
+    ...TableExtended.defaultProps,
+    formUseModalSimple: true,
+    model: 'Hubleto/App/Community/Leads/Models/Lead',
+  }
+
+  props: TableLeadsProps = null;
+  state: TableLeadsState = null;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Leads\\Loader';
+  translationContextInner: string = 'Components\\TableLeads';
+
+  constructor(props: TableLeadsProps) {
+    super(props);
+    this.props = props;
+    this.state = {
+      ...this.getStateFromProps(props),
+      // showSetStatusDialog: false,
+      rerenderKey: Math.random(),
+      selectedBulkStatus: 0,
+    }
+  }
+
+  getFormModalProps(): any {
+    let params = super.getFormModalProps();
+    params.type = 'right wide';
+    return params;
+  }
+
+  getEndpointParams(): any {
+    return {
+      ...super.getEndpointParams(),
+      idCustomer: this.props.idCustomer,
+    }
+  }
+
+  setRecordFormUrl(id: number) {
+    window.history.pushState({}, "", globalThis.hubleto.config.projectUrl + '/leads/' + (id > 0 ? id : 'add'));
+  }
+
+  renderCell(columnName: string, column: any, data: any, options: any) {
+    if (columnName == "virt_tags") {
+      return data.TAGS ? data.TAGS.map((tag: any, key: any) => {
+        return <div key={key} className="text-nowrap mr-2">
+          <i style={{color: tag.TAG?.color}} className="fas fa-tag mr-2"></i>
+          {tag.TAG?.name}
+        </div>
+      }) : null;
+    } else if (columnName == "DEAL") {
+      if (data.DEAL) {
+        return <>
+          <a
+            className="btn btn-transparent btn-small"
+            href={"deals/" + data.DEAL.id}
+            target="_blank"
+          >
+            <span className="icon"><i className="fas fa-arrow-right"></i></span>
+            <span className="text">{data.DEAL.identifier}</span>
+          </a>
+        </>
+      } else {
+        return null;
+      }
+    } else {
+      return super.renderCell(columnName, column, data, options);
+    }
+  }
+
+  onAfterLoadTableDescription(description: any) {
+    description.columns['DEAL'] = {
+      type: 'varchar',
+      title: this.translate('Deal'),
+    };
+
+    return description;
+  }
+
+  renderForm(): React.JSX.Element {
+    let formProps = this.getFormProps() as FormLeadProps;
+    formProps.customEndpointParams.idCustomer = this.props.idCustomer;
+    return <FormLead {...formProps}/>;
+  }
+
+  // saveBulkStatusChange() {
+  //   request.post(
+  //     "leads/api/save-bulk-status-change",
+  //     {
+  //       record: this.state.selection,
+  //     },
+  //     {},
+  //     (data: any) => {
+  //       if (data.status == "success") {
+  //         this.setState({showSetStatusDialog: false, selection: null})
+  //         this.loadData();
+  //       }
+  //     }
+  //   );
+  // }
+
+  // bulkStatusChange(newStatus: any) {
+  //   if (this.state.selection.length > 0) {
+  //     let data = this.state.selection;
+  //     Object.entries(data).map((item, index) => item[1].status = newStatus)
+  //     this.setState({selection: data, rerenderKey: Math.random()});
+  //   }
+  // }
+
+  // renderContent(): React.JSX.Element {
+
+  //   let saveButton = <>
+  //     <button className='btn btn-edit' onClick={() => this.saveBulkStatusChange()}>
+  //       <span className="icon"><i className="fas fa-save"></i></span>
+  //       <span className="text">
+  //         Save
+  //       </span>
+  //     </button>
+  //   </>
+
+  //   return <>
+  //     {super.renderContent()}
+  //     {this.state.showSetStatusDialog ?
+  //       <ModalSimple
+  //         uid={this.props.uid + '_form_bulk_status_change'}
+  //         isOpen={true}
+  //         title={this.translate('Bulk change Lead status')}
+  //         type='centered'
+  //         showHeader={true}
+  //         headerLeft={saveButton}
+  //         onClose={() => { this.setState({showSetStatusDialog: false}); }}
+  //       >
+  //         <>
+  //           <div className='w-[100%] flex flex-row justify-end items-center gap-2 mb-2'>
+  //             <span className='text font-bold'>{this.translate("Bulk change status")}:</span>
+  //             <select
+  //               className='w-1/4 mr-[15px]'
+  //               value={this.state.selectedBulkStatus}
+  //               onChange={(e) => {
+  //                 this.setState({selectedBulkStatus: e.target.value});
+  //                 this.bulkStatusChange(e.target.value);
+  //               }}
+  //             >
+  //               <option value={0}>{this.translate("No interaction yet")}</option>
+  //               <option value={1}>{this.translate("Contacted")}</option>
+  //               <option value={2}>{this.translate("In Progress")}</option>
+  //               <option value={3}>{this.translate("Closed")}</option>
+  //               <option value={20}>C{this.translate("onverted to deal")}</option>
+  //             </select>
+  //           </div>
+  //           <TableExtended
+  //             key={this.state.rerenderKey}
+  //             model={this.model}
+  //             data={{data: this.state.selection}}
+  //             readonly={true}
+  //             uid={this.props.uid + 'table_leads_mass_status_change'}
+  //             descriptionSource='props'
+  //             isInlineEditing={true}
+  //             onRowClick={() => null}
+  //             onChange={(table: TableLeads) => {this.setState({selection: table.state.data?.records})}}
+  //             description={{
+  //               columns: {
+  //                 identifier: {type: "varchar", title: this.translate("Identifier"), readonly: true,
+  //                   cellRenderer: ( table: TableLeads, data: any, options: any): React.JSX.Element => (
+  //                     <>{data.identifier}</>
+  //                   )
+  //                 },
+  //                 title: {type: "varchar", title: this.translate("Title"), readonly: true,
+  //                   cellRenderer: ( table: TableLeads, data: any, options: any): React.JSX.Element => (
+  //                     <>{data.title}</>
+  //                   )
+  //                 },
+  //                 company_name: {type: "varchar", title: this.translate("Company"), readonly: true,
+  //                   cellRenderer: ( table: TableLeads, data: any, options: any): React.JSX.Element => (
+  //                     <>{data.CUSTOMER.name}</>
+  //                   )
+  //                 },
+  //                 status: {type: "interger", title: this.translate("Status"), readonly: true},
+  //               },
+  //               inputs: {
+  //                 identifier: {type: "varchar", title: this.translate("Identifier"), readonly: true},
+  //                 title: {type: "varchar", title: this.translate("Title"), readonly: true},
+  //                 company_name: {type: "varchar", title: this.translate("Company"),readonly: true},
+  //                 status: {type: "interger", title: this.translate("Status"), readonly: true,
+  //                   enumValues: {
+  //                     0: this.translate('No interaction yet'),
+  //                     1: this.translate('Contacted'),
+  //                     2: this.translate('In Progress'),
+  //                     3: this.translate('Closed'),
+  //                     20: this.translate('Converted to deal'),
+  //                   }},
+  //               }
+  //             }}
+  //           >
+  //           </TableExtended>
+  //         </>
+  //       </ModalSimple>
+  //     : null}
+  //   </>;
+  // }
+}

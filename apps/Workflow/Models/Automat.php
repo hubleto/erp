@@ -22,12 +22,12 @@ class Automat extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'trigger' => (new Varchar($this, $this->translate('Trigger')))->setRequired()->setDefaultVisible()->setEnumValues(self::ENUM_TRIGGERS),
       'execution_order' => (new Integer($this, $this->translate('Execution order')))->setRequired()->setDefaultVisible(),
       'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
-      'conditions' => (new Json($this, $this->translate('Conditions')))->setDefaultVisible()->setReactComponent('InputJson'),
-      'actions' => (new Json($this, $this->translate('Actions')))->setDefaultVisible()->setReactComponent('InputJson'),
+      'conditions' => (new Json($this, $this->translate('Conditions')))->setDefaultVisible(),
+      'actions' => (new Json($this, $this->translate('Actions')))->setDefaultVisible(),
     ]);
   }
 

@@ -20,8 +20,8 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^mail\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Home::class,
-      '/^mail\/?(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Home::class,
+      '/^mail\/?(?<idAccount>\d+)?\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Mails::class,
+      '/^mail\/?(?<idAccount>\d+)?\/?(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Mails::class,
 
       '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
       '/^mail\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
@@ -31,9 +31,6 @@ class Loader extends \Hubleto\Erp\App
       '/^mail\/sent\/?$/' => Controllers\Sent::class,
       '/^mail\/get\/?$/' => Controllers\Get::class,
       '/^mail\/mailboxes\/?$/' => Controllers\Mailboxes::class,
-      // '/^mail\/mails\/(?<idMailbox>\d+)\/?$/' => Controllers\Mails::class,
-      // '/^mail\/mails\/add\/?$/' => ['controller' => Controllers\Mails::class, 'vars' => ['recordId' => -1]],
-      // '/^mail\/drafts\/?$/' => Controllers\Drafts::class,
 
       '/^mail\/templates\/?(?<recordId>\d+)?\/?$/' => Controllers\Templates::class,
       '/^mail\/templates\/add\/?$/' => ['controller' => Controllers\Templates::class, 'vars' => ['recordId' => -1]],
@@ -145,36 +142,12 @@ class Loader extends \Hubleto\Erp\App
     }
 
     return '
-      <div class="flex flex-col gap-2">
-        <a class="btn btn-square btn-primary-outline" href="' . $this->env()->projectUrl . '/mail">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span class="text">' . $this->translate('Mail') . '</span>
-        </a>
-
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
         ' . $accountsHtml . '
-
-      <div>
-        <a
-          class="btn btn-small btn-list-item btn-transparent mt-2"
-          href="' . $this->env()->projectUrl . '/mail/get"
-        >
-          <span class="icon"><i class="fas fa-download"></i></span>
-          <span class="text">' . $this->translate('Get emails') . '</span>
-        </a>
-        <a
-          class="btn btn-small btn-list-item btn-transparent mt-2"
-          href="' . $this->env()->projectUrl . '/mail/scheduled"
-        >
-          <span class="icon"><i class="fas fa-clock"></i></span>
-          <span class="text">' . $this->translate('Scheduled to send') . '</span>
-        </a>
-        <a
-          class="btn btn-small btn-list-item btn-transparent mt-2"
-          href="' . $this->env()->projectUrl . '/mail/accounts"
-        >
-          <span class="icon"><i class="fas fa-cog"></i></span>
-          <span class="text">' . $this->translate('Manage accounts') . '</span>
-        </a>
+        ' . $this->secondSidebarButton('mail/get', 'fas fa-download', 'Get emails') . '
+        ' . $this->secondSidebarButton('mail/scheduled', 'fas fa-clock', 'Scheduled to send') . '
+        ' . $this->secondSidebarButton('mail/accounts', 'fas fa-cog', 'Accounts') . '
       </div>
 
     ';

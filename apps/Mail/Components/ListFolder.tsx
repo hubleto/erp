@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
-import Table, { TableProps, TableState } from '@hubleto/react-ui/core/Table';
-import Form, { FormProps } from '@hubleto/react-ui/core/Form';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+import Form, { FormProps } from '@hubleto/react-ui/components/cc/Form';
 import FormMail from './FormMail';
-import Spinner from '@hubleto/react-ui/fc/Spinner';
-import ModalForm from "@hubleto/react-ui/core/ModalForm";
+import Spinner from '@hubleto/react-ui/components/cc/Spinner';
+import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";
 
 interface ListFolderProps extends TableProps {
   idFolder?: number,

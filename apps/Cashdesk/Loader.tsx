@@ -1,6 +1,6 @@
 import App from '@hubleto/react-ui/core/App'
-import TableReceipts from "./Components/TableReceipts"
-import TableCashRegisters from "./Components/TableCashRegisters"
+import TableReceipts from "./Components/FC/TableReceipts"
+import TableCashRegisters from "./Components/FC/TableCashRegisters"
 
 class CashdeskApp extends App {
   init() {

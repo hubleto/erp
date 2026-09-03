@@ -1,0 +1,102 @@
+import React, { Component, createRef, RefObject } from 'react';
+import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+
+interface FormUserRoleProps extends FormExtendedProps {}
+interface FormUserRoleState extends FormExtendedState {}
+
+export default class FormUserRole<P, S> extends FormExtended<FormUserRoleProps,FormUserRoleState> {
+  static defaultProps: any = {
+    ...FormExtended.defaultProps,
+    model: 'Hubleto/App/Community/Auth/Models/UserRole',
+  };
+
+  props: FormUserRoleProps;
+  state: FormUserRoleState;
+
+  translationContext: string = 'Hubleto\\App\\Community\\Settings\\Loader';
+  translationContextInner: string = 'Components\\FormUserRole';
+
+  constructor(props: FormUserRoleProps) {
+    super(props);
+  }
+
+  getStateFromProps(props: FormUserRoleProps) {
+    return {
+      ...super.getStateFromProps(props),
+    };
+  }
+
+  renderTitle(): React.JSX.Element {
+    return <>
+      <small>{this.translate('User role')}</small>
+      <h2>{this.state.record.role ?? '-'}</h2>
+    </>;
+  }
+
+  renderContent(): React.JSX.Element {
+    const R = this.state.record;
+
+    let permissions: any = {};
+
+    try {
+      permissions = JSON.parse(R.permissions);
+    } catch (ex) {
+      permissions = {};
+    }
+
+    if (!permissions) permissions = {};
+
+    return <>
+      <div className='card'>
+        <div className='card-body'>
+          {this.inputWrapper("role")}
+          {this.inputWrapper("description")}
+          {this.inputWrapper("grant_all")}
+        </div>
+      </div>
+      {this.divider(this.translate('Permissions for records with designated owner, manager or team'))}
+      <div className='list'>
+        <div className='list-item'><div className='flex gap-2 justify-between p-1'>
+          <div>{this.translate('Reading')}</div>
+          <div>
+            <select
+              onChange={(event) => {
+                permissions.recordsRead = event.currentTarget.value;
+                this.updateRecord({permissions: JSON.stringify(permissions)});
+              }}
+              value={permissions.recordsRead ?? 'owned'}
+            >
+              <option value='owned'>{this.translate('Can read only owned records')}</option>
+              <option value='owned-and-managed'>{this.translate('Can read only owned and managed records')}</option>
+              <option value='all'>{this.translate('Can read all records')}</option>
+            </select>
+          </div>
+        </div></div>
+        <div className='list-item'><div className='flex gap-2 justify-between p-1'>
+          <div>{this.translate('Modifying')}</div>
+          <div>
+            <select
+              onChange={(event) => {
+                permissions.recordsModify = event.currentTarget.value;
+                this.updateRecord({permissions: JSON.stringify(permissions)});
+              }}
+              value={permissions.recordsModify ?? 'owned'}
+            >
+              <option value='owned'>{this.translate('Can modify only owned records')}</option>
+              <option value='owned-and-managed'>{this.translate('Can modify only owned and managed records')}</option>
+              <option value='all'>{this.translate('Can modify all records')}</option>
+            </select>
+          </div>
+        </div></div>
+      </div>
+      {R.grant_all || R.id <= 0 ? null :
+        <Table
+          uid='user_role_permissions'
+          model='Hubleto/App/Community/Settings/Models/RolePermission'
+          customEndpointParams={{idRole: this.state.id}}
+        ></Table>
+      }
+    </>
+  }
+}

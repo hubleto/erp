@@ -1,9 +1,10 @@
 import React from 'react';
 import App from '@hubleto/react-ui/core/App'
-import TableDeals from "./Components/TableDeals"
-import DealFormActivity from "./Components/DealFormActivity"
+import TableDeals from "./Components/FC/TableDeals"
+import DealCalendarActivityForm from "./Components/FC/DealCalendarActivityForm"
 import request from "@hubleto/react-ui/core/Request";
-import FormLead from '@hubleto/apps/Leads/Components/FormLead';
+import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
+import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
 class DealsApp extends App {
   init() {
@@ -11,7 +12,7 @@ class DealsApp extends App {
 
     // register react components
     globalThis.hubleto.registerReactComponent('DealsTableDeals', TableDeals);
-    globalThis.hubleto.registerReactComponent('DealsFormActivity', DealFormActivity);
+    globalThis.hubleto.registerReactComponent('DealCalendarActivityForm', DealCalendarActivityForm);
 
     // miscellaneous
     globalThis.hubleto.getApp('Hubleto/App/Community/Leads').addCustomFormTab({
@@ -34,20 +35,23 @@ class DealsApp extends App {
       },
     });
 
-    FormLead.addFormHeaderButton(
-      globalThis.hubleto.translate('Create deal', 'Hubleto\\App\\Community\\Deals\\Loader', 'manifest'),
-      '',
-      (form: any) => {
-        request.get(
-          'deals/api/create-from-lead',
-          {idLead: form.state.record.id},
-          (data: any) => {
-              if (data.status == "success") {
-              globalThis.window.open(globalThis.hubleto.config.projectUrl + `/deals/${data.idDeal}`)
-              }
-          }
-        );
-      }
+    FormCustomizer.addFormHeaderExtraButton(
+      'FormLead',
+      (form: FormMeta) => { return form.id <= 0 ? false : {
+        title: 'Create deal',
+        icon: 'fas fa-diagram-project',
+        onClick: (form: FormMeta) => {
+          request.get(
+            'deals/api/create-from-lead',
+            {idLead: form.id},
+            (data: any) => {
+                if (data.status == "success") {
+                globalThis.window.open(globalThis.hubleto.config.projectUrl + `/deals/${data.idDeal}`)
+                }
+            }
+          );
+        }
+      }}
     )
   }
 }

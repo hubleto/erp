@@ -1,0 +1,8 @@
+<hblreact-workflow-table-workflow-steps
+  string:tag="table-workflows"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
+  json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
+></hblreact-workflow-table-workflow-steps>

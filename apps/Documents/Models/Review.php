@@ -11,7 +11,7 @@ class Review extends \Hubleto\Erp\Model
 {
   public string $table = 'documents_reviews';
   public string $recordManagerClass = RecordManagers\Review::class;
-  public ?string $lookupSqlValue = '{%TABLE%}.comments';
+  public ?string $lookupSqlValue = '{%TABLE%}.comment';
   public ?string $lookupUrlAdd = 'documents/reviews/add';
   public ?string $lookupUrlDetail = 'documents/reviews/{%ID%}';
 
@@ -26,8 +26,8 @@ class Review extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_document' => (new Lookup($this, $this->translate("Document"), Document::class))->setRequired()->setReadonly(),
-      'id_version' => (new Lookup($this, $this->translate("Version"), Version::class))->setRequired()->setReadonly(),
+      'id_document' => (new Lookup($this, $this->translate("Document"), Document::class))->setRequired(),
+      'id_version' => (new Lookup($this, $this->translate("Version"), Version::class))->setRequired(),
       'comment' => (new Varchar($this, $this->translate('Comment')))->setDefaultVisible(),
       'requested_on' => (new DateTime($this, $this->translate('Requested on')))->setReadonly()->setDefaultVisible(),
       'id_requested_by' => (new Lookup($this, $this->translate("Requested by"), User::class))->setDefaultVisible(),

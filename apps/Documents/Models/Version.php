@@ -26,10 +26,10 @@ class Version extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
-      'id_document' => (new Lookup($this, $this->translate("Document"), Document::class))->setRequired()->setReadonly(),
-      'version' => (new Integer($this, $this->translate('Version')))->setReadonly()->setDefaultVisible(),
+      'id_document' => (new Lookup($this, $this->translate("Document"), Document::class))->setRequired(),
+      'version' => (new Integer($this, $this->translate('Version')))->setReadonly()->setDefaultVisible()->setHint($this->translate("Version will be automatically added")),
       'created_on' => (new DateTime($this, $this->translate('Created on')))->setReadonly()->setDefaultVisible(),
-      'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultVisible(),
+      'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
       'file' => (new ColumnFile($this, $this->translate('File')))->setDefaultVisible(),
     ]);
   }
@@ -58,7 +58,7 @@ class Version extends \Hubleto\Erp\Model
 
     return $record;
   }
-  
+
   public function onAfterCreate(array $savedRecord): array
   {
     $savedRecord = parent::onAfterCreate($savedRecord);

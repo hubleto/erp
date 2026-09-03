@@ -133,70 +133,72 @@ const Dashboard = (props: DashboardProps) => {
   }, []);
 
   return <div className='flex flex-col gap-2'>
-    <div className='flex flex-row justify-between'>
+    {panels.length == 0 ? <div className='text-primary text-center text-lg'>Nothing to show in dashboard</div> :
+      <div className={'flex flex-col gap-2 md:grid md:grid-cols-' + Math.min(panels.length, 6)}>
+        {panels.map((panel: Panel, index: any) => {
+          const width = panel.width ?? 1;
+          return <div
+            key={index}
+            className={
+              "card"
+              + " " + (panel.id == draggedIdPanel ? "card-info" : "")
+            }
+            style={{gridColumn: `span ${width}`}}
+          >
+            <div
+              className="card-header cursor-move"
+              draggable
+              onDragStart={(e: any) => onDragStart(e, panel.id)}
+              onDragOver={(e: any) => onDragOver(e, panel.id)}
+              onDrop={(e: any) => onDrop(e)}
+            >
+              <div className='btn-group items-center hidden md:block'>
+                <button
+                  className='btn btn-transparent btn-small'
+                  onClick={() => {
+                    let newWidth = (panel.width ?? 3) - 1;
+                    if (newWidth > 6) newWidth = 6;
+                    if (newWidth < 1) newWidth = 1;
+                    setPanelWidth(panel.id, newWidth);
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-minus'></i></span>
+                </button>
+                <button
+                  className='btn btn-transparent btn-small'
+                  onClick={() => {
+                    let newWidth = (panel.width ?? 3) + 1;
+                    if (newWidth > 6) newWidth = 6;
+                    if (newWidth < 1) newWidth = 1;
+                    setPanelWidth(panel.id, newWidth);
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-plus'></i></span>
+                </button>
+              </div>
+              {panel.title}
+            </div>
+            {hidePanelsWhileDragging ?
+              <div className="card-body bg-gray-50 p-4"></div>
+            : (panel.contentLoaded ?
+              <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
+            :
+              <div className="card-body">
+                <Spinner size="sm" />
+              </div>
+            )}
+          </div>
+        })}
+      </div>
+    }
+    <div className='mx-auto my-8'>
       <a
         className='btn btn-transparent'
-        href={"../../dashboards/" + props.idDashboard}
+        href={globalThis.hubleto.config.projectUrl + "/dashboards/" + props.idDashboard}
       >
         <span className="icon"><i className="fas fa-cog"></i></span>
-        <span className="text text-nowrap">{T.translate('Configure this dashboard')}</span>
+        <span className="text text-nowrap">{T.translate('Configure dashboard')}</span>
       </a>
-    </div>
-    <div className='flex flex-col gap-2 md:grid md:grid-cols-6'>
-      {panels.map((panel: Panel, index: any) => {
-        const width = panel.width ?? 1;
-        return <div
-          key={index}
-          className={
-            "card"
-            + " " + (panel.id == draggedIdPanel ? "card-info" : "")
-          }
-          style={{gridColumn: `span ${width}`}}
-        >
-          <div
-            className="card-header cursor-move"
-            draggable
-            onDragStart={(e: any) => onDragStart(e, panel.id)}
-            onDragOver={(e: any) => onDragOver(e, panel.id)}
-            onDrop={(e: any) => onDrop(e)}
-          >
-            <div className='btn-group items-center hidden md:block'>
-              <button
-                className='btn btn-transparent btn-small'
-                onClick={() => {
-                  let newWidth = (panel.width ?? 3) - 1;
-                  if (newWidth > 6) newWidth = 6;
-                  if (newWidth < 1) newWidth = 1;
-                  setPanelWidth(panel.id, newWidth);
-                }}
-              >
-                <span className='icon'><i className='fas fa-minus'></i></span>
-              </button>
-              <button
-                className='btn btn-transparent btn-small'
-                onClick={() => {
-                  let newWidth = (panel.width ?? 3) + 1;
-                  if (newWidth > 6) newWidth = 6;
-                  if (newWidth < 1) newWidth = 1;
-                  setPanelWidth(panel.id, newWidth);
-                }}
-              >
-                <span className='icon'><i className='fas fa-plus'></i></span>
-              </button>
-            </div>
-            {panel.title}
-          </div>
-          {hidePanelsWhileDragging ?
-            <div className="card-body bg-gray-50 p-4"></div>
-          : (panel.contentLoaded ?
-            <div className="card-body" dangerouslySetInnerHTML={{__html: panel.content}}></div>
-          :
-            <div className="card-body">
-              <Spinner size="sm" />
-            </div>
-          )}
-        </div>
-      })}
     </div>
   </div>
 

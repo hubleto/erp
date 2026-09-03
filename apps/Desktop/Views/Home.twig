@@ -1,10 +1,6 @@
 {% set defaultDashboard = viewParams.defaultDashboard %}
 {% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
-<div class="app-main-title">
-  {{ translate('Welcome') }}, {{ user.first_name ?? user.email }}
-</div>
-
 <div class="block md:hidden grid grid-cols-3 gap-0 m-2">
   {% for app in viewParams.appsInSidebar %}
     <a
@@ -20,8 +16,12 @@
 
 <div class="w-full h-full flex-dyn">
   <div class="grow">
+    <div class="text-primary my-16 text-center text-[3em]">
+      {{ translate('Welcome') }}, {{ user.first_name ?? user.email }}
+    </div>
+
     {% for m in viewParams.welcomeScreenMessages %}
-      <div class="alert alert-{{ m.class }} m-2">
+      <div class="alert alert-{{ m.class }} mx-auto my-1 max-w-[90vw] md:max-w-[50vw]">
         {% if m.icon %}
           <div class="icon"><i class="{{ m.icon }}"></i></div>
         {% endif %}
@@ -35,6 +35,20 @@
       </div>
     {% endfor %}
 
+    <div class="alert mx-auto my-12 max-w-[90vw] md:max-w-[50vw]">
+      <div class="icon"><i class="fas fa-question"></i></div>
+      <div class='grow'>
+        <b>Did you know?</b><br>
+        {{ viewParams.didYouKnow|raw }}
+      </div>
+      <div>
+        <a href="https://help.hubleto.eu" target="_blank" class="btn btn-transparent">
+          <span class="icon"><i class="fas fa-book"></i></span>
+          <span class="text">Open user guide</span>
+        </a>  
+      </div>
+    </div>
+
     <div class="mt-2">
       <hblreact-dashboards-dashboard
         int:id-dashboard='{{ defaultDashboard.id }}'
@@ -43,13 +57,9 @@
         bool:show-add-new-panel-button='true'
       ></hblreact-dashboards-dashboard>
     </div>
-
-    <div class="mx-auto pt-20">
-      <img src="{{ welcomeSplashImageUrl }}" class="max-w-90 m-auto">
-    </div>
   </div>
 
-  <div class="flex gap-2 border-l border-l-gray-200 h-full">
+  <div class="flex flex-col gap-2 border-l border-l-gray-200 h-full">
     <div class="grow p-2 mb-2 flex flex-col md:flex-row gap-2">
       <div class="m-8 dark:text-white">
         <div class="flex">
@@ -82,6 +92,10 @@
           />
         </div>
       {% endif %}
+    </div>
+
+    <div>
+      <img src="{{ welcomeSplashImageUrl }}" class="w-48 m-4">
     </div>
 
     {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Usage') %}

@@ -125,12 +125,12 @@ class Loader extends \Hubleto\Erp\App
   }
 
   /**
-   * [Description for renderPriorityNotifications]
+   * [Description for renderAlerts]
    *
    * @return string
    *
    */
-  public function renderPriorityNotifications(): string
+  public function renderAlerts(): string
   {
     return 
       ''

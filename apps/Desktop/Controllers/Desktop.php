@@ -67,7 +67,7 @@ class Desktop extends \Hubleto\Erp\Controller
     $this->viewParams['dictionaryString'] = base64_encode(json_encode($dictionary));
 
     $this->viewParams['secondSidebar'] = $activatedApp ? $activatedApp->renderSecondSidebar() : '';
-    $this->viewParams['priorityNotifications'] = $activatedApp ? $activatedApp->renderPriorityNotifications() : '';
+    $this->viewParams['appAlerts'] = $activatedApp ? $activatedApp->renderAlerts() : '';
 
     /** @var \Hubleto\App\Enterprise\Cloud\AccountManager */
     try {

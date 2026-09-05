@@ -147,7 +147,58 @@
       {% endif %}
       <div class="block flex-1">
         {% if viewParams.activatedApp.manifest.namespace != "Hubleto\\App\\Community\\Desktop" %}
-          {{ include('@hubleto-main/Breadcrumbs.twig', {'items': viewParams.breadcrumbs}) }}
+          <nav class="breadcrumbs">
+            <div>
+              <button
+                class="btn btn-white {% if viewParams.appMenu|length > 0 %} btn-dropdown {% endif %}"
+                {% if viewParams.appMenu|length == 0 %}
+                  onclick="location.href='{{ config.projectUrl }}/{{ viewParams.activatedApp.manifest.rootUrlSlug }}';"
+                {% endif %}
+              >
+                {# <span class="icon"><i class="{{ viewParams.activatedApp.manifest.icon }}"></i></span> #}
+                <span class="text">{{ viewParams.activatedApp.manifest.nameTranslated }}</span>
+                {% if viewParams.appMenu|length > 0 %}
+                  <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                  <div class="menu">
+                    <div class="list">
+                      {% for item in viewParams.appMenu %}
+                        <a href="{{ config.projectUrl }}/{{ item.url }}" class="btn btn-list-item btn-transparent">
+                          <span class="icon"><i class="{{ item.icon }}"></i></span>
+                          <span class="text">{{ item.title }}</span>
+                        </a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+              </button>
+            </div>
+            {% if viewParams.appAlerts != '' %}              
+              <div>
+                <div class="btn btn-danger" onclick="$('.app-alerts').toggle()">
+                  <span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
+                </div>
+              </div>
+            {% endif %}
+            {% set i = 0 %}
+            {% for item in viewParams.breadcrumbs %}
+              <div class="hidden md:block">
+                <div class="flex items-center">
+                  <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                  </svg>
+                  {% if item.url %}
+                    <a
+                      href="{{ config.projectUrl }}/{{ item.url }}"
+                      class="ms-1 text-sm dark:text-white"
+                    >{{ item.content|raw }}</a>
+                  {% else %}
+                    <div class="ms-1 text-sm dark:text-white">{{ item.content|raw }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              {% set i = i + 1 %}
+            {% endfor %}
+          </nav>
         {% endif %}
       </div>
       <div class="flex-1">
@@ -359,14 +410,14 @@
         {% if viewParams.secondSidebar != '' %}
           <div class="second-sidebar">
             {{ viewParams.secondSidebar|raw }}
-            <div class="flex flex-col m-2">{{ viewParams.priorityNotifications|raw }}</div>
+            {# <div class="app-alerts flex flex-col m-2">{{ viewParams.appAlerts|raw }}</div> #}
           </div>
         {% endif %}
       </aside>
 
       <div class="app-content {% if viewParams.secondSidebar != '' %} with-second-sidebar {% endif %}">
-        {% if viewParams.priorityNotifications != '' %}
-          <div class="block md:hidden m-2">{{ viewParams.priorityNotifications|raw }}</div>
+        {% if viewParams.appAlerts != '' %}
+          <div class="app-alerts">{{ viewParams.appAlerts|raw }}</div>
         {% endif %}
 
         {{ contentHtml|raw }}

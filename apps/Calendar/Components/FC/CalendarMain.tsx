@@ -77,7 +77,7 @@ const CalendarMain = (props: CalendarMainProps) => {
     deleteUrlParam('showActivity');
   }
 
-  return <div className="flex gap-2 flex-col md:flex-row">
+  return <div className="flex flex-col md:flex-row">
     <div className="flex flex-col gap-2 text-nowrap">
       <div className='app-main-title'>
         <span>{T.translate('Calendars')}</span>
@@ -149,7 +149,7 @@ const CalendarMain = (props: CalendarMainProps) => {
         <span className="text">{T.translate("Share calendar")}</span>
       </a>
     </div>
-    <div className="w-full">
+    <div className="w-full m-2">
       <Calendar
         readonly={false}
         views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}

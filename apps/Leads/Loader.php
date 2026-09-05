@@ -113,16 +113,16 @@ class Loader extends \Hubleto\Erp\App
     return $this->openLeadsWithoutFuturePlan;
   }
   
-  public function renderPriorityNotifications(): string
+  public function renderAlerts(): string
   {
     return 
       ''
       . ($this->openLeadsWithoutFuturePlan > 0 ? '
-          <a
-            href="' . $this->env()->projectUrl . '/leads?filters%5BfLeadClosed%5D=0&filters%5BfLeadWithPlan%5D=2"
+        <a
+          href="' . $this->env()->projectUrl . '/leads?filters%5BfLeadClosed%5D=0&filters%5BfLeadWithPlan%5D=2"
           class="block badge badge-danger"
-          >' . $this->openLeadsWithoutFuturePlan . ' ' . $this->translate('open leads without future plan') . '</a>
-        ' : '')
+        >' . $this->openLeadsWithoutFuturePlan . ' ' . $this->translate('open leads without future plan') . '</a>
+      ' : '')
     ;
 
   }

@@ -45,9 +45,9 @@
     </div>
   </div>
 
-  <div class="flex flex-col gap-2 border-l border-l-gray-200 h-full">
+  <div class="flex flex-col gap-2 h-full items-center">
     <div class="m-2">
-      <div class="text-primary flex-col w-60 bg-primary/10 p-2">
+      <div class="text-primary flex-col bg-primary/10 p-2">
         <div class='mb-2'>
           <b>Did you know?</b><br>
           {{ viewParams.didYouKnow|raw }}
@@ -62,16 +62,16 @@
     </div>
 
     <div class="grow p-2 mb-2 flex flex-col md:flex-row gap-2">
-      <div class="m-8 dark:text-white">
+      <div class="dark:text-white">
         {% if user.DEFAULT_COMPANY.logo != '' %}
           <div class="my-8 text-center">
             <img
               src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
-              class="max-h-32 max-w-32"
+              class="max-h-32 max-w-32 m-auto"
             />
           </div>
         {% endif %}
-        <div class="flex">
+        <div class="flex p-4 shadow-sm">
           {% if user.photo %}
             <div class="mr-8">
               <img

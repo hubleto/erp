@@ -4,6 +4,7 @@ import request from "@hubleto/react-ui/core/Request";
 import TableOrders from "./Components/FC/TableOrders";
 import TableItems from "./Components/FC/TableItems"
 import TableQuotes from './Components/FC/TableQuotes';
+import OrderCalendarActivityForm from './Components/FC/OrderCalendarActivityForm';
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
@@ -15,6 +16,7 @@ class OrdersApp extends App {
     globalThis.hubleto.registerReactComponent('OrdersTableOrders', TableOrders);
     globalThis.hubleto.registerReactComponent('OrdersTableItems', TableItems);
     globalThis.hubleto.registerReactComponent('OrdersTableQuotes', TableQuotes);
+    globalThis.hubleto.registerReactComponent('OrderCalendarActivityForm', OrderCalendarActivityForm);
 
     FormCustomizer.addFormHeaderExtraButton(
       'FormDeal',

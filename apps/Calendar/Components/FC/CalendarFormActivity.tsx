@@ -45,31 +45,32 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
   const R = React.useContext(FormRecordStoreContext).getRecord();
   const form = React.useContext(FormMetaContext);
 
-  const allDay = useRecordField('all_day', 0);
-  const dateStart = useRecordField('date_start', '');
-  const dateEnd = useRecordField('date_end', '');
-  const timeStart = useRecordField('time_start', '');
-  const timeEnd = useRecordField('time_end', '');
+  const recurrence: string = useRecordField('recurrence', '');
+  const allDay: number = useRecordField('all_day', 0);
+  const dateStart: string = useRecordField('date_start', '');
+  const dateEnd: string = useRecordField('date_end', '');
+  const timeStart: string = useRecordField('time_start', '');
+  const timeEnd: string = useRecordField('time_end', '');
 
-  let recurrence: Recurrence = {
+  let recurrenceParsed: Recurrence = {
     period: '',
     periodEvery: 1,
     periodCount: 0,
     dates: [],
   };
 
-  if (R.recurrence != '') {
+  if (recurrence != '') {
     try {
-      recurrence = JSON.parse(R.recurrence);
-      recurrence.dates = expandRecurrenceDates(recurrence);
+      recurrenceParsed = JSON.parse(recurrence);
+      recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
     } catch (ex) {
-      recurrence = {
+      recurrenceParsed = {
         period: '',
         periodEvery: 1,
         periodCount: 0,
         dates: [],
       };
-      recurrence.dates = expandRecurrenceDates(recurrence);
+      recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
     }
   }
 
@@ -125,16 +126,16 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
           </div>
 
           <Input field='recurrence' content={<div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
-            {recurrence && recurrence.period == '' ?
+            {recurrenceParsed && recurrenceParsed.period == '' ?
               <select
-                value={recurrence.period}
+                value={recurrenceParsed.period}
                 className='w-full dark:bg-gray-800 dark:border-gray-600 dark:text-white'
                 onChange={(event) => {
                   let newR = R;
                   //@ts-ignore
-                  recurrence.period = event.currentTarget.value;
-                  recurrence.dates = expandRecurrenceDates(recurrence);
-                  newR.recurrence = JSON.stringify(recurrence);
+                  recurrenceParsed.period = event.currentTarget.value;
+                  recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
+                  newR.recurrence = JSON.stringify(recurrenceParsed);
                   form.changeRecord(newR);
                 }}
               >
@@ -147,25 +148,25 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
                 <input
                   className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
                   type='number'
-                  value={recurrence.periodEvery}
+                  value={recurrenceParsed.periodEvery}
                   style={{width: '4em'}}
                   onChange={(event) => {
                     let newR = R;
-                    recurrence.periodEvery = parseInt(event.currentTarget.value) ?? 1;
-                    newR.recurrence = JSON.stringify(recurrence);
+                    recurrenceParsed.periodEvery = parseInt(event.currentTarget.value) ?? 1;
+                    newR.recurrence = JSON.stringify(recurrenceParsed);
                     form.changeRecord(newR);
                   }}
                 ></input>
                 <select
                   className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
-                  value={recurrence.period}
+                  value={recurrenceParsed.period}
                   style={{width: '8em'}}
                   onChange={(event) => {
                     let newR = R;
                     //@ts-ignore
-                    recurrence.period = event.currentTarget.value;
-                    recurrence.dates = expandRecurrenceDates(recurrence);
-                    newR.recurrence = JSON.stringify(recurrence);
+                    recurrenceParsed.period = event.currentTarget.value;
+                    recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
+                    newR.recurrence = JSON.stringify(recurrenceParsed);
                     form.changeRecord(newR);
                   }}
                 >
@@ -181,20 +182,20 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
                 <input
                   className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
                   type='number'
-                  value={recurrence.periodCount}
+                  value={recurrenceParsed.periodCount}
                   style={{width: '4em'}}
                   onChange={(event) => {
                     let newR = R;
-                    recurrence.periodCount = parseInt(event.currentTarget.value) ?? 1;
-                    recurrence.dates = expandRecurrenceDates(recurrence);
-                    newR.recurrence = JSON.stringify(recurrence);
+                    recurrenceParsed.periodCount = parseInt(event.currentTarget.value) ?? 1;
+                    recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
+                    newR.recurrence = JSON.stringify(recurrenceParsed);
                     form.changeRecord(newR);
                   }}
                 ></input>
                 <span>{T.translate('occurences.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
               </div>
               <div className='flex gap-1 text-nowrap'>
-                {T.translate('Repeats from {{ dateFrom }} to {{ dateTo }}.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity').replace('{{ dateFrom }}', recurrence.dates[0]).replace('{{ dateTo }}', recurrence.dates[recurrence.dates.length - 1])}
+                {T.translate('Repeats from {{ dateFrom }} to {{ dateTo }}.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity').replace('{{ dateFrom }}', recurrenceParsed.dates[0]).replace('{{ dateTo }}', recurrenceParsed.dates[recurrenceParsed.dates.length - 1])}
               </div>
             </>}
           </div>}></Input>

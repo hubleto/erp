@@ -13,7 +13,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       'title' => $this->translate('Orders'),
       'addNewActivityButtonText' => $this->translate('Add new activity linked to order'),
       'icon' => 'fas fa-handshake',
-      'formComponent' => 'OrdersFormActivity',
+      'formComponent' => 'OrderCalendarActivityForm',
     ];
   }
 

@@ -63,6 +63,14 @@
 
     <div class="grow p-2 mb-2 flex flex-col md:flex-row gap-2">
       <div class="m-8 dark:text-white">
+        {% if user.DEFAULT_COMPANY.logo != '' %}
+          <div class="my-8 text-center">
+            <img
+              src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
+              class="max-h-32 max-w-32"
+            />
+          </div>
+        {% endif %}
         <div class="flex">
           {% if user.photo %}
             <div class="mr-8">
@@ -85,14 +93,6 @@
           </div>
         </div>
       </div>
-      {% if user.DEFAULT_COMPANY.logo != '' %}
-        <div class="flex items-center">
-          <img
-            src="{{ config.uploadUrl }}/{{ user.DEFAULT_COMPANY.logo }}"
-            class="max-h-32 max-w-32 m-8"
-          />
-        </div>
-      {% endif %}
     </div>
 
     <div>

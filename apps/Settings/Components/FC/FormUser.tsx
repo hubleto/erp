@@ -190,23 +190,10 @@ const FormUser = (props: FormUserProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={'Hubleto/App/Community/Auth/Models/User'}
-    urlSlug='parent-app-slug/same-url-slug-as-in-table'
-    endpointParams={{}}
-    title={{field: 'some-field-of-the-record', sub: T.translate(componentName)}}
-    renderTitle={(form: FormMeta): React.JSX.Element => {
-      const firstName = useRecordField('first_name', '');
-      const lastName = useRecordField('last_name', '');
-      const title = (firstName + ' ' + lastName).trim();
-
-      return <>
-        <small>{T.translate('User')}</small>
-        <h2>{title == '' ? '-' : title}</h2>
-      </>;
-    }}
+    title={{fields: ['first_name', 'last_name'], sub: ''}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}
   ></Form>;
 }
 
 export default FormUser;
-

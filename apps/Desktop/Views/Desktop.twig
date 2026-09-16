@@ -283,9 +283,9 @@
                     {{ user.email }}<br/>
                     {{ user.DEFAULT_COMPANY.name }}
                   </div>
-                  <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/settings/my-account">
+                  <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/settings/about-me">
                     <span class="icon"><i class='fas fa-user-tie'></i></span>
-                    <span class="text">{{ translate('Manage your user account') }}</span>
+                    <span class="text">{{ translate('About me') }}</span>
                   </a>
                   {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Cloud') %}
                     <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/cloud">

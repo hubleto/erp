@@ -23,7 +23,7 @@ class Loader extends \Hubleto\Erp\App
     $this->router()->get([
       '/^settings\/?$/' => Controllers\Dashboard::class,
       '/^settings\/log-viewer\/?$/' => Controllers\LogViewer::class,
-      '/^settings\/my-account\/?$/' => Controllers\MyAccount::class,
+      '/^settings\/about-me\/?$/' => Controllers\AboutMe::class,
       '/^settings\/apps\/?$/' => Controllers\Apps::class,
       '/^settings\/users\/?$/' => Controllers\Users::class,
       '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,

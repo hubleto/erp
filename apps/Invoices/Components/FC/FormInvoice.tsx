@@ -51,7 +51,7 @@ const TabDefault = (props: FormInvoiceProps) => {
         ? <Input key='id_supplier' field='id_supplier' />
         : <Input key='id_customer' field='id_customer' />
       }
-      <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+      {/* <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} /> */}
     </>
   } else {
     return <>
@@ -68,6 +68,22 @@ const TabDefault = (props: FormInvoiceProps) => {
             {form.id == -1 ? null : <div className='flex-dyn'>
               <div className='grow'>
                 <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+                <button
+                  className='btn btn-green-outline'
+                  onClick={() => {
+                    request.post(
+                      'invoices/api/generate-invoice-number',
+                      { idInvoice: form.id },
+                      {},
+                      (data: any) => {
+                        form.reload();
+                      }
+                    )
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-bolt'></i></span>
+                  <span className='text'>Generate invoice number</span>
+                </button>
                 <Input field='vs' />
                 <Input field='cs' />
                 <Input field='ss' />

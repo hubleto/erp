@@ -13,8 +13,8 @@ class Home extends \Hubleto\Erp\Controller
 
   public const DID_YOU_KNOW = [
     "Press <span class='badge'>Ctrl+Space</span> to activate app launcher.",
-    "Press <span class='badge'>Ctrl+S</span> to save any form.",
-    "Press <span class='badge'>Esc</span> to close any form.",
+    "Press <span class='badge'>Ctrl+S</span> to save.",
+    "Press <span class='badge'>Esc</span> to close.",
     "Press <span class='badge'>Ctrl+K</span> to search whole Hubleto.",
     "Start Hubleto search with <span class='badge'>/i</span> switch to search invoices.",
     "Start Hubleto search with <span class='badge'>/d</span> switch to search deals.",

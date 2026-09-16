@@ -27,6 +27,7 @@ class Loader extends \Hubleto\Erp\App
       '/^invoices\/api\/create-invoice-from-prepared-item\/?$/' => Controllers\Api\CreateInvoiceFromPreparedItem::class,
       '/^invoices\/api\/link-prepared-item\/?$/' => Controllers\Api\LinkPreparedItem::class,
       '/^invoices\/api\/unlink-prepared-item\/?$/' => Controllers\Api\UnlinkPreparedItem::class,
+      '/^invoices\/api\/generate-invoice-number\/?$/' => Controllers\Api\GenerateInvoiceNumber::class,
       '/^invoices\/api\/send-invoice-in-email\/?$/' => Controllers\Api\SendInvoiceInEmail::class,
       '/^invoices(\/(?<recordId>\d+))?\/?$/' => Controllers\Invoices::class,
       '/^invoices\/add?\/?$/' => ['controller' => Controllers\Invoices::class, 'vars' => [ 'recordId' => -1 ]],

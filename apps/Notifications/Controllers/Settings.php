@@ -18,12 +18,13 @@ class Settings extends \Hubleto\Erp\Controller
     parent::prepareView();
 
     $submitted = $this->router()->urlParamAsBool('submitted');
+    $idUser = $this->authProvider()->getUserId();
 
     if ($submitted) {
       $sendDailyDigest = $this->router()->urlParamAsBool('sendDailyDigest');
-      $this->config()->forApp(NotificationsApp::class)->saveForUser('sendDailyDigest', $sendDailyDigest);
+      $this->config()->save('user/' . $idUser . '/Hubleto\App\Community\Notifications/sendDailyDigest', $sendDailyDigest);
     } else {
-      $sendDailyDigest = $this->config()->forApp(NotificationsApp::class)->getAsBool('sendDailyDigest', true);
+      $sendDailyDigest = $this->config()->getAsBool('Hubleto\App\Community\Notifications/sendDailyDigest', false);
     }
 
     $this->viewParams['sendDailyDigest'] = $sendDailyDigest;

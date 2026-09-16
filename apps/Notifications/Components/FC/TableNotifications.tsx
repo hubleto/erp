@@ -19,7 +19,7 @@ const TableNotifications = (props: TableNotificationsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Notification'}
     endpointParams={{folder: props.folder}}
-    formUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{folder: props.folder}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

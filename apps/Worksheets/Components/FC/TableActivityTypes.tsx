@@ -21,7 +21,7 @@ const TableActivityTypes = (props: TableActivityTypesProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/XXX'}
     endpointParams={{idSomeField: props.idSomeField}}
-    formUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_some_field: props.idSomeField}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}

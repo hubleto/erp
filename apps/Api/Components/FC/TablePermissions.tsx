@@ -20,7 +20,7 @@ const TablePermissions = (props: TablePermissionsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Permission'}
     endpointParams={{idKey: props.idKey}}
-    formUrlSlug='api/permissions'
+    baseUrlSlug='api/permissions'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_key: props.idKey}}
     renderForm={(table: TableMeta): React.JSX.Element => {

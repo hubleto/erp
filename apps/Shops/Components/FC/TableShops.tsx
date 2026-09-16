@@ -13,7 +13,7 @@ const TableShops = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Shop'}
-    formUrlSlug='shops'
+    baseUrlSlug='shops'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta) => <FormShop {...table.getDefaultFormProps()}/>}
     {...props}

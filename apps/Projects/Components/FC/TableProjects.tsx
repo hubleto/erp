@@ -18,7 +18,7 @@ const TableProjects = (props: TableProjectsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Project'}
     endpointParams={{idDeal: props.idDeal}}
-    formUrlSlug='projects'
+    baseUrlSlug='projects'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_deal: props.idDeal}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

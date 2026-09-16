@@ -12,7 +12,7 @@ const TableAuditLogs = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/AuditLog'}
-    formUrlSlug='audit-logs'
+    baseUrlSlug='audit-logs'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormAuditLog {...table.getDefaultFormProps()}/>;

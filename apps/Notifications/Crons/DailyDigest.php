@@ -15,7 +15,7 @@ class DailyDigest extends \Hubleto\Erp\Cron
 
     foreach ($users as $user) {
 
-      $sendDailyDigest = $this->config()->getAsBool('user/' . $user['id'] . '/Hubleto\App\Community\Notifications/sendDailyDigest', true);
+      $sendDailyDigest = (bool) $this->config()->get('user/' . $user['id'] . '/Hubleto\App\Community\Notifications/sendDailyDigest', false, true);
 
       if (!$sendDailyDigest) continue;
 

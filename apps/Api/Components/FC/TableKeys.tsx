@@ -16,7 +16,7 @@ const TableKeys = (props: TableKeysProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Key'}
-    formUrlSlug='api/keys'
+    baseUrlSlug='api/keys'
     formModalProps={{type: 'right wide'}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "key") {

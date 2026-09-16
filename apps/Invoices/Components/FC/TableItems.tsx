@@ -19,7 +19,7 @@ const TableItems = (props: TableItemsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Item'}
     endpointParams={{idInvoice: props.idInvoice}}
-    formUrlSlug='invoices/items'
+    baseUrlSlug='invoices/items'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_invoice: props.idInvoice}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {

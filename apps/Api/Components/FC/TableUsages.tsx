@@ -18,7 +18,7 @@ const TableUsages = (props: TableUsagesProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Usage'}
     endpointParams={{idKey: props.idKey}}
-    formUrlSlug='api/usages'
+    baseUrlSlug='api/usages'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_key: props.idKey}}
     renderForm={(table: TableMeta): React.JSX.Element => {

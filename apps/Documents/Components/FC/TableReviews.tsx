@@ -19,7 +19,7 @@ const TableReviews = (props: TableReviewsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Review'}
     endpointParams={{idDocument: props.idDocument, idVersion: props.idVersion}}
-    formUrlSlug='documents/reviews'
+    baseUrlSlug='documents/reviews'
     formModalProps={{type: 'right wider'}}
     formDefaultValues={{id_document: props.idDocument, id_version: props.idVersion}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}

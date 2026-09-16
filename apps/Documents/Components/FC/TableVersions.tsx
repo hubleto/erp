@@ -18,7 +18,7 @@ const TableVersions = (props: TableVersionsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Version'}
     endpointParams={{idDocument: props.idDocument}}
-    formUrlSlug='documents/versions'
+    baseUrlSlug='documents/versions'
     formModalProps={{type: 'right wider'}}
     formDefaultValues={{id_document: props.idDocument}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}

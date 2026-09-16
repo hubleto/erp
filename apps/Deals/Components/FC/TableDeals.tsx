@@ -18,7 +18,7 @@ const TableDeals = (props: TableDealsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Deal'}
     endpointParams={{idCustomer: props.idCustomer}}
-    formUrlSlug='deals'
+    baseUrlSlug='deals'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_customer: props.idCustomer}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

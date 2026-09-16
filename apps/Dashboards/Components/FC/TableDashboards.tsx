@@ -15,7 +15,7 @@ const TableDashboards = (props: TableDashboardsProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Dashboard'}
-    formUrlSlug='dashboards'
+    baseUrlSlug='dashboards'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormDashboard {...table.getDefaultFormProps()}/>;

@@ -16,7 +16,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/CampaignSchedule'}
     endpointParams={{idCampaign: props.idCampaign}}
-    formUrlSlug='email-marketing/schedules'
+    baseUrlSlug='email-marketing/schedules'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_campaign: props.idCampaign}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

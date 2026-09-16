@@ -15,7 +15,7 @@ const TableFiles = (props: TableFilesProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/File'}
-    formUrlSlug='documents/files'
+    baseUrlSlug='documents/files'
     formModalProps={{type: 'right wider'}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "hyperlink") {

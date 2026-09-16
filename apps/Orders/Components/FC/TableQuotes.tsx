@@ -17,7 +17,7 @@ const TableQuotes = (props: TableQuotesProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Quote'}
     endpointParams={{idOrder: props.idOrder}}
-    formUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_order: props.idOrder}}
     renderForm={(table: TableMeta): React.JSX.Element => {

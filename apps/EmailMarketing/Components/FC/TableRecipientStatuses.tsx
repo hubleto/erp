@@ -17,7 +17,7 @@ const TableRecipientStatuses = (props: TableRecipientStatusesProps) => {
     componentName={componentName}
     model={parentApp + '/Models/RecipientStatus'}
     endpointParams={{idCampaign: props.idCampaign}}
-    formUrlSlug='email-marketing/recipients/statuses'
+    baseUrlSlug='email-marketing/recipients/statuses'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_campaign: props.idCampaign}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

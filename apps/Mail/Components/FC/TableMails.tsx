@@ -28,7 +28,7 @@ const TableMails = (props: TableMailsProps) => {
       showOnlyScheduledToSend: props.showOnlyScheduledToSend,
       showOnlySent: props.showOnlySent,
     }}
-    formUrlSlug={'mail/' + props.idAccount + '/' + props.idMailbox}
+    baseUrlSlug={'mail/' + props.idAccount + '/' + props.idMailbox}
     formModalProps={{type: 'right wide'}}
     formProps={{
       idAccount: props.idAccount,

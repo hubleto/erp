@@ -13,7 +13,7 @@ const TableTodos = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Todo'}
-    formUrlSlug='tasks/todo'
+    baseUrlSlug='tasks/todo'
     formModalProps={{type: 'centered small'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormTodo {...table.getDefaultFormProps()}/>;

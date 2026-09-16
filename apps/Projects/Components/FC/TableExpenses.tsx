@@ -18,7 +18,7 @@ const TableExpenses = (props: TableExpensesProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Expense'}
     endpointParams={{idProject: props.idProject}}
-    formUrlSlug='projects/expenses'
+    baseUrlSlug='projects/expenses'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_project: props.idProject}}
     renderForm={(table: TableMeta): React.JSX.Element => {

@@ -12,7 +12,7 @@ const TableCashRegisters = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/CashRegister'}
-    formUrlSlug='cashdesk/cash-registers'
+    baseUrlSlug='cashdesk/cash-registers'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormCashRegister {...table.getDefaultFormProps()}/>;

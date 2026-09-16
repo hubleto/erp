@@ -16,7 +16,7 @@ const TableTasks = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Task'}
-    formUrlSlug='tasks'
+    baseUrlSlug='tasks'
     formModalProps={{type: 'right wide'}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {

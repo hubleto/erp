@@ -15,7 +15,7 @@ const TableWorkflows = (props: TableWorkflowsProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Workflow'}
-    formUrlSlug='workflow/workflows'
+    baseUrlSlug='workflow/workflows'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormWorkflow {...table.getDefaultFormProps()}/>;

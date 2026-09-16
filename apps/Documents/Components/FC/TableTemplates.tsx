@@ -14,7 +14,7 @@ const TableTemplates = (props: TableTemplatesProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Template'}
-    formUrlSlug='documents.templates'
+    baseUrlSlug='documents.templates'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormTemplate {...table.getDefaultFormProps()}/>;

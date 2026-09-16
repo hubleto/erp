@@ -18,7 +18,7 @@ const TablePayments = (props: TablePaymentsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Payment'}
     endpointParams={{idInvoice: props.idInvoice}}
-    formUrlSlug='invoices/payments'
+    baseUrlSlug='invoices/payments'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_invoice: props.idInvoice}}
     renderForm={(table: TableMeta): React.JSX.Element => {

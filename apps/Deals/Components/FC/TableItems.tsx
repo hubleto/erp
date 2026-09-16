@@ -17,7 +17,7 @@ const TableItems = (props: TableItemsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Item'}
     endpointParams={{idDeal: props.idDeal}}
-    formUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_deal: props.idDeal}}
     {...props}

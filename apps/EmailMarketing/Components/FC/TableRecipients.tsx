@@ -19,7 +19,7 @@ const TableRecipients = (props: TableRecipientsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Recipient'}
     endpointParams={{idCampaign: props.idCampaign, idEmail: props.idEmail}}
-    formUrlSlug='email-marketing/recipients'
+    baseUrlSlug='email-marketing/recipients'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_campaign: props.idCampaign, id_email: props.idEmail}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

@@ -13,7 +13,7 @@ const TableProfiles = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/XXX'}
-    formUrlSlug='invoices/profiles'
+    baseUrlSlug='invoices/profiles'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormProfile {...table.getDefaultFormProps()}/>;

@@ -14,7 +14,7 @@ const TableFolders = (props: TableFoldersProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Folder'}
-    formUrlSlug='documents/folders'
+    baseUrlSlug='documents/folders'
     formModalProps={{type: 'right'}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
     // renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => { return table.renderDefaultCell(columnName, column, data, options); }}

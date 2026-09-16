@@ -25,7 +25,7 @@ const TableAccounts = (props: TableAccountsProps) => {
       idMailbox: props.idMailbox,
       mailboxName: props.mailboxName,
     }}
-    formUrlSlug='mail/accounts'
+    baseUrlSlug='mail/accounts'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_mailbox: props.idMailbox}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

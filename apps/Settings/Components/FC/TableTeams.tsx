@@ -15,7 +15,7 @@ const TableTeams = (props: TableTeamsProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Team'}
-    formUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
     formModalProps={{type: 'centered'}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "members") {

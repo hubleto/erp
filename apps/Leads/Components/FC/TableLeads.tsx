@@ -18,7 +18,7 @@ const TableLeads = (props: TableLeadsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Lead'}
     endpointParams={{idSomeField: props.idCustomer}}
-    formUrlSlug='leads'
+    baseUrlSlug='leads'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_customer: props.idCustomer}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {

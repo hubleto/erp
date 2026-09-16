@@ -8,7 +8,7 @@ const TableCategories = (props: TableProps) => {
     componentName='TableCategories'
     parentApp='Hubleto/App/Community/Products'
     model='Hubleto/App/Community/Products/Models/Category'
-    formUrlSlug='products/categories'
+    baseUrlSlug='products/categories'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta) => <FormCategory {...table.getDefaultFormProps()} />}
     {...props}

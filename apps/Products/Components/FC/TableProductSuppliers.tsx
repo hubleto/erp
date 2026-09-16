@@ -13,7 +13,7 @@ const TableProductSuppliers = (props: TableProductSupplierProps) => {
     parentApp='Hubleto/App/Community/Products'
     model='Hubleto/App/Community/Products/Models/ProductSupplier'
     endpointParams={{idProduct: props.idProduct}}
-    formUrlSlug='products/suppliers'
+    baseUrlSlug='products/suppliers'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_product: props.idProduct}}
     renderForm={(table: TableMeta) => <FormProductSupplier {...table.getDefaultFormProps()} /> }

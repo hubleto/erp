@@ -14,7 +14,7 @@ const TableInvoices = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Invoice'}
-    formUrlSlug='invoices'
+    baseUrlSlug='invoices'
     formModalProps={{type: 'right wide'}}
     getCellClassName={(table: TableMeta, columnName: string, column: any, rowData: any): string => {
       const cellClassName = table.getDefaultCellClassName(columnName, column, rowData);

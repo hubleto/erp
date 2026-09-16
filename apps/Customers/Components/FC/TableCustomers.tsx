@@ -15,7 +15,7 @@ const TableCustomers = (props: TableCustomersProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Customer'}
-    formUrlSlug='customers'
+    baseUrlSlug='customers'
     formModalProps={{type: 'right wide'}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "virt_tags") {

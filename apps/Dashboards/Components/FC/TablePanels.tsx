@@ -18,7 +18,7 @@ const TablePanels = (props: TablePanelsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Panel'}
     endpointParams={{idDashboard: props.idDashboard}}
-    formUrlSlug='dashboards/panels'
+    baseUrlSlug='dashboards/panels'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_dashboard: props.idDashboard}}
     renderForm={(table: TableMeta): React.JSX.Element => {

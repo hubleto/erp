@@ -14,7 +14,7 @@ const TebleUserRoles = (props: TebleUserRolesProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/UserRole'}
-    formUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
     formModalProps={{type: 'right'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormUserRole {...table.getDefaultFormProps()}/>;

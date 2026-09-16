@@ -20,7 +20,7 @@ const TableItems = (props: TableItemsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Item'}
     endpointParams={{idOrder: props.idOrder}}
-    formUrlSlug='orders/items'
+    baseUrlSlug='orders/items'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_order: props.idOrder}}
     getCellClassName={(table: TableMeta, columnName: string, column: any, rowData: any): string => {

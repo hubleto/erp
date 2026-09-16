@@ -15,7 +15,7 @@ const TableAutomats = (props: TableAutomatsProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Automat'}
-    formUrlSlug='workflow/automats'
+    baseUrlSlug='workflow/automats'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormAutomat {...table.getDefaultFormProps()}/>;

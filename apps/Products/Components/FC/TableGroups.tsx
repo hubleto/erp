@@ -8,7 +8,7 @@ const TableGroups = (props: TableProps) => {
     componentName={'TableGroups'}
     parentApp={'Hubleto/App/Community/Products'}
     model='Hubleto/App/Community/Products/Models/Group'
-    formUrlSlug='products/groups'
+    baseUrlSlug='products/groups'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta) => <FormGroup {...table.getDefaultFormProps()} />}
     {...props}

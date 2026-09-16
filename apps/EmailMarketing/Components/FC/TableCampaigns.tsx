@@ -11,7 +11,7 @@ const TableCampaigns = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Campaign'}
-    formUrlSlug='email-marketing/campaigns'
+    baseUrlSlug='email-marketing/campaigns'
     formModalProps={{type: 'right wide'}}
     getRowClassName={(table: TableMeta, rowData: any): string => {
       return rowData.is_closed ? 'bg-slate-300' : table.getDefaultRowClassName(rowData);

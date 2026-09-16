@@ -15,7 +15,7 @@ const TableReviewResults = (props: TableReviewResultsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/ReviewResult'}
     // endpointParams={{idSomeField: props.idSomeField}}
-    formUrlSlug='documents/review-results'
+    baseUrlSlug='documents/review-results'
     formModalProps={{type: 'right'}}
     // formDefaultValues={{id_some_field: props.idSomeField}}
     {...props}

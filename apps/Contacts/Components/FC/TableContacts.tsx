@@ -20,7 +20,7 @@ const TableContacts = (props: TableContactsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Contact'}
     endpointParams={{idCustomer: props.idCustomer}}
-    formUrlSlug='contacts'
+    baseUrlSlug='contacts'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_customer: props.idCustomer}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}

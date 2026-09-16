@@ -17,7 +17,7 @@ const TableEmailClicks = (props: TableEmailClicksProps) => {
     componentName={componentName}
     model={parentApp + '/Models/EmailClick'}
     endpointParams={{idEmail: props.idEmail, email: props.email}}
-    formUrlSlug='email-marketing/emails/clicks'
+    baseUrlSlug='email-marketing/emails/clicks'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_email: props.idEmail}}
     getRowClassName={(table: TableMeta, rowData: any): string => {

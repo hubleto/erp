@@ -17,7 +17,7 @@ const TableMilestones = (props: TableMilestonesProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Milestone'}
     endpointParams={{idProject: props.idProject}}
-    formUrlSlug='projects/milestones'
+    baseUrlSlug='projects/milestones'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_project: props.idProject}}
     renderForm={(table: TableMeta): React.JSX.Element => {

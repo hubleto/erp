@@ -21,7 +21,7 @@ const TableDocuments = (props: TableDocumentsProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Document'}
     endpointParams={{idSomeField: props.idSomeField}}
-    formUrlSlug='documents'
+    baseUrlSlug='documents'
     formModalProps={{type: 'right wider'}}
     formDefaultValues={{id_some_field: props.idSomeField}}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}

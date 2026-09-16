@@ -12,7 +12,7 @@ const TableReceipts = (props: TableProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Receipt'}
-    formUrlSlug='cashdesk/receipts'
+    baseUrlSlug='cashdesk/receipts'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormReceipt {...table.getDefaultFormProps()}/>;

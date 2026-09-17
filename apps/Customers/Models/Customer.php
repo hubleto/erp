@@ -44,7 +44,7 @@ class Customer extends Model
   public function describeColumns(): array
   {
     return array_merge([
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
+      'name' => (new Varchar($this, $this->translate('Customer')))->setRequired()->setDefaultVisible(),
       'identifier' => (new Varchar($this, $this->translate('Identifier')))->setCssClass('font-bold')->setDefaultVisible(),
       'street_line_1' => (new Varchar($this, $this->translate('Street Line 1'))),
       'street_line_2' => (new Varchar($this, $this->translate('Street Line 2'))),

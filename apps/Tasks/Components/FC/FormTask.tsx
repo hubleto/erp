@@ -104,13 +104,13 @@ const TabDefault = (props: FormTaskProps) => {
               {TODO && TODO.map((item, key) => {
                 const refInputTodo = React.createRef();
 
-                return <div className={'btn-list-item items-center flex gap-2 items-start' + (item._toBeDeleted_ ? ' bg-red-100' : '')} key={key}>
+                return <div className={'btn-list-item flex gap-2 items-start' + (item._toBeDeleted_ ? ' bg-red-100' : '')} key={key}>
                   <div>
                     <input
                       type='checkbox'
                       checked={item.is_closed}
                       onChange={(e) => {
-                        let newTodo = TODO;
+                        let newTodo = [...TODO];
                         newTodo[key].is_closed = e.currentTarget.checked;
                         form.changeRecord({TODO: newTodo});
                       }}
@@ -128,7 +128,7 @@ const TabDefault = (props: FormTaskProps) => {
                       value={item.todo}
                       placeholder={T.translate('What to do?')}
                       onChange={(e) => {
-                        let newTodo = TODO;
+                        let newTodo = [...TODO];
                         newTodo[key].todo = e.currentTarget.value;
                         form.changeRecord({TODO: newTodo});
                       }}
@@ -139,7 +139,7 @@ const TabDefault = (props: FormTaskProps) => {
                           uid='new_todo_id_responsible'
                           value={item.id_responsible}
                           onChange={(input: any) => {
-                            let newTodo = TODO;
+                            let newTodo = [...TODO];
                             newTodo[key].id_responsible = input.value;
                             form.changeRecord({TODO: newTodo});
                           }}
@@ -151,7 +151,7 @@ const TabDefault = (props: FormTaskProps) => {
                           type='date'
                           value={item.date_deadline}
                           onChange={(input: any) => {
-                            let newTodo = TODO;
+                          let newTodo = [...TODO];
                             newTodo[key].date_deadline = input.state.value;
                             form.changeRecord({TODO: newTodo});
                           }}
@@ -164,7 +164,7 @@ const TabDefault = (props: FormTaskProps) => {
                       <button
                         className={'btn ' + (item._toBeDeleted_ ? 'btn-primary' : 'btn-danger')}
                         onClick={(e) => {
-                          let newTodo = TODO;
+                          let newTodo = [...TODO];
                           if (newTodo[key].id == undefined) {
                             newTodo = newTodo.filter((todoItem: any, todoKey: number) => todoKey !== key);
                           } else {
@@ -187,7 +187,7 @@ const TabDefault = (props: FormTaskProps) => {
                   className='btn btn-add-outline'
                   onClick={(e) => {
                     e.preventDefault();
-                    let newTodo = TODO;
+                    let newTodo = [...TODO];
                     newTodo.push({
                       id_task: form.id,
                       todo: '',

@@ -148,7 +148,7 @@ class Deal extends \Hubleto\Erp\Model
           where
             `a`.`completed` = 0
             and `a`.`id_deal` = `deals`.`id`
-            and `a`.`date_start` >= now()
+            and `a`.`date_start` >= date(now())
           order by
             `a`.`date_start` asc
           limit 1

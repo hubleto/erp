@@ -14,6 +14,11 @@
       <i class="fas fa-calendar mr-2"></i>
       No future activity is planned.
     </div>
+  {% elseif item.virt_next_activity_date == "now"|date("Y-m-d") %}
+    <div class="badge badge-warning text-xs">
+      <i class="fas fa-calendar mr-2"></i>
+      Next activity is planned for today.
+    </div>
   {% else %}
     <div class="badge badge-success text-xs">
       <i class="fas fa-calendar mr-2"></i>

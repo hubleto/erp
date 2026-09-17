@@ -23,7 +23,7 @@ class App extends \Hubleto\Framework\App
   function secondSidebarButton(string $url, string $icon, string $title, int $badge = 0): string
   {
     return '<a
-      class="btn ' . ($url == $this->env()->requestedUri ? "btn-primary" : "btn-white") . '"
+      class="btn ' . ($url == $this->env()->requestedUri ? "btn-primary" : "btn-transparent") . '"
       href="' . $this->env()->projectUrl . '/' .  $url . '">
         <span class="icon"><i class="' . $icon . '"></i></span>
         <span class="text">' . $this->translate($title) . '</span>

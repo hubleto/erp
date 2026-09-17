@@ -45,6 +45,7 @@ const TabDefault = (props: FormMilestoneProps) => {
             parentForm={form}
             uid={props.uid + "_table_project_milestone_report"}
             idMilestone={form.id}
+            formModalProps={{type: 'centered small'}}
           />
         </div>
       </div>

@@ -6,6 +6,7 @@ import FormMilestone, { FormMilestoneProps } from './FormMilestone';
 
 interface TableMilestonesProps extends TableProps {
   idProject?: number,
+  isClosed?: boolean,
 }
 
 const componentName = 'TableMilestones'; // must be the same as the exported const
@@ -16,7 +17,7 @@ const TableMilestones = (props: TableMilestonesProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Milestone'}
-    endpointParams={{idProject: props.idProject}}
+    endpointParams={{idProject: props.idProject, isClosed: props.isClosed}}
     baseUrlSlug='projects/milestones'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_project: props.idProject}}

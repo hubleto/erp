@@ -41,4 +41,13 @@ class MilestoneTask extends \Hubleto\Erp\Model
     return $description;
   }
 
+  public function getMaxReadLevelForLoadTableData(): int{
+    return 1;
+  }
+
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['TASK'];
+  }
+
 }

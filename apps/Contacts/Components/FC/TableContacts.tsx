@@ -42,7 +42,7 @@ const TableContacts = (props: TableContactsProps) => {
                   contactsRendered += 1;
                   return (
                     <div key={data.id + '-email-' + key}>
-                      {value.value} {value.CATEGORY ? <>({value.CATEGORY.name})</> : null}
+                      {value.value}
                     </div>
                   );
                 } else return null;
@@ -58,7 +58,7 @@ const TableContacts = (props: TableContactsProps) => {
                   contactsRendered += 1;
                   return (
                     <div key={data.id + '-number-' + key}>
-                      {value.value} {value.CATEGORY ? <>({value.CATEGORY.name})</> : null}
+                      {value.value}
                     </div>
                   );
                 } else return null;

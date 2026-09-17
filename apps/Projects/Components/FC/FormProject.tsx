@@ -81,13 +81,14 @@ const TabDefault = (props: FormProjectProps) => {
       <div className='flex-1'>
         {form.id > 0 ? <>
           <div className='card card-warning'>
-            <div className='card-header'>{T.translate('Milestones')}</div>
+            <div className='card-header'>{T.translate('Open milestones')}</div>
             <div className='card-body'>
               <TableMilestones
-                tag={"table_project_task"}
+                tag={"table_project_milestone"}
                 parentForm={form}
-                uid={props.uid + "_table_project_task"}
+                uid={props.uid + "_table_project_milestone"}
                 idProject={form.id}
+                isClosed={false}
                 view='briefOverview'
               />
             </div>

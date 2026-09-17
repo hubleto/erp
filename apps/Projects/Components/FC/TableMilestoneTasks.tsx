@@ -20,6 +20,17 @@ const TableMilestoneTasks = (props: TableMilestoneTasksProps) => {
     baseUrlSlug='projects/milestones/tasks'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_milestone: props.idMilestone}}
+    renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
+      if (columnName == "id_task") {
+        const TASK = data.TASK ?? {};
+        return <>
+          <div>{TASK.identifier} {TASK.title}</div>
+          {TASK.is_closed ? <div className="badge badge-danger">Closed</div> : null}
+        </>;
+      } else {
+        return table.renderDefaultCell(columnName, column, data, options);
+      }
+    }}
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormMilestoneTask {...table.getDefaultFormProps()}/>;
     }}

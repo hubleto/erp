@@ -53,6 +53,11 @@ class Milestone extends \Hubleto\Erp\RecordManager
 
     if ($idProject > 0) $query = $query->where($this->table . '.id_project', $idProject);
 
+    if ($hubleto->router()->isUrlParam('isClosed')) {
+      $isClosed = $hubleto->router()->urlParamAsBool("isClosed");
+      $query = $query->where($this->table . '.is_closed', $isClosed);
+    }
+
     if (isset($filters["fMilestoneClosed"])) {
       if ($filters["fMilestoneClosed"] == 0) $query = $query->where($this->table . '.is_closed', false);
       if ($filters["fMilestoneClosed"] == 1) $query = $query->where($this->table . '.is_closed', true);

@@ -167,7 +167,7 @@ class Renderer extends \Hubleto\Framework\Renderer
 
           $returnArray = [
             'status' => 'error',
-            'code' => $e->getCode(),
+            'code' => (int) $e->getCode(),
             'message' => $e->getMessage(),
             'trace' => $e->getTraceAsString(),
           ];

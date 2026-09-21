@@ -22,7 +22,7 @@ class ApiController extends \Hubleto\Erp\Controller
 
       return [
         'status' => 'error',
-        'code' => $e->getCode(),
+        'code' => (int) $e->getCode(),
         'trace' => $e->getTraceAsString(),
         'message' => $e->getMessage(),
       ];

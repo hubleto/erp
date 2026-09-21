@@ -160,17 +160,17 @@ class Renderer extends \Hubleto\Framework\Renderer
 
       // Either return JSON string ...
       if ($controllerObject->returnType == Controller::RETURN_TYPE_JSON) {
-        try {
+        // try {
           $returnArray = $controllerObject->renderJson();
-        } catch (\Throwable $e) {
-          http_response_code(400);
+        // } catch (\Throwable $e) {
+        //   http_response_code(400);
 
-          $returnArray = [
-            'status' => 'error',
-            'code' => $e->getCode(),
-            'message' => $e->getMessage(),
-          ];
-        }
+        //   $returnArray = [
+        //     'status' => 'error',
+        //     'code' => $e->getCode(),
+        //     'message' => $e->getMessage(),
+        //   ];
+        // }
         $return = json_encode($returnArray, JSON_INVALID_UTF8_SUBSTITUTE);
       } elseif ($controllerObject->returnType == Controller::RETURN_TYPE_STRING) {
         $return = $controllerObject->renderString();

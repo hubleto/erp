@@ -17,7 +17,11 @@
 <div class="w-full h-full flex-dyn">
   <div class="grow">
     <div class="text-primary my-8 text-center text-[3em]">
-      {{ translate('Welcome') }}, {{ user.first_name ?? user.email }}
+      {% if viewParams.hourNow < 10 %} {{ translate('Good morning') }}
+      {% elseif viewParams.hourNow < 14 %} {{ translate('Welcome') }}
+      {% elseif viewParams.hourNow < 18 %} {{ translate('Afternoon') }}
+      {% else %} {{ translate('Good evening') }} {% endif %}
+      {{ user.first_name ?? user.email }}
     </div>
 
     {% for m in viewParams.welcomeScreenMessages %}

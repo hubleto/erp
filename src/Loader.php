@@ -19,7 +19,7 @@ spl_autoload_register(function($className) {
 });
 
 set_exception_handler(function (\Throwable $t) {
-  echo $t->getMessage(), "\n", $t->getCode(), $t->getTraceAsString();
+  echo "Unknown exception occured: " . $t->getMessage(), "\n", $t->getCode(), $t->getTraceAsString();
 });
 
 class Loader extends \Hubleto\Framework\Loader

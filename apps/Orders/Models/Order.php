@@ -197,9 +197,7 @@ class Order extends \Hubleto\Erp\Model
 
     }
 
-    $description->addFilter('fOrderWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'));
     $description->addFilter('fOrderClosed', [
-      'title' => $this->translate('Open / Closed'),
       'direction' => 'horizontal',
       'options' => [
         1 => $this->translate('Open'),
@@ -207,6 +205,7 @@ class Order extends \Hubleto\Erp\Model
       ],
       'default' => 1,
     ]);
+    $description->addFilter('fOrderWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'));
 
     $description->addFilter('fPurchaseSales', [
       'title' => $this->translate('Purchase / Sales'),

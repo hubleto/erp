@@ -19,7 +19,7 @@
     <div class="text-primary my-8 text-center text-[3em]">
       {% if viewParams.hourNow < 10 %} {{ translate('Good morning') }}
       {% elseif viewParams.hourNow < 14 %} {{ translate('Welcome') }}
-      {% elseif viewParams.hourNow < 18 %} {{ translate('Afternoon') }}
+      {% elseif viewParams.hourNow < 18 %} {{ translate('Good afternoon') }}
       {% else %} {{ translate('Good evening') }} {% endif %}
       {{ user.first_name ?? user.email }}
     </div>

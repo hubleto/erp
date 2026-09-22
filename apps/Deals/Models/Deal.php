@@ -191,11 +191,7 @@ class Deal extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     $description->ui['filters'] = [
-      'fDealWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'State'),
-      'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS) ],
-      'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
       'fDealClosed' => [
-        'title' => $this->translate('Open / Closed'),
         'direction' => 'horizontal',
         'options' => [
           1 => $this->translate('Open'),
@@ -203,6 +199,9 @@ class Deal extends \Hubleto\Erp\Model
         ],
         'default' => 1,
       ],
+      'fDealWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'State'),
+      'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS) ],
+      'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
     ];
 
     $description->addFilter('fDealWithPlan', [

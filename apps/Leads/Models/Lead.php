@@ -159,10 +159,7 @@ class Lead extends \Hubleto\Erp\Model
     $description->hide(['footer']);
 
     $description->ui['filters'] = [
-      'fLeadWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Level'),
-      'fLeadOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
       'fLeadClosed' => [
-        'title' => $this->translate('Open / Closed'),
         'direction' => 'horizontal',
         'options' => [
           1 => $this->translate('Open'),
@@ -170,6 +167,8 @@ class Lead extends \Hubleto\Erp\Model
         ],
         'default' => 1,
       ],
+      'fLeadWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Level'),
+      'fLeadOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
     ];
 
     $description->addFilter('fLeadWithPlan', [

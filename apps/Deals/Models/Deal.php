@@ -196,12 +196,12 @@ class Deal extends \Hubleto\Erp\Model
       'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
       'fDealClosed' => [
         'title' => $this->translate('Open / Closed'),
+        'direction' => 'horizontal',
         'options' => [
-          0 => $this->translate('Open'),
-          1 => $this->translate('Closed'),
-          2 => $this->translate('All'),
+          1 => $this->translate('Open'),
+          2 => $this->translate('Closed'),
         ],
-        'default' => 0,
+        'default' => 1,
       ],
     ];
 

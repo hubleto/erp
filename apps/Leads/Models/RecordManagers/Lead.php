@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Override;
 
 class Lead extends \Hubleto\Erp\RecordManager
 {
@@ -43,12 +44,6 @@ class Lead extends \Hubleto\Erp\RecordManager
   public function TEAM(): BelongsTo
   {
     return $this->belongsTo(Team::class, 'id_team', 'id');
-  }
-
-  /** @return BelongsTo<User, covariant Lead> */
-  public function LEVEL(): BelongsTo
-  {
-    return $this->belongsTo(Level::class, 'id_level', 'id');
   }
 
   /** @return BelongsTo<User, covariant Lead> */
@@ -111,37 +106,19 @@ class Lead extends \Hubleto\Erp\RecordManager
     return $this->hasMany(LeadTask::class, 'id_lead', 'id');
   }
 
+  /**
+   * [Description for prepareReadQuery]
+   *
+   * @param mixed|null $query
+   * @param int $level
+   * @param array|null|null $includeRelations
+   * 
+   * @return mixed
+   * 
+   */
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
-
-    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-
-    if ($hubleto->router()->urlParamAsInteger("idCustomer") > 0) {
-      $query = $query->where("leads.id_customer", $hubleto->router()->urlParamAsInteger("idCustomer"));
-    }
-
-    $filters = $hubleto->router()->urlParamAsArray("filters");
-
-    $query = Workflow::applyWorkflowStepFilter(
-      $this->model,
-      $query,
-      (array) ($filters['fLeadWorkflowStep'] ?? [])
-    );
-
-    if (isset($filters["fLeadOwnership"])) {
-      switch ($filters["fLeadOwnership"]) {
-        case 1: $query = $query->where("leads.id_owner", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
-          break;
-        case 2: $query = $query->where("leads.id_manager", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
-          break;
-      }
-    }
-
-    if (isset($filters["fLeadClosed"])) {
-      if ($filters["fLeadClosed"] == 0) $query = $query->where("leads.is_closed", false);
-      if ($filters["fLeadClosed"] == 1) $query = $query->where("leads.is_closed", true);
-    }
 
     // Virtual tag count
     $query->selectSub(function($sub) {
@@ -175,6 +152,58 @@ class Lead extends \Hubleto\Erp\RecordManager
     return $query;
   }
 
+  /**
+   * [Description for addUrlFiltersToQuery]
+   *
+   * @param mixed $query
+   * 
+   * @return mixed
+   * 
+   */
+  public function addUrlFiltersToQuery(mixed $query): mixed
+  {
+    $query = parent::addUrlFiltersToQuery($query);
+
+    $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
+
+    if ($hubleto->router()->urlParamAsInteger("idCustomer") > 0) {
+      $query = $query->where("leads.id_customer", $hubleto->router()->urlParamAsInteger("idCustomer"));
+    }
+
+    $filters = $hubleto->router()->urlParamAsArray("filters");
+
+    $query = Workflow::applyWorkflowStepFilter(
+      $this->model,
+      $query,
+      (array) ($filters['fLeadWorkflowStep'] ?? [])
+    );
+
+    if (isset($filters["fLeadOwnership"])) {
+      switch ($filters["fLeadOwnership"]) {
+        case 1: $query = $query->where("leads.id_owner", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+          break;
+        case 2: $query = $query->where("leads.id_manager", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+          break;
+      }
+    }
+
+    $fLeadClosed = $filters['fLeadClosed'] ?? 1;
+    if ($fLeadClosed == 1) $query = $query->where("leads.is_closed", false);
+    if ($fLeadClosed == 2) $query = $query->where("leads.is_closed", true);
+
+    return $query;
+
+  }
+
+  /**
+   * [Description for addOrderByToQuery]
+   *
+   * @param mixed $query
+   * @param array $orderBy
+   * 
+   * @return mixed
+   * 
+   */
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
     if (($orderBy['field'] ?? null) === 'virt_tags') {
@@ -183,6 +212,15 @@ class Lead extends \Hubleto\Erp\RecordManager
     return parent::addOrderByToQuery($query, $orderBy);
   }
 
+  /**
+   * [Description for addFulltextSearchToQuery]
+   *
+   * @param mixed $query
+   * @param string $fulltextSearch
+   * 
+   * @return mixed
+   * 
+   */
   public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
   {
     if (!empty($fulltextSearch)) {

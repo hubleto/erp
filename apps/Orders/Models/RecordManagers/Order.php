@@ -146,6 +146,21 @@ class Order extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
+    return $query;
+  }
+
+  /**
+   * [Description for addUrlFiltersToQuery]
+   *
+   * @param mixed $query
+   * 
+   * @return mixed
+   * 
+   */
+  public function addUrlFiltersToQuery(mixed $query): mixed
+  {
+    $query = parent::addUrlFiltersToQuery($query);
+
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
@@ -157,10 +172,9 @@ class Order extends \Hubleto\Erp\RecordManager
       (array) ($filters['fOrderWorkflowStep'] ?? [])
     );
 
-    if (isset($filters["fOrderClosed"])) {
-      if ($filters["fOrderClosed"] == 1) $query = $query->where("orders.is_closed", false);
-      if ($filters["fOrderClosed"] == 2) $query = $query->where("orders.is_closed", true);
-    }
+    $fOrderClosed = $filters['fOrderClosed'] ?? 1;
+    if ($fOrderClosed == 1) $query = $query->where("orders.is_closed", false);
+    if ($fOrderClosed == 2) $query = $query->where("orders.is_closed", true);
 
     if (isset($filters["fPurchaseSales"]) && $filters["fPurchaseSales"] > 0) {
       $query = $query->where("orders.purchase_sales", $filters["fPurchaseSales"]);

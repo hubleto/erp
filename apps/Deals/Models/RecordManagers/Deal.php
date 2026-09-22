@@ -135,17 +135,16 @@ class Deal extends \Hubleto\Erp\RecordManager
   }
 
   /**
-   * [Description for prepareReadQuery]
+   * [Description for addUrlFiltersToQuery]
    *
    * @param mixed|null $query
-   * @param int $level
    * 
    * @return mixed
    * 
    */
-  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
+  public function addUrlFiltersToQuery(mixed $query): mixed
   {
-    $query = parent::prepareReadQuery($query, $level, $includeRelations);
+    $query = parent::addUrlFiltersToQuery($query);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
@@ -183,10 +182,9 @@ class Deal extends \Hubleto\Erp\RecordManager
       }
     }
 
-    if (isset($filters["fDealClosed"])) {
-      if ($filters["fDealClosed"] == 0) $query = $query->where("deals.is_closed", false);
-      if ($filters["fDealClosed"] == 1) $query = $query->where("deals.is_closed", true);
-    }
+    $fDealClosed = $filters['fDealClosed'] ?? 1;
+    if ($fDealClosed == 1) $query = $query->where("deals.is_closed", false);
+    if ($fDealClosed == 2) $query = $query->where("deals.is_closed", true);
 
     if (isset($filters["fDealWithPlan"])) {
       switch ($filters["fDealWithPlan"]) {

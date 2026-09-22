@@ -546,7 +546,9 @@ const TabEmail = (props: FormInvoiceProps) => {
               </td>
             </tr>
           </tbody></table>
-          <button className='btn btn-add-outline mt-2'
+          {!sendInvoicePreparedData.senderAccount ? 
+            <div className='alert alert-danger mt-2'>Sender account is not configured, cannot send email.</div>
+          : <button className='btn btn-add-outline mt-2'
             onClick={() => {
               request.post(
                 'invoices/api/send-invoice-in-email',
@@ -569,7 +571,7 @@ const TabEmail = (props: FormInvoiceProps) => {
           >
             <span className='icon'><i className='fas fa-paper-plane'></i></span>
             <span className='text'>{T.translate('Send email')}</span>
-          </button>
+          </button>}
         </>
       }
     </div>

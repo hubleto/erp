@@ -96,7 +96,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
         <Input field='subject' cssClass='text-primary text-2xl'></Input>
         <Input field='id_activity_type' customInputProps={{uiStyle: 'buttons'}} renderOnlyInputField></Input>
 
-        <Divider>{T.translate('Start - End - Repeat','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>
+        <Divider>{T.translate('Start - End - Repeat')}</Divider>
         <div className='flex flex-col gap-2'>
           <div className='flex-dyn'>
             <Input renderOnlyInputField field='date_start' customInputProps={{
@@ -266,6 +266,7 @@ const CalendarFormActivity = (props: FormActivityProps) => {
       <Input field='all_day' renderOnlyInputField customInputProps={{yesText: T.translate('All-day')}}></Input>
       <Input field='completed' renderOnlyInputField customInputProps={{yesText: T.translate('Completed')}}></Input>
     </div>}
+    renderContent={() => <Content {...props}/>}
     onClose={() => { 
       if (props.calendarTab) props.calendarTab.setShowIdActivity(0);
       else if (props.onClose) props.onClose();
@@ -279,9 +280,7 @@ const CalendarFormActivity = (props: FormActivityProps) => {
     description={{
       defaultValues: defaultValues,
     }}
-  >
-    <Content {...props}/>
-  </Form>;
+  ></Form>;
 }
 
 export default CalendarFormActivity;

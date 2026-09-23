@@ -43,7 +43,7 @@ const FormAccount = (props: FormAccountProps) => {
     model={parentApp + '/Models/Account'}
     urlSlug='mail/accounts'
     endpointParams={{}}
-    title={{field: 'ssubject', sub: T.translate('Account')}}
+    title={{field: 'name', sub: T.translate('Account')}}
     tabs={{
       default: {title: <b>{T.translate('Email account')}</b>, content: () => <TabDefault {...props} />},
       smtp: {title: T.translate('Sending (SMTP)'), content: () => <TabSmtp {...props} />},

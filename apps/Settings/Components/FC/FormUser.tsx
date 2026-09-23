@@ -28,6 +28,7 @@ const TabDefault = (props: FormUserProps) => {
   }, [])
 
   const form = React.useContext(FormMetaContext);
+  const photo: any = useRecordField('photo');
   const appsRaw: any = useRecordField('apps');
   const permissionsRaw: any = useRecordField('permissions');
 
@@ -52,7 +53,7 @@ const TabDefault = (props: FormUserProps) => {
   if (!apps) apps = [];
 
   return <>
-    <div className='w-full flex flex-col md:flex-row gap-2'>
+    <div className='w-full flex flex-col gap-2'>
       {form.id == -1 && !globalThis.hubleto.isPremium ?
         <div className="badge badge-warning text-lg w-full block p-8">
           {T.translate('You may add new users only in Premium account.')}<br/>
@@ -63,13 +64,18 @@ const TabDefault = (props: FormUserProps) => {
           </a>
         </div>
       : <>
-        <div className="p-4 flex-1 text-center">
-          <i className="fas fa-user text-primary" style={{fontSize: '8em'}}></i>
+        <div className="p-4 text-center">
+          {photo ?
+            <img
+              src={photo.fileData || (globalThis.hubleto.config.uploadUrl + '/' + photo)}
+              className='max-w-32 max-h-32 rounded-xl'
+            />
+          : <i className="fas fa-user text-primary text-[8em]"></i>}
           <div className='mt-2'>
             <Input field='photo' renderOnlyInputField />
           </div>
         </div>
-        <div className="flex-6">
+        <div>
           <div className='flex gap-2 flex-col md:flex-row'>
             <div className="flex-1">
               <Divider>{T.translate('About the user')}</Divider>

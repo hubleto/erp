@@ -33,6 +33,14 @@
             <i class="fas fa-magnifying-glass"></i>
           </div>
           <div class="card-body flex gap-2">
+            <a
+              class="btn {{ 0 == viewParams.fOwner ? "btn-primary" : "btn-transparent" }}"
+              href="?fOwner=0"
+            >
+              <span class="text">
+                {{ translate("All") }}
+              </span>
+            </a>
             {% for u in viewParams.users %}
               <a
                 class="btn {{ u.id == viewParams.fOwner ? "btn-primary" : "btn-transparent" }}"

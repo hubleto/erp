@@ -54,9 +54,9 @@ class Campaign extends \Hubleto\Erp\RecordManager
    *
    * @param mixed $query
    * @param string $fulltextSearch
-   * 
+   *
    * @return mixed
-   * 
+   *
    */
   public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
   {
@@ -74,9 +74,9 @@ class Campaign extends \Hubleto\Erp\RecordManager
    * @param mixed|null $query
    * @param int $level
    * @param array|null|null $includeRelations
-   * 
+   *
    * @return mixed
-   * 
+   *
    */
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
@@ -103,12 +103,10 @@ class Campaign extends \Hubleto\Erp\RecordManager
       }
     }
 
-    if (isset($filters["fCampaignClosed"])) {
-      $fCampaignClosed = $filters["fCampaignClosed"] ?? 0;
-      switch ($fCampaignClosed) {
-        case 0: $query = $query->where("email_marketing_campaigns.is_closed", false); break;
-        case 1: $query = $query->where("email_marketing_campaigns.is_closed", true); break;
-      }
+    $fCampaignClosed = isset($filters["fCampaignClosed"]) ? $filters["fCampaignClosed"] : 0;
+    switch ($fCampaignClosed) {
+      case 0: $query = $query->where("email_marketing_campaigns.is_closed", false); break;
+      case 1: $query = $query->where("email_marketing_campaigns.is_closed", true); break;
     }
 
     return $query;

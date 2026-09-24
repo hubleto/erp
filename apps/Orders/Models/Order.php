@@ -202,6 +202,7 @@ class Order extends \Hubleto\Erp\Model
       'options' => [
         1 => $this->translate('Open'),
         2 => $this->translate('Closed'),
+        3 => $this->translate('All'),
       ],
       'default' => 1,
     ]);

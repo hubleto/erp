@@ -191,6 +191,27 @@ class Lead extends \Hubleto\Erp\RecordManager
     if ($fLeadClosed == 1) $query = $query->where("leads.is_closed", false);
     if ($fLeadClosed == 2) $query = $query->where("leads.is_closed", true);
 
+    if (isset($filters["fLeadWithPlan"])) {
+      switch ($filters["fLeadWithPlan"]) {
+        case 1:
+          $query = $query
+            ->whereHas('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+        case 2:
+          $query = $query
+            ->whereDoesntHave('ACTIVITIES', function($q) {
+              $q->where('completed', false);
+              $q->whereDate('date_start', '>=', date("Y-m-d"));
+            })
+          ;
+        break;
+      }
+    }
+
     return $query;
 
   }

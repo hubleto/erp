@@ -147,6 +147,7 @@ class Loader extends \Hubleto\Erp\App
         ' . $accountsHtml . '
         ' . $this->secondSidebarButton('mail/get', 'fas fa-download', 'Get emails') . '
         ' . $this->secondSidebarButton('mail/scheduled', 'fas fa-clock', 'Scheduled to send') . '
+        ' . $this->secondSidebarButton('mail/templates', 'fas fa-file', 'Templates') . '
         ' . $this->secondSidebarButton('mail/accounts', 'fas fa-cog', 'Accounts') . '
       </div>
 

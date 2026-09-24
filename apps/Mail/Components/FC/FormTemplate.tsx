@@ -5,7 +5,7 @@ import Form from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 
 const componentName = 'FormTemplate'; // must be the same as the exported const
-const parentApp = 'Hubleto/App/Community/AppXXX';
+const parentApp = 'Hubleto/App/Community/Mail';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 /** FormTemplate */

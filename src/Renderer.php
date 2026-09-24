@@ -170,6 +170,7 @@ class Renderer extends \Hubleto\Framework\Renderer
             'code' => (int) $e->getCode(),
             'message' => $e->getMessage(),
             'trace' => $e->getTraceAsString(),
+            'source' => 'renderer',
           ];
         }
         $return = json_encode($returnArray, JSON_INVALID_UTF8_SUBSTITUTE);

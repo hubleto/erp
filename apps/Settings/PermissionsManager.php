@@ -75,30 +75,33 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
       $permissions[$idUserRole] = array_unique($permissions[$idUserRole]);
     }
 
-    if ($this->db()->isConnected) {
-      $mUserRole = $this->getService(UserRole::class);
+    // 25-Sep-29: Temporarily disabled, eats to much resources.
+    // Need to find more optimal solution.
 
-      $idCommonUserRoles = Helper::pluck('id', $this->db()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
+    // if ($this->db()->isConnected) {
+    //   $mUserRole = $this->getService(UserRole::class);
 
-      foreach ($idCommonUserRoles as $idCommonRole) {
-        $idCommonRole = (int) $idCommonRole;
+    //   $idCommonUserRoles = Helper::pluck('id', $this->db()->fetchAll("select id from `{$mUserRole->table}` where grant_all = 0"));
 
-        $mRolePermission = $this->getService(RolePermission::class);
+    //   foreach ($idCommonUserRoles as $idCommonRole) {
+    //     $idCommonRole = (int) $idCommonRole;
 
-        /** @var array<int, array> */
-        $rolePermissions = (array) $mRolePermission->record
-          ->selectRaw("role_permissions.*,permissions.permission")
-          ->where("id_role", $idCommonRole)
-          ->join("permissions", "role_permissions.id_permission", "permissions.id")
-          ->get()
-          ->toArray()
-        ;
+    //     $mRolePermission = $this->getService(RolePermission::class);
 
-        foreach ($rolePermissions as $key => $rolePermission) {
-          $permissions[$idCommonRole][] = (string) $rolePermission['permission'];
-        }
-      }
-    }
+    //     /** @var array<int, array> */
+    //     $rolePermissions = (array) $mRolePermission->record
+    //       ->selectRaw("role_permissions.*,permissions.permission")
+    //       ->where("id_role", $idCommonRole)
+    //       ->join("permissions", "role_permissions.id_permission", "permissions.id")
+    //       ->get()
+    //       ->toArray()
+    //     ;
+
+    //     foreach ($rolePermissions as $key => $rolePermission) {
+    //       $permissions[$idCommonRole][] = (string) $rolePermission['permission'];
+    //     }
+    //   }
+    // }
 
     return $permissions;
   }

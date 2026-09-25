@@ -5,11 +5,6 @@ namespace Hubleto\App\Community\Invoices;
 class Loader extends \Hubleto\Erp\App
 {
 
-  private int $preparedItemsCount = 0;
-  private int $notPaidInvoicesCount = 0;
-  private int $dueAndNotPaidInvoicesCount = 0;
-  private int $unsentInvoicesCount = 0;
-
   /**
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
@@ -47,14 +42,6 @@ class Loader extends \Hubleto\Erp\App
     /** @var \Hubleto\App\Community\Workflow\Manager $workflowManager */
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflowGroup($this, 'invoices', Workflow::class);
-
-    /** @var Counter */
-    $counter = $this->getService(Counter::class);
-
-    $this->preparedItemsCount = $counter->preparedItems();
-    $this->notPaidInvoicesCount = $counter->notPaidInvoices();
-    $this->dueAndNotPaidInvoicesCount = $counter->dueAndNotPaidInvoices();
-    $this->unsentInvoicesCount = $counter->unsentInvoices();
 
   }
 
@@ -117,10 +104,15 @@ class Loader extends \Hubleto\Erp\App
     /** @var Counter */
     $counter = $this->getService(Counter::class);
 
+    $preparedItemsCount = $counter->preparedItems();
+    // $notPaidInvoicesCount = $counter->notPaidInvoices();
+    $dueAndNotPaidInvoicesCount = $counter->dueAndNotPaidInvoices();
+    $unsentInvoicesCount = $counter->unsentInvoices();
+
     return
-      $this->preparedItemsCount
-      + $this->dueAndNotPaidInvoicesCount
-      + $this->unsentInvoicesCount
+      $preparedItemsCount
+      + $dueAndNotPaidInvoicesCount
+      + $unsentInvoicesCount
     ;
   }
 
@@ -133,24 +125,32 @@ class Loader extends \Hubleto\Erp\App
   public function renderAlerts(): string
   {
 
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    // $preparedItemsCount = $counter->preparedItems();
+    $notPaidInvoicesCount = $counter->notPaidInvoices();
+    $dueAndNotPaidInvoicesCount = $counter->dueAndNotPaidInvoices();
+    $unsentInvoicesCount = $counter->unsentInvoices();
+
     return 
-      ($this->notPaidInvoicesCount > 0 ? '
+      ($notPaidInvoicesCount > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
           class="block badge badge-warning"
-        >' . $this->translate('Not paid') . ': ' . $this->notPaidInvoicesCount . '</a>
+        >' . $this->translate('Not paid') . ': ' . $notPaidInvoicesCount . '</a>
       ' : '')
-      . ($this->dueAndNotPaidInvoicesCount > 0 ? '
+      . ($dueAndNotPaidInvoicesCount > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
           class="block badge badge-danger"
-        >' . $this->translate('Due and not paid') . ': ' . $this->dueAndNotPaidInvoicesCount . '</a>
+        >' . $this->translate('Due and not paid') . ': ' . $dueAndNotPaidInvoicesCount . '</a>
       ' : '')
-      . ($this->unsentInvoicesCount > 0 ? '
+      . ($unsentInvoicesCount > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
           class="block badge badge-danger"
-        >' . $this->translate('Not sent') . ': ' . $this->unsentInvoicesCount . '</a>
+        >' . $this->translate('Not sent') . ': ' . $unsentInvoicesCount . '</a>
       ' : '')
     ;
   }
@@ -163,10 +163,16 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderSecondSidebar(): string
   {
+
+  /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $preparedItemsCount = $counter->preparedItems();
+
     return '
       ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
-        ' . $this->secondSidebarButton('invoices/items', 'fas fa-list', 'Items', $this->preparedItemsCount) . '
+        ' . $this->secondSidebarButton('invoices/items', 'fas fa-list', 'Items', $preparedItemsCount) . '
         ' . $this->secondSidebarButton('invoices/payments', 'fas fa-euro-sign', 'Payments') . '
         ' . $this->secondSidebarButton('invoices/payment-methods', 'fas fa-wallet', 'Payment methods') . '
         ' . $this->secondSidebarButton('invoices/profiles', 'fas fa-address-card', 'Invoicing profiles') . '

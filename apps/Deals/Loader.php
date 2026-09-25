@@ -5,8 +5,6 @@ namespace Hubleto\App\Community\Deals;
 class Loader extends \Hubleto\Erp\App
 {
 
-  private int $openDealsWithoutFuturePlan = 0;
-
   /**
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
@@ -69,10 +67,6 @@ class Loader extends \Hubleto\Erp\App
     $dashboardManager->addBoard($this, $this->translate('Most valuable deals'), 'deals/boards/most-valuable-deals');
     $dashboardManager->addBoard($this, $this->translate('Deal value by result'), 'deals/boards/deal-value-by-result');
 
-    /** @var Counter */
-    $counter = $this->getService(Counter::class);
-
-    $this->openDealsWithoutFuturePlan = $counter->openDealsWithoutFuturePlan();
   }
 
   public function installApp(int $round): void
@@ -121,7 +115,9 @@ class Loader extends \Hubleto\Erp\App
    */
   public function getSidebarBadgeNumber(): int
   {
-    return $this->openDealsWithoutFuturePlan;
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+    return $counter->openDealsWithoutFuturePlan();
   }
 
   /**
@@ -132,13 +128,18 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderAlerts(): string
   {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $openDealsWithoutFuturePlan = $counter->openDealsWithoutFuturePlan();
+
     return 
       ''
-      . ($this->openDealsWithoutFuturePlan > 0 ? '
+      . ($openDealsWithoutFuturePlan > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/deals?filters%5BfDealClosed%5D=0&filters%5BfDealWithPlan%5D=2"
           class="block badge badge-danger"
-        >' . $this->openDealsWithoutFuturePlan . ' ' . $this->translate('open deals without future plan') . '</a>
+        >' . $openDealsWithoutFuturePlan . ' ' . $this->translate('open deals without future plan') . '</a>
       ' : '')
     ;
   }

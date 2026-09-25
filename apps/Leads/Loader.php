@@ -5,8 +5,6 @@ namespace Hubleto\App\Community\Leads;
 class Loader extends \Hubleto\Erp\App
 {
 
-  private int $openLeadsWithoutFuturePlan = 0;
-
   /**
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
@@ -64,9 +62,6 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'leads', $this->translate('Active leads'), 'fas fa-people-arrows');
     $appMenu->addItem($this, 'leads/archive', $this->translate('Archived leads'), 'fas fa-box-archive');
 
-    /** @var Counter */
-    $counter = $this->getService(Counter::class);
-    $this->openLeadsWithoutFuturePlan = $counter->openLeadsWithoutFuturePlan();
   }
 
   public function installApp(int $round): void
@@ -110,18 +105,24 @@ class Loader extends \Hubleto\Erp\App
    */
   public function getSidebarBadgeNumber(): int
   {
-    return $this->openLeadsWithoutFuturePlan;
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+    return $counter->openLeadsWithoutFuturePlan();
   }
   
   public function renderAlerts(): string
   {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+    $openLeadsWithoutFuturePlan = $counter->openLeadsWithoutFuturePlan();
+
     return 
       ''
-      . ($this->openLeadsWithoutFuturePlan > 0 ? '
+      . ($openLeadsWithoutFuturePlan > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/leads?filters%5BfLeadClosed%5D=0&filters%5BfLeadWithPlan%5D=2"
           class="block badge badge-danger"
-        >' . $this->openLeadsWithoutFuturePlan . ' ' . $this->translate('open leads without future plan') . '</a>
+        >' . $openLeadsWithoutFuturePlan . ' ' . $this->translate('open leads without future plan') . '</a>
       ' : '')
     ;
 

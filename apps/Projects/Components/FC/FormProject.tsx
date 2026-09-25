@@ -223,8 +223,8 @@ const TabExpenses = (props: FormProjectProps) => {
 const TabStatistics = (props: FormProjectProps) => {
   const form = React.useContext(FormMetaContext);
 
-  const [statistics, setStatistics] = useState(null);
-  const [salaries, setSalaries] = useState(null);
+  const [statistics, setStatistics] = useState({});
+  const [salaries, setSalaries] = useState({});
 
   useEffect(() => {
     request.post(
@@ -248,13 +248,13 @@ const TabStatistics = (props: FormProjectProps) => {
           <div className='card-body'>
             <table className='table-default dense'>
               <tbody>
-                {statistics.workedByMonth.map((item, key) => {
+                {statistics.workedByMonth ? statistics.workedByMonth.map((item, key) => {
                   totalWorkedHours += parseFloat(item.worked_hours);
                   return <tr key={key}>
                     <td>{item.year}-{item.month}</td>
                     <td>{item.worked_hours} {T.translate('hours')}</td>
                   </tr>;
-                })}
+                }) : null}
               </tbody>
               <tfoot>
                 <tr>
@@ -271,13 +271,13 @@ const TabStatistics = (props: FormProjectProps) => {
           <div className='card-body'>
             <table className='table-default dense'>
               <tbody>
-                {statistics.chargeableByMonth.map((item, key) => {
+                {statistics.chargeableByMonth ? statistics.chargeableByMonth.map((item, key) => {
                   totalChargeableHours += parseFloat(item.worked_hours);
                   return <tr key={key}>
                     <td>{item.year}-{item.month}</td>
                     <td>{item.worked_hours} {T.translate('hours')}</td>
                   </tr>;
-                })}
+                }) : null}
               </tbody>
               <tfoot>
                 <tr>
@@ -304,7 +304,7 @@ const TabStatistics = (props: FormProjectProps) => {
                 </tr>
               </thead>
               <tbody>
-                {statistics.workedByUser.map((item, key) => {
+                {statistics.workedByUser ? statistics.workedByUser.map((item, key) => {
                   let workerCosts = item.worked_hours * salaries[item.id_worker];
                   totalCostsByWorker += workerCosts;
                   return <tr key={key}>
@@ -325,7 +325,7 @@ const TabStatistics = (props: FormProjectProps) => {
                       {globalThis.hubleto.currencyFormat(workerCosts)}
                     </td>
                   </tr>;
-                })}
+                }) : null}
               </tbody>
               <tfoot>
                 <tr>

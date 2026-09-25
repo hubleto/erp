@@ -7,10 +7,6 @@ use Hubleto\App\Community\Documents\Models\Template;
 class Loader extends \Hubleto\Erp\App
 {
 
-  public int $countDueAndChargeableItemsNotPreparedForInvoice = 0;
-  public int $countOrdersAwaitingInvoice = 0;
-  public int $countOpenOrdersWithoutFuturePlan = 0;
-
   /**
    * Inits the app: adds routes, settings, calendars, event listeners, menu items, ...
    *
@@ -71,12 +67,6 @@ class Loader extends \Hubleto\Erp\App
     $dashboardManager = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $dashboardManager->addBoard($this, $this->translate('Order warnings'), 'orders/boards/order-warnings');
 
-    /** @var Counter */
-    $counter = $this->getService(Counter::class);
-
-    $this->countDueAndChargeableItemsNotPreparedForInvoice = $counter->dueAndChargeableItemsNotPreparedForInvoice();
-    $this->countOrdersAwaitingInvoice = $counter->ordersAwaitingInvoice();
-    $this->countOpenOrdersWithoutFuturePlan = $counter->openOrdersWithoutFuturePlan();
   }
 
   /**
@@ -121,13 +111,18 @@ class Loader extends \Hubleto\Erp\App
    */
   public function getSidebarBadgeNumber(): int
   {
+
     /** @var Counter */
     $counter = $this->getService(Counter::class);
 
+    $countDueAndChargeableItemsNotPreparedForInvoice = $counter->dueAndChargeableItemsNotPreparedForInvoice();
+    $countOrdersAwaitingInvoice = $counter->ordersAwaitingInvoice();
+    $countOpenOrdersWithoutFuturePlan = $counter->openOrdersWithoutFuturePlan();
+
     return
-      // $this->countDueAndChargeableItemsNotPreparedForInvoice
-      $this->countOrdersAwaitingInvoice
-      + $this->countOpenOrdersWithoutFuturePlan
+      // $countDueAndChargeableItemsNotPreparedForInvoice
+      $countOrdersAwaitingInvoice
+      + $countOpenOrdersWithoutFuturePlan
     ;
   }
 
@@ -139,21 +134,27 @@ class Loader extends \Hubleto\Erp\App
    */
   public function renderAlerts(): string
   {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
+
+    $countOrdersAwaitingInvoice = $counter->ordersAwaitingInvoice();
+    $countOpenOrdersWithoutFuturePlan = $counter->openOrdersWithoutFuturePlan();
+
     return 
-      ($this->countOrdersAwaitingInvoice > 0 ? '
+      ($countOrdersAwaitingInvoice > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/orders/orders-awaiting-invoice"
           class="block badge badge-danger"
         >
-          ' . $this->countOrdersAwaitingInvoice . ' ' . $this->translate('orders are awaiting invoice') . '
+          ' . $countOrdersAwaitingInvoice . ' ' . $this->translate('orders are awaiting invoice') . '
         </a>
       ' : '')
-      . ($this->countOpenOrdersWithoutFuturePlan > 0 ? '
+      . ($countOpenOrdersWithoutFuturePlan > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/orders?filters%5BfOrderClosed%5D=1&filters%5BfOrderWithPlan%5D=2"
           class="block badge badge-danger"
         >
-          ' . $this->countOpenOrdersWithoutFuturePlan . ' ' . $this->translate('orders without future plan') . '
+          ' . $countOpenOrdersWithoutFuturePlan . ' ' . $this->translate('orders without future plan') . '
         </a>
       ' : '')
     ;

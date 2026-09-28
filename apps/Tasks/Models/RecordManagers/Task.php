@@ -97,10 +97,9 @@ class Task extends \Hubleto\Erp\RecordManager
       (array) ($filters['fTaskWorkflowStep'] ?? [])
     );
 
-    if (isset($filters["fTaskClosed"])) {
-      if ($filters["fTaskClosed"] == 0) $query = $query->where("tasks.is_closed", false);
-      if ($filters["fTaskClosed"] == 1) $query = $query->where("tasks.is_closed", true);
-    }
+    $fTaskClosed = $filters['fTaskClosed'] ?? 1;
+    if ($fTaskClosed == 1) $query = $query->where("tasks.is_closed", false);
+    if ($fTaskClosed == 2) $query = $query->where("tasks.is_closed", true);
 
     if (isset($filters['fDeveloper']) && is_array($filters['fDeveloper']) && count($filters['fDeveloper']) > 0) {
       $query = $query->whereIn($this->table . '.id_developer', $filters['fDeveloper']);

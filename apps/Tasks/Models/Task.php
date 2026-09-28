@@ -146,21 +146,22 @@ class Task extends \Hubleto\Erp\Model
         ];
 
         $description->addFilter(
-          'fTaskWorkflowStep',
-          Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Status'))
+          'fTaskClosed',
+          [
+            // 'title' => $this->translate('Open / Closed'),
+            'direction' => 'horizontal',
+            'options' => [
+              1 => $this->translate('Open'),
+              2 => $this->translate('Closed'),
+              3 => $this->translate('All'),
+            ],
+            'default' => 1,
+          ]
         );
 
         $description->addFilter(
-          'fTaskClosed',
-          [
-            'title' => $this->translate('Open / Closed'),
-            'options' => [
-              0 => $this->translate('Open'),
-              1 => $this->translate('Closed'),
-              2 => $this->translate('All'),
-            ],
-            'default' => 2,
-          ]
+          'fTaskWorkflowStep',
+          Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Status'))
         );
 
         $fUserOptions = [];

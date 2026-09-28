@@ -81,6 +81,21 @@ class Task extends \Hubleto\Erp\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
+    $query = $query->with('TODO')->with('PROJECTS')->with('DEALS');
+    return $query;
+  }
+
+  /**
+   * [Description for addUrlFiltersToQuery]
+   *
+   * @param mixed|null $query
+   * 
+   * @return mixed
+   * 
+   */
+  public function addUrlFiltersToQuery(mixed $query): mixed
+  {
+    $query = parent::addUrlFiltersToQuery($query);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
@@ -88,8 +103,6 @@ class Task extends \Hubleto\Erp\RecordManager
 
     $view = $hubleto->router()->urlParamAsString('view');
     if ($view == 'briefOverview') $query = $query->where($this->table . '.is_closed', false);
-
-    $query = $query->with('TODO')->with('PROJECTS')->with('DEALS');
 
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,

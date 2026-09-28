@@ -81,11 +81,19 @@ class Contact extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
-    // if ($this->router()->urlParamAsInteger('idCustomer') > 0) {
-    //   $description->columns = [];
-    //   $description->inputs = [];
-    //   $description->ui = [];
-    // }
+    $fTagColors = [];
+    $fTagOptions = [];
+    foreach ($this->getModel(Tag::class)->record->get() as $value) {
+      $fTagColors[$value->id] = $value->color;
+      $fTagOptions[$value->id] = $value->name;
+    }
+    $description->addFilter('fTag', [
+      'title' => $this->translate('Tag'),
+      'type' => 'multipleSelectButtons',
+      'colors' => $fTagColors,
+      'options' => $fTagOptions,
+    ]);
+
 
     return $description;
   }

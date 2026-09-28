@@ -75,6 +75,29 @@ class Customer extends \Hubleto\Erp\RecordManager
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
+    // Virtual tag count
+    $query->selectSub(function($sub) {
+      $sub->from('cross_customer_tags')
+        ->join('customer_tags', 'customer_tags.id', '=', 'cross_customer_tags.id_tag')
+        ->whereColumn('cross_customer_tags.id_customer', 'customers.id')
+        ->selectRaw("COUNT(DISTINCT customer_tags.id)");
+    }, 'tags_count');
+
+    return $query;
+  }
+
+  /**
+   * [Description for addUrlFiltersToQuery]
+   *
+   * @param mixed|null $query
+   * 
+   * @return mixed
+   * 
+   */
+  public function addUrlFiltersToQuery(mixed $query): mixed
+  {
+    $query = parent::addUrlFiltersToQuery($query);
+
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
@@ -93,17 +116,18 @@ class Customer extends \Hubleto\Erp\RecordManager
       });
     }
 
-    // Virtual tag count
-    $query->selectSub(function($sub) {
-      $sub->from('cross_customer_tags')
-        ->join('customer_tags', 'customer_tags.id', '=', 'cross_customer_tags.id_tag')
-        ->whereColumn('cross_customer_tags.id_customer', 'customers.id')
-        ->selectRaw("COUNT(DISTINCT customer_tags.id)");
-    }, 'tags_count');
-
     return $query;
   }
 
+  /**
+   * [Description for addOrderByToQuery]
+   *
+   * @param mixed $query
+   * @param array $orderBy
+   * 
+   * @return mixed
+   * 
+   */
   public function addOrderByToQuery(mixed $query, array $orderBy): mixed
   {
     if (($orderBy['field'] ?? null) === 'virt_tags') {
@@ -113,6 +137,15 @@ class Customer extends \Hubleto\Erp\RecordManager
     }
   }
 
+  /**
+   * [Description for addFulltextSearchToQuery]
+   *
+   * @param mixed $query
+   * @param string $fulltextSearch
+   * 
+   * @return mixed
+   * 
+   */
   public function addFulltextSearchToQuery(mixed $query, string $fulltextSearch): mixed
   {
     if (!empty($fulltextSearch)) {

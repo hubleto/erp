@@ -23,6 +23,23 @@ class Counter extends Core
   }
 
   /**
+   * [Description for draftInvoices]
+   *
+   * @return int
+   * 
+   */
+  public function draftInvoices(): int
+  {
+    $mItem = $this->getModel(Models\Invoice::class);
+    return $mItem->record->prepareReadQuery()
+      ->whereNull('number')
+      ->orWhere('number', '=', '')
+      ->count()
+    ;
+  }
+
+
+  /**
    * [Description for notPaidInvoices]
    *
    * @return int

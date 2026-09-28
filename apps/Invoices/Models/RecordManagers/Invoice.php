@@ -87,17 +87,16 @@ class Invoice extends \Hubleto\Erp\RecordManager {
   }
 
   /**
-   * [Description for prepareReadQuery]
+   * [Description for addUrlFiltersToQuery]
    *
    * @param mixed|null $query
-   * @param int $level
    * 
    * @return mixed
    * 
    */
-  public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
+  public function addUrlFiltersToQuery(mixed $query): mixed
   {
-    $query = parent::prepareReadQuery($query, $level, $includeRelations);
+    $query = parent::addUrlFiltersToQuery($query);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
     $filters = $hubleto->router()->urlParamAsArray("filters");
@@ -107,6 +106,13 @@ class Invoice extends \Hubleto\Erp\RecordManager {
 
     $idProfile = $hubleto->router()->urlParamAsInteger('idProfile');
     if ($idProfile > 0) $query->where('id_profile', $idProfile);
+
+    if (isset($filters["fDraft"])) {
+      switch ($filters["fDraft"]) {
+        case 1: $query = $query->where('invoices.number', '=', '')->orWhereNull('invoices.number'); break;
+        case 2: $query = $query->where('invoices.number', '!=', ''); break;
+      }
+    }
 
     if (isset($filters["fInboundOutbound"]) && $filters["fInboundOutbound"] > 0) {
       $query = $query->where("invoices.inbound_outbound", $filters["fInboundOutbound"]);

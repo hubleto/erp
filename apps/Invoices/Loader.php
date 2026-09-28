@@ -129,12 +129,19 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
 
     // $preparedItemsCount = $counter->preparedItems();
+    $draftInvoicesCount = $counter->draftInvoices();
     $notPaidInvoicesCount = $counter->notPaidInvoices();
     $dueAndNotPaidInvoicesCount = $counter->dueAndNotPaidInvoices();
     $unsentInvoicesCount = $counter->unsentInvoices();
 
     return 
-      ($notPaidInvoicesCount > 0 ? '
+      ($draftInvoicesCount > 0 ? '
+        <a
+          href="' . $this->env()->projectUrl . '/invoices?filters%5BfDraft%5D=1"
+          class="block badge badge-warning"
+        >' . $this->translate('Drafts') . ': ' . $draftInvoicesCount . '</a>
+      ' : '')
+      . ($notPaidInvoicesCount > 0 ? '
         <a
           href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
           class="block badge badge-warning"
@@ -168,10 +175,12 @@ class Loader extends \Hubleto\Erp\App
     $counter = $this->getService(Counter::class);
 
     $preparedItemsCount = $counter->preparedItems();
+    $draftInvoicesCount = $counter->draftInvoices();
 
     return '
       ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('invoices?filters%5BfDraft%5D=1', 'fas fa-pen-to-square', 'Drafts', $draftInvoicesCount) . '
         ' . $this->secondSidebarButton('invoices/items', 'fas fa-list', 'Items', $preparedItemsCount) . '
         ' . $this->secondSidebarButton('invoices/payments', 'fas fa-euro-sign', 'Payments') . '
         ' . $this->secondSidebarButton('invoices/payment-methods', 'fas fa-wallet', 'Payment methods') . '

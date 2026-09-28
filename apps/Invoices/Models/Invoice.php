@@ -185,6 +185,15 @@ class Invoice extends \Hubleto\Erp\Model {
       ]
     ]);
 
+    $description->addFilter('fDraft', [
+      // 'title' => $this->translate('Inbound / Outbound'),
+      'direction' => 'horizontal',
+      'options' => [
+        1 => $this->translate('Draft'),
+        2 => $this->translate('Issued'),
+      ]
+    ]);
+
     $description->addFilter('fType', [
       // 'title' => $this->translate('Type'),
       'options' => array_map(fn($v) => $this->translate($v), self::TYPES)

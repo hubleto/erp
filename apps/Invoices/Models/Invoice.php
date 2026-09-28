@@ -358,8 +358,8 @@ class Invoice extends \Hubleto\Erp\Model {
 
     // Calculate other default values
     $record['id_currency'] = $profile['id_currency'] ?? 0;
-    $record['vs'] = preg_replace('/[^0-9]/', '', $record['number']);
-    $record['cs'] = '0308';
+    // $record['vs'] = preg_replace('/[^0-9]/', '', $record['number']);
+    // $record['cs'] = '0308';
     $record['date_issue'] = date('Y-m-d');
     $record['date_due'] = date('Y-m-d', strtotime('+' . $dueDays . ' days'));
     if (!isset($record['date_delivery']) || strtotime($record['date_delivery']) < 1000) {

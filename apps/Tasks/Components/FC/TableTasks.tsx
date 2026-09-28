@@ -36,16 +36,18 @@ const TableTasks = (props: TableProps) => {
       }}
       renderActionsColumn={(table: TableMeta, row: any) => {
         return <>
-          <button
-            className="btn btn-small btn-add-outline text-nowrap"
-            onClick={(e) => {
-              e.preventDefault();
-              setAddActivityForIdTask(row.id);
-            }}
-          >
-            <span className="icon"><i className="fas fa-plus"></i></span>
-            <span className="text">{T.translate('Add activity')}</span>
-          </button>
+          {row.is_closed ? null :
+            <button
+              className="btn btn-small btn-add-outline text-nowrap"
+              onClick={(e) => {
+                e.preventDefault();
+                setAddActivityForIdTask(row.id);
+              }}
+            >
+              <span className="icon"><i className="fas fa-plus"></i></span>
+              <span className="text">{T.translate('Add activity')}</span>
+            </button>
+          }
         </>;
       }}
       // renderFooter={(table: TableMeta) => { return table.renderDefaultFooter(); }}

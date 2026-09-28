@@ -142,20 +142,14 @@ class Loader extends \Hubleto\Erp\App
 
     return 
       ($countOrdersAwaitingInvoice > 0 ? '
-        <a
-          href="' . $this->env()->projectUrl . '/orders/orders-awaiting-invoice"
-          class="block badge badge-danger"
-        >
-          ' . $countOrdersAwaitingInvoice . ' ' . $this->translate('orders are awaiting invoice') . '
-        </a>
+        <a href="' . $this->env()->projectUrl . '/orders/orders-awaiting-invoice">'
+          . $countOrdersAwaitingInvoice . ' ' . $this->translate('orders are awaiting invoice')
+        . '</a><br/>
       ' : '')
       . ($countOpenOrdersWithoutFuturePlan > 0 ? '
-        <a
-          href="' . $this->env()->projectUrl . '/orders?filters%5BfOrderClosed%5D=1&filters%5BfOrderWithPlan%5D=2"
-          class="block badge badge-danger"
-        >
-          ' . $countOpenOrdersWithoutFuturePlan . ' ' . $this->translate('orders without future plan') . '
-        </a>
+        <a href="' . $this->env()->projectUrl . '/orders?filters%5BfOrderClosed%5D=1&filters%5BfOrderWithPlan%5D=2">'
+          . $countOpenOrdersWithoutFuturePlan . ' ' . $this->translate('orders without future plan')
+        . '</a><br/>
       ' : '')
     ;
   }

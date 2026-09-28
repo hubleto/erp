@@ -136,28 +136,24 @@ class Loader extends \Hubleto\Erp\App
 
     return 
       ($draftInvoicesCount > 0 ? '
-        <a
-          href="' . $this->env()->projectUrl . '/invoices?filters%5BfDraft%5D=1"
-          class="block badge badge-warning"
-        >' . $this->translate('Drafts') . ': ' . $draftInvoicesCount . '</a>
+        <a href="' . $this->env()->projectUrl . '/invoices?filters%5BfDraft%5D=1">'
+          . $this->translate('Drafts') . ': ' . $draftInvoicesCount
+        . '</a><br/>
       ' : '')
       . ($notPaidInvoicesCount > 0 ? '
-        <a
-          href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2"
-          class="block badge badge-warning"
-        >' . $this->translate('Not paid') . ': ' . $notPaidInvoicesCount . '</a>
+        <a href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfPaid%5D=2">'
+          . $this->translate('Not paid') . ': ' . $notPaidInvoicesCount
+        . '</a><br/>
       ' : '')
       . ($dueAndNotPaidInvoicesCount > 0 ? '
-        <a
-          href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2"
-          class="block badge badge-danger"
-        >' . $this->translate('Due and not paid') . ': ' . $dueAndNotPaidInvoicesCount . '</a>
+        <a href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfDue%5D=1&filters%5BfPaid%5D=2">'
+          . $this->translate('Due and not paid') . ': ' . $dueAndNotPaidInvoicesCount
+        . '</a><br/>
       ' : '')
       . ($unsentInvoicesCount > 0 ? '
-        <a
-          href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2"
-          class="block badge badge-danger"
-        >' . $this->translate('Not sent') . ': ' . $unsentInvoicesCount . '</a>
+        <a href="' . $this->env()->projectUrl . '/invoices?filters%5BfIssued%5D=0&filters%5BfSent%5D=2">'
+          . $this->translate('Not sent') . ': ' . $unsentInvoicesCount
+        . '</a><br/>
       ' : '')
     ;
   }

@@ -57,12 +57,14 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                   <div className={'badge ' + (record.EMAIL?.SENDER_ACCOUNT?.name ? '' : 'badge-danger')}>
                     {record.EMAIL?.SENDER_ACCOUNT?.name ?? <>No sender account</>}
                   </div>
-                  <div className='badge'>{record.RECIPIENTS ? record.RECIPIENTS.length : 0} recipients</div>
+                  {record.EMAIL?.is_approved ? <div className='badge badge-success'>Approved</div> : <div className='badge badge-danger'>Not approved</div>}
+                  <div className='badge badge-info'>{record.RECIPIENTS ? record.RECIPIENTS.length : 0} recipients</div>
+                  {record.EMAIL?.is_closed ? <div className='badge'>Closed</div> : null}
                 </> : <div className='text-red-800'>No email selected</div>}
               </div>
             </button>
             <div className='m-2'>
-              {record.EMAIL?.is_approved ? 
+              {record.EMAIL?.is_approved && !record.EMAIL?.is_closed ? 
                 <button
                   className='btn btn-transparent'
                   onClick={() => {
@@ -79,7 +81,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                   <span className='icon'><i className='fas fa-bolt'></i></span>
                   <span className='text'>Launch</span>
                 </button>
-              : <div className='badge badge-danger text-nowrap'>Not approved</div>}
+              : null}
             </div>
           </div>;
         })}

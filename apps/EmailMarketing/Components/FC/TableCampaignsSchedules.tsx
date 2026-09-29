@@ -57,7 +57,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                   <div className={'badge ' + (record.EMAIL?.SENDER_ACCOUNT?.name ? '' : 'badge-danger')}>
                     {record.EMAIL?.SENDER_ACCOUNT?.name ?? <>No sender account</>}
                   </div>
-                  <div className='badge'>{record.EMAIL?.RECIPIENTS ? record.EMAIL?.RECIPIENTS.length : 0} recipients</div>
+                  <div className='badge'>{record.RECIPIENTS ? record.RECIPIENTS.length : 0} recipients</div>
                 </> : <div className='text-red-800'>No email selected</div>}
               </div>
             </button>

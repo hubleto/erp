@@ -2,8 +2,9 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Models\RecordManagers;
 
+use Hubleto\App\Community\EmailMarketing\Models\RecordManagers\CampaignScheduleRecipient;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CampaignSchedule extends \Hubleto\Erp\RecordManager
 {
@@ -19,6 +20,12 @@ class CampaignSchedule extends \Hubleto\Erp\RecordManager
   public function CAMPAIGN(): BelongsTo
   {
     return $this->belongsTo(Campaign::class, 'id_campaign', 'id');
+  }
+
+  /** @return HasMany<Tag, covariant LeadTag> */
+  public function RECIPIENTS(): HasMany
+  {
+    return $this->hasMany(CampaignScheduleRecipient::class, 'id_campaign_schedule', 'id');
   }
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed

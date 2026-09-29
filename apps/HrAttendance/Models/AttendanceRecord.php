@@ -46,6 +46,17 @@ class AttendanceRecord extends \Hubleto\Erp\Model
     return $description;
   }
 
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['title'] = $this->translate('Attendance records');
+    $description->ui['addButtonText'] = $this->translate('Add attendance record');
+    $description->ui['orderBy'] = 'date_worked desc';
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+    return $description;
+  }
+
   public function getRelationsIncludedInLoadTableData(): array|null
   {
     return ['USER'];

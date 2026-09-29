@@ -46,6 +46,16 @@ class JobOpening extends \Hubleto\Erp\Model
     return $description;
   }
 
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['title'] = $this->translate('Job openings');
+    $description->ui['addButtonText'] = $this->translate('Add job opening');
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+    return $description;
+  }
+
   public function getRelationsIncludedInLoadTableData(): array|null
   {
     return ['HIRING_MANAGER'];

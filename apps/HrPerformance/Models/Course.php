@@ -25,4 +25,19 @@ class Course extends \Hubleto\Erp\Model
       'description' => (new Text($this, $this->translate('Description'))),
     ]);
   }
+
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['title'] = $this->translate('Learning courses');
+    $description->ui['addButtonText'] = $this->translate('Add course');
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+    return $description;
+  }
+
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    return parent::describeForm();
+  }
 }

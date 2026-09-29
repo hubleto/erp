@@ -23,4 +23,19 @@ class LeaveType extends \Hubleto\Erp\Model
       'description' => (new Text($this, $this->translate('Description'))),
     ]);
   }
+
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['title'] = $this->translate('Leave types');
+    $description->ui['addButtonText'] = $this->translate('Add leave type');
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+    return $description;
+  }
+
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    return parent::describeForm();
+  }
 }

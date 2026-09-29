@@ -41,6 +41,17 @@ class Goal extends \Hubleto\Erp\Model
     return $description;
   }
 
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['title'] = $this->translate('Employee goals');
+    $description->ui['addButtonText'] = $this->translate('Add goal');
+    $description->ui['orderBy'] = 'date_due asc';
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+    return $description;
+  }
+
   public function getRelationsIncludedInLoadTableData(): array|null
   {
     return ['USER'];

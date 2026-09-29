@@ -56,10 +56,10 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
     ;
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
-      $ordersQuery = $ordersQuery->where('id_owner', $filter['idUser']);
+      $ordersQuery = $ordersQuery->where('id_manager', $filter['idUser']);
     }
     if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
-      $ordersQuery = $ordersQuery->where('id_owner', $this->authProvider()->getUserId());
+      $ordersQuery = $ordersQuery->where('id_manager', $this->authProvider()->getUserId());
     }
 
     $orders = $ordersQuery->get();

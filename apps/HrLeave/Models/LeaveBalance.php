@@ -35,7 +35,6 @@ class LeaveBalance extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Leave entitlements');
     $description->ui['addButtonText'] = $this->translate('Add leave entitlement');
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);

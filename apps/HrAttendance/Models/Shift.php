@@ -40,7 +40,6 @@ class Shift extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Shift schedule');
     $description->ui['addButtonText'] = $this->translate('Schedule shift');
     $description->ui['orderBy'] = 'date_start asc';
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);

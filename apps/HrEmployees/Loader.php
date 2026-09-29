@@ -19,6 +19,16 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('hr-employees/employees', 'fas fa-id-card', 'Employees') . '
+      </div>
+    ';
+  }
+
   public function installApp(int $round): void
   {
     if ($round === 1) {

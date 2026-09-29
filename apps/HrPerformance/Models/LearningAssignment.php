@@ -46,7 +46,6 @@ class LearningAssignment extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Learning assignments');
     $description->ui['addButtonText'] = $this->translate('Assign learning');
     $description->ui['orderBy'] = 'date_due asc';
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);

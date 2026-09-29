@@ -19,6 +19,17 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('hr-attendance/records', 'fas fa-clock', 'Attendance records') . '
+        ' . $this->secondSidebarButton('hr-attendance/shifts', 'fas fa-calendar-day', 'Shift schedule') . '
+      </div>
+    ';
+  }
+
   public function installApp(int $round): void
   {
     if ($round === 1) {

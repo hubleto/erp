@@ -19,6 +19,19 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('hr-performance/goals', 'fas fa-bullseye', 'Goals') . '
+        ' . $this->secondSidebarButton('hr-performance/reviews', 'fas fa-star-half-stroke', 'Reviews') . '
+        ' . $this->secondSidebarButton('hr-performance/courses', 'fas fa-book-open', 'Courses') . '
+        ' . $this->secondSidebarButton('hr-performance/learning', 'fas fa-graduation-cap', 'Learning assignments') . '
+      </div>
+    ';
+  }
+
   public function installApp(int $round): void
   {
     if ($round === 1) {

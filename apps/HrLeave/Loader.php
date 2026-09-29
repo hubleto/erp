@@ -24,6 +24,19 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('hr-leave/requests', 'fas fa-file-circle-check', 'Leave requests') . '
+        ' . $this->secondSidebarButton('hr-leave/types', 'fas fa-list-check', 'Leave types') . '
+        ' . $this->secondSidebarButton('hr-leave/balances', 'fas fa-scale-balanced', 'Entitlements') . '
+        ' . $this->secondSidebarButton('calendar?show=hr-leave', 'fas fa-calendar-days', 'Leave calendar') . '
+      </div>
+    ';
+  }
+
   public function installApp(int $round): void
   {
     if ($round === 1) {

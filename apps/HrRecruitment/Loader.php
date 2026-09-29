@@ -24,6 +24,20 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('hr-recruitment/job-openings', 'fas fa-briefcase', 'Job openings') . '
+        ' . $this->secondSidebarButton('hr-recruitment/candidates', 'fas fa-user-tie', 'Candidates') . '
+        ' . $this->secondSidebarButton('hr-recruitment/applications', 'fas fa-file-lines', 'Applications') . '
+        ' . $this->secondSidebarButton('hr-recruitment/interviews', 'fas fa-comments', 'Interviews') . '
+        ' . $this->secondSidebarButton('calendar?show=hr-interviews', 'fas fa-calendar-days', 'Interview calendar') . '
+      </div>
+    ';
+  }
+
   public function installApp(int $round): void
   {
     if ($round === 1) {

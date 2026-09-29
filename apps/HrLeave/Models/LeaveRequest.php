@@ -51,7 +51,6 @@ class LeaveRequest extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['title'] = $this->translate('Leave requests');
     $description->ui['addButtonText'] = $this->translate('Request leave');
     $description->ui['orderBy'] = 'date_from desc';
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);

@@ -10,7 +10,7 @@ class Loader extends \Hubleto\Erp\App
 
     $this->router()->get([
       '/^hr-recruitment\/?$/' => ['controller' => Controllers\Recruitment::class, 'vars' => ['resource' => 'job-openings']],
-      '/^hr-recruitment\/(?<resource>job-openings|candidates|applications|interviews|employment-types|work-locations|opening-dates)(\/(?<recordId>\d+))?\/?$/' => Controllers\Recruitment::class,
+      '/^hr-recruitment\/(?<resource>job-openings|candidates|applications|interviews|employment-types|work-locations)(\/(?<recordId>\d+))?\/?$/' => Controllers\Recruitment::class,
     ]);
 
     $menu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
@@ -38,7 +38,6 @@ class Loader extends \Hubleto\Erp\App
         ' . $this->secondSidebarButton('hr-recruitment/interviews', 'fas fa-comments', 'Interviews') . '
         ' . $this->secondSidebarButton('hr-recruitment/employment-types', 'fas fa-file-contract', 'Employment types') . '
         ' . $this->secondSidebarButton('hr-recruitment/work-locations', 'fas fa-location-dot', 'Work locations') . '
-        ' . $this->secondSidebarButton('hr-recruitment/opening-dates', 'fas fa-calendar-day', 'Opening dates') . '
         ' . $this->secondSidebarButton('calendar?show=hr-interviews', 'fas fa-calendar-days', 'Interview calendar') . '
       </div>
     ';
@@ -55,7 +54,6 @@ class Loader extends \Hubleto\Erp\App
     if ($round === 1) {
       $this->getModel(Models\EmploymentType::class)->upgradeSchema();
       $this->getModel(Models\WorkLocation::class)->upgradeSchema();
-      $this->getModel(Models\OpeningDate::class)->upgradeSchema();
       $this->getModel(Models\JobOpening::class)->upgradeSchema();
       $this->getModel(Models\Candidate::class)->upgradeSchema();
       $this->getModel(Models\Application::class)->upgradeSchema();
@@ -74,16 +72,6 @@ class Loader extends \Hubleto\Erp\App
     foreach ([$this->translate('Hybrid'), $this->translate('Remote'), $this->translate('Head office')] as $name) {
       if (!$mWorkLocation->record->where('name', $name)->exists()) $mWorkLocation->record->recordCreate(['name' => $name]);
     }
-
-    $mOpeningDate = $this->getModel(Models\OpeningDate::class);
-    $openingDateFor = function (string $date) use ($mOpeningDate) {
-      $openingDate = $mOpeningDate->record->where('opened_on', $date)->first();
-      if (!$openingDate) {
-        $created = $mOpeningDate->record->recordCreate(['name' => $date, 'opened_on' => $date]);
-        $openingDate = $mOpeningDate->record->find($created['id']);
-      }
-      return $openingDate;
-    };
 
     $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
     $user = $mUser->record->where('is_active', true)->orderBy('id')->first();
@@ -104,7 +92,7 @@ class Loader extends \Hubleto\Erp\App
         'id_employment_type' => $fullTime->id,
         'status' => $this->translate('Open'),
         'positions' => 1,
-        'id_opening_date' => $openingDateFor(date('Y-m-d'))->id,
+        'date_opened' => date('Y-m-d'),
         'id_hiring_manager' => $user->id,
         'description' => $this->translate('Demo opening for an experienced people operations professional.'),
       ]);
@@ -165,7 +153,7 @@ class Loader extends \Hubleto\Erp\App
         'id_employment_type' => $partTime->id,
         'status' => $this->translate('Open'),
         'positions' => 1,
-        'id_opening_date' => $openingDateFor(date('Y-m-d', strtotime('-7 days')))->id,
+        'date_opened' => date('Y-m-d', strtotime('-7 days')),
         'id_hiring_manager' => $user->id,
         'description' => $this->translate('Demo opening supporting employee services and HR operations.'),
       ]);

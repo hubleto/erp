@@ -35,7 +35,7 @@ class Mail extends \Hubleto\Erp\Model
    */
   public function describeColumns(): array
   {
-    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+    $user = $this->authProvider()->getUser();
     return array_merge(parent::describeColumns(), [
       'mail_number' => (new Varchar($this, $this->translate('Mail Id')))->addIndex('INDEX `mail_number` (`mail_number`)'),
       'mail_id' => (new Varchar($this, $this->translate('Mail Number')))->addIndex('INDEX `mail_id` (`mail_id`)'),

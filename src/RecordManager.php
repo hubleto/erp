@@ -29,7 +29,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $hasIdTeam = $this->model->hasColumn('id_team');
     $hasSharedWith = $this->model->hasColumn('shared_with');
 
-    $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
+    $authProvider = $hubleto->authProvider();
 
     $idUser = $authProvider->getUserId();
 

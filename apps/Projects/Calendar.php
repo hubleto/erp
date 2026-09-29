@@ -46,7 +46,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       $milestones = $milestones->where($mMilestone->table . '.is_closed', $filter['fCompleted'] == 2);
     }
     if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
-      $milestones = $milestones->where($mMilestone->table . ".id_responsible", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+      $milestones = $milestones->where($mMilestone->table . ".id_responsible", $this->authProvider()->getUserId());
     }
 
     $milestones = $milestones->get();

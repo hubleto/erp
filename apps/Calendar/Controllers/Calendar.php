@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Calendar\Controllers;
 
 use Hubleto\App\Community\Calendar\Counter;
-use \Hubleto\App\Community\Calendar\Manager;
+use Hubleto\App\Community\Calendar\Manager;
 
 class Calendar extends \Hubleto\Erp\Controller
 {

@@ -77,7 +77,7 @@ class Counter extends Core
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+    $user = $this->authProvider()->getUser();
     $idUser = $user['id'] ?? 0;
 
     if ($idTo > 0) {

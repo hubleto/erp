@@ -38,7 +38,7 @@ class CreateInvoiceFromOrder extends \Hubleto\Erp\Controllers\ApiController
 
       $idInvoice = $mInvoice->record->recordCreate([
         'inbound_outbound' => $order->purchase_sales,
-        'id_issued_by' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId() ,
+        'id_issued_by' => $this->authProvider()->getUserId() ,
         'id_customer' => $order->id_customer ,
         'id_supplier' => $order->id_supplier ,
         'type' => Invoice::TYPE_STANDARD ,

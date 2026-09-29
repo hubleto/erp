@@ -201,7 +201,7 @@ class Installer extends \Hubleto\Erp\Core
 
     if ($this->adminPassword == '' && $this->smtpHost != '') {
       $this->router()->setUrlParam('login', $this->adminEmail);
-      $this->getService(\Hubleto\Framework\AuthProvider::class)->forgotPassword();
+      $this->authProvider()->forgotPassword();
     }
   }
 

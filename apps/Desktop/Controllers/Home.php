@@ -2,8 +2,8 @@
 
 namespace Hubleto\App\Community\Desktop\Controllers;
 
-use \Hubleto\App\Community\Dashboards\Loader as DashboardsApp;
-use \Hubleto\App\Community\Dashboards\Models\Dashboard as DashboardModel;
+use Hubleto\App\Community\Dashboards\Loader as DashboardsApp;
+use Hubleto\App\Community\Dashboards\Models\Dashboard as DashboardModel;
 use Hubleto\App\Community\Desktop\Loader;
 
 class Home extends \Hubleto\Erp\Controller

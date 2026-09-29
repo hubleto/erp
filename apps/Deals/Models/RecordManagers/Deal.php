@@ -175,9 +175,9 @@ class Deal extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fDealOwnership"])) {
       switch ($filters["fDealOwnership"]) {
-        case 1: $query = $query->where("deals.id_owner", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+        case 1: $query = $query->where("deals.id_owner", $hubleto->authProvider()->getUserId());
           break;
-        case 2: $query = $query->where("deals.id_manager", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+        case 2: $query = $query->where("deals.id_manager", $hubleto->authProvider()->getUserId());
           break;
       }
     }

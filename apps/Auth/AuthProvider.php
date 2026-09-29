@@ -30,7 +30,7 @@ use Hubleto\Framework\Model;
  *
  * @property \Hubleto\Erp\Loader $main
  */
-class AuthProvider extends \Hubleto\Framework\AuthProvider
+class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
 {
 
   public $loginAttribute = 'login';
@@ -264,7 +264,7 @@ class AuthProvider extends \Hubleto\Framework\AuthProvider
       $this->router()->setUrlParam('login', $token->login);
       $this->router()->setUrlParam('password', $this->router()->urlParamAsString('password'));
 
-      $this->getService(\Hubleto\Framework\AuthProvider::class)->auth();
+      $this->authProvider()->auth();
     } else {
       setcookie('passwordReset', '1', time() + 1000, "/");
     }

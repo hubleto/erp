@@ -78,7 +78,7 @@ class Calendar extends \Hubleto\Erp\Calendar
       $query = $query->where('all_day', $filter['all_day']);
     }
     if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
-      $query = $query->where($mActivity->table.".id_owner", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+      $query = $query->where($mActivity->table.".id_owner", $this->authProvider()->getUserId());
     }
 
     return $query;

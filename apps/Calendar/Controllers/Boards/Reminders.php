@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar\Controllers\Boards;
 
-use \Hubleto\App\Community\Calendar\Events;
+use Hubleto\App\Community\Calendar\Events;
 
 class Reminders extends \Hubleto\Erp\Controller
 {

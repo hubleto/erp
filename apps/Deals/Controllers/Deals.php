@@ -22,7 +22,7 @@ class Deals extends \Hubleto\Erp\Controller
 
     $result = $mDeal->record
       ->selectRaw("COUNT(id) as count, SUM(price_excl_vat) as price_excl_vat")
-      ->where("id_owner", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+      ->where("id_owner", $this->authProvider()->getUserId())
       ->first()
       ->toArray()
     ;

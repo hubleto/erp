@@ -45,7 +45,7 @@ class Notification extends \Hubleto\Erp\Model
 
   public function describeColumns(): array
   {
-    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+    $user = $this->authProvider()->getUser();
     return array_merge(parent::describeColumns(), [
       'priority' => (new Integer($this, $this->translate('Priority')))->setRequired()->setDefaultValue(1),
       'id_from' => (new Lookup($this, $this->translate('From'), User::class))->setReactComponent('InputUserSelect')->setRequired()->setDefaultVisible(),

@@ -27,12 +27,12 @@ class Loader extends \Hubleto\Erp\App
     ]);
 
     DependencyInjection::setServiceProviders([
-      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
+      \Hubleto\Framework\Services\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Controllers\SignIn::class => Controllers\SignIn::class,
       \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Auth\Models\User::class,
     ]);
 
-    $this->getService(\Hubleto\Framework\AuthProvider::class)->init();
+    $this->authProvider()->init();
   }
 
   // upgradeSchema

@@ -29,6 +29,11 @@ class Loader extends \Hubleto\Erp\App
       $this->getService(EventListeners\NotifyUpdatedRecord::class)
     );
 
+    $this->eventManager()->addEventListener(
+      'onSendEmailNotification',
+      $this->getService(EventListeners\EmailNotifications::class)
+    );
+
     /** @var \Hubleto\App\Community\Settings\Loader */
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
@@ -74,7 +79,7 @@ class Loader extends \Hubleto\Erp\App
   // {
   //   $mNotification = $this->getModel(Models\Notification::class);
   //   return $mNotification->record->prepareReadQuery()
-  //     ->where('id_to', $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+  //     ->where('id_to', $this->authProvider()->getUserId())
   //     ->whereNull('datetime_read')
   //     ->count()
   //   ;
@@ -103,7 +108,7 @@ class Loader extends \Hubleto\Erp\App
   //   string $color = '',
   //   int $priority = 0
   // ): array {
-  //   $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+  //   $user = $this->authProvider()->getUser();
   //   $idUser = $user['id'] ?? 0;
 
   //   if ($idTo > 0) {

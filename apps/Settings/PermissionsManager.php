@@ -14,7 +14,7 @@ use Hubleto\App\Community\Auth\Models\User;
 /**
  * Class managing Hubleto permissions.
  */
-class PermissionsManager extends \Hubleto\Framework\PermissionsManager
+class PermissionsManager extends \Hubleto\Framework\Services\PermissionsManager
 {
 
   protected bool $grantAllPermissions = false;
@@ -168,7 +168,7 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
       $idRole = (int) $role;
     }
 
-    return in_array($idRole, $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserRoles());
+    return in_array($idRole, $this->authProvider()->getUserRoles());
   }
 
   public function grantedForRole(string $permission, int|string $userRole): bool
@@ -189,7 +189,7 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
       return true;
     } else {
       /** @var AuthProvider */
-      $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
+      $authProvider = $this->authProvider();
 
       if (empty($permission)) return true;
       if (count($userRoles) == 0) $userRoles = $authProvider->getUserRoles();
@@ -247,8 +247,8 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
 
   public function isAppPermittedForActiveUser(\Hubleto\Framework\Interfaces\AppInterface $app): bool
   {
-    $userRoles = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserRoles();
-    $userType = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserType();
+    $userRoles = $this->authProvider()->getUserRoles();
+    $userType = $this->authProvider()->getUserType();
 
     if (
       $this->grantAllPermissions
@@ -259,7 +259,7 @@ class PermissionsManager extends \Hubleto\Framework\PermissionsManager
       return true;
     }
 
-    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+    $user = $this->authProvider()->getUser();
     $userApps = @json_decode($user['apps'], true);
 
     return is_array($userApps) && in_array($app->namespace, $userApps);

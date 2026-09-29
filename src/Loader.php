@@ -38,9 +38,9 @@ class Loader extends \Hubleto\Framework\Loader
     parent::__construct($config);
 
     DependencyInjection::setServiceProviders([
-      \Hubleto\Framework\Renderer::class => Renderer::class,
-      \Hubleto\Framework\Env::class => Env::class,
-      \Hubleto\Framework\Locale::class => Locale::class,
+      \Hubleto\Framework\Services\Renderer::class => Renderer::class,
+      \Hubleto\Framework\Services\Env::class => Env::class,
+      \Hubleto\Framework\Services\Locale::class => Locale::class,
 
       \Hubleto\Framework\Controllers\NotFound::class => Controllers\NotFound::class,
       \Hubleto\Framework\Controllers\Desktop::class => \Hubleto\App\Community\Desktop\Controllers\Desktop::class,
@@ -48,8 +48,8 @@ class Loader extends \Hubleto\Framework\Loader
 
     // Todo: this should be part of the app itself
     DependencyInjection::setServiceProviders([
-      \Hubleto\Framework\PermissionsManager::class => PermissionsManager::class,
-      \Hubleto\Framework\AuthProvider::class => AuthProvider::class,
+      \Hubleto\Framework\Services\PermissionsManager::class => PermissionsManager::class,
+      \Hubleto\Framework\Services\AuthProvider::class => AuthProvider::class,
       \Hubleto\Framework\Controllers\SignIn::class => SignIn::class,
       \Hubleto\Framework\Models\User::class => \Hubleto\App\Community\Auth\Models\User::class,
       \Hubleto\Framework\Models\Token::class => \Hubleto\App\Community\Auth\Models\Token::class,

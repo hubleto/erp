@@ -79,9 +79,7 @@ class Email extends \Hubleto\Erp\RecordManager
     );
 
     if (isset($filters["fEmailOwnership"])) {
-      /** @var \Hubleto\Framework\AuthProvider */
-      $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
-      $idUser = $authProvider->getUserId();
+      $idUser = $hubleto->authProvider()->getUserId();
 
       switch ($filters["fEmailOwnership"]) {
         case 1: $query = $query->where("email_marketing_emails.id_owner", $idUser); break;

@@ -49,7 +49,7 @@ class Key extends \Hubleto\Erp\Model
       'notes' => (new Text($this, $this->translate('Notes'))),
       'ip_address_blacklist' => (new Varchar($this, $this->translate('IP Address blacklist'))),
       'ip_address_whitelist' => (new Varchar($this, $this->translate('IP Address whitelist'))),
-      'id_created_by' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId()),
+      'id_created_by' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()->setDefaultValue($this->authProvider()->getUserId()),
       'created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
     ]);
   }

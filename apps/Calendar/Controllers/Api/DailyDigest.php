@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Calendar\Controllers\Api;
 
-use \Hubleto\App\Community\Calendar\Events;
+use Hubleto\App\Community\Calendar\Events;
 
 class DailyDigest extends \Hubleto\Erp\Controllers\ApiController
 {

@@ -17,9 +17,9 @@ namespace Hubleto\App\Community\Api\Controllers;
 //     vars: {}
 //   }'
 
-use \Hubleto\App\Community\Api\Validator;
-use \Hubleto\App\Community\Api\Models\Usage;
-use \Hubleto\App\Community\Api\Models\Key;
+use Hubleto\App\Community\Api\Validator;
+use Hubleto\App\Community\Api\Models\Usage;
+use Hubleto\App\Community\Api\Models\Key;
 use Hubleto\App\Community\Api\OAuth;
 
 class Call extends \Hubleto\Erp\Controllers\ApiController

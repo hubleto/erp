@@ -2,7 +2,7 @@
 
 namespace Hubleto\Erp;
 
-use Hubleto\Framework\AuthProvider;
+use Hubleto\Framework\Services\AuthProvider;
 use Hubleto\App\Community\Auth\Controllers\SignIn;
 use Hubleto\App\Community\Auth\Controllers\NotEnoughPermissions;
 use Hubleto\App\Community\Desktop\Controllers\Desktop;
@@ -11,9 +11,9 @@ use Hubleto\Framework\Controller;
 use Hubleto\Framework\Exceptions\ControllerNotFound;
 use Hubleto\Framework\Exceptions\GeneralException;
 use Hubleto\Framework\Exceptions\NotEnoughPermissionsException;
-use Hubleto\Framework\Router;
+use Hubleto\Framework\Services\Router;
 
-class Renderer extends \Hubleto\Framework\Renderer
+class Renderer extends \Hubleto\Framework\Services\Renderer
 {
 
   public function init(): void
@@ -61,7 +61,7 @@ class Renderer extends \Hubleto\Framework\Renderer
       $permissionManager = $this->getService(PermissionsManager::class);
 
       /** @var AuthProvider */
-      $authProvider = $this->getService(AuthProvider::class);
+      $authProvider = $this->authProvider();
 
       // Find-out which route is used for rendering
 
@@ -189,7 +189,7 @@ class Renderer extends \Hubleto\Framework\Renderer
 
         $contentParams = [
           'hubleto' => $this,
-          'user' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser(),
+          'user' => $this->authProvider()->getUser(),
           'config' => $this->config()->get(),
           // 'routeUrl' => $router->getRoute(),
           // 'routeParams' => $this->router()->getRouteVars(),

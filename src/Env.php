@@ -5,7 +5,7 @@ namespace Hubleto\Erp;
 /**
  * Storage for environment-specific configuration.
  */
-class Env extends \Hubleto\Framework\Env
+class Env extends \Hubleto\Framework\Services\Env
 {
 
   /**

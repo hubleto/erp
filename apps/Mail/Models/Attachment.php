@@ -26,7 +26,7 @@ class Attachment extends \Hubleto\Erp\Model
    */
   public function describeColumns(): array
   {
-    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+    $user = $this->authProvider()->getUser();
     return array_merge(parent::describeColumns(), [
       'id_mail' => (new Lookup($this, $this->translate('Mail'), Mail::class))->setReadonly(),
       'name' => (new Varchar($this, $this->translate('Name')))->setDefaultVisible(),

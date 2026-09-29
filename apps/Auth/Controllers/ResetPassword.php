@@ -50,9 +50,7 @@ class ResetPassword extends \Hubleto\Erp\Controller
         $this->setView('@Hubleto:App:Community:Auth/ResetPassword.twig');
         return;
       } else {
-        /** @var AuthProvider $authProvider */
-        $authProvider = $this->getService(\Hubleto\Framework\AuthProvider::class);
-        $authProvider->resetPassword();
+        $this->authProvider()->resetPassword();
 
         $this->router()->redirectTo('');
       }

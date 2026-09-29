@@ -13,8 +13,9 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
     $idDeal = $this->router()->urlParamAsInteger("idDeal");
     $activity = $this->router()->urlParamAsString("activity");
     if ($idDeal > 0 && $activity != '') {
-      $mDeal = $this->getModel(Deal::class);
       /** @var Deal */
+      $mDeal = $this->getModel(Deal::class);
+
       $deal = $mDeal->record->find($idDeal)->first()?->toArray();
 
       if ($deal && $deal['id'] > 0) {
@@ -27,7 +28,7 @@ class LogActivity extends \Hubleto\Erp\Controllers\ApiController
           'time_start' => date('H:i:s'),
           'all_day' => true,
           'completed' => true,
-          'id_owner' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
+          'id_owner' => $this->authProvider()->getUserId(),
         ]);
       }
     }

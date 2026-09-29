@@ -5,7 +5,7 @@ namespace Hubleto\Erp;
 /**
  * Methods to support locale in Hubleto project.
  */
-class Locale extends \Hubleto\Framework\Locale
+class Locale extends \Hubleto\Framework\Services\Locale
 {
 
   /**

@@ -24,7 +24,7 @@ class SharedCalendar extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())->setReadonly(),
+      'id_owner' => (new Lookup($this, $this->translate('Created by'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId())->setReadonly(),
       'calendar' => (new Varchar($this, $this->translate('Calendar ID')))->setRequired()->setReadonly(),
       'share_key' => (new Varchar($this, $this->translate('Share key')))->setReadonly()->setHidden(),
       'view_details' => (new Boolean($this, $this->translate('Display details')))->setDefaultValue(true),

@@ -30,7 +30,7 @@ class Milestone extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_project' => (new Lookup($this, $this->translate('Project'), Project::class))->setRequired(),
       'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()
-        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired(),
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setRequired(),

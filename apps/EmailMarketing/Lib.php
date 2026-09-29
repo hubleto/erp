@@ -3,9 +3,9 @@
 namespace Hubleto\App\Community\EmailMarketing;
 
 use Hubleto\App\Community\Mail\Models\Mail;
-use \Hubleto\Erp\Core;
+use Hubleto\Erp\Core;
 use Hubleto\Framework\Core as FrameworkCore;
-use \Hubleto\Framework\Env;
+use Hubleto\Framework\Services\Env;
 
 class Lib extends Core
 {

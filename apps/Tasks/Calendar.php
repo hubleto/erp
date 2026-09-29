@@ -43,7 +43,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       $tasks = $tasks->where($mTask->table . '.is_closed', $filter['fCompleted'] == 2);
     }
     if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
-      $tasks = $tasks->where($mTask->table . ".id_developer", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+      $tasks = $tasks->where($mTask->table . ".id_developer", $this->authProvider()->getUserId());
     }
 
     $tasks = $tasks->get();
@@ -76,7 +76,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       $todos = $todos->where($mTodo->table . '.is_closed', $filter['fCompleted'] == 2);
     }
     if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
-      $todos = $todos->where($mTodo->table . ".id_responsible", $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+      $todos = $todos->where($mTodo->table . ".id_responsible", $this->authProvider()->getUserId());
     }
 
     $todos = $todos->get();

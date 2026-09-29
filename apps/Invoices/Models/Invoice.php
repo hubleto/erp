@@ -253,7 +253,7 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     $description = parent::describeForm();
     $description->defaultValues = [
-      'id_issued_by' => $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId(),
+      'id_issued_by' => $this->authProvider()->getUserId(),
       'issued' => date('Y-m-d H:i:s'),
       'type' => self::TYPE_STANDARD,
     ];

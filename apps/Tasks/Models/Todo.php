@@ -33,7 +33,7 @@ class Todo extends \Hubleto\Erp\Model
       'todo' => (new Varchar($this, $this->translate('To do')))->setDefaultVisible(),
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setDefaultVisible()->setRequired(),
       'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()
-        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false)->setYesText('Closed')->setNoText(''),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),

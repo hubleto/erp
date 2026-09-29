@@ -61,15 +61,15 @@ class Project extends \Hubleto\Erp\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description'))),
       'id_main_developer' => (new Lookup($this, $this->translate('Main developer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
-        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'id_project_manager' => (new Lookup($this, $this->translate('Project manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
-        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'id_account_manager' => (new Lookup($this, $this->translate('Account manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
-        ->setDefaultValue($this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId())
+        ->setDefaultValue($this->authProvider()->getUserId())
       ,
-      'shared_with' => new Json($this, $this->translate('Shared with'), User::class)->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
+      'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),

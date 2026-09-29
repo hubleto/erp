@@ -93,9 +93,7 @@ class Campaign extends \Hubleto\Erp\RecordManager
     );
 
     if (isset($filters["fCampaignOwnership"])) {
-      /** @var \Hubleto\Framework\AuthProvider */
-      $authProvider = $hubleto->getService(\Hubleto\Framework\AuthProvider::class);
-      $idUser = $authProvider->getUserId();
+      $idUser = $hubleto->authProvider()->getUserId();
 
       switch ($filters["fCampaignOwnership"]) {
         case 1: $query = $query->where("email_marketing_campaigns.id_owner", $idUser); break;

@@ -180,9 +180,9 @@ class Lead extends \Hubleto\Erp\RecordManager
 
     if (isset($filters["fLeadOwnership"])) {
       switch ($filters["fLeadOwnership"]) {
-        case 1: $query = $query->where("leads.id_owner", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+        case 1: $query = $query->where("leads.id_owner", $hubleto->authProvider()->getUserId());
           break;
-        case 2: $query = $query->where("leads.id_manager", $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId());
+        case 2: $query = $query->where("leads.id_manager", $hubleto->authProvider()->getUserId());
           break;
       }
     }

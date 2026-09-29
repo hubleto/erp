@@ -199,7 +199,7 @@ class Loader extends \Hubleto\Erp\App
     string $color = '',
     int $priority = 0
   ): array {
-    $user = $this->getService(\Hubleto\Framework\AuthProvider::class)->getUser();
+    $user = $this->authProvider()->getUser();
     $idUser = $user['id'] ?? 0;
     $fromEmail = $user['email'] ?? '';
 

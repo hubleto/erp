@@ -13,7 +13,7 @@ class ResetTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
 
       $model = $this->getModel($this->router()->urlParamAsString("model"));
 
-      $path = "user/" . $this->getService(\Hubleto\Framework\AuthProvider::class)->getUserId() . "/models/" . $model->fullName . "/tableColumns";
+      $path = "user/" . $this->authProvider()->getUserId() . "/models/" . $model->fullName . "/tableColumns";
 
       $this->config()->delete($path);
 

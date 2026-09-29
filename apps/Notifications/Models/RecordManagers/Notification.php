@@ -30,7 +30,7 @@ class Notification extends \Hubleto\Erp\RecordManager
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
 
     $folder = $hubleto->router()->urlParamAsString('folder');
-    $idUser = $hubleto->getService(\Hubleto\Framework\AuthProvider::class)->getUserId();
+    $idUser = $hubleto->authProvider()->getUserId();
 
     switch ($folder) {
       case 'inbox': $query->where('id_to', $idUser);

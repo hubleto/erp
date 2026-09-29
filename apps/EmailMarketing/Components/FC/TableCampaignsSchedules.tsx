@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import FormCampaignSchedule, { FormCampaignScheduleProps } from './FormCampaignSchedule';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
+import request from '@hubleto/react-ui/core/Request';
 
 interface TableCampaignsSchedulesProps extends TableProps {
   idCampaign?: number,
@@ -38,27 +39,49 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
     renderRecords={(table: TableMeta): React.JSX.Element => {
       return <div className='list mt-2'>
         {table.data?.records.map((record, key) => {
-          return <button
-            key={key}
-            className='btn btn-transparent btn-list-item'
-            onClick={() => table.openForm(record.id)}
-          >
-            <div className='icon text-center bg-primary/20 rounded-sm h-full'>
-              Day<br/>
-              <b>{record.day}</b>
+          return <div className='flex gap-2'>
+            <button
+              key={key}
+              className='btn btn-transparent btn-list-item'
+              onClick={() => table.openForm(record.id)}
+            >
+              <div className='icon text-center bg-primary/20 rounded-sm h-full'>
+                Day<br/>
+                <b>{record.day}</b>
+              </div>
+              <div className='text block'>
+                {record.id_email > 0 ? <>
+                  <div className='fond-bold'>
+                    {record.EMAIL?.mail_subject ?? '-'}
+                  </div>
+                  <div className={'badge ' + (record.EMAIL?.SENDER_ACCOUNT?.name ? '' : 'badge-danger')}>
+                    {record.EMAIL?.SENDER_ACCOUNT?.name ?? <>No sender account</>}
+                  </div>
+                  <div className='badge'>{record.EMAIL?.RECIPIENTS ? record.EMAIL?.RECIPIENTS.length : 0} recipients</div>
+                </> : <div className='text-red-800'>No email selected</div>}
+              </div>
+            </button>
+            <div className='m-2'>
+              {record.EMAIL?.is_approved ? 
+                <button
+                  className='btn btn-transparent'
+                  onClick={() => {
+                    request.post(
+                      'email-marketing/api/launch-email-in-campaign',
+                      { idCampaign: props.idCampaign, idEmail: record.id_email },
+                      {},
+                      (data: any) => {
+                        table.props?.parentForm?.reload();
+                      }
+                    )
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-bolt'></i></span>
+                  <span className='text'>Launch</span>
+                </button>
+              : <div className='badge badge-danger text-nowrap'>Not approved</div>}
             </div>
-            <div className='text block'>
-              {record.id_email > 0 ? <>
-                <div className='fond-bold'>
-                  {record.EMAIL?.mail_subject ?? '-'}
-                </div>
-                <div className='text-gray-400'>
-                  Sent from: {record.EMAIL?.SENDER_ACCOUNT?.name ?? <span className='text-red-800'>n/a</span>}
-                </div>
-                {record.EMAIL?.is_approved ? null : <div className='badge badge-danger'>Email is not approved yet.</div>}
-              </> : <div className='text-red-800'>No email selected</div>}
-            </div>
-          </button>;
+          </div>;
         })}
       </div>
     }}

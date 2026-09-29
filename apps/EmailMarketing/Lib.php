@@ -224,7 +224,7 @@ class Lib extends Core
    * @return void
    * 
    */
-  public static function scheduleMissingEmailsInCampaign(int $idCampaign): void
+  public static function scheduleMissingEmailsInCampaign(int $idCampaign, int $idEmail = 0): void
   {
     /** @var Models\Campaign */
     $mCampaign = FrameworkCore::getServiceStatic(Models\Campaign::class);
@@ -244,11 +244,16 @@ class Lib extends Core
     $campaign = $mCampaign->record->where('id', $idCampaign)->first();
     if (!$campaign) return;
 
-    $campaignSchedules = $mCampaignSchedule->record
+    $campaignSchedulesQuery = $mCampaignSchedule->record
       ->where('id_campaign', $idCampaign)
       ->with('EMAIL')
-      ->with('EMAIL.SENDER_ACCOUNT')
-      ->get();
+      ->with('EMAIL.SENDER_ACCOUNT');
+
+    if ($idEmail > 0) {
+      $campaignSchedulesQuery = $campaignSchedulesQuery->where('id_email', $idEmail);
+    }
+
+    $campaignSchedules = $campaignSchedulesQuery->get();
 
     $recipients = $mRecipient->record->with('STATUS')->where('id_campaign', $idCampaign)->get();
 

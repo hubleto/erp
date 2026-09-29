@@ -11,6 +11,7 @@ import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Spinner from '@hubleto/react-ui/components/fc/Spinner';
+import TextareaInput from '@hubleto/react-ui/components/fc/Inputs/Textarea';
 
 export interface FormEmailProps extends FormProps {}
 
@@ -188,7 +189,7 @@ const TabTest = ({ formEmail }) => {
       <div className='card-header'>{T.translate('Analysis & warnings')}</div>
       <div className='card-body'>
         {emailTestInfo ? <>
-          {emailTestInfo.warnings.length == 0 ? 
+          {emailTestInfo.warnings.length == 0 ?
             <div className='alert alert-success'>
               <i className='fas fa-check mr-2'></i>
               {T.translate('No warnings')}
@@ -272,12 +273,17 @@ const TabTest = ({ formEmail }) => {
         />
         <br/>
         {T.translate("Test email variables:")}
-        <InputJsonKeyValue uid="test-email-variables"
+        {/* <InputJsonKeyValue uid="test-email-variables"
           onChange={(input: any, value: any) => {
             // input.setState({value: value});
             setTestEmailVariables(value);
           }}
-        ></InputJsonKeyValue>
+        ></InputJsonKeyValue> */}
+        <TextareaInput uid="test-email-variables"
+          onChange={(input: any, value: any) => {
+            setTestEmailVariables(value);
+          }}>
+        </TextareaInput>
         <button
           className="btn btn-transparent mt-2"
           onClick={() => {
@@ -471,7 +477,7 @@ const TabLaunch = () => {
       <div className='card grow'>
         <div className='card-header'>{T.translate('Recipients')}</div>
         <div className='card-body'>
-          {emailLaunchInfo && emailLaunchInfo.recipients ? 
+          {emailLaunchInfo && emailLaunchInfo.recipients ?
             <table className='table-default dense'>
               <thead>
                 <tr>

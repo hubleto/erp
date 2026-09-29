@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import Form from '@hubleto/react-ui/components/fc/Form';
+import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
+import TableCampaignsSchedulesRecipients from './TableCampaignsSchedulesRecipients';
 
 export interface FormCampaignScheduleProps extends FormProps {}
 
@@ -13,28 +14,45 @@ const T = new Translator(parentApp + '/Loader', 'Components/FormCampaignSchedule
 
 /** TabDefault */
 const TabDefault = (props: FormCampaignScheduleProps) => {
+  const form: FormMeta = React.useContext(FormMetaContext);
   const EMAIL: any = useRecordField('EMAIL');
   const day: number = useRecordField('day');
 
-  return <div className='flex flex-col h-full'>
-    <div className='flex gap-2'>
-      <div><Input field='day' wrapperCssClass='flex gap-2' /></div>
-      <div className='grow'><Input field='id_email' wrapperCssClass='flex gap-2' /></div>
-    </div>
-    <div className='mt-8'>
+  return <div className='flex-dyn'>
+    <div className='flex-1 flex flex-col gap-2 h-full'>
+      <div className='flex gap-2'>
+        <div><Input field='day' wrapperCssClass='flex gap-2' /></div>
+        <div className='grow'><Input field='id_email' wrapperCssClass='flex gap-2' /></div>
+      </div>
       {EMAIL?.is_approved ? null : <div className='alert alert-danger'>Email is not approved yet.</div>}
-      {EMAIL ? <div className='card'>
-        <div className='card-header'>From: {EMAIL.SENDER_ACCOUNT?.name}</div>
-        <div className='card-header'>Subject: {EMAIL.mail_subject}</div>
+      <div>
+        {EMAIL ? <div className='card'>
+          <div className='card-header'>From: {EMAIL.SENDER_ACCOUNT?.name}</div>
+          <div className='card-header'>Subject: {EMAIL.mail_subject}</div>
+          <div className='card-body'>
+            <iframe
+              src="about:blank"
+              className='w-full min-h-96'
+              srcDoc={EMAIL.mail_body}
+            />
+          </div>
+        </div>
+        : <div className='alert alert-warning'>Select email to be sent on <b>day {day}</b></div>}
+      </div>
+    </div>
+    <div className='flex-1'>
+      <div className='card'>
+        <div className='card-header'>Recipients</div>
         <div className='card-body'>
-          <iframe
-            src="about:blank"
-            className='w-full min-h-96'
-            srcDoc={EMAIL.mail_body}
-          />
+          <TableCampaignsSchedulesRecipients
+            tag='table_campaign_schedule_recipients'
+            parentForm={form}
+            uid={form.uid + "_table_campaign_schedule_recipients"}
+            idCampaignSchedule={form.id}
+            readonly={true}
+          ></TableCampaignsSchedulesRecipients>
         </div>
       </div>
-      : <div className='alert alert-warning'>Select email to be sent on <b>day {day}</b></div>}
     </div>
   </div>;
 }

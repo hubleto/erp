@@ -35,6 +35,7 @@ const TableCampaignsSchedulesRecipients = (props: TableCampaignsSchedulesRecipie
     renderForm={(table: TableMeta): React.JSX.Element => {
       return <FormCampaignScheduleRecipient {...table.getDefaultFormProps()}/>;
     }}
+    {...props}
   ></Table>
 }
 

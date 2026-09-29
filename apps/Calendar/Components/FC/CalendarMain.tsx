@@ -42,14 +42,14 @@ const CalendarMain = (props: CalendarMainProps) => {
     );
   }
 
-  const renderCell = (eventInfo) => {
-    return <>
-      <b>{eventInfo.timeText}</b>
-      <span style={{marginLeft: 4}}>{eventInfo.event.title}</span>
-      <i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.type})</i>
-    </>;
-  }
-
+  // const renderCell = (eventInfo) => {
+  //   console.log(eventInfo);
+  //   return <>
+  //     <b>{eventInfo.timeText}</b>
+  //     <span style={{marginLeft: 4}}>{eventInfo.event.title}</span>
+  //     <i style={{marginLeft: 4}}>({eventInfo.event.extendedProps.type})</i>
+  //   </>;
+  // }
 
   let eventForm = null;
   if (showActivity) {

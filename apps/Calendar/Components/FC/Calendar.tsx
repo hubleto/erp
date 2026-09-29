@@ -47,16 +47,16 @@ const Calendar = (props: CalendarProps) => {
       color = eventInfo.event.backgroundColor;
     }
 
-    const cellContent = <>
-      {eventInfo.event.extendedProps.completed ? <i className='fas fa-check ml-1'></i> : null}
-      <b className="ml-2">{eventInfo.timeText}</b>
-      <span className="ml-2">{eventInfo.event.title}</span>
-      {eventInfo.event.extendedProps.details ?
-        <div className="ml-2"><small>
-          <i>{eventInfo.event.extendedProps.details}</i>
-        </small></div>
+    const cellContent = <div className="text-xs mx-1">
+      {eventInfo.event.extendedProps.completed ? <i className='fas fa-check'></i> : null}
+      {eventInfo.event.extendedProps.owner ?
+        <span className="badge badge-small ml-1">{eventInfo.event.extendedProps.owner}</span>
       : null}
-    </>;
+      <span className="ml-1">{eventInfo.event.title}</span>
+      {eventInfo.event.extendedProps.details ?
+        <span className="ml-1"><i>{eventInfo.event.extendedProps.details}</i></span>
+      : null}
+    </div>;
 
     return cellContent;
   }

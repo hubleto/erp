@@ -90,7 +90,7 @@ class Loader extends \Hubleto\Erp\App
     $accountsHtml = '';
     foreach ($accounts as $account) {
       $accountsHtml .= '
-        <div>
+        <div class="mb-2">
           <div class="bg-primary/10 p-1 text-sm">' . $account->name . '</div>
           <div class="list">
       ';

@@ -4,6 +4,8 @@ namespace Hubleto\App\Community\HrEmployees\Models;
 
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Settings\Models\Team;
+use Hubleto\App\Community\Workflow\Models\Workflow as WorkflowModel;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
@@ -18,6 +20,8 @@ class Employee extends \Hubleto\Erp\Model
     'USER' => [self::BELONGS_TO, User::class, 'id_user', 'id'],
     'TEAM' => [self::BELONGS_TO, Team::class, 'id_team', 'id'],
     'MANAGER' => [self::BELONGS_TO, User::class, 'id_manager', 'id'],
+    'WORKFLOW' => [self::HAS_ONE, WorkflowModel::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
   ];
 
   public function describeColumns(): array
@@ -34,6 +38,8 @@ class Employee extends \Hubleto\Erp\Model
       'date_ended' => (new Date($this, $this->translate('End date'))),
       'work_location' => (new Varchar($this, $this->translate('Work location'))),
       'notes' => (new Text($this, $this->translate('Employment notes'))),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), WorkflowModel::class))->setReadonly(),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Lifecycle step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
     ]);
   }
 
@@ -59,6 +65,7 @@ class Employee extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
     $description->ui['addButtonText'] = $this->translate('Add employee profile');
+    $description->addFilter('fEmployeeWorkflowStep', WorkflowModel::buildTableFilterForWorkflowSteps($this, $this->translate('Lifecycle step')));
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     return $description;
@@ -66,11 +73,20 @@ class Employee extends \Hubleto\Erp\Model
 
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['USER', 'TEAM', 'MANAGER'];
+    return ['USER', 'TEAM', 'MANAGER', 'WORKFLOW', 'WORKFLOW_STEP'];
   }
 
   public function getMaxReadLevelForLoadTableData(): int
   {
     return 1;
+  }
+
+  public function onAfterCreate(array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterCreate($savedRecord);
+    $mWorkflow = $this->getModel(WorkflowModel::class);
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'hr_employees');
+    $this->record->recordUpdate($savedRecord);
+    return $savedRecord;
   }
 }

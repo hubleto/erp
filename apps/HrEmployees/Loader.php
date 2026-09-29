@@ -17,6 +17,9 @@ class Loader extends \Hubleto\Erp\App
     if ($menu) {
       $menu->addItem($this, 'hr-employees', $this->translate('Employees'), 'fas fa-id-card');
     }
+
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflowGroup($this, 'hr_employees', Workflow::class);
   }
 
   public function renderSecondSidebar(): string

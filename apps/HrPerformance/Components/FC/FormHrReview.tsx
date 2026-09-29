@@ -22,6 +22,7 @@ const FormHrReview = (props: FormHrReviewProps) => <Form
     <Input field='date_reviewed' />
     <Input field='score' />
     <Input field='status' />
+    <Input field='id_workflow_step' />
     <Input field='summary' />
   </div>}}}
   {...props}

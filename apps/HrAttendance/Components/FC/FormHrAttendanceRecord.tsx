@@ -22,6 +22,7 @@ const FormHrAttendanceRecord = (props: FormHrAttendanceRecordProps) => <Form
     <Input field='time_out' />
     <Input field='break_minutes' />
     <Input field='status' />
+    <Input field='id_workflow_step' />
     <Input field='is_approved' />
     <Input field='notes' />
   </div>}}}

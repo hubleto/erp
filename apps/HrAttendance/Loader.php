@@ -17,6 +17,9 @@ class Loader extends \Hubleto\Erp\App
     if ($menu) {
       $menu->addItem($this, 'hr-attendance', $this->translate('Attendance'), 'fas fa-clock');
     }
+
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflowGroup($this, 'hr_attendance', Workflow::class);
   }
 
   public function renderSecondSidebar(): string

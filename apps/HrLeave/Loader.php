@@ -22,6 +22,9 @@ class Loader extends \Hubleto\Erp\App
     if ($calendarManager) {
       $calendarManager->addCalendar($this, 'hr-leave', Calendar::class);
     }
+
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflowGroup($this, 'hr_leave', Workflow::class);
   }
 
   public function renderSecondSidebar(): string

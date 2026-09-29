@@ -30,6 +30,11 @@ class Workflow extends \Hubleto\Erp\Model
         'tasks',
         'leads',
         'campaigns',
+        'hr_employees',
+        'hr_recruitment',
+        'hr_leave',
+        'hr_attendance',
+        'hr_performance',
       ])->addIndex('INDEX `group` (`group`)'),
     ]);
   }

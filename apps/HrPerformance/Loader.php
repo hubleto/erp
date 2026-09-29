@@ -17,6 +17,9 @@ class Loader extends \Hubleto\Erp\App
     if ($menu) {
       $menu->addItem($this, 'hr-performance', $this->translate('Performance & development'), 'fas fa-chart-line');
     }
+
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflowGroup($this, 'hr_performance', Workflow::class);
   }
 
   public function renderSecondSidebar(): string

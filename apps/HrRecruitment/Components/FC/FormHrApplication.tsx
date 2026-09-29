@@ -20,6 +20,7 @@ const FormHrApplication = (props: FormHrApplicationProps) => <Form
     <Input field='id_candidate' />
     <Input field='stage' />
     <Input field='status' />
+    <Input field='id_workflow_step' />
     <Input field='date_applied' />
     <Input field='date_decided' />
     <Input field='notes' />

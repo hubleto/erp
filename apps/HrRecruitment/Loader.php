@@ -22,6 +22,9 @@ class Loader extends \Hubleto\Erp\App
     if ($calendarManager) {
       $calendarManager->addCalendar($this, 'hr-interviews', Calendar::class);
     }
+
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflowGroup($this, 'hr_recruitment', Workflow::class);
   }
 
   public function renderSecondSidebar(): string

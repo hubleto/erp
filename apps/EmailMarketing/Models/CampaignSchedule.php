@@ -55,7 +55,7 @@ class CampaignSchedule extends \Hubleto\Erp\Model
    */
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['CAMPAIGN', 'EMAIL', 'EMAIL.SENDER_ACCOUNT'];
+    return ['CAMPAIGN', 'EMAIL', 'RECIPIENTS', 'EMAIL.SENDER_ACCOUNT', 'EMAIL.RECIPIENTS'];
   }
 
   /**

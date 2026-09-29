@@ -53,6 +53,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       ->with('MANAGER')
       ->where('date_next_invoice_expected', '>=', $dateStart)
       ->where('date_next_invoice_expected', '<=', $dateEnd)
+      ->where('is_closed', false)
     ;
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {

@@ -84,6 +84,7 @@ class Employee extends \Hubleto\Erp\Model
   public function onAfterCreate(array $savedRecord): array
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
+    /** @var WorkflowModel */
     $mWorkflow = $this->getModel(WorkflowModel::class);
     $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'hr_employees');
     $this->record->recordUpdate($savedRecord);

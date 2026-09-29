@@ -31,6 +31,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       $activities = $activities->where("id_order", $idOrder);
     }
 
+    // events from calendar
     $events = $this->convertActivitiesToEvents(
       'orders',
       $activities->get()?->toArray(),
@@ -44,6 +45,30 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         }
       }
     );
+
+    // expected next invoice for the order
+    $mOrder = $this->getModel(Models\Order::class);
+    $ordersExpectingInvoice = $mOrder->record
+      ->with('OWNER')
+      ->with('MANAGER')
+      ->where('date_next_invoice_expected', '>=', $dateStart)
+      ->where('date_next_invoice_expected', '<=', $dateEnd)
+      ->get();
+
+    foreach ($ordersExpectingInvoice as $order) {
+      $events[] = [
+        'id' => (int) ($order->id ?? 0),
+        'start' => date("Y-m-d", strtotime($order->date_next_invoice_expected)),
+        'end' => date("Y-m-d", strtotime($order->date_next_invoice_expected)),
+        'allDay' => true,
+        'title' => 'Invoice expected: ' . $order->identifier . ' ' . $order->title,
+        'source' => 'orders',
+        'id_owner' => $order->id_manager ?? $order->id_owner,
+        'owner' => $order->MANAGER ? $order->MANAGER->nick : $order->OWNER?->nick,
+        'completed' => false,
+        'url' => 'orders/' . $order->id,
+      ];
+    }
 
     return $events;
   }

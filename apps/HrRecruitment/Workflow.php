@@ -9,7 +9,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     $mApplication = $this->getModel(Models\Application::class);
     $items = $mApplication->record->prepareReadQuery()
       ->where('hr_applications.id_workflow', $idWorkflow)
-      ->with(['JOB_OPENING', 'CANDIDATE']);
+      ->with(['JOB_OPENING', 'CANDIDATE', 'WORKFLOW_STEP']);
 
     $fOwner = (int) ($filters['fOwner'] ?? 0);
     if ($fOwner > 0) {
@@ -24,7 +24,8 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
       $opening = $item['JOB_OPENING'] ?? [];
       $candidateName = trim(($candidate['first_name'] ?? '') . ' ' . ($candidate['last_name'] ?? ''));
       $items[$key]['_WORKFLOW_ITEM_TITLE'] = $candidateName ?: $this->translate('Application') . ' #' . $item['id'];
-      $items[$key]['_WORKFLOW_ITEM_SUBTITLE'] = ($opening['title'] ?? '') . ' - ' . ($item['stage'] ?? '');
+      $step = $item['WORKFLOW_STEP'] ?? [];
+      $items[$key]['_WORKFLOW_ITEM_SUBTITLE'] = ($opening['title'] ?? '') . ' - ' . ($step['name'] ?? '');
       $items[$key]['_DETAIL_URL'] = 'hr-recruitment/applications/' . $item['id'];
       $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:Workflow/WorkflowItemDetail.twig';
     }

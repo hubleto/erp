@@ -26,9 +26,9 @@ class LeaveBalance extends \Hubleto\Erp\Model
       'days_entitled' => (new Decimal($this, $this->translate('Entitlement (days)')))->setDecimals(2)->setRequired(),
       'days_carried_over' => (new Decimal($this, $this->translate('Carried over (days)')))->setDecimals(2)->setDefaultValue(0),
       'virt_days_used' => (new Virtual($this, $this->translate('Approved days used')))->setDefaultVisible()
-        ->setProperty('sql', 'SELECT COALESCE(SUM(days_requested), 0) FROM hr_leave_requests WHERE hr_leave_requests.id_user = hr_leave_balances.id_user AND hr_leave_requests.id_leave_type = hr_leave_balances.id_leave_type AND hr_leave_requests.balance_year = hr_leave_balances.year AND hr_leave_requests.status = "' . addslashes($this->translate('Approved')) . '"'),
+        ->setProperty('sql', 'SELECT COALESCE(SUM(r.days_requested), 0) FROM hr_leave_requests r INNER JOIN workflow_steps s ON s.id = r.id_workflow_step WHERE r.id_user = hr_leave_balances.id_user AND r.id_leave_type = hr_leave_balances.id_leave_type AND r.balance_year = hr_leave_balances.year AND s.tag = "hr-leave-approved"'),
       'virt_days_remaining' => (new Virtual($this, $this->translate('Days remaining')))->setDefaultVisible()
-        ->setProperty('sql', '(hr_leave_balances.days_entitled + hr_leave_balances.days_carried_over - (SELECT COALESCE(SUM(days_requested), 0) FROM hr_leave_requests WHERE hr_leave_requests.id_user = hr_leave_balances.id_user AND hr_leave_requests.id_leave_type = hr_leave_balances.id_leave_type AND hr_leave_requests.balance_year = hr_leave_balances.year AND hr_leave_requests.status = "' . addslashes($this->translate('Approved')) . '"))'),
+        ->setProperty('sql', '(hr_leave_balances.days_entitled + hr_leave_balances.days_carried_over - (SELECT COALESCE(SUM(r.days_requested), 0) FROM hr_leave_requests r INNER JOIN workflow_steps s ON s.id = r.id_workflow_step WHERE r.id_user = hr_leave_balances.id_user AND r.id_leave_type = hr_leave_balances.id_leave_type AND r.balance_year = hr_leave_balances.year AND s.tag = "hr-leave-approved"))'),
     ]);
   }
 

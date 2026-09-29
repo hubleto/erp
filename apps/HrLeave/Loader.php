@@ -107,7 +107,6 @@ class Loader extends \Hubleto\Erp\App
         'date_to' => date('Y-m-d', strtotime('+16 days')),
         'balance_year' => $year,
         'days_requested' => 3,
-        'status' => $this->translate('Pending'),
         'id_approver' => $user->id,
         'reason' => 'Demo pending leave request',
       ]);
@@ -122,7 +121,6 @@ class Loader extends \Hubleto\Erp\App
         'date_to' => date('Y-m-d', strtotime('-13 days')),
         'balance_year' => $year,
         'days_requested' => 2,
-        'status' => $this->translate('Approved'),
         'id_approver' => $user->id,
         'date_decided' => date('Y-m-d', strtotime('-20 days')),
         'reason' => 'Demo approved leave request',
@@ -138,7 +136,6 @@ class Loader extends \Hubleto\Erp\App
         'date_to' => date('Y-m-d', strtotime('+35 days')),
         'balance_year' => $year,
         'days_requested' => 1,
-        'status' => $this->translate('Pending'),
         'id_approver' => $user->id,
         'reason' => 'Demo pending sick leave request',
       ]);
@@ -153,7 +150,6 @@ class Loader extends \Hubleto\Erp\App
         'date_to' => date('Y-m-d', strtotime('+45 days')),
         'balance_year' => $year,
         'days_requested' => 1,
-        'status' => $this->translate('Rejected'),
         'id_approver' => $user->id,
         'date_decided' => date('Y-m-d'),
         'reason' => 'Demo rejected personal leave request',

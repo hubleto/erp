@@ -11,7 +11,6 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Time;
-use Hubleto\Framework\Db\Column\Varchar;
 
 class AttendanceRecord extends \Hubleto\Erp\Model
 {
@@ -31,7 +30,6 @@ class AttendanceRecord extends \Hubleto\Erp\Model
       'time_in' => (new Time($this, $this->translate('Clock in'))),
       'time_out' => (new Time($this, $this->translate('Clock out'))),
       'break_minutes' => (new Decimal($this, $this->translate('Break (minutes)')))->setDecimals(0)->setDefaultValue(0),
-      'status' => (new Varchar($this, $this->translate('Status')))->setDefaultVisible()->setRequired(),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), WorkflowModel::class))->setReadonly(),
@@ -41,15 +39,7 @@ class AttendanceRecord extends \Hubleto\Erp\Model
 
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
-    $description = parent::describeForm();
-    $description->inputs['status']->setPredefinedValues([
-      $this->translate('Present'),
-      $this->translate('Late'),
-      $this->translate('Absent'),
-      $this->translate('Remote'),
-      $this->translate('On leave'),
-    ]);
-    return $description;
+    return parent::describeForm();
   }
 
   public function describeTable(): \Hubleto\Framework\Description\Table

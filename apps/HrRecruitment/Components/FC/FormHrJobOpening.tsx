@@ -18,11 +18,11 @@ const FormHrJobOpening = (props: FormHrJobOpeningProps) => <Form
   tabs={{default: {content: () => <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
     <Input field='title' />
     <Input field='department' />
-    <Input field='location' />
-    <Input field='employment_type' />
+    <Input field='id_work_location' />
+    <Input field='id_employment_type' />
     <Input field='status' />
     <Input field='positions' />
-    <Input field='date_opened' />
+    <Input field='id_opening_date' />
     <Input field='date_closed' />
     <Input field='id_hiring_manager' />
     <Input field='description' />

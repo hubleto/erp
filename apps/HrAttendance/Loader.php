@@ -74,7 +74,6 @@ class Loader extends \Hubleto\Erp\App
         'time_in' => '09:05:00',
         'time_out' => '17:00:00',
         'break_minutes' => 30,
-        'status' => $this->translate('Present'),
         'is_approved' => 0,
         'notes' => $this->translate('Demo attendance record awaiting approval.'),
       ]);
@@ -85,14 +84,12 @@ class Loader extends \Hubleto\Erp\App
         'date' => date('Y-m-d', strtotime('-2 days')),
         'time_in' => '08:55:00',
         'time_out' => '17:10:00',
-        'status' => $this->translate('Present'),
         'approved' => 1,
       ],
       [
         'date' => date('Y-m-d', strtotime('-3 days')),
         'time_in' => '09:20:00',
         'time_out' => '17:00:00',
-        'status' => $this->translate('Late'),
         'approved' => 0,
       ],
     ] as $attendanceData) {
@@ -104,7 +101,6 @@ class Loader extends \Hubleto\Erp\App
         'time_in' => $attendanceData['time_in'],
         'time_out' => $attendanceData['time_out'],
         'break_minutes' => 30,
-        'status' => $attendanceData['status'],
         'is_approved' => $attendanceData['approved'],
         'notes' => $this->translate('Demo attendance record.'),
       ]);

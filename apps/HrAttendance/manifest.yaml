@@ -2,7 +2,7 @@ namespace: Hubleto\App\Community\HrAttendance
 appType: community
 sidebarGroup: human-resources
 rootUrlSlug: hr-attendance
-name: HR Attendance
+name: Attendance
 icon: fas fa-clock
 highlight: Plan employee shifts and record attendance separately from project worksheets.
 tags:

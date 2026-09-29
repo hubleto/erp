@@ -18,7 +18,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
   {
     return $this->getModel(Models\LeaveRequest::class)->record->prepareReadQuery()
       ->where('hr_leave_requests.id', $id)
-      ->where('hr_leave_requests.status', $this->translate('Approved'))
+      ->whereHas('WORKFLOW_STEP', fn($query) => $query->where('tag', 'hr-leave-approved'))
       ->first()?->toArray() ?? [];
   }
 
@@ -26,7 +26,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
   {
     $mRequest = $this->getModel(Models\LeaveRequest::class);
     $requests = $mRequest->record->prepareReadQuery()
-      ->where('hr_leave_requests.status', $this->translate('Approved'))
+      ->whereHas('WORKFLOW_STEP', fn($query) => $query->where('tag', 'hr-leave-approved'))
       ->where('hr_leave_requests.date_from', '<=', $dateEnd)
       ->where('hr_leave_requests.date_to', '>=', $dateStart);
 

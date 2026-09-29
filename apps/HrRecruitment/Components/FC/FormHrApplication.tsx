@@ -14,12 +14,10 @@ const FormHrApplication = (props: FormHrApplicationProps) => <Form
   parentApp={parentApp}
   model={parentApp + '/Models/Application'}
   urlSlug='hr-recruitment/applications'
-  title={{field: 'stage', sub: T.translate('Application')}}
+  title={{field: 'date_applied', sub: T.translate('Application')}}
   tabs={{default: {content: () => <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
     <Input field='id_job_opening' />
     <Input field='id_candidate' />
-    <Input field='stage' />
-    <Input field='status' />
     <Input field='id_workflow_step' />
     <Input field='date_applied' />
     <Input field='date_decided' />

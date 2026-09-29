@@ -22,7 +22,6 @@ const FormHrLeaveRequest = (props: FormHrLeaveRequestProps) => <Form
     <Input field='date_to' />
     <Input field='balance_year' />
     <Input field='days_requested' />
-    <Input field='status' />
     <Input field='id_workflow_step' />
     <Input field='id_approver' />
     <Input field='date_decided' />

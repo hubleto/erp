@@ -9,7 +9,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     $mRecord = $this->getModel(Models\AttendanceRecord::class);
     $items = $mRecord->record->prepareReadQuery()
       ->where('hr_attendance_records.id_workflow', $idWorkflow)
-      ->with('USER');
+      ->with(['USER', 'WORKFLOW_STEP']);
 
     $fOwner = (int) ($filters['fOwner'] ?? 0);
     if ($fOwner > 0) {
@@ -19,8 +19,9 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
     $items = $items->get()?->toArray() ?? [];
     foreach ($items as $key => $item) {
       $user = $item['USER'] ?? [];
+      $step = $item['WORKFLOW_STEP'] ?? [];
       $items[$key]['_WORKFLOW_ITEM_TITLE'] = ($user['nick'] ?? $user['email'] ?? '') . ' - ' . ($item['date_worked'] ?? '');
-      $items[$key]['_WORKFLOW_ITEM_SUBTITLE'] = ($item['status'] ?? '') . (empty($item['is_approved']) ? ' - ' . $this->translate('Awaiting approval') : '');
+      $items[$key]['_WORKFLOW_ITEM_SUBTITLE'] = ($step['name'] ?? '') . (empty($item['is_approved']) ? ' - ' . $this->translate('Awaiting approval') : '');
       $items[$key]['_DETAIL_URL'] = 'hr-attendance/records/' . $item['id'];
       $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:Workflow/WorkflowItemDetail.twig';
     }

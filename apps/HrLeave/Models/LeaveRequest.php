@@ -10,7 +10,6 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Text;
-use Hubleto\Framework\Db\Column\Varchar;
 
 class LeaveRequest extends \Hubleto\Erp\Model
 {
@@ -33,7 +32,6 @@ class LeaveRequest extends \Hubleto\Erp\Model
       'date_to' => (new Date($this, $this->translate('To')))->setDefaultVisible()->setRequired(),
       'balance_year' => (new Integer($this, $this->translate('Balance year')))->setDefaultVisible()->setRequired()->setDefaultValue((int) date('Y')),
       'days_requested' => (new Decimal($this, $this->translate('Days requested')))->setDecimals(2)->setRequired(),
-      'status' => (new Varchar($this, $this->translate('Status')))->setDefaultVisible()->setRequired(),
       'id_approver' => (new Lookup($this, $this->translate('Approver'), User::class))->setReactComponent('InputUserSelect'),
       'date_decided' => (new Date($this, $this->translate('Decision date'))),
       'reason' => (new Text($this, $this->translate('Reason'))),
@@ -44,14 +42,7 @@ class LeaveRequest extends \Hubleto\Erp\Model
 
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
-    $description = parent::describeForm();
-    $description->inputs['status']->setPredefinedValues([
-      $this->translate('Pending'),
-      $this->translate('Approved'),
-      $this->translate('Rejected'),
-      $this->translate('Cancelled'),
-    ]);
-    return $description;
+    return parent::describeForm();
   }
 
   public function describeTable(): \Hubleto\Framework\Description\Table

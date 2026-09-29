@@ -11,7 +11,13 @@ class Counter extends Core
     $mRequest = $this->getModel(Models\LeaveRequest::class);
 
     return $mRequest->record->prepareReadQuery()
-      ->where($mRequest->table . '.status', $this->translate('Pending'))
+      ->whereHas('WORKFLOW_STEP', function ($query) {
+        $query->whereIn('tag', [
+          'hr-leave-submitted',
+          'hr-leave-manager-review',
+          'hr-leave-hr-review',
+        ]);
+      })
       ->count();
   }
 }

@@ -16,6 +16,9 @@ class JobOpening extends \Hubleto\Erp\Model
   public ?string $lookupSqlValue = '{%TABLE%}.title';
   public array $relations = [
     'HIRING_MANAGER' => [self::BELONGS_TO, User::class, 'id_hiring_manager', 'id'],
+    'EMPLOYMENT_TYPE' => [self::BELONGS_TO, EmploymentType::class, 'id_employment_type', 'id'],
+    'WORK_LOCATION' => [self::BELONGS_TO, WorkLocation::class, 'id_work_location', 'id'],
+    'OPENING_DATE' => [self::BELONGS_TO, OpeningDate::class, 'id_opening_date', 'id'],
   ];
 
   public function describeColumns(): array
@@ -23,11 +26,11 @@ class JobOpening extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Job title')))->setDefaultVisible()->setRequired(),
       'department' => (new Varchar($this, $this->translate('Department')))->setDefaultVisible(),
-      'location' => (new Varchar($this, $this->translate('Location'))),
-      'employment_type' => (new Varchar($this, $this->translate('Employment type')))->setDefaultVisible(),
+      'id_work_location' => (new Lookup($this, $this->translate('Work location'), WorkLocation::class))->setDefaultVisible(),
+      'id_employment_type' => (new Lookup($this, $this->translate('Employment type'), EmploymentType::class))->setDefaultVisible(),
       'status' => (new Varchar($this, $this->translate('Status')))->setDefaultVisible()->setRequired(),
       'positions' => (new Integer($this, $this->translate('Positions')))->setDefaultValue(1),
-      'date_opened' => (new Date($this, $this->translate('Opened')))->setDefaultVisible(),
+      'id_opening_date' => (new Lookup($this, $this->translate('Opened'), OpeningDate::class))->setDefaultVisible(),
       'date_closed' => (new Date($this, $this->translate('Closed'))),
       'id_hiring_manager' => (new Lookup($this, $this->translate('Hiring manager'), User::class))->setReactComponent('InputUserSelect'),
       'description' => (new Text($this, $this->translate('Description'))),
@@ -57,7 +60,7 @@ class JobOpening extends \Hubleto\Erp\Model
 
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['HIRING_MANAGER'];
+    return ['HIRING_MANAGER', 'EMPLOYMENT_TYPE', 'WORK_LOCATION', 'OPENING_DATE'];
   }
 
   public function getMaxReadLevelForLoadTableData(): int

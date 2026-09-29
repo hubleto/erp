@@ -11,7 +11,9 @@ class Counter extends Core
     $mApplication = $this->getModel(Models\Application::class);
 
     return $mApplication->record->prepareReadQuery()
-      ->where($mApplication->table . '.status', $this->translate('In progress'))
+      ->whereHas('WORKFLOW_STEP', function ($query) {
+        $query->whereNotIn('tag', ['hr-recruitment-hired', 'hr-recruitment-rejected']);
+      })
       ->count();
   }
 }

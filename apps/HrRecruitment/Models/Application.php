@@ -7,7 +7,6 @@ use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
-use Hubleto\Framework\Db\Column\Varchar;
 
 class Application extends \Hubleto\Erp\Model
 {
@@ -26,8 +25,6 @@ class Application extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_job_opening' => (new Lookup($this, $this->translate('Job opening'), JobOpening::class))->setDefaultVisible()->setRequired(),
       'id_candidate' => (new Lookup($this, $this->translate('Candidate'), Candidate::class))->setDefaultVisible()->setRequired(),
-      'stage' => (new Varchar($this, $this->translate('Stage')))->setDefaultVisible()->setRequired(),
-      'status' => (new Varchar($this, $this->translate('Status')))->setDefaultVisible()->setRequired(),
       'date_applied' => (new Date($this, $this->translate('Applied on')))->setDefaultVisible()->setRequired(),
       'date_decided' => (new Date($this, $this->translate('Decision date'))),
       'notes' => (new Text($this, $this->translate('Notes'))),
@@ -38,21 +35,7 @@ class Application extends \Hubleto\Erp\Model
 
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
-    $description = parent::describeForm();
-    $description->inputs['stage']->setPredefinedValues([
-      $this->translate('Applied'),
-      $this->translate('Screening'),
-      $this->translate('Interview'),
-      $this->translate('Assessment'),
-      $this->translate('Offer'),
-    ]);
-    $description->inputs['status']->setPredefinedValues([
-      $this->translate('In progress'),
-      $this->translate('Hired'),
-      $this->translate('Rejected'),
-      $this->translate('Withdrawn'),
-    ]);
-    return $description;
+    return parent::describeForm();
   }
 
   public function describeTable(): \Hubleto\Framework\Description\Table

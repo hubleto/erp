@@ -29,6 +29,12 @@ class Loader extends \Hubleto\Erp\App
     ';
   }
 
+  public function getSidebarBadgeNumber(): int
+  {
+    $counter = $this->getService(Counter::class);
+    return $counter->activeEmployees();
+  }
+
   public function installApp(int $round): void
   {
     if ($round === 1) {

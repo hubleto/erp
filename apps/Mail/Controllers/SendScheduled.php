@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Mail\Controllers;
 
 use Hubleto\App\Community\Mail\Crons\SendMails;
-use Hubleto\Framework\Logger;
+use Hubleto\Framework\Services\Logger;
 
 class SendScheduled extends \Hubleto\Erp\Controller
 {

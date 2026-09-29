@@ -21,44 +21,67 @@ const TabDefault = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
   const TAGS: Array<any> = useRecordField('TAGS', []);
 
-  return <div className='flex gap-2 flex-col md:flex-row'>
-    <div className='grow'>
-      <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
-      <Input title={T.translate('Tags')}>
-        <InputTags
-          field='TAGS'
-          value={TAGS}
-          model={parentApp + '/Models/Tag'}
-          targetColumn='id_campaign'
-          sourceColumn='id_tag'
-          colorColumn='_LOOKUP_COLOR'
-          showSelect={false}
-          showTagButtons={true}
-          editTagsUrl='email-marketing/tags'
-          onChange={(input: any, value: any) => {
-            form.changeField(input, value);
-          }}
-          onNewTag={(title: string) => {
-            return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
-          }}
-        ></InputTags>
-      </Input>
-
-      <Input field='target_audience' />
-      <Input field='goal' />
-      <Input field='notes' />
-    </div>
-    {form.id <= 0 ? null : <>
+  return <>
+    <div className='flex gap-2 flex-col md:flex-row'>
       <div className='grow'>
-        <TableCampaignsSchedules
-          tag='table_campaign_schedules'
-          parentForm={form}
-          uid={form.uid + "_table_campaign_schedules"}
-          idCampaign={form.id}
-        />
+        <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+        <Input title={T.translate('Tags')}>
+          <InputTags
+            field='TAGS'
+            value={TAGS}
+            model={parentApp + '/Models/Tag'}
+            targetColumn='id_campaign'
+            sourceColumn='id_tag'
+            colorColumn='_LOOKUP_COLOR'
+            showSelect={false}
+            showTagButtons={true}
+            editTagsUrl='email-marketing/tags'
+            onChange={(input: any, value: any) => {
+              form.changeField(input, value);
+            }}
+            onNewTag={(title: string) => {
+              return { id: -1, name: title, color: '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0') }
+            }}
+          ></InputTags>
+        </Input>
+
+        <Input field='target_audience' />
+        <Input field='goal' />
+        <Input field='notes' />
       </div>
-    </>}
-  </div>;
+      {form.id <= 0 ? null : <>
+        <div className='grow'>
+          <TableCampaignsSchedules
+            tag='table_campaign_schedules'
+            parentForm={form}
+            uid={form.uid + "_table_campaign_schedules"}
+            idCampaign={form.id}
+          />
+        </div>
+      </>}
+    </div>
+    <div className='flex justify-center mt-2 bg-lime-50 p-4'>
+      <div className='text-center'>
+        <button
+          className='btn btn-add btn-large mb-2'
+          onClick={() => {
+            request.post(
+              'email-marketing/api/launch-campaign',
+              { idCampaign: form.id },
+              {},
+              (data: any) => {
+                form.reload();
+              }
+            )
+          }}
+        >
+          <span className='icon'><i className='fas fa-bolt'></i></span>
+          <span className='text'>Launch campaign</span>
+        </button>
+        <div>Schedules all approved emails to be sent to all campaign recipients.</div>
+      </div>
+    </div>
+  </>
 }
 
 /**

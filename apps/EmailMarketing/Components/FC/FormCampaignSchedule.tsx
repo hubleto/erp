@@ -18,10 +18,11 @@ const TabDefault = (props: FormCampaignScheduleProps) => {
 
   return <div className='flex flex-col h-full'>
     <div className='flex gap-2'>
-      <div><Input field='day' /></div>
+      <div><Input field='day' wrapperCssClass='flex gap-2' /></div>
       <div className='grow'><Input field='id_email' wrapperCssClass='flex gap-2' /></div>
     </div>
     <div className='mt-8'>
+      {EMAIL?.is_approved ? null : <div className='alert alert-danger'>Email is not approved yet.</div>}
       {EMAIL ? <div className='card'>
         <div className='card-header'>From: {EMAIL.SENDER_ACCOUNT?.name}</div>
         <div className='card-header'>Subject: {EMAIL.mail_subject}</div>

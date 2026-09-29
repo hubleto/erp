@@ -259,6 +259,8 @@ class Lib extends Core
         $day = $campaignSchedule->day;
         $email = $campaignSchedule->EMAIL;
 
+        if (!$email->is_approved) return;
+
         $r = $mCampaignScheduleRecipient->record
           ->where('id_campaign_schedule', $campaignSchedule->id)
           ->where('id_recipient', $recipient->id)

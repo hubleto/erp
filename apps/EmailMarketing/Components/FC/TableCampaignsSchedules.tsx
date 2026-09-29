@@ -55,6 +55,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                 <div className='text-gray-400'>
                   Sent from: {record.EMAIL?.SENDER_ACCOUNT?.name ?? <span className='text-red-800'>n/a</span>}
                 </div>
+                {record.EMAIL?.is_approved ? null : <div className='badge badge-danger'>Email is not approved yet.</div>}
               </> : <div className='text-red-800'>No email selected</div>}
             </div>
           </button>;

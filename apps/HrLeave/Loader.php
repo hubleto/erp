@@ -54,4 +54,78 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\LeaveRequest::class)->upgradeSchema();
     }
   }
+
+  public function generateDemoData(): void
+  {
+    $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
+    $user = $mUser->record->where('is_active', true)->orderBy('id')->first();
+    if (!$user) return;
+
+    $mLeaveType = $this->getModel(Models\LeaveType::class);
+    $leaveTypes = [];
+    foreach ([
+      ['name' => $this->translate('Annual leave'), 'days' => 25, 'paid' => 1],
+      ['name' => $this->translate('Sick leave'), 'days' => 10, 'paid' => 1],
+    ] as $typeData) {
+      $type = $mLeaveType->record->where('name', $typeData['name'])->first();
+      if (!$type) {
+        $created = $mLeaveType->record->recordCreate([
+          'name' => $typeData['name'],
+          'annual_entitlement' => $typeData['days'],
+          'is_paid' => $typeData['paid'],
+          'requires_approval' => 1,
+          'description' => $this->translate('Demo leave policy.'),
+        ]);
+        $type = $mLeaveType->record->find($created['id']);
+      }
+      $leaveTypes[] = $type;
+    }
+
+    $mBalance = $this->getModel(Models\LeaveBalance::class);
+    $mRequest = $this->getModel(Models\LeaveRequest::class);
+    $year = (int) date('Y');
+
+    foreach ($leaveTypes as $leaveType) {
+      if (!$mBalance->record->where('id_user', $user->id)->where('id_leave_type', $leaveType->id)->where('year', $year)->exists()) {
+        $mBalance->record->recordCreate([
+          'id_user' => $user->id,
+          'id_leave_type' => $leaveType->id,
+          'year' => $year,
+          'days_entitled' => $leaveType->annual_entitlement,
+          'days_carried_over' => 2,
+        ]);
+      }
+    }
+
+    $pendingType = $leaveTypes[0];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $pendingType->id)->where('reason', 'Demo pending leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $pendingType->id,
+        'date_from' => date('Y-m-d', strtotime('+14 days')),
+        'date_to' => date('Y-m-d', strtotime('+16 days')),
+        'balance_year' => $year,
+        'days_requested' => 3,
+        'status' => $this->translate('Pending'),
+        'id_approver' => $user->id,
+        'reason' => 'Demo pending leave request',
+      ]);
+    }
+
+    $approvedType = $leaveTypes[1];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $approvedType->id)->where('reason', 'Demo approved leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $approvedType->id,
+        'date_from' => date('Y-m-d', strtotime('-14 days')),
+        'date_to' => date('Y-m-d', strtotime('-13 days')),
+        'balance_year' => $year,
+        'days_requested' => 2,
+        'status' => $this->translate('Approved'),
+        'id_approver' => $user->id,
+        'date_decided' => date('Y-m-d', strtotime('-20 days')),
+        'reason' => 'Demo approved leave request',
+      ]);
+    }
+  }
 }

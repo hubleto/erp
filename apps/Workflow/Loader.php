@@ -176,6 +176,42 @@ class Loader extends \Hubleto\Erp\App
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Approved'), 'order' => 3, 'color' => '#3068a5', 'tag' => 'document-approved']);
       $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Rejected'), 'order' => 4, 'color' => '#ae459f', 'tag' => 'document-rejected']);
 
+      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Employee lifecycle'), "show_in_kanban" => 1, "order" => 8, "group" => "hr_employees" ])['id'];
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Preboarding'), 'order' => 1, 'color' => '#7c8795', 'tag' => 'hr-employee-preboarding']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Onboarding'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'hr-employee-onboarding']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Active'), 'order' => 3, 'color' => '#008000', 'tag' => 'hr-employee-active']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('On leave'), 'order' => 4, 'color' => '#d8a082', 'tag' => 'hr-employee-on-leave']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Offboarding'), 'order' => 5, 'color' => '#c42202', 'tag' => 'hr-employee-offboarding']);
+
+      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Recruitment pipeline'), "show_in_kanban" => 1, "order" => 9, "group" => "hr_recruitment" ])['id'];
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Applied'), 'order' => 1, 'color' => '#7c8795', 'tag' => 'hr-recruitment-applied']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Screening'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'hr-recruitment-screening']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Interview'), 'order' => 3, 'color' => '#3068a5', 'tag' => 'hr-recruitment-interview']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Offer'), 'order' => 4, 'color' => '#d8a082', 'tag' => 'hr-recruitment-offer']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Hired'), 'order' => 5, 'color' => '#008000', 'tag' => 'hr-recruitment-hired']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Rejected'), 'order' => 6, 'color' => '#c42202', 'tag' => 'hr-recruitment-rejected']);
+
+      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Leave approval'), "show_in_kanban" => 1, "order" => 10, "group" => "hr_leave" ])['id'];
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Submitted'), 'order' => 1, 'color' => '#7c8795', 'tag' => 'hr-leave-submitted']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Manager review'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'hr-leave-manager-review']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('HR review'), 'order' => 3, 'color' => '#3068a5', 'tag' => 'hr-leave-hr-review']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Approved'), 'order' => 4, 'color' => '#008000', 'tag' => 'hr-leave-approved']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Rejected'), 'order' => 5, 'color' => '#c42202', 'tag' => 'hr-leave-rejected']);
+
+      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Attendance approval'), "show_in_kanban" => 1, "order" => 11, "group" => "hr_attendance" ])['id'];
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Submitted'), 'order' => 1, 'color' => '#7c8795', 'tag' => 'hr-attendance-submitted']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Manager review'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'hr-attendance-manager-review']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Approved'), 'order' => 3, 'color' => '#008000', 'tag' => 'hr-attendance-approved']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Needs correction'), 'order' => 4, 'color' => '#d8a082', 'tag' => 'hr-attendance-correction']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Rejected'), 'order' => 5, 'color' => '#c42202', 'tag' => 'hr-attendance-rejected']);
+
+      $idWorkflow = $mWorkflow->record->recordCreate([ "name" => $this->translate('Performance review'), "show_in_kanban" => 1, "order" => 12, "group" => "hr_performance" ])['id'];
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Draft'), 'order' => 1, 'color' => '#7c8795', 'tag' => 'hr-performance-draft']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Self review'), 'order' => 2, 'color' => '#6830a5', 'tag' => 'hr-performance-self-review']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Manager review'), 'order' => 3, 'color' => '#3068a5', 'tag' => 'hr-performance-manager-review']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Calibration'), 'order' => 4, 'color' => '#d8a082', 'tag' => 'hr-performance-calibration']);
+      $mWorkflowStep->record->recordCreate(['id_workflow' => $idWorkflow, 'name' => $this->translate('Completed'), 'order' => 5, 'color' => '#008000', 'tag' => 'hr-performance-completed']);
+
       // $mAutomat->record->recordCreate([
       //   'name' => 'setOrderWorkflowStepToPaid',
       //   'trigger' => 'onModelAfterUpdate',

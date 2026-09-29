@@ -44,4 +44,30 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\Employee::class)->upgradeSchema();
     }
   }
+
+  public function generateDemoData(): void
+  {
+    $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
+    $user = $mUser->record->where('is_active', true)->orderBy('id')->first();
+    if (!$user) return;
+
+    $mEmployee = $this->getModel(Models\Employee::class);
+    if ($mEmployee->record->where('id_user', $user->id)->exists()) return;
+
+    $mTeam = $this->getModel(\Hubleto\App\Community\Settings\Models\Team::class);
+    $team = $mTeam->record->orderBy('id')->first();
+
+    $mEmployee->record->recordCreate([
+      'id_user' => $user->id,
+      'employee_number' => 'DEMO-' . $user->id,
+      'job_title' => $user->position ?: $this->translate('People Operations Specialist'),
+      'id_team' => $team?->id,
+      'id_manager' => null,
+      'employment_type' => $this->translate('Full-time'),
+      'employment_status' => $this->translate('Active'),
+      'date_hired' => date('Y-m-d', strtotime('-2 years')),
+      'work_location' => $this->translate('Head office'),
+      'notes' => $this->translate('Demo employee profile.'),
+    ]);
+  }
 }

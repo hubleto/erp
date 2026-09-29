@@ -46,4 +46,38 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\AttendanceRecord::class)->upgradeSchema();
     }
   }
+
+  public function generateDemoData(): void
+  {
+    $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
+    $user = $mUser->record->where('is_active', true)->orderBy('id')->first();
+    if (!$user) return;
+
+    $mShift = $this->getModel(Models\Shift::class);
+    $shiftStart = date('Y-m-d', strtotime('+1 day')) . ' 09:00:00';
+    if (!$mShift->record->where('id_user', $user->id)->where('date_start', $shiftStart)->exists()) {
+      $mShift->record->recordCreate([
+        'id_user' => $user->id,
+        'date_start' => $shiftStart,
+        'date_end' => date('Y-m-d', strtotime('+1 day')) . ' 17:00:00',
+        'location' => $this->translate('Head office'),
+        'status' => $this->translate('Planned'),
+      ]);
+    }
+
+    $mRecord = $this->getModel(Models\AttendanceRecord::class);
+    $workDate = date('Y-m-d', strtotime('-1 day'));
+    if (!$mRecord->record->where('id_user', $user->id)->where('date_worked', $workDate)->exists()) {
+      $mRecord->record->recordCreate([
+        'id_user' => $user->id,
+        'date_worked' => $workDate,
+        'time_in' => '09:05:00',
+        'time_out' => '17:00:00',
+        'break_minutes' => 30,
+        'status' => $this->translate('Present'),
+        'is_approved' => 0,
+        'notes' => $this->translate('Demo attendance record awaiting approval.'),
+      ]);
+    }
+  }
 }

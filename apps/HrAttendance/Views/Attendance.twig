@@ -1,0 +1,17 @@
+<h1 class="app-main-title">{{ viewParams.title }}</h1>
+
+<nav class="flex flex-wrap gap-2 mb-3" aria-label="{{ translate('Attendance') }}">
+  <a class="btn btn-transparent" href="hr-attendance/records">{{ translate('Attendance records') }}</a>
+  <a class="btn btn-transparent" href="hr-attendance/shifts">{{ translate('Shift schedule') }}</a>
+</nav>
+
+<hblreact-hr-attendance-table
+  string:tag="hr-attendance"
+  string:model="{{ viewParams.model }}"
+  string:base-url-slug="{{ viewParams.baseUrlSlug }}"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search="{{ viewParams.q }}"
+  json:column-search="{{ viewParams.search|json_encode }}"
+  json:filters="{{ viewParams.filters|json_encode }}"
+  string:form-active-tab-uid="{{ viewParams.tab }}"
+></hblreact-hr-attendance-table>

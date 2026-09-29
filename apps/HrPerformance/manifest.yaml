@@ -1,0 +1,11 @@
+namespace: Hubleto\App\Community\HrPerformance
+appType: community
+sidebarGroup: human-resources
+rootUrlSlug: hr-performance
+name: HR Performance & Development
+icon: fas fa-chart-line
+highlight: Track employee objectives, performance reviews, and learning assignments.
+tags:
+  - human-resources
+  - performance
+  - learning

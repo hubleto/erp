@@ -1,0 +1,12 @@
+<h1 class="app-main-title">{{ viewParams.title }}</h1>
+
+<hblreact-hremployees-table
+  string:tag="hr-employees"
+  string:model="{{ viewParams.model }}"
+  string:base-url-slug="{{ viewParams.baseUrlSlug }}"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search="{{ viewParams.q }}"
+  json:column-search="{{ viewParams.search|json_encode }}"
+  json:filters="{{ viewParams.filters|json_encode }}"
+  string:form-active-tab-uid="{{ viewParams.tab }}"
+></hblreact-hremployees-table>

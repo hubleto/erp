@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\HrRecruitment
+appType: community
+sidebarGroup: human-resources
+rootUrlSlug: hr-recruitment
+name: HR Recruitment
+icon: fas fa-user-plus
+highlight: Manage job openings, applicants, applications, and interviews.
+tags:
+  - human-resources
+  - recruiting

@@ -66,6 +66,7 @@ class Loader extends \Hubleto\Erp\App
       'customer-acquisition' => [ 'color' => '#c6aa39', 'title' => $this->translate('Marketing'), 'icon' => 'fas fa-bullseye' ],
       'sales' => [ 'color' => '#f50ab9', 'title' => $this->translate('Sales'), 'icon' => 'fas fa-users-viewfinder' ],
       'productivity' => [ 'color' => '#20689f', 'title' => $this->translate('Productivity'), 'icon' => 'fas fa-diagram-project' ],
+      'human-resources' => [ 'color' => '#759f20', 'title' => $this->translate('Human resources'), 'icon' => 'fas fa-helmet' ],
       'finance' => [ 'color' => '#ce4715ff', 'title' => $this->translate('Finance'), 'icon' => 'fas fa-credit-card' ],
       'custom' => [ 'color' => '#888888', 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
       'maintenance' => [ 'color' => '#c0c90e', 'title' => $this->translate('Maintenance'), 'icon' => 'fas fa-cog' ],

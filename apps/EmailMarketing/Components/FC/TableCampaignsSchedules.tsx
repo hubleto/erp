@@ -49,7 +49,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                 Day<br/>
                 <b>{record.day}</b>
               </div>
-              <div className='text block'>
+              <div className={'text block ' + (record.EMAIL?.is_closed ? 'striped-45': '')}>
                 {record.id_email > 0 ? <>
                   <div className='fond-bold'>
                     {record.EMAIL?.mail_subject ?? '-'}
@@ -59,7 +59,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                   </div>
                   {record.EMAIL?.is_approved ? <div className='badge badge-success'>Approved</div> : <div className='badge badge-danger'>Not approved</div>}
                   <div className='badge badge-info'>{record.RECIPIENTS ? record.RECIPIENTS.length : 0} recipients</div>
-                  {record.EMAIL?.is_closed ? <div className='badge'>Closed</div> : null}
+                  {record.EMAIL?.is_closed ? <div className='badge badge-danger'>Closed</div> : null}
                 </> : <div className='text-red-800'>No email selected</div>}
               </div>
             </button>

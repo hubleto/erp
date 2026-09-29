@@ -1,0 +1,54 @@
+<?php
+
+namespace Hubleto\App\Community\HrPerformance\Models;
+
+use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\Decimal;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
+
+class Review extends \Hubleto\Erp\Model
+{
+  public string $table = 'hr_reviews';
+  public string $recordManagerClass = RecordManagers\Review::class;
+  public array $relations = [
+    'EMPLOYEE' => [self::BELONGS_TO, User::class, 'id_user', 'id'],
+    'REVIEWER' => [self::BELONGS_TO, User::class, 'id_reviewer', 'id'],
+  ];
+
+  public function describeColumns(): array
+  {
+    return array_merge(parent::describeColumns(), [
+      'id_user' => (new Lookup($this, $this->translate('Employee'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired(),
+      'id_reviewer' => (new Lookup($this, $this->translate('Reviewer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired(),
+      'period' => (new Varchar($this, $this->translate('Review period')))->setDefaultVisible()->setRequired(),
+      'date_reviewed' => (new Date($this, $this->translate('Review date')))->setDefaultVisible(),
+      'score' => (new Decimal($this, $this->translate('Overall score')))->setDecimals(2),
+      'status' => (new Varchar($this, $this->translate('Status')))->setDefaultVisible()->setRequired(),
+      'summary' => (new Text($this, $this->translate('Summary and feedback'))),
+    ]);
+  }
+
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+    $description->inputs['status']->setPredefinedValues([
+      $this->translate('Draft'),
+      $this->translate('Scheduled'),
+      $this->translate('Completed'),
+    ]);
+    return $description;
+  }
+
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['EMPLOYEE', 'REVIEWER'];
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
+  }
+}

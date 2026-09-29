@@ -1,0 +1,19 @@
+<h1 class="app-main-title">{{ viewParams.title }}</h1>
+
+<nav class="flex flex-wrap gap-2 mb-3" aria-label="{{ translate('Recruitment') }}">
+  <a class="btn btn-transparent" href="hr-recruitment/job-openings">{{ translate('Job openings') }}</a>
+  <a class="btn btn-transparent" href="hr-recruitment/candidates">{{ translate('Candidates') }}</a>
+  <a class="btn btn-transparent" href="hr-recruitment/applications">{{ translate('Applications') }}</a>
+  <a class="btn btn-transparent" href="hr-recruitment/interviews">{{ translate('Interviews') }}</a>
+</nav>
+
+<hblreact-hrrecruitment-table
+  string:tag="hr-recruitment"
+  string:model="{{ viewParams.model }}"
+  string:base-url-slug="{{ viewParams.baseUrlSlug }}"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search="{{ viewParams.q }}"
+  json:column-search="{{ viewParams.search|json_encode }}"
+  json:filters="{{ viewParams.filters|json_encode }}"
+  string:form-active-tab-uid="{{ viewParams.tab }}"
+></hblreact-hrrecruitment-table>

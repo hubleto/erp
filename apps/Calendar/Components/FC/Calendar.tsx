@@ -52,7 +52,12 @@ const Calendar = (props: CalendarProps) => {
       {eventInfo.event.extendedProps.owner ?
         <span className="badge badge-small ml-1">{eventInfo.event.extendedProps.owner}</span>
       : null}
-      <span className="ml-1">{eventInfo.event.title}</span>
+      {eventInfo.timeText ?
+        <span className="ml-1">{eventInfo.timeText}</span>
+      : null}
+      {eventInfo.event.title ?
+        <span className="ml-1">{eventInfo.event.title}</span>
+      : null}
       {eventInfo.event.extendedProps.details ?
         <span className="ml-1"><i>{eventInfo.event.extendedProps.details}</i></span>
       : null}

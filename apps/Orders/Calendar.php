@@ -48,14 +48,23 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 
     // expected next invoice for the order
     $mOrder = $this->getModel(Models\Order::class);
-    $ordersExpectingInvoice = $mOrder->record
+    $ordersQuery = $mOrder->record
       ->with('OWNER')
       ->with('MANAGER')
       ->where('date_next_invoice_expected', '>=', $dateStart)
       ->where('date_next_invoice_expected', '<=', $dateEnd)
-      ->get();
+    ;
 
-    foreach ($ordersExpectingInvoice as $order) {
+    if (isset($filter['idUser']) && $filter['idUser'] > 0) {
+      $ordersQuery = $ordersQuery->where('id_owner', $filter['idUser']);
+    }
+    if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
+      $ordersQuery = $ordersQuery->where('id_owner', $this->authProvider()->getUserId());
+    }
+
+    $orders = $ordersQuery->get();
+
+    foreach ($orders as $order) {
       $events[] = [
         'id' => (int) ($order->id ?? 0),
         'start' => date("Y-m-d", strtotime($order->date_next_invoice_expected)),

@@ -107,16 +107,16 @@ class Project extends \Hubleto\Erp\Model
         $description->hide(['footer']);
 
         $description->ui['filters'] = [
-          'fProjectWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),
           'fProjectClosed' => [
-            'title' => $this->translate('Open / Closed'),
+            'direction' => 'horizontal',
             'options' => [
-              0 => $this->translate('Open'),
-              1 => $this->translate('Closed'),
-              2 => $this->translate('All'),
+              1 => $this->translate('Open'),
+              2 => $this->translate('Closed'),
+              3 => $this->translate('All'),
             ],
-            'default' => 2,
+            'default' => 1,
           ],
+          'fProjectWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'Phase'),
         ];
       break;
     }

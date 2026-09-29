@@ -84,6 +84,20 @@ class Project extends \Hubleto\Erp\RecordManager
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
     $query = parent::prepareReadQuery($query, $level, $includeRelations);
+    return $query;
+  }
+
+  /**
+   * [Description for addUrlFiltersToQuery]
+   *
+   * @param mixed|null $query
+   * 
+   * @return mixed
+   * 
+   */
+  public function addUrlFiltersToQuery(mixed $query): mixed
+  {
+    $query = parent::addUrlFiltersToQuery($query);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
 
@@ -105,10 +119,10 @@ class Project extends \Hubleto\Erp\RecordManager
       (array) ($filters['fProjectWorkflowStep'] ?? [])
     );
 
-    if (isset($filters["fProjectClosed"])) {
-      if ($filters["fProjectClosed"] == 0) $query = $query->where("projects.is_closed", false);
-      if ($filters["fProjectClosed"] == 1) $query = $query->where("projects.is_closed", true);
-    }
+    $fProjectClosed = $filters['fProjectClosed'] ?? 1;
+    if ($fProjectClosed == 1) $query = $query->where("projects.is_closed", false);
+    if ($fProjectClosed == 2) $query = $query->where("projects.is_closed", true);
+
 
     return $query;
   }

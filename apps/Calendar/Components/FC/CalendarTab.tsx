@@ -97,7 +97,7 @@ const CalendarTab = (props: CalendarTabProps) => {
   }
 
   const tmpCalendarLarge = <Calendar
-    onCreateCallback={() => form.loadRecord()}
+    onCreateCallback={() => form.reload()}
     readonly={isClosed}
     initialView='timeGridWeek'
     views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}
@@ -176,7 +176,7 @@ const CalendarTab = (props: CalendarTabProps) => {
       </div>
       <div className='flex-3'>
         <Calendar
-          onCreateCallback={() => form.loadRecord()}
+          onCreateCallback={() => form.reload()}
           readonly={isClosed}
           initialView='dayGridMonth'
           views={"timeGridDay,timeGridWeek,dayGridMonth,listYear"}

@@ -98,7 +98,6 @@ class Task extends \Hubleto\Erp\RecordManager
     $query = parent::addUrlFiltersToQuery($query);
 
     $hubleto = \Hubleto\Erp\Loader::getGlobalApp();
-
     $filters = $hubleto->router()->urlParamAsArray("filters");
 
     $view = $hubleto->router()->urlParamAsString('view');

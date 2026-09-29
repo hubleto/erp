@@ -21,12 +21,12 @@ const FormHrEmployee = (props: FormHrEmployeeProps) => <Form
     <Input field='job_title' />
     <Input field='id_team' />
     <Input field='id_manager' />
-    <Input field='employment_type' />
-    <Input field='employment_status' />
+    <Input field='id_employment_type' />
+    <Input field='id_employment_status' />
     <Input field='id_workflow_step' />
     <Input field='date_hired' />
     <Input field='date_ended' />
-    <Input field='work_location' />
+    <Input field='id_work_location' />
     <Input field='notes' />
   </div>}}}
   {...props}

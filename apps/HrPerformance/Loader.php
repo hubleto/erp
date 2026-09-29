@@ -69,6 +69,17 @@ class Loader extends \Hubleto\Erp\App
       ]);
     }
 
+    if (!$mGoal->record->where('id_user', $user->id)->where('title', $this->translate('Document employee onboarding process'))->exists()) {
+      $mGoal->record->recordCreate([
+        'id_user' => $user->id,
+        'title' => $this->translate('Document employee onboarding process'),
+        'description' => $this->translate('Publish a consistent onboarding checklist for managers.'),
+        'date_due' => date('Y-m-d', strtotime('+60 days')),
+        'progress' => 10,
+        'status' => $this->translate('Not started'),
+      ]);
+    }
+
     $mCourse = $this->getModel(Models\Course::class);
     $course = $mCourse->record->where('name', $this->translate('Workplace essentials - Demo'))->first();
     if (!$course) {
@@ -84,6 +95,21 @@ class Loader extends \Hubleto\Erp\App
       $course = $mCourse->record->find($created['id']);
     }
 
+    $securityCourseName = $this->translate('Data privacy refresher - Demo');
+    $securityCourse = $mCourse->record->where('name', $securityCourseName)->first();
+    if (!$securityCourse) {
+      $created = $mCourse->record->recordCreate([
+        'name' => $securityCourseName,
+        'provider' => $this->translate('Compliance team'),
+        'delivery' => $this->translate('Online'),
+        'duration_hours' => 1,
+        'url' => 'https://example.test/training/data-privacy',
+        'is_active' => 1,
+        'description' => $this->translate('Short demo course on data privacy and secure handling.'),
+      ]);
+      $securityCourse = $mCourse->record->find($created['id']);
+    }
+
     $mAssignment = $this->getModel(Models\LearningAssignment::class);
     if (!$mAssignment->record->where('id_user', $user->id)->where('id_course', $course->id)->exists()) {
       $mAssignment->record->recordCreate([
@@ -93,6 +119,17 @@ class Loader extends \Hubleto\Erp\App
         'date_due' => date('Y-m-d', strtotime('-2 days')),
         'status' => $this->translate('In progress'),
         'notes' => $this->translate('Demo learning assignment.'),
+      ]);
+    }
+
+    if (!$mAssignment->record->where('id_user', $user->id)->where('id_course', $securityCourse->id)->exists()) {
+      $mAssignment->record->recordCreate([
+        'id_user' => $user->id,
+        'id_course' => $securityCourse->id,
+        'date_assigned' => date('Y-m-d'),
+        'date_due' => date('Y-m-d', strtotime('+21 days')),
+        'status' => $this->translate('Assigned'),
+        'notes' => $this->translate('Additional demo learning assignment.'),
       ]);
     }
 
@@ -107,6 +144,19 @@ class Loader extends \Hubleto\Erp\App
         'score' => null,
         'status' => $this->translate('Scheduled'),
         'summary' => $this->translate('Demo performance review awaiting completion.'),
+      ]);
+    }
+
+    $completedPeriod = (string) (date('Y') - 1) . ' Demo';
+    if (!$mReview->record->where('id_user', $user->id)->where('period', $completedPeriod)->exists()) {
+      $mReview->record->recordCreate([
+        'id_user' => $user->id,
+        'id_reviewer' => $user->id,
+        'period' => $completedPeriod,
+        'date_reviewed' => date('Y-m-d', strtotime('-1 year')),
+        'score' => 4.2,
+        'status' => $this->translate('Completed'),
+        'summary' => $this->translate('Demo completed review with strong collaboration and delivery outcomes.'),
       ]);
     }
   }

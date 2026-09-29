@@ -4,6 +4,9 @@ namespace Hubleto\App\Community\HrEmployees\Models\RecordManagers;
 
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Team;
+use Hubleto\App\Community\HrEmployees\Models\RecordManagers\EmploymentType;
+use Hubleto\App\Community\HrEmployees\Models\RecordManagers\EmploymentStatus;
+use Hubleto\App\Community\HrEmployees\Models\RecordManagers\WorkLocation;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\WorkflowStep;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,6 +29,21 @@ class Employee extends \Hubleto\Erp\RecordManager
   public function MANAGER(): BelongsTo
   {
     return $this->belongsTo(User::class, 'id_manager', 'id');
+  }
+
+  public function EMPLOYMENT_TYPE(): BelongsTo
+  {
+    return $this->belongsTo(EmploymentType::class, 'id_employment_type', 'id');
+  }
+
+  public function EMPLOYMENT_STATUS(): BelongsTo
+  {
+    return $this->belongsTo(EmploymentStatus::class, 'id_employment_status', 'id');
+  }
+
+  public function WORK_LOCATION(): BelongsTo
+  {
+    return $this->belongsTo(WorkLocation::class, 'id_work_location', 'id');
   }
 
   public function WORKFLOW(): HasOne

@@ -125,5 +125,84 @@ class Loader extends \Hubleto\Erp\App
         'feedback' => '',
       ]);
     }
+
+    $secondJobTitle = $this->translate('HR Coordinator - Demo');
+    $secondJob = $mJob->record->where('title', $secondJobTitle)->first();
+    if (!$secondJob) {
+      $created = $mJob->record->recordCreate([
+        'title' => $secondJobTitle,
+        'department' => $this->translate('People Operations'),
+        'location' => $this->translate('Remote'),
+        'employment_type' => $this->translate('Part-time'),
+        'status' => $this->translate('Open'),
+        'positions' => 1,
+        'date_opened' => date('Y-m-d', strtotime('-7 days')),
+        'id_hiring_manager' => $user->id,
+        'description' => $this->translate('Demo opening supporting employee services and HR operations.'),
+      ]);
+      $secondJob = $mJob->record->find($created['id']);
+    }
+
+    foreach ([
+      [
+        'email' => 'jamie.rivera.demo@example.test',
+        'first_name' => 'Jamie',
+        'last_name' => 'Rivera',
+        'source' => $this->translate('Employee referral'),
+        'job' => $job,
+        'stage' => $this->translate('Interview'),
+      ],
+      [
+        'email' => 'taylor.quinn.demo@example.test',
+        'first_name' => 'Taylor',
+        'last_name' => 'Quinn',
+        'source' => $this->translate('Careers page'),
+        'job' => $secondJob,
+        'stage' => $this->translate('Applied'),
+      ],
+    ] as $candidateData) {
+      $candidate = $mCandidate->record->where('email', $candidateData['email'])->first();
+      if (!$candidate) {
+        $created = $mCandidate->record->recordCreate([
+          'first_name' => $candidateData['first_name'],
+          'last_name' => $candidateData['last_name'],
+          'email' => $candidateData['email'],
+          'phone' => '+1 555 010 2041',
+          'source' => $candidateData['source'],
+          'consent_to_store_data' => 1,
+          'notes' => $this->translate('Additional demo candidate profile.'),
+        ]);
+        $candidate = $mCandidate->record->find($created['id']);
+      }
+
+      $candidateJob = $candidateData['job'];
+      $candidateApplication = $mApplication->record
+        ->where('id_job_opening', $candidateJob->id)
+        ->where('id_candidate', $candidate->id)
+        ->first();
+      if (!$candidateApplication) {
+        $created = $mApplication->record->recordCreate([
+          'id_job_opening' => $candidateJob->id,
+          'id_candidate' => $candidate->id,
+          'stage' => $candidateData['stage'],
+          'status' => $this->translate('In progress'),
+          'date_applied' => date('Y-m-d', strtotime('-' . ($candidateData['stage'] === $this->translate('Applied') ? 1 : 4) . ' days')),
+          'notes' => $this->translate('Demo application in the recruitment pipeline.'),
+        ]);
+        $candidateApplication = $mApplication->record->find($created['id']);
+      }
+
+      if ($candidateData['stage'] === $this->translate('Interview') && !$mInterview->record->where('id_application', $candidateApplication->id)->exists()) {
+        $mInterview->record->recordCreate([
+          'id_application' => $candidateApplication->id,
+          'id_interviewer' => $user->id,
+          'date_start' => date('Y-m-d H:i:s', strtotime('+7 days 13:00')),
+          'date_end' => date('Y-m-d H:i:s', strtotime('+7 days 14:00')),
+          'location' => $this->translate('Meeting room 2'),
+          'status' => $this->translate('Scheduled'),
+          'feedback' => '',
+        ]);
+      }
+    }
   }
 }

@@ -66,6 +66,7 @@ class Loader extends \Hubleto\Erp\App
     foreach ([
       ['name' => $this->translate('Annual leave'), 'days' => 25, 'paid' => 1],
       ['name' => $this->translate('Sick leave'), 'days' => 10, 'paid' => 1],
+      ['name' => $this->translate('Personal leave'), 'days' => 3, 'paid' => 0],
     ] as $typeData) {
       $type = $mLeaveType->record->where('name', $typeData['name'])->first();
       if (!$type) {
@@ -125,6 +126,37 @@ class Loader extends \Hubleto\Erp\App
         'id_approver' => $user->id,
         'date_decided' => date('Y-m-d', strtotime('-20 days')),
         'reason' => 'Demo approved leave request',
+      ]);
+    }
+
+    $sickType = $leaveTypes[1];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $sickType->id)->where('reason', 'Demo pending sick leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $sickType->id,
+        'date_from' => date('Y-m-d', strtotime('+35 days')),
+        'date_to' => date('Y-m-d', strtotime('+35 days')),
+        'balance_year' => $year,
+        'days_requested' => 1,
+        'status' => $this->translate('Pending'),
+        'id_approver' => $user->id,
+        'reason' => 'Demo pending sick leave request',
+      ]);
+    }
+
+    $personalType = $leaveTypes[2];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $personalType->id)->where('reason', 'Demo rejected personal leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $personalType->id,
+        'date_from' => date('Y-m-d', strtotime('+45 days')),
+        'date_to' => date('Y-m-d', strtotime('+45 days')),
+        'balance_year' => $year,
+        'days_requested' => 1,
+        'status' => $this->translate('Rejected'),
+        'id_approver' => $user->id,
+        'date_decided' => date('Y-m-d'),
+        'reason' => 'Demo rejected personal leave request',
       ]);
     }
   }

@@ -79,5 +79,46 @@ class Loader extends \Hubleto\Erp\App
         'notes' => $this->translate('Demo attendance record awaiting approval.'),
       ]);
     }
+
+    foreach ([
+      [
+        'date' => date('Y-m-d', strtotime('-2 days')),
+        'time_in' => '08:55:00',
+        'time_out' => '17:10:00',
+        'status' => $this->translate('Present'),
+        'approved' => 1,
+      ],
+      [
+        'date' => date('Y-m-d', strtotime('-3 days')),
+        'time_in' => '09:20:00',
+        'time_out' => '17:00:00',
+        'status' => $this->translate('Late'),
+        'approved' => 0,
+      ],
+    ] as $attendanceData) {
+      if ($mRecord->record->where('id_user', $user->id)->where('date_worked', $attendanceData['date'])->exists()) continue;
+
+      $mRecord->record->recordCreate([
+        'id_user' => $user->id,
+        'date_worked' => $attendanceData['date'],
+        'time_in' => $attendanceData['time_in'],
+        'time_out' => $attendanceData['time_out'],
+        'break_minutes' => 30,
+        'status' => $attendanceData['status'],
+        'is_approved' => $attendanceData['approved'],
+        'notes' => $this->translate('Demo attendance record.'),
+      ]);
+    }
+
+    $secondShiftStart = date('Y-m-d', strtotime('+3 days')) . ' 10:00:00';
+    if (!$mShift->record->where('id_user', $user->id)->where('date_start', $secondShiftStart)->exists()) {
+      $mShift->record->recordCreate([
+        'id_user' => $user->id,
+        'date_start' => $secondShiftStart,
+        'date_end' => date('Y-m-d', strtotime('+3 days')) . ' 18:00:00',
+        'location' => $this->translate('Remote'),
+        'status' => $this->translate('Planned'),
+      ]);
+    }
   }
 }

@@ -61,23 +61,21 @@ class Loader extends \Hubleto\Erp\App
     }
   }
 
-  // 25-Sep-29: Temporarily disabled, eats to much resources.
-  // Need to find more optimal solution.
-  // /**
-  //  * [Description for getSidebarBadgeNumber]
-  //  *
-  //  * @return int
-  //  *
-  //  */
-  // public function getSidebarBadgeNumber(): int
-  // {
-  //   /** @var Counter */
-  //   $counter = $this->getService(Counter::class);
+  /**
+   * [Description for getSidebarBadgeNumber]
+   *
+   * @return int
+   *
+   */
+  public function getSidebarBadgeNumber(): int
+  {
+    /** @var Counter */
+    $counter = $this->getService(Counter::class);
 
-  //   return
-  //     $counter->missedIncompleteActivities(null)
-  //   ;
-  // }
+    return
+      $counter->missedIncompleteActivities(null)
+    ;
+  }
 
   public function getInitialView(): string
   {

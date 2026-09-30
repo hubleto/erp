@@ -3,7 +3,7 @@ import TableContacts from '@hubleto/apps/Contacts/Components/FC/TableContacts';
 import TableRecipients from './TableRecipients';
 import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEmailClicks';
 import request from '@hubleto/react-ui/core/Request';
-import InputJsonKeyValue from "@hubleto/react-ui/components/cc/Inputs/JsonKeyValue";
+import InputJsonKeyValue from "@hubleto/react-ui/components/fc/Inputs/JsonKeyValue";
 import moment from "moment";
 import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';

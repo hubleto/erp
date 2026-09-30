@@ -17,20 +17,10 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      '/^products\/?$/' => Controllers\Products::class,
-      '/^products\/add?\/?$/' => ['controller' => Controllers\Products::class, 'vars' => [ 'recordId' => -1 ]],
-      '/^products(\/(?<recordId>\d+))?\/?$/' => Controllers\Products::class,
-
-      '/^products\/categories(\/(?<recordId>\d+))?\/?$/' => Controllers\Categories::class,
-      '/^products\/categories\/add?\/?$/' => ['controller' => Controllers\Categories::class, 'vars' => [ 'recordId' => -1 ]],
-
-      '/^products\/groups(\/(?<recordId>\d+))?\/?$/' => Controllers\Groups::class,
-      '/^products\/groups\/add?\/?$/' => ['controller' => Controllers\Groups::class, 'vars' => [ 'recordId' => -1 ]],
-
-      '/^products\/units(\/(?<recordId>\d+))?\/?$/' => Controllers\Units::class,
-      '/^products\/units\/add?\/?$/' => ['controller' => Controllers\Units::class, 'vars' => [ 'recordId' => -1 ]],
-    ]);
+    $this->router()->crud('products', Controllers\Products::class);
+    $this->router()->crud('products/categories', Controllers\Categories::class);
+    $this->router()->crud('products/groups', Controllers\Groups::class);
+    $this->router()->crud('products/units', Controllers\Units::class);
 
     $appMenu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     $appMenu->addItem($this, 'products', $this->translate('Products'), 'fas fa-cart-shopping');

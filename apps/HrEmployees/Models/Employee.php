@@ -1,0 +1,91 @@
+<?php
+
+namespace Hubleto\App\Community\HrEmployees\Models;
+
+use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Settings\Models\Team;
+use Hubleto\App\Community\HrEmployees\Models\EmploymentType;
+use Hubleto\App\Community\HrEmployees\Models\EmploymentStatus;
+use Hubleto\App\Community\HrEmployees\Models\WorkLocation;
+use Hubleto\App\Community\Workflow\Models\Workflow as WorkflowModel;
+use Hubleto\App\Community\Workflow\Models\WorkflowStep;
+use Hubleto\Framework\Db\Column\Date;
+use Hubleto\Framework\Db\Column\Lookup;
+use Hubleto\Framework\Db\Column\Text;
+use Hubleto\Framework\Db\Column\Varchar;
+
+class Employee extends \Hubleto\Erp\Model
+{
+  public string $table = 'hr_employees';
+  public string $recordManagerClass = RecordManagers\Employee::class;
+  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.employee_number, ""), " ", ifnull({%TABLE%}.first_name, ""), " ", ifnull({%TABLE%}.family_name, ""))';
+  public ?string $lookupUrlDetail = 'hr-employees/{%ID%}';
+
+  public array $relations = [
+    'USER' => [self::BELONGS_TO, User::class, 'id_user', 'id'],
+    'TEAM' => [self::BELONGS_TO, Team::class, 'id_team', 'id'],
+    'MANAGER' => [self::BELONGS_TO, User::class, 'id_manager', 'id'],
+    'EMPLOYMENT_TYPE' => [self::BELONGS_TO, EmploymentType::class, 'id_employment_type', 'id'],
+    'EMPLOYMENT_STATUS' => [self::BELONGS_TO, EmploymentStatus::class, 'id_employment_status', 'id'],
+    'WORK_LOCATION' => [self::BELONGS_TO, WorkLocation::class, 'id_work_location', 'id'],
+    'WORKFLOW' => [self::HAS_ONE, WorkflowModel::class, 'id', 'id_workflow'],
+    'WORKFLOW_STEP' => [self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
+  ];
+
+  public function describeColumns(): array
+  {
+    return array_merge(parent::describeColumns(), [
+      'id_user' => (new Lookup($this, $this->translate('User account'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired(),
+      'employee_number' => (new Varchar($this, $this->translate('Employee number')))->setDefaultVisible()->setRequired(),
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
+      'family_name' => (new Varchar($this, $this->translate('Family name')))->setDefaultVisible(),
+      'job_title' => (new Varchar($this, $this->translate('Job title')))->setDefaultVisible(),
+      'id_team' => (new Lookup($this, $this->translate('Team'), Team::class))->setDefaultVisible(),
+      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect'),
+      'id_employment_type' => (new Lookup($this, $this->translate('Employment type'), EmploymentType::class))->setDefaultVisible()->setRequired(),
+      'id_employment_status' => (new Lookup($this, $this->translate('Employment status'), EmploymentStatus::class))->setDefaultVisible()->setRequired(),
+      'date_hired' => (new Date($this, $this->translate('Hire date')))->setDefaultVisible()->setRequired(),
+      'date_ended' => (new Date($this, $this->translate('End date'))),
+      'id_work_location' => (new Lookup($this, $this->translate('Work location'), WorkLocation::class))->setDefaultVisible(),
+      'notes' => (new Text($this, $this->translate('Employment notes'))),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), WorkflowModel::class))->setReadonly(),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
+    ]);
+  }
+
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+    return $description;
+  }
+
+  public function describeTable(): \Hubleto\Framework\Description\Table
+  {
+    $description = parent::describeTable();
+    $description->ui['addButtonText'] = $this->translate('Add employee');
+    $description->addFilter('fEmployeeWorkflowStep', WorkflowModel::buildTableFilterForWorkflowSteps($this, $this->translate('Lifecycle step')));
+    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+    $description->hide(['footer']);
+    return $description;
+  }
+
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['USER', 'TEAM', 'MANAGER', 'EMPLOYMENT_TYPE', 'EMPLOYMENT_STATUS', 'WORK_LOCATION', 'WORKFLOW', 'WORKFLOW_STEP'];
+  }
+
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 1;
+  }
+
+  public function onAfterCreate(array $savedRecord): array
+  {
+    $savedRecord = parent::onAfterCreate($savedRecord);
+    /** @var WorkflowModel */
+    $mWorkflow = $this->getModel(WorkflowModel::class);
+    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'hr_employees');
+    $this->record->recordUpdate($savedRecord);
+    return $savedRecord;
+  }
+}

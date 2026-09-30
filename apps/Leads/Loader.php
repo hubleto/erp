@@ -15,6 +15,8 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->router()->crud('leads', Controllers\Leads::class);
+
     $this->router()->get([
       '/^leads\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^leads\/api\/save-bulk-status-change\/?$/' => Controllers\Api\SaveBulkStatusChange::class,
@@ -22,8 +24,6 @@ class Loader extends \Hubleto\Erp\App
       '/^leads\/boards\/lead-value-by-score\/?$/' => Controllers\Boards\LeadValueByScore::class,
       '/^leads\/boards\/lead-warnings\/?$/' => Controllers\Boards\LeadWarnings::class,
 
-      '/^leads(\/(?<recordId>\d+))?\/?$/' => Controllers\Leads::class,
-      '/^leads\/add?\/?$/' => ['controller' => Controllers\Leads::class, 'vars' => [ 'recordId' => -1 ]],
       '/^leads\/settings\/?$/' => Controllers\Settings::class,
 
       '/^leads\/tags\/?$/' => Controllers\Tags::class,

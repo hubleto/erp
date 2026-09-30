@@ -1,7 +1,7 @@
 {% set defaultDashboard = viewParams.defaultDashboard %}
 {% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
 
-<div class="block md:hidden grid grid-cols-3 gap-0 m-2">
+<div class="md:hidden grid grid-cols-3 gap-0 m-2">
   {% for app in viewParams.appsInSidebar %}
     <a
       class="btn btn-small btn-transparent rounded-none border-none"

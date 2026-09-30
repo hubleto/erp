@@ -46,6 +46,13 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     'productivity' => [
       \Hubleto\App\Community\Projects\Loader::class => [ 'sidebarOrder' => 230 ],
     ],
+    'human-resources' => [
+      \Hubleto\App\Community\HrEmployees\Loader::class => [ 'sidebarOrder' => 600 ],
+      \Hubleto\App\Community\HrRecruitment\Loader::class => [ 'sidebarOrder' => 610 ],
+      \Hubleto\App\Community\HrLeave\Loader::class => [ 'sidebarOrder' => 620 ],
+      \Hubleto\App\Community\HrAttendance\Loader::class => [ 'sidebarOrder' => 630 ],
+      \Hubleto\App\Community\HrPerformance\Loader::class => [ 'sidebarOrder' => 640 ],
+    ],
     'finance' => [
       \Hubleto\App\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410 ],
     ],

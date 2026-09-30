@@ -16,6 +16,7 @@ class CampaignSchedule extends \Hubleto\Erp\Model
   public array $relations = [
     'CAMPAIGN' => [ self::BELONGS_TO, Campaign::class, 'id_campaign', 'id' ],
     'EMAIL' => [ self::BELONGS_TO, Email::class, 'id_email', 'id' ],
+    'RECIPIENTS' => [ self::HAS_MANY, CampaignScheduleRecipient::class, 'id_campaign_schedule', 'id' ],
   ];
 
   public function describeColumns(): array
@@ -54,7 +55,7 @@ class CampaignSchedule extends \Hubleto\Erp\Model
    */
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['CAMPAIGN', 'EMAIL', 'EMAIL.SENDER_ACCOUNT'];
+    return ['CAMPAIGN', 'EMAIL', 'RECIPIENTS', 'EMAIL.SENDER_ACCOUNT', 'EMAIL.RECIPIENTS'];
   }
 
   /**
@@ -76,7 +77,7 @@ class CampaignSchedule extends \Hubleto\Erp\Model
    */
   public function getRelationsIncludedInLoadFormData(): array|null
   {
-    return ['CAMPAIGN', 'EMAIL', 'EMAIL.SENDER_ACCOUNT'];
+    return ['CAMPAIGN', 'EMAIL', 'RECIPIENTS', 'EMAIL.SENDER_ACCOUNT', 'EMAIL.RECIPIENTS'];
   }
 
   /**

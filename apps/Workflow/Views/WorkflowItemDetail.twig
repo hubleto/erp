@@ -1,0 +1,6 @@
+<div class="flex flex-col gap-1 p-2 text-sm font-normal">
+  <div class="font-semibold">{{ item._WORKFLOW_ITEM_TITLE|default('Workflow item') }}</div>
+  {% if item._WORKFLOW_ITEM_SUBTITLE|default('') %}
+    <div class="text-gray-500">{{ item._WORKFLOW_ITEM_SUBTITLE }}</div>
+  {% endif %}
+</div>

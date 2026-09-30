@@ -15,6 +15,8 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->router()->crud('deals', Controllers\Deals::class);
+
     $this->router()->get([
       '/^deals\/api\/log-activity\/?$/' => Controllers\Api\LogActivity::class,
       '/^deals\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
@@ -29,11 +31,8 @@ class Loader extends \Hubleto\Erp\App
       '/^deals\/boards\/most-valuable-deals\/?$/' => Controllers\Boards\MostValuableDeals::class,
       '/^deals\/boards\/deal-value-by-result\/?$/' => Controllers\Boards\DealValueByResult::class,
 
-      '/^deals(\/(?<recordId>\d+))?\/?$/' => Controllers\Deals::class,
-      '/^deals\/add\/?$/' => ['controller' => Controllers\Deals::class, 'vars' => ['recordId' => -1]],
       '/^deals\/tags\/?$/' => Controllers\Tags::class,
       '/^deals\/lost-reasons\/?$/' => Controllers\LostReasons::class,
-      // '/^deals\/settings\/?$/' => Controllers\Settings::class,
 
       '/^deals\/plan\/?$/' => Controllers\Plan::class,
     ]);

@@ -1,0 +1,153 @@
+<?php
+
+namespace Hubleto\App\Community\HrLeave;
+
+class Loader extends \Hubleto\Erp\App
+{
+  public function init(): void
+  {
+    parent::init();
+
+    $this->router()->crud('hr-leave', Controllers\Leaves::class);
+    $this->router()->crud('hr-leave/leave-types', Controllers\LeaveTypes::class);
+    $this->router()->crud('hr-leave/leave-requests', Controllers\LeaveRequests::class);
+
+    $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
+    if ($calendarManager) {
+      $calendarManager->addCalendar($this, 'hr-leave', Calendar::class);
+    }
+
+    $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
+    $workflowManager->addWorkflowGroup($this, 'hr_leave', Workflow::class);
+  }
+
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('hr-leave/requests', 'fas fa-file-circle-check', 'Leave requests') . '
+        ' . $this->secondSidebarButton('hr-leave/types', 'fas fa-list-check', 'Leave types') . '
+        ' . $this->secondSidebarButton('hr-leave/balances', 'fas fa-scale-balanced', 'Entitlements') . '
+        ' . $this->secondSidebarButton('calendar?show=hr-leave', 'fas fa-calendar-days', 'Leave calendar') . '
+      </div>
+    ';
+  }
+
+  public function getSidebarBadgeNumber(): int
+  {
+    $counter = $this->getService(Counter::class);
+    return $counter->pendingRequests();
+  }
+
+  public function installApp(int $round): void
+  {
+    if ($round === 1) {
+      $this->getModel(Models\Leave::class)->upgradeSchema();
+      $this->getModel(Models\LeaveType::class)->upgradeSchema();
+      $this->getModel(Models\LeaveRequest::class)->upgradeSchema();
+    }
+  }
+
+  public function generateDemoData(): void
+  {
+    $mUser = $this->getModel(\Hubleto\App\Community\Auth\Models\User::class);
+    $user = $mUser->record->where('is_active', true)->orderBy('id')->first();
+    if (!$user) return;
+
+    $mLeaveType = $this->getModel(Models\LeaveType::class);
+    $leaveTypes = [];
+    foreach ([
+      ['name' => $this->translate('Annual leave'), 'days' => 25, 'paid' => 1],
+      ['name' => $this->translate('Sick leave'), 'days' => 10, 'paid' => 1],
+      ['name' => $this->translate('Personal leave'), 'days' => 3, 'paid' => 0],
+    ] as $typeData) {
+      $type = $mLeaveType->record->where('name', $typeData['name'])->first();
+      if (!$type) {
+        $created = $mLeaveType->record->recordCreate([
+          'name' => $typeData['name'],
+          'annual_entitlement' => $typeData['days'],
+          'is_paid' => $typeData['paid'],
+          'requires_approval' => 1,
+          'description' => $this->translate('Demo leave policy.'),
+        ]);
+        $type = $mLeaveType->record->find($created['id']);
+      }
+      $leaveTypes[] = $type;
+    }
+
+    $mBalance = $this->getModel(Models\Leave::class);
+    $mRequest = $this->getModel(Models\LeaveRequest::class);
+    $year = (int) date('Y');
+
+    foreach ($leaveTypes as $leaveType) {
+      if (!$mBalance->record->where('id_user', $user->id)->where('id_leave_type', $leaveType->id)->where('year', $year)->exists()) {
+        $mBalance->record->recordCreate([
+          'id_user' => $user->id,
+          'id_leave_type' => $leaveType->id,
+          'year' => $year,
+          'days_entitled' => $leaveType->annual_entitlement,
+          'days_carried_over' => 2,
+        ]);
+      }
+    }
+
+    $pendingType = $leaveTypes[0];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $pendingType->id)->where('reason', 'Demo pending leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $pendingType->id,
+        'date_from' => date('Y-m-d', strtotime('+14 days')),
+        'date_to' => date('Y-m-d', strtotime('+16 days')),
+        'balance_year' => $year,
+        'days_requested' => 3,
+        'id_approver' => $user->id,
+        'reason' => 'Demo pending leave request',
+      ]);
+    }
+
+    $approvedType = $leaveTypes[1];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $approvedType->id)->where('reason', 'Demo approved leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $approvedType->id,
+        'date_from' => date('Y-m-d', strtotime('-14 days')),
+        'date_to' => date('Y-m-d', strtotime('-13 days')),
+        'balance_year' => $year,
+        'days_requested' => 2,
+        'id_approver' => $user->id,
+        'date_decided' => date('Y-m-d', strtotime('-20 days')),
+        'reason' => 'Demo approved leave request',
+      ]);
+    }
+
+    $sickType = $leaveTypes[1];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $sickType->id)->where('reason', 'Demo pending sick leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $sickType->id,
+        'date_from' => date('Y-m-d', strtotime('+35 days')),
+        'date_to' => date('Y-m-d', strtotime('+35 days')),
+        'balance_year' => $year,
+        'days_requested' => 1,
+        'id_approver' => $user->id,
+        'reason' => 'Demo pending sick leave request',
+      ]);
+    }
+
+    $personalType = $leaveTypes[2];
+    if (!$mRequest->record->where('id_user', $user->id)->where('id_leave_type', $personalType->id)->where('reason', 'Demo rejected personal leave request')->exists()) {
+      $mRequest->record->recordCreate([
+        'id_user' => $user->id,
+        'id_leave_type' => $personalType->id,
+        'date_from' => date('Y-m-d', strtotime('+45 days')),
+        'date_to' => date('Y-m-d', strtotime('+45 days')),
+        'balance_year' => $year,
+        'days_requested' => 1,
+        'id_approver' => $user->id,
+        'date_decided' => date('Y-m-d'),
+        'reason' => 'Demo rejected personal leave request',
+      ]);
+    }
+  }
+}

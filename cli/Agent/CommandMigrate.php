@@ -44,7 +44,7 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
 
       $appQueue[] = $app;
     } else {
-      $appQueue = $this->appManager()->getEnabledApps();
+      $appQueue = $this->appManager()->getInstalledApps();
     }
 
     if ($dryRun) {

@@ -1,0 +1,22 @@
+{% set buttons = [
+  ['hr-recruitment/job-openings', 'fas fa-arrow-right-from-bracket', 'Job openings'],
+  ['hr-recruitment/candidates', 'fas fa-envelope', 'Candidates'],
+  ['hr-recruitment/applications', 'fas fa-users-viewfinder', 'Applications'],
+  ['hr-recruitment/interviews', 'fas fa-hand-pointer', 'Interviews'],
+  ['hr-recruitment/employment-types', 'fas fa-arrow-right-from-bracket', 'Employment types'],
+  ['hr-recruitment/work-locations', 'fas fa-hand-pointer', 'Work locations'],
+] %}
+
+<div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
+  <div class="card-header">
+    <h1 class="app-main-title">Recruitment</h1>
+  </div>
+  <div class="card-body gap-2 flex-wrap grid md:grid-cols-3">
+    {% for btn in buttons %}
+      <a href="{{ config.projectUrl }}/{{ btn[0] }}" class="btn btn-square btn-large btn-transparent">
+        <span class="icon"><i class="{{ btn[1] }}"></i></span>
+        <span class="text">{{ btn[2] }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>

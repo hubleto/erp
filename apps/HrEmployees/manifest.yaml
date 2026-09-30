@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\HrEmployees
+appType: community
+sidebarGroup: human-resources
+rootUrlSlug: hr-employees
+name: Employees
+icon: fas fa-id-card
+highlight: Employment profiles linked to existing user accounts and teams.
+tags:
+  - human-resources
+  - employees

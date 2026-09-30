@@ -17,6 +17,10 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->router()->crud('orders', Controllers\Orders::class);
+    $this->router()->crud('orders/items', Controllers\Items::class);
+    $this->router()->crud('orders/quotes', Controllers\Quotes::class);
+
     $this->router()->get([
       // '/^orders\/api\/generate-pdf\/?$/' => Controllers\Api\GeneratePdf::class,
       // '/^orders\/api\/get-preview-html\/?$/' => Controllers\Api\GetPreviewHtml::class,
@@ -31,15 +35,6 @@ class Loader extends \Hubleto\Erp\App
       '/^orders\/api\/get-statistics\/?$/' => Controllers\Api\GetStatistics::class,
 
       '/^orders\/boards\/order-warnings\/?$/' => Controllers\Boards\OrderWarnings::class,
-
-      '/^orders(\/(?<recordId>\d+))?\/?$/' => Controllers\Orders::class,
-      '/^orders\/add\/?$/' => ['controller' => Controllers\Orders::class, 'vars' => ['recordId' => -1]],
-
-      '/^orders\/items(\/(?<recordId>\d+))?\/?$/' => Controllers\Items::class,
-      '/^orders\/items\/add\/?$/' => ['controller' => Controllers\Items::class, 'vars' => ['recordId' => -1]],
-
-      '/^orders\/quotes(\/(?<recordId>\d+))?\/?$/' => Controllers\Quotes::class,
-      '/^orders\/quotes\/add\/?$/' => ['controller' => Controllers\Quotes::class, 'vars' => ['recordId' => -1]],
 
       '/^orders\/orders-awaiting-invoice\/?$/' => Controllers\OrdersAwaitingInvoice::class,
 

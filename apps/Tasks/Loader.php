@@ -15,16 +15,12 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->router()->crud('tasks', Controllers\Tasks::class);
+    $this->router()->crud('tasks/todo', Controllers\Todos::class);
+
     $this->router()->get([
       '/^tasks\/api\/create-from-mail\/?$/' => Controllers\Api\CreateFromMail::class,
-
       '/^tasks\/boards\/my-recent-tasks\/?$/' => Controllers\Boards\MyRecentTasks::class,
-
-      '/^tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\Tasks::class,
-      '/^tasks\/add?\/?$/' => ['controller' => Controllers\Tasks::class, 'vars' => [ 'recordId' => -1 ]],
-
-      '/^tasks\/todo(\/(?<recordId>\d+))?\/?$/' => Controllers\Todos::class,
-      '/^tasks\/todo\/add?\/?$/' => ['controller' => Controllers\Todos::class, 'vars' => [ 'recordId' => -1 ]],
     ]);
 
     $this->addSearchSwitch('t', 'tasks');

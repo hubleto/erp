@@ -60,7 +60,7 @@ const TabDefault = (props: FormCampaignProps) => {
         </div>
       </>}
     </div>
-    <div className='flex justify-center mt-2 bg-lime-50 p-4'>
+    {/* <div className='flex justify-center mt-2 bg-lime-50 p-4'>
       <div className='text-center'>
         <button
           className='btn btn-add btn-large mb-2'
@@ -80,7 +80,7 @@ const TabDefault = (props: FormCampaignProps) => {
         </button>
         <div>Schedules all approved emails to be sent to all campaign recipients.</div>
       </div>
-    </div>
+    </div> */}
   </>
 }
 

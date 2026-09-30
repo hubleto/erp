@@ -15,10 +15,7 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      '/^suppliers\/?$/' => Controllers\Suppliers::class,
-      '/^suppliers\/add\/?$/' => ['controller' => Controllers\Suppliers::class, 'vars' => ['recordId' => -1]],
-    ]);
+    $this->router()->crud('suppliers', Controllers\Suppliers::class);
   }
 
   // upgradeSchema

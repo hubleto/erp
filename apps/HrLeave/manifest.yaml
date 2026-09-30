@@ -1,0 +1,10 @@
+namespace: Hubleto\App\Community\HrLeave
+appType: community
+sidebarGroup: human-resources
+rootUrlSlug: hr-leave
+name: Leave
+icon: fas fa-umbrella-beach
+highlight: Manage leave policies, requests, and annual entitlements.
+tags:
+  - human-resources
+  - leave

@@ -15,10 +15,7 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      '/^shops(\/(?<recordId>\d+))?\/?$/' => Controllers\Shops::class,
-      '/^shops\/add?\/?$/' => ['controller' => Controllers\Shops::class, 'vars' => [ 'recordId' => -1 ]],
-    ]);
+    $this->router()->crud('shops', Controllers\Shops::class);
 
   }
 

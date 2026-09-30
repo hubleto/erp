@@ -8,10 +8,12 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      '/^hr-performance\/?$/' => ['controller' => Controllers\Performance::class, 'vars' => ['resource' => 'goals']],
-      '/^hr-performance\/(?<resource>goals|reviews|courses|learning)(\/(?<recordId>\d+))?\/?$/' => Controllers\Performance::class,
-    ]);
+    $this->router()->get(['hr-performance' => Controllers\Home::class]);
+
+    $this->router()->crud('hr-performance/courses', Controllers\Courses::class);
+    $this->router()->crud('hr-performance/goals', Controllers\Goals::class);
+    $this->router()->crud('hr-performance/learnings', Controllers\Learnings::class);
+    $this->router()->crud('hr-performance/reviews', Controllers\Reviews::class);
 
     $menu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
     if ($menu) {
@@ -30,7 +32,7 @@ class Loader extends \Hubleto\Erp\App
         ' . $this->secondSidebarButton('hr-performance/goals', 'fas fa-bullseye', 'Goals') . '
         ' . $this->secondSidebarButton('hr-performance/reviews', 'fas fa-star-half-stroke', 'Reviews') . '
         ' . $this->secondSidebarButton('hr-performance/courses', 'fas fa-book-open', 'Courses') . '
-        ' . $this->secondSidebarButton('hr-performance/learning', 'fas fa-graduation-cap', 'Learning assignments') . '
+        ' . $this->secondSidebarButton('hr-performance/learnings', 'fas fa-graduation-cap', 'Learning assignments') . '
       </div>
     ';
   }
@@ -47,7 +49,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\Goal::class)->upgradeSchema();
       $this->getModel(Models\Review::class)->upgradeSchema();
       $this->getModel(Models\Course::class)->upgradeSchema();
-      $this->getModel(Models\LearningAssignment::class)->upgradeSchema();
+      $this->getModel(Models\Learning::class)->upgradeSchema();
     }
   }
 
@@ -110,7 +112,7 @@ class Loader extends \Hubleto\Erp\App
       $securityCourse = $mCourse->record->find($created['id']);
     }
 
-    $mAssignment = $this->getModel(Models\LearningAssignment::class);
+    $mAssignment = $this->getModel(Models\Learning::class);
     if (!$mAssignment->record->where('id_user', $user->id)->where('id_course', $course->id)->exists()) {
       $mAssignment->record->recordCreate([
         'id_user' => $user->id,

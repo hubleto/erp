@@ -9,7 +9,7 @@ class Counter extends Core
   public function overdueDevelopmentItems(): int
   {
     $mGoal = $this->getModel(Models\Goal::class);
-    $mAssignment = $this->getModel(Models\LearningAssignment::class);
+    $mLearning = $this->getModel(Models\Learning::class);
     $today = date('Y-m-d');
 
     $overdueGoals = $mGoal->record->prepareReadQuery()
@@ -20,9 +20,9 @@ class Counter extends Core
       ])
       ->count();
 
-    $overdueLearning = $mAssignment->record->prepareReadQuery()
-      ->whereDate('hr_learning_assignments.date_due', '<', $today)
-      ->whereIn('hr_learning_assignments.status', [
+    $overdueLearning = $mLearning->record->prepareReadQuery()
+      ->whereDate('hr_learnings.date_due', '<', $today)
+      ->whereIn('hr_learnings.status', [
         $this->translate('Assigned'),
         $this->translate('In progress'),
         $this->translate('Overdue'),

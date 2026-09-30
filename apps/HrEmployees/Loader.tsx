@@ -1,16 +1,16 @@
 import App from '@hubleto/react-ui/core/App'
-import TableHrEmployees from './Components/FC/TableHrEmployees'
-import TableHrEmployeesEmploymentTypes from './Components/FC/TableHrEmployeesEmploymentTypes'
-import TableHrEmployeesEmploymentStatuses from './Components/FC/TableHrEmployeesEmploymentStatuses'
-import TableHrEmployeesWorkLocations from './Components/FC/TableHrEmployeesWorkLocations'
+import TableEmployees from './Components/FC/TableEmployees'
+import TableEmploymentTypes from './Components/FC/TableEmploymentTypes'
+import TableEmploymentStatuses from './Components/FC/TableEmploymentStatuses'
+import TableWorkLocations from './Components/FC/TableWorkLocations'
 
 class HrEmployeesApp extends App {
   init() {
     super.init();
-    globalThis.hubleto.registerReactComponent('HrEmployeesTable', TableHrEmployees);
-    globalThis.hubleto.registerReactComponent('HrEmployeesTableEmploymentTypes', TableHrEmployeesEmploymentTypes);
-    globalThis.hubleto.registerReactComponent('HrEmployeesTableEmploymentStatuses', TableHrEmployeesEmploymentStatuses);
-    globalThis.hubleto.registerReactComponent('HrEmployeesTableWorkLocations', TableHrEmployeesWorkLocations);
+    globalThis.hubleto.registerReactComponent('HrEmployeesTable', TableEmployees);
+    globalThis.hubleto.registerReactComponent('HrEmployeesTableEmploymentTypes', TableEmploymentTypes);
+    globalThis.hubleto.registerReactComponent('HrEmployeesTableEmploymentStatuses', TableEmploymentStatuses);
+    globalThis.hubleto.registerReactComponent('HrEmployeesTableWorkLocations', TableWorkLocations);
   }
 }
 

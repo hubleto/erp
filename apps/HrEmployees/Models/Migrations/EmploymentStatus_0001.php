@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\HrEmployees\Models\Migrations;
 
 use Hubleto\Framework\Migration;
 
-class Status_0001 extends Migration
+class EmploymentStatus_0001 extends Migration
 {
   public function upgradeSchema(): void
   {

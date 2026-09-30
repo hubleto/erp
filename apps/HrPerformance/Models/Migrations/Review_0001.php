@@ -17,11 +17,15 @@ class Review_0001 extends Migration
       `score` decimal(14,2),
       `status` varchar(255),
       `summary` text,
+      `id_workflow` int(8) NULL DEFAULT NULL,
+      `id_workflow_step` int(8) NULL DEFAULT NULL,
       INDEX `id_user` (`id_user`),
       INDEX `id_reviewer` (`id_reviewer`),
       INDEX `period` (`period`),
       INDEX `date_reviewed` (`date_reviewed`),
-      INDEX `status` (`status`)
+      INDEX `status` (`status`),
+      INDEX `id_workflow` (`id_workflow`),
+      INDEX `id_workflow_step` (`id_workflow_step`)
     ) ENGINE=InnoDB");
   }
 
@@ -34,11 +38,15 @@ class Review_0001 extends Migration
   {
     $this->db->execute("ALTER TABLE `hr_reviews` ADD CONSTRAINT `fk__hr_reviews__id_user` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT");
     $this->db->execute("ALTER TABLE `hr_reviews` ADD CONSTRAINT `fk__hr_reviews__id_reviewer` FOREIGN KEY (`id_reviewer`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT");
+    $this->db->execute('ALTER TABLE `hr_reviews` ADD CONSTRAINT `fk__hr_reviews__id_workflow` FOREIGN KEY (`id_workflow`) REFERENCES `workflows` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT');
+    $this->db->execute('ALTER TABLE `hr_reviews` ADD CONSTRAINT `fk__hr_reviews__id_workflow_step` FOREIGN KEY (`id_workflow_step`) REFERENCES `workflow_steps` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT');
   }
 
   public function downgradeForeignKeys(): void
   {
     $this->db->execute("ALTER TABLE `hr_reviews` DROP FOREIGN KEY `fk__hr_reviews__id_user`");
     $this->db->execute("ALTER TABLE `hr_reviews` DROP FOREIGN KEY `fk__hr_reviews__id_reviewer`");
+    $this->db->execute('ALTER TABLE `hr_reviews` DROP FOREIGN KEY `fk__hr_reviews__id_workflow`');
+    $this->db->execute('ALTER TABLE `hr_reviews` DROP FOREIGN KEY `fk__hr_reviews__id_workflow_step`');
   }
 }

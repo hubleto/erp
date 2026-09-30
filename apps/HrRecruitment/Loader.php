@@ -8,15 +8,14 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      '/^hr-recruitment\/?$/' => ['controller' => Controllers\Recruitment::class, 'vars' => ['resource' => 'job-openings']],
-      '/^hr-recruitment\/(?<resource>job-openings|candidates|applications|interviews|employment-types|work-locations)(\/(?<recordId>\d+))?\/?$/' => Controllers\Recruitment::class,
-    ]);
+    $this->router()->get(['hr-recruitment' => Controllers\Home::class]);
 
-    $menu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
-    if ($menu) {
-      $menu->addItem($this, 'hr-recruitment', $this->translate('Recruitment'), 'fas fa-user-plus');
-    }
+    $this->router()->crud('hr-recruitment/applications', Controllers\Applications::class);
+    $this->router()->crud('hr-recruitment/candidates', Controllers\Candidates::class);
+    $this->router()->crud('hr-recruitment/employment-types', Controllers\EmploymentTypes::class);
+    $this->router()->crud('hr-recruitment/interviews', Controllers\Interviews::class);
+    $this->router()->crud('hr-recruitment/job-openings', Controllers\JobOpenings::class);
+    $this->router()->crud('hr-recruitment/work-locations', Controllers\WorkLocations::class);
 
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     if ($calendarManager) {

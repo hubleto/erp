@@ -1,14 +1,20 @@
 import App from '@hubleto/react-ui/core/App'
-import TableHrRecruitment from './Components/FC/TableHrRecruitment'
-import TableHrEmploymentType from './Components/FC/TableHrEmploymentType'
-import TableHrWorkLocation from './Components/FC/TableHrWorkLocation'
+import TableApplications from './Components/FC/TableApplications'
+import TableCandidates from './Components/FC/TableCandidates'
+import TableEmploymentTypes from './Components/FC/TableEmploymentTypes'
+import TableInterviews from './Components/FC/TableInterviews'
+import TableJobOpenings from './Components/FC/TableJobOpenings'
+import TableWorkLocations from './Components/FC/TableWorkLocations'
 
 class HrRecruitmentApp extends App {
   init() {
     super.init();
-    globalThis.hubleto.registerReactComponent('HrRecruitmentTable', TableHrRecruitment);
-    globalThis.hubleto.registerReactComponent('HrRecruitmentEmploymentTypeTable', TableHrEmploymentType);
-    globalThis.hubleto.registerReactComponent('HrRecruitmentWorkLocationTable', TableHrWorkLocation);
+    globalThis.hubleto.registerReactComponent('HrRecruitmentTableApplications', TableApplications);
+    globalThis.hubleto.registerReactComponent('HrRecruitmentTableCandidates', TableCandidates);
+    globalThis.hubleto.registerReactComponent('HrRecruitmentTableEmploymentTypes', TableEmploymentTypes);
+    globalThis.hubleto.registerReactComponent('HrRecruitmentTableInterviews', TableInterviews);
+    globalThis.hubleto.registerReactComponent('HrRecruitmentTableJobOpenings', TableJobOpenings);
+    globalThis.hubleto.registerReactComponent('HrRecruitmentTableWorkLocations', TableWorkLocations);
   }
 }
 

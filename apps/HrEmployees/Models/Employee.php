@@ -18,6 +18,8 @@ class Employee extends \Hubleto\Erp\Model
 {
   public string $table = 'hr_employees';
   public string $recordManagerClass = RecordManagers\Employee::class;
+  public ?string $lookupSqlValue = 'concat(ifnull({%TABLE%}.employee_number, ""), " ", ifnull({%TABLE%}.first_name, ""), " ", ifnull({%TABLE%}.family_name, ""))';
+  public ?string $lookupUrlDetail = 'hr-employees/{%ID%}';
 
   public array $relations = [
     'USER' => [self::BELONGS_TO, User::class, 'id_user', 'id'],
@@ -35,6 +37,8 @@ class Employee extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_user' => (new Lookup($this, $this->translate('User account'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired(),
       'employee_number' => (new Varchar($this, $this->translate('Employee number')))->setDefaultVisible()->setRequired(),
+      'first_name' => (new Varchar($this, $this->translate('First name')))->setDefaultVisible(),
+      'family_name' => (new Varchar($this, $this->translate('Family name')))->setDefaultVisible(),
       'job_title' => (new Varchar($this, $this->translate('Job title')))->setDefaultVisible(),
       'id_team' => (new Lookup($this, $this->translate('Team'), Team::class))->setDefaultVisible(),
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect'),
@@ -45,7 +49,7 @@ class Employee extends \Hubleto\Erp\Model
       'id_work_location' => (new Lookup($this, $this->translate('Work location'), WorkLocation::class))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Employment notes'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), WorkflowModel::class))->setReadonly(),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Lifecycle step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
     ]);
   }
 
@@ -58,7 +62,7 @@ class Employee extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
-    $description->ui['addButtonText'] = $this->translate('Add employee profile');
+    $description->ui['addButtonText'] = $this->translate('Add employee');
     $description->addFilter('fEmployeeWorkflowStep', WorkflowModel::buildTableFilterForWorkflowSteps($this, $this->translate('Lifecycle step')));
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);

@@ -3,26 +3,24 @@ import Form from '@hubleto/react-ui/components/fc/Form';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 
-export interface FormHrLeaveTypeProps extends FormProps {}
-
-const componentName = 'FormHrLeaveType';
+const componentName = 'FormLeave';
 const parentApp = 'Hubleto/App/Community/HrLeave';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
-const FormHrLeaveType = (props: FormHrLeaveTypeProps) => <Form
+const FormLeave = (props: FormProps) => <Form
   componentName={componentName}
   parentApp={parentApp}
-  model={parentApp + '/Models/LeaveType'}
-  urlSlug='hr-leave/types'
-  title={{field: 'name', sub: T.translate('Leave type')}}
+  model={parentApp + '/Models/Leave'}
+  urlSlug='hr-leave/balances'
+  title={{field: 'year', sub: T.translate('Leave entitlement')}}
   tabs={{default: {content: () => <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-    <Input field='name' />
-    <Input field='annual_entitlement' />
-    <Input field='is_paid' />
-    <Input field='requires_approval' />
-    <Input field='description' />
+    <Input field='id_user' />
+    <Input field='id_leave_type' />
+    <Input field='year' />
+    <Input field='days_entitled' />
+    <Input field='days_carried_over' />
   </div>}}}
   {...props}
 />
 
-export default FormHrLeaveType;
+export default FormLeave;

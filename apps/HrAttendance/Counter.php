@@ -8,7 +8,7 @@ class Counter extends Core
 {
   public function unapprovedRecords(): int
   {
-    $mRecord = $this->getModel(Models\AttendanceRecord::class);
+    $mRecord = $this->getModel(Models\Attendance::class);
 
     return $mRecord->record->prepareReadQuery()
       ->where($mRecord->table . '.is_approved', false)

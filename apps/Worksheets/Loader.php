@@ -15,13 +15,10 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->router()->crud('worksheets', Controllers\Activities::class);
+    $this->router()->crud('worksheets/activity-types', Controllers\ActivityTypes::class);
+
     $this->router()->get([
-      '/^worksheets\/?$/' => Controllers\Activities::class,
-      '/^worksheets(\/(?<recordId>\d+))?\/?$/' => Controllers\Activities::class,
-      '/^worksheets\/add\/?$/' => ['controller' => Controllers\Activities::class, 'vars' => ['recordId' => -1]],
-
-      '/^worksheets\/activity-types\/?$/' => Controllers\ActivityTypes::class,
-
       '/^worksheets\/boards\/daily-chart\/?$/' => Controllers\Boards\DailyChart::class,
       '/^worksheets\/boards\/monthly-summary\/?$/' => Controllers\Boards\MonthlySummary::class,
       '/^worksheets\/api\/daily-activity-chart\/?$/' => Controllers\Api\DailyActivityChart::class,

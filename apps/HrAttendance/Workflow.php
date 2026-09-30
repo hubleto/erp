@@ -6,7 +6,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
 {
   public function loadItems(int $idWorkflow, array $filters): array
   {
-    $mRecord = $this->getModel(Models\AttendanceRecord::class);
+    $mRecord = $this->getModel(Models\Attendance::class);
     $items = $mRecord->record->prepareReadQuery()
       ->where('hr_attendance_records.id_workflow', $idWorkflow)
       ->with(['USER', 'WORKFLOW_STEP']);

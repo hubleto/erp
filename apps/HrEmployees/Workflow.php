@@ -22,7 +22,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
       $team = $item['TEAM'] ?? [];
       $items[$key]['_WORKFLOW_ITEM_TITLE'] = trim(($item['employee_number'] ?? '') . ' ' . ($user['nick'] ?? $user['email'] ?? ''));
       $items[$key]['_WORKFLOW_ITEM_SUBTITLE'] = trim(($item['job_title'] ?? '') . (empty($team['name']) ? '' : ' - ' . $team['name']));
-      $items[$key]['_DETAIL_URL'] = 'hr-employees/employees/' . $item['id'];
+      $items[$key]['_DETAIL_URL'] = 'hr-employees/' . $item['id'];
       $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:Workflow/WorkflowItemDetail.twig';
     }
 

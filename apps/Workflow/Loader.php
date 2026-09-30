@@ -23,6 +23,10 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->router()->crud('workflow/workflows', Controllers\Workflows::class);
+    $this->router()->crud('workflow/steps', Controllers\WorkflowSteps::class);
+    $this->router()->crud('workflow/automats', Controllers\Automats::class);
+
     $this->router()->get([
       '/^workflow\/api\/get-workflows\/?$/' => Controllers\Api\GetWorkflows::class,
       '/^workflow\/api\/get-workflow-step-by-tag\/?$/' => Controllers\Api\GetWorkflowStepByTag::class,
@@ -31,16 +35,6 @@ class Loader extends \Hubleto\Erp\App
 
       '/^workflow\/?$/' => Controllers\Home::class,
       '/^workflow\/(?<idWorkflow>\d+)\/?$/' => Controllers\Workflow::class,
-
-      '/^workflow\/workflows(\/(?<recordId>\d+))?\/?$/' => Controllers\Workflows::class,
-      '/^workflow\/workflows\/add\/?$/' => ['controller' => Controllers\Workflows::class, 'vars' => ['recordId' => -1]],
-
-      '/^workflow\/steps(\/(?<recordId>\d+))?\/?$/' => Controllers\WorkflowSteps::class,
-      '/^workflow\/steps\/add\/?$/' => ['controller' => Controllers\WorkflowSteps::class, 'vars' => ['recordId' => -1]],
-
-      '/^workflow\/automats(\/(?<recordId>\d+))?\/?$/' => Controllers\Automats::class,
-      '/^workflow\/automats\/add\/?$/' => ['controller' => Controllers\Automats::class, 'vars' => ['recordId' => -1]],
-
     ]);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);

@@ -12,12 +12,13 @@ use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Time;
 
-class AttendanceRecord extends \Hubleto\Erp\Model
+class Attendance extends \Hubleto\Erp\Model
 {
   public string $table = 'hr_attendance_records';
-  public string $recordManagerClass = RecordManagers\AttendanceRecord::class;
+  public string $recordManagerClass = RecordManagers\Attendance::class;
   public array $relations = [
     'USER' => [self::BELONGS_TO, User::class, 'id_user', 'id'],
+    'SHIFT' => [self::HAS_ONE, WorkflowModel::class, 'id', 'id_shift'],
     'WORKFLOW' => [self::HAS_ONE, WorkflowModel::class, 'id', 'id_workflow'],
     'WORKFLOW_STEP' => [self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step'],
   ];
@@ -32,8 +33,9 @@ class AttendanceRecord extends \Hubleto\Erp\Model
       'break_minutes' => (new Decimal($this, $this->translate('Break (minutes)')))->setDecimals(0)->setDefaultValue(0),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'notes' => (new Text($this, $this->translate('Notes'))),
-      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), WorkflowModel::class))->setReadonly(),
-      'id_workflow_step' => (new Lookup($this, $this->translate('Approval step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
+      'id_shift' => (new Lookup($this, $this->translate('Shift'), WorkflowModel::class)),
+      'id_workflow' => (new Lookup($this, $this->translate('Workflow'), WorkflowModel::class)),
+      'id_workflow_step' => (new Lookup($this, $this->translate('Approval step'), WorkflowStep::class))->setDefaultVisible(),
     ]);
   }
 

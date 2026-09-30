@@ -1,10 +1,12 @@
 import App from '@hubleto/react-ui/core/App'
-import TableHrAttendance from './Components/FC/TableHrAttendance'
+import TableAttendances from './Components/FC/TableAttendances'
+import TableShifts from './Components/FC/TableShifts'
 
 class HrAttendanceApp extends App {
   init() {
     super.init();
-    globalThis.hubleto.registerReactComponent('HrAttendanceTable', TableHrAttendance);
+    globalThis.hubleto.registerReactComponent('HrAttendanceTableAttendances', TableAttendances);
+    globalThis.hubleto.registerReactComponent('HrAttendanceTableShifts', TableShifts);
   }
 }
 

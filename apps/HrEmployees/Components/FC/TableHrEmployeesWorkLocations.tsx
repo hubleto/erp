@@ -2,10 +2,10 @@ import Table from '@hubleto/react-ui/components/fc/Table'
 import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces'
 import FormHrEmployeesWorkLocation from './FormHrEmployeesWorkLocation'
 
-const componentName = 'TableHrEmployeesWorkLocation'
+const componentName = 'TableHrEmployeesWorkLocations'
 const parentApp = 'Hubleto/App/Community/HrEmployees'
 
-const TableHrEmployeesWorkLocation = (props: TableProps) => <Table
+const TableHrEmployeesWorkLocations = (props: TableProps) => <Table
   componentName={componentName}
   parentApp={parentApp}
   model={parentApp + '/Models/WorkLocation'}
@@ -15,4 +15,4 @@ const TableHrEmployeesWorkLocation = (props: TableProps) => <Table
   {...props}
 />
 
-export default TableHrEmployeesWorkLocation
+export default TableHrEmployeesWorkLocations;

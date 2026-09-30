@@ -3,21 +3,21 @@ import Form from '@hubleto/react-ui/components/fc/Form';
 import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 
-export interface FormHrEmployeeProps extends FormProps {}
-
 const componentName = 'FormHrEmployee';
 const parentApp = 'Hubleto/App/Community/HrEmployees';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
-const FormHrEmployee = (props: FormHrEmployeeProps) => <Form
+const FormHrEmployee = (props: FormProps) => <Form
   componentName={componentName}
   parentApp={parentApp}
   model={parentApp + '/Models/Employee'}
-  urlSlug='hr-employees/employees'
+  urlSlug='hr-employees'
   title={{fields: ['employee_number', 'job_title'], sub: T.translate('Employee profile')}}
   tabs={{default: {content: () => <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
     <Input field='id_user' />
     <Input field='employee_number' />
+    <Input field='first_name' />
+    <Input field='family_name' />
     <Input field='job_title' />
     <Input field='id_team' />
     <Input field='id_manager' />

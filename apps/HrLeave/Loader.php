@@ -8,15 +8,9 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      '/^hr-leave\/?$/' => ['controller' => Controllers\Leave::class, 'vars' => ['resource' => 'requests']],
-      '/^hr-leave\/(?<resource>requests|types|balances)(\/(?<recordId>\d+))?\/?$/' => Controllers\Leave::class,
-    ]);
-
-    $menu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
-    if ($menu) {
-      $menu->addItem($this, 'hr-leave', $this->translate('Leave'), 'fas fa-umbrella-beach');
-    }
+    $this->router()->crud('hr-leave', Controllers\Leaves::class);
+    $this->router()->crud('hr-leave/leave-types', Controllers\LeaveTypes::class);
+    $this->router()->crud('hr-leave/leave-requests', Controllers\LeaveRequests::class);
 
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
     if ($calendarManager) {
@@ -49,8 +43,8 @@ class Loader extends \Hubleto\Erp\App
   public function installApp(int $round): void
   {
     if ($round === 1) {
+      $this->getModel(Models\Leave::class)->upgradeSchema();
       $this->getModel(Models\LeaveType::class)->upgradeSchema();
-      $this->getModel(Models\LeaveBalance::class)->upgradeSchema();
       $this->getModel(Models\LeaveRequest::class)->upgradeSchema();
     }
   }
@@ -82,7 +76,7 @@ class Loader extends \Hubleto\Erp\App
       $leaveTypes[] = $type;
     }
 
-    $mBalance = $this->getModel(Models\LeaveBalance::class);
+    $mBalance = $this->getModel(Models\Leave::class);
     $mRequest = $this->getModel(Models\LeaveRequest::class);
     $year = (int) date('Y');
 

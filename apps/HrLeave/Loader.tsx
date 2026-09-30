@@ -1,10 +1,14 @@
 import App from '@hubleto/react-ui/core/App'
-import TableHrLeave from './Components/FC/TableHrLeave'
+import TableLeaves from './Components/FC/TableLeaves'
+import TableLeaveRequests from './Components/FC/TableLeaveRequests'
+import TableLeaveTypes from './Components/FC/TableLeaveTypes'
 
 class HrLeaveApp extends App {
   init() {
     super.init();
-    globalThis.hubleto.registerReactComponent('HrLeaveTable', TableHrLeave);
+    globalThis.hubleto.registerReactComponent('HrLeaveTableLeaves', TableLeaves);
+    globalThis.hubleto.registerReactComponent('HrLeaveTableLeaveRequests', TableLeaveRequests);
+    globalThis.hubleto.registerReactComponent('HrLeaveTableLeaveTypes', TableLeaveTypes);
   }
 }
 

@@ -8,18 +8,10 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      '/^hr-employees\/?$/' => ['controller' => Controllers\Employees::class, 'vars' => ['resource' => 'employees']],
-      '/^hr-employees\/(?<resource>employees)(\/(?<recordId>\d+))?\/?$/' => Controllers\Employees::class,
-      '/^hr-employees\/employment-types(\/(?<recordId>\d+))?\/?$/' => Controllers\EmploymentTypes::class,
-      '/^hr-employees\/employment-statuses(\/(?<recordId>\d+))?\/?$/' => Controllers\EmploymentStatuses::class,
-      '/^hr-employees\/work-locations(\/(?<recordId>\d+))?\/?$/' => Controllers\WorkLocations::class,
-    ]);
-
-    $menu = $this->getService(\Hubleto\App\Community\Desktop\AppMenuManager::class);
-    if ($menu) {
-      $menu->addItem($this, 'hr-employees', $this->translate('Employees'), 'fas fa-id-card');
-    }
+    $this->router()->crud('hr-employees', Controllers\Employees::class);
+    $this->router()->crud('hr-employees/employment-types', Controllers\EmploymentTypes::class);
+    $this->router()->crud('hr-employees/employment-statuses', Controllers\EmploymentStatuses::class);
+    $this->router()->crud('hr-employees/work-locations', Controllers\WorkLocations::class);
 
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflowGroup($this, 'hr_employees', Workflow::class);
@@ -30,7 +22,6 @@ class Loader extends \Hubleto\Erp\App
     return '
       ' . $this->secondSidebarTitle() . '
       <div class="app-sidebar-buttons">
-        ' . $this->secondSidebarButton('hr-employees/employees', 'fas fa-id-card', 'Employees') . '
         ' . $this->secondSidebarButton('hr-employees/employment-types', 'fas fa-file-contract', 'Employment types') . '
         ' . $this->secondSidebarButton('hr-employees/employment-statuses', 'fas fa-user-check', 'Employment statuses') . '
         ' . $this->secondSidebarButton('hr-employees/work-locations', 'fas fa-location-dot', 'Work locations') . '
@@ -40,6 +31,7 @@ class Loader extends \Hubleto\Erp\App
 
   public function getSidebarBadgeNumber(): int
   {
+    /** @var Counter */
     $counter = $this->getService(Counter::class);
     return $counter->activeEmployees();
   }

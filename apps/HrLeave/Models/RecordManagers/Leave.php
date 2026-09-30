@@ -6,9 +6,9 @@ use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\HrLeave\Models\RecordManagers\LeaveType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class LeaveBalance extends \Hubleto\Erp\RecordManager
+class Leave extends \Hubleto\Erp\RecordManager
 {
-  public $table = 'hr_leave_balances';
+  public $table = 'hr_leaves';
 
   public function USER(): BelongsTo
   {

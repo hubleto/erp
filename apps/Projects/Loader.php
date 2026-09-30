@@ -15,28 +15,17 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
-    $this->router()->get([
-      // '/^projects\/api\/save-junction\/?$/' => Controllers\Api\SaveJunction::class,
+    $this->router()->crud('projects', Controllers\Projects::class);
+    $this->router()->crud('projects/tasks', Controllers\ProjectsTasks::class);
+    $this->router()->crud('projects/tasks/milestones', Controllers\MilestonesTasks::class);
+    $this->router()->crud('projects/orders', Controllers\ProjectsOrders::class);
+    $this->router()->crud('projects/milestones', Controllers\Milestones::class);
 
+    $this->router()->get([
       '/^projects\/api\/convert-deal-to-project\/?$/' => Controllers\Api\ConvertDealToProject::class,
       '/^projects\/api\/create-from-order\/?$/' => Controllers\Api\CreateFromOrder::class,
       '/^projects\/api\/get-statistics\/?$/' => Controllers\Api\GetStatistics::class,
       '/^projects\/api\/set-parent-order\/?$/' => Controllers\Api\SetParentOrder::class,
-
-      '/^projects(\/(?<recordId>\d+))?\/?$/' => Controllers\Projects::class,
-      '/^projects\/add?\/?$/' => ['controller' => Controllers\Projects::class, 'vars' => [ 'recordId' => -1 ]],
-
-      '/^projects\/tasks(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsTasks::class,
-      '/^projects\/tasks\/add?\/?$/' => ['controller' => Controllers\ProjectsTasks::class, 'vars' => [ 'recordId' => -1 ]],
-
-      '/^projects\/tasks\/milestones(\/(?<recordId>\d+))?\/?$/' => Controllers\MilestonesTasks::class,
-      '/^projects\/tasks\/milestones\/add?\/?$/' => ['controller' => Controllers\MilestonesTasks::class, 'vars' => [ 'recordId' => -1 ]],
-
-      '/^projects\/orders(\/(?<recordId>\d+))?\/?$/' => Controllers\ProjectsOrders::class,
-      '/^projects\/orders\/add?\/?$/' => ['controller' => Controllers\ProjectsOrders::class, 'vars' => [ 'recordId' => -1 ]],
-
-      '/^projects\/milestones(\/(?<recordId>\d+))?\/?$/' => Controllers\Milestones::class,
-      '/^projects\/milestones\/add?\/?$/' => ['controller' => Controllers\Milestones::class, 'vars' => [ 'recordId' => -1 ]],
 
       '/^projects\/monthly-summary\/?$/' => Controllers\MonthlySummary::class,
     ]);

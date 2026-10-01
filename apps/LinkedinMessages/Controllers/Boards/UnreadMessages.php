@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Controllers\Boards;
+namespace Hubleto\App\Community\LinkedinMessages\Controllers\Boards;
 
-use Hubleto\App\Custom\LinkedinMessages\Counter;
+use Hubleto\App\Community\LinkedinMessages\Counter;
 
 class UnreadMessages extends \Hubleto\Erp\Controller
 {

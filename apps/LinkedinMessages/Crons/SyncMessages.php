@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Crons;
+namespace Hubleto\App\Community\LinkedinMessages\Crons;
 
-use Hubleto\App\Custom\LinkedinMessages\Sync;
+use Hubleto\App\Community\LinkedinMessages\Sync;
 
 class SyncMessages extends \Hubleto\Erp\Cron
 {

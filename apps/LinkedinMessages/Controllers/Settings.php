@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Controllers;
+namespace Hubleto\App\Community\LinkedinMessages\Controllers;
 
-use Hubleto\App\Custom\LinkedinMessages\Client;
-use Hubleto\App\Custom\LinkedinMessages\Loader;
+use Hubleto\App\Community\LinkedinMessages\Client;
+use Hubleto\App\Community\LinkedinMessages\Loader;
 
 class Settings extends \Hubleto\Erp\Controller
 {

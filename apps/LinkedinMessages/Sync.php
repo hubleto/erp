@@ -1,11 +1,11 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages;
+namespace Hubleto\App\Community\LinkedinMessages;
 
 use Hubleto\Erp\Core;
-use Hubleto\App\Custom\LinkedinMessages\Models\Account;
-use Hubleto\App\Custom\LinkedinMessages\Models\Message;
-use Hubleto\App\Custom\LinkedinMessages\Models\Profile;
+use Hubleto\App\Community\LinkedinMessages\Models\Account;
+use Hubleto\App\Community\LinkedinMessages\Models\Message;
+use Hubleto\App\Community\LinkedinMessages\Models\Profile;
 
 /**
  * Pulls messages and sender profiles from LinkedIn and stores them in the app's own tables.

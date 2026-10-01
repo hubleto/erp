@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Controllers\Api;
+namespace Hubleto\App\Community\LinkedinMessages\Controllers\Api;
 
-use Hubleto\App\Custom\LinkedinMessages\Models\Message;
-use Hubleto\App\Custom\LinkedinMessages\Models\MessageActivity;
+use Hubleto\App\Community\LinkedinMessages\Models\Message;
+use Hubleto\App\Community\LinkedinMessages\Models\MessageActivity;
 
 class LogActivity extends \Hubleto\Erp\Controllers\ApiController
 {

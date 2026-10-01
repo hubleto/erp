@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Models;
+namespace Hubleto\App\Community\LinkedinMessages\Models;
 
 use Hubleto\Framework\Db\Column\Lookup;
 

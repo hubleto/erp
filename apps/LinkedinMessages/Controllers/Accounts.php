@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Controllers;
+namespace Hubleto\App\Community\LinkedinMessages\Controllers;
 
 class Accounts extends \Hubleto\Erp\Controller
 {

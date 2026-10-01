@@ -1,4 +1,4 @@
-namespace: Hubleto\App\Custom\LinkedinMessages
+namespace: Hubleto\App\Community\LinkedinMessages
 appType: custom
 monthlyPricePerUser: 0
 sidebarGroup: customer-acquisition

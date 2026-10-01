@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages;
+namespace Hubleto\App\Community\LinkedinMessages;
 
 class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Controllers\Api;
+namespace Hubleto\App\Community\LinkedinMessages\Controllers\Api;
 
-use Hubleto\App\Custom\LinkedinMessages\Client;
+use Hubleto\App\Community\LinkedinMessages\Client;
 
 class OauthConnect extends \Hubleto\Erp\Controllers\ApiController
 {

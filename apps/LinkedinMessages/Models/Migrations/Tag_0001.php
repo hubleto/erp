@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Models\Migrations;
+namespace Hubleto\App\Community\LinkedinMessages\Models\Migrations;
 
 use Hubleto\Framework\Migration;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages;
+namespace Hubleto\App\Community\LinkedinMessages;
 
 use Hubleto\App\Community\Auth\Models\User;
 

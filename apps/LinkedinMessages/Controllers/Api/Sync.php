@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Controllers\Api;
+namespace Hubleto\App\Community\LinkedinMessages\Controllers\Api;
 
-use Hubleto\App\Custom\LinkedinMessages\Models\Account;
-use Hubleto\App\Custom\LinkedinMessages\Sync as SyncService;
+use Hubleto\App\Community\LinkedinMessages\Models\Account;
+use Hubleto\App\Community\LinkedinMessages\Sync as SyncService;
 
 class Sync extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -13,7 +13,7 @@ class Sync extends \Hubleto\Erp\Controllers\ApiController
 
     /** @var Account */
     $mAccount = $this->getModel(Account::class);
-    /** @var \Hubleto\App\Custom\LinkedinMessages\Sync */
+    /** @var \Hubleto\App\Community\LinkedinMessages\Sync */
     $sync = $this->getService(SyncService::class);
 
     $query = $mAccount->record->prepareReadQuery();

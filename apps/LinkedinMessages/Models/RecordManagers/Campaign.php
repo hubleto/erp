@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages\Models\RecordManagers;
+namespace Hubleto\App\Community\LinkedinMessages\Models\RecordManagers;
 
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\Workflow\Models\RecordManagers\Workflow;

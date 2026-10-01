@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Custom\LinkedinMessages;
+namespace Hubleto\App\Community\LinkedinMessages;
 
 class Workflow extends \Hubleto\App\Community\Workflow\Workflow
 {

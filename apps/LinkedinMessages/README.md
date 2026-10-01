@@ -1,10 +1,10 @@
 # LinkedIn messages and followups (Hubleto custom app)
 
-Namespace `Hubleto\App\Custom\LinkedinMessages`, url slug `linkedin-messages`.
+Namespace `Hubleto\App\Community\LinkedinMessages`, url slug `linkedin-messages`.
 
 ## Install
 1. Unpack this archive into `src/apps` of your project, so that `src/apps/LinkedinMessages/Loader.php` exists.
-2. Run `php hubleto app install Hubleto\App\Custom\LinkedinMessages` (requires the Workflow and Calendar apps).
+2. Run `php hubleto app install Hubleto\App\Community\LinkedinMessages` (requires the Workflow and Calendar apps).
 3. Rebuild your React bundle so that `src/apps/LinkedinMessages/Loader.tsx` is included.
 
 ## Connect LinkedIn

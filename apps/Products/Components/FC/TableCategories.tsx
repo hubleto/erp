@@ -9,6 +9,8 @@ const TableCategories = (props: TableProps) => {
     parentApp='Hubleto/App/Community/Products'
     model='Hubleto/App/Community/Products/Models/Category'
     baseUrlSlug='products/categories'
+    // the tree has to be asked for in the first request - the server's description arrives with the data
+    description={{ui: {dataView: 'tree'}}}
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta) => <FormCategory {...table.getDefaultFormProps()} />}
     {...props}

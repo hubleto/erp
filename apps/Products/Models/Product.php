@@ -10,6 +10,7 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Exceptions\RecordSaveException;
 
 class Product extends \Hubleto\Erp\Model
 {
@@ -58,7 +59,7 @@ class Product extends \Hubleto\Erp\Model
     return self::BASE_MEASURE_SYMBOLS[$measure ?? self::BASE_MEASURE_COUNT] ?? 'pcs';
   }
 
-  protected function physicalFacts(?float $length, ?float $width, ?float $height, ?float $weight): array
+  protected function physicalFacts(?float $length, ?float $width, ?float $height, ?float $weight, ?float $netWeight = null): array
   {
     $volume = ($length > 0 && $width > 0 && $height > 0) ? $length * $width * $height : null;
     return array_filter([
@@ -66,7 +67,8 @@ class Product extends \Hubleto\Erp\Model
       $width > 0 ? $this->translate('width') . ' ' . $width . ' m' : null,
       $height > 0 ? $this->translate('height') . ' ' . $height . ' m' : null,
       $volume !== null ? $this->translate('volume') . ' ' . round($volume, 4) . ' m3' : null,
-      $weight > 0 ? $this->translate('weight') . ' ' . $weight . ' kg' : null,
+      $weight > 0 ? $this->translate('gross weight') . ' ' . $weight . ' kg' : null,
+      $netWeight > 0 ? $this->translate('net weight') . ' ' . $netWeight . ' kg' : null,
     ]);
   }
 
@@ -81,6 +83,32 @@ class Product extends \Hubleto\Erp\Model
     'CATEGORY' => [ self::HAS_ONE, Category::class, 'id', 'id_category'],
     'PACKAGING' => [ self::HAS_MANY, ProductPackaging::class, 'id_product', 'id'],
   ];
+
+  // Gross is the goods plus their sales packaging, so it cannot be the smaller of the two. The form
+  // shows the difference back as the packaging weight, but an import or the API reaches neither.
+  // Only guard the pair when both are filled in - either one alone is a legitimate half-entry.
+  public function validateWeights(array $record): void
+  {
+    $gross = (float) ($record['base_weight'] ?? 0);
+    $net = (float) ($record['base_net_weight'] ?? 0);
+    if ($gross > 0 && $net > 0 && $net > $gross) {
+      throw new RecordSaveException($this->translate('Net weight cannot be higher than gross weight.'));
+    }
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $record = parent::onBeforeCreate($record);
+    $this->validateWeights($record);
+    return $record;
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    $record = parent::onBeforeUpdate($record);
+    $this->validateWeights($record);
+    return $record;
+  }
 
   public function describeColumns(): array
   {
@@ -117,7 +145,11 @@ class Product extends \Hubleto\Erp\Model
       'notes' => new Text($this, $this->translate('Internal notes')),
       'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
       'base_measure' => (new Integer($this, $this->translate('Base unit')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::BASE_MEASURE_ENUM_VALUES))->setDefaultValue(self::BASE_MEASURE_COUNT)->setDefaultVisible(),
-      'base_weight' => (new Decimal($this, $this->translate('Base unit weight')))->setUnit('kg'),
+      // gross = goods + their own sales packaging; this is what ships and what loads a rack
+      'base_weight' => (new Decimal($this, $this->translate('Base unit gross weight')))->setUnit('kg')
+        ->setHint($this->translate('Weight of one base unit including its sales packaging. Used for shipping and warehouse load.')),
+      'base_net_weight' => (new Decimal($this, $this->translate('Base unit net weight')))->setUnit('kg')
+        ->setHint($this->translate('Weight of the goods alone, without any packaging. Used for labelling, recipes and customs.')),
       'base_length' => (new Decimal($this, $this->translate('Base unit length')))->setUnit('m'),
       'base_width' => (new Decimal($this, $this->translate('Base unit width')))->setUnit('m'),
       'base_height' => (new Decimal($this, $this->translate('Base unit height')))->setUnit('m'),
@@ -211,7 +243,7 @@ class Product extends \Hubleto\Erp\Model
       'Product description' => $product->description,
       'Product sales price' => $product->sales_price,
       'Product base unit' => $this->baseMeasureSymbol($product->base_measure),
-      'Product base unit size' => implode(', ', $this->physicalFacts($product->base_length, $product->base_width, $product->base_height, $product->base_weight)),
+      'Product base unit size' => implode(', ', $this->physicalFacts($product->base_length, $product->base_width, $product->base_height, $product->base_weight, $product->base_net_weight)),
       'Product sales margin' => $product->margin,
     ];
 

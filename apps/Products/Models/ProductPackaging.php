@@ -27,7 +27,10 @@ class ProductPackaging extends \Hubleto\Erp\Model
       'length' => (new Decimal($this, $this->translate('Length')))->setUnit('m'),
       'width' => (new Decimal($this, $this->translate('Width')))->setUnit('m'),
       'height' => (new Decimal($this, $this->translate('Height')))->setUnit('m'),
-      'weight' => (new Decimal($this, $this->translate('Weight')))->setUnit('kg'),
+      // What a STANDARD container of this level weighs empty for this product. Read back when a
+      // container's tare is derived from what is on it, so a change here moves warehouse weights.
+      'weight' => (new Decimal($this, $this->translate('Tare weight for this product')))->setUnit('kg')
+        ->setHint($this->translate('What an empty container of this level normally weighs for this product.')),
       'description' => (new Text($this, $this->translate('Package description'))),
     ]);
   }

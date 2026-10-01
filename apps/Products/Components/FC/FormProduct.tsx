@@ -35,38 +35,69 @@ const packageVolume = (physical: any): number => {
   return allPositive ? length * width * height : 0;
 };
 
+// Gross minus net is the sales packaging - the bag or bucket the goods never leave. Nothing
+// stores it, so showing it back is the only way a typo in either figure becomes visible.
+const salesPackagingWeight = (physical: any): number | null => {
+  const gross = parseFloat(physical.weight);
+  const net = parseFloat(physical.net_weight);
+  if (!isFinite(gross) || !isFinite(net) || gross <= 0 || net <= 0) return null;
+  return gross - net;
+};
+
 const DIMENSION_LABELS: Record<string, string> = { length: 'Length', width: 'Width', height: 'Height' };
 
-/** Dimensions, weight and an optional note - used for the base unit and for every packaging level. */
+/** Dimensions, weights and an optional note - used for the base unit and for every packaging level.
+ * weightFields: baseUnit = gross + net of the goods, tare = the empty container, none = no weight. */
 const PhysicalFields = (props: {
   physical: any,
   onFieldChange: (changedValues: any) => void,
   dimensions?: string[],
-  showWeight?: boolean,
+  weightFields?: 'baseUnit' | 'tare' | 'none',
   showNote?: boolean,
 }) => {
   const dimensions = props.dimensions ?? ['length', 'width', 'height'];
-  const showWeight = props.showWeight ?? true;
+  const weightFields = props.weightFields ?? 'baseUnit';
   const showNote = props.showNote ?? true;
   const volume = packageVolume(props.physical);
+  const salesPackaging = salesPackagingWeight(props.physical);
+
+  // gross + net make five fields next to three dimensions, so the row widens instead of wrapping
+  let weightFieldCount = 0;
+  if (weightFields === 'baseUnit') weightFieldCount = 2;
+  if (weightFields === 'tare') weightFieldCount = 1;
+  const isWide = dimensions.length + weightFieldCount >= 5;
+  const gridClass = isWide ? 'grid-cols-5' : 'grid-cols-4';
+  const fullRowClass = isWide ? 'col-span-5' : 'col-span-4';
 
   const numberField = (field: string, label: string, unit: string) => <div key={field}>
     <label className='text-sm text-gray-500'>{T.translate(label)} ({unit})</label>
     <Int
-      value={props.physical[field]}
+      value={props.physical[field] ?? ''}
       description={{decimals: 4}}
       onChange={(_input: any, value: any) => props.onFieldChange({[field]: value})}
     />
   </div>;
 
-  return <div className='grid grid-cols-4 gap-2 mt-1'>
+  return <div className={'grid ' + gridClass + ' gap-2 mt-1'}>
     {dimensions.map((field) => numberField(field, DIMENSION_LABELS[field], 'm'))}
-    {showWeight ? numberField('weight', 'Weight', 'kg') : null}
-    <div className='col-span-4 text-sm text-gray-500'>
+    {weightFields === 'baseUnit' ? numberField('weight', 'Gross weight', 'kg') : null}
+    {weightFields === 'baseUnit' ? numberField('net_weight', 'Net weight', 'kg') : null}
+    {weightFields === 'tare' ? numberField('weight', 'Tare weight for this product', 'kg') : null}
+    {dimensions.length > 0 ? <div className={fullRowClass + ' text-sm text-gray-500'}>
       {T.translate('Volume')}: <span className='font-bold'>{volume > 0 ? globalThis.hubleto.numberFormat(volume, 4) : '—'}</span> m³
       <span className='ml-1'>({T.translate('length × width × height')})</span>
-    </div>
-    {showNote ? <div className='col-span-4'>
+    </div> : null}
+    {/* the number stays on screen when it goes negative - how far below zero is the size of the typo */}
+    {weightFields === 'baseUnit' && salesPackaging !== null ? <div className={fullRowClass + ' flex items-center gap-2'}>
+      <div className='text-sm text-gray-500'>
+        {T.translate('Sales packaging tare')}: <span className='font-bold'>{globalThis.hubleto.numberFormat(salesPackaging, 4)}</span> kg
+        <span className='ml-1'>({T.translate('gross − net')})</span>
+      </div>
+      {salesPackaging < 0 ? <div className='badge badge-danger'>
+        {T.translate('Net weight is higher than gross weight.')}
+      </div> : null}
+    </div> : null}
+    {showNote ? <div className={fullRowClass}>
       <label className='text-sm text-gray-500'>{T.translate('Package note')}</label>
       <Varchar
         value={props.physical.description}
@@ -84,7 +115,7 @@ const BaseUnitCard = () => {
 
   // the card edits generic length/width/height/weight; the record stores them as base_*
   const editBaseUnit = (changedValues: any) => {
-    const columnByField: Record<string, string> = { length: 'base_length', width: 'base_width', height: 'base_height', weight: 'base_weight' };
+    const columnByField: Record<string, string> = { length: 'base_length', width: 'base_width', height: 'base_height', weight: 'base_weight', net_weight: 'base_net_weight' };
     const changes: any = {};
     for (const field of Object.keys(changedValues)) {
       changes[columnByField[field] ?? field] = changedValues[field];
@@ -97,16 +128,24 @@ const BaseUnitCard = () => {
     width: record.base_width,
     height: record.base_height,
     weight: record.base_weight,
+    net_weight: record.base_net_weight,
   };
   const note = (text: string) => <div className='badge badge-info'>{text}</div>;
 
   let body: React.JSX.Element;
   switch (baseUnitMeasure(record)) {
     case MEASURE_MASS:
-      body = note(T.translate('Measured by weight - one') + ' ' + symbol + ' ' + T.translate('has no fixed shape. Put the real box or bag size on a packaging level below.'));
+      // one kg weighs one kg, so nothing to enter - the warehouse derives the load from the quantity
+      body = note(T.translate('Measured by weight - one') + ' ' + symbol + ' ' + T.translate('has no fixed shape and weighs 1 kg, so warehouse load comes straight from the quantity. Put the real box or bag size on a packaging level below.'));
       break;
     case MEASURE_VOLUME:
-      body = note(T.translate('Measured by volume - one') + ' ' + symbol + ' ' + T.translate('has no fixed shape. Put the real container size on a packaging level below.'));
+      body = <>
+        {note(T.translate('Measured by volume - one') + ' ' + symbol + ' ' + T.translate('has no fixed shape. Put the real container size on a packaging level below.'))}
+        <p className='text-sm text-gray-500 mt-2'>
+          {T.translate('Weight cannot be derived from volume, so give the weight of one') + ' ' + symbol + ' ' + T.translate('or the warehouse counts this product as weightless.')}
+        </p>
+        <PhysicalFields physical={physical} onFieldChange={editBaseUnit} dimensions={[]} showNote={false} />
+      </>;
       break;
     case MEASURE_LENGTH:
       body = <>
@@ -135,8 +174,9 @@ const PackagingLevels = () => {
   const form = React.useContext(FormMetaContext);
   const record = useRecord();
   const [unitNameById, setUnitNameById] = useState<Record<string, string>>({});
+  const [unitTareById, setUnitTareById] = useState<Record<string, number>>({});
 
-  // unit names for the "N x <level below>" label; the lookup inputs load their own
+  // unit names for the "N x <level below>" label and unit tares for the computed weights
   useEffect(() => {
     request.post(
       globalThis.hubleto.config.defaultLookupEndpoint ?? 'api/record/lookup',
@@ -144,10 +184,13 @@ const PackagingLevels = () => {
       {},
       (data: any) => {
         const nameById: Record<string, string> = {};
+        const tareById: Record<string, number> = {};
         for (const id of Object.keys(data ?? {})) {
           nameById[id] = data[id]?._LOOKUP ?? '';
+          tareById[id] = parseFloat(data[id]?.tare_weight);
         }
         setUnitNameById(nameById);
+        setUnitTareById(tareById);
       }
     );
   }, []);
@@ -200,6 +243,52 @@ const PackagingLevels = () => {
   }
   const formatBaseUnits = (value: number) => globalThis.hubleto.numberFormat(value, Number.isInteger(value) ? 0 : 2);
 
+  // What one empty container of this level weighs: the per-product value, or the container type's default.
+  const levelOwnTare = (level: any): number | null => {
+    const ownWeight = parseFloat(level.weight);
+    if (isFinite(ownWeight) && ownWeight > 0) return ownWeight;
+    const unitTare = unitTareById[level.id_unit];
+    if (isFinite(unitTare) && unitTare > 0) return unitTare;
+    return null;
+  };
+
+  // A full container weighs its own packaging plus everything nested inside it. The base unit is
+  // not counted - its wrapper is already inside the base unit gross weight.
+  const cumulativeTares: Array<number | null> = [];
+  let runningTare: number | null = 0;
+  for (let position = 0; position < levels.length; position++) {
+    const level = levels[position];
+    const ownTare = levelOwnTare(level);
+    const qtyPerLower = parseFloat(level.qty_per_lower);
+    if (level._toBeDeleted_) {
+      cumulativeTares.push(null);
+      continue;
+    }
+    if (runningTare === null || ownTare === null) {
+      runningTare = null;
+      cumulativeTares.push(null);
+      continue;
+    }
+    if (position === 0) {
+      runningTare = ownTare;
+    } else if (!isFinite(qtyPerLower) || qtyPerLower <= 0) {
+      runningTare = null;
+    } else {
+      runningTare = ownTare + qtyPerLower * runningTare;
+    }
+    cumulativeTares.push(runningTare);
+  }
+
+  // What a full container of each level puts on the scale - the same sum a location's weight uses.
+  const baseUnitGross = parseFloat(record.base_weight);
+  const fullContainerWeights: Array<number | null> = [];
+  for (let position = 0; position < levels.length; position++) {
+    const baseUnits = baseUnitCounts[position];
+    const tare = cumulativeTares[position];
+    const known = baseUnits != null && tare != null && isFinite(baseUnitGross) && baseUnitGross > 0;
+    fullContainerWeights.push(known ? (baseUnits as number) * baseUnitGross + (tare as number) : null);
+  }
+
   const lowerLevelName = (position: number): string => {
     if (position === 0) return symbol;
     const levelBelow = levels[position - 1];
@@ -250,7 +339,7 @@ const PackagingLevels = () => {
               <div className='flex items-center gap-2'>
                 <div style={{width: '7rem'}}>
                   <Int
-                    value={level.qty_per_lower}
+                    value={level.qty_per_lower ?? ''}
                     description={{decimals: 4}}
                     onChange={(_input: any, value: any) => updateLevel(position, {qty_per_lower: value})}
                   />
@@ -272,7 +361,16 @@ const PackagingLevels = () => {
           <tr className={level._toBeDeleted_ ? 'bg-red-100' : ''}>
             <td></td>
             <td colSpan={4}>
-              <PhysicalFields physical={level} onFieldChange={(changedValues: any) => updateLevel(position, changedValues)} showWeight={false} />
+              <PhysicalFields physical={level} onFieldChange={(changedValues: any) => updateLevel(position, changedValues)} weightFields='tare' />
+              {fullContainerWeights[position] != null ? <div className='text-sm text-gray-500 mt-1'>
+                {T.translate('Full container weighs')}: <span className='font-bold'>{globalThis.hubleto.numberFormat(fullContainerWeights[position], 4)}</span> kg
+                <span className='ml-1'>
+                  ({formatBaseUnits(baseUnitCounts[position] as number)} {symbol} × {globalThis.hubleto.numberFormat(baseUnitGross, 4)} kg
+                  + {globalThis.hubleto.numberFormat(cumulativeTares[position], 4)} kg {T.translate('tare')})
+                </span>
+              </div> : cumulativeTares[position] != null ? <div className='text-sm text-gray-500 mt-1'>
+                {T.translate('Tare incl. inner packaging')}: <span className='font-bold'>{globalThis.hubleto.numberFormat(cumulativeTares[position], 4)}</span> kg
+              </div> : null}
             </td>
           </tr>
         </React.Fragment>)}

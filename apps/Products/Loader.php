@@ -26,7 +26,7 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'products', $this->translate('Products'), 'fas fa-cart-shopping');
     $appMenu->addItem($this, 'products/groups', $this->translate('Groups'), 'fas fa-burger');
     $appMenu->addItem($this, 'products/categories', $this->translate('Categories'), 'fas fa-tag');
-    $appMenu->addItem($this, 'products/units', $this->translate('Units'), 'fas fa-ruler');
+    $appMenu->addItem($this, 'products/units', $this->translate('Packaging units'), 'fas fa-ruler');
 
     $this->productTypes = $this->collectExtendibles('ProductTypes');
   }

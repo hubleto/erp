@@ -12,14 +12,18 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 /** TabDefault */
 const TabDefault = (props: FormMilestoneReportProps) => {
-  return <>
-    <Input field='id_milestone' />
-    <Input field='date_report' />
-    <Input field='summary' />
-    <Input field='details' />
-    <Input field='progress_percent' />
-    <Input field='id_reported_by' />
-  </>;
+  return <div className='flex-dyn gap-2'>
+    <div className='flex-2'>
+      <Input field='progress_percent' customInputProps={{cssClass: 'text-[2em]'}} />
+      <Input field='summary' />
+      <Input field='details' />
+    </div>
+    <div className='flex-1'>
+      <Input field='id_milestone' />
+      <Input field='date_report' />
+      <Input field='id_reported_by' />
+    </div>
+  </div>;
 }
 
 /** FormMilestoneReport */

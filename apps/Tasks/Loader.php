@@ -29,7 +29,7 @@ class Loader extends \Hubleto\Erp\App
     $workflowManager = $this->getService(\Hubleto\App\Community\Workflow\Manager::class);
     $workflowManager->addWorkflowGroup($this, 'tasks', Workflow::class);
 
-    /** @var \Hubleto\App\Community\Dashboards\ */
+    /** @var \Hubleto\App\Community\Dashboards\Manager */
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
     $boards->addBoard( $this, $this->translate('My recent tasks'), 'tasks/boards/my-recent-tasks');
 

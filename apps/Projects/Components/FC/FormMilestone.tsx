@@ -21,7 +21,6 @@ const TabDefault = (props: FormMilestoneProps) => {
       <Input field='id_responsible' />
       <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
       <Input field='date_due' />
-      <Input field='description' />
       {form.id > 0 ? <>
         <div className='grow card'>
           <div className='card-header'>{T.translate('Tasks')}</div>
@@ -35,6 +34,7 @@ const TabDefault = (props: FormMilestoneProps) => {
           </div>
         </div>
       </> : null}
+      <Input field='description' />
     </div>
     {form.id > 0 ? <>
       <div className='grow card'>

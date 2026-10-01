@@ -1,0 +1,58 @@
+<div class="flex">
+  <h1 class="app-main-title">{{ translate('LinkedIn messages') }}: {{ translate('Settings') }}</h1>
+  {% if viewParams.settingsSaved %}
+    <div class="badge badge-info text-sm ml-4">{{ translate('Settings saved.') }}</div>
+  {% endif %}
+</div>
+
+<div class="mt-10 w-1/2 m-auto">
+  {% if viewParams.oauthError %}
+    <div class="alert alert-danger mb-4">{{ viewParams.oauthError }}</div>
+  {% endif %}
+  <div class="alert alert-info mb-4">
+    {{ translate('Create an app in the LinkedIn Developer Portal and add this redirect URL to its OAuth settings:') }}
+    <br/><b>{{ viewParams.redirectUri }}</b>
+    <br/><br/>
+    {{ translate('Reading messages requires the "Member Data Portability" product on your LinkedIn app. Sending messages from this app requires LinkedIn partner access (scope w_messages). Without it, replies are saved and you send them manually on LinkedIn.') }}
+  </div>
+
+  <form id="settings-form" action="" method="POST" class="mt-2">
+    <input type="hidden" name="settingsChanged" value="1">
+    <table class="table-default">
+      <tbody>
+        <tr>
+          <td>{{ translate('Client ID') }}</td>
+          <td>
+            <input type="text" name="clientId" class="hubleto component input"
+              value="{{ viewParams.app.configAsString('clientId') }}" />
+          </td>
+        </tr>
+        <tr>
+          <td>{{ translate('Client secret') }}</td>
+          <td>
+            <input type="password" name="clientSecret" class="hubleto component input" autocomplete="new-password"
+              placeholder="{% if viewParams.clientSecretIsSet %}{{ translate('Secret is set. Leave empty to keep it.') }}{% endif %}" />
+          </td>
+        </tr>
+        <tr>
+          <td>{{ translate('Scopes') }}</td>
+          <td>
+            <input type="text" name="scopes" class="hubleto component input"
+              value="{{ viewParams.app.configAsString('scopes') ?: viewParams.defaultScopes }}" />
+          </td>
+        </tr>
+        <tr>
+          <td>{{ translate('LinkedIn API version') }}</td>
+          <td>
+            <input type="text" name="apiVersion" class="hubleto component input"
+              value="{{ viewParams.app.configAsString('apiVersion') ?: viewParams.defaultApiVersion }}" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-add mt-2">
+      <span class="icon"><i class="fas fa-save"></i></span>
+      <span class="text">{{ translate('Save settings') }}</span>
+    </button>
+  </form>
+</div>

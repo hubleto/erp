@@ -1,0 +1,12 @@
+<div class="flex flex-col p-2 text-sm font-normal">
+  <div class="flex gap-2">
+    <div class="bg-gray-50 p-1">
+      <div class="text-primary">{{ item.OWNER.nick ?? (item.OWNER.email ?? '?') }}</div>
+    </div>
+    <div>
+      <div class="font-bold">{{ item.name }}</div>
+      <div class="text-gray-400 text-xs">{{ item.goal|slice(0, 80) }}</div>
+    </div>
+  </div>
+  <div class="badge badge-small badge-blue">{{ item.virt_message_count }} {{ translate('messages') }}</div>
+</div>

@@ -1,0 +1,35 @@
+{% macro item(item) %}
+  <a href="linkedin-messages/{{ item.id }}" class="btn btn-list-item btn-transparent" target="_blank">
+    <span class="text max-h-none">
+      <b>{{ item['_LOOKUP[id_profile]'] }}</b>
+      {{ item.body|slice(0, 120) }}
+      <div class="badge badge-small badge-blue">@{{ item['_LOOKUP[id_owner]'] }}</div>
+      {% if item['_LOOKUP[id_campaign]'] %}<div class="badge badge-small badge-lime">{{ item['_LOOKUP[id_campaign]'] }}</div>{% endif %}
+    </span>
+  </a>
+{% endmacro %}
+
+<div class="flex flex-col gap-2 md:flex-row">
+  <div class="flex-1 flex flex-col gap-2 items-center">
+    <button
+      class="btn btn-transparent"
+      onclick="$('#{{ viewParams.panelUid }}_details').slideToggle()"
+    >
+      <div class="text-[3em] p-4 text-primary">{{ viewParams.total }}</div>
+    </button>
+    {{ viewParams.title }}
+  </div>
+</div>
+
+<div id="{{ viewParams.panelUid }}_details" style="display:none">
+  {% if viewParams.total == 0 %}
+    <div class="alert alert-info">{{ translate('Nothing to show.') }}</div>
+  {% else %}
+    <div class="{{ viewParams.titleCssClass }}">{{ viewParams.title }}</div>
+    <div class="list mt-2">
+      {% for item in viewParams.items %}
+        {{ _self.item(item) }}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

@@ -34,9 +34,6 @@
                 </span>
               </a>
             {% endif %}
-            {% if m.is_closed %}
-              <div class="btn btn-transparent btn-list-item"><span class="text line-through">{{ hubleto.locale().formatDateShort(m.date_due) }} {{ m.title }}</span></div>
-            {% endif %}
           {% endfor %}
         </div>
       {% endif %}
@@ -44,7 +41,7 @@
         {% if t.TASK.identifier > 0 %}
           <div class="text-sm">
             <span class="badge badge-primary">{{ t.TASK.identifier }}</span>
-            <span class="text-primary">{{ t.TASK.title }}</span>
+            <a class="text-primary" href="{{ config.projectUrl }}/tasks/{{ t.TASK.id }}" target="_blank">{{ t.TASK.title }}</a>
           </div>
         {% endif %}
       {% endfor %}

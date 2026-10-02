@@ -1,10 +1,10 @@
 import React from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
-import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormMeta, type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
-import { useRecord, useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
-import { FormRecord } from '@hubleto/react-ui/components/cc/Form';
+import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
+import { type FormRecord } from '@hubleto/react-ui/components/cc/Form';
 
 export interface FormItemProps extends FormProps {
   idOrder?: number,

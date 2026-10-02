@@ -1,5 +1,5 @@
 import Table from '@hubleto/react-ui/components/fc/Table'
-import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces'
+import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces'
 import FormGoal from './FormGoal'
 
 const componentName = 'TableGoals';

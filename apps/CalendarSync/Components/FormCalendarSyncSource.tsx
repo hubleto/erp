@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form, { FormProps, FormState } from '@hubleto/react-ui/components/cc/Form';
+import Form, { type FormProps, type FormState } from '@hubleto/react-ui/components/cc/Form';
 import FormInput from '@hubleto/react-ui/components/cc/FormInput';
 import Lookup from '@hubleto/react-ui/components/cc/Inputs/Lookup';
 

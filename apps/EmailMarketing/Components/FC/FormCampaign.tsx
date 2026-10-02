@@ -6,7 +6,7 @@ import Translator from "@hubleto/react-ui/core/Translator";
 import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
-import { FormProps, FormTabs } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
 

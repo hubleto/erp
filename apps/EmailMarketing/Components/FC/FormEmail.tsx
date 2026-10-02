@@ -5,7 +5,7 @@ import TableEmailClicks from '@hubleto/apps/EmailMarketing/Components/FC/TableEm
 import request from '@hubleto/react-ui/core/Request';
 import InputJsonKeyValue from "@hubleto/react-ui/components/fc/Inputs/JsonKeyValue";
 import moment from "moment";
-import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormMeta, type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';

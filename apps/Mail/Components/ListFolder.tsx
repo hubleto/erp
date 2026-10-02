@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import request from "@hubleto/react-ui/core/Request";
 import Table, { type TableProps, type TableState } from '@hubleto/react-ui/components/cc/Table';
-import Form, { FormProps } from '@hubleto/react-ui/components/cc/Form';
+import Form, { type FormProps } from '@hubleto/react-ui/components/cc/Form';
 import FormMail from './FormMail';
 import Spinner from '@hubleto/react-ui/components/cc/Spinner';
 import ModalForm from "@hubleto/react-ui/components/cc/ModalForm";

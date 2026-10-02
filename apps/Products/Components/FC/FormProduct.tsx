@@ -289,6 +289,30 @@ const PackagingLevels = () => {
     fullContainerWeights.push(known ? (baseUnits as number) * baseUnitGross + (tare as number) : null);
   }
 
+  // The full container's weight when the base unit weight is known, otherwise just the packaging.
+  const renderLevelWeight = (position: number): React.JSX.Element | null => {
+    const fullWeight = fullContainerWeights[position];
+    const tare = cumulativeTares[position];
+
+    if (fullWeight != null) {
+      return <div className='text-sm text-gray-500 mt-1'>
+        {T.translate('Full container weighs')}: <span className='font-bold'>{globalThis.hubleto.numberFormat(fullWeight, 4)}</span> kg
+        <span className='ml-1'>
+          ({formatBaseUnits(baseUnitCounts[position] as number)} {symbol} × {globalThis.hubleto.numberFormat(baseUnitGross, 4)} kg
+          + {globalThis.hubleto.numberFormat(tare, 4)} kg {T.translate('tare')})
+        </span>
+      </div>;
+    }
+
+    if (tare != null) {
+      return <div className='text-sm text-gray-500 mt-1'>
+        {T.translate('Tare incl. inner packaging')}: <span className='font-bold'>{globalThis.hubleto.numberFormat(tare, 4)}</span> kg
+      </div>;
+    }
+
+    return null;
+  };
+
   const lowerLevelName = (position: number): string => {
     if (position === 0) return symbol;
     const levelBelow = levels[position - 1];
@@ -362,15 +386,7 @@ const PackagingLevels = () => {
             <td></td>
             <td colSpan={4}>
               <PhysicalFields physical={level} onFieldChange={(changedValues: any) => updateLevel(position, changedValues)} weightFields='tare' />
-              {fullContainerWeights[position] != null ? <div className='text-sm text-gray-500 mt-1'>
-                {T.translate('Full container weighs')}: <span className='font-bold'>{globalThis.hubleto.numberFormat(fullContainerWeights[position], 4)}</span> kg
-                <span className='ml-1'>
-                  ({formatBaseUnits(baseUnitCounts[position] as number)} {symbol} × {globalThis.hubleto.numberFormat(baseUnitGross, 4)} kg
-                  + {globalThis.hubleto.numberFormat(cumulativeTares[position], 4)} kg {T.translate('tare')})
-                </span>
-              </div> : cumulativeTares[position] != null ? <div className='text-sm text-gray-500 mt-1'>
-                {T.translate('Tare incl. inner packaging')}: <span className='font-bold'>{globalThis.hubleto.numberFormat(cumulativeTares[position], 4)}</span> kg
-              </div> : null}
+              {renderLevelWeight(position)}
             </td>
           </tr>
         </React.Fragment>)}

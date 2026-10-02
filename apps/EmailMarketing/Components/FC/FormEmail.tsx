@@ -323,23 +323,21 @@ const TabLaunch = () => {
 
   const [emailLaunchInfo, setEmailLaunchInfo] = useState(null);
   const [launchResult, setLaunchResult] = useState(null);
-  const [recentlyContactedPeriod, setRecentlyContactedPeriod] = useState(1);
 
   const updateEmailLaunchInfo = () => {
-    setEmailLaunchInfo(null);
     request.post(
       'email-marketing/api/get-email-launch-info',
       {
         idEmail: form.id,
-        recentlyContactedPeriod: recentlyContactedPeriod,
       },
       {},
       (data: any) => {
         setEmailLaunchInfo(data);
       }
     );
-
   }
+
+  if (!emailLaunchInfo) updateEmailLaunchInfo();
 
   let invalidRecipientsCount = 0;
   let unsubscribedRecipientsCount = 0;
@@ -527,7 +525,7 @@ const TabLaunch = () => {
                 })}
               </tbody>
             </table>
-          : <div className='alert alert-warning'>{T.translate('Loading information about recipients and launch status.')}</div>}
+          : <div className='alert alert-warning'><Spinner></Spinner> {T.translate('Loading information about recipients and launch status.')}</div>}
         </div>
       </div>
     </div>

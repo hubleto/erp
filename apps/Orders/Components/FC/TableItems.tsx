@@ -70,7 +70,7 @@ const TableItems = (props: TableItemsProps) => {
                         idItem: data['id'],
                       },
                       (data: any) => {
-                        table.loadData();
+                        table.reload();
                       }
                     );
                   },

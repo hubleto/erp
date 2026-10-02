@@ -71,7 +71,7 @@ const TableMails = (props: TableMailsProps) => {
               idAccount: props.idAccount,
               idMailbox: props.idMailbox,
               idMail: row.id
-          }, (response: any) => { table.loadData(); })
+          }, (response: any) => { table.reload(); })
           }}
         >
           <span className="icon"><i className="fas fa-eye-slash"></i></span>
@@ -86,7 +86,7 @@ const TableMails = (props: TableMailsProps) => {
               idAccount: props.idAccount,
               idMailbox: props.idMailbox,
               idMail: row.id
-            }, (response: any) => { table.loadData(); })
+            }, (response: any) => { table.reload(); })
           }}
         >
           <span className="icon"><i className="fas fa-eye"></i></span>

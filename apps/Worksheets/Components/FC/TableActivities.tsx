@@ -2,7 +2,7 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormActivity, { FormActivityProps } from './FormActivity';
+import FormActivity from './FormActivity';
 
 interface TableActivitiesProps extends TableProps {
   idTask?: number,
@@ -23,9 +23,6 @@ const TableActivities = (props: TableActivitiesProps) => {
     baseUrlSlug='worksheets'
     formModalProps={{type: 'centered small theme-secondary'}}
     formDefaultValues={{id_task: props.idTask}}
-    // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
-    // renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => { return table.renderDefaultCell(columnName, column, data, options); }}
-    // renderActionsColumn={(table: TableMeta, row: any) => { return table.renderDefaultActionsColumn(row); }}
     renderFooter={(table: TableMeta) => {
       console.log('renderfooter');
       let workedTotal = 0;

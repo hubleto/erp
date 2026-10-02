@@ -2,7 +2,7 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormNotification, { FormNotificationProps } from './FormNotification';
+import FormNotification from './FormNotification';
 import request from '@hubleto/react-ui/core/Request';
 
 interface TableNotificationsProps extends TableProps {
@@ -44,7 +44,7 @@ const TableNotifications = (props: TableNotificationsProps) => {
             className="btn btn-small btn-transparent text-nowrap"
             onClick={(e) => {
               e.preventDefault();
-              request.get( "notifications/api/mark-as-unread", { idNotification: row.id }, (response: any) => { table.loadData(); } )
+              request.get( "notifications/api/mark-as-unread", { idNotification: row.id }, (response: any) => { table.reload(); } )
             }}
           >
             <span className="icon"><i className="fas fa-eye-slash"></i></span>
@@ -58,7 +58,7 @@ const TableNotifications = (props: TableNotificationsProps) => {
               request.get(
                 "notifications/api/mark-as-read",
                 { idNotification: row.id },
-                (response: any) => { table.loadData(); }
+                (response: any) => { table.reload(); }
               )
             }}
           >

@@ -2,7 +2,7 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormTodo, { FormTodoProps } from './FormTodo';
+import FormTodo from './FormTodo';
 
 const componentName = 'TableTodos'; // must be the same as the exported const
 const parentApp = 'Hubleto/App/Community/Tasks';

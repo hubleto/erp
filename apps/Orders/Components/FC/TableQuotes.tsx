@@ -1,8 +1,7 @@
 import React from 'react'
-import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormQuote, { FormQuoteProps } from './FormQuote';
+import FormQuote from './FormQuote';
 
 interface TableQuotesProps extends TableProps {
   idOrder?: number,

@@ -21,6 +21,6 @@ class Install extends \Hubleto\Erp\Cli\Agent\Command
     require_once($this->env()->projectFolder . "/ConfigEnv.php");
 
     $this->appManager()->installApp(1, $appNamespace, [], $forceInstall);
-    $this->terminal()->cyan("{$appNamespace} installed successfully.\n");
+    $this->terminal()->cyan("{$appNamespace} installed successfully. Run `npm run build` to compile its React components.\n");
   }
 }

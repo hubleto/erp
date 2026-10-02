@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormExtended, { FormExtendedProps, FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
+import FormExtended, { type FormExtendedProps, type FormExtendedState } from '@hubleto/react-ui/components/cc/FormExtended';
 import moment from 'moment';
 
 export interface FormSharedCalendarProps extends FormExtendedProps {

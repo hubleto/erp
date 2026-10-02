@@ -2,7 +2,7 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormContact, { FormContactProps } from './FormContact';
+import FormContact from './FormContact';
 import Spinner from '@hubleto/react-ui/components/fc/Spinner';
 
 interface TableContactsProps extends TableProps {

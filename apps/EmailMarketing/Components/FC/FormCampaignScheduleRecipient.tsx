@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';

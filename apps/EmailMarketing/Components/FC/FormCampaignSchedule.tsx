@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FormMeta, FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';

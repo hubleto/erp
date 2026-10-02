@@ -1,6 +1,6 @@
 import React from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import Divider from '@hubleto/react-ui/components/fc/FormComponents/Divider';

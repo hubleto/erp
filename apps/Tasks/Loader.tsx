@@ -3,7 +3,7 @@ import TableTasks from './Components/FC/TableTasks'
 import TableTodos from './Components/FC/TableTodos'
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
-import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
 class Tasks extends App {
   init() {

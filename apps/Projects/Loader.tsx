@@ -4,7 +4,7 @@ import TableProjects from "./Components/FC/TableProjects"
 import TableMilestones from './Components/FC/TableMilestones'
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
-import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 class ProjectsApp extends App {
   init() {
     super.init();

@@ -1,6 +1,6 @@
 import React from 'react'
 import Table from '@hubleto/react-ui/components/fc/Table';
-import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
+import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 import FormProduct from './FormProduct';
 
 interface TableProductsProps extends TableProps {

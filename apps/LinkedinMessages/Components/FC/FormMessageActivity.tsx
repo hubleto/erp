@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import MessageCalendarActivityForm from './MessageCalendarActivityForm';
 
 export interface FormMessageActivityProps extends FormProps {}

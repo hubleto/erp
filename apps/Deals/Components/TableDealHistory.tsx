@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table, { TableProps, TableState } from '@hubleto/react-ui/components/cc/Table';
+import Table, { type TableProps, type TableState } from '@hubleto/react-ui/components/cc/Table';
 
 interface TableDealHistoryProps extends TableProps {}
 interface TableDealHistoryState extends TableState {}

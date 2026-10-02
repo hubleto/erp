@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Table from '@hubleto/react-ui/components/fc/Table';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Translator from '@hubleto/react-ui/core/Translator';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 

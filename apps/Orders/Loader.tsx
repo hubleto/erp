@@ -6,7 +6,7 @@ import TableItems from "./Components/FC/TableItems"
 import TableQuotes from './Components/FC/TableQuotes';
 import OrderCalendarActivityForm from './Components/FC/OrderCalendarActivityForm';
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
-import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
 class OrdersApp extends App {
   init() {

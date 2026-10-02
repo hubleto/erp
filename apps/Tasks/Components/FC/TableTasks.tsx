@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
-import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
+import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 import FormTask, { FormTaskProps } from './FormTask';
 import FormActivity from '@hubleto/apps/Worksheets/Components/FC/FormActivity';
 import Modal from '@hubleto/react-ui/components/fc/Modal';

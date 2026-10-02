@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FormCampaign, { FormCampaignProps } from './FormCampaign';
 import Table from '@hubleto/react-ui/components/fc/Table';
-import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
+import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 import FormEmail, { FormEmailProps } from './FormEmail';
 
 interface TableEmailsProps extends TableProps {

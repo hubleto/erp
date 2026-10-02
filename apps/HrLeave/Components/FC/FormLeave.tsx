@@ -1,6 +1,6 @@
 import Translator from '@hubleto/react-ui/core/Translator';
 import Form from '@hubleto/react-ui/components/fc/Form';
-import { FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 
 const componentName = 'FormLeave';

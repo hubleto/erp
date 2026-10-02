@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FormCampaignScheduleRecipient, { FormCampaignScheduleRecipientProps } from './FormCampaignScheduleRecipient';
 import Table from '@hubleto/react-ui/components/fc/Table';
-import { TableMeta, TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
+import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 
 interface TableCampaignsSchedulesRecipientsProps extends TableProps {
   idCampaignSchedule?: number,

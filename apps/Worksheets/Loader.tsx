@@ -3,7 +3,7 @@ import App from '@hubleto/react-ui/core/App'
 import TableActivities from './Components/FC/TableActivities';
 import TableActivityTypes from './Components/FC/TableActivityTypes';
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
-import { FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 
 class WorksheetsApp extends App {
   init() {

@@ -6,7 +6,7 @@ import request from '@hubleto/react-ui/core/Request';
 import InputJsonKeyValue from "@hubleto/react-ui/components/fc/Inputs/JsonKeyValue";
 import moment from "moment";
 import { type FormMeta, type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
@@ -23,8 +23,8 @@ const TabDefault = () => {
   return <>
     <div className='w-full flex flex-col md:flex-row gap-2'>
       <div className='flex-4 border-r border-gray-100'>
+        <Input field='title' />
         <Input field='mail_subject' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
-        {/* <Input field='title' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} /> */}
         <Input field='id_sender_account' />
         <Input field='reply_to' />
         <Input field='mail_body' />

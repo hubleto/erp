@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect, useCallback} from 'react'
 import request from "@hubleto/react-ui/core/Request";
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import FormFile from './FormFile';
 import Spinner from '@hubleto/react-ui/components/fc/Spinner';
 import Modal from '@hubleto/react-ui/components/fc/Modal';

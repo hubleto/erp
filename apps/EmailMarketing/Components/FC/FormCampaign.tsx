@@ -3,7 +3,7 @@ import TableCampaignsSchedules from './TableCampaignsSchedules';
 import TableRecipients from './TableRecipients';
 import request from '@hubleto/react-ui/core/Request';
 import Translator from "@hubleto/react-ui/core/Translator";
-import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';

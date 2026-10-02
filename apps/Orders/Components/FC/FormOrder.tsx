@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createRef } from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
 import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import request from '@hubleto/react-ui/core/Request';

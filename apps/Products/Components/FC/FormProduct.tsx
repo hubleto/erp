@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Form, { type FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
+import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import TableProductSuppliers from './TableProductSuppliers';
 import Barcode from 'react-barcode';
 import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';

@@ -2,7 +2,7 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormTemplate, { FormTemplateProps } from './FormTemplate';
+import FormTemplate from './FormTemplate';
 
 interface TableTemplatesProps extends TableProps {}
 

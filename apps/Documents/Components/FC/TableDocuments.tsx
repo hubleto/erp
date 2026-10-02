@@ -2,12 +2,9 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormDocument, { FormDocumentProps } from './FormDocument';
+import FormDocument from './FormDocument';
 
 interface TableDocumentsProps extends TableProps {
-  // Delete or change, if your table shall be filterable
-  // by some field. Check prepareReadQuery() in model's
-  // record manager if appropriate filtering is applied.
   idSomeField?: number,
 }
 
@@ -24,7 +21,6 @@ const TableDocuments = (props: TableDocumentsProps) => {
     baseUrlSlug='documents'
     formModalProps={{type: 'right wider'}}
     formDefaultValues={{id_some_field: props.idSomeField}}
-    // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "hyperlink") {
         return <>

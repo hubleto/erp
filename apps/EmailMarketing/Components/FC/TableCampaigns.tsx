@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FormCampaign, { FormCampaignProps } from './FormCampaign';
+import FormCampaign from './FormCampaign';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 

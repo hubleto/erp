@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FormCampaignSchedule, { FormCampaignScheduleProps } from './FormCampaignSchedule';
+import FormCampaignSchedule from './FormCampaignSchedule';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 import request from '@hubleto/react-ui/core/Request';

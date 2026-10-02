@@ -1,7 +1,7 @@
 import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
-import { TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
+import { type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 
 interface TableItemsProps extends TableProps {
   idDeal?: number,

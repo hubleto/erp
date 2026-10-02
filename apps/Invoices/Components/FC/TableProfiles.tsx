@@ -2,7 +2,7 @@ import React from 'react'
 import Translator from '@hubleto/react-ui/core/Translator';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
-import FormProfile, { FormProfileProps } from './FormProfile';
+import FormProfile from './FormProfile';
 
 const componentName = 'TableProfiles'; // must be the same as the exported const
 const parentApp = 'Hubleto/App/Community/Invoices';

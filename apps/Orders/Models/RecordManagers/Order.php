@@ -172,6 +172,10 @@ class Order extends \Hubleto\Erp\RecordManager
       (array) ($filters['fOrderWorkflowStep'] ?? [])
     );
 
+    if (isset($filters["fOrderCustomer"]) && is_array($filters["fOrderCustomer"])) {
+      $query = $query->whereIn("orders.id_customer", $filters["fOrderCustomer"]);
+    }
+
     $fOrderClosed = $filters['fOrderClosed'] ?? 1;
     if ($fOrderClosed == 1) $query = $query->where("orders.is_closed", false);
     if ($fOrderClosed == 2) $query = $query->where("orders.is_closed", true);

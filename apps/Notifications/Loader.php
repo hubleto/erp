@@ -69,6 +69,22 @@ class Loader extends \Hubleto\Erp\App
     return $this->getService(Counter::class)->myUnread();
   }
 
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('notifications/settings', 'fas fa-cog', 'Settings') . '
+      </div>
+    ';
+  }
+
   // /**
   //  * [Description for getNotificationsCount]
   //  *

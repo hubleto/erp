@@ -12,7 +12,7 @@ const TableProfiles = (props: TableProps) => {
   return <Table
     componentName={componentName}
     parentApp={parentApp}
-    model={parentApp + '/Models/XXX'}
+    model={parentApp + '/Models/Profile'}
     baseUrlSlug='invoices/profiles'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta): React.JSX.Element => {

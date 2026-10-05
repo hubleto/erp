@@ -31,7 +31,7 @@ class Loader extends \Hubleto\Erp\App
 
     /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    $settingsApp->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'contacts/categories']);
+    // $settingsApp->addSetting($this, ['title' => $this->translate('Contact Categories'), 'icon' => 'fas fa-phone', 'url' => 'contacts/categories']);
     $settingsApp->addSetting($this, [
       'title' => $this->translate('Contact Tags'),
       'icon' => 'fas fa-tags',

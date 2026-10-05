@@ -37,11 +37,11 @@ class Loader extends \Hubleto\Erp\App
     $this->addSearchSwitch('p', 'projects');
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    $settingsApp->addSetting($this, [
-      'title' => 'Projects', // or $this->translate('Projects')
-      'icon' => 'fas fa-table',
-      'url' => 'settings/projects',
-    ]);
+    // $settingsApp->addSetting($this, [
+    //   'title' => 'Projects', // or $this->translate('Projects')
+    //   'icon' => 'fas fa-table',
+    //   'url' => 'settings/projects',
+    // ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);

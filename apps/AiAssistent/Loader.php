@@ -14,7 +14,7 @@ class Loader extends \Hubleto\Erp\App
     // Add app routes.
     $this->router()->get([
       '/^ai-assistant\/?$/' => Controllers\Home::class,
-      '/^settings\/ai-assistant\/?$/' => Controllers\Settings::class,
+      '/^ai-assistant\/settings\/?$/' => Controllers\Settings::class,
     ]);
     
     $this->router()->get([
@@ -28,7 +28,7 @@ class Loader extends \Hubleto\Erp\App
     // This will be displayed in the Settings app, under the "All settings" card.
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
     $settingsApp->addSetting($this, [
-      'title' => $this->translate('AIAssistant'),
+      'title' => $this->translate('AI Assistant'),
       'icon' => 'fas fa-robot',
       'url' => 'settings/ai-assistant',
     ]);
@@ -57,6 +57,22 @@ class Loader extends \Hubleto\Erp\App
   public function generateDemoData(): void
   {
     // Create any demo data to promote your app.
+  }
+
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('ai-assistant/settings', 'fas fa-cog', 'Settings') . '
+      </div>
+    ';
   }
 
 }

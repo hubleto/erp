@@ -48,11 +48,11 @@ class Loader extends \Hubleto\Erp\App
     $workflowManager->addWorkflowGroup($this, 'orders', Workflow::class);
 
     $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
-    $settingsApp->addSetting($this, [
-      'title' => $this->translate('Order states'),
-      'icon' => 'fas fa-file-lines',
-      'url' => 'orders/states',
-    ]);
+    // $settingsApp->addSetting($this, [
+    //   'title' => $this->translate('Order states'),
+    //   'icon' => 'fas fa-file-lines',
+    //   'url' => 'orders/states',
+    // ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);

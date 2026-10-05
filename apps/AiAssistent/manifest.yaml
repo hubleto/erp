@@ -2,7 +2,7 @@ namespace: Hubleto\App\Community\AiAssistent
 appType: community
 sidebarGroup: crm
 rootUrlSlug: ai-assistant
-name: AIAssistant
+name: AI Assistant
 icon: fas fa-robot
 author:
   name: "Hubleto"

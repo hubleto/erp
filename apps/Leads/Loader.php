@@ -38,11 +38,11 @@ class Loader extends \Hubleto\Erp\App
       'icon' => 'fas fa-tags',
       'url' => 'leads/tags',
     ]);
-    $settingsApp->addSetting($this, [
-      'title' => $this->translate('Lead Lost Reasons'),
-      'icon' => 'fas fa-tags',
-      'url' => 'leads/lost-reasons',
-    ]);
+    // $settingsApp->addSetting($this, [
+    //   'title' => $this->translate('Lead Lost Reasons'),
+    //   'icon' => 'fas fa-tags',
+    //   'url' => 'leads/lost-reasons',
+    // ]);
 
     /** @var \Hubleto\App\Community\Calendar\Manager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
@@ -141,6 +141,7 @@ class Loader extends \Hubleto\Erp\App
       <div class="app-sidebar-buttons">
         ' . $this->secondSidebarButton('leads/plan', 'fas fa-list-ol', 'Plan') . '
         ' . $this->secondSidebarButton('calendar?show=leads', 'fas fa-calendar-days', 'Calendar') . '
+        ' . $this->secondSidebarButton('leads/tags', 'fas fa-tag', 'Tags') . '
       </div>
     ';
   }

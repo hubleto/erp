@@ -155,6 +155,7 @@ class Loader extends \Hubleto\Erp\App
       <div class="app-sidebar-buttons">
         ' . $this->secondSidebarButton('deals/plan', 'fas fa-list-ol', 'Plan') . '
         ' . $this->secondSidebarButton('calendar?show=deals', 'fas fa-calendar-days', 'Calendar') . '
+        ' . $this->secondSidebarButton('deals/lost-reasons', 'fas fa-cog', 'Reasons for `Lost`') . '
       </div>
     ';
   }

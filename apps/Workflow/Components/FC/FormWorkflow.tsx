@@ -45,7 +45,7 @@ const FormWorkflow = (props: FormWorkflowProps) => {
   return <Form
     componentName={componentName}
     parentApp={parentApp}
-    model={parentApp + '/Models/XXX'}
+    model={parentApp + '/Models/Workflow'}
     urlSlug='workflow/workflows'
     endpointParams={{saveRelations: ['STEPS']}}
     title={{field: 'name', sub: T.translate('Workflow')}}

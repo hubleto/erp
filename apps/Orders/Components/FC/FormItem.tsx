@@ -95,7 +95,7 @@ const FormItem = (props: FormItemProps) => {
   return <Form
     componentName={componentName}
     parentApp={parentApp}
-    model={parentApp + '/Models/XXX'}
+    model={parentApp + '/Models/Item'}
     urlSlug='orders/items'
     endpointParams={{idOrder: props.idOrder}}
     onBeforeCopyRecord={(form: FormMeta, record: FormRecord) => {

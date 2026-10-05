@@ -16,7 +16,7 @@ const TableActivityTypes = (props: TableActivityTypesProps) => {
   return <Table
     componentName={componentName}
     parentApp={parentApp}
-    model={parentApp + '/Models/XXX'}
+    model={parentApp + '/Models/ActivityType'}
     endpointParams={{idSomeField: props.idSomeField}}
     baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
     formModalProps={{type: 'right wide'}}

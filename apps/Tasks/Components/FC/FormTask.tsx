@@ -89,7 +89,7 @@ const TabDefault = (props: FormTaskProps) => {
           </div>
         </div>
       </div>
-      {form.id <= 0 ? null : 
+      {form.id <= 0 ? null :
         <div className='flex-1 flex gap-2 flex-col'>
           <div className='text-2xl'>
             {globalThis.hubleto.numberFormat(virtWorkedHours, 2)} h
@@ -226,7 +226,7 @@ const FormTask = (props: FormTaskProps) => {
   return <Form
     componentName={componentName}
     parentApp={parentApp}
-    model={parentApp + '/Models/XXX'}
+    model={parentApp + '/Models/Task'}
     urlSlug='tasks'
     endpointParams={{saveRelations: ['TODO']}}
     // onAfterFormInitialized={(form: any) => {}}

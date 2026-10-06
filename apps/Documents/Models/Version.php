@@ -28,7 +28,7 @@ class Version extends \Hubleto\Erp\Model
       'uid' => (new Varchar($this, $this->translate('Uid')))->setRequired()->setReadonly()->setDefaultValue(\Hubleto\Framework\Helper::generateUuidV4()),
       'id_document' => (new Lookup($this, $this->translate("Document"), Document::class))->setRequired(),
       'version' => (new Integer($this, $this->translate('Version')))->setReadonly()->setDefaultVisible()->setHint($this->translate("Version number will be automatically added")),
-      'created_on' => (new DateTime($this, $this->translate('Created on')))->setReadonly()->setDefaultVisible(),
+      'created_on' => (new DateTime($this, $this->translate('Created on')))->setReadonly()->setDefaultVisible()->setDefaultValue(date("Y-m-d H:i:s")),
       'id_created_by' => (new Lookup($this, $this->translate("Created by"), User::class))->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
       'file' => (new ColumnFile($this, $this->translate('File')))->setDefaultVisible(),
     ]);

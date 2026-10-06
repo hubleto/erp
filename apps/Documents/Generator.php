@@ -243,6 +243,7 @@ class Generator extends \Hubleto\Erp\Core
           'record_id' => $recordId,
           'name' => $documentName,
           'id_created_by' => $this->authProvider()->getUserId(),
+          'created_on' => date("Y-m-d H:i:s"),
         ])['id'] ?? 0;
       }
 
@@ -251,6 +252,7 @@ class Generator extends \Hubleto\Erp\Core
         'name' => $outputFilename,
         'file' => $outputFilename,
         'id_created_by' => $this->authProvider()->getUserId(),
+        'created_on' => date("Y-m-d H:i:s"),
       ]);
 
       return $idDocument;

@@ -51,7 +51,7 @@ const TabDefault = (props: FormProjectProps) => {
             }}
           ></LookupInput>
           : <>
-            {ORDERS ? ORDERS.map((item, key) => {
+            {ORDERS && ORDERS.length > 0 ? ORDERS.map((item, key) => {
               if (!item.ORDER) return null;
               return (item.ORDER ? <a
                 key={key}
@@ -129,7 +129,7 @@ const TabDocuments = (props: FormProjectProps) => {
 
   try {
     let url = new URL(onlineDocumentationFolder);
-    
+
     if (
       url.hostname == 'drive.google.com'
       && url.pathname.indexOf('/drive/folders') == 0

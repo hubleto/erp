@@ -17,9 +17,9 @@ class Generator extends \Hubleto\Erp\Core
    * @param string $model
    * @param int $idTemplate
    * @param array $vars
-   * 
+   *
    * @return string
-   * 
+   *
    */
   public function renderTemplate(string $model, int $idTemplate, array $vars): string
   {
@@ -69,9 +69,9 @@ class Generator extends \Hubleto\Erp\Core
    * @param string $model
    * @param int $recordId
    * @param int $idTemplate
-   * 
+   *
    * @return string
-   * 
+   *
    */
   public function getPreviewHtml(string $model, int $recordId, int $idTemplate): string
   {
@@ -92,9 +92,9 @@ class Generator extends \Hubleto\Erp\Core
    *
    * @param string $model
    * @param int $recordId
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function getPreviewVars(string $model, int $recordId): array
   {
@@ -117,9 +117,9 @@ class Generator extends \Hubleto\Erp\Core
    * @param string $model
    * @param int $recordId
    * @param string $documentName
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function generatePdf(string $model, int $recordId, string $documentName): array
   {
@@ -150,7 +150,7 @@ class Generator extends \Hubleto\Erp\Core
 
     return [$idDocument, $outputFilename];
   }
-  
+
   /**
    * Generates PDF document from template and returns ID of the generated document.
    *
@@ -160,9 +160,9 @@ class Generator extends \Hubleto\Erp\Core
    * @param int $idTemplate ID of template to be used for generating the document.
    * @param string $outputFilename Name of the file to be generated.
    * @param array $vars Variable values to be replaced in template.
-   * 
+   *
    * @return int ID of generated document (0 if $createDocumentEntry == false)
-   * 
+   *
    */
   public function generatePdfDocumentFromTemplate(
     string $documentName,
@@ -234,7 +234,7 @@ class Generator extends \Hubleto\Erp\Core
         ->where('model', $model)
         ->where('record_id', $recordId)
         ->first();
-      
+
       if ($document) {
         $idDocument = $document->id;
       } else {
@@ -242,6 +242,7 @@ class Generator extends \Hubleto\Erp\Core
           'model' => $model,
           'record_id' => $recordId,
           'name' => $documentName,
+          'id_created_by' => $this->authProvider()->getUserId(),
         ])['id'] ?? 0;
       }
 
@@ -249,6 +250,7 @@ class Generator extends \Hubleto\Erp\Core
         'id_document' => $idDocument,
         'name' => $outputFilename,
         'file' => $outputFilename,
+        'id_created_by' => $this->authProvider()->getUserId(),
       ]);
 
       return $idDocument;
@@ -266,9 +268,9 @@ class Generator extends \Hubleto\Erp\Core
    * @param int $idTemplate
    * @param string $outputFilename
    * @param array $vars
-   * 
+   *
    * @return int
-   * 
+   *
    */
   public function createPdfDocumentFromTemplate(
     string $documentName,

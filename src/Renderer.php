@@ -119,6 +119,7 @@ class Renderer extends \Hubleto\Framework\Services\Renderer
 
       if ($controllerObject->requiresAuthenticatedUser) {
         if (!$authProvider->isUserInSession()) {
+          $this->logger()->info("User not authenticated => SignIn.");
           $controllerObject = $this->getController(SignIn::class);
         }
       }

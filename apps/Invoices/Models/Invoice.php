@@ -77,7 +77,7 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for describeColumns]
    *
    * @return array
-   * 
+   *
    */
   public function describeColumns(): array
   {
@@ -90,7 +90,11 @@ class Invoice extends \Hubleto\Erp\Model {
         self::OUTBOUND_INVOICE => 'bg-yellow-50 text-slate-700',
       ])->setDefaultValue(self::OUTBOUND_INVOICE)->setDefaultVisible(),
       'id_profile' => (new Lookup($this, $this->translate('Invoicing profile'), Profile::class))->setDefaultVisible(),
-      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible(),
+      'id_issued_by' => (new Lookup($this, $this->translate('Issued by'), User::class))
+        ->setReactComponent('InputUserSelect')
+        ->setDefaultVisible()
+        ->setDefaultValue($this->authProvider()->getUserId())
+      ,
       'id_payment_method' => (new Lookup($this, $this->translate('Payment method'), PaymentMethod::class)),
 
       // used for outbound invoices
@@ -99,7 +103,7 @@ class Invoice extends \Hubleto\Erp\Model {
       // used for inbound invoices
       'id_supplier' => (new Lookup($this, $this->translate('Supplier'), Supplier::class))->setDefaultVisible(),
 
-      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::TYPES))->setRequired()->setDefaultValue(3)->setDefaultVisible()->setEnumCssClasses([
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::TYPES))->setRequired()->setDefaultValue(self::TYPE_STANDARD)->setDefaultVisible()->setEnumCssClasses([
         self::TYPE_PROFORMA => 'bg-blue-50 text-slate-700',
         self::TYPE_ADVANCE => 'bg-lime-50 text-slate-700',
         self::TYPE_STANDARD => 'bg-green-50 text-slate-700',
@@ -113,7 +117,7 @@ class Invoice extends \Hubleto\Erp\Model {
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
-      'date_issue' => (new Date($this, $this->translate('Issued')))->setDefaultVisible(),
+      'date_issue' => (new Date($this, $this->translate('Issued')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s')),
       'date_delivery' => (new Date($this, $this->translate('Delivered'))),
       'date_due' => (new Date($this, $this->translate('Due')))->setDefaultVisible(),
       'date_payment' => (new Date($this, $this->translate('Paid')))->setDefaultVisible(),
@@ -160,7 +164,7 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for describeTable]
    *
    * @return \Hubleto\Framework\Description\Table
-   * 
+   *
    */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
@@ -247,16 +251,11 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for describeForm]
    *
    * @return \Hubleto\Framework\Description\Form
-   * 
+   *
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
-    $description->defaultValues = [
-      'id_issued_by' => $this->authProvider()->getUserId(),
-      'issued' => date('Y-m-d H:i:s'),
-      'type' => self::TYPE_STANDARD,
-    ];
     return $description;
   }
 
@@ -274,9 +273,9 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for recalculateTotalsForInvoice]
    *
    * @param int $idInvoice
-   * 
+   *
    * @return void
-   * 
+   *
    */
   public function recalculateTotalsForInvoice(int $idInvoice): void
   {
@@ -330,9 +329,9 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for onBeforeCreate]
    *
    * @param array $record
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onBeforeCreate(array $record): array
   {
@@ -357,8 +356,8 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $record['id_profile'] = $idProfile;
 
-    if ($record['inbound_outbound'] <= 0) $record['inbound_outbound'] = self::INBOUND_INVOICE;
-    if ($record['type'] <= 0) $record['type'] = self::TYPE_STANDARD;
+    if (isset($record['inbound_outbound']) && $record['inbound_outbound'] <= 0) $record['inbound_outbound'] = self::INBOUND_INVOICE;
+    if (isset($record['type']) && $record['type'] <= 0) $record['type'] = self::TYPE_STANDARD;
     if ($idTemplate <= 0) $record['id_template'] = (int) ($profile['id_template'] ?? 0);
     if ($idPaymentMethod <= 0) $record['id_payment_method'] = (int) ($profile['id_payment_method'] ?? 0);
 
@@ -382,9 +381,9 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for onAfterCreate]
    *
    * @param array $savedRecord
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onAfterCreate(array $savedRecord): array
   {
@@ -403,9 +402,9 @@ class Invoice extends \Hubleto\Erp\Model {
    *
    * @param array $originalRecord
    * @param array $savedRecord
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
@@ -420,9 +419,9 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for onAfterLoadRecord]
    *
    * @param array $record
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onAfterLoadRecord(array $record): array {
     $vatPercent = 20;
@@ -459,9 +458,9 @@ class Invoice extends \Hubleto\Erp\Model {
    * Generates invoice and return ID of generated invoice
    *
    * @param InvoiceInterface $invoice
-   * 
+   *
    * @return int ID of generated invoice
-   * 
+   *
    */
   public function generateInvoice(Dto\Invoice $invoice): int
   {
@@ -487,9 +486,9 @@ class Invoice extends \Hubleto\Erp\Model {
    * [Description for getDocumentPreviewVars]
    *
    * @param int $idInvoice
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function getDocumentPreviewVars(int $idInvoice, $relations = []): array
   {

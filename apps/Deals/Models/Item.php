@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Deals\Models;
 
+use Hubleto\App\Community\Deals\Loader as DealsApp;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
@@ -9,6 +10,7 @@ use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\App\Community\Products\Services\PriceCalculator;
 use Hubleto\App\Community\Products\Models\Product;
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
 class Item extends \Hubleto\Erp\Model
 {
@@ -52,6 +54,27 @@ class Item extends \Hubleto\Erp\Model
   }
 
   /**
+   * [Description for getPriceCalculatorService]
+   *
+   * @return PriceCalculatorInterface
+   * 
+   */
+  public function getPriceCalculatorService(): PriceCalculatorInterface
+  {
+    $priceCalculatorService = $this->config()->forApp(DealsApp::class)->getAsString('priceCalculatorService');
+
+    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService($priceCalculatorService);
+    } else {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService(PriceCalculator::class);
+    }
+
+    return $calculator;
+  }
+
+  /**
    * [Description for recalculatePricesInRecord]
    *
    * @param array $record
@@ -61,7 +84,7 @@ class Item extends \Hubleto\Erp\Model
    */
   public function recalculatePricesInRecord(array $record): array
   {
-    $calculator = $this->getService(PriceCalculator::class);
+    $calculator = $this->getPriceCalculatorService();
 
     $record["price_excl_vat"] = $calculator->calculatePriceExcludingVat(
       (float) ($record["unit_price"] ?? 0),

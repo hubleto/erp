@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Invoices\Models;
 
+use Hubleto\App\Community\Invoices\Loader as InvoicesApp;
 use Hubleto\App\Community\Invoices\Services\PriceCalculator;
 use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\Framework\Db\Column\Lookup;
@@ -12,6 +13,7 @@ use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\App\Community\Customers\Models\Customer;
 
 use Hubleto\App\Community\Orders\Models\Item as OrderItem;
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
 class Item extends \Hubleto\Erp\Model
 {
@@ -146,6 +148,27 @@ class Item extends \Hubleto\Erp\Model
   {
     return 1;
   }
+  
+  /**
+   * [Description for getPriceCalculatorService]
+   *
+   * @return PriceCalculatorInterface
+   * 
+   */
+  public function getPriceCalculatorService(): PriceCalculatorInterface
+  {
+    $priceCalculatorService = $this->config()->forApp(InvoicesApp::class)->getAsString('priceCalculatorService');
+
+    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService($priceCalculatorService);
+    } else {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService(PriceCalculator::class);
+    }
+
+    return $calculator;
+  }
 
   /**
    * [Description for recalculatePrices]
@@ -159,8 +182,8 @@ class Item extends \Hubleto\Erp\Model
   {
     if ($idItem <= 0) return;
 
-    /** @var PriceCalculator */
-    $calculator = $this->getService(PriceCalculator::class);
+    $calculator = $this->getPriceCalculatorService();
+
     $item = $this->record->where('invoice_items.id', $idItem)->first();
 
     $priceExclVat = $calculator->calculatePriceExcludingVat(

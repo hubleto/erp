@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Invoices\Models;
 
-use Hubleto\App\Community\Invoices\PriceCalculator;
+use Hubleto\App\Community\Invoices\Services\PriceCalculator;
 use Hubleto\App\Community\Orders\Models\Order;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -175,8 +175,8 @@ class Item extends \Hubleto\Erp\Model
     $priceInclVat = $calculator->calculatePriceIncludingVat(
       (float) $item->unit_price,
       (float) $item->amount,
-      (float) $item->vat,
-      (float) $item->discount
+      (float) $item->discount,
+      (float) $item->vat
     );
 
     $this->record->find($idItem)->update([

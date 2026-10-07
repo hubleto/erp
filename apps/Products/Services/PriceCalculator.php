@@ -1,8 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\Products\Controllers\Api;
+namespace Hubleto\App\Community\Products\Services;
 
-class CalculatePrice extends \Hubleto\Erp\Controllers\ApiController
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
+
+class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterface
 {
   // SINGLE PRODUCT FUNCTIONS
   public function calculateFullPrice(float $unitPrice, float $amount): float
@@ -20,18 +22,18 @@ class CalculatePrice extends \Hubleto\Erp\Controllers\ApiController
     return $fullPrice * (1 - $discount / 100);
   }
 
-  public function calculatePriceExcludingVat(float $unitPrice, float $amount, float $discount = 0): float
+  public function calculatePriceExcludingVat(float $unitPrice, float $amount, float $discountPercent = 0): float
   {
     $fullPrice = $this->calculateFullPrice($unitPrice, $amount);
-    $finalPrice = $this->calculateDiscountedPrice($fullPrice, $discount);
+    $finalPrice = $this->calculateDiscountedPrice($fullPrice, $discountPercent);
 
     return $finalPrice;
   }
 
-  public function calculatePriceIncludingVat(float $unitPrice, float $amount, float $vat = 0, float $discount = 0): float
+  public function calculatePriceIncludingVat(float $unitPrice, float $amount, float $discountPercent = 0, float $vatPercent = 0): float
   {
-    $priceExclVat = $this->calculatePriceExcludingVat($unitPrice, $amount, $discount);
-    $finalPrice = $priceExclVat + $this->calculateVat($priceExclVat, $vat);
+    $priceExclVat = $this->calculatePriceExcludingVat($unitPrice, $amount, $discountPercent);
+    $finalPrice = $priceExclVat + $this->calculateVat($priceExclVat, $vatPercent);
 
     return $finalPrice;
   }

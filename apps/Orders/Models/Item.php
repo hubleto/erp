@@ -11,7 +11,7 @@ use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\App\Community\Products\Models\Product;
-use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
+use Hubleto\App\Community\Products\Services\PriceCalculator;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Invoices\Models\Item as InvoiceItem;
 
@@ -173,6 +173,33 @@ class Item extends \Hubleto\Erp\Model
   }
 
   /**
+   * [Description for recalculatePricesInRecord]
+   *
+   * @param array $record
+   * 
+   * @return array
+   * 
+   */
+  public function recalculatePricesInRecord(array $record): array
+  {
+    $calculator = $this->getService(PriceCalculator::class);
+
+    $record["price_excl_vat"] = $calculator->calculatePriceExcludingVat(
+      (float) ($record["unit_price"] ?? 0),
+      (float) ($record["amount"] ?? 0),
+      (float) ($record["discount"] ?? 0)
+    );
+    $record["price_incl_vat"] = $calculator->calculatePriceIncludingVat(
+      (float) ($record["unit_price"] ?? 0),
+      (float) ($record["amount"] ?? 0),
+      (float) ($record["discount"] ?? 0),
+      (float) ($record["vat"] ?? 0)
+    );
+
+    return $record;
+  }
+
+  /**
    * [Description for onBeforeCreate]
    *
    * @param array $record
@@ -182,17 +209,7 @@ class Item extends \Hubleto\Erp\Model
    */
   public function onBeforeCreate(array $record): array
   {
-    $record["price_excl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceExcludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
-    $record["price_incl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceIncludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["vat"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
+    $record = $this->recalculatePricesInRecord($record);
     return parent::onBeforeCreate($record);
   }
 
@@ -206,17 +223,7 @@ class Item extends \Hubleto\Erp\Model
    */
   public function onBeforeUpdate(array $record): array
   {
-    $record["price_excl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceExcludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
-    $record["price_incl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceIncludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["vat"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
+    $record = $this->recalculatePricesInRecord($record);
     return parent::onBeforeUpdate($record);
   }
 }

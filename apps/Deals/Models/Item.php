@@ -7,7 +7,7 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
-use Hubleto\App\Community\Products\Controllers\Api\CalculatePrice;
+use Hubleto\App\Community\Products\Services\PriceCalculator;
 use Hubleto\App\Community\Products\Models\Product;
 
 class Item extends \Hubleto\Erp\Model
@@ -51,35 +51,42 @@ class Item extends \Hubleto\Erp\Model
     return $description;
   }
 
+  /**
+   * [Description for recalculatePricesInRecord]
+   *
+   * @param array $record
+   * 
+   * @return array
+   * 
+   */
+  public function recalculatePricesInRecord(array $record): array
+  {
+    $calculator = $this->getService(PriceCalculator::class);
+
+    $record["price_excl_vat"] = $calculator->calculatePriceExcludingVat(
+      (float) ($record["unit_price"] ?? 0),
+      (float) ($record["amount"] ?? 0),
+      (float) ($record["discount"] ?? 0)
+    );
+    $record["price_incl_vat"] = $calculator->calculatePriceIncludingVat(
+      (float) ($record["unit_price"] ?? 0),
+      (float) ($record["amount"] ?? 0),
+      (float) ($record["discount"] ?? 0),
+      (float) ($record["vat"] ?? 0)
+    );
+
+    return $record;
+  }
+
   public function onBeforeCreate(array $record): array
   {
-    $record["price_excl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceExcludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
-    $record["price_incl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceIncludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["vat"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
+    $record = $this->recalculatePricesInRecord($record);
     return parent::onBeforeCreate($record);
   }
 
   public function onBeforeUpdate(array $record): array
   {
-    $record["price_excl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceExcludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
-    $record["price_incl_vat"] = ($this->getService(CalculatePrice::class))->calculatePriceIncludingVat(
-      (float) ($record["unit_price"] ?? 0),
-      (float) ($record["amount"] ?? 0),
-      (float) ($record["vat"] ?? 0),
-      (float) ($record["discount"] ?? 0)
-    );
+    $record = $this->recalculatePricesInRecord($record);
     return parent::onBeforeUpdate($record);
   }
 }

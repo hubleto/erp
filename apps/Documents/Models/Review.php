@@ -53,10 +53,8 @@ class Review extends \Hubleto\Erp\Model
     if (!isset($record['uid'])) {
       $record['uid'] = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
     }
-    // $record['requested_on'] = date('Y-m-d H:i:s');
-    // $record['id_requested_by'] = $this->authProvider()->getUserId();
 
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   public function getRelationsIncludedInLoadFormData(): array|null

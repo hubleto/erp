@@ -155,7 +155,7 @@ class Recipient extends \Hubleto\Erp\Model
     $mCampaignScheduleRecipient->record->where('id_recipient', $id)->delete();
     $mMail->record->whereIn('id', $idMails)->delete();
 
-    return 0;
+    return parent::onBeforeDelete($id);;
   }
 
 }

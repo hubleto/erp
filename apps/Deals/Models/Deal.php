@@ -407,7 +407,7 @@ class Deal extends \Hubleto\Erp\Model
       }
     }
 
-    return $record;
+    return parent::onBeforeUpdate($record);
   }
 
   /**

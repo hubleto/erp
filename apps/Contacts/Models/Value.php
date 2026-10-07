@@ -69,13 +69,13 @@ class Value extends \Hubleto\Erp\Model
   public function onBeforeCreate(array $record): array
   {
     $record['type'] = $this->getTypeFromValue($record['value']);
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   public function onBeforeUpdate(array $record): array
   {
     $record['type'] = $this->getTypeFromValue($record['value']);
-    return $record;
+    return parent::onBeforeUpdate($record);
   }
 
 }

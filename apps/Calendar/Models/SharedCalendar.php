@@ -39,7 +39,7 @@ class SharedCalendar extends \Hubleto\Erp\Model
   public function onBeforeCreate(array $record): array
   {
     $record['share_key'] = bin2hex(random_bytes(10));
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array

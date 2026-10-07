@@ -374,7 +374,7 @@ class Invoice extends \Hubleto\Erp\Model {
       $record['date_delivery'] = date('Y-m-d');
     }
 
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   /**
@@ -394,7 +394,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
     $this->recalculateTotalsForInvoice((int) $savedRecord['id']);
 
-    return $savedRecord;
+    return parent::onAfterCreate($savedRecord);
   }
 
   /**

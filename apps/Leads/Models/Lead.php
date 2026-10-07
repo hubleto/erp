@@ -291,7 +291,7 @@ class Lead extends \Hubleto\Erp\Model
   public function onBeforeCreate(array $record): array
   {
     $this->checkOwnership($record);
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   /**
@@ -360,7 +360,7 @@ class Lead extends \Hubleto\Erp\Model
       }
     }
 
-    return $record;
+    return parent::onBeforeUpdate($record);
   }
 
   /**

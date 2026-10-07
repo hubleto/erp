@@ -56,7 +56,7 @@ class Version extends \Hubleto\Erp\Model
     $maxVersion = (int) $this->record->where('id_document', $record['id_document'])->max('version');
     $record['version'] = $maxVersion + 1;
 
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   public function onAfterCreate(array $savedRecord): array
@@ -88,7 +88,7 @@ class Version extends \Hubleto\Erp\Model
       unlink($fullPath);
     }
 
-    return $id;
+    return parent::onBeforeDelete($id);
   }
 
   public function getRelationsIncludedInLoadFormData(): array|null

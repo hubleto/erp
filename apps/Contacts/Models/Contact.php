@@ -122,7 +122,7 @@ class Contact extends \Hubleto\Erp\Model
   public function onBeforeCreate(array $record): array
   {
     $record['date_created'] = date('Y-m-d');
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array

@@ -52,6 +52,6 @@ class LeadDocument extends \Hubleto\Erp\Model
     ($this->getService(Document::class))->onBeforeDelete($idDocument);
     ($this->getService(Document::class))->record->where("id", $idDocument)->delete();
 
-    return $id;
+    return parent::onBeforeDelete($id);
   }
 }

@@ -51,7 +51,7 @@ class File extends \Hubleto\Erp\Model
     if (!isset($record['uid'])) {
       $record['uid'] = vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex(random_bytes(16)), 4));
     }
-    return $record;
+    return parent::onBeforeCreate($record);
   }
   
   public function onAfterCreate(array $savedRecord): array
@@ -83,7 +83,7 @@ class File extends \Hubleto\Erp\Model
       unlink($fullPath);
     }
 
-    return $id;
+    return parent::onBeforeDelete($id);
   }
 
   public function getRelationsIncludedInLoadFormData(): array|null

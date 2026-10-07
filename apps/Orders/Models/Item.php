@@ -193,7 +193,7 @@ class Item extends \Hubleto\Erp\Model
       (float) ($record["vat"] ?? 0),
       (float) ($record["discount"] ?? 0)
     );
-    return $record;
+    return parent::onBeforeCreate($record);
   }
 
   /**
@@ -217,6 +217,6 @@ class Item extends \Hubleto\Erp\Model
       (float) ($record["vat"] ?? 0),
       (float) ($record["discount"] ?? 0)
     );
-    return $record;
+    return parent::onBeforeUpdate($record);
   }
 }

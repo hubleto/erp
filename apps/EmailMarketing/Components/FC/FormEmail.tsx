@@ -166,6 +166,7 @@ const TabTest = ({ formEmail }) => {
   const [testEmailSendResult, setTestEmailSendResult] = useState(null);
   const [emailTestInfo, setEmailTestInfo] = useState(null);
   const [recentlyContactedPeriod, setRecentlyContactedPeriod] = useState(1);
+  const [deleteParticipantsResponse, setDeleteParticipantsResponse] = useState(0);
 
   const updateEmailTestInfo = () => {
     request.post(
@@ -188,7 +189,7 @@ const TabTest = ({ formEmail }) => {
       <div className='card-header'>{T.translate('Analysis & warnings')}</div>
       <div className='card-body'>
         {emailTestInfo ? <>
-          {emailTestInfo.warnings.length == 0 ? 
+          {emailTestInfo.warnings.length == 0 ?
             <div className='alert alert-success'>
               <i className='fas fa-check mr-2'></i>
               {T.translate('No warnings')}
@@ -215,13 +216,28 @@ const TabTest = ({ formEmail }) => {
                 Object.keys(emailTestInfo.recentlyContacted).map((email, key) => {
                   emails.push(email)
                 });
-                formEmail.removeRecipients(emails);
+                setDeleteParticipantsResponse(0);
+                formEmail.removeRecipients(emails, (res: any) => {
+                  setDeleteParticipantsResponse(res?.status == 'success' ? 1 : 2);
+                  updateEmailTestInfo();
+                });
               }}
             >
               <span className='icon'><i className='fas fa-trash-can'></i></span>
               <span className='text'>Remove all</span>
             </button>
           </div>
+          {deleteParticipantsResponse == 2 ?
+              <div className='flex items-center px-3 py-2 border border-red-800 rounded bg-red-200 text-red-800'>
+                <p>{T.translate("There was an error during the deletion of the recipients")}</p>
+              </div>
+            : (deleteParticipantsResponse == 1 ?
+              <div className='flex items-center px-3 py-2 border border-green-800 rounded bg-green-200 text-green-800'>
+                <p>{T.translate("Recipients were succesfully deleted")}</p>
+              </div>
+            :
+              <></>)
+          }
           {Object.keys(emailTestInfo.recentlyContacted).length == 0
             ? <div className='flex gap-1 items-center'>No recipients found.</div>
             : <table className='table-default dense'>
@@ -469,7 +485,7 @@ const TabLaunch = () => {
       <div className='card grow'>
         <div className='card-header'>{T.translate('Recipients')}</div>
         <div className='card-body'>
-          {emailLaunchInfo && emailLaunchInfo.recipients ? 
+          {emailLaunchInfo && emailLaunchInfo.recipients ?
             <table className='table-default dense'>
               <thead>
                 <tr>
@@ -562,7 +578,7 @@ const FormEmail = (props: FormEmailProps) => {
     );
   }
 
-  const removeRecipients = (emails: Array<string>) => {
+  const removeRecipients = (emails: Array<string>, onDone?: (data: any) => void) => {
     request.post(
       'email-marketing/api/remove-recipient-from-email',
       {
@@ -570,7 +586,8 @@ const FormEmail = (props: FormEmailProps) => {
         emails: emails,
       },
       {},
-      (data: any) => {}
+      (data: any) => { if (onDone) onDone(data); },
+      (data: any) => { if (onDone) onDone(data); }
     );
   }
 

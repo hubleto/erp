@@ -57,7 +57,7 @@ const TabDefault = (props: FormDealProps) => {
             'deals/api/set-parent-lead',
             { idDeal: form.id, idLead: value },
             {},
-            (data: any) => { setSelectParentLead(false); }
+            (data: any) => { setSelectParentLead(false); form.reload();}
           )
         }}
       ></LookupInput>
@@ -182,7 +182,7 @@ const TabDocuments = (props: FormDealProps) => {
 
   try {
     let url = new URL(sharedFolder ?? '');
-    
+
     if (
       url.hostname == 'drive.google.com'
       && url.pathname.indexOf('/drive/folders') == 0

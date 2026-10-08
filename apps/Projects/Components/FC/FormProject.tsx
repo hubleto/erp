@@ -46,7 +46,7 @@ const TabDefault = (props: FormProjectProps) => {
                 'projects/api/set-parent-order',
                 { idProject: form.id, idOrder: value },
                 {},
-                (data: any) => { setSelectParentOrder(false); }
+                (data: any) => { setSelectParentOrder(false); form.reload(); }
               )
             }}
           ></LookupInput>
@@ -100,6 +100,7 @@ const TabDefault = (props: FormProjectProps) => {
                 tag={"table_project_task"}
                 parentForm={form}
                 uid={props.uid + "_table_project_task"}
+                idProject={form.id}
                 junctionTitle='Project'
                 junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
                 junctionSourceColumn='id_project'
@@ -184,6 +185,7 @@ const TabTasks = (props: FormProjectProps) => {
       tag={"table_project_task"}
       parentForm={form}
       uid={props.uid + "_table_project_task"}
+      idProject={form.id}
       junctionTitle='Project'
       junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
       junctionSourceColumn='id_project'

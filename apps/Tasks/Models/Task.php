@@ -201,6 +201,16 @@ class Task extends \Hubleto\Erp\Model
 
     $this->record->recordUpdate($savedRecord);
 
+    $idProject = $this->router()->urlParamAsInteger('idProject');
+    if ($idProject > 0) {
+      /** @var ProjectTask */
+      $mProjectTask = $this->getModel(ProjectTask::class);
+      $mProjectTask->record->recordCreate([
+        'id_project' => $idProject,
+        'id_task' => $savedRecord['id'],
+      ]);
+    }
+
     return parent::onAfterCreate($savedRecord);
   }
 

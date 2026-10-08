@@ -6,11 +6,15 @@ import FormTask from './FormTask';
 import FormActivity from '@hubleto/apps/Worksheets/Components/FC/FormActivity';
 import Modal from '@hubleto/react-ui/components/fc/Modal';
 
+interface TableTasksProps extends TableProps {
+  idProject?: number;
+}
+
 const componentName = 'TableTasks'; // must be the same as the exported const
 const parentApp = 'Hubleto/App/Community/Tasks';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
-const TableTasks = (props: TableProps) => {
+const TableTasks = (props: TableTasksProps) => {
   const [addActivityForIdTask, setAddActivityForIdTask] = useState(0);
 
   return <>
@@ -20,6 +24,7 @@ const TableTasks = (props: TableProps) => {
       model={parentApp + '/Models/Task'}
       baseUrlSlug='tasks'
       formModalProps={{type: 'right wide'}}
+      formEndpointParams={{idProject: props.idProject}}
       // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
       renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
         if (columnName == "title") {
@@ -35,26 +40,20 @@ const TableTasks = (props: TableProps) => {
         }
       }}
       renderActionsColumn={(table: TableMeta, row: any) => {
-        return <>
-          {row.is_closed ? null :
-            <button
-              className="btn btn-small btn-add-outline text-nowrap"
-              onClick={(e) => {
-                e.preventDefault();
-                setAddActivityForIdTask(row.id);
-              }}
-            >
-              <span className="icon"><i className="fas fa-plus"></i></span>
-              <span className="text">{T.translate('Add activity')}</span>
-            </button>
-          }
-        </>;
+        return row.is_closed ? null :
+        <button
+          className="btn btn-small btn-add-outline text-nowrap"
+          onClick={(e) => {
+            e.preventDefault();
+            setAddActivityForIdTask(row.id);
+          }}
+        >
+          <span className="icon"><i className="fas fa-plus"></i></span>
+          <span className="text">{T.translate('Add activity')}</span>
+        </button>;
       }}
-      // renderFooter={(table: TableMeta) => { return table.renderDefaultFooter(); }}
       renderForm={(table: TableMeta): React.JSX.Element => {
-        return <>
-          <FormTask {...table.getDefaultFormProps()}/>
-        </>
+        return <FormTask {...table.getDefaultFormProps()}/>;
       }}
       {...props}
     ></Table>

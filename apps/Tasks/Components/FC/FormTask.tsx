@@ -228,7 +228,7 @@ const FormTask = (props: FormTaskProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Task'}
     urlSlug='tasks'
-    endpointParams={{saveRelations: ['TODO']}}
+    endpointParams={{...props.endpointParams, saveRelations: ['TODO']}}
     // onAfterFormInitialized={(form: any) => {}}
     // renderTitle={(): React.JSX.Element => { return <></>; }
     title={{fields: ['identifier', 'title'], sub: T.translate('Task')}}

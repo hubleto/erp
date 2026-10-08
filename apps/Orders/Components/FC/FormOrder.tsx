@@ -63,10 +63,10 @@ const TabDefault = (props: FormOrderProps) => {
             cssClass='font-bold'
             onChange={(input: any, value: any) => {
               request.post(
-                'deals/api/set-parent-deal',
+                'orders/api/set-parent-deal',
                 { idOrder: form.id, idDeal: value },
                 {},
-                (data: any) => { setSelectParentDeal(false); }
+                (data: any) => { setSelectParentDeal(false); form.reload(); }
               )
             }}
           ></LookupInput>

@@ -9,6 +9,7 @@ import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore'
 import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
+import Spinner from '@hubleto/react-ui/components/fc/Spinner';
 
 export interface FormCampaignProps extends FormProps {}
 
@@ -92,10 +93,11 @@ const TabDefault = (props: FormCampaignProps) => {
 const TabRecipients = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
 
+  const [importingRecipients, setImportingRecipients] = useState(false);
+
   const example1 = ["recipient@example.com", {"name": "John Smith", "age": 21}];
   const example2 = ["john.smith@example.com", {"name": "John Smith"}];
 
-  const refTableRecipients = useRef(null);
   const refEmails = useRef(null);
 
   return (form.id <= 0
@@ -104,8 +106,6 @@ const TabRecipients = (props: FormCampaignProps) => {
       <div className='flex-3'>
         <TableRecipients
           tag='table_email_recipients'
-          //@ts-ignore
-          ref={refTableRecipients}
           parentForm={form}
           uid={form.uid + "_table_email_recipient"}
           idCampaign={form.id}
@@ -131,6 +131,7 @@ const TabRecipients = (props: FormCampaignProps) => {
             <button
               className='btn btn-add-outline mt-2 w-full'
               onClick={() => {
+                setImportingRecipients(true);
                 request.post(
                   'email-marketing/api/import-recipients',
                   {
@@ -139,13 +140,13 @@ const TabRecipients = (props: FormCampaignProps) => {
                   },
                   {},
                   (data: any) => {
-                    refTableRecipients.current.reload();
+                    form.reload();
                   }
                 )
               }}
             >
               <span className='icon'><i className='fas fa-upload'></i></span>
-              <span className='text'>{T.translate('Import recipients')}</span>
+              <span className='text'>{importingRecipients ? <Spinner size="xs"></Spinner> : T.translate('Import recipients')}</span>
             </button>
           </div>
         </div>
@@ -160,7 +161,7 @@ const TabRecipients = (props: FormCampaignProps) => {
                     { idCampaign: form.id },
                     {},
                     (data: any) => {
-                      refTableRecipients.current.reload();
+                      form.reload();
                     }
                   );
                 }

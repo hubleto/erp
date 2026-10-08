@@ -32,7 +32,7 @@ const TabDefault = (props: FormUserProps) => {
   const photo: any = useRecordField('photo');
   const appsRaw: any = useRecordField('apps');
   const permissionsRaw: any = useRecordField('permissions');
-  const isAdministrator = type == 1;
+  const isAdministrator = globalThis.hubleto.userHasRole(1);
 
   let permissions: any = {};
   let apps: any = [];
@@ -202,6 +202,7 @@ const FormUser = (props: FormUserProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={'Hubleto/App/Community/Auth/Models/User'}
+    urlSlug='settings/users'
     title={{fields: ['first_name', 'last_name'], sub: ''}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}

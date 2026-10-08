@@ -15,7 +15,7 @@ const TableUsers = (props: TableUsersProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={'Hubleto/App/Community/Auth/Models/User'}
-    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='settings/users'
     formModalProps={{type: 'centered'}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "roles") {

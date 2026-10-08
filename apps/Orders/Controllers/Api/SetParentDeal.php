@@ -14,10 +14,10 @@ class SetParentDeal extends \Hubleto\Erp\Controllers\ApiController
     $idOrder = $this->router()->urlParamAsInteger("idOrder");
     $idDeal = $this->router()->urlParamAsInteger("idDeal");
 
-    if ($idOrder <= 0 || $idDeal <= 0) {
+    if ($idOrder <= 0) {
       return [
         "status" => "failed",
-        "error" => "The order or deal not set."
+        "error" => "The order is not set."
       ];
     }
 
@@ -26,10 +26,12 @@ class SetParentDeal extends \Hubleto\Erp\Controllers\ApiController
 
     try {
       $mOrderDeal->record->where('id_order', $idOrder)->delete();
-      $mOrderDeal->record->create([
-        'id_order' => $idOrder,
-        'id_deal' => $idDeal,
-      ]);
+      if ($idDeal > 0) {
+        $mOrderDeal->record->create([
+          'id_order' => $idOrder,
+          'id_deal' => $idDeal,
+        ]);
+      }
     } catch (Exception $e) {
       return [
         "status" => "failed",

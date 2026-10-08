@@ -20,12 +20,13 @@ class Loader extends \Hubleto\Erp\App
 
     $this->getService(PermissionsManager::class)->init();
 
+    $this->router()->crud('settings/users', Controllers\Users::class);
+
     $this->router()->get([
       '/^settings\/?$/' => Controllers\Dashboard::class,
       '/^settings\/log-viewer\/?$/' => Controllers\LogViewer::class,
       '/^settings\/about-me\/?$/' => Controllers\AboutMe::class,
       '/^settings\/apps\/?$/' => Controllers\Apps::class,
-      '/^settings\/users\/?$/' => Controllers\Users::class,
       '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,
       '/^settings\/companies\/?$/' => Controllers\Companies::class,
       '/^settings\/general\/?$/' => Controllers\General::class,
@@ -397,8 +398,11 @@ class Loader extends \Hubleto\Erp\App
     /** @var \Hubleto\Framework\Models\UserRole */
     $mUserRole = $this->permissionsManager()->createUserRoleModel();
 
+    /** @var PermissionsManager */
+    $permissionManager = $this->permissionsManager();
+
     /** @var \Hubleto\Framework\Models\RolePermission */
-    $mRolePermission = $this->permissionsManager()->createRolePermissionModel();
+    $mRolePermission = $permissionManager->createRolePermissionModel();
 
     $userRoles = $mUserRole->record->get()->toArray();
     foreach ($userRoles as $role) {

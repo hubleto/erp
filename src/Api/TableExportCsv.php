@@ -4,6 +4,8 @@ namespace Hubleto\Erp\Api;
 
 class TableExportCsv extends \Hubleto\Erp\Controller
 {
+
+  public bool $permittedForAllUsers = true;
   public \Hubleto\Framework\Model $model;
 
   public function render(): string

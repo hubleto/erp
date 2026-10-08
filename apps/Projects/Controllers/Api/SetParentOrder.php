@@ -14,10 +14,10 @@ class SetParentOrder extends \Hubleto\Erp\Controllers\ApiController
     $idProject = $this->router()->urlParamAsInteger("idProject");
     $idOrder = $this->router()->urlParamAsInteger("idOrder");
 
-    if ($idProject <= 0 || $idOrder <= 0) {
+    if ($idProject <= 0) {
       return [
         "status" => "failed",
-        "error" => "The project or order not set."
+        "error" => "The project is not set."
       ];
     }
 
@@ -26,10 +26,12 @@ class SetParentOrder extends \Hubleto\Erp\Controllers\ApiController
 
     try {
       $mProjectOrder->record->where('id_project', $idProject)->delete();
-      $mProjectOrder->record->create([
-        'id_project' => $idProject,
-        'id_order' => $idOrder,
-      ]);
+      if ($idProject > 0) {
+        $mProjectOrder->record->create([
+          'id_project' => $idProject,
+          'id_order' => $idOrder,
+        ]);
+      }
     } catch (Exception $e) {
       return [
         "status" => "failed",

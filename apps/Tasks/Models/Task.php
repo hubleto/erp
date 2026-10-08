@@ -47,7 +47,7 @@ class Task extends \Hubleto\Erp\Model
     left join projects on projects.id = projects_tasks.id_project
 
     where
-      t2.id = tasks.id 
+      t2.id = tasks.id
       and (
         leads_tasks.id_task = tasks.id
         or deals_tasks.id_task = tasks.id
@@ -81,7 +81,7 @@ class Task extends \Hubleto\Erp\Model
    * [Description for describeColumns]
    *
    * @return array
-   * 
+   *
    */
   public function describeColumns(): array
   {
@@ -125,7 +125,7 @@ class Task extends \Hubleto\Erp\Model
    * [Description for describeTable]
    *
    * @return \Hubleto\Framework\Description\Table
-   * 
+   *
    */
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
@@ -173,7 +173,7 @@ class Task extends \Hubleto\Erp\Model
           'type' => 'multipleSelectButtons',
           'options' => $fUserOptions,
         ]);
-        
+
       break;
     }
 
@@ -184,9 +184,9 @@ class Task extends \Hubleto\Erp\Model
    * [Description for onAfterCreate]
    *
    * @param array $savedRecord
-   * 
+   *
    * @return array
-   * 
+   *
    */
   public function onAfterCreate(array $savedRecord): array
   {
@@ -200,16 +200,6 @@ class Task extends \Hubleto\Erp\Model
     }
 
     $this->record->recordUpdate($savedRecord);
-
-    $idProject = $this->router()->urlParamAsInteger('idProject');
-    if ($idProject > 0) {
-      /** @var ProjectTask */
-      $mProjectTask = $this->getModel(ProjectTask::class);
-      $mProjectTask->record->recordCreate([
-        'id_project' => $idProject,
-        'id_task' => $savedRecord['id'],
-      ]);
-    }
 
     return parent::onAfterCreate($savedRecord);
   }

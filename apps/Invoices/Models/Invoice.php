@@ -293,7 +293,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
     // items
     $mItem = $this->getService(Item::class);
-    $items = $mItem->record->where('id_invoice', $idInvoice)->get();
+    $items = $mItem->record->where('id_invoice', $idInvoice)->get()->toArray();
 
     $calculator = $this->getPriceCalculatorService();
 

@@ -2,27 +2,31 @@
 
 namespace Hubleto\Erp\Api;
 
-use Exception;
-
 class TableExportCsv extends \Hubleto\Erp\Controller
 {
   public \Hubleto\Framework\Model $model;
 
   public function render(): string
   {
-    $model = $this->router()->urlParamAsString('model');
+    $cfgB64 = $this->router()->urlParamAsString('cfg'); 
+    $cfgJson = base64_decode($cfgB64);
+    $cfg = @json_decode($cfgJson, true);
+
+    if (!is_array($cfg)) throw new \Exception('Invalid export configuration.');
+
+    $model = $cfg['model'] ?? '';
     $this->model = $this->getModel($model);
 
     $data = $this->model->record->loadTableData(
-      $this->router()->urlParamAsString('fulltextSearch'),
-      $this->router()->urlParamAsArray('columnSearch'),
-      $this->router()->urlParamAsArray('orderBy'),
+      $cfg['fulltextSearch'] ?? '',
+      $cfg['columnSearch'] ?? [],
+      $cfg['orderBy'] ?? [],
       99999999, // itemsPerPage
       0, // page
       '', // dataView
     );
 
-    $separator = $this->router()->urlParamAsString('separator', ',');
+    $separator = $cfg['separator'] ?? ',';
     $records = $data['records'] ?? [];
 
     $csvContent = "";
@@ -59,9 +63,10 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     }
 
     header('Content-Type: application/csv');
-    header('Content-Disposition: attachment; filename=Export-' . $this->model->shortName . '- ' . date('Ymd-His') . '.csv');
+    header('Content-Disposition: attachment; filename=Export-' . $this->model->shortName . '-' . date('Ymd-His') . '.csv');
     header('Pragma: no-cache');
 
-    return iconv("UTF-8", "windows-1250//TRANSLIT", $csvContent);
+    echo iconv("UTF-8", "windows-1250//TRANSLIT", $csvContent);
+    exit;
   }
 }

@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Invoices\Models;
 
+use Hubleto\App\Community\Invoices\Loader as InvoicesApp;
 
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Currency;
@@ -31,6 +32,8 @@ use Endroid\QrCode\Label\LabelAlignment;
 use Endroid\QrCode\Label\Font\OpenSans;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
+use Hubleto\App\Community\Invoices\Services\PriceCalculator;
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
 class Invoice extends \Hubleto\Erp\Model {
 
@@ -292,10 +295,12 @@ class Invoice extends \Hubleto\Erp\Model {
     $mItem = $this->getService(Item::class);
     $items = $mItem->record->where('id_invoice', $idInvoice)->get();
 
-    foreach ($items as $item) {
-      $totalExclVat += $item->price_excl_vat;
-      $totalInclVat += $item->price_incl_vat;
-    }
+    $calculator = $this->getPriceCalculatorService();
+
+    $totals = $calculator->calculateTotals($items);
+
+    $totalExclVat = $totals["total_excl_vat"];
+    $totalInclVat = $totals["total_incl_vat"];
 
     // payments
     $mPayment = $this->getService(Payment::class);
@@ -424,15 +429,20 @@ class Invoice extends \Hubleto\Erp\Model {
    *
    */
   public function onAfterLoadRecord(array $record): array {
-    $vatPercent = 20;
 
-    $total = 0;
+    $totalExclVat = 0;
+    $vat = 0;
+    $totalInclVat = 0;
+
     foreach ($record['ITEMS'] as $key => $item) { //@phpstan-ignore-line
+      $vatPercent = (float) ($item['vat'] ?? 0);
       $unitPrice = (float) ($item['unit_price'] ?? 0);
       $amount = (float) ($item['amount'] ?? 0);
       $itemPrice = $unitPrice * $amount;
       $itemVat = $itemPrice*$vatPercent/100;
-      $total += $itemPrice;
+      $totalExclVat += $itemPrice;
+      $vat += $itemVat;
+      $totalInclVat += $itemPrice + $itemVat;
 
       $record['ITEMS'][$key]['SUMMARY'] = [
         'totalExcludingVat' => $itemPrice,
@@ -441,13 +451,10 @@ class Invoice extends \Hubleto\Erp\Model {
       ];
     }
 
-    $totalExclVat = $total;
-    $vat = $totalExclVat*$vatPercent/100;
-
     $record['SUMMARY'] = [
       'totalExcludingVat' => $totalExclVat,
       'vat' => $vat,
-      'totalIncludingVat' => $totalExclVat + $vat,
+      'totalIncludingVat' => $totalInclVat,
     ];
 
     return $record;
@@ -567,6 +574,27 @@ class Invoice extends \Hubleto\Erp\Model {
     // return
     return $vars;
 
+  }
+
+  /**
+   * [Description for getPriceCalculatorService]
+   *
+   * @return PriceCalculatorInterface
+   * 
+   */
+  public function getPriceCalculatorService(): PriceCalculatorInterface
+  {
+    $priceCalculatorService = $this->config()->forApp(InvoicesApp::class)->getAsString('priceCalculatorService');
+
+    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService($priceCalculatorService);
+    } else {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService(PriceCalculator::class);
+    }
+
+    return $calculator;
   }
 
 }

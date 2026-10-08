@@ -7,6 +7,7 @@ use Hubleto\App\Community\Auth\Controllers\SignIn;
 use Hubleto\App\Community\Auth\Controllers\NotEnoughPermissions;
 use Hubleto\App\Community\Desktop\Controllers\Desktop;
 use Hubleto\App\Community\Settings\PermissionsManager;
+use Hubleto\Framework\Interfaces\RouterInterface;
 use Hubleto\Framework\Controller;
 use Hubleto\Framework\Exceptions\ControllerNotFound;
 use Hubleto\Framework\Exceptions\GeneralException;
@@ -85,7 +86,7 @@ class Renderer extends \Hubleto\Framework\Services\Renderer
       }
 
       if ($router->isUrlParam('signed-out')) {
-        $router->redirectTo('');
+        $router->redirectTo('', 302, true);
         exit;
       }
 

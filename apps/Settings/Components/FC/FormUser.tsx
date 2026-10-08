@@ -28,9 +28,11 @@ const TabDefault = (props: FormUserProps) => {
   }, [])
 
   const form = React.useContext(FormMetaContext);
+  const type: any = useRecordField('type');
   const photo: any = useRecordField('photo');
   const appsRaw: any = useRecordField('apps');
   const permissionsRaw: any = useRecordField('permissions');
+  const isAdministrator = type == 1;
 
   let permissions: any = {};
   let apps: any = [];
@@ -79,17 +81,17 @@ const TabDefault = (props: FormUserProps) => {
           <div className='flex gap-2 flex-col md:flex-row'>
             <div className="flex-1">
               <Divider>{T.translate('About the user')}</Divider>
-              <Input field='type' />
+              <Input field='type' readonly={!isAdministrator} />
               <Input field='first_name' />
               <Input field='last_name' />
               <Input field='nick' />
               <Input field='position' />
-              <Input field='email' />
+              <Input field='email' readonly={!isAdministrator} />
               <Input field='phone_1' />
               <Input field='phone_2' />
               <Input field='language' />
               <Input field='timezone' />
-              <Input field='id_default_company' />
+              <Input field='id_default_company' readonly={!isAdministrator} />
 
               <Divider>{T.translate('Access to Hubleto')}</Divider>
               <Input field='is_active' customInputProps={{
@@ -105,13 +107,14 @@ const TabDefault = (props: FormUserProps) => {
                 <Table
                   uid='user_roles'
                   model='Hubleto/App/Community/Auth/Models/UserHasRole'
+                  readonly={!isAdministrator}
                   parentForm={form}
                   endpointParams={{idUser: form.id}}
                 ></Table>
               }
             </div>
             <div className="flex-1 md:flex-row">
-              <Divider>{T.translate('Permissions for records with designated owner or manager')}</Divider>
+              <Divider>{T.translate('Permissions for records')}</Divider>
               <div className='list'>
                 <div className='list-item'><div className='flex gap-2 justify-between p-1'>
                   <div>{T.translate('Reading')}</div>
@@ -121,6 +124,7 @@ const TabDefault = (props: FormUserProps) => {
                         permissions.recordsRead = event.currentTarget.value;
                         form.changeRecord({permissions: JSON.stringify(permissions)});
                       }}
+                      disabled={!isAdministrator}
                       value={permissions.recordsRead ?? 'owned'}
                     >
                       <option value='owned'>{T.translate('Can read only owned records')}</option>
@@ -137,6 +141,7 @@ const TabDefault = (props: FormUserProps) => {
                         permissions.recordsModify = event.currentTarget.value;
                         form.changeRecord({permissions: JSON.stringify(permissions)});
                       }}
+                      disabled={!isAdministrator}
                       value={permissions.recordsModify ?? 'owned'}
                     >
                       <option value='owned'>{T.translate('Can modify only owned records')}</option>
@@ -159,6 +164,7 @@ const TabDefault = (props: FormUserProps) => {
                         + (app.permittedForAllUsers ? "btn-disabled" : (permitted ? "btn-primary-outline" : "btn-transparent"))
                       }
                       onClick={() => {
+                        if (!isAdministrator) return;
                         if (!app.permittedForAllUsers) {
                           if (apps.includes(appNamespace)) {
                             let appsNew = [];

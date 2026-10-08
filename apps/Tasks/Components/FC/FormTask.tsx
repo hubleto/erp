@@ -138,9 +138,9 @@ const TabDefault = (props: FormTaskProps) => {
                         <UserSelectInput
                           uid='new_todo_id_responsible'
                           value={item.id_responsible}
-                          onChange={(input: any) => {
+                          onChange={(input: any, value: any) => {
                             let newTodo = [...TODO];
-                            newTodo[key].id_responsible = input.value;
+                            newTodo[key].id_responsible = value;
                             form.changeRecord({TODO: newTodo});
                           }}
                         />
@@ -150,9 +150,9 @@ const TabDefault = (props: FormTaskProps) => {
                           uid='new_todo_deadline'
                           type='date'
                           value={item.date_deadline}
-                          onChange={(input: any) => {
-                          let newTodo = [...TODO];
-                            newTodo[key].date_deadline = input.state.value;
+                          onChange={(input: any, value: any) => {
+                            let newTodo = [...TODO];
+                            newTodo[key].date_deadline = value;
                             form.changeRecord({TODO: newTodo});
                           }}
                         />

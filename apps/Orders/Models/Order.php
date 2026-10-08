@@ -28,7 +28,9 @@ use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Invoices\Models\Invoice;
 use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
 use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Products\Services\PriceCalculator;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
 class Order extends \Hubleto\Erp\Model
 {
@@ -299,6 +301,27 @@ class Order extends \Hubleto\Erp\Model
   }
 
   /**
+   * [Description for getPriceCalculatorService]
+   *
+   * @return PriceCalculatorInterface
+   * 
+   */
+  public function getPriceCalculatorService(): PriceCalculatorInterface
+  {
+    $priceCalculatorService = $this->config()->forApp(OrdersApp::class)->getAsString('priceCalculatorService');
+
+    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService($priceCalculatorService);
+    } else {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService(PriceCalculator::class);
+    }
+
+    return $calculator;
+  }
+
+  /**
    * [Description for onAfterUpdate]
    *
    * @param array $originalRecord
@@ -311,25 +334,18 @@ class Order extends \Hubleto\Erp\Model
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);
 
-    $totalExclVat = 0;
-    $totalInclVat = 0;
+    $calculator = $this->getPriceCalculatorService();
 
+    /** @var Item */
     $mItem = $this->getService(Item::class);
-    $allItems = $mItem->record->where('id_order', $savedRecord['id'])->get()->toArray();
+    $items = $mItem->record->where('id_order', $savedRecord['id'])->get()->toArray();
 
-    if (!empty($allItems)) {
-      foreach ($allItems as $item) {
-        if (!isset($item["_toBeDeleted_"])) {
-          $totalExclVat += $item['price_excl_vat'];
-          $totalInclVat += $item['price_incl_vat'];
-        }
-      }
+    $totals = $calculator->calculateTotals($items);
 
-      $this->record->find($savedRecord["id"])->update([
-        "price_excl_vat" => $totalExclVat,
-        "price_incl_vat" => $totalInclVat,
-      ]);
-    }
+    $this->record->find($savedRecord["id"])->update([
+      "price_excl_vat" => $totals["total_excl_vat"],
+      "price_incl_vat" => $totals["total_incl_vat"],
+    ]);
 
     return $savedRecord;
   }

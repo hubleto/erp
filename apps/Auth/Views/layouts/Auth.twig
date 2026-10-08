@@ -37,7 +37,7 @@
         <img src="{{ logoUrl }}" class="w-full h-full" />
         {% if secondLogoUrl %} <img src="{{ secondLogoUrl }}"  class="w-full h-full"> {% endif %}
       </div>
-      <div class="min-w-min">
+      <div class="form">
         <form class="content min-w-min" id="login_form" action="" method="POST">
           <input type="hidden" name="set-language" id="set-language" value="{{ app.getLanguage() }}">
           <input type="hidden" name="authUser" id="authUser" value="1">
@@ -94,7 +94,7 @@
     </div>
   </div>
   <div class="text-xs text-gray-400 text-right" style="position:fixed;right:0;bottom:0;padding:0.5em">
-    Release<br/>
+    Auth, release
     [{{ app.release.getVersion() }}] {{ app.release.getCodename() }}
   </div>
 </body>

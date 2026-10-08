@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Cashdesk\Models;
 
+use Hubleto\App\Community\Cashdesk\Loader as CashdeskApp;
 
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\Framework\Db\Column\Varchar;
@@ -12,6 +13,8 @@ use Hubleto\Framework\Db\Column\File;
 use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Decimal;
 use Hubleto\App\Community\Auth\Models\User;
+use Hubleto\App\Community\Invoices\Services\PriceCalculator;
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
 class ReceiptItem extends \Hubleto\Erp\Model
 {
@@ -64,6 +67,46 @@ class ReceiptItem extends \Hubleto\Erp\Model
     $description->permissions['canCreate'] = false;
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
     return $description;
+  }
+
+  /**
+   * [Description for recalculatePricesInRecord]
+   *
+   * @param array $record
+   * 
+   * @return array
+   * 
+   */
+  public function recalculatePricesInRecord(array $record): array
+  {
+    /** @var Receipt */
+    $mReceipt = $this->getModel(Receipt::class);
+
+    $calculator = $mReceipt->getPriceCalculatorService();
+
+    $quantity = (float) ($record['quantity'] ?? 0);
+    $vat = (float) ($record['vat_percent'] ?? 0);
+    $unit = (float) ($record['unit_price_excl_vat'] ?? 0);
+
+    $record['unit_vat'] = $calculator->calculateVat($unit, $vat);
+    $record['unit_price_incl_vat'] = $calculator->calculatePriceIncludingVat($unit, 1, 0, $vat);
+    $record['total_price_excl_vat'] = $calculator->calculatePriceExcludingVat($unit, $quantity);
+    $record['total_vat'] = $calculator->calculateVat($record['total_price_excl_vat'], $vat);
+    $record['total_price_incl_vat'] = $calculator->calculatePriceIncludingVat($unit, $quantity, 0, $vat);
+
+    return $record;
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $record = $this->recalculatePricesInRecord($record);
+    return parent::onBeforeCreate($record);
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    $record = $this->recalculatePricesInRecord($record);
+    return parent::onBeforeUpdate($record);
   }
 
 }

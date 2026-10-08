@@ -3,7 +3,7 @@
 namespace Hubleto\App\Community\Cashdesk\Models;
 
 
-
+use Hubleto\App\Community\Cashdesk\Loader as CashdeskApp;
 use Hubleto\Erp\Model;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Date;
@@ -14,12 +14,14 @@ use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Contacts\Models\Contact;
 use Hubleto\App\Community\Deals\Models\Deal;
 use Hubleto\App\Community\Leads\Models\Lead;
+use Hubleto\App\Community\Products\Services\PriceCalculator;
 use Hubleto\App\Community\Settings\Models\Country;
 use Hubleto\Framework\Description\Input;
 use Hubleto\Framework\Description\Table;
 use Hubleto\Framework\Helper;
 
 use Hubleto\App\Community\Settings\Models\Company;
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
 class Receipt extends Model
 {
@@ -58,6 +60,27 @@ class Receipt extends Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
     return $description;
+  }
+
+  /**
+   * [Description for getPriceCalculatorService]
+   *
+   * @return PriceCalculatorInterface
+   * 
+   */
+  public function getPriceCalculatorService(): PriceCalculatorInterface
+  {
+    $priceCalculatorService = $this->config()->forApp(CashdeskApp::class)->getAsString('priceCalculatorService');
+
+    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService($priceCalculatorService);
+    } else {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService(PriceCalculator::class);
+    }
+
+    return $calculator;
   }
 
 }

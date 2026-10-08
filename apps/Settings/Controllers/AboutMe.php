@@ -4,6 +4,9 @@ namespace Hubleto\App\Community\Settings\Controllers;
 
 class AboutMe extends \Hubleto\Erp\Controller
 {
+
+  public bool $permittedForAllUsers = true;
+
   public function getBreadcrumbs(): array
   {
     return array_merge(parent::getBreadcrumbs(), [

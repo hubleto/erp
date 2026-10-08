@@ -150,27 +150,6 @@ class Item extends \Hubleto\Erp\Model
   }
   
   /**
-   * [Description for getPriceCalculatorService]
-   *
-   * @return PriceCalculatorInterface
-   * 
-   */
-  public function getPriceCalculatorService(): PriceCalculatorInterface
-  {
-    $priceCalculatorService = $this->config()->forApp(InvoicesApp::class)->getAsString('priceCalculatorService');
-
-    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
-      /** @var PriceCalculatorInterface */
-      $calculator = $this->getService($priceCalculatorService);
-    } else {
-      /** @var PriceCalculatorInterface */
-      $calculator = $this->getService(PriceCalculator::class);
-    }
-
-    return $calculator;
-  }
-
-  /**
    * [Description for recalculatePrices]
    *
    * @param int $idInvoice
@@ -182,7 +161,10 @@ class Item extends \Hubleto\Erp\Model
   {
     if ($idItem <= 0) return;
 
-    $calculator = $this->getPriceCalculatorService();
+    /** @var Invoice */
+    $mInvoice = $this->getModel(Invoice::class);
+
+    $calculator = $mInvoice->getPriceCalculatorService();
 
     $item = $this->record->where('invoice_items.id', $idItem)->first();
 

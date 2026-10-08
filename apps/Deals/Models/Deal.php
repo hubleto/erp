@@ -32,6 +32,8 @@ use Hubleto\Framework\Helper;
 
 use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Documents\Models\Document;
+use Hubleto\App\Community\Products\Services\PriceCalculator;
+use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
 class Deal extends \Hubleto\Erp\Model
 {
@@ -261,6 +263,27 @@ class Deal extends \Hubleto\Erp\Model
   public function getMaxReadLevelForLoadFormData(): int
   {
     return 2;
+  }
+
+  /**
+   * [Description for getPriceCalculatorService]
+   *
+   * @return PriceCalculatorInterface
+   * 
+   */
+  public function getPriceCalculatorService(): PriceCalculatorInterface
+  {
+    $priceCalculatorService = $this->config()->forApp(DealsApp::class)->getAsString('priceCalculatorService');
+
+    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService($priceCalculatorService);
+    } else {
+      /** @var PriceCalculatorInterface */
+      $calculator = $this->getService(PriceCalculator::class);
+    }
+
+    return $calculator;
   }
 
   /**

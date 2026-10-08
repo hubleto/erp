@@ -175,27 +175,6 @@ class Item extends \Hubleto\Erp\Model
   }
 
   /**
-   * [Description for getPriceCalculatorService]
-   *
-   * @return PriceCalculatorInterface
-   * 
-   */
-  public function getPriceCalculatorService(): PriceCalculatorInterface
-  {
-    $priceCalculatorService = $this->config()->forApp(OrdersApp::class)->getAsString('priceCalculatorService');
-
-    if (!empty($priceCalculatorService) && class_exists($priceCalculatorService)) {
-      /** @var PriceCalculatorInterface */
-      $calculator = $this->getService($priceCalculatorService);
-    } else {
-      /** @var PriceCalculatorInterface */
-      $calculator = $this->getService(PriceCalculator::class);
-    }
-
-    return $calculator;
-  }
-
-  /**
    * [Description for recalculatePricesInRecord]
    *
    * @param array $record
@@ -205,7 +184,10 @@ class Item extends \Hubleto\Erp\Model
    */
   public function recalculatePricesInRecord(array $record): array
   {
-    $calculator = $this->getPriceCalculatorService();
+    /** @var Order */
+    $mOrder = $this->getModel(Order::class);
+
+    $calculator = $mOrder->getPriceCalculatorService();
 
     $record["price_excl_vat"] = $calculator->calculatePriceExcludingVat(
       (float) ($record["unit_price"] ?? 0),

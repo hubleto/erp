@@ -115,8 +115,8 @@ class Invoice extends \Hubleto\Erp\Model {
       ]),
       'number' => (new Varchar($this, $this->translate('Number')))->setDefaultVisible()->setHint($this->translate('Leave empty to generate automatically.')),
       'number_external' => (new Varchar($this, $this->translate('External number')))->setDefaultVisible(),
-      'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
-      'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),
+      'description_before' => (new Text($this, $this->translate('We charge you for...'))),
+      'description_after' => (new Text($this, $this->translate('Additional notes for customer (will be printed on invoice)'))),
       'vs' => (new Varchar($this, $this->translate('Variable symbol')))->setDefaultVisible(),
       'cs' => (new Varchar($this, $this->translate('Constant symbol'))),
       'ss' => (new Varchar($this, $this->translate('Specific symbol'))),
@@ -264,12 +264,22 @@ class Invoice extends \Hubleto\Erp\Model {
 
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['ITEMS'];
+    return ['ITEMS', 'PROFILE', 'PROFILE.COMPANY'];
   }
 
   public function getMaxReadLevelForLoadTableData(): int
   {
-    return 1;
+    return 2;
+  }
+
+  public function getRelationsIncludedInLoadFormData(): array|null
+  {
+    return ['ITEMS', 'CUSTOMER', 'SUPPLIER', 'PROFILE', 'PROFILE.COMPANY'];
+  }
+
+  public function getMaxReadLevelForLoadFormData(): int
+  {
+    return 2;
   }
 
   /**

@@ -23,6 +23,50 @@ const componentName = 'FormInvoice'; // must be the same as the exported const
 const parentApp = 'Hubleto/App/Community/Invoices';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
+const CustomerInfo = (props: any) => {
+  const { customer } = props;
+  return <div className='alert alert-blue block'>
+    <div className='text-lg font-bold'>{customer.name}</div>
+    <div>
+      {customer.street_line_1}, {customer.zip} {customer.city}<br/>
+      {customer.region}<br/>
+      <br/>
+      ID #: {customer.company_id ?? 'N/A'}<br/>
+      VAT: {customer.vat_id ?? 'N/A'}<br/>
+    </div>
+  </div>
+}
+
+const SupplierInfo = (props: any) => {
+  const { supplier } = props;
+  return <div className='alert alert-blue block'>
+    <div className='text-lg font-bold'>{supplier.name}</div>
+    <div>
+      {supplier.street_line_1}, {supplier.zip} {supplier.city}<br/>
+      {supplier.region}<br/>
+      <br/>
+      ID #: {supplier.company_id ?? 'N/A'}<br/>
+      VAT: {supplier.vat_id ?? 'N/A'}<br/>
+    </div>
+  </div>
+}
+
+const InvoicingProfileDetails = (props: any) => {
+  const { profile } = props;
+
+  const COMPANY = profile?.COMPANY;
+
+  return <div className='alert alert-white text-black block'>
+    <div className='text-lg font-bold'>{COMPANY.name}</div>
+    <div>
+      {COMPANY.street_1}, {COMPANY.zip} {COMPANY.city}<br/>
+      {COMPANY.country}<br/>
+      <br/>
+      ID #: {COMPANY.company_id ?? 'N/A'}<br/>
+      VAT: {COMPANY.vat_id ?? 'N/A'}<br/>
+    </div>
+  </div>
+}
 /** TabDefault */
 const TabDefault = (props: FormInvoiceProps) => {
   const form = React.useContext(FormMetaContext);
@@ -35,12 +79,20 @@ const TabDefault = (props: FormInvoiceProps) => {
   const totalInclVat: number = useRecordField('total_incl_vat', 0);
   const totalPayments: number = useRecordField('total_payments', 0);
 
+  const number: string = useRecordField('number', '');
+  const vs: string = useRecordField('vs', '');
+  const cs: string = useRecordField('cs', '');
+  const ss: string = useRecordField('ss', '');
+
   const dateDelivery: string = useRecordField('date_delivery', '');
   const dateIssue: string = useRecordField('date_issue', '');
   const dateDue: string = useRecordField('date_due', '');
   const dateSent: string = useRecordField('date_sent', '');
   const datePayment: string = useRecordField('date_payment', '');
 
+  const CUSTOMER: any = useRecordField('CUSTOMER', {});
+  const SUPPLIER: any = useRecordField('SUPPLIER', {});
+  const PROFILE: any = useRecordField('PROFILE', {});
   const ITEMS: any = useRecordField('ITEMS', []);
   const CURRENCY: any = useRecordField('CURRENCY', {});
   const currencySymbol = CURRENCY.symbol ?? '';
@@ -56,220 +108,262 @@ const TabDefault = (props: FormInvoiceProps) => {
   } else {
     return <>
       <div className='flex flex-col md:flex-row gap-2'>
-        <div className='grow'>
-          {inboundOutbound == 1 ?
-            <Input key='id_supplier' field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-          : <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2'}} />}
-        </div>
-      </div>
-      <div className='flex flex-col md:flex-row gap-2'>
         <div className="flex flex-5 gap-2">
           <div className='flex-1 min-w-80'>
-            {form.id == -1 ? null : <div className='flex-dyn'>
-              <div className='grow'>
-                <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
-                <button
-                  className='btn btn-green-outline'
-                  onClick={() => {
-                    request.post(
-                      'invoices/api/generate-invoice-number',
-                      { idInvoice: form.id },
-                      {},
-                      (data: any) => {
-                        form.reload();
-                      }
-                    )
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-bolt'></i></span>
-                  <span className='text'>Generate invoice number</span>
-                </button>
-                <Input field='vs' />
-                <Input field='cs' />
-                <Input field='ss' />
+            {form.id == -1 ? null : <>
+              <div className='flex-dyn gap-2 items-center'>
+                <div className='grow'>
+                  <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] w-full p-1 shadow rounded'}} />
+                </div>
+                {number == '' ? <div>
+                  <button
+                    className='btn btn-warning btn-large'
+                    onClick={() => {
+                      request.post(
+                        'invoices/api/generate-invoice-number',
+                        { idInvoice: form.id },
+                        {},
+                        (data: any) => {
+                          form.reload();
+                        }
+                      )
+                    }}
+                  >
+                    <span className='icon'><i className='fas fa-bolt'></i></span>
+                    <span className='text'>Generate invoice number</span>
+                  </button>
+                </div> : null}
               </div>
-              <div className='grow'>
-                <Input field='notes'  customInputProps={{cssClass: 'border border-orange-200'}} />
+              <div className='flex-dyn mt-2'>
+                <div className='grow'>
+                  <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+                  <InvoicingProfileDetails profile={PROFILE} />
+                </div>
+                <div className='grow'>
+                  {inboundOutbound == 1 ? <>
+                    <Input key='id_supplier' field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+                    <SupplierInfo supplier={SUPPLIER} />
+                  </> : <>
+                    <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2', cssClass: 'text-lg'}} />
+                    <CustomerInfo customer={CUSTOMER} />
+                  </>}
+                </div>
               </div>
-            </div>}
+              <div className='flex-dyn mt-2 gap-2'>
+                <div className='grow'><Input field='vs' renderOnlyInputField customInputProps={{cssClass: (vs == '' ? 'border border-red-400' : '')}} /></div>
+                <div className='grow'><Input field='cs' renderOnlyInputField customInputProps={{cssClass: (cs == '' ? 'border border-red-400' : '')}} /></div>
+                <div className='grow'><Input field='ss' renderOnlyInputField customInputProps={{cssClass: (ss == '' ? 'border border-red-400' : '')}} /></div>
+              </div>
+            </>}
 
 
             {form.id <= 0 ? null : <div className='card mt-2'>
-              <div className='card-header'>{T.translate('Items')}</div>
+              {/* <div className='card-header'>{T.translate('Items')}</div> */}
               <div className='card-body'>
                 <div className='flex flex-col gap-2'>
-                  <Input field='description_before' rendeOnlyInputField customInputProps={{cssClass: 'bg-blue-50 text-blue-500'}} />
-                  {ITEMS.map((item, key) => {
-                    const rowBgClass = (key % 2 == 0 ? 'bg-white' : 'bg-gray-50');
+                  <Input field='description_before' renderOnlyInputField customInputProps={{cssClass: 'h-10'}} />
+                  <table className='table-default dense'>
+                    <thead>
+                      <tr>
+                        <th className='text-xs'>#</th>
+                        <th className='text-xs'>Item</th>
+                        <th className='text-xs'>Unit price [{currencySymbol}/unit]</th>
+                        <th className='text-xs'>Amount [units]</th>
+                        <th className='text-xs'>Discount [%]</th>
+                        <th className='text-xs'>VAT [%]</th>
+                        <th className='text-xs'>Excl. VAT [{currencySymbol}]</th>
+                        <th className='text-xs'>Incl. VAT [{currencySymbol}]</th>
+                        <th className='text-xs'>...</th>
+                      </tr>
+                      <tr>
+                        <th className='text-xs'>#</th>
+                        <th className='text-xs' colSpan={2}>Ordered in</th>
+                        <th className='text-xs' colSpan={6}>Attachments</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                      {ITEMS.map((item, key) => {
+                        const rowBgClass = item._toBeDeleted_ ? 'bg-red-100' : (key % 2 == 0 ? 'bg-white' : 'bg-gray-100');
 
-                    return <div key={key} className={'card border ' + (item._toBeDeleted_ ? 'border-red-400' : 'border-blue-400')}>
-                        <div className={'card-header ' + rowBgClass}>
-                          <div className='badge text-xl'>{key + 1}</div>
-                          <VarcharInput
-                            value={item.item}
-                            cssClass='bg-white text-blue-500'
-                            onChange={(input: any, value: any) => {
-                              let newItems = ITEMS;
-                              newItems[key].item = value;
-                              form.changeRecord({ITEMS: newItems});
-                            }}
-                          ></VarcharInput>
-                          <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                            {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol} {T.translate('excl. VAT')}
-                          </div>
-                          <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                            {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol} {T.translate('incl. VAT')}
-                          </div>
-                          <button
-                            className='btn btn-warning'
-                            onClick={() => {
-                              request.post(
-                                'invoices/api/unlink-prepared-item',
-                                {
-                                  idInvoice: form.id,
-                                  idItem: item.id
-                                },
-                                {},
-                                (result: any) => {
-                                  form.reload();
-                                }
-                              );
-                            }}
-                          >
-                            <span className='icon'><i className='fas fa-link-slash'></i></span>
-                          </button>
-                          <button
-                            className='btn btn-danger'
-                            onClick={() => {
-                              let newItems = ITEMS;
-                              newItems[key]._toBeDeleted_ = true;
-                              form.changeRecord({ITEMS: newItems});
-                            }}
-                          >
-                            <span className='icon'><i className='fas fa-trash'></i></span>
-                          </button>
-                        </div>
-                        <div className='card-body flex flex-col gap-2'>
-                          <div className='flex gap-2 items-center text-nowrap'>
-                            {T.translate('Unit price')}:
-                            <IntInput
-                              value={item.unit_price}
-                              cssClass='bg-white text-blue-500 w-auto'
-                              description={{unit: currencySymbol + '/unit'}}
-                              onChange={(input: any, value: any) => {
-                                let newItems = ITEMS;
-                                newItems[key].unit_price = value;
-                                form.changeRecord({ITEMS: newItems});
-                              }}
-                            ></IntInput>
-                          </div>
-                          <div className='flex gap-2 items-center'>
-                            {T.translate('Amount')}:
-                            <IntInput
-                              value={item.amount}
-                              cssClass='bg-white text-blue-500 w-auto'
-                              description={{unit: 'units'}}
-                              onChange={(input: any, value: any) => {
-                                let newItems = ITEMS;
-                                newItems[key].amount = value;
-                                form.changeRecord({ITEMS: newItems});
-                              }}
-                            ></IntInput>
-                          </div>
-                          <div className='flex gap-2 items-center'>
-                            {T.translate('Order')}:
-                            <LookupInput
-                              value={item.id_order}
-                              cssClass='bg-white w-auto'
-                              description={{
-                                model: 'Hubleto/App/Community/Orders/Models/Order'
-                              }}
-                              onChange={(input: any, value: any) => {
-                                let newItems = ITEMS;
-                                newItems[key].id_order = value;
-                                form.changeRecord({ITEMS: newItems});
-                              }}
-                            ></LookupInput>
-                            {item.id_order > 0 ?
-                              <LookupInput
-                                value={item.id_order_item}
-                                cssClass='bg-white w-auto'
-                                description={{
-                                  model: 'Hubleto/App/Community/Orders/Models/Item'
-                                }}
-                                customEndpointParams={{idOrder: item.id_order}}
+                        return <>
+                          <tr key={key + 'a'} className={rowBgClass + ' border-none'}>
+                            <td>
+                              <div className='badge text-xl'>{key + 1}</div>
+                            </td>
+                            <td>
+                              <VarcharInput
+                                value={item.item}
+                                cssClass='bg-white text-blue-500 min-w-96'
                                 onChange={(input: any, value: any) => {
-                                  request.post('orders/api/get-item',
-                                    {idItem: input.value},
+                                  let newItems = [...ITEMS];
+                                  newItems[key].item = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></VarcharInput>
+                            </td>
+                            <td>
+                              <IntInput
+                                value={item.unit_price}
+                                cssClass='bg-white text-blue-500 !w-16'
+                                onChange={(input: any, value: any) => {
+                                  let newItems = [...ITEMS];
+                                  newItems[key].unit_price = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></IntInput>
+                            </td>
+                            <td>
+                              <IntInput
+                                value={item.amount}
+                                cssClass='bg-white text-blue-500 !w-16'
+                                onChange={(input: any, value: any) => {
+                                  let newItems = [...ITEMS];
+                                  newItems[key].amount = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></IntInput>
+                            </td>
+                            <td>
+                              <IntInput
+                                value={item.discount}
+                                cssClass='bg-white w-auto !w-16'
+                                onChange={(input: any, value: any) => {
+                                  let newItems = [...ITEMS];
+                                  newItems[key].discount = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></IntInput>
+                            </td>
+                            <td>
+                              <IntInput
+                                value={item.vat}
+                                cssClass='bg-white w-auto !w-16'
+                                onChange={(input: any, value: any) => {
+                                  let newItems = [...ITEMS];
+                                  newItems[key].vat = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></IntInput>
+                            </td>
+                            <td>
+                              <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
+                                {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol}
+                              </div>
+                            </td>
+                            <td>
+                              <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
+                                {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol}
+                              </div>
+                            </td>
+                            <td className='text-nowrap'>
+                              <button
+                                className='btn btn-transparent btn-small mr-2'
+                                onClick={() => {
+                                  request.post(
+                                    'invoices/api/unlink-prepared-item',
+                                    {
+                                      idInvoice: form.id,
+                                      idItem: item.id
+                                    },
                                     {},
-                                    (data: any) => {
-                                      const P = data.item;
-                                      let newItems = ITEMS;
-                                      newItems[key].id_order_item = value;
-                                      newItems[key].item = P?.title ?? '';
-                                      newItems[key].unit_price = P?.sales_price ?? 0;
-                                      newItems[key].amount = P?.amount ?? 0;
-                                      newItems[key].price_excl_vat = P?.price_excl_vat ?? 0;
-                                      newItems[key].price_incl_vat = P?.price_incl_vat ?? 0;
-                                      newItems[key].vat = P?.vat ?? 0;
-                                      newItems[key].discount = P?.discount ?? 0;
-                                      form.changeRecord({ITEMS: newItems});
+                                    (result: any) => {
+                                      form.reload();
                                     }
-                                  )
+                                  );
+                                }}
+                              >
+                                <span className='icon'><i className='fas fa-link-slash'></i></span>
+                              </button>
+                              <button
+                                className='btn btn-danger btn-small'
+                                onClick={() => {
+                                  let newItems = [...ITEMS];
+                                  if (newItems[key]._toBeDeleted_) {
+                                    delete newItems[key]._toBeDeleted_;
+                                  } else {
+                                    newItems[key]._toBeDeleted_ = true;
+                                  }
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              >
+                                <span className='icon'><i className='fas fa-trash'></i></span>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr key={key + 'b'} className={rowBgClass + ' border-none'}>
+                            <td></td>
+                            <td colSpan={2}>
+                              <LookupInput
+                                value={item.id_order}
+                                cssClass='bg-white w-full'
+                                description={{
+                                  model: 'Hubleto/App/Community/Orders/Models/Order'
+                                }}
+                                onChange={(input: any, value: any) => {
+                                  let newItems = ITEMS;
+                                  newItems[key].id_order = value;
+                                  form.changeRecord({ITEMS: newItems});
                                 }}
                               ></LookupInput>
-                            : null}
-                          </div>
-                          <div className='flex gap-2 items-center'>
-                            {T.translate('Discount')}:
-                            <IntInput
-                              value={item.discount}
-                              cssClass='bg-white w-auto'
-                              description={{unit: '%'}}
-                              onChange={(input: any, value: any) => {
-                                let newItems = ITEMS;
-                                newItems[key].discount = value;
-                                form.changeRecord({ITEMS: newItems});
-                              }}
-                            ></IntInput>
-                          </div>
-                          <div className='flex gap-2 items-center'>
-                            {T.translate('VAT')}:
-                            <IntInput
-                              value={item.vat}
-                              cssClass='bg-white w-auto'
-                              description={{unit: '%'}}
-                              onChange={(input: any, value: any) => {
-                                let newItems = ITEMS;
-                                newItems[key].vat = value;
-                                form.changeRecord({ITEMS: newItems});
-                              }}
-                            ></IntInput>
-                          </div>
-                          <div className='flex gap-2 items-center'>
-                            {T.translate('Attachments')}:
-                            <FileInput
-                              value={item.attachment_1}
-                              cssClass='bg-white w-auto'
-                              onChange={(input: any, value: any) => {
-                                let newItems = ITEMS;
-                                newItems[key].attachment_1 = value;
-                                form.changeRecord({ITEMS: newItems});
-                              }}
-                            ></FileInput>
-                            <FileInput
-                              value={item.attachment_2}
-                              cssClass='bg-white w-auto'
-                              onChange={(input: any, value: any) => {
-                                let newItems = ITEMS;
-                                newItems[key].attachment_2 = value;
-                                form.changeRecord({ITEMS: newItems});
-                              }}
-                            ></FileInput>
-                          </div>
-                        </div>
-                    </div>;
-                  })}
+                              {item.id_order > 0 ?
+                                <LookupInput
+                                  value={item.id_order_item}
+                                  cssClass='bg-white w-auto'
+                                  description={{
+                                    model: 'Hubleto/App/Community/Orders/Models/Item'
+                                  }}
+                                  customEndpointParams={{idOrder: item.id_order}}
+                                  onChange={(input: any, value: any) => {
+                                    request.post('orders/api/get-item',
+                                      {idItem: input.value},
+                                      {},
+                                      (data: any) => {
+                                        const P = data.item;
+                                        let newItems = ITEMS;
+                                        newItems[key].id_order_item = value;
+                                        newItems[key].item = P?.title ?? '';
+                                        newItems[key].unit_price = P?.sales_price ?? 0;
+                                        newItems[key].amount = P?.amount ?? 0;
+                                        newItems[key].price_excl_vat = P?.price_excl_vat ?? 0;
+                                        newItems[key].price_incl_vat = P?.price_incl_vat ?? 0;
+                                        newItems[key].vat = P?.vat ?? 0;
+                                        newItems[key].discount = P?.discount ?? 0;
+                                        form.changeRecord({ITEMS: newItems});
+                                      }
+                                    )
+                                  }}
+                                ></LookupInput>
+                              : null}
+                            </td>
+                            <td colSpan={6}>
+                              <FileInput
+                                value={item.attachment_1}
+                                cssClass='bg-white w-auto'
+                                onChange={(input: any, value: any) => {
+                                  let newItems = ITEMS;
+                                  newItems[key].attachment_1 = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></FileInput>
+                              <FileInput
+                                value={item.attachment_2}
+                                cssClass='bg-white w-auto'
+                                onChange={(input: any, value: any) => {
+                                  let newItems = ITEMS;
+                                  newItems[key].attachment_2 = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></FileInput>
+                            </td>
+                          </tr>
+                        </>;
+                      })}
+
+
+
+                    </tbody>
+                  </table>
                   <div className='flex gap-2'>
                     <button
                       className='btn btn-add mt-2'
@@ -293,7 +387,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                       <span className='text'>{T.translate('Link prepared item')}</span>
                     </button>
                   </div>
-                  <Input field='description_after' renderOnlyInputField customInputProps={{cssClass: 'bg-blue-50 text-blue-500'}} />
+                  <Input field='description_after' renderOnlyInputField customInputProps={{cssClass: 'h-10'}} />
                 </div>
               </div>
             </div>}
@@ -319,23 +413,24 @@ const TabDefault = (props: FormInvoiceProps) => {
               <span className='ml-2'>{T.translate('paid')}</span>
             </div>
           </div>
-          <div className={'border-t border-t-4 border-t-blue-400 grow ' + (dateDelivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+          <div className={'border-t-4 border-t-blue-400 grow ' + (dateDelivery ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
             <Input field='date_delivery' customInputProps={{wrapperCssClass: 'block'}} />
           </div>
-          <div className={'border-t border-t-4 border-t-orange-300 grow ' + (dateIssue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+          <div className={'border-t-4 border-t-orange-300 grow ' + (dateIssue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
             <Input field='date_issue' customInputProps={{wrapperCssClass: 'block'}} />
           </div>
-          <div className={'border-t border-t-4 border-t-green-400 grow ' + (dateDue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+          <div className={'border-t-4 border-t-green-400 grow ' + (dateDue ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
             <Input field='date_due' customInputProps={{wrapperCssClass: 'block'}} />
           </div>
-          <div className={'border-t border-t-4 border-t-violet-400 grow ' + (dateSent ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+          <div className={'border-t-4 border-t-violet-400 grow ' + (dateSent ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
             <Input field='date_sent' customInputProps={{wrapperCssClass: 'block'}} />
           </div>
-          <div className={'border-t border-t-4 border-t-green-600 grow ' + (datePayment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
+          <div className={'border-t-4 border-t-green-600 grow ' + (datePayment ? '' : 'bg-gradient-to-b from-red-50 to-white')}>
             <Input field='date_payment' customInputProps={{wrapperCssClass: 'block'}} />
           </div>
           <div>
             <Input field='number_external' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+            <Input field='notes' />
             <Input field='id_issued_by' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
           </div>
         </div>
@@ -621,7 +716,6 @@ const FormInvoice = (props: FormInvoiceProps) => {
     renderTopInputs={() => {
       return <div className='modal-top-inputs'>
         <Input field='type' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
-        <Input field='id_profile' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
         <Input field='id_payment_method' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
         <Input field='id_currency' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2'}} />
       </div>;

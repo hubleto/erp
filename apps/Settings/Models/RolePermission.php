@@ -54,6 +54,45 @@ class RolePermission extends \Hubleto\Erp\Model
     $this->grantPermissionById($idRole, $idPermission);
   }
 
+  /** Resolve permissions and existing grants once for the whole assignment. */
+  public function grantPermissionsByString(array $idRoles, array $permissions): void
+  {
+    if ($this->db() instanceof \Hubleto\Framework\Services\Db && $this->db()->isFreshInstallation()) {
+      $this->assignPermissionsByString($idRoles, $permissions);
+    } else {
+      $this->record->getConnection()->transaction(fn() => $this->assignPermissionsByString($idRoles, $permissions));
+    }
+  }
+
+  private function assignPermissionsByString(array $idRoles, array $permissions): void
+  {
+    $idRoles = array_values(array_unique(array_map('intval', $idRoles)));
+    $permissions = array_values(array_unique($permissions));
+    if (!$idRoles || !$permissions) return;
+
+    $mPermission = $this->getModel(Permission::class);
+    $ids = [];
+    foreach ($mPermission->record->whereIn('permission', $permissions)->orderBy('id')->get()->toArray() as $row) {
+      $ids[$row['permission']] ??= (int) $row['id'];
+    }
+    foreach ($permissions as $permission) {
+      if (!isset($ids[$permission])) $ids[$permission] = (int) ($this->findPermissionByString($permission)['id'] ?? 0);
+    }
+
+    $granted = [];
+    foreach ($this->record->whereIn('id_role', $idRoles)->whereIn('id_permission', array_values($ids))->get()->toArray() as $row) {
+      $granted[$row['id_role'] . '/' . $row['id_permission']] = true;
+    }
+    foreach ($idRoles as $idRole) {
+      foreach ($ids as $idPermission) {
+        if ($idPermission > 0 && !isset($granted[$idRole . '/' . $idPermission])) {
+          $this->record->recordCreate(['id_permission' => $idPermission, 'id_role' => $idRole]);
+          $granted[$idRole . '/' . $idPermission] = true;
+        }
+      }
+    }
+  }
+
   public function denyPermissionByString(int $idRole, string $permission): void
   {
     $idPermission = $this->findPermissionByString($permission)['id'] ?? 0;

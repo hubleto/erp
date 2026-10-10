@@ -30,6 +30,10 @@ class Logger extends Core
     int $priority = 0 // 0 = lowest, higher number = higher priority
   ): void {
     try {
+      $idUser = $this->authProvider()->getUserId();
+      // CLI/system work has no user; inserting zero only fails the FK and
+      // the previous implementation swallowed that failure on every event.
+      if ($idUser <= 0) return;
       $mAuditLog = $this->getModel(Models\AuditLog::class);
       $mAuditLog->record->create([
         'datetime' => date("Y-m-d H:i:s"),
@@ -39,7 +43,7 @@ class Logger extends Core
         'record_id' => $recordId,
         'message' => $message,
         'priority' => $priority,
-        'id_user' => $this->authProvider()->getUserId(),
+        'id_user' => $idUser,
         'ip' => $_SERVER['REMOTE_ADDR'] ?? '',
       ]);
     } catch (\Throwable $e) {

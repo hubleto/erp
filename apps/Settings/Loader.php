@@ -373,12 +373,19 @@ class Loader extends \Hubleto\Erp\App
         [249, 'Zimbabwe', 'ZWE'],
       ];
 
-      foreach ($countries as $country) {
-        $mCountry->record->recordCreate([
-          "id" => $country[0],
-          "name" => $country[1],
-          "code" => $country[2],
-        ]);
+      $installCountries = function () use ($countries, $mCountry): void {
+        foreach ($countries as $country) {
+          $mCountry->record->recordCreate([
+            "id" => $country[0],
+            "name" => $country[1],
+            "code" => $country[2],
+          ]);
+        }
+      };
+      if ($this->db() instanceof \Hubleto\Framework\Services\Db && $this->db()->isFreshInstallation()) {
+        $installCountries();
+      } else {
+        $mCountry->record->getConnection()->transaction($installCountries);
       }
 
       $mPermission = $this->getModel(Models\Permission::class);

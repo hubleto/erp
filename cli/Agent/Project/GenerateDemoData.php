@@ -15,6 +15,12 @@ class GenerateDemoData extends \Hubleto\Erp\Cli\Agent\Command
 
   public function run(): void
   {
+    if ($this->db() instanceof \Hubleto\Framework\Services\Db && $this->db()->isFreshInstallation()) $this->generateData();
+    else $this->db()->eloquent->getConnection()->transaction(fn() => $this->generateData());
+  }
+
+  private function generateData(): void
+  {
 
     /** @var PermissionsManager */
     $permissionsManager = $this->getService(PermissionsManager::class);

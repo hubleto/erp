@@ -435,6 +435,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->authProvider()->setUserLanguage($language);
 
     $installer->appsToInstall = [];
+    $installer->deferFreshPersistence = true;
 
     // 'crm' is always installed
     $packagesToInstall = array_merge(['crm'], explode(',', (string) $packagesToInstall));
@@ -490,32 +491,41 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       . ").\n"
     );
 
-    $this->terminal()->cyan("    -> Creating tables, round #1.\n");
-    $installer->installApps(1);
+    try {
+      $this->terminal()->cyan("    -> Creating tables, round #1.\n");
+      $installer->installApps(1);
 
-    $this->terminal()->cyan("    -> Creating tables, round #2.\n");
-    $installer->installApps(2);
+      $this->terminal()->cyan("    -> Creating tables, round #2.\n");
+      $installer->installApps(2);
 
-    $this->terminal()->cyan("    -> Creating tables, round #3. (Creating foreign keys.)\n");
-    $installer->installApps(3);
+      $this->terminal()->cyan("    -> Creating tables, round #3. (Creating foreign keys.)\n");
+      $installer->installApps(3);
 
-    $this->terminal()->cyan("  -> Adding default company and admin user.\n");
-    $installer->addCompanyAndAdminUser();
+      $this->terminal()->cyan("  -> Adding default company and admin user.\n");
+      $installer->addCompanyAndAdminUser();
 
-    $this->terminal()->cyan("  -> Reinitializing Hubleto after installation.\n");
-    $this->appManager()->init();
+      $this->terminal()->cyan("  -> Reinitializing Hubleto after installation.\n");
+      $this->appManager()->init();
 
-    if (!empty($defaultConfiguration)) {
-      $this->terminal()->cyan("  -> Applying default configuration: {$defaultConfiguration}\n");
-      $installer->applyDefaultConfiguration((string) $defaultConfiguration);
+      if (!empty($defaultConfiguration)) {
+        $this->terminal()->cyan("  -> Applying default configuration: {$defaultConfiguration}\n");
+        $installer->applyDefaultConfiguration((string) $defaultConfiguration);
+      }
+
+      if ($generateDemoData) {
+        $this->terminal()->cyan("  -> Generating demo data.\n");
+        $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
+      }
+
+      $this->terminal()->cyan("\n");
+      $this->terminal()->cyan("  -> Completing database installation.\n");
+      if ($this->db() instanceof \Hubleto\Framework\Services\Db) $this->db()->endFreshInstallation();
+    } catch (\Throwable $error) {
+      if ($this->db() instanceof \Hubleto\Framework\Services\Db) {
+        try { $this->db()->abortFreshInstallation(); } catch (\Throwable $cleanupError) {}
+      }
+      throw $error;
     }
-
-    if ($generateDemoData) {
-      $this->terminal()->cyan("  -> Generating demo data.\n");
-      $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
-    }
-
-    $this->terminal()->cyan("\n");
     $this->terminal()->yellow("All done! Enjoy Hubleto.\n");
 
     $this->terminal()->green("\n");

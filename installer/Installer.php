@@ -41,6 +41,7 @@ class Installer extends \Hubleto\Erp\Core
   public string $language = '';
 
   public bool $randomize = false;
+  public bool $deferFreshPersistence = false;
 
   /** @property array<string, array<string, mixed>> */
   public array $appsToInstall = [];
@@ -142,6 +143,9 @@ class Installer extends \Hubleto\Erp\Core
     $this->config()->set('db_name', $this->dbName);
     $this->config()->set('db_codepage', "utf8mb4");
     $this->db()->init();
+    if ($this->db() instanceof \Hubleto\Framework\Services\Db) {
+      $this->db()->beginFreshInstallation();
+    }
 
   }
 
@@ -164,6 +168,10 @@ class Installer extends \Hubleto\Erp\Core
     $this->config()->set('enterpriseAppsRepository', $this->enterpriseAppsRepository);
     foreach ($this->appsToInstall as $appNamespace => $appConfig) {
       $this->appManager()->installApp($round, $appNamespace, $appConfig, true);
+    }
+    if ($round === 3 && $this->db() instanceof \Hubleto\Framework\Services\Db) {
+      if ($this->deferFreshPersistence) $this->db()->startFreshPersistence();
+      else $this->db()->endFreshInstallation();
     }
   }
 

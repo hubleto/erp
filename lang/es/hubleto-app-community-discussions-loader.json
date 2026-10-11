@@ -1,0 +1,60 @@
+{
+    "manifest": {
+        "Discussions": "Discusiones",
+        "Members": "Miembros",
+        "Messages": "Mensajes"
+    },
+    "Controllers\\Discussions": {
+        "Discussions": "Discusiones"
+    },
+    "Controllers\\Members": {
+        "Discussions": "Discusiones",
+        "Members": "Miembros"
+    },
+    "Controllers\\Messages": {
+        "Discussions": "Discusiones",
+        "Messages": "Mensajes"
+    },
+    "Models\\Discussion": {
+        "Title": "Título",
+        "Description": "Descripción",
+        "Main MOD": "MOD principal",
+        "Closed": "Cerrado",
+        "Notes": "Notas",
+        "Created": "Creado",
+        "Add Discussion": "Agregar discusión"
+    },
+    "Models\\Member": {
+        "Discussion": "Discusión",
+        "Member": "Miembro",
+        "Permissions": "Permisos",
+        "Add Member": "Agregar miembro"
+    },
+    "Models\\Message": {
+        "Discussion": "Discusión",
+        "From": "De",
+        "From (Email)": "De (correo electrónico)",
+        "Text": "Texto",
+        "Sent": "Enviado",
+        "Add Message": "Agregar mensaje"
+    },
+    "Components\\FormDiscussion": {
+        "About": "Acerca de Hubleto",
+        "Messages": "Mensajes",
+        "Discussion": "Discusión"
+    },
+    "Components\\FormMember": {
+        "Member": "Miembro",
+        "Record #": "Registro #"
+    },
+    "Components\\FormMessage": {
+        "Task": "Tarea",
+        "Message": "Mensaje",
+        "Record #": "Registro #"
+    },
+    "Components\\Messages": {
+        "you": "usted",
+        "Type your message here...": "Escriba su mensaje aquí...",
+        "Tip: You can use **markdown** syntax.": "Consejo: puede usar sintaxis **markdown**."
+    }
+}

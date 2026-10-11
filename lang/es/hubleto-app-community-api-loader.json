@@ -6,9 +6,9 @@
         "Discussions": "Discusiones",
         "Members": "Miembros",
         "Messages": "Mensajes",
-        "API": "",
-        "Keys": "",
-        "Usage log": ""
+        "API": "API",
+        "Keys": "Claves",
+        "Usage log": "Registro de uso"
     },
     "Models\\Key": {
         "Key": "Clave",
@@ -18,12 +18,14 @@
         "IP Address blacklist": "Lista negra de direcciones IP",
         "IP Address whitelist": "Lista blanca de direcciones IP",
         "Created by": "Creado por",
-        "Created": "Creado"
+        "Created": "Creado",
+        "Add Key": "Agregar clave"
     },
     "Models\\Permission": {
         "Key": "Clave",
         "App": "Aplicación",
-        "Controller": "Controlador"
+        "Controller": "Controlador",
+        "Add Permission": "Agregar permiso"
     },
     "Components\\FormKey": {
         "Usage": "Registros de uso",
@@ -31,7 +33,13 @@
         "Permissions": "Permisos",
         "Test": "Probar",
         "Test result": "Resultado de la prueba",
-        "Run test": "Ejecutar prueba"
+        "Run test": "Ejecutar prueba",
+        "API Key": "Clave API",
+        "Parameter": "Parámetro",
+        "Endpoint": "Endpoint",
+        "App": "Aplicación",
+        "Controller": "Controlador",
+        "Vars": "Variables"
     },
     "Models\\Usage": {
         "Key": "Clave",
@@ -42,6 +50,19 @@
         "Status": "Estado",
         "Unknown": "Desconocido",
         "Success": "Éxito",
-        "Error": "Error"
+        "Error": "Error",
+        "Add Usage": "Agregar uso"
+    },
+    "Controllers\\Keys": {
+        "API": "API",
+        "Keys": "Claves"
+    },
+    "Controllers\\Permissions": {
+        "API": "API",
+        "Permissions": "Permisos"
+    },
+    "Controllers\\Usages": {
+        "API": "API",
+        "Usages": "Usos"
     }
 }

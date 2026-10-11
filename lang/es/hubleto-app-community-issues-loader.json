@@ -3,7 +3,7 @@
         "Issues": "Problemas",
         "Issue management": "Gestión de problemas",
         "Mail accounts": "Cuentas de correo",
-        "Issues Mail Accounts": ""
+        "Issues Mail Accounts": "Cuentas de correo de incidencias"
     },
     "root": {
         "Issues": "Problemas",
@@ -14,11 +14,57 @@
     },
     "Models\\Issue": {
         "Title": "Título",
-        "Problem description": "Descripción del problema"
+        "Problem description": "Descripción del problema",
+        "From": "De",
+        "Notess": "Notas",
+        "Customer": "Cliente",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Owner": "Propietario",
+        "Manager": "Gerente",
+        "Shared with": "Compartido con",
+        "Closed": "Cerrado",
+        "Thread UID": "UID del hilo",
+        "Add issue": "Agregar incidencia",
+        "Open / Closed": "Abierto / Cerrado",
+        "Open": "Abierto",
+        "All": "Todo",
+        "Ownership": "Propiedad",
+        "Owned by me": "De mi propiedad",
+        "Managed by me": "Gestionado por mí",
+        "Stage": "Etapa"
     },
     "Models\\MailAccount": {
         "Mail account (requires Mail app)": "Cuenta de correo (requiere la aplicación de correo)",
         "Configuration": "Configuración",
         "Notes": "Notas"
+    },
+    "Controllers\\Posts": {
+        "Issues": "Problemas",
+        "Posts": "Publicaciones"
+    },
+    "Controllers\\MailAccounts": {
+        "Issues": "Problemas",
+        "Mail accounts": "Cuentas de correo"
+    },
+    "Models\\IssueTask": {
+        "Issue": "Emitido",
+        "Task": "Tarea",
+        "Assign task to issue": "Asignar tarea a la incidencia"
+    },
+    "Models\\Post": {
+        "Issue": "Emitido",
+        "From": "De",
+        "Content": "Contenido",
+        "Thread UID": "UID del hilo",
+        "Originating mail": "Correo de origen",
+        "Add post": "Agregar publicación"
+    },
+    "Components\\FormIssue": {
+        "Issue": "Emitido",
+        "Tasks": "Tareas"
+    },
+    "Components\\FormPost": {
+        "Post": "Publicación"
     }
 }

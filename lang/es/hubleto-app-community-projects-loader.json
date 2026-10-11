@@ -4,8 +4,13 @@
         "Project management": "Gestión de proyectos",
         "Phases": "Fases",
         "Monthly summary": "Resumen mensual",
-        "Milestones": "",
-        "Task assignment": ""
+        "Milestones": "Hitos",
+        "Task assignment": "Asignación de tareas",
+        "Sample project #1": "Proyecto de ejemplo #1",
+        "Sample project #1 for demonstration purposes.": "Proyecto de ejemplo #1 con fines de demostración.",
+        "Sample project #2": "Proyecto de ejemplo #2",
+        "Sample project #2 for demonstration purposes.": "Proyecto de ejemplo #2 con fines de demostración.",
+        "Create project": "Crear proyecto"
     },
     "root": {
         "Projects": "Proyectos",
@@ -34,8 +39,11 @@
         "Open": "Abierto",
         "All": "Todos",
         "Average hourly costs": "Costo promedio por hora",
-        "Project manager": "",
-        "Shared with": ""
+        "Project manager": "Gerente de proyecto",
+        "Shared with": "Compartido con",
+        "Leave empty to generate automatically.": "Deja en blanco para generar automáticamente.",
+        "Online documentation folder": "Carpeta de documentación en línea",
+        "Add Project": "Agregar proyecto"
     },
     "Models\\Phase": {
         "Name": "Nombre",
@@ -48,37 +56,135 @@
         "Project": "Proyecto",
         "Tasks": "Tareas",
         "Statistics": "Estadísticas",
-        "Open tasks": "Tareas abiertas"
+        "Open tasks": "Tareas abiertas",
+        "Documents": "Documentos",
+        "Milestones": "Hitos",
+        "Expenses": "Gastos",
+        "Discussions": "Discusiones",
+        "Project:": "Proyecto:",
+        "Order": "Orden",
+        "Select parent order": "Seleccionar pedido principal",
+        "First create the project, then you will be prompted to add tasks.": "Primero cree el proyecto; luego se le pedirá agregar tareas.",
+        "Worked hours & costs by month": "Horas trabajadas y costos por mes",
+        "Chargeable hours by month": "Horas facturables por mes",
+        "Labor costs calculator": "Calculadora de costos laborales",
+        "Total": "Total",
+        "User": "Usuario",
+        "Worked hours": "Horas trabajadas",
+        "Salary": "Salario",
+        "Labor costs": "Costos laborales",
+        "hours": "horas"
     },
     "Models\\ProjectOrder": {
         "Project": "Proyecto",
-        "Order": "Pedido"
+        "Order": "Pedido",
+        "Order Projects": "Proyectos del pedido",
+        "Add project": "Agregar proyecto"
     },
     "Models\\ProjectTask": {
         "Project": "Proyecto",
-        "Task": "Tarea"
+        "Task": "Tarea",
+        "Assign task to project": "Asignar tarea al proyecto"
     },
     "Models\\ProjectDeal": {
         "Project": "Proyecto",
-        "Deal": "Oportunidad"
+        "Deal": "Oportunidad",
+        "Project Deals": "Oportunidades del proyecto",
+        "Add deal": "Agregar oportunidad"
     },
     "Models\\ProjectActivity": {
-        "Subject": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "Recurrence": "",
-        "All day": "",
-        "Completed": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Created by": "",
-        "Project": "",
-        "Contact": ""
+        "Subject": "Asunto",
+        "Location": "Ubicación",
+        "Online meeting link": "Enlace a la reunión en línea",
+        "Description": "Descripción",
+        "Activity type": "Tipo de actividad",
+        "Start date": "Fecha de inicio",
+        "Start time": "Hora de inicio",
+        "End date": "Fecha de finalización",
+        "End time": "Hora de finalización",
+        "Recurrence": "Recurrencia",
+        "All day": "Todo el día",
+        "Completed": "Completado",
+        "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Resúmen de la reunión",
+        "Created by": "Creado por",
+        "Project": "Proyecto",
+        "Contact": "Contacto"
+    },
+    "Models\\MilestoneReport": {
+        "Milestone": "Hito",
+        "Summary": "Resumen",
+        "Details": "Detalles",
+        "Progress": "Progreso",
+        "Reported on": "Reportado el",
+        "Reported by": "Reportado por",
+        "Add milestone report": "Agregar informe de hito"
+    },
+    "Models\\Expense": {
+        "Project": "Proyecto",
+        "Reason": "Motivo",
+        "Date": "Fecha",
+        "Amount": "Monto",
+        "Approved by": "Aprobado por",
+        "Spent by": "Gastado por",
+        "Add expense": "Agregar gasto"
+    },
+    "Components\\FormMilestone": {
+        "Milestone": "Hito",
+        "Reports": "Reportes"
+    },
+    "Components\\FormMilestoneReport": {
+        "Milestone report": "Informe de hito"
+    },
+    "Components\\FormExpense": {
+        "Expense": "Gasto"
+    },
+    "Controllers\\Projects": {
+        "Projects": "Proyectos"
+    },
+    "Controllers\\Dashboard": {
+        "Projects": "Proyectos",
+        "Current date and time is": "La fecha y hora actual es",
+        "Go to contacts": "Ir a contactos"
+    },
+    "Controllers\\Contacts": {
+        "Projects": "Proyectos",
+        "Contacts": "Contactos"
+    },
+    "Controllers\\Settings": {
+        "Projects": "Proyectos",
+        "Settings": "Configuraciones",
+        "Create your custom settings page here": "Cree aquí su página de configuración personalizada"
+    },
+    "Models\\Milestone": {
+        "Title": "Título",
+        "Due date": "Fecha de vencimiento",
+        "Expected output": "Resultado esperado",
+        "Description of activities": "Descripción de las actividades",
+        "Color": "Color",
+        "Closed": "Cerrado",
+        "Last report": "Último informe",
+        "Last progress": "Último progreso",
+        "Add milestone": "Agregar hito",
+        "Project": "Proyecto"
+    },
+    "Controllers\\Milestones": {
+        "Milestones": "Hitos"
+    },
+    "Controllers\\ProjectsTasks": {
+        "Projects": "Proyectos",
+        "Assignment of tasks": "Asignación de tareas"
+    },
+    "Controllers\\MonthlySummary": {
+        "Projects": "Proyectos",
+        "Monthly summary": "Resumen mensual",
+        "Search project": "Buscar proyecto",
+        "No project found.": "No se encontró ningún proyecto.",
+        "projects found": "proyectos encontrados",
+        "hours": "horas"
+    },
+    "Calendar": {
+        "Projects": "Proyectos",
+        "Add new activity linked to Projects": "Agregar nueva actividad vinculada a los proyectos"
     }
 }

@@ -4,12 +4,49 @@
         "Free sales workflow management.": "Gestión flexible de flujos de ventas.",
         "History": "Historial",
         "Workflows": "Flujos de trabajo",
-        "Items with not updated step": ""
+        "Items with not updated step": "Elementos con paso no actualizado",
+        "Campaigns": "Campañas",
+        "Preparation": "Preparación",
+        "Launched": "Lanzado",
+        "Analysis": "Análisis",
+        "Leads": "Clientes potenciales",
+        "Subscriber": "Suscriptor",
+        "MQL": "MQL",
+        "SQL": "SQL",
+        "Opportunity": "Oportunidad",
+        "Customer": "Cliente",
+        "Deals": "Oportunidades",
+        "Prospecting": "Prospección",
+        "Qualified": "Calificado",
+        "Quote Sent": "Cotización enviada",
+        "Under Review": "En revisión",
+        "Contracting": "Contratación",
+        "WON": "GANADO",
+        "LOST": "PERDIDO",
+        "Orders": "Pedidos",
+        "In progress": "En curso",
+        "Delivered": "Entregado",
+        "Ready to invoice": "Listo para facturar",
+        "Invoiced": "Facturado",
+        "Paid": "Pagado",
+        "Projects": "Proyectos",
+        "Implementation": "Implementación",
+        "Testing": "Pruebas",
+        "Tasks": "Tareas",
+        "Ready to test": "Listo para probar",
+        "Test passed": "Prueba superada",
+        "Test failed": "Prueba fallida",
+        "Ready to deploy": "Listo para desplegar",
+        "Deployed": "Desplegado",
+        "Accepted": "Aceptado",
+        "Manage workflows": "Administrar flujos de trabajo"
     },
     "Controllers\\Home": {
         "Workflow": "Flujo de trabajo",
         "Add workflow": "Agregar flujo de trabajo",
-        "Manage workflow steps": "Administrar etapas del flujo"
+        "Manage workflow steps": "Administrar etapas del flujo",
+        "Manage workflows": "Administrar flujos de trabajo",
+        "Add deal": "Agregar oportunidad"
     },
     "root": {
         "Workflows": "Flujos de trabajo"
@@ -20,7 +57,8 @@
         "Type": "Tipo",
         "Group": "Grupo",
         "Order": "Pedido",
-        "Show in kanban": ""
+        "Show in kanban": "Mostrar en kanban",
+        "Add Workflow": "Agregar flujo de trabajo"
     },
     "Models\\WorkflowStep": {
         "Name": "Nombre",
@@ -29,10 +67,20 @@
         "Probability": "Probabilidad",
         "Workflow": "Flujo de trabajo",
         "Set result of a deal to": "Establecer resultado de una oportunidad a",
-        "Tag": "Etiqueta"
+        "Tag": "Etiqueta",
+        "Add Workflow Step": "Agregar paso del flujo de trabajo"
     },
     "Controllers\\Workflow": {
-        "Workflow": "Flujo de trabajo"
+        "Workflow": "Flujo de trabajo",
+        "Show details": "Mostrar detalles",
+        "Target": "Objetivo",
+        "Goal": "Objetivo",
+        "items": "artículos",
+        "Project has no milestones.": "El proyecto no tiene hitos.",
+        "progress": "progreso",
+        "reported on": "reportado el",
+        "no report yet": "aún sin informe",
+        "Closed milestone": "Hito cerrado"
     },
     "Models\\WorkflowHistory": {
         "Model": "Modelo",
@@ -41,5 +89,25 @@
         "User": "Usuario",
         "Workflow": "Flujo de trabajo",
         "Workflow Step": "Etapa del flujo"
+    },
+    "Controllers\\Workflows": {
+        "Settings": "Configuraciones",
+        "Workflows": "Flujos de trabajo"
+    },
+    "Controllers\\History": {
+        "Workflow": "Flujo de trabajo",
+        "History": "Historial"
+    },
+    "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
+        "Item": "Artículo",
+        "Days without workflow update": "Días sin actualizar el flujo de trabajo",
+        "Last update by": "Última actualización por"
+    },
+    "Components\\FormWorkflow": {
+        "Workflow": "Flujo de trabajo",
+        "Steps": "Pasos"
+    },
+    "Components\\FormWorkflowStep": {
+        "Workflow step": "Etapa del flujo"
     }
 }

@@ -1,0 +1,32 @@
+{
+    "manifest": {
+        "Audit Logs": "Registros de auditoría",
+        "Internal audit logs": "Registros de auditoría internos"
+    },
+    "Models\\AuditLog": {
+        "Datetime": "Fecha y hora",
+        "Type": "Tipo",
+        "Context": "Contexto",
+        "Model": "Modelo",
+        "RecordId": "ID de registro",
+        "Message": "Mensaje",
+        "Priority": "Prioridad",
+        "User": "Usuario",
+        "IP": "IP",
+        "create": "crear",
+        "update": "actualizar",
+        "delete": "eliminar"
+    },
+    "Controllers\\AuditLogs": {
+        "AuditLogs": "Registros de auditoría"
+    },
+    "Components\\FormAuditLog": {
+        "Audit Log": "Registro de auditoría"
+    },
+    "Crons\\DailyDigest": {
+        "Hubleto: Your Daily Digest": "Hubleto: su resumen diario"
+    },
+    "Digest": {
+        "Hi {{ name }}, here is your daily digest": "Hola {{ name }}, este es su resumen diario"
+    }
+}

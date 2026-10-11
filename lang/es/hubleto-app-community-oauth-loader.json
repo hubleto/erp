@@ -1,0 +1,43 @@
+{
+    "manifest": {
+        "OAuth": "OAuth"
+    },
+    "Models\\AccessToken": {
+        "Access Token": "Token de acceso",
+        "User Id": "ID de usuario",
+        "Client Id": "ID de cliente",
+        "Scopes": "Alcances",
+        "Revoked": "Revocado",
+        "Add AccessToken": "Agregar token de acceso"
+    },
+    "Models\\AuthCode": {
+        "Code": "Código",
+        "Expires At": "Expira el",
+        "User Id": "ID de usuario",
+        "Client Id": "ID de cliente",
+        "Scopes": "Alcances",
+        "Code Challenge": "Code Challenge",
+        "Code Challenge Method": "Método de Code Challenge",
+        "Redirect Uri": "URI de redirección",
+        "Revoked": "Revocado",
+        "Add AuthCode": "Agregar código de autorización"
+    },
+    "Models\\Client": {
+        "Client Id": "ID de cliente",
+        "Client Secret": "Secreto del cliente",
+        "Name": "Nombre",
+        "Redirect Uri": "URI de redirección",
+        "Add Client": "Agregar cliente"
+    },
+    "Models\\RefreshToken": {
+        "Access Token": "Token de acceso",
+        "Refresh Token": "Token de actualización",
+        "Expires At": "Expira el",
+        "Add RefreshToken": "Agregar token de actualización"
+    },
+    "Models\\Scope": {
+        "Scope Id": "ID de alcance",
+        "Description": "Descripción",
+        "Add Scope": "Agregar alcance"
+    }
+}

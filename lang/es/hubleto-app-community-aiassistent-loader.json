@@ -1,0 +1,43 @@
+{
+    "manifest": {
+        "AIAssistant": "Asistente IA",
+        "AI Assistant for intelligent data interaction": "Asistente de IA para la interacción inteligente con los datos"
+    },
+    "Controllers\\Home": {
+        "AIAssistant": "Asistente IA",
+        "AI Assistant": "Asistente de IA"
+    },
+    "Controllers\\Settings": {
+        "AIAssistant": "Asistente IA",
+        "Settings": "Configuraciones",
+        "Settings saved.": "Configuración guardada.",
+        "Google Gemini API Key": "Clave API de Google Gemini",
+        "AI Model": "Modelo de IA",
+        "Context Sensitivity Level": "Nivel de sensibilidad del contexto",
+        "Level of detail from ERP records sent to AI.": "Nivel de detalle de los registros del ERP enviados a la IA.",
+        "0 - Restricted (No context data)": "0 - Restringido (sin datos de contexto)",
+        "1 - Detailed data (Send record info to AI)": "1 - Datos detallados (enviar información del registro a la IA)",
+        "Save": "Guardar"
+    },
+    "GeminiProvider": {
+        "Failed to get a response from AIAssistant.": "No se pudo obtener una respuesta del Asistente IA."
+    },
+    "Components\\ChatUi": {
+        "User Mode": "Modo usuario",
+        "Developer Mode": "Modo desarrollador",
+        "Context": "Contexto",
+        "Show context details": "Mostrar detalles del contexto",
+        "Sample Questions": "Preguntas de ejemplo",
+        "Hi, I am Hubi, your AIAssistant. How can I help you today with Hubleto ERP?": "Hola, soy Hubi, su asistente de IA. ¿En qué puedo ayudarle hoy con Hubleto ERP?",
+        "Thinking...": "Pensando...",
+        "Type your question here...": "Escriba su pregunta aquí...",
+        "AI can make mistakes. Please verify answers in the official documentation.": "La IA puede cometer errores. Verifique las respuestas en la documentación oficial.",
+        "Error occurred.": "Ocurrió un error.",
+        "Connection error.": "Error de conexión.",
+        "What is the difference between a Lead and a Deal in Hubleto?": "¿Cuál es la diferencia entre un cliente potencial y una oportunidad en Hubleto?",
+        "How can I create a new model and migration in Hubleto?": "¿Cómo puedo crear un nuevo modelo y una migración en Hubleto?",
+        "How do I set up calendar synchronization?": "¿Cómo configuro la sincronización del calendario?",
+        "How do I create a new custom app?": "¿Cómo creo una nueva aplicación personalizada?",
+        "How does the link between an order and an invoice work?": "¿Cómo funciona el vínculo entre un pedido y una factura?"
+    }
+}

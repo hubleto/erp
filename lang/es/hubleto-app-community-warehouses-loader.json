@@ -8,7 +8,23 @@
         "Transactions": "Movimientos",
         "Inventory": "Inventario",
         "Create transaction": "Registrar movimiento",
-        "Locations types": "Tipos de ubicaciones"
+        "Locations types": "Tipos de ubicaciones",
+        "All items": "Todos los artículos",
+        "Area": "Área",
+        "Aisle": "Pasillo",
+        "Rack": "Estante",
+        "Shelf": "Repisa",
+        "Bin": "Contenedor",
+        "Main": "Principal",
+        "Regional": "Regional",
+        "External": "Externo",
+        "Main Distribution Center": "Centro de distribución principal",
+        "Main warehouse used for supplying the most important customers.": "Almacén principal usado para abastecer a los clientes más importantes.",
+        "Regional Hub East": "Centro regional Este",
+        "Regional warehouse used for supplying the regional customers.": "Almacén regional usado para abastecer a los clientes de la región.",
+        "Settings": "Configuraciones",
+        "Types of warehouses": "Tipos de almacenes",
+        "Types of locations": "Tipos de ubicaciones"
     },
     "root": {
         "Warehouses": "Almacenes",
@@ -34,7 +50,11 @@
         "Manager of operation": "Responsable de operaciones",
         "Current stock status": "Estado actual de stock",
         "Add warehouse": "Agregar almacén",
-        "Type": "Tipo"
+        "Type": "Tipo",
+        "Automatically calculated as total capacity of all locations in warehouse.": "Se calcula automáticamente como la capacidad total de todas las ubicaciones del almacén.",
+        "Active": "Activo",
+        "Inactive": "Inactivo",
+        "Maintenance": "Mantenimiento"
     },
     "Models\\WarehouseType": {
         "Name": "Nombre"
@@ -53,7 +73,11 @@
         "Manager of operation": "Responsable de operaciones",
         "Current stock status": "Estado actual de stock",
         "Add location": "Agregar ubicación",
-        "Type": "Tipo"
+        "Type": "Tipo",
+        "Active": "Activo",
+        "Inactive": "Inactivo",
+        "Maintenance": "Mantenimiento",
+        "JSON-formatted information about placement of location inside the warehouse.": "Información en formato JSON sobre la posición de la ubicación dentro del almacén."
     },
     "Models\\LocationType": {
         "Name": "Nombre"
@@ -67,7 +91,8 @@
         "Address": "Dirección",
         "More information": "Información adicional",
         "Locations": "Ubicaciones",
-        "Warehouse": "Almacén"
+        "Warehouse": "Almacén",
+        "First create warehouse, then you will be prompted to add its locations.": "Primero cree el almacén; luego se le pedirá agregar sus ubicaciones."
     },
     "Controllers\\Locations": {
         "Warehouses": "Almacenes",
@@ -76,7 +101,8 @@
     "Components\\FormLocation": {
         "Capacity and stock status": "Capacidad y estado de stock",
         "Placement": "Posición",
-        "More information": "Información adicional"
+        "More information": "Información adicional",
+        "Location": "Ubicación"
     },
     "Controllers\\Inventory": {
         "Warehouses": "Almacenes",
@@ -91,8 +117,8 @@
         "Expiration": "Fecha de vencimiento",
         "Received": "Recibido",
         "Last moved": "Último movimiento",
-        "Location": "",
-        "Add item": ""
+        "Location": "Ubicación",
+        "Add item": "Agregar artículo"
     },
     "Components\\TableInventory": {
         "Total quantity": "Cantidad total"
@@ -119,15 +145,15 @@
         "Add transaction": "Agregar movimiento",
         "Inbound": "Entrada",
         "Outbound": "Salida",
-        "Old location": "",
-        "New location": "",
-        "Receipt": "",
-        "Shipment": "",
-        "Transfer In": "",
-        "Transfer Out": "",
-        "Adjustment In": "",
-        "Adjustment Out": "",
-        "Return": ""
+        "Old location": "Ubicación anterior",
+        "New location": "Nueva ubicación",
+        "Receipt": "Recibo",
+        "Shipment": "Envío",
+        "Transfer In": "Transferencia de entrada",
+        "Transfer Out": "Transferencia de salida",
+        "Adjustment In": "Ajuste de entrada",
+        "Adjustment Out": "Ajuste de salida",
+        "Return": "Devolución"
     },
     "Models\\TransactionItem": {
         "Transaction": "Movimiento",
@@ -136,5 +162,36 @@
         "Quantity": "Cantidad",
         "Original location": "Ubicación original",
         "New location": "Nueva ubicación"
+    },
+    "Controllers\\TransactionItems": {
+        "Warehouses": "Almacenes",
+        "Transactions": "Transacciones",
+        "Items": "Artículos"
+    },
+    "Controllers\\WarehouseTypes": {
+        "Warehouses": "Almacenes",
+        "Settings": "Configuraciones",
+        "Warehouse types": "Tipos de almacenes"
+    },
+    "Controllers\\LocationTypes": {
+        "Warehouses": "Almacenes",
+        "Settings": "Configuraciones",
+        "Location types": "Tipos de ubicación"
+    },
+    "Components\\FormInventory": {
+        "Inventory": "Inventario"
+    },
+    "Components\\FormTransaction": {
+        "Transaction": "Movimiento",
+        "Product": "Producto",
+        "Purchase price": "Precio de compra",
+        "Qty.": "Cant.",
+        "Add item": "Agregar producto"
+    },
+    "Components\\FormTransactionItem": {
+        "Transaction item": "Artículo de la transacción"
+    },
+    "Components\\TableTransactionItems": {
+        "Total quantity": "Cantidad total"
     }
 }

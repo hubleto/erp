@@ -3,7 +3,9 @@
         "Campaigns": "Campañas",
         "Management of marketing campaigns": "Gestión de campañas de marketing",
         "Recipients": "Destinatarios",
-        "Recipient statuses": "Estados de los destinatarios"
+        "Recipient statuses": "Estados de los destinatarios",
+        "Target": "Objetivo",
+        "Goal": "Objetivo"
     },
     "Models\\Campaign": {
         "Name": "Nombre",
@@ -33,7 +35,17 @@
         "Owner": "Propietario",
         "Lanuched by": "Lanzado por",
         "Launched": "Lanzado",
-        "Shared with": ""
+        "Shared with": "Compartido con",
+        "Type": "Tipo",
+        "Phase": "Fase",
+        "Ownership": "Propiedad",
+        "Owned by me": "De mi propiedad",
+        "Managed by me": "Gestionado por mí",
+        "Online document folder": "Carpeta de documentos en línea",
+        "not specified": "no especificado",
+        "direct mail": "correo directo",
+        "cold call": "llamada",
+        "other": "otro"
     },
     "Models\\Recipient": {
         "Campaign": "Campaña",
@@ -44,11 +56,21 @@
         "Salutation": "Saludo",
         "Reference to mail sent": "Correo enviado de referencia",
         "Variables": "Variables",
-        "Status": "Estado"
+        "Status": "Estado",
+        "Add recipient": "Agregar destinatario",
+        "UTM: source": "UTM: fuente",
+        "UTM: campaign": "UTM: campaña",
+        "UTM: term": "UTM: término",
+        "Group by": "Agrupar por",
+        "Count": "Cantidad",
+        "Clicks": "Clicks",
+        "Click summary": "Resumen de clics",
+        "Bot score": "Puntuación de bot"
     },
     "Models\\CampaignTask": {
         "Campaign": "Campaña",
-        "Task": "Tarea"
+        "Task": "Tarea",
+        "Add campaign": "Agregar campaña"
     },
     "Controllers\\Campaigns": {
         "Campaigns": "Campañas"
@@ -62,13 +84,60 @@
         "Contacts": "Contactos",
         "Recipients": "Destinatarios",
         "Test": "Prueba",
-        "Clicks": "Clicks"
+        "Clicks": "Clicks",
+        "Select contacts which will be added as recipients": "Seleccione los contactos que se agregarán como destinatarios",
+        "One email per line.": "Un correo electrónico por línea.",
+        "Import emails": "Importar correos electrónicos",
+        "Emails will be sent only to recipients who did not receive email from this campaign yet.": "Los correos se enviarán solo a los destinatarios que aún no hayan recibido un correo de esta campaña.",
+        "Unsubscribed recipients will be ignored.": "Los destinatarios dados de baja serán ignorados.",
+        "Unsubscribed and invalid recipients will be ignored.": "Los destinatarios dados de baja y no válidos serán ignorados.",
+        "Who clicked? (Bot Score = 0)": "¿Quién hizo clic? (Puntuación de bot = 0)",
+        "Email": "Correo electrónico",
+        "Status": "Estado",
+        "Bot score": "Puntuación de bot",
+        "Launch campaign now!": "¡Lanzar la campaña ahora!",
+        "Analysis & warnings": "Análisis y advertencias",
+        "Send test email": "Enviar correo de prueba",
+        "Test email recipient:": "Destinatario del correo de prueba:",
+        "Recipient email": "Correo del destinatario",
+        "Test email variables:": "Variables del correo de prueba:",
+        "Loading information about recipients and launch status.": "Cargando información sobre los destinatarios y el estado del lanzamiento.",
+        "Analysing campaign...": "Analizando la campaña...",
+        "Error occured when sending a test email to you.": "Ocurrió un error al enviarle el correo de prueba.",
+        "Recently contacted": "Contactado recientemente",
+        "Documents": "Documentos",
+        "Log completed activity": "Registrar actividad completada",
+        "Schedule activity": "Programar actividad",
+        "Most recent activities": "Actividades más recientes",
+        "Not completed yet": "No completado aún",
+        "Type recent activity here": "Escriba la actividad reciente aquí",
+        "No warnings": "Sin advertencias",
+        "Statistics": "Estadísticas",
+        "Total": "Total",
+        "Details": "Detalles",
+        "Emails sent": "Correos enviados",
+        "Invalid recipients": "Destinatarios no válidos",
+        "Unsubscribed recipients": "Destinatarios dados de baja",
+        "Campaign was launched.": "La campaña fue lanzada.",
+        "Error occured when launching the campaign.": "Ocurrió un error al lanzar la campaña.",
+        "Sent": "Enviado",
+        "Scheduled": "Programado",
+        "Not scheduled yet": "Aún no programado",
+        "Unsubscribed": "Dado de baja",
+        "Invalid": "No válido",
+        "in campaign": "en la campaña",
+        "Campaign was already launched by {{ email }} on {{ datetime }}.": "La campaña ya fue lanzada por {{ email }} el {{ datetime }}.",
+        "Test email was sent to you.": "Se le envió el correo de prueba.",
+        "Leads": "Clientes potenciales",
+        "First create the campaign, then you will be prompted to create leads.": "Primero cree la campaña; luego se le pedirá crear clientes potenciales."
     },
     "Models\\Click": {
         "Campaign": "Campaña",
         "Recipient": "Destinatario",
         "Url": "Url",
-        "Clicked": "Clickeado"
+        "Clicked": "Clickeado",
+        "Bot Score": "Puntuación de bot",
+        "Log": "Registro"
     },
     "Models\\CampaignActivity": {
         "Subject": "Asunto",
@@ -89,11 +158,64 @@
         "Campaign": "Campaña"
     },
     "Components\\TableCampaigns": {
-        "Hide filter": "Esconder filtro"
+        "Hide filter": "Esconder filtro",
+        "Copy cell content to clipboard": "Copiar el contenido de la celda al portapapeles"
     },
     "Models\\RecipientStatus": {
         "Email": "Correo electrónico",
         "Is unsubscribed": "Está excluido",
-        "Is invalid": "Es inválido"
+        "Is invalid": "Es inválido",
+        "Add recipient status": "Agregar estado del destinatario"
+    },
+    "Controllers\\Recipients": {
+        "Campaigns": "Campañas",
+        "Recipients": "Destinatarios"
+    },
+    "Controllers\\Api\\SendTestEmail": {
+        "Recipient must be provided.": "Se debe indicar un destinatario.",
+        "Recipient is not valid email address.": "El destinatario no es una dirección de correo electrónico válida."
+    },
+    "Controllers\\Api\\GetCampaignTestInfo": {
+        "Mail template is not set.": "No se ha definido la plantilla de correo.",
+        "Mail template does not contain {{ placeholder }} placeholder.": "La plantilla de correo no contiene el marcador {{ placeholder }}.",
+        "Recipients contain variables {{ variables }} but not all of them are used in template.": "Los destinatarios contienen las variables {{ variables }}, pero no todas se usan en la plantilla."
+    },
+    "Components\\FormActivity": {
+        "Campaign": "Campaña"
+    },
+    "Components\\FormRecipient": {
+        "Campaign": "Campaña",
+        "Recipient": "Destinatario",
+        "Mail preview": "Vista previa del correo",
+        "No mail preview available.": "No hay vista previa del correo disponible."
+    },
+    "Components\\FormRecipientStatus": {
+        "Campaign": "Campaña",
+        "Recipient status": "Estado del destinatario"
+    },
+    "Components\\FormClick": {
+        "Campaign": "Campaña",
+        "Click": "Clic"
+    },
+    "Components\\TableRecipients": {
+        "Unsubscribed": "Dado de baja",
+        "Invalid": "No válido"
+    },
+    "Controllers\\RecipientStatuses": {
+        "Campaigns": "Campañas",
+        "Recipients": "Destinatarios",
+        "Statuses": "Estados"
+    },
+    "Controllers\\Unsubscribe": {
+        "Unsubscribe": "Darse de baja",
+        "Your email": "Correo electrónico",
+        "has been unsubscribed.": "ha sido dado de baja.",
+        "Your email:": "Su correo electrónico:",
+        "Powered by Hubleto": "Desarrollado con Hubleto"
+    },
+    "Calendar": {
+        "Campaigns": "Campañas",
+        "Add new activity linked to campaign": "Agregar nueva actividad vinculada a la campaña",
+        "Campaign #{{ id }}": "Campaña #{{ id }}"
     }
 }

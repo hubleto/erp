@@ -11,7 +11,7 @@
         "Developer": "Desarrollador",
         "DB Updates": "Actualizaciones de la base de datos",
         "Form designer": "Diseñador de formularios",
-        "Check DB consistency": ""
+        "Check DB consistency": "Verificar la consistencia de la base de datos"
     },
     "Controllers\\DbUpdates": {
         "Developer": "Desarrollador",
@@ -20,24 +20,35 @@
         "No necessary database updates found.": "No se encontraron actualizaciones necesarias para la base de datos."
     },
     "Controllers\\CheckDbConsistency": {
-        "Developer tools": "",
-        "Check DB consistency": "",
-        "No necessary database updates found.": ""
+        "Developer tools": "Herramientas para desarrolladores",
+        "Check DB consistency": "Verificar consistencia de la base de datos",
+        "No necessary database updates found.": "No se encontraron actualizaciones necesarias para la base de datos.",
+        "UID": "UID",
+        "Type": "Tipo",
+        "Description": "Descripción",
+        "SQL": "SQL",
+        "Run this update": "Ejecutar esta actualización",
+        "Run the updates now!": "¡Ejecutar las actualizaciones ahora!"
     },
     "Controllers\\FormDesigner": {
-        "Developer": "",
-        "Form designer": "",
-        "Template": "",
-        "One column": "",
-        "Two columns": "",
-        "Three columns": "",
-        "Rendered Typescript code": "",
-        "Copy & paste following code into your ": "",
-        " file and then:": "",
-        "1. Adapt the code to render inputs, nested tables or other components based on your requirements.": "",
-        "2. Run ": "",
-        " in your terminal.": "",
-        "Check ": "",
-        " for more details.": ""
+        "Developer": "Desarrollador",
+        "Form designer": "Diseñador de formularios",
+        "Template": "Plantilla",
+        "One column": "Una columna",
+        "Two columns": "Dos columnas",
+        "Three columns": "Tres columnas",
+        "Rendered Typescript code": "Código TypeScript renderizado",
+        "Copy & paste following code into your ": "Copia y pega el siguiente código en tu ",
+        " file and then:": " archivo y luego:",
+        "1. Adapt the code to render inputs, nested tables or other components based on your requirements.": "1. Adapta el código para renderizar entradas, tablas anidadas u otros componentes según tus requisitos.",
+        "2. Run ": "2. Ejecuta ",
+        " in your terminal.": " en tu terminal.",
+        "Check ": "Consulta ",
+        " for more details.": " para más detalles."
+    },
+    "Controllers\\UpgradeModels": {
+        "Developer tools": "Herramientas para desarrolladores",
+        "Upgrade models": "Actualizar modelos",
+        "No upgrades found.": "No se encontraron actualizaciones."
     }
 }

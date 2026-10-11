@@ -2,7 +2,19 @@
     "manifest": {
         "Notifications": "Notificaciones",
         "Auth": "Autenticación",
-        "Hubleto Authorization App for User Management": "Aplicación de autorización de Hubleto para la gestión de usuarios"
+        "Hubleto Authorization App for User Management": "Aplicación de autorización de Hubleto para la gestión de usuarios",
+        "Administrator": "Administrador",
+        "Can do anything.": "Puede hacer cualquier cosa.",
+        "Chief Officer (default permissions)": "Director ejecutivo (permisos predeterminados)",
+        "Can read all data and can modify most of the data. Does not have access to settings.": "Puede leer todos los datos y modificar la mayoría de ellos. No tiene acceso a la configuración.",
+        "Manager (default permissions)": "Gerente (permisos predeterminados)",
+        "Can read and modify all data that he/she owns or is manager.": "Puede leer y modificar todos los datos de los que es propietario o gerente.",
+        "Employee (default permissions)": "Empleado (permisos predeterminados)",
+        "In general, can read or modify only data that he/she owns.": "En general, solo puede leer o modificar los datos de los que es propietario.",
+        "Assistant (default permissions)": "Asistente (permisos predeterminados)",
+        "Very similar to employee, but may be more limited in some certain situations.": "Muy similar al empleado, pero puede estar más limitado en ciertas situaciones.",
+        "External (default permissions)": "Externo (permisos predeterminados)",
+        "By default should not have access to anything. Access permissions must be enabled in settings by administrator.": "Por defecto no debería tener acceso a nada. El administrador debe habilitar los permisos de acceso en la configuración."
     },
     "Models\\User": {
         "Type": "Tipo",
@@ -20,24 +32,56 @@
         "Phone number #2": "Número de teléfono #2",
         "Photo": "Foto",
         "Timezone": "Zona horaria",
-        "Permissions": ""
+        "Permissions": "Permisos",
+        "Add User": "Agregar usuario",
+        "NOT_SPECIFIED": "NO_ESPECIFICADO",
+        "ADMINISTRATOR": "ADMINISTRADOR",
+        "Chief Officer (CEO, CFO, CTO, ...)": "Director ejecutivo (CEO, CFO, CTO, ...)",
+        "Manager (Sales, Project, ...)": "Gerente (ventas, proyectos, ...)",
+        "Employee": "Empleado",
+        "Assistant": "Asistente",
+        "External": "Externo"
     },
     "Models\\UserRole": {
         "Role": "Rol",
         "Grant all permissions (administrator role)": "Conceder todos los permisos (rol de administrador)",
         "Description": "Descripción",
         "Is default role (cannot be modified)": "Es el rol predeterminado (no se puede modificar)",
-        "Permissions": ""
+        "Permissions": "Permisos",
+        "User Roles": "Roles de usuario",
+        "Add User Role": "Agregar rol de usuario"
     },
     "Models\\UserHasRole": {
         "User": "Usuario",
-        "Role": "Rol"
+        "Role": "Rol",
+        "Assign Roles": "Asignar roles"
     },
     "Controllers\\SignIn": {
         "Your email": "Correo electrónico",
         "Password": "Contraseña",
         "Keep signed in": "Mantener sesión iniciada",
         "Sign in": "Iniciar sesión",
-        "Forgot password?": "¿Olvidó su contraseña?"
+        "Forgot password?": "¿Olvidó su contraseña?",
+        "Email or password invalid. Try again.": "Correo electrónico o contraseña no válidos. Inténtelo de nuevo.",
+        "Password successfully updated.": "Contraseña actualizada correctamente."
+    },
+    "Controllers\\ForgotPassword": {
+        "A password reset link has been sent to your email address.": "Se ha enviado un enlace para restablecer la contraseña a su correo electrónico.",
+        "Check your inbox.": "Revise su bandeja de entrada.",
+        "Email": "Correo electrónico",
+        "Request password reset": "Solicitar restablecimiento de contraseña",
+        "Back to sign in": "Volver a iniciar sesión"
+    },
+    "Controllers\\ResetPassword": {
+        "Passwords do not match.": "Las contraseñas no coinciden.",
+        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.": "La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "¡Bienvenido a Hubleto! Establezca su contraseña para acceder a su panel y comenzar a usar la aplicación.",
+        "New password": "Nueva contraseña",
+        "Confirm new password": "Confirmar nueva contraseña",
+        "Reset password": "Restablecer contraseña"
+    },
+    "Controllers\\NotEnoughPermissions": {
+        "You don't have permissions for this panel": "No tiene permisos para este panel",
+        "Sign out": "Cerrar sesión"
     }
 }

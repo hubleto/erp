@@ -1,7 +1,8 @@
 {
     "manifest": {
         "Usage": "Uso",
-        "Usage statistics": "Estadísticas de uso"
+        "Usage statistics": "Estadísticas de uso",
+        "Usage log": "Registro de uso"
     },
     "root": {
         "Usage log": "Registro de uso"
@@ -13,5 +14,14 @@
         "Params": "Parámetros",
         "Message": "Mensaje",
         "User": "Usuario"
+    },
+    "Controllers\\Home": {
+        "Usage": "Registros de uso",
+        "Log": "Registro"
+    },
+    "Controllers\\Log": {
+        "Usage": "Registros de uso",
+        "Log": "Registro",
+        "Usage log": "Registro de uso"
     }
 }

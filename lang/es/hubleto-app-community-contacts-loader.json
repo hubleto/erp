@@ -4,7 +4,10 @@
         "Default customer management and addressbook.": "Gestión predeterminada de clientes y libreta de direcciones.",
         "Contact Categories": "Categorías de contacto",
         "Contact Tags": "Etiquetas de contacto",
-        "Import contacts": "Importar contactos"
+        "Import contacts": "Importar contactos",
+        "Work": "Trabajo",
+        "Home": "Inicio",
+        "Other": "Otro"
     },
     "Components\\FormPerson": {
         "Edit": "Editar",
@@ -74,11 +77,15 @@
         "Import contacts": "Importar contactos"
     },
     "Models\\Category": {
-        "Type": "Tipo"
+        "Type": "Tipo",
+        "Contact Categories": "Categorías de contacto",
+        "Add Contact Category": "Agregar categoría de contacto"
     },
     "Models\\Tag": {
         "Name": "Etiqueta",
-        "Color": "Color"
+        "Color": "Color",
+        "Contact Tags": "Etiquetas de contacto",
+        "Add Contact Tag": "Agregar etiqueta de contacto"
     },
     "Models\\Contact": {
         "Salutation": "Saludo",
@@ -99,11 +106,12 @@
         "Mrs.": "Sra.",
         "Valid": "Válido",
         "Tags": "Etiquetas",
-        "Invoicing Contact": ""
+        "Invoicing Contact": "Contacto de facturación"
     },
     "Models\\ContactTag": {
         "Contact": "Contacto",
-        "Tag": "Etiqueta"
+        "Tag": "Etiqueta",
+        "Contact tags": "Etiquetas de contacto"
     },
     "Controllers\\Contacts": {
         "Contacts": "Contactos"
@@ -124,41 +132,61 @@
         "Contacts": "Contactos"
     },
     "Components\\TableContacts": {
-        "Primary": "Principal"
+        "Primary": "Principal",
+        "Invoicing": "Facturación",
+        "Copy cell content to clipboard": "Copiar el contenido de la celda al portapapeles"
     },
     "Controllers\\Import": {
-        "Import": "",
-        "Contacts": "",
-        "Step 1: Prepare list of contacts": "",
-        "Contacts can be imported from a ": "",
-        " or ": "",
-        " file. The file for import must comply with following rules": "",
-        "The file can contain unlimited number of lines.": "",
-        "Values in file must be separated by semicolon": "",
-        "First line of the file must be the header containig names of the columns.": "",
-        "Following lines contain ": "",
-        "persons": "",
-        "First 3 columns must be ": "",
-        "First name": "",
-        "Middle name": "",
-        " and ": "",
-        "Last name": "",
-        " of the person": "",
-        "Following columns contain contact information. Each column represents one contact information.": "",
-        "Each person can contain any number of contact information.": "",
-        "The import automatically detects ": "",
-        "emails": "",
-        "phone numbers": "",
-        "links": "",
-        "Example CSV file": "",
-        "You may also": "",
-        "Export your addressbook": "",
-        "modify it and re-import again": "",
-        "Step 2: Upload the file with contacts": "",
-        "Step 3: Give a tag to new imported contacts": "",
-        "Step 4: Check the import": "",
-        "Check the import now": "",
-        "Step 5: Run the import": "",
-        "You will be able to run the import after its check": ""
+        "Import": "Importar",
+        "Contacts": "Contactos",
+        "Step 1: Prepare list of contacts": "Paso 1: Preparar lista de contactos",
+        "Contacts can be imported from a ": "Los contactos se pueden importar desde un ",
+        " or ": "o",
+        " file. The file for import must comply with following rules": "archivo. El archivo a importar debe cumplir con las siguientes reglas",
+        "The file can contain unlimited number of lines.": "El archivo puede contener un número ilimitado de líneas.",
+        "Values in file must be separated by semicolon": "Los valores en el archivo deben estar separados por punto y coma.",
+        "First line of the file must be the header containig names of the columns.": "La primera línea del archivo debe ser el encabezado que contiene los nombres de las columnas.",
+        "Following lines contain ": "Las siguientes líneas contienen ",
+        "persons": "personas",
+        "First 3 columns must be ": "Las primeras 3 columnas deben ser ",
+        "First name": "Nombre",
+        "Middle name": "Segundo Nombre",
+        " and ": "y",
+        "Last name": "Apellido",
+        " of the person": " de la persona",
+        "Following columns contain contact information. Each column represents one contact information.": "Las siguientes columnas contienen información de contacto. Cada columna representa una información de contacto.",
+        "Each person can contain any number of contact information.": "Cada persona puede contener cualquier número de información de contacto.",
+        "The import automatically detects ": "El importador detecta automáticamente ",
+        "emails": "correos",
+        "phone numbers": "números de teléfono",
+        "links": "enlaces",
+        "Example CSV file": "Ejemplo de archivo CSV",
+        "You may also": "También puede",
+        "Export your addressbook": "Exportar su libreta de direcciones",
+        "modify it and re-import again": "modificarlo y vuelver a importarlo",
+        "Step 2: Upload the file with contacts": "Paso 2: Cargar el archivo con contactos",
+        "Step 3: Give a tag to new imported contacts": "Paso 3: Asignar una etiqueta a los nuevos contactos importados",
+        "Step 4: Check the import": "Paso 4: Revisar la importación",
+        "Check the import now": "Revisar la importación ahora",
+        "Step 5: Run the import": "Paso 5: Ejecutar la importación",
+        "You will be able to run the import after its check": "Podrá ejecutar la importación después de revisarla",
+        "This was only check of the import. Check the log and if you are satisfied, upload the CSV file again run the import now.": "Esto fue solo una verificación de la importación. Revise el registro y, si está conforme, vuelva a subir el archivo CSV y ejecute la importación.",
+        "Run import": "Ejecutar importación",
+        "Import finished, see log below": "Importación finalizada, vea el registro a continuación",
+        "Test of import, see log below": "Prueba de importación, vea el registro a continuación",
+        "File:": "Archivo:",
+        "Tag:": "Etiqueta:"
+    },
+    "Controllers\\Categories": {
+        "Contacts": "Contactos",
+        "Categories": "Categorias"
+    },
+    "Controllers\\Tags": {
+        "Settings": "Configuraciones",
+        "Contact Tags": "Etiquetas de contacto"
+    },
+    "Controllers\\Api\\CheckPrimaryContact": {
+        "Some request data were missing": "Faltan algunos datos de la solicitud",
+        "There already exists a primary contact for this customer for these tags:": "Ya existe un contacto principal para este cliente con estas etiquetas:"
     }
 }

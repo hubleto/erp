@@ -2,15 +2,15 @@
     "manifest": {
         "Tasks": "Tareas",
         "Task management app": "Aplicación de gestión de tareas",
-        "Todo": "",
-        "My recent tasks": ""
+        "Todo": "Por hacer",
+        "My recent tasks": "Mis tareas recientes"
     },
     "Models\\Task": {
         "Identifier": "Identificador",
         "Title": "Título",
         "Description": "Descripción",
-        "Developer": "Desarrollador",
-        "Tester": "Probador",
+        "Developer": "Responsable",
+        "Tester": "Supervisor",
         "Priority": "Prioridad",
         "Estimation": "Estimación",
         "Duration": "Duración",
@@ -32,15 +32,20 @@
         "Open \/ Closed": "Abierto \/ Cerrado",
         "Open": "Abierto",
         "All": "Todos",
-        "Estimated workhours": "",
-        "Estimated duration": ""
+        "Estimated workhours": "Horas de trabajo estimadas",
+        "Estimated duration": "Duración estimada",
+        "Add Task": "Agregar tarea",
+        "Leave empty to generate automatically.": "Deja en blanco para generar automáticamente.",
+        "Shared folder (online document storage)": "Carpeta compartida (almacenamiento de documentos en línea)",
+        "Status": "Estado"
     },
     "Models\\Todo": {
         "To do": "Por hacer",
         "Task": "Tarea",
         "Responsible": "Responsable",
         "Closed": "Cerrado",
-        "Deadline": "Fecha límite"
+        "Deadline": "Fecha límite",
+        "Add Todo": "Agregar pendiente"
     },
     "Controllers\\Boards\\MyRecentTasks": {
         "You did not work on any task since last 2 weeks.": "No trabajaste en ninguna tarea durante las últimas 2 semanas."
@@ -49,7 +54,30 @@
         "Tasks": "Tareas"
     },
     "Controllers\\Todos": {
-        "Tasks": "",
-        "Todo": ""
+        "Tasks": "Tareas",
+        "Todo": "Por hacer"
+    },
+    "Components\\FormTask": {
+        "Task": "Tarea",
+        "unsaved changes": "cambios no guardados",
+        "Todo": "Por hacer",
+        "Press ENTER to add new Todo": "Presione ENTER para agregar un nuevo pendiente",
+        "Worksheet": "Registro de horas",
+        "Orders": "Pedidos",
+        "Deals": "Oportunidades",
+        "Projects": "Proyectos",
+        "What to do?": "¿Qué hay que hacer?",
+        "Add new todo...": "Agregar nuevo pendiente..."
+    },
+    "Components\\TableTasks": {
+        "Copy cell content to clipboard": "Copiar el contenido de la celda al portapapeles",
+        "Add activity": "Agregar actividad"
+    },
+    "Components\\FormTodo": {
+        "Todo": "Por hacer"
+    },
+    "Calendar": {
+        "Tasks": "Tareas",
+        "Add new activity linked to Tasks": "Agregar nueva actividad vinculada a las tareas"
     }
 }

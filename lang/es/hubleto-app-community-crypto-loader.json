@@ -4,6 +4,6 @@
         "Manage security keys and other security settings.": "Gestión de claves de seguridad y otros ajustes de seguridad."
     },
     "Controllers\\Dashboard": {
-        "Crypto": ""
+        "Crypto": "Crypto"
     }
 }

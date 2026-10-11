@@ -8,6 +8,17 @@
     "Controllers\\About": {
         "About": "Acerca de Hubleto",
         "About your Hubleto": "Acerca de tu Hubleto",
-        "Useful links": ""
+        "Useful links": "Enlaces de interés",
+        "Package": "Paquete",
+        "Version": "Versión",
+        "Commit": "Commit",
+        "Privacy policy": "Política de privacidad",
+        "Terms of use": "Términos de uso",
+        "Website": "Sitio web",
+        "User guide": "Guía de usuario",
+        "Community discussion forum": "Foro de discusión de la comunidad",
+        "Developer's guide": "Guía para desarrolladores",
+        "Source code": "Código fuente",
+        "Packages": "Paquetes"
     }
 }

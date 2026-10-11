@@ -2,8 +2,9 @@
     "manifest": {
         "Dashboards": "Tableros",
         "Free dashboards app": "Aplicación gratuita de tableros",
-        "Preview Dashboards": "",
-        "Manage": ""
+        "Preview Dashboards": "Vista previa de tableros",
+        "Manage": "Gestionar",
+        "My dashboard": "Mi panel"
     },
     "root": {
         "Dashboards": "Tableros"
@@ -26,7 +27,7 @@
         "Width": "Ancho",
         "Order": "Orden",
         "Position": "Posición",
-        "Add panel": ""
+        "Add panel": "Agregar panel"
     },
     "Components\\Dashboard": {
         "Add new panel": "Agregar nuevo panel",
@@ -35,17 +36,28 @@
     "Controllers\\Dashboards": {
         "Dashboards": "Tableros",
         "Add dashboard": "Agregar tablero",
-        "Preview Dashboards": ""
+        "Preview Dashboards": "Vista previa de los tableros",
+        "Manage": "Gestionar",
+        "Active": "Activo",
+        "Manage dashboards": "Administrar paneles"
     },
     "Controllers\\Settings": {
         "Dashboards": "Tableros",
         "Settings": "Configuraciones"
     },
     "Components\\FormDashboard": {
-        "Panels": "Paneles"
+        "Panels": "Paneles",
+        "Preview": "Vista previa",
+        "Advanced options": "Opciones avanzadas",
+        "Preview available after saving": "Vista previa disponible después de guardar",
+        "First create the dashboard, then you will be prompted to add panels.": "Primero cree el panel; luego se le pedirá agregar paneles."
     },
     "Controllers\\DashboardsManage": {
-        "Manage": "",
-        "Dashboards": ""
+        "Manage": "Gestionar",
+        "Dashboards": "Tableros",
+        "Settings": "Configuraciones"
+    },
+    "Components\\FormPanel": {
+        "Dashboard panel": "Panel del tablero"
     }
 }

@@ -1,0 +1,15 @@
+{
+    "manifest": {
+        "Billing": "Facturación"
+    },
+    "Controllers\\BillingAccounts": {
+        "Customers": "Clientes",
+        "Billing Accounts": "Cuentas de facturación"
+    },
+    "Models\\BillingAccount": {
+        "Customer": "Cliente",
+        "Description": "Descripción",
+        "Billing Account": "Cuenta de facturación",
+        "Add Billing Account": "Agregar cuenta de facturación"
+    }
+}

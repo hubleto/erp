@@ -8,5 +8,8 @@
         "Model": "Modelo",
         "Query": "Consulta",
         "Notes": "Notas"
+    },
+    "Controllers\\Home": {
+        "Reports": "Reportes"
     }
 }

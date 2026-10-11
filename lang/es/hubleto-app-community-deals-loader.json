@@ -8,7 +8,18 @@
         "Most valuable deals": "Oportunidades más valiosas",
         "Deal value by result": "Valor de oportunidades por resultado",
         "Active deals": "Oportunidades activas",
-        "Archived deals": "Oportunidades archivadas"
+        "Archived deals": "Oportunidades archivadas",
+        "Create deal": "Crear oportunidad",
+        "Important": "Importante",
+        "ASAP": "Lo antes posible",
+        "Extenstion": "Extensión",
+        "New Customer": "Nuevo cliente",
+        "Existing Customer": "Cliente existente",
+        "Price": "Precio",
+        "Solution": "Solución",
+        "Demand canceled by customer": "Demanda cancelada por el cliente",
+        "Other": "Otro",
+        "Calendar": "Calendario"
     },
     "Controllers\\Deals": {
         "Sales": "Ventas",
@@ -19,14 +30,15 @@
     "Controllers\\DealsArchive": {
         "Sales": "Ventas",
         "Deals": "Oportunidades",
-        "Archive": "Archivo"
+        "Archive": "Archivo",
+        "Archived deals": "Oportunidades archivadas"
     },
     "Models\\Deal": {
         "Deal Identifier": "Identificación",
         "Title": "Título",
         "Customer": "Cliente",
         "Contact person": "Persona de contacto",
-        "Lead": "Prospecto",
+        "Lead": "Cliente potencial",
         "Price": "Precio",
         "Currency": "Moneda",
         "Expected close date": "Fecha de cierre prevista",
@@ -65,16 +77,41 @@
         "Active": "Activa",
         " changed from ": " cambió de ",
         " to ": " a ",
-        "Shared with": ""
+        "Shared with": "Compartido con",
+        "Unknown": "Desconocido",
+        "Won": "Ganado",
+        "Lost": "Perdido",
+        "New": "Nuevo",
+        "Existing": "Existente",
+        "Advertisement": "Anuncio",
+        "Partner": "Socio",
+        "Web": "Web",
+        "Cold call": "Llamada",
+        "E-mail": "Correo electrónico",
+        "Referral": "Recomendación",
+        "Other": "Otro",
+        "Shared folder (online document storage)": "Carpeta compartida (almacenamiento de documentos en línea)",
+        "Description\/notes before the list of items": "Descripción\/notas antes de la lista de artículos",
+        "Description\/notes after the list of items": "Descripción\/notas después de la lista de artículos",
+        "Template": "Plantilla",
+        "Document": "Documento",
+        "PDF": "PDF",
+        "Deal created": "Oportunidad creada",
+        "Yes": "Sí",
+        "No": "No",
+        "Customer' order number": "Número de pedido del cliente"
     },
     "Models\\DealHistory": {
         "Change Date": "Fecha de cambio",
         "Deal": "Oportunidad",
-        "Description": "Descripción"
+        "Description": "Descripción",
+        "Deals": "Oportunidades",
+        "Add Deal": "Agregar oportunidad"
     },
     "Models\\DealTag": {
         "Deal": "Oportunidad",
-        "Tag": "Etiqueta"
+        "Tag": "Etiqueta",
+        "Deal Tags": "Etiquetas de oportunidades"
     },
     "Models\\DealActivity": {
         "Deal": "Oportunidad",
@@ -94,8 +131,8 @@
         "Online meeting link": "Enlace a la reunión en línea",
         "Description": "Descripción",
         "Recurrence": "Recurrencia",
-        "Long meeting minutes (link to external document)": "Acta larga de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Acta corta de la reunión"
+        "Long meeting minutes (link to external document)": "Minuta extendida de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Resumen de la reunión"
     },
     "Models\\DealDocument": {
         "Deal": "Oportunidad",
@@ -116,7 +153,7 @@
         "Local documents": "Documentos locales",
         "Shared documents": "Documentos compartidos",
         "History": "Historial",
-        "Go to original lead": "Ir al prospecto original",
+        "Go to original lead": "Ir al cliente potencial original",
         "Documents": "Documentos",
         "Show deals": "Mostrar oportunidades",
         "Enter = Log completed activity": "Enter = Registrar actividad completada",
@@ -132,14 +169,27 @@
         "Deal value:": "Valor de la oportunidad:",
         "Weighted profit": "Ganancia ponderada",
         "Tasks": "Tareas",
-        "Products": "Productos"
+        "Products": "Productos",
+        "Lead": "Cliente potencial",
+        "Items": "Artículos",
+        "Select parent lead": "Seleccionar cliente potencial principal",
+        "Customer": "Cliente",
+        "Contact": "Contacto",
+        "Description": "Descripción",
+        "Change Date": "Fecha de cambio",
+        "Generate quotation (PDF)": "Generar cotización (PDF)",
+        "Price is calculated from items.": "El precio se calcula a partir de los artículos."
     },
     "Models\\Tag": {
         "Name": "Nombre",
-        "Color": "Color"
+        "Color": "Color",
+        "Deal Tags": "Etiquetas de oportunidades",
+        "Add Deal Tag": "Agregar etiqueta de oportunidad"
     },
     "Controllers\\Boards\\MostValuableDeals": {
-        "Open deal": "Oportunidad abierta"
+        "Open deal": "Oportunidad abierta",
+        "No deals found.": "No se encontraron oportunidades.",
+        "Add deal": "Agregar oportunidad"
     },
     "Models\\Item": {
         "Deal": "Oportunidad",
@@ -156,7 +206,9 @@
         "Sales Price": "Precio de venta"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Razón de pérdida"
+        "Lost Reason": "Razón de pérdida",
+        "Deal Lost Reasons": "Razones de pérdida de oportunidades",
+        "Add Reason": "Agregar motivo"
     },
     "Controllers\\LostReasons": {
         "Settings": "Configuraciones",
@@ -168,29 +220,48 @@
         "Show 'Deal warnings' in dashboard": "Mostrar 'Alertas de oportunidades' en el panel",
         "Show 'Most valuable deals' in dashboard": "Mostrar 'Oportunidades más valiosas' en el panel",
         "Show 'Deal value by result' in dashboard": "Mostrar 'Valor de oportunidades por resultado' en el tablero",
-        "Calendar color": "Color del calendario"
+        "Calendar color": "Color del calendario",
+        "Settings saved.": "Configuración guardada.",
+        "Deals Prefix": "Prefijo de oportunidades"
     },
     "Controllers\\Boards\\DealWarnings": {
         "Pending deals without future plan": "Čakajúce dealy bez budúceho plánu",
         "No notifications for deals.": "Žiadne oznámenia o dealoch.",
         "Open deal": "Deal",
-        "Open deals without future plan": "Otvorené dealy bez budúceho plánu"
+        "Open deals without future plan": "Otvorené dealy bez budúceho plánu",
+        "No warnings for deals.": "No hay advertencias para las oportunidades."
     },
     "Controllers\\Boards\\DealValueByResult": {
         "Unknown": "Desconocido",
         "Pending": "En proceso",
         "Won": "Ganado",
-        "Lost": "Perdido"
+        "Lost": "Perdido",
+        "No deals found.": "No se encontraron oportunidades.",
+        "Add deal": "Agregar oportunidad"
     },
     "Models\\DealLead": {
         "Deal": "Oportunidad",
-        "Lead": "Prospecto"
+        "Lead": "Cliente potencial",
+        "Add Deal": "Agregar oportunidad"
     },
     "Models\\DealTask": {
         "Deal": "Oportunidad",
-        "Task": "Tarea"
+        "Task": "Tarea",
+        "Add Deal": "Agregar oportunidad"
     },
     "Components\\TableDeals": {
         "Hide filter": "Ocultar filtro"
+    },
+    "Controllers\\ReportGoal": {
+        "Sales": "Ventas",
+        "Goals": "Objetivos"
+    },
+    "Controllers\\Api\\DailyDigest": {
+        "Missing plan": "Falta plan",
+        "You should schedule further activity for this deal.": "Debería programar más actividades para esta oportunidad."
+    },
+    "Calendar": {
+        "Deals": "Oportunidades",
+        "Add new activity linked to deal": "Agregar nueva actividad vinculada a la oportunidad"
     }
 }

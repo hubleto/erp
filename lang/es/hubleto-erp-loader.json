@@ -9,7 +9,9 @@
         "Adding record": "Agregando registro",
         "Editing record": "Editando registro",
         "Record": "Registro",
-        "New record": "Nuevo registro"
+        "New record": "Nuevo registro",
+        "Saved": "Guardado",
+        "You have unsaved changes. Are you sure to close?": "Tiene cambios sin guardar. ¿Está seguro de que desea cerrar?"
     },
     "Components\\Input": {
         "Upload file": "Subir archivo"
@@ -22,7 +24,16 @@
         "Start typing to search...": "Comienza a escribir para buscar...",
         "Search...": "Buscar...",
         "No data.": "No hay datos.",
-        "More options": "Más opciones"
+        "More options": "Más opciones",
+        "Show/Hide filter": "Mostrar/Ocultar filtro",
+        "Hide filter": "Esconder filtro",
+        "Show as plain table": "Mostrar como tabla simple",
+        "Show as standard table": "Mostrar como tabla estándar",
+        "Delete record": "Eliminar registro",
+        "Cancel": "Cancelar",
+        "Are you sure you want to delete this record?": "¿Está seguro de que desea eliminar este registro?",
+        "Copy cell content to clipboard": "Copiar el contenido de la celda al portapapeles",
+        "records were hidden based on your permissions.": "registros fueron ocultados según sus permisos."
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Mantener sesión iniciada"
@@ -44,11 +55,122 @@
     "Controllers\\NotFound": {
         "Page Not Found": "Página no encontrada",
         "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Lo sentimos, no pudimos encontrar la página que buscabas. Verifica tus permisos o regresa a la página principal.",
-        "Home": "Inicio"
+        "Home": "Inicio",
+        "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Lo sentimos, no pudimos encontrar la página que buscaba. Verifique sus permisos o vuelva a la página de inicio."
     },
     "Model": {
         "Export to CSV": "Exportar a CSV",
         "Import from CSV": "Importar desde CSV",
-        "Columns": ""
+        "Columns": "Columnas"
+    },
+    "RecordManager": {
+        "Cannot read record. Not enough permissions.": "No se puede leer el registro. Permisos insuficientes.",
+        "Cannot delete. Not enough permissions.": "No se puede eliminar. Permisos insuficientes.",
+        "Cannot save. Not enough permissions.": "No se puede guardar. Permisos insuficientes.",
+        "A field contains a value that already exists.": "Un campo contiene un valor que ya existe.",
+        "Value '{{ value }}' for {{ field }} already exists.": "El valor '{{ value }}' para {{ field }} ya existe.",
+        "{{ field }} is required.": "{{ field }} es obligatorio.",
+        "{{ field }} contains invalid value.": "{{ field }} contiene un valor no válido."
+    },
+    "HubletoReactUi": {
+        "Some inputs need your attention": "Algunos campos requieren su atención",
+        "Duplicate entry error": "Error de entrada duplicada",
+        "OK, I understand": "De acuerdo, entiendo",
+        "Warning": "Advertencia",
+        "Confirm": "Confirmar"
+    },
+    "Components\\FormExtended": {
+        "Copy link to clipboard": "Copiar enlace al portapapeles",
+        "unsaved changes": "cambios no guardados",
+        "Open in new tab": "Abrir en una nueva pestaña"
+    },
+    "Components\\ErpWorkflowSelector": {
+        "Change workflow": "Cambiar flujo de trabajo",
+        "Last update: {{ date }} by {{ user }}": "Última actualización: {{ date }} por {{ user }}",
+        "unknown": "desconocido"
+    },
+    "Components\\Inputs\\JsonKeyValue": {
+        "Add value": "Agregar valor"
+    },
+    "Components\\Inputs\\File": {
+        "Upload file": "Subir archivo"
+    },
+    "Components\\Inputs\\DateTime": {
+        "Year-Month-Day": "Año-Mes-Día",
+        "Year-Month-Day Hour:Min:Sec": "Año-Mes-Día Hora:Min:Seg"
+    },
+    "Components\\Inputs\\SharedWith": {
+        "Share": "Compartir",
+        "Default access based on ownership": "Acceso predeterminado según la propiedad",
+        "Can only read": "Solo puede leer",
+        "Can read and modify": "Puede leer y modificar",
+        "Apply": "Aplicar"
+    },
+    "Components\\TableExtended": {
+        "Add new": "Agregar nuevo",
+        "Customize Columns": "Personalizar columnas"
+    },
+    "Components\\TableExtendedColumnsCustomize": {
+        "Customize Columns": "Personalizar columnas",
+        "Save": "Guardar",
+        "Reset to default": "Restablecer valores predeterminados"
+    },
+    "Components\\Inputs\\TextareaWithHtmlPreview": {
+        "Toggle fullscreen": "Alternar pantalla completa",
+        "Preview": "Vista previa"
+    },
+    "Components\\ErpSearch": {
+        "[Ctrl+K] Search in Hubleto...": "[Ctrl+K] Buscar en Hubleto...",
+        "No options": "Sin opciones"
+    },
+    "Controllers\\AccessForbidden": {
+        "Access Forbidden": "Acceso prohibido",
+        "Home": "Inicio",
+        "You have no access to {{ appName }}.": "No tiene acceso a {{ appName }}."
+    },
+    "EmailProvider": {
+        "Hello from Hubleto!": "¡Hola desde Hubleto!",
+        "Dear {{ name }},": "Estimado/a {{ name }}:",
+        "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Recibimos una solicitud para restablecer la contraseña de su cuenta. Si usted hizo esta solicitud, haga clic en el botón de abajo para establecer una nueva contraseña:",
+        "Reset password": "Restablecer contraseña",
+        "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Si no solicitó restablecer su contraseña, ignore este correo. Su contraseña no cambiará.",
+        "For security reasons, this link will expire in 15 minutes.": "Por motivos de seguridad, este enlace caducará en 15 minutos.",
+        "Reset your password | Hubleto": "Restablezca su contraseña | Hubleto",
+        "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "¡Gracias por registrarse en nuestro sitio web! Nos alegra tenerle con nosotros. Haga clic en el botón de abajo para confirmar su cuenta y comenzar.",
+        "Get started": "Comenzar",
+        "If you didn't sign up for this account, you can safely ignore this email.": "Si no se registró para esta cuenta, puede ignorar este correo con tranquilidad.",
+        "Your Hubleto account has been created!": "¡Su cuenta de Hubleto ha sido creada!"
+    },
+    "Emails\\EmailProvider": {
+        "Hello from Hubleto!": "¡Hola desde Hubleto!",
+        "Dear {{ name }},": "Estimado/a {{ name }}:",
+        "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Recibimos una solicitud para restablecer la contraseña de su cuenta. Si usted hizo esta solicitud, haga clic en el botón de abajo para establecer una nueva contraseña:",
+        "Reset password": "Restablecer contraseña",
+        "If you did not request a password reset, please ignore this email. Your password will remain unchanged.": "Si no solicitó restablecer su contraseña, ignore este correo. Su contraseña no cambiará.",
+        "For security reasons, this link will expire in 15 minutes.": "Por motivos de seguridad, este enlace caducará en 15 minutos.",
+        "Reset your password | Hubleto": "Restablezca su contraseña | Hubleto",
+        "Thank you for signing up at our website! We're excited to have you on board. Please click the button below to confirm your account and get started.": "¡Gracias por registrarse en nuestro sitio web! Nos alegra tenerle con nosotros. Haga clic en el botón de abajo para confirmar su cuenta y comenzar.",
+        "Get started": "Comenzar",
+        "If you didn't sign up for this account, you can safely ignore this email.": "Si no se registró para esta cuenta, puede ignorar este correo con tranquilidad.",
+        "Your Hubleto account has been created!": "¡Su cuenta de Hubleto ha sido creada!"
+    },
+    "Renderer": {
+        "Oops! Something went wrong with the database.": "¡Vaya! Algo salió mal con la base de datos.",
+        "{{ modelName }} cannot be deleted because other data is linked to it.": "{{ modelName }} no se puede eliminar porque hay otros datos vinculados.",
+        "You are trying to save a record that is already existing.": "Está intentando guardar un registro que ya existe.",
+        "You cannot delete record that is linked with another records. Delete the linked records first.": "No puede eliminar un registro vinculado con otros registros. Elimine primero los registros vinculados.",
+        "Show error details": "Mostrar detalles del error",
+        "Oops! Something went wrong.": "¡Vaya! Algo salió mal."
+    },
+    "Controllers\\Api\\FileUpload\\Upload": {
+        "The file has been successfully uploaded": "El archivo se subió correctamente",
+        "This file type cannot be uploaded": "Este tipo de archivo no se puede subir",
+        "The file already exists": "El archivo ya existe",
+        "An error occurred during the file upload": "Ocurrió un error al subir el archivo"
+    },
+    "Controllers\\Api\\FileUpload\\Delete": {
+        "The deletion of the file encountered an error": "Ocurrió un error al eliminar el archivo",
+        "File not found": "Archivo no encontrado",
+        "The file has been successfully deleted": "El archivo se eliminó correctamente"
     }
 }

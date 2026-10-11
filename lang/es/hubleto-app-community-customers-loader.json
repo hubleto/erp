@@ -30,8 +30,8 @@
         "Archived": "Archivado",
         "Identifier": "Identificador",
         "Non-active": "Inactivo",
-        "Shared with": "",
-        "Columns": ""
+        "Shared with": "Compartido con",
+        "Columns": "Columnas"
     },
     "Controllers\\Customers": {
         "Customers": "Clientes"
@@ -58,8 +58,8 @@
         "Online meeting link": "Enlace a la reunión en línea",
         "Description": "Descripción",
         "Recurrence": "Recurrencia",
-        "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Minutas cortas de la reunión"
+        "Long meeting minutes (link to external document)": "Minutas de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Resumen de la reunión"
     },
     "Models\\CustomerDocument": {
         "Customer": "Cliente",
@@ -67,7 +67,9 @@
     },
     "Models\\CustomerTag": {
         "Customer": "Cliente",
-        "Tag": "Etiqueta"
+        "Tag": "Etiqueta",
+        "Customer Categories": "Categorías de clientes",
+        "Add Customer": "Agregar cliente"
     },
     "Components\\FormCustomer": {
         "Contacts": "Contactos",
@@ -97,7 +99,11 @@
         "Log completed activity": "Registrar actividad completada",
         "Schedule activity": "Programar actividad",
         "Enter": "Enter",
-        "Shift+Enter": "Shift+Enter"
+        "Shift+Enter": "Shift+Enter",
+        "unsaved changes": "cambios no guardados",
+        "Document": "Documento",
+        "Add document": "Agregar documento",
+        "Link": "Enlace a la versión en línea"
     },
     "root": {
         "Customer Tags": "Etiquetas de clientes"
@@ -114,7 +120,8 @@
     "Components\\CustomerFormActivity": {
         "Customer": "Cliente",
         "End": "Fin",
-        "Start": "Inicio"
+        "Start": "Inicio",
+        "Contact": "Contacto"
     },
     "Controllers\\Activity": {
         "Customers": "Clientes",
@@ -127,6 +134,24 @@
         "Tags": "Etiquetas"
     },
     "Components\\TableCustomers": {
-        "Hide filter": "Ocultar filtro"
+        "Hide filter": "Ocultar filtro",
+        "Show as plain table": "Mostrar como tabla simple",
+        "Show/Hide filter": "Mostrar/Ocultar filtro",
+        "Copy cell content to clipboard": "Copiar el contenido de la celda al portapapeles"
+    },
+    "Controllers\\Settings": {
+        "Customers": "Clientes",
+        "Settings": "Configuraciones",
+        "Customers: Settings": "Clientes: configuración",
+        "Settings saved.": "Configuración guardada.",
+        "Customer tags": "Etiquetas de clientes",
+        "Calendar color": "Color del calendario"
+    },
+    "Controllers\\Dashboard": {
+        "Customers": "Clientes"
+    },
+    "Calendar": {
+        "Customers": "Clientes",
+        "Add new activity linked to customer": "Agregar nueva actividad vinculada al cliente"
     }
 }

@@ -6,7 +6,20 @@
         "List": "Lista",
         "Templates": "Plantillas",
         "Show as list": "Mostrar como lista",
-        "Manage folders": "Gestionar carpetas"
+        "Manage folders": "Gestionar carpetas",
+        "Marketing materials": "Materiales de marketing",
+        "Customer profiles": "Perfiles de clientes",
+        "Quotation": "Cotización",
+        "Proforma invoice": "Factura proforma",
+        "Advance invoice": "Factura de anticipo",
+        "Standard invoice": "Factura estándar",
+        "Credit note": "Nota de crédito",
+        "Debit note": "Nota de débito",
+        "Proforma faktúra": "Factura proforma",
+        "Zálohová faktúra": "Factura de anticipo",
+        "Vyúčtovacia faktúra s DPH": "Factura de liquidación con IVA",
+        "Dobropis s DPH": "Nota de crédito con IVA",
+        "Ťarchopis": "Nota de débito"
     },
     "Models\\Document": {
         "Document name": "Nombre del documento",
@@ -16,7 +29,8 @@
         "Origin Link": "Enlace original",
         "Uid": "Id",
         "Folder": "Carpeta",
-        "Add Document": "Agregar documento"
+        "Add Document": "Agregar documento",
+        "Public": "Público"
     },
     "Controllers\\Documents": {
         "Documents": "Documentos"
@@ -33,14 +47,14 @@
         "Uid": "Id",
         "Parent folder": "Carpeta principal",
         "Folder name": "Nombre de la carpeta",
-        "Add Folder": ""
+        "Add Folder": "Agregar carpeta"
     },
     "Models\\Template": {
         "Name": "Nombre",
         "Content": "Contenido",
         "Notes": "Notas",
         "Used For": "Usado para",
-        "Add template": ""
+        "Add template": "Agregar plantilla"
     },
     "Controllers\\Browse": {
         "Documents": "Documentos",
@@ -48,16 +62,26 @@
     },
     "Components\\Browser": {
         "Add folder": "Agregar carpeta",
-        "Add document": "Agregar documento"
+        "Add document": "Agregar documento",
+        "Move": "Mover",
+        "Move selected": "Mover seleccionados",
+        "Confirm delete": "Confirmar eliminación",
+        "Delete": "Eliminar",
+        "Public": "Público"
     },
     "Components\\FormDocument": {
-        "Document": "Documento"
+        "Document": "Documento",
+        "Download": "Descargar",
+        "Preview": "Vista previa"
     },
     "Controllers\\Folders": {
-        "Folders": ""
+        "Folders": "Carpetas"
     },
     "Controllers\\Templates": {
-        "Templates": "",
-        "Documents": ""
+        "Templates": "Plantillas",
+        "Documents": "Documentos"
+    },
+    "Components\\FormTemplate": {
+        "Document template": "Plantilla de documento"
     }
 }

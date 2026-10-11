@@ -1,0 +1,27 @@
+{
+    "GenerateDemoData": {
+        "Follow-up call": "Llamada de seguimiento",
+        "Lead created": "Cliente potencial creado",
+        "Converted to a deal": "Convertido en oportunidad",
+        "Newsletter subscribers": "Suscriptores del boletín",
+        "Cold calling - SMEs": "Llamadas en frío - PYMEs",
+        "Website visitors filling 'Subscribe to our newsletter'.": "Visitantes del sitio web que completaron 'Suscríbase a nuestro boletín'.",
+        "SMEs reached out by cold calling.": "PYMEs contactadas mediante llamadas en frío.",
+        "Meeting": "Reunión",
+        "Business Trip": "Viaje de negocios",
+        "Call": "Llamada",
+        "Email": "Correo electrónico",
+        "Other": "Otro",
+        "Chief Officer": "Director ejecutivo",
+        "Manager": "Gerente",
+        "Employee": "Empleado",
+        "Assistant": "Asistente",
+        "External": "Externo",
+        "TV": "TV",
+        "Internet": "Internet",
+        "Fiber": "Fibra",
+        "Landline": "Telefonía fija",
+        "Marketing": "Marketing",
+        "Virtual Server": "Servidor virtual"
+    }
+}

@@ -33,7 +33,7 @@
     >
       <div class="text-[3em] p-4 text-primary">{{ viewParams.remindersToday|length }}</div>
     </button>
-    today
+    {{ translate('today') }}
   </div>
   <div class="flex-1 flex flex-col gap-2 items-center">
     <button
@@ -42,7 +42,7 @@
     >
       <div class="text-[3em] p-4 text-primary">{{ viewParams.remindersTomorrow|length }}</div>
     </button>
-    tomorrow
+    {{ translate('tomorrow') }}
   </div>
   <div class="flex-1 flex flex-col gap-2 items-center">
     <button
@@ -51,7 +51,7 @@
     >
       <div class="text-[3em] p-4 text-primary">{{ viewParams.remindersLater|length }}</div>
     </button>
-    later
+    {{ translate('later') }}
   </div>
 </div>
 

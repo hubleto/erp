@@ -12,17 +12,17 @@
   {% if item.virt_next_activity_date == '' %}
     <div class="badge badge-danger text-xs">
       <i class="fas fa-calendar mr-2"></i>
-      No future activity is planned.
+      {{ translate('No future activity is planned.') }}
     </div>
   {% elseif item.virt_next_activity_date == "now"|date("Y-m-d") %}
     <div class="badge badge-warning text-xs">
       <i class="fas fa-calendar mr-2"></i>
-      Next activity is planned for today.
+      {{ translate('Next activity is planned for today.') }}
     </div>
   {% else %}
     <div class="badge badge-success text-xs">
       <i class="fas fa-calendar mr-2"></i>
-      Next activity planned for <b>{{ hubleto.locale().formatDateShort(item.virt_next_activity_date) }}</b>.
+      {{ translate('Next activity planned for {{ date }}.', { date: hubleto.locale().formatDateShort(item.virt_next_activity_date) }) }}
     </div>
   {% endif %}
 </div>

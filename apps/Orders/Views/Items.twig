@@ -2,7 +2,7 @@
   {% for i in viewParams.dueAndChargeableItemsNotPreparedForInvoice %}
     <div class="alert alert-warning">
       <a href="{{ hubleto.env().projectUrl }}/orders/{{ i.ORDER.id }}?tab=items" target="_blank">
-        {{ i.ORDER.identifier }} {{ i.ORDER.title }}, <b>{{ i.title }}</b>, {{ i.unit_price }} {{ i.ORDER.CURRENCY.symbol }} x {{ i.amount }} is ready to be invoiced.
+        {{ i.ORDER.identifier }} {{ i.ORDER.title }}, <b>{{ i.title }}</b>, {{ i.unit_price }} {{ i.ORDER.CURRENCY.symbol }} x {{ i.amount }} {{ translate('is ready to be invoiced.') }}
       </a>
     </div>
   {% endfor %}

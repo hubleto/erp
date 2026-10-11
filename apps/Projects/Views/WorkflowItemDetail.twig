@@ -25,7 +25,7 @@
                   </div>
                   <div class="text-gray-800">
                     {% if m.REPORTS|length > 0 %}
-                      {{ (m.REPORTS|first).progress_percent }} % on {{ hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }},
+                      {{ translate('{{ progress }} % on {{ date }}', { progress: (m.REPORTS|first).progress_percent, date: hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }) }},
                       {{ (m.REPORTS|first).summary }}
                     {% else %}
                       ({{ translate('no report yet') }})

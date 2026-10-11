@@ -7,13 +7,13 @@
 
 <div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
   <div class="card-header">
-    <h1 class="app-main-title">Performance</h1>
+    <h1 class="app-main-title">{{ translate('Performance') }}</h1>
   </div>
   <div class="card-body gap-2 flex-wrap grid md:grid-cols-3">
     {% for btn in buttons %}
       <a href="{{ config.projectUrl }}/{{ btn[0] }}" class="btn btn-square btn-large btn-transparent">
         <span class="icon"><i class="{{ btn[1] }}"></i></span>
-        <span class="text">{{ btn[2] }}</span>
+        <span class="text">{{ translate(btn[2]) }}</span>
       </a>
     {% endfor %}
   </div>

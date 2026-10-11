@@ -42,7 +42,7 @@ class AuditLog extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'datetime' => (new DateTime($this, $this->translate('Datetime')))->setRequired()->setReadonly()->setDefaultVisible(),
-      'type' => (new Integer($this, $this->translate('Type')))->setRequired()->setEnumValues(self::ENUM_TYPES)->setEnumCssClasses(self::ENUM_TYPES_CSS_CLASSES)->setDefaultVisible(),
+      'type' => (new Integer($this, $this->translate('Type')))->setRequired()->setEnumValues(array_map(fn($type) => $this->translate($type), self::ENUM_TYPES))->setEnumCssClasses(self::ENUM_TYPES_CSS_CLASSES)->setDefaultVisible(),
       'context' => (new Varchar($this, $this->translate('Context')))->setRequired()->setReadonly()->setDefaultVisible(),
       'model' => (new Varchar($this, $this->translate('Model')))->setRequired()->setReadonly()->setDefaultVisible(),
       'record_id' => (new Integer($this, $this->translate('RecordId')))->setRequired()->setDefaultVisible(),

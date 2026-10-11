@@ -11,11 +11,15 @@ class MonthlyRevenue extends \Hubleto\Erp\Report
   public string $name = '';
   // public string $modelClass = Deal::class;
 
+  public function __construct()
+  {
+    parent::__construct();
+    $this->name = $this->translate('My revenue this month');
+  }
+
   public function getReportConfig(): array
   {
     $config = [];
-
-    $this->name = $this->translate('My revenue this month');
 
     /** @var Deal */
     $mDeal = $this->getModel(Deal::class);

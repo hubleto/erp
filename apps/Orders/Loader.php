@@ -192,7 +192,7 @@ class Loader extends \Hubleto\Erp\App
     $mTemplate = $this->getModel(Template::class);
 
     $idTemplate = $mTemplate->record->recordCreate([
-      'name' => 'Demo template for order PDF',
+      'name' => $this->translate('Demo template for order PDF'),
       'content' => '
         <div>1 {{ identifier }}</div>
         <div>2 {{ title }}</div>
@@ -206,7 +206,7 @@ class Loader extends \Hubleto\Erp\App
         'id_customer' => rand(1, $customerCount),
         'id_state' => rand(1, $stateCount),
         'identifier' => 'O' . date('Y') . '-00' . $i,
-        'title' => 'This is a test bid #' . $i,
+        'title' => $this->translate('This is a test bid #{{ number }}', ['number' => $i]),
         'price' => rand(1000, 2000) / rand(3, 5),
         'id_currency' => 1,
         'date_order' => date('Y-m-d', strtotime('-' . rand(0, 10) . ' days')),

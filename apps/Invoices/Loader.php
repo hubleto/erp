@@ -86,10 +86,10 @@ class Loader extends \Hubleto\Erp\App
           Models\Invoice::TYPES[Models\Invoice::TYPE_CREDIT_NOTE] => 'CRD',
           Models\Invoice::TYPES[Models\Invoice::TYPE_DEBIT_NOTE] => 'DBT',
     ]),
-      'mail_send_invoice_subject' => 'Invoice nr. {{ number }}',
-      'mail_send_invoice_body' => 'Dear customer, see attached invoice nr. {{ number }}.',
-      'mail_send_due_warning_subject' => 'Notification on due invoice nr. {{ number }}',
-      'mail_send_due_warning_body' => 'Dear customer, this is a kindly reminder on due invoice nr. {{ number }}.',
+      'mail_send_invoice_subject' => $this->translate('Invoice nr. {{ number }}'),
+      'mail_send_invoice_body' => $this->translate('Dear customer, see attached invoice nr. {{ number }}.'),
+      'mail_send_due_warning_subject' => $this->translate('Notification on due invoice nr. {{ number }}'),
+      'mail_send_due_warning_body' => $this->translate('Dear customer, this is a kindly reminder on due invoice nr. {{ number }}.'),
     ]);
   }
 

@@ -32,7 +32,7 @@ class CreateFromOrder extends \Hubleto\Erp\Controllers\ApiController
     try {
       $order = $mOrder->record->prepareReadQuery()->where($mOrder->table . ".id", $idOrder)->first();
       if (!$order) {
-        throw new Exception("Order was not found.");
+        throw new Exception($this->translate("Order was not found."));
       }
 
       $project = $mProject->record->recordCreate([

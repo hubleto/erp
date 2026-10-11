@@ -19,7 +19,7 @@ class ItemsWithNotUpdatedStep extends \Hubleto\Erp\Controller
       $model = $this->router()->urlParamAsString('model');
 
       $modelObj = $this->getModel($model);
-      if (!$modelObj) throw new \Exception('Model does not exist.');
+      if (!$modelObj) throw new \Exception($this->translate('Model does not exist.'));
 
       $modelColumns = $modelObj->describeColumns();
 
@@ -30,7 +30,7 @@ class ItemsWithNotUpdatedStep extends \Hubleto\Erp\Controller
         && $modelColumns['is_closed'] instanceof Boolean
       );
 
-      if (!$hasIsClosedBooleanColumn) throw new \Exception('This report can be shown only for closeable records. (must contain "Is closed" switch)');
+      if (!$hasIsClosedBooleanColumn) throw new \Exception($this->translate('This report can be shown only for closeable records. (must contain "Is closed" switch)'));
 
       $mHistory = $this->getModel(WorkflowHistory::class);
       $lastChangeInfo = Helper::keyBy('id', $mHistory->record

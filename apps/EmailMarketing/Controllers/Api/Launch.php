@@ -28,8 +28,8 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
         ->first()
       ;
 
-      if (!$email->id_sender_account) throw new \Exception('Email has not configured sender account.');
-      if (!$email->is_approved) throw new \Exception('Email is not approved.');
+      if (!$email->id_sender_account) throw new \Exception($this->translate('Email has not configured sender account.'));
+      if (!$email->is_approved) throw new \Exception($this->translate('Email is not approved.'));
 
       $sec = 0;
       $createdMails = 0;

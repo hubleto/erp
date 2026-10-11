@@ -115,7 +115,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
       $cc = $this->router()->urlParamAsString('cc');
       $bcc = $this->router()->urlParamAsString('bcc');
 
-      if (empty($to)) throw new \Exception("Recipient must be provided.");
+      if (empty($to)) throw new \Exception($this->translate("Recipient must be provided."));
 
       try {
 

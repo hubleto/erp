@@ -15,13 +15,13 @@ class GenerateInvoiceNumber extends \Hubleto\Erp\Controllers\ApiController
     /** @var Invoice */
     $mInvoice = $this->getService(Invoice::class);
     $invoice = $mInvoice->record->where('id', $idInvoice)->first();
-    if (!$invoice) throw new \Exception('Invoice not found.');
+    if (!$invoice) throw new \Exception($this->translate('Invoice not found.'));
     $idProfile = $invoice['id_profile'] ?? 0;
 
     /** @var Profile */
     $mProfile = $this->getService(Profile::class);
     $profile = $mProfile->record->where('id', $idProfile)->first();
-    if (!$profile) throw new \Exception('Invoice profile not found.');
+    if (!$profile) throw new \Exception($this->translate('Invoice profile not found.'));
 
     $numberingPattern = (string) ($profile->numbering_pattern ?? 'YYYY/NNNN');
 

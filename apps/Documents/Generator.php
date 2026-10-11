@@ -131,7 +131,7 @@ class Generator extends \Hubleto\Erp\Core
 
     $mTemplate = $this->getService(Template::class);
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $record->id_template)->first();
-    if (!$template) throw new \Exception('Template was not found.');
+    if (!$template) throw new \Exception($this->translate('Template was not found.'));
 
     $vars = $this->getPreviewVars($model, $recordId);
 
@@ -193,7 +193,7 @@ class Generator extends \Hubleto\Erp\Core
 
         if (!empty($error)) throw new \Exception($error);
       } catch (\Throwable $e) {
-        throw new \Exception('Error occured while generating PDF. ' . $e->getMessage());
+        throw new \Exception($this->translate('Error occured while generating PDF.') . ' ' . $e->getMessage());
       }
     } else {
       $options = new Options();

@@ -38,7 +38,7 @@ class CheckDbConsistency extends \Hubleto\Erp\Controller
         if (!isset($tables[$mObj->table])) {
           $necessaryUpdates['mt-' . ($updateCounter++)] = [
             'type' => 'missing-table',
-            'description' => 'Table ' . $mObj->table . ' from ' . $mObj->fullName . ' is missing.',
+            'description' => $this->translate('Table {{ table }} from {{ model }} is missing.', ['table' => $mObj->table, 'model' => $mObj->fullName]),
             'sql' => $mObj->getSqlCreateTableCommands(),
             'bgClass' => 'bg-yellow-50',
           ];
@@ -56,7 +56,7 @@ class CheckDbConsistency extends \Hubleto\Erp\Controller
               }
               $necessaryUpdates['mc-' . ($updateCounter++)] = [
                 'type' => 'missing-column',
-                'description' => 'Column ' . $mObj->table . '.' . $colName . ' from ' . $mObj->fullName . ' is missing.',
+                'description' => $this->translate('Column {{ table }}.{{ column }} from {{ model }} is missing.', ['table' => $mObj->table, 'column' => $colName, 'model' => $mObj->fullName]),
                 'sql' => $sql,
                 'bgClass' => 'bg-blue-50',
               ];

@@ -34,7 +34,7 @@ class CreateFromDeal extends \Hubleto\Erp\Controllers\ApiController
     try {
       $deal = $mDeal->record->prepareReadQuery()->where($mDeal->table . ".id", $idDeal)->first();
       if (!$deal) {
-        throw new Exception("Deal was not found.");
+        throw new Exception($this->translate("Deal was not found."));
       }
 
       $order = $mOrder->record->recordCreate([

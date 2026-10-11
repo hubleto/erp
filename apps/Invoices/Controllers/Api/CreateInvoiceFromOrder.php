@@ -33,7 +33,7 @@ class CreateInvoiceFromOrder extends \Hubleto\Erp\Controllers\ApiController
 
       $order = $mOrder->record->prepareReadQuery()->where($mOrder->table . ".id", $idOrder)->with("ITEMS")->first();
       if (!$order) {
-        throw new Exception("Order was not found.");
+        throw new Exception($this->translate("Order was not found."));
       }
 
       $idInvoice = $mInvoice->record->recordCreate([

@@ -447,7 +447,7 @@ class Deal extends \Hubleto\Erp\Model
     $mDeal = $this->getModel(Deal::class);
 
     $deal = $mDeal->record->prepareReadQuery()->where('deals.id', $idDeal)->first();
-    if (!$deal) throw new \Exception('Deal was not found.');
+    if (!$deal) throw new \Exception($this->translate('Deal was not found.'));
 
     $vars = $deal->toArray();
     $vars['hubleto'] = $this;

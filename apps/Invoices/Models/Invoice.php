@@ -364,7 +364,7 @@ class Invoice extends \Hubleto\Erp\Model {
       $idProfile = (int) $defaultProfile->id;
     }
     if ($idProfile <= 0) {
-      throw new \Exception('Invoice profile is required to create an invoice.');
+      throw new \Exception($this->translate('Invoice profile is required to create an invoice.'));
     }
 
     $profile = $mProfile->record->where('id', $idProfile)->first();
@@ -523,7 +523,10 @@ class Invoice extends \Hubleto\Erp\Model {
           }
         }
       }
+
+      /** @disregard */
       $pbsEnc = new \Hubleto\Utilities\PayBySquareEncoder();
+
       $pbsEnc->setAmount(round($totalInclVat - $totalAdvancePayments, 2));
       $pbsEnc->setIBAN($vars['PROFILE']['iban'] ?? '');
       $pbsEnc->setBIC($vars['PROFILE']['swift'] ?? '');

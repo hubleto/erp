@@ -28,7 +28,7 @@ class OrderDeal extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
-    $description->ui['title'] = 'Order Deals';
+    $description->ui['title'] = $this->translate('Order Deals');
     $description->ui["addButtonText"] = $this->translate("Add deal");
 
     if ($this->router()->urlParamAsInteger('idOrder') > 0) {

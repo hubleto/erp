@@ -17,12 +17,12 @@ class SentEmails extends \Hubleto\Framework\Controllers\CrudController
   public function describeTable(): Table
   {
     $description = new Table;
-    $description->addColumn('subject', (new Varchar(null, 'Subject'))->setDefaultVisible());
-    $description->addColumn('from', (new Varchar(null, 'From'))->setDefaultVisible());
-    $description->addColumn('to', (new Varchar(null, 'To'))->setDefaultVisible());
-    $description->addColumn('cc', (new Varchar(null, 'CC'))->setDefaultVisible());
-    $description->addColumn('datetime_scheduled_to_send', (new DateTime(null, 'Scheduled to send'))->setDefaultVisible());
-    $description->addColumn('datetime_sent', (new DateTime(null, 'Sent'))->setDefaultVisible());
+    $description->addColumn('subject', (new Varchar(null, $this->translate('Subject')))->setDefaultVisible());
+    $description->addColumn('from', (new Varchar(null, $this->translate('From')))->setDefaultVisible());
+    $description->addColumn('to', (new Varchar(null, $this->translate('To')))->setDefaultVisible());
+    $description->addColumn('cc', (new Varchar(null, $this->translate('CC')))->setDefaultVisible());
+    $description->addColumn('datetime_scheduled_to_send', (new DateTime(null, $this->translate('Scheduled to send')))->setDefaultVisible());
+    $description->addColumn('datetime_sent', (new DateTime(null, $this->translate('Sent')))->setDefaultVisible());
     return $description;
   }
 

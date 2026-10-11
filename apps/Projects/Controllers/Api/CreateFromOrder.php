@@ -16,7 +16,7 @@ class CreateFromOrder extends \Hubleto\Erp\Controllers\ApiController
     if ($idOrder <= 0) {
       return [
         "status" => "failed",
-        "error" => "The order for converting was not set"
+        "error" => $this->translate("The order for converting was not set")
       ];
     }
 

@@ -127,7 +127,7 @@ class Generator extends \Hubleto\Erp\Core
     $mObj = $this->getService($model);
 
     $record = $mObj->record->prepareReadQuery()->where($mObj->table . '.id', $recordId)->first();
-    if (!$record) throw new \Exception('Record to generate PDF from was not found.');
+    if (!$record) throw new \Exception($this->translate('Record to generate PDF from was not found.'));
 
     $mTemplate = $this->getService(Template::class);
     $template = $mTemplate->record->prepareReadQuery()->where('documents_templates.id', $record->id_template)->first();

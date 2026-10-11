@@ -17,7 +17,7 @@ class SetParentLead extends \Hubleto\Erp\Controllers\ApiController
     if ($idDeal <= 0 || $idLead <= 0) {
       return [
         "status" => "failed",
-        "error" => "The deal or lead not set."
+        "error" => $this->translate("The deal or lead not set.")
       ];
     }
 

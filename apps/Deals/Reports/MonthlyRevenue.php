@@ -8,21 +8,23 @@ use Hubleto\App\Community\Deals\Models\Deal;
 class MonthlyRevenue extends \Hubleto\Erp\Report
 {
   protected string $urlSlug = 'month-revenue';
-  public string $name = 'My revenue this month';
+  public string $name = '';
   // public string $modelClass = Deal::class;
 
   public function getReportConfig(): array
   {
     $config = [];
 
+    $this->name = $this->translate('My revenue this month');
+
     /** @var Deal */
     $mDeal = $this->getModel(Deal::class);
 
     $config['groupsBy'] = [
-      ["field" => "id_customer", "title" => "Customer"],
+      ["field" => "id_customer", "title" => $this->translate("Customer")],
     ];
     $config['returnWith'] = [
-      ["type" => "total", "field" => "price", "title" => "Total price of deals"]
+      ["type" => "total", "field" => "price", "title" => $this->translate("Total price of deals")]
     ];
 
     $config["searchGroups"] = [

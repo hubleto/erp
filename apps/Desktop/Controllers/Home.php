@@ -79,7 +79,7 @@ class Home extends \Hubleto\Erp\Controller
 
     $this->viewParams['hourNow'] = (int) date("H");
 
-    $this->viewParams['didYouKnow'] = self::DID_YOU_KNOW[rand(0, count(self::DID_YOU_KNOW) - 1)];
+    $this->viewParams['didYouKnow'] = $this->translate(self::DID_YOU_KNOW[rand(0, count(self::DID_YOU_KNOW) - 1)]);
     $this->viewParams['appsInSidebar'] = $appsInSidebar;
     $this->viewParams['welcomeScreenMessages'] = $welcomeScreenMessages;
 

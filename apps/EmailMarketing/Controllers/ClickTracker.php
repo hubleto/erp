@@ -26,7 +26,7 @@ class ClickTracker extends \Hubleto\Erp\Controller
     $url = $clickData['url'] ?? '';
     $bot = (bool) ($clickData['bot'] ?? false);
 
-    if (empty($emailUid)) return 'Unknown email.';
+    if (empty($emailUid)) return $this->translate('Unknown email.');
 
     /** @var Email */
     $mEmail = $this->getModel(Email::class);
@@ -77,7 +77,7 @@ class ClickTracker extends \Hubleto\Erp\Controller
 
       return '';
     } else {
-      return 'Email not found.';
+      return $this->translate('Email not found.');
     }
   }
 

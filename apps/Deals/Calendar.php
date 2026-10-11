@@ -62,7 +62,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         if (isset($activity['DEAL'])) {
           $deal = $activity['DEAL'];
           $customer = $deal['CUSTOMER'] ?? [];
-          return 'Deal ' . $deal['identifier'] . ' ' . $deal['title'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
+          return $this->translate('Deal') . ' ' . $deal['identifier'] . ' ' . $deal['title'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
         } else {
           return '';
         }

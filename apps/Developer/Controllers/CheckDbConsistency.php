@@ -87,12 +87,12 @@ class CheckDbConsistency extends \Hubleto\Erp\Controller
         if (isset($necessaryUpdates[$updateUid])) {
           $sqls = array_merge($sqls, $necessaryUpdates[$updateUid]['sql']);
         } else {
-          $runLog[] = 'Update ' . $updateUid . ' not found.';
+          $runLog[] = $this->translate('Update {{ updateUid }} not found.', ['updateUid' => $updateUid]);
         }
       }
 
       try {
-        $runLog[] = 'Starting transaction.';
+        $runLog[] = $this->translate('Starting transaction.');
         $this->db()->startTransaction();
 
         foreach ($sqls as $sql) {
@@ -100,10 +100,10 @@ class CheckDbConsistency extends \Hubleto\Erp\Controller
           $this->db()->execute($sql);
         }
 
-        $runLog[] = 'Commiting.';
+        $runLog[] = $this->translate('Commiting.');
         $this->db()->commit();
       } catch (\Throwable $e) {
-        $runLog[] = 'ERROR when running above SQL. Rolling back.';
+        $runLog[] = $this->translate('ERROR when running above SQL. Rolling back.');
         $runLog[] = $e->getMessage();
         $this->db()->rollback();
       }

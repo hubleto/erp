@@ -40,7 +40,7 @@ class CampaignScheduleRecipient extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Add recipient';
+    $description->ui['addButtonText'] = $this->translate('Add recipient');
     $description->show(['header']);
     $description->hide(['footer']);
 

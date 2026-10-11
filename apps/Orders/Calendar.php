@@ -39,7 +39,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         if (isset($activity['ORDER'])) {
           $order = $activity['ORDER'];
           $customer = $order['CUSTOMER'] ?? [];
-          return 'Order ' . $order['identifier'] . ' ' . $order['title'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
+          return $this->translate('Order') . ' ' . $order['identifier'] . ' ' . $order['title'] . (isset($customer['name']) ? ', ' . $customer['name'] : '');
         } else {
           return '';
         }
@@ -71,7 +71,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
         'start' => date("Y-m-d", strtotime($order->date_next_invoice_expected)),
         'end' => date("Y-m-d", strtotime($order->date_next_invoice_expected)),
         'allDay' => true,
-        'title' => 'Invoice expected: ' . $order->identifier . ' ' . $order->title,
+        'title' => $this->translate('Invoice expected') . ': ' . $order->identifier . ' ' . $order->title,
         'source' => 'orders',
         'id_owner' => $order->id_manager ?? $order->id_owner,
         'owner' => $order->MANAGER ? $order->MANAGER->nick : $order->OWNER?->nick,

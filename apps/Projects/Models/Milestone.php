@@ -37,7 +37,7 @@ class Milestone extends \Hubleto\Erp\Model
       'expected_output' => (new Text($this, $this->translate('Expected output')))->setDefaultVisible(),
       'description' => (new Text($this, $this->translate('Description of activities')))->setDefaultVisible(),
       // 'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText($this->translate('Closed'))->setNoText(''),
 
       'virt_last_report_date' => (new Virtual($this, $this->translate('Last report')))
         ->setDefaultVisible()

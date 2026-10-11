@@ -36,7 +36,7 @@ class Calendar extends \Hubleto\App\Community\Calendar\Calendar
       function (array $activity) {
         if (isset($activity['LEAD'])) {
           $lead = $activity['LEAD'];
-          return 'Lead ' . $lead['title'];
+          return $this->translate('Lead') . ' ' . $lead['title'];
         } else {
           return '';
         }

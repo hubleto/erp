@@ -39,7 +39,7 @@ class CampaignSchedule extends \Hubleto\Erp\Model
     $description = parent::describeTable();
 
     $description->ui['title'] = '';
-    $description->ui['addButtonText'] = 'Schedule email';
+    $description->ui['addButtonText'] = $this->translate('Schedule email');
     $description->setOrderBy('day', 'asc');
     $description->show(['header']);
     $description->hide(['footer']);

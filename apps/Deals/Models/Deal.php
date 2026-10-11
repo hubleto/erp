@@ -118,7 +118,7 @@ class Deal extends \Hubleto\Erp\Model
       'source_channel' => (new Integer($this, $this->translate('Source channel')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS)),
       'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
       'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText('Closed')->setNoText(''),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText($this->translate('Closed'))->setNoText(''),
       'deal_result' => (new Integer($this, $this->translate('Deal Result')))
         ->setEnumValues(array_map(fn($v) => $this->translate($v), self::ENUM_DEAL_RESULTS))
         ->setEnumCssClasses([
@@ -492,7 +492,7 @@ class Deal extends \Hubleto\Erp\Model
       <html>
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Ponuka {{ user.DEFAULT_COMPANY.name }} {{ number }}</title>
+        <title>{{ translate("Ponuka") }} {{ user.DEFAULT_COMPANY.name }} {{ number }}</title>
         <style>
           {% if PDF_EXPORT %}
             * { font-family: Dejavu Sans !important; line-height: 0.95em; font-size: 10pt; }
@@ -521,13 +521,13 @@ class Deal extends \Hubleto\Erp\Model
       </head>
       <body>
         <!-- TOP -->
-        <div>Deal # <b>{{ identifier }}</b></div>
+        <div>{{ translate("Deal #") }} <b>{{ identifier }}</b></div>
         <br/>
         <div class="dmain">
           <div class="dcolumn">
             <div class="content">
               <div>
-                <b>SUPPLIER</b><br/>
+                <b>{{ translate("SUPPLIER") }}</b><br/>
                 <br/>
                 <b>{{ user.DEFAULT_COMPANY.name }}</b><br/>
                 {{ user.DEFAULT_COMPANY.street_1 }}<br/>
@@ -545,7 +545,7 @@ class Deal extends \Hubleto\Erp\Model
           </div>
           <div class="dcolumn">
             <div class="content odberatel">
-              <b>CUSTOMER</b><br/>
+              <b>{{ translate("CUSTOMER") }}</b><br/>
               <br/>
               <b>{{ CUSTOMER.name }}</b><br/>
               {{ CUSTOMER.street_line_1 }}<br/>
@@ -575,8 +575,8 @@ class Deal extends \Hubleto\Erp\Model
                     <table style="width:100%">
                       <tbody>
                         <tr>
-                          <td style="width:50%">Item</td>
-                          <td style="width:50%;text-align:right">Unit price × Amount = Price</td>
+                          <td style="width:50%">{{ translate("Item") }}</td>
+                          <td style="width:50%;text-align:right">{{ translate("Unit price × Amount = Price") }}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -601,7 +601,7 @@ class Deal extends \Hubleto\Erp\Model
                               <span>{{ hubleto.locale().formatCurrency(i.unit_price * (100 - i.discount)/100, CURRENCY.symbol) }}</span>
                               ×
                               {{ hubleto.locale().formatNumber(i.amount, 4) }}
-                              = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> excl. VAT</b>
+                              = <b><span>{{ hubleto.locale().formatCurrency(i.price_excl_vat, CURRENCY.symbol) }}</span> {{ translate("excl. VAT") }}</b>
                             </td>
                           </tr>
                         </tbody>
@@ -620,8 +620,8 @@ class Deal extends \Hubleto\Erp\Model
 
         <br/>
         <br/>
-        Issued by {{ user.first_name }} {{ user.last_name }} {{ now }}.<br/>
-        Generated in ERP Hubleto.
+        {{ translate("Issued by") }} {{ user.first_name }} {{ user.last_name }} {{ now }}.<br/>
+        {{ translate("Generated in ERP Hubleto") }}.
         https://www.hubleto.eu<br/>
       </body>
     ';

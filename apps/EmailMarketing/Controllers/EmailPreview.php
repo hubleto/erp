@@ -21,7 +21,7 @@ class EmailPreview extends \Hubleto\Erp\Controller
     $emailUid = $urlData['cuid'] ?? '';
     $idRecipient = (int) ($urlData['rcid'] ?? 0);
 
-    if (empty($emailUid)) return 'Unknown email.';
+    if (empty($emailUid)) return $this->translate('Unknown email.');
 
     /** @var Email */
     $mEmail = $this->getModel(Email::class);

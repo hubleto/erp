@@ -35,7 +35,7 @@ class Todo extends \Hubleto\Erp\Model
       'id_responsible' => (new Lookup($this, $this->translate('Responsible'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()
         ->setDefaultValue($this->authProvider()->getUserId())
       ,
-      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false)->setYesText('Closed')->setNoText(''),
+      'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultValue(false)->setYesText($this->translate('Closed'))->setNoText(''),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
     ]);
   }

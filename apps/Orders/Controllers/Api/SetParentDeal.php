@@ -17,7 +17,7 @@ class SetParentDeal extends \Hubleto\Erp\Controllers\ApiController
     if ($idOrder <= 0) {
       return [
         "status" => "failed",
-        "error" => "The order is not set."
+        "error" => $this->translate("The order is not set.")
       ];
     }
 

@@ -17,7 +17,7 @@ class SetParentOrder extends \Hubleto\Erp\Controllers\ApiController
     if ($idProject <= 0) {
       return [
         "status" => "failed",
-        "error" => "The project is not set."
+        "error" => $this->translate("The project is not set.")
       ];
     }
 

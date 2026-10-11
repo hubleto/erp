@@ -95,13 +95,11 @@ class Loader extends \Hubleto\Erp\App
       $messages[] = [
         'class' => 'warning',
         'icon' => 'fas fa-table',
-        'title' => 'No dashboard configured',
-        'content' => '
-          You do not have default dashboard configured.
-        ',
+        'title' => $this->translate('No dashboard configured'),
+        'content' => $this->translate('You do not have default dashboard configured.'),
         'button' => '
           <a class="btn btn-primary" href="dashboards">
-            <span class="text">Configure your default dashboard</span>
+            <span class="text">' . $this->translate('Configure your default dashboard') . '</span>
           </a>
         ',
       ];

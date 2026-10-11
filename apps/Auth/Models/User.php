@@ -103,14 +103,14 @@ class User extends UserModel implements UserModelInterface
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'login' => new Varchar($this, 'Login'),
-      'password' => new Password($this, 'Password'),
-      'is_active' => new Boolean($this, 'Active'),
+      'login' => new Varchar($this, $this->translate('Login')),
+      'password' => new Password($this, $this->translate('Password')),
+      'is_active' => new Boolean($this, $this->translate('Active')),
       'force_signout' => (new Boolean($this, 'Force signout'))->setHidden(),
-      'last_login_time' => new DateTime($this, 'Time of last login'),
-      'last_login_ip' => new Varchar($this, 'Last login IP'),
-      'last_access_time' => new DateTime($this, 'Time of last access'),
-      'last_access_ip' => new Varchar($this, 'Last access IP'),
+      'last_login_time' => new DateTime($this, $this->translate('Time of last login')),
+      'last_login_ip' => new Varchar($this, $this->translate('Last login IP')),
+      'last_access_time' => new DateTime($this, $this->translate('Time of last access')),
+      'last_access_ip' => new Varchar($this, $this->translate('Last access IP')),
       'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::TYPE_ENUM_VALUES)),
       'first_name' => (new Varchar($this, $this->translate('First name'))),
       'last_name' => (new Varchar($this, $this->translate('Last name'))),

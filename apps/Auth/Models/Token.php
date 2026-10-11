@@ -27,9 +27,9 @@ class Token extends \Hubleto\Framework\Models\Token {
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      "type" => new Varchar($this, 'Token type'),
-      "valid_to" => new DateTime($this, 'Expiration date'),
-      "token" => new Varchar($this, 'Token')
+      "type" => new Varchar($this, $this->translate('Token type')),
+      "valid_to" => new DateTime($this, $this->translate('Expiration date')),
+      "token" => new Varchar($this, $this->translate('Token'))
     ]);
   }
 

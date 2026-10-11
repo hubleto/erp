@@ -14,7 +14,7 @@ class CreateFromDeal extends \Hubleto\Erp\Controllers\ApiController
     if (!$this->router()->isUrlParam("idDeal")) {
       return [
         "status" => "failed",
-        "error" => "The deal for converting was not set"
+        "error" => $this->translate("The deal for converting was not set")
       ];
     }
 

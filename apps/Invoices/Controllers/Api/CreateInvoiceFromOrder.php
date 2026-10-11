@@ -15,7 +15,7 @@ class CreateInvoiceFromOrder extends \Hubleto\Erp\Controllers\ApiController
     $idOrder = $this->router()->urlParamAsInteger("idOrder");
 
     if ($idOrder <= 0) {
-      throw new Exception("The order for converting was not set");
+      throw new Exception($this->translate("The order for converting was not set"));
     }
 
     /** @var Order */

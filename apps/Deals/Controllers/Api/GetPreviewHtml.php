@@ -23,7 +23,7 @@ class GetPreviewHtml extends \Hubleto\Erp\Controllers\ApiController
       try {
         $html = $mDeal->getPreviewHtml($idDeal);
       } catch (\Throwable $e) {
-        $html = '<div class="alert alert-danger">Error generating preview: ' . $e->getMessage() . '</div>';
+        $html = '<div class="alert alert-danger">' . $this->translate('Error generating preview') . ': ' . $e->getMessage() . '</div>';
       }
     }
 

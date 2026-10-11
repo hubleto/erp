@@ -27,11 +27,11 @@ class GetPreviewHtml extends \Hubleto\Erp\Controllers\ApiController
         }
 
         $record = $mObj->record->prepareReadQuery()->where($mObj->table . '.id', $recordId)->first();
-        if (!$record) throw new \Exception('Record to generate PDF from was not found.');
+        if (!$record) throw new \Exception($this->translate('Record to generate PDF from was not found.'));
 
         $html = $generator->getPreviewHtml($model, $recordId, $idTemplate);
       } catch (\Throwable $e) {
-        $html = '<div class="alert alert-danger">Error generating preview: ' . $e->getMessage() . '</div>';
+        $html = '<div class="alert alert-danger">' . $this->translate('Error generating preview') . ': ' . $e->getMessage() . '</div>';
       }
     }
 

@@ -18,7 +18,7 @@ class CreateFromLead extends \Hubleto\Erp\Controllers\ApiController
     if ($idLead <= 0) {
       return [
         "status" => "failed",
-        "error" => "The lead for converting was not set"
+        "error" => $this->translate("The lead for converting was not set")
       ];
     }
 

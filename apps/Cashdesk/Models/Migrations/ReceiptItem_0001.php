@@ -21,7 +21,7 @@ create table `cashdesk_receipts_items` (
  `unit_price_excl_vat` decimal(14, 4) ,
  `unit_vat` decimal(14, 4) ,
  `unit_price_incl_vat` decimal(14, 4) ,
- `quantity` decimal(14, 4) ,
+ `amount` decimal(14, 4) ,
  `total_price_excl_vat` decimal(14, 4) ,
  `total_vat` decimal(14, 4) ,
  `total_price_incl_vat` decimal(14, 4) ,

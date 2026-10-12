@@ -21,6 +21,8 @@ class Loader extends \Hubleto\Erp\App
     $this->getService(PermissionsManager::class)->init();
 
     $this->router()->crud('settings/users', Controllers\Users::class);
+    $this->router()->crud('settings/currency-rates', Controllers\CurrencyRates::class);
+    $this->router()->crud('settings/vat-rates', Controllers\VatRates::class);
 
     $this->router()->get([
       '/^settings\/?$/' => Controllers\Dashboard::class,
@@ -72,6 +74,8 @@ class Loader extends \Hubleto\Erp\App
       $mCurrency = $this->getModel(Models\Currency::class);
       $mTeam = $this->getModel(Models\Team::class);
       $mTeamMember = $this->getModel(Models\TeamMember::class);
+      $mCurrencyRate = $this->getModel(Models\CurrencyRate::class);
+      $mVatRate = $this->getModel(Models\VatRate::class);
 
       $mCompany->upgradeSchema();
       $mPermission->upgradeSchema();
@@ -82,6 +86,8 @@ class Loader extends \Hubleto\Erp\App
       $mCurrency->upgradeSchema();
       $mTeam->upgradeSchema();
       $mTeamMember->upgradeSchema();
+      $mCurrencyRate->upgradeSchema();
+      $mVatRate->upgradeSchema();
 
       $mSetting->record->recordCreate([
         'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
@@ -114,6 +120,11 @@ class Loader extends \Hubleto\Erp\App
       $mCurrency->record->recordCreate([ 'name' => 'Bosnia-Herzegovina Convertible Marka', 'code' => 'BAM', 'symbol' => 'KM' ]);
       $mCurrency->record->recordCreate([ 'name' => 'Argentine Peso', 'code' => 'ARS', 'symbol' => '$' ]);
       $mCurrency->record->recordCreate([ 'name' => 'New Zealand Dollar', 'code' => 'NZD', 'symbol' => 'NZ$' ]);
+
+      $mVatRate->record->recordCreate(['code' => 'STD', 'name' => $this->translate('Standard rate'), 'percent' => 20, 'type' => Models\VatRate::TYPE_STANDARD, 'valid_from' => date('Y-01-01'), 'is_default' => true]);
+      $mVatRate->record->recordCreate(['code' => 'RED', 'name' => $this->translate('Reduced rate'), 'percent' => 10, 'type' => Models\VatRate::TYPE_REDUCED, 'valid_from' => date('Y-01-01')]);
+      $mVatRate->record->recordCreate(['code' => 'ZERO', 'name' => $this->translate('Zero rate'), 'percent' => 0, 'type' => Models\VatRate::TYPE_ZERO, 'valid_from' => date('Y-01-01')]);
+      $mVatRate->record->recordCreate(['code' => 'STD-OLD', 'name' => $this->translate('Former standard rate'), 'percent' => 19, 'type' => Models\VatRate::TYPE_STANDARD, 'valid_to' => date('Y-12-31', strtotime('-1 year'))]);
 
       $mActivityTypes->record->recordCreate([ 'name' => $this->translate('Meeting'), 'color' => '#607d8b', 'calendar_visibility' => true ]);
       $mActivityTypes->record->recordCreate([ 'name' => $this->translate('Business Trip'), 'color' => '#673ab7', 'calendar_visibility' => true ]);

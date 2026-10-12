@@ -1,0 +1,35 @@
+namespace: Hubleto\App\Community\PriceList
+appType: custom
+sidebarGroup: sales
+rootUrlSlug: price-lists
+name: Price lists
+icon: fas fa-tags
+author:
+  name: "Hubleto community"
+  nick: "pricelist"
+  company: "Custom app"
+highlight: Price lists, quantity breaks, customer-specific prices, promotions and central price and VAT arithmetic.
+requires:
+  - Hubleto\App\Community\Settings
+  - Hubleto\App\Community\Auth
+  - Hubleto\App\Community\Products
+  - Hubleto\App\Community\Customers
+  - Hubleto\App\Community\Suppliers
+  - Hubleto\App\Community\Documents
+  - Hubleto\App\Community\Workflow
+  - Hubleto\App\Community\Calendar
+  - Hubleto\App\Community\Dashboards
+  - Hubleto\App\Community\Notifications
+  - Hubleto\App\Community\Mail
+  - Hubleto\App\Community\Shops
+  - Hubleto\App\Community\Cashdesk
+  - Hubleto\App\Community\Deals
+  - Hubleto\App\Community\Projects
+  - Hubleto\App\Community\Worksheets
+tags:
+  - price lists
+  - pricing
+  - vat
+  - discounts
+  - products
+  - orders

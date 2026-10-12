@@ -1,0 +1,10 @@
+<h1 class="app-main-title">{{ translate('Settings') }} > {{ translate('VAT rates') }}</h1>
+
+<hblreact-settings-table-vat-rates
+  string:tag="table-vat-rates"
+  int:record-id="{{ viewParams.recordId }}"
+  string:fulltext-search='{{ viewParams.q }}'
+  json:column-search='{{ viewParams.search|json_encode }}'
+  json:filters='{{ viewParams.filters|json_encode }}'
+  string:form-active-tab-uid='{{ viewParams.tab }}'
+></hblreact-settings-table-vat-rates>

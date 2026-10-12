@@ -1,0 +1,78 @@
+<h1 class="app-main-title">{{ translate('Price lists') }} > {{ translate('Settings') }}</h1>
+
+{% if viewParams.submitted %}
+  <div class="badge badge-green mb-2">{{ translate('Settings were saved.') }}</div>
+{% endif %}
+
+<form method="POST">
+  <input type="hidden" name="submitted" value="1" />
+
+  <div style="max-width:800px;margin:auto">
+
+    <h2 class="mt-4 mb-2">{{ translate('Use PriceList as the price calculator of other apps') }}</h2>
+    <p class="text-sm text-gray-600 mb-2">
+      {{ translate('When switched on, the app calculates prices of its items with the arithmetic of PriceList (the config key priceCalculatorService of the app). With default settings the results are identical to the default calculator.') }}
+    </p>
+    <table class="table-default">
+      <tbody>
+        {% for consumer in viewParams.consumers %}
+          <tr>
+            <td>{{ consumer.title }}</td>
+            <td>
+              {% if consumer.installed %}
+                <input type="checkbox" name="consumer_{{ consumer.uid }}" {% if consumer.enabled %} checked {% endif %} />
+              {% else %}
+                <span class="text-gray-500">{{ translate('The app is not installed.') }}</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="mt-1">
+      <label>
+        <input type="checkbox" name="enableAll" value="1" />
+        {{ translate('Enable for all apps above') }}
+      </label>
+    </div>
+    <p class="text-xs text-gray-500 mt-1">
+      {{ translate('Switch the apps off before disabling or uninstalling PriceList.') }}
+    </p>
+
+    {% for group, fields in viewParams.definition %}
+      <h2 class="mt-4 mb-2">{{ group }}</h2>
+      <table class="table-default">
+        <tbody>
+          {% for key, field in fields %}
+            {% set type = field[0] %}
+            {% set label = field[1] %}
+            {% set name = key|replace({'.': '_'}) %}
+            <tr>
+              <td>{{ label }}</td>
+              <td>
+                {% if type == 'bool' %}
+                  <input type="checkbox" name="{{ name }}" value="1" {% if viewParams.values[key] %} checked {% endif %} />
+                {% elseif type == 'int' or type == 'float' %}
+                  <input type="text" class="input" name="{{ name }}" value="{{ viewParams.values[key] }}" />
+                {% elseif type == 'string' %}
+                  <input type="text" class="input" name="{{ name }}" value="{{ viewParams.values[key] }}" />
+                {% else %}
+                  <select name="{{ name }}" class="input">
+                    {% for optionValue, optionLabel in type %}
+                      <option value="{{ optionValue }}" {% if viewParams.values[key] == optionValue %} selected {% endif %}>{{ optionLabel }}</option>
+                    {% endfor %}
+                  </select>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary mt-4">
+      <span class="icon"><i class="fas fa-save"></i></span>
+      <span class="text">{{ translate('Save') }}</span>
+    </button>
+  </div>
+</form>

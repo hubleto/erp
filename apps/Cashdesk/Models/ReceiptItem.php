@@ -54,7 +54,7 @@ class ReceiptItem extends \Hubleto\Erp\Model
       'unit_price_excl_vat' => (new Decimal($this, $this->translate('Unit price excl. VAT')))->setDefaultVisible()->setUnit('€'),
       'unit_vat' => (new Decimal($this, $this->translate('Unit VAT')))->setDefaultVisible()->setUnit('€'),
       'unit_price_incl_vat' => (new Decimal($this, $this->translate('Unit price incl. VAT')))->setDefaultVisible()->setUnit('€'),
-      'quantity' => (new Decimal($this, $this->translate('Quantity')))->setDefaultVisible(),
+      'amount' => (new Decimal($this, $this->translate('Amount')))->setDefaultVisible(),
       'total_price_excl_vat' => (new Decimal($this, $this->translate('Total price excl. VAT')))->setDefaultVisible()->setUnit('€'),
       'total_vat' => (new Decimal($this, $this->translate('Total VAT')))->setDefaultVisible()->setUnit('€'),
       'total_price_incl_vat' => (new Decimal($this, $this->translate('Total price incl. VAT')))->setDefaultVisible()->setUnit('€'),
@@ -84,15 +84,15 @@ class ReceiptItem extends \Hubleto\Erp\Model
 
     $calculator = $mReceipt->getPriceCalculatorService();
 
-    $quantity = (float) ($record['quantity'] ?? 0);
+    $amount = (float) ($record['amount'] ?? 0);
     $vat = (float) ($record['vat_percent'] ?? 0);
     $unit = (float) ($record['unit_price_excl_vat'] ?? 0);
 
     $record['unit_vat'] = $calculator->calculateVat($unit, $vat);
     $record['unit_price_incl_vat'] = $calculator->calculatePriceIncludingVat($unit, 1, 0, $vat);
-    $record['total_price_excl_vat'] = $calculator->calculatePriceExcludingVat($unit, $quantity);
+    $record['total_price_excl_vat'] = $calculator->calculatePriceExcludingVat($unit, $amount);
     $record['total_vat'] = $calculator->calculateVat($record['total_price_excl_vat'], $vat);
-    $record['total_price_incl_vat'] = $calculator->calculatePriceIncludingVat($unit, $quantity, 0, $vat);
+    $record['total_price_incl_vat'] = $calculator->calculatePriceIncludingVat($unit, $amount, 0, $vat);
 
     return $record;
   }

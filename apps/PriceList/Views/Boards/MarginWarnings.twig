@@ -1,0 +1,16 @@
+<div class="flex flex-col gap-2 items-center">
+  <div class="text-[3em] p-4 text-primary">{{ viewParams.total }}</div>
+  <div class="text-sm">{{ translate('minimum margin warnings in the last 30 days') }}</div>
+</div>
+{% if viewParams.items|length > 0 %}
+  <div class="list mt-2">
+    {% for item in viewParams.items %}
+      <a href="price-lists/{{ item.id_price_list }}" class="btn btn-list-item btn-transparent flex-col items-start md:flex-row" target="_blank">
+        <span class="text max-h-none">
+          {{ item.short_description }}
+          <div class="badge badge-small">{{ item.date_time }}</div>
+        </span>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}

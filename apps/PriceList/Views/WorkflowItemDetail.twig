@@ -1,0 +1,9 @@
+<div class="p-2">
+  <b>{{ item.code }}</b> {{ item.name }}
+  <div class="badge badge-small">{{ item.valid_from }} - {{ item.valid_to }}</div>
+  <div class="mt-2">
+    <a href="price-lists/{{ item.id }}" class="btn btn-small btn-primary" target="_blank">
+      <span class="text">{{ translate('Open price list') }}</span>
+    </a>
+  </div>
+</div>

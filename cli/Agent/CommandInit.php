@@ -22,25 +22,15 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       \Hubleto\App\Community\Tasks\Loader::class => [ 'sidebarOrder' => 195 ],
       \Hubleto\App\Community\Worksheets\Loader::class => [ 'sidebarOrder' => 200 ],
     ],
-    'maintenance' => [
-      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 0],
-      \Hubleto\App\Community\Crypto\Loader::class => [ ],
-      \Hubleto\App\Community\Api\Loader::class => [ 'sidebarOrder' => 99993 ],
-      \Hubleto\App\Community\AuditLogs\Loader::class => [ 'sidebarOrder' => 99994 ],
-      \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99990 ],
-    ],
-    'help' => [
-      \Hubleto\App\Community\Help\Loader::class => [ 'sidebarOrder' => 99991 ],
-      \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99992 ],
-    ],
-    'customer-acquisition' => [
+    'marketing' => [
       \Hubleto\App\Community\EmailMarketing\Loader::class => [ 'sidebarOrder' => 202 ],
       \Hubleto\App\Community\Leads\Loader::class => [ 'sidebarOrder' => 200 ],
     ],
     'sales' => [
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 200 ],
-      \Hubleto\App\Community\Deals\Loader::class => [ 'sidebarOrder' => 210 ],
+      \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 204 ],
+      \Hubleto\App\Community\PriceList\Loader::class => [ 'sidebarOrder' => 208 ],
+      \Hubleto\App\Community\Deals\Loader::class => [ 'sidebarOrder' => 212 ],
       \Hubleto\App\Community\Orders\Loader::class => [ 'sidebarOrder' => 230 ],
     ],
     'productivity' => [
@@ -55,6 +45,17 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     ],
     'finance' => [
       \Hubleto\App\Community\Invoices\Loader::class => [ 'sidebarOrder' => 410 ],
+    ],
+    'maintenance' => [
+      \Hubleto\App\Community\Auth\Loader::class => ['sidebarOrder' => 0],
+      \Hubleto\App\Community\Crypto\Loader::class => [ ],
+      \Hubleto\App\Community\Api\Loader::class => [ 'sidebarOrder' => 99993 ],
+      \Hubleto\App\Community\AuditLogs\Loader::class => [ 'sidebarOrder' => 99994 ],
+      \Hubleto\App\Community\Settings\Loader::class => [ 'sidebarOrder' => 99990 ],
+    ],
+    'help' => [
+      \Hubleto\App\Community\Help\Loader::class => [ 'sidebarOrder' => 99991 ],
+      \Hubleto\App\Community\About\Loader::class => [ 'sidebarOrder' => 99992 ],
     ],
     'developer' => [
       \Hubleto\App\Community\Developer\Loader::class => [ 'sidebarOrder' => 410 ],

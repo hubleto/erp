@@ -89,12 +89,6 @@ class Loader extends \Hubleto\Erp\App
       $mCurrencyRate->upgradeSchema();
       $mVatRate->upgradeSchema();
 
-      $mSetting->record->recordCreate([
-        'key' => 'Apps\Community\Settings\Currency\DefaultCurrency',
-        'value' => '1',
-        'id_owner' => null
-      ]);
-
       $mCurrency->record->recordCreate([ 'name' => 'EURO', 'code' => 'EUR', 'symbol' => '€' ]);
       $mCurrency->record->recordCreate([ 'name' => 'Pound Sterling', 'code' => 'GBP', 'symbol' => '£' ]);
       $mCurrency->record->recordCreate([ 'name' => 'US Dollar', 'code' => 'USD', 'symbol' => '$' ]);

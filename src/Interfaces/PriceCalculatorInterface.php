@@ -28,4 +28,13 @@ interface PriceCalculatorInterface
   public function sqlItemVat(string $table, array $columns = []): string;
   public function sqlItemInclVat(string $table, array $columns = []): string;
 
-  }
+
+  public function round(float $value, ?array $policy = null): float;
+  public function roundMoney(float $value, int $decimals): float;
+  public function roundToStep(float $value, float $step, int $mode = PHP_ROUND_HALF_UP): float;
+  public function ceilToStep(float $value, float $step): float;
+  public function floorToStep(float $value, float $step): float;
+  public function roundEndsIn(float $value, float $ending): float;
+  public function cashRound(float $value, float $step): float;
+
+}

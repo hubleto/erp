@@ -19,6 +19,7 @@ use Hubleto\Framework\Db\Column\Virtual;
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Settings\Models\Setting;
+use Hubleto\App\Community\Settings\Services\Currency as CurrencyService;
 
 use Hubleto\App\Community\Documents\Models\Template;
 use Hubleto\App\Community\Documents\Models\Document;
@@ -29,6 +30,7 @@ use Hubleto\App\Community\Invoices\Models\Invoice;
 use Hubleto\App\Community\Invoices\Models\Dto\Invoice as InvoiceDto;
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Products\Services\PriceCalculator;
+use Hubleto\App\Community\Settings\Controllers\CurrencyRates;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
 use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
 
@@ -261,17 +263,11 @@ class Order extends \Hubleto\Erp\Model
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
 
-    /** @var Setting */
-    $mSettings = $this->getModel(Setting::class);
-
-    $defaultCurrency = (int) $mSettings->record
-      ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
-      ->first()
-      ?->value
-    ;
+    /** @var CurrencyService */
+    $currencyService = $this->getService(CurrencyService::class);
 
     $description = parent::describeForm();
-    $description->defaultValues["id_currency"] = $defaultCurrency;
+    $description->defaultValues["id_currency"] = $currencyService->getDefaultCurrencyId();
 
     return $description;
   }

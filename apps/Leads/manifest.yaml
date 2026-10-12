@@ -1,6 +1,6 @@
 namespace: Hubleto\App\Community\Leads
 appType: community
-sidebarGroup: customer-acquisition
+sidebarGroup: marketing
 rootUrlSlug: leads
 name: Leads
 icon: fas fa-people-arrows

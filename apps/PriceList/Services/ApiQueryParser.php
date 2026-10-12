@@ -1,14 +1,16 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceList\Services;
+
+use Hubleto\Erp\Core;
 
 /**
  * Base of API controllers that take a price resolver query from URL/JSON parameters.
  */
-abstract class ResolverApiController extends \Hubleto\Erp\Controllers\ApiController
+class ApiQueryParser extends Core
 {
   /** Reads the query array of PriceResolver::resolve() from request parameters. */
-  protected function readQuery(): array
+  public function readQuery(): array
   {
     $router = $this->router();
 

@@ -92,12 +92,10 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
     $rounding = (string) $options['rounding'];
     $decimalsUnit = (int) $options['decimals_unit'];
     $decimalsItem = (int) $options['decimals_item'];
-    /** @var Rounding $rounder */
-    $rounder = $this->getService(Rounding::class);
 
     if ($rounding === 'unit') {
-      $unitNet = $rounder->roundMoney($unitNet, $decimalsUnit);
-      $unitVat = $rounder->roundMoney($unitVat, $decimalsUnit);
+      $unitNet = $this->roundMoney($unitNet, $decimalsUnit);
+      $unitVat = $this->roundMoney($unitVat, $decimalsUnit);
     }
 
     $unitIncl = $unitNet + $unitVat;
@@ -111,8 +109,8 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
     }
 
     if ($rounding === 'item' || $rounding === 'unit') {
-      $priceExcl = $rounder->roundMoney($priceExcl, $decimalsItem);
-      $priceVat = $rounder->roundMoney($priceVat, $decimalsItem);
+      $priceExcl = $this->roundMoney($priceExcl, $decimalsItem);
+      $priceVat = $this->roundMoney($priceVat, $decimalsItem);
     }
 
     return [
@@ -160,8 +158,7 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
   public function calculateTotals(array $items, array $options = []): array
   {
     $options = array_merge($this->defaultOptions(), $options);
-    /** @var Rounding $rounder */
-    $rounder = $this->getService(Rounding::class);
+
     $decimalsItem = (int) $options['decimals_item'];
 
     $groups = [];
@@ -192,14 +189,14 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
       $totalVat = 0.0;
       foreach ($groups as $key => $group) {
         $groupVat = $this->calculateVat($group['base'], $group['rate']);
-        if ($options['rounding'] !== 'none') $groupVat = $rounder->roundMoney($groupVat, $decimalsItem);
+        if ($options['rounding'] !== 'none') $groupVat = $this->roundMoney($groupVat, $decimalsItem);
         $groups[$key]['vat'] = $groupVat;
         $totalVat += $groupVat;
       }
     }
 
     $totalIncl = $totalExcl + $totalVat;
-    $payable = $rounder->cashRound($totalIncl, (float) $options['cash_rounding']);
+    $payable = $this->cashRound($totalIncl, (float) $options['cash_rounding']);
 
     $summary = [];
     foreach ($groups as $group) {
@@ -301,14 +298,6 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
     return $total > 0 && round($paid, $decimals) >= round($total, $decimals);
   }
 
-  /** Rounds a value (facade over Rounding). */
-  public function round(float $value, ?array $policy = null): float
-  {
-    /** @var Rounding $rounder */
-    $rounder = $this->getService(Rounding::class);
-    return $rounder->round($value, $policy);
-  }
-
   // ---------------------------------------------------------------------------------------------------------------
   // SQL builders (expressions to be used inside sum(...) in record managers)
   // ---------------------------------------------------------------------------------------------------------------
@@ -364,5 +353,93 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
     } catch (\Throwable $e) {
       return $defaults;
     }
+  }
+
+
+  public const POLICY_NONE = 0;
+  public const POLICY_NEAREST = 1;
+  public const POLICY_UP = 2;
+  public const POLICY_DOWN = 3;
+  public const POLICY_ENDS_IN = 4;
+
+  /**
+   * Rounds the value according to the policy.
+   *
+   * @param float $value
+   * @param array|null $policy
+   *
+   * @return float
+   *
+   */
+  public function round(float $value, ?array $policy = null): float
+  {
+    $policy = array_merge(['policy' => self::POLICY_NONE, 'step' => 0.0, 'ending' => 0.0, 'decimals' => null], $policy ?? []);
+    $step = (float) $policy['step'];
+    $decimals = $policy['decimals'] === null ? null : (int) $policy['decimals'];
+
+    switch ((int) $policy['policy']) {
+      case self::POLICY_NEAREST:
+        $result = $step > 0 ? $this->roundToStep($value, $step, PHP_ROUND_HALF_UP) : round($value, $decimals ?? 2, PHP_ROUND_HALF_UP);
+      break;
+      case self::POLICY_UP:
+        $result = $step > 0 ? $this->ceilToStep($value, $step) : ceil(round($value, 8));
+      break;
+      case self::POLICY_DOWN:
+        $result = $step > 0 ? $this->floorToStep($value, $step) : floor(round($value, 8));
+      break;
+      case self::POLICY_ENDS_IN:
+        $result = $this->roundEndsIn($value, (float) $policy['ending']);
+      break;
+      default:
+        $result = $value;
+    }
+
+    return round($result, $decimals ?? 8, PHP_ROUND_HALF_UP);
+  }
+
+  /** Rounds a money value to the given number of decimals (half up). */
+  public function roundMoney(float $value, int $decimals): float
+  {
+    return round($value, $decimals, PHP_ROUND_HALF_UP);
+  }
+
+  /** Rounds to the nearest multiple of the step. */
+  public function roundToStep(float $value, float $step, int $mode = PHP_ROUND_HALF_UP): float
+  {
+    if ($step <= 0) return $value;
+    return round(round($value / $step, 8), 0, $mode) * $step;
+  }
+
+  /** Rounds up to a multiple of the step. */
+  public function ceilToStep(float $value, float $step): float
+  {
+    if ($step <= 0) return $value;
+    return ceil(round($value / $step, 8)) * $step;
+  }
+
+  /** Rounds down to a multiple of the step. */
+  public function floorToStep(float $value, float $step): float
+  {
+    if ($step <= 0) return $value;
+    return floor(round($value / $step, 8)) * $step;
+  }
+
+  /**
+   * Rounds to the nearest price that ends with the given fraction, e.g. 0.99 (12.47 becomes 12.99, 12.10 becomes 11.99).
+   */
+  public function roundEndsIn(float $value, float $ending): float
+  {
+    $base = floor($value);
+    $upper = $base + $ending;
+    $lower = $base - 1 + $ending;
+
+    return (abs($upper - $value) <= abs($value - $lower)) ? $upper : $lower;
+  }
+
+  /** Cash rounding of a payable amount to a step (0 = off). */
+  public function cashRound(float $value, float $step): float
+  {
+    if ($step <= 0) return $value;
+    return $this->roundToStep($value, $step);
   }
 }

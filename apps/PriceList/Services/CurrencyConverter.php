@@ -2,27 +2,14 @@
 
 namespace Hubleto\App\Community\PriceList\Services;
 
-use Hubleto\App\Community\Settings\Models\Setting;
-use Hubleto\App\Custom\Settings\Models\CurrencyRate;
+use Hubleto\App\Community\Settings\Services\Currency as CurrencyService;
+use Hubleto\App\Community\Settings\Models\CurrencyRate;
 
 /**
  * Converts amounts between currencies using the rates stored in CurrencyRate (rate to the default currency).
  */
 class CurrencyConverter extends \Hubleto\Erp\Core
 {
-  /** Id of the default currency (0 if not set). */
-  public function getDefaultCurrencyId(): int
-  {
-    /** @var Setting $mSettings */
-    $mSettings = $this->getModel(Setting::class);
-
-    return (int) $mSettings->record
-      ->where('key', 'Apps\\Community\\Settings\\Currency\\DefaultCurrency')
-      ->first()
-      ?->value
-    ;
-  }
-
   /**
    * Units of the default currency for 1 unit of the given currency, valid on the date. Null if no rate is known.
    *
@@ -34,7 +21,10 @@ class CurrencyConverter extends \Hubleto\Erp\Core
    */
   public function getRateToDefault(int $idCurrency, string $date): ?float
   {
-    if ($idCurrency <= 0 || $idCurrency === $this->getDefaultCurrencyId()) return 1.0;
+    /** @var CurrencyService */
+    $currencyService = $this->getService(CurrencyService::class);
+
+    if ($idCurrency <= 0 || $idCurrency === $currencyService->getDefaultCurrencyId()) return 1.0;
 
     /** @var CurrencyRate $mRate */
     $mRate = $this->getModel(CurrencyRate::class);

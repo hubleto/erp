@@ -63,7 +63,7 @@ class Loader extends \Hubleto\Erp\App
   public function getSidebarGroups() {
     return $this->config()->getAsArray('sidebarGroups', [
       'crm' => [ 'color' => '#7a23dc', 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
-      'customer-acquisition' => [ 'color' => '#c6aa39', 'title' => $this->translate('Marketing'), 'icon' => 'fas fa-bullseye' ],
+      'marketing' => [ 'color' => '#c6aa39', 'title' => $this->translate('Marketing'), 'icon' => 'fas fa-bullseye' ],
       'sales' => [ 'color' => '#f50ab9', 'title' => $this->translate('Sales'), 'icon' => 'fas fa-users-viewfinder' ],
       'productivity' => [ 'color' => '#20689f', 'title' => $this->translate('Productivity'), 'icon' => 'fas fa-diagram-project' ],
       'human-resources' => [ 'color' => '#759f20', 'title' => $this->translate('Human resources'), 'icon' => 'fas fa-helmet' ],

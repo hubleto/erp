@@ -25,7 +25,7 @@ use Hubleto\App\Community\Leads\Models\Lead;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
-use Hubleto\App\Community\Settings\Models\Setting;
+use Hubleto\App\Community\Settings\Services\Currency as CurrencyService;
 use Hubleto\App\Community\Auth\Models\User;
 
 use Hubleto\Framework\Helper;
@@ -226,17 +226,11 @@ class Deal extends \Hubleto\Erp\Model
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
-    /** @var Setting */
-    $mSettings = $this->getModel(Setting::class);
-
-    $defaultCurrency = (int) $mSettings->record
-      ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
-      ->first()
-      ->value
-    ;
+    /** @var CurrencyService */
+    $currencyService = $this->getService(CurrencyService::class);
 
     $description = parent::describeForm();
-    $description->defaultValues['id_currency'] = $defaultCurrency;
+    $description->defaultValues["id_currency"] = $currencyService->getDefaultCurrencyId();
 
     return $description;
   }

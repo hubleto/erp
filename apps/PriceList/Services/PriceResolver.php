@@ -193,9 +193,7 @@ class PriceResolver extends \Hubleto\Erp\Core
 
     // rounding of the list
     if ($list) {
-      /** @var Rounding $rounder */
-      $rounder = $this->getService(Rounding::class);
-      $unitPrice = $rounder->round($unitPrice, [
+      $unitPrice = $calc->round($unitPrice, [
         'policy' => (int) $list->rounding_policy,
         'step' => (float) $list->rounding_step,
         'ending' => (float) $list->rounding_ending,

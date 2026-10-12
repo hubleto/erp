@@ -25,9 +25,7 @@ use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Auth\Models\User;
 
-use Hubleto\App\Community\Settings\PermissionsManager;
-
-use Hubleto\App\Community\Deals\Models\DealLead;
+use Hubleto\App\Community\Settings\Services\Currency as CurrencyService;
 
 class Lead extends \Hubleto\Erp\Model
 {
@@ -198,12 +196,11 @@ class Lead extends \Hubleto\Erp\Model
     /** @var Setting */
     $mSettings = $this->getModel(Setting::class);
 
-    $defaultCurrency = (int) $mSettings->record
-      ->where("key", "Apps\Community\Settings\Currency\DefaultCurrency")
-      ->first()
-      ->value
-    ;
-    $description->defaultValues['id_currency'] = $defaultCurrency;
+    /** @var CurrencyService */
+    $currencyService = $this->getService(CurrencyService::class);
+
+    $description = parent::describeForm();
+    $description->defaultValues["id_currency"] = $currencyService->getDefaultCurrencyId();
 
     $description->ui['addButtonText'] = $this->translate('Add Lead');
 

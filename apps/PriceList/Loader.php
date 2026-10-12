@@ -7,11 +7,11 @@ use Hubleto\App\Community\Customers\Models\Tag;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\App\Community\Products\Models\ProductSupplier;
 use Hubleto\App\Community\Settings\Models\Currency;
+use Hubleto\App\Community\Settings\Services\Currency as CurrencyService;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
 use Hubleto\App\Community\Workflow\Models\Workflow as WorkflowModel;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\PriceList\Services\Counter;
-use Hubleto\App\Community\PriceList\Services\CurrencyConverter;
 use Hubleto\App\Community\PriceList\Services\PriceCalculator;
 
 class Loader extends \Hubleto\Erp\App
@@ -152,9 +152,9 @@ class Loader extends \Hubleto\Erp\App
       /** @var Models\PriceList $mPriceList */
       $mPriceList = $this->getModel(Models\PriceList::class);
       if ($mPriceList->record->count() == 0) {
-        /** @var CurrencyConverter $converter */
-        $converter = $this->getService(CurrencyConverter::class);
-        $idCurrency = $converter->getDefaultCurrencyId();
+        /** @var CurrencyService */
+        $currencyService = $this->getService(CurrencyService::class);
+        $idCurrency = $currencyService->getDefaultCurrencyId();
         if ($idCurrency > 0) {
           $mPriceList->record->recordCreate([
             'code' => 'RETAIL',
@@ -284,8 +284,8 @@ class Loader extends \Hubleto\Erp\App
   {
     /** @var PriceCalculator $calc */
     $calc = $this->getService(PriceCalculator::class);
-    /** @var CurrencyConverter $converter */
-    $converter = $this->getService(CurrencyConverter::class);
+    /** @var CurrencyService */
+    $currencyService = $this->getService(CurrencyService::class);
 
     /** @var Models\PriceList $mPriceList */
     $mPriceList = $this->getModel(Models\PriceList::class);
@@ -296,7 +296,7 @@ class Loader extends \Hubleto\Erp\App
     /** @var Models\Rule $mRule */
     $mRule = $this->getModel(Models\Rule::class);
 
-    $idCurrency = $converter->getDefaultCurrencyId();
+    $idCurrency = $currencyService->getDefaultCurrencyId();
     if ($idCurrency <= 0) {
       /** @var Currency $mCurrencyFirst */
       $mCurrencyFirst = $this->getModel(Currency::class);

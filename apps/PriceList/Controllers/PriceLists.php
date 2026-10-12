@@ -16,6 +16,6 @@ class PriceLists extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Custom:PriceList/PriceLists.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/PriceLists.twig');
   }
 }

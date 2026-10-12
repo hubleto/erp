@@ -17,6 +17,6 @@ class Assignments extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Custom:PriceList/Assignments.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/Assignments.twig');
   }
 }

@@ -19,6 +19,6 @@ class MarginWarnings extends \Hubleto\Erp\Controller
     $this->viewParams['total'] = count($warnings);
     $this->viewParams['items'] = $warnings;
 
-    $this->setView('@Hubleto:App:Custom:PriceList/Boards/MarginWarnings.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/Boards/MarginWarnings.twig');
   }
 }

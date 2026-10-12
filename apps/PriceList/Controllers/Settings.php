@@ -102,6 +102,6 @@ class Settings extends \Hubleto\Erp\Controller
     $this->viewParams['consumers'] = $consumerRows;
     $this->viewParams['submitted'] = $this->router()->urlParamAsBool('submitted');
 
-    $this->setView('@Hubleto:App:Custom:PriceList/Settings.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/Settings.twig');
   }
 }

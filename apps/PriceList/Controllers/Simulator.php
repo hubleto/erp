@@ -17,6 +17,6 @@ class Simulator extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Custom:PriceList/Simulator.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/Simulator.twig');
   }
 }

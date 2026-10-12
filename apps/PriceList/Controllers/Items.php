@@ -17,6 +17,6 @@ class Items extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Custom:PriceList/Items.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/Items.twig');
   }
 }

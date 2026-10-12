@@ -18,6 +18,6 @@ class Matrix extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
     $this->viewParams['idPriceList'] = $this->router()->urlParamAsInteger('idPriceList');
-    $this->setView('@Hubleto:App:Custom:PriceList/Matrix.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/Matrix.twig');
   }
 }

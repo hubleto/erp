@@ -17,6 +17,6 @@ class PriceListHasDocuments extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Custom:PriceList/PriceListHasDocuments.twig');
+    $this->setView('@Hubleto:App:Community:PriceList/PriceListHasDocuments.twig');
   }
 }

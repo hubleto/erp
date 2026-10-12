@@ -2,9 +2,9 @@
 
 namespace Hubleto\App\Community\Products\Services;
 
-use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
+use Hubleto\App\Community\PriceList\Services\PriceCalculator as PriceCalculatorService;
 
-class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterface
+class PriceCalculator extends PriceCalculatorService
 {
   // SINGLE PRODUCT FUNCTIONS
   public function calculateFullPrice(float $unitPrice, float $amount): float

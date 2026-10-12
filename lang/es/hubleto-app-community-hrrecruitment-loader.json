@@ -1,0 +1,110 @@
+{
+    "manifest": {
+        "Recruitment": "Reclutamiento",
+        "Manage job openings, applicants, applications, and interviews.": "Administre las vacantes, los candidatos, las postulaciones y las entrevistas.",
+        "Full-time": "Tiempo completo",
+        "Part-time": "Medio tiempo",
+        "Contract": "Contrato",
+        "Hybrid": "Híbrido",
+        "Remote": "Remoto",
+        "Head office": "Oficina central",
+        "People Operations Manager - Demo": "Gerente de Recursos Humanos - Demo",
+        "People Operations": "Recursos Humanos",
+        "Open": "Abierto",
+        "Demo opening for an experienced people operations professional.": "Vacante de demostración para un profesional de recursos humanos con experiencia.",
+        "Careers page": "Página de empleo",
+        "Demo candidate profile.": "Perfil de candidato de demostración.",
+        "Demo application awaiting initial review.": "Postulación de demostración pendiente de revisión inicial.",
+        "Video call": "Videollamada",
+        "Scheduled": "Programado",
+        "HR Coordinator - Demo": "Coordinador de RR. HH. - Demo",
+        "Demo opening supporting employee services and HR operations.": "Vacante de demostración de apoyo a los servicios al empleado y a las operaciones de RR. HH.",
+        "Employee referral": "Referido por empleado",
+        "Additional demo candidate profile.": "Perfil de candidato de demostración adicional.",
+        "Demo application in the recruitment pipeline.": "Postulación de demostración en el proceso de reclutamiento.",
+        "Meeting room 2": "Sala de reuniones 2"
+    },
+    "Calendar": {
+        "Recruitment interviews": "Entrevistas de reclutamiento",
+        "Cancelled": "Cancelado",
+        "Interview": "Entrevista"
+    },
+    "Components\\FormApplication": {
+        "Application": "Postulación"
+    },
+    "Components\\FormCandidate": {
+        "Candidate": "Candidato"
+    },
+    "Components\\FormEmploymentType": {
+        "Employment type": "Tipo de empleo"
+    },
+    "Components\\FormInterview": {
+        "Interview": "Entrevista"
+    },
+    "Components\\FormJobOpening": {
+        "Job opening": "Vacante"
+    },
+    "Components\\FormWorkLocation": {
+        "Work location": "Lugar de trabajo"
+    },
+    "Models\\Application": {
+        "Job opening": "Vacante",
+        "Candidate": "Candidato",
+        "Applied on": "Fecha de postulación",
+        "Decision date": "Fecha de decisión",
+        "Notes": "Notas",
+        "Workflow": "Flujo de trabajo",
+        "Pipeline step": "Etapa del proceso",
+        "Add application": "Agregar postulación"
+    },
+    "Models\\Candidate": {
+        "First name": "Nombre",
+        "Last name": "Apellido",
+        "Email": "Correo electrónico",
+        "Phone": "Teléfono",
+        "Source": "Origen",
+        "Portfolio or profile URL": "URL del portafolio o perfil",
+        "Consent to store application data": "Consentimiento para almacenar los datos de la postulación",
+        "Notes": "Notas",
+        "Add candidate": "Agregar candidato"
+    },
+    "Models\\EmploymentType": {
+        "Name": "Nombre",
+        "Description": "Descripción",
+        "Add employment type": "Agregar tipo de empleo"
+    },
+    "Models\\Interview": {
+        "Application": "Postulación",
+        "Interviewer": "Entrevistador",
+        "Start": "Inicio",
+        "End": "Fin",
+        "Location or meeting link": "Lugar o enlace de la reunión",
+        "Status": "Estado",
+        "Interview feedback": "Retroalimentación de la entrevista",
+        "Scheduled": "Programado",
+        "Completed": "Completado",
+        "Cancelled": "Cancelado",
+        "Schedule interview": "Programar entrevista"
+    },
+    "Models\\JobOpening": {
+        "Job title": "Puesto",
+        "Department": "Departamento",
+        "Work location": "Lugar de trabajo",
+        "Employment type": "Tipo de empleo",
+        "Status": "Estado",
+        "Positions": "Plazas",
+        "Opened": "Abierta",
+        "Closed": "Cerrado",
+        "Hiring manager": "Responsable de contratación",
+        "Description": "Descripción",
+        "Draft": "Borrador",
+        "Open": "Abierto",
+        "On hold": "En pausa",
+        "Add job opening": "Agregar vacante"
+    },
+    "Models\\WorkLocation": {
+        "Name": "Nombre",
+        "Description": "Descripción",
+        "Add work location": "Agregar lugar de trabajo"
+    }
+}

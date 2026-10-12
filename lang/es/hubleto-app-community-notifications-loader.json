@@ -15,7 +15,7 @@
         "Sent": "Enviado",
         "Read": "Leído",
         "URL": "URL",
-        "No category": ""
+        "No category": "Sin categoría"
     },
     "Controllers\\Notifications": {
         "Notifications": "Notificaciones"
@@ -23,5 +23,20 @@
     "Components\\TableNotifications": {
         "Mark as unread": "Marcar como no leído",
         "Mark as read": "Marcar como leído"
+    },
+    "Controllers\\All": {
+        "Notifications": "Notificaciones",
+        "All": "Todo"
+    },
+    "Controllers\\Inbox": {
+        "Notifications": "Notificaciones",
+        "Inbox": "Bandeja de entrada"
+    },
+    "Controllers\\Sent": {
+        "Notifications": "Notificaciones",
+        "Sent": "Enviado"
+    },
+    "Components\\FormNotification": {
+        "Notification": "Notificación"
     }
 }

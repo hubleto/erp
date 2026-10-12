@@ -1,0 +1,70 @@
+{
+    "manifest": {
+        "Cashdesk": "Caja",
+        "Cash registers": "Cajas registradoras",
+        "Receipts": "Recibos",
+        "Cashdesk and receipts.": "Caja y recibos."
+    },
+    "Controllers\\Home": {
+        "Cashdesk": "Caja",
+        "Cash registers": "Cajas registradoras",
+        "Receipts": "Recibos"
+    },
+    "Controllers\\CashRegisters": {
+        "Cashdesk": "Caja",
+        "Cash registers": "Cajas registradoras"
+    },
+    "Controllers\\Receipts": {
+        "Cashdesk": "Caja",
+        "Receipts": "Recibos"
+    },
+    "Models\\CashRegister": {
+        "Cash register": "Caja registradora",
+        "Company": "Empresa",
+        "Shop": "Tienda",
+        "Identifier": "Identificador",
+        "Description": "Descripción",
+        "Add cash register": "Agregar caja registradora"
+    },
+    "Models\\Receipt": {
+        "Receipt": "Recibo",
+        "Number": "Número",
+        "Company": "Empresa",
+        "Cash register": "Caja registradora",
+        "Total price excl. VAT": "Precio total sin Imp.",
+        "Total price incl. VAT": "Precio total con Imp.",
+        "Created": "Creado",
+        "Sent to cash register": "Enviado a la caja registradora",
+        "Add receipt": "Agregar recibo"
+    },
+    "Models\\ReceiptItem": {
+        "Receipt": "Recibo",
+        "Product": "Producto",
+        "VAT": "Impuestos",
+        "Unit price excl. VAT": "Precio unitario sin Imp.",
+        "Unit VAT": "IVA unitario",
+        "Unit price incl. VAT": "Precio unitario con Imp.",
+        "Quantity": "Cantidad",
+        "Total price excl. VAT": "Precio total sin Imp.",
+        "Total VAT": "Total impuestos",
+        "Total price incl. VAT": "Precio total con Imp."
+    },
+    "Components\\FormCashRegister": {
+        "Cash register": "Caja registradora"
+    },
+    "Components\\FormReceipt": {
+        "Receipt": "Recibo",
+        "Product": "Producto",
+        "Qty.": "Cant.",
+        "Unit price incl. VAT (€)": "Precio unitario con Imp.",
+        "VAT (%)": "Impuestos (%)",
+        "Total price incl. VAT (€)": "Precio total con Imp.",
+        "Add item": "Agregar producto",
+        "Send to cash register": "Enviar a la caja registradora",
+        "TAX ID:": "Identificación fiscal:",
+        "VAT ID:": "Registro de contribuyente:",
+        "RECEIPT": "RECIBO",
+        "TOTAL:": "TOTAL:",
+        "Cash register identifier:": "Identificador de la caja registradora:"
+    }
+}

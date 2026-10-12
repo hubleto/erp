@@ -7,9 +7,28 @@
         "Help center": "Centro de ayuda",
         "Search knowledgebase...": "Buscar en la base de conocimientos...",
         "Browse knowledgebase": "Explorar la base de conocimientos",
-        "Need help using Hubleto?": "",
-        "Found a bug?": "",
-        "Need help with development?": "",
-        "Just looking around?": ""
+        "Need help using Hubleto?": "¿Necesitas ayuda para usar Hubleto?",
+        "Found a bug?": "¿Encontraste un error?",
+        "Need help with development?": "¿Necesitas ayuda con el desarrollo?",
+        "Just looking around?": "¿Solo estás mirando alrededor?",
+        "Help": "Ayuda",
+        "About your Hubleto": "Acerca de tu Hubleto"
+    },
+    "Controllers\\Search": {
+        "Help": "Ayuda",
+        "Search": "Buscar",
+        "Bring search to the brand new level.": "Lleve la búsqueda a un nivel completamente nuevo.",
+        "Hubleto fulltext search provides powerful functionality to enhance search capabilities.": "La búsqueda de texto completo de Hubleto ofrece funciones potentes para mejorar las capacidades de búsqueda.",
+        "Ctrl+K shortcut": "Atajo Ctrl+K",
+        "Type {ctrlK} to start searching at any time.": "Presione {ctrlK} para empezar a buscar en cualquier momento.",
+        "App selectors": "Selectores de aplicación",
+        "{appSelectors} are special tags like, e.g. {codeExample}, filtering what app should be used to search. Using app selectors makes search faster and more effective because it directly points to a certain app and ignores searching in other apps.": "Los {appSelectors} son etiquetas especiales, por ejemplo {codeExample}, que filtran qué aplicación se debe usar para buscar. Usar selectores de aplicación hace la búsqueda más rápida y efectiva, porque apunta directamente a una aplicación concreta e ignora la búsqueda en las demás.",
+        "Example:": "Ejemplo:",
+        "will invoke search in {dealsApp} app with expression {expression}.": "buscará en la aplicación {dealsApp} con la expresión {expression}.",
+        "The app selectors are intuitive, try using {contacts} or {tasks}.": "Los selectores de aplicación son intuitivos, pruebe a usar {contacts} o {tasks}.",
+        "Switches": "Modificadores",
+        "{switches} behave a bit differently from {appSelectors}. By providing a switch (e.g, {codeExample}), you may directly specify, what kind of data you want to search. One switch may be assigned with more than one app.": "Los {switches} se comportan de forma un poco distinta a los {appSelectors}. Al indicar un modificador (por ejemplo, {codeExample}), puede especificar directamente qué tipo de datos desea buscar. Un modificador puede estar asignado a más de una aplicación.",
+        "will search for tasks (or related data) across the whole Hubleto, containing identifier {identifier}.": "buscará tareas (o datos relacionados) en todo Hubleto que contengan el identificador {identifier}.",
+        "Switches can have their shorthand variants, e.g. {short} is equal to {long}.": "Los modificadores pueden tener variantes abreviadas, por ejemplo {short} equivale a {long}."
     }
 }

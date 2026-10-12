@@ -1,5 +1,8 @@
 {
     "manifest": {
         "Support": "Ayuda"
+    },
+    "Controllers\\Dashboard": {
+        "Support...": "Soporte..."
     }
 }

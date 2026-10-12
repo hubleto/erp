@@ -1,0 +1,90 @@
+{
+    "manifest": {
+        "Performance": "Desempeño",
+        "Track employee objectives, performance reviews, and learning assignments.": "Dé seguimiento a los objetivos de los empleados, las evaluaciones de desempeño y las asignaciones de formación.",
+        "Performance & development": "Desempeño y desarrollo",
+        "Complete annual HR compliance training": "Completar la capacitación anual de cumplimiento de RR. HH.",
+        "Complete required workplace and privacy training.": "Completar la capacitación obligatoria sobre el lugar de trabajo y la privacidad.",
+        "In progress": "En curso",
+        "Document employee onboarding process": "Documentar el proceso de incorporación de empleados",
+        "Publish a consistent onboarding checklist for managers.": "Publicar una lista de verificación de incorporación uniforme para los gerentes.",
+        "Not started": "No iniciado",
+        "Workplace essentials - Demo": "Aspectos básicos del lugar de trabajo - Demo",
+        "People Operations": "Recursos Humanos",
+        "Online": "En línea",
+        "Demo course covering workplace essentials.": "Curso de demostración sobre los aspectos básicos del lugar de trabajo.",
+        "Data privacy refresher - Demo": "Repaso de privacidad de datos - Demo",
+        "Compliance team": "Equipo de cumplimiento",
+        "Short demo course on data privacy and secure handling.": "Curso breve de demostración sobre privacidad y manejo seguro de datos.",
+        "Demo learning assignment.": "Asignación de formación de demostración.",
+        "Assigned": "Asignado",
+        "Additional demo learning assignment.": "Asignación de formación de demostración adicional.",
+        "Scheduled": "Programado",
+        "Demo performance review awaiting completion.": "Evaluación de desempeño de demostración pendiente de completar.",
+        "Completed": "Completado",
+        "Demo completed review with strong collaboration and delivery outcomes.": "Evaluación de demostración completada con muy buenos resultados en colaboración y entregas."
+    },
+    "Components\\FormCourse": {
+        "Learning course": "Curso de formación"
+    },
+    "Components\\FormGoal": {
+        "Employee goal": "Objetivo del empleado"
+    },
+    "Components\\FormLearning": {
+        "Learning assignment": "Asignación de formación"
+    },
+    "Components\\FormReview": {
+        "Performance review": "Evaluación de desempeño"
+    },
+    "Models\\Course": {
+        "Course name": "Nombre del curso",
+        "Provider": "Proveedor",
+        "Delivery method": "Modalidad",
+        "Duration (hours)": "Duración (horas)",
+        "Course URL": "URL del curso",
+        "Active": "Activo",
+        "Description": "Descripción",
+        "Add course": "Agregar curso"
+    },
+    "Models\\Goal": {
+        "Employee": "Empleado",
+        "Objective": "Objetivo",
+        "Description": "Descripción",
+        "Due date": "Fecha de vencimiento",
+        "Progress (%)": "Progreso (%)",
+        "Status": "Estado",
+        "Not started": "No iniciado",
+        "In progress": "En curso",
+        "Completed": "Completado",
+        "Deferred": "Pospuesto",
+        "Add goal": "Agregar objetivo"
+    },
+    "Models\\Learning": {
+        "Employee": "Empleado",
+        "Course": "Curso",
+        "Assigned": "Asignado",
+        "Due date": "Fecha de vencimiento",
+        "Completed": "Completado",
+        "Status": "Estado",
+        "Notes": "Notas",
+        "In progress": "En curso",
+        "Overdue": "Vencido",
+        "Cancelled": "Cancelado",
+        "Assign learning": "Asignar formación"
+    },
+    "Models\\Review": {
+        "Employee": "Empleado",
+        "Reviewer": "Evaluador",
+        "Review period": "Período de evaluación",
+        "Review date": "Fecha de evaluación",
+        "Overall score": "Puntuación general",
+        "Status": "Estado",
+        "Summary and feedback": "Resumen y retroalimentación",
+        "Workflow": "Flujo de trabajo",
+        "Review step": "Paso de la evaluación",
+        "Draft": "Borrador",
+        "Scheduled": "Programado",
+        "Completed": "Completado",
+        "Schedule review": "Programar evaluación"
+    }
+}

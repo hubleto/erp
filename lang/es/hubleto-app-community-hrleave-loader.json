@@ -1,0 +1,55 @@
+{
+    "manifest": {
+        "Leave": "Ausencias",
+        "Manage leave policies, requests, and annual entitlements.": "Administre las políticas de ausencias, las solicitudes y los días anuales asignados.",
+        "Annual leave": "Vacaciones anuales",
+        "Sick leave": "Incapacidad por enfermedad",
+        "Personal leave": "Permiso personal",
+        "Demo leave policy.": "Política de ausencias de demostración."
+    },
+    "Calendar": {
+        "Approved employee leave": "Ausencias aprobadas de empleados",
+        "Leave": "Ausencias"
+    },
+    "Components\\FormLeave": {
+        "Leave entitlement": "Días de ausencia asignados"
+    },
+    "Components\\FormLeaveRequest": {
+        "Leave request": "Solicitud de ausencia"
+    },
+    "Components\\FormLeaveType": {
+        "Leave type": "Tipo de ausencia"
+    },
+    "Models\\Leave": {
+        "Employee": "Empleado",
+        "Leave type": "Tipo de ausencia",
+        "Year": "Año",
+        "Entitlement (days)": "Días asignados",
+        "Carried over (days)": "Días acumulados del año anterior",
+        "Approved days used": "Días aprobados usados",
+        "Days remaining": "Días restantes",
+        "Add leave entitlement": "Agregar días de ausencia asignados"
+    },
+    "Models\\LeaveRequest": {
+        "Employee": "Empleado",
+        "Leave type": "Tipo de ausencia",
+        "From": "Desde",
+        "To": "Hasta",
+        "Balance year": "Año del saldo",
+        "Days requested": "Días solicitados",
+        "Approver": "Aprobador",
+        "Decision date": "Fecha de decisión",
+        "Reason": "Motivo",
+        "Workflow": "Flujo de trabajo",
+        "Approval step": "Paso de aprobación",
+        "Request leave": "Solicitar ausencia"
+    },
+    "Models\\LeaveType": {
+        "Leave type": "Tipo de ausencia",
+        "Annual entitlement (days)": "Días asignados por año",
+        "Paid": "Remunerado",
+        "Requires approval": "Requiere aprobación",
+        "Description": "Descripción",
+        "Add leave type": "Agregar tipo de ausencia"
+    }
+}

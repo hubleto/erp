@@ -4,7 +4,7 @@
         "Worksheet log": "Registro de hojas de trabajo",
         "Activity types": "Tipos de actividad",
         "Daily chart": "Gráfico diario",
-        "Monthly summary": ""
+        "Monthly summary": "Resumen mensual"
     },
     "root": {
         "Worksheets": "Hojas de trabajo",
@@ -33,12 +33,13 @@
         "Last 7 days": "Últimos 7 días",
         "Last 14 days": "Últimos 14 días",
         "Month before last": "El mes antepasado",
-        "Month": "",
-        "Customer": "",
-        "Deal": "",
-        "Project": "",
-        "Group by": "",
-        "Total worked hours": ""
+        "Month": "Mes",
+        "Customer": "Cliente",
+        "Deal": "Negocio",
+        "Project": "Proyecto",
+        "Group by": "Agrupar por",
+        "Total worked hours": "Total de horas trabajadas",
+        "Add Activity": "Agregar actividad"
     },
     "Components\\TableActivities": {
         "Worked total": "Total de horas trabajadas",
@@ -46,6 +47,36 @@
     },
     "Models\\ActivityType": {
         "Varchar": "Nombre",
-        "Color": "Color"
+        "Color": "Color",
+        "Add ActivityType": "Agregar tipo de actividad"
+    },
+    "Components\\FormActivity": {
+        "Activity": "Actividad"
+    },
+    "Components\\FormActivityType": {
+        "ActivityType": "Tipo de actividad",
+        "Record #": "Registro #"
+    },
+    "Components\\FormType": {
+        "Type": "Tipo",
+        "Record #": "Registro #"
+    },
+    "Controllers\\Activities": {
+        "Worksheets": "Hojas de trabajo",
+        "Activities": "Actividades"
+    },
+    "Controllers\\ActivityTypes": {
+        "Worksheets": "Hojas de trabajo",
+        "Activity types": "Tipos de actividad"
+    },
+    "Controllers\\Boards\\DailyChart": {
+        "Show/Hide details": "Mostrar/Ocultar detalles"
+    },
+    "Controllers\\Boards\\MonthlySummary": {
+        "No employee with email address '{{ employeeEmail }}' found.": "No se encontró ningún empleado con el correo '{{ employeeEmail }}'.",
+        "No summary available for this employee.": "No hay resumen disponible para este empleado."
+    },
+    "Controllers\\Api\\DailyActivityChart": {
+        "Daily activity": "Actividad diaria"
     }
 }

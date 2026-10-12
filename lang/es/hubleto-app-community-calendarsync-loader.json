@@ -1,0 +1,50 @@
+{
+    "manifest": {
+        "Calendar sources": "Fuentes de calendario",
+        "Add calendar source": "Agregar fuente de calendario"
+    },
+    "Calendar": {
+        "Error fetching events": "Error al obtener los eventos",
+        "No Title": "Sin título",
+        "Error fetching ICS file": "Error al obtener el archivo ICS"
+    },
+    "Models\\Source": {
+        "Name": "Nombre",
+        "Calendar ID": "ID del calendario",
+        "Type": "Tipo",
+        "Google Calendar": "Google Calendar",
+        ".ics Url": "URL .ics",
+        "Color": "Color",
+        "Active": "Activo",
+        "Calendar sources": "Fuentes de calendario",
+        "Add calendar source": "Agregar fuente de calendario"
+    },
+    "Controllers\\Google": {
+        "Settings": "Configuraciones",
+        "Calendar Sources": "Fuentes de calendario",
+        "Google Calendars": "Calendarios de Google",
+        "Google Calendar": "Google Calendar",
+        "When using Google Calendar integration, also make sure to have $config['google-api-key'] defined in your ConfigEnv.php.": "Al usar la integración con Google Calendar, asegúrese también de tener $config['google-api-key'] definido en su ConfigEnv.php.",
+        "Visit": "Visite",
+        "for details on how to get and configure your Google Calendar API key.": "para obtener detalles sobre cómo obtener y configurar su clave API de Google Calendar."
+    },
+    "Controllers\\Home": {
+        "Settings": "Configuraciones",
+        "Calendar Sources": "Fuentes de calendario",
+        "Manage Google Calendars": "Administrar calendarios de Google",
+        "Manage online .ics Calendars": "Administrar calendarios .ics en línea"
+    },
+    "Controllers\\Ics": {
+        "Settings": "Configuraciones",
+        "Calendar Sources": "Fuentes de calendario",
+        ".ics Calendars": "Calendarios .ics",
+        "Online .ics Calendar": "Calendario .ics en línea"
+    },
+    "Components\\FormSource": {
+        "Enter the Calendar ID from the settings of your calendar in Google Calendar (look at the bottom of the page).": "Ingrese el ID del calendario desde la configuración de su calendario en Google Calendar (mire al final de la página).",
+        "It should be in the form of": "Debe tener el formato",
+        "The calendar must also be set to public or the API Key specified in the config file must have access to it.": "El calendario también debe ser público o la clave API especificada en el archivo de configuración debe tener acceso a él.",
+        "Enter the URL that points to an ICS file.": "Ingrese la URL que apunta a un archivo ICS.",
+        "When using Google calendar, make sure you define an API key in ConfigEnv.php: $config['google-api-key'] = ...": "Al usar Google Calendar, asegúrese de definir una clave API en ConfigEnv.php: $config['google-api-key'] = ..."
+    }
+}

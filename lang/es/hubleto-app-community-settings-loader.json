@@ -16,7 +16,13 @@
         "Platform config": "Configuración de la plataforma",
         "Sidebar": "Menú lateral",
         "Teams": "Equipos",
-        "Log viewer": ""
+        "Log viewer": "Visor de registros",
+        "Meeting": "Reunión",
+        "Business Trip": "Viaje de negocios",
+        "Call": "Llamada",
+        "Email": "Correo electrónico",
+        "Other": "Otro",
+        "...": "..."
     },
     "Models\\User": {
         "First name": "Nombre",
@@ -37,30 +43,40 @@
         "Roles": "Roles",
         "Teams": "Equipos",
         "Type": "Tipo",
-        "Apps": "Aplicaciones"
+        "Apps": "Aplicaciones",
+        "Add User": "Agregar usuario"
     },
     "Models\\Country": {
         "Country Name": "Nombre del país",
         "Code": "Código",
-        "Country": "País"
+        "Country": "País",
+        "Countries": "Países",
+        "Add Country": "Agregar país"
     },
     "Models\\Profile": {
         "Company": "Empresa"
     },
     "Models\\ActivityType": {
-        "Type Name": "Typ",
-        "Color": "Farba",
-        "Shown in Calendar": "Zobraziť v kalendári",
+        "Type Name": "Nombre",
+        "Color": "Color",
+        "Shown in Calendar": "Mostrar en el calendario",
         "Icon": "Ikonka",
-        "Type": "Typ",
-        "Show in calendar": "Show v kalendári"
+        "Type": "Tipo",
+        "Show in calendar": "Mostrar en el calendario",
+        "Activity Types": "Tipos de actividad",
+        "Add Activity Type": "Agregar tipo de actividad"
     },
     "Models\\Currency": {
         "Currency Name": "Nombre de la moneda",
         "Currency Code": "Código de la moneda",
         "Currency": "Moneda",
         "Code": "Código",
-        "Symbol": "Símbolo"
+        "Symbol": "Símbolo",
+        "Currencies": "Monedas",
+        "Add currency": "Agregar moneda",
+        "New currency": "Nueva moneda",
+        "Adding": "Agregando",
+        "Editing": "Editando"
     },
     "Models\\Workflow": {
         "Name": "Nombre",
@@ -81,7 +97,9 @@
     "Models\\Setting": {
         "Key": "Parámetro",
         "Value": "Valor",
-        "Only for user": "Solo para el usuario"
+        "Only for user": "Solo para el usuario",
+        "Settings": "Configuraciones",
+        "Add Setting": "Agregar configuración"
     },
     "Models\\InvoiceProfile": {
         "Name": "Nombre",
@@ -109,14 +127,17 @@
         "Grant all permissions": "Dar todos los permisos (administrador)",
         "Grant all permissions (administrator role)": "Dar todos los permisos (rol de administrador)",
         "Description": "Descripción",
-        "Is default role (cannot be modified)": "Es el rol predeterminado (no se puede modificar)"
+        "Is default role (cannot be modified)": "Es el rol predeterminado (no se puede modificar)",
+        "Grant all permissions (admin role)": "Otorgar todos los permisos (rol de administrador)"
     },
     "Models\\RolePermission": {
         "Permission": "Permiso",
-        "Role": "Rol"
+        "Role": "Rol",
+        "Assign permission to role": "Asignar permiso al rol"
     },
     "Models\\Permission": {
-        "Permission": "Permiso"
+        "Permission": "Permiso",
+        "Permissions": "Permisos"
     },
     "Controllers\\Dashboard": {
         "Settings": "Ajustes",
@@ -142,7 +163,12 @@
         "Manage apps": "Administrar aplicaciones",
         "All settings": "Todas las configuraciones",
         "Change theme": "Cambiar tema",
-        "Locale": "Idioma y región"
+        "Locale": "Idioma y región",
+        "Sign out from Hubleto": "Cerrar sesión en Hubleto",
+        "Default currency and timezone": "Moneda y zona horaria predeterminadas",
+        "Date (short / long) and time formats": "Formatos de fecha (corto / largo) y hora",
+        "Decimals and thousands separator": "Separador de decimales y de miles",
+        "Search settings...": "Buscar en la configuración..."
     },
     "Controllers\\UserRoles": {
         "Settings": "Ajustes",
@@ -203,17 +229,45 @@
         "Logo": "Logo",
         "Brand color - primary": "Color de marca - primario",
         "Brand color - secondary": "Color de marca - secundario",
-        "Region": ""
+        "Region": "Región",
+        "Add company": "Agregar empresa"
     },
     "Controllers\\Sidebar": {
         "Settings": "Ajustes",
-        "Sidebar": "Menú lateral"
+        "Sidebar": "Menú lateral",
+        "Save sidebar configuration": "Guardar configuración de la barra lateral"
     },
     "Components\\FormUserRole": {
-        "Save": "Guardar"
+        "Save": "Guardar",
+        "User role": "Rol de usuario",
+        "Permissions for records with designated owner, manager or team": "Permisos para registros con propietario, gerente o equipo asignado",
+        "Reading": "Lectura",
+        "Modifying": "Modificación",
+        "Can read only owned records": "Solo puede leer los registros propios",
+        "Can read only owned and managed records": "Solo puede leer los registros propios y gestionados",
+        "Can read all records": "Puede leer todos los registros",
+        "Can modify only owned records": "Solo puede modificar los registros propios",
+        "Can modify only owned and managed records": "Solo puede modificar los registros propios y gestionados",
+        "Can modify all records": "Puede modificar todos los registros"
     },
     "Components\\FormUser": {
-        "About the user": "Acerca del usuario"
+        "About the user": "Acerca del usuario",
+        "User": "Usuario",
+        "You may add new users only in Premium account.": "Solo puede agregar nuevos usuarios en una cuenta Premium.",
+        "Activate Premium account": "Activar cuenta Premium",
+        "Access to Hubleto": "Acceso a Hubleto",
+        "Roles": "Roles",
+        "First create user, then you will be prompted to assign roles.": "Primero cree el usuario; luego se le pedirá asignar roles.",
+        "Permissions for records with designated owner or manager": "Permisos para registros con propietario o gerente asignado",
+        "Reading": "Lectura",
+        "Modifying": "Modificación",
+        "Can read only owned records": "Solo puede leer los registros propios",
+        "Can read only owned and managed records": "Solo puede leer los registros propios y gestionados",
+        "Can read all records": "Puede leer todos los registros",
+        "Can modify only owned records": "Solo puede modificar los registros propios",
+        "Can modify only owned and managed records": "Solo puede modificar los registros propios y gestionados",
+        "Can modify all records": "Puede modificar todos los registros",
+        "Access to apps": "Acceso a las aplicaciones"
     },
     "Controllers\\InvoiceProfiles": {
         "Settings": "Ajustes",
@@ -224,21 +278,80 @@
         "Team color": "Color del equipo",
         "Description": "Descripción",
         "Team manager": "Responsable del equipo",
-        "Manager": "Responsable"
+        "Manager": "Responsable",
+        "Members": "Miembros",
+        "Teams": "Equipos",
+        "Add team": "Agregar equipo"
     },
     "Models\\TeamMember": {
         "Team": "Equipo",
-        "Member": "Miembro"
+        "Member": "Miembro",
+        "Add member to team": "Agregar miembro al equipo"
     },
     "Controllers\\Apps": {
         "Settings": "Ajustes",
         "Apps": "Aplicaciones",
         "Open": "Abrir",
         "Disable": "Desactivar",
-        "Install": "Instalar"
+        "Install": "Instalar",
+        "Go to app": "Ir a la aplicación",
+        "Enable": "Habilitar",
+        "Activate Premium account": "Activar cuenta Premium",
+        "Installed apps": "Aplicaciones instaladas",
+        "Available apps": "Aplicaciones disponibles",
+        "(Search) Type app name and press Enter...": "(Buscar) Escriba el nombre de la aplicación y presione Enter...",
+        "Community": "Community",
+        "Enterprise": "Enterprise",
+        "External": "Externo",
+        "Custom": "Personalizado",
+        "You can install Premium apps only in Premium account.": "Solo puede instalar aplicaciones Premium en una cuenta Premium."
     },
     "Controllers\\MyAccount": {
         "Settings": "Ajustes",
         "Company": "Empresa"
+    },
+    "Controllers\\Companies": {
+        "Settings": "Configuraciones",
+        "Companies": "Empresas"
+    },
+    "Controllers\\Currencies": {
+        "Settings": "Configuraciones",
+        "Currencies": "Monedas"
+    },
+    "Controllers\\Teams": {
+        "Settings": "Configuraciones",
+        "Teams": "Equipos"
+    },
+    "Controllers\\Theme": {
+        "Settings": "Configuraciones",
+        "Theme": "Tema"
+    },
+    "Controllers\\Permissions": {
+        "Settings": "Configuraciones",
+        "Permissions": "Permisos"
+    },
+    "Controllers\\RolePermissions": {
+        "Role permissions": "Permisos de roles"
+    },
+    "Controllers\\UpdateDefaultPermissions": {
+        "Settings": "Configuraciones",
+        "Update default permissions": "Actualizar permisos predeterminados"
+    },
+    "Controllers\\Config": {
+        "Settings": "Configuraciones",
+        "Platform config": "Configuración de la plataforma"
+    },
+    "Controllers\\General": {
+        "Settings": "Configuraciones",
+        "General settings": "Ajustes generales"
+    },
+    "Controllers\\LogViewer": {
+        "Settings": "Configuraciones",
+        "Log Viewer": "Visor de registros"
+    },
+    "Components\\FormTeam": {
+        "Team": "Equipo",
+        "Team members": "Miembros del equipo",
+        "First create team, then you will be prompted to add members.": "Primero cree el equipo; luego se le pedirá agregar miembros."
     }
 }

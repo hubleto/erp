@@ -18,7 +18,9 @@
         "Serial number": "Número de serie",
         "Expiration": "Caducidad",
         "Received": "Recibido",
-        "Last moved": "Último movimiento"
+        "Last moved": "Último movimiento",
+        "Location": "Ubicación",
+        "Add item": "Agregar producto"
     },
     "Models\\Status": {
         "Name": "Nombre"

@@ -1,0 +1,66 @@
+{
+    "manifest": {
+        "Employees": "Empleados",
+        "Employment profiles linked to existing user accounts and teams.": "Perfiles laborales vinculados a cuentas de usuario y equipos existentes.",
+        "Full-time": "Tiempo completo",
+        "Part-time": "Medio tiempo",
+        "Contract": "Contrato",
+        "Temporary": "Temporal",
+        "Internship": "Pasantía",
+        "Active": "Activo",
+        "On leave": "De licencia",
+        "Ended": "Finalizado",
+        "Head office": "Oficina central",
+        "Remote": "Remoto",
+        "Hybrid": "Híbrido",
+        "Demo employee profile.": "Perfil de empleado de demostración.",
+        "People Operations Manager": "Gerente de Recursos Humanos",
+        "People Operations Specialist": "Especialista de Recursos Humanos"
+    },
+    "Components\\FormEmployee": {
+        "Employee profile": "Perfil del empleado"
+    },
+    "Components\\FormEmploymentStatus": {
+        "Employment status": "Estado laboral"
+    },
+    "Components\\FormEmploymentType": {
+        "Employment type": "Tipo de empleo"
+    },
+    "Components\\FormWorkLocation": {
+        "Work location": "Lugar de trabajo"
+    },
+    "Models\\Employee": {
+        "User account": "Cuenta de usuario",
+        "Employee number": "Número de empleado",
+        "First name": "Nombre",
+        "Family name": "Apellido",
+        "Job title": "Puesto",
+        "Team": "Equipo",
+        "Manager": "Gerente",
+        "Employment type": "Tipo de empleo",
+        "Employment status": "Estado laboral",
+        "Hire date": "Fecha de contratación",
+        "End date": "Fecha de finalización",
+        "Work location": "Lugar de trabajo",
+        "Employment notes": "Notas laborales",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Etapa del flujo",
+        "Add employee": "Agregar empleado",
+        "Lifecycle step": "Etapa del ciclo laboral"
+    },
+    "Models\\EmploymentStatus": {
+        "Name": "Nombre",
+        "Description": "Descripción",
+        "Add employment status": "Agregar estado laboral"
+    },
+    "Models\\EmploymentType": {
+        "Name": "Nombre",
+        "Description": "Descripción",
+        "Add employment type": "Agregar tipo de empleo"
+    },
+    "Models\\WorkLocation": {
+        "Name": "Nombre",
+        "Description": "Descripción",
+        "Add work location": "Agregar lugar de trabajo"
+    }
+}

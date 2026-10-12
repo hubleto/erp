@@ -3,7 +3,87 @@
         "Products": "Productos",
         "Free product portfolio managment.": "Gestión gratuita del portafolio de productos.",
         "Groups": "Grupos",
-        "Categories": "Categorias"
+        "Categories": "Categorias",
+        "Computers & Accessories": "Computadoras y accesorios",
+        "Laptops & Desktops": "Portátiles y computadoras de escritorio",
+        "Laptop Computers": "Computadoras portátiles",
+        "Desktop Computers": "Computadoras de escritorio",
+        "Monitors": "Monitores",
+        "Components & Storage": "Componentes y almacenamiento",
+        "Internal Components": "Componentes internos",
+        "Hard Drives & SSDs": "Discos duros y SSD",
+        "Networking": "Networking",
+        "Peripherals & Accessories": "Periféricos y accesorios",
+        "Keyboards & Mice": "Teclados y ratones",
+        "Printers & Scanners": "Impresoras y escáneres",
+        "Webcams & Microphones": "Cámaras web y micrófonos",
+        "Mobile Devices & Communication": "Dispositivos móviles y comunicación",
+        "Smartphones & Cell Phones": "Smartphones y teléfonos celulares",
+        "Unlocked Phones": "Teléfonos liberados",
+        "Contract Phones": "Teléfonos con contrato",
+        "Basic/Feature Phones": "Teléfonos básicos",
+        "Tablets & E-Readers": "Tabletas y lectores electrónicos",
+        "Android Tablets": "Tabletas Android",
+        "iPad Tablets": "Tabletas iPad",
+        "Mobile Accessories": "Accesorios para móviles",
+        "Cases & Screen Protectors": "Fundas y protectores de pantalla",
+        "Chargers & Power Banks": "Cargadores y baterías externas",
+        "Bluetooth Headsets & Car Kits": "Auriculares Bluetooth y kits para auto",
+        "Audio & Home Theater": "Audio y cine en casa",
+        "Home Audio": "Audio para el hogar",
+        "Speakers": "Parlantes",
+        "Home Theater Systems": "Sistemas de cine en casa",
+        "Receivers & Amplifiers": "Receptores y amplificadores",
+        "Headphones & Portable Audio": "Auriculares y audio portátil",
+        "Over-Ear & On-Ear Headphones": "Auriculares de diadema",
+        "Earbuds & In-Ear Monitors": "Auriculares intraurales",
+        "Portable Bluetooth Speakers": "Altavoces Bluetooth portátiles",
+        "Televisions & Video": "Televisores y video",
+        "Smart TVs": "Smart TV",
+        "Projectors & Screens": "Proyectores y pantallas",
+        "Streaming Media Players": "Reproductores de streaming",
+        "Smart Home & Security": "Hogar inteligente y seguridad",
+        "Smart Home Devices": "Dispositivos para hogar inteligente",
+        "Smart Speakers & Displays": "Altavoces y pantallas inteligentes",
+        "Smart Lighting & Plugs": "Iluminación y enchufes inteligentes",
+        "Smart Thermostats & HVAC": "Termostatos inteligentes y climatización",
+        "Security & Surveillance": "Seguridad y vigilancia",
+        "Security Cameras": "Cámaras de seguridad",
+        "Video Doorbells": "Timbres con video",
+        "Home Alarm Systems": "Sistemas de alarma para el hogar",
+        "Cameras & Drones": "Cámaras y drones",
+        "Digital Cameras": "Cámaras digitales",
+        "DSLR Cameras": "Cámaras réflex (DSLR)",
+        "Mirrorless Cameras": "Cámaras sin espejo",
+        "Point & Shoot Cameras": "Cámaras compactas",
+        "Video & Action Cameras": "Cámaras de video y de acción",
+        "Camcorders": "Videocámaras",
+        "Action Cameras": "Cámaras de acción",
+        "Drones & Accessories": "Drones y accesorios",
+        "Camera Drones": "Drones con cámara",
+        "Drone Parts": "Repuestos para drones",
+        "Gaming": "Videojuegos",
+        "Gaming Consoles": "Consolas de videojuegos",
+        "PlayStation Consoles": "Consolas PlayStation",
+        "Xbox Consoles": "Consolas Xbox",
+        "Nintendo Consoles": "Consolas Nintendo",
+        "PC Gaming": "Juegos para PC",
+        "Gaming Headsets": "Auriculares gaming",
+        "Gaming Keyboards & Mice": "Teclados y ratones gaming",
+        "PC Game Controllers": "Controles de juego para PC",
+        "Games & Accessories": "Juegos y accesorios",
+        "Console Games": "Juegos de consola",
+        "VR/AR Headsets & Gear": "Visores y equipos de RV/RA",
+        "Wearable Technology": "Tecnología vestible",
+        "Smartwatches": "Relojes inteligentes",
+        "Apple Watch": "Apple Watch",
+        "Android/Other Smartwatches": "Relojes inteligentes Android/otros",
+        "Fitness Trackers": "Monitores de actividad física",
+        "Activity Bands": "Pulseras de actividad",
+        "Smart Scales": "Básculas inteligentes",
+        "Wearable Accessories": "Accesorios para dispositivos vestibles",
+        "Watch Bands": "Correas de reloj",
+        "Replacement Chargers": "Cargadores de repuesto"
     },
     "root": {
         "Products": "Productos",
@@ -61,11 +141,25 @@
         "Package mass": "Masa del paquete",
         "Package discount": "Descuento del paquete",
         "Package description": "Descripción del paquete",
-        "Type": "Tipo"
+        "Type": "Tipo",
+        "Products": "Productos",
+        "E.g.: palette, box, bag": "Ej.: palé, caja, bolsa",
+        "Consumable": "Consumible",
+        "Order": "Orden",
+        "Storable": "Almacenable",
+        "Service": "Servicio",
+        "Delivery": "Entrega",
+        "Manual": "Manual",
+        "Consumables are physical products for which you do not manage inventory levels - they are always available. ": "Los consumibles son productos físicos de los que no se gestiona el nivel de inventario: siempre están disponibles. ",
+        "Storable products are physical items for which you manage inventory levels.": "Los productos almacenables son artículos físicos de los que se gestiona el nivel de inventario.",
+        "Order: An invoice is generated immediately after a sales order is confirmed. ": "Pedido: la factura se genera inmediatamente después de confirmar una orden de venta. ",
+        "Delivery: An invoice is generated immediately after the delivery is completed. ": "Entrega: la factura se genera inmediatamente después de completar la entrega. ",
+        "Manual: Invoice is not automatically generated.": "Manual: la factura no se genera automáticamente."
     },
     "Models\\Group": {
         "Title": "Título",
-        "Name": "Nombre"
+        "Name": "Nombre",
+        "Add product group": "Agregar grupo de productos"
     },
     "Models\\Supplier": {
         "Title": "Nombre",
@@ -84,7 +178,10 @@
     },
     "Components\\FormProduct": {
         "Product": "Producto",
-        "Suppliers": "Proveedores"
+        "Suppliers": "Proveedores",
+        "Packaging": "Embalaje",
+        "Gallery": "Galería",
+        "First create the product.": "Primero cree el producto."
     },
     "Models\\ProductSupplier": {
         "Product": "Producto",
@@ -93,7 +190,9 @@
         "Supplier product code": "Código del producto del proveedor",
         "Purchase price": "Precio de compra",
         "Internal notes": "Notas internas",
-        "Delivery time": "Tiempo de entrega"
+        "Delivery time": "Tiempo de entrega",
+        "Add supplier": "Añadir proveedor",
+        "Product Suppliers": "Proveedores del producto"
     },
     "Controllers\\Groups": {
         "Products": "Productos",
@@ -112,13 +211,25 @@
         "Photo #4": "Foto #4",
         "Photo #5": "Foto #5",
         "URL slug": "URL slug",
-        "Add product category": ""
+        "Add product category": "Añadir categoría de producto"
     },
     "Components\\TableProducts": {
         "Hide filter": "Ocultar filtro"
     },
     "Controllers\\Categories": {
-        "Categories": "",
-        "Products": ""
+        "Categories": "Categorías",
+        "Products": "Productos"
+    },
+    "Components\\FormCategory": {
+        "Category": "Categoría",
+        "Products": "Productos",
+        "Description": "Descripción",
+        "First create the category.": "Primero cree la categoría."
+    },
+    "Components\\FormGroup": {
+        "Group": "Grupo"
+    },
+    "Components\\TableCategories": {
+        "Add new": "Agregar nuevo"
     }
 }

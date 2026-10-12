@@ -13,8 +13,13 @@
         "Accounts": "Cuentas",
         "Scheduled to send": "Programado para enviar",
         "Sent from Hubleto": "Enviado desde Hubleto",
-        "Get emails": "",
-        "Manage accounts": ""
+        "Get emails": "Obtener correos",
+        "Manage accounts": "Administrar cuentas",
+        "Sent": "Enviado",
+        "Internal emails": "Correos internos",
+        "External accounts": "Cuentas externas",
+        "Account is not used for receiving emails.": "La cuenta no se usa para recibir correos.",
+        "Account has no mailboxes.": "La cuenta no tiene buzones."
     },
     "Models\\Mail": {
         "Mail Id": "ID de correo",
@@ -36,7 +41,18 @@
         "Template": "Plantilla",
         "Account": "Cuenta",
         "Scheduled to send": "Programado para enviar",
-        "Reply to": "Responder a"
+        "Reply to": "Responder a",
+        "Save draft": "Guardar borrador",
+        "Email ID is missing.": "Falta el ID del correo.",
+        "Email has already been sent.": "El correo ya fue enviado.",
+        "Email is scheduled to be sent later.": "El correo está programado para enviarse más tarde.",
+        "Email has no subject.": "El correo no tiene asunto.",
+        "No SMTP email account configured.": "No hay ninguna cuenta de correo SMTP configurada.",
+        "Email's account SMTP is not properly configured.": "El SMTP de la cuenta de correo no está configurado correctamente.",
+        "Email's account sender is not properly configured.": "El remitente de la cuenta de correo no está configurado correctamente.",
+        "Recipient contains invalid email address.": "El destinatario contiene una dirección de correo no válida.",
+        "Mailer Error": "Error del servicio de correo",
+        "Failed to create the email.": "No se pudo crear el correo."
     },
     "Models\\Account": {
         "Name": "Nombre",
@@ -53,14 +69,14 @@
         "SMTP encryption": "Cifrado SMTP",
         "SMTP username": "Nombre de usuario SMTP",
         "SMTP password": "Contraseña SMTP",
-        "Owner": "",
-        "Manager": "",
-        "Add account": ""
+        "Owner": "Propietario",
+        "Manager": "Gerente",
+        "Add account": "Añadir cuenta"
     },
     "Models\\Mailbox": {
         "Account": "Cuenta",
         "Name": "Nombre",
-        "Attributes": ""
+        "Attributes": "Atributos"
     },
     "Controllers\\Home": {
         "Mail": "Correo"
@@ -73,14 +89,14 @@
         "Subject": "Asunto",
         "Body (Text)": "Cuerpo (Texto)",
         "Body (HTML)": "Cuerpo (HTML)",
-        "Add template": ""
+        "Add template": "Añadir plantilla"
     },
     "Controllers\\Scheduled": {
         "Scheduled": "Programado",
         "Mail": "Correo",
-        "Send scheduled emails now": "",
-        "Show sent emails": "",
-        "Scheduled to send": ""
+        "Send scheduled emails now": "Enviar correos programados ahora",
+        "Show sent emails": "Mostrar correos enviados",
+        "Scheduled to send": "Programado para enviar"
     },
     "Controllers\\Sent": {
         "Sent": "Enviado",
@@ -102,8 +118,55 @@
         "Bcc": "CCO"
     },
     "Models\\Attachment": {
-        "Mail": "",
-        "Name": "",
-        "File": ""
+        "Mail": "Correo",
+        "Name": "Nombre",
+        "File": "Archivo"
+    },
+    "Controllers\\Drafts": {
+        "Mail": "Correo",
+        "Drafts": "Borradores"
+    },
+    "Controllers\\SendScheduled": {
+        "Mail": "Correo",
+        "Send scheduled": "Enviar programados",
+        "Mails scheduled to send were sent.": "Los correos programados fueron enviados.",
+        "Scheduled": "Programado"
+    },
+    "Controllers\\Mailboxes": {
+        "Mail": "Correo",
+        "Mailboxes": "Buzones"
+    },
+    "Components\\FormTemplate": {
+        "Template": "Plantilla"
+    },
+    "Components\\FormMail": {
+        "Template": "Plantilla",
+        "Send now": "Enviar ahora",
+        "Mail": "Correo"
+    },
+    "Components\\FormAccount": {
+        "Email account": "Cuenta de correo",
+        "Receiving (IMAP)": "Recepción (IMAP)",
+        "Sending (SMTP)": "Envío (SMTP)",
+        "Account": "Cuenta"
+    },
+    "Components\\ListFolder": {
+        "Mark as unread": "Marcar como no leído",
+        "Mark as read": "Marcar como leído"
+    },
+    "Components\\TableMails": {
+        "Mark as unread": "Marcar como no leído",
+        "Mark as read": "Marcar como leído"
+    },
+    "Components\\TableAccounts": {
+        "Mark as unread": "Marcar como no leído",
+        "Mark as read": "Marcar como leído"
+    },
+    "Mailer": {
+        "Getting emails from {{ count }} account(s).": "Obteniendo correos de {{ count }} cuenta(s).",
+        "Checking account {{ name }}": "Revisando la cuenta {{ name }}",
+        "Mailbox {{ account }} -> {{ mailbox }}": "Buzón {{ account }} -> {{ mailbox }}",
+        "Found mail {{ number }} {{ id }}": "Correo encontrado {{ number }} {{ id }}",
+        "Creating mail in database": "Creando el correo en la base de datos"
     }
 }

@@ -27,7 +27,8 @@
     },
     "Controllers\\Home": {
         "Welcome": "Bienvenido",
-        "Edit profile": "Editar perfil"
+        "Edit profile": "Editar perfil",
+        "Recently used apps": "Aplicaciones usadas recientemente"
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",
@@ -59,6 +60,9 @@
         "Workflow": "Flujo de trabajo",
         "Premium": "Premium",
         "Manage cloud account": "Administrar cuenta en la nube",
-        "Apps": ""
+        "Apps": "Apps",
+        "Personal": "Personal",
+        "Privacy policy": "Política de privacidad",
+        "Terms of use": "Términos de uso"
     }
 }

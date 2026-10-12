@@ -8,8 +8,17 @@
         "Purchase orders": "Pedidos de compra",
         "Sales orders": "Pedidos de venta",
         "Payments": "Pagos",
-        "Items": "",
-        "Quotes": ""
+        "Items": "Artículos",
+        "Quotes": "Cotizaciones",
+        "Create order": "Crear pedido",
+        "New": "Nuevo",
+        "Sent to customer": "Enviado al cliente",
+        "Requires modification": "Requiere modificación",
+        "Accepted": "Aceptado",
+        "Modified": "Modificado",
+        "Order created": "Pedido creado",
+        "Rejected": "Rechazado",
+        "periodical orders require your attention": "pedidos periódicos requieren su atención"
     },
     "root": {
         "Order states": "Estados de pedidos"
@@ -62,9 +71,14 @@
         "PDF": "PDF",
         "Purchase orders": "Pedidos de compra",
         "Sales orders": "Pedidos de venta",
-        "Shared with": "",
-        "No periodical payments": "",
-        "Annually": ""
+        "Shared with": "Compartido con",
+        "No periodical payments": "Sin pagos periódicos",
+        "Annually": "Anualmente",
+        "Group by": "Agrupar por",
+        "Total price excl. VAT": "Precio total sin IVA",
+        "Total price incl. VAT": "Precio total con IVA",
+        "Order created": "Pedido creado",
+        "Identifier at customer": "Identificador en el cliente"
     },
     "Models\\State": {
         "Title": "Título",
@@ -84,13 +98,23 @@
         "Price excl. VAT": "Precio sin impuesto",
         "Price incl. VAT": "Precio con impuesto",
         "Position": "Posición",
-        "VAT": "",
-        "Due date": "",
-        "Notes": "",
-        "Invoice item": "",
-        "Owner": "",
-        "Manager": "",
-        "Position (in the PDF)": ""
+        "VAT": "Impuesto",
+        "Due date": "Fecha de vencimiento",
+        "Notes": "Notas",
+        "Invoice item": "Artículo de factura",
+        "Owner": "Propietario",
+        "Manager": "Gerente",
+        "Position (in the PDF)": "Posición (en el PDF)",
+        "Status": "Estado",
+        "Not-prepared to invoice": "No preparado para facturar",
+        "Prepared to invoice": "Preparado para facturar",
+        "Due \/ Not due": "Vencido \/ No vencido",
+        "Due": "Vencimiento",
+        "Not due": "No vencido",
+        "Group by": "Agrupar por",
+        "Total price excl. VAT": "Precio total sin IVA",
+        "Total price incl. VAT": "Precio total con IVA",
+        "Item order": "Orden del artículo"
     },
     "Models\\History": {
         "Order": "Pedido",
@@ -118,11 +142,18 @@
         "Payments": "Pagos",
         "Select parent deal": "Seleccionar trato principal",
         "unsaved changes": "cambios no guardados",
-        "Save and close": "Guardar y cerrar"
+        "Save and close": "Guardar y cerrar",
+        "Quotes": "Cotizaciones",
+        "Export to PDF": "Exportar a PDF",
+        "Show variables available in template": "Mostrar las variables disponibles en la plantilla",
+        "Purchase Order": "Orden de compra",
+        "Sales Order": "Orden de venta",
+        "Not completed yet": "No completado aún"
     },
     "Models\\OrderDocument": {
         "Order": "Pedido",
-        "Document": "Documento"
+        "Document": "Documento",
+        "Add document": "Agregar documento"
     },
     "Models\\OrderActivity": {
         "Subject": "Asunto",
@@ -145,10 +176,12 @@
     },
     "Models\\OrderDeal": {
         "Order": "Pedido",
-        "Deal": "Oportunidad"
+        "Deal": "Oportunidad",
+        "Add deal": "Agregar oportunidad"
     },
     "Controllers\\Boards\\OrderWarnings": {
-        "Open orders without future plan": "Pedidos abiertos sin plan futuro"
+        "Open orders without future plan": "Pedidos abiertos sin plan futuro",
+        "No warnings for orders.": "No hay advertencias para los pedidos."
     },
     "Models\\Payment": {
         "Order": "Pedido",
@@ -159,9 +192,98 @@
         "Discount": "Descuento",
         "VAT": "Impuesto",
         "Notes": "Notas",
-        "Invoice item": "Artículo de factura"
+        "Invoice item": "Artículo de factura",
+        "Add payment": "Agregar pago",
+        "Status": "Estado",
+        "Not-prepared to invoice": "No preparado para facturar",
+        "Prepared to invoice": "Preparado para facturar",
+        "Due \/ Not due": "Vencido \/ No vencido",
+        "Due": "Vencimiento",
+        "Not due": "No vencido",
+        "Group by": "Agrupar por",
+        "Total price excl. VAT": "Precio total sin IVA",
+        "Total price incl. VAT": "Precio total con IVA"
     },
     "Components\\TableOrders": {
         "Hide filter": "Ocultar filtro"
+    },
+    "Controllers\\States": {
+        "Orders": "Pedidos",
+        "States": "Estados"
+    },
+    "Controllers\\MissingItemsInPeriodicalOrders": {
+        "Orders": "Pedidos",
+        "Missing items in periodical orders": "Faltan artículos en los pedidos periódicos",
+        "Order": "Orden",
+        "Customer": "Cliente",
+        "Payment period": "Período de pago",
+        "Items": "Artículos"
+    },
+    "Models\\Quote": {
+        "Order": "Orden",
+        "Version": "Versión",
+        "Created": "Creado",
+        "Sent to customer": "Enviado al cliente",
+        "Approved by": "Aprobado por",
+        "Approved": "Aprobado",
+        "Accepted by customer": "Aceptado por el cliente",
+        "Quote summary": "Resumen de la cotización",
+        "Online document #1": "Documento en línea #1",
+        "Online document #2": "Documento en línea #2",
+        "Online document #3": "Documento en línea #3",
+        "Online document #4": "Documento en línea #4",
+        "Online document #5": "Documento en línea #5",
+        "Final PDF #1": "PDF final #1",
+        "Final PDF #2": "PDF final #2",
+        "Final PDF #3": "PDF final #3",
+        "Final PDF #4": "PDF final #4",
+        "Final PDF #5": "PDF final #5",
+        "Notes for document #1": "Notas del documento #1",
+        "Notes for document #2": "Notas del documento #2",
+        "Notes for document #3": "Notas del documento #3",
+        "Notes for document #4": "Notas del documento #4",
+        "Notes for document #5": "Notas del documento #5",
+        "Owner": "Propietario",
+        "Manager": "Gerente",
+        "Add quote": "Agregar cotización"
+    },
+    "Components\\FormQuote": {
+        "Quote": "Cotización",
+        "Document #": "Documento #"
+    },
+    "Components\\FormPayment": {
+        "Including {vat}% VAT": "Incluye {vat}% de Imp.",
+        "Payment summary": "Resumen de pagos",
+        "Without discount": "Sin descuento",
+        "With discount": "Con descuento",
+        "Excluding VAT": "Sin Imp.",
+        "Payment": "Pago",
+        "Order Payment": "Pago del pedido"
+    },
+    "Components\\FormItem": {
+        "Order item": "Artículo del pedido",
+        "Item": "Artículo",
+        "Summary": "Resumen",
+        "Without discount": "Sin descuento",
+        "With discount": "Con descuento",
+        "Excluding VAT": "Sin Imp.",
+        "Including {vat}% VAT": "Incluye {vat}% de Imp."
+    },
+    "Components\\TableItems": {
+        "Is this item ready to be invoiced? Press OK to confirm.": "¿Este artículo está listo para facturarse? Presione OK para confirmar.",
+        "Prepare for invoice": "Preparar para facturar",
+        "Yes, prepare for invoice": "Sí, preparar para facturar",
+        "Cancel": "Cancelar"
+    },
+    "Components\\TablePayments": {
+        "Prepared for invoice": "Preparado para facturar",
+        "Is this payment ready to be invoiced? Press OK to confirm.": "¿Este pago está listo para facturarse? Presione OK para confirmar.",
+        "Prepare for invoice": "Preparar para facturar",
+        "Yes, prepare for invoice": "Sí, preparar para facturar",
+        "Cancel": "Cancelar"
+    },
+    "Calendar": {
+        "Orders": "Pedidos",
+        "Add new activity linked to order": "Agregar nueva actividad vinculada al pedido"
     }
 }

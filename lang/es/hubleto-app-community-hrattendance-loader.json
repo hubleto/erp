@@ -1,0 +1,41 @@
+{
+    "manifest": {
+        "Attendance": "Asistencia",
+        "Plan employee shifts and record attendance separately from project worksheets.": "Planifique los turnos de los empleados y registre la asistencia por separado de las hojas de trabajo de los proyectos.",
+        "Head office": "Oficina central",
+        "Planned": "Planificado",
+        "Demo attendance record awaiting approval.": "Registro de asistencia de demostración pendiente de aprobación.",
+        "Demo attendance record.": "Registro de asistencia de demostración.",
+        "Remote": "Remoto"
+    },
+    "Components\\FormAttendance": {
+        "Attendance record": "Registro de asistencia"
+    },
+    "Components\\FormShift": {
+        "Shift": "Turno"
+    },
+    "Models\\Attendance": {
+        "Employee": "Empleado",
+        "Work date": "Fecha de trabajo",
+        "Clock in": "Hora de entrada",
+        "Clock out": "Hora de salida",
+        "Break (minutes)": "Pausa (minutos)",
+        "Approved": "Aprobado",
+        "Notes": "Notas",
+        "Shift": "Turno",
+        "Workflow": "Flujo de trabajo",
+        "Approval step": "Paso de aprobación",
+        "Add attendance record": "Agregar registro de asistencia"
+    },
+    "Models\\Shift": {
+        "Employee": "Empleado",
+        "Shift start": "Inicio del turno",
+        "Shift end": "Fin del turno",
+        "Work location": "Lugar de trabajo",
+        "Status": "Estado",
+        "Planned": "Planificado",
+        "Completed": "Completado",
+        "Cancelled": "Cancelado",
+        "Schedule shift": "Programar turno"
+    }
+}

@@ -58,7 +58,11 @@
         "Ownership": "Vlastníctvo",
         "My activities": "Moje aktivity",
         "Calendars": "Kalendáre",
-        "Export calendar": "Exportovať kalendár"
+        "Export calendar": "Exportovať kalendár",
+        "My": "",
+        "Open": "",
+        "Completed": "",
+        "Share calendar": ""
     },
     "Components\\CalendarShareTable": {
         "You are about to remove all shared access to the calendar \"{calendar}\". Do you want to continue?": "Chystáte sa odstrániť všetok zdieľaný prístup ku kalendáru \"{calendar}\". Chcete pokračovať?",
@@ -89,6 +93,9 @@
         "Save": "Uložiť"
     },
     "Components\\FormActivity": {
+        "Start - End - Repeat": "",
+        "All-day": "",
+        "Completed": "",
         "Start - End": "Začiatok - Koniec",
         "Repeats": "Opakuje sa",
         "Does not repeat": "Neopakuje sa",

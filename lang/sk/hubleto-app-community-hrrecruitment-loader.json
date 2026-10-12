@@ -1,0 +1,89 @@
+{
+    "manifest": {
+        "Recruitment interviews": "",
+        "Cancelled": "",
+        "Interview": "",
+        "Full-time": "",
+        "Part-time": "",
+        "Contract": "",
+        "Hybrid": "",
+        "Remote": "",
+        "Head office": "",
+        "People Operations Manager - Demo": "",
+        "People Operations": "",
+        "Open": "",
+        "Demo opening for an experienced people operations professional.": "",
+        "Careers page": "",
+        "Demo candidate profile.": "",
+        "Demo application awaiting initial review.": "",
+        "Video call": "",
+        "Scheduled": "",
+        "HR Coordinator - Demo": "",
+        "Demo opening supporting employee services and HR operations.": "",
+        "Employee referral": "",
+        "Additional demo candidate profile.": "",
+        "Demo application in the recruitment pipeline.": "",
+        "Meeting room 2": "",
+        "Application": ""
+    },
+    "Models\\Application": {
+        "Job opening": "",
+        "Candidate": "",
+        "Applied on": "",
+        "Decision date": "",
+        "Notes": "",
+        "Workflow": "",
+        "Pipeline step": "",
+        "Add application": ""
+    },
+    "Models\\Candidate": {
+        "First name": "",
+        "Last name": "",
+        "Email": "",
+        "Phone": "",
+        "Source": "",
+        "Portfolio or profile URL": "",
+        "Consent to store application data": "",
+        "Notes": "",
+        "Add candidate": ""
+    },
+    "Models\\EmploymentType": {
+        "Name": "",
+        "Description": "",
+        "Add employment type": ""
+    },
+    "Models\\Interview": {
+        "Application": "",
+        "Interviewer": "",
+        "Start": "",
+        "End": "",
+        "Location or meeting link": "",
+        "Status": "",
+        "Interview feedback": "",
+        "Scheduled": "",
+        "Completed": "",
+        "Cancelled": "",
+        "Schedule interview": ""
+    },
+    "Models\\JobOpening": {
+        "Job title": "",
+        "Department": "",
+        "Work location": "",
+        "Employment type": "",
+        "Status": "",
+        "Positions": "",
+        "Opened": "",
+        "Closed": "",
+        "Hiring manager": "",
+        "Description": "",
+        "Draft": "",
+        "Open": "",
+        "On hold": "",
+        "Add job opening": ""
+    },
+    "Models\\WorkLocation": {
+        "Name": "",
+        "Description": "",
+        "Add work location": ""
+    }
+}

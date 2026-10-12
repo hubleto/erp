@@ -1,0 +1,43 @@
+{
+    "manifest": {
+        "Approved employee leave": "",
+        "Leave": "",
+        "Annual leave": "",
+        "Sick leave": "",
+        "Personal leave": "",
+        "Demo leave policy.": "",
+        "days": ""
+    },
+    "Models\\Leave": {
+        "Employee": "",
+        "Leave type": "",
+        "Year": "",
+        "Entitlement (days)": "",
+        "Carried over (days)": "",
+        "Approved days used": "",
+        "Days remaining": "",
+        "Add leave entitlement": ""
+    },
+    "Models\\LeaveRequest": {
+        "Employee": "",
+        "Leave type": "",
+        "From": "",
+        "To": "",
+        "Balance year": "",
+        "Days requested": "",
+        "Approver": "",
+        "Decision date": "",
+        "Reason": "",
+        "Workflow": "",
+        "Approval step": "",
+        "Request leave": ""
+    },
+    "Models\\LeaveType": {
+        "Leave type": "",
+        "Annual entitlement (days)": "",
+        "Paid": "",
+        "Requires approval": "",
+        "Description": "",
+        "Add leave type": ""
+    }
+}

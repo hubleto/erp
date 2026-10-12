@@ -1,0 +1,352 @@
+{
+    "manifest": {
+        "Price lists": "",
+        "starts": "",
+        "ends": "",
+        "Expiring price lists": "",
+        "Margin warnings": "",
+        "Draft": "",
+        "Approved": "",
+        "Retail prices": "",
+        "price lists are about to expire": "",
+        "price lists are waiting for activation": "",
+        "Wholesale prices": "",
+        "VIP customers": "",
+        "Autumn promotion": "",
+        "Volume discount 10 %": "",
+        "Purchase prices": ""
+    },
+    "Controllers\\ApplyToDocument": {
+        "This document cannot be priced with price lists.": ""
+    },
+    "Controllers\\BulkAdjust": {
+        "Select a price list and a non-zero value.": "",
+        "Prices adjusted": ""
+    },
+    "Controllers\\CalculateItems": {
+        "Too many items in one request.": ""
+    },
+    "Controllers\\CopyPriceList": {
+        "Price list was not found.": "",
+        "copy": "",
+        "Copied from price list": ""
+    },
+    "Controllers\\GeneratePdf": {
+        "Price list was not found.": ""
+    },
+    "Controllers\\ResolvePrices": {
+        "Too many items in one request.": ""
+    },
+    "Controllers\\SendByEmail": {
+        "Enter the e-mail address of the recipient.": "",
+        "Price list was not found.": "",
+        "Price list": "",
+        "Please find the price list at the link below.": ""
+    },
+    "Controllers\\SetMatrixPrice": {
+        "Select a price list and a product.": ""
+    },
+    "Controllers\\SetStatus": {
+        "Unknown status.": "",
+        "Price list was not found.": "",
+        "A price list without any price cannot be activated.": ""
+    },
+    "Controllers\\SyncSupplierPrices": {
+        "Assign a supplier to the price list first.": ""
+    },
+    "Controllers\\Assignments": {
+        "Price lists": "",
+        "Assignments": ""
+    },
+    "Controllers\\Histories": {
+        "Price lists": "",
+        "History": ""
+    },
+    "Controllers\\Items": {
+        "Price lists": "",
+        "Prices": ""
+    },
+    "Controllers\\Matrix": {
+        "Price lists": "",
+        "Matrix": ""
+    },
+    "Controllers\\PriceListHasDocuments": {
+        "Price lists": "",
+        "Documents": ""
+    },
+    "Controllers\\PriceLists": {
+        "Price lists": ""
+    },
+    "Controllers\\Resolutions": {
+        "Price lists": "",
+        "Resolutions": ""
+    },
+    "Controllers\\Rules": {
+        "Price lists": "",
+        "Rules": ""
+    },
+    "Controllers\\Settings": {
+        "General": "",
+        "Numbering pattern of price lists ({YYYY}, {YY}, {MM}, {DD}, {#})": "",
+        "Calculation": "",
+        "None": "",
+        "Per unit": "",
+        "Per item": "",
+        "Rounding": "",
+        "VAT per item": "",
+        "VAT per rate group": "",
+        "VAT in totals": "",
+        "Decimals of unit prices": "",
+        "Decimals of item and document amounts": "",
+        "Cash rounding step (0 = off)": "",
+        "Fail when the VAT rate cannot be determined": "",
+        "Price resolution": "",
+        "Use the product price when no price list gives a price": "",
+        "Off": "",
+        "When the price is zero": "",
+        "Always": "",
+        "Fill prices of saved document items automatically": "",
+        "Only items with zero price": "",
+        "All items": "",
+        "\"Apply price list\" button changes": "",
+        "Tolerated deviation of an item price from the price list (%)": "",
+        "Refuse items with a price below the minimum of the price list": "",
+        "Copy purchase prices of suppliers to their purchase price lists": "",
+        "Housekeeping": "",
+        "Warn about expiring price lists (days before the end)": "",
+        "Keep resolutions for (days, 0 = forever)": "",
+        "Maximum number of items in one batch request": "",
+        "Settings": ""
+    },
+    "Controllers\\Simulator": {
+        "Price lists": "",
+        "Simulator": ""
+    },
+    "Crons\\\\ActivateAndExpire": {
+        "Price list archived because its validity ended": ""
+    },
+    "Crons\\\\WarnAboutExpiry": {
+        "Price list is about to expire": "",
+        "valid to": ""
+    },
+    "EventListeners\\\\ApplyAndAuditItemPrice": {
+        "The price is below the minimum allowed by the price list.": "",
+        "Minimum margin applied to a document item": ""
+    },
+    "EventListeners\\\\ReactToSupplierPrice": {
+        "Purchase price of a product changed": ""
+    },
+    "EventListeners\\\\TrackProductPriceChange": {
+        "Sales price of a product changed": ""
+    },
+    "Models\\Assignment": {
+        "Price list": "",
+        "Customer": "",
+        "Customer tag": "",
+        "Country": "",
+        "Supplier": "",
+        "Shop": "",
+        "Cash register": "",
+        "Deal": "",
+        "Project": "",
+        "Valid from": "",
+        "Valid to": "",
+        "Priority": "",
+        "Default for the target": "",
+        "Add assignment": "",
+        "Validity": "",
+        "Valid now": "",
+        "Not valid now": "",
+        "An assignment can have only one target.": ""
+    },
+    "Models\\History": {
+        "Price list": "",
+        "Price": "",
+        "Product": "",
+        "Event": "",
+        "Created": "",
+        "Activated": "",
+        "Archived": "",
+        "Price changed": "",
+        "Bulk adjusted": "",
+        "Copied": "",
+        "Source price changed": "",
+        "Margin floor hit": "",
+        "Set to draft": "",
+        "Old value": "",
+        "New value": "",
+        "Description": "",
+        "Date and time": "",
+        "User": "",
+        "Source": "",
+        "Add history record": ""
+    },
+    "Models\\Item": {
+        "Price list": "",
+        "Product": "",
+        "Category": "",
+        "Group": "",
+        "Unit": "",
+        "Supplier": "",
+        "Supplier product code": "",
+        "VAT rate": "",
+        "Minimum quantity": "",
+        "Maximum quantity": "",
+        "Valid from": "",
+        "Valid to": "",
+        "Method": "",
+        "Fixed price": "",
+        "Percent off base": "",
+        "Amount off base": "",
+        "Markup on cost": "",
+        "Margin on cost": "",
+        "Base": "",
+        "Product sales price": "",
+        "Product cost": "",
+        "Parent price list": "",
+        "Other price list": "",
+        "Base price list": "",
+        "Value": "",
+        "Extra fee": "",
+        "Minimum margin": "",
+        "Minimum price": "",
+        "Maximum price": "",
+        "Priority": "",
+        "Is active": "",
+        "Note": "",
+        "Add price": "",
+        "Active": "",
+        "Inactive": "",
+        "Validity": "",
+        "Valid now": "",
+        "Not valid now": "",
+        "A price can be scoped to only one of: product, category, group, activity type.": "",
+        "Maximum quantity must not be lower than minimum quantity.": "",
+        "Margin must be lower than 100 %.": "",
+        "\"Valid from\" must not be later than \"Valid to\".": "",
+        "Price added": "",
+        "Price changed": ""
+    },
+    "Models\\PriceList": {
+        "Code": "",
+        "Name": "",
+        "Description": "",
+        "Type": "",
+        "Sales": "",
+        "Purchase": "",
+        "Status": "",
+        "Draft": "",
+        "Active": "",
+        "Archived": "",
+        "Currency": "",
+        "Prices include VAT": "",
+        "Price basis": "",
+        "Own prices": "",
+        "Product sales price": "",
+        "Product purchase price": "",
+        "Parent price list": "",
+        "Derive method": "",
+        "None": "",
+        "Percent off": "",
+        "Percent on": "",
+        "Amount off": "",
+        "Amount on": "",
+        "Derive value": "",
+        "Rounding policy": "",
+        "Nearest": "",
+        "Up": "",
+        "Down": "",
+        "Ends in": "",
+        "Rounding step": "",
+        "Rounding ending": "",
+        "Valid from": "",
+        "Valid to": "",
+        "Priority": "",
+        "Is default": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Owner": "",
+        "Manager": "",
+        "Shared with": "",
+        "Note": "",
+        "Add price list": "",
+        "Validity": "",
+        "Valid now": "",
+        "Not valid now": "",
+        "The code of a price list must be unique.": "",
+        "A price list cannot be derived from itself, directly or indirectly.": "",
+        "\"Valid from\" must not be later than \"Valid to\".": "",
+        "Price list created": "",
+        "Price list set to draft": "",
+        "Price list activated": "",
+        "Price list archived": "",
+        "An active price list cannot be deleted. Archive it first.": "",
+        "Product": "",
+        "Min. quantity": "",
+        "Value": ""
+    },
+    "Models\\PriceListHasDocument": {
+        "Price list": "",
+        "Document": "",
+        "Add document": ""
+    },
+    "Models\\Resolution": {
+        "Model": "",
+        "Document item": "",
+        "Parent model": "",
+        "Parent document": "",
+        "Price list": "",
+        "Price": "",
+        "Product": "",
+        "Quantity": "",
+        "Base price": "",
+        "Resolved unit price": "",
+        "Discount": "",
+        "Unit price on the item": "",
+        "Deviates": "",
+        "Trace": "",
+        "Date and time": "",
+        "Add resolution": "",
+        "Deviation": "",
+        "Does not deviate": ""
+    },
+    "Models\\Rule": {
+        "Name": "",
+        "Price list": "",
+        "Kind": "",
+        "Percent off": "",
+        "Amount off": "",
+        "Percent surcharge": "",
+        "Amount surcharge": "",
+        "Set price": "",
+        "Value": "",
+        "Product": "",
+        "Category": "",
+        "Group": "",
+        "Customer": "",
+        "Customer tag": "",
+        "Minimum quantity": "",
+        "Maximum quantity": "",
+        "Minimum amount": "",
+        "Maximum amount": "",
+        "Valid from": "",
+        "Valid to": "",
+        "Priority": "",
+        "Is stackable": "",
+        "Is active": "",
+        "Note": "",
+        "Add rule": "",
+        "Active": "",
+        "Inactive": "",
+        "Validity": "",
+        "Valid now": "",
+        "Not valid now": "",
+        "A rule can be scoped to only one of: product, category, group.": "",
+        "Maximum quantity must not be lower than minimum quantity.": ""
+    },
+    "Services\\\\VatCalculator": {
+        "VAT rate could not be determined.": "",
+        "VAT exempt": "",
+        "Reverse charge": ""
+    }
+}

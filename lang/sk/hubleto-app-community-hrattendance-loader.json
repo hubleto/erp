@@ -1,0 +1,35 @@
+{
+    "manifest": {
+        "Attendance": "",
+        "Head office": "",
+        "Planned": "",
+        "Demo attendance record awaiting approval.": "",
+        "Demo attendance record.": "",
+        "Remote": "",
+        "Awaiting approval": ""
+    },
+    "Models\\Attendance": {
+        "Employee": "",
+        "Work date": "",
+        "Clock in": "",
+        "Clock out": "",
+        "Break (minutes)": "",
+        "Approved": "",
+        "Notes": "",
+        "Shift": "",
+        "Workflow": "",
+        "Approval step": "",
+        "Add attendance record": ""
+    },
+    "Models\\Shift": {
+        "Employee": "",
+        "Shift start": "",
+        "Shift end": "",
+        "Work location": "",
+        "Status": "",
+        "Planned": "",
+        "Completed": "",
+        "Cancelled": "",
+        "Schedule shift": ""
+    }
+}

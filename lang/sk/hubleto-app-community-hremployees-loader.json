@@ -1,0 +1,50 @@
+{
+    "manifest": {
+        "Active": "",
+        "Full-time": "",
+        "Part-time": "",
+        "Contract": "",
+        "Temporary": "",
+        "Internship": "",
+        "On leave": "",
+        "Ended": "",
+        "Head office": "",
+        "Remote": "",
+        "Hybrid": "",
+        "Demo employee profile.": ""
+    },
+    "Models\\Employee": {
+        "User account": "",
+        "Employee number": "",
+        "First name": "",
+        "Family name": "",
+        "Job title": "",
+        "Team": "",
+        "Manager": "",
+        "Employment type": "",
+        "Employment status": "",
+        "Hire date": "",
+        "End date": "",
+        "Work location": "",
+        "Employment notes": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Add employee": "",
+        "Lifecycle step": ""
+    },
+    "Models\\EmploymentStatus": {
+        "Name": "",
+        "Description": "",
+        "Add employment status": ""
+    },
+    "Models\\EmploymentType": {
+        "Name": "",
+        "Description": "",
+        "Add employment type": ""
+    },
+    "Models\\WorkLocation": {
+        "Name": "",
+        "Description": "",
+        "Add work location": ""
+    }
+}

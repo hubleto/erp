@@ -1,0 +1,165 @@
+{
+    "Controllers\\GetEmailTestInfo": {
+        "Mail has empty subject or body.": "",
+        "Mail does not contain {{ botDetectorHiddenLink }} placeholder.": "",
+        "Mail does not contain {{ unsubscribeHref }} placeholder.": "",
+        "Mail does not contain {{ viewInBrowserHref }} placeholder.": "",
+        "Recipients contain variables {{ variables }} but not all of them are used in template.": ""
+    },
+    "Controllers\\Launch": {
+        "Email has not configured sender account.": "",
+        "Email is not approved.": ""
+    },
+    "Controllers\\SendTestEmail": {
+        "Recipient must be provided.": "",
+        "Recipient is not valid email address.": ""
+    },
+    "Controllers\\ClickTracker": {
+        "Unknown email.": "",
+        "Email not found.": ""
+    },
+    "Controllers\\SentEmails": {
+        "Subject": "",
+        "From": "",
+        "To": "",
+        "CC": "",
+        "Scheduled to send": "",
+        "Sent": ""
+    },
+    "Controllers\\EmailClicks": {
+        "Emails": "",
+        "Clicks": ""
+    },
+    "Controllers\\EmailPreview": {
+        "Unknown email.": ""
+    },
+    "Controllers\\Recipients": {
+        "Email recipients": ""
+    },
+    "Controllers\\RecipientStatuses": {
+        "Recipients": "",
+        "Statuses": ""
+    },
+    "Controllers\\Tags": {
+        "Tags": ""
+    },
+    "manifest": {
+        "Email marketing tags": ""
+    },
+    "Models\\Campaign": {
+        "Title": "",
+        "Target audience": "",
+        "Goal": "",
+        "Notes": "",
+        "Color": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Owner": "",
+        "Manager": "",
+        "Closed": "",
+        "Shared with": "",
+        "Tags": "",
+        "Add campaign": "",
+        "Phase": "",
+        "Ownership": "",
+        "All": "",
+        "Owned by me": "",
+        "Managed by me": "",
+        "Open / Closed": "",
+        "Open": ""
+    },
+    "Models\\CampaignSchedule": {
+        "Campaign": "",
+        "Day": "",
+        "Email": "",
+        "Schedule email": ""
+    },
+    "Models\\CampaignScheduleRecipient": {
+        "Campaign schedule": "",
+        "Recipient": "",
+        "Reference to mail sent": "",
+        "Add recipient": ""
+    },
+    "Models\\CampaignTag": {
+        "Campaign": "",
+        "Tag": "",
+        "Campaign tags": ""
+    },
+    "Models\\Email": {
+        "UID": "",
+        "Title": "",
+        "Subject": "",
+        "Body": "",
+        "UTM source": "",
+        "UTM campaign": "",
+        "UTM term": "",
+        "UTM content": "",
+        "Target audience": "",
+        "Goal": "",
+        "Notes": "",
+        "Color": "",
+        "Sender account": "",
+        "Reply to": "",
+        "Workflow": "",
+        "Workflow step": "",
+        "Owner": "",
+        "Manager": "",
+        "Shared with": "",
+        "Approved": "",
+        "Closed": "",
+        "Created": "",
+        "Lanuched by": "",
+        "Launched": "",
+        "Recipients": "",
+        "Add e-mail": "",
+        "Phase": "",
+        "Ownership": "",
+        "All": "",
+        "Owned by me": "",
+        "Managed by me": "",
+        "Campaign": "",
+        "In campaign": "",
+        "Not in campaign": "",
+        "Open / Closed": "",
+        "Open": ""
+    },
+    "Models\\EmailClick": {
+        "Email": "",
+        "Recipient": "",
+        "Url": "",
+        "Clicked": "",
+        "Log": "",
+        "Bot Score": "",
+        "Campaign": ""
+    },
+    "Models\\Recipient": {
+        "Campaign": "",
+        "Email": "",
+        "Contact": "",
+        "Variables": "",
+        "Added": "",
+        "Notes": "",
+        "Reference to mail sent": "",
+        "UTM: source": "",
+        "UTM: campaign": "",
+        "UTM: term": "",
+        "Status": "",
+        "Add recipient": "",
+        "Count": "",
+        "Clicks": "",
+        "Click summary": "",
+        "Bot score": "",
+        "Group by": ""
+    },
+    "Models\\RecipientStatus": {
+        "Email": "",
+        "Is unsubscribed": "",
+        "Is invalid": "",
+        "Add recipient status": ""
+    },
+    "Models\\Tag": {
+        "Name": "",
+        "Color": "",
+        "Add Email marketing Tag": ""
+    }
+}

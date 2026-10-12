@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Services\VatCalculator;
+use Hubleto\App\Community\PriceLists\Services\VatCalculator;
 
 class GetVatRate extends \Hubleto\Erp\Controllers\ApiController
 {

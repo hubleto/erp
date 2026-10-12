@@ -14,7 +14,7 @@ import TablePriceListHasDocuments from './TablePriceListHasDocuments';
 export interface FormPriceListProps extends FormProps {}
 
 const componentName = 'FormPriceList'; // must be the same as the exported const
-const parentApp = 'Hubleto/App/Custom/PriceList';
+const parentApp = 'Hubleto/App/Community/PriceLists';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 const STATUS_DRAFT = 1;

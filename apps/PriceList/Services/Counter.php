@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Services;
+namespace Hubleto\App\Community\PriceLists\Services;
 
-use Hubleto\App\Community\PriceList\Models\History;
-use Hubleto\App\Community\PriceList\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Models\History;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
 
 /**
  * Counters used in the sidebar badge, alerts, dashboards and crons.

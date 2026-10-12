@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers;
+namespace Hubleto\App\Community\PriceLists\Controllers;
 
 class Matrix extends \Hubleto\Erp\Controller
 {
-  public string $permission = 'Hubleto/App/Custom/PriceList/Loader::Controllers/Matrix';
+  public string $permission = 'Hubleto/App/Community/PriceLists/Loader::Controllers/Matrix';
 
   public function getBreadcrumbs(): array
   {
@@ -18,6 +18,6 @@ class Matrix extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
     $this->viewParams['idPriceList'] = $this->router()->urlParamAsInteger('idPriceList');
-    $this->setView('@Hubleto:App:Community:PriceList/Matrix.twig');
+    $this->setView('@Hubleto:App:Community:PriceLists/Matrix.twig');
   }
 }

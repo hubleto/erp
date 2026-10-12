@@ -13,8 +13,8 @@ interface TableResolutionsProps extends TableProps {
 const TableResolutions = (props: TableResolutionsProps) => {
   return <Table
     componentName='TableResolutions'
-    parentApp='Hubleto/App/Custom/PriceList'
-    model='Hubleto/App/Custom/PriceList/Models/Resolution'
+    parentApp='Hubleto/App/Community/PriceLists'
+    model='Hubleto/App/Community/PriceLists/Models/Resolution'
     endpointParams={{idPriceList: props.idPriceList, idProduct: props.idProduct, parentModel: props.parentModel, idParentRecord: props.idParentRecord}}
     baseUrlSlug='price-lists/resolutions'
     formModalProps={{type: 'right wide'}}

@@ -1,14 +1,14 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\EventListeners;
+namespace Hubleto\App\Community\PriceLists\EventListeners;
 
 use Hubleto\App\Community\Products\Models\ProductSupplier;
-use Hubleto\App\Community\PriceList\Models\Assignment;
-use Hubleto\App\Community\PriceList\Models\History;
-use Hubleto\App\Community\PriceList\Models\Item;
-use Hubleto\App\Community\PriceList\Models\PriceList;
-use Hubleto\App\Community\PriceList\Services\HistoryWriter;
-use Hubleto\App\Community\PriceList\Services\Settings;
+use Hubleto\App\Community\PriceLists\Models\Assignment;
+use Hubleto\App\Community\PriceLists\Models\History;
+use Hubleto\App\Community\PriceLists\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Services\HistoryWriter;
+use Hubleto\App\Community\PriceLists\Services\Settings;
 use Hubleto\Framework\Interfaces\ModelInterface;
 
 /**

@@ -1,13 +1,13 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Models;
+namespace Hubleto\App\Community\PriceLists\Models;
 
 use Hubleto\App\Community\Auth\Models\User;
 use Hubleto\App\Community\Settings\Models\Currency;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
-use Hubleto\App\Community\PriceList\Loader as PriceListApp;
-use Hubleto\App\Community\PriceList\Services\HistoryWriter;
+use Hubleto\App\Community\PriceLists\Loader as PriceListApp;
+use Hubleto\App\Community\PriceLists\Services\HistoryWriter;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;

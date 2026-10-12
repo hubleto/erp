@@ -10,8 +10,8 @@ interface TableRulesProps extends TableProps {
 const TableRules = (props: TableRulesProps) => {
   return <Table
     componentName='TableRules'
-    parentApp='Hubleto/App/Custom/PriceList'
-    model='Hubleto/App/Custom/PriceList/Models/Rule'
+    parentApp='Hubleto/App/Community/PriceLists'
+    model='Hubleto/App/Community/PriceLists/Models/Rule'
     endpointParams={{idPriceList: props.idPriceList}}
     baseUrlSlug='price-lists/rules'
     formModalProps={{type: 'right wide'}}

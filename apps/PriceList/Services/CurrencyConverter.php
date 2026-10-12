@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Services;
+namespace Hubleto\App\Community\PriceLists\Services;
 
 use Hubleto\App\Community\Settings\Services\Currency as CurrencyService;
 use Hubleto\App\Community\Settings\Models\CurrencyRate;

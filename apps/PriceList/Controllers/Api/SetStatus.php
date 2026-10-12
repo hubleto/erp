@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Models\Item;
-use Hubleto\App\Community\PriceList\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
 
 /**
  * Changes status of a price list (draft, active, archived).

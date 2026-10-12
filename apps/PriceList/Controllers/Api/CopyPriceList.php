@@ -1,13 +1,13 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Models\Assignment;
-use Hubleto\App\Community\PriceList\Models\History;
-use Hubleto\App\Community\PriceList\Models\Item;
-use Hubleto\App\Community\PriceList\Models\PriceList;
-use Hubleto\App\Community\PriceList\Models\Rule;
-use Hubleto\App\Community\PriceList\Services\HistoryWriter;
+use Hubleto\App\Community\PriceLists\Models\Assignment;
+use Hubleto\App\Community\PriceLists\Models\History;
+use Hubleto\App\Community\PriceLists\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Models\Rule;
+use Hubleto\App\Community\PriceLists\Services\HistoryWriter;
 
 /**
  * Copies a price list with its prices, rules and assignments. The copy is a draft with a new code.

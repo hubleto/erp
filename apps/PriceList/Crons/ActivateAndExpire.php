@@ -1,14 +1,14 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Crons;
+namespace Hubleto\App\Community\PriceLists\Crons;
 
-use Hubleto\App\Community\PriceList\Models\History;
-use Hubleto\App\Community\PriceList\Models\Item;
-use Hubleto\App\Community\PriceList\Models\PriceList;
-use Hubleto\App\Community\PriceList\Models\Resolution;
-use Hubleto\App\Community\PriceList\Models\Rule;
-use Hubleto\App\Community\PriceList\Services\HistoryWriter;
-use Hubleto\App\Community\PriceList\Services\Settings;
+use Hubleto\App\Community\PriceLists\Models\History;
+use Hubleto\App\Community\PriceLists\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Models\Resolution;
+use Hubleto\App\Community\PriceLists\Models\Rule;
+use Hubleto\App\Community\PriceLists\Services\HistoryWriter;
+use Hubleto\App\Community\PriceLists\Services\Settings;
 
 /**
  * Archives price lists whose validity has ended, deactivates prices and rules that are no longer valid

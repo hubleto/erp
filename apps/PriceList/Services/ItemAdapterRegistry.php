@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Services;
+namespace Hubleto\App\Community\PriceLists\Services;
 
-use Hubleto\App\Community\PriceList\Loader as PriceListApp;
+use Hubleto\App\Community\PriceLists\Loader as PriceListApp;
 
 /**
  * Maps document-item models (items of orders, deals, invoices, receipts, ...) to the field names PriceList needs.
@@ -25,7 +25,7 @@ class ItemAdapterRegistry extends \Hubleto\Erp\Core
   {
     if ($this->adapters === null) {
       /** @var PriceListApp|null $app */
-      $app = $this->appManager()->getApp('Hubleto\\App\\Custom\\PriceList');
+      $app = $this->appManager()->getApp('Hubleto\\App\\Community\\PriceLists');
       $this->adapters = $app ? $app->collectExtendibles('PriceListItemAdapters') : [];
     }
     return $this->adapters;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
 use Hubleto\App\Community\Mail\Loader as MailApp;
-use Hubleto\App\Community\PriceList\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
 
 /**
  * Generates the PDF of a price list and sends a link to it by e-mail with Mail\Loader->send().

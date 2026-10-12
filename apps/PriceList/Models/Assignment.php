@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Models;
+namespace Hubleto\App\Community\PriceLists\Models;
 
 use Hubleto\App\Community\Cashdesk\Models\CashRegister;
 use Hubleto\App\Community\Customers\Models\Customer;

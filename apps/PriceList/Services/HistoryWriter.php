@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Services;
+namespace Hubleto\App\Community\PriceLists\Services;
 
-use Hubleto\App\Community\PriceList\Models\History;
+use Hubleto\App\Community\PriceLists\Models\History;
 
 /**
  * Writes records to the history of a price list. A failure to write history never blocks the calling operation.

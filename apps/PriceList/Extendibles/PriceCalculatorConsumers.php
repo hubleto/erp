@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Extendibles;
+namespace Hubleto\App\Community\PriceLists\Extendibles;
 
 /**
  * Declares apps that read the config key `priceCalculatorService` (a class implementing

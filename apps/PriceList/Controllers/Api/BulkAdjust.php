@@ -1,12 +1,12 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Models\History;
-use Hubleto\App\Community\PriceList\Models\Item;
-use Hubleto\App\Community\PriceList\Services\HistoryWriter;
-use Hubleto\App\Community\PriceList\Services\PriceCalculator;
-use Hubleto\App\Community\PriceList\Services\Settings;
+use Hubleto\App\Community\PriceLists\Models\History;
+use Hubleto\App\Community\PriceLists\Models\Item;
+use Hubleto\App\Community\PriceLists\Services\HistoryWriter;
+use Hubleto\App\Community\PriceLists\Services\PriceCalculator;
+use Hubleto\App\Community\PriceLists\Services\Settings;
 
 /**
  * Changes fixed prices of a price list by a percentage or an amount.

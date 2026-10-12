@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Models\RecordManagers;
+namespace Hubleto\App\Community\PriceLists\Models\RecordManagers;
 
 use Hubleto\App\Community\Products\Models\RecordManagers\Category;
 use Hubleto\App\Community\Products\Models\RecordManagers\Group;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Services\PriceCalculator;
-use Hubleto\App\Community\PriceList\Services\Settings;
+use Hubleto\App\Community\PriceLists\Services\PriceCalculator;
+use Hubleto\App\Community\PriceLists\Services\Settings;
 
 class CalculateItems extends \Hubleto\Erp\Controllers\ApiController
 {

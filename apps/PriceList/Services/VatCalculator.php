@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Services;
+namespace Hubleto\App\Community\PriceLists\Services;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Products\Models\Product;
-use Hubleto\App\Community\PriceList\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\Item;
 use Hubleto\App\Community\Settings\Models\VatRate;
 
 /**

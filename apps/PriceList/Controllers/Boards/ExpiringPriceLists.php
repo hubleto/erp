@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Boards;
+namespace Hubleto\App\Community\PriceLists\Controllers\Boards;
 
-use Hubleto\App\Community\PriceList\Services\Counter;
+use Hubleto\App\Community\PriceLists\Services\Counter;
 
 class ExpiringPriceLists extends \Hubleto\Erp\Controller
 {
@@ -19,6 +19,6 @@ class ExpiringPriceLists extends \Hubleto\Erp\Controller
     $this->viewParams['total'] = count($expiring);
     $this->viewParams['items'] = $expiring;
 
-    $this->setView('@Hubleto:App:Community:PriceList/Boards/ExpiringPriceLists.twig');
+    $this->setView('@Hubleto:App:Community:PriceLists/Boards/ExpiringPriceLists.twig');
   }
 }

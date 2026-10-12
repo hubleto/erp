@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Models\RecordManagers;
+namespace Hubleto\App\Community\PriceLists\Models\RecordManagers;
 
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
 use Hubleto\App\Community\Settings\Models\RecordManagers\Currency;

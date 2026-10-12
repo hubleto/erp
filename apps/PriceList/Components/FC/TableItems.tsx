@@ -11,8 +11,8 @@ interface TableItemsProps extends TableProps {
 const TableItems = (props: TableItemsProps) => {
   return <Table
     componentName='TableItems'
-    parentApp='Hubleto/App/Custom/PriceList'
-    model='Hubleto/App/Custom/PriceList/Models/Item'
+    parentApp='Hubleto/App/Community/PriceLists'
+    model='Hubleto/App/Community/PriceLists/Models/Item'
     endpointParams={{idPriceList: props.idPriceList, idProduct: props.idProduct}}
     baseUrlSlug='price-lists/items'
     formModalProps={{type: 'right wide'}}

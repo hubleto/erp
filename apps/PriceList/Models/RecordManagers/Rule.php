@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Models\RecordManagers;
+namespace Hubleto\App\Community\PriceLists\Models\RecordManagers;
 
 use Hubleto\App\Community\Customers\Models\RecordManagers\Customer;
 use Hubleto\App\Community\Customers\Models\RecordManagers\Tag;

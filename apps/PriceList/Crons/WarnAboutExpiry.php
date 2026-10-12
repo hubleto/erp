@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Crons;
+namespace Hubleto\App\Community\PriceLists\Crons;
 
 use Hubleto\App\Community\Notifications\Sender;
-use Hubleto\App\Community\PriceList\Models\PriceList;
-use Hubleto\App\Community\PriceList\Services\Counter;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Services\Counter;
 
 /**
  * Notifies owners of price lists that are about to expire (within the setting expiryWarningDays).

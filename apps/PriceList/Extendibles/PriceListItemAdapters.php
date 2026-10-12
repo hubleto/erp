@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Extendibles;
+namespace Hubleto\App\Community\PriceLists\Extendibles;
 
 use Hubleto\App\Community\Cashdesk\Models\Receipt;
 use Hubleto\App\Community\Cashdesk\Models\ReceiptItem;

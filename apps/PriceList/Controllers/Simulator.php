@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers;
+namespace Hubleto\App\Community\PriceLists\Controllers;
 
 class Simulator extends \Hubleto\Erp\Controller
 {
-  public string $permission = 'Hubleto/App/Custom/PriceList/Loader::Controllers/Simulator';
+  public string $permission = 'Hubleto/App/Community/PriceLists/Loader::Controllers/Simulator';
 
   public function getBreadcrumbs(): array
   {
@@ -17,6 +17,6 @@ class Simulator extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:PriceList/Simulator.twig');
+    $this->setView('@Hubleto:App:Community:PriceLists/Simulator.twig');
   }
 }

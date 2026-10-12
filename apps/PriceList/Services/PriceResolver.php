@@ -1,16 +1,16 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Services;
+namespace Hubleto\App\Community\PriceLists\Services;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Customers\Models\CustomerTag;
 use Hubleto\App\Community\Products\Models\Category;
 use Hubleto\App\Community\Products\Models\Product;
 use Hubleto\App\Community\Products\Models\ProductSupplier;
-use Hubleto\App\Community\PriceList\Models\Assignment;
-use Hubleto\App\Community\PriceList\Models\Item;
-use Hubleto\App\Community\PriceList\Models\PriceList;
-use Hubleto\App\Community\PriceList\Models\Rule;
+use Hubleto\App\Community\PriceLists\Models\Assignment;
+use Hubleto\App\Community\PriceLists\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Models\Rule;
 
 /**
  * Selects the price of a product for a given context. It contains no arithmetic of its own:

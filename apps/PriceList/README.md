@@ -2,7 +2,7 @@
 
 Price lists, quantity breaks, customer-specific prices, promotions and central price and VAT arithmetic.
 
-Namespace: `Hubleto\App\Community\PriceList`. URL slug: `price-lists`.
+Namespace: `Hubleto\App\Community\PriceLists`. URL slug: `price-lists`.
 
 ## Install
 

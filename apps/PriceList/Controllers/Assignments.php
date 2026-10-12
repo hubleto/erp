@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers;
+namespace Hubleto\App\Community\PriceLists\Controllers;
 
 class Assignments extends \Hubleto\Erp\Controller
 {
-  public string $permission = 'Hubleto/App/Custom/PriceList/Loader::Controllers/Assignments';
+  public string $permission = 'Hubleto/App/Community/PriceLists/Loader::Controllers/Assignments';
 
   public function getBreadcrumbs(): array
   {
@@ -17,6 +17,6 @@ class Assignments extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:PriceList/Assignments.twig');
+    $this->setView('@Hubleto:App:Community:PriceLists/Assignments.twig');
   }
 }

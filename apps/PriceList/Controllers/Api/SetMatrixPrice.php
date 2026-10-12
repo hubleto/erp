@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\Item;
 
 /**
  * Creates, updates or (for an empty value) deletes one fixed price of the matrix.

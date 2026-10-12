@@ -13,7 +13,7 @@ export interface InputPriceListSelectProps {
  */
 const InputPriceListSelect = (props: InputPriceListSelectProps) => {
   return <LookupInput
-    model='Hubleto/App/Custom/PriceList/Models/PriceList'
+    model='Hubleto/App/Community/PriceLists/Models/PriceList'
     value={props.value}
     cssClass={props.cssClass}
     onChange={props.onChange}

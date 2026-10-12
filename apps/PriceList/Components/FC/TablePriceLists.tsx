@@ -6,8 +6,8 @@ import FormPriceList from './FormPriceList';
 const TablePriceLists = (props: TableProps) => {
   return <Table
     componentName='TablePriceLists'
-    parentApp='Hubleto/App/Custom/PriceList'
-    model='Hubleto/App/Custom/PriceList/Models/PriceList'
+    parentApp='Hubleto/App/Community/PriceLists'
+    model='Hubleto/App/Community/PriceLists/Models/PriceList'
     baseUrlSlug='price-lists'
     formModalProps={{type: 'right wide'}}
     renderForm={(table: TableMeta) => <FormPriceList {...table.getDefaultFormProps()} /> }

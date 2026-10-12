@@ -4,7 +4,7 @@ import request from '@hubleto/react-ui/core/Request';
 import LookupInput from '@hubleto/react-ui/components/fc/Inputs/Lookup';
 
 const componentName = 'PriceMatrix'; // must be the same as the exported const
-const parentApp = 'Hubleto/App/Custom/PriceList';
+const parentApp = 'Hubleto/App/Community/PriceLists';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 export interface PriceMatrixProps {

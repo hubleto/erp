@@ -1,14 +1,14 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers;
+namespace Hubleto\App\Community\PriceLists\Controllers;
 
-use Hubleto\App\Community\PriceList\Loader as PriceListApp;
-use Hubleto\App\Community\PriceList\Services\PriceCalculator;
-use Hubleto\App\Community\PriceList\Services\Settings as SettingsService;
+use Hubleto\App\Community\PriceLists\Loader as PriceListApp;
+use Hubleto\App\Community\PriceLists\Services\PriceCalculator;
+use Hubleto\App\Community\PriceLists\Services\Settings as SettingsService;
 
 class Settings extends \Hubleto\Erp\Controller
 {
-  public string $permission = 'Hubleto/App/Custom/PriceList/Loader::Controllers/Settings';
+  public string $permission = 'Hubleto/App/Community/PriceLists/Loader::Controllers/Settings';
 
   /** Settings shown on the page: key => [type, label]. Types: string, int, float, bool, or a list of select options. */
   protected function getSettingsDefinition(): array
@@ -57,7 +57,7 @@ class Settings extends \Hubleto\Erp\Controller
     $definition = $this->getSettingsDefinition();
 
     /** @var PriceListApp $app */
-    $app = $this->appManager()->getApp('Hubleto\\App\\Custom\\PriceList');
+    $app = $this->appManager()->getApp('Hubleto\\App\\Community\\PriceLists');
     $consumers = $app->collectExtendibles('PriceCalculatorConsumers');
 
     if ($this->router()->urlParamAsBool('submitted')) {
@@ -102,6 +102,6 @@ class Settings extends \Hubleto\Erp\Controller
     $this->viewParams['consumers'] = $consumerRows;
     $this->viewParams['submitted'] = $this->router()->urlParamAsBool('submitted');
 
-    $this->setView('@Hubleto:App:Community:PriceList/Settings.twig');
+    $this->setView('@Hubleto:App:Community:PriceLists/Settings.twig');
   }
 }

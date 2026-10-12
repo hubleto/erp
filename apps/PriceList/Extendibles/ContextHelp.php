@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Extendibles;
+namespace Hubleto\App\Community\PriceLists\Extendibles;
 
 class ContextHelp extends \Hubleto\Framework\Extendible
 {

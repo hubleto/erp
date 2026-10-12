@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers;
+namespace Hubleto\App\Community\PriceLists\Controllers;
 
 class Resolutions extends \Hubleto\Erp\Controller
 {
-  public string $permission = 'Hubleto/App/Custom/PriceList/Loader::Controllers/Resolutions';
+  public string $permission = 'Hubleto/App/Community/PriceLists/Loader::Controllers/Resolutions';
 
   public function getBreadcrumbs(): array
   {
@@ -17,6 +17,6 @@ class Resolutions extends \Hubleto\Erp\Controller
   public function prepareView(): void
   {
     parent::prepareView();
-    $this->setView('@Hubleto:App:Community:PriceList/Resolutions.twig');
+    $this->setView('@Hubleto:App:Community:PriceLists/Resolutions.twig');
   }
 }

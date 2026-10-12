@@ -1,16 +1,16 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Services;
+namespace Hubleto\App\Community\PriceLists\Services;
 
-use Hubleto\App\Community\PriceList\Loader as PriceListApp;
+use Hubleto\App\Community\PriceLists\Loader as PriceListApp;
 
 /**
  * Typed access to the settings of the PriceList app.
- * Settings are stored in the config under apps/Hubleto\App\Community\PriceList/<key>.
+ * Settings are stored in the config under apps/Hubleto\App\Community\PriceLists/<key>.
  */
 class Settings extends \Hubleto\Erp\Core
 {
-  public const CONFIG_PREFIX = 'apps/Hubleto\\App\\Custom\\PriceList/';
+  public const CONFIG_PREFIX = 'apps/Hubleto\\App\\Community\\PriceLists/';
 
   /** Default values of all settings. */
   public const DEFAULTS = [

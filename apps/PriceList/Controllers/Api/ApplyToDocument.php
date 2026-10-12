@@ -1,11 +1,11 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Services\ItemAdapterRegistry;
-use Hubleto\App\Community\PriceList\Services\PriceCalculator;
-use Hubleto\App\Community\PriceList\Services\PriceResolver;
-use Hubleto\App\Community\PriceList\Services\Settings;
+use Hubleto\App\Community\PriceLists\Services\ItemAdapterRegistry;
+use Hubleto\App\Community\PriceLists\Services\PriceCalculator;
+use Hubleto\App\Community\PriceLists\Services\PriceResolver;
+use Hubleto\App\Community\PriceLists\Services\Settings;
 
 /**
  * Prices the items of a document (order, deal, invoice, receipt, ...) with the price lists.

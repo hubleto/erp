@@ -1,8 +1,8 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\Item;
 
 /**
  * Data of the price matrix: fixed prices of products of a price list grouped by quantity tier.

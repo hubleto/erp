@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
 use Hubleto\App\Community\Documents\Generator;
-use Hubleto\App\Community\PriceList\Models\PriceList;
-use Hubleto\App\Community\PriceList\Models\PriceListHasDocument;
+use Hubleto\App\Community\PriceLists\Models\PriceList;
+use Hubleto\App\Community\PriceLists\Models\PriceListHasDocument;
 
 /**
  * Generates a PDF of a price list with Documents\Generator and links the document to the price list.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList;
+namespace Hubleto\App\Community\PriceLists;
 
 class Calendar extends \Hubleto\App\Community\Calendar\Calendar
 {

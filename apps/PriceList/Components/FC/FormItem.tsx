@@ -12,7 +12,7 @@ export interface FormItemProps extends FormProps {
 }
 
 const componentName = 'FormItem'; // must be the same as the exported const
-const parentApp = 'Hubleto/App/Custom/PriceList';
+const parentApp = 'Hubleto/App/Community/PriceLists';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 /** TabDefault */

@@ -10,8 +10,8 @@ interface TablePriceListHasDocumentsProps extends TableProps {
 const TablePriceListHasDocuments = (props: TablePriceListHasDocumentsProps) => {
   return <Table
     componentName='TablePriceListHasDocuments'
-    parentApp='Hubleto/App/Custom/PriceList'
-    model='Hubleto/App/Custom/PriceList/Models/PriceListHasDocument'
+    parentApp='Hubleto/App/Community/PriceLists'
+    model='Hubleto/App/Community/PriceLists/Models/PriceListHasDocument'
     endpointParams={{idPriceList: props.idPriceList}}
     baseUrlSlug='price-lists/documents'
     formModalProps={{type: 'right wide'}}

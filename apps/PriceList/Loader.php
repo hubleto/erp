@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList;
+namespace Hubleto\App\Community\PriceLists;
 
 use Hubleto\App\Community\Customers\Models\Customer;
 use Hubleto\App\Community\Customers\Models\Tag;
@@ -11,8 +11,8 @@ use Hubleto\App\Community\Settings\Services\Currency as CurrencyService;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
 use Hubleto\App\Community\Workflow\Models\Workflow as WorkflowModel;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
-use Hubleto\App\Community\PriceList\Services\Counter;
-use Hubleto\App\Community\PriceList\Services\PriceCalculator;
+use Hubleto\App\Community\PriceLists\Services\Counter;
+use Hubleto\App\Community\PriceLists\Services\PriceCalculator;
 
 class Loader extends \Hubleto\Erp\App
 {

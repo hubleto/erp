@@ -141,4 +141,4 @@ class PriceListApp extends App {
 }
 
 // register app
-globalThis.hubleto.registerApp('Hubleto/App/Custom/PriceList', new PriceListApp());
+globalThis.hubleto.registerApp('Hubleto/App/Community/PriceLists', new PriceListApp());

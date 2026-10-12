@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Models;
+namespace Hubleto\App\Community\PriceLists\Models;
 
 use Hubleto\App\Community\Products\Models\Category;
 use Hubleto\App\Community\Products\Models\Group;
@@ -9,7 +9,7 @@ use Hubleto\App\Community\Products\Models\Unit;
 use Hubleto\App\Community\Suppliers\Models\Supplier;
 use Hubleto\App\Community\Worksheets\Models\ActivityType;
 use Hubleto\App\Community\Settings\Models\VatRate;
-use Hubleto\App\Community\PriceList\Services\HistoryWriter;
+use Hubleto\App\Community\PriceLists\Services\HistoryWriter;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Date;
 use Hubleto\Framework\Db\Column\Decimal;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList;
+namespace Hubleto\App\Community\PriceLists;
 
 class Workflow extends \Hubleto\App\Community\Workflow\Workflow
 {
@@ -24,7 +24,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
 
     foreach ($items as $key => $item) {
       $items[$key]['_DETAIL_URL'] = 'price-lists/' . $item['id'];
-      $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:PriceList/WorkflowItemDetail.twig';
+      $items[$key]['_DETAIL_VIEW'] = '@Hubleto:App:Community:PriceLists/WorkflowItemDetail.twig';
     }
 
     return $items;

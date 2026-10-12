@@ -1,9 +1,9 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
-use Hubleto\App\Community\PriceList\Services\PriceResolver;
-use Hubleto\App\Community\PriceList\Services\ApiQueryParser;
+use Hubleto\App\Community\PriceLists\Services\PriceResolver;
+use Hubleto\App\Community\PriceLists\Services\ApiQueryParser;
 use Hubleto\Erp\Core;
 
 class GetPriceListsForParty extends Core

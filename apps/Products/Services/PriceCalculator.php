@@ -2,7 +2,7 @@
 
 namespace Hubleto\App\Community\Products\Services;
 
-use Hubleto\App\Community\PriceList\Services\PriceCalculator as PriceCalculatorService;
+use Hubleto\App\Community\PriceLists\Services\PriceCalculator as PriceCalculatorService;
 
 class PriceCalculator extends PriceCalculatorService
 {

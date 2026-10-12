@@ -15,8 +15,8 @@ interface TableAssignmentsProps extends TableProps {
 const TableAssignments = (props: TableAssignmentsProps) => {
   return <Table
     componentName='TableAssignments'
-    parentApp='Hubleto/App/Custom/PriceList'
-    model='Hubleto/App/Custom/PriceList/Models/Assignment'
+    parentApp='Hubleto/App/Community/PriceLists'
+    model='Hubleto/App/Community/PriceLists/Models/Assignment'
     endpointParams={{idPriceList: props.idPriceList, idCustomer: props.idCustomer, idShop: props.idShop, idProject: props.idProject, idDeal: props.idDeal, idSupplier: props.idSupplier}}
     baseUrlSlug='price-lists/assignments'
     formModalProps={{type: 'right wide'}}

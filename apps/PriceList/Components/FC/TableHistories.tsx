@@ -11,8 +11,8 @@ interface TableHistoriesProps extends TableProps {
 const TableHistories = (props: TableHistoriesProps) => {
   return <Table
     componentName='TableHistories'
-    parentApp='Hubleto/App/Custom/PriceList'
-    model='Hubleto/App/Custom/PriceList/Models/History'
+    parentApp='Hubleto/App/Community/PriceLists'
+    model='Hubleto/App/Community/PriceLists/Models/History'
     endpointParams={{idPriceList: props.idPriceList, idProduct: props.idProduct}}
     baseUrlSlug='price-lists/histories'
     formModalProps={{type: 'right wide'}}

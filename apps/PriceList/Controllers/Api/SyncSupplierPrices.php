@@ -1,10 +1,10 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Controllers\Api;
+namespace Hubleto\App\Community\PriceLists\Controllers\Api;
 
 use Hubleto\App\Community\Products\Models\ProductSupplier;
-use Hubleto\App\Community\PriceList\Models\Assignment;
-use Hubleto\App\Community\PriceList\Models\Item;
+use Hubleto\App\Community\PriceLists\Models\Assignment;
+use Hubleto\App\Community\PriceLists\Models\Item;
 
 /**
  * Copies purchase prices of the supplier assigned to a purchase price list into the prices of the list.

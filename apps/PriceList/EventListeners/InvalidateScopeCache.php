@@ -1,11 +1,11 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\EventListeners;
+namespace Hubleto\App\Community\PriceLists\EventListeners;
 
 use Hubleto\App\Community\Customers\Models\CustomerTag;
 use Hubleto\App\Community\Products\Models\Category;
 use Hubleto\App\Community\Products\Models\Group;
-use Hubleto\App\Community\PriceList\Services\PriceResolver;
+use Hubleto\App\Community\PriceLists\Services\PriceResolver;
 use Hubleto\Framework\Interfaces\ModelInterface;
 
 /**

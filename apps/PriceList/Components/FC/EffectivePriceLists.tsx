@@ -3,7 +3,7 @@ import Translator from '@hubleto/react-ui/core/Translator';
 import request from '@hubleto/react-ui/core/Request';
 
 const componentName = 'EffectivePriceLists'; // must be the same as the exported const
-const parentApp = 'Hubleto/App/Custom/PriceList';
+const parentApp = 'Hubleto/App/Community/PriceLists';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 export interface EffectivePriceListsProps {

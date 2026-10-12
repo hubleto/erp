@@ -1,6 +1,6 @@
 <?php
 
-namespace Hubleto\App\Community\PriceList\Models\Migrations;
+namespace Hubleto\App\Community\PriceLists\Models\Migrations;
 
 class History_0001 extends \Hubleto\Framework\Migration
 {

@@ -29,7 +29,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     'sales' => [
       \Hubleto\App\Community\Suppliers\Loader::class => [ 'sidebarOrder' => 200 ],
       \Hubleto\App\Community\Products\Loader::class => [ 'sidebarOrder' => 204 ],
-      \Hubleto\App\Community\PriceList\Loader::class => [ 'sidebarOrder' => 208 ],
+      \Hubleto\App\Community\PriceLists\Loader::class => [ 'sidebarOrder' => 208 ],
       \Hubleto\App\Community\Deals\Loader::class => [ 'sidebarOrder' => 212 ],
       \Hubleto\App\Community\Orders\Loader::class => [ 'sidebarOrder' => 230 ],
     ],

@@ -4,7 +4,7 @@ import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form from '@hubleto/react-ui/components/fc/Form';
 
 const componentName = 'FormAssignment'; // must be the same as the exported const
-const parentApp = 'Hubleto/App/Custom/PriceList';
+const parentApp = 'Hubleto/App/Community/PriceLists';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 /** FormAssignment */

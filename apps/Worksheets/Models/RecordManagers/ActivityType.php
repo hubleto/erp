@@ -28,4 +28,19 @@ class ActivityType extends \Hubleto\Erp\RecordManager
     return $query;
   }
 
+  /**
+   * [Description for prepareLookupQuery]
+   *
+   * @param string $search
+   * 
+   * @return mixed
+   * 
+   */
+  public function prepareLookupQuery(string $search): mixed
+  {
+    $query = parent::prepareLookupQuery($search);
+    $query = $query->orderBy('name', 'asc');
+    return $query;
+  }
+
 }

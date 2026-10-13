@@ -18,7 +18,7 @@ const TableActivityTypes = (props: TableActivityTypesProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/ActivityType'}
     endpointParams={{idSomeField: props.idSomeField}}
-    baseUrlSlug='parent-app-slug/same-url-slug-as-in-form'
+    baseUrlSlug='worksheets/activity-types'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_some_field: props.idSomeField}}
     renderForm={(table: TableMeta): React.JSX.Element => {

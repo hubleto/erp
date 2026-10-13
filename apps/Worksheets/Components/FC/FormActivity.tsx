@@ -39,7 +39,6 @@ const FormActivity = (props: FormActivityProps) => {
     renderTopInputs={() => <div className='modal-top-inputs'>
       <Input field='is_approved' renderOnlyInputField />
       <Input field='is_chargeable' renderOnlyInputField></Input>
-      <Input field='id_type' renderOnlyInputField customInputProps={{uiStyle: 'buttons'}} />
     </div>}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}

@@ -23,7 +23,7 @@ const FormActivityType = (props: FormActivityTypeProps) => {
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/ActivityType'}
-    urlSlug='worksheet/activity-types'
+    urlSlug='worksheets/activity-types'
     title={{field: 'name', sub: T.translate('Activity type')}}
     tabs={{default: {content: () => <TabDefault {...props} />}}}
     {...props}

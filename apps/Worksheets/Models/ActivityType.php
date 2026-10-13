@@ -21,12 +21,12 @@ class ActivityType extends \Hubleto\Erp\Model
 {
   public string $table = 'worksheet_activities_types';
   public string $recordManagerClass = RecordManagers\ActivityType::class;
-  public ?string $lookupSqlValue = 'concat("ActivityType #", {%TABLE%}.id)';
+  public ?string $lookupSqlValue = '{%TABLE%}.name';
 
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'name' => (new Varchar($this, $this->translate('Varchar')))->setDefaultVisible(),
+      'name' => (new Varchar($this, $this->translate('Activity type')))->setDefaultVisible(),
       'color' => (new Color($this, $this->translate('Color')))->setDefaultVisible(),
     ]);
   }

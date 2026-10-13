@@ -96,7 +96,7 @@ class Sidebar extends Core
         }
       }
 
-      $this->config()->save('cache/sidebarBadgeNumbers', json_encode([
+      $this->config()->saveForUser('cache/sidebarBadgeNumbers', json_encode([
         'expiry' => time() + 60*5,
         'data' => $sidebarBadgeNumbers
       ]));

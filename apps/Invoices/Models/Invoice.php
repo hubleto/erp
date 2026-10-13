@@ -259,6 +259,17 @@ class Invoice extends \Hubleto\Erp\Model {
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
     $description = parent::describeForm();
+
+    /** @var Profile */
+    $mProfile = $this->getService(Profile::class);
+
+    $defaultProfile = $mProfile->record->where('is_default', 1)->first();
+
+    $description->defaultValues = [
+      'id_profile' => $defaultProfile['id'],
+      'id_currency' => $defaultProfile['id_currency'],
+    ];
+
     return $description;
   }
 

@@ -24,7 +24,6 @@ const TableActivities = (props: TableActivitiesProps) => {
     formModalProps={{type: 'centered small theme-secondary'}}
     formDefaultValues={{id_task: props.idTask}}
     renderFooter={(table: TableMeta) => {
-      console.log('renderfooter');
       let workedTotal = 0;
       for (let i in table.data?.records) {
         const row = table.data?.records[i];

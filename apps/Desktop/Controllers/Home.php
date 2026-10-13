@@ -53,7 +53,7 @@ class Home extends \Hubleto\Erp\Controller
 
     // invalidate sidebarBadgeNumbers cache on every display of home screen
     $this->config()->save('cache/sidebarBadgeNumbers', json_encode([
-      'expiry' => time() - 1,
+      'expiry' => 0,
       'data' => [],
     ]));
 

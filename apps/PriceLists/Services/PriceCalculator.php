@@ -17,6 +17,12 @@ use Hubleto\Erp\Interfaces\PriceCalculatorInterface;
  */
 class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterface
 {
+  public const ROUNDING_POLICY_NONE = 0;
+  public const ROUNDING_POLICY_NEAREST = 1;
+  public const ROUNDING_POLICY_UP = 2;
+  public const ROUNDING_POLICY_DOWN = 3;
+  public const ROUNDING_POLICY_ENDS_IN = 4;
+
   // ---------------------------------------------------------------------------------------------------------------
   // Contract of PriceCalculatorInterface (unrounded)
   // ---------------------------------------------------------------------------------------------------------------
@@ -356,12 +362,6 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
   }
 
 
-  public const POLICY_NONE = 0;
-  public const POLICY_NEAREST = 1;
-  public const POLICY_UP = 2;
-  public const POLICY_DOWN = 3;
-  public const POLICY_ENDS_IN = 4;
-
   /**
    * Rounds the value according to the policy.
    *
@@ -373,21 +373,21 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
    */
   public function round(float $value, ?array $policy = null): float
   {
-    $policy = array_merge(['policy' => self::POLICY_NONE, 'step' => 0.0, 'ending' => 0.0, 'decimals' => null], $policy ?? []);
+    $policy = array_merge(['policy' => self::ROUNDING_POLICY_NONE, 'step' => 0.0, 'ending' => 0.0, 'decimals' => null], $policy ?? []);
     $step = (float) $policy['step'];
     $decimals = $policy['decimals'] === null ? null : (int) $policy['decimals'];
 
     switch ((int) $policy['policy']) {
-      case self::POLICY_NEAREST:
+      case self::ROUNDING_POLICY_NEAREST:
         $result = $step > 0 ? $this->roundToStep($value, $step, PHP_ROUND_HALF_UP) : round($value, $decimals ?? 2, PHP_ROUND_HALF_UP);
       break;
-      case self::POLICY_UP:
+      case self::ROUNDING_POLICY_UP:
         $result = $step > 0 ? $this->ceilToStep($value, $step) : ceil(round($value, 8));
       break;
-      case self::POLICY_DOWN:
+      case self::ROUNDING_POLICY_DOWN:
         $result = $step > 0 ? $this->floorToStep($value, $step) : floor(round($value, 8));
       break;
-      case self::POLICY_ENDS_IN:
+      case self::ROUNDING_POLICY_ENDS_IN:
         $result = $this->roundEndsIn($value, (float) $policy['ending']);
       break;
       default:
@@ -442,4 +442,5 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
     if ($step <= 0) return $value;
     return $this->roundToStep($value, $step);
   }
+
 }

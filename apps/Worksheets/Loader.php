@@ -44,19 +44,28 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'worksheets/activity-types', $this->translate('Activity types'), 'fas fa-table');
   }
 
-  // upgradeSchema
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    return '
+      ' . $this->secondSidebarTitle() .'
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('worksheets/activity-types', 'fas fa-tag', 'Activity types') . '
+      </div>
+    ';
+  }
+
   public function installApp(int $round): void
   {
     if ($round == 1) {
       $this->getModel(Models\ActivityType::class)->upgradeSchema();
       $this->getModel(Models\Activity::class)->upgradeSchema();
     }
-  }
-
-  // generateDemoData
-  public function generateDemoData(): void
-  {
-    // Create any demo data to promote your app.
   }
 
 }

@@ -42,7 +42,7 @@ class Activity extends \Hubleto\Erp\Model
     return array_merge(parent::describeColumns(), [
       'id_worker' => (new Lookup($this, $this->translate('Worker'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId())->setRequired(),
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setDefaultVisible()->setRequired(),
-      'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setDefaultVisible(),
+      'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setDefaultVisible()->setRequired(),
       'date_worked' => (new Date($this, $this->translate('Day')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
       'worked_hours' => (new Decimal($this, $this->translate('Worked hours')))->setDefaultVisible()->setDecimals(2)->setUnit('hours')->setStep(0.25),
       'description' => (new Text($this, $this->translate('Description')))->setDefaultVisible(),

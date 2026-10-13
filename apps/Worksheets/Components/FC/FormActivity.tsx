@@ -14,14 +14,17 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 const TabDefault = (props: FormActivityProps) => {
   return <div>
     <div className='flex-dyn w-full'>
-      <div className='grow'><Input field='id_worker' /></div>
-      <div className='grow'><Input field='id_task' /></div>
+      <div className='grow'>
+        <Input field='id_worker' />
+        <Input field='id_type' customInputProps={{uiStyle: 'buttons'}} />
+        <Input field='worked_hours' customInputProps={{cssClass: 'text-[1.5em]'}} />
+        <Input field='description' />
+      </div>
+      <div className='grow'>
+        <Input field='id_task' />
+        <Input field='date_worked' />
+      </div>
     </div>
-    <div className='flex-dyn w-full'>
-      <div className='grow'><Input field='worked_hours' customInputProps={{cssClass: 'text-[1.5em]'}} /></div>
-      <div className='grow'><Input field='date_worked' /></div>
-    </div>
-    <Input field='description' />
   </div>;
 }
 

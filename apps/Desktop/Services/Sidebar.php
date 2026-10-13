@@ -1,0 +1,107 @@
+<?php
+
+namespace Hubleto\App\Community\Desktop\Services;
+
+use Hubleto\Erp\Core;
+use Hubleto\App\Community\Settings\PermissionsManager;
+
+class Sidebar extends Core
+{
+
+  /**
+   * [Description for invalidateCache]
+   *
+   * @return void
+   * 
+   */
+  public function invalidateCache(): void
+  {
+    // invalidate sidebarBadgeNumbers cache on every display of home screen
+    $this->config()->save('cache/sidebarBadgeNumbers', json_encode([
+      'expiry' => 0,
+      'data' => [],
+    ]));
+  }
+
+  /**
+   * [Description for getSidebarGroups]
+   *
+   * @return array
+   * 
+   */
+  public function getSidebarGroups() {
+    return $this->config()->getAsArray('sidebarGroups', [
+      'crm' => [ 'color' => '#7a23dc', 'title' => $this->translate('CRM'), 'icon' => 'fas fa-id-card-clip' ],
+      'marketing' => [ 'color' => '#c6aa39', 'title' => $this->translate('Marketing'), 'icon' => 'fas fa-bullseye' ],
+      'sales' => [ 'color' => '#f50ab9', 'title' => $this->translate('Sales'), 'icon' => 'fas fa-users-viewfinder' ],
+      'productivity' => [ 'color' => '#20689f', 'title' => $this->translate('Productivity'), 'icon' => 'fas fa-diagram-project' ],
+      'human-resources' => [ 'color' => '#759f20', 'title' => $this->translate('Human resources'), 'icon' => 'fas fa-helmet' ],
+      'finance' => [ 'color' => '#ce4715ff', 'title' => $this->translate('Finance'), 'icon' => 'fas fa-credit-card' ],
+      'custom' => [ 'color' => '#888888', 'title' => $this->translate('Custom'), 'icon' => 'fas fa-puzzle-piece' ],
+      'maintenance' => [ 'color' => '#c0c90e', 'title' => $this->translate('Maintenance'), 'icon' => 'fas fa-cog' ],
+      'help' => [ 'color' => '#005a16ff', 'title' => $this->translate('Help'), 'icon' => 'fas fa-life-ring' ],
+    ]);
+  }
+
+  /**
+   * [Description for getAppsInSidebar]
+   *
+   * @return array
+   * 
+   */
+  public function getAppsInSidebar(): array
+  {
+    $appsInSidebar = $this->appManager()->getEnabledApps();
+
+    foreach ($appsInSidebar as $appNamespace => $app) {
+      if (
+        !$this->getService(PermissionsManager::class)->isAppPermittedForActiveUser($app)
+        || $app->configAsInteger('sidebarOrder') <= 0
+      ) {
+        unset($appsInSidebar[$appNamespace]);
+      }
+    }
+
+    uasort($appsInSidebar, function ($a, $b) {
+      $aOrder = $a->configAsInteger('sidebarOrder');
+      $bOrder = $b->configAsInteger('sidebarOrder');
+      return $aOrder <=> $bOrder;
+    });
+
+    return $appsInSidebar;
+  }
+
+  /**
+   * [Description for getBadgeNumbers]
+   *
+   * @return array
+   * 
+   */
+  public function getBadgeNumbers(): array
+  {
+    $sidebarBadgeNumbers = [];
+
+    $sbnCache = $this->config()->getAsJson('cache/sidebarBadgeNumbers');
+    if (is_array($sbnCache) && isset($sbnCache['expiry']) && $sbnCache['expiry'] > time()) {
+      $sidebarBadgeNumbers = $sbnCache['data'];
+    } else {
+
+      $appsInSidebar = $this->getAppsInSidebar();
+
+      foreach ($appsInSidebar as $appNamespace => $app) {
+        try {
+          $sidebarBadgeNumbers[$appNamespace] = $app->getSidebarBadgeNumber();
+        } catch (\Throwable $e) {
+          //
+        }
+      }
+
+      $this->config()->save('cache/sidebarBadgeNumbers', json_encode([
+        'expiry' => time() + 60*5,
+        'data' => $sidebarBadgeNumbers
+      ]));
+    }
+
+    return $sidebarBadgeNumbers;
+  }
+}

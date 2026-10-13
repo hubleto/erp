@@ -15,10 +15,12 @@
     >
       <span class="icon"><i class="{{ app.manifest.icon }}"></i></span>
       <span class="text">{{ app.manifest.nameTranslated }}</span>
-      <div
-        id="app_btn_{{ app.manifest.namespace|replace({'\\': '_'}) }}"
-        class="notification-badge hidden"
-      ><div style="zoom:0.5"><hblreact-spinner size="xs" /></div></div>
+      {% if badgeNumber > 0 %}
+        <div
+          id="app_btn_{{ app.manifest.namespace|replace({'\\': '_'}) }}"
+          class="notification-badge loaded"
+        >{{ badgeNumber }}</div>
+      {% endif %}
     </a>
   </div>
 {% endmacro %}
@@ -82,7 +84,6 @@
 {{ config.gaTag|raw }}
 
 <body id="page-top">
-  
   {% if (viewParams.showOnlyContentHtml) %} {{ contentHtml|raw }} {% else %}
 
     <div class="app-launcher" onclick="lchr(false);"><div>
@@ -510,27 +511,6 @@
       );
     }
 
-    function getSidebarBadgeNumbers() {
-      $('.notification-badge').show();
-      $.getJSON(
-        window.ConfigEnv.projectUrl + '/desktop/api/get-sidebar-badge-numbers',
-        {},
-        (data) => {
-          const sbn = data.sidebarBadgeNumbers;
-          if (!sbn) return;
-          Object.keys(sbn).map((app) => {
-            const number = sbn[app];
-            const badge = $('#app_btn_' + app.replaceAll('\\', '_'));
-            if (number > 0) {
-              badge.addClass('loaded').text(number).show();
-            } else {
-              badge.hide();
-            }
-          })
-        }
-      );
-    }
-
     function applyTheme() {
       if (localStorage.theme == "dark") {
         $('*').addClass('dark');
@@ -547,7 +527,6 @@
     }
 
     applyTheme();
-    setTimeout(function() { getSidebarBadgeNumbers(); }, 10000);
 
   </script>
 

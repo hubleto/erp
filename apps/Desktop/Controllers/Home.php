@@ -4,7 +4,7 @@ namespace Hubleto\App\Community\Desktop\Controllers;
 
 use Hubleto\App\Community\Dashboards\Loader as DashboardsApp;
 use Hubleto\App\Community\Dashboards\Models\Dashboard as DashboardModel;
-use Hubleto\App\Community\Desktop\Loader;
+use Hubleto\App\Community\Desktop\Services\Sidebar;
 
 class Home extends \Hubleto\Erp\Controller
 {
@@ -51,17 +51,13 @@ class Home extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
-    // invalidate sidebarBadgeNumbers cache on every display of home screen
-    $this->config()->save('cache/sidebarBadgeNumbers', json_encode([
-      'expiry' => 0,
-      'data' => [],
-    ]));
+    /** @var Sidebar */
+    $sidebarService = $this->getService(Sidebar::class);
 
-    /** @var Loader */
-    $desktopApp = $this->getService(Loader::class);
+    $sidebarService->invalidateCache();
 
     $enabledApps = $this->appManager()->getEnabledApps();
-    $appsInSidebar = $desktopApp->getAppsInSidebar();
+    $appsInSidebar = $sidebarService->getAppsInSidebar();
 
     $dashboardsApp = $this->appManager()->getApp(DashboardsApp::class);
     if ($dashboardsApp) {

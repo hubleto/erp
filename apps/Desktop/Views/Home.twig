@@ -122,3 +122,27 @@
     {% endif %}
   </div>
 </div>
+
+<script>
+  function udpateSidebarBadgeNumbers() {
+    $('.notification-badge').removeClass('loaded');
+    $.getJSON(
+      window.ConfigEnv.projectUrl + '/desktop/api/update-sidebar-badge-numbers',
+      {},
+      (data) => {
+        const sbn = data.sidebarBadgeNumbers;
+        if (!sbn) return;
+        Object.keys(sbn).map((app) => {
+          const number = sbn[app];
+          const badge = $('#app_btn_' + app.replaceAll('\\', '_'));
+          if (number > 0) {
+            badge.addClass('loaded').text(number).show();
+          } else {
+            badge.hide();
+          }
+        })
+      }
+    );
+  }
+  setTimeout(function() { udpateSidebarBadgeNumbers(); }, 300);
+</script>

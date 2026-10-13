@@ -3,9 +3,8 @@
 namespace Hubleto\App\Community\Desktop\Controllers;
 
 
-use Hubleto\App\Community\Settings\PermissionsManager;
-
 use Hubleto\App\Community\Desktop\Loader;
+use Hubleto\App\Community\Desktop\Services\Sidebar;
 use Hubleto\App\Community\Notifications\Counter;
 
 class Desktop extends \Hubleto\Erp\Controller
@@ -16,12 +15,15 @@ class Desktop extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    /** @var Sidebar */
+    $sidebarService = $this->getService(Sidebar::class);
+
     /** @var Loader */
     $desktopApp = $this->getService(Loader::class);
 
-    $appsInSidebar = $desktopApp->getAppsInSidebar();
-    $activatedApp = $desktopApp->getActivatedApp();
-    $sidebarGroups = $desktopApp->getSidebarGroups();
+    $appsInSidebar = $sidebarService->getAppsInSidebar();
+    $sidebarGroups = $sidebarService->getSidebarGroups();
+    $activatedApp = $this->appManager()->getActivatedApp();
 
     $activatedSidebarGroup = [];
     $activatedSidebarGroupUrlSlug = '';
@@ -53,7 +55,8 @@ class Desktop extends \Hubleto\Erp\Controller
     $this->viewParams['availableLanguages'] = $this->locale()->getAvailableLanguages();
 
     $this->viewParams['appMenu'] = [];
-    foreach ($desktopApp->appMenu as $item) {
+    $appMenu = $desktopApp->collectExtendibles('AppMenu');
+    foreach ($appMenu as $item) {
       if ($item['app'] === $activatedApp) {
         $this->viewParams['appMenu'][] = $item;
       }
@@ -79,6 +82,8 @@ class Desktop extends \Hubleto\Erp\Controller
     } catch (\Throwable $e) {
       $this->viewParams['subscriptionPlan'] = '';
     }
+
+    $this->viewParams['sidebarBadgeNumbers'] = $sidebarService->getBadgeNumbers();
 
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');
   }

@@ -33,7 +33,8 @@
         "Shared with": "Compartido con",
         "Columns": "Columnas",
         "Customer": "",
-        "Company ID": ""
+        "Company ID": "",
+        "Tag": ""
     },
     "Controllers\\Customers": {
         "Customers": "Clientes"

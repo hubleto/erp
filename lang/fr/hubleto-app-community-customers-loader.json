@@ -32,7 +32,8 @@
         "Shared with": "",
         "Columns": "",
         "Customer": "",
-        "Company ID": ""
+        "Company ID": "",
+        "Tag": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "",

@@ -32,7 +32,8 @@
         "Non-active": "Neaktivní",
         "Shared with": "Sdíleno s",
         "Customer": "",
-        "Company ID": ""
+        "Company ID": "",
+        "Tag": ""
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"

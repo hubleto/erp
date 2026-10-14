@@ -26,7 +26,9 @@
         "Primary": "",
         "Invoicing": "",
         "Invalid": "",
-        "Tag": ""
+        "Tag": "",
+        "Mr.": "",
+        "Mrs.": ""
     },
     "Models\\Value": {
         "Contact": "",

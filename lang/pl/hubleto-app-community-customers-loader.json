@@ -32,7 +32,8 @@
         "Non-active": "Nieaktywny",
         "Shared with": "Udostępnione dla",
         "Customer": "",
-        "Company ID": ""
+        "Company ID": "",
+        "Tag": ""
     },
     "Controllers\\Customers": {
         "Customers": "Klienci"

@@ -4,7 +4,7 @@
         "Task management app": "Správa úloh",
         "Todo": "Todo",
         "My recent tasks": "Moje nedávne úlohy",
-        "Calendar": ""
+        "Calendar": "Kalendár"
     },
     "Models\\Task": {
         "Identifier": "Identifikátor",
@@ -39,7 +39,7 @@
         "Leave empty to generate automatically.": "Nechajte prázdne pre automatické generovanie.",
         "Shared folder (online document storage)": "Zdieľaný priečinok (online úložisko dokumentov)",
         "Status": "Stav",
-        "Description (Scope of Work)": ""
+        "Description (Scope of Work)": "Popis (rozsah prác)"
     },
     "Models\\Todo": {
         "To do": "Todo",
@@ -82,7 +82,7 @@
     "Calendar": {
         "Tasks": "Úlohy",
         "Add new activity linked to Tasks": "Pridať novú aktivitu pre úlohu",
-        "Tasks and todo": "",
-        "TASK": ""
+        "Tasks and todo": "Úlohy a zoznam úloh",
+        "TASK": "ÚLOHA"
     }
 }

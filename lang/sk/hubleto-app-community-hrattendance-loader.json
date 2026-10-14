@@ -1,36 +1,36 @@
 {
     "manifest": {
-        "Attendance": "",
-        "Head office": "",
-        "Planned": "",
-        "Demo attendance record awaiting approval.": "",
-        "Demo attendance record.": "",
-        "Remote": "",
-        "Awaiting approval": "",
-        "Plan employee shifts and record attendance separately from project worksheets.": ""
+        "Attendance": "Dochádzka",
+        "Head office": "Ústredie",
+        "Planned": "Naplánované",
+        "Demo attendance record awaiting approval.": "Ukážkový záznam dochádzky čakajúci na schválenie.",
+        "Demo attendance record.": "Ukážkový záznam dochádzky.",
+        "Remote": "Práca na diaľku",
+        "Awaiting approval": "Čaká na schválenie",
+        "Plan employee shifts and record attendance separately from project worksheets.": "Plánujte zmeny zamestnancov a evidujte dochádzku oddelene od projektových výkazov."
     },
     "Models\\Attendance": {
-        "Employee": "",
-        "Work date": "",
-        "Clock in": "",
-        "Clock out": "",
-        "Break (minutes)": "",
-        "Approved": "",
-        "Notes": "",
-        "Shift": "",
-        "Workflow": "",
-        "Approval step": "",
-        "Add attendance record": ""
+        "Employee": "Zamestnanec",
+        "Work date": "Dátum práce",
+        "Clock in": "Príchod",
+        "Clock out": "Odchod",
+        "Break (minutes)": "Prestávka (minúty)",
+        "Approved": "Schválené",
+        "Notes": "Poznámky",
+        "Shift": "Pracovná zmena",
+        "Workflow": "Pracovný postup",
+        "Approval step": "Krok schvaľovania",
+        "Add attendance record": "Pridať záznam dochádzky"
     },
     "Models\\Shift": {
-        "Employee": "",
-        "Shift start": "",
-        "Shift end": "",
-        "Work location": "",
-        "Status": "",
-        "Planned": "",
-        "Completed": "",
-        "Cancelled": "",
-        "Schedule shift": ""
+        "Employee": "Zamestnanec",
+        "Shift start": "Začiatok zmeny",
+        "Shift end": "Koniec zmeny",
+        "Work location": "Pracovisko",
+        "Status": "Stav",
+        "Planned": "Naplánované",
+        "Completed": "Dokončené",
+        "Cancelled": "Zrušené",
+        "Schedule shift": "Naplánovať zmenu"
     }
 }

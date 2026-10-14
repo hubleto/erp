@@ -11,10 +11,10 @@
         "Sample project #2": "Vzorový projekt #2",
         "Sample project #2 for demonstration purposes.": "Vzorový projekt #2 na demonštračné účely.",
         "Create project": "Vytvoriť projekt",
-        "Assign task to project": "",
-        "Assign project to order": "",
-        "Assign task to milestone": "",
-        "Calendar": ""
+        "Assign task to project": "Priradiť úlohu k projektu",
+        "Assign project to order": "Priradiť projekt k objednávke",
+        "Assign task to milestone": "Priradiť úlohu k míľniku",
+        "Calendar": "Kalendár"
     },
     "root": {
         "Projects": "Projekty",
@@ -171,7 +171,7 @@
         "Last progress": "Posledný pokrok",
         "Add milestone": "Pridať míľnik",
         "Project": "Projekt",
-        "Responsible": ""
+        "Responsible": "Zodpovedná osoba"
     },
     "Controllers\\Milestones": {
         "Milestones": "Míľniky"
@@ -193,7 +193,7 @@
         "Add new activity linked to Projects": "Pridať novú aktivitu pre projekt"
     },
     "Models\\MilestoneTask": {
-        "Milestone": "",
-        "Task": ""
+        "Milestone": "Míľnik",
+        "Task": "Úloha"
     }
 }

@@ -20,7 +20,7 @@
         "Demand canceled by customer": "Dopyt zrušený zákazníkom",
         "Other": "Iné",
         "Calendar": "Kalendár",
-        "Plan": ""
+        "Plan": "Plán"
     },
     "Controllers\\Deals": {
         "Sales": "Predaj",
@@ -108,7 +108,7 @@
         "Deal created": "Deal vytvorený",
         "Yes": "Áno",
         "No": "Nie",
-        "Next activity": ""
+        "Next activity": "Ďalšia aktivita"
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",
@@ -142,7 +142,7 @@
         "Recurrence": "Opakovanie",
         "Long meeting minutes (link to external document)": "Podrobný zápis zo stretnutia (odkaz na externý dokument)",
         "Short meeting minutes": "Krátky zápis zo stretnutia",
-        "Owner": ""
+        "Owner": "Vlastník"
     },
     "Models\\DealDocument": {
         "Deal": "Deal",
@@ -172,8 +172,8 @@
         "Price excl. VAT": "Cena bez DPH",
         "Price incl. VAT": "Cena s DPH",
         "Sales Price": "Predajná cena",
-        "Title": "",
-        "Position (in the PDF)": ""
+        "Title": "Názov",
+        "Position (in the PDF)": "Pozícia (v PDF)"
     },
     "Models\\DealLead": {
         "Deal": "Deal",

@@ -74,11 +74,11 @@
         "Credit Note": "Dobropis",
         "Debit Note": "Ťarchopis",
         "Default invoicing profile is not set.": "Predvolený fakturačný profil nie je nastavený.",
-        "Inbound invoice": "",
-        "Outbound invoice": "",
-        "We charge you for...": "",
-        "Additional notes for customer (will be printed on invoice)": "",
-        "Document": ""
+        "Inbound invoice": "Prijatá faktúra",
+        "Outbound invoice": "Vystavená faktúra",
+        "We charge you for...": "Účtujeme vám za...",
+        "Additional notes for customer (will be printed on invoice)": "Ďalšie poznámky pre zákazníka (budú vytlačené na faktúre)",
+        "Document": "Dokument"
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Spolu bez DPH",
@@ -187,9 +187,9 @@
         "Add invoice item": "Pridať položku faktúry",
         "Total price excl. VAT": "Celková cena bez DPH",
         "Total price incl. VAT": "Celková cena s DPH",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Attachment #1": "Príloha č. 1",
+        "Attachment #2": "Príloha č. 2",
+        "Delivery date": "Dátum dodania"
     },
     "Controllers\\Invoices": {
         "Invoices": "Faktúry"

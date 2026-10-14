@@ -25,7 +25,7 @@
         "Recurrence": "Opakovanie",
         "Long meeting minutes (link to external document)": "Podrobná zápisnica (odkaz na externý dokument)",
         "Short meeting minutes": "Stručná zápisnica",
-        "Owner": ""
+        "Owner": "Vlastník"
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Zobraziť podrobnosti",
@@ -60,10 +60,10 @@
         "My activities": "Moje aktivity",
         "Calendars": "Kalendáre",
         "Export calendar": "Exportovať kalendár",
-        "My": "",
-        "Open": "",
-        "Completed": "",
-        "Share calendar": ""
+        "My": "Moje",
+        "Open": "Otvorené",
+        "Completed": "Dokončené",
+        "Share calendar": "Zdieľať kalendár"
     },
     "Components\\CalendarShareTable": {
         "You are about to remove all shared access to the calendar \"{calendar}\". Do you want to continue?": "Chystáte sa odstrániť všetok zdieľaný prístup ku kalendáru \"{calendar}\". Chcete pokračovať?",
@@ -94,9 +94,9 @@
         "Save": "Uložiť"
     },
     "Components\\FormActivity": {
-        "Start - End - Repeat": "",
-        "All-day": "",
-        "Completed": "",
+        "Start - End - Repeat": "Začiatok - Koniec - Opakovanie",
+        "All-day": "Celý deň",
+        "Completed": "Dokončené",
         "Start - End": "Začiatok - Koniec",
         "Repeats": "Opakuje sa",
         "Does not repeat": "Neopakuje sa",

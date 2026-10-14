@@ -1,47 +1,47 @@
 {
     "manifest": {
-        "Approved employee leave": "",
-        "Leave": "",
-        "Annual leave": "",
-        "Sick leave": "",
-        "Personal leave": "",
-        "Demo leave policy.": "",
-        "days": "",
-        "Manage leave policies, requests, and annual entitlements.": ""
+        "Approved employee leave": "Schválené voľno zamestnanca",
+        "Leave": "Voľno",
+        "Annual leave": "Dovolenka za kalendárny rok",
+        "Sick leave": "Práceneschopnosť",
+        "Personal leave": "Osobné voľno",
+        "Demo leave policy.": "Ukážkové pravidlá čerpania voľna.",
+        "days": "dni",
+        "Manage leave policies, requests, and annual entitlements.": "Spravujte pravidlá voľna, žiadosti a ročné nároky."
     },
     "Models\\Leave": {
-        "Employee": "",
-        "Leave type": "",
-        "Year": "",
-        "Entitlement (days)": "",
-        "Carried over (days)": "",
-        "Approved days used": "",
-        "Days remaining": "",
-        "Add leave entitlement": ""
+        "Employee": "Zamestnanec",
+        "Leave type": "Typ voľna",
+        "Year": "Rok",
+        "Entitlement (days)": "Nárok (dni)",
+        "Carried over (days)": "Prenesené (dni)",
+        "Approved days used": "Schválené vyčerpané dni",
+        "Days remaining": "Zostávajúce dni",
+        "Add leave entitlement": "Pridať nárok na voľno"
     },
     "Models\\LeaveRequest": {
-        "Employee": "",
-        "Leave type": "",
-        "From": "",
-        "To": "",
-        "Balance year": "",
-        "Days requested": "",
-        "Approver": "",
-        "Decision date": "",
-        "Reason": "",
-        "Workflow": "",
-        "Approval step": "",
-        "Request leave": ""
+        "Employee": "Zamestnanec",
+        "Leave type": "Typ voľna",
+        "From": "Od",
+        "To": "Komu",
+        "Balance year": "Zostatok za rok",
+        "Days requested": "Požadované dni",
+        "Approver": "Schvaľovateľ",
+        "Decision date": "Dátum rozhodnutia",
+        "Reason": "Dôvod",
+        "Workflow": "Pracovný postup",
+        "Approval step": "Krok schvaľovania",
+        "Request leave": "Požiadať o voľno"
     },
     "Models\\LeaveType": {
-        "Leave type": "",
-        "Annual entitlement (days)": "",
-        "Paid": "",
-        "Requires approval": "",
-        "Description": "",
-        "Add leave type": ""
+        "Leave type": "Typ voľna",
+        "Annual entitlement (days)": "Ročný nárok (dni)",
+        "Paid": "Zaplatené",
+        "Requires approval": "Vyžaduje schválenie",
+        "Description": "Popis",
+        "Add leave type": "Pridať typ voľna"
     },
     "Calendar": {
-        "Approved employee leave": ""
+        "Approved employee leave": "Schválené voľno zamestnanca"
     }
 }

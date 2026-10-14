@@ -20,10 +20,10 @@
         "Vyúčtovacia faktúra s DPH": "Vyúčtovacia faktúra s DPH",
         "Dobropis s DPH": "Dobropis s DPH",
         "Ťarchopis": "Ťarchopis",
-        "Document review results": "",
-        "Versions": "",
-        "Reviews": "",
-        "File manager": ""
+        "Document review results": "Výsledky kontroly dokumentu",
+        "Versions": "Verzie",
+        "Reviews": "Hodnotenia",
+        "File manager": "Správca súborov"
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",
@@ -34,12 +34,12 @@
         "Folder": "Priečinok",
         "Add Document": "Pridať dokument",
         "Public": "Verejné",
-        "Model": "",
-        "RecordId": "",
-        "Created on": "",
-        "Created by": "",
-        "Workflow": "",
-        "Workflow step": ""
+        "Model": "Model",
+        "RecordId": "ID záznamu",
+        "Created on": "Vytvorené dňa",
+        "Created by": "Vytvoril",
+        "Workflow": "Pracovný postup",
+        "Workflow step": "Krok pracovného postupu"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"

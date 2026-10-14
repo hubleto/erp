@@ -53,7 +53,7 @@
         "Recipient contains invalid email address.": "Príjemca obsahuje neplatnú emailovú adresu.",
         "Mailer Error": "Chyba odosielania",
         "Failed to create the email.": "Nepodarilo sa vytvoriť email.",
-        "Discussion UID": ""
+        "Discussion UID": "UID diskusie"
     },
     "Models\\Account": {
         "Name": "Názov",
@@ -73,7 +73,7 @@
         "Owner": "Majiteľ",
         "Manager": "Manažér",
         "Add account": "Pridať účet",
-        "Max. attachment size": ""
+        "Max. attachment size": "Maximálna veľkosť prílohy"
     },
     "Models\\Mailbox": {
         "Account": "Účet",

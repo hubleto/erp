@@ -90,13 +90,13 @@
         "Total price excl. VAT": "Celková suma bez DPH",
         "Total price incl. VAT": "Celková suma s DPH",
         "Order created": "Objednávka vytvorená",
-        "Description\/notes before the list of items": "",
-        "Description\/notes after the list of items": "",
-        "Order expires on": "",
-        "Next invoice expected on": "",
-        "Document": "",
-        "Last item": "",
-        "Next activity": ""
+        "Description\/notes before the list of items": "Popis/poznámky pred zoznamom položiek",
+        "Description\/notes after the list of items": "Popis/poznámky za zoznamom položiek",
+        "Order expires on": "Objednávka vyprší dňa",
+        "Next invoice expected on": "Ďalšia faktúra sa očakáva dňa",
+        "Document": "Dokument",
+        "Last item": "Posledná položka",
+        "Next activity": "Ďalšia aktivita"
     },
     "Models\\State": {
         "Title": "Názov",
@@ -132,12 +132,12 @@
         "Group by": "Zoskupiť podľa",
         "Total price excl. VAT": "Celková suma bez DPH",
         "Total price incl. VAT": "Celková suma s DPH",
-        "Is chargeable": "",
-        "Charged period - start": "",
-        "Charged period - end": "",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Is chargeable": "Je spoplatnený",
+        "Charged period - start": "Začiatok účtovaného obdobia",
+        "Charged period - end": "Koniec účtovaného obdobia",
+        "Attachment #1": "Príloha č. 1",
+        "Attachment #2": "Príloha č. 2",
+        "Delivery date": "Dátum dodania"
     },
     "Models\\History": {
         "Order": "Objednávka",
@@ -228,7 +228,7 @@
         "Recurrence": "Opakovanie",
         "Long meeting minutes (link to external document)": "Dlhý zápis zo stretnutia (odkaz na externý dokument)",
         "Short meeting minutes": "Krátky zápis zo stretnutia",
-        "Owner": ""
+        "Owner": "Vlastník"
     },
     "Models\\OrderDeal": {
         "Order": "Objednávka",

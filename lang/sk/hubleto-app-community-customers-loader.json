@@ -31,9 +31,9 @@
         "Identifier": "Identifikátor",
         "Non-active": "Neaktívny",
         "Shared with": "Zdieľané s",
-        "Customer": "",
-        "Company ID": "",
-        "Tag": ""
+        "Customer": "Zákazník",
+        "Company ID": "IČO",
+        "Tag": "Štítok"
     },
     "Controllers\\Customers": {
         "Customers": "Zákazníci"
@@ -62,7 +62,7 @@
         "Recurrence": "Opakovanie",
         "Long meeting minutes (link to external document)": "Zápisnica zo stretnutia (odkaz na externý dokument)",
         "Short meeting minutes": "Stručná zápisnica",
-        "Owner": ""
+        "Owner": "Vlastník"
     },
     "Models\\CustomerDocument": {
         "Customer": "Zákazník",

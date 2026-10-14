@@ -1,170 +1,170 @@
 {
     "Controllers\\GetEmailTestInfo": {
-        "Mail has empty subject or body.": "",
-        "Mail does not contain {{ botDetectorHiddenLink }} placeholder.": "",
-        "Mail does not contain {{ unsubscribeHref }} placeholder.": "",
-        "Mail does not contain {{ viewInBrowserHref }} placeholder.": "",
-        "Recipients contain variables {{ variables }} but not all of them are used in template.": ""
+        "Mail has empty subject or body.": "E-mail má prázdny predmet alebo telo.",
+        "Mail does not contain {{ botDetectorHiddenLink }} placeholder.": "E-mail neobsahuje zástupný symbol {{ botDetectorHiddenLink }}.",
+        "Mail does not contain {{ unsubscribeHref }} placeholder.": "E-mail neobsahuje zástupný symbol {{ unsubscribeHref }}.",
+        "Mail does not contain {{ viewInBrowserHref }} placeholder.": "E-mail neobsahuje zástupný symbol {{ viewInBrowserHref }}.",
+        "Recipients contain variables {{ variables }} but not all of them are used in template.": "Príjemcovia obsahujú premenné {{ variables }}, ale nie všetky sa používajú v šablóne."
     },
     "Controllers\\Launch": {
-        "Email has not configured sender account.": "",
-        "Email is not approved.": ""
+        "Email has not configured sender account.": "E-mail nemá nakonfigurovaný účet odosielateľa.",
+        "Email is not approved.": "E-mail nebol schválený."
     },
     "Controllers\\SendTestEmail": {
-        "Recipient must be provided.": "",
-        "Recipient is not valid email address.": ""
+        "Recipient must be provided.": "Je potrebné zadať príjemcu.",
+        "Recipient is not valid email address.": "E-mailová adresa príjemcu nie je platná."
     },
     "Controllers\\ClickTracker": {
-        "Unknown email.": "",
-        "Email not found.": ""
+        "Unknown email.": "Neznámy e-mail.",
+        "Email not found.": "E-mail sa nenašiel."
     },
     "Controllers\\SentEmails": {
-        "Subject": "",
-        "From": "",
-        "To": "",
-        "CC": "",
-        "Scheduled to send": "",
-        "Sent": ""
+        "Subject": "Predmet",
+        "From": "Od",
+        "To": "Komu",
+        "CC": "Kópia (CC)",
+        "Scheduled to send": "Naplánované na odoslanie",
+        "Sent": "Odoslané"
     },
     "Controllers\\EmailClicks": {
-        "Emails": "",
-        "Clicks": ""
+        "Emails": "E-maily",
+        "Clicks": "Kliknutia"
     },
     "Controllers\\EmailPreview": {
-        "Unknown email.": ""
+        "Unknown email.": "Neznámy e-mail."
     },
     "Controllers\\Recipients": {
-        "Email recipients": ""
+        "Email recipients": "Príjemcovia e-mailu"
     },
     "Controllers\\RecipientStatuses": {
-        "Recipients": "",
-        "Statuses": ""
+        "Recipients": "Príjemcovia",
+        "Statuses": "Stavy"
     },
     "Controllers\\Tags": {
-        "Tags": ""
+        "Tags": "Štítky"
     },
     "manifest": {
-        "Email marketing tags": "",
-        "Email marketing": "",
-        "Full-featured email marketing": "",
-        "Emails": "",
-        "Recipients": "",
-        "Recipient statuses": ""
+        "Email marketing tags": "Štítky e-mailového marketingu",
+        "Email marketing": "E-mailový marketing",
+        "Full-featured email marketing": "Plnohodnotný e-mailový marketing",
+        "Emails": "E-maily",
+        "Recipients": "Príjemcovia",
+        "Recipient statuses": "Stavy príjemcov"
     },
     "Models\\Campaign": {
-        "Title": "",
-        "Target audience": "",
-        "Goal": "",
-        "Notes": "",
-        "Color": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Owner": "",
-        "Manager": "",
-        "Closed": "",
-        "Shared with": "",
-        "Tags": "",
-        "Add campaign": "",
-        "Phase": "",
-        "Ownership": "",
-        "All": "",
-        "Owned by me": "",
-        "Managed by me": "",
-        "Open \/ Closed": "",
-        "Open": ""
+        "Title": "Názov",
+        "Target audience": "Cieľová skupina",
+        "Goal": "Cieľ",
+        "Notes": "Poznámky",
+        "Color": "Farba",
+        "Workflow": "Pracovný postup",
+        "Workflow step": "Krok pracovného postupu",
+        "Owner": "Vlastník",
+        "Manager": "Manažér",
+        "Closed": "Uzavreté",
+        "Shared with": "Zdieľané s",
+        "Tags": "Štítky",
+        "Add campaign": "Pridať kampaň",
+        "Phase": "Fáza",
+        "Ownership": "Vlastníctvo",
+        "All": "Všetko",
+        "Owned by me": "V mojom vlastníctve",
+        "Managed by me": "Spravujem ja",
+        "Open \/ Closed": "Otvorené / Uzavreté",
+        "Open": "Otvorené"
     },
     "Models\\CampaignSchedule": {
-        "Campaign": "",
-        "Day": "",
-        "Email": "",
-        "Schedule email": ""
+        "Campaign": "Kampaň",
+        "Day": "Deň",
+        "Email": "E-mail",
+        "Schedule email": "Naplánovať e-mail"
     },
     "Models\\CampaignScheduleRecipient": {
-        "Campaign schedule": "",
-        "Recipient": "",
-        "Reference to mail sent": "",
-        "Add recipient": ""
+        "Campaign schedule": "Plán kampane",
+        "Recipient": "Príjemca",
+        "Reference to mail sent": "Odkaz na odoslaný e-mail",
+        "Add recipient": "Pridať príjemcu"
     },
     "Models\\CampaignTag": {
-        "Campaign": "",
-        "Tag": "",
-        "Campaign tags": ""
+        "Campaign": "Kampaň",
+        "Tag": "Štítok",
+        "Campaign tags": "Štítky kampane"
     },
     "Models\\Email": {
-        "UID": "",
-        "Title": "",
-        "Subject": "",
-        "Body": "",
-        "UTM source": "",
-        "UTM campaign": "",
-        "UTM term": "",
-        "UTM content": "",
-        "Target audience": "",
-        "Goal": "",
-        "Notes": "",
-        "Color": "",
-        "Sender account": "",
-        "Reply to": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Owner": "",
-        "Manager": "",
-        "Shared with": "",
-        "Approved": "",
-        "Closed": "",
-        "Created": "",
-        "Lanuched by": "",
-        "Launched": "",
-        "Recipients": "",
-        "Add e-mail": "",
-        "Phase": "",
-        "Ownership": "",
-        "All": "",
-        "Owned by me": "",
-        "Managed by me": "",
-        "Campaign": "",
-        "In campaign": "",
-        "Not in campaign": "",
-        "Open \/ Closed": "",
-        "Open": ""
+        "UID": "UID",
+        "Title": "Názov",
+        "Subject": "Predmet",
+        "Body": "Text správy",
+        "UTM source": "UTM zdroj",
+        "UTM campaign": "UTM kampaň",
+        "UTM term": "UTM výraz",
+        "UTM content": "UTM obsah",
+        "Target audience": "Cieľová skupina",
+        "Goal": "Cieľ",
+        "Notes": "Poznámky",
+        "Color": "Farba",
+        "Sender account": "Účet odosielateľa",
+        "Reply to": "Odpovedať na",
+        "Workflow": "Pracovný postup",
+        "Workflow step": "Krok pracovného postupu",
+        "Owner": "Vlastník",
+        "Manager": "Manažér",
+        "Shared with": "Zdieľané s",
+        "Approved": "Schválené",
+        "Closed": "Uzavreté",
+        "Created": "Vytvorené",
+        "Lanuched by": "Spustil",
+        "Launched": "Spustené",
+        "Recipients": "Príjemcovia",
+        "Add e-mail": "Pridať e-mail",
+        "Phase": "Fáza",
+        "Ownership": "Vlastníctvo",
+        "All": "Všetko",
+        "Owned by me": "V mojom vlastníctve",
+        "Managed by me": "Spravujem ja",
+        "Campaign": "Kampaň",
+        "In campaign": "V kampani",
+        "Not in campaign": "Nie je v kampani",
+        "Open \/ Closed": "Otvorené / Uzavreté",
+        "Open": "Otvorené"
     },
     "Models\\EmailClick": {
-        "Email": "",
-        "Recipient": "",
-        "Url": "",
-        "Clicked": "",
-        "Log": "",
-        "Bot Score": "",
-        "Campaign": ""
+        "Email": "E-mail",
+        "Recipient": "Príjemca",
+        "Url": "URL",
+        "Clicked": "Kliknuté",
+        "Log": "Záznam",
+        "Bot Score": "Skóre bota",
+        "Campaign": "Kampaň"
     },
     "Models\\Recipient": {
-        "Campaign": "",
-        "Email": "",
-        "Contact": "",
-        "Variables": "",
-        "Added": "",
-        "Notes": "",
-        "Reference to mail sent": "",
-        "UTM: source": "",
-        "UTM: campaign": "",
-        "UTM: term": "",
-        "Status": "",
-        "Add recipient": "",
-        "Count": "",
-        "Clicks": "",
-        "Click summary": "",
-        "Bot score": "",
-        "Group by": ""
+        "Campaign": "Kampaň",
+        "Email": "E-mail",
+        "Contact": "Kontakt",
+        "Variables": "Premenné",
+        "Added": "Pridané",
+        "Notes": "Poznámky",
+        "Reference to mail sent": "Odkaz na odoslaný e-mail",
+        "UTM: source": "UTM: zdroj",
+        "UTM: campaign": "UTM: kampaň",
+        "UTM: term": "UTM: výraz",
+        "Status": "Stav",
+        "Add recipient": "Pridať príjemcu",
+        "Count": "Počet",
+        "Clicks": "Kliknutia",
+        "Click summary": "Súhrn kliknutí",
+        "Bot score": "Skóre bota",
+        "Group by": "Zoskupiť podľa"
     },
     "Models\\RecipientStatus": {
-        "Email": "",
-        "Is unsubscribed": "",
-        "Is invalid": "",
-        "Add recipient status": ""
+        "Email": "E-mail",
+        "Is unsubscribed": "Odhlásený",
+        "Is invalid": "Je neplatný",
+        "Add recipient status": "Pridať stav príjemcu"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": "",
-        "Add Email marketing Tag": ""
+        "Name": "Názov",
+        "Color": "Farba",
+        "Add Email marketing Tag": "Pridať štítok e-mailového marketingu"
     }
 }

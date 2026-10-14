@@ -1,52 +1,52 @@
 {
     "manifest": {
-        "Active": "",
-        "Full-time": "",
-        "Part-time": "",
-        "Contract": "",
-        "Temporary": "",
-        "Internship": "",
-        "On leave": "",
-        "Ended": "",
-        "Head office": "",
-        "Remote": "",
-        "Hybrid": "",
-        "Demo employee profile.": "",
-        "Employees": "",
-        "Employment profiles linked to existing user accounts and teams.": ""
+        "Active": "Aktívny",
+        "Full-time": "Plný úväzok",
+        "Part-time": "Čiastočný úväzok",
+        "Contract": "Zmluva",
+        "Temporary": "Dočasné",
+        "Internship": "Stáž",
+        "On leave": "Na dovolenke",
+        "Ended": "Ukončené",
+        "Head office": "Ústredie",
+        "Remote": "Práca na diaľku",
+        "Hybrid": "Hybridný režim",
+        "Demo employee profile.": "Ukážkový profil zamestnanca.",
+        "Employees": "Zamestnanci",
+        "Employment profiles linked to existing user accounts and teams.": "Pracovné profily prepojené s existujúcimi používateľskými účtami a tímami."
     },
     "Models\\Employee": {
-        "User account": "",
-        "Employee number": "",
-        "First name": "",
-        "Family name": "",
-        "Job title": "",
-        "Team": "",
-        "Manager": "",
-        "Employment type": "",
-        "Employment status": "",
-        "Hire date": "",
-        "End date": "",
-        "Work location": "",
-        "Employment notes": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Add employee": "",
-        "Lifecycle step": ""
+        "User account": "Používateľský účet",
+        "Employee number": "Číslo zamestnanca",
+        "First name": "Meno",
+        "Family name": "Priezvisko",
+        "Job title": "Pracovná pozícia",
+        "Team": "Tím",
+        "Manager": "Manažér",
+        "Employment type": "Typ pracovného pomeru",
+        "Employment status": "Pracovný stav",
+        "Hire date": "Dátum nástupu",
+        "End date": "Dátum ukončenia",
+        "Work location": "Pracovisko",
+        "Employment notes": "Poznámky k pracovnému pomeru",
+        "Workflow": "Pracovný postup",
+        "Workflow step": "Krok pracovného postupu",
+        "Add employee": "Pridať zamestnanca",
+        "Lifecycle step": "Krok životného cyklu"
     },
     "Models\\EmploymentStatus": {
-        "Name": "",
-        "Description": "",
-        "Add employment status": ""
+        "Name": "Názov",
+        "Description": "Popis",
+        "Add employment status": "Pridať pracovný stav"
     },
     "Models\\EmploymentType": {
-        "Name": "",
-        "Description": "",
-        "Add employment type": ""
+        "Name": "Názov",
+        "Description": "Popis",
+        "Add employment type": "Pridať typ pracovného pomeru"
     },
     "Models\\WorkLocation": {
-        "Name": "",
-        "Description": "",
-        "Add work location": ""
+        "Name": "Názov",
+        "Description": "Popis",
+        "Add work location": "Pridať pracovisko"
     }
 }

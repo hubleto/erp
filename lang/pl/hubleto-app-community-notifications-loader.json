@@ -16,8 +16,8 @@
         "Read": "Przeczytane",
         "URL": "URL",
         "No category": "Bez kategorii",
-        "Model": "",
-        "RecordId": ""
+        "Model": "Model",
+        "RecordId": "ID rekordu"
     },
     "Controllers\\Notifications": {
         "Notifications": "Powiadomienia"

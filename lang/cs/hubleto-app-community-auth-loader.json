@@ -41,24 +41,24 @@
         "Employee": "Zaměstnanec",
         "Assistant": "Asistent",
         "External": "Externí",
-        "Login": "",
-        "Password": "",
-        "Active": "",
-        "Time of last login": "",
-        "Last login IP": "",
-        "Time of last access": "",
-        "Last access IP": "",
-        "---": "",
-        "Administrator": "",
-        "Chief Officer": "",
-        "Manager": ""
+        "Login": "Přihlášení",
+        "Password": "Heslo",
+        "Active": "Aktivní",
+        "Time of last login": "Čas posledního přihlášení",
+        "Last login IP": "IP posledního přihlášení",
+        "Time of last access": "Čas posledního přístupu",
+        "Last access IP": "IP posledního přístupu",
+        "---": "---",
+        "Administrator": "Správce",
+        "Chief Officer": "Vedoucí pracovník",
+        "Manager": "Manažer"
     },
     "Models\\UserRole": {
         "Role": "Role",
         "Grant all permissions (administrator role)": "Povolit vše (role administrátora)",
         "Description": "Popis",
         "Is default role (cannot be modified)": "Je výchozí role (nelze upravit)",
-        "Permissions": "",
+        "Permissions": "Oprávnění",
         "User Roles": "Uživatelské role",
         "Add User Role": "Přidat roli"
     },
@@ -96,8 +96,8 @@
         "Sign out": "Odhlásit se"
     },
     "Models\\Token": {
-        "Token type": "",
-        "Expiration date": "",
-        "Token": ""
+        "Token type": "Typ tokenu",
+        "Expiration date": "Datum vypršení platnosti",
+        "Token": "Token"
     }
 }

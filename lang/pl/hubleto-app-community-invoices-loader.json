@@ -74,12 +74,12 @@
         "Credit Note": "Nota kredytowa",
         "Debit Note": "Nota debetowa",
         "Default invoicing profile is not set.": "Domyślny profil fakturowania nie jest ustawiony.",
-        "Inbound \/ outbound": "",
-        "Inbound invoice": "",
-        "Outbound invoice": "",
-        "We charge you for...": "",
-        "Additional notes for customer (will be printed on invoice)": "",
-        "Document": ""
+        "Inbound \/ outbound": "Przychodzące / wychodzące",
+        "Inbound invoice": "Faktura zakupu",
+        "Outbound invoice": "Faktura sprzedaży",
+        "We charge you for...": "Obciążamy opłatą za...",
+        "Additional notes for customer (will be printed on invoice)": "Dodatkowe uwagi dla klienta (zostaną wydrukowane na fakturze)",
+        "Document": "Dokument"
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Razem bez VAT",
@@ -188,9 +188,9 @@
         "Add invoice item": "Dodaj pozycję faktury",
         "Total price excl. VAT": "Całkowita cena bez VAT",
         "Total price incl. VAT": "Całkowita cena z VAT",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Attachment #1": "Załącznik nr 1",
+        "Attachment #2": "Załącznik nr 2",
+        "Delivery date": "Data dostawy"
     },
     "Controllers\\Invoices": {
         "Invoices": "Faktury"
@@ -242,7 +242,7 @@
         "Mail to send warning about due invoice - body": "E-mail ostrzeżenia o wymagalnej fakturze - treść",
         "Add invoice profile": "Dodaj profil faktury",
         "Invoice profile": "Profil fakturowania",
-        "Bank (SWIFT\/BIC)": ""
+        "Bank (SWIFT\/BIC)": "Bank (SWIFT/BIC)"
     },
     "Models\\PaymentMethod": {
         "Name": "Nazwa",

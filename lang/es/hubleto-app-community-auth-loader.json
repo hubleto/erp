@@ -41,17 +41,17 @@
         "Employee": "Empleado",
         "Assistant": "Asistente",
         "External": "Externo",
-        "Login": "",
-        "Password": "",
-        "Active": "",
-        "Time of last login": "",
-        "Last login IP": "",
-        "Time of last access": "",
-        "Last access IP": "",
-        "---": "",
-        "Administrator": "",
-        "Chief Officer": "",
-        "Manager": ""
+        "Login": "Inicio de sesión",
+        "Password": "Contraseña",
+        "Active": "Activo",
+        "Time of last login": "Hora del último inicio de sesión",
+        "Last login IP": "IP del último inicio de sesión",
+        "Time of last access": "Hora del último acceso",
+        "Last access IP": "IP del último acceso",
+        "---": "---",
+        "Administrator": "Administrador",
+        "Chief Officer": "Director ejecutivo",
+        "Manager": "Gerente"
     },
     "Models\\UserRole": {
         "Role": "Rol",
@@ -96,8 +96,8 @@
         "Sign out": "Cerrar sesión"
     },
     "Models\\Token": {
-        "Token type": "",
-        "Expiration date": "",
-        "Token": ""
+        "Token type": "Tipo de token",
+        "Expiration date": "Fecha de vencimiento",
+        "Token": "Token"
     }
 }

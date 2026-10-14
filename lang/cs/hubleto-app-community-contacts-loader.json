@@ -96,10 +96,10 @@
         "Valid": "Platný",
         "Tags": "Štítky",
         "Invoicing Contact": "Fakturační kontakt",
-        "Primary": "",
-        "Invoicing": "",
-        "Invalid": "",
-        "Tag": ""
+        "Primary": "Primární",
+        "Invoicing": "Fakturace",
+        "Invalid": "Neplatný",
+        "Tag": "Štítek"
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty"
@@ -122,7 +122,7 @@
     "Components\\TableContacts": {
         "Primary": "Primární",
         "Invoicing": "Fakturace",
-        "Copy cell content to clipboard": ""
+        "Copy cell content to clipboard": "Kopírovat obsah buňky do schránky"
     },
     "Controllers\\Import": {
         "Import": "Import",

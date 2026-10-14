@@ -74,11 +74,11 @@
         "Credit Note": "Nota de crédito",
         "Debit Note": "Nota de débito",
         "Default invoicing profile is not set.": "No se ha definido el perfil de facturación predeterminado.",
-        "Inbound invoice": "",
-        "Outbound invoice": "",
-        "We charge you for...": "",
-        "Additional notes for customer (will be printed on invoice)": "",
-        "Document": ""
+        "Inbound invoice": "Factura recibida",
+        "Outbound invoice": "Factura emitida",
+        "We charge you for...": "Le cobramos por...",
+        "Additional notes for customer (will be printed on invoice)": "Notas adicionales para el cliente (se imprimirán en la factura)",
+        "Document": "Documento"
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Total sin impuestos",
@@ -167,9 +167,9 @@
         "Add invoice item": "Agregar artículo a la factura",
         "Total price excl. VAT": "Precio total sin IVA",
         "Total price incl. VAT": "Precio total con IVA",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Attachment #1": "Adjunto n.º 1",
+        "Attachment #2": "Adjunto n.º 2",
+        "Delivery date": "Fecha de entrega"
     },
     "Controllers\\Invoices": {
         "Invoices": "Facturas"

@@ -8,9 +8,9 @@
     "manifest": {
         "Workflow": "Workflow",
         "Free sales workflow management.": "Kostenloses Verkaufsworkflowmanagement.",
-        "History": "",
-        "Workflows": "",
-        "Items with not updated step": ""
+        "History": "Verlauf",
+        "Workflows": "Workflows",
+        "Items with not updated step": "Positionen mit nicht aktualisiertem Schritt"
     },
     "root": {
         "Workflows": "Workflows"
@@ -19,9 +19,9 @@
         "Name": "Name",
         "Description": "Beschreibung",
         "Type": "Typ",
-        "Order": "",
-        "Group": "",
-        "Show in kanban": ""
+        "Order": "Auftrag",
+        "Group": "Gruppe",
+        "Show in kanban": "In Kanban anzeigen"
     },
     "Models\\WorkflowStep": {
         "Name": "Name",
@@ -30,7 +30,7 @@
         "Probability": "Wahrscheinlichkeit",
         "Workflow": "Workflow",
         "Set result of a deal to": "Setzen Sie das Ergebnis eines Deals an",
-        "Tag": ""
+        "Tag": "Tag"
     },
     "Controllers\\Home": {
         "Workflow": "Workflow",
@@ -38,11 +38,11 @@
         "Add deal": "Deal hinzufügen"
     },
     "Models\\WorkflowHistory": {
-        "Model": "",
-        "Record Id": "",
-        "Changed": "",
-        "User": "",
-        "Workflow": "",
-        "Workflow Step": ""
+        "Model": "Modell",
+        "Record Id": "Datensatz-ID",
+        "Changed": "Geändert",
+        "User": "Benutzer",
+        "Workflow": "Workflow",
+        "Workflow Step": "Workflowschritt"
     }
 }

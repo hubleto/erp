@@ -84,7 +84,7 @@
         "Wearable Accessories": "Akcesoria do technologii ubieralnej",
         "Watch Bands": "Paski do zegarków",
         "Replacement Chargers": "Zapasowe ładowarki",
-        "Units": ""
+        "Units": "Jednostki"
     },
     "root": {
         "Products": "Produkty",
@@ -165,17 +165,17 @@
         "Order: An invoice is generated immediately after a sales order is confirmed. ": "Zamówienie: Faktura jest generowana natychmiast po potwierdzeniu zamówienia sprzedaży. ",
         "Delivery: An invoice is generated immediately after the delivery is completed. ": "Dostawa: Faktura jest generowana natychmiast po zakończeniu dostawy. ",
         "Manual: Invoice is not automatically generated.": "Ręcznie: Faktura nie jest generowana automatycznie.",
-        "Base unit": "",
-        "Count (pieces)": "",
-        "Mass (weight)": "",
-        "Volume (capacity)": "",
-        "Length (distance)": "",
-        "Base unit weight": "",
-        "Base unit length": "",
-        "Base unit width": "",
-        "Base unit height": "",
-        "Track lots\/batches": "",
-        "Stock of this product is identified per lot\/batch.": ""
+        "Base unit": "Jednostka podstawowa",
+        "Count (pieces)": "Liczba (sztuki)",
+        "Mass (weight)": "Masa (waga)",
+        "Volume (capacity)": "Objętość (pojemność)",
+        "Length (distance)": "Długość (odległość)",
+        "Base unit weight": "Waga jednostki bazowej",
+        "Base unit length": "Długość jednostki bazowej",
+        "Base unit width": "Szerokość jednostki bazowej",
+        "Base unit height": "Wysokość jednostki bazowej",
+        "Track lots\/batches": "Śledź partie",
+        "Stock of this product is identified per lot\/batch.": "Stan magazynowy tego produktu jest identyfikowany według partii."
     },
     "Models\\Group": {
         "Title": "Nazwa",

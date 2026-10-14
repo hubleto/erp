@@ -3,54 +3,54 @@
         "Documents": "Documents"
     },
     "manifest": {
-        "Browse": "",
-        "Show as list": "",
-        "Manage folders": "",
-        "Templates": "",
-        "Documents": "",
-        "Free document management.": "",
-        "Document review results": "",
-        "Versions": "",
-        "Reviews": "",
-        "File manager": ""
+        "Browse": "Parcourir",
+        "Show as list": "Afficher sous forme de liste",
+        "Manage folders": "Gérer les dossiers",
+        "Templates": "Modèles",
+        "Documents": "Documents",
+        "Free document management.": "Gestion documentaire gratuite.",
+        "Document review results": "Résultats de la révision du document",
+        "Versions": "Versions",
+        "Reviews": "Avis",
+        "File manager": "Gestionnaire de fichiers"
     },
     "Models\\Template": {
-        "Name": "",
-        "Used For": "",
-        "Content": "",
-        "Notes": "",
-        "Add template": ""
+        "Name": "Nom",
+        "Used For": "Utilisé pour",
+        "Content": "Contenu",
+        "Notes": "Remarques",
+        "Add template": "Ajouter un modèle"
     },
     "Models\\Document": {
-        "Uid": "",
-        "Folder": "",
-        "Document name": "",
-        "File": "",
-        "File Link": "",
-        "Origin Link": "",
-        "Add Document": "",
-        "Model": "",
-        "RecordId": "",
-        "Created on": "",
-        "Created by": "",
-        "Workflow": "",
-        "Workflow step": ""
+        "Uid": "UID",
+        "Folder": "Dossier",
+        "Document name": "Nom du document",
+        "File": "Fichier",
+        "File Link": "Lien du fichier",
+        "Origin Link": "Lien d'origine",
+        "Add Document": "Ajouter un document",
+        "Model": "Modèle",
+        "RecordId": "ID de l'enregistrement",
+        "Created on": "Créé le",
+        "Created by": "Créé par",
+        "Workflow": "Flux de travail",
+        "Workflow step": "Étape du flux de travail"
     },
     "Controllers\\Browse": {
-        "Browse": "",
-        "Documents": ""
+        "Browse": "Parcourir",
+        "Documents": "Documents"
     },
     "Models\\Folder": {
-        "Uid": "",
-        "Parent folder": "",
-        "Folder name": "",
-        "Add Folder": ""
+        "Uid": "UID",
+        "Parent folder": "Dossier parent",
+        "Folder name": "Nom du dossier",
+        "Add Folder": "Ajouter un dossier"
     },
     "Controllers\\Folders": {
-        "Folders": ""
+        "Folders": "Dossiers"
     },
     "Controllers\\Templates": {
-        "Templates": "",
-        "Documents": ""
+        "Templates": "Modèles",
+        "Documents": "Documents"
     }
 }

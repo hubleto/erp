@@ -7,34 +7,34 @@
         "Sales": "Ventes"
     },
     "manifest": {
-        "History": "",
-        "Workflow": "",
-        "Free sales workflow management.": "",
-        "Workflows": "",
-        "Items with not updated step": ""
+        "History": "Historique",
+        "Workflow": "Flux de travail",
+        "Free sales workflow management.": "Gestion gratuite du flux de vente.",
+        "Workflows": "Flux de travail",
+        "Items with not updated step": "Articles dont l'étape n'a pas été mise à jour"
     },
     "Models\\Workflow": {
-        "Name": "",
-        "Order": "",
-        "Description": "",
-        "Group": "",
-        "Show in kanban": ""
+        "Name": "Nom",
+        "Order": "Commande",
+        "Description": "Description",
+        "Group": "Groupe",
+        "Show in kanban": "Afficher en Kanban"
     },
     "Models\\WorkflowStep": {
-        "Workflow": "",
-        "Name": "",
-        "Order": "",
-        "Color": "",
-        "Tag": "",
-        "Probability": "",
-        "Set result of a deal to": ""
+        "Workflow": "Flux de travail",
+        "Name": "Nom",
+        "Order": "Commande",
+        "Color": "Couleur",
+        "Tag": "Étiquette",
+        "Probability": "Probabilité",
+        "Set result of a deal to": "Définir le résultat de l'opportunité sur"
     },
     "Models\\WorkflowHistory": {
-        "Model": "",
-        "Record Id": "",
-        "Changed": "",
-        "User": "",
-        "Workflow": "",
-        "Workflow Step": ""
+        "Model": "Modèle",
+        "Record Id": "ID de l'enregistrement",
+        "Changed": "Modifié",
+        "User": "Utilisateur",
+        "Workflow": "Flux de travail",
+        "Workflow Step": "Étape du flux de travail"
     }
 }

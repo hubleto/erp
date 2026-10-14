@@ -2,8 +2,8 @@
     "manifest": {
         "Campaigns": "Kampagnen",
         "Management of marketing campaigns": "Verwaltung von Marketingkampagnen",
-        "Recipients": "",
-        "Recipient statuses": ""
+        "Recipients": "Empfänger",
+        "Recipient statuses": "Empfängerstatus"
     },
     "Controllers\\Campaigns": {
         "Campaigns": "Kampagnen"
@@ -17,25 +17,25 @@
         "Manager": "Verwalter",
         "Created": "Erstellt am",
         "Add Campaign": "Kampagne hinzufügen",
-        "UID": "",
-        "UTM source": "",
-        "UTM campaign": "",
-        "UTM term": "",
-        "UTM content": "",
-        "Mail account to send email from": "",
-        "Mail template": "",
-        "Reply to": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Approved": "",
-        "Closed": "",
-        "Owner": "",
-        "Lanuched by": "",
-        "Launched": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": "",
-        "Shared with": ""
+        "UID": "UID",
+        "UTM source": "UTM-Quelle",
+        "UTM campaign": "UTM-Kampagne",
+        "UTM term": "UTM-Begriff",
+        "UTM content": "UTM-Inhalt",
+        "Mail account to send email from": "E-Mail-Konto für den E-Mail-Versand",
+        "Mail template": "E-Mail-Vorlage",
+        "Reply to": "Antwort an",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflowschritt",
+        "Approved": "Genehmigt",
+        "Closed": "Geschlossen",
+        "Owner": "Inhaber",
+        "Lanuched by": "Gestartet von",
+        "Launched": "Gestartet",
+        "Open \/ Closed": "Offen / Geschlossen",
+        "Open": "Offen",
+        "All": "Alle",
+        "Shared with": "Geteilt mit"
     },
     "Components\\FormCampaign": {
         "Leads": "Leads",
@@ -43,41 +43,41 @@
         "First create the campaign, then you will be prompted to create leads.": "Erstellen Sie zuerst eine Kampagne, anschließend werden Sie aufgefordert, Leads hinzuzufügen."
     },
     "Models\\CampaignActivity": {
-        "Subject": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "Recurrence": "",
-        "All day": "",
-        "Completed": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Created by": "",
-        "Campaign": ""
+        "Subject": "Betreff",
+        "Location": "Standort",
+        "Online meeting link": "Link zum Online-Meeting",
+        "Description": "Beschreibung",
+        "Activity type": "Aktivitätstyp",
+        "Start date": "Startdatum",
+        "Start time": "Startzeit",
+        "End date": "Enddatum",
+        "End time": "Endzeit",
+        "Recurrence": "Wiederholung",
+        "All day": "Ganztägig",
+        "Completed": "Abgeschlossen",
+        "Long meeting minutes (link to external document)": "Ausführliches Besprechungsprotokoll (Link zu einem externen Dokument)",
+        "Short meeting minutes": "Kurzprotokoll",
+        "Created by": "Erstellt von",
+        "Campaign": "Kampagne"
     },
     "Models\\CampaignTask": {
-        "Campaign": "",
-        "Task": ""
+        "Campaign": "Kampagne",
+        "Task": "Aufgabe"
     },
     "Models\\Recipient": {
-        "Campaign": "",
-        "Contact": "",
-        "Email": "",
-        "First name": "",
-        "Last name": "",
-        "Salutation": "",
-        "Variables": "",
-        "Reference to mail sent": "",
-        "Status": ""
+        "Campaign": "Kampagne",
+        "Contact": "Kontakt",
+        "Email": "E-Mail",
+        "First name": "Vorname",
+        "Last name": "Nachname",
+        "Salutation": "Anrede",
+        "Variables": "Variablen",
+        "Reference to mail sent": "Verweis auf gesendete E-Mail",
+        "Status": "Status"
     },
     "Models\\RecipientStatus": {
-        "Email": "",
-        "Is unsubscribed": "",
-        "Is invalid": ""
+        "Email": "E-Mail",
+        "Is unsubscribed": "Hat sich abgemeldet",
+        "Is invalid": "Ist ungültig"
     }
 }

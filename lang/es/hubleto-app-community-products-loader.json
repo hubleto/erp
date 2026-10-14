@@ -84,7 +84,7 @@
         "Wearable Accessories": "Accesorios para dispositivos vestibles",
         "Watch Bands": "Correas de reloj",
         "Replacement Chargers": "Cargadores de repuesto",
-        "Units": ""
+        "Units": "Unidades"
     },
     "root": {
         "Products": "Productos",
@@ -156,17 +156,17 @@
         "Order: An invoice is generated immediately after a sales order is confirmed. ": "Pedido: la factura se genera inmediatamente después de confirmar una orden de venta. ",
         "Delivery: An invoice is generated immediately after the delivery is completed. ": "Entrega: la factura se genera inmediatamente después de completar la entrega. ",
         "Manual: Invoice is not automatically generated.": "Manual: la factura no se genera automáticamente.",
-        "Base unit": "",
-        "Count (pieces)": "",
-        "Mass (weight)": "",
-        "Volume (capacity)": "",
-        "Length (distance)": "",
-        "Base unit weight": "",
-        "Base unit length": "",
-        "Base unit width": "",
-        "Base unit height": "",
-        "Track lots\/batches": "",
-        "Stock of this product is identified per lot\/batch.": ""
+        "Base unit": "Unidad base",
+        "Count (pieces)": "Cantidad (unidades)",
+        "Mass (weight)": "Masa (peso)",
+        "Volume (capacity)": "Volumen (capacidad)",
+        "Length (distance)": "Longitud (distancia)",
+        "Base unit weight": "Peso de la unidad base",
+        "Base unit length": "Longitud de la unidad base",
+        "Base unit width": "Anchura de la unidad base",
+        "Base unit height": "Altura de la unidad base",
+        "Track lots\/batches": "Hacer seguimiento de lotes",
+        "Stock of this product is identified per lot\/batch.": "Las existencias de este producto se identifican por lote."
     },
     "Models\\Group": {
         "Title": "Título",

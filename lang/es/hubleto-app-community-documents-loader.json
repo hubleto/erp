@@ -20,10 +20,10 @@
         "Vyúčtovacia faktúra s DPH": "Factura de liquidación con IVA",
         "Dobropis s DPH": "Nota de crédito con IVA",
         "Ťarchopis": "Nota de débito",
-        "Document review results": "",
-        "Versions": "",
-        "Reviews": "",
-        "File manager": ""
+        "Document review results": "Resultados de la revisión del documento",
+        "Versions": "Versiones",
+        "Reviews": "Reseñas",
+        "File manager": "Gestor de archivos"
     },
     "Models\\Document": {
         "Document name": "Nombre del documento",
@@ -35,12 +35,12 @@
         "Folder": "Carpeta",
         "Add Document": "Agregar documento",
         "Public": "Público",
-        "Model": "",
-        "RecordId": "",
-        "Created on": "",
-        "Created by": "",
-        "Workflow": "",
-        "Workflow step": ""
+        "Model": "Modelo",
+        "RecordId": "ID del registro",
+        "Created on": "Creado el",
+        "Created by": "Creado por",
+        "Workflow": "Flujo de trabajo",
+        "Workflow step": "Paso del flujo de trabajo"
     },
     "Controllers\\Documents": {
         "Documents": "Documentos"

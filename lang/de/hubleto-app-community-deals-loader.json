@@ -15,25 +15,25 @@
     "manifest": {
         "Deals": "Angebote",
         "Deal management. From deal to purchase.": "Deal Management. Vom Deal zum Kauf.",
-        "Deal Tags": "",
-        "Deal Lost Reasons": "",
-        "Deal warnings": "",
-        "Most valuable deals": "",
-        "Deal value by result": "",
-        "Active deals": "",
-        "Archived deals": "",
-        "Plan": "",
-        "Calendar": ""
+        "Deal Tags": "Tags für Verkaufschancen",
+        "Deal Lost Reasons": "Gründe für verlorene Verkaufschancen",
+        "Deal warnings": "Warnungen zu Verkaufschancen",
+        "Most valuable deals": "Wertvollste Verkaufschancen",
+        "Deal value by result": "Wert der Verkaufschancen nach Ergebnis",
+        "Active deals": "Aktive Verkaufschancen",
+        "Archived deals": "Archivierte Verkaufschancen",
+        "Plan": "Plan",
+        "Calendar": "Kalender"
     },
     "root": {
-        "Deal statuses": "",
+        "Deal statuses": "Verkaufschancenstatus",
         "Deal Tags": "Deal -Tags",
         "Most valuable deals": "Wertvollste Angebote",
         "Deal value by result": "Dealwert nach Ergebnis",
         "Deal Lost Reasons": "Verlorene Gründe",
         "Active deals": "Aktive Angebote",
         "Archived deals": "Archivierte Geschäfte",
-        "Deal warnings": ""
+        "Deal warnings": "Warnungen zu Verkaufschancen"
     },
     "Models\\Deal": {
         "Deal Identifier": "Deal Identifier",
@@ -59,7 +59,7 @@
         "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
         "Add Deal": "Deal hinzufügen",
         "Manager": "Manager",
-        "Customer' order number": "",
+        "Customer' order number": "Bestellnummer des Kunden",
         "Closed": "Geschlossen",
         "Result": "Ergebnis",
         "All": "Alle",
@@ -69,31 +69,31 @@
         "Open \/ Closed": "Offen \/ Geschlossen",
         "Open": "Offen",
         "Active": "Aktiv",
-        "Version": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": "",
-        "Template for quotation": "",
-        "Customer's order number": "",
-        "Shared with": "",
-        "Shared folder (online document storage)": "",
-        "Advertisement": "",
-        "Partner": "",
-        "Web": "",
-        "Cold call": "",
-        "E-mail": "",
-        "Referral": "",
-        "Other": "",
-        "Description\/notes before the list of items": "",
-        "Description\/notes after the list of items": "",
-        "Unknown": "",
-        "Won": "",
-        "Lost": "",
-        "New": "",
-        "Existing": "",
-        "Template": "",
-        "Document": "",
-        "PDF": "",
-        "Next activity": ""
+        "Version": "Version",
+        "Price excl. VAT": "Preis ohne MwSt.",
+        "Price incl. VAT": "Preis inkl. MwSt.",
+        "Template for quotation": "Angebotsvorlage",
+        "Customer's order number": "Bestellnummer des Kunden",
+        "Shared with": "Geteilt mit",
+        "Shared folder (online document storage)": "Freigegebener Ordner (Online-Dokumentenspeicher)",
+        "Advertisement": "Werbung",
+        "Partner": "Partner",
+        "Web": "Web",
+        "Cold call": "Kaltakquise-Anruf",
+        "E-mail": "E-Mail",
+        "Referral": "Empfehlung",
+        "Other": "Sonstige",
+        "Description\/notes before the list of items": "Beschreibung/Anmerkungen vor der Positionsliste",
+        "Description\/notes after the list of items": "Beschreibung/Anmerkungen nach der Positionsliste",
+        "Unknown": "Unbekannt",
+        "Won": "Gewonnen",
+        "Lost": "Verloren",
+        "New": "Neu",
+        "Existing": "Vorhanden",
+        "Template": "Vorlage",
+        "Document": "Dokument",
+        "PDF": "PDF",
+        "Next activity": "Nächste Aktivität"
     },
     "Models\\DealActivity": {
         "Deal": "Handeln",
@@ -108,13 +108,13 @@
         "Completed": "Vollendet",
         "Created by": "Erstellt von",
         "Meeting minutes (link)": "Besprechungsminuten (Link)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Owner": ""
+        "Location": "Standort",
+        "Online meeting link": "Link zum Online-Meeting",
+        "Description": "Beschreibung",
+        "Recurrence": "Wiederholung",
+        "Long meeting minutes (link to external document)": "Ausführliches Besprechungsprotokoll (Link zu einem externen Dokument)",
+        "Short meeting minutes": "Kurzprotokoll",
+        "Owner": "Inhaber"
     },
     "Models\\LostReason": {
         "Lost Reason": "Verlorener Vernunft"
@@ -136,13 +136,13 @@
         "Vat": "Mehrwertsteuer",
         "Discount": "Rabatt",
         "Sum": "Summe",
-        "Order": "",
-        "Description": "",
-        "Sales Price": "",
-        "Price excl. VAT": "",
-        "Price incl. VAT": "",
-        "Title": "",
-        "Position (in the PDF)": ""
+        "Order": "Auftrag",
+        "Description": "Beschreibung",
+        "Sales Price": "Verkaufspreis",
+        "Price excl. VAT": "Preis ohne MwSt.",
+        "Price incl. VAT": "Preis inkl. MwSt.",
+        "Title": "Titel",
+        "Position (in the PDF)": "Position (im PDF)"
     },
     "Models\\DealDocument": {
         "Deal": "Handeln",
@@ -184,15 +184,15 @@
         "Lost": "Verloren"
     },
     "Models\\DealLead": {
-        "Deal": "",
-        "Lead": ""
+        "Deal": "Verkaufschance",
+        "Lead": "Lead"
     },
     "Models\\DealTask": {
-        "Deal": "",
-        "Task": ""
+        "Deal": "Verkaufschance",
+        "Task": "Aufgabe"
     },
     "Calendar": {
-        "Deals": "",
-        "Add new activity linked to deal": ""
+        "Deals": "Verkaufschancen",
+        "Add new activity linked to deal": "Neue Aktivität für eine Verkaufschance hinzufügen"
     }
 }

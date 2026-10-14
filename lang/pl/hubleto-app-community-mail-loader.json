@@ -53,7 +53,7 @@
         "Recipient contains invalid email address.": "Odbiorca zawiera nieprawidłowy adres e-mail.",
         "Mailer Error": "Błąd wysyłania",
         "Failed to create the email.": "Nie udało się utworzyć wiadomości.",
-        "Discussion UID": ""
+        "Discussion UID": "UID dyskusji"
     },
     "Models\\Account": {
         "Name": "Nazwa",
@@ -73,7 +73,7 @@
         "Owner": "Właściciel",
         "Manager": "Menedżer",
         "Add account": "Dodaj konto",
-        "Max. attachment size": ""
+        "Max. attachment size": "Maksymalny rozmiar załącznika"
     },
     "Models\\Mailbox": {
         "Account": "Konto",

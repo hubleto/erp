@@ -84,7 +84,7 @@
         "Wearable Accessories": "Příslušenství k nositelné elektronice",
         "Watch Bands": "Řemínky na hodinky",
         "Replacement Chargers": "Náhradní nabíječky",
-        "Units": ""
+        "Units": "Jednotky"
     },
     "root": {
         "Products": "Produkty",
@@ -165,17 +165,17 @@
         "Order: An invoice is generated immediately after a sales order is confirmed. ": "Objednávka: Faktura se vygeneruje okamžitě po potvrzení prodejní objednávky. ",
         "Delivery: An invoice is generated immediately after the delivery is completed. ": "Dodání: Faktura se vygeneruje okamžitě po dokončení dodávky. ",
         "Manual: Invoice is not automatically generated.": "Ručně: Faktura se nevytváří automaticky.",
-        "Base unit": "",
-        "Count (pieces)": "",
-        "Mass (weight)": "",
-        "Volume (capacity)": "",
-        "Length (distance)": "",
-        "Base unit weight": "",
-        "Base unit length": "",
-        "Base unit width": "",
-        "Base unit height": "",
-        "Track lots\/batches": "",
-        "Stock of this product is identified per lot\/batch.": ""
+        "Base unit": "Základní jednotka",
+        "Count (pieces)": "Počet (kusy)",
+        "Mass (weight)": "Hmotnost",
+        "Volume (capacity)": "Objem (kapacita)",
+        "Length (distance)": "Délka (vzdálenost)",
+        "Base unit weight": "Hmotnost základní jednotky",
+        "Base unit length": "Délka základní jednotky",
+        "Base unit width": "Šířka základní jednotky",
+        "Base unit height": "Výška základní jednotky",
+        "Track lots\/batches": "Sledovat šarže",
+        "Stock of this product is identified per lot\/batch.": "Zásoby tohoto produktu jsou evidovány podle šarží."
     },
     "Models\\Group": {
         "Title": "Název",

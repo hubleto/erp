@@ -1,17 +1,17 @@
 {
     "manifest": {
-        "Usage": "",
-        "Usage statistics": ""
+        "Usage": "Utilizare",
+        "Usage statistics": "Statistici de utilizare"
     },
     "root": {
-        "Usage log": ""
+        "Usage log": "Jurnal de utilizare"
     },
     "Models\\Log": {
-        "Time": "",
-        "IP": "",
-        "Route": "",
-        "Params": "",
-        "Message": "",
-        "User": ""
+        "Time": "Oră",
+        "IP": "IP",
+        "Route": "Rută",
+        "Params": "Parametri",
+        "Message": "Mesaj",
+        "User": "Utilizator"
     }
 }

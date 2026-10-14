@@ -87,7 +87,7 @@
         "Company": "Barva",
         "Workflow": "Kanál",
         "Color": "Barva",
-        "Set result of a deal to": ""
+        "Set result of a deal to": "Nastavit výsledek obchodu na"
     },
     "Models\\Tag": {
         "Name": "Název",

@@ -113,7 +113,7 @@
         "Page Not Found": "Strona nie znaleziona",
         "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Nie znaleźliśmy strony, której szukasz.",
         "Home": "Strona główna",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": ""
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Nie udało się znaleźć strony, której szukasz. Sprawdź swoje uprawnienia lub wróć na stronę główną."
     },
     "Controllers\\AccessForbidden": {
         "Access Forbidden": "Dostęp zabroniony",

@@ -16,8 +16,8 @@
         "Read": "Leído",
         "URL": "URL",
         "No category": "Sin categoría",
-        "Model": "",
-        "RecordId": ""
+        "Model": "Modelo",
+        "RecordId": "ID del registro"
     },
     "Controllers\\Notifications": {
         "Notifications": "Notificaciones"

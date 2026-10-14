@@ -20,10 +20,10 @@
         "Vyúčtovacia faktúra s DPH": "Faktura końcowa z VAT",
         "Dobropis s DPH": "Nota kredytowa z VAT",
         "Ťarchopis": "Nota debetowa",
-        "Document review results": "",
-        "Versions": "",
-        "Reviews": "",
-        "File manager": ""
+        "Document review results": "Wyniki przeglądu dokumentu",
+        "Versions": "Wersje",
+        "Reviews": "Opinie",
+        "File manager": "Menedżer plików"
     },
     "Models\\Document": {
         "Document name": "Nazwa dokumentu",
@@ -34,12 +34,12 @@
         "Folder": "Folder",
         "Add Document": "Dodaj dokument",
         "Public": "Publiczny",
-        "Model": "",
-        "RecordId": "",
-        "Created on": "",
-        "Created by": "",
-        "Workflow": "",
-        "Workflow step": ""
+        "Model": "Model",
+        "RecordId": "ID rekordu",
+        "Created on": "Utworzono dnia",
+        "Created by": "Utworzył",
+        "Workflow": "Przepływ pracy",
+        "Workflow step": "Krok przepływu pracy"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"

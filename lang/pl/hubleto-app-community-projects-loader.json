@@ -11,10 +11,10 @@
         "Sample project #2": "Przykładowy projekt #2",
         "Sample project #2 for demonstration purposes.": "Przykładowy projekt #2 do celów demonstracyjnych.",
         "Create project": "Utwórz projekt",
-        "Assign task to project": "",
-        "Assign project to order": "",
-        "Assign task to milestone": "",
-        "Calendar": ""
+        "Assign task to project": "Przypisz zadanie do projektu",
+        "Assign project to order": "Przypisz projekt do zamówienia",
+        "Assign task to milestone": "Przypisz zadanie do kamienia milowego",
+        "Calendar": "Kalendarz"
     },
     "root": {
         "Projects": "Projekty",
@@ -171,7 +171,7 @@
         "Last progress": "Ostatni postęp",
         "Add milestone": "Dodaj kamień milowy",
         "Project": "Projekt",
-        "Responsible": ""
+        "Responsible": "Osoba odpowiedzialna"
     },
     "Controllers\\Milestones": {
         "Milestones": "Kamienie milowe"
@@ -193,7 +193,7 @@
         "Add new activity linked to Projects": "Dodaj nową aktywność dla projektu"
     },
     "Models\\MilestoneTask": {
-        "Milestone": "",
-        "Task": ""
+        "Milestone": "Kamień milowy",
+        "Task": "Zadanie"
     }
 }

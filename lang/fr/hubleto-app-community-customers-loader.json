@@ -1,74 +1,74 @@
 {
     "manifest": {
-        "Customers": "",
-        "Free customer management and addressbook.": "",
-        "Customer Tags": ""
+        "Customers": "Clients",
+        "Free customer management and addressbook.": "Gestion gratuite des clients et carnet d'adresses.",
+        "Customer Tags": "Étiquettes de clients"
     },
     "Controllers\\Customers": {
-        "Customers": ""
+        "Customers": "Clients"
     },
     "Models\\Customer": {
-        "Name": "",
-        "Identifier": "",
-        "Street Line 1": "",
-        "Street Line 2": "",
-        "Region": "",
-        "City": "",
-        "Postal Code": "",
-        "Country": "",
-        "VAT ID": "",
-        "Customer ID": "",
-        "Tax ID": "",
-        "Notes": "",
-        "Date Created": "",
-        "Active": "",
-        "Owner": "",
-        "Manager": "",
-        "Shared folder (online document storage)": "",
-        "Tags": "",
-        "Link to shared folder (online storage) with related documents": "",
-        "Add Customer": "",
-        "Non-active": "",
-        "Shared with": "",
-        "Columns": "",
-        "Customer": "",
-        "Company ID": "",
-        "Tag": ""
+        "Name": "Nom",
+        "Identifier": "Identifiant",
+        "Street Line 1": "Adresse, ligne 1",
+        "Street Line 2": "Adresse, ligne 2",
+        "Region": "Région",
+        "City": "Ville",
+        "Postal Code": "Code postal",
+        "Country": "Pays",
+        "VAT ID": "Numéro de TVA",
+        "Customer ID": "ID du client",
+        "Tax ID": "Numéro fiscal",
+        "Notes": "Remarques",
+        "Date Created": "Date de création",
+        "Active": "Actif",
+        "Owner": "Propriétaire",
+        "Manager": "Responsable",
+        "Shared folder (online document storage)": "Dossier partagé (stockage de documents en ligne)",
+        "Tags": "Étiquettes",
+        "Link to shared folder (online storage) with related documents": "Lien vers le dossier partagé (stockage en ligne) contenant les documents associés",
+        "Add Customer": "Ajouter un client",
+        "Non-active": "Inactif",
+        "Shared with": "Partagé avec",
+        "Columns": "Colonnes",
+        "Customer": "Client",
+        "Company ID": "Identifiant de l'entreprise",
+        "Tag": "Étiquette"
     },
     "Models\\CustomerDocument": {
-        "Customer": "",
-        "Document": ""
+        "Customer": "Client",
+        "Document": "Document"
     },
     "Models\\CustomerTag": {
-        "Customer": "",
-        "Tag": ""
+        "Customer": "Client",
+        "Tag": "Étiquette"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Nom",
+        "Color": "Couleur"
     },
     "Models\\CustomerActivity": {
-        "Subject": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "Recurrence": "",
-        "All day": "",
-        "Completed": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Created by": "",
-        "Customer": "",
-        "Contact": "",
-        "Owner": ""
+        "Subject": "Objet",
+        "Location": "Emplacement",
+        "Online meeting link": "Lien de réunion en ligne",
+        "Description": "Description",
+        "Activity type": "Type d'activité",
+        "Start date": "Date de début",
+        "Start time": "Heure de début",
+        "End date": "Date de fin",
+        "End time": "Heure de fin",
+        "Recurrence": "Récurrence",
+        "All day": "Toute la journée",
+        "Completed": "Terminé",
+        "Long meeting minutes (link to external document)": "Compte rendu détaillé de réunion (lien vers un document externe)",
+        "Short meeting minutes": "Compte rendu succinct de réunion",
+        "Created by": "Créé par",
+        "Customer": "Client",
+        "Contact": "Contact",
+        "Owner": "Propriétaire"
     },
     "Calendar": {
-        "Customers": "",
-        "Add new activity linked to customer": ""
+        "Customers": "Clients",
+        "Add new activity linked to customer": "Ajouter une activité liée au client"
     }
 }

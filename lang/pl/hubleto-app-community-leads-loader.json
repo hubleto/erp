@@ -22,8 +22,8 @@
         "Solution": "Rozwiązanie",
         "Demand canceled by customer": "Zapytanie anulowane przez klienta",
         "Other": "Inne",
-        "Plan": "",
-        "Calendar": ""
+        "Plan": "Plan",
+        "Calendar": "Kalendarz"
     },
     "Controllers\\Leads": {
         "Sales": "Sprzedaż",
@@ -86,7 +86,7 @@
         "Recurrence": "Powtarzanie",
         "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
         "Short meeting minutes": "Krótki protokół ze spotkania",
-        "Owner": ""
+        "Owner": "Właściciel"
     },
     "Models\\Lead": {
         "Add Lead": "Dodaj lead",
@@ -147,8 +147,8 @@
         "Yes": "Tak",
         "No": "Nie",
         "Lead created": "Lead utworzony",
-        "Shared with": "",
-        "Next activity": ""
+        "Shared with": "Udostępniono użytkownikowi",
+        "Next activity": "Następna aktywność"
     },
     "root": {
         "Lead statuses": "Statusy leadów",
@@ -162,7 +162,7 @@
         "Change Date": "Data zmiany",
         "Lead": "Lead",
         "Description": "Opis",
-        "Date": ""
+        "Date": "Data"
     },
     "Models\\LeadTag": {
         "Lead": "Lead",

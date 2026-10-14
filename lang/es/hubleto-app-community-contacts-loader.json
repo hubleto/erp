@@ -107,10 +107,10 @@
         "Valid": "Válido",
         "Tags": "Etiquetas",
         "Invoicing Contact": "Contacto de facturación",
-        "Primary": "",
-        "Invoicing": "",
-        "Invalid": "",
-        "Tag": ""
+        "Primary": "Principal",
+        "Invoicing": "Facturación",
+        "Invalid": "No válido",
+        "Tag": "Etiqueta"
     },
     "Models\\ContactTag": {
         "Contact": "Contacto",

@@ -20,7 +20,7 @@
         "Demand canceled by customer": "Zapytanie anulowane przez klienta",
         "Other": "Inne",
         "Calendar": "Kalendarz",
-        "Plan": ""
+        "Plan": "Plan"
     },
     "Controllers\\Deals": {
         "Sales": "Sprzedaż",
@@ -108,7 +108,7 @@
         "Deal created": "Deal utworzony",
         "Yes": "Tak",
         "No": "Nie",
-        "Next activity": ""
+        "Next activity": "Następna aktywność"
     },
     "Models\\DealHistory": {
         "Change Date": "Data zmiany",
@@ -142,7 +142,7 @@
         "Recurrence": "Powtarzanie",
         "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
         "Short meeting minutes": "Krótki protokół ze spotkania",
-        "Owner": ""
+        "Owner": "Właściciel"
     },
     "Models\\DealDocument": {
         "Deal": "Deal",
@@ -172,8 +172,8 @@
         "Price excl. VAT": "Cena bez VAT",
         "Price incl. VAT": "Cena z VAT",
         "Sales Price": "Cena sprzedaży",
-        "Title": "",
-        "Position (in the PDF)": ""
+        "Title": "Tytuł",
+        "Position (in the PDF)": "Pozycja (w PDF)"
     },
     "Models\\DealLead": {
         "Deal": "Deal",

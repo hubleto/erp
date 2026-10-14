@@ -2,8 +2,8 @@
     "manifest": {
         "Calendar": "Kalender",
         "Free calendar app.": "Kostenlose Kalender-App.",
-        "Reminders": "",
-        "Share": ""
+        "Reminders": "Erinnerungen",
+        "Share": "Freigeben"
     },
     "root": {
         "Reminders": "Erinnerungen"
@@ -19,13 +19,13 @@
         "Completed": "Vollendet",
         "Created by": "Erstellt von",
         "Meeting minutes (link)": "Besprechungsminuten (Link)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Owner": ""
+        "Location": "Standort",
+        "Online meeting link": "Link zum Online-Meeting",
+        "Description": "Beschreibung",
+        "Recurrence": "Wiederholung",
+        "Long meeting minutes (link to external document)": "Ausführliches Besprechungsprotokoll (Link zu einem externen Dokument)",
+        "Short meeting minutes": "Kurzprotokoll",
+        "Owner": "Inhaber"
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalender"
@@ -48,16 +48,16 @@
         "Let's have a break. You have nothing to do for today.": "Lass uns eine Pause machen. Heute hast du nichts zu tun.",
         "reminders later": "spätere Erinnerungen",
         "Later": "Später",
-        "reminders tomorrow": "",
-        "Tomorrow": ""
+        "reminders tomorrow": "Erinnerungen für morgen",
+        "Tomorrow": "Morgen"
     },
     "Components\\CalendarMain": {
         "Calendars": "Kalender",
         "Ownership": "Eigentümer",
         "All": "Alle",
         "My activities": "Meine Aktivitäten",
-        "Export calendar": "",
-        "New activity": ""
+        "Export calendar": "Kalender exportieren",
+        "New activity": "Neue Aktivität"
     },
     "Components\\FormActivity": {
         "Start": "Anfang",
@@ -73,11 +73,11 @@
         "Calendar: Settings": "Kalender: Einstellungen"
     },
     "Controllers\\Share": {
-        "Share": "",
-        "Calendar: Settings": ""
+        "Share": "Freigeben",
+        "Calendar: Settings": "Kalender: Einstellungen"
     },
     "Calendar": {
-        "Default": "",
-        "Add a simple event": ""
+        "Default": "Standard",
+        "Add a simple event": "Ein einfaches Ereignis hinzufügen"
     }
 }

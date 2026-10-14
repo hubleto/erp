@@ -90,14 +90,14 @@
         "Total price excl. VAT": "Łączna kwota bez VAT",
         "Total price incl. VAT": "Łączna kwota z VAT",
         "Order created": "Zamówienie utworzone",
-        "Purchase \/ Sales": "",
-        "Description\/notes before the list of items": "",
-        "Description\/notes after the list of items": "",
-        "Order expires on": "",
-        "Next invoice expected on": "",
-        "Document": "",
-        "Last item": "",
-        "Next activity": ""
+        "Purchase \/ Sales": "Zakup / sprzedaż",
+        "Description\/notes before the list of items": "Opis/uwagi przed listą pozycji",
+        "Description\/notes after the list of items": "Opis/uwagi po liście pozycji",
+        "Order expires on": "Zamówienie wygasa dnia",
+        "Next invoice expected on": "Następna faktura oczekiwana dnia",
+        "Document": "Dokument",
+        "Last item": "Ostatnia pozycja",
+        "Next activity": "Następna aktywność"
     },
     "Models\\State": {
         "Title": "Nazwa",
@@ -133,12 +133,12 @@
         "Group by": "Grupuj według",
         "Total price excl. VAT": "Łączna kwota bez VAT",
         "Total price incl. VAT": "Łączna kwota z VAT",
-        "Is chargeable": "",
-        "Charged period - start": "",
-        "Charged period - end": "",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Is chargeable": "Podlega opłacie",
+        "Charged period - start": "Początek okresu rozliczeniowego",
+        "Charged period - end": "Koniec okresu rozliczeniowego",
+        "Attachment #1": "Załącznik nr 1",
+        "Attachment #2": "Załącznik nr 2",
+        "Delivery date": "Data dostawy"
     },
     "Models\\History": {
         "Order": "Zamówienie",
@@ -229,7 +229,7 @@
         "Recurrence": "Powtarzanie",
         "Long meeting minutes (link to external document)": "Długi protokół ze spotkania (link do zewnętrznego dokumentu)",
         "Short meeting minutes": "Krótki protokół ze spotkania",
-        "Owner": ""
+        "Owner": "Właściciel"
     },
     "Models\\OrderDeal": {
         "Order": "Zamówienie",

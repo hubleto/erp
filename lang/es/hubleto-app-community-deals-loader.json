@@ -20,7 +20,7 @@
         "Demand canceled by customer": "Demanda cancelada por el cliente",
         "Other": "Otro",
         "Calendar": "Calendario",
-        "Plan": ""
+        "Plan": "Plan"
     },
     "Controllers\\Deals": {
         "Sales": "Ventas",
@@ -101,7 +101,7 @@
         "Yes": "Sí",
         "No": "No",
         "Customer' order number": "Número de pedido del cliente",
-        "Next activity": ""
+        "Next activity": "Próxima actividad"
     },
     "Models\\DealHistory": {
         "Change Date": "Fecha de cambio",
@@ -135,7 +135,7 @@
         "Recurrence": "Recurrencia",
         "Long meeting minutes (link to external document)": "Minuta extendida de la reunión (enlace a documento externo)",
         "Short meeting minutes": "Resumen de la reunión",
-        "Owner": ""
+        "Owner": "Propietario"
     },
     "Models\\DealDocument": {
         "Deal": "Oportunidad",
@@ -207,8 +207,8 @@
         "Price excl. VAT": "Precio sin impuestos",
         "Price incl. VAT": "Precio con impuestos",
         "Sales Price": "Precio de venta",
-        "Title": "",
-        "Position (in the PDF)": ""
+        "Title": "Título",
+        "Position (in the PDF)": "Posición (en el PDF)"
     },
     "Models\\LostReason": {
         "Lost Reason": "Razón de pérdida",

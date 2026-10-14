@@ -1,12 +1,12 @@
 {
     "manifest": {
-        "Help": "",
-        "Help and user guide for Hubleto.": ""
+        "Help": "Ajutor",
+        "Help and user guide for Hubleto.": "Ajutor și ghid de utilizare pentru Hubleto."
     },
     "Controllers\\Help": {
-        "Need help using Hubleto?": "",
-        "Found a bug?": "",
-        "Need help with development?": "",
-        "Just looking around?": ""
+        "Need help using Hubleto?": "Ai nevoie de ajutor pentru utilizarea Hubleto?",
+        "Found a bug?": "Ai găsit o eroare?",
+        "Need help with development?": "Ai nevoie de ajutor pentru dezvoltare?",
+        "Just looking around?": "Doar te uiți?"
     }
 }

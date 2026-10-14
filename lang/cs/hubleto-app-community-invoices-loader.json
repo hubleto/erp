@@ -74,12 +74,12 @@
         "Credit Note": "Dobropis",
         "Debit Note": "Vrubopis",
         "Default invoicing profile is not set.": "Výchozí fakturační profil není nastaven.",
-        "Inbound \/ outbound": "",
-        "Inbound invoice": "",
-        "Outbound invoice": "",
-        "We charge you for...": "",
-        "Additional notes for customer (will be printed on invoice)": "",
-        "Document": ""
+        "Inbound \/ outbound": "Příchozí / odchozí",
+        "Inbound invoice": "Příchozí faktura",
+        "Outbound invoice": "Odchozí faktura",
+        "We charge you for...": "Účtujeme vám za...",
+        "Additional notes for customer (will be printed on invoice)": "Další poznámky pro zákazníka (budou vytištěny na faktuře)",
+        "Document": "Dokument"
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Celkem bez DPH",
@@ -188,9 +188,9 @@
         "Add invoice item": "Přidat položku faktury",
         "Total price excl. VAT": "Celková cena bez DPH",
         "Total price incl. VAT": "Celková cena s DPH",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Attachment #1": "Příloha č. 1",
+        "Attachment #2": "Příloha č. 2",
+        "Delivery date": "Datum dodání"
     },
     "Controllers\\Invoices": {
         "Invoices": "Faktury"
@@ -242,7 +242,7 @@
         "Mail to send warning about due invoice - body": "E-mail upozornění o splatné faktuře - obsah",
         "Add invoice profile": "Přidat profil faktury",
         "Invoice profile": "Fakturační profil",
-        "Bank (SWIFT\/BIC)": ""
+        "Bank (SWIFT\/BIC)": "Banka (SWIFT/BIC)"
     },
     "Models\\PaymentMethod": {
         "Name": "Název",

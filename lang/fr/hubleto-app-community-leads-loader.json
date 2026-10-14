@@ -13,117 +13,117 @@
         "Archive": "Archive"
     },
     "manifest": {
-        "Leads": "",
-        "Management of leads, cold contacts. Convert leads to deals.": "",
-        "Lead Levels": "",
-        "Lead Tags": "",
-        "Lead Lost Reasons": "",
-        "Active leads": "",
-        "Archived leads": "",
-        "Lead value by score": "",
-        "Lead warnings": "",
-        "Plan": "",
-        "Calendar": ""
+        "Leads": "Prospects",
+        "Management of leads, cold contacts. Convert leads to deals.": "Gestion des prospects et des contacts à froid. Convertissez les prospects en opportunités.",
+        "Lead Levels": "Niveaux de prospects",
+        "Lead Tags": "Étiquettes de prospects",
+        "Lead Lost Reasons": "Motifs de perte des prospects",
+        "Active leads": "Prospects actifs",
+        "Archived leads": "Prospects archivés",
+        "Lead value by score": "Valeur des prospects par score",
+        "Lead warnings": "Alertes sur les prospects",
+        "Plan": "Forfait",
+        "Calendar": "Calendrier"
     },
     "Models\\Lead": {
-        "Specific subject (if any)": "",
-        "Customer": "",
-        "Email": "",
-        "Phone number": "",
-        "Contact": "",
-        "Price": "",
-        "Currency": "",
-        "Score": "",
-        "Expected close date": "",
-        "Owner": "",
-        "Manager": "",
-        "Team": "",
-        "Created": "",
-        "Reason for Lost": "",
-        "Notes": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Source channel": "",
-        "Closed": "",
-        "Tags": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": "",
-        "Add lead": "",
-        "Add Lead": "",
-        "Phone": "",
-        "Advertisement": "",
-        "Partner": "",
-        "Web": "",
-        "Cold call": "",
-        "E-mail": "",
-        "Referral": "",
-        "Other": "",
-        "Online document folder": "",
-        "Profile link #1": "",
-        "Profile link #2": "",
-        "Profile link #3": "",
-        "Title": "",
-        "Shared with": "",
-        "Next activity": ""
+        "Specific subject (if any)": "Objet spécifique (le cas échéant)",
+        "Customer": "Client",
+        "Email": "E-mail",
+        "Phone number": "Numéro de téléphone",
+        "Contact": "Contact",
+        "Price": "Prix",
+        "Currency": "Devise",
+        "Score": "Score",
+        "Expected close date": "Date de clôture prévue",
+        "Owner": "Propriétaire",
+        "Manager": "Responsable",
+        "Team": "Équipe",
+        "Created": "Créé",
+        "Reason for Lost": "Motif de perte",
+        "Notes": "Remarques",
+        "Workflow": "Flux de travail",
+        "Workflow step": "Étape du flux de travail",
+        "Source channel": "Canal source",
+        "Closed": "Fermé",
+        "Tags": "Étiquettes",
+        "Open \/ Closed": "Ouvert / Fermé",
+        "Open": "Ouvert",
+        "All": "Tout",
+        "Add lead": "Ajouter un prospect",
+        "Add Lead": "Ajouter un prospect",
+        "Phone": "Téléphone",
+        "Advertisement": "Publicité",
+        "Partner": "Partenaire",
+        "Web": "Web",
+        "Cold call": "Appel à froid",
+        "E-mail": "E-mail",
+        "Referral": "Recommandation",
+        "Other": "Autre",
+        "Online document folder": "Dossier de documents en ligne",
+        "Profile link #1": "Lien de profil n° 1",
+        "Profile link #2": "Lien de profil n° 2",
+        "Profile link #3": "Lien de profil n° 3",
+        "Title": "Titre",
+        "Shared with": "Partagé avec",
+        "Next activity": "Prochaine activité"
     },
     "Models\\LostReason": {
-        "Lost Reason": ""
+        "Lost Reason": "Motif de perte"
     },
     "Models\\LeadHistory": {
-        "Change Date": "",
-        "Lead": "",
-        "Description": "",
-        "Date": ""
+        "Change Date": "Modifier la date",
+        "Lead": "Prospect",
+        "Description": "Description",
+        "Date": "Date"
     },
     "Models\\LeadTag": {
-        "Lead": "",
-        "Tag": ""
+        "Lead": "Prospect",
+        "Tag": "Étiquette"
     },
     "Models\\LeadActivity": {
-        "Subject": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "Recurrence": "",
-        "All day": "",
-        "Completed": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Created by": "",
-        "Lead": "",
-        "Contact": "",
-        "Owner": ""
+        "Subject": "Objet",
+        "Location": "Emplacement",
+        "Online meeting link": "Lien de réunion en ligne",
+        "Description": "Description",
+        "Activity type": "Type d'activité",
+        "Start date": "Date de début",
+        "Start time": "Heure de début",
+        "End date": "Date de fin",
+        "End time": "Heure de fin",
+        "Recurrence": "Récurrence",
+        "All day": "Toute la journée",
+        "Completed": "Terminé",
+        "Long meeting minutes (link to external document)": "Compte rendu détaillé de réunion (lien vers un document externe)",
+        "Short meeting minutes": "Compte rendu succinct de réunion",
+        "Created by": "Créé par",
+        "Lead": "Prospect",
+        "Contact": "Contact",
+        "Owner": "Propriétaire"
     },
     "Models\\LeadDocument": {
-        "Lead": "",
-        "Document": ""
+        "Lead": "Prospect",
+        "Document": "Document"
     },
     "Models\\LeadCampaign": {
-        "Lead": "",
-        "Campaign": ""
+        "Lead": "Prospect",
+        "Campaign": "Campagne"
     },
     "Models\\LeadTask": {
-        "Lead": "",
-        "Task": ""
+        "Lead": "Prospect",
+        "Task": "Tâche"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Nom",
+        "Color": "Couleur"
     },
     "Controllers\\Boards\\LeadWarnings": {
-        "Open leads without future plan": ""
+        "Open leads without future plan": "Prospects ouverts sans plan futur"
     },
     "Controllers\\Leads": {
-        "Leads": ""
+        "Leads": "Prospects"
     },
     "Calendar": {
-        "Leads": "",
-        "Add new activity linked to lead": ""
+        "Leads": "Prospects",
+        "Add new activity linked to lead": "Ajouter une activité liée au prospect"
     }
 }

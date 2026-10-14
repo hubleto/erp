@@ -31,9 +31,9 @@
         "Identifier": "Identyfikator",
         "Non-active": "Nieaktywny",
         "Shared with": "Udostępnione dla",
-        "Customer": "",
-        "Company ID": "",
-        "Tag": ""
+        "Customer": "Klient",
+        "Company ID": "NIP",
+        "Tag": "Tag"
     },
     "Controllers\\Customers": {
         "Customers": "Klienci"
@@ -62,7 +62,7 @@
         "Recurrence": "Powtarzanie",
         "Long meeting minutes (link to external document)": "Protokół ze spotkania (link do zewnętrznego dokumentu)",
         "Short meeting minutes": "Skrócony protokół",
-        "Owner": ""
+        "Owner": "Właściciel"
     },
     "Models\\CustomerDocument": {
         "Customer": "Klient",

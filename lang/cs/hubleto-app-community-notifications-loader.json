@@ -16,8 +16,8 @@
         "Read": "Přečteno",
         "URL": "URL",
         "No category": "Bez kategorie",
-        "Model": "",
-        "RecordId": ""
+        "Model": "Model",
+        "RecordId": "ID záznamu"
     },
     "Controllers\\Notifications": {
         "Notifications": "Oznámení"

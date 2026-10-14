@@ -1,18 +1,18 @@
 {
     "Desktop": {
-        "Premium": "",
-        "Manage your user account": "",
-        "Manage cloud account": "",
-        "Sign out": ""
+        "Premium": "Premium",
+        "Manage your user account": "Gestionează contul de utilizator",
+        "Manage cloud account": "Gestionează contul Cloud",
+        "Sign out": "Deconectare"
     },
     "Model": {
-        "Export to CSV": "",
-        "Import from CSV": "",
-        "Columns": ""
+        "Export to CSV": "Exportă în CSV",
+        "Import from CSV": "Importă din CSV",
+        "Columns": "Coloane"
     },
     "Controllers\\NotFound": {
-        "Page Not Found": "",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
-        "Home": ""
+        "Page Not Found": "Pagina nu a fost găsită",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Ne pare rău, pagina căutată nu a fost găsită. Verificați permisiunile sau reveniți la pagina principală.",
+        "Home": "Acasă"
     }
 }

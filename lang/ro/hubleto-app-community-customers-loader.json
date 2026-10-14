@@ -1,78 +1,78 @@
 {
     "manifest": {
-        "Customers": "",
-        "Free customer management and addressbook.": "",
-        "Customer Tags": ""
+        "Customers": "Clienți",
+        "Free customer management and addressbook.": "Gestionare gratuită a clienților și agendă de contacte.",
+        "Customer Tags": "Etichete de client"
     },
     "root": {
-        "Customer Tags": ""
+        "Customer Tags": "Etichete de client"
     },
     "Models\\CustomerActivity": {
-        "Subject": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Meeting minutes (link)": "",
-        "Created by": "",
-        "Customer": "",
-        "Contact": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Owner": ""
+        "Subject": "Subiect",
+        "Activity type": "Tip de activitate",
+        "Start date": "Data de început",
+        "Start time": "Ora de început",
+        "End date": "Data de sfârșit",
+        "End time": "Ora de sfârșit",
+        "All day": "Toată ziua",
+        "Completed": "Finalizat",
+        "Meeting minutes (link)": "Proces-verbal al întâlnirii (link)",
+        "Created by": "Creat de",
+        "Customer": "Client",
+        "Contact": "Contact",
+        "Location": "Locație",
+        "Online meeting link": "Link pentru întâlnire online",
+        "Description": "Descriere",
+        "Recurrence": "Recurență",
+        "Long meeting minutes (link to external document)": "Proces-verbal detaliat al întâlnirii (link către un document extern)",
+        "Short meeting minutes": "Proces-verbal scurt al întâlnirii",
+        "Owner": "Proprietar"
     },
     "Models\\Customer": {
-        "Name": "",
-        "Street Line 1": "",
-        "Street Line 2": "",
-        "Region": "",
-        "City": "",
-        "Postal Code": "",
-        "Country": "",
-        "VAT ID": "",
-        "Customer ID": "",
-        "Tax ID": "",
-        "Notes": "",
-        "Date Created": "",
-        "Active": "",
-        "Owner": "",
-        "Identifier": "",
-        "Manager": "",
-        "Shared folder (online document storage)": "",
-        "Tags": "",
-        "Link to shared folder (online storage) with related documents": "",
-        "Add Customer": "",
-        "Non-active": "",
-        "Shared with": "",
-        "Columns": "",
-        "Customer": "",
-        "Company ID": "",
-        "Tag": ""
+        "Name": "Nume",
+        "Street Line 1": "Stradă, rândul 1",
+        "Street Line 2": "Stradă, rândul 2",
+        "Region": "Regiune",
+        "City": "Oraș",
+        "Postal Code": "Cod poștal",
+        "Country": "Țară",
+        "VAT ID": "Cod TVA",
+        "Customer ID": "ID client",
+        "Tax ID": "Cod fiscal",
+        "Notes": "Note",
+        "Date Created": "Data creării",
+        "Active": "Activ",
+        "Owner": "Proprietar",
+        "Identifier": "Identificator",
+        "Manager": "Manager",
+        "Shared folder (online document storage)": "Dosar partajat (stocare online de documente)",
+        "Tags": "Etichete",
+        "Link to shared folder (online storage) with related documents": "Link către dosarul partajat (stocare online) cu documentele aferente",
+        "Add Customer": "Adaugă client",
+        "Non-active": "Inactiv",
+        "Shared with": "Partajat cu",
+        "Columns": "Coloane",
+        "Customer": "Client",
+        "Company ID": "ID companie",
+        "Tag": "Etichetă"
     },
     "Models\\CustomerDocument": {
-        "Customer": "",
-        "Document": ""
+        "Customer": "Client",
+        "Document": "Document"
     },
     "Models\\CustomerTag": {
-        "Customer": "",
-        "Tag": ""
+        "Customer": "Client",
+        "Tag": "Etichetă"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Nume",
+        "Color": "Culoare"
     },
     "Controllers\\Customers": {
-        "Customers": ""
+        "Customers": "Clienți"
     },
     "Calendar": {
-        "Customers": "",
-        "Add new activity linked to customer": ""
+        "Customers": "Clienți",
+        "Add new activity linked to customer": "Adaugă o activitate nouă asociată clientului"
     }
 }

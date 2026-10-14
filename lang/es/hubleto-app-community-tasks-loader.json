@@ -4,7 +4,7 @@
         "Task management app": "Aplicación de gestión de tareas",
         "Todo": "Por hacer",
         "My recent tasks": "Mis tareas recientes",
-        "Calendar": ""
+        "Calendar": "Calendario"
     },
     "Models\\Task": {
         "Identifier": "Identificador",
@@ -39,7 +39,7 @@
         "Leave empty to generate automatically.": "Deja en blanco para generar automáticamente.",
         "Shared folder (online document storage)": "Carpeta compartida (almacenamiento de documentos en línea)",
         "Status": "Estado",
-        "Description (Scope of Work)": ""
+        "Description (Scope of Work)": "Descripción (alcance del trabajo)"
     },
     "Models\\Todo": {
         "To do": "Por hacer",
@@ -81,7 +81,7 @@
     "Calendar": {
         "Tasks": "Tareas",
         "Add new activity linked to Tasks": "Agregar nueva actividad vinculada a las tareas",
-        "Tasks and todo": "",
-        "TASK": ""
+        "Tasks and todo": "Tareas y pendientes",
+        "TASK": "TAREA"
     }
 }

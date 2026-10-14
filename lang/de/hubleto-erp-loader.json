@@ -12,7 +12,7 @@
         "New record": "Neuer Eintrag"
     },
     "Components\\Input": {
-        "Upload file": ""
+        "Upload file": "Datei hochladen"
     },
     "Components\\Table": {
         "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
@@ -23,18 +23,18 @@
         "No data.": "Keine Daten"
     },
     "Desktop": {
-        "Upgrade to Premium": "",
-        "Your messages": "",
-        "Help center": "",
-        "Search knowledgebase...": "",
-        "Browse knowledgebase": "",
-        "Hot tips & tricks": "",
-        "No hot tips for this screen": "",
-        "Need more help?": "",
-        "Contact us": "",
-        "Manage your account": "",
+        "Upgrade to Premium": "Auf Premium upgraden",
+        "Your messages": "Ihre Nachrichten",
+        "Help center": "Hilfe-Center",
+        "Search knowledgebase...": "Wissensdatenbank durchsuchen...",
+        "Browse knowledgebase": "Wissensdatenbank durchsuchen",
+        "Hot tips & tricks": "Tipps und Tricks",
+        "No hot tips for this screen": "Für diesen Bildschirm gibt es keine Tipps.",
+        "Need more help?": "Benötigen Sie weitere Hilfe?",
+        "Contact us": "Kontaktieren Sie uns",
+        "Manage your account": "Konto verwalten",
         "Sign out": "Abmelden",
-        "Get premium": "",
+        "Get premium": "Premium erhalten",
         "Premium": "Prämie",
         "Manage your user account": "Verwalten Sie Ihr Benutzerkonto",
         "Manage cloud account": "Cloud -Konto verwalten",
@@ -42,13 +42,13 @@
         "Personal": "Persönlich"
     },
     "Model": {
-        "Export to CSV": "",
-        "Import from CSV": "",
-        "Columns": ""
+        "Export to CSV": "Als CSV exportieren",
+        "Import from CSV": "Aus CSV importieren",
+        "Columns": "Spalten"
     },
     "Controllers\\NotFound": {
-        "Page Not Found": "",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "",
-        "Home": ""
+        "Page Not Found": "Seite nicht gefunden",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Die gesuchte Seite wurde leider nicht gefunden. Bitte überprüfen Sie Ihre Berechtigungen oder kehren Sie zur Startseite zurück.",
+        "Home": "Startseite"
     }
 }

@@ -1,99 +1,99 @@
 {
     "Models\\User": {
-        "First name": "",
-        "Last name": "",
-        "Nick": "",
-        "Email": "",
-        "Language": "",
-        "Default company": ""
+        "First name": "Prenume",
+        "Last name": "Nume de familie",
+        "Nick": "Poreclă",
+        "Email": "E-mail",
+        "Language": "Limbă",
+        "Default company": "Companie implicită"
     },
     "Models\\UserRole": {
-        "Role": "",
-        "Grant all permissions (administrator role)": "",
-        "Description": "",
-        "Is default role (cannot be modified)": ""
+        "Role": "Rol",
+        "Grant all permissions (administrator role)": "Acordă toate permisiunile (rol de administrator)",
+        "Description": "Descriere",
+        "Is default role (cannot be modified)": "Este rolul implicit (nu poate fi modificat)"
     },
     "Models\\UserHasRole": {
-        "User": "",
-        "Role": ""
+        "User": "Utilizator",
+        "Role": "Rol"
     },
     "Models\\RolePermission": {
-        "Permission": "",
-        "Role": ""
+        "Permission": "Permisiune",
+        "Role": "Rol"
     },
     "manifest": {
-        "Settings": "",
-        "Settings and control panel for your Hubleto.": "",
-        "Settings and tools": "",
-        "Users": "",
-        "Roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Activity types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Platform config": "",
-        "Sidebar": "",
-        "Teams": "",
-        "Log viewer": ""
+        "Settings": "Setări",
+        "Settings and control panel for your Hubleto.": "Setări și panou de control pentru Hubleto.",
+        "Settings and tools": "Setări și instrumente",
+        "Users": "Utilizatori",
+        "Roles": "Roluri",
+        "Your companies": "Companiile tale",
+        "General settings": "Setări generale",
+        "Permissions list": "Lista permisiunilor",
+        "Role permissions": "Permisiuni de rol",
+        "Activity types": "Tipuri de activități",
+        "Countries": "Țări",
+        "Currencies": "Monede",
+        "Platform config": "Configurația platformei",
+        "Sidebar": "Bară laterală",
+        "Teams": "Echipe",
+        "Log viewer": "Vizualizator de jurnale"
     },
     "root": {
-        "Users": "",
-        "Roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Activity types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Invoice profiles": "",
-        "Platform config": "",
-        "Sidebar": "",
-        "Teams": ""
+        "Users": "Utilizatori",
+        "Roles": "Roluri",
+        "Your companies": "Companiile tale",
+        "General settings": "Setări generale",
+        "Permissions list": "Lista permisiunilor",
+        "Role permissions": "Permisiuni de rol",
+        "Activity types": "Tipuri de activități",
+        "Countries": "Țări",
+        "Currencies": "Monede",
+        "Invoice profiles": "Profiluri de facturare",
+        "Platform config": "Configurația platformei",
+        "Sidebar": "Bară laterală",
+        "Teams": "Echipe"
     },
     "Models\\ActivityType": {
-        "Type": "",
-        "Color": "",
-        "Show in calendar": "",
-        "Icon": ""
+        "Type": "Tip",
+        "Color": "Culoare",
+        "Show in calendar": "Afișează în calendar",
+        "Icon": "Pictogramă"
     },
     "Models\\Country": {
-        "Country": "",
-        "Code": ""
+        "Country": "Țară",
+        "Code": "Cod"
     },
     "Models\\Company": {
-        "Company": "",
-        "Tax ID": "",
-        "VAT ID": "",
-        "Street, line 1": "",
-        "Street, line 2": "",
-        "ZIP": "",
-        "City": "",
-        "Country": "",
-        "Registration ID": "",
-        "Business register": "",
-        "Logo": "",
-        "Brand color - primary": "",
-        "Brand color - secondary": "",
-        "Region": ""
+        "Company": "Companie",
+        "Tax ID": "Cod fiscal",
+        "VAT ID": "Cod TVA",
+        "Street, line 1": "Stradă, rândul 1",
+        "Street, line 2": "Stradă, rândul 2",
+        "ZIP": "Cod poștal",
+        "City": "Oraș",
+        "Country": "Țară",
+        "Registration ID": "Număr de înregistrare",
+        "Business register": "Registrul comerțului",
+        "Logo": "Logo",
+        "Brand color - primary": "Culoarea principală a mărcii",
+        "Brand color - secondary": "Culoarea secundară a mărcii",
+        "Region": "Regiune"
     },
     "Models\\Currency": {
-        "Currency": "",
-        "Code": "",
-        "Symbol": ""
+        "Currency": "Monedă",
+        "Code": "Cod",
+        "Symbol": "Simbol"
     },
     "Models\\Team": {
-        "Team name": "",
-        "Team color": "",
-        "Description": "",
-        "Manager": ""
+        "Team name": "Numele echipei",
+        "Team color": "Culoarea echipei",
+        "Description": "Descriere",
+        "Manager": "Manager"
     },
     "Models\\Setting": {
-        "Key": "",
-        "Value": "",
-        "Only for user": ""
+        "Key": "Cheie",
+        "Value": "Valoare",
+        "Only for user": "Doar pentru utilizator"
     }
 }

@@ -25,7 +25,7 @@
         "Recurrence": "Opakování",
         "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
         "Short meeting minutes": "Stručný zápis ze schůzky",
-        "Owner": ""
+        "Owner": "Vlastník"
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Zobrazit podrobnosti",

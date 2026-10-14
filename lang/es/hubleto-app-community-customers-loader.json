@@ -32,9 +32,9 @@
         "Non-active": "Inactivo",
         "Shared with": "Compartido con",
         "Columns": "Columnas",
-        "Customer": "",
-        "Company ID": "",
-        "Tag": ""
+        "Customer": "Cliente",
+        "Company ID": "CIF",
+        "Tag": "Etiqueta"
     },
     "Controllers\\Customers": {
         "Customers": "Clientes"
@@ -63,7 +63,7 @@
         "Recurrence": "Recurrencia",
         "Long meeting minutes (link to external document)": "Minutas de la reunión (enlace a documento externo)",
         "Short meeting minutes": "Resumen de la reunión",
-        "Owner": ""
+        "Owner": "Propietario"
     },
     "Models\\CustomerDocument": {
         "Customer": "Cliente",

@@ -25,7 +25,7 @@
         "Recurrence": "Recurrencia",
         "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
         "Short meeting minutes": "Minutas cortas de la reunión",
-        "Owner": ""
+        "Owner": "Propietario"
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Abrir detalles del evento",

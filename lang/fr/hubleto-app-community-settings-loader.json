@@ -107,70 +107,70 @@
         "Settings": "Paramètres"
     },
     "controllers.users": {
-        "Settings": "",
-        "Users": ""
+        "Settings": "Paramètres",
+        "Users": "Utilisateurs"
     },
     "Models\\RolePermission": {
-        "Permission": "",
-        "Role": ""
+        "Permission": "Autorisation",
+        "Role": "Rôle"
     },
     "manifest": {
-        "Settings": "",
-        "Settings and control panel for your Hubleto.": "",
-        "Users": "",
-        "Roles": "",
-        "Your companies": "",
-        "General settings": "",
-        "Permissions list": "",
-        "Role permissions": "",
-        "Activity types": "",
-        "Countries": "",
-        "Currencies": "",
-        "Platform config": "",
-        "Sidebar": "",
-        "Teams": "",
-        "Log viewer": ""
+        "Settings": "Paramètres",
+        "Settings and control panel for your Hubleto.": "Paramètres et panneau de contrôle de votre Hubleto.",
+        "Users": "Utilisateurs",
+        "Roles": "Rôles",
+        "Your companies": "Vos entreprises",
+        "General settings": "Paramètres généraux",
+        "Permissions list": "Liste des autorisations",
+        "Role permissions": "Autorisations des rôles",
+        "Activity types": "Types d'activité",
+        "Countries": "Pays",
+        "Currencies": "Devises",
+        "Platform config": "Configuration de la plateforme",
+        "Sidebar": "Barre latérale",
+        "Teams": "Équipes",
+        "Log viewer": "Visionneuse de journaux"
     },
     "Models\\Country": {
-        "Country": "",
-        "Code": ""
+        "Country": "Pays",
+        "Code": "Code"
     },
     "Models\\Currency": {
-        "Currency": "",
-        "Code": "",
-        "Symbol": ""
+        "Currency": "Devise",
+        "Code": "Code",
+        "Symbol": "Symbole"
     },
     "Models\\Team": {
-        "Team name": "",
-        "Team color": "",
-        "Description": "",
-        "Manager": ""
+        "Team name": "Nom de l'équipe",
+        "Team color": "Couleur de l'équipe",
+        "Description": "Description",
+        "Manager": "Responsable"
     },
     "Models\\Company": {
-        "Company": "",
-        "Registration ID": "",
-        "Business register": "",
-        "Tax ID": "",
-        "VAT ID": "",
-        "Street, line 1": "",
-        "Street, line 2": "",
-        "ZIP": "",
-        "City": "",
-        "Country": "",
-        "Logo": "",
-        "Brand color - primary": "",
-        "Brand color - secondary": "",
-        "Region": ""
+        "Company": "Entreprise",
+        "Registration ID": "Numéro d'enregistrement",
+        "Business register": "Registre du commerce",
+        "Tax ID": "Numéro fiscal",
+        "VAT ID": "Numéro de TVA",
+        "Street, line 1": "Adresse, ligne 1",
+        "Street, line 2": "Adresse, ligne 2",
+        "ZIP": "Code postal",
+        "City": "Ville",
+        "Country": "Pays",
+        "Logo": "Logo",
+        "Brand color - primary": "Couleur principale de la marque",
+        "Brand color - secondary": "Couleur secondaire de la marque",
+        "Region": "Région"
     },
     "Models\\ActivityType": {
-        "Type": "",
-        "Color": "",
-        "Show in calendar": "",
-        "Icon": ""
+        "Type": "Type",
+        "Color": "Couleur",
+        "Show in calendar": "Afficher dans le calendrier",
+        "Icon": "Icône"
     },
     "Models\\Setting": {
-        "Key": "",
-        "Value": "",
-        "Only for user": ""
+        "Key": "Clé",
+        "Value": "Valeur",
+        "Only for user": "Uniquement pour l'utilisateur"
     }
 }

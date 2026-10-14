@@ -1,57 +1,57 @@
 {
     "manifest": {
-        "Documents": "",
-        "Free document management.": "",
-        "Browse": "",
-        "Show as list": "",
-        "Manage folders": "",
-        "Templates": "",
-        "Document review results": "",
-        "Versions": "",
-        "Reviews": "",
-        "File manager": ""
+        "Documents": "Documente",
+        "Free document management.": "Gestionare gratuită a documentelor.",
+        "Browse": "Răsfoiește",
+        "Show as list": "Afișează ca listă",
+        "Manage folders": "Gestionează dosarele",
+        "Templates": "Șabloane",
+        "Document review results": "Rezultatele revizuirii documentului",
+        "Versions": "Versiuni",
+        "Reviews": "Recenzii",
+        "File manager": "Manager de fișiere"
     },
     "root": {
-        "Browse": "",
-        "List": ""
+        "Browse": "Răsfoiește",
+        "List": "Listă"
     },
     "Models\\Document": {
-        "Uid": "",
-        "Folder": "",
-        "Document name": "",
-        "File": "",
-        "File Link": "",
-        "Origin Link": "",
-        "Add Document": "",
-        "Model": "",
-        "RecordId": "",
-        "Created on": "",
-        "Created by": "",
-        "Workflow": "",
-        "Workflow step": ""
+        "Uid": "UID",
+        "Folder": "Dosar",
+        "Document name": "Numele documentului",
+        "File": "Fișier",
+        "File Link": "Link către fișier",
+        "Origin Link": "Link de origine",
+        "Add Document": "Adaugă document",
+        "Model": "Model",
+        "RecordId": "ID înregistrare",
+        "Created on": "Creat la",
+        "Created by": "Creat de",
+        "Workflow": "Flux de lucru",
+        "Workflow step": "Etapă a fluxului de lucru"
     },
     "Models\\Template": {
-        "Name": "",
-        "Used For": "",
-        "Content": "",
-        "Notes": "",
-        "Add template": ""
+        "Name": "Nume",
+        "Used For": "Utilizat pentru",
+        "Content": "Conținut",
+        "Notes": "Note",
+        "Add template": "Adaugă șablon"
     },
     "Controllers\\Browse": {
-        "Browse": "",
-        "Documents": ""
+        "Browse": "Răsfoiește",
+        "Documents": "Documente"
     },
     "Models\\Folder": {
-        "Uid": "",
-        "Parent folder": "",
-        "Folder name": "",
-        "Add Folder": ""
+        "Uid": "UID",
+        "Parent folder": "Dosar părinte",
+        "Folder name": "Numele dosarului",
+        "Add Folder": "Adaugă dosar"
     },
     "Controllers\\Folders": {
-        "Folders": ""
+        "Folders": "Dosare"
     },
     "Controllers\\Templates": {
-        "Templates": "",
-        "Documents": ""
+        "Templates": "Șabloane",
+        "Documents": "Documente"
     }
 }

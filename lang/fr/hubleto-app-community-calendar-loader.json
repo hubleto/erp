@@ -6,58 +6,58 @@
         "Calendar": "Calendrier"
     },
     "manifest": {
-        "Calendar": "",
-        "Free calendar app.": "",
-        "Reminders": "",
-        "Share": ""
+        "Calendar": "Calendrier",
+        "Free calendar app.": "Application de calendrier gratuite.",
+        "Reminders": "Rappels",
+        "Share": "Partager"
     },
     "Models\\Activity": {
-        "Subject": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "Recurrence": "",
-        "All day": "",
-        "Completed": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Created by": "",
-        "Owner": ""
+        "Subject": "Objet",
+        "Location": "Emplacement",
+        "Online meeting link": "Lien de réunion en ligne",
+        "Description": "Description",
+        "Activity type": "Type d'activité",
+        "Start date": "Date de début",
+        "Start time": "Heure de début",
+        "End date": "Date de fin",
+        "End time": "Heure de fin",
+        "Recurrence": "Récurrence",
+        "All day": "Toute la journée",
+        "Completed": "Terminé",
+        "Long meeting minutes (link to external document)": "Compte rendu détaillé de réunion (lien vers un document externe)",
+        "Short meeting minutes": "Compte rendu succinct de réunion",
+        "Created by": "Créé par",
+        "Owner": "Propriétaire"
     },
     "Controllers\\Boards\\Reminders": {
-        "reminders later": "",
-        "Later": "",
-        "reminders tomorrow": "",
-        "Tomorrow": ""
+        "reminders later": "rappels ultérieurs",
+        "Later": "Plus tard",
+        "reminders tomorrow": "rappels de demain",
+        "Tomorrow": "Demain"
     },
     "Components\\CalendarMain": {
-        "New activity": "",
-        "Calendars": "",
-        "Ownership": "",
-        "All": "",
-        "My activities": "",
-        "Export calendar": ""
+        "New activity": "Nouvelle activité",
+        "Calendars": "Calendriers",
+        "Ownership": "Propriété",
+        "All": "Tout",
+        "My activities": "Mes activités",
+        "Export calendar": "Exporter le calendrier"
     },
     "Controllers\\Share": {
-        "Share": "",
-        "Calendar: Settings": ""
+        "Share": "Partager",
+        "Calendar: Settings": "Calendrier : paramètres"
     },
     "Models\\SharedCalendar": {
-        "Created by": "",
-        "Calendar ID": "",
-        "Share key": "",
-        "Display details": "",
-        "Enabled": "",
-        "Date from": "",
-        "Date to": ""
+        "Created by": "Créé par",
+        "Calendar ID": "ID du calendrier",
+        "Share key": "Clé de partage",
+        "Display details": "Afficher les détails",
+        "Enabled": "Activé",
+        "Date from": "Date de début",
+        "Date to": "Date de fin"
     },
     "Calendar": {
-        "Default": "",
-        "Add a simple event": ""
+        "Default": "Par défaut",
+        "Add a simple event": "Ajouter un événement simple"
     }
 }

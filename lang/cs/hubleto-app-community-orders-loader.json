@@ -90,14 +90,14 @@
         "Total price excl. VAT": "Celková částka bez DPH",
         "Total price incl. VAT": "Celková částka s DPH",
         "Order created": "Objednávka vytvořena",
-        "Purchase \/ Sales": "",
-        "Description\/notes before the list of items": "",
-        "Description\/notes after the list of items": "",
-        "Order expires on": "",
-        "Next invoice expected on": "",
-        "Document": "",
-        "Last item": "",
-        "Next activity": ""
+        "Purchase \/ Sales": "Nákup / prodej",
+        "Description\/notes before the list of items": "Popis/poznámky před seznamem položek",
+        "Description\/notes after the list of items": "Popis/poznámky za seznamem položek",
+        "Order expires on": "Platnost objednávky končí dne",
+        "Next invoice expected on": "Další faktura se očekává dne",
+        "Document": "Dokument",
+        "Last item": "Poslední položka",
+        "Next activity": "Další aktivita"
     },
     "Models\\State": {
         "Title": "Název",
@@ -133,12 +133,12 @@
         "Group by": "Seskupit podle",
         "Total price excl. VAT": "Celková částka bez DPH",
         "Total price incl. VAT": "Celková částka s DPH",
-        "Is chargeable": "",
-        "Charged period - start": "",
-        "Charged period - end": "",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Is chargeable": "Je zpoplatněno",
+        "Charged period - start": "Začátek účtovaného období",
+        "Charged period - end": "Konec účtovaného období",
+        "Attachment #1": "Příloha č. 1",
+        "Attachment #2": "Příloha č. 2",
+        "Delivery date": "Datum dodání"
     },
     "Models\\History": {
         "Order": "Objednávka",
@@ -229,7 +229,7 @@
         "Recurrence": "Opakování",
         "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
         "Short meeting minutes": "Stručný zápis ze schůzky",
-        "Owner": ""
+        "Owner": "Vlastník"
     },
     "Models\\OrderDeal": {
         "Order": "Objednávka",

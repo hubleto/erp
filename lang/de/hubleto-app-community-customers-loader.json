@@ -2,7 +2,7 @@
     "manifest": {
         "Customers": "Kunden",
         "Free customer management and addressbook.": "Kostenloses Kundenmanagement und Adressbuch.",
-        "Customer Tags": ""
+        "Customer Tags": "Kunden-Tags"
     },
     "root": {
         "Customer Tags": "Kunden-Tags"
@@ -24,13 +24,13 @@
         "End date": "Enddatum",
         "End time": "Endzeit",
         "Meeting minutes (link)": "Meeting minutes (Link)",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Owner": ""
+        "Location": "Standort",
+        "Online meeting link": "Link zum Online-Meeting",
+        "Description": "Beschreibung",
+        "Recurrence": "Wiederholung",
+        "Long meeting minutes (link to external document)": "Ausführliches Besprechungsprotokoll (Link zu einem externen Dokument)",
+        "Short meeting minutes": "Kurzprotokoll",
+        "Owner": "Inhaber"
     },
     "Controllers\\Customers": {
         "Customers": "Kunden"
@@ -57,13 +57,13 @@
         "Archived": "Archiviert",
         "Manager": "Verwalter",
         "Shared folder (online document storage)": "Geteilter Ordner",
-        "Identifier": "",
-        "Non-active": "",
-        "Shared with": "",
-        "Columns": "",
-        "Customer": "",
-        "Company ID": "",
-        "Tag": ""
+        "Identifier": "Kennung",
+        "Non-active": "Inaktiv",
+        "Shared with": "Geteilt mit",
+        "Columns": "Spalten",
+        "Customer": "Kunde",
+        "Company ID": "Unternehmens-ID",
+        "Tag": "Tag"
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",
@@ -113,7 +113,7 @@
         "Primary": "Primär"
     },
     "Calendar": {
-        "Customers": "",
-        "Add new activity linked to customer": ""
+        "Customers": "Kunden",
+        "Add new activity linked to customer": "Neue Aktivität für einen Kunden hinzufügen"
     }
 }

@@ -1,135 +1,135 @@
 {
     "manifest": {
-        "Leads": "",
-        "Management of leads, cold contacts. Convert leads to deals.": "",
-        "Lead Levels": "",
-        "Lead Tags": "",
-        "Lead Lost Reasons": "",
-        "Active leads": "",
-        "Archived leads": "",
-        "Lead value by score": "",
-        "Lead warnings": "",
-        "Plan": "",
-        "Calendar": ""
+        "Leads": "Potențiali clienți",
+        "Management of leads, cold contacts. Convert leads to deals.": "Gestionarea potențialilor clienți și a contactelor neabordate. Transformă potențialii clienți în oportunități.",
+        "Lead Levels": "Niveluri de potențiali clienți",
+        "Lead Tags": "Etichete pentru potențiali clienți",
+        "Lead Lost Reasons": "Motivele pierderii potențialilor clienți",
+        "Active leads": "Potențiali clienți activi",
+        "Archived leads": "Potențiali clienți arhivați",
+        "Lead value by score": "Valoarea potențialilor clienți în funcție de scor",
+        "Lead warnings": "Alerte privind potențialii clienți",
+        "Plan": "Plan",
+        "Calendar": "Calendar"
     },
     "root": {
-        "Lead Tags": "",
-        "Lead Lost Reasons": "",
-        "Active leads": "",
-        "Archived leads": ""
+        "Lead Tags": "Etichete pentru potențiali clienți",
+        "Lead Lost Reasons": "Motivele pierderii potențialilor clienți",
+        "Active leads": "Potențiali clienți activi",
+        "Archived leads": "Potențiali clienți arhivați"
     },
     "Models\\LeadActivity": {
-        "Subject": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Meeting minutes (link)": "",
-        "Created by": "",
-        "Lead": "",
-        "Contact": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Owner": ""
+        "Subject": "Subiect",
+        "Activity type": "Tip de activitate",
+        "Start date": "Data de început",
+        "Start time": "Ora de început",
+        "End date": "Data de sfârșit",
+        "End time": "Ora de sfârșit",
+        "All day": "Toată ziua",
+        "Completed": "Finalizat",
+        "Meeting minutes (link)": "Proces-verbal al întâlnirii (link)",
+        "Created by": "Creat de",
+        "Lead": "Potențial client",
+        "Contact": "Contact",
+        "Location": "Locație",
+        "Online meeting link": "Link pentru întâlnire online",
+        "Description": "Descriere",
+        "Recurrence": "Recurență",
+        "Long meeting minutes (link to external document)": "Proces-verbal detaliat al întâlnirii (link către un document extern)",
+        "Short meeting minutes": "Proces-verbal scurt al întâlnirii",
+        "Owner": "Proprietar"
     },
     "Models\\Lead": {
-        "Lead Identifier": "",
-        "Title": "",
-        "Customer": "",
-        "Contact": "",
-        "Price": "",
-        "Currency": "",
-        "Score": "",
-        "Expected close date": "",
-        "Owner": "",
-        "Created": "",
-        "Status": "",
-        "Reason for Lost": "",
-        "Notes": "",
-        "Source channel": "",
-        "Archived": "",
-        "Specific subject (if any)": "",
-        "Email": "",
-        "Phone number": "",
-        "Manager": "",
-        "Team": "",
-        "Workflow": "",
-        "Workflow step": "",
-        "Closed": "",
-        "Tags": "",
-        "Open \/ Closed": "",
-        "Open": "",
-        "All": "",
-        "Add lead": "",
-        "Add Lead": "",
-        "Phone": "",
-        "Advertisement": "",
-        "Partner": "",
-        "Web": "",
-        "Cold call": "",
-        "E-mail": "",
-        "Referral": "",
-        "Other": "",
-        "Online document folder": "",
-        "Profile link #1": "",
-        "Profile link #2": "",
-        "Profile link #3": "",
-        "Shared with": "",
-        "Next activity": ""
+        "Lead Identifier": "Identificatorul potențialului client",
+        "Title": "Titlu",
+        "Customer": "Client",
+        "Contact": "Contact",
+        "Price": "Preț",
+        "Currency": "Monedă",
+        "Score": "Scor",
+        "Expected close date": "Data estimată a încheierii",
+        "Owner": "Proprietar",
+        "Created": "Creat",
+        "Status": "Stare",
+        "Reason for Lost": "Motivul pierderii",
+        "Notes": "Note",
+        "Source channel": "Canal sursă",
+        "Archived": "Arhivat",
+        "Specific subject (if any)": "Subiect specific (dacă există)",
+        "Email": "E-mail",
+        "Phone number": "Număr de telefon",
+        "Manager": "Manager",
+        "Team": "Echipă",
+        "Workflow": "Flux de lucru",
+        "Workflow step": "Etapă a fluxului de lucru",
+        "Closed": "Închis",
+        "Tags": "Etichete",
+        "Open \/ Closed": "Deschis / Închis",
+        "Open": "Deschis",
+        "All": "Toate",
+        "Add lead": "Adaugă potențial client",
+        "Add Lead": "Adaugă potențial client",
+        "Phone": "Telefon",
+        "Advertisement": "Publicitate",
+        "Partner": "Partener",
+        "Web": "Web",
+        "Cold call": "Apel la rece",
+        "E-mail": "E-mail",
+        "Referral": "Recomandare",
+        "Other": "Altele",
+        "Online document folder": "Dosar de documente online",
+        "Profile link #1": "Link profil nr. 1",
+        "Profile link #2": "Link profil nr. 2",
+        "Profile link #3": "Link profil nr. 3",
+        "Shared with": "Partajat cu",
+        "Next activity": "Următoarea activitate"
     },
     "Models\\LostReason": {
-        "Lost Reason": ""
+        "Lost Reason": "Motivul pierderii"
     },
     "Models\\LeadHistory": {
-        "Change Date": "",
-        "Lead": "",
-        "Description": "",
-        "Date": ""
+        "Change Date": "Modifică data",
+        "Lead": "Potențial client",
+        "Description": "Descriere",
+        "Date": "Dată"
     },
     "Models\\LeadTag": {
-        "Lead": "",
-        "Tag": ""
+        "Lead": "Potențial client",
+        "Tag": "Etichetă"
     },
     "Models\\LeadProduct": {
-        "Lead": "",
-        "Product": "",
-        "Unit Price": "",
-        "Amount": "",
-        "Vat": "",
-        "Discount": "",
-        "Sum": ""
+        "Lead": "Potențial client",
+        "Product": "Produs",
+        "Unit Price": "Preț unitar",
+        "Amount": "Sumă",
+        "Vat": "TVA",
+        "Discount": "Reducere",
+        "Sum": "Sumă"
     },
     "Models\\LeadDocument": {
-        "Lead": "",
-        "Document": ""
+        "Lead": "Potențial client",
+        "Document": "Document"
     },
     "Models\\Tag": {
-        "Name": "",
-        "Color": ""
+        "Name": "Nume",
+        "Color": "Culoare"
     },
     "Models\\LeadCampaign": {
-        "Lead": "",
-        "Campaign": ""
+        "Lead": "Potențial client",
+        "Campaign": "Campanie"
     },
     "Models\\LeadTask": {
-        "Lead": "",
-        "Task": ""
+        "Lead": "Potențial client",
+        "Task": "Sarcină"
     },
     "Controllers\\Boards\\LeadWarnings": {
-        "Open leads without future plan": ""
+        "Open leads without future plan": "Potențiali clienți deschiși fără plan viitor"
     },
     "Controllers\\Leads": {
-        "Leads": ""
+        "Leads": "Potențiali clienți"
     },
     "Calendar": {
-        "Leads": "",
-        "Add new activity linked to lead": ""
+        "Leads": "Potențiali clienți",
+        "Add new activity linked to lead": "Adaugă o activitate nouă asociată potențialului client"
     }
 }

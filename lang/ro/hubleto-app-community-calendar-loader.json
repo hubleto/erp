@@ -1,65 +1,65 @@
 {
     "manifest": {
-        "Calendar": "",
-        "Free calendar app.": "",
-        "Reminders": "",
-        "Share": ""
+        "Calendar": "Calendar",
+        "Free calendar app.": "Aplicație gratuită de calendar.",
+        "Reminders": "Mementouri",
+        "Share": "Partajează"
     },
     "root": {
-        "Events for today": ""
+        "Events for today": "Evenimentele de astăzi"
     },
     "Models\\Activity": {
-        "Subject": "",
-        "Activity type": "",
-        "Start date": "",
-        "Start time": "",
-        "End date": "",
-        "End time": "",
-        "All day": "",
-        "Completed": "",
-        "Meeting minutes (link)": "",
-        "Created by": "",
-        "Location": "",
-        "Online meeting link": "",
-        "Description": "",
-        "Recurrence": "",
-        "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": "",
-        "Owner": ""
+        "Subject": "Subiect",
+        "Activity type": "Tip de activitate",
+        "Start date": "Data de început",
+        "Start time": "Ora de început",
+        "End date": "Data de sfârșit",
+        "End time": "Ora de sfârșit",
+        "All day": "Toată ziua",
+        "Completed": "Finalizat",
+        "Meeting minutes (link)": "Proces-verbal al întâlnirii (link)",
+        "Created by": "Creat de",
+        "Location": "Locație",
+        "Online meeting link": "Link pentru întâlnire online",
+        "Description": "Descriere",
+        "Recurrence": "Recurență",
+        "Long meeting minutes (link to external document)": "Proces-verbal detaliat al întâlnirii (link către un document extern)",
+        "Short meeting minutes": "Proces-verbal scurt al întâlnirii",
+        "Owner": "Proprietar"
     },
     "Controllers\\Boards\\Reminders": {
-        "All-day": "",
-        "Open event details": "",
-        "events for tomorrow": "",
-        "events later": "",
-        "reminders later": "",
-        "Later": "",
-        "reminders tomorrow": "",
-        "Tomorrow": ""
+        "All-day": "Toată ziua",
+        "Open event details": "Deschide detaliile evenimentului",
+        "events for tomorrow": "evenimentele de mâine",
+        "events later": "evenimente ulterioare",
+        "reminders later": "mementouri ulterioare",
+        "Later": "Mai târziu",
+        "reminders tomorrow": "mementouri pentru mâine",
+        "Tomorrow": "Mâine"
     },
     "Components\\CalendarMain": {
-        "New activity": "",
-        "Calendars": "",
-        "Ownership": "",
-        "All": "",
-        "My activities": "",
-        "Export calendar": ""
+        "New activity": "Activitate nouă",
+        "Calendars": "Calendare",
+        "Ownership": "Proprietate",
+        "All": "Toate",
+        "My activities": "Activitățile mele",
+        "Export calendar": "Exportă calendarul"
     },
     "Controllers\\Share": {
-        "Share": "",
-        "Calendar: Settings": ""
+        "Share": "Partajează",
+        "Calendar: Settings": "Calendar: setări"
     },
     "Models\\SharedCalendar": {
-        "Created by": "",
-        "Calendar ID": "",
-        "Share key": "",
-        "Display details": "",
-        "Enabled": "",
-        "Date from": "",
-        "Date to": ""
+        "Created by": "Creat de",
+        "Calendar ID": "ID calendar",
+        "Share key": "Cheie de partajare",
+        "Display details": "Afișează detaliile",
+        "Enabled": "Activat",
+        "Date from": "De la data",
+        "Date to": "Până la data"
     },
     "Calendar": {
-        "Default": "",
-        "Add a simple event": ""
+        "Default": "Implicit",
+        "Add a simple event": "Adaugă un eveniment simplu"
     }
 }

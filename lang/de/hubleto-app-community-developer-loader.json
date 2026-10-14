@@ -2,35 +2,35 @@
     "manifest": {
         "Developer": "Entwickler",
         "Developer tools to automate your Hubleto development": "Entwicklerwerkzeuge zur Automatisierung deiner Hubleto-Entwicklung",
-        "Developer tools": ""
+        "Developer tools": "Entwicklertools"
     },
     "root": {
         "Developer tools": "Entwicklerwerkzeuge"
     },
     "Controllers\\Dashboard": {
-        "Developer": "",
-        "Check DB consistency": "",
-        "Form designer": ""
+        "Developer": "Entwickler",
+        "Check DB consistency": "Datenbankkonsistenz prüfen",
+        "Form designer": "Formulardesigner"
     },
     "Controllers\\CheckDbConsistency": {
-        "Developer tools": "",
-        "Check DB consistency": "",
-        "No necessary database updates found.": ""
+        "Developer tools": "Entwicklertools",
+        "Check DB consistency": "Datenbankkonsistenz prüfen",
+        "No necessary database updates found.": "Keine erforderlichen Datenbankaktualisierungen gefunden."
     },
     "Controllers\\FormDesigner": {
-        "Developer": "",
-        "Form designer": "",
-        "Template": "",
-        "One column": "",
-        "Two columns": "",
-        "Three columns": "",
-        "Rendered Typescript code": "",
-        "Copy & paste following code into your ": "",
-        " file and then:": "",
-        "1. Adapt the code to render inputs, nested tables or other components based on your requirements.": "",
-        "2. Run ": "",
-        " in your terminal.": "",
-        "Check ": "",
-        " for more details.": ""
+        "Developer": "Entwickler",
+        "Form designer": "Formulardesigner",
+        "Template": "Vorlage",
+        "One column": "Eine Spalte",
+        "Two columns": "Zwei Spalten",
+        "Three columns": "Drei Spalten",
+        "Rendered Typescript code": "Gerenderter TypeScript-Code",
+        "Copy & paste following code into your ": "Kopieren Sie den folgenden Code und fügen Sie ihn in Ihre/Ihren ",
+        " file and then:": " Datei und anschließend:",
+        "1. Adapt the code to render inputs, nested tables or other components based on your requirements.": "1. Passen Sie den Code an, um Eingaben, verschachtelte Tabellen oder andere Komponenten entsprechend Ihren Anforderungen darzustellen.",
+        "2. Run ": "2. Führen Sie ",
+        " in your terminal.": " in Ihrem Terminal.",
+        "Check ": "Prüfen ",
+        " for more details.": " für weitere Informationen."
     }
 }

@@ -2,7 +2,7 @@
     "manifest": {
         "AIAssistant": "AI Asystent",
         "AI Assistant for intelligent data interaction": "AI asystent do inteligentnej interakcji z danymi",
-        "AI Assistant": ""
+        "AI Assistant": "Asystent AI"
     },
     "Controllers\\Home": {
         "AIAssistant": "AI Asystent",

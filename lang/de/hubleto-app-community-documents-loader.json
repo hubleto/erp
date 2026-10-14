@@ -5,15 +5,15 @@
     "manifest": {
         "Documents": "Unterlagen",
         "Free document management.": "Kostenlose Dokumentverwaltung.",
-        "Browse": "",
-        "List": "",
-        "Templates": "",
-        "Show as list": "",
-        "Manage folders": "",
-        "Document review results": "",
-        "Versions": "",
-        "Reviews": "",
-        "File manager": ""
+        "Browse": "Durchsuchen",
+        "List": "Liste",
+        "Templates": "Vorlagen",
+        "Show as list": "Als Liste anzeigen",
+        "Manage folders": "Ordner verwalten",
+        "Document review results": "Ergebnisse der Dokumentprüfung",
+        "Versions": "Versionen",
+        "Reviews": "Bewertungen",
+        "File manager": "Dateimanager"
     },
     "root": {
         "Browse": "Durchsuchen",
@@ -27,12 +27,12 @@
         "File Link": "Dateilink",
         "Origin Link": "Ursprungslink",
         "Add Document": "Dokument hinzufügen",
-        "Model": "",
-        "RecordId": "",
-        "Created on": "",
-        "Created by": "",
-        "Workflow": "",
-        "Workflow step": ""
+        "Model": "Modell",
+        "RecordId": "Datensatz-ID",
+        "Created on": "Erstellt am",
+        "Created by": "Erstellt von",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflowschritt"
     },
     "Controllers\\Table": {
         "Documents": "Unterlagen"
@@ -41,24 +41,24 @@
         "Uid": "Uid",
         "Parent folder": "Elternordner",
         "Folder name": "Ordner Name",
-        "Add Folder": ""
+        "Add Folder": "Ordner hinzufügen"
     },
     "Controllers\\Browse": {
         "Documents": "Dokumente",
-        "Browse": ""
+        "Browse": "Durchsuchen"
     },
     "Models\\Template": {
-        "Name": "",
-        "Used For": "",
-        "Content": "",
-        "Notes": "",
-        "Add template": ""
+        "Name": "Name",
+        "Used For": "Verwendet für",
+        "Content": "Inhalt",
+        "Notes": "Notizen",
+        "Add template": "Vorlage hinzufügen"
     },
     "Controllers\\Folders": {
-        "Folders": ""
+        "Folders": "Ordner"
     },
     "Controllers\\Templates": {
-        "Templates": "",
-        "Documents": ""
+        "Templates": "Vorlagen",
+        "Documents": "Dokumente"
     }
 }

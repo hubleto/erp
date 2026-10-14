@@ -113,7 +113,7 @@
         "Page Not Found": "Stránka nenalezena",
         "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Stránku, kterou hledáte, jsme nenašli.",
         "Home": "Úvod",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": ""
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Požadovanou stránku se nepodařilo najít. Zkontrolujte svá oprávnění nebo se vraťte na domovskou stránku."
     },
     "Controllers\\AccessForbidden": {
         "Access Forbidden": "Přístup odepřen",

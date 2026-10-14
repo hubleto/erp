@@ -1,36 +1,36 @@
 {
     "manifest": {
-        "Workflow": "",
-        "Free sales workflow management.": "",
-        "History": "",
-        "Workflows": "",
-        "Items with not updated step": ""
+        "Workflow": "Flux de lucru",
+        "Free sales workflow management.": "Gestionare gratuită a fluxului de vânzări.",
+        "History": "Istoric",
+        "Workflows": "Fluxuri de lucru",
+        "Items with not updated step": "Articole cu etapa neactualizată"
     },
     "root": {
-        "Workflows": ""
+        "Workflows": "Fluxuri de lucru"
     },
     "Models\\Workflow": {
-        "Name": "",
-        "Description": "",
-        "Order": "",
-        "Group": "",
-        "Show in kanban": ""
+        "Name": "Nume",
+        "Description": "Descriere",
+        "Order": "Comandă",
+        "Group": "Grup",
+        "Show in kanban": "Afișează în Kanban"
     },
     "Models\\WorkflowStep": {
-        "Name": "",
-        "Order": "",
-        "Color": "",
-        "Probability": "",
-        "Workflow": "",
-        "Set result of a deal to": "",
-        "Tag": ""
+        "Name": "Nume",
+        "Order": "Comandă",
+        "Color": "Culoare",
+        "Probability": "Probabilitate",
+        "Workflow": "Flux de lucru",
+        "Set result of a deal to": "Setează rezultatul oportunității la",
+        "Tag": "Etichetă"
     },
     "Models\\WorkflowHistory": {
-        "Model": "",
-        "Record Id": "",
-        "Changed": "",
-        "User": "",
-        "Workflow": "",
-        "Workflow Step": ""
+        "Model": "Model",
+        "Record Id": "ID înregistrare",
+        "Changed": "Modificat",
+        "User": "Utilizator",
+        "Workflow": "Flux de lucru",
+        "Workflow Step": "Etapă a fluxului de lucru"
     }
 }

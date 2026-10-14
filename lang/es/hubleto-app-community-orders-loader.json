@@ -79,13 +79,13 @@
         "Total price incl. VAT": "Precio total con IVA",
         "Order created": "Pedido creado",
         "Identifier at customer": "Identificador en el cliente",
-        "Description\/notes before the list of items": "",
-        "Description\/notes after the list of items": "",
-        "Order expires on": "",
-        "Next invoice expected on": "",
-        "Document": "",
-        "Last item": "",
-        "Next activity": ""
+        "Description\/notes before the list of items": "Descripción/notas antes de la lista de artículos",
+        "Description\/notes after the list of items": "Descripción/notas después de la lista de artículos",
+        "Order expires on": "El pedido vence el",
+        "Next invoice expected on": "Próxima factura prevista para el",
+        "Document": "Documento",
+        "Last item": "Último elemento",
+        "Next activity": "Próxima actividad"
     },
     "Models\\State": {
         "Title": "Título",
@@ -122,12 +122,12 @@
         "Total price excl. VAT": "Precio total sin IVA",
         "Total price incl. VAT": "Precio total con IVA",
         "Item order": "Orden del artículo",
-        "Is chargeable": "",
-        "Charged period - start": "",
-        "Charged period - end": "",
-        "Attachment #1": "",
-        "Attachment #2": "",
-        "Delivery date": ""
+        "Is chargeable": "Es facturable",
+        "Charged period - start": "Inicio del período facturado",
+        "Charged period - end": "Fin del período facturado",
+        "Attachment #1": "Adjunto n.º 1",
+        "Attachment #2": "Adjunto n.º 2",
+        "Delivery date": "Fecha de entrega"
     },
     "Models\\History": {
         "Order": "Pedido",
@@ -186,7 +186,7 @@
         "Recurrence": "Recurrencia",
         "Long meeting minutes (link to external document)": "Minutas detalladas de la reunión (enlace a documento externo)",
         "Short meeting minutes": "Minutas breves de la reunión",
-        "Owner": ""
+        "Owner": "Propietario"
     },
     "Models\\OrderDeal": {
         "Order": "Pedido",

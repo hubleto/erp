@@ -35,6 +35,7 @@ class SignIn extends \Hubleto\Framework\Controllers\SignIn
     }
 
     if ($authProvider->isUserInSession()) {
+      $this->logger()->info("Redirecting to home page, user is in session.");
       $this->router()->redirectTo('', 302, true);
       return;
     }

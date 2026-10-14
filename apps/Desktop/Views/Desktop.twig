@@ -250,7 +250,7 @@
               </a>
             </li>
           {% endif %}
-          {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Notifications') %}
+          {# {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Notifications') %}
             <li class="mr-2 hidden md:block">
               {% if viewParams.unreadNotifications > 0 %}
                 <div style="position:relative;width:0;height:0;top:-0.5em;left:1.5em">
@@ -264,7 +264,7 @@
                 <span class="icon"><i class="fas fa-bell"></i></span>
               </a>
             </li>
-          {% endif %}
+          {% endif %} #}
           <li class="mr-2 block">
             <button id="theme-toggle-btn" class="btn btn-transparent" onclick="toggleTheme();">
               <span class="icon"><i class="fas fa-sun"></i></span>

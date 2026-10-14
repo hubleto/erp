@@ -9,10 +9,10 @@
     },
     "Models\\Campaign": {
         "Name": "Názov",
-        "UTM source": "UTM source",
-        "UTM campaign": "UTM campaign",
-        "UTM term": "UTM term",
-        "UTM content": "UTM content",
+        "UTM source": "Zdroj UTM",
+        "UTM campaign": "Kampaň UTM",
+        "UTM term": "Výraz UTM",
+        "UTM content": "Obsah UTM",
         "Target audience": "Cieľová skupina",
         "Goal": "Cieľ",
         "Notes": "Poznámky",
@@ -23,8 +23,8 @@
         "Created": "Vytvorená",
         "UID": "UID",
         "Mail account to send email from": "Odosielací účet",
-        "Workflow": "Workflow",
-        "Workflow step": "Workflow step",
+        "Workflow": "Pracovný postup",
+        "Workflow step": "Krok pracovného postupu",
         "Approved": "Schválená",
         "Closed": "Uzavretá",
         "Add Campaign": "Pridať kampaň",
@@ -44,13 +44,13 @@
         "Online document folder": "Online priečinok dokumentov",
         "not specified": "nezadané",
         "direct mail": "priamy mail",
-        "cold call": "cold call",
+        "cold call": "studený hovor",
         "other": "iné"
     },
     "Models\\Recipient": {
         "Campaign": "Kampaň",
         "Contact": "Kontakt",
-        "Email": "Email",
+        "Email": "E-mail",
         "First name": "Meno",
         "Last name": "Priezvisko",
         "Salutation": "Oslovenie",
@@ -105,7 +105,7 @@
         "Unsubscribed recipients will be ignored.": "Odhlásení príjemcovia budú ignorovaní.",
         "Unsubscribed and invalid recipients will be ignored.": "Odhlásení a neplatní príjemcovia budú ignorovaní.",
         "Who clicked? (Bot Score = 0)": "Kto klikol? (Bot skóre = 0)",
-        "Email": "Email",
+        "Email": "E-mail",
         "Status": "Stav",
         "Bot score": "Bot skóre",
         "Launch campaign now!": "Spustiť kampaň",
@@ -148,7 +148,7 @@
         "Url": "URL",
         "Clicked": "Kliknuté",
         "Bot Score": "Bot skóre",
-        "Log": "Log"
+        "Log": "Záznam"
     },
     "Models\\CampaignActivity": {
         "Subject": "Predmet",
@@ -196,7 +196,7 @@
     "Components\\TableRecipientStatuses": {},
     "Components\\TableClicks": {},
     "Models\\RecipientStatus": {
-        "Email": "Email",
+        "Email": "E-mail",
         "Is unsubscribed": "Odhlásený",
         "Is invalid": "Neplatný",
         "Add recipient status": "Pridať status príjemcu"
@@ -211,7 +211,7 @@
         "Your email": "Váš email",
         "has been unsubscribed.": "bol odhlásený.",
         "Your email:": "Váš email:",
-        "Powered by Hubleto": "Powered by Hubleto"
+        "Powered by Hubleto": "Poháňa Hubleto"
     },
     "Calendar": {
         "Campaigns": "Kampane",

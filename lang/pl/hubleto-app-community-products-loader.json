@@ -193,7 +193,7 @@
         "Photo #3": "Zdjęcie nr 3",
         "Photo #4": "Zdjęcie nr 4",
         "Photo #5": "Zdjęcie nr 5",
-        "URL slug": "URL slug",
+        "URL slug": "Identyfikator URL",
         "Add product category": "Dodaj kategorię produktu"
     },
     "Models\\Supplier": {

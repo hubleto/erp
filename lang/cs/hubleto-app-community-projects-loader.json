@@ -21,7 +21,7 @@
         "Phases": "Fáze"
     },
     "Models\\Project": {
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Customer": "Zákazník",
         "Contact": "Kontakt",
         "Identifier": "Identifikátor",
@@ -31,10 +31,10 @@
         "Main developer": "Hlavní vývojář",
         "Account manager": "Account manažer",
         "Priority": "Priorita",
-        "Start": "Start",
+        "Start": "Spustit",
         "Deadline": "Termín",
         "Budget": "Rozpočet",
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Workflow step": "Stav workflow",
         "Closed": "Uzavřený",
         "Color": "Barva",
@@ -79,7 +79,7 @@
     },
     "Models\\ProjectDeal": {
         "Project": "Projekt",
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Project Deals": "Dealy projektu",
         "Add deal": "Přidat deal"
     },

@@ -21,7 +21,7 @@
         "By turning this on you will change the dashboard shown on the Homepage": "Włączenie tej opcji zmieni dashboard wyświetlany na stronie głównej"
     },
     "Models\\Panel": {
-        "Dashboard": "Dashboard",
+        "Dashboard": "Panel",
         "Board": "Źródło",
         "Title": "Tytuł",
         "Configuration": "Konfiguracja",

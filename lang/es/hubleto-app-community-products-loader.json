@@ -12,7 +12,7 @@
         "Components & Storage": "Componentes y almacenamiento",
         "Internal Components": "Componentes internos",
         "Hard Drives & SSDs": "Discos duros y SSD",
-        "Networking": "Networking",
+        "Networking": "Creación de redes de contacto",
         "Peripherals & Accessories": "Periféricos y accesorios",
         "Keyboards & Mice": "Teclados y ratones",
         "Printers & Scanners": "Impresoras y escáneres",
@@ -222,7 +222,7 @@
         "Photo #3": "Foto #3",
         "Photo #4": "Foto #4",
         "Photo #5": "Foto #5",
-        "URL slug": "URL slug",
+        "URL slug": "Identificador URL",
         "Add product category": "Añadir categoría de producto"
     },
     "Components\\TableProducts": {

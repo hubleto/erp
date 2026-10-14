@@ -31,7 +31,7 @@
         "RecordId": "Datensatz-ID",
         "Created on": "Erstellt am",
         "Created by": "Erstellt von",
-        "Workflow": "Workflow",
+        "Workflow": "Arbeitsablauf",
         "Workflow step": "Workflowschritt"
     },
     "Controllers\\Table": {

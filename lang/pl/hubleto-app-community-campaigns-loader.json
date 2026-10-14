@@ -9,10 +9,10 @@
   },
   "Models\\Campaign": {
     "Name": "Nazwa",
-    "UTM source": "UTM source",
-    "UTM campaign": "UTM campaign",
-    "UTM term": "UTM term",
-    "UTM content": "UTM content",
+    "UTM source": "Źródło UTM",
+    "UTM campaign": "Kampania UTM",
+    "UTM term": "Termin UTM",
+    "UTM content": "Treść UTM",
     "Target audience": "Grupa docelowa",
     "Goal": "Cel",
     "Notes": "Notatki",
@@ -23,7 +23,7 @@
     "Created": "Utworzona",
     "UID": "UID",
     "Mail account to send email from": "Konto nadawcze",
-    "Workflow": "Workflow",
+    "Workflow": "Przepływ pracy",
     "Workflow step": "Krok workflow",
     "Approved": "Zatwierdzona",
     "Closed": "Zamknięta",
@@ -43,8 +43,8 @@
     "Managed by me": "Zarządzane przeze mnie",
     "Online document folder": "Folder dokumentów online",
     "not specified": "nie określono",
-    "direct mail": "direct mail",
-    "cold call": "cold call",
+    "direct mail": "Marketing bezpośredni",
+    "cold call": "telefon na zimno",
     "other": "inne"
   },
   "Models\\Recipient": {
@@ -148,7 +148,7 @@
     "Url": "URL",
     "Clicked": "Kliknięto",
     "Bot Score": "Wynik bota",
-    "Log": "Log"
+    "Log": "Dziennik"
   },
   "Models\\CampaignActivity": {
     "Subject": "Temat",
@@ -211,7 +211,7 @@
     "Your email": "Twój e-mail",
     "has been unsubscribed.": "został wypisany.",
     "Your email:": "Twój e-mail:",
-    "Powered by Hubleto": "Powered by Hubleto"
+    "Powered by Hubleto": "Napędzane przez Hubleto"
   },
   "Calendar": {
     "Campaigns": "Kampanie",

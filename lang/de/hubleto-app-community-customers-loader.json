@@ -52,7 +52,7 @@
         "Owner": "Eigentümer",
         "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
         "Add Customer": "Kunden hinzufügen",
-        "Tags": "Tags",
+        "Tags": "Schlagwörter",
         "Archive": "Archiv",
         "Archived": "Archiviert",
         "Manager": "Verwalter",
@@ -63,7 +63,7 @@
         "Columns": "Spalten",
         "Customer": "Kunde",
         "Company ID": "Unternehmens-ID",
-        "Tag": "Tag"
+        "Tag": "Schlagwort"
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",
@@ -92,16 +92,16 @@
         "Email": "E-Mail",
         "Primary Contact": "Hauptkontakt",
         "Calendar": "Kalender",
-        "Tags": "Tags",
+        "Tags": "Schlagwörter",
         "Documents": "Unterlagen",
         "Local documents": "Lokale Dokumente",
         "Log completed activity": "Abgeschlossene Aktivität erfassen",
-        "Enter": "Enter",
+        "Enter": "Eingeben",
         "Schedule activity": "Aktivität planen",
         "Shift+Enter": "Shift+Enter",
         "Document": "Dokument",
         "Add document": "Dokument hinzufügen",
-        "Link": "Link"
+        "Link": "Verknüpfung"
     },
     "Components\\CustomerFormActivity": {
         "Start": "Anfang",

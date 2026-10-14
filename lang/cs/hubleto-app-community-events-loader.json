@@ -1,12 +1,12 @@
 {
     "manifest": {
         "Seminar": "Seminář",
-        "Workshop": "Workshop",
+        "Workshop": "Pracovní dílna",
         "Team building": "Teambuildingová akce",
         "Conference": "Konference",
         "Trade show": "Veletrh",
         "Product launch": "Uvedení produktu",
-        "Networking": "Networking",
+        "Networking": "Navazování kontaktů",
         "Other": "Jiné",
         "Event types": "Typy událostí",
         "Events": "Události",

@@ -125,7 +125,7 @@
         "Copy cell content to clipboard": "Kopírovat obsah buňky do schránky"
     },
     "Controllers\\Import": {
-        "Import": "Import",
+        "Import": "Importovat",
         "Contacts": "Kontakty",
         "Step 1: Prepare list of contacts": "Krok 1: Připravte seznam kontaktů",
         "Contacts can be imported from a ": "Kontakty lze importovat z ",

@@ -1,6 +1,6 @@
 {
     "manifest": {
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Free sales workflow management.": "Bezpłatne zarządzanie procesami sprzedaży.",
         "History": "Historia",
         "Workflows": "Workflowy",
@@ -42,7 +42,7 @@
         "Manage workflows": "Zarządzaj workflowami"
     },
     "Controllers\\Home": {
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Add workflow": "Dodaj workflow",
         "Manage workflow steps": "Zarządzaj krokami"
     },
@@ -51,7 +51,7 @@
         "Workflows": "Workflowy"
     },
     "Controllers\\Workflow": {
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Show details": "Pokaż szczegóły",
         "Target": "Grupa docelowa",
         "Goal": "Cel",
@@ -63,7 +63,7 @@
         "Closed milestone": "Zamknięty kamień milowy"
     },
     "Controllers\\History": {
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "History": "Historia"
     },
     "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
@@ -88,7 +88,7 @@
         "Order": "Kolejność",
         "Color": "Kolor",
         "Probability": "Prawdopodobieństwo",
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Set result of a deal to": "Ustaw wynik dealu na",
         "Tag": "Etykieta",
         "Add Workflow Step": "Dodaj krok workflow"
@@ -98,11 +98,11 @@
         "Record Id": "ID rekordu",
         "Changed": "Zmienione",
         "User": "Użytkownik",
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Workflow Step": "Krok"
     },
     "Components\\FormWorkflow": {
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Steps": "Kroki"
     },
     "Components\\FormWorkflowStep": {

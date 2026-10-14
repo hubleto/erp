@@ -34,7 +34,7 @@
         "Primary": "Primär",
         "Invoicing": "Rechnungsstellung",
         "Invalid": "Ungültig",
-        "Tag": "Tag"
+        "Tag": "Schlagwort"
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -50,7 +50,7 @@
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
-        "Tag": "Tag"
+        "Tag": "Schlagwort"
     },
     "Models\\Category": {
         "Type": "Typ"

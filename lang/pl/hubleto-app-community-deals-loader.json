@@ -47,13 +47,13 @@
         "Title": "Nazwa",
         "Customer": "Klient",
         "Contact person": "Osoba kontaktowa",
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Price": "Cena",
         "Currency": "Waluta",
         "Expected close date": "Przewidywana data zamknięcia",
         "Assigned user": "Odpowiedzialny",
         "Date created": "Utworzony",
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Workflow step": "Krok workflow",
         "Notes": "Notatki",
         "Source channel": "Źródło",
@@ -95,7 +95,7 @@
         "Advertisement": "Reklama",
         "Partner": "Partner",
         "Web": "Web",
-        "Cold call": "Cold call",
+        "Cold call": "Telefon na zimno",
         "E-mail": "E-mail",
         "Referral": "Polecenie",
         "Other": "Inne",
@@ -112,18 +112,18 @@
     },
     "Models\\DealHistory": {
         "Change Date": "Data zmiany",
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Description": "Opis",
         "Deals": "Deale",
         "Add Deal": "Dodaj deal"
     },
     "Models\\DealTag": {
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Tag": "Oznaczenie",
         "Deal Tags": "Tagi deali"
     },
     "Models\\DealActivity": {
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Contact person": "Osoba kontaktowa",
         "Activity type": "Typ aktywności",
         "Subject": "Temat",
@@ -145,7 +145,7 @@
         "Owner": "Właściciel"
     },
     "Models\\DealDocument": {
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Document": "Dokument"
     },
     "Models\\LostReason": {
@@ -160,7 +160,7 @@
         "Add Deal Tag": "Dodaj tag dealu"
     },
     "Models\\Item": {
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Product": "Produkt",
         "Unit Price": "Cena jednostkowa",
         "Amount": "Kwota",
@@ -176,12 +176,12 @@
         "Position (in the PDF)": "Pozycja (w PDF)"
     },
     "Models\\DealLead": {
-        "Deal": "Deal",
-        "Lead": "Lead",
+        "Deal": "Transakcja",
+        "Lead": "Potencjalny klient",
         "Add Deal": "Dodaj deal"
     },
     "Models\\DealTask": {
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Task": "Zadanie",
         "Add Deal": "Dodaj deal"
     },
@@ -208,10 +208,10 @@
         "Type recent activity here": "Wpisz ostatnią aktywność tutaj",
         "Not completed yet": "Nieukończona",
         "Most recent activities": "Ostatnie aktywności",
-        "Deal": "Deal",
-        "Lead": "Lead",
+        "Deal": "Transakcja",
+        "Lead": "Potencjalny klient",
         "Log completed activity": "Zarejestruj aktywność",
-        "Enter": "Enter",
+        "Enter": "Wprowadź",
         "Schedule activity": "Zaplanuj aktywność",
         "Shift+Enter": "Shift+Enter",
         "Deal value:": "Wartość dealu",

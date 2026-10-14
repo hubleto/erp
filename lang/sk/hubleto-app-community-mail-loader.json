@@ -24,7 +24,7 @@
     "Models\\Mail": {
         "Mail Id": "ID správy",
         "Mail Number": "Číslo správy",
-        "Mailbox": "Mailbox",
+        "Mailbox": "Poštová schránka",
         "Priority": "Priorita",
         "Created": "Vytvorená",
         "Sent": "Odoslané",
@@ -60,13 +60,13 @@
         "Color": "Farba",
         "Sender email address": "Emailová adresa odosielateľa",
         "Sender name": "Meno odosielateľa",
-        "IMAP host": "IMAP host",
-        "IMAP port": "IMAP port",
+        "IMAP host": "Hostiteľ IMAP",
+        "IMAP port": "Port IMAP",
         "IMAP encryption": "IMAP šifrovanie",
         "IMAP username": "IMAP používateľské meno",
         "IMAP password": "IMAP heslo",
-        "SMTP host": "SMTP host",
-        "SMTP port": "SMTP port",
+        "SMTP host": "Hostiteľ SMTP",
+        "SMTP port": "Port SMTP",
         "SMTP encryption": "SMTP šifrovanie",
         "SMTP username": "SMTP používateľské meno",
         "SMTP password": "SMTP heslo",
@@ -167,7 +167,7 @@
     "Mailer": {
         "Getting emails from {{ count }} account(s).": "Načítavam emaily z {{ count }} účtu\/účtov.",
         "Checking account {{ name }}": "Kontrolujem účet {{ name }}",
-        "Mailbox {{ account }} -> {{ mailbox }}": "Mailbox {{ account }} -> {{ mailbox }}",
+        "Mailbox {{ account }} -> {{ mailbox }}": "Poštová schránka {{ account }} -> {{ mailbox }}",
         "Found mail {{ number }} {{ id }}": "Nájdený email {{ number }} {{ id }}",
         "Creating mail in database": "Ukladám email do databázy"
     }

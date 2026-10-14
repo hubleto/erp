@@ -2,7 +2,7 @@
     "manifest": {
         "Tasks": "Zadania",
         "Task management app": "Aplikacja do zarządzania zadaniami",
-        "Todo": "Todo",
+        "Todo": "Do zrobienia",
         "My recent tasks": "Moje ostatnie zadania",
         "Calendar": "Kalendarz"
     },
@@ -17,7 +17,7 @@
         "Duration": "Czas trwania",
         "Start": "Start",
         "Deadline": "Termin",
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Workflow step": "Etap Workflow",
         "Is milestone": "Kamień milowy",
         "Closed": "Zamknięte",
@@ -58,7 +58,7 @@
     "Components\\FormTask": {
         "Task": "Zadanie",
         "unsaved changes": "niezapisane zmiany",
-        "Todo": "Todo",
+        "Todo": "Do zrobienia",
         "Press ENTER to add new Todo": "Naciśnij ENTER, aby dodać nowe Todo",
         "Worksheet": "Karta pracy",
         "Orders": "Zamówienia",
@@ -73,10 +73,10 @@
     },
     "Controllers\\Todos": {
         "Tasks": "Zadania",
-        "Todo": "Todo"
+        "Todo": "Do zrobienia"
     },
     "Components\\FormTodo": {
-        "Todo": "Todo"
+        "Todo": "Do zrobienia"
     },
     "Components\\TableTodos": [],
     "Calendar": {

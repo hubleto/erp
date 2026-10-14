@@ -193,7 +193,7 @@
         "Photo #3": "Foto č. 3",
         "Photo #4": "Foto č. 4",
         "Photo #5": "Foto č. 5",
-        "URL slug": "URL slug",
+        "URL slug": "Identifikátor URL",
         "Add product category": "Pridať produktovú kategóriu"
     },
     "Models\\Supplier": {

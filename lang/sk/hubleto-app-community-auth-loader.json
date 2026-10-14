@@ -21,7 +21,7 @@
         "First name": "Meno",
         "Last name": "Priezvisko",
         "Nick": "Prezývka",
-        "Email": "Email",
+        "Email": "E-mail",
         "Language": "Jazyk",
         "Default company": "Spoločnosť",
         "Apps": "Appky",
@@ -79,7 +79,7 @@
     "Controllers\\ForgotPassword": {
         "A password reset link has been sent to your email address.": "Na vašu emailovú adresu bol odoslaný odkaz na obnovenie hesla.",
         "Check your inbox.": "Skontrolujte svoju doručenú poštu.",
-        "Email": "Email",
+        "Email": "E-mail",
         "Request password reset": "Požiadať o obnovenie hesla",
         "Back to sign in": "Späť na prihlásenie"
     },

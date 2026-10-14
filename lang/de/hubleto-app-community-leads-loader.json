@@ -1,19 +1,19 @@
 {
     "loaders": {
-        "Leads": "Leads",
+        "Leads": "Interessenten",
         "Leads Archive": "Leadsarchiv"
     },
     "controllers.leads": {
         "Sales": "Vertrieb",
-        "Leads": "Leads"
+        "Leads": "Interessenten"
     },
     "controllers.leadsArchive": {
         "Sales": "Vertrieb",
-        "Leads": "Leads",
+        "Leads": "Interessenten",
         "Archive": "Archiv"
     },
     "manifest": {
-        "Leads": "Leads",
+        "Leads": "Interessenten",
         "Management of leads, cold contacts. Convert leads to deals.": "Management von Leads, kalte Kontakte. Konvertieren führt zu Geschäften.",
         "Lead Levels": "Lead-Stufen",
         "Lead Tags": "Lead-Tags",
@@ -27,7 +27,7 @@
     },
     "root": {
         "Lead statuses": "Lead Zustände",
-        "Lead Tags": "Lead Tags",
+        "Lead Tags": "Interessenten-Tags",
         "Lead Lost Reasons": "Führen Sie verlorene Gründe",
         "Active leads": "Aktive Leads",
         "Archived leads": "Archivierte Leads",
@@ -80,10 +80,10 @@
         "Phone number": "Telefonnummer",
         "Level": "Stufe",
         "Team": "Team",
-        "Workflow": "Workflow",
+        "Workflow": "Arbeitsablauf",
         "Workflow step": "Workflowschritt",
         "Closed": "Geschlossen",
-        "Tags": "Tags",
+        "Tags": "Schlagwörter",
         "Open \/ Closed": "Offen / Geschlossen",
         "Open": "Offen",
         "All": "Alle",
@@ -147,7 +147,7 @@
         "Local documents": "Lokale Dokumente"
     },
     "Controllers\\Leads": {
-        "Leads": "Leads"
+        "Leads": "Interessenten"
     },
     "Controllers\\Boards\\LeadWarnings": {
         "Pending leads without future plan": "Ausstehende Leads ohne weitere Planung",
@@ -159,15 +159,15 @@
         "Color": "Farbe"
     },
     "Models\\LeadCampaign": {
-        "Lead": "Lead",
+        "Lead": "Interessent",
         "Campaign": "Kampagne"
     },
     "Models\\LeadTask": {
-        "Lead": "Lead",
+        "Lead": "Interessent",
         "Task": "Aufgabe"
     },
     "Calendar": {
-        "Leads": "Leads",
+        "Leads": "Interessenten",
         "Add new activity linked to lead": "Neue Aktivität für einen Lead hinzufügen"
     }
 }

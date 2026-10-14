@@ -101,7 +101,7 @@
         "Most recent activities": "Nejnovější aktivity",
         "Log completed activity": "Zaznamenat ukončenou aktivitu",
         "Schedule activity": "Naplánovat aktivitu",
-        "Enter": "Enter",
+        "Enter": "Zadat",
         "Shift+Enter": "Shift+Enter",
         "unsaved changes": "neuložené změny"
     },
@@ -121,7 +121,7 @@
         "Customer": "Zákazník",
         "Contact": "Kontakt",
         "End": "Ukončit",
-        "Start": "Start"
+        "Start": "Spustit"
     },
     "Components\\TableActivities": [],
     "Controllers\\Activity": {

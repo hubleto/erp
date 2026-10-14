@@ -63,7 +63,7 @@
         "UTM: term": "UTM: término",
         "Group by": "Agrupar por",
         "Count": "Cantidad",
-        "Clicks": "Clicks",
+        "Clicks": "Clics",
         "Click summary": "Resumen de clics",
         "Bot score": "Puntuación de bot"
     },
@@ -84,7 +84,7 @@
         "Contacts": "Contactos",
         "Recipients": "Destinatarios",
         "Test": "Prueba",
-        "Clicks": "Clicks",
+        "Clicks": "Clics",
         "Select contacts which will be added as recipients": "Seleccione los contactos que se agregarán como destinatarios",
         "One email per line.": "Un correo electrónico por línea.",
         "Import emails": "Importar correos electrónicos",

@@ -2,11 +2,11 @@
     "manifest": {
         "Seminar": "Seminario",
         "Workshop": "Taller",
-        "Team building": "Team building",
+        "Team building": "Trabajo en equipo",
         "Conference": "Conferencia",
         "Trade show": "Feria comercial",
         "Product launch": "Lanzamiento de producto",
-        "Networking": "Networking",
+        "Networking": "Creación de redes de contacto",
         "Other": "Otro",
         "Event types": "Tipos de eventos",
         "Events": "Eventos",

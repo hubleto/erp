@@ -47,13 +47,13 @@
         "Title": "Název",
         "Customer": "Zákazník",
         "Contact person": "Kontaktní osoba",
-        "Lead": "Lead",
+        "Lead": "Potenciální zákazník",
         "Price": "Cena",
         "Currency": "Měna",
         "Expected close date": "Předpokládané datum uzavření",
         "Assigned user": "Zodpovědný",
         "Date created": "Vytvořen",
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Workflow step": "Krok workflow",
         "Notes": "Poznámky",
         "Source channel": "Zdroj",
@@ -95,7 +95,7 @@
         "Advertisement": "Reklama",
         "Partner": "Partner",
         "Web": "Web",
-        "Cold call": "Cold call",
+        "Cold call": "Studený hovor",
         "E-mail": "E-mail",
         "Referral": "Doporučení",
         "Other": "Jiné",
@@ -112,18 +112,18 @@
     },
     "Models\\DealHistory": {
         "Change Date": "Datum změny",
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Description": "Popis",
         "Deals": "Dealy",
         "Add Deal": "Přidat deal"
     },
     "Models\\DealTag": {
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Tag": "Označení",
         "Deal Tags": "Štítky dealů"
     },
     "Models\\DealActivity": {
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Contact person": "Kontaktní osoba",
         "Activity type": "Typ aktivity",
         "Subject": "Předmět",
@@ -145,7 +145,7 @@
         "Owner": "Vlastník"
     },
     "Models\\DealDocument": {
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Document": "Dokument"
     },
     "Models\\LostReason": {
@@ -160,7 +160,7 @@
         "Add Deal Tag": "Přidat štítek dealu"
     },
     "Models\\Item": {
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Výše",
@@ -176,12 +176,12 @@
         "Position (in the PDF)": "Pozice (v PDF)"
     },
     "Models\\DealLead": {
-        "Deal": "Deal",
-        "Lead": "Lead",
+        "Deal": "Obchodní případ",
+        "Lead": "Potenciální zákazník",
         "Add Deal": "Přidat deal"
     },
     "Models\\DealTask": {
-        "Deal": "Deal",
+        "Deal": "Obchodní případ",
         "Task": "Úkol",
         "Add Deal": "Přidat deal"
     },
@@ -208,10 +208,10 @@
         "Type recent activity here": "Zadejte poslední aktivitu zde",
         "Not completed yet": "Nedokončena",
         "Most recent activities": "Nejnovější aktivity",
-        "Deal": "Deal",
-        "Lead": "Lead",
+        "Deal": "Obchodní případ",
+        "Lead": "Potenciální zákazník",
         "Log completed activity": "Zaznamenat aktivitu",
-        "Enter": "Enter",
+        "Enter": "Zadat",
         "Schedule activity": "Naplánovat aktivitu",
         "Shift+Enter": "Shift+Enter",
         "Deal value:": "Hodnota dealu",

@@ -69,7 +69,7 @@
     "Models\\LeadActivity": {
         "Activity type": "Typ aktywności",
         "Subject": "Temat",
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Contact person": "Osoba kontaktowa",
         "Start date": "Data rozpoczęcia",
         "Start time": "Godzina rozpoczęcia",
@@ -118,19 +118,19 @@
         "Level": "Poziom",
         "Manager": "Menedżer",
         "Team": "Zespół",
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Workflow step": "Krok workflow",
         "Closed": "Zamknięty",
         "Tags": "Tagi",
         "Open \\\/ Closed": "Otwarte \\\/ Zamknięte",
         "Open": "Otwarte",
         "All": "Wszystkie",
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Phone": "Telefon",
         "Advertisement": "Reklama",
         "Partner": "Partner",
         "Web": "Web",
-        "Cold call": "Cold call",
+        "Cold call": "Telefon na zimno",
         "E-mail": "E-mail",
         "Referral": "Polecenie",
         "Other": "Inne",
@@ -160,26 +160,26 @@
     },
     "Models\\LeadHistory": {
         "Change Date": "Data zmiany",
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Description": "Opis",
         "Date": "Data"
     },
     "Models\\LeadTag": {
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Tag": "Tag",
         "Lead Tags": "Tagi leadów"
     },
     "Models\\LeadDocument": {
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Document": "Dokument"
     },
     "Models\\LeadTask": {
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Task": "Zadanie",
         "Lead Tasks": "Zadania leadu"
     },
     "Models\\LeadCampaign": {
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Campaign": "Kampania",
         "Campaign Leads": "Leady kampanii",
         "Add lead": "Dodaj lead"
@@ -203,7 +203,7 @@
         "Add Reason": "Dodaj powód"
     },
     "Models\\LeadProduct": {
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Product": "Produkt",
         "Unit Price": "Cena jednostkowa",
         "Amount": "Ilość",
@@ -214,7 +214,7 @@
         "Sum": "Suma"
     },
     "Components\\FormLead": {
-        "Lead": "Lead",
+        "Lead": "Potencjalny klient",
         "Documents": "Dokumenty",
         "Calendar": "Kalendarz",
         "Shared documents": "Dokumenty udostępnione",
@@ -229,7 +229,7 @@
         "Not completed yet": "Nieukończona",
         "Tasks": "Zadania",
         "Log completed activity": "Zarejestruj wykonaną czynność",
-        "Enter": "Enter",
+        "Enter": "Wprowadź",
         "Schedule activity": "Zaplanuj aktywność",
         "Shift+Enter": "Shift+Enter",
         "Campaign": "Kampania",
@@ -245,10 +245,10 @@
         "End": "Koniec",
         "Start": "Początek",
         "Contact": "Kontakt",
-        "Lead": "Lead"
+        "Lead": "Potencjalny klient"
     },
     "Components\\TableLeads": {
-        "Deal": "Deal"
+        "Deal": "Transakcja"
     },
     "Calendar": {
         "Leads": "Leady",

@@ -5,7 +5,7 @@
     },
     "controllers.deals": {
         "Sales": "Vertrieb",
-        "Deals": "Deals"
+        "Deals": "Verkaufschancen"
     },
     "controllers.dealsArchive": {
         "Sales": "Vertrieb",
@@ -36,7 +36,7 @@
         "Deal warnings": "Warnungen zu Verkaufschancen"
     },
     "Models\\Deal": {
-        "Deal Identifier": "Deal Identifier",
+        "Deal Identifier": "Kennung der Verkaufschance",
         "Title": "Titel",
         "Customer": "Kunde",
         "Contact": "Kontakt",
@@ -46,7 +46,7 @@
         "Expected close date": "Erwartete Schließungsdatum",
         "Owner": "Eigentümer",
         "Created": "Erstellt",
-        "Workflow": "Workflow",
+        "Workflow": "Arbeitsablauf",
         "Workflow step": "Workflow -Schritt",
         "Notes": "Notizen",
         "Source channel": "Quellkanal",
@@ -185,7 +185,7 @@
     },
     "Models\\DealLead": {
         "Deal": "Verkaufschance",
-        "Lead": "Lead"
+        "Lead": "Interessent"
     },
     "Models\\DealTask": {
         "Deal": "Verkaufschance",

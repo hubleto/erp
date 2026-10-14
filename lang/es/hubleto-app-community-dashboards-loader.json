@@ -15,7 +15,7 @@
     "Models\\Dashboard": {
         "Owner": "Propietario",
         "Title": "Título",
-        "Slug": "Slug",
+        "Slug": "Identificador URL",
         "Color": "Color",
         "Is default": "Predeterminado",
         "Add dashboard": "Agregar tablero",

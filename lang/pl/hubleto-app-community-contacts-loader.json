@@ -125,7 +125,7 @@
         "Copy cell content to clipboard": "Skopiuj zawartość komórki do schowka"
     },
     "Controllers\\Import": {
-        "Import": "Import",
+        "Import": "Importuj",
         "Contacts": "Kontakty",
         "Step 1: Prepare list of contacts": "Krok 1: Przygotuj listę kontaktów",
         "Contacts can be imported from a ": "Kontakty można importować z ",

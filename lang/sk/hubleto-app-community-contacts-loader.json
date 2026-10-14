@@ -16,7 +16,7 @@
         "Personal Information": "Osobné údaje",
         "Category": "Kategória",
         "Type": "Typ",
-        "Email": "Email",
+        "Email": "E-mail",
         "Phone Number": "Telefón",
         "Customer": "Zákazník",
         "Tags": "Tagy",
@@ -46,7 +46,7 @@
         "Person": "Kontakt",
         "Contact Category": "Kategória",
         "Type": "Typ",
-        "Email": "Email",
+        "Email": "E-mail",
         "Phone Number": "Telefón",
         "Other": "Iné",
         "Value": "Hodnota",
@@ -106,7 +106,7 @@
     },
     "Components\\FormContact": {
         "No contacts yet.": "Žiadne kontakty.",
-        "Email": "Email",
+        "Email": "E-mail",
         "Type": "Typ",
         "Phone Number": "Telefón",
         "Other": "Iné",
@@ -125,7 +125,7 @@
         "Copy cell content to clipboard": "Skopírovať obsah bunky do schránky"
     },
     "Controllers\\Import": {
-        "Import": "Import",
+        "Import": "Importovať",
         "Contacts": "Kontakty",
         "Step 1: Prepare list of contacts": "Krok 1: Pripravte zoznam kontaktov",
         "Contacts can be imported from a ": "Kontakty je možné importovať z ",

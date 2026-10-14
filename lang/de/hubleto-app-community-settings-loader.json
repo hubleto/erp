@@ -6,7 +6,7 @@
         "Email": "E-Mail",
         "Language": "Sprache",
         "Active profile": "Aktives Profil",
-        "Login": "Login",
+        "Login": "Anmeldung",
         "Password": "Passwort",
         "Active": "Konto ist inaktiv",
         "Time of last login": "Zeit letzter Anmeldung",
@@ -152,7 +152,7 @@
         "Contact types": "Kontakttypen",
         "Countries": "Länder",
         "Currencies": "Währungen",
-        "Workflows": "Workflows",
+        "Workflows": "Arbeitsabläufe",
         "Invoice profiles": "Rechnungsprofile",
         "Platform config": "Plattformkonfiguration",
         "Roles": "Rollen",
@@ -239,7 +239,7 @@
     },
     "Controllers\\Apps": {
         "Settings": "Einstellungen",
-        "Apps": "Apps",
+        "Apps": "Anwendungen",
         "Open": "Offen",
         "Disable": "Deaktivieren"
     },

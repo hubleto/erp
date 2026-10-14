@@ -21,7 +21,7 @@
         "Phases": "Fazy"
     },
     "Models\\Project": {
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Customer": "Klient",
         "Contact": "Kontakt",
         "Identifier": "Identyfikator",
@@ -34,7 +34,7 @@
         "Start": "Start",
         "Deadline": "Termin",
         "Budget": "Budżet",
-        "Workflow": "Workflow",
+        "Workflow": "Przepływ pracy",
         "Workflow step": "Stan workflow",
         "Closed": "Zamknięty",
         "Color": "Kolor",
@@ -79,7 +79,7 @@
     },
     "Models\\ProjectDeal": {
         "Project": "Projekt",
-        "Deal": "Deal",
+        "Deal": "Transakcja",
         "Project Deals": "Deale projektu",
         "Add deal": "Dodaj deal"
     },

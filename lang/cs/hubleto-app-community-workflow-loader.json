@@ -1,6 +1,6 @@
 {
     "manifest": {
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Free sales workflow management.": "Bezplatná správa prodejních kanálů.",
         "History": "Historie",
         "Workflows": "Workflow",
@@ -42,7 +42,7 @@
         "Manage workflows": "Spravovat workflow"
     },
     "Controllers\\Home": {
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Add workflow": "Přidat workflow",
         "Manage workflow steps": "Spravovat kroky"
     },
@@ -51,7 +51,7 @@
         "Workflows": "Workflow"
     },
     "Controllers\\Workflow": {
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Show details": "Zobrazit detaily",
         "Target": "Cílová skupina",
         "Goal": "Cíl",
@@ -63,7 +63,7 @@
         "Closed milestone": "Uzavřený milník"
     },
     "Controllers\\History": {
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "History": "Historie"
     },
     "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
@@ -88,7 +88,7 @@
         "Order": "Pořadí",
         "Color": "Barva",
         "Probability": "Pravděpodobnost",
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Set result of a deal to": "Nastavit výsledek dealu na",
         "Tag": "Značka",
         "Add Workflow Step": "Přidat krok workflow"
@@ -98,11 +98,11 @@
         "Record Id": "ID záznamu",
         "Changed": "Změněno",
         "User": "Uživatel",
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Workflow Step": "Krok"
     },
     "Components\\FormWorkflow": {
-        "Workflow": "Workflow",
+        "Workflow": "Pracovní postup",
         "Steps": "Kroky"
     },
     "Components\\FormWorkflowStep": {

@@ -25,7 +25,7 @@
         "Mail account to send email from": "E-Mail-Konto für den E-Mail-Versand",
         "Mail template": "E-Mail-Vorlage",
         "Reply to": "Antwort an",
-        "Workflow": "Workflow",
+        "Workflow": "Arbeitsablauf",
         "Workflow step": "Workflowschritt",
         "Approved": "Genehmigt",
         "Closed": "Geschlossen",
@@ -38,7 +38,7 @@
         "Shared with": "Geteilt mit"
     },
     "Components\\FormCampaign": {
-        "Leads": "Leads",
+        "Leads": "Interessenten",
         "Campaign": "Kampagne",
         "First create the campaign, then you will be prompted to create leads.": "Erstellen Sie zuerst eine Kampagne, anschließend werden Sie aufgefordert, Leads hinzuzufügen."
     },

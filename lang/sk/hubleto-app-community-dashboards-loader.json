@@ -21,7 +21,7 @@
         "By turning this on you will change the dashboard shown on the Homepage": "Zapnutím tejto možnosti zmeníte dashboard zobrazený na úvodnej stránke"
     },
     "Models\\Panel": {
-        "Dashboard": "Dashboard",
+        "Dashboard": "Ovládací panel",
         "Board": "Zdroj",
         "Title": "Názov",
         "Configuration": "Konfigurácia",

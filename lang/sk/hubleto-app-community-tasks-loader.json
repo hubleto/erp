@@ -2,7 +2,7 @@
     "manifest": {
         "Tasks": "Úlohy",
         "Task management app": "Správa úloh",
-        "Todo": "Todo",
+        "Todo": "Úlohy",
         "My recent tasks": "Moje nedávne úlohy",
         "Calendar": "Kalendár"
     },
@@ -17,7 +17,7 @@
         "Duration": "Trvanie",
         "Start": "Štart",
         "Deadline": "Termín",
-        "Workflow": "Workflow",
+        "Workflow": "Pracovný postup",
         "Workflow step": "Workflow stav",
         "Is milestone": "Míľnik",
         "Closed": "Uzavretá",
@@ -58,7 +58,7 @@
     "Components\\FormTask": {
         "Task": "Úloha",
         "unsaved changes": "neuložené zmeny",
-        "Todo": "Todo",
+        "Todo": "Úlohy",
         "Press ENTER to add new Todo": "Stlačte ENTER pre pridanie nového Todo",
         "Worksheet": "Pracovný výkaz",
         "Orders": "Objednávky",
@@ -73,10 +73,10 @@
     },
     "Controllers\\Todos": {
         "Tasks": "Úlohy",
-        "Todo": "Todo"
+        "Todo": "Úlohy"
     },
     "Components\\FormTodo": {
-        "Todo": "Todo"
+        "Todo": "Úlohy"
     },
     "Components\\TableTodos": [],
     "Calendar": {

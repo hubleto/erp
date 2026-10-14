@@ -1,12 +1,12 @@
 {
     "manifest": {
         "Seminar": "Seminár",
-        "Workshop": "Workshop",
+        "Workshop": "Pracovný seminár",
         "Team building": "Teambuildingová akcia",
         "Conference": "Konferencia",
         "Trade show": "Veľtrh",
         "Product launch": "Uvedenie produktu",
-        "Networking": "Networking",
+        "Networking": "Budovanie kontaktov",
         "Other": "Iné",
         "Event types": "Typy udalostí",
         "Events": "Udalosti",

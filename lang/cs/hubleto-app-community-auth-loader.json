@@ -21,7 +21,7 @@
         "First name": "Jméno",
         "Last name": "Příjmení",
         "Nick": "Přezdívka",
-        "Email": "Email",
+        "Email": "E-mail",
         "Language": "Jazyk",
         "Default company": "Společnost",
         "Apps": "Aplikace",
@@ -79,7 +79,7 @@
     "Controllers\\ForgotPassword": {
         "A password reset link has been sent to your email address.": "Na vaši emailovou adresu byl odeslán odkaz pro obnovení hesla.",
         "Check your inbox.": "Zkontrolujte svou doručenou poštu.",
-        "Email": "Email",
+        "Email": "E-mail",
         "Request password reset": "Požádat o obnovení hesla",
         "Back to sign in": "Zpět na přihlášení"
     },

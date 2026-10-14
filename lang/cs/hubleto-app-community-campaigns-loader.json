@@ -9,10 +9,10 @@
     },
     "Models\\Campaign": {
         "Name": "Název",
-        "UTM source": "UTM source",
-        "UTM campaign": "UTM campaign",
-        "UTM term": "UTM term",
-        "UTM content": "UTM content",
+        "UTM source": "Zdroj UTM",
+        "UTM campaign": "Kampaň UTM",
+        "UTM term": "Výraz UTM",
+        "UTM content": "Obsah UTM",
         "Target audience": "Cílová skupina",
         "Goal": "Cíl",
         "Notes": "Poznámky",
@@ -23,8 +23,8 @@
         "Created": "Vytvořena",
         "UID": "UID",
         "Mail account to send email from": "Odesílací účet",
-        "Workflow": "Workflow",
-        "Workflow step": "Workflow step",
+        "Workflow": "Pracovní postup",
+        "Workflow step": "Krok pracovního postupu",
         "Approved": "Schválena",
         "Closed": "Uzavřena",
         "Add Campaign": "Přidat kampaň",
@@ -44,7 +44,7 @@
         "Online document folder": "Online složka dokumentů",
         "not specified": "nezadáno",
         "direct mail": "přímý mail",
-        "cold call": "cold call",
+        "cold call": "studený hovor",
         "other": "jiné"
     },
     "Models\\Recipient": {
@@ -148,7 +148,7 @@
         "Url": "URL",
         "Clicked": "Kliknuto",
         "Bot Score": "Bot skóre",
-        "Log": "Log"
+        "Log": "Protokol"
     },
     "Models\\CampaignActivity": {
         "Subject": "Předmět",
@@ -211,7 +211,7 @@
         "Your email": "Váš e-mail",
         "has been unsubscribed.": "byl odhlášen.",
         "Your email:": "Váš e-mail:",
-        "Powered by Hubleto": "Powered by Hubleto"
+        "Powered by Hubleto": "Běží na Hubleto"
     },
     "Calendar": {
         "Campaigns": "Kampaně",

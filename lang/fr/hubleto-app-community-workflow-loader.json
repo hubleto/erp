@@ -1,7 +1,7 @@
 {
     "loader": {
         "Sales": "Ventes",
-        "Workflow": "Workflow"
+        "Workflow": "Flux de travail"
     },
     "controllers.home": {
         "Sales": "Ventes"

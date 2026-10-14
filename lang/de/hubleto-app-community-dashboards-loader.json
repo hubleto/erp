@@ -1,6 +1,6 @@
 {
     "manifest": {
-        "Dashboards": "Dashboards",
+        "Dashboards": "Übersichten",
         "Free dashboards app": "Kostenlose Dashboardsanwendung",
         "Preview Dashboards": "Dashboard-Vorschau",
         "Manage": "Verwalten",
@@ -9,10 +9,10 @@
         "Configure your default dashboard": ""
     },
     "root": {
-        "Dashboards": "Dashboards"
+        "Dashboards": "Übersichten"
     },
     "Controllers\\Dashboards": {
-        "Dashboards": "Dashboards",
+        "Dashboards": "Übersichten",
         "Manage dashboards": "Dashboards verwalten",
         "Preview Dashboards": "Dashboard-Vorschau",
         "Add dashboard": "Dashboard hinzufügen"
@@ -20,14 +20,14 @@
     "Models\\Dashboard": {
         "Owner": "Eigentümer",
         "Title": "Name",
-        "Slug": "Slug",
+        "Slug": "URL-Kürzel",
         "Color": "Farbe",
         "Is default": "Voreinstellung",
         "Add dashboard": "Panel hinzufügen",
         "By turning this on you will change the dashboard shown on the Homepage": "Wenn Sie diese Option aktivieren, wird das auf der Startseite angezeigte Dashboard geändert."
     },
     "Models\\Panel": {
-        "Dashboard": "Dashboard",
+        "Dashboard": "Übersicht",
         "Board": "Brett",
         "Title": "Name",
         "Configuration": "Konfiguration",
@@ -38,7 +38,7 @@
         "Position": "Position"
     },
     "Controllers\\Settings": {
-        "Dashboards": "Dashboards",
+        "Dashboards": "Übersichten",
         "Settings": "Einstellungen"
     },
     "Components\\Dashboard": {
@@ -47,6 +47,6 @@
     },
     "Controllers\\DashboardsManage": {
         "Manage": "Verwalten",
-        "Dashboards": "Dashboards"
+        "Dashboards": "Übersichten"
     }
 }

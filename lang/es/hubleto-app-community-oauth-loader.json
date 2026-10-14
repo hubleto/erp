@@ -16,7 +16,7 @@
         "User Id": "ID de usuario",
         "Client Id": "ID de cliente",
         "Scopes": "Alcances",
-        "Code Challenge": "Code Challenge",
+        "Code Challenge": "Desafío de código",
         "Code Challenge Method": "Método de Code Challenge",
         "Redirect Uri": "URI de redirección",
         "Revoked": "Revocado",

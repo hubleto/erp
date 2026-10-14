@@ -92,7 +92,7 @@
         "Currencies": "Devises",
         "Lead Statuses": "États de clients potentiels",
         "Deal Statuses": "États de accords de vente",
-        "Workflows": "Workflows",
+        "Workflows": "Flux de travail",
         "Invoice profiles": "Profils de facturation"
     },
     "controllers.userRoles": {

@@ -30,11 +30,11 @@ class Loader extends \Hubleto\Erp\App
     ';
   }
 
-  public function getSidebarBadgeNumber(): int
-  {
-    $counter = $this->getService(Counter::class);
-    return $counter->unapprovedRecords();
-  }
+  // public function getSidebarBadgeNumber(): int
+  // {
+  //   $counter = $this->getService(Counter::class);
+  //   return $counter->unapprovedRecords();
+  // }
 
   public function installApp(int $round): void
   {

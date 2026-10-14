@@ -4,7 +4,10 @@
         "Free dashboards app": "Aplicación gratuita de tableros",
         "Preview Dashboards": "Vista previa de tableros",
         "Manage": "Gestionar",
-        "My dashboard": "Mi panel"
+        "My dashboard": "Mi panel",
+        "No dashboard configured": "",
+        "You do not have default dashboard configured.": "",
+        "Configure your default dashboard": ""
     },
     "root": {
         "Dashboards": "Tableros"

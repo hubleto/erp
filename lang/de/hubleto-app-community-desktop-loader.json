@@ -1,7 +1,13 @@
 {
     "Controllers\\Home": {
         "Welcome": "Willkommen",
-        "Edit profile": "Profil bearbeiten"
+        "Edit profile": "Profil bearbeiten",
+        "Hubleto provides powerful and secure API to integrate with external services.": "",
+        "Did you know?": "",
+        "Open user guide": "",
+        "Recently used apps": "",
+        "Start Hubleto search with <span class='badge'>\/c<\/span> switch to search customers.": "",
+        "You can have as many dashboard as you wish.": ""
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",

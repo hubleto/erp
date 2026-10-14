@@ -28,7 +28,12 @@
     "Controllers\\Home": {
         "Welcome": "Vitajte",
         "Edit profile": "Upraviť profil",
-        "Recently used apps": "Nedávno použité appky"
+        "Recently used apps": "Nedávno použité appky",
+        "Hubleto provides powerful and secure API to integrate with external services.": "",
+        "Did you know?": "",
+        "Open user guide": "",
+        "Start Hubleto search with <span class='badge'>\/c<\/span> switch to search customers.": "",
+        "You can have as many dashboard as you wish.": ""
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",

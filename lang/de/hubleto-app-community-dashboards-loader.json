@@ -3,7 +3,10 @@
         "Dashboards": "Dashboards",
         "Free dashboards app": "Kostenlose Dashboardsanwendung",
         "Preview Dashboards": "Dashboard-Vorschau",
-        "Manage": "Verwalten"
+        "Manage": "Verwalten",
+        "No dashboard configured": "",
+        "You do not have default dashboard configured.": "",
+        "Configure your default dashboard": ""
     },
     "root": {
         "Dashboards": "Dashboards"

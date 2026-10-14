@@ -3,7 +3,10 @@
         "Dashboards": "Dashboardy",
         "Free dashboards app": "Bezplatná aplikácia pre dashboardy",
         "Manage": "Spravovať",
-        "My dashboard": "Môj dashboard"
+        "My dashboard": "Môj dashboard",
+        "No dashboard configured": "",
+        "You do not have default dashboard configured.": "",
+        "Configure your default dashboard": ""
     },
     "root": {
         "Dashboards": "Dashboardy"

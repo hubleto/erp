@@ -114,7 +114,7 @@ class Order extends \Hubleto\Erp\Model
       ]),
       'description_before' => (new Text($this, $this->translate('Description/notes before the list of items'))),
       'description_after' => (new Text($this, $this->translate('Description/notes after the list of items'))),
-      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class))->setReadonly(),
+      'id_currency' => (new Lookup($this, $this->translate('Currency'), Currency::class)),
       'date_order' => (new Date($this, $this->translate('Order date')))->setRequired()->setDefaultValue(date("Y-m-d")),
       'date_expiration' => (new Date($this, $this->translate('Order expires on'))),
       'date_next_invoice_expected' => (new Date($this, $this->translate('Next invoice expected on'))),

@@ -98,7 +98,8 @@
         "Invoicing Contact": "Fakturační kontakt",
         "Primary": "",
         "Invoicing": "",
-        "Invalid": ""
+        "Invalid": "",
+        "Tag": ""
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty"

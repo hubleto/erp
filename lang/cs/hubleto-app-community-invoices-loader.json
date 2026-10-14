@@ -75,7 +75,11 @@
         "Debit Note": "Vrubopis",
         "Default invoicing profile is not set.": "Výchozí fakturační profil není nastaven.",
         "Inbound \/ outbound": "",
-        "Inbound invoice": ""
+        "Inbound invoice": "",
+        "Outbound invoice": "",
+        "We charge you for...": "",
+        "Additional notes for customer (will be printed on invoice)": "",
+        "Document": ""
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Celkem bez DPH",
@@ -237,7 +241,8 @@
         "Mail to send warning about due invoice - subject": "E-mail upozornění o splatné faktuře - předmět",
         "Mail to send warning about due invoice - body": "E-mail upozornění o splatné faktuře - obsah",
         "Add invoice profile": "Přidat profil faktury",
-        "Invoice profile": "Fakturační profil"
+        "Invoice profile": "Fakturační profil",
+        "Bank (SWIFT\/BIC)": ""
     },
     "Models\\PaymentMethod": {
         "Name": "Název",

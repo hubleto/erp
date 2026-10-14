@@ -109,7 +109,8 @@
         "Invoicing Contact": "Contacto de facturación",
         "Primary": "",
         "Invoicing": "",
-        "Invalid": ""
+        "Invalid": "",
+        "Tag": ""
     },
     "Models\\ContactTag": {
         "Contact": "Contacto",

@@ -75,7 +75,10 @@
         "Debit Note": "Nota de débito",
         "Default invoicing profile is not set.": "No se ha definido el perfil de facturación predeterminado.",
         "Inbound invoice": "",
-        "Outbound invoice": ""
+        "Outbound invoice": "",
+        "We charge you for...": "",
+        "Additional notes for customer (will be printed on invoice)": "",
+        "Document": ""
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Total sin impuestos",

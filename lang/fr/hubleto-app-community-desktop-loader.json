@@ -32,7 +32,11 @@
         "Manage your user account": "",
         "Manage cloud account": "",
         "Sign out": "",
-        "Apps": ""
+        "Apps": "",
+        "Search Hubleto app...": "",
+        "About me": "",
+        "Privacy policy": "",
+        "Terms of use": ""
     },
     "Controllers\\Home": {
         "Welcome": "",

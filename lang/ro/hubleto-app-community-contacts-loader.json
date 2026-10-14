@@ -30,7 +30,8 @@
         "Invoicing Contact": "",
         "Primary": "",
         "Invoicing": "",
-        "Invalid": ""
+        "Invalid": "",
+        "Tag": ""
     },
     "Models\\Value": {
         "Contact": "",

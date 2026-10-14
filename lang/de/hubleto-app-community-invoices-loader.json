@@ -101,7 +101,15 @@
         "This year": "",
         "Last year": "",
         "Inbound invoice": "",
-        "Outbound invoice": ""
+        "Outbound invoice": "",
+        "Proforma": "",
+        "Advance": "",
+        "Standard": "",
+        "Credit Note": "",
+        "Debit Note": "",
+        "We charge you for...": "",
+        "Additional notes for customer (will be printed on invoice)": "",
+        "Document": ""
     },
     "Models\\Item": {
         "Invoice": "",

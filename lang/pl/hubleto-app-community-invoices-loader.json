@@ -76,7 +76,10 @@
         "Default invoicing profile is not set.": "Domyślny profil fakturowania nie jest ustawiony.",
         "Inbound \/ outbound": "",
         "Inbound invoice": "",
-        "Outbound invoice": ""
+        "Outbound invoice": "",
+        "We charge you for...": "",
+        "Additional notes for customer (will be printed on invoice)": "",
+        "Document": ""
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Razem bez VAT",
@@ -238,7 +241,8 @@
         "Mail to send warning about due invoice - subject": "E-mail ostrzeżenia o wymagalnej fakturze - temat",
         "Mail to send warning about due invoice - body": "E-mail ostrzeżenia o wymagalnej fakturze - treść",
         "Add invoice profile": "Dodaj profil faktury",
-        "Invoice profile": "Profil fakturowania"
+        "Invoice profile": "Profil fakturowania",
+        "Bank (SWIFT\/BIC)": ""
     },
     "Models\\PaymentMethod": {
         "Name": "Nazwa",

@@ -74,7 +74,11 @@
         "Credit Note": "Dobropis",
         "Debit Note": "Ťarchopis",
         "Default invoicing profile is not set.": "Predvolený fakturačný profil nie je nastavený.",
-        "Inbound invoice": ""
+        "Inbound invoice": "",
+        "Outbound invoice": "",
+        "We charge you for...": "",
+        "Additional notes for customer (will be printed on invoice)": "",
+        "Document": ""
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Spolu bez DPH",

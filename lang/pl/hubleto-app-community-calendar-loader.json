@@ -24,7 +24,8 @@
         "Description": "Opis",
         "Recurrence": "Powtarzanie",
         "Long meeting minutes (link to external document)": "Szczegółowy protokół (link do zewnętrznego dokumentu)",
-        "Short meeting minutes": "Skrócony protokół"
+        "Short meeting minutes": "Skrócony protokół",
+        "Owner": ""
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Pokaż szczegóły",
@@ -104,7 +105,7 @@
         "End after": "Zakończ po",
         "occurences.": "powtórzeniach.",
         "Repeats from {{ dateFrom }} to {{ dateTo }}.": "Powtarza się od {{ dateFrom }} do {{ dateTo }}.",
-        "day(s)": "dzień/dni",
+        "day(s)": "dzień\/dni",
         "hours": "godzin",
         "minutes": "minut"
     },

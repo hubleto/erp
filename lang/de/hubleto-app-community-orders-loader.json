@@ -64,7 +64,14 @@
         "Sales orders": "",
         "Shared with": "",
         "No periodical payments": "",
-        "Annually": ""
+        "Annually": "",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Order expires on": "",
+        "Next invoice expected on": "",
+        "Document": "",
+        "Last item": "",
+        "Next activity": ""
     },
     "Models\\State": {
         "Title": "Titel",
@@ -91,7 +98,13 @@
         "Invoice item": "",
         "Owner": "",
         "Manager": "",
-        "Position (in the PDF)": ""
+        "Position (in the PDF)": "",
+        "Is chargeable": "",
+        "Charged period - start": "",
+        "Charged period - end": "",
+        "Attachment #1": "",
+        "Attachment #2": "",
+        "Delivery date": ""
     },
     "Models\\History": {
         "Order": "Befehl",
@@ -121,7 +134,8 @@
         "Description": "",
         "Recurrence": "",
         "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Short meeting minutes": "",
+        "Owner": ""
     },
     "Models\\OrderDocument": {
         "Order": "",
@@ -144,5 +158,9 @@
         "VAT": "",
         "Notes": "",
         "Invoice item": ""
+    },
+    "Calendar": {
+        "Orders": "",
+        "Add new activity linked to order": ""
     }
 }

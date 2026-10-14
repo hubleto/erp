@@ -73,7 +73,9 @@
         "Standard": "Estándar",
         "Credit Note": "Nota de crédito",
         "Debit Note": "Nota de débito",
-        "Default invoicing profile is not set.": "No se ha definido el perfil de facturación predeterminado."
+        "Default invoicing profile is not set.": "No se ha definido el perfil de facturación predeterminado.",
+        "Inbound invoice": "",
+        "Outbound invoice": ""
     },
     "Components\\TableInvoices": {
         "Total excl. VAT": "Total sin impuestos",
@@ -161,7 +163,10 @@
         "Group by": "Agrupar por",
         "Add invoice item": "Agregar artículo a la factura",
         "Total price excl. VAT": "Precio total sin IVA",
-        "Total price incl. VAT": "Precio total con IVA"
+        "Total price incl. VAT": "Precio total con IVA",
+        "Attachment #1": "",
+        "Attachment #2": "",
+        "Delivery date": ""
     },
     "Controllers\\Invoices": {
         "Invoices": "Facturas"
@@ -218,7 +223,7 @@
     },
     "Components\\FormProfile": {
         "Profile": "Perfil",
-        "Template":"Plantilla",
+        "Template": "Plantilla",
         "Invoice rendering": "Generación de facturas",
         "E-mails": "Correos electrónicos",
         "Send invoice": "Enviar factura",

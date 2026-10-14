@@ -26,7 +26,8 @@
         "Completed": "",
         "Long meeting minutes (link to external document)": "",
         "Short meeting minutes": "",
-        "Created by": ""
+        "Created by": "",
+        "Owner": ""
     },
     "Controllers\\Boards\\Reminders": {
         "reminders later": "",
@@ -54,5 +55,9 @@
         "Enabled": "",
         "Date from": "",
         "Date to": ""
+    },
+    "Calendar": {
+        "Default": "",
+        "Add a simple event": ""
     }
 }

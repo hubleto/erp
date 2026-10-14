@@ -15,7 +15,9 @@
         "Sent": "Enviado",
         "Read": "Leído",
         "URL": "URL",
-        "No category": "Sin categoría"
+        "No category": "Sin categoría",
+        "Model": "",
+        "RecordId": ""
     },
     "Controllers\\Notifications": {
         "Notifications": "Notificaciones"

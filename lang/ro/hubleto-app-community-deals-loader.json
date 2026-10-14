@@ -6,7 +6,9 @@
         "Deal Lost Reasons": "",
         "Deal warnings": "",
         "Most valuable deals": "",
-        "Deal value by result": ""
+        "Deal value by result": "",
+        "Plan": "",
+        "Calendar": ""
     },
     "root": {
         "Deal Tags": "",
@@ -35,7 +37,8 @@
         "Description": "",
         "Recurrence": "",
         "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Short meeting minutes": "",
+        "Owner": ""
     },
     "Models\\Deal": {
         "Deal Identifier": "",
@@ -73,7 +76,26 @@
         "Managed by me": "",
         "Open \/ Closed": "",
         "Open": "",
-        "Shared with": ""
+        "Shared with": "",
+        "Shared folder (online document storage)": "",
+        "Advertisement": "",
+        "Partner": "",
+        "Web": "",
+        "Cold call": "",
+        "E-mail": "",
+        "Referral": "",
+        "Other": "",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Unknown": "",
+        "Won": "",
+        "Lost": "",
+        "New": "",
+        "Existing": "",
+        "Template": "",
+        "Document": "",
+        "PDF": "",
+        "Next activity": ""
     },
     "Models\\LostReason": {
         "Lost Reason": ""
@@ -99,7 +121,9 @@
         "Description": "",
         "Sales Price": "",
         "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Price incl. VAT": "",
+        "Title": "",
+        "Position (in the PDF)": ""
     },
     "Models\\DealDocument": {
         "Deal": "",
@@ -134,5 +158,9 @@
         "Pending": "",
         "Won": "",
         "Lost": ""
+    },
+    "Calendar": {
+        "Deals": "",
+        "Add new activity linked to deal": ""
     }
 }

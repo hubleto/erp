@@ -30,7 +30,9 @@
         "Add Customer": "",
         "Non-active": "",
         "Shared with": "",
-        "Columns": ""
+        "Columns": "",
+        "Customer": "",
+        "Company ID": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "",
@@ -61,6 +63,11 @@
         "Short meeting minutes": "",
         "Created by": "",
         "Customer": "",
-        "Contact": ""
+        "Contact": "",
+        "Owner": ""
+    },
+    "Calendar": {
+        "Customers": "",
+        "Add new activity linked to customer": ""
     }
 }

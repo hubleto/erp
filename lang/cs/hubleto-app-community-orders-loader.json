@@ -59,10 +59,10 @@
         "Price excl. VAT": "Částka bez DPH",
         "Price incl. VAT": "Částka s DPH",
         "Closed": "Uzavřeno",
-        "Open \\/ Closed": "Otevřené \\/ Uzavřené",
+        "Open \\\/ Closed": "Otevřené \\\/ Uzavřené",
         "Open": "Otevřené",
         "All": "Vše",
-        "Purchase \\/ Sales": "Nákup \\/ Prodej",
+        "Purchase \\\/ Sales": "Nákup \\\/ Prodej",
         "Purchase order": "Nákupní objednávka",
         "Sales order": "Prodejní objednávka",
         "External identifier": "Externí identifikátor",
@@ -89,7 +89,15 @@
         "Group by": "Seskupit podle",
         "Total price excl. VAT": "Celková částka bez DPH",
         "Total price incl. VAT": "Celková částka s DPH",
-        "Order created": "Objednávka vytvořena"
+        "Order created": "Objednávka vytvořena",
+        "Purchase \/ Sales": "",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Order expires on": "",
+        "Next invoice expected on": "",
+        "Document": "",
+        "Last item": "",
+        "Next activity": ""
     },
     "Models\\State": {
         "Title": "Název",
@@ -119,12 +127,18 @@
         "Status": "Stav",
         "Not-prepared to invoice": "Nepřipraveno k fakturaci",
         "Prepared to invoice": "Připraveno k fakturaci",
-        "Due / Not due": "Splatné / Nesplatné",
+        "Due \/ Not due": "Splatné \/ Nesplatné",
         "Due": "Splatné",
         "Not due": "Nesplatné",
         "Group by": "Seskupit podle",
         "Total price excl. VAT": "Celková částka bez DPH",
-        "Total price incl. VAT": "Celková částka s DPH"
+        "Total price incl. VAT": "Celková částka s DPH",
+        "Is chargeable": "",
+        "Charged period - start": "",
+        "Charged period - end": "",
+        "Attachment #1": "",
+        "Attachment #2": "",
+        "Delivery date": ""
     },
     "Models\\History": {
         "Order": "Objednávka",
@@ -214,7 +228,8 @@
         "Description": "Popis",
         "Recurrence": "Opakování",
         "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
-        "Short meeting minutes": "Stručný zápis ze schůzky"
+        "Short meeting minutes": "Stručný zápis ze schůzky",
+        "Owner": ""
     },
     "Models\\OrderDeal": {
         "Order": "Objednávka",
@@ -239,7 +254,7 @@
         "Status": "Stav",
         "Not-prepared to invoice": "Nepřipraveno k fakturaci",
         "Prepared to invoice": "Připraveno k fakturaci",
-        "Due / Not due": "Splatné / Nesplatné",
+        "Due \/ Not due": "Splatné \/ Nesplatné",
         "Due": "Splatné",
         "Not due": "Nesplatné",
         "Group by": "Seskupit podle",

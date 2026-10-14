@@ -106,7 +106,10 @@
         "Mrs.": "Sra.",
         "Valid": "Válido",
         "Tags": "Etiquetas",
-        "Invoicing Contact": "Contacto de facturación"
+        "Invoicing Contact": "Contacto de facturación",
+        "Primary": "",
+        "Invoicing": "",
+        "Invalid": ""
     },
     "Models\\ContactTag": {
         "Contact": "Contacto",

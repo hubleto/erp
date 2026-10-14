@@ -6,7 +6,8 @@
         "Sick leave": "",
         "Personal leave": "",
         "Demo leave policy.": "",
-        "days": ""
+        "days": "",
+        "Manage leave policies, requests, and annual entitlements.": ""
     },
     "Models\\Leave": {
         "Employee": "",
@@ -39,5 +40,8 @@
         "Requires approval": "",
         "Description": "",
         "Add leave type": ""
+    },
+    "Calendar": {
+        "Approved employee leave": ""
     }
 }

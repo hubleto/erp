@@ -24,7 +24,8 @@
         "Description": "Popis",
         "Recurrence": "Opakování",
         "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
-        "Short meeting minutes": "Stručný zápis ze schůzky"
+        "Short meeting minutes": "Stručný zápis ze schůzky",
+        "Owner": ""
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Zobrazit podrobnosti",
@@ -104,7 +105,7 @@
         "End after": "Ukončit po",
         "occurences.": "opakováních.",
         "Repeats from {{ dateFrom }} to {{ dateTo }}.": "Opakuje se od {{ dateFrom }} do {{ dateTo }}.",
-        "day(s)": "den/dní",
+        "day(s)": "den\/dní",
         "hours": "hodin",
         "minutes": "minut"
     },

@@ -24,7 +24,8 @@
         "Description": "",
         "Recurrence": "",
         "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Short meeting minutes": "",
+        "Owner": ""
     },
     "Controllers\\Calendar": {
         "Calendar": "Kalender"
@@ -74,5 +75,9 @@
     "Controllers\\Share": {
         "Share": "",
         "Calendar: Settings": ""
+    },
+    "Calendar": {
+        "Default": "",
+        "Add a simple event": ""
     }
 }

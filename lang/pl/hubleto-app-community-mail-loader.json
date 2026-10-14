@@ -52,7 +52,8 @@
         "Email's account sender is not properly configured.": "Nadawca konta e-mail nie jest poprawnie skonfigurowany.",
         "Recipient contains invalid email address.": "Odbiorca zawiera nieprawidłowy adres e-mail.",
         "Mailer Error": "Błąd wysyłania",
-        "Failed to create the email.": "Nie udało się utworzyć wiadomości."
+        "Failed to create the email.": "Nie udało się utworzyć wiadomości.",
+        "Discussion UID": ""
     },
     "Models\\Account": {
         "Name": "Nazwa",
@@ -71,7 +72,8 @@
         "SMTP password": "Hasło SMTP",
         "Owner": "Właściciel",
         "Manager": "Menedżer",
-        "Add account": "Dodaj konto"
+        "Add account": "Dodaj konto",
+        "Max. attachment size": ""
     },
     "Models\\Mailbox": {
         "Account": "Konto",
@@ -163,7 +165,7 @@
         "Mark as read": "Oznacz jako przeczytane"
     },
     "Mailer": {
-        "Getting emails from {{ count }} account(s).": "Pobieranie wiadomości z {{ count }} konta/kont.",
+        "Getting emails from {{ count }} account(s).": "Pobieranie wiadomości z {{ count }} konta\/kont.",
         "Checking account {{ name }}": "Sprawdzanie konta {{ name }}",
         "Mailbox {{ account }} -> {{ mailbox }}": "Skrzynka pocztowa {{ account }} -> {{ mailbox }}",
         "Found mail {{ number }} {{ id }}": "Znaleziono wiadomość {{ number }} {{ id }}",

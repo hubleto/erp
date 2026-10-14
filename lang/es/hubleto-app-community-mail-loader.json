@@ -52,7 +52,8 @@
         "Email's account sender is not properly configured.": "El remitente de la cuenta de correo no está configurado correctamente.",
         "Recipient contains invalid email address.": "El destinatario contiene una dirección de correo no válida.",
         "Mailer Error": "Error del servicio de correo",
-        "Failed to create the email.": "No se pudo crear el correo."
+        "Failed to create the email.": "No se pudo crear el correo.",
+        "Discussion UID": ""
     },
     "Models\\Account": {
         "Name": "Nombre",
@@ -71,7 +72,8 @@
         "SMTP password": "Contraseña SMTP",
         "Owner": "Propietario",
         "Manager": "Gerente",
-        "Add account": "Añadir cuenta"
+        "Add account": "Añadir cuenta",
+        "Max. attachment size": ""
     },
     "Models\\Mailbox": {
         "Account": "Cuenta",

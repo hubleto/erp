@@ -8,7 +8,9 @@
         "Active leads": "",
         "Archived leads": "",
         "Lead value by score": "",
-        "Lead warnings": ""
+        "Lead warnings": "",
+        "Plan": "",
+        "Calendar": ""
     },
     "root": {
         "Lead Tags": "",
@@ -34,7 +36,8 @@
         "Description": "",
         "Recurrence": "",
         "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Short meeting minutes": "",
+        "Owner": ""
     },
     "Models\\Lead": {
         "Lead Identifier": "",
@@ -74,7 +77,12 @@
         "E-mail": "",
         "Referral": "",
         "Other": "",
-        "Online document folder": ""
+        "Online document folder": "",
+        "Profile link #1": "",
+        "Profile link #2": "",
+        "Profile link #3": "",
+        "Shared with": "",
+        "Next activity": ""
     },
     "Models\\LostReason": {
         "Lost Reason": ""
@@ -82,7 +90,8 @@
     "Models\\LeadHistory": {
         "Change Date": "",
         "Lead": "",
-        "Description": ""
+        "Description": "",
+        "Date": ""
     },
     "Models\\LeadTag": {
         "Lead": "",
@@ -118,5 +127,9 @@
     },
     "Controllers\\Leads": {
         "Leads": ""
+    },
+    "Calendar": {
+        "Leads": "",
+        "Add new activity linked to lead": ""
     }
 }

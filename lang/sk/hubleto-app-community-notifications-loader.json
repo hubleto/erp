@@ -15,7 +15,9 @@
         "Sent": "Odoslané",
         "Read": "Prečítané",
         "URL": "URL",
-        "No category": "Bez kategórie"
+        "No category": "Bez kategórie",
+        "Model": "",
+        "RecordId": ""
     },
     "Controllers\\Notifications": {
         "Notifications": "Notifikácie"

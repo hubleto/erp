@@ -29,7 +29,8 @@
         "Description": "",
         "Recurrence": "",
         "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Short meeting minutes": "",
+        "Owner": ""
     },
     "Controllers\\Customers": {
         "Customers": "Kunden"
@@ -59,7 +60,9 @@
         "Identifier": "",
         "Non-active": "",
         "Shared with": "",
-        "Columns": ""
+        "Columns": "",
+        "Customer": "",
+        "Company ID": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",
@@ -107,5 +110,9 @@
     },
     "Components\\TableContacts": {
         "Primary": "Primär"
+    },
+    "Calendar": {
+        "Customers": "",
+        "Add new activity linked to customer": ""
     }
 }

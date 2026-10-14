@@ -3,7 +3,8 @@
         "Tasks": "Zadania",
         "Task management app": "Aplikacja do zarządzania zadaniami",
         "Todo": "Todo",
-        "My recent tasks": "Moje ostatnie zadania"
+        "My recent tasks": "Moje ostatnie zadania",
+        "Calendar": ""
     },
     "Models\\Task": {
         "Identifier": "Identyfikator",
@@ -29,7 +30,7 @@
         "Contact": "Kontakt",
         "Is chargeable": "Płatne",
         "Related to": "Powiązane z",
-        "Open \\/ Closed": "Otwarte \\/ Zamknięte",
+        "Open \\\/ Closed": "Otwarte \\\/ Zamknięte",
         "Open": "Otwarte",
         "All": "Wszystkie",
         "Estimated workhours": "Szacowane godziny pracy",
@@ -37,7 +38,8 @@
         "Add Task": "Dodaj zadanie",
         "Leave empty to generate automatically.": "Pozostaw puste, aby wygenerować automatycznie.",
         "Shared folder (online document storage)": "Folder współdzielony (magazyn dokumentów online)",
-        "Status": "Status"
+        "Status": "Status",
+        "Description (Scope of Work)": ""
     },
     "Models\\Todo": {
         "To do": "Todo",
@@ -76,9 +78,11 @@
     "Components\\FormTodo": {
         "Todo": "Todo"
     },
-    "Components\\TableTodos": {},
+    "Components\\TableTodos": [],
     "Calendar": {
         "Tasks": "Zadania",
-        "Add new activity linked to Tasks": "Dodaj nową aktywność powiązaną z zadaniem"
+        "Add new activity linked to Tasks": "Dodaj nową aktywność powiązaną z zadaniem",
+        "Tasks and todo": "",
+        "TASK": ""
     }
 }

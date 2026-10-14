@@ -99,7 +99,9 @@
         "Last month": "",
         "Month before last": "",
         "This year": "",
-        "Last year": ""
+        "Last year": "",
+        "Inbound invoice": "",
+        "Outbound invoice": ""
     },
     "Models\\Item": {
         "Invoice": "",
@@ -112,7 +114,10 @@
         "Discount": "",
         "VAT": "",
         "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Price incl. VAT": "",
+        "Attachment #1": "",
+        "Attachment #2": "",
+        "Delivery date": ""
     },
     "Models\\Profile": {
         "Name": "",

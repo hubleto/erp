@@ -30,7 +30,10 @@
         "Mrs.": "Frau",
         "Valid": "Gültig",
         "Tags": "Markierungen",
-        "Invoicing Contact": ""
+        "Invoicing Contact": "",
+        "Primary": "",
+        "Invoicing": "",
+        "Invalid": ""
     },
     "Models\\Value": {
         "Contact": "Kontakt",

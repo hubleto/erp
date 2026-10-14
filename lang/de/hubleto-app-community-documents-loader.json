@@ -9,7 +9,11 @@
         "List": "",
         "Templates": "",
         "Show as list": "",
-        "Manage folders": ""
+        "Manage folders": "",
+        "Document review results": "",
+        "Versions": "",
+        "Reviews": "",
+        "File manager": ""
     },
     "root": {
         "Browse": "Durchsuchen",
@@ -22,7 +26,13 @@
         "File": "Datei",
         "File Link": "Dateilink",
         "Origin Link": "Ursprungslink",
-        "Add Document": "Dokument hinzufügen"
+        "Add Document": "Dokument hinzufügen",
+        "Model": "",
+        "RecordId": "",
+        "Created on": "",
+        "Created by": "",
+        "Workflow": "",
+        "Workflow step": ""
     },
     "Controllers\\Table": {
         "Documents": "Unterlagen"

@@ -19,7 +19,11 @@
         "Zálohová faktúra": "Factura de anticipo",
         "Vyúčtovacia faktúra s DPH": "Factura de liquidación con IVA",
         "Dobropis s DPH": "Nota de crédito con IVA",
-        "Ťarchopis": "Nota de débito"
+        "Ťarchopis": "Nota de débito",
+        "Document review results": "",
+        "Versions": "",
+        "Reviews": "",
+        "File manager": ""
     },
     "Models\\Document": {
         "Document name": "Nombre del documento",
@@ -30,7 +34,13 @@
         "Uid": "Id",
         "Folder": "Carpeta",
         "Add Document": "Agregar documento",
-        "Public": "Público"
+        "Public": "Público",
+        "Model": "",
+        "RecordId": "",
+        "Created on": "",
+        "Created by": "",
+        "Workflow": "",
+        "Workflow step": ""
     },
     "Controllers\\Documents": {
         "Documents": "Documentos"

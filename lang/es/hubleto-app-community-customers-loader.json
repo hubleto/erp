@@ -31,7 +31,9 @@
         "Identifier": "Identificador",
         "Non-active": "Inactivo",
         "Shared with": "Compartido con",
-        "Columns": "Columnas"
+        "Columns": "Columnas",
+        "Customer": "",
+        "Company ID": ""
     },
     "Controllers\\Customers": {
         "Customers": "Clientes"
@@ -59,7 +61,8 @@
         "Description": "Descripción",
         "Recurrence": "Recurrencia",
         "Long meeting minutes (link to external document)": "Minutas de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Resumen de la reunión"
+        "Short meeting minutes": "Resumen de la reunión",
+        "Owner": ""
     },
     "Models\\CustomerDocument": {
         "Customer": "Cliente",
@@ -136,7 +139,7 @@
     "Components\\TableCustomers": {
         "Hide filter": "Ocultar filtro",
         "Show as plain table": "Mostrar como tabla simple",
-        "Show/Hide filter": "Mostrar/Ocultar filtro",
+        "Show\/Hide filter": "Mostrar\/Ocultar filtro",
         "Copy cell content to clipboard": "Copiar el contenido de la celda al portapapeles"
     },
     "Controllers\\Settings": {

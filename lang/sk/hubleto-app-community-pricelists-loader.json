@@ -14,7 +14,12 @@
         "VIP customers": "",
         "Autumn promotion": "",
         "Volume discount 10 %": "",
-        "Purchase prices": ""
+        "Purchase prices": "",
+        "Price lists, quantity breaks, customer-specific prices, promotions and central price and VAT arithmetic.": "",
+        "Price matrix": "",
+        "Price simulator": "",
+        "Prices": "",
+        "VAT rates": ""
     },
     "Controllers\\ApplyToDocument": {
         "This document cannot be priced with price lists.": ""
@@ -348,5 +353,10 @@
         "VAT rate could not be determined.": "",
         "VAT exempt": "",
         "Reverse charge": ""
+    },
+    "Calendar": {
+        "Default": "",
+        "Add a simple event": "",
+        "Price lists": ""
     }
 }

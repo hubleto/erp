@@ -52,7 +52,8 @@
         "Email's account sender is not properly configured.": "Odosielateľ emailového účtu nie je správne nakonfigurovaný.",
         "Recipient contains invalid email address.": "Príjemca obsahuje neplatnú emailovú adresu.",
         "Mailer Error": "Chyba odosielania",
-        "Failed to create the email.": "Nepodarilo sa vytvoriť email."
+        "Failed to create the email.": "Nepodarilo sa vytvoriť email.",
+        "Discussion UID": ""
     },
     "Models\\Account": {
         "Name": "Názov",
@@ -71,7 +72,8 @@
         "SMTP password": "SMTP heslo",
         "Owner": "Majiteľ",
         "Manager": "Manažér",
-        "Add account": "Pridať účet"
+        "Add account": "Pridať účet",
+        "Max. attachment size": ""
     },
     "Models\\Mailbox": {
         "Account": "Účet",
@@ -145,9 +147,9 @@
         "Mail": "Email"
     },
     "Components\\FormAccount": {
-        "Email account":"Emailový účet",
+        "Email account": "Emailový účet",
         "Receiving (IMAP)": "Prijímanie (IMAP)",
-        "Sending (SMTP)":"Odosielanie (SMTP)",
+        "Sending (SMTP)": "Odosielanie (SMTP)",
         "Account": "Účet"
     },
     "Components\\ListFolder": {
@@ -163,11 +165,10 @@
         "Mark as read": "Označiť ako prečítané"
     },
     "Mailer": {
-        "Getting emails from {{ count }} account(s).": "Načítavam emaily z {{ count }} účtu/účtov.",
+        "Getting emails from {{ count }} account(s).": "Načítavam emaily z {{ count }} účtu\/účtov.",
         "Checking account {{ name }}": "Kontrolujem účet {{ name }}",
         "Mailbox {{ account }} -> {{ mailbox }}": "Mailbox {{ account }} -> {{ mailbox }}",
         "Found mail {{ number }} {{ id }}": "Nájdený email {{ number }} {{ id }}",
         "Creating mail in database": "Ukladám email do databázy"
     }
-
 }

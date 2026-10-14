@@ -24,7 +24,9 @@
         "Additional demo candidate profile.": "",
         "Demo application in the recruitment pipeline.": "",
         "Meeting room 2": "",
-        "Application": ""
+        "Application": "",
+        "Recruitment": "",
+        "Manage job openings, applicants, applications, and interviews.": ""
     },
     "Models\\Application": {
         "Job opening": "",
@@ -85,5 +87,9 @@
         "Name": "",
         "Description": "",
         "Add work location": ""
+    },
+    "Calendar": {
+        "Recruitment interviews": "",
+        "Cancelled": ""
     }
 }

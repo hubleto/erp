@@ -5,7 +5,11 @@
         "Browse": "",
         "Show as list": "",
         "Manage folders": "",
-        "Templates": ""
+        "Templates": "",
+        "Document review results": "",
+        "Versions": "",
+        "Reviews": "",
+        "File manager": ""
     },
     "root": {
         "Browse": "",
@@ -18,7 +22,13 @@
         "File": "",
         "File Link": "",
         "Origin Link": "",
-        "Add Document": ""
+        "Add Document": "",
+        "Model": "",
+        "RecordId": "",
+        "Created on": "",
+        "Created by": "",
+        "Workflow": "",
+        "Workflow step": ""
     },
     "Models\\Template": {
         "Name": "",

@@ -3,7 +3,8 @@
         "Products": "",
         "Free product portfolio managment.": "",
         "Categories": "",
-        "Groups": ""
+        "Groups": "",
+        "Units": ""
     },
     "root": {
         "Products": "",
@@ -55,7 +56,30 @@
         "Package discount": "",
         "Package description": "",
         "Add product": "",
-        "Type": ""
+        "Type": "",
+        "Consumable": "",
+        "Storable": "",
+        "Service": "",
+        "Consumables are physical products for which you do not manage inventory levels - they are always available. ": "",
+        "Storable products are physical items for which you manage inventory levels.": "",
+        "Order: An invoice is generated immediately after a sales order is confirmed. ": "",
+        "Delivery: An invoice is generated immediately after the delivery is completed. ": "",
+        "Manual: Invoice is not automatically generated.": "",
+        "Order": "",
+        "Delivery": "",
+        "Manual": "",
+        "Base unit": "",
+        "Count (pieces)": "",
+        "Mass (weight)": "",
+        "Volume (capacity)": "",
+        "Length (distance)": "",
+        "Base unit weight": "",
+        "Base unit length": "",
+        "Base unit width": "",
+        "Base unit height": "",
+        "Track lots\/batches": "",
+        "Stock of this product is identified per lot\/batch.": "",
+        "E.g.: palette, box, bag": ""
     },
     "Controllers\\Products": {
         "Products": ""

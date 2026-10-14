@@ -78,7 +78,14 @@
         "Total price excl. VAT": "Precio total sin IVA",
         "Total price incl. VAT": "Precio total con IVA",
         "Order created": "Pedido creado",
-        "Identifier at customer": "Identificador en el cliente"
+        "Identifier at customer": "Identificador en el cliente",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Order expires on": "",
+        "Next invoice expected on": "",
+        "Document": "",
+        "Last item": "",
+        "Next activity": ""
     },
     "Models\\State": {
         "Title": "Título",
@@ -114,7 +121,13 @@
         "Group by": "Agrupar por",
         "Total price excl. VAT": "Precio total sin IVA",
         "Total price incl. VAT": "Precio total con IVA",
-        "Item order": "Orden del artículo"
+        "Item order": "Orden del artículo",
+        "Is chargeable": "",
+        "Charged period - start": "",
+        "Charged period - end": "",
+        "Attachment #1": "",
+        "Attachment #2": "",
+        "Delivery date": ""
     },
     "Models\\History": {
         "Order": "Pedido",
@@ -172,7 +185,8 @@
         "Description": "Descripción",
         "Recurrence": "Recurrencia",
         "Long meeting minutes (link to external document)": "Minutas detalladas de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Minutas breves de la reunión"
+        "Short meeting minutes": "Minutas breves de la reunión",
+        "Owner": ""
     },
     "Models\\OrderDeal": {
         "Order": "Pedido",

@@ -44,7 +44,12 @@
         "Tags": ""
     },
     "manifest": {
-        "Email marketing tags": ""
+        "Email marketing tags": "",
+        "Email marketing": "",
+        "Full-featured email marketing": "",
+        "Emails": "",
+        "Recipients": "",
+        "Recipient statuses": ""
     },
     "Models\\Campaign": {
         "Title": "",
@@ -65,7 +70,7 @@
         "All": "",
         "Owned by me": "",
         "Managed by me": "",
-        "Open / Closed": "",
+        "Open \/ Closed": "",
         "Open": ""
     },
     "Models\\CampaignSchedule": {
@@ -120,7 +125,7 @@
         "Campaign": "",
         "In campaign": "",
         "Not in campaign": "",
-        "Open / Closed": "",
+        "Open \/ Closed": "",
         "Open": ""
     },
     "Models\\EmailClick": {

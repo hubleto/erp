@@ -52,7 +52,8 @@
         "Email's account sender is not properly configured.": "Odesílatel e-mailového účtu není správně nakonfigurován.",
         "Recipient contains invalid email address.": "Příjemce obsahuje neplatnou e-mailovou adresu.",
         "Mailer Error": "Chyba odesílání",
-        "Failed to create the email.": "Nepodařilo se vytvořit e-mail."
+        "Failed to create the email.": "Nepodařilo se vytvořit e-mail.",
+        "Discussion UID": ""
     },
     "Models\\Account": {
         "Name": "Název",
@@ -71,7 +72,8 @@
         "SMTP password": "SMTP heslo",
         "Owner": "Vlastník",
         "Manager": "Manažer",
-        "Add account": "Přidat účet"
+        "Add account": "Přidat účet",
+        "Max. attachment size": ""
     },
     "Models\\Mailbox": {
         "Account": "Účet",
@@ -163,7 +165,7 @@
         "Mark as read": "Označit jako přečtené"
     },
     "Mailer": {
-        "Getting emails from {{ count }} account(s).": "Načítám e-maily z {{ count }} účtu/účtů.",
+        "Getting emails from {{ count }} account(s).": "Načítám e-maily z {{ count }} účtu\/účtů.",
         "Checking account {{ name }}": "Kontroluji účet {{ name }}",
         "Mailbox {{ account }} -> {{ mailbox }}": "Poštovní schránka {{ account }} -> {{ mailbox }}",
         "Found mail {{ number }} {{ id }}": "Nalezen e-mail {{ number }} {{ id }}",

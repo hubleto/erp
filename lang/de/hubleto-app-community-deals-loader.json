@@ -21,7 +21,9 @@
         "Most valuable deals": "",
         "Deal value by result": "",
         "Active deals": "",
-        "Archived deals": ""
+        "Archived deals": "",
+        "Plan": "",
+        "Calendar": ""
     },
     "root": {
         "Deal statuses": "",
@@ -72,7 +74,26 @@
         "Price incl. VAT": "",
         "Template for quotation": "",
         "Customer's order number": "",
-        "Shared with": ""
+        "Shared with": "",
+        "Shared folder (online document storage)": "",
+        "Advertisement": "",
+        "Partner": "",
+        "Web": "",
+        "Cold call": "",
+        "E-mail": "",
+        "Referral": "",
+        "Other": "",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Unknown": "",
+        "Won": "",
+        "Lost": "",
+        "New": "",
+        "Existing": "",
+        "Template": "",
+        "Document": "",
+        "PDF": "",
+        "Next activity": ""
     },
     "Models\\DealActivity": {
         "Deal": "Handeln",
@@ -92,7 +113,8 @@
         "Description": "",
         "Recurrence": "",
         "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Short meeting minutes": "",
+        "Owner": ""
     },
     "Models\\LostReason": {
         "Lost Reason": "Verlorener Vernunft"
@@ -118,7 +140,9 @@
         "Description": "",
         "Sales Price": "",
         "Price excl. VAT": "",
-        "Price incl. VAT": ""
+        "Price incl. VAT": "",
+        "Title": "",
+        "Position (in the PDF)": ""
     },
     "Models\\DealDocument": {
         "Deal": "Handeln",
@@ -166,5 +190,9 @@
     "Models\\DealTask": {
         "Deal": "",
         "Task": ""
+    },
+    "Calendar": {
+        "Deals": "",
+        "Add new activity linked to deal": ""
     }
 }

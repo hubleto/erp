@@ -10,7 +10,11 @@
         "Sample project #1 for demonstration purposes.": "Proyecto de ejemplo #1 con fines de demostración.",
         "Sample project #2": "Proyecto de ejemplo #2",
         "Sample project #2 for demonstration purposes.": "Proyecto de ejemplo #2 con fines de demostración.",
-        "Create project": "Crear proyecto"
+        "Create project": "Crear proyecto",
+        "Assign task to project": "",
+        "Assign project to order": "",
+        "Assign task to milestone": "",
+        "Calendar": ""
     },
     "root": {
         "Projects": "Proyectos",
@@ -166,7 +170,8 @@
         "Last report": "Último informe",
         "Last progress": "Último progreso",
         "Add milestone": "Agregar hito",
-        "Project": "Proyecto"
+        "Project": "Proyecto",
+        "Responsible": ""
     },
     "Controllers\\Milestones": {
         "Milestones": "Hitos"
@@ -186,5 +191,9 @@
     "Calendar": {
         "Projects": "Proyectos",
         "Add new activity linked to Projects": "Agregar nueva actividad vinculada a los proyectos"
+    },
+    "Models\\MilestoneTask": {
+        "Milestone": "",
+        "Task": ""
     }
 }

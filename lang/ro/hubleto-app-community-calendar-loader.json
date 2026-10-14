@@ -24,7 +24,8 @@
         "Description": "",
         "Recurrence": "",
         "Long meeting minutes (link to external document)": "",
-        "Short meeting minutes": ""
+        "Short meeting minutes": "",
+        "Owner": ""
     },
     "Controllers\\Boards\\Reminders": {
         "All-day": "",
@@ -56,5 +57,9 @@
         "Enabled": "",
         "Date from": "",
         "Date to": ""
+    },
+    "Calendar": {
+        "Default": "",
+        "Add a simple event": ""
     }
 }

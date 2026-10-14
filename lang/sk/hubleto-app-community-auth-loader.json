@@ -8,9 +8,9 @@
         "Chief Officer (default permissions)": "Vedúci pracovník (predvolené oprávnenia)",
         "Can read all data and can modify most of the data. Does not have access to settings.": "Môže čítať všetky údaje a upravovať väčšinu z nich. Nemá prístup k nastaveniam.",
         "Manager (default permissions)": "Manažér (predvolené oprávnenia)",
-        "Can read and modify all data that he/she owns or is manager.": "Môže čítať a upravovať všetky údaje, ktoré vlastní alebo spravuje.",
+        "Can read and modify all data that he\/she owns or is manager.": "Môže čítať a upravovať všetky údaje, ktoré vlastní alebo spravuje.",
         "Employee (default permissions)": "Zamestnanec (predvolené oprávnenia)",
-        "In general, can read or modify only data that he/she owns.": "Vo všeobecnosti môže čítať alebo upravovať iba údaje, ktoré vlastní.",
+        "In general, can read or modify only data that he\/she owns.": "Vo všeobecnosti môže čítať alebo upravovať iba údaje, ktoré vlastní.",
         "Assistant (default permissions)": "Asistent (predvolené oprávnenia)",
         "Very similar to employee, but may be more limited in some certain situations.": "Veľmi podobné zamestnancovi, ale v určitých situáciách môže byť viac obmedzený.",
         "External (default permissions)": "Externý (predvolené oprávnenia)",
@@ -40,7 +40,18 @@
         "Manager (Sales, Project, ...)": "Manažér (obchod, projekt, ...)",
         "Employee": "Zamestnanec",
         "Assistant": "Asistent",
-        "External": "Externý"
+        "External": "Externý",
+        "Login": "",
+        "Password": "",
+        "Active": "",
+        "Time of last login": "",
+        "Last login IP": "",
+        "Time of last access": "",
+        "Last access IP": "",
+        "---": "",
+        "Administrator": "",
+        "Chief Officer": "",
+        "Manager": ""
     },
     "Models\\UserRole": {
         "Role": "Rola",
@@ -83,5 +94,10 @@
     "Controllers\\NotEnoughPermissions": {
         "You don't have permissions for this panel": "Nemáte oprávnenie na prístup k tomuto panelu",
         "Sign out": "Odhlásiť sa"
+    },
+    "Models\\Token": {
+        "Token type": "",
+        "Expiration date": "",
+        "Token": ""
     }
 }

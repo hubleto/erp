@@ -8,7 +8,11 @@
         "Manage folders": "",
         "Templates": "",
         "Documents": "",
-        "Free document management.": ""
+        "Free document management.": "",
+        "Document review results": "",
+        "Versions": "",
+        "Reviews": "",
+        "File manager": ""
     },
     "Models\\Template": {
         "Name": "",
@@ -24,7 +28,13 @@
         "File": "",
         "File Link": "",
         "Origin Link": "",
-        "Add Document": ""
+        "Add Document": "",
+        "Model": "",
+        "RecordId": "",
+        "Created on": "",
+        "Created by": "",
+        "Workflow": "",
+        "Workflow step": ""
     },
     "Controllers\\Browse": {
         "Browse": "",

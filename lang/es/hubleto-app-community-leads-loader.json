@@ -21,7 +21,9 @@
         "Price": "Precio",
         "Solution": "Solución",
         "Demand canceled by customer": "Demanda cancelada por el cliente",
-        "Other": "Otro"
+        "Other": "Otro",
+        "Plan": "",
+        "Calendar": ""
     },
     "Controllers\\Leads": {
         "Sales": "Ventas",
@@ -51,7 +53,8 @@
         "Description": "Descripción",
         "Recurrence": "Recurrente",
         "Long meeting minutes (link to external document)": "Acta larga de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Acta corta de la reunión"
+        "Short meeting minutes": "Acta corta de la reunión",
+        "Owner": ""
     },
     "Models\\Lead": {
         "Add Lead": "Añadir cliente potencial",
@@ -111,7 +114,9 @@
         "to": "a",
         "Yes": "Sí",
         "No": "No",
-        "Lead created": "Cliente potencial creado"
+        "Lead created": "Cliente potencial creado",
+        "Shared with": "",
+        "Next activity": ""
     },
     "root": {
         "Lead statuses": "Estados de clientes potenciales",
@@ -124,7 +129,8 @@
     "Models\\LeadHistory": {
         "Change Date": "Fecha de cambio",
         "Lead": "Cliente potencial",
-        "Description": "Descripción"
+        "Description": "Descripción",
+        "Date": ""
     },
     "Models\\LeadTag": {
         "Lead": "Cliente potencial",

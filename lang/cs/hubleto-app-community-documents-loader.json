@@ -19,7 +19,11 @@
         "Zálohová faktúra": "Zálohová faktura",
         "Vyúčtovacia faktúra s DPH": "Vyúčtovací faktura s DPH",
         "Dobropis s DPH": "Dobropis s DPH",
-        "Ťarchopis": "Vrubopis"
+        "Ťarchopis": "Vrubopis",
+        "Document review results": "",
+        "Versions": "",
+        "Reviews": "",
+        "File manager": ""
     },
     "Models\\Document": {
         "Document name": "Název dokumentu",
@@ -29,7 +33,13 @@
         "Uid": "Uid",
         "Folder": "Složka",
         "Add Document": "Přidat dokument",
-        "Public": "Veřejné"
+        "Public": "Veřejné",
+        "Model": "",
+        "RecordId": "",
+        "Created on": "",
+        "Created by": "",
+        "Workflow": "",
+        "Workflow step": ""
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"
@@ -83,7 +93,7 @@
         "Templates": "Šablony",
         "Documents": "Dokumenty"
     },
-    "Components\\TableDocuments": {},
-    "Components\\TableFolders": {},
-    "Components\\TableTemplates": {}
+    "Components\\TableDocuments": [],
+    "Components\\TableFolders": [],
+    "Components\\TableTemplates": []
 }

@@ -21,7 +21,7 @@
         "Smartphones & Cell Phones": "Smartfóny a mobilné telefóny",
         "Unlocked Phones": "Telefóny bez viazanosti",
         "Contract Phones": "Telefóny so zmluvou",
-        "Basic/Feature Phones": "Základné telefóny",
+        "Basic\/Feature Phones": "Základné telefóny",
         "Tablets & E-Readers": "Tablety a čítačky e-kníh",
         "Android Tablets": "Tablety Android",
         "iPad Tablets": "Tablety iPad",
@@ -73,17 +73,18 @@
         "PC Game Controllers": "Herné ovládače pre PC",
         "Games & Accessories": "Hry a príslušenstvo",
         "Console Games": "Konzolové hry",
-        "VR/AR Headsets & Gear": "VR/AR headsety a vybavenie",
+        "VR\/AR Headsets & Gear": "VR\/AR headsety a vybavenie",
         "Wearable Technology": "Nositeľná technológia",
         "Smartwatches": "Inteligentné hodinky",
         "Apple Watch": "Apple Watch",
-        "Android/Other Smartwatches": "Android a iné inteligentné hodinky",
+        "Android\/Other Smartwatches": "Android a iné inteligentné hodinky",
         "Fitness Trackers": "Fitness náramky",
         "Activity Bands": "Aktivitné náramky",
         "Smart Scales": "Inteligentné váhy",
         "Wearable Accessories": "Príslušenstvo k nositeľnej elektronike",
         "Watch Bands": "Remienky na hodinky",
-        "Replacement Chargers": "Náhradné nabíjačky"
+        "Replacement Chargers": "Náhradné nabíjačky",
+        "Units": ""
     },
     "root": {
         "Products": "Produkty",
@@ -163,7 +164,18 @@
         "Storable products are physical items for which you manage inventory levels.": "Skladovateľné produkty sú fyzické položky, pre ktoré spravujete úroveň zásob.",
         "Order: An invoice is generated immediately after a sales order is confirmed. ": "Objednávka: Faktúra sa vygeneruje okamžite po potvrdení predajnej objednávky. ",
         "Delivery: An invoice is generated immediately after the delivery is completed. ": "Dodanie: Faktúra sa vygeneruje okamžite po dokončení dodávky. ",
-        "Manual: Invoice is not automatically generated.": "Manuálne: Faktúra sa nevytvára automaticky."
+        "Manual: Invoice is not automatically generated.": "Manuálne: Faktúra sa nevytvára automaticky.",
+        "Base unit": "",
+        "Count (pieces)": "",
+        "Mass (weight)": "",
+        "Volume (capacity)": "",
+        "Length (distance)": "",
+        "Base unit weight": "",
+        "Base unit length": "",
+        "Base unit width": "",
+        "Base unit height": "",
+        "Track lots\/batches": "",
+        "Stock of this product is identified per lot\/batch.": ""
     },
     "Models\\Group": {
         "Title": "Názov",
@@ -226,7 +238,7 @@
     "Components\\FormGroup": {
         "Group": "Skupina"
     },
-    "Components\\FormProductSupplier": {},
+    "Components\\FormProductSupplier": [],
     "Components\\TableProducts": {
         "Hide filter": "Skryť filter"
     },

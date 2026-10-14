@@ -15,7 +15,9 @@
         "Sent": "Wysłane",
         "Read": "Przeczytane",
         "URL": "URL",
-        "No category": "Bez kategorii"
+        "No category": "Bez kategorii",
+        "Model": "",
+        "RecordId": ""
     },
     "Controllers\\Notifications": {
         "Notifications": "Powiadomienia"

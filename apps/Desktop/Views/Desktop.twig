@@ -210,13 +210,13 @@
             <li class="mr-2 hidden md:block">
               <button class="btn btn-transparent btn-dropdown">
                 <div class="menu">
-                  <div class="list mr-2">
+                  <div class="list">
                     {% for langSymbol, lang in viewParams.availableLanguages %}
                       <a
                         href="?set-language={{ langSymbol }}"
                         class="btn btn-white btn-no-border btn-list-item"
                       >
-                        <span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/{{ lang.flagImage }}" style="max-height:1em;max-width:1em;" /></span>
+                        <span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/{{ lang.flagImage }}" style="max-height:2em;max-width:2em;" /></span>
                         <span class="text">{{ lang.name }}</span>
                       </a>
                     {% endfor %}

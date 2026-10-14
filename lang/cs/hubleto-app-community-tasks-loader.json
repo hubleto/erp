@@ -3,7 +3,8 @@
         "Tasks": "Úlohy",
         "Task management app": "Správa úloh",
         "Todo": "Todo",
-        "My recent tasks": "Moje nedávné úlohy"
+        "My recent tasks": "Moje nedávné úlohy",
+        "Calendar": ""
     },
     "Models\\Task": {
         "Identifier": "Identifikátor",
@@ -29,7 +30,7 @@
         "Contact": "Kontakt",
         "Is chargeable": "Je účtovatelné",
         "Related to": "Souvisí s",
-        "Open \\/ Closed": "Otevřené \\/ Uzavřené",
+        "Open \\\/ Closed": "Otevřené \\\/ Uzavřené",
         "Open": "Otevřené",
         "All": "Všechny",
         "Estimated workhours": "Odhadované pracovní hodiny",
@@ -37,7 +38,8 @@
         "Add Task": "Přidat úlohu",
         "Leave empty to generate automatically.": "Nechte prázdné pro automatické generování.",
         "Shared folder (online document storage)": "Sdílená složka (online úložiště dokumentů)",
-        "Status": "Stav"
+        "Status": "Stav",
+        "Description (Scope of Work)": ""
     },
     "Models\\Todo": {
         "To do": "Todo",
@@ -76,9 +78,11 @@
     "Components\\FormTodo": {
         "Todo": "Todo"
     },
-    "Components\\TableTodos": {},
+    "Components\\TableTodos": [],
     "Calendar": {
         "Tasks": "Úlohy",
-        "Add new activity linked to Tasks": "Přidat novou aktivitu pro úlohu"
+        "Add new activity linked to Tasks": "Přidat novou aktivitu pro úlohu",
+        "Tasks and todo": "",
+        "TASK": ""
     }
 }

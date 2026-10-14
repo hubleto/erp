@@ -21,7 +21,9 @@
         "Price": "Cena",
         "Solution": "Řešení",
         "Demand canceled by customer": "Poptávka zrušená zákazníkem",
-        "Other": "Jiné"
+        "Other": "Jiné",
+        "Plan": "",
+        "Calendar": ""
     },
     "Controllers\\Leads": {
         "Sales": "Obchod",
@@ -83,7 +85,8 @@
         "Description": "Popis",
         "Recurrence": "Opakování",
         "Long meeting minutes (link to external document)": "Podrobný zápis ze schůzky (odkaz na externí dokument)",
-        "Short meeting minutes": "Stručný zápis ze schůzky"
+        "Short meeting minutes": "Stručný zápis ze schůzky",
+        "Owner": ""
     },
     "Models\\Lead": {
         "Add Lead": "Přidat lead",
@@ -119,7 +122,7 @@
         "Workflow step": "Krok workflow",
         "Closed": "Uzavřený",
         "Tags": "Štítky",
-        "Open \\/ Closed": "Otevřené \\/ Uzavřené",
+        "Open \\\/ Closed": "Otevřené \\\/ Uzavřené",
         "Open": "Otevřené",
         "All": "Vše",
         "Deal": "Deal",
@@ -143,7 +146,9 @@
         "to": "na",
         "Yes": "Ano",
         "No": "Ne",
-        "Lead created": "Lead vytvořen"
+        "Lead created": "Lead vytvořen",
+        "Shared with": "",
+        "Next activity": ""
     },
     "root": {
         "Lead statuses": "Stavy leadů",
@@ -156,7 +161,8 @@
     "Models\\LeadHistory": {
         "Change Date": "Datum změny",
         "Lead": "Lead",
-        "Description": "Popis"
+        "Description": "Popis",
+        "Date": ""
     },
     "Models\\LeadTag": {
         "Lead": "Lead",

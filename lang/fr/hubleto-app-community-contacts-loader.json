@@ -22,7 +22,10 @@
         "Emails": "",
         "Tags": "",
         "Add contact": "",
-        "Invoicing Contact": ""
+        "Invoicing Contact": "",
+        "Primary": "",
+        "Invoicing": "",
+        "Invalid": ""
     },
     "Models\\Value": {
         "Contact": "",

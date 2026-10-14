@@ -10,7 +10,11 @@
         "Sample project #1 for demonstration purposes.": "Vzorový projekt č. 1 pro demonstrační účely.",
         "Sample project #2": "Vzorový projekt č. 2",
         "Sample project #2 for demonstration purposes.": "Vzorový projekt č. 2 pro demonstrační účely.",
-        "Create project": "Vytvořit projekt"
+        "Create project": "Vytvořit projekt",
+        "Assign task to project": "",
+        "Assign project to order": "",
+        "Assign task to milestone": "",
+        "Calendar": ""
     },
     "root": {
         "Projects": "Projekty",
@@ -37,7 +41,7 @@
         "Online documentation folder": "Složka online dokumentace",
         "Notes": "Poznámky",
         "Created": "Vytvořen",
-        "Open \\/ Closed": "Otevřené \\/ Uzavřené",
+        "Open \\\/ Closed": "Otevřené \\\/ Uzavřené",
         "Open": "Otevřené",
         "All": "Vše",
         "Average hourly costs": "Průměrné hodinové náklady",
@@ -166,7 +170,8 @@
         "Last report": "Poslední zpráva",
         "Last progress": "Poslední pokrok",
         "Add milestone": "Přidat milník",
-        "Project": "Projekt"
+        "Project": "Projekt",
+        "Responsible": ""
     },
     "Controllers\\Milestones": {
         "Milestones": "Milníky"
@@ -186,5 +191,9 @@
     "Calendar": {
         "Projects": "Projekty",
         "Add new activity linked to Projects": "Přidat novou aktivitu pro projekt"
+    },
+    "Models\\MilestoneTask": {
+        "Milestone": "",
+        "Task": ""
     }
 }

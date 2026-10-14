@@ -19,7 +19,8 @@
         "Solution": "Riešenie",
         "Demand canceled by customer": "Dopyt zrušený zákazníkom",
         "Other": "Iné",
-        "Calendar": "Kalendár"
+        "Calendar": "Kalendár",
+        "Plan": ""
     },
     "Controllers\\Deals": {
         "Sales": "Predaj",
@@ -106,7 +107,8 @@
         "PDF": "PDF",
         "Deal created": "Deal vytvorený",
         "Yes": "Áno",
-        "No": "Nie"
+        "No": "Nie",
+        "Next activity": ""
     },
     "Models\\DealHistory": {
         "Change Date": "Dátum zmeny",
@@ -139,7 +141,8 @@
         "Description": "Popis",
         "Recurrence": "Opakovanie",
         "Long meeting minutes (link to external document)": "Podrobný zápis zo stretnutia (odkaz na externý dokument)",
-        "Short meeting minutes": "Krátky zápis zo stretnutia"
+        "Short meeting minutes": "Krátky zápis zo stretnutia",
+        "Owner": ""
     },
     "Models\\DealDocument": {
         "Deal": "Deal",
@@ -168,7 +171,9 @@
         "Description": "Popis",
         "Price excl. VAT": "Cena bez DPH",
         "Price incl. VAT": "Cena s DPH",
-        "Sales Price": "Predajná cena"
+        "Sales Price": "Predajná cena",
+        "Title": "",
+        "Position (in the PDF)": ""
     },
     "Models\\DealLead": {
         "Deal": "Deal",

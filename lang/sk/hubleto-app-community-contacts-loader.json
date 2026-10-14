@@ -95,7 +95,10 @@
         "Mrs.": "Pani",
         "Valid": "Platný",
         "Tags": "Značky",
-        "Invoicing Contact": "Fakturačný kontakt"
+        "Invoicing Contact": "Fakturačný kontakt",
+        "Primary": "",
+        "Invoicing": "",
+        "Invalid": ""
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty"

@@ -11,7 +11,9 @@
         "Head office": "",
         "Remote": "",
         "Hybrid": "",
-        "Demo employee profile.": ""
+        "Demo employee profile.": "",
+        "Employees": "",
+        "Employment profiles linked to existing user accounts and teams.": ""
     },
     "Models\\Employee": {
         "User account": "",

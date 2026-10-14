@@ -89,7 +89,14 @@
         "Group by": "Zoskupiť podľa",
         "Total price excl. VAT": "Celková suma bez DPH",
         "Total price incl. VAT": "Celková suma s DPH",
-        "Order created": "Objednávka vytvorená"
+        "Order created": "Objednávka vytvorená",
+        "Description\/notes before the list of items": "",
+        "Description\/notes after the list of items": "",
+        "Order expires on": "",
+        "Next invoice expected on": "",
+        "Document": "",
+        "Last item": "",
+        "Next activity": ""
     },
     "Models\\State": {
         "Title": "Názov",
@@ -119,12 +126,18 @@
         "Status": "Status",
         "Not-prepared to invoice": "Nie pripravené na fakturáciu",
         "Prepared to invoice": "Pripravené na fakturáciu",
-        "Due / Not due": "Splatné / Nesplatné",
+        "Due \/ Not due": "Splatné \/ Nesplatné",
         "Due": "Splatné",
         "Not due": "Nesplatné",
         "Group by": "Zoskupiť podľa",
         "Total price excl. VAT": "Celková suma bez DPH",
-        "Total price incl. VAT": "Celková suma s DPH"
+        "Total price incl. VAT": "Celková suma s DPH",
+        "Is chargeable": "",
+        "Charged period - start": "",
+        "Charged period - end": "",
+        "Attachment #1": "",
+        "Attachment #2": "",
+        "Delivery date": ""
     },
     "Models\\History": {
         "Order": "Objednávka",
@@ -158,7 +171,7 @@
         "Notes for document #5": "Poznámky k dokumentu č. 5",
         "Owner": "Vlastník",
         "Manager": "Manažér",
-        "Add quote": "Pridať ponuku"        
+        "Add quote": "Pridať ponuku"
     },
     "Components\\FormOrder": {
         "Order": "Objednávka",
@@ -214,7 +227,8 @@
         "Description": "Popis",
         "Recurrence": "Opakovanie",
         "Long meeting minutes (link to external document)": "Dlhý zápis zo stretnutia (odkaz na externý dokument)",
-        "Short meeting minutes": "Krátky zápis zo stretnutia"
+        "Short meeting minutes": "Krátky zápis zo stretnutia",
+        "Owner": ""
     },
     "Models\\OrderDeal": {
         "Order": "Objednávka",
@@ -239,7 +253,7 @@
         "Status": "Status",
         "Not-prepared to invoice": "Nie pripravené na fakturáciu",
         "Prepared to invoice": "Pripravené na fakturáciu",
-        "Due / Not due": "Splatné / Nesplatné",
+        "Due \/ Not due": "Splatné \/ Nesplatné",
         "Due": "Splatné",
         "Not due": "Nesplatné",
         "Group by": "Zoskupiť podľa",

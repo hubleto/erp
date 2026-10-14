@@ -21,7 +21,9 @@
         "Price": "Cena",
         "Solution": "Riešenie",
         "Demand canceled by customer": "Dopyt zrušený zákazníkom",
-        "Other": "Iné"
+        "Other": "Iné",
+        "Plan": "",
+        "Calendar": ""
     },
     "Controllers\\Leads": {
         "Sales": "Obchod",
@@ -83,7 +85,8 @@
         "Description": "Popis",
         "Recurrence": "Opakovanie",
         "Long meeting minutes (link to external document)": "Podrobná zápisnica (odkaz na externý dokument)",
-        "Short meeting minutes": "Stručná zápisnica"
+        "Short meeting minutes": "Stručná zápisnica",
+        "Owner": ""
     },
     "Models\\Lead": {
         "Add Lead": "Pridať lead",
@@ -143,7 +146,9 @@
         "to": "na",
         "Yes": "Áno",
         "No": "Nie",
-        "Lead created": "Lead vytvorený"
+        "Lead created": "Lead vytvorený",
+        "Shared with": "",
+        "Next activity": ""
     },
     "root": {
         "Lead statuses": "Stavy leadov",
@@ -156,7 +161,8 @@
     "Models\\LeadHistory": {
         "Change Date": "Dátum zmeny",
         "Lead": "Lead",
-        "Description": "Opis"
+        "Description": "Opis",
+        "Date": ""
     },
     "Models\\LeadTag": {
         "Lead": "Lead",

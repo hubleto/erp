@@ -8,9 +8,9 @@
         "Chief Officer (default permissions)": "Director ejecutivo (permisos predeterminados)",
         "Can read all data and can modify most of the data. Does not have access to settings.": "Puede leer todos los datos y modificar la mayoría de ellos. No tiene acceso a la configuración.",
         "Manager (default permissions)": "Gerente (permisos predeterminados)",
-        "Can read and modify all data that he/she owns or is manager.": "Puede leer y modificar todos los datos de los que es propietario o gerente.",
+        "Can read and modify all data that he\/she owns or is manager.": "Puede leer y modificar todos los datos de los que es propietario o gerente.",
         "Employee (default permissions)": "Empleado (permisos predeterminados)",
-        "In general, can read or modify only data that he/she owns.": "En general, solo puede leer o modificar los datos de los que es propietario.",
+        "In general, can read or modify only data that he\/she owns.": "En general, solo puede leer o modificar los datos de los que es propietario.",
         "Assistant (default permissions)": "Asistente (permisos predeterminados)",
         "Very similar to employee, but may be more limited in some certain situations.": "Muy similar al empleado, pero puede estar más limitado en ciertas situaciones.",
         "External (default permissions)": "Externo (permisos predeterminados)",
@@ -40,7 +40,18 @@
         "Manager (Sales, Project, ...)": "Gerente (ventas, proyectos, ...)",
         "Employee": "Empleado",
         "Assistant": "Asistente",
-        "External": "Externo"
+        "External": "Externo",
+        "Login": "",
+        "Password": "",
+        "Active": "",
+        "Time of last login": "",
+        "Last login IP": "",
+        "Time of last access": "",
+        "Last access IP": "",
+        "---": "",
+        "Administrator": "",
+        "Chief Officer": "",
+        "Manager": ""
     },
     "Models\\UserRole": {
         "Role": "Rol",
@@ -83,5 +94,10 @@
     "Controllers\\NotEnoughPermissions": {
         "You don't have permissions for this panel": "No tiene permisos para este panel",
         "Sign out": "Cerrar sesión"
+    },
+    "Models\\Token": {
+        "Token type": "",
+        "Expiration date": "",
+        "Token": ""
     }
 }

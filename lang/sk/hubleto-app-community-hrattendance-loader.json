@@ -6,7 +6,8 @@
         "Demo attendance record awaiting approval.": "",
         "Demo attendance record.": "",
         "Remote": "",
-        "Awaiting approval": ""
+        "Awaiting approval": "",
+        "Plan employee shifts and record attendance separately from project worksheets.": ""
     },
     "Models\\Attendance": {
         "Employee": "",

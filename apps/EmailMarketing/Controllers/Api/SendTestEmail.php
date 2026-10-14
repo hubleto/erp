@@ -55,7 +55,7 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
 
       return ['status' => 'success'];
     } catch (\Throwable $e) {
-      return ['status' => 'error', 'message' => $e->getMessage()];
+      return ['status' => 'error', 'message' => $e->getMessage().$e->getTraceAsString()];
     }
 
     return $result;

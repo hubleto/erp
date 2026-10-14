@@ -37,9 +37,13 @@ class Lib extends Core
       'RECIPIENT:last_name' => $recipient['last_name'] ?? '',
     ];
 
-    $recipientVariables = @json_decode($recipient['variables'], true);
-    if (is_array($recipientVariables)) {
-      $emailVariables = array_merge($emailVariables, $recipientVariables);
+    if (is_string($recipient['variables'])) {
+      $recipientVariables = @json_decode($recipient['variables'], true);
+      if (is_array($recipientVariables)) {
+        $emailVariables = array_merge($emailVariables, $recipientVariables);
+      }
+    } else {
+      $recipientVariables = [];
     }
 
     $bodyHtml = Lib::replaceVariables($bodyHtml, $emailVariables);

@@ -164,9 +164,11 @@ const TabTest = ({ formEmail }) => {
 
   const [testEmailVariables, setTestEmailVariables] = useState([]);
   const [testEmailSendResult, setTestEmailSendResult] = useState(null);
+  const [sendingTestEmail, setSendingTestEmail] = useState(false);
   const [emailTestInfo, setEmailTestInfo] = useState(null);
   const [recentlyContactedPeriod, setRecentlyContactedPeriod] = useState(1);
-  const [deleteParticipantsResponse, setDeleteParticipantsResponse] = useState(0);
+  const [deletingRecipients, setDeletingRecipients] = useState(false);
+  const [deleteRecipientsResponse, setDeleteRecipientsResponse] = useState(0);
 
   const updateEmailTestInfo = () => {
     request.post(
@@ -212,31 +214,32 @@ const TabTest = ({ formEmail }) => {
             <button
               className='btn btn-delete-outline btn-small'
               onClick={() => {
+                setDeletingRecipients(true);
                 let emails = [];
                 Object.keys(emailTestInfo.recentlyContacted).map((email, key) => {
                   emails.push(email)
                 });
-                setDeleteParticipantsResponse(0);
+                setDeleteRecipientsResponse(0);
                 formEmail.removeRecipients(emails, (res: any) => {
-                  setDeleteParticipantsResponse(res?.status == 'success' ? 1 : 2);
+                  setDeleteRecipientsResponse(res?.status == 'success' ? 1 : 2);
+                  setDeletingRecipients(false);
                   updateEmailTestInfo();
                 });
               }}
             >
-              <span className='icon'><i className='fas fa-trash-can'></i></span>
+              <span className="icon">{deletingRecipients ? <Spinner size="xs" /> : <i className="fas fa-trash-can"></i>}</span>
               <span className='text'>Remove all</span>
             </button>
           </div>
-          {deleteParticipantsResponse == 2 ?
-              <div className='flex items-center px-3 py-2 border border-red-800 rounded bg-red-200 text-red-800'>
+          {deleteRecipientsResponse == 2 ?
+              <div className='alert alert-danger m-2'>
                 <p>{T.translate("There was an error during the deletion of the recipients")}</p>
               </div>
-            : (deleteParticipantsResponse == 1 ?
-              <div className='flex items-center px-3 py-2 border border-green-800 rounded bg-green-200 text-green-800'>
+            : (deleteRecipientsResponse == 1 ?
+              <div className='alert alert-success m-2'>
                 <p>{T.translate("Recipients were succesfully deleted")}</p>
               </div>
-            :
-              <></>)
+            : <></>)
           }
           {Object.keys(emailTestInfo.recentlyContacted).length == 0
             ? <div className='flex gap-1 items-center'>No recipients found.</div>
@@ -297,6 +300,7 @@ const TabTest = ({ formEmail }) => {
         <button
           className="btn btn-transparent mt-2"
           onClick={() => {
+            setSendingTestEmail(true);
             request.post(
               'email-marketing/api/send-test-email',
               {
@@ -306,23 +310,29 @@ const TabTest = ({ formEmail }) => {
               },
               {},
               (result: any) => {
+                setSendingTestEmail(false);
                 setTestEmailSendResult(result);
+              },
+              (error: any) => {
+                console.log(error);
+                setSendingTestEmail(false);
+                setTestEmailSendResult(error);
               }
             );
           }}
         >
-          <span className="icon"><i className="fas fa-envelope"></i></span>
+          <span className="icon">{sendingTestEmail ? <Spinner size="xs" /> : <i className="fas fa-envelope"></i>}</span>
           <span className="text">{T.translate('Send test email')}</span>
         </button>
         {testEmailSendResult && testEmailSendResult.status == 'success' ?
-          <div className='alert alert-success mt-2'>{T.translate('Test email was sent to you.')}</div>
+          <div className='alert alert-success mt-2'>{T.translate('Test email was sent.')}</div>
         : null}
         {testEmailSendResult && testEmailSendResult.status != 'success' ?
-          <div className='alert alert-danger mt-2'>
-            {T.translate('Error occured when sending a test email to you.')}
+          <div className='alert alert-danger mt-2'><div>
+            {T.translate('Error occured while sending test email.')}
             <br/>
             <b>{testEmailSendResult.message}</b>
-          </div>
+          </div></div>
         : null}
       </div>
     </div>

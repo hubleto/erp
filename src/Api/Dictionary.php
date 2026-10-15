@@ -9,6 +9,7 @@ class Dictionary extends \Hubleto\Erp\Controllers\ApiController
   {
     $language = $this->router()->urlParamAsString('language', 'en');
     $addNew = $this->router()->urlParamAsArray('addNew');
+    
 
     // $dictFile = __DIR__ . '/../../lang/' . $language . '.json';
 

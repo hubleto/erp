@@ -16,6 +16,7 @@ class Loader extends \Hubleto\Erp\App
   public function init(): void
   {
     parent::init();
+    $this->setConfigAsInteger('sidebarOrder', 0);
     $this->router()->get([ '/^about\/?$/' => Controllers\About::class ]);
   }
 

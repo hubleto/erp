@@ -19,6 +19,8 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->setConfigAsInteger('sidebarOrder', 0);
+
     $this->router()->get([
       '/^help\/?$/' => Controllers\Help::class,
       '/^help\/api\/welcome-guide-previous-step\/?$/' => Controllers\Api\WelcomeGuidePreviousStep::class,

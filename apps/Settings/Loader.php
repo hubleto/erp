@@ -18,6 +18,7 @@ class Loader extends \Hubleto\Erp\App
   {
     parent::init();
 
+    $this->setConfigAsInteger('sidebarOrder', 0);
     $this->getService(PermissionsManager::class)->init();
 
     $this->router()->crud('settings/users', Controllers\Users::class);

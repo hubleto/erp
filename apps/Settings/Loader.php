@@ -28,6 +28,7 @@ class Loader extends \Hubleto\Erp\App
       '/^settings\/?$/' => Controllers\Dashboard::class,
       '/^settings\/log-viewer\/?$/' => Controllers\LogViewer::class,
       '/^settings\/about-me\/?$/' => Controllers\AboutMe::class,
+      '/^settings\/update-password\/?$/' => Controllers\UpdatePassword::class,
       '/^settings\/apps\/?$/' => Controllers\Apps::class,
       '/^settings\/user-roles\/?$/' => Controllers\UserRoles::class,
       '/^settings\/companies\/?$/' => Controllers\Companies::class,

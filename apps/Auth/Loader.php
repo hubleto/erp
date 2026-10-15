@@ -35,7 +35,6 @@ class Loader extends \Hubleto\Erp\App
     $this->authProvider()->init();
   }
 
-  // upgradeSchema
   public function installApp(int $round): void
   {
     if ($round == 1) {
@@ -90,6 +89,48 @@ class Loader extends \Hubleto\Erp\App
       ])['id'];
 
     }
+  }
+
+  public function getWelcomeScreenMessages(): array
+  {
+    $messages = [];
+    $user = $this->authProvider()->getUser();
+    $passwordChangePeriodDays = $this->config()->getAsInteger('passwordChangePeriod', 90);
+    $passwordChangePeriodSeconds = $passwordChangePeriodDays * 3600*24;
+
+    if (strtotime($user['password_last_change']) <= 1000) {
+      $messages[] = [
+        'class' => 'warning',
+        'icon' => 'fas fa-shield',
+        'content' => '
+          <b>You are using default password.</b><br/>
+          Change it to improve your security.
+        ',
+        'button' => '
+          <a class="btn btn-primary" href="settings/update-password">
+            <span class="icon"><i class="fas fa-shield"></i></span>
+            <span class="text">Change your default password</span>
+          </a>
+        ',
+      ];
+    } else if (strtotime($user['password_last_change']) <= time() - $passwordChangePeriodSeconds) {
+      $messages[] = [
+        'class' => 'warning',
+        'icon' => 'fas fa-shield',
+        'content' => '
+          <b>You did not change your password for more than ' . $passwordChangePeriodDays . ' days.</b><br/>
+          Change it to improve your security.
+        ',
+        'button' => '
+          <a class="btn btn-primary" href="settings/update-password">
+            <span class="icon"><i class="fas fa-shield"></i></span>
+            <span class="text">Change your password</span>
+          </a>
+        ',
+      ];
+    }
+
+    return $messages;
   }
 
 }

@@ -125,6 +125,7 @@ class User extends UserModel implements UserModelInterface
       'id_default_company' => (new Lookup($this, $this->translate("Default company"), Company::class)),
       'apps' => (new Json($this, $this->translate('Apps'))),
       'permissions' => (new Json($this, $this->translate('Permissions'))),
+      'password_last_change' => new DateTime($this, $this->translate('Password last change')),
     ]);
   }
 
@@ -192,6 +193,7 @@ class User extends UserModel implements UserModelInterface
     } else if ($forceSignout) {
       $this->record->where('id', (int) $savedRecord['id'])->update(['force_signout' => 1]);
     }
+
     return $savedRecord;
   }
 
@@ -231,12 +233,12 @@ class User extends UserModel implements UserModelInterface
   /**
    * [Description for isUserActive]
    *
-   * @param mixed $user
+   * @param array $user
    * 
    * @return bool
    * 
    */
-  public function isUserActive($user): bool
+  public function isUserActive(array $user): bool
   {
     return $user['is_active'] == 1;
   }
@@ -295,18 +297,20 @@ class User extends UserModel implements UserModelInterface
    * @param mixed $uidUser
    * @param string $password
    * 
-   * @return array
+   * @return void
    * 
    */
-  public function updatePassword(mixed $uidUser, string $password): array
+  public function updatePassword(mixed $uidUser, string $password): void
   {
     $idUser = (int) $uidUser;
-    return $this->record
+    $this->record
       ->where('id', $idUser)
-      ->update(
-        ["password" => $this->encryptPassword($password)]
-      )
-    ;
+      ->update([
+        'password' => $this->encryptPassword($password),
+        'password_last_change' => date("Y-m-d H:i:s"),
+      ]);
+
+    $this->authProvider()->updateUserInSession($this->authProvider()->getUserFromDatabase());
   }
 
   /**

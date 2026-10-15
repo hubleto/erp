@@ -64,25 +64,7 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
    */
   public function getUser(): array
   {
-    $tmp = $this->getUserFromSession();
-    return [
-      'id' => (int) ($tmp['id'] ?? 0),
-      'type' => (int) ($tmp['type'] ?? 0),
-      'login' => (string) ($tmp['login'] ?? ''),
-      'email' => (string) ($tmp['email'] ?? ''),
-      'first_name' => (string) ($tmp['first_name'] ?? ''),
-      'last_name' => (string) ($tmp['last_name'] ?? ''),
-      'is_active' => (bool) ($tmp['is_active'] ?? false),
-      'force_signout' => (bool) ($tmp['force_signout'] ?? false),
-      'language' => (string) ($tmp['language'] ?? false),
-      'timezone' => (string) ($tmp['timezone'] ?? false),
-      'position' => (string) ($tmp['position'] ?? false),
-      'photo' => (string) ($tmp['photo'] ?? false),
-      'apps' => (string) ($tmp['apps'] ?? ''),
-      'ROLES' => (array) ($tmp['ROLES'] ?? []),
-      'TEAMS' => (array) ($tmp['TEAMS'] ?? []),
-      'DEFAULT_COMPANY' => (array) ($tmp['DEFAULT_COMPANY'] ?? []),
-    ];
+    return $this->normalizeUserProfile($this->getUserFromSession());
   }
 
   /**
@@ -113,6 +95,7 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
       'photo' => (string) ($user['photo'] ?? false),
       'permissions' => (string) ($user['permissions'] ?? false),
       'apps' => (string) ($user['apps'] ?? ''),
+      'password_last_change' => (string) ($user['password_last_change'] ?? ''),
       'APPS' => (array) $apps,
       'ROLES' => (array) ($user['ROLES'] ?? []),
       'TEAMS' => (array) ($user['TEAMS'] ?? []),
@@ -216,8 +199,9 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
         $name = $user['first_name'] . ' ' . $user['last_name'];
       }
 
-      $mJunctionTable = $this->getModel(UserHasToken::class);
-      $mJunctionTable->record->recordCreate([
+      /** @var UserHasToken */
+      $mUserHasToken = $this->getModel(UserHasToken::class);
+      $mUserHasToken->record->recordCreate([
         'id_user' => $user['id'],
         'id_token' => $token['id'],
       ]);
@@ -247,17 +231,18 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
     /** @var User $mUser */
     $mUser = $this->getModel(User::class);
 
-    /** @var UserHasToken $mJunctionTable */
-    $mJunctionTable = $this->getModel(UserHasToken::class);
+    /** @var UserHasToken */
+    $mUserHasToken = $this->getModel(UserHasToken::class);
 
     $token = $mToken->record->where('token', $this->router()->urlParamAsString('token'))->first();
-    $junctionEntry = $mJunctionTable->record->where('id_token', $token->id)->first();
-    $user = $mUser->record->where('id', $junctionEntry->id_user)->first();
+    $userHasToken = $mUserHasToken->record->where('id_token', $token->id)->first();
+    $user = $mUser->record->where('id', $userHasToken->id_user)->first();
     $oldPassword = $user->password;
 
-    $user->update(['password' => password_hash($this->router()->urlParamAsString('password'), PASSWORD_DEFAULT)]);
+    $mUser->updatePassword($user['id'], $this->router()->urlParamAsString('password'));
+    // $user->update(['password' => password_hash($this->router()->urlParamAsString('password'), PASSWORD_DEFAULT)]);
 
-    $junctionEntry->delete();
+    $userHasToken->delete();
     $token->delete();
 
     if ($oldPassword == "") {
@@ -275,17 +260,18 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
    *
    * @param mixed $userId
    * 
-   * @return [type]
+   * @return void
    * 
    */
   private function initiateRememberMe($userId) {
 
-    /** @var Token $mToken */
+    /** @var Token */
     $mToken = $this->getModel(Token::class);
     $token = $mToken->generateToken($this->config()->getAsString('sessionSalt'), Token::TOKEN_TYPE_USER_REMEMBER_ME, date("Y-m-d H:i:s", strtotime("+ 30 day", time())));
 
-    $mJunctionTable = $this->getModel(UserHasToken::class);
-    $mJunctionTable->record->recordCreate([
+    /** @var UserHasToken */
+    $mUserHasToken = $this->getModel(UserHasToken::class);
+    $mUserHasToken->record->recordCreate([
       'id_user' => $userId,
       'id_token' => $token['id'],
     ]);
@@ -301,17 +287,18 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
    */
   public function authenticateRememberedUser(): bool {
 
-    /** @var Token $mToken */
+    /** @var Token */
     $mToken = $this->getModel(Token::class);
     $tokenId = $mToken->validateToken($_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe'] ?? '', Token::TOKEN_TYPE_USER_REMEMBER_ME);
     if (
       $tokenId !== false)
     {
-      $mJunctionTable = $this->getModel(UserHasToken::class);
-      $junctionEntry = $mJunctionTable->record->where('id_token', $tokenId)->first();
-      if (!empty($junctionEntry)) {
-        $userId = $junctionEntry['id_user'];
-        /** @var User $userModel */
+      /** @var UserHasToken */
+      $mUserHasToken = $this->getModel(UserHasToken::class);
+      $userHasToken = $mUserHasToken->record->where('id_token', $tokenId)->first();
+      if (!empty($userHasToken)) {
+        $userId = $userHasToken['id_user'];
+        /** @var User */
         $userModel = $this->getService(User::class);
 
         $authResult = $userModel->loadUser($userId);
@@ -416,16 +403,16 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
       setcookie($this->config()->getAsString('accountUid') . '-rememberMe', '', time() - 3600, "/");
     }
 
-    /** @var Token $mToken */
+    /** @var Token */
     $mToken = $this->getModel(Token::class);
-    /** @var UserHasToken $mJunctionTable */
-    $mJunctionTable = $this->getModel(UserHasToken::class);
+    /** @var UserHasToken */
+    $mUserHasToken = $this->getModel(UserHasToken::class);
 
-    $tokenIds = $mJunctionTable->record->where('id_user', $this->getUserId())->get(['id', 'id_token']);
+    $tokenIds = $mUserHasToken->record->where('id_user', $this->getUserId())->get(['id', 'id_token']);
 
     foreach ($tokenIds as $entry) {
       if ($mToken->record->where('id', $entry['id_token'])->where('type', Token::TOKEN_TYPE_USER_REMEMBER_ME)->count() > 0) {
-        $mJunctionTable->record->where('id', $entry['id'])->delete();
+        $mUserHasToken->record->where('id', $entry['id'])->delete();
       }
       $mToken->record->where('id', $entry['id_token'])->where('type', Token::TOKEN_TYPE_USER_REMEMBER_ME)->delete();
     }

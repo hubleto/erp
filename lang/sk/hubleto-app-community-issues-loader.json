@@ -2,12 +2,12 @@
   "manifest": {
     "Issues": "Problémy",
     "Issue management": "Správa problémov",
-    "Mail accounts": "Emailové účty",
-    "Issues Mail Accounts": "Emailové účty problémov"
+    "Mail accounts": "E-mailové účty",
+    "Issues Mail Accounts": "E-mailové účty problémov"
   },
   "root": {
     "Issues": "Problémy",
-    "Mail accounts": "Emailové účty"
+    "Mail accounts": "E-mailové účty"
   },
   "Controllers\\Issues": {
     "Issues": "Problémy"
@@ -18,7 +18,7 @@
   },
   "Controllers\\MailAccounts": {
     "Issues": "Problémy",
-    "Mail accounts": "Emailové účty"
+    "Mail accounts": "E-mailové účty"
   },
   "Models\\Issue": {
     "Title": "Názov",
@@ -26,7 +26,7 @@
     "Problem description": "Popis problému",
     "Notess": "Poznámky",
     "Customer": "Zákazník",
-    "Workflow": "Pracovný postup",
+    "Workflow": "Workflow",
     "Workflow step": "Krok workflow",
     "Owner": "Vlastník",
     "Manager": "Manažér",
@@ -39,7 +39,7 @@
     "All": "Všetky",
     "Ownership": "Vlastníctvo",
     "Owned by me": "Moje",
-    "Managed by me": "Mnou riadené",
+    "Managed by me": "Mnou spravované",
     "Stage": "Fáza"
   },
   "Models\\IssueTask": {
@@ -52,11 +52,11 @@
     "From": "Od",
     "Content": "Obsah",
     "Thread UID": "UID vlákna",
-    "Originating mail": "Pôvodný email",
+    "Originating mail": "Pôvodný e-mail",
     "Add post": "Pridať príspevok"
   },
   "Models\\MailAccount": {
-    "Mail account (requires Mail app)": "Emailový účet (vyžaduje aplikáciu Mail)",
+    "Mail account (requires Mail app)": "E-mailový účet (vyžaduje aplikáciu Mail)",
     "Configuration": "Konfigurácia",
     "Notes": "Poznámky"
   },

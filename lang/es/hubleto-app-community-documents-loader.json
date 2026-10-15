@@ -22,16 +22,16 @@
         "Ťarchopis": "Nota de débito",
         "Document review results": "Resultados de la revisión del documento",
         "Versions": "Versiones",
-        "Reviews": "Reseñas",
+        "Reviews": "Revisiones",
         "File manager": "Gestor de archivos"
     },
     "Models\\Document": {
         "Document name": "Nombre del documento",
         "File": "Archivo",
-        "Link": "Enlace a la versión en línea",
+        "Link": "Enlace",
         "File Link": "Enlace al archivo",
         "Origin Link": "Enlace original",
-        "Uid": "Id",
+        "Uid": "UID",
         "Folder": "Carpeta",
         "Add Document": "Agregar documento",
         "Public": "Público",
@@ -40,7 +40,7 @@
         "Created on": "Creado el",
         "Created by": "Creado por",
         "Workflow": "Flujo de trabajo",
-        "Workflow step": "Paso del flujo de trabajo"
+        "Workflow step": "Etapa del flujo de trabajo"
     },
     "Controllers\\Documents": {
         "Documents": "Documentos"
@@ -54,7 +54,7 @@
         "Documents": "Documentos"
     },
     "Models\\Folder": {
-        "Uid": "Id",
+        "Uid": "UID",
         "Parent folder": "Carpeta principal",
         "Folder name": "Nombre de la carpeta",
         "Add Folder": "Agregar carpeta"

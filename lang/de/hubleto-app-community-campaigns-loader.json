@@ -14,7 +14,7 @@
         "Goal": "Ziel",
         "Notes": "Notizen",
         "Color": "Farbe",
-        "Manager": "Verwalter",
+        "Manager": "Manager",
         "Created": "Erstellt am",
         "Add Campaign": "Kampagne hinzufügen",
         "UID": "UID",
@@ -25,11 +25,11 @@
         "Mail account to send email from": "E-Mail-Konto für den E-Mail-Versand",
         "Mail template": "E-Mail-Vorlage",
         "Reply to": "Antwort an",
-        "Workflow": "Arbeitsablauf",
-        "Workflow step": "Workflowschritt",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow-Schritt",
         "Approved": "Genehmigt",
         "Closed": "Geschlossen",
-        "Owner": "Inhaber",
+        "Owner": "Eigentümer",
         "Lanuched by": "Gestartet von",
         "Launched": "Gestartet",
         "Open \/ Closed": "Offen / Geschlossen",
@@ -38,7 +38,7 @@
         "Shared with": "Geteilt mit"
     },
     "Components\\FormCampaign": {
-        "Leads": "Interessenten",
+        "Leads": "Leads",
         "Campaign": "Kampagne",
         "First create the campaign, then you will be prompted to create leads.": "Erstellen Sie zuerst eine Kampagne, anschließend werden Sie aufgefordert, Leads hinzuzufügen."
     },

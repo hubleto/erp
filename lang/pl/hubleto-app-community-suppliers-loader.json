@@ -15,8 +15,8 @@
         "Contact": "Kontakt",
         "Order email": "E-mail do zamówień",
         "Tax ID": "NIP",
-        "Company ID": "REGON",
-        "VAT ID": "NIP UE",
+        "Company ID": "NIP",
+        "VAT ID": "Nr VAT",
         "Payment account number": "Numer konta bankowego",
         "Add supplier": "Dodaj dostawcę",
         "Suppliers": "Dostawcy"

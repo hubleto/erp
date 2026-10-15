@@ -1,17 +1,17 @@
 {
     "manifest": {
         "Cloud": "Cloud",
-        "Management of cloud Hubleto account.": "Manažment cloud účtu Hubleto."
+        "Management of cloud Hubleto account.": "Správa cloudového účtu Hubleto."
     },
     "Models\\Log": {
         "Date": "Dátum",
         "Active users": "Aktívni používatelia",
         "Paid apps": "Platené aplikácie",
         "Premium expected": "Premium účet vyžadovaný",
-        "Log datetime": "Denník DateTime"
+        "Log datetime": "Dátum a čas záznamu"
     },
     "Models\\Credit": {
-        "Recalculated": "Dátum",
+        "Recalculated": "Dátum prepočtu",
         "Credit": "Kredit"
     },
     "Models\\Payment": {
@@ -20,23 +20,23 @@
         "Full amount": "Plná suma",
         "Discounted amount": "Zľavnená suma",
         "Type": "Typ",
-        "Details": "Detaily",
+        "Details": "Podrobnosti",
         "Has invoice": "Má faktúru",
-        "Billing account": "Účtovací profil",
-        "UUID": "Uuid"
+        "Billing account": "Fakturačný účet",
+        "UUID": "UUID"
     },
     "Models\\Discount": {
         "Year": "Rok",
         "Month": "Mesiac",
         "Discount": "Zľava",
         "Notes": "Poznámky",
-        "Billing account": "Účtovací profil"
+        "Billing account": "Fakturačný účet"
     },
     "Models\\BillingAccount": {
         "Name": "Pomenovanie",
         "Phone": "Telefón",
         "E-mail": "E-mail",
-        "Tax ID": "Daňové IČO",
+        "Tax ID": "DIČ",
         "VAT ID": "IČ DPH",
         "Street, line 1": "Ulica, riadok 1",
         "Street, line 2": "Ulica, riadok 2",
@@ -47,7 +47,7 @@
         "Created": "Vytvorené"
     },
     "Controllers\\Dashboard": {
-        "welcome to Hubleto cloud.": "vitajte v Hubleto cloud.",
+        "welcome to Hubleto cloud.": "vitajte v Hubleto Cloud.",
         "We are happy you decided to use Hubleto.": "Sme radi, že ste sa rozhodli používať Hubleto.",
         "Before you start, you should first read, understand and accept our": "Pred začatím si prosím prečítajte, porozumejte a odsúhlaste naše",
         "Terms of use": "Podmienky používania",
@@ -56,23 +56,23 @@
         "Therefore, we kindly ask you to go through these documents and appoint your consent": "Preto Vás žiadame, aby ste si tieto dokumenty prečítali a vyjadrili súhlas",
         "by ticking the checkbox below.": "zaškrtnutím políčka nižšie.",
         "I have read, undestrood and agree to the": "Prečítal/-a som si, rozumiem a súhlasím s",
-        "of Hubleto cloud": "Hubleto cloud",
-        "Continue to the dashboard": "Pokračovať na nástennú tabuľu",
+        "of Hubleto cloud": "služby Hubleto Cloud",
+        "Continue to the dashboard": "Pokračovať na dashboard",
         "You are upgraded to Premium": "Máte aktivované Premium",
         "Free trial expired.": "Skúšobná doba vypršala.",
-        "Free trial expires in": "Skúšobná prevádzka skončí o",
+        "Free trial expires in": "Bezplatná skúšobná doba skončí o",
         "days": "dní",
         "Your subscription is inactive": "Vaše predplatné je neaktívne",
         "Make a payment to reactivate it again.": "Vykonajte platbu na opätovnú aktiváciu.",
         "Automatic subscription renewal is active": "Automatické obnovenie predplatného je aktívne",
-        "Access to your Premium account will be automaticaly renewed next month.": "Prístup do Vášho Premium účtu bude automaticky predĺžený o mesiac.",
+        "Access to your Premium account will be automaticaly renewed next month.": "Prístup k vášmu účtu Premium bude automaticky predĺžený o mesiac.",
         "Automatic subscription renewal is deactivated": "Automatické obnovenie predplatného je deaktivované",
-        "Access to your Premium account will be blocked on ": "Prístup do Vášho Premium účtu bude zablokovaný dňa ",
+        "Access to your Premium account will be blocked on ": "Prístup k vášmu účtu Premium bude zablokovaný dňa ",
         "Activate subscription renewal": "Aktivovať automatické obnovenie predplatného",
         "Extend subscription": "Predĺžiť predplatné",
         "You will be redirected to the payment provider": "Budete presmerovaný na poskytovateľa platby",
         "Your Premium benefits": "Vaše výhody Premium",
-        "unlimited users": "neobmedzení používatelia",
+        "unlimited users": "neobmedzený počet používateľov",
         "more apps & features": "viac aplikácií a funkcií",
         "premium support": "prémiová podpora",
         "Add new users or install new apps": "Pridať používateľov a inštalovať aplikácie",
@@ -80,18 +80,18 @@
         "Technical support": "Technická podpora",
         "Sales": "Predaj",
         "You are using free personal account": "Používate bezplatný osobný účet",
-        "Upgrade to Premium and you'll get": "Inováciou na Premium získate",
-        "Activate Premium account": "Aktivovať Premium účet",
-        "You will be given": "Bude Vám poskytnutých",
+        "Upgrade to Premium and you'll get": "Prechodom na Premium získate",
+        "Activate Premium account": "Aktivovať účet Premium",
+        "You will be given": "Bude vám poskytnutých",
         "30 days of free": "30 dní bezplatného",
         "trial period": "skúšobného obdobia",
         "to configure payment method.": "na nastavenie spôsobu platby.",
         "Please type your account's email address below": "Zadajte e-mailovú adresu Vášho účtu nižšie",
-        "to confirm that you realy want to activate Premium account": "na potvrdenie, že naozaj chcete aktivovať Premium účet",
+        "to confirm that you realy want to activate Premium account": "na potvrdenie, že naozaj chcete aktivovať účet Premium",
         "To confirm, type your email address here.": "Pre potvrdenie zadajte svoju e-mailovú adresu.",
-        "Go! Activate premium account now.": "Aktivovať Premium účet teraz.",
+        "Go! Activate premium account now.": "Do toho! Aktivujte účet Premium teraz.",
         "Show payments and download invoices": "Zobraziť platby a stiahnuť faktúry",
-        "Manage billing accounts": "Spravovať účtovacie profily",
+        "Manage billing accounts": "Spravovať fakturačné účty",
         "Usage info": "Informácie o používaní",
         "Month": "Mesiac",
         "Active users": "Aktívni používatelia",
@@ -100,7 +100,7 @@
         "Price for this month": "Cena za tento mesiac",
         "Terms of use and privacy policy accepted": "Podmienky používania akceptované",
         "Subscription active until": "Predplatné aktívne do",
-        "Premium account activated": "Premium účet aktivovaný",
+        "Premium account activated": "Účet Premium aktivovaný",
         "Free trial until": "Skúšobná doba do",
         "Account UID": "Identifikátor účtu",
         "Variable symbol for payments": "Variabilný symbol pre platby",
@@ -111,7 +111,7 @@
         "Charge credit via bank transfer": "Dobiť kredit bankovým prevodom"
     },
     "Controllers\\BillingAccounts": {
-        "Billing accounts": "Účtovacie profily"
+        "Billing accounts": "Fakturačné účty"
     },
     "Controllers\\MakePayment": {
         "Make payment": "Vykonať platbu",
@@ -128,7 +128,7 @@
         "was simulated.": "bola simulovaná."
     },
     "Controllers\\Log": {
-        "Usage log": "Denník používania",
+        "Usage log": "Záznam používania",
         "Datetime": "Dátum a čas",
         "Active users": "Aktívni používatelia",
         "Paid apps": "Platené aplikácie"
@@ -139,12 +139,12 @@
         "UUID": "UUID",
         "Type": "Typ",
         "Amount": "Suma",
-        "Details": "Detaily",
+        "Details": "Podrobnosti",
         "Invoice": "Faktúra",
         "Download invoice": "Stiahnuť faktúru"
     },
     "root": {
-        "Free trial expires in": "Skúšobná prevádzka skončí o",
+        "Free trial expires in": "Bezplatná skúšobná doba skončí o",
         "days": "dní"
     }
 }

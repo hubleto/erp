@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Contacts": "Kontakty",
-        "Default customer management and addressbook.": "Adresár a manažment zákazníkov.",
+        "Default customer management and addressbook.": "Štandardná správa zákazníkov a adresár.",
         "Contact Categories": "Kategórie kontaktov",
         "Contact Tags": "Značky kontaktov",
         "Import contacts": "Importovať kontakty",
@@ -19,13 +19,13 @@
         "Email": "E-mail",
         "Phone Number": "Telefón",
         "Customer": "Zákazník",
-        "Tags": "Tagy",
+        "Tags": "Značky",
         "Value": "Hodnota",
         "Add contact": "Pridať kontakt",
-        "No contacts for this person yet.": "Ešte nemáte žiadne kontakty na túto osobu"
+        "No contacts for this person yet.": "Pre túto osobu zatiaľ nie sú žiadne kontakty."
     },
     "Components\\TablePersons": {
-        "Start typing to search...": "Hľadať..."
+        "Start typing to search...": "Začnite písať na vyhľadávanie..."
     },
     "Models\\Person": {
         "First name": "Meno",
@@ -34,11 +34,11 @@
         "Main Contact": "Hlavný kontakt",
         "Notes": "Poznámky",
         "Active": "Aktívny",
-        "Date Created": "Vytvorený",
+        "Date Created": "Dátum vytvorenia",
         "Contacts": "Kontakty",
         "Add Contact": "Pridať kontakt",
-        "Emails": "Emaily",
-        "Phone Numbers": "Telefóny",
+        "Emails": "E-maily",
+        "Phone Numbers": "Telefónne čísla",
         "Add": "Pridať",
         "Primary Contact": "Primárny kontakt"
     },
@@ -52,7 +52,7 @@
         "Value": "Hodnota",
         "Contact": "Kontakt",
         "Category": "Kategória",
-        "Number": "Počet",
+        "Number": "Číslo",
         "URL": "Adresa URL",
         "Contacts": "Kontakty",
         "Add Customer": "Pridať zákazníka"
@@ -68,7 +68,7 @@
         "Region": "Región",
         "City": "Mesto",
         "Postal Code": "PSČ",
-        "Country": "Štát"
+        "Country": "Krajina"
     },
     "root": {
         "Contact Categories": "Kategórie kontaktov",
@@ -80,16 +80,16 @@
         "Salutation": "Oslovenie",
         "Title before": "Titul pred",
         "First name": "Meno",
-        "Middle name": "Prostredné meno",
+        "Middle name": "Stredné meno",
         "Last name": "Priezvisko",
         "Title after": "Titul za",
         "Customer": "Zákazník",
         "Primary Contact": "Primárny kontakt",
         "Notes": "Poznámky",
-        "Date Created": "Vytvorený",
+        "Date Created": "Dátum vytvorenia",
         "Active": "Aktívny",
         "Add contact": "Pridať kontakt",
-        "Emails": "Emaily",
+        "Emails": "E-maily",
         "Phone Numbers": "Telefónne čísla",
         "Mr.": "Pán",
         "Mrs.": "Pani",
@@ -99,13 +99,13 @@
         "Primary": "Primárny",
         "Invoicing": "Fakturácia",
         "Invalid": "Neplatný",
-        "Tag": "Štítok"
+        "Tag": "Značka"
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty"
     },
     "Components\\FormContact": {
-        "No contacts yet.": "Žiadne kontakty.",
+        "No contacts yet.": "Zatiaľ žiadne kontakty.",
         "Email": "E-mail",
         "Type": "Typ",
         "Phone Number": "Telefón",
@@ -153,7 +153,7 @@
         "Export your addressbook": "Exportovať váš adresár",
         "modify it and re-import again": "upraviť ho a znovu importovať",
         "Step 2: Upload the file with contacts": "Krok 2: Nahrajte súbor s kontaktmi",
-        "Step 3: Give a tag to new imported contacts": "Krok 3: Priraďte tag novým importovaným kontaktom",
+        "Step 3: Give a tag to new imported contacts": "Krok 3: Priraďte značku novým importovaným kontaktom",
         "Step 4: Check the import": "Krok 4: Skontrolujte import",
         "Check the import now": "Skontrolovať import teraz",
         "Step 5: Run the import": "Krok 5: Spustite import",

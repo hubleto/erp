@@ -22,13 +22,13 @@
         "Ťarchopis": "Vrubopis",
         "Document review results": "Výsledky kontroly dokumentu",
         "Versions": "Verze",
-        "Reviews": "Hodnocení",
+        "Reviews": "Kontroly",
         "File manager": "Správce souborů"
     },
     "Models\\Document": {
         "Document name": "Název dokumentu",
         "File": "Soubor",
-        "File Link": "Odkaz na dokument",
+        "File Link": "Odkaz na soubor",
         "Origin Link": "Původní odkaz",
         "Uid": "Uid",
         "Folder": "Složka",
@@ -38,8 +38,8 @@
         "RecordId": "ID záznamu",
         "Created on": "Vytvořeno dne",
         "Created by": "Vytvořil",
-        "Workflow": "Pracovní postup",
-        "Workflow step": "Krok pracovního postupu"
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"

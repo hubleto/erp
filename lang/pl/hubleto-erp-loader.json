@@ -22,7 +22,7 @@
         "Delete": "Usuń",
         "Confirm delete": "Potwierdź usunięcie",
         "Edit": "Edytuj",
-        "Adding record": "Dodaj rekord",
+        "Adding record": "Dodawanie rekordu",
         "Editing record": "Edycja rekordu",
         "Record": "Rekord",
         "New record": "Nowy rekord",
@@ -61,10 +61,10 @@
     },
     "Components\\Table": {
         "Delete": "Usuń",
-        "Start typing to search...": "Zacznij wpisywać, aby wyszukać...",
-        "Search...": "Szukaj",
+        "Start typing to search...": "Zacznij pisać, aby wyszukać...",
+        "Search...": "Szukaj...",
         "No data.": "Brak danych.",
-        "More options": "Ustawienia",
+        "More options": "Więcej opcji",
         "Show\\\/Hide filter": "Pokaż\\\/ukryj filtr",
         "Hide filter": "Ukryj filtr",
         "Show as plain table": "Pokaż jako prostą tabelę",
@@ -88,14 +88,14 @@
         "Keep signed in": "Pozostań zalogowany"
     },
     "Controllers\\SignIn": {
-        "Your email": "Email",
+        "Your email": "Twój e-mail",
         "Password": "Hasło",
         "Keep signed in": "Pozostań zalogowany",
         "Sign in": "Zaloguj się",
-        "Forgot password?": "Zapomniałem hasła"
+        "Forgot password?": "Nie pamiętasz hasła?"
     },
     "Components\\Inputs\\Image": {
-        "Choose image": "Prześlij obraz"
+        "Choose image": "Wybierz obraz"
     },
     "Components\\Inputs\\TextareaWithHtmlPreview": {
         "Toggle fullscreen": "Przełącz pełny ekran",
@@ -111,7 +111,7 @@
     },
     "Controllers\\NotFound": {
         "Page Not Found": "Strona nie znaleziona",
-        "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Nie znaleźliśmy strony, której szukasz.",
+        "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Przepraszamy, nie udało się znaleźć strony, której szukasz. Sprawdź swoje uprawnienia lub wróć na stronę główną.",
         "Home": "Strona główna",
         "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Nie udało się znaleźć strony, której szukasz. Sprawdź swoje uprawnienia lub wróć na stronę główną."
     },

@@ -1,8 +1,8 @@
 {
     "manifest": {
         "Deals": "Deale",
-        "Deal management. From deal to purchase.": "Zarządzanie transakcjami handlowymi aż do stworzenia oferty.",
-        "Deal Tags": "Tagi deali",
+        "Deal management. From deal to purchase.": "Zarządzanie dealami. Od dealu do zakupu.",
+        "Deal Tags": "Znaczniki deali",
         "Deal Lost Reasons": "Powody utraty dealu",
         "Deal warnings": "Ostrzeżenia dotyczące deali",
         "Most valuable deals": "Najcenniejsze deale",
@@ -25,7 +25,7 @@
     "Controllers\\Deals": {
         "Sales": "Sprzedaż",
         "Deals": "Deale",
-        "Open deals": "Otwarte oferty",
+        "Open deals": "Otwarte deale",
         "Total value": "Łączna wartość"
     },
     "Controllers\\DealsArchive": {
@@ -47,13 +47,13 @@
         "Title": "Nazwa",
         "Customer": "Klient",
         "Contact person": "Osoba kontaktowa",
-        "Lead": "Potencjalny klient",
+        "Lead": "Lead",
         "Price": "Cena",
         "Currency": "Waluta",
         "Expected close date": "Przewidywana data zamknięcia",
         "Assigned user": "Odpowiedzialny",
-        "Date created": "Utworzony",
-        "Workflow": "Przepływ pracy",
+        "Date created": "Data utworzenia",
+        "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Notes": "Notatki",
         "Source channel": "Źródło",
@@ -68,7 +68,7 @@
         "Deal Result": "Wynik dealu",
         "Date of result update": "Data aktualizacji wyniku",
         "New Customer": "Nowy klient",
-        "Business type": "Typ biznesu",
+        "Business type": "Typ transakcji",
         "Contact": "Kontakt",
         "Owner": "Właściciel",
         "Created": "Utworzony",
@@ -112,25 +112,25 @@
     },
     "Models\\DealHistory": {
         "Change Date": "Data zmiany",
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Description": "Opis",
         "Deals": "Deale",
         "Add Deal": "Dodaj deal"
     },
     "Models\\DealTag": {
-        "Deal": "Transakcja",
-        "Tag": "Oznaczenie",
-        "Deal Tags": "Tagi deali"
+        "Deal": "Deal",
+        "Tag": "Znacznik",
+        "Deal Tags": "Znaczniki deali"
     },
     "Models\\DealActivity": {
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Contact person": "Osoba kontaktowa",
         "Activity type": "Typ aktywności",
         "Subject": "Temat",
         "Start date": "Data rozpoczęcia",
-        "Start time": "Początek",
-        "End date": "Data",
-        "End time": "Czas",
+        "Start time": "Godzina rozpoczęcia",
+        "End date": "Data zakończenia",
+        "End time": "Godzina zakończenia",
         "All day": "Cały dzień",
         "Completed": "Ukończona",
         "Created by": "Utworzone przez",
@@ -141,11 +141,11 @@
         "Description": "Opis",
         "Recurrence": "Powtarzanie",
         "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
-        "Short meeting minutes": "Krótki protokół ze spotkania",
+        "Short meeting minutes": "Skrócony protokół ze spotkania",
         "Owner": "Właściciel"
     },
     "Models\\DealDocument": {
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Document": "Dokument"
     },
     "Models\\LostReason": {
@@ -156,11 +156,11 @@
     "Models\\Tag": {
         "Name": "Nazwa",
         "Color": "Kolor",
-        "Deal Tags": "Tagi deali",
-        "Add Deal Tag": "Dodaj tag dealu"
+        "Deal Tags": "Znaczniki deali",
+        "Add Deal Tag": "Dodaj znacznik dealu"
     },
     "Models\\Item": {
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Product": "Produkt",
         "Unit Price": "Cena jednostkowa",
         "Amount": "Kwota",
@@ -176,18 +176,18 @@
         "Position (in the PDF)": "Pozycja (w PDF)"
     },
     "Models\\DealLead": {
-        "Deal": "Transakcja",
-        "Lead": "Potencjalny klient",
+        "Deal": "Deal",
+        "Lead": "Lead",
         "Add Deal": "Dodaj deal"
     },
     "Models\\DealTask": {
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Task": "Zadanie",
         "Add Deal": "Dodaj deal"
     },
     "root": {
         "Deal statuses": "Statusy deali",
-        "Deal Tags": "Tagi deali",
+        "Deal Tags": "Znaczniki deali",
         "Deal value by result": "Wartość deali według wyniku",
         "Most valuable deals": "Najcenniejsze deale",
         "Active deals": "Aktywne deale",
@@ -197,24 +197,24 @@
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendarz",
-        "Local documents": "Dokumenty",
+        "Local documents": "Dokumenty lokalne",
         "Shared documents": "Dokumenty udostępnione",
         "History": "Historia",
         "Go to original lead": "Przejdź do oryginalnego leadu",
         "Documents": "Dokumenty",
         "Show deals": "Pokaż deale",
-        "Enter = Log completed activity": "Enter = zapisz zakończoną aktywność",
+        "Enter = Log completed activity": "Enter = zarejestruj zakończoną aktywność",
         "Shift+Enter = Schedule": "Shift+Enter = zaplanuj aktywność na później",
-        "Type recent activity here": "Wpisz ostatnią aktywność tutaj",
+        "Type recent activity here": "Wpisz tutaj ostatnią aktywność",
         "Not completed yet": "Nieukończona",
-        "Most recent activities": "Ostatnie aktywności",
-        "Deal": "Transakcja",
-        "Lead": "Potencjalny klient",
-        "Log completed activity": "Zarejestruj aktywność",
-        "Enter": "Wprowadź",
+        "Most recent activities": "Najnowsze aktywności",
+        "Deal": "Deal",
+        "Lead": "Lead",
+        "Log completed activity": "Zarejestruj zakończoną aktywność",
+        "Enter": "Enter",
         "Schedule activity": "Zaplanuj aktywność",
         "Shift+Enter": "Shift+Enter",
-        "Deal value:": "Wartość dealu",
+        "Deal value:": "Wartość dealu:",
         "Weighted profit": "Ważona wartość dealu",
         "Tasks": "Zadania",
         "Products": "Produkty",
@@ -238,9 +238,9 @@
         "Deals": "Deale",
         "Settings": "Ustawienia",
         "Settings saved.": "Ustawienia zapisane.",
-        "Show 'Deal warnings' in dashboard": "Pokaż 'Ostrzeżenia dotyczące deali' na pulpicie",
-        "Show 'Most valuable deals' in dashboard": "Pokaż 'Najcenniejsze deale' na pulpicie",
-        "Show 'Deal value by result' in dashboard": "Pokaż 'Wartość deali według wyniku' na pulpicie",
+        "Show 'Deal warnings' in dashboard": "Pokaż 'Ostrzeżenia dotyczące deali' na dashboardzie",
+        "Show 'Most valuable deals' in dashboard": "Pokaż 'Najcenniejsze deale' na dashboardzie",
+        "Show 'Deal value by result' in dashboard": "Pokaż 'Wartość deali według wyniku' na dashboardzie",
         "Calendar color": "Kolor kalendarza",
         "Deals Prefix": "Prefiks dealu"
     },
@@ -253,7 +253,7 @@
     },
     "Controllers\\Boards\\DealValueByResult": {
         "Unknown": "Nieznany",
-        "Pending": "W trakcie",
+        "Pending": "Oczekujące",
         "Won": "Wygrany",
         "Lost": "Przegrany",
         "No deals found.": "Nie znaleziono żadnych deali.",

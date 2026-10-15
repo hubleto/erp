@@ -24,7 +24,7 @@
         "UID": "UID",
         "Mail account to send email from": "Cuenta de correo para enviar",
         "Workflow": "Flujo de trabajo",
-        "Workflow step": "Etapa del flujo",
+        "Workflow step": "Etapa del flujo de trabajo",
         "Approved": "Aprobado",
         "Closed": "Cerrado",
         "Add Campaign": "Agregar campaña",
@@ -44,7 +44,7 @@
         "Online document folder": "Carpeta de documentos en línea",
         "not specified": "no especificado",
         "direct mail": "correo directo",
-        "cold call": "llamada",
+        "cold call": "llamada en frío",
         "other": "otro"
     },
     "Models\\Recipient": {
@@ -54,7 +54,7 @@
         "First name": "Nombre",
         "Last name": "Apellido",
         "Salutation": "Saludo",
-        "Reference to mail sent": "Correo enviado de referencia",
+        "Reference to mail sent": "Referencia al correo enviado",
         "Variables": "Variables",
         "Status": "Estado",
         "Add recipient": "Agregar destinatario",
@@ -134,15 +134,15 @@
     "Models\\Click": {
         "Campaign": "Campaña",
         "Recipient": "Destinatario",
-        "Url": "Url",
-        "Clicked": "Clickeado",
+        "Url": "URL",
+        "Clicked": "Clic realizado",
         "Bot Score": "Puntuación de bot",
         "Log": "Registro"
     },
     "Models\\CampaignActivity": {
         "Subject": "Asunto",
         "Location": "Ubicación",
-        "Online meeting link": "Enlace a la reunión",
+        "Online meeting link": "Enlace a la reunión en línea",
         "Description": "Descripción",
         "Activity type": "Tipo de actividad",
         "Start date": "Fecha de inicio",
@@ -152,18 +152,18 @@
         "Recurrence": "Recurrencia",
         "All day": "Todo el día",
         "Completed": "Completado",
-        "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Minutas cortas de la reunión",
+        "Long meeting minutes (link to external document)": "Acta extensa de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Acta breve de la reunión",
         "Created by": "Creado por",
         "Campaign": "Campaña"
     },
     "Components\\TableCampaigns": {
-        "Hide filter": "Esconder filtro",
+        "Hide filter": "Ocultar filtro",
         "Copy cell content to clipboard": "Copiar el contenido de la celda al portapapeles"
     },
     "Models\\RecipientStatus": {
         "Email": "Correo electrónico",
-        "Is unsubscribed": "Está excluido",
+        "Is unsubscribed": "Está dado de baja",
         "Is invalid": "Es inválido",
         "Add recipient status": "Agregar estado del destinatario"
     },
@@ -208,10 +208,10 @@
     },
     "Controllers\\Unsubscribe": {
         "Unsubscribe": "Darse de baja",
-        "Your email": "Correo electrónico",
+        "Your email": "Su correo electrónico",
         "has been unsubscribed.": "ha sido dado de baja.",
         "Your email:": "Su correo electrónico:",
-        "Powered by Hubleto": "Desarrollado con Hubleto"
+        "Powered by Hubleto": "Con tecnología de Hubleto"
     },
     "Calendar": {
         "Campaigns": "Campañas",

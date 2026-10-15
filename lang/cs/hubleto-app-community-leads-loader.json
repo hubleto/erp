@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Leads": "Leady",
-        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadů. Konverze do dealů.",
+        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadů a studených kontaktů. Konverze leadů na dealy.",
         "Lead Levels": "Úrovně leadů",
         "Lead Tags": "Štítky leadů",
         "Lead Lost Reasons": "Důvody ztráty leadu",
@@ -26,11 +26,11 @@
         "Calendar": "Kalendář"
     },
     "Controllers\\Leads": {
-        "Sales": "Obchod",
+        "Sales": "Prodej",
         "Leads": "Leady"
     },
     "Controllers\\LeadsArchive": {
-        "Sales": "Obchod",
+        "Sales": "Prodej",
         "Leads": "Leady",
         "Archive": "Archiv"
     },
@@ -51,7 +51,7 @@
     "Controllers\\Settings": {
         "Leads": "Leady",
         "Settings": "Nastavení",
-        "Settings saved.": "Nastavení uložena.",
+        "Settings saved.": "Nastavení uloženo.",
         "Calendar color": "Barva kalendáře",
         "Lead Prefix": "Prefix leadu",
         "Lead tags": "Štítky leadů",
@@ -69,7 +69,7 @@
     "Models\\LeadActivity": {
         "Activity type": "Typ aktivity",
         "Subject": "Předmět",
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Contact person": "Kontaktní osoba",
         "Start date": "Datum začátku",
         "Start time": "Čas začátku",
@@ -98,12 +98,12 @@
         "Currency": "Měna",
         "Expected close date": "Předpokládané datum uzavření",
         "Assigned user": "Zodpovědný",
-        "Date created": "Vytvořen",
+        "Date created": "Datum vytvoření",
         "Status": "Stav",
         "Notes": "Poznámky",
         "Source channel": "Zdroj",
         "Archived": "Archivovaný",
-        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku",
+        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku (online úložiště) se souvisejícími dokumenty",
         "Score": "Skóre",
         "Contact": "Kontakt",
         "Created": "Vytvořen",
@@ -118,14 +118,14 @@
         "Level": "Úroveň",
         "Manager": "Manažer",
         "Team": "Tým",
-        "Workflow": "Pracovní postup",
+        "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Closed": "Uzavřený",
         "Tags": "Štítky",
         "Open \\\/ Closed": "Otevřené \\\/ Uzavřené",
         "Open": "Otevřené",
         "All": "Vše",
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Phone": "Telefon",
         "Advertisement": "Reklama",
         "Partner": "Partner",
@@ -140,7 +140,7 @@
         "Profile link #3": "Odkaz na profil č. 3",
         "Ownership": "Vlastnictví",
         "Owned by me": "Moje leady",
-        "Managed by me": "Spravované mnou",
+        "Managed by me": "Mnou spravované",
         "None": "Žádné",
         "changed from": "změněno z",
         "to": "na",
@@ -160,26 +160,26 @@
     },
     "Models\\LeadHistory": {
         "Change Date": "Datum změny",
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Description": "Popis",
         "Date": "Datum"
     },
     "Models\\LeadTag": {
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Tag": "Štítek",
         "Lead Tags": "Štítky leadů"
     },
     "Models\\LeadDocument": {
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Document": "Dokument"
     },
     "Models\\LeadTask": {
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Task": "Úkol",
         "Lead Tasks": "Úkoly leadu"
     },
     "Models\\LeadCampaign": {
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Campaign": "Kampaň",
         "Campaign Leads": "Leady kampaně",
         "Add lead": "Přidat lead"
@@ -203,7 +203,7 @@
         "Add Reason": "Přidat důvod"
     },
     "Models\\LeadProduct": {
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Množství",
@@ -214,22 +214,22 @@
         "Sum": "Součet"
     },
     "Components\\FormLead": {
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Documents": "Dokumenty",
         "Calendar": "Kalendář",
         "Shared documents": "Sdílené dokumenty",
         "History": "Historie",
-        "Local documents": "Dokumenty",
+        "Local documents": "Lokální dokumenty",
         "Go to deal": "Přejít na deal",
         "Show leads": "Zobrazit leady",
-        "Type recent activity here": "Zadejte poslední aktivitu zde",
+        "Type recent activity here": "Sem zadejte nedávnou aktivitu",
         "Enter = Log completed activity": "Enter = zaznamenat dokončenou aktivitu",
         "Shift+Enter = Schedule": "Shift+Enter = naplánovat aktivitu na později",
         "Most recent activities": "Nejnovější aktivity",
         "Not completed yet": "Nedokončená",
         "Tasks": "Úkoly",
-        "Log completed activity": "Zaznamenat provedenou činnost",
-        "Enter": "Zadat",
+        "Log completed activity": "Zaznamenat dokončenou aktivitu",
+        "Enter": "Enter",
         "Schedule activity": "Naplánovat aktivitu",
         "Shift+Enter": "Shift+Enter",
         "Campaign": "Kampaň",
@@ -245,10 +245,10 @@
         "End": "Konec",
         "Start": "Začátek",
         "Contact": "Kontakt",
-        "Lead": "Potenciální zákazník"
+        "Lead": "Lead"
     },
     "Components\\TableLeads": {
-        "Deal": "Obchodní případ"
+        "Deal": "Deal"
     },
     "Calendar": {
         "Leads": "Leady",

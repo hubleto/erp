@@ -3,7 +3,7 @@
         "Cashdesk": "Pokladna",
         "Cash registers": "Pokladny",
         "Receipts": "Pokladní doklady",
-        "Cashdesk and receipts.": "Pokladny a pokladní doklady"
+        "Cashdesk and receipts.": "Pokladny a pokladní doklady."
     },
     "Controllers\\Home": {
         "Cashdesk": "Pokladna",
@@ -55,7 +55,7 @@
     "Components\\FormReceipt": {
         "Receipt": "Pokladní doklad",
         "Product": "Produkt",
-        "Qty.": "Množství",
+        "Qty.": "Množ.",
         "Unit price incl. VAT (€)": "Jedn. cena s DPH (€)",
         "VAT (%)": "DPH (%)",
         "Total price incl. VAT (€)": "Celková cena s DPH (€)",

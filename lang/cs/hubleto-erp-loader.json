@@ -22,7 +22,7 @@
         "Delete": "Smazat",
         "Confirm delete": "Potvrďte smazání",
         "Edit": "Upravit",
-        "Adding record": "Přidat záznam",
+        "Adding record": "Přidávání záznamu",
         "Editing record": "Úprava záznamu",
         "Record": "Záznam",
         "New record": "Nový záznam",
@@ -32,7 +32,7 @@
     "Components\\FormExtended": {
         "Copy link to clipboard": "Zkopírovat odkaz do schránky",
         "unsaved changes": "neuložené změny",
-        "Open in new tab": "Otevřít v novém okně"
+        "Open in new tab": "Otevřít na nové kartě"
     },
     "Components\\ErpWorkflowSelector": {
         "Change workflow": "Změnit workflow",
@@ -61,10 +61,10 @@
     },
     "Components\\Table": {
         "Delete": "Smazat",
-        "Start typing to search...": "Začněte vyhledávat...",
-        "Search...": "Hledat",
+        "Start typing to search...": "Začněte psát pro vyhledávání...",
+        "Search...": "Hledat...",
         "No data.": "Žádná data.",
-        "More options": "Nastavení",
+        "More options": "Další možnosti",
         "Show\\\/Hide filter": "Zobrazit\\\/skrýt filtr",
         "Hide filter": "Skrýt filtr",
         "Show as plain table": "Zobrazit jako jednoduchou tabulku",
@@ -88,14 +88,14 @@
         "Keep signed in": "Zůstat přihlášen"
     },
     "Controllers\\SignIn": {
-        "Your email": "E-mail",
+        "Your email": "Váš e-mail",
         "Password": "Heslo",
         "Keep signed in": "Zůstat přihlášen",
         "Sign in": "Přihlásit se",
-        "Forgot password?": "Zapomněl jsem heslo"
+        "Forgot password?": "Zapomenuté heslo?"
     },
     "Components\\Inputs\\Image": {
-        "Choose image": "Nahrát obrázek"
+        "Choose image": "Vybrat obrázek"
     },
     "Components\\Inputs\\TextareaWithHtmlPreview": {
         "Toggle fullscreen": "Přepnout celou obrazovku",
@@ -111,7 +111,7 @@
     },
     "Controllers\\NotFound": {
         "Page Not Found": "Stránka nenalezena",
-        "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Stránku, kterou hledáte, jsme nenašli.",
+        "Sorry, we couldn't find the page you were looking for. Please check your permissions or return to the home page.": "Je nám líto, požadovanou stránku se nepodařilo najít. Zkontrolujte svá oprávnění nebo se vraťte na domovskou stránku.",
         "Home": "Úvod",
         "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Požadovanou stránku se nepodařilo najít. Zkontrolujte svá oprávnění nebo se vraťte na domovskou stránku."
     },
@@ -121,7 +121,7 @@
         "You have no access to {{ appName }}.": "Nemáte přístup k {{ appName }}."
     },
     "EmailProvider": {
-        "Hello from Hubleto!": "Dobrý den od Hubleto!",
+        "Hello from Hubleto!": "Zdraví vás Hubleto!",
         "Dear {{ name }},": "Vážený\/á {{ name }},",
         "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Obdrželi jsme žádost o obnovení vašeho hesla. Pokud jste o to požádali, klikněte na tlačítko níže a nastavte si nové heslo:",
         "Reset password": "Obnovit heslo",
@@ -134,7 +134,7 @@
         "Your Hubleto account has been created!": "Váš Hubleto účet byl vytvořen!"
     },
     "Emails\\EmailProvider": {
-        "Hello from Hubleto!": "Dobrý den od Hubleto!",
+        "Hello from Hubleto!": "Zdraví vás Hubleto!",
         "Dear {{ name }},": "Vážený\/á {{ name }},",
         "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Obdrželi jsme žádost o obnovení vašeho hesla. Pokud jste o to požádali, klikněte na tlačítko níže a nastavte si nové heslo:",
         "Reset password": "Obnovit heslo",

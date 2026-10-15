@@ -1,11 +1,11 @@
 {
     "manifest": {
-        "Notifications": "Uwierzytelnianie",
+        "Notifications": "Powiadomienia",
         "Auth": "Uwierzytelnianie",
         "Hubleto Authorization App for User Management": "Aplikacja do uwierzytelniania użytkowników",
         "Administrator": "Administrator",
         "Can do anything.": "Może robić wszystko.",
-        "Chief Officer (default permissions)": "Kierownik (domyślne uprawnienia)",
+        "Chief Officer (default permissions)": "Dyrektor (domyślne uprawnienia)",
         "Can read all data and can modify most of the data. Does not have access to settings.": "Może czytać wszystkie dane i modyfikować większość z nich. Nie ma dostępu do ustawień.",
         "Manager (default permissions)": "Menedżer (domyślne uprawnienia)",
         "Can read and modify all data that he\/she owns or is manager.": "Może czytać i modyfikować wszystkie dane, których jest właścicielem lub menedżerem.",
@@ -21,9 +21,9 @@
         "First name": "Imię",
         "Last name": "Nazwisko",
         "Nick": "Pseudonim",
-        "Email": "Email",
+        "Email": "E-mail",
         "Language": "Język",
-        "Default company": "Firma",
+        "Default company": "Domyślna firma",
         "Apps": "Aplikacje",
         "Roles": "Role",
         "Teams": "Zespoły",
@@ -36,7 +36,7 @@
         "Add User": "Dodaj użytkownika",
         "NOT_SPECIFIED": "Nieokreślony",
         "ADMINISTRATOR": "Administrator",
-        "Chief Officer (CEO, CFO, CTO, ...)": "Kierownik (CEO, CFO, CTO, ...)",
+        "Chief Officer (CEO, CFO, CTO, ...)": "Dyrektor (CEO, CFO, CTO, ...)",
         "Manager (Sales, Project, ...)": "Menedżer (sprzedaż, projekt, ...)",
         "Employee": "Pracownik",
         "Assistant": "Asystent",
@@ -68,25 +68,25 @@
         "Assign Roles": "Przypisz role"
     },
     "Controllers\\SignIn": {
-        "Your email": "Twój email",
+        "Your email": "Twój e-mail",
         "Password": "Hasło",
         "Keep signed in": "Pozostań zalogowany",
         "Sign in": "Zaloguj się",
-        "Forgot password?": "Zapomniałeś hasła?",
-        "Email or password invalid. Try again.": "Nieprawidłowy email lub hasło. Spróbuj ponownie.",
+        "Forgot password?": "Nie pamiętasz hasła?",
+        "Email or password invalid. Try again.": "Nieprawidłowy e-mail lub hasło. Spróbuj ponownie.",
         "Password successfully updated.": "Hasło zostało pomyślnie zaktualizowane."
     },
     "Controllers\\ForgotPassword": {
-        "A password reset link has been sent to your email address.": "Na Twój adres email został wysłany link do resetowania hasła.",
+        "A password reset link has been sent to your email address.": "Na Twój adres e-mail został wysłany link do resetowania hasła.",
         "Check your inbox.": "Sprawdź swoją skrzynkę odbiorczą.",
-        "Email": "Email",
+        "Email": "E-mail",
         "Request password reset": "Poproś o reset hasła",
         "Back to sign in": "Powrót do logowania"
     },
     "Controllers\\ResetPassword": {
         "Passwords do not match.": "Hasła nie są zgodne.",
         "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.": "Hasło musi mieć co najmniej 8 znaków i zawierać co najmniej jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny.",
-        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "Witaj w Hubleto! Ustaw hasło, aby uzyskać dostęp do pulpitu i rozpocząć korzystanie z aplikacji.",
+        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "Witaj w Hubleto! Ustaw hasło, aby uzyskać dostęp do dashboardu i rozpocząć korzystanie z aplikacji.",
         "New password": "Nowe hasło",
         "Confirm new password": "Potwierdź nowe hasło",
         "Reset password": "Resetuj hasło"

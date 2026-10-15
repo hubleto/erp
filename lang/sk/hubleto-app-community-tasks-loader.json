@@ -15,10 +15,10 @@
         "Priority": "Priorita",
         "Estimation": "Odhad náročnosti",
         "Duration": "Trvanie",
-        "Start": "Štart",
+        "Start": "Začiatok",
         "Deadline": "Termín",
-        "Workflow": "Pracovný postup",
-        "Workflow step": "Workflow stav",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Is milestone": "Míľnik",
         "Closed": "Uzavretá",
         "Notes": "Poznámky",
@@ -28,7 +28,7 @@
         "Worked": "Odpracované",
         "Customer": "Zákazník",
         "Contact": "Kontakt",
-        "Is chargeable": "Je útovateľné",
+        "Is chargeable": "Je účtovateľné",
         "Related to": "Súvisí s",
         "Open \/ Closed": "Otvorené \/ Uzavreté",
         "Open": "Otvorené",
@@ -50,7 +50,7 @@
         "Add Todo": "Pridať Todo"
     },
     "Controllers\\Boards\\MyRecentTasks": {
-        "You did not work on any task since last 2 weeks.": "Za posledné 2 týždne si nepracoval na žiadnej úlohe."
+        "You did not work on any task since last 2 weeks.": "Za posledné 2 týždne ste nepracovali na žiadnej úlohe."
     },
     "Controllers\\Tasks": {
         "Tasks": "Úlohy"
@@ -62,7 +62,7 @@
         "Press ENTER to add new Todo": "Stlačte ENTER pre pridanie nového Todo",
         "Worksheet": "Pracovný výkaz",
         "Orders": "Objednávky",
-        "Deals": "Obchody",
+        "Deals": "Dealy",
         "Projects": "Projekty",
         "What to do?": "Čo treba urobiť?",
         "Add new todo...": "Pridať nové todo..."

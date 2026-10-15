@@ -19,7 +19,7 @@
         "Title": "Názov",
         "Description": "Popis",
         "Main MOD": "Hlavný moderátor",
-        "Closed": "Uzatvorená",
+        "Closed": "Uzavretá",
         "Notes": "Poznámky",
         "Created": "Vytvorená",
         "Add Discussion": "Pridať diskusiu"
@@ -33,7 +33,7 @@
     "Models\\Message": {
         "Discussion": "Diskusia",
         "From": "Od",
-        "From (Email)": "Od (Email)",
+        "From (Email)": "Od (E-mail)",
         "Text": "Text",
         "Sent": "Odoslané",
         "Add Message": "Pridať správu"

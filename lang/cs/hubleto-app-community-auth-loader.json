@@ -1,6 +1,6 @@
 {
     "manifest": {
-        "Notifications": "Autentifikace",
+        "Notifications": "Oznámení",
         "Auth": "Autentifikace",
         "Hubleto Authorization App for User Management": "Aplikace pro autentifikaci uživatelů",
         "Administrator": "Administrátor",
@@ -23,11 +23,11 @@
         "Nick": "Přezdívka",
         "Email": "E-mail",
         "Language": "Jazyk",
-        "Default company": "Společnost",
+        "Default company": "Výchozí společnost",
         "Apps": "Aplikace",
         "Roles": "Role",
         "Teams": "Týmy",
-        "Position": "Pozice",
+        "Position": "Pracovní pozice",
         "Phone number #1": "Telefonní číslo #1",
         "Phone number #2": "Telefonní číslo #2",
         "Photo": "Fotografie",
@@ -55,7 +55,7 @@
     },
     "Models\\UserRole": {
         "Role": "Role",
-        "Grant all permissions (administrator role)": "Povolit vše (role administrátora)",
+        "Grant all permissions (administrator role)": "Udělit všechna oprávnění (role administrátora)",
         "Description": "Popis",
         "Is default role (cannot be modified)": "Je výchozí role (nelze upravit)",
         "Permissions": "Oprávnění",
@@ -68,16 +68,16 @@
         "Assign Roles": "Přiřadit role"
     },
     "Controllers\\SignIn": {
-        "Your email": "Váš email",
+        "Your email": "Váš e-mail",
         "Password": "Heslo",
         "Keep signed in": "Zůstat přihlášen",
         "Sign in": "Přihlásit se",
         "Forgot password?": "Zapomenuté heslo?",
-        "Email or password invalid. Try again.": "Nesprávný email nebo heslo. Zkuste znovu.",
+        "Email or password invalid. Try again.": "Nesprávný e-mail nebo heslo. Zkuste znovu.",
         "Password successfully updated.": "Heslo bylo úspěšně aktualizováno."
     },
     "Controllers\\ForgotPassword": {
-        "A password reset link has been sent to your email address.": "Na vaši emailovou adresu byl odeslán odkaz pro obnovení hesla.",
+        "A password reset link has been sent to your email address.": "Na vaši e-mailovou adresu byl odeslán odkaz pro obnovení hesla.",
         "Check your inbox.": "Zkontrolujte svou doručenou poštu.",
         "Email": "E-mail",
         "Request password reset": "Požádat o obnovení hesla",
@@ -86,7 +86,7 @@
     "Controllers\\ResetPassword": {
         "Passwords do not match.": "Hesla se neshodují.",
         "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.": "Heslo musí mít alespoň 8 znaků a obsahovat alespoň jedno velké písmeno, jedno malé písmeno, jednu číslici a jeden speciální znak.",
-        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "Vítejte v Hubleto! Nastavte si heslo pro přístup k ovládacímu panelu.",
+        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "Vítejte v Hubleto! Nastavte si heslo, abyste získali přístup k dashboardu a mohli začít aplikaci používat.",
         "New password": "Nové heslo",
         "Confirm new password": "Potvrďte nové heslo",
         "Reset password": "Obnovit heslo"

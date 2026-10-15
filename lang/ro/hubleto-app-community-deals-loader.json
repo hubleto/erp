@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Deals": "Oportunități",
-        "Deal management. From deal to purchase.": "Gestionarea oportunităților, de la vânzare la achiziție.",
+        "Deal management. From deal to purchase.": "Gestionarea oportunităților, de la oportunitate la achiziție.",
         "Deal Tags": "Etichete de oportunitate",
         "Deal Lost Reasons": "Motivele pierderii oportunității",
         "Deal warnings": "Alerte privind oportunitățile",
@@ -52,7 +52,7 @@
         "Owner": "Proprietar",
         "Created": "Creat",
         "Workflow": "Flux de lucru",
-        "Workflow step": "Etapă a fluxului de lucru",
+        "Workflow step": "Etapa fluxului de lucru",
         "Notes": "Note",
         "Source channel": "Canal sursă",
         "Archived": "Arhivat",
@@ -60,7 +60,7 @@
         "Reason for Lost": "Motivul pierderii",
         "Date of result update": "Data actualizării rezultatului",
         "New Customer": "Client nou",
-        "Business type": "Tip de activitate comercială",
+        "Business type": "Tip de afacere",
         "Version": "Versiune",
         "Price excl. VAT": "Preț fără TVA",
         "Price incl. VAT": "Preț cu TVA",
@@ -101,7 +101,7 @@
         "Lost Reason": "Motivul pierderii"
     },
     "Models\\DealHistory": {
-        "Change Date": "Modifică data",
+        "Change Date": "Data modificării",
         "Deal": "Oportunitate",
         "Description": "Descriere"
     },

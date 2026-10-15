@@ -20,7 +20,7 @@
         "Add calendar source": "Agregar fuente de calendario"
     },
     "Controllers\\Google": {
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Calendar Sources": "Fuentes de calendario",
         "Google Calendars": "Calendarios de Google",
         "Google Calendar": "Google Calendar",
@@ -29,13 +29,13 @@
         "for details on how to get and configure your Google Calendar API key.": "para obtener detalles sobre cómo obtener y configurar su clave API de Google Calendar."
     },
     "Controllers\\Home": {
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Calendar Sources": "Fuentes de calendario",
         "Manage Google Calendars": "Administrar calendarios de Google",
         "Manage online .ics Calendars": "Administrar calendarios .ics en línea"
     },
     "Controllers\\Ics": {
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Calendar Sources": "Fuentes de calendario",
         ".ics Calendars": "Calendarios .ics",
         "Online .ics Calendar": "Calendario .ics en línea"

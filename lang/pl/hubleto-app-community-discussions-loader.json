@@ -33,7 +33,7 @@
     "Models\\Message": {
         "Discussion": "Dyskusja",
         "From": "Od",
-        "From (Email)": "Od (Email)",
+        "From (Email)": "Od (E-mail)",
         "Text": "Treść",
         "Sent": "Wysłano",
         "Add Message": "Dodaj wiadomość"

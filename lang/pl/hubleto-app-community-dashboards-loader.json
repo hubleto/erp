@@ -4,9 +4,9 @@
         "Free dashboards app": "Bezpłatna aplikacja dashboardów",
         "Manage": "Zarządzaj",
         "My dashboard": "Mój dashboard",
-        "No dashboard configured": "",
-        "You do not have default dashboard configured.": "",
-        "Configure your default dashboard": ""
+        "No dashboard configured": "Nie skonfigurowano żadnego dashboardu",
+        "You do not have default dashboard configured.": "Nie masz skonfigurowanego domyślnego dashboardu.",
+        "Configure your default dashboard": "Skonfiguruj domyślny dashboard"
     },
     "root": {
         "Dashboards": "Dashboardy"
@@ -21,11 +21,11 @@
         "By turning this on you will change the dashboard shown on the Homepage": "Włączenie tej opcji zmieni dashboard wyświetlany na stronie głównej"
     },
     "Models\\Panel": {
-        "Dashboard": "Panel",
+        "Dashboard": "Dashboard",
         "Board": "Źródło",
         "Title": "Tytuł",
         "Configuration": "Konfiguracja",
-        "-- Select board to be displayed in panel --": "-- Wybierz panel do wyświetlenia --",
+        "-- Select board to be displayed in panel --": "-- Wybierz źródło do wyświetlenia w panelu --",
         "Width": "Szerokość",
         "Order": "Kolejność",
         "Position": "Pozycja",

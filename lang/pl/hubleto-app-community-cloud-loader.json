@@ -8,10 +8,10 @@
     "Active users": "Aktywni użytkownicy",
     "Paid apps": "Płatne aplikacje",
     "Premium expected": "Konto Premium wymagane",
-    "Log datetime": "Dziennik DateTime"
+    "Log datetime": "Data i czas wpisu"
   },
   "Models\\Credit": {
-    "Recalculated": "Data",
+    "Recalculated": "Data przeliczenia",
     "Credit": "Kredyt"
   },
   "Models\\Payment": {
@@ -22,22 +22,22 @@
     "Type": "Typ",
     "Details": "Szczegóły",
     "Has invoice": "Ma fakturę",
-    "Billing account": "Profil rozliczeniowy",
-    "UUID": "Uuid"
+    "Billing account": "Konto rozliczeniowe",
+    "UUID": "UUID"
   },
   "Models\\Discount": {
     "Year": "Rok",
     "Month": "Miesiąc",
     "Discount": "Rabat",
     "Notes": "Uwagi",
-    "Billing account": "Profil rozliczeniowy"
+    "Billing account": "Konto rozliczeniowe"
   },
   "Models\\BillingAccount": {
     "Name": "Nazwa",
     "Phone": "Telefon",
     "E-mail": "E-mail",
     "Tax ID": "NIP",
-    "VAT ID": "NIP VAT",
+    "VAT ID": "Nr VAT",
     "Street, line 1": "Ulica, wiersz 1",
     "Street, line 2": "Ulica, wiersz 2",
     "ZIP": "Kod pocztowy",
@@ -47,7 +47,7 @@
     "Created": "Utworzono"
   },
   "Controllers\\Dashboard": {
-    "welcome to Hubleto cloud.": "witamy w Hubleto cloud.",
+    "welcome to Hubleto cloud.": "witamy w Hubleto Cloud.",
     "We are happy you decided to use Hubleto.": "Cieszymy się, że zdecydowałeś się używać Hubleto.",
     "Before you start, you should first read, understand and accept our": "Przed rozpoczęciem prosimy o przeczytanie, zrozumienie i zaakceptowanie naszych",
     "Terms of use": "Warunki użytkowania",
@@ -56,8 +56,8 @@
     "Therefore, we kindly ask you to go through these documents and appoint your consent": "Dlatego prosimy o zapoznanie się z tymi dokumentami i wyrażenie zgody",
     "by ticking the checkbox below.": "przez zaznaczenie pola wyboru poniżej.",
     "I have read, undestrood and agree to the": "Przeczytałem/-am, rozumiem i zgadzam się z",
-    "of Hubleto cloud": "Hubleto cloud",
-    "Continue to the dashboard": "Przejdź do pulpitu nawigacyjnego",
+    "of Hubleto cloud": "usługi Hubleto Cloud",
+    "Continue to the dashboard": "Przejdź do dashboardu",
     "You are upgraded to Premium": "Masz aktywowane konto Premium",
     "Free trial expired.": "Okres próbny wygasł.",
     "Free trial expires in": "Okres próbny zakończy się za",
@@ -74,13 +74,13 @@
     "Your Premium benefits": "Twoje korzyści Premium",
     "unlimited users": "nieograniczona liczba użytkowników",
     "more apps & features": "więcej aplikacji i funkcji",
-    "premium support": "wsparcie premium",
+    "premium support": "wsparcie Premium",
     "Add new users or install new apps": "Dodaj użytkowników i instaluj aplikacje",
     "Your Hubleto partner": "Twój partner Hubleto",
     "Technical support": "Wsparcie techniczne",
     "Sales": "Sprzedaż",
     "You are using free personal account": "Korzystasz z bezpłatnego konta osobistego",
-    "Upgrade to Premium and you'll get": "Uaktualniając do Premium otrzymasz",
+    "Upgrade to Premium and you'll get": "Po przejściu na Premium otrzymasz",
     "Activate Premium account": "Aktywuj konto Premium",
     "You will be given": "Otrzymasz",
     "30 days of free": "30 dni bezpłatnego",
@@ -89,9 +89,9 @@
     "Please type your account's email address below": "Wpisz adres e-mail swojego konta poniżej",
     "to confirm that you realy want to activate Premium account": "aby potwierdzić, że naprawdę chcesz aktywować konto Premium",
     "To confirm, type your email address here.": "Aby potwierdzić, wpisz swój adres e-mail.",
-    "Go! Activate premium account now.": "Aktywuj konto Premium teraz.",
+    "Go! Activate premium account now.": "Do dzieła! Aktywuj konto Premium teraz.",
     "Show payments and download invoices": "Pokaż płatności i pobierz faktury",
-    "Manage billing accounts": "Zarządzaj profilami rozliczeniowymi",
+    "Manage billing accounts": "Zarządzaj kontami rozliczeniowymi",
     "Usage info": "Informacje o użyciu",
     "Month": "Miesiąc",
     "Active users": "Aktywni użytkownicy",
@@ -111,7 +111,7 @@
     "Charge credit via bank transfer": "Doładuj kredyt przelewem bankowym"
   },
   "Controllers\\BillingAccounts": {
-    "Billing accounts": "Profile rozliczeniowe"
+    "Billing accounts": "Konta rozliczeniowe"
   },
   "Controllers\\MakePayment": {
     "Make payment": "Dokonaj płatności",

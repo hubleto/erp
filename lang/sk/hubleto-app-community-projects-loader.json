@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Projects": "Projekty",
-        "Project management": "Projektový manažment",
+        "Project management": "Správa projektov",
         "Phases": "Fázy",
         "Monthly summary": "Mesačný prehľad",
         "Milestones": "Míľniky",
@@ -21,27 +21,27 @@
         "Phases": "Fázy"
     },
     "Models\\Project": {
-        "Deal": "Obchodná príležitosť",
+        "Deal": "Deal",
         "Customer": "Zákazník",
         "Contact": "Kontakt",
         "Identifier": "Identifikátor",
         "Leave empty to generate automatically.": "Nechajte prázdne pre automatické vygenerovanie.",
         "Title": "Názov",
         "Description": "Popis",
-        "Main developer": "Hlavný developer",
+        "Main developer": "Hlavný vývojár",
         "Account manager": "Account manažér",
         "Priority": "Priorita",
-        "Start": "Štart",
+        "Start": "Začiatok",
         "Deadline": "Termín",
         "Budget": "Rozpočet",
-        "Workflow": "Pracovný postup",
-        "Workflow step": "Workflow stav",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Closed": "Uzavretý",
         "Color": "Farba",
         "Online documentation folder": "Priečinok online dokumentácie",
         "Notes": "Poznámky",
         "Created": "Vytvorený",
-        "Open \/ Closed": "Otvorené \/ Zatvorené",
+        "Open \/ Closed": "Otvorené \/ Uzavreté",
         "Open": "Otvorené",
         "All": "Všetky",
         "Average hourly costs": "Priemerné hodinové náklady",
@@ -57,10 +57,10 @@
     "Models\\MilestoneReport": {
         "Milestone": "Míľnik",
         "Summary": "Zhrnutie",
-        "Details": "Detaily",
+        "Details": "Podrobnosti",
         "Progress": "Pokrok",
         "Reported on": "Dátum správy",
-        "Reported by": "Reportoval",
+        "Reported by": "Nahlásil",
         "Add milestone report": "Pridať správu k míľniku"
     },
     "Models\\Expense": {
@@ -79,7 +79,7 @@
     },
     "Models\\ProjectDeal": {
         "Project": "Projekt",
-        "Deal": "Obchodná príležitosť",
+        "Deal": "Deal",
         "Project Deals": "Dealy projektu",
         "Add deal": "Pridať deal"
     },
@@ -107,7 +107,7 @@
         "Worked hours & costs by month": "Odpracované hodiny a náklady podľa mesiaca",
         "Chargeable hours by month": "Fakturovateľné hodiny podľa mesiaca",
         "Labor costs calculator": "Kalkulátor mzdových nákladov",
-        "Total": "Spolu",
+        "Total": "Celkom",
         "User": "Používateľ",
         "Worked hours": "Odpracované hodiny",
         "Salary": "Mzda",

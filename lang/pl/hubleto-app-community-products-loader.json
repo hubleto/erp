@@ -205,10 +205,10 @@
         "Contact person": "Osoba kontaktowa",
         "Phone number": "Numer telefonu",
         "Supplier email": "E-mail dostawcy",
-        "Order email": "E-mail zamówień",
+        "Order email": "E-mail do zamówień",
         "Tax ID": "NIP",
-        "Company ID": "REGON",
-        "VAT ID": "NIP UE",
+        "Company ID": "NIP",
+        "VAT ID": "Nr VAT",
         "Payment account number": "Numer konta płatniczego"
     },
     "Models\\ProductSupplier": {

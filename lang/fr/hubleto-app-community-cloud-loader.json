@@ -1,6 +1,6 @@
 {
     "loader": {
-        "Upgrade": "Passer à PRO"
+        "Upgrade": "Passer à Premium"
     },
     "manifest": {
         "Cloud": "Cloud",
@@ -16,7 +16,7 @@
         "Name": "Nom",
         "Phone": "Téléphone",
         "E-mail": "E-mail",
-        "Tax ID": "Numéro fiscal",
+        "Tax ID": "Numéro d'identification fiscale",
         "VAT ID": "Numéro de TVA",
         "Street, line 1": "Adresse, ligne 1",
         "Street, line 2": "Adresse, ligne 2",
@@ -45,7 +45,7 @@
         "Year": "Année",
         "Month": "Mois",
         "Discount": "Remise",
-        "Notes": "Remarques",
+        "Notes": "Notes",
         "Billing account": "Compte de facturation"
     },
     "Controllers\\Dashboard": {

@@ -13,9 +13,9 @@
         "City": "Ciudad",
         "Country": "País",
         "Postal Code": "Código postal",
-        "VAT ID": "Registro Impuesto",
+        "VAT ID": "ID de IVA",
         "Customer ID": "Número de cliente",
-        "Tax ID": "Número de identificación fiscal",
+        "Tax ID": "Identificación fiscal",
         "Notes": "Notas",
         "Date Created": "Fecha de creación",
         "Active": "Activo",
@@ -33,7 +33,7 @@
         "Shared with": "Compartido con",
         "Columns": "Columnas",
         "Customer": "Cliente",
-        "Company ID": "CIF",
+        "Company ID": "ID de la empresa",
         "Tag": "Etiqueta"
     },
     "Controllers\\Customers": {
@@ -56,13 +56,13 @@
         "Start time": "Hora de inicio",
         "End date": "Fecha de finalización",
         "End time": "Hora de finalización",
-        "Meeting minutes (link)": "Minutas de la reunión (enlace)",
+        "Meeting minutes (link)": "Acta de la reunión (enlace)",
         "Location": "Ubicación",
         "Online meeting link": "Enlace a la reunión en línea",
         "Description": "Descripción",
         "Recurrence": "Recurrencia",
-        "Long meeting minutes (link to external document)": "Minutas de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Resumen de la reunión",
+        "Long meeting minutes (link to external document)": "Acta extensa de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Acta breve de la reunión",
         "Owner": "Propietario"
     },
     "Models\\CustomerDocument": {
@@ -102,12 +102,12 @@
         "Most recent activities": "Actividades más recientes",
         "Log completed activity": "Registrar actividad completada",
         "Schedule activity": "Programar actividad",
-        "Enter": "Introducir",
+        "Enter": "Enter",
         "Shift+Enter": "Shift+Enter",
         "unsaved changes": "cambios no guardados",
         "Document": "Documento",
         "Add document": "Agregar documento",
-        "Link": "Enlace a la versión en línea"
+        "Link": "Enlace"
     },
     "root": {
         "Customer Tags": "Etiquetas de clientes"
@@ -132,7 +132,7 @@
         "Activities": "Actividades"
     },
     "Controllers\\Tags": {
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Customer Tags": "Etiquetas de clientes",
         "Customers": "Clientes",
         "Tags": "Etiquetas"
@@ -145,7 +145,7 @@
     },
     "Controllers\\Settings": {
         "Customers": "Clientes",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Customers: Settings": "Clientes: configuración",
         "Settings saved.": "Configuración guardada.",
         "Customer tags": "Etiquetas de clientes",

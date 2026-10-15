@@ -11,14 +11,14 @@
         "Free document management.": "Gestion documentaire gratuite.",
         "Document review results": "Résultats de la révision du document",
         "Versions": "Versions",
-        "Reviews": "Avis",
+        "Reviews": "Révisions",
         "File manager": "Gestionnaire de fichiers"
     },
     "Models\\Template": {
         "Name": "Nom",
         "Used For": "Utilisé pour",
         "Content": "Contenu",
-        "Notes": "Remarques",
+        "Notes": "Notes",
         "Add template": "Ajouter un modèle"
     },
     "Models\\Document": {

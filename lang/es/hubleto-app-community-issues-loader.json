@@ -1,16 +1,16 @@
 {
     "manifest": {
-        "Issues": "Problemas",
-        "Issue management": "Gestión de problemas",
+        "Issues": "Incidencias",
+        "Issue management": "Gestión de incidencias",
         "Mail accounts": "Cuentas de correo",
         "Issues Mail Accounts": "Cuentas de correo de incidencias"
     },
     "root": {
-        "Issues": "Problemas",
+        "Issues": "Incidencias",
         "Mail accounts": "Cuentas de correo"
     },
     "Controllers\\Issues": {
-        "Issues": "Problemas"
+        "Issues": "Incidencias"
     },
     "Models\\Issue": {
         "Title": "Título",
@@ -19,7 +19,7 @@
         "Notess": "Notas",
         "Customer": "Cliente",
         "Workflow": "Flujo de trabajo",
-        "Workflow step": "Etapa del flujo",
+        "Workflow step": "Etapa del flujo de trabajo",
         "Owner": "Propietario",
         "Manager": "Gerente",
         "Shared with": "Compartido con",
@@ -40,11 +40,11 @@
         "Notes": "Notas"
     },
     "Controllers\\Posts": {
-        "Issues": "Problemas",
+        "Issues": "Incidencias",
         "Posts": "Publicaciones"
     },
     "Controllers\\MailAccounts": {
-        "Issues": "Problemas",
+        "Issues": "Incidencias",
         "Mail accounts": "Cuentas de correo"
     },
     "Models\\IssueTask": {

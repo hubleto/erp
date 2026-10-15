@@ -1,11 +1,11 @@
 {
     "manifest": {
         "Settings": "Nastavenia",
-        "Settings and control panel for your Hubleto.": "Nastavenia Hubleto účtu.",
+        "Settings and control panel for your Hubleto.": "Nastavenia a ovládací panel vášho Hubleto.",
         "Settings and tools": "Nastavenia a nástroje",
         "Users": "Používatelia",
         "Roles": "Role",
-        "Your companies": "Vaše firmy",
+        "Your companies": "Vaše spoločnosti",
         "General settings": "Všeobecné nastavenia",
         "Permissions list": "Zoznam povolení",
         "Role permissions": "Povolenia rolí",
@@ -14,7 +14,7 @@
         "Currencies": "Meny",
         "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
-        "Sidebar": "Ľavé menu",
+        "Sidebar": "Bočný panel",
         "Teams": "Tímy",
         "Meeting": "Stretnutie",
         "Business Trip": "Pracovná cesta",
@@ -38,7 +38,7 @@
         "Time of last access": "Čas posledného prístupu",
         "Last access IP": "IP adresa posledného prístupu",
         "Nick": "Prezývka",
-        "Default company": "Firma",
+        "Default company": "Predvolená spoločnosť",
         "Roles": "Role",
         "Teams": "Tímy",
         "Type": "Typ",
@@ -53,15 +53,15 @@
         "Add Country": "Pridať štát"
     },
     "Models\\Profile": {
-        "Company": "Firma"
+        "Company": "Spoločnosť"
     },
     "Models\\ActivityType": {
-        "Type Name": "Typ",
+        "Type Name": "Názov typu",
         "Color": "Farba",
         "Shown in Calendar": "Zobraziť v kalendári",
-        "Icon": "Ikonka",
+        "Icon": "Ikona",
         "Type": "Typ",
-        "Show in calendar": "Show v kalendári",
+        "Show in calendar": "Zobraziť v kalendári",
         "Activity Types": "Typy aktivít",
         "Add Activity Type": "Pridať typ aktivity"
     },
@@ -84,10 +84,10 @@
     "Models\\WorkflowStep": {
         "Name": "Názov",
         "Order": "Poradie",
-        "Company": "Farba",
-        "Workflow": "Kanál",
+        "Company": "Spoločnosť",
+        "Workflow": "Workflow",
         "Color": "Farba",
-        "Set result of a deal to": "Nastaviť výsledok obchodnej príležitosti na"
+        "Set result of a deal to": "Nastaviť výsledok dealu na"
     },
     "Models\\Tag": {
         "Name": "Názov",
@@ -103,7 +103,7 @@
     "Models\\InvoiceProfile": {
         "Name": "Názov",
         "Phone": "Telefón",
-        "E-mail": "Email",
+        "E-mail": "E-mail",
         "WWW": "WWW",
         "Company ID": "IČO",
         "Tax ID": "DIČ",
@@ -112,7 +112,7 @@
         "Street, line 2": "Ulica, riadok č. 2",
         "ZIP": "PSČ",
         "City": "Mesto",
-        "Country": "Štát",
+        "Country": "Krajina",
         "Bank name": "Názov banky",
         "Account number": "Číslo účtu",
         "Account IBAN": "IBAN",
@@ -124,9 +124,9 @@
     "Models\\UserRole": {
         "Role": "Rola",
         "Grant all permissions": "Udeliť všetky oprávnenia (administrátor)",
-        "Grant all permissions (administrator role)": "Udeliť všetky povolenia (úloha správcu)",
+        "Grant all permissions (administrator role)": "Udeliť všetky oprávnenia (rola administrátora)",
         "Description": "Opis",
-        "Is default role (cannot be modified)": "Je predvolená úloha (nedá sa upraviť)"
+        "Is default role (cannot be modified)": "Je predvolená rola (nedá sa upraviť)"
     },
     "Models\\RolePermission": {
         "Permission": "Povolenie",
@@ -135,15 +135,15 @@
     },
     "Models\\Permission": {
         "Permission": "Povolenie",
-        "Permissions": "Povolenia"
+        "Permissions": "Oprávnenia"
     },
     "Models\\Company": {
         "Company": "Spoločnosť",
-        "Tax ID": "Daňový ID",
-        "VAT ID": "ID DPH",
+        "Tax ID": "DIČ",
+        "VAT ID": "IČ DPH",
         "Street, line 1": "Ulica, riadok 1",
         "Street, line 2": "Ulica, riadok 2",
-        "ZIP": "Zips",
+        "ZIP": "PSČ",
         "City": "Mesto",
         "Country": "Krajina",
         "Registration ID": "IČO",
@@ -156,7 +156,7 @@
     },
     "Models\\Team": {
         "Team name": "Názov tímu",
-        "Team color": "Farebný tím",
+        "Team color": "Farba tímu",
         "Description": "Opis",
         "Team manager": "Manažér tímu",
         "Manager": "Manažér",
@@ -172,10 +172,10 @@
     "Controllers\\Dashboard": {
         "Settings": "Nastavenia",
         "Users": "Používatelia",
-        "User Roles": "Používateľské role",
+        "User Roles": "Používateľské roly",
         "Profiles": "Profily",
-        "Permissions": "Povolenia",
-        "Tags": "Tagy",
+        "Permissions": "Oprávnenia",
+        "Tags": "Značky",
         "Activity Types": "Typy aktivít",
         "Contact Types": "Typy kontaktov",
         "Countries": "Štáty",
@@ -189,12 +189,12 @@
         "Uninstall": "Odinštalovať",
         "Open": "Otvoriť",
         "Most common settings": "Najbežnejšie nastavenia",
-        "Manage users": "Spravujte používateľov",
+        "Manage users": "Spravovať používateľov",
         "Manage apps": "Spravovať aplikácie",
         "All settings": "Všetky nastavenia",
         "Change theme": "Zmeniť tému",
         "Locale": "Lokalizácia",
-        "Sign out from Hubleto": "Odhlásiť z Hubleta",
+        "Sign out from Hubleto": "Odhlásiť sa z Hubleto",
         "Default currency and timezone": "Základná mena a časové pásmo",
         "Date (short / long) and time formats": "Formáty dátumu (krátky / dlhý) a času",
         "Decimals and thousands separator": "Desatinné miesta a oddeľovač tisícov",
@@ -202,7 +202,7 @@
     },
     "Controllers\\UserRoles": {
         "Settings": "Nastavenia",
-        "User Roles": "Používateľské role"
+        "User Roles": "Používateľské roly"
     },
     "Controllers\\Countries": {
         "Settings": "Nastavenia",
@@ -210,7 +210,7 @@
     },
     "Controllers\\Users": {
         "Settings": "Nastavenia",
-        "Users": "Užívatelia"
+        "Users": "Používatelia"
     },
     "Controllers\\Activitytypes": {
         "Settings": "Nastavenia",
@@ -234,7 +234,7 @@
     },
     "Controllers\\Permissions": {
         "Settings": "Nastavenia",
-        "Permissions": "Povolenia"
+        "Permissions": "Oprávnenia"
     },
     "Controllers\\RolePermissions": {
         "Role permissions": "Povolenia rolí"
@@ -264,7 +264,7 @@
         "Install": "Inštalovať",
         "Go to app": "Prejsť do aplikácie",
         "Enable": "Aktivovať",
-        "Activate Premium account": "Aktivovať prémiový účet",
+        "Activate Premium account": "Aktivovať účet Premium",
         "Installed apps": "Nainštalované aplikácie",
         "Available apps": "Dostupné aplikácie",
         "(Search) Type app name and press Enter...": "(Hľadať) Zadajte názov aplikácie a stlačte Enter...",
@@ -272,7 +272,7 @@
         "Enterprise": "Enterprise",
         "External": "Externá",
         "Custom": "Vlastná",
-        "You can install Premium apps only in Premium account.": "Prémiové aplikácie môžete inštalovať iba v prémiovom účte."
+        "You can install Premium apps only in Premium account.": "Aplikácie Premium môžete inštalovať iba v účte Premium."
     },
     "Controllers\\LogViewer": {
         "Settings": "Nastavenia",
@@ -280,7 +280,7 @@
     },
     "Controllers\\MyAccount": {
         "Settings": "Nastavenia",
-        "Company": "Firma"
+        "Company": "Spoločnosť"
     },
     "Controllers\\Profile": {
         "Settings": "Nastavenia",
@@ -288,7 +288,7 @@
     },
     "Controllers\\InvoiceProfiles": {
         "Settings": "Nastavenia",
-        "Invoice profiles": "Faktúra"
+        "Invoice profiles": "Fakturačné profily"
     },
     "Components\\FormUserRole": {
         "Save": "Uložiť",
@@ -306,8 +306,8 @@
     "Components\\FormUser": {
         "About the user": "O používateľovi",
         "User": "Používateľ",
-        "You may add new users only in Premium account.": "Nových používateľov môžete pridávať iba v prémiovom účte.",
-        "Activate Premium account": "Aktivovať prémiový účet",
+        "You may add new users only in Premium account.": "Nových používateľov môžete pridávať iba v účte Premium.",
+        "Activate Premium account": "Aktivovať účet Premium",
         "Access to Hubleto": "Prístup do Hubleto",
         "Roles": "Role",
         "First create user, then you will be prompted to assign roles.": "Najprv vytvorte používateľa, potom budete vyzvaní na priradenie rolí.",
@@ -330,15 +330,15 @@
     "root": {
         "Users": "Používatelia",
         "User roles": "Používateľské role",
-        "Your companies": "Moje firmy",
+        "Your companies": "Vaše spoločnosti",
         "General settings": "Všeobecné nastavenia",
-        "Permissions": "Právomocu",
+        "Permissions": "Oprávnenia",
         "Tags": "Značky",
         "Activity types": "Typy aktivít",
         "Contact types": "Typy kontaktov",
         "Countries": "Štáty",
         "Currencies": "Meny",
-        "Workflows": "Pracovné postupy",
+        "Workflows": "Workflowy",
         "Invoice profiles": "Fakturačné profily",
         "Platform config": "Konfigurácia platformy",
         "Contact Categories": "Kategórie kontaktov",
@@ -349,7 +349,7 @@
         "Teams": "Tímy"
     },
     "Models\\UserHasRole": {
-        "User": "Užívateľ",
+        "User": "Používateľ",
         "Role": "Rola"
     }
 }

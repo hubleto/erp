@@ -21,7 +21,7 @@
         "Phases": "Fazy"
     },
     "Models\\Project": {
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Customer": "Klient",
         "Contact": "Kontakt",
         "Identifier": "Identyfikator",
@@ -31,11 +31,11 @@
         "Main developer": "Główny programista",
         "Account manager": "Opiekun klienta",
         "Priority": "Priorytet",
-        "Start": "Start",
+        "Start": "Początek",
         "Deadline": "Termin",
         "Budget": "Budżet",
-        "Workflow": "Przepływ pracy",
-        "Workflow step": "Stan workflow",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Closed": "Zamknięty",
         "Color": "Kolor",
         "Online documentation folder": "Folder dokumentacji online",
@@ -46,7 +46,7 @@
         "All": "Wszystkie",
         "Average hourly costs": "Średnie koszty godzinowe",
         "Project manager": "Kierownik projektu",
-        "Shared with": "Udostępniono dla",
+        "Shared with": "Udostępnione dla",
         "Add Project": "Dodaj projekt"
     },
     "Models\\Phase": {
@@ -79,7 +79,7 @@
     },
     "Models\\ProjectDeal": {
         "Project": "Projekt",
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Project Deals": "Deale projektu",
         "Add deal": "Dodaj deal"
     },
@@ -137,8 +137,8 @@
         "Recurrence": "Powtarzanie",
         "All day": "Cały dzień",
         "Completed": "Ukończona",
-        "Long meeting minutes (link to external document)": "Szczegółowy protokół (link do zewnętrznego dokumentu)",
-        "Short meeting minutes": "Krótki protokół",
+        "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
+        "Short meeting minutes": "Skrócony protokół ze spotkania",
         "Created by": "Utworzył",
         "Project": "Projekt",
         "Contact": "Kontakt"

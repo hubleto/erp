@@ -1,26 +1,26 @@
 {
     "loader": {
-        "Deals": "Accords de vente",
-        "Deals Archive": "Archive des accords de vente"
+        "Deals": "Opportunités",
+        "Deals Archive": "Archive des opportunités"
     },
     "controllers.deals": {
         "Sales": "Ventes",
-        "Deals": "Accords de vente"
+        "Deals": "Opportunités"
     },
     "controllers.dealsArchive": {
         "Sales": "Ventes",
-        "Deals": "Accords de vente",
+        "Deals": "Opportunités",
         "Archive": "Archive"
     },
     "manifest": {
         "Deals": "Opportunités",
-        "Deal management. From deal to purchase.": "Gestion des opportunités, de la vente à l'achat.",
+        "Deal management. From deal to purchase.": "Gestion des opportunités, de l'opportunité à l'achat.",
         "Deal Tags": "Étiquettes d'opportunités",
         "Deal Lost Reasons": "Motifs de perte des opportunités",
         "Deal warnings": "Alertes sur les opportunités",
         "Most valuable deals": "Opportunités les plus importantes",
         "Deal value by result": "Valeur des opportunités par résultat",
-        "Plan": "Forfait",
+        "Plan": "Plan",
         "Calendar": "Calendrier"
     },
     "Models\\Deal": {
@@ -40,20 +40,20 @@
         "Customer's order number": "Numéro de commande du client",
         "Workflow": "Flux de travail",
         "Workflow step": "Étape du flux de travail",
-        "Notes": "Remarques",
+        "Notes": "Notes",
         "Source channel": "Canal source",
         "Closed": "Fermé",
         "Deal Result": "Résultat de l'opportunité",
         "Reason for Lost": "Motif de perte",
         "Date of result update": "Date de mise à jour du résultat",
         "New Customer": "Nouveau client",
-        "Business type": "Type d'entreprise",
+        "Business type": "Type d'affaire",
         "Created": "Créé",
         "Link to shared folder (online storage) with related documents": "Lien vers le dossier partagé (stockage en ligne) contenant les documents associés",
         "Add Deal": "Ajouter une opportunité",
         "Ownership": "Propriété",
         "All": "Tout",
-        "Owned by me": "M'appartient",
+        "Owned by me": "Dont je suis propriétaire",
         "Managed by me": "Géré par moi",
         "Open \/ Closed": "Ouvert / Fermé",
         "Open": "Ouvert",
@@ -82,7 +82,7 @@
         "Lost Reason": "Motif de perte"
     },
     "Models\\DealHistory": {
-        "Change Date": "Modifier la date",
+        "Change Date": "Date de modification",
         "Deal": "Opportunité",
         "Description": "Description"
     },

@@ -11,9 +11,9 @@
         "Customer": "Kunde",
         "Contact": "Kontakt",
         "Activity type": "Aktivitätstyp",
-        "Subject": "Thema",
-        "Start Date": "Anfangsdatum",
-        "Start Time": "Anfangszeit",
+        "Subject": "Betreff",
+        "Start Date": "Startdatum",
+        "Start Time": "Startzeit",
         "End Date": "Enddatum",
         "End Time": "Endzeit",
         "All day": "Ganztägig",
@@ -23,14 +23,14 @@
         "Start time": "Startzeit",
         "End date": "Enddatum",
         "End time": "Endzeit",
-        "Meeting minutes (link)": "Meeting minutes (Link)",
+        "Meeting minutes (link)": "Besprechungsprotokoll (Link)",
         "Location": "Standort",
         "Online meeting link": "Link zum Online-Meeting",
         "Description": "Beschreibung",
         "Recurrence": "Wiederholung",
         "Long meeting minutes (link to external document)": "Ausführliches Besprechungsprotokoll (Link zu einem externen Dokument)",
         "Short meeting minutes": "Kurzprotokoll",
-        "Owner": "Inhaber"
+        "Owner": "Eigentümer"
     },
     "Controllers\\Customers": {
         "Customers": "Kunden"
@@ -43,35 +43,35 @@
         "City": "Stadt",
         "Postal Code": "Postleitzahl",
         "Country": "Land",
-        "VAT ID": "USt-IdNr",
-        "Customer ID": "Kundenausweis",
-        "Tax ID": "Steuer-ID",
+        "VAT ID": "USt-IdNr.",
+        "Customer ID": "Kundennummer",
+        "Tax ID": "Steuernummer",
         "Notes": "Notizen",
         "Date Created": "Erstellt am",
         "Active": "Aktiv",
         "Owner": "Eigentümer",
-        "Link to shared folder (online storage) with related documents": "Link zum gemeinsam genutzten Ordner (Online -Speicher) mit zugehörigen Dokumenten",
-        "Add Customer": "Kunden hinzufügen",
-        "Tags": "Schlagwörter",
+        "Link to shared folder (online storage) with related documents": "Link zum freigegebenen Ordner (Online-Speicher) mit zugehörigen Dokumenten",
+        "Add Customer": "Kunde hinzufügen",
+        "Tags": "Tags",
         "Archive": "Archiv",
         "Archived": "Archiviert",
-        "Manager": "Verwalter",
-        "Shared folder (online document storage)": "Geteilter Ordner",
+        "Manager": "Manager",
+        "Shared folder (online document storage)": "Freigegebener Ordner (Online-Dokumentenspeicher)",
         "Identifier": "Kennung",
         "Non-active": "Inaktiv",
         "Shared with": "Geteilt mit",
         "Columns": "Spalten",
         "Customer": "Kunde",
         "Company ID": "Unternehmens-ID",
-        "Tag": "Schlagwort"
+        "Tag": "Tag"
     },
     "Models\\CustomerDocument": {
         "Customer": "Kunde",
-        "Document": "Dokumentieren"
+        "Document": "Dokument"
     },
     "Models\\CustomerTag": {
         "Customer": "Kunde",
-        "Tag": "Etikett"
+        "Tag": "Tag"
     },
     "Models\\Tag": {
         "Name": "Name",
@@ -79,7 +79,7 @@
     },
     "Components\\FormCustomer": {
         "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
-        "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
+        "Shift+Enter = Schedule": "Shift+Enter = Aktivität planen",
         "Not completed yet": "Noch nicht fertig",
         "Most recent activities": "Letzte Aktivitäten",
         "Customer": "Kunde",
@@ -92,19 +92,19 @@
         "Email": "E-Mail",
         "Primary Contact": "Hauptkontakt",
         "Calendar": "Kalender",
-        "Tags": "Schlagwörter",
-        "Documents": "Unterlagen",
+        "Tags": "Tags",
+        "Documents": "Dokumente",
         "Local documents": "Lokale Dokumente",
         "Log completed activity": "Abgeschlossene Aktivität erfassen",
-        "Enter": "Eingeben",
+        "Enter": "Enter",
         "Schedule activity": "Aktivität planen",
         "Shift+Enter": "Shift+Enter",
         "Document": "Dokument",
         "Add document": "Dokument hinzufügen",
-        "Link": "Verknüpfung"
+        "Link": "Link"
     },
     "Components\\CustomerFormActivity": {
-        "Start": "Anfang",
+        "Start": "Beginn",
         "Customer": "Kunde",
         "End": "Ende",
         "Contact": "Kontakt"

@@ -291,6 +291,12 @@
                     <span class="icon"><i class='fas fa-shield'></i></span>
                     <span class="text">{{ translate('Change my password') }}</span>
                   </a>
+                  {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Settings') %}
+                    <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/settings" data-pr-tooltip="Settings">
+                      <span class="icon"><i class="fas fa-cog"></i></span>
+                      <span class="text">{{ translate('Settings') }}</span>
+                    </a>
+                  {% endif %}
                   {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\AiAssistent') %}
                     <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/ai-assistant" data-pr-tooltip="AIAssistant">
                       <span class="icon"><i class="fas fa-robot"></i></span>
@@ -301,18 +307,6 @@
                     <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/help" data-pr-tooltip="Help">
                       <span class="icon"><i class="fas fa-life-ring"></i></span>
                       <span class="text">{{ translate('Help') }}</span>
-                    </a>
-                  {% endif %}
-                  {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Settings') %}
-                    <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/settings" data-pr-tooltip="Settings">
-                      <span class="icon"><i class="fas fa-cog"></i></span>
-                      <span class="text">{{ translate('Settings') }}</span>
-                    </a>
-                  {% endif %}
-                  {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Enterprise\\Cloud') %}
-                    <a class="btn btn-white btn-list-item p-2" href="{{ config.projectUrl }}/cloud">
-                      <span class="icon"><i class='fas fa-cloud'></i></span>
-                      <span class="text">{{ translate('Manage cloud account') }}</span>
                     </a>
                   {% endif %}
                   {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\About') %}

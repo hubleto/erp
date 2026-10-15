@@ -28,7 +28,7 @@
     "Models\\Transaction": {
         "Transaction UID": "UID pohybu",
         "Type": "Typ",
-        "Date and time of transaction": "Dátum a čas",
+        "Date and time of transaction": "Dátum a čas pohybu",
         "Product": "Produkt",
         "Quantity": "Množstvo",
         "Reference document #1": "Referenčný dokument #1",

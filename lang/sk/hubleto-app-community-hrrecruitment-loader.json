@@ -15,28 +15,28 @@
         "Demo opening for an experienced people operations professional.": "Ukážková pracovná ponuka pre skúseného odborníka na personálne operácie.",
         "Careers page": "Kariérna stránka",
         "Demo candidate profile.": "Ukážkový profil kandidáta.",
-        "Demo application awaiting initial review.": "Ukážková žiadosť čakajúca na úvodné posúdenie.",
+        "Demo application awaiting initial review.": "Ukážková prihláška čakajúca na úvodné posúdenie.",
         "Video call": "Videohovor",
         "Scheduled": "Naplánované",
         "HR Coordinator - Demo": "HR koordinátor - ukážka",
         "Demo opening supporting employee services and HR operations.": "Ukážková pracovná ponuka v oblasti služieb pre zamestnancov a HR operácií.",
         "Employee referral": "Odporúčanie zamestnanca",
         "Additional demo candidate profile.": "Dodatočný ukážkový profil kandidáta.",
-        "Demo application in the recruitment pipeline.": "Ukážková žiadosť v náborovom procese.",
+        "Demo application in the recruitment pipeline.": "Ukážková prihláška v náborovom procese.",
         "Meeting room 2": "Zasadacia miestnosť 2",
-        "Application": "Žiadosť",
+        "Application": "Prihláška",
         "Recruitment": "Nábor",
-        "Manage job openings, applicants, applications, and interviews.": "Spravujte pracovné ponuky, uchádzačov, žiadosti a pohovory."
+        "Manage job openings, applicants, applications, and interviews.": "Spravujte pracovné ponuky, uchádzačov, prihlášky a pohovory."
     },
     "Models\\Application": {
         "Job opening": "Pracovná ponuka",
         "Candidate": "Kandidát",
-        "Applied on": "Uplatnené na",
+        "Applied on": "Dátum prihlásenia",
         "Decision date": "Dátum rozhodnutia",
         "Notes": "Poznámky",
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "Pipeline step": "Krok náborového procesu",
-        "Add application": "Pridať žiadosť"
+        "Add application": "Pridať prihlášku"
     },
     "Models\\Candidate": {
         "First name": "Meno",
@@ -45,7 +45,7 @@
         "Phone": "Telefón",
         "Source": "Zdroj",
         "Portfolio or profile URL": "Adresa URL portfólia alebo profilu",
-        "Consent to store application data": "Súhlas s ukladaním údajov o žiadosti",
+        "Consent to store application data": "Súhlas s ukladaním údajov z prihlášky",
         "Notes": "Poznámky",
         "Add candidate": "Pridať kandidáta"
     },
@@ -55,7 +55,7 @@
         "Add employment type": "Pridať typ pracovného pomeru"
     },
     "Models\\Interview": {
-        "Application": "Žiadosť",
+        "Application": "Prihláška",
         "Interviewer": "Osoba vedúca pohovor",
         "Start": "Začiatok",
         "End": "Koniec",

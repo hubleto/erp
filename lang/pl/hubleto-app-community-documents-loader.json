@@ -22,7 +22,7 @@
         "Ťarchopis": "Nota debetowa",
         "Document review results": "Wyniki przeglądu dokumentu",
         "Versions": "Wersje",
-        "Reviews": "Opinie",
+        "Reviews": "Przeglądy",
         "File manager": "Menedżer plików"
     },
     "Models\\Document": {
@@ -38,8 +38,8 @@
         "RecordId": "ID rekordu",
         "Created on": "Utworzono dnia",
         "Created by": "Utworzył",
-        "Workflow": "Przepływ pracy",
-        "Workflow step": "Krok przepływu pracy"
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"

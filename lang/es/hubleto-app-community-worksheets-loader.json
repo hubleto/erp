@@ -32,10 +32,10 @@
         "Yesterday": "Ayer",
         "Last 7 days": "Últimos 7 días",
         "Last 14 days": "Últimos 14 días",
-        "Month before last": "El mes antepasado",
+        "Month before last": "Hace dos meses",
         "Month": "Mes",
         "Customer": "Cliente",
-        "Deal": "Negocio",
+        "Deal": "Oportunidad",
         "Project": "Proyecto",
         "Group by": "Agrupar por",
         "Total worked hours": "Total de horas trabajadas",
@@ -46,7 +46,7 @@
         "hours": "horas"
     },
     "Models\\ActivityType": {
-        "Varchar": "Nombre",
+        "Varchar": "Texto",
         "Color": "Color",
         "Add ActivityType": "Agregar tipo de actividad"
     },

@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Documents": "Dokumenty",
-        "Free document management.": "Bezplatný manažment dokumentov.",
+        "Free document management.": "Bezplatná správa dokumentov.",
         "Browse": "Prehliadať",
         "List": "Zoznam",
         "Templates": "Šablóny",
@@ -22,13 +22,13 @@
         "Ťarchopis": "Ťarchopis",
         "Document review results": "Výsledky kontroly dokumentu",
         "Versions": "Verzie",
-        "Reviews": "Hodnotenia",
+        "Reviews": "Kontroly",
         "File manager": "Správca súborov"
     },
     "Models\\Document": {
         "Document name": "Názov dokumentu",
         "File": "Súbor",
-        "File Link": "Odkaz na dokument",
+        "File Link": "Odkaz na súbor",
         "Origin Link": "Pôvodný odkaz",
         "Uid": "Uid",
         "Folder": "Priečinok",
@@ -38,8 +38,8 @@
         "RecordId": "ID záznamu",
         "Created on": "Vytvorené dňa",
         "Created by": "Vytvoril",
-        "Workflow": "Pracovný postup",
-        "Workflow step": "Krok pracovného postupu"
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow"
     },
     "Controllers\\Documents": {
         "Documents": "Dokumenty"
@@ -54,7 +54,7 @@
     },
     "Models\\Folder": {
         "Uid": "Uid",
-        "Parent folder": "Priečinok",
+        "Parent folder": "Nadradený priečinok",
         "Folder name": "Názov priečinka",
         "Add Folder": "Pridať priečinok"
     },
@@ -77,7 +77,7 @@
         "Add document": "Pridať dokument",
         "Move": "Presunúť",
         "Move selected": "Presunúť vybrané",
-        "Confirm delete": "Potvrdiť vymazanie",
+        "Confirm delete": "Potvrdiť odstránenie",
         "Delete": "Vymazať",
         "Public": "Verejné"
     },

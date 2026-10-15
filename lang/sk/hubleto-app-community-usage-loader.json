@@ -2,7 +2,7 @@
     "manifest": {
         "Usage": "Používanie",
         "Usage statistics": "Štatistiky používania",
-        "Usage log": "Záznamy používania"
+        "Usage log": "Záznam používania"
     },
     "Controllers\\Home": {
         "Usage": "Používanie",
@@ -11,7 +11,7 @@
     "Controllers\\Log": {
         "Usage": "Používanie",
         "Log": "Denník",
-        "Usage log": "Záznamy používania"
+        "Usage log": "Záznam používania"
     },
     "Models\\Log": {
         "Time": "Čas",

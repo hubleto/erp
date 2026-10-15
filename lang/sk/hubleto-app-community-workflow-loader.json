@@ -1,9 +1,9 @@
 {
     "manifest": {
-        "Workflow": "Pracovný postup",
-        "Free sales workflow management.": "Bezplatný manažment predajných kanálov.",
+        "Workflow": "Workflow",
+        "Free sales workflow management.": "Bezplatná správa predajných workflowov.",
         "History": "História",
-        "Workflows": "Workflovy",
+        "Workflows": "Workflowy",
         "Items with not updated step": "Položky s neaktualizovaným krokom",
         "Campaigns": "Kampane",
         "Preparation": "Príprava",
@@ -42,17 +42,17 @@
         "Manage workflows": "Spravovať workflovy"
     },
     "Controllers\\Home": {
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "Add workflow": "Pridať workflow",
         "Manage workflow steps": "Spravovať kroky"
     },
     "Controllers\\Workflows": {
         "Settings": "Nastavenia",
-        "Workflows": "Workflovy"
+        "Workflows": "Workflowy"
     },
     "Controllers\\Workflow": {
-        "Workflow": "Pracovný postup",
-        "Show details": "Zobraziť detaily",
+        "Workflow": "Workflow",
+        "Show details": "Zobraziť podrobnosti",
         "Target": "Cieľová skupina",
         "Goal": "Cieľ",
         "items": "položiek",
@@ -63,7 +63,7 @@
         "Closed milestone": "Uzavretý míľnik"
     },
     "Controllers\\History": {
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "History": "História"
     },
     "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
@@ -72,7 +72,7 @@
         "Last update by": "Naposledy aktualizoval"
     },
     "root": {
-        "Workflows": "Workflovy"
+        "Workflows": "Workflowy"
     },
     "Models\\Workflow": {
         "Name": "Názov",
@@ -88,7 +88,7 @@
         "Order": "Poradie",
         "Color": "Farba",
         "Probability": "Pravdepodobnosť",
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "Set result of a deal to": "Nastaviť výsledok dealu na",
         "Tag": "Značka",
         "Add Workflow Step": "Pridať krok workflow"
@@ -98,11 +98,11 @@
         "Record Id": "ID záznamu",
         "Changed": "Zmenené",
         "User": "Používateľ",
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "Workflow Step": "Krok"
     },
     "Components\\FormWorkflow": {
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "Steps": "Kroky"
     },
     "Components\\FormWorkflowStep": {

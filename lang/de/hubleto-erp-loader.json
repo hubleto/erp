@@ -15,30 +15,30 @@
         "Upload file": "Datei hochladen"
     },
     "Components\\Table": {
-        "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, einen Eintrag zu löschen. Drücken Sie OK um dies zu bestätigen.",
+        "You are about to delete the record. Press OK to confirm.": "Sie sind dabei, den Eintrag zu löschen. Zum Bestätigen auf OK klicken.",
         "Yes, delete": "Ja, löschen",
-        "No, do not delete": "Nein, Fenster schließen",
+        "No, do not delete": "Nein, nicht löschen",
         "Delete": "Löschen",
-        "Start typing to search...": "Suchen...",
-        "No data.": "Keine Daten"
+        "Start typing to search...": "Zum Suchen eingeben...",
+        "No data.": "Keine Daten."
     },
     "Desktop": {
         "Upgrade to Premium": "Auf Premium upgraden",
         "Your messages": "Ihre Nachrichten",
-        "Help center": "Hilfe-Center",
-        "Search knowledgebase...": "Wissensdatenbank durchsuchen...",
+        "Help center": "Hilfezentrum",
+        "Search knowledgebase...": "In der Wissensdatenbank suchen...",
         "Browse knowledgebase": "Wissensdatenbank durchsuchen",
-        "Hot tips & tricks": "Tipps und Tricks",
-        "No hot tips for this screen": "Für diesen Bildschirm gibt es keine Tipps.",
+        "Hot tips & tricks": "Tipps & Tricks",
+        "No hot tips for this screen": "Für diese Ansicht gibt es keine Tipps.",
         "Need more help?": "Benötigen Sie weitere Hilfe?",
         "Contact us": "Kontaktieren Sie uns",
         "Manage your account": "Konto verwalten",
         "Sign out": "Abmelden",
         "Get premium": "Premium erhalten",
-        "Premium": "Prämie",
-        "Manage your user account": "Verwalten Sie Ihr Benutzerkonto",
-        "Manage cloud account": "Cloud -Konto verwalten",
-        "Help": "Helfen",
+        "Premium": "Premium",
+        "Manage your user account": "Benutzerkonto verwalten",
+        "Manage cloud account": "Cloud-Konto verwalten",
+        "Help": "Hilfe",
         "Personal": "Persönlich"
     },
     "Model": {

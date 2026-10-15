@@ -22,7 +22,7 @@
         "Main warehouse used for supplying the most important customers.": "Almacén principal usado para abastecer a los clientes más importantes.",
         "Regional Hub East": "Centro regional Este",
         "Regional warehouse used for supplying the regional customers.": "Almacén regional usado para abastecer a los clientes de la región.",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Types of warehouses": "Tipos de almacenes",
         "Types of locations": "Tipos de ubicaciones"
     },
@@ -165,17 +165,17 @@
     },
     "Controllers\\TransactionItems": {
         "Warehouses": "Almacenes",
-        "Transactions": "Transacciones",
+        "Transactions": "Movimientos",
         "Items": "Artículos"
     },
     "Controllers\\WarehouseTypes": {
         "Warehouses": "Almacenes",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Warehouse types": "Tipos de almacenes"
     },
     "Controllers\\LocationTypes": {
         "Warehouses": "Almacenes",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Location types": "Tipos de ubicación"
     },
     "Components\\FormInventory": {
@@ -186,7 +186,7 @@
         "Product": "Producto",
         "Purchase price": "Precio de compra",
         "Qty.": "Cant.",
-        "Add item": "Agregar producto"
+        "Add item": "Agregar artículo"
     },
     "Components\\FormTransactionItem": {
         "Transaction item": "Artículo de la transacción"

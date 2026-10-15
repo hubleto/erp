@@ -18,7 +18,7 @@
         "Serial number": "Numer seryjny",
         "Expiration": "Data ważności",
         "Received": "Przyjęte",
-        "Last moved": "Ostatni ruch",
+        "Last moved": "Ostatni ruch magazynowy",
         "Location": "Lokalizacja",
         "Add item": "Dodaj pozycję"
     },
@@ -26,9 +26,9 @@
         "Name": "Nazwa"
     },
     "Models\\Transaction": {
-        "Transaction UID": "UID transakcji",
+        "Transaction UID": "UID ruchu",
         "Type": "Typ",
-        "Date and time of transaction": "Data i godzina",
+        "Date and time of transaction": "Data i czas ruchu",
         "Product": "Produkt",
         "Quantity": "Ilość",
         "Reference document #1": "Dokument referencyjny #1",

@@ -13,9 +13,9 @@
         "Priority": "Prioridad",
         "User": "Usuario",
         "IP": "IP",
-        "create": "crear",
-        "update": "actualizar",
-        "delete": "eliminar"
+        "create": "Creación",
+        "update": "Actualización",
+        "delete": "Eliminación"
     },
     "Controllers\\AuditLogs": {
         "AuditLogs": "Registros de auditoría"

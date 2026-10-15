@@ -1,7 +1,7 @@
 {
     "manifest": {
-        "Audit Logs": "Audit Logi",
-        "Internal audit logs": "Wewnętrzne audit logi"
+        "Audit Logs": "Dzienniki audytu",
+        "Internal audit logs": "Wewnętrzne dzienniki audytu"
     },
     "Models\\AuditLog": {
         "Datetime": "Data i czas",
@@ -18,10 +18,10 @@
         "delete": "Usunięcie"
     },
     "Controllers\\AuditLogs": {
-        "AuditLogs": "Audit Logi"
+        "AuditLogs": "Dzienniki audytu"
     },
     "Components\\FormAuditLog": {
-        "Audit Log": "Zapis audytu"
+        "Audit Log": "Dziennik audytu"
     },
     "Crons\\DailyDigest": {
         "Hubleto: Your Daily Digest": "Hubleto: Twój dzienny przegląd"

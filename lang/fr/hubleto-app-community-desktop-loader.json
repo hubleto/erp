@@ -41,11 +41,11 @@
     "Controllers\\Home": {
         "Welcome": "Bienvenue",
         "Edit profile": "Modifier le profil",
-        "Hubleto provides powerful and secure API to integrate with external services.": "",
-        "Did you know?": "",
-        "Open user guide": "",
-        "Recently used apps": "",
-        "Start Hubleto search with <span class='badge'>\/c<\/span> switch to search customers.": "",
-        "You can have as many dashboard as you wish.": ""
+        "Hubleto provides powerful and secure API to integrate with external services.": "Hubleto propose une API puissante et sécurisée pour l'intégration avec des services externes.",
+        "Did you know?": "Le saviez-vous ?",
+        "Open user guide": "Ouvrir le guide de l'utilisateur",
+        "Recently used apps": "Applications récemment utilisées",
+        "Start Hubleto search with <span class='badge'>\/c<\/span> switch to search customers.": "Lancez la recherche Hubleto avec l'option <span class='badge'>\/c<\/span> pour rechercher des clients.",
+        "You can have as many dashboard as you wish.": "Vous pouvez avoir autant de tableaux de bord que vous le souhaitez."
     }
 }

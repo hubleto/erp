@@ -3,15 +3,15 @@
         "Help": "Ayuda",
         "Help and user guide for Hubleto.": "Ayuda y guía del usuario para Hubleto.",
         "About": "Acerca de Hubleto",
-        "About your Hubleto": "Acerca de tu Hubleto"
+        "About your Hubleto": "Acerca de su Hubleto"
     },
     "Controllers\\About": {
         "About": "Acerca de Hubleto",
-        "About your Hubleto": "Acerca de tu Hubleto",
+        "About your Hubleto": "Acerca de su Hubleto",
         "Useful links": "Enlaces de interés",
         "Package": "Paquete",
         "Version": "Versión",
-        "Commit": "Confirmación",
+        "Commit": "Commit",
         "Privacy policy": "Política de privacidad",
         "Terms of use": "Términos de uso",
         "Website": "Sitio web",

@@ -23,7 +23,7 @@
     },
     "Controllers\\Settings": {
         "EventFeedback": "Comentarios del evento",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Create your custom settings page here": "Cree aquí su página de configuración personalizada"
     },
     "Models\\Contact": {

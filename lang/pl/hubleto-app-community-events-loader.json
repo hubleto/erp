@@ -84,7 +84,7 @@
         "Add Agenda": "Dodaj program"
     },
     "Models\\Attendee": {
-        "Salutation": "Tytuł grzecznościowy",
+        "Salutation": "Zwrot grzecznościowy",
         "Title before": "Tytuł przed",
         "Full name": "Pełne imię i nazwisko",
         "Title after": "Tytuł po",
@@ -116,7 +116,7 @@
         "Add venue": "Dodaj miejsce"
     },
     "Models\\Speaker": {
-        "Salutation": "Tytuł grzecznościowy",
+        "Salutation": "Zwrot grzecznościowy",
         "Title before": "Tytuł przed",
         "Full name": "Pełne imię i nazwisko",
         "Title after": "Tytuł po",

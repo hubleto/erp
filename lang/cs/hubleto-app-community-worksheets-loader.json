@@ -2,7 +2,7 @@
     "manifest": {
         "Worksheets": "Výkaznictví",
         "Worksheet log": "Výkaznictví odpracovaných hodin",
-        "Activity types": "Typy činností",
+        "Activity types": "Typy aktivit",
         "Daily chart": "Denní přehled",
         "Monthly summary": "Měsíční souhrn"
     },
@@ -12,13 +12,13 @@
     },
     "Models\\Activity": {
         "Worker": "Pracovník",
-        "Task": "Úloha",
+        "Task": "Úkol",
         "Type": "Typ činnosti",
         "Day": "Den",
         "Worked hours": "Odpracováno",
         "Description": "Popis",
         "Approved": "Schváleno",
-        "Is chargeable": "Účtovatelné",
+        "Is chargeable": "Je účtovatelné",
         "Created": "Vytvořeno",
         "Period": "Období",
         "All": "Vše",
@@ -35,7 +35,7 @@
         "Month before last": "Předminulý měsíc",
         "Month": "Měsíc",
         "Customer": "Zákazník",
-        "Deal": "Obchod",
+        "Deal": "Deal",
         "Project": "Projekt",
         "Group by": "Seskupit podle",
         "Total worked hours": "Celkem odpracováno hodin",
@@ -70,7 +70,7 @@
         "Activity types": "Typy aktivit"
     },
     "Controllers\\Boards\\DailyChart": {
-        "Show/Hide details": "Zobrazit/Skrýt detaily"
+        "Show/Hide details": "Zobrazit/Skrýt podrobnosti"
     },
     "Controllers\\Boards\\MonthlySummary": {
         "No employee with email address '{{ employeeEmail }}' found.": "Zaměstnanec s e-mailovou adresou '{{ employeeEmail }}' nebyl nalezen.",

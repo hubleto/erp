@@ -21,12 +21,12 @@
         "Yes, delete": "Sí, eliminar",
         "No, do not delete": "No, no eliminar",
         "Delete": "Eliminar",
-        "Start typing to search...": "Comienza a escribir para buscar...",
+        "Start typing to search...": "Comience a escribir para buscar...",
         "Search...": "Buscar...",
         "No data.": "No hay datos.",
         "More options": "Más opciones",
         "Show/Hide filter": "Mostrar/Ocultar filtro",
-        "Hide filter": "Esconder filtro",
+        "Hide filter": "Ocultar filtro",
         "Show as plain table": "Mostrar como tabla simple",
         "Show as standard table": "Mostrar como tabla estándar",
         "Delete record": "Eliminar registro",
@@ -39,11 +39,11 @@
         "Keep signed in": "Mantener sesión iniciada"
     },
     "Controllers\\SignIn": {
-        "Your email": "Correo electrónico",
+        "Your email": "Su correo electrónico",
         "Password": "Contraseña",
         "Keep signed in": "Mantener sesión iniciada",
         "Sign in": "Iniciar sesión",
-        "Forgot password?": "¿Olvidaste tu contraseña?"
+        "Forgot password?": "¿Olvidó su contraseña?"
     },
     "Components\\Inputs\\Image": {
         "Choose image": "Seleccionar imagen"

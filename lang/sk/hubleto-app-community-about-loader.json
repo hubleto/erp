@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Help": "Pomoc",
-        "Help and user guide for Hubleto.": "Pomocník a používateľská príručka pre Hubleto.",
+        "Help and user guide for Hubleto.": "Pomoc a používateľská príručka pre Hubleto.",
         "About": "O Hubleto",
         "About your Hubleto": "O Hubleto"
     },
@@ -11,7 +11,7 @@
         "Useful links": "Užitočné odkazy",
         "Package": "Balík",
         "Version": "Verzia",
-        "Commit": "Zmena",
+        "Commit": "Commit",
         "Privacy policy": "Zásady ochrany osobných údajov",
         "Terms of use": "Podmienky používania",
         "Website": "Webová stránka",

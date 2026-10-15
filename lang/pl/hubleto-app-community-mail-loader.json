@@ -143,7 +143,7 @@
     },
     "Components\\FormMail": {
         "Template": "Szablon",
-        "Send now": "Wyślij",
+        "Send now": "Wyślij teraz",
         "Mail": "Poczta"
     },
     "Components\\FormAccount": {

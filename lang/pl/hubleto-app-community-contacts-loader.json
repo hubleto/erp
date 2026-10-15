@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Contacts": "Kontakty",
-        "Default customer management and addressbook.": "Książka adresowa i zarządzanie klientami.",
+        "Default customer management and addressbook.": "Domyślne zarządzanie klientami i książka adresowa.",
         "Contact Categories": "Kategorie kontaktów",
         "Contact Tags": "Znaczniki kontaktów",
         "Import contacts": "Importuj kontakty",
@@ -16,16 +16,16 @@
         "Personal Information": "Dane osobowe",
         "Category": "Kategoria",
         "Type": "Typ",
-        "Email": "Email",
+        "Email": "E-mail",
         "Phone Number": "Telefon",
         "Customer": "Klient",
-        "Tags": "Tagi",
+        "Tags": "Znaczniki",
         "Value": "Wartość",
         "Add contact": "Dodaj kontakt",
-        "No contacts for this person yet.": "Brak kontaktów dla tej osoby"
+        "No contacts for this person yet.": "Brak kontaktów dla tej osoby."
     },
     "Components\\TablePersons": {
-        "Start typing to search...": "Szukaj..."
+        "Start typing to search...": "Zacznij pisać, aby wyszukać..."
     },
     "Models\\Person": {
         "First name": "Imię",
@@ -34,11 +34,11 @@
         "Main Contact": "Główny kontakt",
         "Notes": "Uwagi",
         "Active": "Aktywny",
-        "Date Created": "Utworzono",
+        "Date Created": "Data utworzenia",
         "Contacts": "Kontakty",
         "Add Contact": "Dodaj kontakt",
-        "Emails": "Emaile",
-        "Phone Numbers": "Telefony",
+        "Emails": "E-maile",
+        "Phone Numbers": "Numery telefonów",
         "Add": "Dodaj",
         "Primary Contact": "Kontakt główny"
     },
@@ -46,13 +46,13 @@
         "Person": "Kontakt",
         "Contact Category": "Kategoria",
         "Type": "Typ",
-        "Email": "Email",
+        "Email": "E-mail",
         "Phone Number": "Telefon",
         "Other": "Inne",
         "Value": "Wartość",
         "Contact": "Kontakt",
         "Category": "Kategoria",
-        "Number": "Liczba",
+        "Number": "Numer",
         "URL": "Adres URL",
         "Contacts": "Kontakty",
         "Add Customer": "Dodaj klienta"
@@ -77,7 +77,7 @@
         "Import contacts": "Importuj kontakty"
     },
     "Models\\Contact": {
-        "Salutation": "Pozdrowienie",
+        "Salutation": "Zwrot grzecznościowy",
         "Title before": "Tytuł przed",
         "First name": "Imię",
         "Middle name": "Drugie imię",
@@ -86,10 +86,10 @@
         "Customer": "Klient",
         "Primary Contact": "Kontakt główny",
         "Notes": "Uwagi",
-        "Date Created": "Utworzono",
+        "Date Created": "Data utworzenia",
         "Active": "Aktywny",
         "Add contact": "Dodaj kontakt",
-        "Emails": "Emaile",
+        "Emails": "E-maile",
         "Phone Numbers": "Numery telefonów",
         "Mr.": "Pan",
         "Mrs.": "Pani",
@@ -99,14 +99,14 @@
         "Primary": "Główny",
         "Invoicing": "Fakturowanie",
         "Invalid": "Nieprawidłowy",
-        "Tag": "Tag"
+        "Tag": "Znacznik"
     },
     "Controllers\\Contacts": {
         "Contacts": "Kontakty"
     },
     "Components\\FormContact": {
         "No contacts yet.": "Brak kontaktów.",
-        "Email": "Email",
+        "Email": "E-mail",
         "Type": "Typ",
         "Phone Number": "Telefon",
         "Other": "Inne",
@@ -150,7 +150,7 @@
         "links": "linki",
         "Example CSV file": "Przykładowy plik CSV",
         "You may also": "Możesz też",
-        "Export your addressbook": "Wyeksportować swoją książkę adresową",
+        "Export your addressbook": "wyeksportować swoją książkę adresową",
         "modify it and re-import again": "zmodyfikować ją i zaimportować ponownie",
         "Step 2: Upload the file with contacts": "Krok 2: Prześlij plik z kontaktami",
         "Step 3: Give a tag to new imported contacts": "Krok 3: Przypisz znacznik nowym zaimportowanym kontaktom",

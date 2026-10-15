@@ -7,7 +7,7 @@
         "User Id": "ID uživatele",
         "Client Id": "ID klienta",
         "Scopes": "Rozsahy",
-        "Revoked": "Zrušený",
+        "Revoked": "Zneplatněný",
         "Add AccessToken": "Přidat přístupový token"
     },
     "Models\\AuthCode": {
@@ -19,7 +19,7 @@
         "Code Challenge": "Výzva kódu",
         "Code Challenge Method": "Metoda výzvy kódu",
         "Redirect Uri": "Přesměrovací URI",
-        "Revoked": "Zrušený",
+        "Revoked": "Zneplatněný",
         "Add AuthCode": "Přidat autorizační kód"
     },
     "Models\\Client": {

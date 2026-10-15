@@ -1,35 +1,35 @@
 {
     "models.user": {
         "First name": "Vorname",
-        "Middle name": "Mittelname",
+        "Middle name": "Zweiter Vorname",
         "Last name": "Nachname",
         "Email": "E-Mail",
         "Language": "Sprache",
         "Active profile": "Aktives Profil",
         "Login": "Anmeldung",
         "Password": "Passwort",
-        "Active": "Konto ist inaktiv",
-        "Time of last login": "Zeit letzter Anmeldung",
-        "Last login IP": "IP-Adresse letzter Anmeldung",
-        "Time of last access": "Zeit von letztem Zugriff",
-        "Last access IP": "IP-Adresse von letztem Zugriff"
+        "Active": "Konto ist aktiv",
+        "Time of last login": "Zeitpunkt der letzten Anmeldung",
+        "Last login IP": "IP-Adresse der letzten Anmeldung",
+        "Time of last access": "Zeitpunkt des letzten Zugriffs",
+        "Last access IP": "IP-Adresse des letzten Zugriffs"
     },
     "models.country": {
         "Country Name": "Land",
         "Code": "Code"
     },
     "models.profile": {
-        "Company": "Firma"
+        "Company": "Unternehmen"
     },
     "models.activityType": {
-        "Type Name": "Typ",
+        "Type Name": "Typname",
         "Color": "Farbe",
         "Shown in Calendar": "Im Kalender anzeigen",
         "Icon": "Symbol"
     },
     "models.currency": {
         "Currency Name": "Währung",
-        "Currency Code": "Code"
+        "Currency Code": "Währungscode"
     },
     "models.workflow": {
         "Name": "Titel",
@@ -38,7 +38,7 @@
     "models.workflowStep": {
         "Name": "Titel",
         "Order": "Reihenfolge",
-        "Company": "Farbe"
+        "Company": "Unternehmen"
     },
     "models.tag": {
         "Name": "Titel",
@@ -47,15 +47,15 @@
     "models.setting": {
         "Key": "Parameter",
         "Value": "Wert",
-        "Only for user": "Nur für Nutzer"
+        "Only for user": "Nur für den Benutzer"
     },
     "models.invoiceProfile": {
         "Name": "Titel",
         "Phone": "Telefon",
-        "E-mail": "E-Mail:",
+        "E-mail": "E-Mail",
         "WWW": "WWW",
-        "Company ID": "Firmenkennung",
-        "Tax ID": "Steuer-IdNr.",
+        "Company ID": "Unternehmens-ID",
+        "Tax ID": "Steuernummer",
         "VAT ID": "USt-IdNr.",
         "Street, line 1": "Straße, erste Zeile",
         "Street, line 2": "Straße, zweite Zeile",
@@ -85,15 +85,15 @@
         "User Roles": "Benutzerrollen",
         "Profiles": "Profile",
         "Permissions": "Berechtigungen",
-        "Tags": "Markierungen",
+        "Tags": "Tags",
         "Activity Types": "Aktivitätstypen",
         "Contact Types": "Kontakttypen",
         "Countries": "Länder",
         "Currencies": "Währungen",
-        "Lead Statuses": "Lead Zustände",
-        "Deal Statuses": "Deal Zustände",
+        "Lead Statuses": "Lead-Status",
+        "Deal Statuses": "Deal-Status",
         "Workflows": "Workflow",
-        "Invoice profiles": "Abrechnungsprofile"
+        "Invoice profiles": "Rechnungsprofile"
     },
     "controllers.userRoles": {
         "Settings": "Einstellungen",
@@ -107,7 +107,7 @@
         "Settings": "Einstellungen"
     },
     "models.activitytype": {
-        "Type Name": "Typ Name",
+        "Type Name": "Typname",
         "Color": "Farbe",
         "Shown in Calendar": "Im Kalender anzeigen",
         "Icon": "Symbol"
@@ -119,7 +119,7 @@
     },
     "controllers.users": {
         "Settings": "Einstellungen",
-        "Users": "Nutzer"
+        "Users": "Benutzer"
     },
     "manifest": {
         "Settings": "Einstellungen",
@@ -147,12 +147,12 @@
         "Your companies": "Ihre Unternehmen",
         "General settings": "Allgemeine Einstellungen",
         "Permissions": "Berechtigungen",
-        "Tags": "Markierungen",
+        "Tags": "Tags",
         "Activity types": "Aktivitätstypen",
         "Contact types": "Kontakttypen",
         "Countries": "Länder",
         "Currencies": "Währungen",
-        "Workflows": "Arbeitsabläufe",
+        "Workflows": "Workflows",
         "Invoice profiles": "Rechnungsprofile",
         "Platform config": "Plattformkonfiguration",
         "Roles": "Rollen",
@@ -174,7 +174,7 @@
     },
     "Controllers\\Dashboard": {
         "Settings": "Einstellungen",
-        "Manage installed apps": "Installierte Anwendungen verwalten",
+        "Manage installed apps": "Installierte Apps verwalten",
         "Open": "Offen",
         "Most common settings": "Die häufigsten Einstellungen",
         "Manage users": "Benutzer verwalten",
@@ -183,7 +183,7 @@
         "Change theme": "Design ändern"
     },
     "Models\\RolePermission": {
-        "Permission": "Erlaubnis",
+        "Permission": "Berechtigung",
         "Role": "Rolle"
     },
     "Models\\User": {
@@ -195,7 +195,7 @@
         "Default company": "Standardfirma",
         "Roles": "Rollen",
         "Teams": "Teams",
-        "Apps": "Anwendungen"
+        "Apps": "Apps"
     },
     "Models\\Country": {
         "Country": "Land",
@@ -203,11 +203,11 @@
     },
     "Models\\Company": {
         "Company": "Unternehmen",
-        "Tax ID": "Steuer -ID",
-        "VAT ID": "Mehrwertsteuer id",
+        "Tax ID": "Steuernummer",
+        "VAT ID": "USt-IdNr.",
         "Street, line 1": "Straße, Zeile 1",
         "Street, line 2": "Straße, Zeile 2",
-        "ZIP": "REISSVERSCHLUSS",
+        "ZIP": "PLZ",
         "City": "Stadt",
         "Country": "Land",
         "Logo": "Logo",
@@ -220,7 +220,7 @@
     "Models\\ActivityType": {
         "Type": "Typ",
         "Color": "Farbe",
-        "Show in calendar": "Im Kalender zeigen",
+        "Show in calendar": "Im Kalender anzeigen",
         "Icon": "Symbol"
     },
     "Models\\Currency": {
@@ -239,7 +239,7 @@
     },
     "Controllers\\Apps": {
         "Settings": "Einstellungen",
-        "Apps": "Anwendungen",
+        "Apps": "Apps",
         "Open": "Offen",
         "Disable": "Deaktivieren"
     },

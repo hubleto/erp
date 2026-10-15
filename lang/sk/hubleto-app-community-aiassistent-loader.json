@@ -1,15 +1,15 @@
 {
     "manifest": {
-        "AIAssistant": "AI Asistent",
+        "AIAssistant": "AI asistent",
         "AI Assistant for intelligent data interaction": "AI asistent pre inteligentnú interakciu s dátami",
         "AI Assistant": "AI asistent"
     },
     "Controllers\\Home": {
-        "AIAssistant": "AI Asistent",
-        "AI Assistant": "AI Asistent"
+        "AIAssistant": "AI asistent",
+        "AI Assistant": "AI asistent"
     },
     "Controllers\\Settings": {
-        "AIAssistant": "AI Asistent",
+        "AIAssistant": "AI asistent",
         "Settings": "Nastavenia",
         "Settings saved.": "Nastavenia uložené.",
         "Google Gemini API Key": "Google Gemini API kľúč",
@@ -21,21 +21,21 @@
         "Save": "Uložiť"
     },
     "GeminiProvider": {
-        "Failed to get a response from AIAssistant.": "Nepodarilo sa získať odpoveď od AI Asistenta."
+        "Failed to get a response from AIAssistant.": "Nepodarilo sa získať odpoveď od AI asistenta."
     },
     "Components\\ChatUi": {
         "User Mode": "Používateľský režim",
         "Developer Mode": "Vývojársky režim",
         "Context": "Kontext",
-        "Show context details": "Zobraziť detaily kontextu",
+        "Show context details": "Zobraziť podrobnosti kontextu",
         "Sample Questions": "Ukážkové otázky",
-        "Hi, I am Hubi, your AIAssistant. How can I help you today with Hubleto ERP?": "Ahoj, som Hubi, váš AI Asistent. Ako vám dnes môžem pomôcť s Hubleto ERP?",
+        "Hi, I am Hubi, your AIAssistant. How can I help you today with Hubleto ERP?": "Dobrý deň, som Hubi, váš AI asistent. Ako vám dnes môžem pomôcť s Hubleto ERP?",
         "Thinking...": "Premýšľam...",
         "Type your question here...": "Napíšte svoju otázku sem...",
         "AI can make mistakes. Please verify answers in the official documentation.": "AI môže robiť chyby. Prosím, overte odpovede v oficiálnej dokumentácii.",
         "Error occurred.": "Nastala chyba.",
         "Connection error.": "Chyba pripojenia.",
-        "What is the difference between a Lead and a Deal in Hubleto?": "Aký je rozdiel medzi Leádom a Dealem v Hubleto?",
+        "What is the difference between a Lead and a Deal in Hubleto?": "Aký je rozdiel medzi leadom a dealom v Hubleto?",
         "How can I create a new model and migration in Hubleto?": "Ako môžem vytvoriť nový model a migráciu v Hubleto?",
         "How do I set up calendar synchronization?": "Ako nastavím synchronizáciu kalendára?",
         "How do I create a new custom app?": "Ako vytvorím novú vlastnú aplikáciu?",

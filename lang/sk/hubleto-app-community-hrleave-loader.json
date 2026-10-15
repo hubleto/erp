@@ -6,7 +6,7 @@
         "Sick leave": "Práceneschopnosť",
         "Personal leave": "Osobné voľno",
         "Demo leave policy.": "Ukážkové pravidlá čerpania voľna.",
-        "days": "dni",
+        "days": "dní",
         "Manage leave policies, requests, and annual entitlements.": "Spravujte pravidlá voľna, žiadosti a ročné nároky."
     },
     "Models\\Leave": {
@@ -29,14 +29,14 @@
         "Approver": "Schvaľovateľ",
         "Decision date": "Dátum rozhodnutia",
         "Reason": "Dôvod",
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "Approval step": "Krok schvaľovania",
         "Request leave": "Požiadať o voľno"
     },
     "Models\\LeaveType": {
         "Leave type": "Typ voľna",
         "Annual entitlement (days)": "Ročný nárok (dni)",
-        "Paid": "Zaplatené",
+        "Paid": "Platené",
         "Requires approval": "Vyžaduje schválenie",
         "Description": "Popis",
         "Add leave type": "Pridať typ voľna"

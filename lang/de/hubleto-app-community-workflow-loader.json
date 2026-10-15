@@ -6,14 +6,14 @@
         "Sales": "Vertrieb"
     },
     "manifest": {
-        "Workflow": "Arbeitsablauf",
-        "Free sales workflow management.": "Kostenloses Verkaufsworkflowmanagement.",
+        "Workflow": "Workflow",
+        "Free sales workflow management.": "Kostenlose Verwaltung von Vertriebs-Workflows.",
         "History": "Verlauf",
-        "Workflows": "Arbeitsabläufe",
+        "Workflows": "Workflows",
         "Items with not updated step": "Positionen mit nicht aktualisiertem Schritt"
     },
     "root": {
-        "Workflows": "Arbeitsabläufe"
+        "Workflows": "Workflows"
     },
     "Models\\Workflow": {
         "Name": "Name",
@@ -25,15 +25,15 @@
     },
     "Models\\WorkflowStep": {
         "Name": "Name",
-        "Order": "Befehl",
+        "Order": "Reihenfolge",
         "Color": "Farbe",
         "Probability": "Wahrscheinlichkeit",
-        "Workflow": "Arbeitsablauf",
-        "Set result of a deal to": "Setzen Sie das Ergebnis eines Deals an",
-        "Tag": "Schlagwort"
+        "Workflow": "Workflow",
+        "Set result of a deal to": "Ergebnis des Deals festlegen auf",
+        "Tag": "Tag"
     },
     "Controllers\\Home": {
-        "Workflow": "Arbeitsablauf",
+        "Workflow": "Workflow",
         "Manage workflows": "Workflows verwalten",
         "Add deal": "Deal hinzufügen"
     },
@@ -42,7 +42,7 @@
         "Record Id": "Datensatz-ID",
         "Changed": "Geändert",
         "User": "Benutzer",
-        "Workflow": "Arbeitsablauf",
+        "Workflow": "Workflow",
         "Workflow Step": "Workflowschritt"
     }
 }

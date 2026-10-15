@@ -12,7 +12,7 @@
         "Name": "Nazwa",
         "Calendar ID": "ID kalendarza",
         "Type": "Typ",
-        "Google Calendar": "Google Kalendarz",
+        "Google Calendar": "Kalendarz Google",
         ".ics Url": ".ics URL",
         "Color": "Kolor",
         "Active": "Aktywny",
@@ -22,16 +22,16 @@
     "Controllers\\Google": {
         "Settings": "Ustawienia",
         "Calendar Sources": "Źródła kalendarzy",
-        "Google Calendars": "Google Kalendarze",
-        "Google Calendar": "Google Kalendarz",
-        "When using Google Calendar integration, also make sure to have $config['google-api-key'] defined in your ConfigEnv.php.": "Podczas korzystania z integracji Google Kalendarz upewnij się, że masz $config['google-api-key'] zdefiniowany w pliku ConfigEnv.php.",
+        "Google Calendars": "Kalendarze Google",
+        "Google Calendar": "Kalendarz Google",
+        "When using Google Calendar integration, also make sure to have $config['google-api-key'] defined in your ConfigEnv.php.": "Podczas korzystania z integracji z Kalendarzem Google upewnij się, że w pliku ConfigEnv.php zdefiniowano $config['google-api-key'].",
         "Visit": "Odwiedź",
-        "for details on how to get and configure your Google Calendar API key.": "aby uzyskać szczegółowe informacje o tym, jak pobrać i skonfigurować klucz API Google Kalendarz."
+        "for details on how to get and configure your Google Calendar API key.": "aby uzyskać szczegółowe informacje o tym, jak pobrać i skonfigurować klucz API Kalendarza Google."
     },
     "Controllers\\Home": {
         "Settings": "Ustawienia",
         "Calendar Sources": "Źródła kalendarzy",
-        "Manage Google Calendars": "Zarządzaj Google Kalendarzami",
+        "Manage Google Calendars": "Zarządzaj Kalendarzami Google",
         "Manage online .ics Calendars": "Zarządzaj kalendarzami .ics online"
     },
     "Controllers\\Ics": {
@@ -41,10 +41,10 @@
         "Online .ics Calendar": "Kalendarz .ics online"
     },
     "Components\\FormSource": {
-        "Enter the Calendar ID from the settings of your calendar in Google Calendar (look at the bottom of the page).": "Wprowadź ID kalendarza z ustawień swojego kalendarza w Google Kalendarz (patrz na dół strony).",
+        "Enter the Calendar ID from the settings of your calendar in Google Calendar (look at the bottom of the page).": "Wprowadź ID kalendarza z ustawień swojego kalendarza w Kalendarzu Google (patrz na dół strony).",
         "It should be in the form of": "Powinno mieć postać",
         "The calendar must also be set to public or the API Key specified in the config file must have access to it.": "Kalendarz musi być ustawiony jako publiczny lub klucz API podany w pliku konfiguracyjnym musi mieć do niego dostęp.",
         "Enter the URL that points to an ICS file.": "Wprowadź URL wskazujący na plik ICS.",
-        "When using Google calendar, make sure you define an API key in ConfigEnv.php: $config['google-api-key'] = ...": "Podczas korzystania z Google Kalendarz upewnij się, że masz zdefiniowany klucz API w ConfigEnv.php: $config['google-api-key'] = ..."
+        "When using Google calendar, make sure you define an API key in ConfigEnv.php: $config['google-api-key'] = ...": "Podczas korzystania z Kalendarza Google upewnij się, że w pliku ConfigEnv.php zdefiniowano klucz API: $config['google-api-key'] = ..."
     }
 }

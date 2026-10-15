@@ -1,6 +1,6 @@
 {
     "Controllers\\GetEmailTestInfo": {
-        "Mail has empty subject or body.": "E-mail má prázdny predmet alebo telo.",
+        "Mail has empty subject or body.": "E-mail má prázdny predmet alebo obsah.",
         "Mail does not contain {{ botDetectorHiddenLink }} placeholder.": "E-mail neobsahuje zástupný symbol {{ botDetectorHiddenLink }}.",
         "Mail does not contain {{ unsubscribeHref }} placeholder.": "E-mail neobsahuje zástupný symbol {{ unsubscribeHref }}.",
         "Mail does not contain {{ viewInBrowserHref }} placeholder.": "E-mail neobsahuje zástupný symbol {{ viewInBrowserHref }}.",
@@ -41,10 +41,10 @@
         "Statuses": "Stavy"
     },
     "Controllers\\Tags": {
-        "Tags": "Štítky"
+        "Tags": "Značky"
     },
     "manifest": {
-        "Email marketing tags": "Štítky e-mailového marketingu",
+        "Email marketing tags": "Značky e-mailového marketingu",
         "Email marketing": "E-mailový marketing",
         "Full-featured email marketing": "Plnohodnotný e-mailový marketing",
         "Emails": "E-maily",
@@ -57,19 +57,19 @@
         "Goal": "Cieľ",
         "Notes": "Poznámky",
         "Color": "Farba",
-        "Workflow": "Pracovný postup",
-        "Workflow step": "Krok pracovného postupu",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Owner": "Vlastník",
         "Manager": "Manažér",
         "Closed": "Uzavreté",
         "Shared with": "Zdieľané s",
-        "Tags": "Štítky",
+        "Tags": "Značky",
         "Add campaign": "Pridať kampaň",
         "Phase": "Fáza",
         "Ownership": "Vlastníctvo",
         "All": "Všetko",
         "Owned by me": "V mojom vlastníctve",
-        "Managed by me": "Spravujem ja",
+        "Managed by me": "Mnou spravované",
         "Open \/ Closed": "Otvorené / Uzavreté",
         "Open": "Otvorené"
     },
@@ -87,8 +87,8 @@
     },
     "Models\\CampaignTag": {
         "Campaign": "Kampaň",
-        "Tag": "Štítok",
-        "Campaign tags": "Štítky kampane"
+        "Tag": "Značka",
+        "Campaign tags": "Značky kampane"
     },
     "Models\\Email": {
         "UID": "UID",
@@ -97,7 +97,7 @@
         "Body": "Text správy",
         "UTM source": "UTM zdroj",
         "UTM campaign": "UTM kampaň",
-        "UTM term": "UTM výraz",
+        "UTM term": "Kľúčové slovo UTM",
         "UTM content": "UTM obsah",
         "Target audience": "Cieľová skupina",
         "Goal": "Cieľ",
@@ -105,8 +105,8 @@
         "Color": "Farba",
         "Sender account": "Účet odosielateľa",
         "Reply to": "Odpovedať na",
-        "Workflow": "Pracovný postup",
-        "Workflow step": "Krok pracovného postupu",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Owner": "Vlastník",
         "Manager": "Manažér",
         "Shared with": "Zdieľané s",
@@ -121,7 +121,7 @@
         "Ownership": "Vlastníctvo",
         "All": "Všetko",
         "Owned by me": "V mojom vlastníctve",
-        "Managed by me": "Spravujem ja",
+        "Managed by me": "Mnou spravované",
         "Campaign": "Kampaň",
         "In campaign": "V kampani",
         "Not in campaign": "Nie je v kampani",
@@ -147,7 +147,7 @@
         "Reference to mail sent": "Odkaz na odoslaný e-mail",
         "UTM: source": "UTM: zdroj",
         "UTM: campaign": "UTM: kampaň",
-        "UTM: term": "UTM: výraz",
+        "UTM: term": "UTM: kľúčové slovo",
         "Status": "Stav",
         "Add recipient": "Pridať príjemcu",
         "Count": "Počet",
@@ -165,6 +165,6 @@
     "Models\\Tag": {
         "Name": "Názov",
         "Color": "Farba",
-        "Add Email marketing Tag": "Pridať štítok e-mailového marketingu"
+        "Add Email marketing Tag": "Pridať značku e-mailového marketingu"
     }
 }

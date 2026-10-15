@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Contacts": "Kontakty",
-        "Default customer management and addressbook.": "Adresář a správa zákazníků.",
+        "Default customer management and addressbook.": "Výchozí správa zákazníků a adresář.",
         "Contact Categories": "Kategorie kontaktů",
         "Contact Tags": "Štítky kontaktů",
         "Import contacts": "Importovat kontakty",
@@ -22,10 +22,10 @@
         "Tags": "Štítky",
         "Value": "Hodnota",
         "Add contact": "Přidat kontakt",
-        "No contacts for this person yet.": "Pro tuto osobu zatím nejsou žádné kontakty"
+        "No contacts for this person yet.": "Pro tuto osobu zatím nejsou žádné kontakty."
     },
     "Components\\TablePersons": {
-        "Start typing to search...": "Hledat..."
+        "Start typing to search...": "Začněte psát pro vyhledávání..."
     },
     "Models\\Person": {
         "First name": "Jméno",
@@ -34,11 +34,11 @@
         "Main Contact": "Hlavní kontakt",
         "Notes": "Poznámky",
         "Active": "Aktivní",
-        "Date Created": "Vytvořen",
+        "Date Created": "Datum vytvoření",
         "Contacts": "Kontakty",
         "Add Contact": "Přidat kontakt",
         "Emails": "E-maily",
-        "Phone Numbers": "Telefony",
+        "Phone Numbers": "Telefonní čísla",
         "Add": "Přidat",
         "Primary Contact": "Primární kontakt"
     },
@@ -52,7 +52,7 @@
         "Value": "Hodnota",
         "Contact": "Kontakt",
         "Category": "Kategorie",
-        "Number": "Počet",
+        "Number": "Číslo",
         "URL": "Adresa URL",
         "Contacts": "Kontakty",
         "Add Customer": "Přidat zákazníka"
@@ -68,7 +68,7 @@
         "Region": "Region",
         "City": "Město",
         "Postal Code": "PSČ",
-        "Country": "Stát"
+        "Country": "Země"
     },
     "root": {
         "Contact Categories": "Kategorie kontaktů",
@@ -86,7 +86,7 @@
         "Customer": "Zákazník",
         "Primary Contact": "Primární kontakt",
         "Notes": "Poznámky",
-        "Date Created": "Vytvořen",
+        "Date Created": "Datum vytvoření",
         "Active": "Aktivní",
         "Add contact": "Přidat kontakt",
         "Emails": "E-maily",

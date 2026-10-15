@@ -2,7 +2,7 @@
     "manifest": {
         "Worksheets": "Ewidencja czasu",
         "Worksheet log": "Ewidencja przepracowanych godzin",
-        "Activity types": "Typy czynności",
+        "Activity types": "Typy aktywności",
         "Daily chart": "Dzienny przegląd",
         "Monthly summary": "Podsumowanie miesięczne"
     },
@@ -35,7 +35,7 @@
         "Month before last": "Przedostatni miesiąc",
         "Month": "Miesiąc",
         "Customer": "Klient",
-        "Deal": "Transakcja",
+        "Deal": "Deal",
         "Project": "Projekt",
         "Group by": "Grupuj według",
         "Total worked hours": "Łącznie przepracowanych godzin",

@@ -1,8 +1,8 @@
 {
     "manifest": {
         "Customers": "Klienci",
-        "Free customer management and addressbook.": "Książka adresowa i zarządzanie klientami.",
-        "Customer Tags": "Etykiety klientów"
+        "Free customer management and addressbook.": "Bezpłatne zarządzanie klientami i książka adresowa.",
+        "Customer Tags": "Znaczniki klientów"
     },
     "Models\\Customer": {
         "Add Customer": "Dodaj klienta",
@@ -13,11 +13,11 @@
         "City": "Miasto",
         "Country": "Kraj",
         "Postal Code": "Kod pocztowy",
-        "VAT ID": "NIP UE",
+        "VAT ID": "Nr VAT",
         "Customer ID": "NIP",
-        "Tax ID": "REGON",
+        "Tax ID": "NIP",
         "Notes": "Uwagi",
-        "Date Created": "Utworzony",
+        "Date Created": "Data utworzenia",
         "Active": "Aktywny",
         "Assigned User": "Właściciel",
         "Customers": "Klienci",
@@ -25,7 +25,7 @@
         "Link to shared folder (online storage) with related documents": "Link do folderu współdzielonego",
         "Owner": "Właściciel",
         "Manager": "Menedżer",
-        "Tags": "Etykiety",
+        "Tags": "Znaczniki",
         "Archive": "Archiwum",
         "Archived": "Zarchiwizowany",
         "Identifier": "Identyfikator",
@@ -33,7 +33,7 @@
         "Shared with": "Udostępnione dla",
         "Customer": "Klient",
         "Company ID": "NIP",
-        "Tag": "Tag"
+        "Tag": "Znacznik"
     },
     "Controllers\\Customers": {
         "Customers": "Klienci"
@@ -43,25 +43,25 @@
         "Contact Person": "Osoba kontaktowa",
         "Activity type": "Typ aktywności",
         "Subject": "Temat",
-        "Start Date": "Początek",
-        "Start Time": "Czas",
-        "End Date": "Koniec",
-        "End Time": "Czas",
-        "All day": "Całodniowe",
+        "Start Date": "Data rozpoczęcia",
+        "Start Time": "Godzina rozpoczęcia",
+        "End Date": "Data zakończenia",
+        "End Time": "Godzina zakończenia",
+        "All day": "Cały dzień",
         "Completed": "Zakończone",
         "Created by": "Utworzył",
         "Contact": "Kontakt",
         "Start date": "Data rozpoczęcia",
-        "Start time": "Początek",
-        "End date": "Data",
-        "End time": "Czas",
+        "Start time": "Godzina rozpoczęcia",
+        "End date": "Data zakończenia",
+        "End time": "Godzina zakończenia",
         "Meeting minutes (link)": "Protokół ze spotkania (link)",
         "Location": "Lokalizacja",
         "Online meeting link": "Link do spotkania online",
         "Description": "Opis",
         "Recurrence": "Powtarzanie",
-        "Long meeting minutes (link to external document)": "Protokół ze spotkania (link do zewnętrznego dokumentu)",
-        "Short meeting minutes": "Skrócony protokół",
+        "Long meeting minutes (link to external document)": "Szczegółowy protokół ze spotkania (link do zewnętrznego dokumentu)",
+        "Short meeting minutes": "Skrócony protokół ze spotkania",
         "Owner": "Właściciel"
     },
     "Models\\CustomerDocument": {
@@ -70,7 +70,7 @@
     },
     "Models\\CustomerTag": {
         "Customer": "Klient",
-        "Tag": "Etykieta",
+        "Tag": "Znacznik",
         "Customer Categories": "Kategorie klientów",
         "Add Customer": "Dodaj klienta"
     },
@@ -85,34 +85,34 @@
         "Deals": "Deale",
         "Calendar": "Kalendarz",
         "Shared documents": "Dokumenty współdzielone",
-        "Local documents": "Dokumenty",
+        "Local documents": "Dokumenty lokalne",
         "Documents": "Dokumenty",
         "Contact persons": "Osoby kontaktowe",
         "Add contact person": "Dodaj osobę kontaktową",
         "Phone number": "Nr tel.",
         "Email": "E-mail",
-        "Primary Contact": "Kontakt podstawowy",
-        "Tags": "Etykiety",
+        "Primary Contact": "Kontakt główny",
+        "Tags": "Znaczniki",
         "Show on map": "Pokaż na mapie",
-        "Enter = Log completed activity": "Enter = zapisz zakończoną aktywność",
+        "Enter = Log completed activity": "Enter = zarejestruj zakończoną aktywność",
         "Shift+Enter = Schedule": "Shift+Enter = zaplanuj aktywność na później",
-        "Type recent activity here": "Wpisz ostatnią aktywność tutaj",
+        "Type recent activity here": "Wpisz tutaj ostatnią aktywność",
         "Not completed yet": "Jeszcze niezakończone",
         "Most recent activities": "Najnowsze aktywności",
-        "Log completed activity": "Zapisz zakończoną aktywność",
+        "Log completed activity": "Zarejestruj zakończoną aktywność",
         "Schedule activity": "Zaplanuj aktywność",
-        "Enter": "Wprowadź",
+        "Enter": "Enter",
         "Shift+Enter": "Shift+Enter",
         "unsaved changes": "niezapisane zmiany"
     },
     "root": {
-        "Customer Tags": "Etykiety klientów"
+        "Customer Tags": "Znaczniki klientów"
     },
     "Models\\Tag": {
         "Name": "Etykieta",
         "Color": "Kolor",
-        "Customer Tags": "Etykiety klientów",
-        "Add Customer Tag": "Dodaj etykietę"
+        "Customer Tags": "Znaczniki klientów",
+        "Add Customer Tag": "Dodaj znacznik klienta"
     },
     "Components\\FormActivity": {
         "Customer": "Klient"
@@ -120,8 +120,8 @@
     "Components\\CustomerFormActivity": {
         "Customer": "Klient",
         "Contact": "Kontakt",
-        "End": "Zakończ",
-        "Start": "Start"
+        "End": "Koniec",
+        "Start": "Początek"
     },
     "Components\\TableActivities": [],
     "Controllers\\Activity": {
@@ -130,16 +130,16 @@
     },
     "Controllers\\Tags": {
         "Settings": "Ustawienia",
-        "Customer Tags": "Etykiety klientów",
+        "Customer Tags": "Znaczniki klientów",
         "Customers": "Klienci",
-        "Tags": "Etykiety"
+        "Tags": "Znaczniki"
     },
     "Controllers\\Settings": {
         "Customers": "Klienci",
         "Settings": "Ustawienia",
         "Customers: Settings": "Klienci: Ustawienia",
         "Settings saved.": "Ustawienia zapisane.",
-        "Customer tags": "Etykiety klientów",
+        "Customer tags": "Znaczniki klientów",
         "Calendar color": "Kolor kalendarza"
     },
     "Controllers\\Dashboard": {

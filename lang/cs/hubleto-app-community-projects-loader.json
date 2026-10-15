@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Projects": "Projekty",
-        "Project management": "Projektový management",
+        "Project management": "Správa projektů",
         "Phases": "Fáze",
         "Monthly summary": "Měsíční přehled",
         "Milestones": "Milníky",
@@ -21,21 +21,21 @@
         "Phases": "Fáze"
     },
     "Models\\Project": {
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Customer": "Zákazník",
         "Contact": "Kontakt",
         "Identifier": "Identifikátor",
-        "Leave empty to generate automatically.": "Ponechte prázdné pro automatické vygenerování.",
+        "Leave empty to generate automatically.": "Ponechte prázdné pro automatické generování.",
         "Title": "Název",
         "Description": "Popis",
         "Main developer": "Hlavní vývojář",
         "Account manager": "Account manažer",
         "Priority": "Priorita",
-        "Start": "Spustit",
+        "Start": "Začátek",
         "Deadline": "Termín",
         "Budget": "Rozpočet",
-        "Workflow": "Pracovní postup",
-        "Workflow step": "Stav workflow",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Closed": "Uzavřený",
         "Color": "Barva",
         "Online documentation folder": "Složka online dokumentace",
@@ -60,7 +60,7 @@
         "Details": "Podrobnosti",
         "Progress": "Pokrok",
         "Reported on": "Datum zprávy",
-        "Reported by": "Vykazoval",
+        "Reported by": "Nahlásil",
         "Add milestone report": "Přidat zprávu k milníku"
     },
     "Models\\Expense": {
@@ -79,7 +79,7 @@
     },
     "Models\\ProjectDeal": {
         "Project": "Projekt",
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Project Deals": "Dealy projektu",
         "Add deal": "Přidat deal"
     },
@@ -99,7 +99,7 @@
         "Expenses": "Výdaje",
         "Statistics": "Statistiky",
         "Open tasks": "Otevřené úkoly",
-        "Discussions": "Diskuse",
+        "Discussions": "Diskuze",
         "Project:": "Projekt:",
         "Order": "Objednávka",
         "Select parent order": "Vybrat nadřazenou objednávku",

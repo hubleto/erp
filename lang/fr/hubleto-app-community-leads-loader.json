@@ -1,15 +1,15 @@
 {
     "loaders": {
-        "Leads": "Clients potentiels",
-        "Leads Archive": "Archive de clients potentiels"
+        "Leads": "Prospects",
+        "Leads Archive": "Archive des prospects"
     },
     "controllers.leads": {
         "Sales": "Ventes",
-        "Leads": "Archive de clients potentiels"
+        "Leads": "Prospects"
     },
     "controllers.leadsArchive": {
         "Sales": "Ventes",
-        "Leads": "Clients potentiels",
+        "Leads": "Prospects",
         "Archive": "Archive"
     },
     "manifest": {
@@ -22,7 +22,7 @@
         "Archived leads": "Prospects archivés",
         "Lead value by score": "Valeur des prospects par score",
         "Lead warnings": "Alertes sur les prospects",
-        "Plan": "Forfait",
+        "Plan": "Plan",
         "Calendar": "Calendrier"
     },
     "Models\\Lead": {
@@ -40,7 +40,7 @@
         "Team": "Équipe",
         "Created": "Créé",
         "Reason for Lost": "Motif de perte",
-        "Notes": "Remarques",
+        "Notes": "Notes",
         "Workflow": "Flux de travail",
         "Workflow step": "Étape du flux de travail",
         "Source channel": "Canal source",
@@ -71,7 +71,7 @@
         "Lost Reason": "Motif de perte"
     },
     "Models\\LeadHistory": {
-        "Change Date": "Modifier la date",
+        "Change Date": "Date de modification",
         "Lead": "Prospect",
         "Description": "Description",
         "Date": "Date"

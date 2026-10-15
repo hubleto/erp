@@ -1,6 +1,6 @@
 {
     "manifest": {
-        "Tasks": "Úlohy",
+        "Tasks": "Úkoly",
         "Task management app": "Správa úloh",
         "Todo": "Úkoly",
         "My recent tasks": "Moje nedávné úlohy",
@@ -15,10 +15,10 @@
         "Priority": "Priorita",
         "Estimation": "Odhad náročnosti",
         "Duration": "Trvání",
-        "Start": "Spustit",
+        "Start": "Začátek",
         "Deadline": "Termín",
-        "Workflow": "Pracovní postup",
-        "Workflow step": "Workflow stav",
+        "Workflow": "Workflow",
+        "Workflow step": "Krok workflow",
         "Is milestone": "Milník",
         "Closed": "Uzavřená",
         "Notes": "Poznámky",
@@ -36,33 +36,33 @@
         "Estimated workhours": "Odhadované pracovní hodiny",
         "Estimated duration": "Odhadovaná délka",
         "Add Task": "Přidat úlohu",
-        "Leave empty to generate automatically.": "Nechte prázdné pro automatické generování.",
+        "Leave empty to generate automatically.": "Ponechte prázdné pro automatické generování.",
         "Shared folder (online document storage)": "Sdílená složka (online úložiště dokumentů)",
         "Status": "Stav",
         "Description (Scope of Work)": "Popis (rozsah prací)"
     },
     "Models\\Todo": {
         "To do": "Todo",
-        "Task": "Úloha",
+        "Task": "Úkol",
         "Responsible": "Zodpovědný",
         "Closed": "Uzavřené",
         "Deadline": "Termín",
         "Add Todo": "Přidat Todo"
     },
     "Controllers\\Boards\\MyRecentTasks": {
-        "You did not work on any task since last 2 weeks.": "Za poslední 2 týdny jsi nepracoval na žádné úloze."
+        "You did not work on any task since last 2 weeks.": "Za poslední 2 týdny jste nepracovali na žádném úkolu."
     },
     "Controllers\\Tasks": {
-        "Tasks": "Úlohy"
+        "Tasks": "Úkoly"
     },
     "Components\\FormTask": {
-        "Task": "Úloha",
+        "Task": "Úkol",
         "unsaved changes": "neuložené změny",
         "Todo": "Úkoly",
         "Press ENTER to add new Todo": "Stiskněte ENTER pro přidání nového Todo",
         "Worksheet": "Pracovní výkaz",
         "Orders": "Objednávky",
-        "Deals": "Obchody",
+        "Deals": "Dealy",
         "Projects": "Projekty",
         "What to do?": "Co je třeba udělat?",
         "Add new todo...": "Přidat nové todo..."
@@ -72,7 +72,7 @@
         "Add activity": "Přidat aktivitu"
     },
     "Controllers\\Todos": {
-        "Tasks": "Úlohy",
+        "Tasks": "Úkoly",
         "Todo": "Úkoly"
     },
     "Components\\FormTodo": {
@@ -80,7 +80,7 @@
     },
     "Components\\TableTodos": [],
     "Calendar": {
-        "Tasks": "Úlohy",
+        "Tasks": "Úkoly",
         "Add new activity linked to Tasks": "Přidat novou aktivitu pro úlohu",
         "Tasks and todo": "Úkoly a seznam úkolů",
         "TASK": "ÚKOL"

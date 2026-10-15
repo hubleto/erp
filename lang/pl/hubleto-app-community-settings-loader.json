@@ -1,7 +1,7 @@
 {
   "manifest": {
     "Settings": "Ustawienia",
-    "Settings and control panel for your Hubleto.": "Ustawienia konta Hubleto.",
+    "Settings and control panel for your Hubleto.": "Ustawienia i panel sterowania Twojego Hubleto.",
     "Settings and tools": "Ustawienia i narzędzia",
     "Users": "Użytkownicy",
     "Roles": "Role",
@@ -14,12 +14,12 @@
     "Currencies": "Waluty",
     "Invoice profiles": "Profile fakturowania",
     "Platform config": "Konfiguracja platformy",
-    "Sidebar": "Lewe menu",
+    "Sidebar": "Panel boczny",
     "Teams": "Zespoły",
     "Meeting": "Spotkanie",
     "Business Trip": "Podróż służbowa",
-    "Call": "Połączenie",
-    "Email": "Email",
+    "Call": "Rozmowa",
+    "Email": "E-mail",
     "Other": "Inne",
     "Log viewer": "Przeglądarka logów"
   },
@@ -27,7 +27,7 @@
     "First name": "Imię",
     "Middle name": "Drugie imię",
     "Last name": "Nazwisko",
-    "Email": "Email",
+    "Email": "E-mail",
     "Language": "Język",
     "Active profile": "Aktywny profil",
     "Login": "Logowanie",
@@ -38,7 +38,7 @@
     "Time of last access": "Czas ostatniego dostępu",
     "Last access IP": "Adres IP ostatniego dostępu",
     "Nick": "Pseudonim",
-    "Default company": "Firma",
+    "Default company": "Domyślna firma",
     "Roles": "Role",
     "Teams": "Zespoły",
     "Type": "Typ",
@@ -56,7 +56,7 @@
     "Company": "Firma"
   },
   "Models\\ActivityType": {
-    "Type Name": "Typ",
+    "Type Name": "Nazwa typu",
     "Color": "Kolor",
     "Shown in Calendar": "Pokaż w kalendarzu",
     "Icon": "Ikona",
@@ -84,10 +84,10 @@
   "Models\\WorkflowStep": {
     "Name": "Nazwa",
     "Order": "Kolejność",
-    "Company": "Kolor",
-    "Workflow": "Kanał",
+    "Company": "Firma",
+    "Workflow": "Workflow",
     "Color": "Kolor",
-    "Set result of a deal to": "Ustaw wynik transakcji na"
+    "Set result of a deal to": "Ustaw wynik dealu na"
   },
   "Models\\Tag": {
     "Name": "Nazwa",
@@ -103,7 +103,7 @@
   "Models\\InvoiceProfile": {
     "Name": "Nazwa",
     "Phone": "Telefon",
-    "E-mail": "Email",
+    "E-mail": "E-mail",
     "WWW": "WWW",
     "Company ID": "NIP",
     "Tax ID": "NIP",
@@ -123,8 +123,8 @@
   },
   "Models\\UserRole": {
     "Role": "Rola",
-    "Grant all permissions": "Nadaj wszystkie uprawnienia (administrator)",
-    "Grant all permissions (administrator role)": "Nadaj wszystkie uprawnienia (rola administratora)",
+    "Grant all permissions": "Przyznaj wszystkie uprawnienia (administrator)",
+    "Grant all permissions (administrator role)": "Przyznaj wszystkie uprawnienia (rola administratora)",
     "Description": "Opis",
     "Is default role (cannot be modified)": "Jest rolą domyślną (nie można modyfikować)"
   },
@@ -159,7 +159,7 @@
     "Team color": "Kolor zespołu",
     "Description": "Opis",
     "Team manager": "Kierownik zespołu",
-    "Manager": "Kierownik",
+    "Manager": "Menedżer",
     "Members": "Członkowie",
     "Teams": "Zespoły",
     "Add team": "Dodaj zespół"
@@ -175,13 +175,13 @@
     "User Roles": "Role użytkowników",
     "Profiles": "Profile",
     "Permissions": "Uprawnienia",
-    "Tags": "Tagi",
+    "Tags": "Znaczniki",
     "Activity Types": "Typy aktywności",
     "Contact Types": "Typy kontaktów",
     "Countries": "Kraje",
     "Currencies": "Waluty",
     "Lead Statuses": "Statusy leadów",
-    "Deal Statuses": "Statusy transakcji",
+    "Deal Statuses": "Statusy deali",
     "Workflows": "Workflow",
     "Invoice profiles": "Profile fakturowania",
     "Manage installed apps": "Zarządzaj zainstalowanymi aplikacjami",
@@ -194,7 +194,7 @@
     "All settings": "Wszystkie ustawienia",
     "Change theme": "Zmień motyw",
     "Locale": "Lokalizacja",
-    "Sign out from Hubleto": "Wyloguj z Hubleto",
+    "Sign out from Hubleto": "Wyloguj się z Hubleto",
     "Default currency and timezone": "Domyślna waluta i strefa czasowa",
     "Date (short / long) and time formats": "Formaty daty (krótki / długi) i czasu",
     "Decimals and thousands separator": "Miejsca dziesiętne i separator tysięcy",
@@ -288,7 +288,7 @@
   },
   "Controllers\\InvoiceProfiles": {
     "Settings": "Ustawienia",
-    "Invoice profiles": "Faktura"
+    "Invoice profiles": "Profile fakturowania"
   },
   "Components\\FormUserRole": {
     "Save": "Zapisz",
@@ -330,15 +330,15 @@
   "root": {
     "Users": "Użytkownicy",
     "User roles": "Role użytkowników",
-    "Your companies": "Moje firmy",
+    "Your companies": "Twoje firmy",
     "General settings": "Ustawienia ogólne",
     "Permissions": "Uprawnienia",
-    "Tags": "Tagi",
+    "Tags": "Znaczniki",
     "Activity types": "Typy aktywności",
     "Contact types": "Typy kontaktów",
     "Countries": "Kraje",
     "Currencies": "Waluty",
-    "Workflows": "Przepływy pracy",
+    "Workflows": "Workflowy",
     "Invoice profiles": "Profile fakturowania",
     "Platform config": "Konfiguracja platformy",
     "Contact Categories": "Kategorie kontaktów",

@@ -4,9 +4,9 @@
         "Free dashboards app": "Bezplatná aplikácia pre dashboardy",
         "Manage": "Spravovať",
         "My dashboard": "Môj dashboard",
-        "No dashboard configured": "",
-        "You do not have default dashboard configured.": "",
-        "Configure your default dashboard": ""
+        "No dashboard configured": "Nie je nastavený žiadny dashboard",
+        "You do not have default dashboard configured.": "Nemáte nastavený predvolený dashboard.",
+        "Configure your default dashboard": "Nastaviť predvolený dashboard"
     },
     "root": {
         "Dashboards": "Dashboardy"
@@ -21,11 +21,11 @@
         "By turning this on you will change the dashboard shown on the Homepage": "Zapnutím tejto možnosti zmeníte dashboard zobrazený na úvodnej stránke"
     },
     "Models\\Panel": {
-        "Dashboard": "Ovládací panel",
+        "Dashboard": "Dashboard",
         "Board": "Zdroj",
         "Title": "Názov",
         "Configuration": "Konfigurácia",
-        "-- Select board to be displayed in panel --": "-- Zvoľte panel --",
+        "-- Select board to be displayed in panel --": "-- Zvoľte zdroj zobrazený v paneli --",
         "Width": "Širka",
         "Order": "Poradie",
         "Position": "Pozícia",

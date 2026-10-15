@@ -3,7 +3,7 @@
         "Products": "Productos",
         "Free product portfolio managment.": "Gestión gratuita del portafolio de productos.",
         "Groups": "Grupos",
-        "Categories": "Categorias",
+        "Categories": "Categorías",
         "Computers & Accessories": "Computadoras y accesorios",
         "Laptops & Desktops": "Portátiles y computadoras de escritorio",
         "Laptop Computers": "Computadoras portátiles",
@@ -105,14 +105,14 @@
         "Number of items in package": "Número de artículos en el paquete",
         "Single unit price": "Precio por unidad",
         "Margin": "Margen",
-        "Vat": "Impuesto",
+        "Vat": "IVA",
         "Single unit order possible": "Pedido de unidad individual posible",
         "Unit": "Unidad",
         "Packaging": "Embalaje",
         "Sale ended": "Venta finalizada",
         "Show price to customer": "Mostrar precio al cliente",
-        "Set price after reweight?": "Establecer precio después del re-pesaje?",
-        "Needs reordering?": "Necesita reordenar?",
+        "Set price after reweight?": "¿Establecer el precio después de volver a pesar?",
+        "Needs reordering?": "¿Requiere reabastecimiento?",
         "Storage rules": "Reglas de almacenamiento",
         "Table": "Tabla",
         "Add product": "Agregar producto",
@@ -123,9 +123,9 @@
         "Internal notes": "Notas internas",
         "Amount of items in package": "Número de artículos en el paquete",
         "Sales price": "Precio de venta",
-        "VAT": "Impuesto",
+        "VAT": "IVA",
         "Bar code": "Código de barras",
-        "Data ": "Datos",
+        "Data ": "Datos ",
         "EAN": "EAN",
         "Group": "Grupo",
         "Category": "Categoría",
@@ -182,8 +182,8 @@
         "Contact person": "Persona de contacto",
         "Phone number": "Número de teléfono",
         "Supplier email": "Correo electrónico del proveedor",
-        "Order email": "Correo electrónico de pedido",
-        "Tax ID": "ID fiscal",
+        "Order email": "Correo electrónico para pedidos",
+        "Tax ID": "Identificación fiscal",
         "Company ID": "ID de la empresa",
         "VAT ID": "ID de IVA",
         "Payment account number": "Número de cuenta de pago"
@@ -203,7 +203,7 @@
         "Purchase price": "Precio de compra",
         "Internal notes": "Notas internas",
         "Delivery time": "Tiempo de entrega",
-        "Add supplier": "Añadir proveedor",
+        "Add supplier": "Agregar proveedor",
         "Product Suppliers": "Proveedores del producto"
     },
     "Controllers\\Groups": {
@@ -212,7 +212,7 @@
         "Groups": "Grupos"
     },
     "Models\\Category": {
-        "Parent": "Categoría",
+        "Parent": "Categoría principal",
         "Name": "Nombre",
         "Color": "Color",
         "Short description": "Descripción corta",
@@ -223,7 +223,7 @@
         "Photo #4": "Foto #4",
         "Photo #5": "Foto #5",
         "URL slug": "Identificador URL",
-        "Add product category": "Añadir categoría de producto"
+        "Add product category": "Agregar categoría de producto"
     },
     "Components\\TableProducts": {
         "Hide filter": "Ocultar filtro"

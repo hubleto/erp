@@ -13,12 +13,12 @@
         "Postal code": "Código postal",
         "Country": "País",
         "Contact": "Contacto",
-        "Order email": "Correo para pedidos",
-        "Tax ID": "ID fiscal",
+        "Order email": "Correo electrónico para pedidos",
+        "Tax ID": "Identificación fiscal",
         "Company ID": "ID de la empresa",
-        "VAT ID": "ID de impuesto",
+        "VAT ID": "ID de IVA",
         "Payment account number": "Número de cuenta de pago",
-        "Add supplier": "Añadir proveedor",
+        "Add supplier": "Agregar proveedor",
         "Suppliers": "Proveedores"
     }
 }

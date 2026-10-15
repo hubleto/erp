@@ -3,11 +3,11 @@
         "Inventory": "Inventario",
         "Management of inventory items in warehouses.": "Gestión de artículos de inventario en almacenes.",
         "Warehouses": "Almacenes",
-        "Transactions": "Transacciones"
+        "Transactions": "Movimientos"
     },
     "root": {
         "Warehouses": "Almacenes",
-        "Transactions": "Transacciones"
+        "Transactions": "Movimientos"
     },
     "Models\\Inventory": {
         "Product": "Producto",
@@ -20,15 +20,15 @@
         "Received": "Recibido",
         "Last moved": "Último movimiento",
         "Location": "Ubicación",
-        "Add item": "Agregar producto"
+        "Add item": "Agregar artículo"
     },
     "Models\\Status": {
         "Name": "Nombre"
     },
     "Models\\Transaction": {
-        "Transaction UID": "ID de la transacción",
+        "Transaction UID": "UID del movimiento",
         "Type": "Tipo",
-        "Date and time of transaction": "Fecha y hora de la transacción",
+        "Date and time of transaction": "Fecha y hora del movimiento",
         "Product": "Producto",
         "Quantity": "Cantidad",
         "Reference document #1": "Documento de referencia #1",

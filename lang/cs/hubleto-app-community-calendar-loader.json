@@ -10,12 +10,12 @@
     },
     "Models\\Activity": {
         "Subject": "Předmět",
-        "Activity type": "Typ",
-        "Start date": "Začátek",
+        "Activity type": "Typ aktivity",
+        "Start date": "Datum začátku",
         "Start time": "Čas začátku",
-        "End date": "Konec",
+        "End date": "Datum konce",
         "End time": "Čas konce",
-        "All day": "Celodenní",
+        "All day": "Celý den",
         "Completed": "Dokončeno",
         "Created by": "Vytvořil",
         "Meeting minutes (link)": "Zápis ze schůzky (odkaz)",
@@ -47,7 +47,7 @@
     "Controllers\\Share": {
         "Share": "Sdílet",
         "Calendar: Settings": "Kalendář: Nastavení",
-        "Settings saved.": "Nastavení uložena."
+        "Settings saved.": "Nastavení uloženo."
     },
     "root": {
         "Events for today": "Dnešní události",

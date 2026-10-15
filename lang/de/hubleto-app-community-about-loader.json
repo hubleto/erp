@@ -1,17 +1,17 @@
 {
     "manifest": {
         "Help": "Hilfe",
-        "Help and user guide for Hubleto.": "Hilfe und Benutzerhandbuch für Hubleto",
-        "About": "Über",
-        "About your Hubleto": "Über dein Hubleto"
+        "Help and user guide for Hubleto.": "Hilfe und Benutzerhandbuch für Hubleto.",
+        "About": "Über Hubleto",
+        "About your Hubleto": "Über Ihr Hubleto"
     },
     "Controllers\\Help": {
         "Help center": "Hilfezentrum",
-        "Search knowledgebase...": "In der Wissensbasis suchen...",
-        "Browse knowledgebase": "Wissensbasis durchsuchen",
-        "Hot tips & tricks": "Heiße Tipps & Tricks",
-        "No hot tips for this screen": "Keine heißen Tipps für diesen Bildschirm",
-        "Need more help?": "Mehr Hilfe benötigt?",
+        "Search knowledgebase...": "In der Wissensdatenbank suchen...",
+        "Browse knowledgebase": "Wissensdatenbank durchsuchen",
+        "Hot tips & tricks": "Tipps & Tricks",
+        "No hot tips for this screen": "Für diese Ansicht gibt es keine Tipps.",
+        "Need more help?": "Benötigen Sie weitere Hilfe?",
         "Contact us": "Kontaktieren Sie uns"
     },
     "Controllers\\About": {

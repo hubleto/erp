@@ -1,26 +1,26 @@
 {
     "manifest": {
-        "Developer": "Deweloper",
-        "Developer tools to automate your Hubleto development": "Narzędzia deweloperskie",
-        "Developer tools": "Narzędzia deweloperskie"
+        "Developer": "Programista",
+        "Developer tools to automate your Hubleto development": "Narzędzia dla programistów do automatyzacji rozwoju w Hubleto",
+        "Developer tools": "Narzędzia dla programistów"
     },
     "root": {
-        "Developer tools": "Narzędzia deweloperskie"
+        "Developer tools": "Narzędzia dla programistów"
     },
     "Controllers\\Dashboard": {
-        "Developer": "Deweloper",
+        "Developer": "Programista",
         "DB Updates": "Aktualizacje bazy danych",
         "Form designer": "Projektant formularzy",
         "Check DB consistency": "Sprawdź spójność bazy danych"
     },
     "Controllers\\DbUpdates": {
-        "Developer": "Deweloper",
+        "Developer": "Programista",
         "DB Updater": "Aktualizacje bazy danych",
         "Database updater": "Aktualizacje bazy danych",
         "No necessary database updates found.": "Nie znaleziono wymaganych aktualizacji bazy danych."
     },
     "Controllers\\CheckDbConsistency": {
-        "Developer tools": "Narzędzia deweloperskie",
+        "Developer tools": "Narzędzia dla programistów",
         "Check DB consistency": "Sprawdź spójność bazy danych",
         "No necessary database updates found.": "Nie znaleziono wymaganych aktualizacji bazy danych.",
         "UID": "UID",
@@ -31,12 +31,12 @@
         "Run the updates now!": "Uruchom aktualizacje!"
     },
     "Controllers\\UpgradeModels": {
-        "Developer tools": "Narzędzia deweloperskie",
+        "Developer tools": "Narzędzia dla programistów",
         "Upgrade models": "Aktualizuj modele",
         "No upgrades found.": "Nie znaleziono żadnych aktualizacji."
     },
     "Controllers\\FormDesigner": {
-        "Developer": "Deweloper",
+        "Developer": "Programista",
         "Form designer": "Projektant formularzy",
         "Template": "Szablon",
         "One column": "Jedna kolumna",

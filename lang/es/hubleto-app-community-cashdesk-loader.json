@@ -31,8 +31,8 @@
         "Number": "Número",
         "Company": "Empresa",
         "Cash register": "Caja registradora",
-        "Total price excl. VAT": "Precio total sin Imp.",
-        "Total price incl. VAT": "Precio total con Imp.",
+        "Total price excl. VAT": "Precio total sin IVA",
+        "Total price incl. VAT": "Precio total con IVA",
         "Created": "Creado",
         "Sent to cash register": "Enviado a la caja registradora",
         "Add receipt": "Agregar recibo"
@@ -40,14 +40,14 @@
     "Models\\ReceiptItem": {
         "Receipt": "Recibo",
         "Product": "Producto",
-        "VAT": "Impuestos",
-        "Unit price excl. VAT": "Precio unitario sin Imp.",
+        "VAT": "IVA",
+        "Unit price excl. VAT": "Precio unitario sin IVA",
         "Unit VAT": "IVA unitario",
-        "Unit price incl. VAT": "Precio unitario con Imp.",
+        "Unit price incl. VAT": "Precio unitario con IVA",
         "Quantity": "Cantidad",
-        "Total price excl. VAT": "Precio total sin Imp.",
-        "Total VAT": "Total impuestos",
-        "Total price incl. VAT": "Precio total con Imp."
+        "Total price excl. VAT": "Precio total sin IVA",
+        "Total VAT": "Total IVA",
+        "Total price incl. VAT": "Precio total con IVA"
     },
     "Components\\FormCashRegister": {
         "Cash register": "Caja registradora"
@@ -56,13 +56,13 @@
         "Receipt": "Recibo",
         "Product": "Producto",
         "Qty.": "Cant.",
-        "Unit price incl. VAT (€)": "Precio unitario con Imp.",
-        "VAT (%)": "Impuestos (%)",
-        "Total price incl. VAT (€)": "Precio total con Imp.",
-        "Add item": "Agregar producto",
+        "Unit price incl. VAT (€)": "Precio unitario con IVA (€)",
+        "VAT (%)": "IVA (%)",
+        "Total price incl. VAT (€)": "Precio total con IVA (€)",
+        "Add item": "Agregar artículo",
         "Send to cash register": "Enviar a la caja registradora",
         "TAX ID:": "Identificación fiscal:",
-        "VAT ID:": "Registro de contribuyente:",
+        "VAT ID:": "ID de IVA:",
         "RECEIPT": "RECIBO",
         "TOTAL:": "TOTAL:",
         "Cash register identifier:": "Identificador de la caja registradora:"

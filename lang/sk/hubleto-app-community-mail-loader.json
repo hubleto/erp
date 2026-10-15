@@ -1,24 +1,24 @@
 {
     "root": {
-        "Active Mail": "Aktívny email",
+        "Active Mail": "Aktívny e-mail",
         "Templates": "Šablóny",
-        "Drafts": "Rozpísané",
+        "Drafts": "Koncepty",
         "Accounts": "Účty"
     },
     "manifest": {
-        "Mail": "Email",
-        "Email client": "Emailový klient",
-        "Active Mail": "Aktívny email",
+        "Mail": "E-mail",
+        "Email client": "E-mailový klient",
+        "Active Mail": "Aktívny e-mail",
         "Templates": "Šablóny",
         "Accounts": "Účty",
         "Sent": "Odoslané",
         "Scheduled to send": "Naplánované na odoslanie",
         "Sent from Hubleto": "Odoslané z Hubleto",
-        "Get emails": "Načítať emaily",
+        "Get emails": "Načítať e-maily",
         "Manage accounts": "Spravovať účty",
-        "Internal emails": "Interné emaily",
+        "Internal emails": "Interné e-maily",
         "External accounts": "Externé účty",
-        "Account is not used for receiving emails.": "Účet nie je používaný na prijímanie emailov.",
+        "Account is not used for receiving emails.": "Účet nie je používaný na prijímanie e-mailov.",
         "Account has no mailboxes.": "Účet nemá žiadne mailboxy."
     },
     "Models\\Mail": {
@@ -37,28 +37,28 @@
         "Body (Text)": "Správa (Text)",
         "Body (HTML)": "Správa (HTML)",
         "Color": "Farba",
-        "Draft": "Rozpísaná",
+        "Draft": "Koncept",
         "Template": "Šablóna",
         "Account": "Účet",
         "Scheduled to send": "Naplánované na odoslanie",
         "Reply to": "Odpovedať",
         "Save draft": "Uložiť koncept",
-        "Email ID is missing.": "Chýba ID emailu.",
-        "Email has already been sent.": "Email bol už odoslaný.",
-        "Email is scheduled to be sent later.": "Email je naplánovaný na neskoršie odoslanie.",
-        "Email has no subject.": "Email nemá predmet.",
+        "Email ID is missing.": "Chýba ID e-mailu.",
+        "Email has already been sent.": "E-mail bol už odoslaný.",
+        "Email is scheduled to be sent later.": "E-mail je naplánovaný na neskoršie odoslanie.",
+        "Email has no subject.": "E-mail nemá predmet.",
         "No SMTP email account configured.": "Nie je nakonfigurovaný žiadny SMTP účet.",
-        "Email's account SMTP is not properly configured.": "SMTP nastavenia emailového účtu nie sú správne nakonfigurované.",
-        "Email's account sender is not properly configured.": "Odosielateľ emailového účtu nie je správne nakonfigurovaný.",
-        "Recipient contains invalid email address.": "Príjemca obsahuje neplatnú emailovú adresu.",
+        "Email's account SMTP is not properly configured.": "SMTP nastavenia e-mailového účtu nie sú správne nakonfigurované.",
+        "Email's account sender is not properly configured.": "Odosielateľ e-mailového účtu nie je správne nakonfigurovaný.",
+        "Recipient contains invalid email address.": "Príjemca obsahuje neplatnú e-mailovú adresu.",
         "Mailer Error": "Chyba odosielania",
-        "Failed to create the email.": "Nepodarilo sa vytvoriť email.",
+        "Failed to create the email.": "Nepodarilo sa vytvoriť e-mail.",
         "Discussion UID": "UID diskusie"
     },
     "Models\\Account": {
         "Name": "Názov",
         "Color": "Farba",
-        "Sender email address": "Emailová adresa odosielateľa",
+        "Sender email address": "E-mailová adresa odosielateľa",
         "Sender name": "Meno odosielateľa",
         "IMAP host": "Hostiteľ IMAP",
         "IMAP port": "Port IMAP",
@@ -70,7 +70,7 @@
         "SMTP encryption": "SMTP šifrovanie",
         "SMTP username": "SMTP používateľské meno",
         "SMTP password": "SMTP heslo",
-        "Owner": "Majiteľ",
+        "Owner": "Vlastník",
         "Manager": "Manažér",
         "Add account": "Pridať účet",
         "Max. attachment size": "Maximálna veľkosť prílohy"
@@ -81,15 +81,15 @@
         "Attributes": "Atribúty"
     },
     "Controllers\\Home": {
-        "Mail": "Email"
+        "Mail": "E-mail"
     },
     "Controllers\\Templates": {
-        "Mail": "Email",
+        "Mail": "E-mail",
         "Templates": "Šablóny"
     },
     "Controllers\\Drafts": {
-        "Mail": "Email",
-        "Drafts": "Rozpísané"
+        "Mail": "E-mail",
+        "Drafts": "Koncepty"
     },
     "Models\\Template": {
         "Subject": "Predmet",
@@ -99,42 +99,42 @@
     },
     "Controllers\\Scheduled": {
         "Scheduled": "Naplánované",
-        "Mail": "Email",
-        "Send scheduled emails now": "Odoslať naplánované emaily teraz",
-        "Show sent emails": "Zobraziť odoslané emaily",
+        "Mail": "E-mail",
+        "Send scheduled emails now": "Odoslať naplánované e-maily teraz",
+        "Show sent emails": "Zobraziť odoslané e-maily",
         "Scheduled to send": "Naplánované na odoslanie"
     },
     "Controllers\\SendScheduled": {
-        "Mail": "Email",
+        "Mail": "E-mail",
         "Send scheduled": "Odoslať naplánované",
-        "Mails scheduled to send were sent.": "Naplánované emaily boli odoslané.",
+        "Mails scheduled to send were sent.": "Naplánované e-maily boli odoslané.",
         "Scheduled": "Naplánované"
     },
     "Controllers\\Sent": {
         "Sent": "Odoslané",
-        "Mail": "Email"
+        "Mail": "E-mail"
     },
     "Controllers\\Get": {
-        "Mail": "Email",
+        "Mail": "E-mail",
         "Get": "Načítať"
     },
     "Controllers\\Accounts": {
-        "Mail": "Email",
+        "Mail": "E-mail",
         "Accounts": "Účty"
     },
     "Controllers\\Mailboxes": {
-        "Mail": "Email",
-        "Mailboxes": "Mailboxy"
+        "Mail": "E-mail",
+        "Mailboxes": "Poštové schránky"
     },
     "Models\\Index": {
-        "Mail": "Email",
+        "Mail": "E-mail",
         "From": "Odosielateľ",
         "To": "Príjemca",
         "Cc": "CC",
         "Bcc": "BCC"
     },
     "Models\\Attachment": {
-        "Mail": "Email",
+        "Mail": "E-mail",
         "Name": "Názov",
         "File": "Súbor"
     },
@@ -143,11 +143,11 @@
     },
     "Components\\FormMail": {
         "Template": "Šablóna",
-        "Send now": "Odoslať",
-        "Mail": "Email"
+        "Send now": "Odoslať teraz",
+        "Mail": "E-mail"
     },
     "Components\\FormAccount": {
-        "Email account": "Emailový účet",
+        "Email account": "E-mailový účet",
         "Receiving (IMAP)": "Prijímanie (IMAP)",
         "Sending (SMTP)": "Odosielanie (SMTP)",
         "Account": "Účet"
@@ -165,10 +165,10 @@
         "Mark as read": "Označiť ako prečítané"
     },
     "Mailer": {
-        "Getting emails from {{ count }} account(s).": "Načítavam emaily z {{ count }} účtu\/účtov.",
+        "Getting emails from {{ count }} account(s).": "Načítavam e-maily z {{ count }} účtu\/účtov.",
         "Checking account {{ name }}": "Kontrolujem účet {{ name }}",
         "Mailbox {{ account }} -> {{ mailbox }}": "Poštová schránka {{ account }} -> {{ mailbox }}",
-        "Found mail {{ number }} {{ id }}": "Nájdený email {{ number }} {{ id }}",
-        "Creating mail in database": "Ukladám email do databázy"
+        "Found mail {{ number }} {{ id }}": "Nájdený e-mail {{ number }} {{ id }}",
+        "Creating mail in database": "Ukladám e-mail do databázy"
     }
 }

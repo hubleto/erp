@@ -1,8 +1,8 @@
 {
     "manifest": {
         "Developer": "Entwickler",
-        "Developer tools to automate your Hubleto development": "Entwicklerwerkzeuge zur Automatisierung deiner Hubleto-Entwicklung",
-        "Developer tools": "Entwicklertools"
+        "Developer tools to automate your Hubleto development": "Entwicklerwerkzeuge zur Automatisierung Ihrer Hubleto-Entwicklung",
+        "Developer tools": "Entwicklerwerkzeuge"
     },
     "root": {
         "Developer tools": "Entwicklerwerkzeuge"
@@ -13,7 +13,7 @@
         "Form designer": "Formulardesigner"
     },
     "Controllers\\CheckDbConsistency": {
-        "Developer tools": "Entwicklertools",
+        "Developer tools": "Entwicklerwerkzeuge",
         "Check DB consistency": "Datenbankkonsistenz prüfen",
         "No necessary database updates found.": "Keine erforderlichen Datenbankaktualisierungen gefunden."
     },

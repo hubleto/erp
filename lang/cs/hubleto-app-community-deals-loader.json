@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Deals": "Dealy",
-        "Deal management. From deal to purchase.": "Správa obchodních případů až po vytvoření nabídky.",
+        "Deal management. From deal to purchase.": "Správa dealů. Od dealu až po nákup.",
         "Deal Tags": "Štítky dealů",
         "Deal Lost Reasons": "Důvody ztráty dealu",
         "Deal warnings": "Upozornění na dealy",
@@ -25,7 +25,7 @@
     "Controllers\\Deals": {
         "Sales": "Prodej",
         "Deals": "Dealy",
-        "Open deals": "Otevřené nabídky",
+        "Open deals": "Otevřené dealy",
         "Total value": "Celková hodnota"
     },
     "Controllers\\DealsArchive": {
@@ -47,19 +47,19 @@
         "Title": "Název",
         "Customer": "Zákazník",
         "Contact person": "Kontaktní osoba",
-        "Lead": "Potenciální zákazník",
+        "Lead": "Lead",
         "Price": "Cena",
         "Currency": "Měna",
         "Expected close date": "Předpokládané datum uzavření",
         "Assigned user": "Zodpovědný",
-        "Date created": "Vytvořen",
-        "Workflow": "Pracovní postup",
+        "Date created": "Datum vytvoření",
+        "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Notes": "Poznámky",
         "Source channel": "Zdroj",
         "Archived": "Archivován",
         "Status": "Stav",
-        "Link to shared folder (online storage) with related documents": "Odkaz na sdílený dokument",
+        "Link to shared folder (online storage) with related documents": "Odkaz na sdílenou složku (online úložiště) se souvisejícími dokumenty",
         "Unknown": "Neznámý",
         "Won": "Vyhraný",
         "Lost": "Prohraný",
@@ -68,7 +68,7 @@
         "Deal Result": "Výsledek dealu",
         "Date of result update": "Datum aktualizace výsledku",
         "New Customer": "Nový zákazník",
-        "Business type": "Typ businessu",
+        "Business type": "Typ obchodu",
         "Contact": "Kontakt",
         "Owner": "Vlastník",
         "Created": "Vytvořen",
@@ -86,7 +86,7 @@
         "Ownership": "Vlastnictví",
         "Owned by me": "Moje",
         "Managed by me": "Mnou spravované",
-        "Open \/ Closed": "Otevřené \/ Zavřené",
+        "Open \/ Closed": "Otevřené \/ Uzavřené",
         "Open": "Otevřené",
         "Active": "Aktivní",
         " changed from ": " změněno z ",
@@ -112,25 +112,25 @@
     },
     "Models\\DealHistory": {
         "Change Date": "Datum změny",
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Description": "Popis",
         "Deals": "Dealy",
         "Add Deal": "Přidat deal"
     },
     "Models\\DealTag": {
-        "Deal": "Obchodní případ",
-        "Tag": "Označení",
+        "Deal": "Deal",
+        "Tag": "Štítek",
         "Deal Tags": "Štítky dealů"
     },
     "Models\\DealActivity": {
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Contact person": "Kontaktní osoba",
         "Activity type": "Typ aktivity",
         "Subject": "Předmět",
         "Start date": "Datum začátku",
-        "Start time": "Začátek",
-        "End date": "Datum",
-        "End time": "Čas",
+        "Start time": "Čas začátku",
+        "End date": "Datum konce",
+        "End time": "Čas konce",
         "All day": "Celý den",
         "Completed": "Dokončena",
         "Created by": "Vytvořeno",
@@ -145,7 +145,7 @@
         "Owner": "Vlastník"
     },
     "Models\\DealDocument": {
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Document": "Dokument"
     },
     "Models\\LostReason": {
@@ -160,7 +160,7 @@
         "Add Deal Tag": "Přidat štítek dealu"
     },
     "Models\\Item": {
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Výše",
@@ -176,12 +176,12 @@
         "Position (in the PDF)": "Pozice (v PDF)"
     },
     "Models\\DealLead": {
-        "Deal": "Obchodní případ",
-        "Lead": "Potenciální zákazník",
+        "Deal": "Deal",
+        "Lead": "Lead",
         "Add Deal": "Přidat deal"
     },
     "Models\\DealTask": {
-        "Deal": "Obchodní případ",
+        "Deal": "Deal",
         "Task": "Úkol",
         "Add Deal": "Přidat deal"
     },
@@ -197,24 +197,24 @@
     },
     "Components\\FormDeal": {
         "Calendar": "Kalendář",
-        "Local documents": "Dokumenty",
+        "Local documents": "Lokální dokumenty",
         "Shared documents": "Sdílené dokumenty",
         "History": "Historie",
         "Go to original lead": "Přejít na původní lead",
         "Documents": "Dokumenty",
         "Show deals": "Zobrazit dealy",
-        "Enter = Log completed activity": "Enter = zapsat ukončenou aktivitu",
+        "Enter = Log completed activity": "Enter = zaznamenat dokončenou aktivitu",
         "Shift+Enter = Schedule": "Shift+Enter = naplánovat aktivitu na později",
-        "Type recent activity here": "Zadejte poslední aktivitu zde",
+        "Type recent activity here": "Sem zadejte nedávnou aktivitu",
         "Not completed yet": "Nedokončena",
         "Most recent activities": "Nejnovější aktivity",
-        "Deal": "Obchodní případ",
-        "Lead": "Potenciální zákazník",
-        "Log completed activity": "Zaznamenat aktivitu",
-        "Enter": "Zadat",
+        "Deal": "Deal",
+        "Lead": "Lead",
+        "Log completed activity": "Zaznamenat dokončenou aktivitu",
+        "Enter": "Enter",
         "Schedule activity": "Naplánovat aktivitu",
         "Shift+Enter": "Shift+Enter",
-        "Deal value:": "Hodnota dealu",
+        "Deal value:": "Hodnota dealu:",
         "Weighted profit": "Vážená hodnota dealu",
         "Tasks": "Úkoly",
         "Products": "Produkty",
@@ -240,7 +240,7 @@
         "Settings saved.": "Nastavení uloženo.",
         "Show 'Deal warnings' in dashboard": "Zobrazit 'Upozornění na dealy' na dashboardu",
         "Show 'Most valuable deals' in dashboard": "Zobrazit 'Nejhodnotnější dealy' na dashboardu",
-        "Show 'Deal value by result' in dashboard": "Zobrazit 'Hodnotu dealu podle výsledku' na dashboardu",
+        "Show 'Deal value by result' in dashboard": "Zobrazit 'Hodnota dealů podle výsledku' na dashboardu",
         "Calendar color": "Barva kalendáře",
         "Deals Prefix": "Prefix dealu"
     },
@@ -253,7 +253,7 @@
     },
     "Controllers\\Boards\\DealValueByResult": {
         "Unknown": "Neznámý",
-        "Pending": "V procesu",
+        "Pending": "Čekající",
         "Won": "Vyhraný",
         "Lost": "Prohraný",
         "No deals found.": "Žádné dealy nenalezeny.",

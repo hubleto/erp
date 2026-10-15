@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Tools": "Nástroje",
-        "Management of internal maintenance tools.": "Správa nástrojů pro údržbu"
+        "Management of internal maintenance tools.": "Správa interních nástrojů pro údržbu."
     },
     "Controllers\\Dashboard": {
         "Tools": "Nástroje"

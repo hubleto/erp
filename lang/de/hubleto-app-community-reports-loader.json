@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Reports": "Berichte",
-        "Free report generator app.": "Kostenlose Berichtgenerator App."
+        "Free report generator app.": "Kostenlose App zur Berichterstellung."
     },
     "Controllers\\Home": {
         "Reports": "Berichte"

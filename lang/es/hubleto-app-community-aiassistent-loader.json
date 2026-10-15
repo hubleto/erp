@@ -10,7 +10,7 @@
     },
     "Controllers\\Settings": {
         "AIAssistant": "Asistente IA",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Settings saved.": "Configuración guardada.",
         "Google Gemini API Key": "Clave API de Google Gemini",
         "AI Model": "Modelo de IA",

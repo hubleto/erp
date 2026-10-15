@@ -6,12 +6,12 @@
         "Account name": "Názov účtu",
         "Account type": "Typ účtu",
         "Account subtype": "Podtyp účtu",
-        "Balance": "Aktuálny stav"
+        "Balance": "Zostatok"
     },
     "Models\\AccountType": {
-        "Type title": "Typ účtu"
+        "Type title": "Názov typu"
     },
     "Models\\AccountSubtype": {
-        "Subtype title": "Podtyp účtu"
+        "Subtype title": "Názov podtypu"
     }
 }

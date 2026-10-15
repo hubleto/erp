@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Reports": "Reporty",
-        "Free report generator app.": "Správa reportů zdarma."
+        "Free report generator app.": "Bezplatná aplikace pro generování reportů."
     },
     "Models\\Report": {
         "Title": "Název",

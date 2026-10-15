@@ -2,7 +2,7 @@
     "manifest": {
         "Dashboard": "Tablero",
         "Desktop": "Escritorio",
-        "Default Hubleto desktop implementation.": "Implementación predeterminada del escritorio Hubleto",
+        "Default Hubleto desktop implementation.": "Implementación predeterminada del escritorio de Hubleto.",
         "CRM": "CRM",
         "Addressbook": "Libreta de direcciones",
         "Calendar": "Calendario",
@@ -29,11 +29,11 @@
         "Welcome": "Bienvenido",
         "Edit profile": "Editar perfil",
         "Recently used apps": "Aplicaciones usadas recientemente",
-        "Hubleto provides powerful and secure API to integrate with external services.": "",
-        "Did you know?": "",
-        "Open user guide": "",
-        "Start Hubleto search with <span class='badge'>\/c<\/span> switch to search customers.": "",
-        "You can have as many dashboard as you wish.": ""
+        "Hubleto provides powerful and secure API to integrate with external services.": "Hubleto ofrece una API potente y segura para la integración con servicios externos.",
+        "Did you know?": "¿Sabía que…?",
+        "Open user guide": "Abrir la guía del usuario",
+        "Start Hubleto search with <span class='badge'>\/c<\/span> switch to search customers.": "Inicie la búsqueda en Hubleto con el modificador <span class='badge'>\/c<\/span> para buscar clientes.",
+        "You can have as many dashboard as you wish.": "Puede tener tantos tableros como desee."
     },
     "Controllers\\Desktop": {
         "CRM": "CRM",
@@ -44,7 +44,7 @@
         "Communication": "Comunicación",
         "Projects": "Proyectos",
         "Supply chain": "Cadena de suministro",
-        "Helpdesk": "Centro de ayuda",
+        "Helpdesk": "Mesa de ayuda",
         "Events": "Eventos",
         "E-Commerce": "Comercio electrónico",
         "Website": "Sitio web",
@@ -59,7 +59,7 @@
         "Sign out": "Cerrar sesión",
         "Search app": "Buscar aplicación",
         "Home": "Inicio",
-        "You have no apps in this group.": "No tienes aplicaciones en este grupo.",
+        "You have no apps in this group.": "No tiene aplicaciones en este grupo.",
         "Addressbook": "Libreta de direcciones",
         "Calendar": "Calendario",
         "Workflow": "Flujo de trabajo",

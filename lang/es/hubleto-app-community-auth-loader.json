@@ -27,15 +27,15 @@
         "Apps": "Aplicaciones",
         "Roles": "Roles",
         "Teams": "Equipos",
-        "Position": "Posición",
+        "Position": "Cargo",
         "Phone number #1": "Número de teléfono #1",
         "Phone number #2": "Número de teléfono #2",
         "Photo": "Foto",
         "Timezone": "Zona horaria",
         "Permissions": "Permisos",
         "Add User": "Agregar usuario",
-        "NOT_SPECIFIED": "NO_ESPECIFICADO",
-        "ADMINISTRATOR": "ADMINISTRADOR",
+        "NOT_SPECIFIED": "No especificado",
+        "ADMINISTRATOR": "Administrador",
         "Chief Officer (CEO, CFO, CTO, ...)": "Director ejecutivo (CEO, CFO, CTO, ...)",
         "Manager (Sales, Project, ...)": "Gerente (ventas, proyectos, ...)",
         "Employee": "Empleado",
@@ -68,7 +68,7 @@
         "Assign Roles": "Asignar roles"
     },
     "Controllers\\SignIn": {
-        "Your email": "Correo electrónico",
+        "Your email": "Su correo electrónico",
         "Password": "Contraseña",
         "Keep signed in": "Mantener sesión iniciada",
         "Sign in": "Iniciar sesión",
@@ -86,7 +86,7 @@
     "Controllers\\ResetPassword": {
         "Passwords do not match.": "Las contraseñas no coinciden.",
         "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.": "La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
-        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "¡Bienvenido a Hubleto! Establezca su contraseña para acceder a su panel y comenzar a usar la aplicación.",
+        "Welcome to Hubleto! Set your password to access your dashboard and start using the app.": "¡Le damos la bienvenida a Hubleto! Establezca su contraseña para acceder a su tablero y comenzar a usar la aplicación.",
         "New password": "Nueva contraseña",
         "Confirm new password": "Confirmar nueva contraseña",
         "Reset password": "Restablecer contraseña"

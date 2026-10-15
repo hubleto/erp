@@ -4,7 +4,7 @@
         "Management of leads, cold contacts. Convert leads to deals.": "Gestión de clientes potenciales y contactos en frío. Conversión en oportunidades.",
         "Lead Levels": "Niveles de clientes potenciales",
         "Lead Tags": "Etiquetas de clientes potenciales",
-        "Lead Lost Reasons": "Motivos de pédida",
+        "Lead Lost Reasons": "Motivos de pérdida de clientes potenciales",
         "Active leads": "Clientes potenciales activos",
         "Archived leads": "Clientes potenciales archivados",
         "Lead value by score": "Valor de clientes potenciales por puntuación",
@@ -52,12 +52,12 @@
         "Online meeting link": "Enlace a la reunión en línea",
         "Description": "Descripción",
         "Recurrence": "Recurrente",
-        "Long meeting minutes (link to external document)": "Acta larga de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Acta corta de la reunión",
+        "Long meeting minutes (link to external document)": "Acta extensa de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Acta breve de la reunión",
         "Owner": "Propietario"
     },
     "Models\\Lead": {
-        "Add Lead": "Añadir cliente potencial",
+        "Add Lead": "Agregar cliente potencial",
         "Lead Identifier": "Identificador",
         "Title": "Título",
         "Customer": "Cliente",
@@ -76,7 +76,7 @@
         "Contact": "Contacto",
         "Created": "Creado",
         "Reason for Lost": "Motivo de pérdida",
-        "Add lead": "Añadir cliente potencial",
+        "Add lead": "Agregar cliente potencial",
         "Owner": "Propietario",
         "Identifier": "Identificador",
         "Specific subject (if any)": "Asunto específico (si lo hay)",
@@ -87,7 +87,7 @@
         "Manager": "Gerente",
         "Team": "Equipo",
         "Workflow": "Flujo de trabajo",
-        "Workflow step": "Etapa del flujo",
+        "Workflow step": "Etapa del flujo de trabajo",
         "Closed": "Cerrado",
         "Tags": "Etiquetas",
         "Open \/ Closed": "Abierto \/ Cerrado",
@@ -95,9 +95,9 @@
         "All": "Todos",
         "Phone": "Teléfono",
         "Advertisement": "Anuncio",
-        "Partner": "Socio",
+        "Partner": "Partner",
         "Web": "Web",
-        "Cold call": "Llamada",
+        "Cold call": "Llamada en frío",
         "E-mail": "Correo electrónico",
         "Referral": "Recomendación",
         "Other": "Otro",
@@ -123,7 +123,7 @@
         "Lead Tags": "Etiquetas de clientes potenciales",
         "Active leads": "Clientes potenciales activos",
         "Archived leads": "Clientes potenciales archivados",
-        "Lead Lost Reasons": "Motivos de pérdida",
+        "Lead Lost Reasons": "Motivos de pérdida de clientes potenciales",
         "Lead Levels": "Niveles de clientes potenciales"
     },
     "Models\\LeadHistory": {
@@ -151,13 +151,13 @@
         "Go to deal": "Ir a la oportunidad",
         "Show leads": "Mostrar clientes potenciales",
         "Type recent activity here": "Escriba la actividad reciente aquí",
-        "Enter = Log completed activity": "Enter = Registrar actividad completada",
-        "Shift+Enter = Schedule": "Shift+Enter = Programar actividad",
+        "Enter = Log completed activity": "Enter = registrar actividad completada",
+        "Shift+Enter = Schedule": "Shift+Enter = programar actividad",
         "Most recent activities": "Actividades más recientes",
         "Not completed yet": "No completado aún",
         "Tasks": "Tareas",
         "Log completed activity": "Registrar actividad completada",
-        "Enter": "Introducir",
+        "Enter": "Enter",
         "Schedule activity": "Programar actividad",
         "Shift+Enter": "Shift+Enter",
         "Campaign": "Campaña",
@@ -177,14 +177,14 @@
         "Unit Price": "Precio unitario",
         "Amount": "Cantidad",
         "Dicount (%)": "Descuento (%)",
-        "Vat (%)": "Impuesto (%)",
-        "Vat": "Impuesto",
+        "Vat (%)": "IVA (%)",
+        "Vat": "IVA",
         "Discount": "Descuento",
         "Sum": "Suma"
     },
     "Models\\LostReason": {
         "Lost Reason": "Motivo de pérdida",
-        "Lead Lost Reasons": "Motivos de pédida",
+        "Lead Lost Reasons": "Motivos de pérdida de clientes potenciales",
         "Add Reason": "Agregar motivo"
     },
     "Components\\FormActivity": {
@@ -209,7 +209,7 @@
         "Lead": "Cliente potencial",
         "Campaign": "Campaña",
         "Campaign Leads": "Clientes potenciales de la campaña",
-        "Add lead": "Añadir cliente potencial"
+        "Add lead": "Agregar cliente potencial"
     },
     "Models\\LeadTask": {
         "Lead": "Cliente potencial",
@@ -221,22 +221,22 @@
         "Deal": "Oportunidad"
     },
     "Controllers\\Levels": {
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Lead Levels": "Niveles de clientes potenciales",
         "Leads": "Clientes potenciales",
         "Levels": "Niveles"
     },
     "Controllers\\LostReasons": {
-        "Settings": "Configuraciones",
-        "Lead Lost Reasons": "Motivos de pédida"
+        "Settings": "Configuración",
+        "Lead Lost Reasons": "Motivos de pérdida de clientes potenciales"
     },
     "Controllers\\Tags": {
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Lead Tags": "Etiquetas de clientes potenciales"
     },
     "Controllers\\Settings": {
         "Leads": "Clientes potenciales",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Settings saved.": "Configuración guardada.",
         "Calendar color": "Color del calendario",
         "Lead Prefix": "Prefijo de clientes potenciales",
@@ -246,7 +246,7 @@
     },
     "Controllers\\Boards\\LeadValueByScore": {
         "No leads found.": "No se encontraron clientes potenciales.",
-        "Add lead": "Añadir cliente potencial"
+        "Add lead": "Agregar cliente potencial"
     },
     "Components\\FormLevel": {
         "Level": "Nivel",

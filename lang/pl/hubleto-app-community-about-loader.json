@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Help": "Pomoc",
-        "Help and user guide for Hubleto.": "Pomocnik i przewodnik użytkownika dla Hubleto.",
+        "Help and user guide for Hubleto.": "Pomoc i przewodnik użytkownika dla Hubleto.",
         "About": "O Hubleto",
         "About your Hubleto": "O Hubleto"
     },
@@ -11,7 +11,7 @@
         "Useful links": "Przydatne linki",
         "Package": "Pakiet",
         "Version": "Wersja",
-        "Commit": "Zatwierdzenie",
+        "Commit": "Commit",
         "Privacy policy": "Polityka prywatności",
         "Terms of use": "Warunki użytkowania",
         "Website": "Strona internetowa",

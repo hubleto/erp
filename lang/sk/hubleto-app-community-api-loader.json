@@ -23,15 +23,15 @@
     },
     "Models\\Permission": {
         "Key": "Kľúč",
-        "App": "Appka",
+        "App": "Aplikácia",
         "Controller": "Kontrolér",
-        "Add Permission": "Pridať povolenie"
+        "Add Permission": "Pridať oprávnenie"
     },
     "Models\\Usage": {
         "Key": "Kľúč",
-        "App": "Appka",
+        "App": "Aplikácia",
         "Controller": "Kontrolér",
-        "Used on": "Použitý",
+        "Used on": "Dátum použitia",
         "IP address": "IP adresa",
         "Status": "Stav",
         "Unknown": "Neznámy",
@@ -42,14 +42,14 @@
     "Components\\FormKey": {
         "Usage": "Záznamy používania",
         "Key": "Kľúč",
-        "Permissions": "Povolenia",
+        "Permissions": "Oprávnenia",
         "Test": "Otestovať",
         "Test result": "Výsledok testu",
         "Run test": "Spustiť test",
         "API Key": "API kľúč",
         "Parameter": "Parameter",
         "Endpoint": "Koncový bod",
-        "App": "Appka",
+        "App": "Aplikácia",
         "Controller": "Kontrolér",
         "Vars": "Premenné"
     },
@@ -59,7 +59,7 @@
     },
     "Controllers\\Permissions": {
         "API": "API",
-        "Permissions": "Povolenia"
+        "Permissions": "Oprávnenia"
     },
     "Controllers\\Usages": {
         "API": "API",

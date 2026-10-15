@@ -3,7 +3,7 @@
         "Documents": "Dokumente"
     },
     "manifest": {
-        "Documents": "Unterlagen",
+        "Documents": "Dokumente",
         "Free document management.": "Kostenlose Dokumentverwaltung.",
         "Browse": "Durchsuchen",
         "List": "Liste",
@@ -12,7 +12,7 @@
         "Manage folders": "Ordner verwalten",
         "Document review results": "Ergebnisse der Dokumentprüfung",
         "Versions": "Versionen",
-        "Reviews": "Bewertungen",
+        "Reviews": "Prüfungen",
         "File manager": "Dateimanager"
     },
     "root": {
@@ -31,16 +31,16 @@
         "RecordId": "Datensatz-ID",
         "Created on": "Erstellt am",
         "Created by": "Erstellt von",
-        "Workflow": "Arbeitsablauf",
-        "Workflow step": "Workflowschritt"
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow-Schritt"
     },
     "Controllers\\Table": {
-        "Documents": "Unterlagen"
+        "Documents": "Dokumente"
     },
     "Models\\Folder": {
         "Uid": "Uid",
         "Parent folder": "Elternordner",
-        "Folder name": "Ordner Name",
+        "Folder name": "Ordnername",
         "Add Folder": "Ordner hinzufügen"
     },
     "Controllers\\Browse": {

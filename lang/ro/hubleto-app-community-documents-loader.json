@@ -8,7 +8,7 @@
         "Templates": "Șabloane",
         "Document review results": "Rezultatele revizuirii documentului",
         "Versions": "Versiuni",
-        "Reviews": "Recenzii",
+        "Reviews": "Revizuiri",
         "File manager": "Manager de fișiere"
     },
     "root": {
@@ -28,7 +28,7 @@
         "Created on": "Creat la",
         "Created by": "Creat de",
         "Workflow": "Flux de lucru",
-        "Workflow step": "Etapă a fluxului de lucru"
+        "Workflow step": "Etapa fluxului de lucru"
     },
     "Models\\Template": {
         "Name": "Nume",

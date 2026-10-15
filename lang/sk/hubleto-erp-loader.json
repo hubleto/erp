@@ -20,9 +20,9 @@
         "Save": "Uložiť",
         "Copy": "Kopírovať",
         "Delete": "Zmazať",
-        "Confirm delete": "Potvrďte zmazanie",
+        "Confirm delete": "Potvrdiť odstránenie",
         "Edit": "Upraviť",
-        "Adding record": "Pridať záznam",
+        "Adding record": "Pridávanie záznamu",
         "Editing record": "Úprava záznamu",
         "Record": "Záznam",
         "New record": "Nový záznam",
@@ -30,12 +30,12 @@
         "You have unsaved changes. Are you sure to close?": "Máte neuložené zmeny. Naozaj chcete zavrieť?"
     },
     "Components\\FormExtended": {
-        "Copy link to clipboard":"Zkopíruj link do schránky",
+        "Copy link to clipboard": "Skopírovať odkaz do schránky",
         "unsaved changes":"neuložené zmeny",
-        "Open in new tab":"Otvoriť v novom okne"
+        "Open in new tab": "Otvoriť na novej karte"
     },
     "Components\\ErpWorkflowSelector": {
-        "Change workflow": "Zmeň workflow",
+        "Change workflow": "Zmeniť workflow",
         "Last update: {{ date }} by {{ user }}": "Posledná aktualizácia: {{ date }} od {{ user }}",
         "unknown": "neznámy"
     },
@@ -61,17 +61,17 @@
     },
     "Components\\Table": {
         "Delete": "Zmazať",
-        "Start typing to search...": "Začnite vyhľadávať...",
-        "Search...": "Hľadať",
+        "Start typing to search...": "Začnite písať na vyhľadávanie...",
+        "Search...": "Hľadať...",
         "No data.": "Žiadne údaje.",
-        "More options": "Nastavenia",
+        "More options": "Ďalšie možnosti",
         "Show\/Hide filter": "Zobraziť\/skryť filter",
         "Hide filter": "Skryť filter",
         "Show as plain table": "Zobraziť ako jednoduchú tabuľku",
         "Show as standard table": "Zobraziť ako štandardnú tabuľku",
         "Delete record": "Vymazanie záznamu",
         "Cancel": "Zrušiť",
-        "Are you sure you want to delete this record?": "Ste si istý, že chcete vymazať tento záznam?",
+        "Are you sure you want to delete this record?": "Naozaj chcete vymazať tento záznam?",
         "Copy cell content to clipboard": "Kopírovať obsah bunky do schránky",
         "records were hidden based on your permissions.": "záznamov bolo skrytých na základe vašich oprávnení."
     },
@@ -82,20 +82,20 @@
     "Components\\TableExtendedColumnsCustomize": {
         "Customize Columns": "Prispôsobiť stĺpce",
         "Save": "Uložiť",
-        "Reset to default": "Pôvodné nastavenie"
+        "Reset to default": "Obnoviť predvolené"
     },
     "Controllers\\ControllerSignIn": {
         "Keep signed in": "Zostať prihlásený"
     },
     "Controllers\\SignIn": {
-        "Your email": "Email",
+        "Your email": "Váš e-mail",
         "Password": "Heslo",
         "Keep signed in": "Zostať prihlásený",
         "Sign in": "Prihlásiť sa",
-        "Forgot password?": "Zabudol som heslo"
+        "Forgot password?": "Zabudnuté heslo?"
     },
     "Components\\Inputs\\Image": {
-        "Choose image": "Nahrať obrázok"
+        "Choose image": "Vybrať obrázok"
     },
     "Components\\Inputs\\TextareaWithHtmlPreview": {
         "Toggle fullscreen": "Prepnúť celú obrazovku",
@@ -111,7 +111,7 @@
     },
     "Controllers\\NotFound": {
         "Page Not Found": "Stránka nenájdená",
-        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Stránku, ktorú hľadáte, sme nenašli.",
+        "Sorry, we couldn’t find the page you were looking for. Please check your permissions or return to the home page.": "Ľutujeme, stránku, ktorú hľadáte, sme nenašli. Skontrolujte svoje oprávnenia alebo sa vráťte na domovskú stránku.",
         "Home": "Úvod"
     },
     "Controllers\\AccessForbidden": {
@@ -120,7 +120,7 @@
         "You have no access to {{ appName }}.": "Nemáte prístup k {{ appName }}."
     },
     "EmailProvider": {
-        "Hello from Hubleto!": "Dobrý deň od Hubleto!",
+        "Hello from Hubleto!": "Pozdravuje vás Hubleto!",
         "Dear {{ name }},": "Vážený/á {{ name }},",
         "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Prijali sme žiadosť o obnovenie vášho hesla. Ak ste o to požiadali, kliknite na tlačidlo nižšie a nastavte si nové heslo:",
         "Reset password": "Obnoviť heslo",
@@ -133,7 +133,7 @@
         "Your Hubleto account has been created!": "Váš Hubleto účet bol vytvorený!"
     },
     "Emails\\EmailProvider": {
-        "Hello from Hubleto!": "Dobrý deň od Hubleto!",
+        "Hello from Hubleto!": "Pozdravuje vás Hubleto!",
         "Dear {{ name }},": "Vážený/á {{ name }},",
         "We received a request to reset your password for your account. If you made this request, please click the button below to set a new password:": "Prijali sme žiadosť o obnovenie vášho hesla. Ak ste o to požiadali, kliknite na tlačidlo nižšie a nastavte si nové heslo:",
         "Reset password": "Obnoviť heslo",

@@ -1,40 +1,40 @@
 {
     "manifest": {
-        "Orders": "Bestellungen",
-        "Free order managment.": "Kostenloses Bestellmanagement.",
+        "Orders": "Aufträge",
+        "Free order managment.": "Kostenlose Auftragsverwaltung.",
         "Order states": "Auftragsstatus",
         "Order warnings": "Auftragswarnungen",
         "All orders": "Alle Aufträge",
-        "Purchase orders": "Einkaufsaufträge",
+        "Purchase orders": "Einkaufsbestellungen",
         "Sales orders": "Verkaufsaufträge",
         "Payments": "Zahlungen",
         "Items": "Positionen",
         "Quotes": "Angebote"
     },
     "root": {
-        "Order states": "Bestellstaaten"
+        "Order states": "Auftragsstatus"
     },
     "Controllers\\Orders": {
-        "Orders": "Bestellungen"
+        "Orders": "Aufträge"
     },
     "Models\\Order": {
-        "Order number": "Bestellnummer",
+        "Order number": "Auftragsnummer",
         "Customer": "Kunde",
         "Title": "Titel",
-        "State": "Zustand",
+        "State": "Status",
         "Price": "Preis",
         "Currency": "Währung",
-        "Order date": "Bestelldatum",
-        "Required delivery date": "Erforderlicher Liefertermin",
+        "Order date": "Auftragsdatum",
+        "Required delivery date": "Gewünschter Liefertermin",
         "Shipping information": "Versandinformationen",
         "Notes": "Notizen",
-        "Add order": "Bestellung hinzufügen",
+        "Add order": "Auftrag hinzufügen",
         "Identifier": "Kennung",
         "Identifier at customer": "Kennung beim Kunden",
-        "Owner": "Inhaber",
+        "Owner": "Eigentümer",
         "Manager": "Manager",
-        "Workflow": "Arbeitsablauf",
-        "Workflow step": "Workflowschritt",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow-Schritt",
         "Price excl. VAT": "Preis ohne MwSt.",
         "Price incl. VAT": "Preis inkl. MwSt.",
         "Shared folder (online document storage)": "Freigegebener Ordner (Online-Dokumentenspeicher)",
@@ -42,7 +42,7 @@
         "Template": "Vorlage",
         "Closed": "Geschlossen",
         "Purchase \/ Sales": "Einkauf / Verkauf",
-        "Purchase order": "Einkaufsauftrag",
+        "Purchase order": "Einkaufsbestellung",
         "Sales order": "Verkaufsauftrag",
         "External identifier": "Externe Kennung",
         "Supplier": "Lieferant",
@@ -60,7 +60,7 @@
         "PDF": "PDF",
         "Open \/ Closed": "Offen / Geschlossen",
         "Open": "Offen",
-        "Purchase orders": "Einkaufsaufträge",
+        "Purchase orders": "Einkaufsbestellungen",
         "Sales orders": "Verkaufsaufträge",
         "Shared with": "Geteilt mit",
         "No periodical payments": "Keine regelmäßigen Zahlungen",
@@ -70,7 +70,7 @@
         "Order expires on": "Auftrag läuft ab am",
         "Next invoice expected on": "Nächste Rechnung erwartet am",
         "Document": "Dokument",
-        "Last item": "Letzter Eintrag",
+        "Last item": "Letzte Position",
         "Next activity": "Nächste Aktivität"
     },
     "Models\\State": {
@@ -79,14 +79,14 @@
         "Color": "Farbe"
     },
     "Models\\Item": {
-        "Order": "Befehl",
+        "Order": "Reihenfolge",
         "Title": "Titel",
         "Product": "Produkt",
         "Unit price": "Stückpreis",
         "Amount": "Menge",
         "Discount": "Rabatt",
-        "Vat": "Mehrwertsteuer",
-        "Add item": "Produkt hinzufügen",
+        "Vat": "MwSt.",
+        "Add item": "Position hinzufügen",
         "Item order": "Positionsreihenfolge",
         "Sales price": "Verkaufspreis",
         "Price excl. VAT": "Preis ohne MwSt.",
@@ -96,7 +96,7 @@
         "Due date": "Fälligkeitsdatum",
         "Notes": "Notizen",
         "Invoice item": "Rechnungsposition",
-        "Owner": "Inhaber",
+        "Owner": "Eigentümer",
         "Manager": "Manager",
         "Position (in the PDF)": "Position (im PDF)",
         "Is chargeable": "Ist kostenpflichtig",
@@ -107,15 +107,15 @@
         "Delivery date": "Lieferdatum"
     },
     "Models\\History": {
-        "Order": "Befehl",
+        "Order": "Reihenfolge",
         "Short Description": "Kurzbeschreibung",
         "Long Description": "Lange Beschreibung",
-        "Date Time": "Datum Uhrzeit"
+        "Date Time": "Datum und Uhrzeit"
     },
     "Components\\FormOrder": {
-        "Order": "Befehl",
+        "Order": "Reihenfolge",
         "Title": "Titel",
-        "History": "Geschichte"
+        "History": "Verlauf"
     },
     "Models\\OrderActivity": {
         "Subject": "Betreff",
@@ -135,7 +135,7 @@
         "Recurrence": "Wiederholung",
         "Long meeting minutes (link to external document)": "Ausführliches Besprechungsprotokoll (Link zu einem externen Dokument)",
         "Short meeting minutes": "Kurzprotokoll",
-        "Owner": "Inhaber"
+        "Owner": "Eigentümer"
     },
     "Models\\OrderDocument": {
         "Order": "Auftrag",
@@ -143,7 +143,7 @@
     },
     "Models\\OrderDeal": {
         "Order": "Auftrag",
-        "Deal": "Verkaufschance"
+        "Deal": "Deal"
     },
     "Controllers\\Boards\\OrderWarnings": {
         "Open orders without future plan": "Offene Aufträge ohne zukünftigen Plan"

@@ -27,14 +27,14 @@
         "Identifier": "Identificador",
         "Title": "Título",
         "Description": "Descripción",
-        "Main developer": "Encargado principal",
+        "Main developer": "Desarrollador principal",
         "Account manager": "Responsable de cuenta",
         "Priority": "Prioridad",
         "Start": "Inicio",
         "Deadline": "Fecha límite",
         "Budget": "Presupuesto",
         "Workflow": "Flujo de trabajo",
-        "Workflow step": "Etapa del flujo",
+        "Workflow step": "Etapa del flujo de trabajo",
         "Closed": "Cerrado",
         "Color": "Color",
         "Notes": "Notas",
@@ -45,7 +45,7 @@
         "Average hourly costs": "Costo promedio por hora",
         "Project manager": "Gerente de proyecto",
         "Shared with": "Compartido con",
-        "Leave empty to generate automatically.": "Deja en blanco para generar automáticamente.",
+        "Leave empty to generate automatically.": "Deje en blanco para generar automáticamente.",
         "Online documentation folder": "Carpeta de documentación en línea",
         "Add Project": "Agregar proyecto"
     },
@@ -109,8 +109,8 @@
         "Recurrence": "Recurrencia",
         "All day": "Todo el día",
         "Completed": "Completado",
-        "Long meeting minutes (link to external document)": "Minutas largas de la reunión (enlace a documento externo)",
-        "Short meeting minutes": "Resúmen de la reunión",
+        "Long meeting minutes (link to external document)": "Acta extensa de la reunión (enlace a documento externo)",
+        "Short meeting minutes": "Acta breve de la reunión",
         "Created by": "Creado por",
         "Project": "Proyecto",
         "Contact": "Contacto"
@@ -120,8 +120,8 @@
         "Summary": "Resumen",
         "Details": "Detalles",
         "Progress": "Progreso",
-        "Reported on": "Reportado el",
-        "Reported by": "Reportado por",
+        "Reported on": "Informado el",
+        "Reported by": "Informado por",
         "Add milestone report": "Agregar informe de hito"
     },
     "Models\\Expense": {
@@ -157,7 +157,7 @@
     },
     "Controllers\\Settings": {
         "Projects": "Proyectos",
-        "Settings": "Configuraciones",
+        "Settings": "Configuración",
         "Create your custom settings page here": "Cree aquí su página de configuración personalizada"
     },
     "Models\\Milestone": {

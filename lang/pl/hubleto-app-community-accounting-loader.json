@@ -9,9 +9,9 @@
         "Balance": "Saldo"
     },
     "Models\\AccountType": {
-        "Type title": "Typ konta"
+        "Type title": "Nazwa typu"
     },
     "Models\\AccountSubtype": {
-        "Subtype title": "Podtyp konta"
+        "Subtype title": "Nazwa podtypu"
     }
 }

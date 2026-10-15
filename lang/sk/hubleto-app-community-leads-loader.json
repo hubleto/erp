@@ -1,10 +1,10 @@
 {
     "manifest": {
         "Leads": "Leady",
-        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadov. Konverzia do dealov.",
+        "Management of leads, cold contacts. Convert leads to deals.": "Správa leadov a studených kontaktov. Konverzia leadov na dealy.",
         "Lead Levels": "Úrovne leadov",
         "Lead Tags": "Značky leadov",
-        "Lead Lost Reasons": "Dôvody pre stratu leadu",
+        "Lead Lost Reasons": "Dôvody straty leadu",
         "Active leads": "Aktívne leady",
         "Archived leads": "Archivované leady",
         "Lead value by score": "Hodnota leadov podľa skóre",
@@ -26,11 +26,11 @@
         "Calendar": "Kalendár"
     },
     "Controllers\\Leads": {
-        "Sales": "Obchod",
+        "Sales": "Predaj",
         "Leads": "Leady"
     },
     "Controllers\\LeadsArchive": {
-        "Sales": "Obchod",
+        "Sales": "Predaj",
         "Leads": "Leady",
         "Archive": "Archív"
     },
@@ -42,7 +42,7 @@
     },
     "Controllers\\LostReasons": {
         "Settings": "Nastavenia",
-        "Lead Lost Reasons": "Dôvody pre stratu leadu"
+        "Lead Lost Reasons": "Dôvody straty leadu"
     },
     "Controllers\\Tags": {
         "Settings": "Nastavenia",
@@ -69,7 +69,7 @@
     "Models\\LeadActivity": {
         "Activity type": "Typ aktivity",
         "Subject": "Predmet",
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Contact person": "Kontaktná osoba",
         "Start date": "Dátum začiatku",
         "Start time": "Čas začiatku",
@@ -96,20 +96,20 @@
         "Contact person": "Kontaktná osoba",
         "Price": "Cena",
         "Currency": "Mena",
-        "Expected close date": "Predpokladaný dátum ukončenia",
+        "Expected close date": "Predpokladaný dátum uzavretia",
         "Assigned user": "Zodpovedný",
-        "Date created": "Vytvorený",
+        "Date created": "Dátum vytvorenia",
         "Status": "Stav",
         "Notes": "Poznámky",
         "Source channel": "Zdroj",
         "Archived": "Archivovaný",
-        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok",
+        "Link to shared folder (online storage) with related documents": "Odkaz na zdieľaný priečinok (online úložisko) so súvisiacimi dokumentmi",
         "Score": "Skóre",
         "Contact": "Kontakt",
         "Created": "Vytvorený",
-        "Reason for Lost": "Dôvod pre stratu",
+        "Reason for Lost": "Dôvod straty",
         "Add lead": "Pridať lead",
-        "Owner": "Majiteľ",
+        "Owner": "Vlastník",
         "Identifier": "Identifikátor",
         "Specific subject (if any)": "Predmet",
         "Campaign": "Kampaň",
@@ -118,14 +118,14 @@
         "Level": "Úroveň",
         "Manager": "Manažér",
         "Team": "Tím",
-        "Workflow": "Pracovný postup",
+        "Workflow": "Workflow",
         "Workflow step": "Krok workflow",
         "Closed": "Uzavretý",
         "Tags": "Značky",
-        "Open \/ Closed": "Otvorené \/ Zatvorené",
+        "Open \/ Closed": "Otvorené \/ Uzavreté",
         "Open": "Otvorené",
         "All": "Všetky",
-        "Deal": "Obchodná príležitosť",
+        "Deal": "Deal",
         "Phone": "Telefón",
         "Advertisement": "Reklama",
         "Partner": "Partner",
@@ -140,7 +140,7 @@
         "Profile link #3": "Odkaz na profil #3",
         "Ownership": "Vlastníctvo",
         "Owned by me": "Moje leady",
-        "Managed by me": "Spravované mnou",
+        "Managed by me": "Mnou spravované",
         "None": "Žiadne",
         "changed from": "zmenené z",
         "to": "na",
@@ -155,31 +155,31 @@
         "Lead Tags": "Značky leadov",
         "Active leads": "Aktívne leady",
         "Archived leads": "Archivované leady",
-        "Lead Lost Reasons": "Dôvody pre stratu leadu",
+        "Lead Lost Reasons": "Dôvody straty leadu",
         "Lead Levels": "Úrovne leadov"
     },
     "Models\\LeadHistory": {
         "Change Date": "Dátum zmeny",
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Description": "Opis",
         "Date": "Dátum"
     },
     "Models\\LeadTag": {
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Tag": "Značka",
         "Lead Tags": "Značky leadov"
     },
     "Models\\LeadDocument": {
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Document": "Dokument"
     },
     "Models\\LeadTask": {
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Task": "Úloha",
         "Lead Tasks": "Úlohy leadu"
     },
     "Models\\LeadCampaign": {
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Campaign": "Kampaň",
         "Campaign Leads": "Leady kampane",
         "Add lead": "Pridať lead"
@@ -199,11 +199,11 @@
     },
     "Models\\LostReason": {
         "Lost Reason": "Dôvod straty",
-        "Lead Lost Reasons": "Dôvody pre stratu leadu",
+        "Lead Lost Reasons": "Dôvody straty leadu",
         "Add Reason": "Pridať dôvod"
     },
     "Models\\LeadProduct": {
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Product": "Produkt",
         "Unit Price": "Jednotková cena",
         "Amount": "Množstvo",
@@ -214,22 +214,22 @@
         "Sum": "Súčet"
     },
     "Components\\FormLead": {
-        "Lead": "Potenciálny zákazník",
+        "Lead": "Lead",
         "Documents": "Dokumenty",
         "Calendar": "Kalendár",
         "Shared documents": "Zdieľané dokumenty",
         "History": "História",
-        "Local documents": "Dokumenty",
+        "Local documents": "Lokálne dokumenty",
         "Go to deal": "Prejsť na deal",
         "Show leads": "Zobraziť leady",
-        "Type recent activity here": "Zadajte poslednú aktivitu tu",
-        "Enter = Log completed activity": "Enter = zapísať ukončenú aktivitu",
+        "Type recent activity here": "Sem zadajte nedávnu aktivitu",
+        "Enter = Log completed activity": "Enter = zaznamenať dokončenú aktivitu",
         "Shift+Enter = Schedule": "Shift+Enter = naplánovať aktivitu na neskôr",
         "Most recent activities": "Najnovšie aktivity",
         "Not completed yet": "Nedokončená",
         "Tasks": "Úlohy",
-        "Log completed activity": "Zaevidovať vykonanú činnosť",
-        "Enter": "Zadať",
+        "Log completed activity": "Zaznamenať dokončenú aktivitu",
+        "Enter": "Enter",
         "Schedule activity": "Naplánovať aktivitu",
         "Shift+Enter": "Shift+Enter",
         "Campaign": "Kampaň",
@@ -245,10 +245,10 @@
         "End": "Koniec",
         "Start": "Začiatok",
         "Contact": "Kontakt",
-        "Lead": "Potenciálny zákazník"
+        "Lead": "Lead"
     },
     "Components\\TableLeads": {
-        "Deal": "Obchodná príležitosť"
+        "Deal": "Deal"
     },
     "Calendar": {
         "Leads": "Leady",

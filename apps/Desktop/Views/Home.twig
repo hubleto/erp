@@ -1,5 +1,5 @@
 {% set defaultDashboard = viewParams.defaultDashboard %}
-{% set welcomeSplashImageUrl = config.welcomeSplashImageUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
+{% set logoUrl = config.logoUrl ?? (hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png") %}
 
 <div class="md:hidden grid grid-cols-3 gap-0 m-2">
   {% for app in viewParams.appsInSidebar %}
@@ -100,7 +100,7 @@
     </div>
 
     <div>
-      <img src="{{ welcomeSplashImageUrl }}" class="w-48 m-4 mx-auto">
+      <img src="{{ logoUrl }}" class="w-48 m-4 mx-auto">
     </div>
 
     {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Community\\Usage') %}

@@ -1,7 +1,7 @@
 {
     "manifest": {
-        "Workflow": "Przepływ pracy",
-        "Free sales workflow management.": "Bezpłatne zarządzanie procesami sprzedaży.",
+        "Workflow": "Workflow",
+        "Free sales workflow management.": "Bezpłatne zarządzanie workflow sprzedaży.",
         "History": "Historia",
         "Workflows": "Workflowy",
         "Items with not updated step": "Elementy z nieaktualizowanym krokiem",
@@ -42,7 +42,7 @@
         "Manage workflows": "Zarządzaj workflowami"
     },
     "Controllers\\Home": {
-        "Workflow": "Przepływ pracy",
+        "Workflow": "Workflow",
         "Add workflow": "Dodaj workflow",
         "Manage workflow steps": "Zarządzaj krokami"
     },
@@ -51,7 +51,7 @@
         "Workflows": "Workflowy"
     },
     "Controllers\\Workflow": {
-        "Workflow": "Przepływ pracy",
+        "Workflow": "Workflow",
         "Show details": "Pokaż szczegóły",
         "Target": "Grupa docelowa",
         "Goal": "Cel",
@@ -63,11 +63,11 @@
         "Closed milestone": "Zamknięty kamień milowy"
     },
     "Controllers\\History": {
-        "Workflow": "Przepływ pracy",
+        "Workflow": "Workflow",
         "History": "Historia"
     },
     "Controllers\\Boards\\ItemsWithNotUpdatedStep": {
-        "Item": "Element",
+        "Item": "Pozycja",
         "Days without workflow update": "Dni bez aktualizacji workflow",
         "Last update by": "Ostatnio zaktualizował"
     },
@@ -88,9 +88,9 @@
         "Order": "Kolejność",
         "Color": "Kolor",
         "Probability": "Prawdopodobieństwo",
-        "Workflow": "Przepływ pracy",
+        "Workflow": "Workflow",
         "Set result of a deal to": "Ustaw wynik dealu na",
-        "Tag": "Etykieta",
+        "Tag": "Znacznik",
         "Add Workflow Step": "Dodaj krok workflow"
     },
     "Models\\WorkflowHistory": {
@@ -98,11 +98,11 @@
         "Record Id": "ID rekordu",
         "Changed": "Zmienione",
         "User": "Użytkownik",
-        "Workflow": "Przepływ pracy",
+        "Workflow": "Workflow",
         "Workflow Step": "Krok"
     },
     "Components\\FormWorkflow": {
-        "Workflow": "Przepływ pracy",
+        "Workflow": "Workflow",
         "Steps": "Kroki"
     },
     "Components\\FormWorkflowStep": {

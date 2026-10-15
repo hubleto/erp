@@ -8,7 +8,7 @@
     },
     "root": {
         "Contact Categories": "Kontaktkategorien",
-        "Contact Tags": "Kontakttags",
+        "Contact Tags": "Kontakt-Tags",
         "Contacts": "Kontakte",
         "Import contacts": "Kontakte importieren"
     },
@@ -22,19 +22,19 @@
         "Customer": "Kunde",
         "Primary Contact": "Hauptkontakt",
         "Notes": "Notizen",
-        "Date Created": "Datum erstellt",
+        "Date Created": "Erstellt am",
         "Add contact": "Kontakt hinzufügen",
-        "Emails": "E -Mails",
+        "Emails": "E-Mails",
         "Phone Numbers": "Telefonnummern",
-        "Mr.": "Herr.",
+        "Mr.": "Herr",
         "Mrs.": "Frau",
         "Valid": "Gültig",
-        "Tags": "Markierungen",
+        "Tags": "Tags",
         "Invoicing Contact": "Rechnungskontakt",
         "Primary": "Primär",
         "Invoicing": "Rechnungsstellung",
         "Invalid": "Ungültig",
-        "Tag": "Schlagwort"
+        "Tag": "Tag"
     },
     "Models\\Value": {
         "Contact": "Kontakt",
@@ -50,7 +50,7 @@
     },
     "Models\\ContactTag": {
         "Contact": "Kontakt",
-        "Tag": "Schlagwort"
+        "Tag": "Tag"
     },
     "Models\\Category": {
         "Type": "Typ"
@@ -88,7 +88,7 @@
         "links": "Links",
         "Example CSV file": "Beispiel-CSV-Datei",
         "You may also": "Sie können außerdem",
-        "Export your addressbook": "Adressbuch exportieren",
+        "Export your addressbook": "Ihr Adressbuch exportieren",
         "modify it and re-import again": "bearbeiten und erneut importieren",
         "Step 2: Upload the file with contacts": "Schritt 2: Datei mit Kontakten hochladen",
         "Step 3: Give a tag to new imported contacts": "Schritt 3: Neue importierte Kontakte mit einem Tag versehen",

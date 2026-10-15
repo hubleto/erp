@@ -1,18 +1,18 @@
 {
     "manifest": {
-        "Dashboards": "Übersichten",
-        "Free dashboards app": "Kostenlose Dashboardsanwendung",
+        "Dashboards": "Dashboards",
+        "Free dashboards app": "Kostenlose Dashboard-App",
         "Preview Dashboards": "Dashboard-Vorschau",
         "Manage": "Verwalten",
-        "No dashboard configured": "",
-        "You do not have default dashboard configured.": "",
-        "Configure your default dashboard": ""
+        "No dashboard configured": "Kein Dashboard konfiguriert",
+        "You do not have default dashboard configured.": "Sie haben kein Standard-Dashboard konfiguriert.",
+        "Configure your default dashboard": "Standard-Dashboard konfigurieren"
     },
     "root": {
-        "Dashboards": "Übersichten"
+        "Dashboards": "Dashboards"
     },
     "Controllers\\Dashboards": {
-        "Dashboards": "Übersichten",
+        "Dashboards": "Dashboards",
         "Manage dashboards": "Dashboards verwalten",
         "Preview Dashboards": "Dashboard-Vorschau",
         "Add dashboard": "Dashboard hinzufügen"
@@ -22,23 +22,23 @@
         "Title": "Name",
         "Slug": "URL-Kürzel",
         "Color": "Farbe",
-        "Is default": "Voreinstellung",
-        "Add dashboard": "Panel hinzufügen",
+        "Is default": "Ist Standard",
+        "Add dashboard": "Dashboard hinzufügen",
         "By turning this on you will change the dashboard shown on the Homepage": "Wenn Sie diese Option aktivieren, wird das auf der Startseite angezeigte Dashboard geändert."
     },
     "Models\\Panel": {
-        "Dashboard": "Übersicht",
-        "Board": "Brett",
+        "Dashboard": "Dashboard",
+        "Board": "Board",
         "Title": "Name",
         "Configuration": "Konfiguration",
-        "-- Select board to be displayed in panel --": "Brett auswählen, die in dem Panel angezeigt wird",
+        "-- Select board to be displayed in panel --": "-- Board für die Anzeige im Panel auswählen --",
         "Add panel": "Panel hinzufügen",
         "Width": "Breite",
         "Order": "Auftrag",
         "Position": "Position"
     },
     "Controllers\\Settings": {
-        "Dashboards": "Übersichten",
+        "Dashboards": "Dashboards",
         "Settings": "Einstellungen"
     },
     "Components\\Dashboard": {
@@ -47,6 +47,6 @@
     },
     "Controllers\\DashboardsManage": {
         "Manage": "Verwalten",
-        "Dashboards": "Übersichten"
+        "Dashboards": "Dashboards"
     }
 }

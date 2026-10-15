@@ -1,7 +1,7 @@
 {
     "manifest": {
-        "Audit Logs": "Audit Logy",
-        "Internal audit logs": "Interné audit logy"
+        "Audit Logs": "Záznamy auditu",
+        "Internal audit logs": "Interné záznamy auditu"
     },
     "Models\\AuditLog": {
         "Datetime": "Dátum a čas",
@@ -18,7 +18,7 @@
         "delete": "Odstránenie"
     },
     "Controllers\\AuditLogs": {
-        "AuditLogs": "Audit Logy"
+        "AuditLogs": "Záznamy auditu"
     },
     "Components\\FormAuditLog": {
         "Audit Log": "Záznam auditu"

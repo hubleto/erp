@@ -1,7 +1,7 @@
 {
     "manifest": {
         "Developer": "Vývojár",
-        "Developer tools to automate your Hubleto development": "Nástroja pre vývojárov",
+        "Developer tools to automate your Hubleto development": "Nástroje pre vývojárov na automatizáciu vášho vývoja v Hubleto",
         "Developer tools": "Nástroje pre vývojárov"
     },
     "root": {
@@ -49,6 +49,6 @@
         "2. Run ": "2. Spustite ",
         " in your terminal.": " vo vašom termináli.",
         "Check ": "Pozrite si ",
-        " for more details.": " pre viac detailov."
+        " for more details.": " pre viac podrobností."
     }
 }

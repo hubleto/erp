@@ -1,89 +1,89 @@
 {
     "loaders": {
-        "Leads": "Interessenten",
-        "Leads Archive": "Leadsarchiv"
+        "Leads": "Leads",
+        "Leads Archive": "Lead-Archiv"
     },
     "controllers.leads": {
         "Sales": "Vertrieb",
-        "Leads": "Interessenten"
+        "Leads": "Leads"
     },
     "controllers.leadsArchive": {
         "Sales": "Vertrieb",
-        "Leads": "Interessenten",
+        "Leads": "Leads",
         "Archive": "Archiv"
     },
     "manifest": {
-        "Leads": "Interessenten",
-        "Management of leads, cold contacts. Convert leads to deals.": "Management von Leads, kalte Kontakte. Konvertieren führt zu Geschäften.",
+        "Leads": "Leads",
+        "Management of leads, cold contacts. Convert leads to deals.": "Verwaltung von Leads und Kaltkontakten. Leads in Deals umwandeln.",
         "Lead Levels": "Lead-Stufen",
         "Lead Tags": "Lead-Tags",
         "Lead Lost Reasons": "Gründe für verlorene Leads",
         "Active leads": "Aktive Leads",
         "Archived leads": "Archivierte Leads",
-        "Lead value by score": "Lead-Wert nach Punktzahl",
+        "Lead value by score": "Lead-Wert nach Score",
         "Lead warnings": "Lead-Warnungen",
         "Plan": "Plan",
         "Calendar": "Kalender"
     },
     "root": {
-        "Lead statuses": "Lead Zustände",
-        "Lead Tags": "Interessenten-Tags",
-        "Lead Lost Reasons": "Führen Sie verlorene Gründe",
+        "Lead statuses": "Lead-Status",
+        "Lead Tags": "Lead-Tags",
+        "Lead Lost Reasons": "Gründe für verlorene Leads",
         "Active leads": "Aktive Leads",
         "Archived leads": "Archivierte Leads",
-        "Lead Levels": "Lead Stufen"
+        "Lead Levels": "Lead-Stufen"
     },
     "Models\\LeadActivity": {
-        "Lead": "Führen",
+        "Lead": "Lead",
         "Contact": "Kontakt",
         "Activity type": "Aktivitätstyp",
-        "Subject": "Thema",
+        "Subject": "Betreff",
         "Start date": "Startdatum",
         "Start time": "Startzeit",
         "End date": "Enddatum",
         "End time": "Endzeit",
-        "All day": "Den ganzen Tag",
-        "Completed": "Vollendet",
+        "All day": "Ganztägig",
+        "Completed": "Abgeschlossen",
         "Created by": "Erstellt von",
-        "Meeting minutes (link)": "Besprechungsminuten (Link)",
+        "Meeting minutes (link)": "Besprechungsprotokoll (Link)",
         "Location": "Standort",
         "Online meeting link": "Link zum Online-Meeting",
         "Description": "Beschreibung",
         "Recurrence": "Wiederholung",
         "Long meeting minutes (link to external document)": "Ausführliches Besprechungsprotokoll (Link zu einem externen Dokument)",
         "Short meeting minutes": "Kurzprotokoll",
-        "Owner": "Inhaber"
+        "Owner": "Eigentümer"
     },
     "Models\\Lead": {
-        "Lead Identifier": "Lead -Kennung",
+        "Lead Identifier": "Lead-Kennung",
         "Title": "Titel",
         "Customer": "Kunde",
         "Contact": "Kontakt",
         "Price": "Preis",
         "Currency": "Währung",
-        "Score": "Punktzahl",
-        "Expected close date": "Erwartete Schließungsdatum",
+        "Score": "Score",
+        "Expected close date": "Erwartetes Abschlussdatum",
         "Created": "Erstellt",
         "Status": "Status",
-        "Reason for Lost": "Grund für verlorene",
+        "Reason for Lost": "Verlustgrund",
         "Notes": "Notizen",
         "Source channel": "Quellkanal",
         "Archived": "Archiviert",
-        "Add lead": "Blei hinzufügen",
+        "Add lead": "Lead hinzufügen",
         "Owner": "Eigentümer",
-        "Add Lead": "Blei hinzufügen",
+        "Add Lead": "Lead hinzufügen",
         "Manager": "Manager",
-        "Identifier": "Identifikator",
+        "Identifier": "Kennung",
         "Specific subject (if any)": "Betreff (falls vorhanden)",
         "Campaign": "Kampagne",
         "Email": "E-Mail",
         "Phone number": "Telefonnummer",
         "Level": "Stufe",
         "Team": "Team",
-        "Workflow": "Arbeitsablauf",
-        "Workflow step": "Workflowschritt",
+        "Workflow": "Workflow",
+        "Workflow step": "Workflow-Schritt",
         "Closed": "Geschlossen",
-        "Tags": "Schlagwörter",
+        "Tags": "Tags",
         "Open \/ Closed": "Offen / Geschlossen",
         "Open": "Offen",
         "All": "Alle",
@@ -103,51 +103,51 @@
         "Next activity": "Nächste Aktivität"
     },
     "Models\\LostReason": {
-        "Lost Reason": "Verlorener Vernunft"
+        "Lost Reason": "Verlustgrund"
     },
     "Models\\LeadHistory": {
-        "Change Date": "Datum ändern",
-        "Lead": "Führen",
+        "Change Date": "Änderungsdatum",
+        "Lead": "Lead",
         "Description": "Beschreibung",
         "Date": "Datum"
     },
     "Models\\LeadTag": {
-        "Lead": "Führen",
-        "Tag": "Etikett"
+        "Lead": "Lead",
+        "Tag": "Tag"
     },
     "Models\\LeadProduct": {
-        "Lead": "Führen",
+        "Lead": "Lead",
         "Product": "Produkt",
         "Unit Price": "Stückpreis",
         "Amount": "Menge",
-        "Vat": "Mehrwertsteuer",
+        "Vat": "MwSt.",
         "Discount": "Rabatt",
         "Sum": "Summe"
     },
     "Models\\LeadDocument": {
-        "Lead": "Führen",
-        "Document": "Dokumentieren"
+        "Lead": "Lead",
+        "Document": "Dokument"
     },
     "Models\\Tag": {
         "Name": "Name",
         "Color": "Farbe"
     },
     "Components\\FormLead": {
-        "Show leads": "Show -Leads",
+        "Show leads": "Leads anzeigen",
         "Type recent activity here": "Geben Sie hier die aktuelle Aktivität ein",
-        "Shift+Enter = Schedule": "Shift+ENTER = Zeitplan",
+        "Shift+Enter = Schedule": "Shift+Enter = Aktivität planen",
         "Most recent activities": "Letzte Aktivitäten",
-        "Enter = Log completed activity": "Geben Sie = log abgeschlossene Aktivität ein",
-        "Lead": "Führen",
+        "Enter = Log completed activity": "Enter = Abgeschlossene Aktivität erfassen",
+        "Lead": "Lead",
         "Not completed yet": "Noch nicht fertig",
-        "Go to deal": "Gehen Sie zu Deal",
+        "Go to deal": "Zum Deal wechseln",
         "Calendar": "Kalender",
-        "Documents": "Unterlagen",
-        "History": "Geschichte",
+        "Documents": "Dokumente",
+        "History": "Verlauf",
         "Local documents": "Lokale Dokumente"
     },
     "Controllers\\Leads": {
-        "Leads": "Interessenten"
+        "Leads": "Leads"
     },
     "Controllers\\Boards\\LeadWarnings": {
         "Pending leads without future plan": "Ausstehende Leads ohne weitere Planung",
@@ -159,15 +159,15 @@
         "Color": "Farbe"
     },
     "Models\\LeadCampaign": {
-        "Lead": "Interessent",
+        "Lead": "Lead",
         "Campaign": "Kampagne"
     },
     "Models\\LeadTask": {
-        "Lead": "Interessent",
+        "Lead": "Lead",
         "Task": "Aufgabe"
     },
     "Calendar": {
-        "Leads": "Interessenten",
+        "Leads": "Leads",
         "Add new activity linked to lead": "Neue Aktivität für einen Lead hinzufügen"
     }
 }

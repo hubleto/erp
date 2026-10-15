@@ -25,8 +25,7 @@
   </div>
 {% endmacro %}
 
-{% set logoUrl = config.logoUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto.png" %}
-{% set secondLogoUrl = config.secondLogoUrl %}
+{% set logoUrl = config.logoUrl ?? (hubleto.env().assetsUrl ~ "/images/logo-hubleto.png") %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +39,7 @@
   <meta name='og:image' content='{{ hubleto.env().assetsUrl }}/images/logo-hubleto.png'>
   <meta name='og:title' content='Hubleto | Business Application Hub'>
   <link rel='shortcut icon' href='{{ logoUrl }}'>
-  <title>{{ config.appTitle ?? user.DEFAULT_COMPANY.name ~ " | Hubleto | Business Application Hub" }}</title>
+  <title>{{ user.DEFAULT_COMPANY.name }} | {{ config.appTitle ?? "Hubleto | Business Application Hub" }}</title>
 
   <script>
     window.ConfigEnv = {
@@ -75,7 +74,7 @@
   <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/custom-apps.js'></script>
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/fontawesome-6.6.css">
-  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/themes/{{ viewParams.currentTheme }}.css">
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsThemesUrl }}/{{ viewParams.uiTheme }}.css">
 
   {% if user.DEFAULT_COMPANY.brand_color_primary != '' %}
     <style>
@@ -112,7 +111,6 @@
           <a class="flex" href="{{ config.projectUrl }}/" class="w-8 h-8">
             <img id="logo" src="{{ logoUrl }}" class="h-8 m-auto">
           </a>
-          {% if secondLogoUrl %} <img src="{{ secondLogoUrl }}" class="h-8 m-auto"> {% endif %}
           <button onclick="toggleSidebar()" class="block sm:hidden md:ml-4 md:border md:border-primary/20 text-primary py-1.5 px-2 md:rounded">
             <span class="icon"><i id="menuButton" class="fas fa-chevron-down"></i></span>
           </button>

@@ -26,10 +26,14 @@ $config['assetsUrl'] = '{{ assetsUrl }}';
 if (is_dir(__DIR__ . '/assets/compiled')) $config['assetsCompiledUrl'] = '{{ projectUrl }}/assets/compiled';
 else $config['assetsCompiledUrl'] = '{{ assetsUrl }}/compiled';
 
+if (is_dir(__DIR__ . '/assets/css/themes')) $config['assetsThemesUrl'] = '{{ projectUrl }}/assets/css/themes';
+else $config['assetsThemesUrl'] = '{{ assetsUrl }}/css/themes';
+
 // sanitize dirs and urls based on used release
 $config['releaseFolder'] = str_replace('__RELEASE__', $config['release'], $config['releaseFolder']);
 $config['assetsUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsUrl']);
 $config['assetsCompiledUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsCompiledUrl']);
+$config['assetsThemesUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsThemesUrl']);
 
 // db
 $config['db_host'] = '{{ dbHost }}';

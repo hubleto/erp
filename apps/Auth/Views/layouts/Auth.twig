@@ -1,5 +1,4 @@
-{% set logoUrl = config.logoUrl ?? hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png" %}
-{% set secondLogoUrl = config.secondLogoUrl %}
+{% set logoUrl = config.logoUrl ?? (hubleto.env().assetsUrl ~ "/images/logo-hubleto-text-horizontal.png") %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,25 +16,21 @@
 
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/fontawesome-6.6.css">
-  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/font-gabarito.css">
+  <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsThemesUrl }}/{{ viewParams.uiTheme }}.css">
 </head>
 
 <body>
-
   <div class="sign-in-screen">
     {% block languages %}
       <div class="languages">
-        <a href="?set-language=en" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/en.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=de" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/de.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=sk" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/sk.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=cs" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/cs.jpg" style="max-height:1em;max-width:1em;" /></span></a>
-        <a href="?set-language=ro" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/ro.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        {% for lg in config.availableLanguages %}
+          <a href="?set-language={{ lg }}" class="btn btn-white"><span class="icon"><img src="{{ hubleto.env().assetsUrl }}/images/flags/{{ lg }}.jpg" style="max-height:1em;max-width:1em;" /></span></a>
+        {% endfor %}
       </div>
     {% endblock %}
     <div class="inner">
       <div class="logo flex gap-2" style="max-height:4em;margin-bottom:1em; width: auto;">
         <img src="{{ logoUrl }}" class="w-full h-full" />
-        {% if secondLogoUrl %} <img src="{{ secondLogoUrl }}"  class="w-full h-full"> {% endif %}
       </div>
       <div class="form">
         <form class="content min-w-min" id="login_form" action="" method="POST">

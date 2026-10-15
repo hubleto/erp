@@ -55,6 +55,8 @@ class SignIn extends \Hubleto\Framework\Controllers\SignIn
       'login' => $this->router()->urlParamAsString('user'),
     ];
 
+    $this->viewParams['uiTheme'] = $this->config()->getAsString('uiTheme', 'default');
+
     $this->setView('@Hubleto:App:Community:Auth/SignIn.twig');
   }
 

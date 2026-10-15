@@ -101,7 +101,7 @@ class Controller extends \Hubleto\Framework\Controller
 
     parent::prepareView();
 
-    $this->viewParams['currentTheme'] = $this->config()->getAsString('uiTheme', 'default');
+    $this->viewParams['uiTheme'] = $this->config()->getAsString('uiTheme', 'default');
 
     if (isset($this->hubletoApp)) {
       $this->viewParams['app'] = $this->hubletoApp;

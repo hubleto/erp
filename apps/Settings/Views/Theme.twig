@@ -2,7 +2,7 @@
 
 <div class="list">
   {% for theme in viewParams.themes %}
-    <a href="?set={{ theme }}" class="btn btn-list-item {{ theme == viewParams.currentTheme ? "btn-primary" : "btn-transparent" }}">
+    <a href="?set={{ theme }}" class="btn btn-list-item {{ theme == viewParams.uiTheme ? "btn-primary" : "btn-transparent" }}">
       <span class="text">{{ theme }}</span>
     </a>
   {% endfor %}

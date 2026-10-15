@@ -473,7 +473,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan("  -> Creating folders and files.\n");
     $installer->createFoldersAndFiles();
 
-    $this->terminal()->cyan("  -> Creating database (including drop if exists).\n");
+    $this->terminal()->cyan("  -> Creating database (including `drop if exists`).\n");
     $installer->createDatabase();
 
     if ($smtpHost != '') {

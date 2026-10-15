@@ -22,7 +22,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     $data = $this->model->record->loadTableData(
       $cfg['fulltextSearch'] ?? '',
       $cfg['columnSearch'] ?? [],
-      $cfg['orderBy'] ?? [],
+      is_string($cfg['orderBy']) ? [$cfg['orderBy']] : ($cfg['orderBy'] ?? []),
       99999999, // itemsPerPage
       0, // page
       '', // dataView

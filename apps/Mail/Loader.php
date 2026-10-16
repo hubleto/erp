@@ -20,6 +20,8 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
+      '/^mail\/?$/' => Controllers\Home::class,
+
       '/^mail\/(?<idAccount>\d+)\/(?<idMailbox>\d+)?\/?$/' => Controllers\Mails::class,
       '/^mail\/(?<idAccount>\d+)\/(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Mails::class,
 

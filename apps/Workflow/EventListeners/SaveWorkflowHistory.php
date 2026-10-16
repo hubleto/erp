@@ -23,8 +23,8 @@ class SaveWorkflowHistory extends \Hubleto\Framework\EventListener implements \H
 
       if (
         !$lastState
-        || $lastState->id_workflow != $savedRecord['id_workflow']
-        || $lastState->id_workflow_step != $savedRecord['id_workflow_step']
+        || $lastState->id_workflow != ($savedRecord['id_workflow'] ?? 0)
+        || $lastState->id_workflow_step != ($savedRecord['id_workflow_step'] ?? 0)
       ) {
         $mWorkflowHistory->record->recordCreate([
           'model' => get_class($model),

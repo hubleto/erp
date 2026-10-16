@@ -20,8 +20,8 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
-      '/^mail\/?(?<idAccount>\d+)?\/?(?<idMailbox>\d+)?\/?$/' => Controllers\Mails::class,
-      '/^mail\/?(?<idAccount>\d+)?\/?(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Mails::class,
+      '/^mail\/(?<idAccount>\d+)\/(?<idMailbox>\d+)?\/?$/' => Controllers\Mails::class,
+      '/^mail\/(?<idAccount>\d+)\/(?<idMailbox>\d+)\/?(?<recordId>\d+)?\/?$/' => Controllers\Mails::class,
 
       '/^mail\/accounts\/?(?<idAccount>\d+)?\/?$/' => Controllers\Accounts::class,
       '/^mail\/accounts\/add\/?$/' => ['controller' => Controllers\Accounts::class, 'vars' => ['recordId' => -1]],
@@ -113,7 +113,7 @@ class Loader extends \Hubleto\Erp\App
         foreach ($account->MAILBOXES as $mailbox) {
           $unreadEmailsCount = $mMail->record
             ->where('id_account', $account['id'])
-            ->where('id_mailbox', $mailbox['id'])
+            ->where('id_mailbox', $mailbox->id)
             ->whereNull('datetime_read')
             ->count()
           ;
@@ -124,7 +124,7 @@ class Loader extends \Hubleto\Erp\App
                 btn btn-small btn-list-item
                 ' . ($mailbox->id == $activeIdMailbox ? "btn-primary" : "btn-transparent") . '
               "
-              href="' . $this->env()->projectUrl . '/mail/' . $mailbox->id . '"
+              href="' . $this->env()->projectUrl . '/mail/' . $account['id'] . '/' . $mailbox->id . '"
             >
               <span class="text">' . $mailbox->name . '</span>
               ' . ($unreadEmailsCount > 0 ? '

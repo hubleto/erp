@@ -48,19 +48,17 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
     }
 
     if ($dryRun) {
-      $this->terminal()->yellow("\nThis is dry run. I will not install any migration.\n");
+      $this->terminal()->yellow("This is dry run. I will not install any migration.\n\n");
     }
 
     try {
       $this->db()->startTransaction();
 
       for ($round = 1; $round <= 2; $round++) {
-        if (!$dryRun) {
-          if ($round == 1) {
-            $this->terminal()->yellow("Installing tables...\n");
-          } else {
-            $this->terminal()->yellow("Installing foreign keys...\n");
-          }
+        if ($round == 1) {
+          $this->terminal()->yellow("Migrating tables...\n");
+        } else {
+          $this->terminal()->yellow("Migrating foreign keys...\n");
         }
 
         foreach ($appQueue as $app) {
@@ -100,7 +98,6 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
               }
   
               if ($dryRun) {
-                $this->terminal()->yellow("This is only a dry-run. Skipping.\n");
               } else {
 
                 try {

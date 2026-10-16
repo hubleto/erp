@@ -34,23 +34,27 @@ set foreign_key_checks = 1;");
 
   public function upgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `cashdesk_cash_registers`
-          ADD CONSTRAINT `fk_15d70fdba9b4541acc9c83956b4284cc`
-          FOREIGN KEY (`id_company`)
-          REFERENCES `companies` (`id`)
-          ON DELETE RESTRICT
-          ON UPDATE RESTRICT; ALTER TABLE `cashdesk_cash_registers`
-          ADD CONSTRAINT `fk_b9bd33d303c13720c9544481eeb789ec`
-          FOREIGN KEY (`id_shop`)
-          REFERENCES `shops` (`id`)
-          ON DELETE RESTRICT
-          ON UPDATE RESTRICT;");
+    $this->db->execute("
+      ALTER TABLE `cashdesk_cash_registers`
+      ADD CONSTRAINT `fk_15d70fdba9b4541acc9c83956b4284cc`
+      FOREIGN KEY (`id_company`)
+      REFERENCES `companies` (`id`)
+      ON DELETE RESTRICT
+      ON UPDATE RESTRICT;
+      ALTER TABLE `cashdesk_cash_registers`
+      ADD CONSTRAINT `fk_b9bd33d303c13720c9544481eeb789ec`
+      FOREIGN KEY (`id_shop`)
+      REFERENCES `shops` (`id`)
+      ON DELETE RESTRICT
+      ON UPDATE RESTRICT;
+    ");
   }
 
   public function downgradeForeignKeys(): void
   {
-    $this->db->execute("ALTER TABLE `cashdesk_cash_registers`
-          DROP FOREIGN KEY `fk_15d70fdba9b4541acc9c83956b4284cc`; ALTER TABLE `cashdesk_cash_registers`
-          DROP FOREIGN KEY `fk_b9bd33d303c13720c9544481eeb789ec`;");
+    $this->db->execute("
+      ALTER TABLE `cashdesk_cash_registers` DROP FOREIGN KEY `fk_15d70fdba9b4541acc9c83956b4284cc`;
+      ALTER TABLE `cashdesk_cash_registers` DROP FOREIGN KEY `fk_b9bd33d303c13720c9544481eeb789ec`;
+    ");
   }
 }

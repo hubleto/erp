@@ -142,6 +142,10 @@ class PriceList extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'price-lists');
+
     return $description;
   }
 
@@ -205,10 +209,6 @@ class PriceList extends \Hubleto\Erp\Model
   public function onAfterCreate(array $savedRecord): array
   {
     $savedRecord = parent::onAfterCreate($savedRecord);
-
-    /** @var Workflow $mWorkflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'price-lists');
 
     if (empty($savedRecord['code'])) {
       $code = $this->config()->forApp(PriceListApp::class)->getAsString('numberingPattern', 'PL{YY}-{#}');

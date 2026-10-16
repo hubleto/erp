@@ -116,7 +116,10 @@ class Campaign extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
     $description->show(['copyButton']);
-    // $description->includeRelations = ['WORKFLOW', 'WORKFLOW_STEP'];
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'email_marketing_emails');
 
     return $description;
   }
@@ -141,24 +144,14 @@ class Campaign extends \Hubleto\Erp\Model
   }
 
   /**
-   * [Description for onAfterCreate]
+   * [Description for onAfterUpdate]
    *
+   * @param array $originalRecord
    * @param array $savedRecord
    * 
    * @return array
    * 
    */
-  public function onAfterCreate(array $savedRecord): array
-  {
-
-    /** @var Workflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'email_marketing_emails');
-    $this->record->recordUpdate($savedRecord);
-
-    return parent::onAfterCreate($savedRecord);
-  }
-
   public function onAfterUpdate(array $originalRecord, array $savedRecord): array
   {
     $savedRecord = parent::onAfterUpdate($originalRecord, $savedRecord);

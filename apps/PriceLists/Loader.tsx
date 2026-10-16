@@ -14,6 +14,7 @@ import PriceSimulator from "./Components/FC/PriceSimulator"
 import PriceMatrix from "./Components/FC/PriceMatrix"
 import EffectivePriceLists from "./Components/FC/EffectivePriceLists"
 import Translator from '@hubleto/react-ui/core/Translator';
+
 const T = new Translator('Hubleto/App/Community/PriceLists/Loader', 'manifest');
 
 /** Parent document models of the "Apply price list" button, by the form of the other app. */

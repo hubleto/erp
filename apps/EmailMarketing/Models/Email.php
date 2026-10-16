@@ -137,7 +137,10 @@ class Email extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
     $description->show(['copyButton']);
-    // $description->includeRelations = ['WORKFLOW', 'WORKFLOW_STEP'];
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'email_marketing_emails');
 
     return $description;
   }
@@ -169,9 +172,6 @@ class Email extends \Hubleto\Erp\Model
     $savedRecord['uid'] = \Hubleto\Framework\Helper::generateUuidV4();
     $savedRecord['datetime_created'] = date("Y-m-d H:i:s");
 
-    /** @var Workflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'email_marketing_emails');
     $this->record->recordUpdate($savedRecord);
 
     return parent::onAfterCreate($savedRecord);

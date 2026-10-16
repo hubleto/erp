@@ -37,17 +37,6 @@ class Review extends \Hubleto\Erp\Model
     ]);
   }
 
-  public function describeForm(): \Hubleto\Framework\Description\Form
-  {
-    $description = parent::describeForm();
-    $description->inputs['status']->setPredefinedValues([
-      $this->translate('Draft'),
-      $this->translate('Scheduled'),
-      $this->translate('Completed'),
-    ]);
-    return $description;
-  }
-
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
@@ -56,6 +45,29 @@ class Review extends \Hubleto\Erp\Model
     $description->addFilter('fReviewWorkflowStep', WorkflowModel::buildTableFilterForWorkflowSteps($this, $this->translate('Review step')));
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
+    return $description;
+  }
+
+  /**
+   * [Description for describeForm]
+   *
+   * @return \Hubleto\Framework\Description\Form
+   * 
+   */
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+
+    $description->inputs['status']->setPredefinedValues([
+      $this->translate('Draft'),
+      $this->translate('Scheduled'),
+      $this->translate('Completed'),
+    ]);
+
+    /** @var WorkflowModel */
+    $mWorkflow = $this->getModel(WorkflowModel::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'hr_performance');
+
     return $description;
   }
 
@@ -69,13 +81,4 @@ class Review extends \Hubleto\Erp\Model
     return 1;
   }
 
-  public function onAfterCreate(array $savedRecord): array
-  {
-    $savedRecord = parent::onAfterCreate($savedRecord);
-    /** @var WorkflowModel */
-    $mWorkflow = $this->getModel(WorkflowModel::class);
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'hr_performance');
-    $this->record->recordUpdate($savedRecord);
-    return $savedRecord;
-  }
 }

@@ -262,11 +262,14 @@ class Order extends \Hubleto\Erp\Model
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
+    $description = parent::describeForm();
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'orders');
 
     /** @var CurrencyService */
     $currencyService = $this->getService(CurrencyService::class);
-
-    $description = parent::describeForm();
     $description->defaultValues["id_currency"] = $currencyService->getDefaultCurrencyId();
 
     return $description;
@@ -356,11 +359,6 @@ class Order extends \Hubleto\Erp\Model
    */
   public function onAfterCreate(array $savedRecord): array
   {
-    /** @var Workflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'orders');
-    $this->record->recordUpdate($savedRecord);
 
     $savedRecord = parent::onAfterCreate($savedRecord);
 

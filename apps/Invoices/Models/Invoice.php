@@ -260,15 +260,17 @@ class Invoice extends \Hubleto\Erp\Model {
   {
     $description = parent::describeForm();
 
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'invoices');
+
     /** @var Profile */
     $mProfile = $this->getService(Profile::class);
-
     $defaultProfile = $mProfile->record->where('is_default', 1)->first();
 
-    $description->defaultValues = [
-      'id_profile' => $defaultProfile['id'],
-      'id_currency' => $defaultProfile['id_currency'],
-    ];
+    $description->defaultValues['id_profile'] = $defaultProfile['id'];
+    $description->defaultValues['id_currency'] = $defaultProfile['id_currency'];
 
     return $description;
   }
@@ -413,13 +415,7 @@ class Invoice extends \Hubleto\Erp\Model {
    */
   public function onAfterCreate(array $savedRecord): array
   {
-    /** @var Workflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'invoices');
-    $this->record->recordUpdate($savedRecord);
-
     $this->recalculateTotalsForInvoice((int) $savedRecord['id']);
-
     return parent::onAfterCreate($savedRecord);
   }
 

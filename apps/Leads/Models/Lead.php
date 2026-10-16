@@ -193,13 +193,12 @@ class Lead extends \Hubleto\Erp\Model
   {
     $description = parent::describeForm();
 
-    /** @var Setting */
-    $mSettings = $this->getModel(Setting::class);
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'leads');
 
     /** @var CurrencyService */
     $currencyService = $this->getService(CurrencyService::class);
-
-    $description = parent::describeForm();
     $description->defaultValues["id_currency"] = $currencyService->getDefaultCurrencyId();
 
     $description->ui['addButtonText'] = $this->translate('Add Lead');
@@ -380,10 +379,6 @@ class Lead extends \Hubleto\Erp\Model
     ]);
 
     $newLead = $savedRecord;
-
-    /** @var Workflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-    $newLead = $mWorkflow->applyDefaultWorkflow($newLead, 'leads');
 
     if (empty($newLead['identifier'])) {
       $newLead["identifier"] = $newLead["id"];

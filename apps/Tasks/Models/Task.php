@@ -181,6 +181,23 @@ class Task extends \Hubleto\Erp\Model
   }
 
   /**
+   * Describes the form of a record.
+   *
+   * @return \Hubleto\Framework\Description\Form
+   *
+   */
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'tasks');
+
+    return $description;
+  }
+
+  /**
    * [Description for onAfterCreate]
    *
    * @param array $savedRecord
@@ -190,10 +207,6 @@ class Task extends \Hubleto\Erp\Model
    */
   public function onAfterCreate(array $savedRecord): array
   {
-
-    /** @var Workflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'tasks');
 
     if (empty($savedRecord['identifier'])) {
       $savedRecord["identifier"] = $savedRecord["id"];

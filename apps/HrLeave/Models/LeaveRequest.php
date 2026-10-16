@@ -40,11 +40,6 @@ class LeaveRequest extends \Hubleto\Erp\Model
     ]);
   }
 
-  public function describeForm(): \Hubleto\Framework\Description\Form
-  {
-    return parent::describeForm();
-  }
-
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
@@ -53,6 +48,23 @@ class LeaveRequest extends \Hubleto\Erp\Model
     $description->addFilter('fLeaveWorkflowStep', WorkflowModel::buildTableFilterForWorkflowSteps($this, $this->translate('Approval step')));
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
+    return $description;
+  }
+
+  /**
+   * [Description for describeForm]
+   *
+   * @return \Hubleto\Framework\Description\Form
+   * 
+   */
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+
+    /** @var WorkflowModel */
+    $mWorkflow = $this->getModel(WorkflowModel::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'hr_leave');
+
     return $description;
   }
 
@@ -66,13 +78,4 @@ class LeaveRequest extends \Hubleto\Erp\Model
     return 1;
   }
 
-  public function onAfterCreate(array $savedRecord): array
-  {
-    $savedRecord = parent::onAfterCreate($savedRecord);
-    /** @var WorkflowModel */
-    $mWorkflow = $this->getModel(WorkflowModel::class);
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'hr_leave');
-    $this->record->recordUpdate($savedRecord);
-    return $savedRecord;
-  }
 }

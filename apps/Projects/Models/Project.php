@@ -125,6 +125,23 @@ class Project extends \Hubleto\Erp\Model
   }
 
   /**
+   * Describes the form of a record.
+   *
+   * @return \Hubleto\Framework\Description\Form
+   *
+   */
+  public function describeForm(): \Hubleto\Framework\Description\Form
+  {
+    $description = parent::describeForm();
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'projects');
+
+    return $description;
+  }
+
+  /**
    * [Description for getMaxReadLevelForLoadFormData]
    *
    * @return int
@@ -158,11 +175,6 @@ class Project extends \Hubleto\Erp\Model
    */
   public function onAfterCreate(array $savedRecord): array
   {
-
-    /** @var Workflow */
-    $mWorkflow = $this->getModel(Workflow::class);
-
-    $savedRecord = $mWorkflow->applyDefaultWorkflow($savedRecord, 'projects');
 
     if (empty($savedRecord['identifier'])) {
 

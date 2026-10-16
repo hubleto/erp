@@ -24,38 +24,54 @@
   </a>
 </div>
 <div class="flex-dyn p-2 m-auto w-1/2">
-  <div class="card">
-    <div class="card-header">{{ translate('Users and apps') }}</div>
-    <div class="card-body flex flex-col gap-2">
-      <a class="btn btn-square btn-primary-outline" href="settings/users">
+  <div class="card grow">
+    <div class="card-header">{{ translate('Users, apps and account') }}</div>
+    <div class="card-body gap-2">
+      <a class="btn btn-primary-outline w-full" href="settings/users">
         <span class="icon"><i class="fas fa-users"></i></span>
         <span class="text">{{ translate('Users') }}</span>
       </a>
-      <a class="btn btn-square btn-primary-outline" href="settings/apps">
+      <a class="btn btn-primary-outline w-full mt-2" href="settings/apps">
         <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
         <span class="text">{{ translate('Apps') }}</span>
       </a>
+      {% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Enterprise\\Cloud') %}
+        <a class="btn btn-primary-outline w-full mt-2" href="{{ config.projectUrl }}/cloud">
+          <span class="icon"><i class='fas fa-cloud'></i></span>
+          <span class="text">{{ translate('Account') }}</span>
+        </a>
+      {% endif %}
     </div>
   </div>
-  <div class="card">
+  <div class="card grow">
     <div class="card-header">{{ translate('Theme') }}</div>
-    <div class="card-body flex gap-2"><div class="list">
+    <div class="card-body flex-dyn gap-2">
       {% for theme in viewParams.themes %}
-        <a href="?setTheme={{ theme }}" class="btn btn-list-item {{ theme == viewParams.uiTheme ? "btn-primary" : "btn-transparent" }}">
+        <a href="?setTheme={{ theme }}" class="btn {{ theme == viewParams.uiTheme ? "btn-primary" : "btn-transparent" }}">
           <span class="text">{{ theme }}</span>
         </a>
       {% endfor %}
-    </div></div>
+    </div>
   </div>
+</div>
+
+<div class="flex-dyn p-2 m-auto w-1/2">
   <div class="card grow">
-    <div class="card-header">{{ translate('Locale') }}</div>
+    <div class="card-header">
+      {{ translate('Localization') }}
+    </div>
     <div class="card-body">
       <table class="table-default dense">
         <tbody>
           <tr>
-            <td>{{ translate('Default currency and timezone') }}</td>
+            <td>{{ translate('Default currency') }}</td>
             <td>
               <div class="badge badge-info">{{ hubleto.locale().getCurrencyIsoCode() }} [{{ hubleto.locale().getCurrencySymbol() }}]</div>
+            </td>
+          </tr>
+          <tr>
+            <td>{{ translate('Timezone') }}</td>
+            <td>
               <div class="badge badge-info">{{ hubleto.locale().getTimezone() }}</div>
             </td>
           </tr>
@@ -77,9 +93,14 @@
           </tr>
         </tbody>
       </table>
+      <a class="btn btn-transparent mt-2" href="settings/localization">
+        <span class="icon"><i class="fas fa-pencil"></i></span>
+        <span class="text">{{ translate("Change localization settings") }}</span>
+      </a>
     </div>
   </div>
 </div>
+
 
 <script>
   function searchSetting(q) {
@@ -98,16 +119,8 @@
   }
 </script>
 
-{% if hubleto.appManager().isAppInstalled('Hubleto\\App\\Enterprise\\Cloud') %}
-  <div class="flex-dyn p-2 m-auto w-1/2">
-    <a class="btn btn-primary-outline w-full p-2" href="{{ config.projectUrl }}/cloud">
-      <span class="icon"><i class='fas fa-cloud'></i></span>
-      <span class="text">{{ translate('Manage cloud account') }}</span>
-    </a>
-  </div>
-{% endif %}
 <div class="flex-dyn p-2 m-auto w-1/2">
-  <div class="card mt-2">
+  <div class="card">
     <div class="card-header">{{ translate('All settings') }}</div>
     <div class="card-body">
       <input

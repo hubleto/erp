@@ -83,6 +83,10 @@ class Desktop extends \Hubleto\Erp\Controller
       $this->viewParams['subscriptionPlan'] = '';
     }
 
+    $this->viewParams['hasEnterpriseAppsEnabled'] = $this->appManager()->hasEnterpriseAppsEnabled();
+    $this->viewParams['hasExternalAppsEnabled'] = $this->appManager()->hasExternalAppsEnabled();
+    $this->viewParams['hasCustomAppsEnabled'] = $this->appManager()->hasCustomAppsEnabled();
+
     $this->viewParams['sidebarBadgeNumbers'] = $sidebarService->getBadgeNumbers();
 
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');

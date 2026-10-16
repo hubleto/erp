@@ -70,9 +70,9 @@
   <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/react-ui.js'></script>
   <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/main.js'></script>
   <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/community-apps.js'></script>
-  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/enterprise-apps.js'></script>
-  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/external-apps.js'></script>
-  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/custom-apps.js'></script>
+  {% if viewParams.hasEnterpriseAppsEnabled %} <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/enterprise-apps.js'></script> {% endif %}
+  {% if viewParams.hasExternalAppsEnabled %} <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/external-apps.js'></script> {% endif %}
+  {% if viewParams.hasCustomAppsEnabled %} <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/custom-apps.js'></script> {% endif %}
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsThemesUrl }}/{{ viewParams.uiTheme }}.css">

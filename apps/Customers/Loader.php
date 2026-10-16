@@ -61,9 +61,9 @@ class Loader extends \Hubleto\Erp\App
       $mCrossCustomerTag->upgradeSchema();
       $mCustomerDocument->upgradeSchema();
 
-      $mCustomerTag->record->recordCreate([ 'name' => "VIP", 'color' => '#D33115' ]);
-      $mCustomerTag->record->recordCreate([ 'name' => "Partner", 'color' => '#4caf50' ]);
-      $mCustomerTag->record->recordCreate([ 'name' => "Public", 'color' => '#2196f3' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => $this->translate("VIP"), 'color' => '#D33115' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => $this->translate("Partner"), 'color' => '#4caf50' ]);
+      $mCustomerTag->record->recordCreate([ 'name' => $this->translate("Public"), 'color' => '#2196f3' ]);
     }
 
     if ($round == 2) {

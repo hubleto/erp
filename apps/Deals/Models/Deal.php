@@ -202,7 +202,7 @@ class Deal extends \Hubleto\Erp\Model
         ],
         'default' => 1,
       ],
-      'fDealWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, 'State'),
+      'fDealWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('State')),
       'fDealSourceChannel' => [ 'title' => $this->translate('Source channel'), 'type' => 'multipleSelectButtons', 'options' => array_map(fn($v) => $this->translate($v), self::ENUM_SOURCE_CHANNELS) ],
       'fDealOwnership' => [ 'title' => $this->translate('Ownership'), 'options' => [ 0 => $this->translate('All'), 1 => $this->translate('Owned by me'), 2 => $this->translate('Managed by me') ] ],
     ];
@@ -380,15 +380,16 @@ class Deal extends \Hubleto\Erp\Model
 
     $diff = $this->diffRecords($oldRecord, $record);
     $columns = $this->getColumns();
+    $noneLabel = $this->translate("None");
     foreach ($diff as $columnName => $values) {
-      $oldValue = $values[0] ?? "None";
-      $newValue = $values[1] ?? "None";
+      $oldValue = $values[0] ?? $noneLabel;
+      $newValue = $values[1] ?? $noneLabel;
 
       if ($columns[$columnName]->getType() == "lookup") {
         $lookupModel = $this->getModel($columns[$columnName]->getLookupModel());
         $lookupSqlValue = $lookupModel->getLookupSqlValue($lookupModel->table);
 
-        if ($oldValue != "None") {
+        if ($oldValue != $noneLabel) {
           $oldValue = $lookupModel->record
             ->selectRaw($lookupSqlValue)
             ->where("id", $values[0])
@@ -397,7 +398,7 @@ class Deal extends \Hubleto\Erp\Model
           $oldValue = reset($oldValue);
         }
 
-        if ($newValue != "None") {
+        if ($newValue != $noneLabel) {
           $newValue = $lookupModel->record
             ->selectRaw($lookupSqlValue)
             ->where("id", $values[1])
@@ -416,8 +417,8 @@ class Deal extends \Hubleto\Erp\Model
           $oldValue = $values[0] ? $this->translate("Yes") : $this->translate("No");
           $newValue = $values[1] ? $this->translate("Yes") : $this->translate("No");
         } elseif (!empty($columns[$columnName]->getEnumValues())) {
-          $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? "None";
-          $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? "None";
+          $oldValue = $columns[$columnName]->getEnumValues()[$oldValue] ?? $noneLabel;
+          $newValue = $columns[$columnName]->getEnumValues()[$newValue] ?? $noneLabel;
         }
 
         $mDealHistory->record->recordCreate([

@@ -16,7 +16,7 @@ class Chat extends \Hubleto\Erp\Controllers\ApiController
     $idParam = $request['id'] ?? null;
 
     if (empty($message)) {
-      throw new \Exception('Empty message.');
+      throw new \Exception($this->translate('Empty message.'));
     }
 
     $aiApp = $this->appManager()->getApp(\Hubleto\App\Community\AiAssistent\Loader::class);

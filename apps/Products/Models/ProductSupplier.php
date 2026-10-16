@@ -33,7 +33,7 @@ class ProductSupplier extends \Hubleto\Erp\Model
       'supplier_product_code' => new Text($this, $this->translate('Supplier product code'))->setDefaultVisible(),
       'purchase_price' => (new Decimal($this, $this->translate('Purchase price')))->setDefaultVisible(),
       'notes' => new Text($this, $this->translate('Internal notes'))->setDefaultVisible(),
-      'delivery_time' => new Integer($this, $this->translate('Delivery time'))->setUnit('days'),
+      'delivery_time' => new Integer($this, $this->translate('Delivery time'))->setUnit($this->translate('days')),
     ]);
   }
 

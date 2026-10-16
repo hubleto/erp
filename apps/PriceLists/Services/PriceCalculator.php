@@ -275,7 +275,7 @@ class PriceCalculator extends \Hubleto\Erp\Core implements PriceCalculatorInterf
   public function priceFromCostMargin(float $cost, float $marginPercent): float
   {
     if ($marginPercent >= 100) {
-      throw new \InvalidArgumentException('Margin must be lower than 100 %.');
+      throw new \InvalidArgumentException($this->translate('Margin must be lower than 100 %.'));
     }
     return $cost / (1 - $marginPercent / 100);
   }

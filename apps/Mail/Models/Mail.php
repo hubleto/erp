@@ -140,7 +140,7 @@ class Mail extends \Hubleto\Erp\Model
   public function validateBeforeSending(array $mail): void
   {
     if (!class_exists(PHPMailer::class)) {
-      throw new \Exception('PHPMailer is required to send emails. Run `composer require phpmailer/phpmailer` to install it.');
+      throw new \Exception($this->translate('PHPMailer is required to send emails. Run `composer require phpmailer/phpmailer` to install it.'));
     }
 
     if ((int) $mail['id'] <= 0) throw new \Exception($this->translate('Email ID is missing.'));

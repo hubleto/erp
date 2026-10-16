@@ -102,7 +102,7 @@ class Order extends \Hubleto\Erp\Model
         12 => $this->translate('Annually'),
         24 => $this->translate('Each 2 years'),
       ]),
-      'prepaid_working_hours' => (new Integer($this, $this->translate('Prepaid working hours')))->setUnit('hours'),
+      'prepaid_working_hours' => (new Integer($this, $this->translate('Prepaid working hours')))->setUnit($this->translate('hours')),
       'prepaid_working_hours_period' => (new Integer($this, $this->translate('Prepaid working hours - period')))->setEnumValues([
         0 => $this->translate('No working hours recurrence'),
         1 => $this->translate('Monthly'),
@@ -210,7 +210,7 @@ class Order extends \Hubleto\Erp\Model
       ],
       'default' => 1,
     ]);
-    $description->addFilter('fOrderWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, 'Stage'));
+    $description->addFilter('fOrderWorkflowStep', Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Stage')));
 
     $description->addFilter('fPurchaseSales', [
       'title' => $this->translate('Purchase / Sales'),

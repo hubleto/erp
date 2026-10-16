@@ -103,13 +103,13 @@ class Loader extends \Hubleto\Erp\App
         'class' => 'warning',
         'icon' => 'fas fa-shield',
         'content' => '
-          <b>You are using default password.</b><br/>
-          Change it to improve your security.
+          <b>' . $this->translate('You are using default password.') . '</b><br/>
+          ' . $this->translate('Change it to improve your security.') . '
         ',
         'button' => '
           <a class="btn btn-primary" href="settings/update-password">
             <span class="icon"><i class="fas fa-shield"></i></span>
-            <span class="text">Change your default password</span>
+            <span class="text">' . $this->translate('Change your default password') . '</span>
           </a>
         ',
       ];
@@ -118,13 +118,13 @@ class Loader extends \Hubleto\Erp\App
         'class' => 'warning',
         'icon' => 'fas fa-shield',
         'content' => '
-          <b>You did not change your password for more than ' . $passwordChangePeriodDays . ' days.</b><br/>
-          Change it to improve your security.
+          <b>' . $this->translate('You did not change your password for more than {{ days }} days.', ['days' => $passwordChangePeriodDays]) . '</b><br/>
+          ' . $this->translate('Change it to improve your security.') . '
         ',
         'button' => '
           <a class="btn btn-primary" href="settings/update-password">
             <span class="icon"><i class="fas fa-shield"></i></span>
-            <span class="text">Change your password</span>
+            <span class="text">' . $this->translate('Change your password') . '</span>
           </a>
         ',
       ];

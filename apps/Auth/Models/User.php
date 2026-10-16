@@ -106,7 +106,7 @@ class User extends UserModel implements UserModelInterface
       'login' => new Varchar($this, $this->translate('Login')),
       'password' => new Password($this, $this->translate('Password')),
       'is_active' => new Boolean($this, $this->translate('Active')),
-      'force_signout' => (new Boolean($this, 'Force signout'))->setHidden(),
+      'force_signout' => (new Boolean($this, $this->translate('Force signout')))->setHidden(),
       'last_login_time' => new DateTime($this, $this->translate('Time of last login')),
       'last_login_ip' => new Varchar($this, $this->translate('Last login IP')),
       'last_access_time' => new DateTime($this, $this->translate('Time of last access')),

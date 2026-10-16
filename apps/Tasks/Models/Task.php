@@ -99,7 +99,7 @@ class Task extends \Hubleto\Erp\Model
       ,
       'priority' => (new Integer($this, $this->translate('Priority'))),
       'hours_estimation' => (new Decimal($this, $this->translate('Estimated workhours')))->setDefaultVisible()->setUnit('h')->setDecimals(2),
-      'duration_days' => (new Integer($this, $this->translate('Estimated duration')))->setDefaultVisible()->setUnit('days'),
+      'duration_days' => (new Integer($this, $this->translate('Estimated duration')))->setDefaultVisible()->setUnit($this->translate('days')),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),
       'date_deadline' => (new Date($this, $this->translate('Deadline')))->setDefaultValue(date("Y-m-d")),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
@@ -111,7 +111,7 @@ class Task extends \Hubleto\Erp\Model
       'shared_folder' => (new Varchar($this, $this->translate('Shared folder (online document storage)')))->setReactComponent('InputHyperlink')->setCssClass('text-violet-800'),
       'notes' => (new Text($this, $this->translate('Notes'))),
       'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
-      'virt_worked_hours' => (new Virtual($this, $this->translate('Worked')))->setDefaultVisible()->setUnit("hours")->setSearchAlgorithm('number')
+      'virt_worked_hours' => (new Virtual($this, $this->translate('Worked')))->setDefaultVisible()->setUnit($this->translate("hours"))->setSearchAlgorithm('number')
         ->setProperty('sql', "select sum(ifnull(worked_hours, 0)) from worksheet_activities where id_task = tasks.id")
       ,
       'virt_related_to' => (new Virtual($this, $this->translate('Related to')))->setDefaultVisible()

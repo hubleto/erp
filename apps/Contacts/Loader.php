@@ -66,12 +66,12 @@ class Loader extends \Hubleto\Erp\App
       $mCategory->record->recordCreate([ 'name' => $this->translate('Home') ]);
       $mCategory->record->recordCreate([ 'name' => $this->translate('Other') ]);
 
-      $mTag->record->recordCreate([ 'name' => "IT manager", 'color' => '#D33115' ]);
-      $mTag->record->recordCreate([ 'name' => "CEO", 'color' => '#4caf50' ]);
-      $mTag->record->recordCreate([ 'name' => "Desicion Maker", 'color' => '#fcc203' ]);
-      $mTag->record->recordCreate([ 'name' => "Sales", 'color' => '#2196f3' ]);
-      $mTag->record->recordCreate([ 'name' => "Support", 'color' => '#03fc8c' ]);
-      $mTag->record->recordCreate([ 'name' => "Other", 'color' => '#b3b3b3' ]);
+      $mTag->record->recordCreate([ 'name' => $this->translate("IT manager"), 'color' => '#D33115' ]);
+      $mTag->record->recordCreate([ 'name' => $this->translate("CEO"), 'color' => '#4caf50' ]);
+      $mTag->record->recordCreate([ 'name' => $this->translate("Desicion Maker"), 'color' => '#fcc203' ]);
+      $mTag->record->recordCreate([ 'name' => $this->translate("Sales"), 'color' => '#2196f3' ]);
+      $mTag->record->recordCreate([ 'name' => $this->translate("Support"), 'color' => '#03fc8c' ]);
+      $mTag->record->recordCreate([ 'name' => $this->translate("Other"), 'color' => '#b3b3b3' ]);
     }
   }
 

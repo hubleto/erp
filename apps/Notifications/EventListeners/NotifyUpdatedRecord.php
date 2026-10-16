@@ -24,7 +24,7 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
     if (count($diff) > 0) {
 
       $body =
-        'User ' . $user['email'] . ' updated ' . $model->shortName . ":\n"
+        $this->translate('User {{ email }} updated {{ model }}:', ['email' => $user['email'], 'model' => $model->shortName]) . "\n"
         . json_encode($diff, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
       ;
 
@@ -35,7 +35,7 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
           $model->fullName,
           $recordId,
           $idOwner, // to
-          $model->shortName . ' updated', // subject
+          $this->translate('{{ model }} updated', ['model' => $model->shortName]), // subject
           $body,
           $this->env()->projectUrl . '/' . $model->getRecordDetailUrl($savedRecord) // url
         );
@@ -48,7 +48,7 @@ class NotifyUpdatedRecord extends \Hubleto\Framework\EventListener implements \H
           $model->fullName,
           $recordId,
           $idManager, // to
-          $model->shortName . ' updated', // subject
+          $this->translate('{{ model }} updated', ['model' => $model->shortName]), // subject
           $body,
           $this->env()->projectUrl . '/' . $model->getRecordDetailUrl($savedRecord) // url
         );

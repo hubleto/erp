@@ -39,7 +39,7 @@ class LeadValueByScore extends \Hubleto\Erp\Controller
     }
 
     foreach ($leads as $lead) {
-      $chartData['labels'][] = 'Score ' . $lead['score'];
+      $chartData['labels'][] = $this->translate('Score {{ score }}', ['score' => $lead['score']]);
       $chartData['values'][] = $lead['price'];
 
       if ($maxScore > 0) {

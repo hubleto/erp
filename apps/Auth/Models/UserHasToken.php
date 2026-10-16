@@ -17,8 +17,8 @@ class UserHasToken extends Model {
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'id_user' => new \Hubleto\Framework\Db\Column\Lookup($this, 'User', User::class),
-      'id_token' => new \Hubleto\Framework\Db\Column\Lookup($this, 'Token', Token::class),
+      'id_user' => new \Hubleto\Framework\Db\Column\Lookup($this, $this->translate('User'), User::class),
+      'id_token' => new \Hubleto\Framework\Db\Column\Lookup($this, $this->translate('Token'), Token::class),
     ]);
   }
 }

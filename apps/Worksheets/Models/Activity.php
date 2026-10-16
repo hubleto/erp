@@ -44,7 +44,7 @@ class Activity extends \Hubleto\Erp\Model
       'id_task' => (new Lookup($this, $this->translate('Task'), Task::class))->setDefaultVisible()->setRequired(),
       'id_type' => (new Lookup($this, $this->translate('Type'), ActivityType::class))->setDefaultVisible()->setRequired(),
       'date_worked' => (new Date($this, $this->translate('Day')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
-      'worked_hours' => (new Decimal($this, $this->translate('Worked hours')))->setDefaultVisible()->setDecimals(2)->setUnit('hours')->setStep(0.25),
+      'worked_hours' => (new Decimal($this, $this->translate('Worked hours')))->setDefaultVisible()->setDecimals(2)->setUnit($this->translate('hours'))->setStep(0.25),
       'description' => (new Text($this, $this->translate('Description')))->setDefaultVisible(),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_chargeable' => (new Boolean($this, $this->translate('Is chargeable')))->setDefaultValue(true),
@@ -108,7 +108,7 @@ class Activity extends \Hubleto\Erp\Model
 
       $description->addColumn(
         'total_worked_hours',
-        (new Decimal($this, $this->translate('Total worked hours')))->setUnit('hours')->setDecimals(2)->setCssClass('badge badge-warning')
+        (new Decimal($this, $this->translate('Total worked hours')))->setUnit($this->translate('hours'))->setDecimals(2)->setCssClass('badge badge-warning')
       );
       // $description->hideColumns(['worked_hours']);
 
@@ -176,7 +176,7 @@ class Activity extends \Hubleto\Erp\Model
     $userType = $this->authProvider()->getUserType();
 
     if ($userType != User::TYPE_ADMINISTRATOR && $days > $daysDiffMax) {
-      throw new RecordSaveException('You may not create or modify activity more than ' . $daysDiffMax . ' days after it has been performed.');
+      throw new RecordSaveException($this->translate('You may not create or modify activity more than {{ days }} days after it has been performed.', ['days' => $daysDiffMax]));
     }
   }
 

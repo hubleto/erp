@@ -214,7 +214,7 @@ class Loader extends \Hubleto\Erp\App
         "id" => $invoice['id'],
         "label" => $invoice['number'] . ' ' . $invoice['vs'],
         "url" => 'invoices/' . $invoice['id'],
-        "description" => Models\Invoice::TYPES[$invoice['type']],
+        "description" => $this->translate(Models\Invoice::TYPES[$invoice['type']]),
       ];
     }
 

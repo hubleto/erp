@@ -13,15 +13,15 @@ class PriceCalculatorConsumers extends \Hubleto\Framework\Extendible
   {
     return [
       \Hubleto\App\Community\Orders\Loader::class => [
-        'title' => 'Orders',
+        'title' => $this->translate('Orders'),
         'configPath' => 'apps/Hubleto\\App\\Community\\Orders/priceCalculatorService',
       ],
       \Hubleto\App\Community\Deals\Loader::class => [
-        'title' => 'Deals',
+        'title' => $this->translate('Deals'),
         'configPath' => 'apps/Hubleto\\App\\Community\\Deals/priceCalculatorService',
       ],
       \Hubleto\App\Community\Invoices\Loader::class => [
-        'title' => 'Invoices',
+        'title' => $this->translate('Invoices'),
         'configPath' => 'apps/Hubleto\\App\\Community\\Invoices/priceCalculatorService',
       ],
     ];

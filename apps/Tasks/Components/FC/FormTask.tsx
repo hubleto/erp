@@ -85,7 +85,7 @@ const TabDefault = (props: FormTaskProps) => {
             <Input field='duration_days' />
             <Input field='date_start' />
             <Input field='date_deadline' />
-            <Input field='is_chargeable' customInputProps={{yesText: 'Chargeable'}} />
+            <Input field='is_chargeable' customInputProps={{yesText: T.translate('Chargeable')}} />
           </div>
         </div>
       </div>
@@ -212,7 +212,7 @@ const TabDefault = (props: FormTaskProps) => {
 /** TabWorksheet */
 const TabWorksheet = (props: FormTaskProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create task first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create task first')}</div>;
   return <TableActivities
     uid={props.uid + "_table_activities"}
     tag="TaskActivities"

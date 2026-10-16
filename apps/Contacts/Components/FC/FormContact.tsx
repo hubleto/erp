@@ -49,9 +49,9 @@ const TabDefault = (props: FormContactProps) => {
     <div className='flex-dyn'>
       <div className="flex-1">
         <div className='flex gap-2'>
-          <Input field='is_primary' renderOnlyInputField customInputProps={{yesText: 'Primary'}} />
-          <Input field='is_for_invoicing' renderOnlyInputField customInputProps={{yesText: 'Send invoices'}} />
-          <Input field='is_valid' renderOnlyInputField customInputProps={{yesText: 'Valid'}} />
+          <Input field='is_primary' renderOnlyInputField customInputProps={{yesText: T.translate('Primary')}} />
+          <Input field='is_for_invoicing' renderOnlyInputField customInputProps={{yesText: T.translate('Send invoices')}} />
+          <Input field='is_valid' renderOnlyInputField customInputProps={{yesText: T.translate('Valid')}} />
         </div>
         <Input field='salutation' renderOnlyInputField />
         <Input field='title_before' renderOnlyInputField />
@@ -59,7 +59,7 @@ const TabDefault = (props: FormContactProps) => {
         {showMiddleNameInput ? <Input field='middle_name' />
         : <button className='btn btn-small btn-transparent'
           onClick={() => setShowMiddleNameInput(true)}
-        ><span className='text'>Add middle name</span></button>}
+        ><span className='text'>{T.translate('Add middle name')}</span></button>}
         <Input field='last_name' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
         <Input field='title_after' renderOnlyInputField />
       </div>

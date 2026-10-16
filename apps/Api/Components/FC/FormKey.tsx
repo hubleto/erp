@@ -20,7 +20,7 @@ const TabDefault = (props: FormKeyProps) => {
   return <>
     <Input field='key' />
     <Input field='valid_until' />
-    <Input field='is_enabled' customInputProps={{yesText: 'Enabled'}} />
+    <Input field='is_enabled' customInputProps={{yesText: T.translate('Enabled')}} />
     <Input field='notes' />
     <Input field='ip_address_blacklist' />
     <Input field='ip_address_whitelist' />

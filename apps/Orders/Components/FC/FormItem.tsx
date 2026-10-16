@@ -101,7 +101,7 @@ const FormItem = (props: FormItemProps) => {
     onBeforeCopyRecord={(form: FormMeta, record: FormRecord) => {
       return {
         ...record,
-        title: 'Copy of ' + (record.title ?? ''),
+        title: T.translate('Copy of') + ' ' + (record.title ?? ''),
         id_invoice_item: null,
         date_due: null,
         attachment_1: null,

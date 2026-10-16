@@ -118,7 +118,7 @@ const CalendarTab = (props: CalendarTabProps) => {
     {form.id > 0 ? <div className='flex-dyn'>
       <div className='flex-1 gap-2'>
         <div className='card'>
-          <div className='card-header'>Follow-ups</div>
+          <div className='card-header'>{T.translate('Follow-ups')}</div>
           <div className='card-body'>
             <button onClick={() => {scheduleActivity()}} className="btn btn-add-outline">
               <span className="icon"><i className="fas fa-clock"></i></span>
@@ -127,7 +127,7 @@ const CalendarTab = (props: CalendarTabProps) => {
           </div>
         </div>
         <div className='card'>
-          <div className='card-header'>What did you do?</div>
+          <div className='card-header'>{T.translate('What did you do?')}</div>
           <div className='card-body'>
             <div className="hubleto component input"><div className="input-element w-full gap-2">
               <input

@@ -32,8 +32,8 @@ const CustomerInfo = (props: any) => {
       {customer.street_line_1}, {customer.zip} {customer.city}<br/>
       {customer.region}<br/>
       <br/>
-      ID #: {customer.company_id ?? 'N/A'}<br/>
-      VAT: {customer.vat_id ?? 'N/A'}<br/>
+      {T.translate('ID')} #: {customer.company_id ?? T.translate('N/A')}<br/>
+      {T.translate('VAT')}: {customer.vat_id ?? T.translate('N/A')}<br/>
     </div>
   </div>
 }
@@ -46,8 +46,8 @@ const SupplierInfo = (props: any) => {
       {supplier.street_line_1}, {supplier.zip} {supplier.city}<br/>
       {supplier.region}<br/>
       <br/>
-      ID #: {supplier.company_id ?? 'N/A'}<br/>
-      VAT: {supplier.vat_id ?? 'N/A'}<br/>
+      {T.translate('ID')} #: {supplier.company_id ?? T.translate('N/A')}<br/>
+      {T.translate('VAT')}: {supplier.vat_id ?? T.translate('N/A')}<br/>
     </div>
   </div>
 }
@@ -63,8 +63,8 @@ const InvoicingProfileDetails = (props: any) => {
       {COMPANY?.street_1}, {COMPANY?.zip} {COMPANY?.city}<br/>
       {COMPANY?.country}<br/>
       <br/>
-      ID #: {COMPANY?.company_id ?? 'N/A'}<br/>
-      VAT: {COMPANY?.vat_id ?? 'N/A'}<br/>
+      {T.translate('ID')} #: {COMPANY?.company_id ?? T.translate('N/A')}<br/>
+      {T.translate('VAT')}: {COMPANY?.vat_id ?? T.translate('N/A')}<br/>
     </div>
   </div>
 }
@@ -143,7 +143,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                   }}
                 >
                   <span className='icon'><i className='fas fa-bolt'></i></span>
-                  <span className='text'>Generate invoice number</span>
+                  <span className='text'>{T.translate('Generate invoice number')}</span>
                 </button>
               </div> : null}
             </div>
@@ -177,19 +177,19 @@ const TabDefault = (props: FormInvoiceProps) => {
                     <thead>
                       <tr>
                         <th className='text-xs'>#</th>
-                        <th className='text-xs'>Item</th>
-                        <th className='text-xs'>Unit price [{currencySymbol}/unit]</th>
-                        <th className='text-xs'>Amount [units]</th>
-                        <th className='text-xs'>Discount [%]</th>
-                        <th className='text-xs'>VAT [%]</th>
-                        <th className='text-xs'>Excl. VAT [{currencySymbol}]</th>
-                        <th className='text-xs'>Incl. VAT [{currencySymbol}]</th>
+                        <th className='text-xs'>{T.translate('Item')}</th>
+                        <th className='text-xs'>{T.translate('Unit price')} [{currencySymbol}/{T.translate('unit')}]</th>
+                        <th className='text-xs'>{T.translate('Amount [units]')}</th>
+                        <th className='text-xs'>{T.translate('Discount [%]')}</th>
+                        <th className='text-xs'>{T.translate('VAT [%]')}</th>
+                        <th className='text-xs'>{T.translate('Excl. VAT')} [{currencySymbol}]</th>
+                        <th className='text-xs'>{T.translate('Incl. VAT')} [{currencySymbol}]</th>
                         <th className='text-xs'>...</th>
                       </tr>
                       <tr>
                         <th className='text-xs'>#</th>
-                        <th className='text-xs' colSpan={2}>Ordered in</th>
-                        <th className='text-xs' colSpan={6}>Attachments</th>
+                        <th className='text-xs' colSpan={2}>{T.translate('Ordered in')}</th>
+                        <th className='text-xs' colSpan={6}>{T.translate('Attachments')}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -653,7 +653,7 @@ const TabEmail = (props: FormInvoiceProps) => {
             </tr>
           </tbody></table>
           {!sendInvoicePreparedData.senderAccount ? 
-            <div className='alert alert-danger mt-2'>Sender account is not configured, cannot send email.</div>
+            <div className='alert alert-danger mt-2'>{T.translate('Sender account is not configured, cannot send email.')}</div>
           : <button className='btn btn-add-outline mt-2'
             onClick={() => {
               request.post(
@@ -724,9 +724,9 @@ const FormInvoice = (props: FormInvoiceProps) => {
         return <div>
           <h2>{title} {number}</h2>
           <small>
-            {number == '' ? <div className='badge badge-warning'>Draft</div> : null}
-            {dateSent ? <div className='badge badge-success'>Sent</div> : <div className='badge badge-error'>Not sent</div>}
-            {datePayment ? <div className='badge badge-success'>Paid</div> : <div className='badge badge-error'>Not paid</div>}
+            {number == '' ? <div className='badge badge-warning'>{T.translate('Draft')}</div> : null}
+            {dateSent ? <div className='badge badge-success'>{T.translate('Sent')}</div> : <div className='badge badge-error'>{T.translate('Not sent')}</div>}
+            {datePayment ? <div className='badge badge-success'>{T.translate('Paid')}</div> : <div className='badge badge-error'>{T.translate('Not paid')}</div>}
           </small>
         </div>;
       }

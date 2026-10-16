@@ -3,6 +3,7 @@ import FormCampaignSchedule from './FormCampaignSchedule';
 import Table from '@hubleto/react-ui/components/fc/Table';
 import { type TableMeta, type TableProps } from '@hubleto/react-ui/components/fc/TableInterfaces';
 import request from '@hubleto/react-ui/core/Request';
+import Translator from '@hubleto/react-ui/core/Translator';
 
 interface TableCampaignsSchedulesProps extends TableProps {
   idCampaign?: number,
@@ -10,6 +11,7 @@ interface TableCampaignsSchedulesProps extends TableProps {
 
 const componentName = 'TableCampaignsSchedules';
 const parentApp = 'Hubleto/App/Community/EmailMarketing';
+const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
   return <Table
@@ -46,7 +48,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
               onClick={() => table.openForm(record.id)}
             >
               <div className='icon text-center bg-primary/20 rounded-sm h-full'>
-                Day<br/>
+                {T.translate('Day')}<br/>
                 <b>{record.day}</b>
               </div>
               <div className={'text block ' + (record.EMAIL?.is_closed ? 'striped-45': '')}>
@@ -55,12 +57,12 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                     {record.EMAIL?.mail_subject ?? '-'}
                   </div>
                   <div className={'badge ' + (record.EMAIL?.SENDER_ACCOUNT?.name ? '' : 'badge-danger')}>
-                    {record.EMAIL?.SENDER_ACCOUNT?.name ?? <>No sender account</>}
+                    {record.EMAIL?.SENDER_ACCOUNT?.name ?? <>{T.translate('No sender account')}</>}
                   </div>
-                  {record.EMAIL?.is_approved ? <div className='badge badge-success'>Approved</div> : <div className='badge badge-danger'>Not approved</div>}
-                  <div className='badge badge-info'>{record.RECIPIENTS ? record.RECIPIENTS.length : 0} recipients</div>
-                  {record.EMAIL?.is_closed ? <div className='badge badge-danger'>Closed</div> : null}
-                </> : <div className='text-red-800'>No email selected</div>}
+                  {record.EMAIL?.is_approved ? <div className='badge badge-success'>{T.translate('Approved')}</div> : <div className='badge badge-danger'>{T.translate('Not approved')}</div>}
+                  <div className='badge badge-info'>{record.RECIPIENTS ? record.RECIPIENTS.length : 0} {T.translate('recipients')}</div>
+                  {record.EMAIL?.is_closed ? <div className='badge badge-danger'>{T.translate('Closed')}</div> : null}
+                </> : <div className='text-red-800'>{T.translate('No email selected')}</div>}
               </div>
             </button>
             <div className='m-2'>
@@ -79,7 +81,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                   }}
                 >
                   <span className='icon'><i className='fas fa-bolt'></i></span>
-                  <span className='text'>Launch</span>
+                  <span className='text'>{T.translate('Launch')}</span>
                 </button>
               : null}
             </div>

@@ -79,13 +79,13 @@ const TabDefault = (props: FormLeadProps) => {
         {nextActivityDate ?
           <div className='block alert alert-success'>
             <i className='fas fa-calendar mr-2'></i>
-            Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+            {T.translate('Next follow-up is planned for')} <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
             <br/>
             <i>{nextActivity.subject}</i>
           </div>
         : <div className='block alert alert-danger'>
             <i className='fas fa-calendar mr-2'></i>
-            No follow-up in your calendar.
+            {T.translate('No follow-up in your calendar.')}
           </div>
         }
       </> : null}
@@ -106,7 +106,7 @@ const TabDefault = (props: FormLeadProps) => {
 /** TabCalendar */
 const TabCalendar = (props: FormProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create lead first')}</div>;
   return <CalendarTab
     loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=leads&idLead=' + form.id}
     logActivityEndpoint={'leads/api/log-activity?idLead=' + form.id}
@@ -119,7 +119,7 @@ const TabCalendar = (props: FormProps) => {
 /** TabEmailClicks */
 const TabEmailClicks = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create lead first')}</div>;
   return <TableEmailClicks
     tag={"table_email_clicks"}
     parentForm={form}
@@ -131,12 +131,12 @@ const TabEmailClicks = (props: FormLeadProps) => {
 /** TabTasks */
 const TabTasks = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create lead first')}</div>;
   return <TableTasks
     tag={"table_lead_task"}
     parentForm={form}
     uid={props.uid + "_table_lead_task"}
-    junctionTitle='Lead'
+    junctionTitle={T.translate('Lead')}
     junctionModel='Hubleto/App/Community/Leads/Models/LeadTask'
     junctionSourceColumn='id_lead'
     junctionSourceRecordId={form.id}
@@ -147,7 +147,7 @@ const TabTasks = (props: FormLeadProps) => {
 /** TabHistory */
 const TabHistory = (props: FormLeadProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create lead first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create lead first')}</div>;
   return <Table
     parentForm={form}
     uid={props.uid + "_table_lead_history"}

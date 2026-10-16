@@ -35,7 +35,7 @@ const FormActivity = (props: FormActivityProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Activity'}
     urlSlug='worksheets'
-    title={{fields: ['worked_hours', <>hours, </>, 'description'], sub: T.translate('Activity')}}
+    title={{fields: ['worked_hours', <>{T.translate('hours')}, </>, 'description'], sub: T.translate('Activity')}}
     renderTopInputs={() => <div className='modal-top-inputs'>
       <Input field='is_approved' renderOnlyInputField />
       <Input field='is_chargeable' renderOnlyInputField></Input>

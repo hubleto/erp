@@ -101,7 +101,7 @@ const TabDefault = (props: FormProjectProps) => {
                 parentForm={form}
                 uid={props.uid + "_table_project_task"}
                 idProject={form.id}
-                junctionTitle='Project'
+                junctionTitle={T.translate('Project')}
                 junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
                 junctionSourceColumn='id_project'
                 junctionSourceRecordId={form.id}
@@ -186,7 +186,7 @@ const TabTasks = (props: FormProjectProps) => {
       parentForm={form}
       uid={props.uid + "_table_project_task"}
       idProject={form.id}
-      junctionTitle='Project'
+      junctionTitle={T.translate('Project')}
       junctionModel='Hubleto/App/Community/Projects/Models/ProjectTask'
       junctionSourceColumn='id_project'
       junctionSourceRecordId={form.id}

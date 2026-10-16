@@ -5,6 +5,10 @@ import TableMilestones from './Components/FC/TableMilestones'
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Translator from '@hubleto/react-ui/core/Translator';
+
+const T = new Translator('Hubleto/App/Community/Projects/Loader', 'manifest');
+
 class ProjectsApp extends App {
   init() {
     super.init();
@@ -17,7 +21,7 @@ class ProjectsApp extends App {
       'FormOrder',
       'projects',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Projects',
+        title: T.translate('Projects'),
         content: (form: FormMeta) => {
           return <TableProjects
             tag={"table_project_order"}
@@ -26,7 +30,7 @@ class ProjectsApp extends App {
             description={{ui: {showHeader:false}}}
             descriptionSource='both'
             uid={form.uid + "_table_project_order"}
-            junctionTitle='Order'
+            junctionTitle={T.translate('Order')}
             junctionModel='Hubleto/App/Community/Projects/Models/ProjectOrder'
             junctionSourceColumn='id_order'
             junctionSourceRecordId={form.id}
@@ -39,7 +43,7 @@ class ProjectsApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormOrder',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Create project',
+        title: T.translate('Create project'),
         icon: 'fas fa-diagram-project',
         onClick: (form: FormMeta) => {
           request.get(
@@ -58,7 +62,7 @@ class ProjectsApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Assign task to project',
+        title: T.translate('Assign task to project'),
         icon: 'fas fa-check-double',
         onClick: (form: FormMeta) => {
           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/tasks/add?idTask=' + form.id);
@@ -69,7 +73,7 @@ class ProjectsApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Assign task to milestone',
+        title: T.translate('Assign task to milestone'),
         icon: 'fas fa-check-double',
         onClick: (form: FormMeta) => {
           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/projects/tasks/milestones/add?idTask=' + form.id);

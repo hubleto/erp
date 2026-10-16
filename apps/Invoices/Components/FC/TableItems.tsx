@@ -32,7 +32,7 @@ const TableItems = (props: TableItemsProps) => {
               <>
                 <div className='font-bold'>{data.CUSTOMER?.name}</div>
                 <div className='font-bold'>{data.item}</div>
-                <div className='font-bold'>{data.unit_price} € x {data.amount} pcs</div>
+                <div className='font-bold'>{data.unit_price} € x {data.amount} {T.translate('pcs')}</div>
                 <div className='mt-4'>{T.translate('Create invoice from this item? Press OK to confirm.')}</div>
               </>,
               {

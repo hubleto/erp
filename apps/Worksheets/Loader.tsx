@@ -4,6 +4,9 @@ import TableActivities from './Components/FC/TableActivities';
 import TableActivityTypes from './Components/FC/TableActivityTypes';
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Translator from '@hubleto/react-ui/core/Translator';
+
+const T = new Translator('Hubleto/App/Community/Worksheets/Loader', 'manifest');
 
 class WorksheetsApp extends App {
   init() {
@@ -15,7 +18,7 @@ class WorksheetsApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormTask',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Add activity',
+        title: T.translate('Add activity'),
         icon: 'fas fa-user-clock',
         onClick: (form: FormMeta) => {
           globalThis.window.open(globalThis.hubleto.config.projectUrl + '/worksheets/add?idTask=' + form.id);

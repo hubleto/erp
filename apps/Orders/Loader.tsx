@@ -7,6 +7,9 @@ import TableQuotes from './Components/FC/TableQuotes';
 import OrderCalendarActivityForm from './Components/FC/OrderCalendarActivityForm';
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Translator from '@hubleto/react-ui/core/Translator';
+
+const T = new Translator('Hubleto/App/Community/Orders/Loader', 'manifest');
 
 class OrdersApp extends App {
   init() {
@@ -21,7 +24,7 @@ class OrdersApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormDeal',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Create order',
+        title: T.translate('Create order'),
         icon: 'fas fa-money-check-dollar',
         onClick: (form: FormMeta) => {
           request.get(

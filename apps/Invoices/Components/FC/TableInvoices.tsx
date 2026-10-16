@@ -48,7 +48,7 @@ const TableInvoices = (props: TableProps) => {
           let items = JSON.parse(data['virt_items']);
           return <div className='flex flex-col'>{items.map((item, index) => {
             return <div key={index} className='badge text-xs'>
-              {item.item}: {item.amount ?? 0} ks x {globalThis.hubleto.currencyFormat(item.unit_price)} €
+              {item.item}: {item.amount ?? 0} {T.translate('ks')} x {globalThis.hubleto.currencyFormat(item.unit_price)} €
             </div>
           })}</div>;
         } catch (ex) {

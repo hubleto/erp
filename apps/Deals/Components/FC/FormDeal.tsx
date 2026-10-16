@@ -113,18 +113,18 @@ const TabDefault = (props: FormDealProps) => {
       {nextActivityDate ?
         <div className='block alert alert-success'>
           <i className='fas fa-calendar mr-2'></i>
-          Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+          {T.translate('Next follow-up is planned for')} <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
           <br/>
           <i>{nextActivity.subject}</i>
         </div>
       : <div className='block alert alert-danger'>
           <i className='fas fa-calendar mr-2'></i>
-          No follow-up in your calendar.
+          {T.translate('No follow-up in your calendar.')}
         </div>
       }
     </> : null}
     <Input field='source_channel' customInputProps={{readonly: isClosed, uiStyle: 'buttons'}} />
-    <Input field='is_new_customer' customInputProps={{readonly: isClosed, yesText: 'New customer', onChange: (input: any, value: any) => {
+    <Input field='is_new_customer' customInputProps={{readonly: isClosed, yesText: T.translate('New customer'), onChange: (input: any, value: any) => {
       if (isNewCustomer) {
         form.changeRecord({
           is_new_customer: value,
@@ -232,7 +232,7 @@ const TabTasks = (props: FormDealProps) => {
     tag={"table_deal_task"}
     parentForm={form}
     uid={props.uid + "_table_deal_task"}
-    junctionTitle='Deal'
+    junctionTitle={T.translate('Deal')}
     junctionModel='Hubleto/App/Community/Deals/Models/DealTask'
     junctionSourceColumn='id_deal'
     junctionSourceRecordId={form.id}

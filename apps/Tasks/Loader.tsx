@@ -4,6 +4,9 @@ import TableTodos from './Components/FC/TableTodos'
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Translator from '@hubleto/react-ui/core/Translator';
+
+const T = new Translator('Hubleto/App/Enterprise/Tasks/Loader', 'manifest');
 
 class Tasks extends App {
   init() {
@@ -16,7 +19,7 @@ class Tasks extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormMail',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Create task',
+        title: T.translate('Create task'),
         icon: 'fas fas fa-list-check',
         onClick: (form: FormMeta) => {
           request.get(

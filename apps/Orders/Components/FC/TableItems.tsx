@@ -53,7 +53,7 @@ const TableItems = (props: TableItemsProps) => {
                 <>
                   <div>{data.ORDER?.identifier} ({data.ORDER?.title})</div>
                   <div className='font-bold'>{data.title}</div>
-                  <div className='font-bold'>{data.unit_price} € x {data.amount} pcs</div>
+                  <div className='font-bold'>{data.unit_price} € x {data.amount} {T.translate('pcs')}</div>
                   <div className='mt-4'>{T.translate('Is this item ready to be invoiced? Press OK to confirm.')}</div>
                 </>,
                 {

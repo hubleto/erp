@@ -5,6 +5,9 @@ import DealCalendarActivityForm from "./Components/FC/DealCalendarActivityForm"
 import request from "@hubleto/react-ui/core/Request";
 import FormCustomizer from '@hubleto/react-ui/core/FormCustomizer';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import Translator from '@hubleto/react-ui/core/Translator';
+
+const T = new Translator('Hubleto/App/Community/Deals/Loader', 'manifest');
 
 class DealsApp extends App {
   init() {
@@ -26,7 +29,7 @@ class DealsApp extends App {
           description={{ui: {showHeader:false}}}
           descriptionSource='both'
           uid={form.props.uid + "_table_lead_deal"}
-          junctionTitle='Deal'
+          junctionTitle={T.translate('Deal')}
           junctionModel='Hubleto/App/Community/Deals/Models/DealLead'
           junctionSourceColumn='id_lead'
           junctionSourceRecordId={form.state.record.id}
@@ -38,7 +41,7 @@ class DealsApp extends App {
     FormCustomizer.addFormHeaderExtraButton(
       'FormLead',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Create deal',
+        title: T.translate('Create deal'),
         icon: 'fas fa-diagram-project',
         onClick: (form: FormMeta) => {
           request.get(

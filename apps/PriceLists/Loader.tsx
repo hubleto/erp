@@ -13,6 +13,8 @@ import TablePriceListHasDocuments from "./Components/FC/TablePriceListHasDocumen
 import PriceSimulator from "./Components/FC/PriceSimulator"
 import PriceMatrix from "./Components/FC/PriceMatrix"
 import EffectivePriceLists from "./Components/FC/EffectivePriceLists"
+import Translator from '@hubleto/react-ui/core/Translator';
+const T = new Translator('Hubleto/App/Community/PriceLists/Loader', 'manifest');
 
 /** Parent document models of the "Apply price list" button, by the form of the other app. */
 const documentForms: { [formName: string]: string } = {
@@ -42,7 +44,7 @@ class PriceListApp extends App {
       'FormProduct',
       'price-lists',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Price lists',
+        title: T.translate('Price lists'),
         content: (form: FormMeta) => {
           return <TableItems
             tag={"table_price_list_item_product"}
@@ -59,7 +61,7 @@ class PriceListApp extends App {
       'FormCustomer',
       'price-lists',
       (form: FormMeta) => { return form.id <= 0 ? false : {
-        title: 'Price lists',
+        title: T.translate('Price lists'),
         content: (form: FormMeta) => {
           return <>
             <EffectivePriceLists idCustomer={form.id} />
@@ -85,7 +87,7 @@ class PriceListApp extends App {
         assignmentTab.formName,
         'price-lists',
         (form: FormMeta) => { return form.id <= 0 ? false : {
-          title: 'Price lists',
+          title: T.translate('Price lists'),
           content: (form: FormMeta) => {
             const idParams: any = {};
             idParams[assignmentTab.prop] = form.id;
@@ -106,7 +108,7 @@ class PriceListApp extends App {
         formName,
         'price-list-resolutions',
         (form: FormMeta) => { return form.id <= 0 ? false : {
-          title: 'Price list',
+          title: T.translate('Price list'),
           content: (form: FormMeta) => {
             return <TableResolutions
               tag={"table_price_list_resolution_" + formName}
@@ -122,7 +124,7 @@ class PriceListApp extends App {
       FormCustomizer.addFormHeaderExtraButton(
         formName,
         (form: FormMeta) => { return form.id <= 0 ? false : {
-          title: 'Apply price list',
+          title: T.translate('Apply price list'),
           icon: 'fas fa-tags',
           onClick: (form: FormMeta) => {
             request.get(

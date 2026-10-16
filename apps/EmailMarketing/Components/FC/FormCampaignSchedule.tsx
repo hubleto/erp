@@ -24,11 +24,11 @@ const TabDefault = (props: FormCampaignScheduleProps) => {
         <div><Input field='day' wrapperCssClass='flex gap-2' /></div>
         <div className='grow'><Input field='id_email' wrapperCssClass='flex gap-2' /></div>
       </div>
-      {EMAIL?.is_approved ? null : <div className='alert alert-danger'>Email is not approved yet.</div>}
+      {EMAIL?.is_approved ? null : <div className='alert alert-danger'>{T.translate('Email is not approved yet.')}</div>}
       <div>
         {EMAIL ? <div className='card'>
-          <div className='card-header'>From: {EMAIL.SENDER_ACCOUNT?.name}</div>
-          <div className='card-header'>Subject: {EMAIL.mail_subject}</div>
+          <div className='card-header'>{T.translate('From')}: {EMAIL.SENDER_ACCOUNT?.name}</div>
+          <div className='card-header'>{T.translate('Subject')}: {EMAIL.mail_subject}</div>
           <div className='card-body'>
             <iframe
               src="about:blank"
@@ -37,12 +37,12 @@ const TabDefault = (props: FormCampaignScheduleProps) => {
             />
           </div>
         </div>
-        : <div className='alert alert-warning'>Select email to be sent on <b>day {day}</b></div>}
+        : <div className='alert alert-warning'>{T.translate('Select email to be sent on')} <b>{T.translate('day')} {day}</b></div>}
       </div>
     </div>
     <div className='flex-1'>
       <div className='card'>
-        <div className='card-header'>Recipients</div>
+        <div className='card-header'>{T.translate('Recipients')}</div>
         <div className='card-body'>
           <TableCampaignsSchedulesRecipients
             tag='table_campaign_schedule_recipients'

@@ -30,7 +30,7 @@ const TabDefault = () => {
         <Input field='mail_body' />
       </div>
       <div className='flex-1'>
-        <Input field='is_approved' customInputProps={{yesText: 'Approved'}} />
+        <Input field='is_approved' customInputProps={{yesText: T.translate('Approved')}} />
         <Input field='target_audience' />
         <Input field='goal' />
         <Input field='notes' />
@@ -135,7 +135,7 @@ const TabRecipients = ({ formEmail }) => {
           <button
             className='btn btn-danger'
             onClick={() => {
-              if (confirm('Are you sure to delete all recipients in this email?')) {
+              if (confirm(T.translate('Are you sure to delete all recipients in this email?'))) {
                 request.post(
                   'email-marketing/api/remove-all-recipients',
                   {
@@ -202,7 +202,7 @@ const TabTest = ({ formEmail }) => {
             })
           }
           <div className='flex gap-1 mt-2'>
-            <b className='flex gap-1 items-center'>Recipients contacted in last <input
+            <b className='flex gap-1 items-center'>{T.translate('Recipients contacted in last')} <input
               type='number'
               className='w-12'
               value={recentlyContactedPeriod}
@@ -210,7 +210,7 @@ const TabTest = ({ formEmail }) => {
                 setRecentlyContactedPeriod(event.target.value);
                 updateEmailTestInfo();
               }}
-            ></input> months</b>
+            ></input> {T.translate('months')}</b>
             <button
               className='btn btn-delete-outline btn-small'
               onClick={() => {
@@ -228,7 +228,7 @@ const TabTest = ({ formEmail }) => {
               }}
             >
               <span className="icon">{deletingRecipients ? <Spinner size="xs" /> : <i className="fas fa-trash-can"></i>}</span>
-              <span className='text'>Remove all</span>
+              <span className='text'>{T.translate('Remove all')}</span>
             </button>
           </div>
           {deleteRecipientsResponse == 2 ?
@@ -242,7 +242,7 @@ const TabTest = ({ formEmail }) => {
             : <></>)
           }
           {Object.keys(emailTestInfo.recentlyContacted).length == 0
-            ? <div className='flex gap-1 items-center'>No recipients found.</div>
+            ? <div className='flex gap-1 items-center'>{T.translate('No recipients found.')}</div>
             : <table className='table-default dense'>
               <thead>
                 <tr>
@@ -532,7 +532,7 @@ const TabLaunch = () => {
                       {item.STATUS?.is_unsubscribed ? <div className='badge badge-danger'>{T.translate('Unsubscribed')}</div> : null}
                       {item.STATUS?.is_invalid ? <div className='badge badge-warning'>{T.translate('Invalid')}</div> : null}
                       {recentlyContacted ? <div className='badge'>
-                        Contacted {recentlyContacted.mailSent} in <i>{recentlyContacted.emailName}</i>
+                        {T.translate('Contacted')} {recentlyContacted.mailSent} {T.translate('in')} <i>{recentlyContacted.emailName}</i>
                       </div> : null}
                     </td>
                     <td>

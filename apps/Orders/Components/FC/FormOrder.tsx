@@ -57,7 +57,7 @@ const TabDefault = (props: FormOrderProps) => {
     <div className='flex-dyn'>
       <div className='grow'>
         <Input field={purchaseSales == 1 ? 'id_supplier' : 'id_customer'} />
-        <Input title={"Deal"}>
+        <Input title={T.translate('Deal')}>
           {selectParentDeal ? <LookupInput
             model='Hubleto/App/Community/Deals/Models/Deal'
             cssClass='font-bold'
@@ -111,13 +111,13 @@ const TabDefault = (props: FormOrderProps) => {
           {nextActivityDate ?
             <div className='block alert alert-success'>
               <i className='fas fa-calendar mr-2'></i>
-              Next follow-up is planned for <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
+              {T.translate('Next follow-up is planned for')} <b>{nextActivityDate.format('YYYY-MM-DD')}</b>.<br/>
               <br/>
               <i>{nextActivity.subject}</i>
             </div>
           : <div className='block alert alert-danger'>
               <i className='fas fa-calendar mr-2'></i>
-              No follow-up in your calendar.
+              {T.translate('No follow-up in your calendar.')}
             </div>
           }
         </> : null}
@@ -135,7 +135,7 @@ const TabDefault = (props: FormOrderProps) => {
 const TabItems = (props: FormOrderProps) => {
   const form = React.useContext(FormMetaContext);
 
-  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create order first')}</div>;
 
   return <div className='flex flex-col gap-2'>
     <div>
@@ -157,7 +157,7 @@ const TabItems = (props: FormOrderProps) => {
 /** TabCalendar */
 const TabCalendar = (props: FormProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create order first')}</div>;
   return <CalendarTab
     loadEventsEndpoint={'calendar/api/get-calendar-events?calendar=orders&idOrder=' + form.id}
     logActivityEndpoint={'orders/api/log-activity?idOrder=' + form.id}
@@ -175,7 +175,7 @@ const TabCalendar = (props: FormProps) => {
 /** TabQuotes */
 const TabQuotes = (props: FormOrderProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create order first')}</div>;
   return <TableQuotes
     tag={"table_order_quote"}
     parentForm={form}
@@ -190,7 +190,7 @@ const TabWorksheet = (props: FormOrderProps) => {
   const ITEMS = useRecordField('ITEMS');
   const refTableActivities = createRef();
 
-  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create order first')}</div>;
 
   let latestItemDue = moment('2000-01-01');
 
@@ -212,7 +212,7 @@ const TabWorksheet = (props: FormOrderProps) => {
       }}
     >
       <span className='icon'><i className='fas fa-calendar'></i></span>
-      <span className='text'>Show activities since the latest item due ({latestItemDue.format('YYYY-MM-DD')})</span>
+      <span className='text'>{T.translate('Show activities since the latest item due')} ({latestItemDue.format('YYYY-MM-DD')})</span>
     </button>
     <TableActivities
       ref={refTableActivities}
@@ -273,7 +273,7 @@ const TabStatistics = (props: FormOrderProps) => {
   const [salaries, setSalaries] = useState({});
   const [statistics, setStatistics] = useState({});
 
-  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create order first')}</div>;
 
   useEffect(() => {
     request.post(
@@ -289,7 +289,7 @@ const TabStatistics = (props: FormOrderProps) => {
     let totalChargeableHours = 0;
     let totalCostsByWorker = 0;
 
-    if (!statistics.projects || statistics.projects.length == 0) return <div className='alert alert-warning'>Order has not project assigned yet.</div>;
+    if (!statistics.projects || statistics.projects.length == 0) return <div className='alert alert-warning'>{T.translate('Order has not project assigned yet.')}</div>;
 
     return <div>{Object.keys(statistics.projects).map((idProject) => {
       const P = statistics.projects[idProject];
@@ -392,14 +392,14 @@ const TabStatistics = (props: FormOrderProps) => {
       </div>;
     })}</div>;
   } else {
-    return <Spinner>Loading statistics...</Spinner>;
+    return <Spinner>{T.translate('Loading statistics...')}</Spinner>;
   }
 }
 
 /** TabHistory */
 const TabHistory = (props: FormOrderProps) => {
   const form = React.useContext(FormMetaContext);
-  if (form.id <= 0) return <div className='alert alert-info'>Create order first</div>;
+  if (form.id <= 0) return <div className='alert alert-info'>{T.translate('Create order first')}</div>;
   return <Table
     parentForm={form}
     uid={props.uid + "_table_order_history"}

@@ -287,14 +287,14 @@ const FileBrowser = (props: FileBrowserProps) => {
               let newPath = path;
               newPath.push({
                 id_parent_folder: 1,
-                name:"Documents",
+                name:T.translate('Documents'),
                 uid: newFolderUid
               });
               changeFolder(newFolderUid, newPath);
             }}
           >
             <span className="icon"><i className="fas fa-folder"></i></span>
-            <div className="text line-clamp-2 w-full break-words">Documents</div>
+            <div className="text line-clamp-2 w-full break-words">{T.translate('Documents')}</div>
           </button>
         : <></>}
 

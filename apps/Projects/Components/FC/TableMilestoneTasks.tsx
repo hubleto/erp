@@ -10,6 +10,7 @@ interface TableMilestoneTasksProps extends TableProps {
 
 const componentName = 'TableMilestoneTasks'; // must be the same as the exported const
 const parentApp = 'Hubleto/App/Community/Projects';
+const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 const TableMilestoneTasks = (props: TableMilestoneTasksProps) => {
   return <Table
@@ -25,7 +26,7 @@ const TableMilestoneTasks = (props: TableMilestoneTasksProps) => {
         const TASK = data.TASK ?? {};
         return <>
           <div>{TASK.identifier} {TASK.title}</div>
-          {TASK.is_closed ? <div className="badge badge-danger">Closed</div> : null}
+          {TASK.is_closed ? <div className="badge badge-danger">{T.translate('Closed')}</div> : null}
         </>;
       } else {
         return table.renderDefaultCell(columnName, column, data, options);

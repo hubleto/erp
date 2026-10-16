@@ -39,7 +39,7 @@ const TabDefault = (props: FormDashboardProps) => {
             form.changeField(input, slugify(newValue));
           }
         }} />
-        <Input field='is_default' customInputProps={{yesText: 'Show on home screen'}} />
+        <Input field='is_default' customInputProps={{yesText: T.translate('Show on home screen')}} />
         <Input field='slug' />
       </div>
     </div>

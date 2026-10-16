@@ -101,7 +101,7 @@ const TabRecipients = (props: FormCampaignProps) => {
   const refEmails = useRef(null);
 
   return (form.id <= 0
-    ? <div className='alert alert-info'>Create campaign first</div>
+    ? <div className='alert alert-info'>{T.translate('Create campaign first')}</div>
     : <div className='flex gap-2'>
       <div className='flex-3'>
         <TableRecipients
@@ -155,7 +155,7 @@ const TabRecipients = (props: FormCampaignProps) => {
             <button
               className='btn btn-danger'
               onClick={() => {
-                if (confirm('Are you sure to delete all recipients in this email?')) {
+                if (confirm(T.translate('Are you sure to delete all recipients in this email?'))) {
                   request.post(
                     'email-marketing/api/remove-all-recipients',
                     { idCampaign: form.id },

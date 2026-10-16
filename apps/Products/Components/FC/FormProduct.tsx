@@ -22,7 +22,7 @@ const TabDefault = (props: FormProps) => {
         <div className='flex grow'><Barcode value={ean} height={30} /></div>
       </div>
       <Input field='name' customInputProps={{cssClass: 'text-2xl'}} />
-      <Input field='is_on_sale' customInputProps={{yesText: 'On sale'}} />
+      <Input field='is_on_sale' customInputProps={{yesText: T.translate('On sale')}} />
       <Input field='sales_price' />
       <Input field='id_group' />
       <Input field='id_category' />
@@ -30,9 +30,9 @@ const TabDefault = (props: FormProps) => {
       <Input field='margin' />
       <Input field='unit' />
       <Input field='description' />
-      <Input field='is_single_order_possible' customInputProps={{yesText: 'Single unit order possible'}} />
-      <Input field='show_price' customInputProps={{yesText: 'Show price to customer'}} />
-      <Input field='needs_reordering' customInputProps={{yesText: 'Needs reordering'}} />
+      <Input field='is_single_order_possible' customInputProps={{yesText: T.translate('Single unit order possible')}} />
+      <Input field='show_price' customInputProps={{yesText: T.translate('Show price to customer')}} />
+      <Input field='needs_reordering' customInputProps={{yesText: T.translate('Needs reordering')}} />
     </div>
     <div className=''>
       <Input field='type' />

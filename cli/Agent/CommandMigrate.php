@@ -54,12 +54,12 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
     try {
       $this->db()->startTransaction();
 
-      for ($round = 1; $round <= ($dryRun ? 1 : 2); $round++) {
+      for ($round = 1; $round <= 2; $round++) {
         if (!$dryRun) {
           if ($round == 1) {
-            $this->terminal()->yellow("\nInstalling tables...\n");
+            $this->terminal()->yellow("Installing tables...\n");
           } else {
-            $this->terminal()->yellow("\nInstalling foreign keys...\n");
+            $this->terminal()->yellow("Installing foreign keys...\n");
           }
         }
 
@@ -100,11 +100,17 @@ class CommandMigrate extends \Hubleto\Erp\Cli\Agent\Command
               }
   
               if ($dryRun) {
+                $this->terminal()->yellow("This is only a dry-run. Skipping.\n");
               } else {
-                if ($round == 1) {
-                  $mObj->upgradeSchema();
-                } else {
-                  $mObj->upgradeForeignKeys();
+
+                try {
+                  if ($round == 1) {
+                    $mObj->upgradeSchema();
+                  } else {
+                    $mObj->upgradeForeignKeys();
+                  }
+                } catch (\Throwable $e) {
+                  $this->terminal()->red("ERROR: {$e->getMessage()}\n");
                 }
               }
             }

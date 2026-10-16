@@ -53,7 +53,7 @@ class Loader extends \Hubleto\Erp\App
     $this->addSetting($this, ['title' => $this->translate('Users'), 'icon' => 'fas fa-user', 'url' => 'settings/users']);
     $this->addSetting($this, ['title' => $this->translate('Roles'), 'icon' => 'fas fa-user-group', 'url' => 'settings/user-roles']);
     $this->addSetting($this, ['title' => $this->translate('Your companies'), 'icon' => 'fas fa-id-card', 'url' => 'settings/companies']);
-    $this->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
+    // $this->addSetting($this, ['title' => $this->translate('General settings'), 'icon' => 'fas fa-cog', 'url' => 'settings/general']);
     $this->addSetting($this, ['title' => $this->translate('Permissions list'), 'icon' => 'fas fa-shield-halved', 'url' => 'settings/permissions']);
     $this->addSetting($this, ['title' => $this->translate('Role permissions'), 'icon' => 'fas fa-user-shield', 'url' => 'settings/role-permissions']);
     $this->addSetting($this, ['title' => $this->translate('Activity types'), 'icon' => 'fas fa-layer-group', 'url' => 'settings/activity-types']);
@@ -62,6 +62,33 @@ class Loader extends \Hubleto\Erp\App
     $this->addSetting($this, ['title' => $this->translate('Platform config'), 'icon' => 'fas fa-hammer', 'url' => 'settings/config']);
     $this->addSetting($this, ['title' => $this->translate('Sidebar'), 'icon' => 'fas fa-bars', 'url' => 'settings/sidebar']);
     $this->addSetting($this, ['title' => $this->translate('Teams'), 'icon' => 'fas fa-users', 'url' => 'settings/teams']);
+  }
+
+  /**
+   * [Description for renderSecondSidebar]
+   *
+   * @return string
+   *
+   */
+  public function renderSecondSidebar(): string
+  {
+    $hasCloudApp = $this->appManager()->isAppInstalled('Hubleto\\App\\Enterprise\\Cloud');
+
+    return '
+      ' . $this->secondSidebarTitle() . '
+      <div class="app-sidebar-buttons">
+        ' . $this->secondSidebarButton('settings/about-me', 'fas fa-circle-user', 'My profile') . '
+        ' . $this->secondSidebarButton('settings/update-password', 'fas fa-shield', 'Change password') . '
+        <br/>
+        ' . $this->secondSidebarButton('settings/users', 'fas fa-user', 'Users') . '
+        ' . $this->secondSidebarButton('settings/apps', 'fas fa-puzzle-piece', 'Apps') . '
+        ' . ($hasCloudApp ? $this->secondSidebarButton('cloud', 'fas fa-cloud', 'Account') : '') . '
+        ' . $this->secondSidebarButton('settings/localization', 'fas fa-earth-europe', 'Localization') . '
+        <br/>
+        ' . $this->secondSidebarButton('settings/teams', 'fas fa-users', 'Teams') . '
+        ' . $this->secondSidebarButton('settings/sidebar', 'fas fa-bars', 'Sidebar') . '
+      </div>
+    ';
   }
 
   public function installApp(int $round): void

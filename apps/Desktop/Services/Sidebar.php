@@ -79,6 +79,8 @@ class Sidebar extends Core
    */
   public function getBadgeNumbers(): array
   {
+    if ($this->authProvider()->getUserId() <= 0) return [];
+
     $sidebarBadgeNumbers = [];
 
     $sbnCache = $this->config()->getAsJson('cache/sidebarBadgeNumbers');

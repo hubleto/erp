@@ -17,7 +17,7 @@ class Sidebar extends Core
   public function invalidateCache(): void
   {
     // invalidate sidebarBadgeNumbers cache on every display of home screen
-    $this->config()->save('cache/sidebarBadgeNumbers', json_encode([
+    $this->config()->saveForUser('cache/sidebarBadgeNumbers', json_encode([
       'expiry' => 0,
       'data' => [],
     ]));

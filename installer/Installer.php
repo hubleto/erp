@@ -161,7 +161,7 @@ class Installer extends \Hubleto\Erp\Core
 
   public function installApps(int $round): void
   {
-    $this->terminal()->cyan("    -> Installing apps, round #{$round}. ");
+    $this->terminal()->cyan("    -> Round #{$round}. ");
 
     $ts1 = microtime(true);
 

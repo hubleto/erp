@@ -185,9 +185,9 @@ const PackagingLevels = () => {
       (data: any) => {
         const nameById: Record<string, string> = {};
         const tareById: Record<string, number> = {};
-        for (const id of Object.keys(data ?? {})) {
-          nameById[id] = data[id]?._LOOKUP ?? '';
-          tareById[id] = parseFloat(data[id]?.tare_weight);
+        for (const unit of data ?? []) {
+          nameById[unit.id] = unit._LOOKUP ?? '';
+          tareById[unit.id] = parseFloat(unit.tare_weight);
         }
         setUnitNameById(nameById);
         setUnitTareById(tareById);

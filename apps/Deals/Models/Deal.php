@@ -226,10 +226,14 @@ class Deal extends \Hubleto\Erp\Model
    */
   public function describeForm(): \Hubleto\Framework\Description\Form
   {
+    $description = parent::describeForm();
+
+    /** @var Workflow */
+    $mWorkflow = $this->getModel(Workflow::class);
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'deals');
+
     /** @var CurrencyService */
     $currencyService = $this->getService(CurrencyService::class);
-
-    $description = parent::describeForm();
     $description->defaultValues["id_currency"] = $currencyService->getDefaultCurrencyId();
 
     return $description;

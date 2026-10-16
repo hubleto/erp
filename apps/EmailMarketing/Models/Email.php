@@ -140,7 +140,7 @@ class Email extends \Hubleto\Erp\Model
 
     /** @var Workflow */
     $mWorkflow = $this->getModel(Workflow::class);
-    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'email_marketing_emails');
+    $description->defaultValues = $mWorkflow->applyDefaultWorkflow([], 'email-marketing');
 
     return $description;
   }

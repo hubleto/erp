@@ -28,7 +28,7 @@ class AppMenu extends \Hubleto\Framework\Extendible
       [
         'app' => $this->app,
         'url' => 'products/units',
-        'title' => $this->app->translate('Units'),
+        'title' => $this->app->translate('Packaging units'),
         'icon' => 'fas fa-ruler',
       ],
     ];

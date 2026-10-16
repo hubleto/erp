@@ -26,7 +26,7 @@ class Loader extends \Hubleto\Erp\App
     $appMenu->addItem($this, 'products', $this->translate('Products'), 'fas fa-cart-shopping');
     $appMenu->addItem($this, 'products/groups', $this->translate('Groups'), 'fas fa-burger');
     $appMenu->addItem($this, 'products/categories', $this->translate('Categories'), 'fas fa-tag');
-    $appMenu->addItem($this, 'products/units', $this->translate('Units'), 'fas fa-ruler');
+    $appMenu->addItem($this, 'products/units', $this->translate('Packaging units'), 'fas fa-ruler');
 
     $this->productTypes = $this->collectExtendibles('ProductTypes');
   }
@@ -206,10 +206,11 @@ class Loader extends \Hubleto\Erp\App
       [ 'id_category' => 730, 'name' => 'Wireless Charging Puck, Multi-Device Charging Stand' ],
     ];
 
+    // standard empty weights, so tare and container weights show from the start; 25 kg is a EUR pallet
     $units = [
-      [ 'name' => 'box' ],
-      [ 'name' => 'carton' ],
-      [ 'name' => 'pallet' ],
+      [ 'name' => 'box', 'tare_weight' => 0.3 ],
+      [ 'name' => 'carton', 'tare_weight' => 0.5 ],
+      [ 'name' => 'pallet', 'tare_weight' => 25 ],
     ];
 
     $mCategory = $this->getModel(Models\Category::class);

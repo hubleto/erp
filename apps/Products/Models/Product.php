@@ -10,6 +10,7 @@ use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\Text;
 use Hubleto\Framework\Db\Column\Varchar;
+use Hubleto\Framework\Exceptions\RecordSaveException;
 
 class Product extends \Hubleto\Erp\Model
 {
@@ -58,7 +59,7 @@ class Product extends \Hubleto\Erp\Model
     return self::BASE_MEASURE_SYMBOLS[$measure ?? self::BASE_MEASURE_COUNT] ?? 'pcs';
   }
 
-  protected function physicalFacts(?float $length, ?float $width, ?float $height, ?float $weight): array
+  protected function physicalFacts(?float $length, ?float $width, ?float $height, ?float $weight, ?float $netWeight = null): array
   {
     $volume = ($length > 0 && $width > 0 && $height > 0) ? $length * $width * $height : null;
     return array_filter([
@@ -66,7 +67,8 @@ class Product extends \Hubleto\Erp\Model
       $width > 0 ? $this->translate('width') . ' ' . $width . ' m' : null,
       $height > 0 ? $this->translate('height') . ' ' . $height . ' m' : null,
       $volume !== null ? $this->translate('volume') . ' ' . round($volume, 4) . ' m3' : null,
-      $weight > 0 ? $this->translate('weight') . ' ' . $weight . ' kg' : null,
+      $weight > 0 ? $this->translate('gross weight') . ' ' . $weight . ' kg' : null,
+      $netWeight > 0 ? $this->translate('net weight') . ' ' . $netWeight . ' kg' : null,
     ]);
   }
 
@@ -81,6 +83,32 @@ class Product extends \Hubleto\Erp\Model
     'CATEGORY' => [ self::HAS_ONE, Category::class, 'id', 'id_category'],
     'PACKAGING' => [ self::HAS_MANY, ProductPackaging::class, 'id_product', 'id'],
   ];
+
+  // Gross is the goods plus their sales packaging, so it cannot be the smaller of the two. The form
+  // shows the difference back as the packaging weight, but an import or the API reaches neither.
+  // Only guard the pair when both are filled in - either one alone is a legitimate half-entry.
+  public function validateWeights(array $record): void
+  {
+    $gross = (float) ($record['base_weight'] ?? 0);
+    $net = (float) ($record['base_net_weight'] ?? 0);
+    if ($gross > 0 && $net > 0 && $net > $gross) {
+      throw new RecordSaveException($this->translate('Net weight cannot be higher than gross weight.'));
+    }
+  }
+
+  public function onBeforeCreate(array $record): array
+  {
+    $record = parent::onBeforeCreate($record);
+    $this->validateWeights($record);
+    return $record;
+  }
+
+  public function onBeforeUpdate(array $record): array
+  {
+    $record = parent::onBeforeUpdate($record);
+    $this->validateWeights($record);
+    return $record;
+  }
 
   public function describeColumns(): array
   {
@@ -101,8 +129,8 @@ class Product extends \Hubleto\Erp\Model
     ;
 
     return array_merge(parent::describeColumns(), [
-      'ean' => (new Varchar($this, $this->translate('EAN')))->setRequired()->setDefaultVisible(),
-      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
+      'ean' => (new Varchar($this, $this->translate('EAN')))->setDefaultVisible(),
+      'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible()->setIcon(self::COLUMN_NAME_DEFAULT_ICON),
       'id_group' => (new Lookup($this, $this->translate('Group'), Group::class)),
       'id_category' => (new Lookup($this, $this->translate('Category'), Category::class)),
       'type' => (new Integer($this, $this->translate('Product Type')))->setEnumValues($typeEnumValues)->setHint($typeDescription)->setDefaultVisible(),
@@ -117,7 +145,11 @@ class Product extends \Hubleto\Erp\Model
       'notes' => new Text($this, $this->translate('Internal notes')),
       'sales_price' => (new Decimal($this, $this->translate('Sales price')))->setDefaultVisible()->setUnit($this->locale()->getCurrencySymbol()),
       'base_measure' => (new Integer($this, $this->translate('Base unit')))->setEnumValues(array_map(fn($v) => $this->translate($v), self::BASE_MEASURE_ENUM_VALUES))->setDefaultValue(self::BASE_MEASURE_COUNT)->setDefaultVisible(),
-      'base_weight' => (new Decimal($this, $this->translate('Base unit weight')))->setUnit('kg'),
+      // gross = goods + their own sales packaging; this is what ships and what loads a rack
+      'base_weight' => (new Decimal($this, $this->translate('Base unit gross weight')))->setUnit('kg')
+        ->setHint($this->translate('Weight of one base unit including its sales packaging. Used for shipping and warehouse load.')),
+      'base_net_weight' => (new Decimal($this, $this->translate('Base unit net weight')))->setUnit('kg')
+        ->setHint($this->translate('Weight of the goods alone, without any packaging. Used for labelling, recipes and customs.')),
       'base_length' => (new Decimal($this, $this->translate('Base unit length')))->setUnit('m'),
       'base_width' => (new Decimal($this, $this->translate('Base unit width')))->setUnit('m'),
       'base_height' => (new Decimal($this, $this->translate('Base unit height')))->setUnit('m'),
@@ -127,15 +159,6 @@ class Product extends \Hubleto\Erp\Model
       'vat' => (new Decimal($this, $this->translate('VAT')))->setUnit("%"),
       'qr_code_data' => new Varchar($this, $this->translate('Data ')),
       'is_single_order_possible' => new Boolean($this, $this->translate('Single unit order possible')),
-      'package_unit' => new Varchar($this, $this->translate('Packaging unit'))->setHint($this->translate('E.g.: palette, box, bag')),
-      'package_amount' => new Decimal($this, $this->translate('Amount of items in package')),
-      'package_length' => new Decimal($this, $this->translate('Package length'))->setUnit('m'),
-      'package_width' => new Decimal($this, $this->translate('Package width'))->setUnit('m'),
-      'package_height' => new Decimal($this, $this->translate('Package height'))->setUnit('m'),
-      'package_volume' => new Decimal($this, $this->translate('Package volume'))->setUnit('m3'),
-      'package_mass' => new Decimal($this, $this->translate('Package mass'))->setUnit('kg'),
-      'package_discount' => new Decimal($this, $this->translate('Package discount'))->setUnit('%'),
-      'package_description' => new Text($this, $this->translate('Package description')),
       'sale_ended' => new Date($this, $this->translate('Sale ended')),
       'show_price' => new Boolean($this, $this->translate('Show price to customer')),
       'price_after_reweight' => new Boolean($this, $this->translate('Set price after reweight?')),
@@ -154,6 +177,7 @@ class Product extends \Hubleto\Erp\Model
   {
     $description = parent::describeTable();
 
+    $description->ui['title'] = $this->translate('Products');
     $description->ui["addButtonText"] = $this->translate("Add product");
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
@@ -219,7 +243,7 @@ class Product extends \Hubleto\Erp\Model
       'Product description' => $product->description,
       'Product sales price' => $product->sales_price,
       'Product base unit' => $this->baseMeasureSymbol($product->base_measure),
-      'Product base unit size' => implode(', ', $this->physicalFacts($product->base_length, $product->base_width, $product->base_height, $product->base_weight)),
+      'Product base unit size' => implode(', ', $this->physicalFacts($product->base_length, $product->base_width, $product->base_height, $product->base_weight, $product->base_net_weight)),
       'Product sales margin' => $product->margin,
     ];
 

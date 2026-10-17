@@ -64,6 +64,8 @@ class Renderer extends \Hubleto\Framework\Services\Renderer
       /** @var AuthProvider */
       $authProvider = $this->authProvider();
 
+      $authProvider->authenticateRememberedUser();
+
       // Find-out which route is used for rendering
 
       if (empty($route)) $route = $router->extractRouteFromRequest();

@@ -258,12 +258,10 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
   /**
    * [Description for initiateRememberMe]
    *
-   * @param mixed $userId
-   * 
    * @return void
    * 
    */
-  private function initiateRememberMe($userId) {
+  public function initiateRememberMe(): void {
 
     /** @var Token */
     $mToken = $this->getModel(Token::class);
@@ -272,7 +270,7 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
     /** @var UserHasToken */
     $mUserHasToken = $this->getModel(UserHasToken::class);
     $mUserHasToken->record->recordCreate([
-      'id_user' => $userId,
+      'id_user' => $this->getUserId(),
       'id_token' => $token['id'],
     ]);
 
@@ -289,20 +287,28 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
 
     /** @var Token */
     $mToken = $this->getModel(Token::class);
-    $tokenId = $mToken->validateToken($_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe'] ?? '', Token::TOKEN_TYPE_USER_REMEMBER_ME);
-    if (
-      $tokenId !== false)
-    {
+    $tokenId = $mToken->validateToken(
+      $_COOKIE[$this->config()->getAsString('accountUid') . '-rememberMe'] ?? '',
+      Token::TOKEN_TYPE_USER_REMEMBER_ME
+    );
+
+    if ($tokenId !== false) {
+
       /** @var UserHasToken */
       $mUserHasToken = $this->getModel(UserHasToken::class);
       $userHasToken = $mUserHasToken->record->where('id_token', $tokenId)->first();
+
       if (!empty($userHasToken)) {
         $userId = $userHasToken['id_user'];
+
         /** @var User */
-        $userModel = $this->getService(User::class);
+        $userModel = $this->getModel(User::class);
+
+        $this->logger()->info("Authenticating user {$userId} as 'rememberMe'.");
 
         $authResult = $userModel->loadUser($userId);
         $this->signIn($authResult);
+
         return true;
       }
     }
@@ -350,7 +356,7 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
             $successful = true;
 
             if ($rememberLogin) {
-              $this->initiateRememberMe($user['id']);
+              $this->initiateRememberMe();
             }
 
             break;
@@ -393,7 +399,7 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
   /**
    * [Description for signOut]
    *
-   * @return [type]
+   * @return void
    * 
    */
   public function signOut()

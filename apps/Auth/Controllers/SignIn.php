@@ -2,8 +2,6 @@
 
 namespace Hubleto\App\Community\Auth\Controllers;
 
-
-
 use Hubleto\App\Community\Auth\AuthProvider;
 
 class SignIn extends \Hubleto\Framework\Controllers\SignIn
@@ -15,7 +13,7 @@ class SignIn extends \Hubleto\Framework\Controllers\SignIn
   {
     parent::prepareView();
 
-    /* @var AuthProvider $authProvider */
+    /** @var AuthProvider $authProvider */
     $authProvider = $this->getService(AuthProvider::class);
 
     $authProvider->authenticateRememberedUser();

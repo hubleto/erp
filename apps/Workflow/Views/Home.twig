@@ -17,17 +17,16 @@
     {% endfor %}
   </div>
 
-<div class="list dense border-none">
-  {% for w in viewParams.workflows %}
-    <a
-      class="btn btn-list-item btn-transparent"
-      href="{{ config.projectUrl }}/workflow/{{ w.id }}"
-    >
-      <span class="text">{{ w.name }}</span>
-    </a>
-  {% endfor %}
-</div>
-
+  <div class="list dense border-none">
+    {% for w in viewParams.workflows %}
+      <a
+        class="btn btn-list-item btn-transparent"
+        href="{{ config.projectUrl }}/workflow/{{ w.id }}"
+      >
+        <span class="text">{{ w.name }}</span>
+      </a>
+    {% endfor %}
+  </div>
 </div>
 
 

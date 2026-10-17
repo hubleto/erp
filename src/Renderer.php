@@ -189,6 +189,8 @@ class Renderer extends \Hubleto\Framework\Services\Renderer
 
         $view = $controllerObject->getView();
 
+        $this->logger()->info("Rendering {$view}.");
+
         $contentParams = [
           'hubleto' => $this,
           'user' => $this->authProvider()->getUser(),

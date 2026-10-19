@@ -44,9 +44,9 @@ class Campaign extends \Hubleto\Erp\Model
   {
     return array_merge(parent::describeColumns(), [
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
-      'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible(),
-      'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible(),
-      'notes' => (new Text($this, $this->translate('Notes'))),
+      'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),
+      'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),
+      'notes' => (new Text($this, $this->translate('Notes')))->setReactComponent('InputTextareaMarkdown'),
       'color' => (new Color($this, $this->translate('Color'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),

@@ -42,7 +42,8 @@ class Loader extends \Hubleto\Erp\App
       $dashboardsApp->addBoard(
         $this,
         $this->translate('Monthly summary'),
-        'worksheets/boards/monthly-summary'
+        'worksheets/boards/monthly-summary',
+        Controllers\Boards\MonthlySummary::class,
       );
 
       $dashboardsApp->addBoard(

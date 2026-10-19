@@ -9,6 +9,13 @@ class MonthlySummary extends \Hubleto\App\Community\Dashboards\Controller
 {
   public bool $hideDefaultDesktop = true;
 
+  public function getConfigurationOptionsDescription(): array
+  {
+    return [
+      [ 'variable' => 'employeeEmail', 'type' => 'email', 'default' => 'Current user', 'description' => 'Email of the user for which to display data.' ],
+    ];
+  }
+
   public function prepareView(): void
   {
     parent::prepareView();

@@ -84,7 +84,7 @@ class Lead extends \Hubleto\Erp\Model
       'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId()),
       'id_team' => (new Lookup($this, $this->translate('Team'), Team::class)),
       'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
-      'date_created' => (new DateTime($this, $this->translate('Created')))->setRequired()->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
+      'date_created' => (new DateTime($this, $this->translate('Created')))->setReadonly()->setDefaultValue(date("Y-m-d H:i:s")),
       'lost_reason' => (new Lookup($this, $this->translate("Reason for Lost"), LostReason::class)),
       'shared_folder' => new Varchar($this, $this->translate("Online document folder")),
       'note' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),

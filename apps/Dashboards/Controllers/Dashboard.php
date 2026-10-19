@@ -4,6 +4,7 @@ namespace Hubleto\App\Community\Dashboards\Controllers;
 
 class Dashboard extends \Hubleto\Erp\Controller
 {
+
   public function getBreadcrumbs(): array
   {
     $dashboardSlug = $this->router()->urlParamAsString('dashboardSlug');

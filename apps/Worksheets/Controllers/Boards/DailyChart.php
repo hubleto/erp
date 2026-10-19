@@ -9,6 +9,15 @@ class DailyChart extends \Hubleto\App\Community\Dashboards\Controller
 {
   public bool $hideDefaultDesktop = true;
 
+  public function getConfigurationOptionsDescription(): array
+  {
+    return [
+      [ 'variable' => 'quota', 'type' => 'float', 'default' => 8, 'description' => 'Daily quota in hours.' ],
+      [ 'variable' => 'employeeEmail', 'type' => 'email', 'default' => 'Current user', 'description' => 'Email of the user for which to display data.' ],
+      [ 'variable' => 'range', 'type' => 'number', 'default' => '30', 'description' => 'Number of days to display.' ],
+    ];
+  }
+
   public function prepareView(): void
   {
     parent::prepareView();

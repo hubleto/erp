@@ -12,12 +12,17 @@ class Manager extends \Hubleto\Erp\Core
     return $this->boards;
   }
 
-  public function addBoard(\Hubleto\Framework\Interfaces\AppInterface $app, string $title, string $boardUrlSlug): void
+  public function addBoard(
+    \Hubleto\Framework\Interfaces\AppInterface $app,
+    string $title,
+    string $boardUrlSlug,
+    string $controllerClass = ''): void
   {
     $this->boards[$boardUrlSlug] = [
       'app' => $app,
       'title' => $title,
       'boardUrlSlug' => $boardUrlSlug,
+      'controllerClass' => $controllerClass,
     ];
   }
 

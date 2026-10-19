@@ -4,6 +4,12 @@ namespace Hubleto\App\Community\Dashboards;
 
 class Controller extends \Hubleto\Erp\Controller
 {
+
+  public function getConfigurationOptionsDescription(): array
+  {
+    return [];
+  }
+
   public function prepareView(): void
   {
     parent::prepareView();

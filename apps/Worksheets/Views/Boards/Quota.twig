@@ -1,0 +1,15 @@
+<div>
+{% if viewParams.employee %}
+  {% if viewParams.employee == "N/A" %}
+    <div class="text-center">
+      Employee could not be found. Defaulting to your data.
+    </div>
+  {% else %}
+    <div style="text-align: center"><h2>Viewing quota for: {{ viewParams.employee }}</h2></div>
+  {% endif %}
+{% endif %}
+
+ <span>{{ translate("You have worked") }}</span>
+ <h2>{{ viewParams.workedHours }} {{ translate("hours out of ")}} {{ viewParams.quota }} {{ translate("hours") }}</h2>
+ <span>{{ translate("You still need to work") }} {{(viewParams.quota - viewParams.workedHours)}} {{ translate("hours") }} </span>
+</div>

@@ -18,6 +18,7 @@ class Loader extends \Hubleto\Erp\App
     $this->router()->get([
       '/^dashboards\/api\/sort-panels\/?$/' => Controllers\Api\SortPanels::class,
       '/^dashboards\/api\/set-panel-width\/?$/' => Controllers\Api\SetPanelWidth::class,
+      '/^dashboards\/api\/describe-board\/?$/' => Controllers\Api\DescribeBoard::class,
 
       '/^dashboards\/~(\/(?<dashboardSlug>[^\/]+))?\/?$/' => Controllers\Dashboard::class,
       '/^dashboards(\/(?<recordId>\d+))?\/?$/' => Controllers\Dashboards::class,

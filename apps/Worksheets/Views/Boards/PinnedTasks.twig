@@ -1,0 +1,13 @@
+<div class="grid grid-cols-2 gap-2">
+{% for task in viewParams.pinnedTasks %}
+  <div class="card p-1 flex flex-row gap-2" style="overflow-x: hidden;">
+    <div class="grow">
+      <p class="text-amber-600 font-bold text-sm line-clamp-2">{{ task.relatedTo ?? "-" }}</p>
+      <p class=" line-clamp-2">#{{task.id}} {{ task.title }}</p>
+    </div>
+    <div style="margin: auto 0;" class="">
+      <a class="btn p-1 btn-main w-full block truncate text-sm" target="_blank" href="./tasks?recordId={{task.id}}">Show task</a>
+    </div>
+  </div>
+{% endfor %}
+</div>

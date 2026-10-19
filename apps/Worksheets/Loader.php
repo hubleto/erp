@@ -21,6 +21,12 @@ class Loader extends \Hubleto\Erp\App
     $this->router()->get([
       '/^worksheets\/boards\/daily-chart\/?$/' => Controllers\Boards\DailyChart::class,
       '/^worksheets\/boards\/monthly-summary\/?$/' => Controllers\Boards\MonthlySummary::class,
+      '/^worksheets\/boards\/quota\/?$/' => Controllers\Boards\Quota::class,
+      '/^worksheets\/boards\/work-table\/?$/' => Controllers\Boards\WorkTable::class,
+      '/^worksheets\/boards\/hours-by-month\/?$/' => Controllers\Boards\HoursByMonth::class,
+      '/^worksheets\/boards\/my-tasks\/?$/' => Controllers\Boards\MyTasks::class,
+      '/^worksheets\/boards\/pinned-tasks\/?$/' => Controllers\Boards\PinnedTask::class,
+      '/^worksheets\/boards\/latest-tasks\/?$/' => Controllers\Boards\LatestWorkedTasks::class,
       '/^worksheets\/api\/daily-activity-chart\/?$/' => Controllers\Api\DailyActivityChart::class,
     ]);
 
@@ -30,12 +36,44 @@ class Loader extends \Hubleto\Erp\App
       $dashboardsApp->addBoard(
         $this,
         $this->translate('Daily chart'),
-        'worksheets/boards/daily-chart'
+        'worksheets/boards/daily-chart',
+        Controllers\Boards\DailyChart::class,
       );
       $dashboardsApp->addBoard(
         $this,
         $this->translate('Monthly summary'),
         'worksheets/boards/monthly-summary'
+      );
+
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('Quota for today'),
+        'worksheets/boards/quota'
+      );
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('Work Table'),
+        'worksheets/boards/work-table'
+      );
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('Hours by Month'),
+        'worksheets/boards/hours-by-month'
+      );
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('My Tasks'),
+        'worksheets/boards/my-tasks'
+      );
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('Pinned tasks'),
+        'worksheets/boards/pinned-tasks'
+      );
+      $dashboardsApp->addBoard(
+        $this,
+        $this->translate('Latest worked on tasks'),
+        'worksheets/boards/latest-tasks'
       );
     }
 

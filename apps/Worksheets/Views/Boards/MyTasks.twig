@@ -1,0 +1,80 @@
+<style>
+  #my-task-table {
+    border: solid 1px lightgray;
+    border-collapse: collapse;
+    /* table-layout: fixed; */
+  }
+
+  #my-task-table td,
+  #my-task-table th {
+    padding: 5px;
+    border: solid 1px lightgray;
+  }
+
+  #task-container {
+    container: container-size / inline-size;
+  }
+
+  #my-task-table td,
+  #my-task-table th {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  @container container-size (width < 300px) {
+    #my-task-table th:nth-child(1),
+    #my-task-table td:nth-child(1),
+    #my-task-table td:nth-child(4),
+    #my-task-table th:nth-child(4),
+    #my-task-table td:nth-child(5),
+    #my-task-table th:nth-child(5)
+    {
+      display: none;
+    }
+  }
+</style>
+
+{% if viewParams.employee %}
+  {% if viewParams.employee == "N/A" %}
+  <div class="text-center">
+    Employee could not be found. Defaulting to your data.
+  </div>
+  {% else %}
+  <div class="text-center">
+    <div style="text-align: center">
+      <h2>Viewing tasks for: {{ viewParams.employee }}</h2>
+    </div>
+  </div>
+  {% endif %}
+{% endif %}
+
+{% if viewParams.myTasks == null %}
+  <p>No tasks were found</p>
+{% else %}
+  <div id="task-container" class="w-full">
+    <table id="my-task-table" class="hubleto component table">
+      <tr>
+        <th>Identifier</th>
+        <th>Related to</th>
+        <th>Task</th>
+        <th>My hours</th>
+        <th>Step</th>
+        <th></th>
+      </tr>
+      {% for task in viewParams.myTasks %}
+      <tr>
+        <td>{{ task.identifier }}</td>
+        <td>{{ task.related_to ?? "-" }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.worked ?? 0 }} h</td>
+        <td>
+          <div style="border-left: 10px solid {{task.color}}; padding-left:5px;">{{ task.step }}</div>
+        </td>
+        <td><a class="btn p-1 btn-main w-full block whitespace-nowrap" target="_blank" href="{{ config.projectUrl }}/tasks/{{ task.id }}"><span class="text-center">Go to task</span></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  </div>
+{% endif %}

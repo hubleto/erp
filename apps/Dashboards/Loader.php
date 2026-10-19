@@ -54,6 +54,7 @@ class Loader extends \Hubleto\Erp\App
     $mDashboard = $this->getModel(Models\Dashboard::class);
 
     $dashboards = $mDashboard->record->prepareReadQuery()
+      ->where('id_owner', $this->authProvider()->getUserId())
       ->with('PANELS')
       ->orderBy('is_default')
       ->get()

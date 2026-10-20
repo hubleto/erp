@@ -87,6 +87,15 @@ class Desktop extends \Hubleto\Erp\Controller
     $this->viewParams['hasExternalAppsEnabled'] = $this->appManager()->hasExternalAppsEnabled();
     $this->viewParams['hasCustomAppsEnabled'] = $this->appManager()->hasCustomAppsEnabled();
 
+
+    $installedApps = $this->appManager()->getInstalledApps();
+    $assetsUrls = [];
+    foreach ($installedApps as $app) {
+      $assetsUrls = array_merge($assetsUrls, $app->getJavascriptAssetsUrls());
+    }
+    $this->viewParams['installedApps'] = $installedApps;
+    $this->viewParams['assetsUrls'] = $assetsUrls;
+
     $this->viewParams['sidebarBadgeNumbers'] = $sidebarService->getBadgeNumbers();
 
     $this->setView('@Hubleto:App:Community:Desktop/Desktop.twig');

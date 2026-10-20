@@ -60,6 +60,7 @@ class Loader extends \Hubleto\Erp\App
       $this->getModel(Models\ProjectDeal::class)->upgradeSchema();
       $this->getModel(Models\ProjectOrder::class)->upgradeSchema();
       $this->getModel(Models\ProjectTask::class)->upgradeSchema();
+      $this->getModel(Models\ProjectRate::class)->upgradeSchema();
       $this->getModel(Models\ProjectActivity::class)->upgradeSchema();
       $this->getModel(Models\Expense::class)->upgradeSchema();
       $this->getModel(Models\MilestoneTask::class)->upgradeSchema();

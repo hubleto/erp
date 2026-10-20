@@ -47,7 +47,6 @@ const TableItems = (props: TableItemsProps) => {
           return <button
             className='btn btn-yellow btn-small'
             onClick={(e) => {
-              console.log('ggg');
               e.stopPropagation();
               globalThis.hubleto.showDialogConfirm(
                 <>

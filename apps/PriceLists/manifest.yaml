@@ -1,5 +1,5 @@
 namespace: Hubleto\App\Community\PriceLists
-appType: custom
+appType: community
 sidebarGroup: sales
 rootUrlSlug: price-lists
 name: Price lists

@@ -16,6 +16,7 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->crud('projects', Controllers\Projects::class);
+    $this->router()->crud('projects/rates', Controllers\ProjectsRates::class);
     $this->router()->crud('projects/tasks', Controllers\ProjectsTasks::class);
     $this->router()->crud('projects/tasks/milestones', Controllers\MilestonesTasks::class);
     $this->router()->crud('projects/orders', Controllers\ProjectsOrders::class);
@@ -107,6 +108,7 @@ class Loader extends \Hubleto\Erp\App
         ' . $this->secondSidebarButton('projects/tasks/milestones', 'fas fa-check-double', 'Assign task to milestone') . '
         ' . $this->secondSidebarButton('projects/orders', 'fas fa-check-double', 'Assign project to order') . '
         ' . $this->secondSidebarButton('projects/monthly-summary', 'fas fa-chart-bar', 'Monthly summary') . '
+        ' . $this->secondSidebarButton('projects/rates', 'fas fa-euro-sign', 'Rates') . '
         ' . $this->secondSidebarButton('calendar?show=projects', 'fas fa-calendar-days', 'Calendar') . '
       </div>
     ';

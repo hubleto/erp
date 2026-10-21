@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
-import { type FormProps, type FormTabs } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { type FormProps, type FormMeta, type FormTabs } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import request from '@hubleto/react-ui/core/Request';
@@ -17,6 +17,7 @@ import FileInput from '@hubleto/react-ui/components/fc/Inputs/File';
 import ModalHeader from '@hubleto/react-ui/components/fc/ModalComponents/Header';
 import LoaderBar from '@hubleto/react-ui/components/fc/LoaderBar';
 import moment from "moment";
+import Spinner from '@hubleto/react-ui/components/fc/Spinner';
 
 export interface FormInvoiceProps extends FormProps {}
 
@@ -25,8 +26,30 @@ const parentApp = 'Hubleto/App/Community/Invoices';
 const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 
 const CustomerInfo = (props: any) => {
-  const { customer } = props;
-  return <div className='alert alert-blue block'>
+  const { idCustomer } = props;
+
+  const [loading, setLoading] = useState(false);
+  const [customer, setCustomer] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    request.post(
+      'invoices/api/get-customer-info',
+      { idCustomer: idCustomer },
+      {},
+      (data: any) => {
+        setCustomer(data);
+        setLoading(false);
+      },
+      (err: any) => {
+        setCustomer(null);
+        setLoading(false);
+      }
+    );
+  }, [idCustomer]);
+
+  if (loading) return <div className='alert alert-blue block'><Spinner></Spinner></div>;
+  return customer ? <div className='alert alert-blue block'>
     <div className='text-lg font-bold'>{customer.name}</div>
     <div>
       {customer.street_line_1}, {customer.zip} {customer.city}<br/>
@@ -35,7 +58,7 @@ const CustomerInfo = (props: any) => {
       {T.translate('ID')} #: {customer.company_id ?? T.translate('N/A')}<br/>
       {T.translate('VAT')}: {customer.vat_id ?? T.translate('N/A')}<br/>
     </div>
-  </div>
+  </div> : null;
 }
 
 const SupplierInfo = (props: any) => {
@@ -99,31 +122,31 @@ const TabDefault = (props: FormInvoiceProps) => {
   const currencySymbol = CURRENCY.symbol ?? '';
 
   if (form.id <= 0) {
-    return <>
-      <Input field='id_currency' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-      <div className='flex-dyn mt-2'>
-        <div className='grow'>
-          <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-          <InvoicingProfileDetails profile={PROFILE} />
-        </div>
-        <div className='grow'>
-          {inboundOutbound == 1 ? <>
-            <Input key='id_supplier' field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-            <SupplierInfo supplier={SUPPLIER} />
-          </> : <>
-            <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2', cssClass: 'text-lg'}} />
-            <CustomerInfo customer={CUSTOMER} />
-          </>}
-        </div>
-      </div>
-      {/* <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} /> */}
-    </>
+    return <div className='flex flex-col gap-2 max-w-120 m-auto'>
+      <Input field='inbound_outbound'  renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />
+      <Input field='type' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
+      <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+      {inboundOutbound == 1 ? <>
+        <Input key='id_supplier' field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+        <SupplierInfo supplier={SUPPLIER} />
+      </> : <>
+        <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2', cssClass: 'text-lg'}} />
+        <CustomerInfo idCustomer={idCustomer} />
+      </>}
+    </div>;
   } else {
     return <>
       <div className='flex flex-col md:flex-row gap-2'>
         <div className="flex flex-5 gap-2">
           <div className='flex-1 min-w-80'>
-            <Input field='id_currency' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+            <div className='flex-dyn gap-2'>
+              <div className='grow flex-1'>
+                <Input field='id_currency' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+              </div>
+              <div className='grow flex-1'>
+                <Input field='id_payment_method' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
+              </div>
+            </div>
             <div className='flex-dyn gap-2 items-center'>
               <div className='grow'>
                 <Input field='number' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] w-full p-1 shadow rounded'}} />
@@ -158,7 +181,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                   <SupplierInfo supplier={SUPPLIER} />
                 </> : <>
                   <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2', cssClass: 'text-lg'}} />
-                  <CustomerInfo customer={CUSTOMER} />
+                  <CustomerInfo idCustomer={idCustomer} />
                 </>}
               </div>
             </div>
@@ -687,24 +710,25 @@ const TabEmail = (props: FormInvoiceProps) => {
 /** FormInvoice */
 const FormInvoice = (props: FormInvoiceProps) => {
 
-  let tabs: FormTabs = {
-    default: { title: <b>{T.translate('Invoice')}</b>, content: () => <TabDefault {...props} /> }
-  }
-
-  if (props.id > 0) {
-    tabs.payments = { title: T.translate('Payments'), content: () => <TabPayments {...props} /> };
-    tabs.email = { title: T.translate('Email'), content: () => <TabEmail {...props} /> };
-  }
-
   return <Form
     componentName={componentName}
     parentApp={parentApp}
     model={parentApp + '/Models/Invoice'}
     urlSlug='invoices'
     endpointParams={{saveRelations: ['ITEMS']}}
-    // onAfterFormInitialized={(form: any) => {}}
-    title={{fields: ['number'], sub: <>
-    </>}}
+    title={{fields: ['number'], sub: <></>}}
+    getTabs={(form: FormMeta): FormTabs => {
+      let tabs: FormTabs = {
+        default: { title: <b>{T.translate('Invoice')}</b>, content: () => <TabDefault {...props} /> }
+      }
+
+      if (form.id > 0) {
+        tabs.payments = { title: T.translate('Payments'), content: () => <TabPayments {...props} /> };
+        tabs.email = { title: T.translate('Email'), content: () => <TabEmail {...props} /> };
+      }
+
+      return tabs;
+    }}
     renderTitle={(): React.JSX.Element => {
         const type = useRecordField('type', 0);
         const number = useRecordField('number', '');
@@ -731,15 +755,12 @@ const FormInvoice = (props: FormInvoiceProps) => {
         </div>;
       }
     }
-    renderTopInputs={() => {
-      return <div className='modal-top-inputs'>
+    renderTopInputs={(form: FormMeta) => {
+      return (form.id > 0 ? <div className='modal-top-inputs'>
         <Input field='inbound_outbound'  renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />
         <Input field='type' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
-        <Input field='id_payment_method' renderOnlyInputField customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
-      </div>;
+      </div> : null);
     }}
-    // title={{field: 'some-field-of-the-record', sub: T.translate(componentName)}}
-    tabs={tabs}
     {...props}
   ></Form>;
 }

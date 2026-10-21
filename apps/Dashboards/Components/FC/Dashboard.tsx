@@ -134,7 +134,7 @@ const Dashboard = (props: DashboardProps) => {
 
   return <div className='flex flex-col gap-2'>
     {panels.length == 0 ? <div className='text-primary text-center text-lg'>{T.translate('Nothing to show in dashboard')}</div> :
-      <div className={'flex flex-col gap-2 md:grid md:grid-cols-5'}>
+      <div className={'flex flex-col gap-2 md:grid md:grid-cols-6'}>
         {panels.map((panel: Panel, index: any) => {
           const width = panel.width ?? 1;
           return <div

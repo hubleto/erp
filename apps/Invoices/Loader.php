@@ -16,6 +16,7 @@ class Loader extends \Hubleto\Erp\App
     parent::init();
 
     $this->router()->get([
+      '/^invoices\/api\/get-customer-info\/?$/' => Controllers\Api\GetCustomerInfo::class,
       '/^invoices\/api\/create-invoice-from-prepared-item\/?$/' => Controllers\Api\CreateInvoiceFromPreparedItem::class,
       '/^invoices\/api\/link-prepared-item\/?$/' => Controllers\Api\LinkPreparedItem::class,
       '/^invoices\/api\/unlink-prepared-item\/?$/' => Controllers\Api\UnlinkPreparedItem::class,

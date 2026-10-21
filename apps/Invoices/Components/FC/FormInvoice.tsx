@@ -62,8 +62,30 @@ const CustomerInfo = (props: any) => {
 }
 
 const SupplierInfo = (props: any) => {
-  const { supplier } = props;
-  return <div className='alert alert-blue block'>
+  const { idSupplier } = props;
+
+  const [loading, setLoading] = useState(false);
+  const [supplier, setSupplier] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    request.post(
+      'invoices/api/get-supplier-info',
+      { idSupplier: idSupplier },
+      {},
+      (data: any) => {
+        setSupplier(data);
+        setLoading(false);
+      },
+      (err: any) => {
+        setSupplier(null);
+        setLoading(false);
+      }
+    );
+  }, [idSupplier]);
+
+  if (loading) return <div className='alert alert-blue block'><Spinner></Spinner></div>;
+  return supplier ? <div className='alert alert-blue block'>
     <div className='text-lg font-bold'>{supplier.name}</div>
     <div>
       {supplier.street_line_1}, {supplier.zip} {supplier.city}<br/>
@@ -72,7 +94,7 @@ const SupplierInfo = (props: any) => {
       {T.translate('ID')} #: {supplier.company_id ?? T.translate('N/A')}<br/>
       {T.translate('VAT')}: {supplier.vat_id ?? T.translate('N/A')}<br/>
     </div>
-  </div>
+  </div> : null;
 }
 
 const InvoicingProfileDetails = (props: any) => {
@@ -98,6 +120,7 @@ const TabDefault = (props: FormInvoiceProps) => {
   const [linkPreparedItem, setLinkPreparedItem] = useState(false);
 
   const idCustomer: number = useRecordField('id_customer', 0);
+  const idSupplier: number = useRecordField('id_supplier', 0);
   const inboundOutbound: number = useRecordField('inbound_outbound', 0);
   const totalExclVat: number = useRecordField('total_excl_vat', 0);
   const totalInclVat: number = useRecordField('total_incl_vat', 0);
@@ -128,7 +151,7 @@ const TabDefault = (props: FormInvoiceProps) => {
       <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
       {inboundOutbound == 1 ? <>
         <Input key='id_supplier' field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-        <SupplierInfo supplier={SUPPLIER} />
+        <SupplierInfo idSupplier={idSupplier} />
       </> : <>
         <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2', cssClass: 'text-lg'}} />
         <CustomerInfo idCustomer={idCustomer} />
@@ -139,6 +162,10 @@ const TabDefault = (props: FormInvoiceProps) => {
       <div className='flex flex-col md:flex-row gap-2'>
         <div className="flex flex-5 gap-2">
           <div className='flex-1 min-w-80'>
+          {number == '' ? <div className='alert badge-warning'>
+            <i className='fas fa-pencil'></i>
+            {T.translate('This is draft invoice. Generate invoice number to publish it.')}<br/>
+          </div> : null}
             <div className='flex-dyn gap-2'>
               <div className='grow flex-1'>
                 <Input field='id_currency' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
@@ -171,19 +198,25 @@ const TabDefault = (props: FormInvoiceProps) => {
               </div> : null}
             </div>
             <div className='flex-dyn mt-2'>
-              <div className='grow'>
-                <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-                <InvoicingProfileDetails profile={PROFILE} />
-              </div>
-              <div className='grow'>
-                {inboundOutbound == 1 ? <>
+              {inboundOutbound == 1 ? <>
+                <div className='grow'>
                   <Input key='id_supplier' field='id_supplier' customInputProps={{wrapperCssClass: 'flex gap-2'}} />
-                  <SupplierInfo supplier={SUPPLIER} />
-                </> : <>
+                  <SupplierInfo idSupplier={idSupplier} />
+                </div>
+                <div className='grow'>
+                  <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2', title: 'Customer'}} />
+                  <InvoicingProfileDetails profile={PROFILE} />
+                </div>
+              </> : <>
+                <div className='grow'>
+                  <Input field='id_profile' customInputProps={{wrapperCssClass: 'flex gap-2', title: 'Supplier'}} />
+                  <InvoicingProfileDetails profile={PROFILE} />
+                </div>
+                <div className='grow'>
                   <Input key='id_customer' field='id_customer' customInputProps={{wrapperCssClass: 'flex gap-2', cssClass: 'text-lg'}} />
                   <CustomerInfo idCustomer={idCustomer} />
-                </>}
-              </div>
+                </div>
+              </>}
             </div>
             <div className='flex-dyn mt-2 gap-2'>
               <div className='grow'><Input field='vs' renderOnlyInputField customInputProps={{cssClass: (vs == '' ? 'border border-red-400' : '')}} /></div>

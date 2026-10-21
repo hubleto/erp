@@ -73,12 +73,17 @@ class GenerateInvoiceNumber extends \Hubleto\Erp\Controllers\ApiController
     $number = str_replace('NNN', str_pad((string) ($maxNumber + 1), 3, '0', STR_PAD_LEFT), $number);
     $number = str_replace('NN', str_pad((string) ($maxNumber + 1), 2, '0', STR_PAD_LEFT), $number);
 
-    $mInvoice->record->where('id', $idInvoice)->update(['number' => $number]);
+    $variableSymbol = preg_replace('/[^0-9]/', '', $number);
+
+    $mInvoice->record
+      ->where('id', $idInvoice)
+      ->update(['number' => $number, 'vs' => $variableSymbol]);
 
     return [
       'status' => 'success',
       'idInvoice' => $idInvoice,
       'number' => $number,
+      'variableSymbol' => $variableSymbol,
     ];
   }
 }

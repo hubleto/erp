@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Hubleto\App\Community\Auth\Models\RecordManagers\User;
+use Hubleto\App\Community\EmailMarketing\Models\RecordManagers\Recipient;
 
 class Campaign extends \Hubleto\Erp\RecordManager
 {
@@ -47,6 +48,12 @@ class Campaign extends \Hubleto\Erp\RecordManager
   public function TAGS(): HasMany
   {
     return $this->hasMany(CampaignTag::class, 'id_campaign', 'id');
+  }
+
+  /** @return HasMany<CampaignTag, covariant Contact> */
+  public function RECIPIENTS(): HasMany
+  {
+    return $this->hasMany(Recipient::class, 'id_campaign', 'id');
   }
 
   /**

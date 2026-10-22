@@ -32,6 +32,7 @@ class Campaign extends \Hubleto\Erp\Model
     'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
     'SCHEDULES' => [ self::HAS_MANY, CampaignSchedule::class, 'id_campaign', 'id' ],
     'TAGS' => [ self::HAS_MANY, CampaignTag::class, 'id_campaign', 'id' ],
+    'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_campaign', 'id' ],
   ];
 
   /**
@@ -139,6 +140,22 @@ class Campaign extends \Hubleto\Erp\Model
   }
 
   public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 3;
+  }
+
+  /**
+   * [Description for getRelationsIncludedInLoadFormData]
+   *
+   * @return array|null
+   * 
+   */
+  public function getRelationsIncludedInLoadFormData(): array|null
+  {
+    return ['TAGS', 'RECIPIENTS', 'SCHEDULES', 'SCHEDULES.RECIPIENTS'];
+  }
+
+  public function getMaxReadLevelForLoadFormData(): int
   {
     return 3;
   }

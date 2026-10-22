@@ -21,6 +21,8 @@ const T = new Translator(parentApp + '/Loader', 'Components/FormCampaign');
 const TabDefault = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
   const TAGS: Array<any> = useRecordField('TAGS', []);
+  const RECIPIENTS: Array<any> = useRecordField('RECIPIENTS', []);
+  const SCHEDULES: Array<any> = useRecordField('SCHEDULES', []);
 
   return <>
     <div className='flex gap-2 flex-col md:flex-row'>
@@ -50,16 +52,35 @@ const TabDefault = (props: FormCampaignProps) => {
         <Input field='goal' />
         <Input field='notes' />
       </div>
-      {form.id <= 0 ? null : <>
-        <div className='grow'>
-          <TableCampaignsSchedules
-            tag='table_campaign_schedules'
-            parentForm={form}
-            uid={form.uid + "_table_campaign_schedules"}
-            idCampaign={form.id}
-          />
-        </div>
-      </>}
+      <div className='grow flex flex-col gap-2'>
+        {form.id <= 0 ? null : <>
+          <div className='card'>
+            <div className='card-body'>
+              <div>Campaign has <b>{RECIPIENTS.length}</b> recipients.</div>
+              {SCHEDULES ? SCHEDULES.map((s) => {
+                if (s.RECIPIENTS && s.RECIPIENTS.length < RECIPIENTS.length) {
+                  const EMAIL = s.EMAIL;
+
+                  if (!EMAIL) return;
+                  if (EMAIL.is_closed || !EMAIL.is_approved || !EMAIL.id_sender_account) return;
+
+                  return <div className='badge badge-danger'>
+                    Email <i>{EMAIL.mail_subject}</i> has only {s.RECIPIENTS.length} recipients and needs to be launched.
+                  </div>
+                }
+              }) : null}
+            </div>
+          </div>
+          <div>
+            <TableCampaignsSchedules
+              tag='table_campaign_schedules'
+              parentForm={form}
+              uid={form.uid + "_table_campaign_schedules"}
+              idCampaign={form.id}
+            />
+          </div>
+        </>}
+      </div>
     </div>
     {/* <div className='flex justify-center mt-2 bg-lime-50 p-4'>
       <div className='text-center'>

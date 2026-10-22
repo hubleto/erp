@@ -66,7 +66,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
               </div>
             </button>
             <div className='m-2'>
-              {record.EMAIL?.is_approved && !record.EMAIL?.is_closed ? 
+              {record.EMAIL?.id_sender_account > 0 && record.EMAIL?.is_approved && !record.EMAIL?.is_closed ? 
                 <button
                   className='btn btn-transparent'
                   onClick={() => {

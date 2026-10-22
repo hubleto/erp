@@ -25,7 +25,7 @@
                   </div>
                   <div class="text-gray-800">
                     {% if m.REPORTS|length > 0 %}
-                      <progress max="100" value="{{ (m.REPORTS|first).progress_percent }}"></progress>
+                      <progress max="100" value="{{ (m.REPORTS|first).progress_percent }}" class="w-12"></progress>
                       {{ translate('{{ progress }} % on {{ date }}', { progress: (m.REPORTS|first).progress_percent, date: hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }) }},
                       {{ (m.REPORTS|first).summary }}
                     {% else %}

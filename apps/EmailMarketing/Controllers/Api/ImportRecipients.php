@@ -57,7 +57,8 @@ class ImportRecipients extends \Hubleto\Erp\Controllers\ApiController
         }
       }
 
-      Lib::scheduleMissingEmailsInCampaign($idCampaign);
+      // scheduling is now done on request by clicking "Launch"
+      // Lib::scheduleMissingEmailsInCampaign($idCampaign);
 
       return ['status' => 'success', 'recipientsImported' => $recipientsImported];
 

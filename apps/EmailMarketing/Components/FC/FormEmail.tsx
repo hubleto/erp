@@ -24,7 +24,7 @@ const TabDefault = () => {
     <div className='w-full flex flex-col md:flex-row gap-2'>
       <div className='flex-4 border-r border-gray-100'>
         <Input field='title' />
-        <Input field='mail_subject' renderOnlyInputField customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
+        <Input field='mail_subject' customInputProps={{cssClass: 'text-[2em] border border-primary p-1 shadow rounded'}} />
         <Input field='id_sender_account' />
         <Input field='reply_to' />
         <Input field='mail_body' />

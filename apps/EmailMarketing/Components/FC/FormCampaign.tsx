@@ -64,7 +64,7 @@ const TabDefault = (props: FormCampaignProps) => {
                   if (!EMAIL) return;
                   if (EMAIL.is_closed || !EMAIL.is_approved || !EMAIL.id_sender_account) return;
 
-                  return <div className='badge badge-danger'>
+                  return <div className='badge badge-danger block'>
                     Email <i>{EMAIL.mail_subject}</i> has only {s.RECIPIENTS.length} recipients and needs to be launched.
                   </div>
                 }

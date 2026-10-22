@@ -5,6 +5,8 @@ import Translator from '@hubleto/react-ui/core/Translator';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import TableCampaignsSchedulesRecipients from './TableCampaignsSchedulesRecipients';
+import Modal from '@hubleto/react-ui/components/fc/Modal';
+import FormEmail from './FormEmail';
 
 export interface FormCampaignScheduleProps extends FormProps {}
 
@@ -18,6 +20,8 @@ const TabDefault = (props: FormCampaignScheduleProps) => {
   const EMAIL: any = useRecordField('EMAIL');
   const day: number = useRecordField('day');
 
+  const [showFormEmail, setShowFormEmail] = React.useState(false);
+
   return <div className='flex-dyn'>
     <div className='flex-1 flex flex-col gap-2 h-full'>
       <div className='flex gap-2'>
@@ -26,18 +30,26 @@ const TabDefault = (props: FormCampaignScheduleProps) => {
       </div>
       {EMAIL?.is_approved ? null : <div className='alert alert-danger'>{T.translate('Email is not approved yet.')}</div>}
       <div>
-        {EMAIL ? <div className='card'>
-          <div className='card-header'>{T.translate('From')}: {EMAIL.SENDER_ACCOUNT?.name}</div>
-          <div className='card-header'>{T.translate('Subject')}: {EMAIL.mail_subject}</div>
-          <div className='card-body'>
-            <iframe
-              src="about:blank"
-              className='w-full min-h-96'
-              srcDoc={EMAIL.mail_body}
-            />
+        {EMAIL ? <>
+          <div className='card'>
+            <div className='card-header'>{T.translate('From')}: {EMAIL.SENDER_ACCOUNT?.name}</div>
+            <div className='card-header'>{T.translate('Subject')}: {EMAIL.mail_subject}</div>
+            <div className='card-body'>
+              <iframe
+                src="about:blank"
+                className='w-full min-h-96'
+                srcDoc={EMAIL.mail_body}
+              />
+            </div>
           </div>
-        </div>
-        : <div className='alert alert-warning'>{T.translate('Select email to be sent on')} <b>{T.translate('day')} {day}</b></div>}
+          <button
+            className='btn btn-primary m-2'
+            onClick={() => { setShowFormEmail(true); }}
+          >
+            <span className='icon'><i className='fas fa-pencil'></i></span>
+            <span className='text'>Edit email</span>
+          </button>
+        </> : <div className='alert alert-warning'>{T.translate('Select email to be sent on')} <b>{T.translate('day')} {day}</b></div>}
       </div>
     </div>
     <div className='flex-1'>
@@ -54,6 +66,11 @@ const TabDefault = (props: FormCampaignScheduleProps) => {
         </div>
       </div>
     </div>
+    {showFormEmail ? 
+      <Modal type='centered large'>
+        <FormEmail id={EMAIL.id} onClose={() => setShowFormEmail(false)}></FormEmail>
+      </Modal>
+    : null}
   </div>;
 }
 

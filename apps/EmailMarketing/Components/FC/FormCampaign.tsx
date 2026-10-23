@@ -58,7 +58,7 @@ const TabDefault = (props: FormCampaignProps) => {
           <div className='card'>
             <div className='card-body'>
               <div>Campaign has <b>{RECIPIENTS.length}</b> recipients.</div>
-              {SCHEDULES ? SCHEDULES.map((s) => {
+              {/* {SCHEDULES ? SCHEDULES.map((s) => {
                 if (s.RECIPIENTS && s.RECIPIENTS.length < RECIPIENTS.length) {
                   const EMAIL = s.EMAIL;
 
@@ -69,7 +69,7 @@ const TabDefault = (props: FormCampaignProps) => {
                     Email <i>{EMAIL.mail_subject}</i> has only {s.RECIPIENTS.length} recipients and needs to be launched.
                   </div>
                 }
-              }) : null}
+              }) : null} */}
             </div>
           </div>
           <div>

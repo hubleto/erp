@@ -51,10 +51,12 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
               className='btn btn-transparent btn-list-item'
               onClick={() => table.openForm(record.id)}
             >
-              <div className='icon text-center bg-primary/20 rounded-sm h-full'>
-                {T.translate('Day')}<br/>
-                <b>{record.day}</b>
-              </div>
+              {CAMPAIGN?.type == 1 /* nurturing */ ?
+                <div className='icon text-center bg-primary/20 rounded-sm h-full'>
+                  {T.translate('Day')}<br/>
+                  <b>{record.day}</b>
+                </div>
+              : null}
               <div className={'text block ' + (record.EMAIL?.is_closed ? 'striped-45': '')}>
                 {record.id_email > 0 ? <>
                   <div className='fond-bold'>
@@ -69,11 +71,19 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                 </> : <div className='text-red-800'>{T.translate('No email selected')}</div>}
               </div>
             </button>
-            <div className='m-2'>
+            <div className='ml-2 btn-group border-none'>
+              <a
+                className='btn btn-transparent'
+                href={globalThis.hubleto.config.projectUrl + '/email-marketing/emails/' + record.id_email}
+                target='_blank'
+              >
+                <span className='icon'><i className='fas fa-pencil'></i></span>
+                <span className='text'>{T.translate('Edit')}</span>
+              </a>
               {CAMPAIGN?.type == 2 /* newsletter */
                && record.EMAIL?.id_sender_account > 0
                && record.EMAIL?.is_approved
-               && !record.EMAIL?.is_closed ? <div className='btn-group'>
+               && !record.EMAIL?.is_closed ? <>
                 <button
                   className={'btn ' + (sendToCount <= 0 ? 'btn-transparent' : 'btn-warning')}
                   onClick={() => {
@@ -106,7 +116,7 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                   <span className='icon'><i className='fas fa-times'></i></span>
                   <span className='text'>{T.translate('Close')}</span>
                 </button>
-              </div> : null}
+              </> : null}
             </div>
           </div>;
         })}

@@ -28,6 +28,11 @@ class Campaign extends \Hubleto\Erp\Model
     self::TYPE_NEWSLETTER => 'Newsletter campaign',
   ];
 
+  public const TYPE_CSS_CLASSES = [
+    self::TYPE_NURTURING => 'bg-lime-50 text-slate-700',
+    self::TYPE_NEWSLETTER => 'bg-yellow-50 text-slate-700',
+  ];
+
   public string $table = 'email_marketing_campaigns';
   public string $recordManagerClass = RecordManagers\Campaign::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
@@ -53,7 +58,7 @@ class Campaign extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
-      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPE_ENUM_VALUES),
+      'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()->setEnumValues(self::TYPE_ENUM_VALUES)->setEnumCssClasses(self::TYPE_CSS_CLASSES),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),
@@ -92,17 +97,32 @@ class Campaign extends \Hubleto\Erp\Model
     $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
     $description->hide(['footer']);
 
-    $description->ui['filters'] = [
-      'fCampaignWorkflowStep' => Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Phase')),
-      'fCampaignOwnership' => [ 
+    $description->addFilter(
+      'fCampaignType',
+      [ 
+        'title' => $this->translate('Type'), 
+        'type' => 'multipleSelectButtons',
+        'options' => self::TYPE_ENUM_VALUES,
+      ]
+    );
+    $description->addFilter(
+      'fCampaignWorkflowStep',
+      Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Phase'))
+    );
+    $description->addFilter(
+      'fCampaignOwnership',
+      [ 
         'title' => $this->translate('Ownership'), 
         'options' => [ 
           0 => $this->translate('All'),
           1 => $this->translate('Owned by me',), 
           2 => $this->translate('Managed by me') 
         ] 
-      ],
-      'fCampaignClosed' => [
+      ]
+    );
+    $description->addFilter(
+      'fCampaignClosed',
+      [
         'title' => $this->translate('Open / Closed'),
         'options' => [
           0 => $this->translate('Open'),
@@ -110,8 +130,8 @@ class Campaign extends \Hubleto\Erp\Model
           2 => $this->translate('All'),
         ],
         'default' => 0,
-      ],
-    ];
+      ]
+    );
 
 
     return $description;

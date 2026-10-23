@@ -93,6 +93,10 @@ class Campaign extends \Hubleto\Erp\RecordManager
 
     $filters = $hubleto->router()->urlParamAsArray("filters");
 
+    if (isset($filters['fCampaignType']) && is_array($filters['fCampaignType']) && count($filters['fCampaignType']) > 0) {
+      $query = $query->whereIn($this->table . '.type', $filters['fCampaignType']);
+    }
+
     $query = Workflow::applyWorkflowStepFilter(
       $this->model,
       $query,

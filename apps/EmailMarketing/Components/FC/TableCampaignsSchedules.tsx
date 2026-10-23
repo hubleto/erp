@@ -45,6 +45,56 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
           const numberOfRecipients = record.RECIPIENTS ? record.RECIPIENTS.length : 0;
           const sendToCount = CAMPAIGN?.RECIPIENTS?.length - numberOfRecipients;
 
+          let buttons = [];
+
+          if (!record.EMAIL?.is_closed) buttons.push(<a
+            className='btn btn-transparent'
+            href={globalThis.hubleto.config.projectUrl + '/email-marketing/emails/' + record.id_email}
+            target='_blank'
+          >
+            <span className='icon'><i className='fas fa-pencil'></i></span>
+            <span className='text'>{T.translate('Edit')}</span>
+          </a>);
+
+          if (
+            CAMPAIGN?.type == 2 /* newsletter */
+            && record.EMAIL?.id_sender_account > 0
+            && record.EMAIL?.is_approved
+            && !record.EMAIL?.is_closed) buttons.push(<>
+            <button
+              className={'btn ' + (sendToCount <= 0 ? 'btn-transparent' : 'btn-warning')}
+              onClick={() => {
+                request.post(
+                  'email-marketing/api/launch-email-in-campaign',
+                  { idCampaign: props.idCampaign, idEmail: record.id_email },
+                  {},
+                  (data: any) => {
+                    table.props?.parentForm?.reload();
+                  }
+                )
+              }}
+            >
+              <span className='icon'><i className='fas fa-bolt'></i></span>
+              <span className='text'>{T.translate('Send to')} {sendToCount}</span>
+            </button>
+            <button
+              className='btn btn-transparent'
+              onClick={() => {
+                request.post(
+                  'email-marketing/api/close-email-in-campaign',
+                  { idCampaign: props.idCampaign, idEmail: record.id_email },
+                  {},
+                  (data: any) => {
+                    table.props?.parentForm?.reload();
+                  }
+                )
+              }}
+            >
+              <span className='icon'><i className='fas fa-times'></i></span>
+              <span className='text'>{T.translate('Close')}</span>
+            </button>
+          </>);
+
           return <div className='flex gap-2'>
             <button
               key={key}
@@ -59,8 +109,9 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
               : null}
               <div className={'text block ' + (record.EMAIL?.is_closed ? 'striped-45': '')}>
                 {record.id_email > 0 ? <>
-                  <div className='fond-bold'>
-                    {record.EMAIL?.mail_subject ?? '-'}
+                  <div>
+                    {record.EMAIL?.title ?? '-'}<br/>
+                    <b>{record.EMAIL?.mail_subject ?? '-'}</b>
                   </div>
                   <div className={'badge ' + (record.EMAIL?.SENDER_ACCOUNT?.name ? '' : 'badge-danger')}>
                     {record.EMAIL?.SENDER_ACCOUNT?.name ?? <>{T.translate('No sender account')}</>}
@@ -71,53 +122,11 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                 </> : <div className='text-red-800'>{T.translate('No email selected')}</div>}
               </div>
             </button>
-            <div className='ml-2 btn-group border-none'>
-              <a
-                className='btn btn-transparent'
-                href={globalThis.hubleto.config.projectUrl + '/email-marketing/emails/' + record.id_email}
-                target='_blank'
-              >
-                <span className='icon'><i className='fas fa-pencil'></i></span>
-                <span className='text'>{T.translate('Edit')}</span>
-              </a>
-              {CAMPAIGN?.type == 2 /* newsletter */
-               && record.EMAIL?.id_sender_account > 0
-               && record.EMAIL?.is_approved
-               && !record.EMAIL?.is_closed ? <>
-                <button
-                  className={'btn ' + (sendToCount <= 0 ? 'btn-transparent' : 'btn-warning')}
-                  onClick={() => {
-                    request.post(
-                      'email-marketing/api/launch-email-in-campaign',
-                      { idCampaign: props.idCampaign, idEmail: record.id_email },
-                      {},
-                      (data: any) => {
-                        table.props?.parentForm?.reload();
-                      }
-                    )
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-bolt'></i></span>
-                  <span className='text'>{T.translate('Send to')} {sendToCount}</span>
-                </button>
-                <button
-                  className='btn btn-transparent'
-                  onClick={() => {
-                    request.post(
-                      'email-marketing/api/close-email-in-campaign',
-                      { idCampaign: props.idCampaign, idEmail: record.id_email },
-                      {},
-                      (data: any) => {
-                        table.props?.parentForm?.reload();
-                      }
-                    )
-                  }}
-                >
-                  <span className='icon'><i className='fas fa-times'></i></span>
-                  <span className='text'>{T.translate('Close')}</span>
-                </button>
-              </> : null}
-            </div>
+            {buttons.length == 0 ? null :
+              <div className='btn-group border-none'>
+                {buttons}
+              </div>
+            }
           </div>;
         })}
       </div>

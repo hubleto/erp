@@ -790,7 +790,7 @@ const FormInvoice = (props: FormInvoiceProps) => {
     }
     renderTopInputs={(form: FormMeta) => {
       return (form.id > 0 ? <div className='modal-top-inputs'>
-        <Input field='inbound_outbound'  renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />
+        <Input field='inbound_outbound' renderOnlyInputField customInputProps={{ uiStyle: 'buttons' }} />
         <Input field='type' renderOnlyInputField customInputProps={{ cssClass: 'w-auto', uiStyle: 'buttons' }} />
       </div> : null);
     }}

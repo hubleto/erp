@@ -1,6 +1,6 @@
 import React from 'react';
 import Translator from '@hubleto/react-ui/core/Translator';
-import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
+import { FormMeta, type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
@@ -8,6 +8,7 @@ import moment from 'moment';
 import DateTimeInput from '@hubleto/react-ui/components/fc/Inputs/DateTime';
 import UserSelectInput from '@hubleto/react-ui/components/fc/Inputs/UserSelect';
 import TableActivities from '@hubleto/apps/Worksheets/Components/FC/TableActivities';
+import WorkflowSelector from '@hubleto/react-ui/components/fc/FormComponents/WorkflowSelector';
 
 export interface FormTaskProps extends FormProps {}
 
@@ -37,60 +38,46 @@ const TabDefault = (props: FormTaskProps) => {
     </div>
     <div className='w-full flex gap-2 flex-col md:flex-row'>
       <div className='flex-2'>
-        <div className='flex gap-2 flex-col md:flex-row'>
-          <div className='flex-1'>
-            <div className='flex gap-2'>
-              {ORDERS && ORDERS.length > 0 ?
-                <Input title={T.translate("Orders")}>{ORDERS.map((item, key) => {
-                  return (item ? <a
-                    key={key}
-                    className='badge badge-violet text-lg'
-                    href={globalThis.hubleto.config.projectUrl + '/orders/' + item.id}
-                    target='_blank'
-                  >{item.identifier} {item.title}</a> : '#');
-                })}</Input>
-                : null}
-              {DEALS && DEALS.length > 0 ?
-                <Input title={T.translate("Deals")}>{DEALS.map((item, key) => {
-                  return (item ? <a
-                    key={key}
-                    className='badge badge-violet text-lg'
-                    href={globalThis.hubleto.config.projectUrl + '/deals/' + item.id}
-                    target='_blank'
-                  >{item.identifier} {item.title}</a> : '#');
-                })}</Input>
-              : null}
-              {PROJECTS && PROJECTS.length > 0 ?
-                <Input title={T.translate("Projects")}>{PROJECTS.map((item, key) => {
-                  return (item ? <a
-                    key={key}
-                    className='badge badge-violet text-lg'
-                    href={globalThis.hubleto.config.projectUrl + '/projects/' + item.id}
-                    target='_blank'
-                  >{item.identifier} {item.title}</a> : '#');
-                })}</Input>
-              : null}
-            </div>
-            <Input field='description' />
-            <Input field='id_developer' />
-            <Input field='id_tester' />
-            <Input field='shared_folder' />
-            <Input field='hours_estimation' />
-            <Input field='notes' customInputProps={{cssClass: 'border border-orange-200'}} />
-          </div>
-          <div className='flex-1'>
-            <Input field='id_customer' />
-            <Input field='id_contact' />
-            <Input field='priority' />
-            <Input field='duration_days' />
-            <Input field='date_start' />
-            <Input field='date_deadline' />
-            <Input field='is_chargeable' customInputProps={{yesText: T.translate('Chargeable')}} />
-          </div>
+        <div className='flex gap-2'>
+          {ORDERS && ORDERS.length > 0 ?
+            <Input title={T.translate("Orders")}>{ORDERS.map((item, key) => {
+              return (item ? <a
+                key={key}
+                className='badge badge-violet text-lg'
+                href={globalThis.hubleto.config.projectUrl + '/orders/' + item.id}
+                target='_blank'
+              >{item.identifier} {item.title}</a> : '#');
+            })}</Input>
+            : null}
+          {DEALS && DEALS.length > 0 ?
+            <Input title={T.translate("Deals")}>{DEALS.map((item, key) => {
+              return (item ? <a
+                key={key}
+                className='badge badge-violet text-lg'
+                href={globalThis.hubleto.config.projectUrl + '/deals/' + item.id}
+                target='_blank'
+              >{item.identifier} {item.title}</a> : '#');
+            })}</Input>
+          : null}
+          {PROJECTS && PROJECTS.length > 0 ?
+            <Input title={T.translate("Projects")}>{PROJECTS.map((item, key) => {
+              return (item ? <a
+                key={key}
+                className='badge badge-violet text-lg'
+                href={globalThis.hubleto.config.projectUrl + '/projects/' + item.id}
+                target='_blank'
+              >{item.identifier} {item.title}</a> : '#');
+            })}</Input>
+          : null}
         </div>
+        <Input field='description' />
+        <Input field='id_developer' />
+        <Input field='id_tester' />
+        <Input field='hours_estimation' />
+        <Input field='notes' customInputProps={{cssClass: 'border border-orange-200'}} />
       </div>
       {form.id <= 0 ? null :
-        <div className='flex-1 flex gap-2 flex-col'>
+        <div className='flex-2 flex gap-2 flex-col'>
           <div className='text-2xl'>
             {globalThis.hubleto.numberFormat(virtWorkedHours, 2)} h
           </div>
@@ -184,7 +171,7 @@ const TabDefault = (props: FormTaskProps) => {
               })}
               {!isClosed ?
                 <button
-                  className='btn btn-add-outline'
+                  className='btn btn-add-outline mt-2'
                   onClick={(e) => {
                     e.preventDefault();
                     let newTodo = [...TODO];
@@ -205,6 +192,15 @@ const TabDefault = (props: FormTaskProps) => {
           </div>
         </div>
       }
+      <div className='flex-1'>
+        <Input field='id_customer' />
+        <Input field='id_contact' />
+        <Input field='shared_folder' />
+        <Input field='duration_days' />
+        <Input field='date_start' />
+        <Input field='date_deadline' />
+        <Input field='is_chargeable' customInputProps={{yesText: T.translate('Chargeable')}} />
+      </div>
     </div>
   </>;
 }
@@ -228,7 +224,6 @@ const FormTask = (props: FormTaskProps) => {
     parentApp={parentApp}
     model={parentApp + '/Models/Task'}
     urlSlug='tasks'
-    endpointParams={{...props.endpointParams, saveRelations: ['TODO']}}
     // onAfterFormInitialized={(form: any) => {}}
     // renderTitle={(): React.JSX.Element => { return <></>; }
     title={{fields: ['identifier', 'title'], sub: T.translate('Task')}}
@@ -236,7 +231,22 @@ const FormTask = (props: FormTaskProps) => {
       default: {title: <b>{T.translate('Task')}</b>, content: () => <TabDefault {...props} /> },
       worksheet: {title: T.translate('Worksheet'), content: () => <TabWorksheet {...props} /> },
     }}
+    renderTopInputs={(form: FormMeta) => {
+      return <div className='modal-top-inputs'>
+        <Input
+          field='is_closed'
+          readonly={false}
+          renderOnlyInputField
+          customInputProps={{yesText: 'Closed', noText: 'Open', yesBtnClass: 'btn-danger', noBtnClass: 'btn-success'}}
+          onChange={() => { form.saveRecord(); }}
+        />
+        <div className='min-w-64'><WorkflowSelector /></div>
+        <Input field='priority' customInputProps={{wrapperCssClass: 'flex gap-2', uiStyle: 'buttons'}} />
+      </div>
+    }}
+
     {...props}
+    endpointParams={{...props.endpointParams, saveRelations: ['TODO']}}
   ></Form>;
 }
 

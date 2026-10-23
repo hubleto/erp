@@ -90,14 +90,14 @@ class Task extends \Hubleto\Erp\Model
       'title' => (new Varchar($this, $this->translate('Title')))->setDefaultVisible()->setRequired()->setCssClass('font-bold'),
       'description' => (new Text($this, $this->translate('Description (Scope of Work)'))),
       'id_customer' => (new Lookup($this, $this->translate('Customer'), Customer::class)),
-      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden()->setIcon(self::COLUMN_CONTACT_DEFAULT_ICON),
+      'id_contact' => (new Lookup($this, $this->translate('Contact'), Contact::class))->setDefaultHidden(),
       'id_developer' => (new Lookup($this, $this->translate('Developer'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->authProvider()->getUserId())
       ,
       'id_tester' => (new Lookup($this, $this->translate('Tester'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setRequired()
         ->setDefaultValue($this->authProvider()->getUserId())
       ,
-      'priority' => (new Integer($this, $this->translate('Priority'))),
+      'priority' => (new Integer($this, $this->translate('Priority')))->setEnumValues([1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5']),
       'hours_estimation' => (new Decimal($this, $this->translate('Estimated workhours')))->setDefaultVisible()->setUnit('h')->setDecimals(2),
       'duration_days' => (new Integer($this, $this->translate('Estimated duration')))->setDefaultVisible()->setUnit($this->translate('days')),
       'date_start' => (new Date($this, $this->translate('Start')))->setDefaultValue(date("Y-m-d")),

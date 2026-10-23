@@ -24,8 +24,8 @@ class Campaign extends \Hubleto\Erp\Model
   public const TYPE_NEWSLETTER = 2;
 
   public const TYPE_ENUM_VALUES = [
-    self::TYPE_NURTURING => 'Nurturing campaign',
-    self::TYPE_NEWSLETTER => 'Newsletter campaign',
+    self::TYPE_NURTURING => 'Nurturing',
+    self::TYPE_NEWSLETTER => 'Newsletter',
   ];
 
   public const TYPE_CSS_CLASSES = [
@@ -105,21 +105,7 @@ class Campaign extends \Hubleto\Erp\Model
         'options' => self::TYPE_ENUM_VALUES,
       ]
     );
-    $description->addFilter(
-      'fCampaignWorkflowStep',
-      Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Phase'))
-    );
-    $description->addFilter(
-      'fCampaignOwnership',
-      [ 
-        'title' => $this->translate('Ownership'), 
-        'options' => [ 
-          0 => $this->translate('All'),
-          1 => $this->translate('Owned by me',), 
-          2 => $this->translate('Managed by me') 
-        ] 
-      ]
-    );
+
     $description->addFilter(
       'fCampaignClosed',
       [
@@ -133,6 +119,22 @@ class Campaign extends \Hubleto\Erp\Model
       ]
     );
 
+    $description->addFilter(
+      'fCampaignWorkflowStep',
+      Workflow::buildTableFilterForWorkflowSteps($this, $this->translate('Phase'))
+    );
+
+    $description->addFilter(
+      'fCampaignOwnership',
+      [ 
+        'title' => $this->translate('Ownership'), 
+        'options' => [ 
+          0 => $this->translate('All'),
+          1 => $this->translate('Owned by me',), 
+          2 => $this->translate('Managed by me') 
+        ] 
+      ]
+    );
 
     return $description;
   }

@@ -252,6 +252,29 @@ class Deal extends \Hubleto\Erp\Model
     return $dataRaw['CUSTOMER']['name'] ?? '';
   }
 
+
+  /**
+   * [Description for getRelationsIncludedInLoadTableData]
+   *
+   * @return array|null
+   * 
+   */
+  public function getRelationsIncludedInLoadTableData(): array|null
+  {
+    return ['OWNER', 'MANAER', 'CUSTOMER'];
+  }
+
+  /**
+   * [Description for getMaxReadLevelForLoadTableData]
+   *
+   * @return int
+   * 
+   */
+  public function getMaxReadLevelForLoadTableData(): int
+  {
+    return 2;
+  }
+
   /**
    * [Description for getMaxReadLevelForLoadFormData]
    *

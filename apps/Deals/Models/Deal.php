@@ -261,7 +261,7 @@ class Deal extends \Hubleto\Erp\Model
    */
   public function getRelationsIncludedInLoadTableData(): array|null
   {
-    return ['OWNER', 'MANAER', 'CUSTOMER', 'WORKFLOW_STEP'];
+    return ['OWNER', 'MANAGER', 'CUSTOMER', 'WORKFLOW_STEP'];
   }
 
   /**

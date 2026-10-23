@@ -37,10 +37,10 @@ const TableDeals = (props: TableDealsProps) => {
         <div className="flex flex-col p-2 text-sm font-normal">
           <div className='badge pl-2' style={{borderLeft: '1em solid ' + STEP?.color}}>{STEP?.name}</div>
           <div className="flex-dyn gap-2">
-            <div className="text-primary">{record.OWNER?.nick ?? (record.OWNER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
-            <div className="text-gray-400">{record.MANAGER?.nick ?? (record.MANAGER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
+            <div>{record.OWNER?.nick ?? (record.OWNER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
+            <div>{record.MANAGER?.nick ?? (record.MANAGER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
           </div>
-          <div>
+          <div className='m-4'>
             <div className="">{record.CUSTOMER?.name}</div>
             <div className="text-lg font-bold">{record.identifier} {record.title}</div>
           </div>

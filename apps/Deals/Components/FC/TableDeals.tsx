@@ -29,26 +29,29 @@ const TableDeals = (props: TableDealsProps) => {
       return <FormDeal {...table.getDefaultFormProps()}/>;
     }}
     renderCard={(table: TableMeta, record: any, cardIndex: number): React.JSX.Element => {
-      return <button className='btn btn-transparent' onClick={() => table.openForm(record.id)}>
-        <div class="flex flex-col p-2 text-sm font-normal">
-          <div class="flex gap-2">
-            <div class="bg-gray-50 p-1">
-              <div class="text-primary">{record.OWNER?.nick ?? (record.OWNER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
-              <div class="text-gray-400">{record.MANAGER?.nick ?? (record.MANAGER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
-            </div>
-            <div>
-              <div class="text-gray-400 text-nowrap">{record.CUSTOMER?.name}</div>
-              <div class="font-bold">{record.identifier} {record.title}</div>
-            </div>
+      const STEP = record.WORKFLOW_STEP;
+      return <button
+        className={'btn btn-transparent w-1/4 ' + (record.is_closed ? 'striped-45' : '')}
+        onClick={() => table.openForm(record.id)}
+      >
+        <div className="flex flex-col p-2 text-sm font-normal">
+          <div className='badge pl-2' style={{borderLeft: '1em solid ' + STEP?.color}}>{STEP?.name}</div>
+          <div className="flex-dyn gap-2">
+            <div className="text-primary">{record.OWNER?.nick ?? (record.OWNER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
+            <div className="text-gray-400">{record.MANAGER?.nick ?? (record.MANAGER?.email ?? <div class="text-red-800 text-xs">?</div>)}</div>
+          </div>
+          <div>
+            <div className="">{record.CUSTOMER?.name}</div>
+            <div className="text-lg font-bold">{record.identifier} {record.title}</div>
           </div>
           {!record.virt_next_activity_date ?
-            <div class="badge badge-danger text-xs">
-              <i class="fas fa-calendar mr-2"></i>
+            <div className="badge badge-danger text-xs">
+              <i className="fas fa-calendar mr-2"></i>
               {T.translate('No future activity is planned.')}
             </div>
           :
-            <div class="badge badge-success text-xs">
-              <i class="fas fa-calendar mr-2"></i>
+            <div className="badge badge-success text-xs">
+              <i className="fas fa-calendar mr-2"></i>
               {T.translate('Next activity planned for')} {record.virt_next_activity_date}
             </div>
           }

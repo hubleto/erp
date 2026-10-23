@@ -6,6 +6,7 @@ namespace Hubleto\App\Community\EmailMarketing\Controllers\Api;
 use Hubleto\App\Community\EmailMarketing\Models\Email;
 use Hubleto\App\Community\EmailMarketing\Models\Recipient;
 use Hubleto\App\Community\EmailMarketing\Lib;
+use Hubleto\App\Community\EmailMarketing\Models\Campaign;
 
 class ImportRecipients extends \Hubleto\Erp\Controllers\ApiController
 {
@@ -14,6 +15,18 @@ class ImportRecipients extends \Hubleto\Erp\Controllers\ApiController
     $recipients = $this->router()->urlParamAsString('recipients');
     $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $idEmail = $this->router()->urlParamAsInteger('idEmail');
+
+    /** @var Campaign */
+    $mCampaign = $this->getModel(Campaign::class);
+    $campaign = $mCampaign->record->where('id', $idCampaign)->first();
+    if (!$campaign) throw new \Exception("Campaign not found");
+
+    if ($idEmail > 0) {
+      /** @var Email */
+      $mEmail = $this->getModel(Email::class);
+      $email = $mEmail->record->where('id', $idEmail)->first();
+      if (!$email) throw new \Exception("Email not found");
+    }
 
     /** @var Recipient */
     $mRecipient = $this->getModel(Recipient::class);
@@ -57,8 +70,9 @@ class ImportRecipients extends \Hubleto\Erp\Controllers\ApiController
         }
       }
 
-      // scheduling is now done on request by clicking "Launch"
-      // Lib::scheduleMissingEmailsInCampaign($idCampaign);
+      if ($campaign->type == Campaign::TYPE_NURTURING) {
+        Lib::scheduleMissingEmailsInCampaign($idCampaign);
+      }
 
       return ['status' => 'success', 'recipientsImported' => $recipientsImported];
 

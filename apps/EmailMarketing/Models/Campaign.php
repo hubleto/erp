@@ -13,12 +13,21 @@ use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Lookup;
 use Hubleto\Framework\Db\Column\DateTime;
 use Hubleto\Framework\Db\Column\Virtual;
+use Hubleto\Framework\Db\Column\Integer;
 use Hubleto\App\Community\Workflow\Models\Workflow;
 use Hubleto\App\Community\Workflow\Models\WorkflowStep;
 use Hubleto\App\Community\Auth\Models\User;
 
 class Campaign extends \Hubleto\Erp\Model
 {
+  public const TYPE_NURTURING = 1;
+  public const TYPE_NEWSLETTER = 2;
+
+  public const TYPE_ENUM_VALUES = [
+    self::TYPE_NURTURING => 'Nurturing campaign',
+    self::TYPE_NEWSLETTER => 'Newsletter campaign',
+  ];
+
   public string $table = 'email_marketing_campaigns';
   public string $recordManagerClass = RecordManagers\Campaign::class;
   public ?string $lookupSqlValue = '{%TABLE%}.title';
@@ -44,6 +53,7 @@ class Campaign extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'type' => (new Integer($this, $this->translate('Type')))->setEnumValues(self::TYPE_ENUM_VALUES),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),

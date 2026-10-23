@@ -41,6 +41,10 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
     renderRecords={(table: TableMeta): React.JSX.Element => {
       return <div className='list mt-2'>
         {table.data?.records.map((record, key) => {
+          const CAMPAIGN = record.CAMPAIGN;
+          const numberOfRecipients = record.RECIPIENTS ? record.RECIPIENTS.length : 0;
+          const sendToCount = CAMPAIGN?.RECIPIENTS?.length - numberOfRecipients;
+
           return <div className='flex gap-2'>
             <button
               key={key}
@@ -60,15 +64,18 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                     {record.EMAIL?.SENDER_ACCOUNT?.name ?? <>{T.translate('No sender account')}</>}
                   </div>
                   {record.EMAIL?.is_approved ? <div className='badge badge-success'>{T.translate('Approved')}</div> : <div className='badge badge-danger'>{T.translate('Not approved')}</div>}
-                  <div className='badge badge-info'>{record.RECIPIENTS ? record.RECIPIENTS.length : 0} {T.translate('recipients')}</div>
+                  <div className='badge badge-info'>{numberOfRecipients} {T.translate('recipients')}</div>
                   {record.EMAIL?.is_closed ? <div className='badge badge-danger'>{T.translate('Closed')}</div> : null}
                 </> : <div className='text-red-800'>{T.translate('No email selected')}</div>}
               </div>
             </button>
             <div className='m-2'>
-              {record.EMAIL?.id_sender_account > 0 && record.EMAIL?.is_approved && !record.EMAIL?.is_closed ? 
+              {CAMPAIGN?.type == 2 /* newsletter */
+               && record.EMAIL?.id_sender_account > 0
+               && record.EMAIL?.is_approved
+               && !record.EMAIL?.is_closed ? <div className='btn-group'>
                 <button
-                  className='btn btn-transparent'
+                  className={'btn ' + (sendToCount <= 0 ? 'btn-transparent' : 'btn-warning')}
                   onClick={() => {
                     request.post(
                       'email-marketing/api/launch-email-in-campaign',
@@ -81,9 +88,25 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
                   }}
                 >
                   <span className='icon'><i className='fas fa-bolt'></i></span>
-                  <span className='text'>{T.translate('Launch')}</span>
+                  <span className='text'>{T.translate('Send to')} {sendToCount}</span>
                 </button>
-              : null}
+                <button
+                  className='btn btn-transparent'
+                  onClick={() => {
+                    request.post(
+                      'email-marketing/api/close-email-in-campaign',
+                      { idCampaign: props.idCampaign, idEmail: record.id_email },
+                      {},
+                      (data: any) => {
+                        table.props?.parentForm?.reload();
+                      }
+                    )
+                  }}
+                >
+                  <span className='icon'><i className='fas fa-times'></i></span>
+                  <span className='text'>{T.translate('Close')}</span>
+                </button>
+              </div> : null}
             </div>
           </div>;
         })}

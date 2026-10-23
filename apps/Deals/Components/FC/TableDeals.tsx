@@ -21,7 +21,7 @@ const TableDeals = (props: TableDealsProps) => {
     baseUrlSlug='deals'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_customer: props.idCustomer}}
-    showAsCards={true}
+    view='cards'
     getRowClassName={(table: TableMeta, rowData: any): string => {
       return rowData.is_closed ? 'bg-slate-300' : table.getDefaultRowClassName(rowData);
     }}
@@ -30,9 +30,10 @@ const TableDeals = (props: TableDealsProps) => {
     }}
     renderCard={(table: TableMeta, record: any, cardIndex: number): React.JSX.Element => {
       const STEP = record.WORKFLOW_STEP;
-      return <button
-        className={'btn btn-transparent w-1/4 ' + (record.is_closed ? 'striped-45' : '')}
-        onClick={() => table.openForm(record.id)}
+      return <div className='p-2 md:w-1/4'><button
+        key={cardIndex}
+        className={'btn btn-transparent items-start w-full shadow-sm'}
+        onClick={() => { table.openForm(record.id); }}
       >
         <div className="flex flex-col p-2 text-sm font-normal">
           <div className='badge pl-2' style={{borderLeft: '1em solid ' + STEP?.color}}>{STEP?.name}</div>
@@ -56,7 +57,7 @@ const TableDeals = (props: TableDealsProps) => {
             </div>
           }
         </div>
-      </button>;
+      </button></div>;
     }}
     {...props}
   ></Table>

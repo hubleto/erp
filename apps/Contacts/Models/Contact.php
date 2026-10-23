@@ -76,24 +76,31 @@ class Contact extends \Hubleto\Erp\Model
   public function describeTable(): \Hubleto\Framework\Description\Table
   {
     $description = parent::describeTable();
+
+    $idCustomer = $this->router()->urlParamAsInteger('idCustomer', 0);
+
     $description->ui['title'] = ''; // $this->translate('Contacts');
     $description->ui['addButtonText'] = $this->translate('Add contact');
-    $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
-    $description->hide(['footer']);
 
-    $fTagColors = [];
-    $fTagOptions = [];
-    foreach ($this->getModel(Tag::class)->record->get() as $value) {
-      $fTagColors[$value->id] = $value->color;
-      $fTagOptions[$value->id] = $value->name;
+    if ($idCustomer > 0) {
+      $description->hide(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
+    } else {
+      $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
+      $description->hide(['footer']);
+
+      $fTagColors = [];
+      $fTagOptions = [];
+      foreach ($this->getModel(Tag::class)->record->get() as $value) {
+        $fTagColors[$value->id] = $value->color;
+        $fTagOptions[$value->id] = $value->name;
+      }
+      $description->addFilter('fTag', [
+        'title' => $this->translate('Tag'),
+        'type' => 'multipleSelectButtons',
+        'colors' => $fTagColors,
+        'options' => $fTagOptions,
+      ]);
     }
-    $description->addFilter('fTag', [
-      'title' => $this->translate('Tag'),
-      'type' => 'multipleSelectButtons',
-      'colors' => $fTagColors,
-      'options' => $fTagOptions,
-    ]);
-
 
     return $description;
   }

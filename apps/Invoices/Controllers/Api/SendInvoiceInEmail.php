@@ -39,7 +39,7 @@ class SendInvoiceInEmail extends \Hubleto\Erp\Controllers\ApiController
 
     $attachmentName .=
       ' '
-      . Helper::str2url($invoice->number)
+      . Helper::str2url($invoice->number ?? '')
       . ' '
       . Helper::str2url($invoice->CUSTOMER?->name ?? '')
       . '.pdf'

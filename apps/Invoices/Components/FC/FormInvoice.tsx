@@ -117,7 +117,7 @@ const InvoicingProfileDetails = (props: any) => {
 const TabDefault = (props: FormInvoiceProps) => {
   const form = React.useContext(FormMetaContext);
 
-  const [linkPreparedItem, setLinkPreparedItem] = useState(false);
+  const [linkExistingItem, setLinkExistingItem] = useState(false);
 
   const idCustomer: number = useRecordField('id_customer', 0);
   const idSupplier: number = useRecordField('id_supplier', 0);
@@ -328,7 +328,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                                 className='btn btn-transparent btn-small mr-2'
                                 onClick={() => {
                                   request.post(
-                                    'invoices/api/unlink-prepared-item',
+                                    'invoices/api/unlink-existing-item',
                                     {
                                       idInvoice: form.id,
                                       idItem: item.id
@@ -447,11 +447,11 @@ const TabDefault = (props: FormInvoiceProps) => {
                     <button
                       className='btn btn-add-outline mt-2'
                       onClick={() => {
-                        setLinkPreparedItem(true);
+                        setLinkExistingItem(true);
                       }}
                     >
                       <span className='icon'><i className='fas fa-link'></i></span>
-                      <span className='text'>{T.translate('Link prepared item')}</span>
+                      <span className='text'>{T.translate('Link existing item')}</span>
                     </button>
                   </div>
                   <Input field='description_after' renderOnlyInputField customInputProps={{cssClass: 'h-10'}} />
@@ -502,17 +502,17 @@ const TabDefault = (props: FormInvoiceProps) => {
           </div>
         </div>
       </div>
-      {linkPreparedItem ? <>
+      {linkExistingItem ? <>
         <Modal
           uid={props.uid + '_modal_link_prepared_item'}
           isOpen={true}
           type='centered'
           showHeader={true}
           title={<>
-            <h2>{T.translate('Link prepared item')}</h2>
+            <h2>{T.translate('Link existing item')}</h2>
           </>}
           onClose={(modal: ModalMeta) => {
-            setLinkPreparedItem(false);
+            setLinkExistingItem(false);
           }}
         >
           <ModalHeader></ModalHeader>
@@ -520,19 +520,20 @@ const TabDefault = (props: FormInvoiceProps) => {
             uid={props.uid + "_table_link_not_invoiced_items"}
             tag={"link_not_invoiced_items"}
             parentForm={form}
+            linkingItemToInvoice={true}
             idInvoice={0}
             filters={{fStatus: 1}}
             readonly={true}
             onRowClick={(table: any, row: any) => {
               request.post(
-                'invoices/api/link-prepared-item',
+                'invoices/api/link-existing-item',
                 {
                   idInvoice: form.id,
                   idItem: row.id
                 },
                 {},
                 (result: any) => {
-                  setLinkPreparedItem(false);
+                  setLinkExistingItem(false);
                   form.reload();
                 }
               );

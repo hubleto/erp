@@ -7,6 +7,7 @@ import request from '@hubleto/react-ui/core/Request';
 
 interface TableItemsProps extends TableProps {
   idInvoice?: number,
+  linkingItemToInvoice?: boolean,
 }
 
 const componentName = 'TableItems'; // must be the same as the exported const
@@ -23,7 +24,7 @@ const TableItems = (props: TableItemsProps) => {
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_invoice: props.idInvoice}}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
-      if (columnName == "id_invoice" && !data['INVOICE']) {
+      if (!props.linkingItemToInvoice && columnName == "id_invoice" && !data['INVOICE']) {
         return <button
           className='btn btn-yellow btn-small'
           onClick={(e) => {

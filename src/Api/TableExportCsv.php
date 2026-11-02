@@ -69,7 +69,7 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     }
 
     header('Content-Type: application/csv');
-    header('Content-Disposition: attachment; filename=Export-' . $this->model->shortName . '-' . date('Ymd-His') . '.csv');
+    header('Content-Disposition: attachment; filename=Export-' . $this->model->shortName . '.csv');
     header('Pragma: no-cache');
 
     echo iconv("UTF-8", "windows-1250//TRANSLIT", $csvContent);

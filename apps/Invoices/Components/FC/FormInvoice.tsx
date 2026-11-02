@@ -305,7 +305,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                             <td>
                               <IntInput
                                 value={item.vat}
-                                cssClass='bg-white w-auto !w-16'
+                                cssClass={'w-auto !w-16 ' + (item.vat ? 'bg-white' : 'bg-red-100')}
                                 onChange={(input: any, value: any) => {
                                   let newItems = [...ITEMS];
                                   newItems[key].vat = value;

@@ -560,15 +560,14 @@ const TabPayments = (props: FormInvoiceProps) => {
 const TabEmail = (props: FormInvoiceProps) => {
   const form = React.useContext(FormMetaContext);
 
+  const [sendingInvoice, setSendingInvoice] = useState(false);
   const [sendInvoiceEmailType, setSendInvoiceEmailType] = useState('send-invoice');
   const [sendInvoicePreparedData, setSendInvoicePreparedData] = useState(null);
   const [sendInvoiceResult, setSendInvoiceResult] = useState(null);
   const [htmlPreview, setHtmlPreview] = useState('');
 
+  const number: string = useRecordField('number', '');
   const pdf: string = useRecordField('pdf', '');
-
-  if (!pdf) return <div className='alert alert-danger'>{T.translate('PDF version of the invoice was not generated yet. Cannot send.')}</div>;
-  if (sendInvoiceResult) return <div className='alert alert-success'>{T.translate('Email was sent')}</div>;
 
   const updateEmailPreview = () => {
     console.log('updateEmailPreview', sendInvoiceEmailType);
@@ -592,152 +591,166 @@ const TabEmail = (props: FormInvoiceProps) => {
   useEffect(() => { updateEmailPreview(); }, [sendInvoiceEmailType]);
 
   return <>
-    <div className='btn-group'>
-      <button
-        className={'btn ' + (sendInvoiceEmailType == 'send-invoice' ? 'btn-primary': 'btn-transparent')}
-        onClick={() => {
-          setSendInvoiceEmailType('send-invoice');
-        }}
-      >
-        <span className='text'>{T.translate('Send invoice')}</span>
-      </button>
-      <button
-        className={'btn ' + (sendInvoiceEmailType == 'notify-due-invoice' ? 'btn-primary': 'btn-transparent')}
-        onClick={() => {
-          setSendInvoiceEmailType('notify-due-invoice');
-        }}
-      >
-        <span className='text'>{T.translate('Send notification on due invoice')}</span>
-      </button>
-    </div>
-    <div className='mt-2'>
-      {!sendInvoicePreparedData
-        ? <div className='alert alert-warning'>
-          {T.translate('Preparing email...')}
-          <LoaderBar></LoaderBar>
-        </div>
-        : <>
-          <table className='table-default dense'><tbody>
-            <tr>
-              <td>{T.translate('Subject')}:</td>
-              <td>
-                <input
-                  className='w-full bg-white'
-                  value={sendInvoicePreparedData.subject ?? ''}
-                  onChange={(e: any) => {
-                    setSendInvoicePreparedData({
-                      ...sendInvoicePreparedData,
-                      subject: e.currentTarget.value
-                    });
+     {number && pdf ? <>
+      <div className='btn-group'>
+        <button
+          className={'btn ' + (sendInvoiceEmailType == 'send-invoice' ? 'btn-primary': 'btn-transparent')}
+          onClick={() => {
+            setSendInvoiceEmailType('send-invoice');
+          }}
+        >
+          <span className='text'>{T.translate('Send invoice')}</span>
+        </button>
+        <button
+          className={'btn ' + (sendInvoiceEmailType == 'notify-due-invoice' ? 'btn-primary': 'btn-transparent')}
+          onClick={() => {
+            setSendInvoiceEmailType('notify-due-invoice');
+          }}
+        >
+          <span className='text'>{T.translate('Send notification on due invoice')}</span>
+        </button>
+      </div>
+      <div className='mt-2'>
+        {!sendInvoicePreparedData
+          ? <div className='alert alert-warning'>
+            {T.translate('Preparing email...')}
+            <LoaderBar></LoaderBar>
+          </div>
+          : <>
+            <table className='table-default dense'><tbody>
+              <tr>
+                <td>{T.translate('Subject')}:</td>
+                <td>
+                  <input
+                    className='w-full bg-white'
+                    value={sendInvoicePreparedData.subject ?? ''}
+                    onChange={(e: any) => {
+                      setSendInvoicePreparedData({
+                        ...sendInvoicePreparedData,
+                        subject: e.currentTarget.value
+                      });
+                    }}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>{T.translate('From')}:</td>
+                <td>{sendInvoicePreparedData.senderAccount?.name ?? <div className='text-red-800'>{T.translate('Not configured')}</div>}</td>
+              </tr>
+              <tr>
+                <td>{T.translate('To')}:</td>
+                <td className={sendInvoicePreparedData.to == '' ? 'bg-red-100' : ''}>
+                  <input
+                    className='w-full bg-white'
+                    value={sendInvoicePreparedData.to ?? ''}
+                    onChange={(e: any) => {
+                      setSendInvoicePreparedData({
+                        ...sendInvoicePreparedData,
+                        to: e.currentTarget.value
+                      });
+                    }}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>{T.translate('CC')}:</td>
+                <td>
+                  <input
+                    className='w-full bg-white'
+                    value={sendInvoicePreparedData.cc ?? ''}
+                    onChange={(e: any) => {
+                      setSendInvoicePreparedData({
+                        ...sendInvoicePreparedData,
+                        cc: e.currentTarget.value
+                      });
+                    }}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>{T.translate('BCC')}:</td>
+                <td>
+                  <input
+                    className='w-full bg-white'
+                    value={sendInvoicePreparedData.bcc ?? ''}
+                    onChange={(e: any) => {
+                      setSendInvoicePreparedData({
+                        ...sendInvoicePreparedData,
+                        bcc: e.currentTarget.value
+                      });
+                    }}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>{T.translate('Email')}:</td>
+                <td>
+                  <TextareaWithHtmlPreview
+                    value={sendInvoicePreparedData.bodyHtml ?? ''}
+                    onChange={(input: any) => {
+                      setSendInvoicePreparedData({
+                        ...sendInvoicePreparedData,
+                        subject: input.value
+                      });
+                    }}
+                  ></TextareaWithHtmlPreview>
+                </td>
+              </tr>
+              <tr>
+                <td>{T.translate('Attachments')}:</td>
+                <td>
+                  {sendInvoicePreparedData.attachments ? sendInvoicePreparedData.attachments.map((att, index) => {
+                    return <a
+                      className='badge badge-info'
+                      href={globalThis.hubleto.config.uploadUrl + "/" + att.file}
+                      target="_blank"
+                    >{att.name}</a>
+                  }) : null}
+                </td>
+              </tr>
+            </tbody></table>
+            <div className='mt-2'>
+              {sendInvoiceResult ? 
+                <div className='alert alert-success'>{T.translate('Invoice was sent')}</div>
+              :
+                !sendInvoicePreparedData.senderAccount ? 
+                  <div className='alert alert-dange'>{T.translate('Sender account is not configured, cannot send email.')}</div>
+                : <button className='btn btn-add-outline'
+                  onClick={() => {
+                    setSendingInvoice(true);
+                    request.post(
+                      'invoices/api/send-invoice-in-email',
+                      {
+                        idInvoice: form.id,
+                        idSenderAccount: sendInvoicePreparedData.senderAccount.id,
+                        subject: sendInvoicePreparedData.subject,
+                        bodyHtml: sendInvoicePreparedData.bodyHtml,
+                        to: sendInvoicePreparedData.to,
+                        cc: sendInvoicePreparedData.cc,
+                        bcc: sendInvoicePreparedData.bcc,
+                        ATTACHMENTS: sendInvoicePreparedData.ATTACHMENTS,
+                      },
+                      {},
+                      (result: any) => {
+                        setSendInvoiceResult(result);
+                        setSendingInvoice(false);
+                      }
+                    );
                   }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>{T.translate('From')}:</td>
-              <td>{sendInvoicePreparedData.senderAccount?.name ?? <div className='text-red-800'>{T.translate('Not configured')}</div>}</td>
-            </tr>
-            <tr>
-              <td>{T.translate('To')}:</td>
-              <td className={sendInvoicePreparedData.to == '' ? 'bg-red-100' : ''}>
-                <input
-                  className='w-full bg-white'
-                  value={sendInvoicePreparedData.to ?? ''}
-                  onChange={(e: any) => {
-                    setSendInvoicePreparedData({
-                      ...sendInvoicePreparedData,
-                      to: e.currentTarget.value
-                    });
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>{T.translate('CC')}:</td>
-              <td>
-                <input
-                  className='w-full bg-white'
-                  value={sendInvoicePreparedData.cc ?? ''}
-                  onChange={(e: any) => {
-                    setSendInvoicePreparedData({
-                      ...sendInvoicePreparedData,
-                      cc: e.currentTarget.value
-                    });
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>{T.translate('BCC')}:</td>
-              <td>
-                <input
-                  className='w-full bg-white'
-                  value={sendInvoicePreparedData.bcc ?? ''}
-                  onChange={(e: any) => {
-                    setSendInvoicePreparedData({
-                      ...sendInvoicePreparedData,
-                      bcc: e.currentTarget.value
-                    });
-                  }}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>{T.translate('Email')}:</td>
-              <td>
-                <TextareaWithHtmlPreview
-                  value={sendInvoicePreparedData.bodyHtml ?? ''}
-                  onChange={(input: any) => {
-                    setSendInvoicePreparedData({
-                      ...sendInvoicePreparedData,
-                      subject: input.value
-                    });
-                  }}
-                ></TextareaWithHtmlPreview>
-              </td>
-            </tr>
-            <tr>
-              <td>{T.translate('Attachments')}:</td>
-              <td>
-                {sendInvoicePreparedData.attachments ? sendInvoicePreparedData.attachments.map((att, index) => {
-                  return <a
-                    className='badge badge-info'
-                    href={globalThis.hubleto.config.uploadUrl + "/" + att.file}
-                    target="_blank"
-                  >{att.name}</a>
-                }) : null}
-              </td>
-            </tr>
-          </tbody></table>
-          {!sendInvoicePreparedData.senderAccount ? 
-            <div className='alert alert-danger mt-2'>{T.translate('Sender account is not configured, cannot send email.')}</div>
-          : <button className='btn btn-add-outline mt-2'
-            onClick={() => {
-              request.post(
-                'invoices/api/send-invoice-in-email',
-                {
-                  idInvoice: form.id,
-                  idSenderAccount: sendInvoicePreparedData.senderAccount.id,
-                  subject: sendInvoicePreparedData.subject,
-                  bodyHtml: sendInvoicePreparedData.bodyHtml,
-                  to: sendInvoicePreparedData.to,
-                  cc: sendInvoicePreparedData.cc,
-                  bcc: sendInvoicePreparedData.bcc,
-                  ATTACHMENTS: sendInvoicePreparedData.ATTACHMENTS,
-                },
-                {},
-                (result: any) => {
-                  setSendInvoiceResult(result);
-                }
-              );
-            }}
-          >
-            <span className='icon'><i className='fas fa-paper-plane'></i></span>
-            <span className='text'>{T.translate('Send email')}</span>
-          </button>}
-        </>
-      }
-    </div>
+                >
+                  <span className='icon'><i className='fas fa-paper-plane'></i></span>
+                  {sendingInvoice ? <Spinner size="sm" />
+                  : <span className='text'>{T.translate('Send invoice')}</span>}
+                </button>
+              }
+            </div>
+          </>
+        }
+      </div>
+    </> : <div className='flex flex-col gap-2'>
+      {pdf ? null : <div className='alert alert-danger'>{T.translate('PDF version of the invoice was not generated yet.')}</div>}
+      {number ? null : <div className='alert alert-danger'>{T.translate('Invoice number was not generated yet.')}</div>}
+    </div>}
   </>;
 }
 

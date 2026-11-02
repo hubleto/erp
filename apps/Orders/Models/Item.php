@@ -29,8 +29,8 @@ class Item extends \Hubleto\Erp\Model
     'ORDER' => [ self::BELONGS_TO, Order::class, 'id_order', 'id'],
     'PRODUCT' => [ self::BELONGS_TO, Product::class, 'id_product', 'id'],
     'INVOICE_ITEM' => [ self::BELONGS_TO, InvoiceItem::class, "id_invoice_item" ],
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    // 'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
+    // 'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
   ];
 
   public function describeColumns(): array
@@ -59,8 +59,8 @@ class Item extends \Hubleto\Erp\Model
       'date_due' => (new Date($this, $this->translate('Due date')))->setDefaultVisible()->setDefaultValue(date("Y-m-d")),
       'notes' => (new Text($this, $this->translate('Notes')))->setDefaultVisible(),
       'id_invoice_item' => (new Lookup($this, $this->translate('Invoice item'), InvoiceItem::class))->setDefaultVisible(),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
+      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId()),
+      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
       'position' => (new Integer($this, $this->translate('Position (in the PDF)')))->setDefaultVisible(),
     ]);
   }

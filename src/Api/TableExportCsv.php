@@ -14,6 +14,10 @@ class TableExportCsv extends \Hubleto\Erp\Controller
     $cfgJson = base64_decode($cfgB64);
     $cfg = @json_decode($cfgJson, true);
 
+    foreach ($cfg as $varName => $varValue) {
+      $this->router()->setUrlParam($varName, $varValue);
+    }
+
     if (!is_array($cfg)) throw new \Exception('Invalid export configuration.');
 
     $model = $cfg['model'] ?? '';

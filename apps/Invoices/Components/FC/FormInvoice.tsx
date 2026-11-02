@@ -229,35 +229,60 @@ const TabDefault = (props: FormInvoiceProps) => {
               <div className='card-body'>
                 <div className='flex flex-col gap-2'>
                   <Input field='description_before' renderOnlyInputField customInputProps={{cssClass: 'h-10'}} />
-                  <table className='table-default dense'>
-                    <thead>
-                      <tr>
-                        <th className='text-xs'>#</th>
-                        <th className='text-xs'>{T.translate('Item')}</th>
-                        <th className='text-xs'>{T.translate('Unit price')} [{currencySymbol}/{T.translate('unit')}]</th>
-                        <th className='text-xs'>{T.translate('Amount [units]')}</th>
-                        <th className='text-xs'>{T.translate('Discount [%]')}</th>
-                        <th className='text-xs'>{T.translate('VAT [%]')}</th>
-                        <th className='text-xs'>{T.translate('Excl. VAT')} [{currencySymbol}]</th>
-                        <th className='text-xs'>{T.translate('Incl. VAT')} [{currencySymbol}]</th>
-                        <th className='text-xs'>...</th>
-                      </tr>
-                      <tr>
-                        <th className='text-xs'>#</th>
-                        <th className='text-xs' colSpan={2}>{T.translate('Ordered in')}</th>
-                        <th className='text-xs' colSpan={6}>{T.translate('Attachments')}</th>
-                      </tr>
-                    </thead>
+                  <table className='table-default dense not-striped'>
                     <tbody>
                       
                       {ITEMS.map((item, key) => {
                         const rowBgClass = item._toBeDeleted_ ? 'bg-red-100' : (key % 2 == 0 ? 'bg-white' : 'bg-gray-100');
 
                         return <>
+                          <tr className='border-none'>
+                            <th rowSpan={4}>
+                              <div className='badge text-2xl'>{key + 1}</div>
+                            </th>
+                            <th className='text-xs'>{T.translate('Item')}</th>
+                            <th className='text-xs'>{T.translate('Unit price')} [{currencySymbol}/{T.translate('unit')}]</th>
+                            <th className='text-xs'>{T.translate('Amount [units]')}</th>
+                            <th className='text-xs'>{T.translate('VAT [%]')}</th>
+                            <th className='text-xs'>{T.translate('Discount [%]')}</th>
+                            <th className='text-xs'>{T.translate('Excl. VAT')} [{currencySymbol}]</th>
+                            <th className='text-xs'>{T.translate('Incl. VAT')} [{currencySymbol}]</th>
+                            <th rowSpan={4}><div className='flex flex-col gap-2'>
+                              <button
+                                className='btn btn-transparent btn-small'
+                                onClick={() => {
+                                  request.post(
+                                    'invoices/api/unlink-existing-item',
+                                    {
+                                      idInvoice: form.id,
+                                      idItem: item.id
+                                    },
+                                    {},
+                                    (result: any) => {
+                                      form.reload();
+                                    }
+                                  );
+                                }}
+                              >
+                                <span className='icon'><i className='fas fa-link-slash'></i></span>
+                              </button>
+                              {/* <button
+                                className='btn btn-danger btn-small'
+                                onClick={() => {
+                                  let newItems = [...ITEMS];
+                                  if (newItems[key]._toBeDeleted_) {
+                                    delete newItems[key]._toBeDeleted_;
+                                  } else {
+                                    newItems[key]._toBeDeleted_ = true;
+                                  }
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              >
+                                <span className='icon'><i className='fas fa-trash'></i></span>
+                              </button> */}
+                            </div></th>
+                          </tr>
                           <tr key={key + 'a'} className={rowBgClass + ' border-none'}>
-                            <td>
-                              <div className='badge text-xl'>{key + 1}</div>
-                            </td>
                             <td>
                               <VarcharInput
                                 value={item.item}
@@ -293,6 +318,17 @@ const TabDefault = (props: FormInvoiceProps) => {
                             </td>
                             <td>
                               <IntInput
+                                value={item.vat}
+                                cssClass={'w-auto !w-16 text-blue-500 ' + (item.vat ? 'bg-white' : 'bg-red-100')}
+                                onChange={(input: any, value: any) => {
+                                  let newItems = [...ITEMS];
+                                  newItems[key].vat = value;
+                                  form.changeRecord({ITEMS: newItems});
+                                }}
+                              ></IntInput>
+                            </td>
+                            <td>
+                              <IntInput
                                 value={item.discount}
                                 cssClass='bg-white w-auto !w-16'
                                 onChange={(input: any, value: any) => {
@@ -303,64 +339,23 @@ const TabDefault = (props: FormInvoiceProps) => {
                               ></IntInput>
                             </td>
                             <td>
-                              <IntInput
-                                value={item.vat}
-                                cssClass={'w-auto !w-16 ' + (item.vat ? 'bg-white' : 'bg-red-100')}
-                                onChange={(input: any, value: any) => {
-                                  let newItems = [...ITEMS];
-                                  newItems[key].vat = value;
-                                  form.changeRecord({ITEMS: newItems});
-                                }}
-                              ></IntInput>
-                            </td>
-                            <td>
-                              <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
+                              <div className={'text-nowrap badge text-base ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
                                 {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol}
                               </div>
                             </td>
                             <td>
-                              <div className={'text-nowrap badge ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
+                              <div className={'text-nowrap badge text-base ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
                                 {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol}
                               </div>
                             </td>
-                            <td className='text-nowrap'>
-                              <button
-                                className='btn btn-transparent btn-small mr-2'
-                                onClick={() => {
-                                  request.post(
-                                    'invoices/api/unlink-existing-item',
-                                    {
-                                      idInvoice: form.id,
-                                      idItem: item.id
-                                    },
-                                    {},
-                                    (result: any) => {
-                                      form.reload();
-                                    }
-                                  );
-                                }}
-                              >
-                                <span className='icon'><i className='fas fa-link-slash'></i></span>
-                              </button>
-                              <button
-                                className='btn btn-danger btn-small'
-                                onClick={() => {
-                                  let newItems = [...ITEMS];
-                                  if (newItems[key]._toBeDeleted_) {
-                                    delete newItems[key]._toBeDeleted_;
-                                  } else {
-                                    newItems[key]._toBeDeleted_ = true;
-                                  }
-                                  form.changeRecord({ITEMS: newItems});
-                                }}
-                              >
-                                <span className='icon'><i className='fas fa-trash'></i></span>
-                              </button>
-                            </td>
+                          </tr>
+                          <tr className='border-none'>
+                            <th className='text-xs'>{T.translate('Ordered in')}</th>
+                            <th className='text-xs' colSpan={3}>{T.translate('Attachment #1')}</th>
+                            <th className='text-xs' colSpan={3}>{T.translate('Attachment #2')}</th>
                           </tr>
                           <tr key={key + 'b'} className={rowBgClass + ' border-none'}>
-                            <td></td>
-                            <td colSpan={2}>
+                            <td>
                               <LookupInput
                                 value={item.id_order}
                                 cssClass='bg-white w-full'
@@ -403,7 +398,7 @@ const TabDefault = (props: FormInvoiceProps) => {
                                 ></LookupInput>
                               : null}
                             </td>
-                            <td colSpan={6}>
+                            <td colSpan={3}>
                               <FileInput
                                 value={item.attachment_1}
                                 cssClass='bg-white w-auto'
@@ -413,6 +408,8 @@ const TabDefault = (props: FormInvoiceProps) => {
                                   form.changeRecord({ITEMS: newItems});
                                 }}
                               ></FileInput>
+                            </td>
+                            <td colSpan={3}>
                               <FileInput
                                 value={item.attachment_2}
                                 cssClass='bg-white w-auto'

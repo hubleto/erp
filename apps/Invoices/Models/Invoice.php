@@ -287,7 +287,7 @@ class Invoice extends \Hubleto\Erp\Model {
 
   public function getRelationsIncludedInLoadFormData(): array|null
   {
-    return ['ITEMS', 'CUSTOMER', 'SUPPLIER', 'PROFILE', 'PROFILE.COMPANY'];
+    return ['ITEMS', 'CUSTOMER', 'SUPPLIER', 'PROFILE', 'PROFILE.COMPANY', 'CURRENCY'];
   }
 
   public function getMaxReadLevelForLoadFormData(): int

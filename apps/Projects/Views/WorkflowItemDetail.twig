@@ -1,3 +1,6 @@
+{% set openMilestones = 0 %}
+{% for m in item.MILESTONES %} {% if not m.is_closed %} {% set openMilestones = openMilestones + 1 %} {% endif %} {% endfor %}
+
 <div class="p-2 text-sm font-normal">
   <div class="flex justify-between w-full">
     <div class="flex flex-col truncate gap-1">
@@ -6,8 +9,8 @@
         <div class="text-gray-400">{{ item.CUSTOMER.name }}</div>
       </div>
       <div class="font-bold">{{ item.identifier }} {{ item.title }}</div>
-      {% if item.MILESTONES|length <= 0 %}
-        <div>{{ translate('Project has no milestones.') }}</div>
+      {% if openMilestones <= 0 %}
+        <div>{{ translate('Project has no open milestones.') }}</div>
       {% else %}
         <div class="list dense">
           {% for m in item.MILESTONES %}

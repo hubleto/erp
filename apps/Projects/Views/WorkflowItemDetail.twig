@@ -46,8 +46,10 @@
       {% for t in item.TASKS %}
         {% if t.TASK.identifier > 0 %}
           <div class="text-sm">
-            <span class="badge badge-primary">{{ t.TASK.identifier }}</span>
-            <a class="text-primary" href="{{ config.projectUrl }}/tasks/{{ t.TASK.id }}" target="_blank">{{ t.TASK.title }}</a>
+            <a class="text-primary" href="{{ config.projectUrl }}/tasks/{{ t.TASK.id }}" target="_blank">
+              <span class="badge badge-primary">{{ t.TASK.identifier }}</span>
+              <b>{{ t.TASK.title }}</b>
+            </a>
             {% if t.TASK.TODO|length > 0 %}
               <ul class="text-sm ml-12 list-decimal">
                 {% for td in t.TASK.TODO %}

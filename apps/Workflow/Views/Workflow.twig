@@ -56,40 +56,41 @@
 
         <div class="flex flex-col items-stretch md:flex-row justify-start gap-2 overflow-auto">
           {% for step in viewParams.workflow.STEPS %}
+            {% if step.order > 0 %}
+              {% set itemsInStep = 0 %}
+              {% for item in viewParams.items %}
+                {% if item.id_workflow_step == step.id %} {% set itemsInStep = itemsInStep + 1 %} {% endif %}
+              {% endfor %}
 
-            {% set itemsInStep = 0 %}
-            {% for item in viewParams.items %}
-              {% if item.id_workflow_step == step.id %} {% set itemsInStep = itemsInStep + 1 %} {% endif %}
-            {% endfor %}
+              <div class="{{ itemsInStep == 0 ? "flex-2 shrink" : "flex-3" }}">
 
-            <div class="{{ itemsInStep == 0 ? "flex-2 shrink" : "flex-3" }}">
+                <div class="p-2 font-bold items-center justify-between flex flex-row gap-1" style="border-top: 0.5em solid {{ step.color }}">
+                  <div class="text-base text-nowrap">{{ step.name }}</div>
+                  {% set itemsCount = 0 %}
+                  {% for item in viewParams.items %}
+                    {% if item.id_workflow_step == step.id %}
+                      {% set itemsCount = itemsCount + 1 %}
+                    {% endif %}
+                  {% endfor %}
+                  <div class="text-sm text-slate-400">{{ itemsCount }}</div>
+                </div>
 
-              <div class="p-2 font-bold items-center justify-between flex flex-row gap-1" style="border-top: 0.5em solid {{ step.color }}">
-                <div class="text-base text-nowrap">{{ step.name }}</div>
-                {% set itemsCount = 0 %}
-                {% for item in viewParams.items %}
-                  {% if item.id_workflow_step == step.id %}
-                    {% set itemsCount = itemsCount + 1 %}
-                  {% endif %}
-                {% endfor %}
-                <div class="text-sm text-slate-400">{{ itemsCount }}</div>
+                <div class="list overflow-auto md:block">
+                  {% for item in viewParams.items %}
+                    {% if item.id_workflow_step == step.id %}
+                      <div class="list-item w-full"><div class="flex gap-2 justify-between w-full">
+                        <div class="grow hover:bg-gray-50">
+                          {% include item._DETAIL_VIEW with { item: item } %}
+                        </div>
+                        <a class="btn btn-list-item btn-transparent w-12 justify-center" href="{{ hubleto.env().projectUrl }}/{{ item._DETAIL_URL }}" target="_blank">
+                          <span class="icon" title="{{ translate('Show details') }}"><i class="fas fa-external-link"></i></span>
+                        </a>
+                      </div></div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
               </div>
-
-              <div class="list overflow-auto md:block">
-                {% for item in viewParams.items %}
-                  {% if item.id_workflow_step == step.id %}
-                    <div class="list-item w-full"><div class="flex gap-2 justify-between w-full">
-                      <div class="grow hover:bg-gray-50">
-                        {% include item._DETAIL_VIEW with { item: item } %}
-                      </div>
-                      <a class="btn btn-list-item btn-transparent w-12 justify-center" href="{{ hubleto.env().projectUrl }}/{{ item._DETAIL_URL }}" target="_blank">
-                        <span class="icon" title="{{ translate('Show details') }}"><i class="fas fa-external-link"></i></span>
-                      </a>
-                    </div></div>
-                  {% endif %}
-                {% endfor %}
-              </div>
-            </div>
+            {% endif %}
           {% endfor %}
         </div>
       </div>

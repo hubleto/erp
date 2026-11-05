@@ -14,10 +14,10 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
       ->with(['MILESTONES.REPORTS' => function($query) {
         $query->orderBy('projects_milestone_reports.date_report', 'desc');
       }])
+      ->with('TASKS.TASK.TODO.RESPONSIBLE')
       ->with('TASKS.TASK', function($q) {
         $q->where('tasks.is_closed', false);
       })
-      ->with('TASKS.TASK.TODO.RESPONSIBLE')
       ->where($mProject->table . ".id_workflow", $idWorkflow)
       ->where($mProject->table . ".is_closed", false)
     ;

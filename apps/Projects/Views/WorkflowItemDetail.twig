@@ -12,11 +12,11 @@
       {% if openMilestones <= 0 %}
         <div>{{ translate('Project has no open milestones.') }}</div>
       {% else %}
-        <div class="list dense">
+        <div class="list dense border border-yellow-200">
           {% for m in item.MILESTONES %}
             {% if not m.is_closed %} 
               <a
-                class="btn btn-list-item btn-transparent {{ (m.REPORTS|first).progress_percent == 100 ? "text-gray-600" : "text-violet-600" }}"
+                class="btn btn-list-item btn-transparent bg-yellow-50 {{ (m.REPORTS|first).progress_percent == 100 ? "text-gray-600" : "" }}"
                 href="{{ hubleto.env().projectUrl }}/projects/milestones/{{ m.id }}"
                 target="_blank"
               >
@@ -34,7 +34,7 @@
                       {{ translate('{{ progress }} % on {{ date }}', { progress: (m.REPORTS|first).progress_percent, date: hubleto.locale().formatDateShort((m.REPORTS|first).date_report) }) }},
                       {{ (m.REPORTS|first).summary }}
                     {% else %}
-                      ({{ translate('no report yet') }})
+                      <span class="text-red-700">{{ translate('No report yet') }}</span>
                     {% endif %}
                   </div>
                 </span>
@@ -45,7 +45,7 @@
       {% endif %}
       {% for t in item.TASKS %}
         {% if t.TASK.identifier > 0 %}
-          <div class="text-sm">
+          <div class="text-sm mt-2">
             <a class="text-primary" href="{{ config.projectUrl }}/tasks/{{ t.TASK.id }}" target="_blank">
               <span class="badge badge-primary">{{ t.TASK.identifier }}</span>
               <b>{{ t.TASK.title }}</b>

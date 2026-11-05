@@ -17,6 +17,7 @@ class Workflow extends \Hubleto\App\Community\Workflow\Workflow
       ->with('TASKS.TASK', function($q) {
         $q->where('tasks.is_closed', false);
       })
+      ->with('TASKS.TASK.TODO.RESPONSIBLE')
       ->where($mProject->table . ".id_workflow", $idWorkflow)
       ->where($mProject->table . ".is_closed", false)
     ;

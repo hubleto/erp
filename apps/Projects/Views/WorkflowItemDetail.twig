@@ -46,6 +46,16 @@
           <div class="text-sm">
             <span class="badge badge-primary">{{ t.TASK.identifier }}</span>
             <a class="text-primary" href="{{ config.projectUrl }}/tasks/{{ t.TASK.id }}" target="_blank">{{ t.TASK.title }}</a>
+            {% if t.TASK.TODO|length > 0 %}
+              {% for td in t.TASK.TODO %}
+                {% if not td.is_closed %}
+                  <div class="flex gap-2 text-sm ml-12">
+                    <div>{{ td.todo }}</div>
+                    <div>[{{ td.RESPONSIBLE.nick }}, {{ td.date_deadline }}]</div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
           </div>
         {% endif %}
       {% endfor %}

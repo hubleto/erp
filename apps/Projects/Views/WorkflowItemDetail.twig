@@ -23,7 +23,9 @@
                 <span class="icon"><i class="fas fa-calendar-check"></i></span>
                 <span class="text block">
                   <div>
-                    {{ hubleto.locale().formatDateShort(m.date_due) }}
+                    <span style="{% if date(m.date_due) < date() %} color:red; {% endif %}">
+                      {{ hubleto.locale().formatDateShort(m.date_due) }}
+                    </span>
                     {{ m.title }}
                   </div>
                   <div class="text-gray-800">
@@ -51,8 +53,11 @@
                 {% for td in t.TASK.TODO %}
                   {% if not td.is_closed %}
                     <li>
+                      <span class="text-primary">{{ td.RESPONSIBLE.nick }}</span>
                       {{ td.todo }}
-                      [{{ td.RESPONSIBLE.nick }}, {{ td.date_deadline }}]
+                      <span style="{% if date(td.date_deadline) < date() %} color:red; {% endif %}">
+                        {{ hubleto.locale().formatDateShort(td.date_deadline) }}
+                      </span>
                     </li>
                   {% endif %}
                 {% endfor %}

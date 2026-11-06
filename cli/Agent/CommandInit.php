@@ -259,11 +259,11 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $projectUrl = $this->terminal()->read('ConfigEnv.projectUrl', 'http://localhost/' . trim((string) $rewriteBase, '/'));
     }
     if ($assetsUrl === null) {
-      if (is_dir($this->env()->projectFolder . '/assets')) {
-        $assetsUrl = $this->terminal()->read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/assets');
-      } else {
-        $assetsUrl = $this->terminal()->read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/vendor/hubleto/assets');
-      }
+      // if (is_dir($this->env()->projectFolder . '/assets')) {
+      //   $assetsUrl = $this->terminal()->read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/assets');
+      // } else {
+        $assetsUrl = $this->terminal()->read('ConfigEnv.assetsUrl', 'http://localhost/' . trim((string) $rewriteBase, '/') . '/public/assets');
+      // }
     }
     if ($dbHost === null) {
       $dbHost = $this->terminal()->read('ConfigEnv.dbHost', 'localhost');

@@ -250,7 +250,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       $projectFolder = $this->env()->projectFolder;
     }
     if ($releaseFolder === null) {
-      $releaseFolder = $this->env()->releaseFolder;
+      $releaseFolder = $this->env()->projectFolder;
     }
     if ($secureFolder === null) {
       $secureFolder = $this->env()->secureFolder;

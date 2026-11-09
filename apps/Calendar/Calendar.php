@@ -19,6 +19,21 @@ class Calendar extends \Hubleto\Erp\Calendar
     ];
   }
 
+  /**
+   * Read query for loadEvents(). With 'includeOtherUsers' in the filter, records of other users are included too.
+   * Only GetCalendarEvents sets it, for users permitted in the Calendar settings.
+   */
+  public function prepareReadQueryForFilter(\Hubleto\Erp\RecordManager $recordManager, array $filter): mixed
+  {
+    $includeOtherUsers = $filter['includeOtherUsers'] ?? false;
+
+    if ($includeOtherUsers) {
+      return $recordManager->prepareReadQueryOfAllUsers();
+    } else {
+      return $recordManager->prepareReadQuery();
+    }
+  }
+
   public function prepareLoadActivityQuery(Activity $mActivity, int $id): mixed
   {
     return $mActivity->record->prepareReadQuery()->where("{$mActivity->table}.id", $id);
@@ -49,7 +64,7 @@ class Calendar extends \Hubleto\Erp\Calendar
       $dates[] = date('Y-m-d', $ts);
     }
 
-    $query = $mActivity->record->prepareReadQuery()
+    $query = $this->prepareReadQueryForFilter($mActivity->record, $filter)
       ->with('ACTIVITY_TYPE')
     ;
 

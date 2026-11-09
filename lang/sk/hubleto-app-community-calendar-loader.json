@@ -63,7 +63,14 @@
         "My": "Moje",
         "Open": "Otvorené",
         "Completed": "Dokončené",
-        "Share calendar": "Zdieľať kalendár"
+        "Share calendar": "Zdieľať kalendár",
+        "My calendar": "Môj kalendár",
+        "All users": "Všetci používatelia",
+        "Calendar": "Kalendár",
+        "Start": "Začiatok",
+        "End": "Koniec",
+        "Owner": "Vlastník",
+        "Details": "Podrobnosti"
     },
     "Components\\CalendarShareTable": {
         "You are about to remove all shared access to the calendar \"{calendar}\". Do you want to continue?": "Chystáte sa odstrániť všetok zdieľaný prístup ku kalendáru \"{calendar}\". Chcete pokračovať?",
@@ -124,5 +131,11 @@
     "Calendar": {
         "Default": "Predvolený",
         "Add a simple event": "Pridať jednoduchú udalosť"
+    },
+    "Controllers\\Settings": {
+        "Calendar": "Kalendár",
+        "Settings": "Nastavenia",
+        "Settings saved.": "Nastavenia uložené.",
+        "Users who can view calendars and activities of other users": "Používatelia, ktorí môžu pozerať kalendáre a aktivity iných používateľov"
     }
 }

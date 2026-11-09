@@ -1,6 +1,7 @@
 <hblreact-calendar-main
   string:height="85vh"
   json:calendars='{{ viewParams.calendars|json_encode|raw }}'
+  json:users-with-viewable-calendars='{{ viewParams.usersWithViewableCalendars|json_encode|raw }}'
   string:show-activity="{{ viewParams.showActivity }}"
   string:initial-view="{{ viewParams.initialView }}"
 ></hblreact-calendar-main>

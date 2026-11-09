@@ -37,6 +37,17 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
       'fCompleted' => $this->router()->urlParamAsInteger('fCompleted'),
     ];
 
+    /** @var \Hubleto\App\Community\Calendar\Loader $calendarApp */
+    $calendarApp = $this->getService(\Hubleto\App\Community\Calendar\Loader::class);
+
+    // fUser: 0 = the usual calendar, -1 = all users, a user id = that user's calendar.
+    $fUser = $this->router()->urlParamAsInteger('fUser');
+    if ($fUser != 0 && $calendarApp->activeUserCanViewOtherCalendars()) {
+      $filter['includeOtherUsers'] = true;
+      $filter['fOwnership'] = 0;
+      if ($fUser > 0) $filter['idUser'] = $fUser;
+    }
+
     if ($this->router()->isUrlParam('calendar')) {
 
       /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
@@ -81,6 +92,8 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
   ): array {
 
     $events = [];
+    $includeOtherUsers = $filter['includeOtherUsers'] ?? false;
+    $idActiveUser = $this->authProvider()->getUserId();
 
     /** @var \Hubleto\App\Community\Calendar\Manager $calendarManager */
     $calendarManager = $this->getService(\Hubleto\App\Community\Calendar\Manager::class);
@@ -94,6 +107,10 @@ class GetCalendarEvents extends \Hubleto\Erp\Controllers\ApiController
       foreach ($calEvents as $key => $value) {
         $calEvents[$key]['SOURCEFORM'] = $calendar->getCalendarConfig()["formComponent"] ?? null;
         $calEvents[$key]['icon'] = $calendar->getCalendarConfig()["icon"] ?? null;
+
+        // Activities of other users can only be viewed. Their forms would not load them.
+        $isEventOfOtherUser = $includeOtherUsers && ($value['id_owner'] ?? 0) != $idActiveUser;
+        if ($isEventOfOtherUser) $calEvents[$key]['readonly'] = true;
       }
       $events = array_merge($events, $calEvents);
     }

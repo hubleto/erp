@@ -1,3 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ translate('Unsubscribe') }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-800 antialiased flex flex-col items-center justify-center px-4 py-10">
+
+  <main class="w-full max-w-md">
+    <div class="overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-slate-200">
+      <div class="h-1.5 bg-[#4780bf]"></div>
+
+      <div class="p-8">
+        {% if viewParams.recipientEmail %}
+
+          <div class="flex flex-col items-center text-center">
+            <div class="flex h-14 w-14 items-center justify-center rounded-full bg-[#4780bf]/10 text-[#4780bf]">
+              <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+
+            <h1 class="mt-5 text-xl font-semibold text-slate-900">
+              {{ translate('You are unsubscribed') }}
+            </h1>
+
+            <p class="mt-2 text-sm leading-6 text-slate-600">
+              {{ translate('Your email') }}
+              <b class="break-all font-semibold text-slate-900">{{ viewParams.recipientEmail }}</b>
+              {{ translate('has been unsubscribed.') }}
+            </p>
+          </div>
+
+        {% else %}
+
+          <h1 class="text-xl font-semibold text-slate-900">
+            {{ translate('Unsubscribe') }}
+          </h1>
+
+          <form method="GET" action="" class="mt-6">
+            <input type="hidden" name="c" value="{{ viewParams.c }}" />
+
+            <input
+              type="email"
+              id="recipientEmail"
+              name="recipientEmail"
+              required
+              autocomplete="email"
+              class="mt-2 block w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-[#4780bf] focus:outline-none focus:ring-2 focus:ring-[#4780bf]/30"
+              placeholder="your@email-address.com"
+            />
+
+            <button
+              type="submit"
+              class="mt-5 w-full rounded-lg bg-[#4780bf] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#3a6ba3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4780bf]"
+            >
+              {{ translate('Unsubscribe') }}
+            </button>
+          </form>
+
+        {% endif %}
+      </div>
+    </div>
+
+    <p class="mt-6 text-center text-xs text-slate-500">
+      {{ translate('Powered by Hubleto') }}
+      <a href="https://www.hubleto.eu" target="_blank" rel="noopener" class="font-medium text-[#4780bf] underline-offset-2 hover:underline">www.hubleto.eu</a>.
+    </p>
+  </main>
+
+</body>
+</html>
+{# 
+
 <html>
 <head>
   <title>{{ translate('Unsubscribe') }}</title>
@@ -8,7 +84,7 @@
 </head>
 <body>
   <div style="width:600px;margin:5em auto 0 auto;padding:1em;background:#4780bf;color:white;">
-    <b>{{ translate('Unsubscribe') }}</b>
+    <b>{{ translate('You are unsubscribed') }}</b><br/>
     {% if viewParams.recipientEmail %}
       ✓ {{ translate('Your email') }} <b>{{ viewParams.recipientEmail }}</b> {{ translate('has been unsubscribed.') }}
     {% else %}
@@ -27,4 +103,4 @@
     {{ translate('Powered by Hubleto') }} <a href="https://www.hubleto.eu" target="_blank">www.hubleto.eu</a>.
   </p>
 </body>
-</html>
+</html> #}

@@ -26,20 +26,24 @@ class Unsubscribe extends \Hubleto\Erp\Controller
     /** @var RecipientStatus */
     $mRecipientStatus = $this->getModel(RecipientStatus::class);
 
-    $email = $mEmail->record->where('uid', $emailUid)->first();
+    $email = $mEmail->record->where('uid', $emailUid)->with('CAMPAIGN')->first();
 
-    if (!empty($email) && $email) {
-      $mRecipientStatus->record->create([
-        'email' => $recipientEmail,
-        'is_unsubscribed' => true,
-      ]);
+    if (!empty($recipientEmail) && $recipientEmail) {
+      try {
+        $mRecipientStatus->record->create([
+          'email' => $recipientEmail,
+          'is_unsubscribed' => true,
+        ]);
+      } catch (\Throwable $e) {
+        // do nothing
+      }
     }
 
     $this->viewParams['email'] = $email;
     $this->viewParams['recipientEmail'] = $recipientEmail;
     $this->viewParams['c'] = $urlDataB64;
 
-    $this->setView('@Hubleto:App:Community:Campaigns/Unsubscribe.twig');
+    $this->setView('@Hubleto:App:Community:EmailMarketing/Unsubscribe.twig');
 
   }
 

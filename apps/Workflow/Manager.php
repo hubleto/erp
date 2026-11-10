@@ -13,9 +13,14 @@ class Manager extends \Hubleto\Erp\Core
     $workflow = $this->getService($workflowClass);
     if ($workflow instanceof Workflow) {
       $workflow->app = $app;
-      if (!isset($this->workflowLoaders[$group])) $this->workflowLoaders[$group] = [];
+      if (!isset($this->workflowLoaders[$group])) $this->workflowLoaders[$group] = null;
       $this->workflowLoaders[$group] = $workflow;
     }
+  }
+
+  public function getWorkflowGroups(): array
+  {
+    return array_keys($this->workflowLoaders);
   }
 
   /** @return Workflow */

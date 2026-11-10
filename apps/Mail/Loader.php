@@ -226,13 +226,13 @@ class Loader extends \Hubleto\Erp\App
 
       if (is_string($cc)) {
         $ccEmails = $this->parseEmailsFromString($cc);
-      } else {
+      } else if (is_numeric($cc) && $cc > 0) {
         $ccEmails = [ $emailsByUserId[$cc] ];
       }
 
       if (is_string($bcc)) {
         $bccEmails = $this->parseEmailsFromString($bcc);
-      } else {
+      } else if (is_numeric($bcc) && $bcc > 0) {
         $bccEmails = [ $emailsByUserId[$bcc] ];
       }
 

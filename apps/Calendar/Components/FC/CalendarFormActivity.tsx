@@ -25,6 +25,11 @@ interface Recurrence {
 }
 
 const expandRecurrenceDates = (recurrence: Recurrence): Array<string> => {
+
+  // TODO: Expansion starts at the current date, not at `date_start` of the activity, so
+  // recurrences of activities planned in the future start too early.
+  // Suggestion: expand from `date_start`.
+
   let dates = [];
   let date = moment();
   let periodCount = recurrence.periodCount;

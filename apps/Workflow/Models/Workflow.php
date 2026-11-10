@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\Workflow\Models;
 
+use Hubleto\App\Community\Workflow\Manager;
 use Hubleto\Framework\Db\Column\Boolean;
 use Hubleto\Framework\Db\Column\Varchar;
 use Hubleto\Framework\Db\Column\Integer;
@@ -18,24 +19,15 @@ class Workflow extends \Hubleto\Erp\Model
 
   public function describeColumns(): array
   {
+    /** @var Manager */
+    $manager = $this->getService(Manager::class);
+
     return array_merge(parent::describeColumns(), [
       'name' => (new Varchar($this, $this->translate('Name')))->setRequired()->setDefaultVisible(),
       'order' => (new Integer($this, $this->translate('Order')))->setRequired()->setDefaultVisible(),
       'description' => (new Varchar($this, $this->translate('Description')))->setDefaultVisible(),
       'show_in_kanban' => (new Boolean($this, $this->translate('Show in kanban')))->setDefaultVisible(),
-      'group' => (new Varchar($this, $this->translate('Group')))->setRequired()->setDefaultVisible()->setPredefinedValues([
-        'deals',
-        'orders',
-        'projects',
-        'tasks',
-        'leads',
-        'campaigns',
-        'hr_employees',
-        'hr_recruitment',
-        'hr_leave',
-        'hr_attendance',
-        'hr_performance',
-      ])->addIndex('INDEX `group` (`group`)'),
+      'group' => (new Varchar($this, $this->translate('Group')))->setRequired()->setDefaultVisible()->setPredefinedValues($manager->getWorkflowGroups())->addIndex('INDEX `group` (`group`)'),
     ]);
   }
 

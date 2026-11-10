@@ -14,6 +14,8 @@ class Controller extends \Hubleto\Erp\Controller
   {
     parent::prepareView();
 
+    $this->hideDefaultDesktop = $this->router()->urlParamAsString('panelUid') !== '' || $this->router()->urlParamAsInteger('idPanel') > 0;
+
     $this->viewParams['idPanel'] = $this->router()->urlParamAsInteger('idPanel');
     $this->viewParams['configuration'] = $this->router()->urlParamAsArray('configuration');
   }

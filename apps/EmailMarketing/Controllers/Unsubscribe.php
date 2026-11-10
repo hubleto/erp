@@ -2,6 +2,7 @@
 
 namespace Hubleto\App\Community\EmailMarketing\Controllers;
 
+use Hubleto\App\Community\EmailMarketing\Models\Campaign;
 use Hubleto\App\Community\EmailMarketing\Models\Email;
 use Hubleto\App\Community\EmailMarketing\Models\RecipientStatus;
 
@@ -18,7 +19,11 @@ class Unsubscribe extends \Hubleto\Erp\Controller
     $urlDataJson = @base64_decode($urlDataB64);
     $urlData = @json_decode($urlDataJson, true);
 
-    $emailUid = $urlData['cuid'] ?? '';
+    $idCampaign = $urlData['cmpid'] ?? 0;
+    $emailUid = $urlData['euid'] ?? '';
+
+    /** @var Campaign */
+    $mCampaign = $this->getModel(Campaign::class);
 
     /** @var Email */
     $mEmail = $this->getModel(Email::class);
@@ -26,11 +31,13 @@ class Unsubscribe extends \Hubleto\Erp\Controller
     /** @var RecipientStatus */
     $mRecipientStatus = $this->getModel(RecipientStatus::class);
 
-    $email = $mEmail->record->where('uid', $emailUid)->with('CAMPAIGN')->first();
+    $campaign = $mCampaign->record->where('id', $idCampaign)->first();
+    $email = $mEmail->record->where('uid', $emailUid)->first();
 
-    if (!empty($recipientEmail) && $recipientEmail) {
+    if ($idCampaign > 0 && $email && !empty($recipientEmail)) {
       try {
         $mRecipientStatus->record->create([
+          'id_campaign' => $idCampaign,
           'email' => $recipientEmail,
           'is_unsubscribed' => true,
         ]);
@@ -39,6 +46,7 @@ class Unsubscribe extends \Hubleto\Erp\Controller
       }
     }
 
+    $this->viewParams['campaign'] = $campaign;
     $this->viewParams['email'] = $email;
     $this->viewParams['recipientEmail'] = $recipientEmail;
     $this->viewParams['c'] = $urlDataB64;

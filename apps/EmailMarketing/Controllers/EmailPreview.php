@@ -18,7 +18,8 @@ class EmailPreview extends \Hubleto\Erp\Controller
     $urlDataJson = @base64_decode($urlDataB64);
     $urlData = @json_decode($urlDataJson, true);
 
-    $emailUid = $urlData['cuid'] ?? '';
+    $idCampaign = $urlData['cmpid'] ?? '';
+    $emailUid = $urlData['euid'] ?? '';
     $idRecipient = (int) ($urlData['rcid'] ?? 0);
 
     if (empty($emailUid)) return $this->translate('Unknown email.');
@@ -39,6 +40,7 @@ class EmailPreview extends \Hubleto\Erp\Controller
       ->first();
 
     $bodyHtml = Lib::getMailPreview(
+      $idCampaign,
       $email->toArray(),
       ($recipient ? $recipient->toArray() : []),
     );

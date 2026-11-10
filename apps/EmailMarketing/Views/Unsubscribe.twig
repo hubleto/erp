@@ -36,7 +36,7 @@
         {% else %}
 
           <h1 class="text-xl font-semibold text-slate-900">
-            {{ translate('Unsubscribe') }}
+            {{ viewParams.campaign.title ?? 'Unsubscribe' }}
           </h1>
 
           <form method="GET" action="" class="mt-6">

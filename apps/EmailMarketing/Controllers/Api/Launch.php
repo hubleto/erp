@@ -11,6 +11,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
+    $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $idEmail = $this->router()->urlParamAsInteger('idEmail');
 
     $result = [];
@@ -37,6 +38,7 @@ class Launch extends \Hubleto\Erp\Controllers\ApiController
       foreach ($email->RECIPIENTS as $recipient) {
 
         $bodyHtml = Lib::getMailPreview(
+          $idCampaign,
           $email->toArray(),
           $recipient->toArray(),
         );

@@ -10,6 +10,7 @@ class GetEmailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
+    $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $idRecipient = $this->router()->urlParamAsInteger('idRecipient');
 
     /** @var Recipient */
@@ -32,6 +33,7 @@ class GetEmailPreviewInfo extends \Hubleto\Erp\Controllers\ApiController
 
     if ($recipient) {
       $bodyHtml = Lib::getMailPreview(
+        $idCampaign,
         $recipient->MAIL?->toArray() ?? [],
         $recipient->toArray(),
       );

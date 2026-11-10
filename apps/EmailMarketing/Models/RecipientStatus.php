@@ -18,6 +18,7 @@ class RecipientStatus extends \Hubleto\Erp\Model
   public function describeColumns(): array
   {
     return array_merge(parent::describeColumns(), [
+      'id_campaign' => (new Lookup($this, $this->translate('Campaign'), Campaign::class))->setReadonly()->setRequired(),
       'email' => (new Varchar($this, $this->translate('Email')))->setDefaultVisible()->addIndex('INDEX `email` (`email`)'),
       'is_unsubscribed' => (new Boolean($this, $this->translate('Is unsubscribed')))->setDefaultVisible(),
       'is_invalid' => (new Boolean($this, $this->translate('Is invalid')))->setDefaultVisible(),

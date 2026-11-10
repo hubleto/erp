@@ -12,6 +12,7 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
 {
   public function renderJson(): array
   {
+    $idCampaign = $this->router()->urlParamAsInteger('idCampaign');
     $idEmail = $this->router()->urlParamAsInteger('idEmail');
     $to = $this->router()->urlParamAsString('to');
     $variables = $this->router()->urlParamAsString('variables');
@@ -37,11 +38,15 @@ class SendTestEmail extends \Hubleto\Erp\Controllers\ApiController
 
       $user = $this->authProvider()->getUser();
 
-      $bodyHtml = Lib::getMailPreview($email->toArray(), [
-        'first_name' => $user['first_name'],
-        'last_name' => $user['last_name'],
-        'variables' => $variables,
-      ]);
+      $bodyHtml = Lib::getMailPreview(
+        $idCampaign,
+        $email->toArray(),
+        [
+          'first_name' => $user['first_name'],
+          'last_name' => $user['last_name'],
+          'variables' => $variables,
+        ]
+      );
 
       $mMail->createAndSend([
         'subject' => $email->mail_subject,

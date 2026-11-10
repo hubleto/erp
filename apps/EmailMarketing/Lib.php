@@ -13,14 +13,14 @@ class Lib extends Core
   /**
    * [Description for getMailPreview]
    *
+   * @param int $idCampaign
    * @param array $email
-   * @param array $contact
-   * @param array $vars
+   * @param array $recipient
    * 
    * @return string
    * 
    */
-  public static function getMailPreview(array $email, array $recipient): string
+  public static function getMailPreview(int $idCampaign, array $email, array $recipient): string
   {
 
     $bodyHtml = Lib::addUtmVariablesToEmailLinks(
@@ -54,9 +54,9 @@ class Lib extends Core
       $bodyHtml,
     );
 
-    $bodyHtml = str_replace('{{ botDetectorHiddenLink }}', self::getBotDetectorHiddenLink($email, $recipient), $bodyHtml);
-    $bodyHtml = str_replace('{{ unsubscribeHref }}', self::getUnsubscribeHref($email, $recipient), $bodyHtml);
-    $bodyHtml = str_replace('{{ viewInBrowserHref }}', self::getViewInBrowserHref($email, $recipient), $bodyHtml);
+    $bodyHtml = str_replace('{{ botDetectorHiddenLink }}', self::getBotDetectorHiddenLink($idCampaign, $email, $recipient), $bodyHtml);
+    $bodyHtml = str_replace('{{ unsubscribeHref }}', self::getUnsubscribeHref($idCampaign, $email, $recipient), $bodyHtml);
+    $bodyHtml = str_replace('{{ viewInBrowserHref }}', self::getViewInBrowserHref($idCampaign, $email, $recipient), $bodyHtml);
 
     return $bodyHtml;
   }
@@ -67,11 +67,12 @@ class Lib extends Core
    * @return string
    * 
    */
-  public static function getBotDetectorHiddenLink(array $email, array $recipient): string
+  public static function getBotDetectorHiddenLink(int $idCampaign, array $email, array $recipient): string
   {
     $clickTrackerUrl = self::getClickTrackerUrl();
     $botClickData = [
-      'cuid' => ($email['uid'] ?? ''),
+      'cmpid' => $idCampaign,
+      'euid' => ($email['uid'] ?? ''),
       'rcid' => ($recipient['id'] ?? ''),
       'bot' => true,
     ];
@@ -87,11 +88,15 @@ class Lib extends Core
    * @return string
    * 
    */
-  public static function getUnsubscribeHref(array $email, array $recipient): string
+  public static function getUnsubscribeHref(int $idCampaign, array $email, array $recipient): string
   {
     $url = Core::getServiceStatic(Env::class)->projectUrl . '/email-marketing/unsubscribe';
 
-    $urlData = [ 'cuid' => ($email['uid'] ?? ''), 'rcid' => ($recipient['id'] ?? ''), ];
+    $urlData = [
+      'cmpid' => $idCampaign,
+      'euid' => ($email['uid'] ?? ''),
+      'rcid' => ($recipient['id'] ?? '')
+    ];
     return $url . '?c=' . base64_encode(json_encode($urlData));
   }
 
@@ -101,11 +106,15 @@ class Lib extends Core
    * @return string
    * 
    */
-  public static function getViewInBrowserHref(array $email, array $recipient): string
+  public static function getViewInBrowserHref(int $idCampaign, array $email, array $recipient): string
   {
     $url = Core::getServiceStatic(Env::class)->projectUrl . '/email-marketing/email-preview';
 
-    $urlData = [ 'cuid' => ($email['uid'] ?? ''), 'rcid' => ($recipient['id'] ?? ''), ];
+    $urlData = [
+      'cmpid' => $idCampaign,
+      'euid' => ($email['uid'] ?? ''),
+      'rcid' => ($recipient['id'] ?? '')
+    ];
     return $url . '?c=' . base64_encode(json_encode($urlData));
   }
 
@@ -190,7 +199,7 @@ class Lib extends Core
           return $m[0];
         } else {
           $clickData = [
-            'cuid' => ($email['uid'] ?? ''),
+            'euid' => ($email['uid'] ?? ''),
             'rcid' => ($recipient['id'] ?? ''),
             'url' => $m[2],
           ];
@@ -208,7 +217,7 @@ class Lib extends Core
       function($m) use ($clickTrackerUrl, $email, $recipient) {
         return 
           $m[1] . 'href=\'' . $clickTrackerUrl
-          . '?cuid=' . ($email['uid'] ?? '')
+          . '?euid=' . ($email['uid'] ?? '')
           . '&rcid=' . ($recipient['id'] ?? '')
           . '&url=' . urlencode($m[2])
           . '\''
@@ -279,6 +288,7 @@ class Lib extends Core
         if (!$r) {
 
           $bodyHtml = Lib::getMailPreview(
+            $idCampaign,
             $email->toArray(),
             $recipient->toArray(),
           );

@@ -21,7 +21,7 @@ class ClickTracker extends \Hubleto\Erp\Controller
     $clickDataJson = @base64_decode($clickDataB64);
     $clickData = @json_decode($clickDataJson, true);
 
-    $emailUid = $clickData['cuid'] ?? '';
+    $emailUid = $clickData['euid'] ?? '';
     $idRecipient = (int) ($clickData['rcid'] ?? 0);
     $url = $clickData['url'] ?? '';
     $bot = (bool) ($clickData['bot'] ?? false);

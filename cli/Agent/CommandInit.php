@@ -140,6 +140,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $copies = [
       [ $root . '/vendor/hubleto/assets/compiled', $root . '/public/assets/compiled' ],
       [ $root . '/vendor/hubleto/assets/css', $root . '/public/assets/css' ],
+      [ $root . '/vendor/hubleto/assets/js', $root . '/public/assets/js' ],
       [ $root . '/vendor/hubleto/assets/fonts', $root . '/public/assets/fonts' ],
       [ $root . '/vendor/hubleto/assets/images', $root . '/public/assets/images' ],
     ];

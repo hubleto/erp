@@ -42,8 +42,8 @@ class Campaign extends \Hubleto\Erp\Model
   public array $relations = [
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow' ],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step' ],
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    // 'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
+    // 'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
     'SCHEDULES' => [ self::HAS_MANY, CampaignSchedule::class, 'id_campaign', 'id' ],
     'TAGS' => [ self::HAS_MANY, CampaignTag::class, 'id_campaign', 'id' ],
     'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_campaign', 'id' ],
@@ -61,15 +61,16 @@ class Campaign extends \Hubleto\Erp\Model
       'type' => (new Integer($this, $this->translate('Type')))->setDefaultVisible()->setEnumValues(self::TYPE_ENUM_VALUES)->setEnumCssClasses(self::TYPE_CSS_CLASSES),
       'title' => (new Varchar($this, $this->translate('Title')))->setRequired()->setDefaultVisible()->setCssClass('font-bold'),
       'target_audience' => (new Text($this, $this->translate('Target audience')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),
+      'mail_body_template' => (new Text($this, $this->translate('Body template')))->setReactComponent('InputTextareaWithHtmlPreview'),
       'goal' => (new Text($this, $this->translate('Goal')))->setDefaultVisible()->setReactComponent('InputTextareaMarkdown'),
       'notes' => (new Text($this, $this->translate('Notes')))->setReactComponent('InputTextareaMarkdown'),
       'color' => (new Color($this, $this->translate('Color'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
+      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId()),
+      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText($this->translate('Closed'))->setNoText(''),
-      'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
+      // 'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'virt_tags' => (new Virtual($this, $this->translate('Tags')))->setDefaultVisible()
         ->setProperty('sql',"
           SELECT

@@ -31,8 +31,8 @@ class Email extends \Hubleto\Erp\Model
     'LAUNCHED_BY' => [ self::BELONGS_TO, User::class, 'id_launched_by', 'id' ],
     'WORKFLOW' => [ self::HAS_ONE, Workflow::class, 'id', 'id_workflow' ],
     'WORKFLOW_STEP' => [ self::HAS_ONE, WorkflowStep::class, 'id', 'id_workflow_step' ],
-    'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
-    'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
+    // 'OWNER' => [ self::BELONGS_TO, User::class, 'id_owner', 'id'],
+    // 'MANAGER' => [ self::BELONGS_TO, User::class, 'id_manager', 'id' ],
     'RECIPIENTS' => [ self::HAS_MANY, Recipient::class, 'id_email', 'id' ],
   ];
 
@@ -61,9 +61,9 @@ class Email extends \Hubleto\Erp\Model
       'reply_to' => (new Varchar($this, $this->translate('Reply to'))),
       'id_workflow' => (new Lookup($this, $this->translate('Workflow'), Workflow::class))->setReadonly(),
       'id_workflow_step' => (new Lookup($this, $this->translate('Workflow step'), WorkflowStep::class))->setDefaultVisible()->setReadonly(),
-      'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId()),
-      'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
-      'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
+      // 'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId()),
+      // 'id_manager' => (new Lookup($this, $this->translate('Manager'), User::class))->setReactComponent('InputUserSelect')->setDefaultVisible()->setDefaultValue($this->authProvider()->getUserId())->setDefaultVisible(),
+      // 'shared_with' => new Json($this, $this->translate('Shared with'))->setReactComponent('InputSharedWith')->setTableCellRenderer('TableCellRendererSharedWith'),
       'is_approved' => (new Boolean($this, $this->translate('Approved')))->setDefaultVisible(),
       'is_closed' => (new Boolean($this, $this->translate('Closed')))->setDefaultVisible()->setYesText($this->translate('Closed'))->setNoText(''),
       'datetime_created' => (new DateTime($this, $this->translate('Created')))->setDefaultVisible()->setDefaultValue(date('Y-m-d H:i:s'))->setReadonly(),

@@ -7,6 +7,7 @@ import Translator from '@hubleto/react-ui/core/Translator';
 
 interface TableCampaignsSchedulesProps extends TableProps {
   idCampaign?: number,
+  parentCampaign?: any,
 }
 
 const componentName = 'TableCampaignsSchedules';
@@ -36,7 +37,11 @@ const TableCampaignsSchedules = (props: TableCampaignsSchedulesProps) => {
       } else return table.renderDefaultCell(columnName, column, data, options);
     }}
     renderForm={(table: TableMeta): React.JSX.Element => {
-      return <FormCampaignSchedule {...table.getDefaultFormProps()}/>;
+      return <FormCampaignSchedule
+        {...table.getDefaultFormProps()}
+        idCampaign={props.idCampaign}
+        parentCampaign={props.parentCampaign}
+      />;
     }}
     renderRecords={(table: TableMeta): React.JSX.Element => {
       return <div className='list mt-2'>

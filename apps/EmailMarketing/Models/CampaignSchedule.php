@@ -91,4 +91,42 @@ class CampaignSchedule extends \Hubleto\Erp\Model
     return 2;
   }
 
+
+  /**
+   * [Description for onAfterCreate]
+   *
+   * @param array $savedRecord
+   * 
+   * @return array
+   * 
+   */
+  public function onAfterCreate(array $savedRecord): array
+  {
+
+    $idCampaign = $savedRecord['id_campaign'] ?? 0;
+
+    /** @var Campaign */
+    $mCampaign = $this->getModel(Campaign::class);
+
+    /** @var Email */
+    $mEmail = $this->getModel(Email::class);
+
+    if ($idCampaign > 0) {
+      $campaign = $mCampaign->record->where('id', $idCampaign)->first();
+      $email = $mEmail->record->recordCreate([
+        'title' => $campaign->title,
+        'mail_subject' => $campaign->title,
+        'mail_body' => $campaign->mail_body_template,
+      ]);
+
+      $idEmail = $email['id'] ?? 0;
+
+      $this->record->where('id', $savedRecord['id'] ?? 0)->update([
+        'id_email' => $idEmail
+      ]);
+    }
+
+    return parent::onAfterCreate($savedRecord);
+  }
+  
 }

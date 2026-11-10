@@ -14,6 +14,7 @@ const T = new Translator(parentApp + '/Loader', 'Components/' + componentName);
 /** TabDefault */
 const TabDefault = (props: FormRecipientStatusProps) => {
   return <>
+    <Input field='id_campaign' />
     <Input field='email' />
     <Input field='is_unsubscribed' />
     <Input field='is_invalid' />

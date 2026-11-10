@@ -5,7 +5,7 @@ import request from '@hubleto/react-ui/core/Request';
 import Translator from "@hubleto/react-ui/core/Translator";
 import Form, { FormMetaContext } from '@hubleto/react-ui/components/fc/Form';
 import { type FormMeta } from '@hubleto/react-ui/components/fc/FormInterfaces';
-import { useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
+import { useRecord, useRecordField } from '@hubleto/react-ui/components/fc/FormRecordStore';
 import { type FormProps } from '@hubleto/react-ui/components/fc/FormInterfaces';
 import Input from '@hubleto/react-ui/components/fc/FormComponents/Input';
 import InputTags from '@hubleto/react-ui/components/fc/Inputs/Tags';
@@ -20,6 +20,7 @@ const T = new Translator(parentApp + '/Loader', 'Components/FormCampaign');
 /** TabDefault */
 const TabDefault = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
+  const CAMPAIGN: any = useRecord();
   const TAGS: Array<any> = useRecordField('TAGS', []);
   const RECIPIENTS: Array<any> = useRecordField('RECIPIENTS', []);
   const SCHEDULES: Array<any> = useRecordField('SCHEDULES', []);
@@ -78,6 +79,7 @@ const TabDefault = (props: FormCampaignProps) => {
               parentForm={form}
               uid={form.uid + "_table_campaign_schedules"}
               idCampaign={form.id}
+              parentCampaign={CAMPAIGN}
             />
           </div>
         </>}
@@ -105,6 +107,13 @@ const TabDefault = (props: FormCampaignProps) => {
       </div>
     </div> */}
   </>
+}
+
+/** TabTemplate */
+const TabTemplate = (props: FormCampaignProps) => {
+  return <>
+    <Input field='mail_body_template' />
+  </>;
 }
 
 /**
@@ -210,6 +219,7 @@ const FormCampaign = (props: FormCampaignProps) => {
     title={{field: 'title', sub: T.translate('Campaign')}}
     tabs={{
       default: { title: <b>{T.translate('Campaign')}</b>, content: () => <TabDefault {...props} /> },
+      template: { title: T.translate('Template'), content: () => <TabTemplate /> },
       recipients: { title: T.translate('Recipients'), content: () => <TabRecipients /> },
     }}
     {...props}

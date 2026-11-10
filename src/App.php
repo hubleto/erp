@@ -15,8 +15,8 @@ class App extends \Hubleto\Framework\App
       case 'community':
         $urls[] = $this->env()->assetsCompiledUrl . '/js/community/' . $this->shortName . '.js';
       break;
-      case 'enterprise':
-        $urls[] = $this->env()->assetsCompiledUrl . '/js/enterprise/' . $this->shortName . '.js';
+      case 'external':
+        $urls[] = $this->env()->assetsCompiledUrl . '/js/external/' . $this->shortName . '.js';
       break;
       case 'custom':
         $urls[] = $this->env()->assetsCompiledUrl . '/js/custom/' . $this->shortName . '.js';

@@ -63,6 +63,15 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     ],
   ];
 
+  /**
+   * [Description for parseConfigFile]
+   *
+   * @param string $configFile
+   * @param array $extraConfigsInCommandLine
+   * 
+   * @return array
+   * 
+   */
   public function parseConfigFile(string $configFile, array $extraConfigsInCommandLine = []): array
   {
     $configStr = (string) file_get_contents($configFile);
@@ -76,6 +85,80 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     return $config;
   }
 
+  /**
+   * [Description for copyDirectory]
+   *
+   * @param string $source
+   * @param string $destination
+   * 
+   * @return void
+   * 
+   */
+  function copyDirectory(string $source, string $destination): void
+  {
+    if (!is_dir($source)) {
+      throw new \Exception("Source directory does not exist: {$source}");
+    }
+
+    if (!is_dir($destination) && !mkdir($destination, 0777, true)) {
+      throw new \Exception("Cannot create directory: {$destination}");
+    }
+
+    $iterator = new \FilesystemIterator($source, \FilesystemIterator::SKIP_DOTS);
+
+    foreach ($iterator as $item) {
+      $sourcePath = $item->getPathname();
+      $destinationPath = $destination . DIRECTORY_SEPARATOR . $item->getFilename();
+
+      if ($item->isLink()) {
+        // Preserve symbolic links rather than following them
+        $target = readlink($sourcePath);
+
+        if ($target === false || !symlink($target, $destinationPath)) {
+          throw new \Exception("Cannot copy symlink: {$sourcePath}");
+        }
+      } elseif ($item->isDir()) {
+        $this->copyDirectory($sourcePath, $destinationPath);
+      } elseif ($item->isFile()) {
+        if (!copy($sourcePath, $destinationPath)) {
+          throw new \Exception("Cannot copy file: {$sourcePath}");
+        }
+      }
+    }
+  }
+
+  /**
+   * [Description for copyAssetsToPublic]
+   *
+   * @return void
+   * 
+   */
+  public function copyAssetsToPublic(): void
+  {
+    $root = $this->env()->projectFolder;
+
+    $copies = [
+      [ $root . '/vendor/hubleto/assets/compiled', $root . '/public/assets/compiled' ],
+      [ $root . '/vendor/hubleto/assets/css', $root . '/public/assets/css' ],
+      [ $root . '/vendor/hubleto/assets/fonts', $root . '/public/assets/fonts' ],
+      [ $root . '/vendor/hubleto/assets/images', $root . '/public/assets/images' ],
+    ];
+
+    foreach ($copies as [$source, $destination]) {
+      // Remove previous destination to avoid stale files
+      if (file_exists($destination) || is_link($destination)) {
+        throw new \Exception("Directory already exists: {$destination}");
+      }
+      $this->copyDirectory($source, $destination);
+    }
+  }
+
+  /**
+   * [Description for run]
+   *
+   * @return void
+   * 
+   */
   public function run(): void
   {
 
@@ -509,6 +592,13 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     if ($generateDemoData) {
       $this->terminal()->cyan("  -> Generating demo data.\n");
       $this->getService(\Hubleto\Erp\Cli\Agent\Project\GenerateDemoData::class)->run();
+    }
+
+    try {
+      $this->terminal()->cyan("  -> Copying assets to folder `public`.\n");
+      $this->copyAssetsToPublic();
+    } catch (\Throwable $e) {
+      $this->terminal()->red("     ERROR: " . $e->getMessage());
     }
 
     $this->terminal()->cyan("\n");

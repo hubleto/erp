@@ -185,7 +185,7 @@ class Campaign extends \Hubleto\Erp\Model
    */
   public function getRelationsIncludedInLoadFormData(): array|null
   {
-    return ['TAGS', 'RECIPIENTS', 'SCHEDULES', 'SCHEDULES.RECIPIENTS'];
+    return ['TAGS', 'SCHEDULES'];
   }
 
   public function getMaxReadLevelForLoadFormData(): int

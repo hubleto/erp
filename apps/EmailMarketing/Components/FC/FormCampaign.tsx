@@ -22,8 +22,8 @@ const TabDefault = (props: FormCampaignProps) => {
   const form: FormMeta = React.useContext(FormMetaContext);
   const CAMPAIGN: any = useRecord();
   const TAGS: Array<any> = useRecordField('TAGS', []);
-  const RECIPIENTS: Array<any> = useRecordField('RECIPIENTS', []);
-  const SCHEDULES: Array<any> = useRecordField('SCHEDULES', []);
+  // const RECIPIENTS: Array<any> = useRecordField('RECIPIENTS', []);
+  // const SCHEDULES: Array<any> = useRecordField('SCHEDULES', []);
 
   return <>
     <div className='flex gap-2 flex-col md:flex-row'>
@@ -58,7 +58,7 @@ const TabDefault = (props: FormCampaignProps) => {
         {form.id <= 0 ? null : <>
           <div className='card'>
             <div className='card-body'>
-              <div>Campaign has <b>{RECIPIENTS.length}</b> recipients.</div>
+              {/* <div>Campaign has <b>{RECIPIENTS.length}</b> recipients.</div> */}
               {/* {SCHEDULES ? SCHEDULES.map((s) => {
                 if (s.RECIPIENTS && s.RECIPIENTS.length < RECIPIENTS.length) {
                   const EMAIL = s.EMAIL;

@@ -27,7 +27,16 @@ class Loader extends \Hubleto\Erp\App
       '/^calendar\/?$/' => Controllers\Calendar::class,
       '/^calendar(\/(?<key>\w+))?\/ics\/?$/' => Controllers\IcsCalendar::class,
       '/^calendar\/share\/?$/' => Controllers\Share::class,
+      '/^calendar\/settings\/?$/' => Controllers\Settings::class,
       '/^calendar\/boards\/reminders\/?$/' => Controllers\Boards\Reminders::class,
+    ]);
+
+    /** @var \Hubleto\App\Community\Settings\Loader $settingsApp */
+    $settingsApp = $this->appManager()->getApp(\Hubleto\App\Community\Settings\Loader::class);
+    $settingsApp->addSetting($this, [
+      'title' => $this->translate('Calendar'),
+      'icon' => 'fas fa-calendar',
+      'url' => 'calendar/settings',
     ]);
 
     $boards = $this->getService(\Hubleto\App\Community\Dashboards\Manager::class);
@@ -88,6 +97,41 @@ class Loader extends \Hubleto\Erp\App
   {
     if (!in_array($initialView, ['timeGridDay', 'timeGridWeek', 'dayGridMonth', 'listYear'])) $initialView = 'timeGridWeek';
     $this->config()->save('apps/Hubleto\\App\\Community\\Calendar/initialView', $initialView);
+  }
+
+  /**
+   * Ids of users who can view calendars and activities of other users. Administrators choose them in the settings.
+   *
+   * @return array<int>
+   */
+  public function getUsersPermittedToViewOtherCalendars(): array
+  {
+    $savedIds = $this->config()->getAsString('apps/Hubleto\\App\\Community\\Calendar/usersPermittedToViewOtherCalendars', '');
+
+    $idUsers = [];
+    foreach (explode(',', $savedIds) as $savedId) {
+      $idUser = (int) $savedId;
+      if ($idUser > 0) $idUsers[] = $idUser;
+    }
+
+    return $idUsers;
+  }
+
+  public function setUsersPermittedToViewOtherCalendars(array $idUsers): void
+  {
+    $validIds = [];
+    foreach ($idUsers as $idUser) {
+      if ((int) $idUser > 0) $validIds[] = (int) $idUser;
+    }
+
+    $configPath = 'apps/Hubleto\\App\\Community\\Calendar/usersPermittedToViewOtherCalendars';
+    $this->config()->set($configPath, implode(',', $validIds));
+    $this->config()->save($configPath, implode(',', $validIds));
+  }
+
+  public function activeUserCanViewOtherCalendars(): bool
+  {
+    return in_array($this->authProvider()->getUserId(), $this->getUsersPermittedToViewOtherCalendars());
   }
 
 }

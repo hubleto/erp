@@ -8,6 +8,25 @@ use Hubleto\App\Community\Auth\Models\User;
 class RecordManager extends \Hubleto\Framework\RecordManager
 {
 
+  // False only while prepareReadQueryOfAllUsers() runs. A flag, not a parameter, so the apps'
+  // prepareReadQuery() overrides need no change: they call the parent, which reads the flag.
+  protected bool $filterByActiveUser = true;
+
+  /**
+   * Same as prepareReadQuery(), but the records are not limited to the ones the active user owns or manages.
+   * For places where a setting permits a user to see records of other users, e.g. calendars of other users.
+   */
+  public function prepareReadQueryOfAllUsers(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
+  {
+    $this->filterByActiveUser = false;
+    try {
+      $query = $this->prepareReadQuery($query, $level, $includeRelations);
+    } finally {
+      $this->filterByActiveUser = true;
+    }
+    return $query;
+  }
+
   /**
    * [Description for prepareReadQuery]
    *
@@ -40,8 +59,11 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     }
 
     if (
-      $authProvider->getUserType() == User::TYPE_MANAGER
-      || $authProvider->getUserType() == User::TYPE_CHIEF_OFFICER
+      $this->filterByActiveUser
+      && (
+        $authProvider->getUserType() == User::TYPE_MANAGER
+        || $authProvider->getUserType() == User::TYPE_CHIEF_OFFICER
+      )
     ) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
         $query = $query->where(function ($q) use ($idUser, $userTeams) {
@@ -84,7 +106,8 @@ class RecordManager extends \Hubleto\Framework\RecordManager
         });
       }
     } elseif (
-      ($authProvider->getUserType() == User::TYPE_EMPLOYEE || $authProvider->getUserType() == User::TYPE_ASSISTANT)
+      $this->filterByActiveUser
+      && ($authProvider->getUserType() == User::TYPE_EMPLOYEE || $authProvider->getUserType() == User::TYPE_ASSISTANT)
       && $hasIdOwner
     ) {
       $query = $query->where(function($q) use ($idUser, $hasSharedWith) {

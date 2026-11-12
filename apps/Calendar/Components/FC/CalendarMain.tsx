@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import moment from 'moment';
 import Calendar from "./Calendar";
 import Modal from "@hubleto/react-ui/components/fc/Modal";
+import ModalHeader from "@hubleto/react-ui/components/fc/ModalComponents/Header";
 
 interface CalendarMainProps {
   showActivity?: string,
@@ -17,9 +18,11 @@ interface CalendarMainProps {
   onDateClick: any,
   onEventClick: any,
   calendars?: any,
+  // Users whose calendars can be viewed. Empty if the active user is not permitted in the Calendar settings.
+  usersWithViewableCalendars?: Array<{id: number, name: string}>,
 }
 
-const T = new Translator('HubletoApp\\Community\\Calendar\\Loader', 'Components\\CalendarMain');
+const T = new Translator('Hubleto/App/Community/Calendar/Loader', 'Components/CalendarMain');
 
 const CalendarMain = (props: CalendarMainProps) => {
   const [showActivity, setShowActivity] = useState(props.showActivity ?? '');
@@ -28,12 +31,18 @@ const CalendarMain = (props: CalendarMainProps) => {
   const [calendars, setCalendars] = useState(props.calendars);
   const [fOwnership, setFOwnership] = useState(0);
   const [fCompleted, setFCompleted] = useState(0);
+  // 0 = the usual calendar, -1 = all users, a user id = that user's calendar.
+  const [fUser, setFUser] = useState(0);
+  const [previewedEvent, setPreviewedEvent] = useState<any>(null);
+
+  const usersWithViewableCalendars = props.usersWithViewableCalendars ?? [];
 
   const getActivitiesEndpointUrl = (showActivity?: string, eventId?: number): string => {
     return (
       'calendar/api/get-calendar-events?'
       + 'fOwnership=' + fOwnership
       + '&fCompleted=' + fCompleted
+      + '&fUser=' + fUser
       + '&' + Object.keys(calendars)
         .filter((calendarName) => calendars[calendarName].show)
         .map((calendarName) => 'calendars[]=' + calendarName)
@@ -115,16 +124,29 @@ const CalendarMain = (props: CalendarMainProps) => {
         })}
       </div>
 
-      <div className="list">
-        <button
-          className={"btn btn-small btn-list-item " + (fOwnership == 0 ? "btn-primary" : "btn-transparent")}
-          onClick={() => { setFOwnership(0); }}
-        ><span className="text">{T.translate("All")}</span></button>
-        <button
-          className={"btn btn-small btn-list-item " + (fOwnership == 1 ? "btn-primary" : "btn-transparent")}
-          onClick={() => { setFOwnership(1); }}
-        ><span className="text">{T.translate("My")}</span></button>
-      </div>
+      {usersWithViewableCalendars.length > 0 ?
+        <div>
+          <select className='input' value={fUser} onChange={(event) => { setFUser(parseInt(event.target.value)); }}>
+            <option value={0}>{T.translate("My calendar")}</option>
+            <option value={-1}>{T.translate("All users")}</option>
+            {usersWithViewableCalendars.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}
+          </select>
+        </div>
+      : null}
+
+      {/* The selected user's calendar does not use the All / My filter. */}
+      {fUser == 0 ?
+        <div className="list">
+          <button
+            className={"btn btn-small btn-list-item " + (fOwnership == 0 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { setFOwnership(0); }}
+          ><span className="text">{T.translate("All")}</span></button>
+          <button
+            className={"btn btn-small btn-list-item " + (fOwnership == 1 ? "btn-primary" : "btn-transparent")}
+            onClick={() => { setFOwnership(1); }}
+          ><span className="text">{T.translate("My")}</span></button>
+        </div>
+      : null}
 
       <div className="list">
         <button
@@ -164,7 +186,9 @@ const CalendarMain = (props: CalendarMainProps) => {
           setTimeClicked(info.view.type == "dayGridMonth" ? null : time);
         }}
         onEventClick={(info) => {
-          if (info.event.url) {
+          if (info.event.extendedProps.readonly) {
+            setPreviewedEvent(info.event);
+          } else if (info.event.url) {
             globalThis.window.open(globalThis.hubleto.config.projectUrl + '/' + info.event.url);
           } else {
             setShowActivity(info.event.extendedProps.source + ',' + info.event.id);
@@ -179,6 +203,39 @@ const CalendarMain = (props: CalendarMainProps) => {
       isOpen={true}
       type='right'
     >{eventForm}</Modal> : null}
+    {previewedEvent ? <Modal
+      uid='event_preview_modal'
+      isOpen={true}
+      type='right'
+      showHeader={true}
+      title={<h2>{previewedEvent.title}</h2>}
+      onClose={() => { setPreviewedEvent(null); }}
+    >
+      <ModalHeader></ModalHeader>
+      <table className="table-default dense"><tbody>
+        <tr>
+          <td>{T.translate("Calendar")}</td>
+          <td>{calendars[previewedEvent.extendedProps.source]?.title}</td>
+        </tr>
+        <tr>
+          <td>{T.translate("Start")}</td>
+          <td>{moment(previewedEvent.start).format(previewedEvent.allDay ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm')}</td>
+        </tr>
+        {/* The calendar moves the end of all-day events by one day, so only timed events show it. */}
+        {previewedEvent.end && !previewedEvent.allDay ? <tr>
+          <td>{T.translate("End")}</td>
+          <td>{moment(previewedEvent.end).format('YYYY-MM-DD HH:mm')}</td>
+        </tr> : null}
+        {previewedEvent.extendedProps.owner ? <tr>
+          <td>{T.translate("Owner")}</td>
+          <td>{previewedEvent.extendedProps.owner}</td>
+        </tr> : null}
+        {previewedEvent.extendedProps.details ? <tr>
+          <td>{T.translate("Details")}</td>
+          <td>{previewedEvent.extendedProps.details}</td>
+        </tr> : null}
+      </tbody></table>
+    </Modal> : null}
   </div>;
 }
 

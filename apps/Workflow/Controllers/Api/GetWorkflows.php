@@ -9,6 +9,9 @@ use Hubleto\App\Community\Workflow\Models\WorkflowHistory;
 
 class GetWorkflows extends \Hubleto\Erp\Controllers\ApiController
 {
+
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): array
   {
     $model = $this->router()->urlParamAsString('model');

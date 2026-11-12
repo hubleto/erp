@@ -7,6 +7,8 @@ use Hubleto\Framework\Helper;
 
 class GetUsers extends \Hubleto\Erp\Controllers\ApiController
 {
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): array
   {
     $mUser = $this->getModel(User::class);

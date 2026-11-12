@@ -4,6 +4,9 @@ namespace Hubleto\Erp\Api;
 
 class GetAppsInfo extends \Hubleto\Erp\Controllers\ApiController
 {
+
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): array
   {
     $appsInfo = [];

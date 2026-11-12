@@ -5,6 +5,8 @@ namespace Hubleto\Erp\Api;
 class Dictionary extends \Hubleto\Erp\Controllers\ApiController
 {
 
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): array
   {
     $language = $this->router()->urlParamAsString('language', 'en');

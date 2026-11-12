@@ -6,6 +6,9 @@ use Exception;
 
 class Search extends \Hubleto\Erp\Controllers\ApiController
 {
+
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): array
   {
     $results = [];

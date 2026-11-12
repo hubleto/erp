@@ -6,6 +6,9 @@ use Exception;
 
 class GetTemplateChartData extends \Hubleto\Erp\Controllers\ApiController
 {
+
+  public bool $permittedForAllUsers = true;
+
   public const OPERATIONS = [
     1 => "=",
     2 => "!=",

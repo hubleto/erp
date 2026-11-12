@@ -4,6 +4,9 @@ namespace Hubleto\Erp\Api;
 
 class LogJavascriptError extends \Hubleto\Erp\Controllers\ApiController
 {
+
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): array
   {
     $logFolder = $this->config()->getAsString('logFolder');

@@ -7,6 +7,9 @@ use Exception;
 
 class SaveTableColumnsCustomize extends \Hubleto\Erp\Controllers\ApiController
 {
+
+  public bool $permittedForAllUsers = true;
+
   public function renderJson(): array
   {
     try {

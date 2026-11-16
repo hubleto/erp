@@ -22,6 +22,7 @@ $config['rewriteBase'] = "{{ rewriteBase }}";
 $config['projectUrl'] = '{{ projectUrl }}';
 $config['uploadUrl'] = '{{ projectUrl }}/upload';
 $config['assetsUrl'] = '{{ assetsUrl }}';
+$config['assetsCompileUrl'] = '{{ assetsCompileUrl }}';
 
 // if (is_dir(__DIR__ . '/assets/compiled')) $config['assetsCompiledUrl'] = '{{ projectUrl }}/assets/compiled';
 // else $config['assetsCompiledUrl'] = '{{ assetsUrl }}/compiled';
@@ -32,7 +33,7 @@ $config['assetsUrl'] = '{{ assetsUrl }}';
 // sanitize dirs and urls based on used release
 $config['releaseFolder'] = str_replace('__RELEASE__', $config['release'], $config['releaseFolder']);
 $config['assetsUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsUrl']);
-// $config['assetsCompiledUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsCompiledUrl']);
+$config['assetsCompiledUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsCompiledUrl']);
 // $config['assetsThemesUrl'] = str_replace('__RELEASE__', $config['release'], $config['assetsThemesUrl']);
 
 // db

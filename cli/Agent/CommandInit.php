@@ -176,6 +176,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $secureFolder = null;
     $projectUrl = null;
     $assetsUrl = null;
+    $assetsCompiledUrl = null;
     $dbHost = null;
     $dbUser = null;
     $dbPassword = null;
@@ -242,6 +243,9 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     }
     if (isset($config['assetsUrl'])) {
       $assetsUrl = $config['assetsUrl'];
+    }
+    if (isset($config['assetsCompiledUrl'])) {
+      $assetsCompiledUrl = $config['assetsCompiledUrl'];
     }
     if (isset($config['dbHost'])) {
       $dbHost = $config['dbHost'];
@@ -408,6 +412,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
 
     $projectUrl = str_replace('{{ rewriteBase }}', trim($rewriteBase, '/'), $projectUrl);
     $assetsUrl = str_replace('{{ rewriteBase }}', trim($rewriteBase, '/'), $assetsUrl);
+    $assetsCompiledUrl = str_replace('{{ rewriteBase }}', trim($rewriteBase, '/'), $assetsCompiledUrl ?? rtrim($assetsUrl, '/') . '/compiled');
 
     $errors = [];
     $errorColumns = [];
@@ -454,6 +459,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->terminal()->cyan('  -> projectUrl = ' . (string) $projectUrl . "\n");
     $this->terminal()->cyan('  -> secureFolder = ' . (string) $secureFolder . "\n");
     $this->terminal()->cyan('  -> assetsUrl = ' . (string) $assetsUrl . "\n");
+    $this->terminal()->cyan('  -> assetsCompiledUrl = ' . (string) $assetsCompiledUrl . "\n");
     $this->terminal()->cyan('  -> dbHost = ' . (string) $dbHost . "\n");
     $this->terminal()->cyan('  -> dbUser = ' . (string) $dbUser . "\n");
     $this->terminal()->cyan('  -> dbPassword = ***' . "\n");
@@ -475,6 +481,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
     $this->config()->set('projectUrl', $projectUrl);
     $this->config()->set('secureFolder', $secureFolder);
     $this->config()->set('assetsUrl', $assetsUrl);
+    $this->config()->set('assetsCompiledUrl', $assetsCompiledUrl);
 
     $this->config()->set('db_host', $dbHost);
     $this->config()->set('db_user', $dbUser);
@@ -515,6 +522,7 @@ class CommandInit extends \Hubleto\Erp\Cli\Agent\Command
       (string) $smtpPassword,
       (string) $language,
       false, // randomize (deprecated)
+      (string) $assetsCompiledUrl,
     );
 
     $this->authProvider()->setUserLanguage($language);

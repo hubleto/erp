@@ -23,6 +23,7 @@ class Installer extends \Hubleto\Erp\Core
   public string $releaseFolder = '';
   public string $secureFolder = '';
   public string $assetsUrl = '';
+  public string $assetsCompiledUrl = '';
 
   public string $enterpriseAppsRepository = '';
 
@@ -76,7 +77,8 @@ class Installer extends \Hubleto\Erp\Core
     string $smtpLogin,
     string $smtpPassword,
     string $language,
-    bool $randomize = false
+    bool $randomize = false,
+    string $assetsCompiledUrl = ''
   ) {
     $this->env = $env;
     $this->uid = $uid;
@@ -92,6 +94,7 @@ class Installer extends \Hubleto\Erp\Core
     $this->secureFolder = str_replace('\\', '/', $secureFolder);
     $this->projectUrl = $projectUrl;
     $this->assetsUrl = $assetsUrl;
+    $this->assetsCompiledUrl = $assetsCompiledUrl !== '' ? $assetsCompiledUrl : rtrim($assetsUrl, '/') . '/compiled';
 
     $this->dbHost = $dbHost;
     $this->dbName = $dbName;
@@ -241,6 +244,7 @@ class Installer extends \Hubleto\Erp\Core
     $configEnv = str_replace('{{ secureFolder }}', $this->secureFolder, $configEnv);
     $configEnv = str_replace('{{ projectUrl }}', $this->projectUrl, $configEnv);
     $configEnv = str_replace('{{ assetsUrl }}', $this->assetsUrl, $configEnv);
+    $configEnv = str_replace('{{ assetsCompiledUrl }}', $this->assetsCompiledUrl, $configEnv);
     $configEnv = str_replace('{{ dbHost }}', $this->config()->getAsString('db_host'), $configEnv);
     $configEnv = str_replace('{{ dbUser }}', $this->dbUser, $configEnv);
     $configEnv = str_replace('{{ dbPassword }}', $this->dbPassword, $configEnv);

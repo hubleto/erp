@@ -22,7 +22,7 @@ $config['rewriteBase'] = "{{ rewriteBase }}";
 $config['projectUrl'] = '{{ projectUrl }}';
 $config['uploadUrl'] = '{{ projectUrl }}/upload';
 $config['assetsUrl'] = '{{ assetsUrl }}';
-$config['assetsCompileUrl'] = '{{ assetsCompileUrl }}';
+$config['assetsCompiledUrl'] = '{{ assetsCompiledUrl }}';
 
 // if (is_dir(__DIR__ . '/assets/compiled')) $config['assetsCompiledUrl'] = '{{ projectUrl }}/assets/compiled';
 // else $config['assetsCompiledUrl'] = '{{ assetsUrl }}/compiled';

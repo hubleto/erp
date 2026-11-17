@@ -1,6 +1,7 @@
 import App from '@hubleto/react-ui/core/App'
 import CalendarMain from "./Components/FC/CalendarMain";
 import CalendarFormActivity from "./Components/FC/CalendarFormActivity";
+import InputAttendees from "./Components/FC/InputAttendees";
 import CalendarShareTable from "./Components/CalendarShareTable";
 import FormSharedCalendar from "./Components/FormSharedCalendar";
 
@@ -13,6 +14,7 @@ class CalendarApp extends App {
     globalThis.hubleto.registerReactComponent('CalendarMain', CalendarMain);
     globalThis.hubleto.registerReactComponent('CalendarFormActivity', CalendarFormActivity);
     globalThis.hubleto.registerReactComponent('SharedCalendarForm', FormSharedCalendar);
+    globalThis.hubleto.registerReactComponent('CalendarInputAttendees', InputAttendees);
   }
 }
 

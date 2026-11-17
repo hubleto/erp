@@ -27,6 +27,16 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     return $query;
   }
 
+  // Records with an "attendees" column (JSON list of user ids, e.g. activities) are visible to their attendees too.
+  private function orWhereUserAttends(mixed $query, mixed $idUser): void
+  {
+    $idUserAsText = (string) (int) $idUser;
+    $attendeesJson = "coalesce(nullif({$this->table}.attendees, ''), '[]')";
+    // The ids may be stored as numbers or as strings.
+    $query->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [$idUserAsText]);
+    $query->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [json_encode($idUserAsText)]);
+  }
+
   /**
    * [Description for prepareReadQuery]
    *
@@ -47,6 +57,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $hasIdManager = $this->model->hasColumn('id_manager');
     $hasIdTeam = $this->model->hasColumn('id_team');
     $hasSharedWith = $this->model->hasColumn('shared_with');
+    $hasAttendees = $this->model->hasColumn('attendees');
 
     $authProvider = $hubleto->authProvider();
 
@@ -66,15 +77,16 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       )
     ) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
-        $query = $query->where(function ($q) use ($idUser, $userTeams) {
+        $query = $query->where(function ($q) use ($idUser, $userTeams, $hasAttendees) {
           $q
             ->where($this->table . '.id_owner', $idUser)
             ->orWhere($this->table . '.id_manager', $idUser)
             ->orWhereIn($this->table . '.id_team', $userTeams)
           ;
+          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdOwner && $hasIdManager) {
-        $query = $query->where(function ($q) use ($idUser, $hasSharedWith) {
+        $query = $query->where(function ($q) use ($idUser, $hasSharedWith, $hasAttendees) {
           $q
             ->where($this->table . '.id_owner', $idUser)
             ->orWhere($this->table . '.id_manager', $idUser)
@@ -82,27 +94,31 @@ class RecordManager extends \Hubleto\Framework\RecordManager
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
+          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdOwner) {
-        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
           $q->where($this->table . '.id_owner', $idUser);
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
+          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdManager) {
-        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
           $q->where($this->table . '.id_manager', $idUser);
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
+          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdTeam) {
-        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
           $q->where($this->table . '.id_team', $idUser);
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
+          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       }
     } elseif (
@@ -110,11 +126,12 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       && ($authProvider->getUserType() == User::TYPE_EMPLOYEE || $authProvider->getUserType() == User::TYPE_ASSISTANT)
       && $hasIdOwner
     ) {
-      $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
+      $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
         $q->where($this->table . '.id_owner', $idUser);
         if ($hasSharedWith) {
           $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
         }
+        if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
       });
     }
 

@@ -84,7 +84,7 @@ class Calendar extends \Hubleto\Erp\Calendar
     });
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
-      $query = $query->where($mActivity->table . '.id_owner', $filter['idUser']);
+      $query = $this->whereUserOwnsOrAttends($query, $mActivity, (int) $filter['idUser']);
     }
     if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
       $query = $query->where('completed', $filter['fCompleted'] == 2);
@@ -93,10 +93,27 @@ class Calendar extends \Hubleto\Erp\Calendar
       $query = $query->where('all_day', $filter['all_day']);
     }
     if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
-      $query = $query->where($mActivity->table.".id_owner", $this->authProvider()->getUserId());
+      $query = $this->whereUserOwnsOrAttends($query, $mActivity, (int) $this->authProvider()->getUserId());
     }
 
     return $query;
+  }
+
+  // Activities of a user: the ones the user owns, and the ones the user attends.
+  private function whereUserOwnsOrAttends(mixed $query, Activity $mActivity, int $idUser): mixed
+  {
+    $table = $mActivity->table;
+    if (!$mActivity->hasColumn('attendees')) {
+      return $query->where($table . '.id_owner', $idUser);
+    }
+
+    $attendeesJson = "coalesce(nullif({$table}.attendees, ''), '[]')";
+    return $query->where(function ($activitiesOfUser) use ($table, $idUser, $attendeesJson) {
+      $activitiesOfUser->where($table . '.id_owner', $idUser);
+      // The ids may be stored as numbers or as strings.
+      $activitiesOfUser->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [(string) $idUser]);
+      $activitiesOfUser->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [json_encode((string) $idUser)]);
+    });
   }
 
   public function convertActivitiesToEvents(string $source, array $activities, \Closure $detailsCallback): array

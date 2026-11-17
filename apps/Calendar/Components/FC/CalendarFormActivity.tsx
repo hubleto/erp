@@ -210,6 +210,7 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
         <Input field='online_meeting_link'></Input>
         <Input field='location'></Input>
         <Input field='description'></Input>
+        <Input field='attendees'></Input>
       </div>
       {/* <div className='grow'>
         <Divider>{T.translate('Meeting minutes','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</Divider>

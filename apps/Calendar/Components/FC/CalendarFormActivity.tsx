@@ -44,7 +44,7 @@ const expandRecurrenceDates = (recurrence: Recurrence): Array<string> => {
 
 }
 
-const T = new Translator('HubletoApp\\Community\\Calendar\\Loader', 'Components\\FormActivity');
+const T = new Translator('Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity');
 
 const Content = (props: FormActivityProps): React.JSX.Element => {
   const R = React.useContext(FormRecordStoreContext).getRecord();
@@ -215,7 +215,11 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
           </div>
           <div className='md:w-1/3'>
             {/* On wider screens the user list is as high as the dates, link and place next to it. */}
-            <Input field='attendees' customInputProps={{listCssClass: 'md:max-h-none md:h-[14.8rem]'}}></Input>
+            <Input field='attendees' customInputProps={{
+              searchPlaceholder: T.translate('Search attendees'),
+              emptyText: T.translate('No attendees'),
+              listCssClass: 'md:max-h-none md:h-[14.8rem]',
+            }}></Input>
           </div>
         </div>
 

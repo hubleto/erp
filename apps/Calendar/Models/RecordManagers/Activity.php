@@ -24,7 +24,35 @@ class Activity extends \Hubleto\Erp\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    return parent::prepareReadQuery($query, $level, $includeRelations)->orderBy('date_start')->orderBy('time_start');
+    // The parent would limit the activities to the owned ones. It is turned off here,
+    // because the limit below also lets the attendees read the activity.
+    $limitToActiveUser = $this->filterByActiveUser;
+    $this->filterByActiveUser = false;
+    try {
+      $query = parent::prepareReadQuery($query, $level, $includeRelations);
+    } finally {
+      $this->filterByActiveUser = $limitToActiveUser;
+    }
+
+    // Activities have only an owner, so both limits of the parent mean "owned activities".
+    $isActiveUserLimited = $this->isActiveUserLimitedToOwnManagedAndTeamRecords() || $this->isActiveUserLimitedToOwnRecords();
+    if ($limitToActiveUser && $isActiveUserLimited) {
+      $authProvider = \Hubleto\Framework\Loader::getGlobalApp()->authProvider();
+      $query = $this->whereUserOwnsOrAttends($query, (int) $authProvider->getUserId());
+    }
+
+    return $query->orderBy('date_start')->orderBy('time_start');
+  }
+
+  // Activities the user owns or attends. Attendees are a JSON list of user ids, stored as numbers or strings.
+  public function whereUserOwnsOrAttends(mixed $query, int $idUser): mixed
+  {
+    $attendeesJson = "coalesce(nullif({$this->table}.attendees, ''), '[]')";
+    return $query->where(function ($activitiesOfUser) use ($idUser, $attendeesJson) {
+      $activitiesOfUser->where($this->table . '.id_owner', $idUser);
+      $activitiesOfUser->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [(string) $idUser]);
+      $activitiesOfUser->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [json_encode((string) $idUser)]);
+    });
   }
 
 }

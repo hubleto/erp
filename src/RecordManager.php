@@ -27,14 +27,18 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     return $query;
   }
 
-  // Records with an "attendees" column (JSON list of user ids, e.g. activities) are visible to their attendees too.
-  private function orWhereUserAttends(mixed $query, mixed $idUser): void
+  // Managers and chief officers read only the records they own, manage, or that belong to their team.
+  protected function isActiveUserLimitedToOwnManagedAndTeamRecords(): bool
   {
-    $idUserAsText = (string) (int) $idUser;
-    $attendeesJson = "coalesce(nullif({$this->table}.attendees, ''), '[]')";
-    // The ids may be stored as numbers or as strings.
-    $query->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [$idUserAsText]);
-    $query->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [json_encode($idUserAsText)]);
+    $userType = \Hubleto\Framework\Loader::getGlobalApp()->authProvider()->getUserType();
+    return $userType == User::TYPE_MANAGER || $userType == User::TYPE_CHIEF_OFFICER;
+  }
+
+  // Employees and assistants read only the records they own.
+  protected function isActiveUserLimitedToOwnRecords(): bool
+  {
+    $userType = \Hubleto\Framework\Loader::getGlobalApp()->authProvider()->getUserType();
+    return $userType == User::TYPE_EMPLOYEE || $userType == User::TYPE_ASSISTANT;
   }
 
   /**
@@ -57,7 +61,6 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     $hasIdManager = $this->model->hasColumn('id_manager');
     $hasIdTeam = $this->model->hasColumn('id_team');
     $hasSharedWith = $this->model->hasColumn('shared_with');
-    $hasAttendees = $this->model->hasColumn('attendees');
 
     $authProvider = $hubleto->authProvider();
 
@@ -69,24 +72,17 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       $userTeams[] = $team['id'] ?? 0;
     }
 
-    if (
-      $this->filterByActiveUser
-      && (
-        $authProvider->getUserType() == User::TYPE_MANAGER
-        || $authProvider->getUserType() == User::TYPE_CHIEF_OFFICER
-      )
-    ) {
+    if ($this->filterByActiveUser && $this->isActiveUserLimitedToOwnManagedAndTeamRecords()) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
-        $query = $query->where(function ($q) use ($idUser, $userTeams, $hasAttendees) {
+        $query = $query->where(function ($q) use ($idUser, $userTeams) {
           $q
             ->where($this->table . '.id_owner', $idUser)
             ->orWhere($this->table . '.id_manager', $idUser)
             ->orWhereIn($this->table . '.id_team', $userTeams)
           ;
-          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdOwner && $hasIdManager) {
-        $query = $query->where(function ($q) use ($idUser, $hasSharedWith, $hasAttendees) {
+        $query = $query->where(function ($q) use ($idUser, $hasSharedWith) {
           $q
             ->where($this->table . '.id_owner', $idUser)
             ->orWhere($this->table . '.id_manager', $idUser)
@@ -94,44 +90,35 @@ class RecordManager extends \Hubleto\Framework\RecordManager
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
-          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdOwner) {
-        $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
           $q->where($this->table . '.id_owner', $idUser);
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
-          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdManager) {
-        $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
           $q->where($this->table . '.id_manager', $idUser);
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
-          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       } elseif ($hasIdTeam) {
-        $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
+        $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
           $q->where($this->table . '.id_team', $idUser);
           if ($hasSharedWith) {
             $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
           }
-          if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
         });
       }
-    } elseif (
-      $this->filterByActiveUser
-      && ($authProvider->getUserType() == User::TYPE_EMPLOYEE || $authProvider->getUserType() == User::TYPE_ASSISTANT)
-      && $hasIdOwner
-    ) {
-      $query = $query->where(function($q) use ($idUser, $hasSharedWith, $hasAttendees) {
+    } elseif ($this->filterByActiveUser && $this->isActiveUserLimitedToOwnRecords() && $hasIdOwner) {
+      $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
         $q->where($this->table . '.id_owner', $idUser);
         if ($hasSharedWith) {
           $q->orWhereRaw("JSON_CONTAINS_PATH({$this->table}.shared_with, 'one', '$.\"{$idUser}\"')");
         }
-        if ($hasAttendees) $this->orWhereUserAttends($q, $idUser);
       });
     }
 

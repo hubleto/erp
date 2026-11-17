@@ -116,26 +116,9 @@ class Model extends \Hubleto\Framework\Model
       $canModify = $sharedWith[$idUser] == 'modify';
     }
 
-    // Attendees (e.g. of an activity) may read the record; whether they may change it follows "recordsModify".
-    if ($this->isUserAttendee($record, (int) $idUser)) {
-      $canRead = true;
-    }
-
     $permissions = [true, $canRead, $canModify, $canModify];
 
     return $permissions;
-  }
-
-  // Whether the user is in the record's "attendees" column (JSON list of user ids, stored as numbers or strings).
-  private function isUserAttendee(array $record, int $idUser): bool
-  {
-    $attendees = @json_decode((string) ($record['attendees'] ?? ''), true);
-    if (!is_array($attendees)) return false;
-
-    foreach ($attendees as $idAttendee) {
-      if ((int) $idAttendee == $idUser) return true;
-    }
-    return false;
   }
 
   /**

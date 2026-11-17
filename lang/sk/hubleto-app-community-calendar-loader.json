@@ -122,7 +122,9 @@
         "Repeats from {{ dateFrom }} to {{ dateTo }}.": "Opakuje sa od {{ dateFrom }} do {{ dateTo }}.",
         "day(s)": "deň\/dní",
         "hours": "hodín",
-        "minutes": "minút"
+        "minutes": "minút",
+        "Search attendees": "Hľadať účastníkov",
+        "No attendees": "Bez účastníkov"
     },
     "Components\\FormSharedCalendar": {
         "Shared calendar": "Zdieľaný kalendár",

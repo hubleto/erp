@@ -1,6 +1,7 @@
 {
-    "Components\\Inputs\\Attendees": {
+    "Components\\Inputs\\MultipleUsers": {
         "Search users": "Hľadať používateľov",
-        "No attendees": "Bez účastníkov"
+        "No users selected": "Žiadni vybraní používatelia",
+        "inactive": "neaktívny"
     }
 }

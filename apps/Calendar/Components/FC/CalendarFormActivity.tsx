@@ -214,7 +214,8 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
             <Input field='location'></Input>
           </div>
           <div className='md:w-1/3'>
-            <Input field='attendees'></Input>
+            {/* On wider screens the user list is as high as the dates, link and place next to it. */}
+            <Input field='attendees' customInputProps={{listCssClass: 'md:max-h-none md:h-[14.8rem]'}}></Input>
           </div>
         </div>
 

@@ -42,7 +42,7 @@ class Activity extends \Hubleto\Erp\Model
       'meeting_minutes_link' => (new Varchar($this, $this->translate('Long meeting minutes (link to external document)')))->setReactComponent('InputHyperlink'),
       'meeting_minutes' => (new Text($this, $this->translate('Short meeting minutes')))->setReactComponent('InputWysiwyg'),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
-      'attendees' => (new Json($this, $this->translate('Attendees')))->setReactComponent('CalendarInputAttendees'),
+      'attendees' => (new Json($this, $this->translate('Attendees')))->setReactComponent('InputAttendees'),
     ]);
   }
 }

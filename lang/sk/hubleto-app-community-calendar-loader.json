@@ -138,9 +138,5 @@
         "Settings": "Nastavenia",
         "Settings saved.": "Nastavenia uložené.",
         "Users who can view calendars and activities of other users": "Používatelia, ktorí môžu pozerať kalendáre a aktivity iných používateľov"
-    },
-    "Components\\InputAttendees": {
-        "Search users": "Hľadať používateľov",
-        "No attendees": "Bez účastníkov"
     }
 }

@@ -75,7 +75,8 @@ const InputComponent = () => {
       placeholder={T.translate('Search users')}
       onChange={(event) => setSearch(event.target.value)}
     />
-    <div className='max-h-40 overflow-y-auto border border-gray-200 rounded p-1'>
+    {/* On wider screens the list is as high as the dates, link and place next to it in the activity form. */}
+    <div className='max-h-40 md:max-h-none md:h-[14.8rem] overflow-y-auto border border-gray-200 rounded p-1'>
       {listedUsers.map((user: any) => <label key={user.id} className='flex gap-2 items-center justify-start w-fit cursor-pointer'>
         <input
           type='checkbox'
@@ -84,8 +85,11 @@ const InputComponent = () => {
           disabled={input.readonly}
           onChange={(event) => toggleAttendee(Number(user.id), event.target.checked)}
         />
-        <span>{getUserName(user)}</span>
-        <span className='text-xs text-gray-400'>{user.email}</span>
+        {/* Name and email on two lines, so they fit in a narrow column. */}
+        <span className='flex flex-col'>
+          <span>{getUserName(user)}</span>
+          <span className='text-xs text-gray-400'>{user.email}</span>
+        </span>
       </label>)}
     </div>
   </div>;

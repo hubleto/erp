@@ -84,7 +84,7 @@ class Calendar extends \Hubleto\Erp\Calendar
     });
 
     if (isset($filter['idUser']) && $filter['idUser'] > 0) {
-      $query = $query->where($mActivity->table . '.id_owner', $filter['idUser']);
+      $query = $mActivity->record->whereUserOwnsOrAttends($query, (int) $filter['idUser']);
     }
     if (isset($filter['fCompleted']) && $filter['fCompleted'] > 0) {
       $query = $query->where('completed', $filter['fCompleted'] == 2);
@@ -93,7 +93,7 @@ class Calendar extends \Hubleto\Erp\Calendar
       $query = $query->where('all_day', $filter['all_day']);
     }
     if (isset($filter['fOwnership']) && $filter["fOwnership"] == 1) {
-      $query = $query->where($mActivity->table.".id_owner", $this->authProvider()->getUserId());
+      $query = $mActivity->record->whereUserOwnsOrAttends($query, (int) $this->authProvider()->getUserId());
     }
 
     return $query;

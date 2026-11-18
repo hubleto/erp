@@ -27,6 +27,20 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     return $query;
   }
 
+  // Managers and chief officers read only the records they own, manage, or that belong to their team.
+  protected function isActiveUserLimitedToOwnManagedAndTeamRecords(): bool
+  {
+    $userType = \Hubleto\Framework\Loader::getGlobalApp()->authProvider()->getUserType();
+    return $userType == User::TYPE_MANAGER || $userType == User::TYPE_CHIEF_OFFICER;
+  }
+
+  // Employees and assistants read only the records they own.
+  protected function isActiveUserLimitedToOwnRecords(): bool
+  {
+    $userType = \Hubleto\Framework\Loader::getGlobalApp()->authProvider()->getUserType();
+    return $userType == User::TYPE_EMPLOYEE || $userType == User::TYPE_ASSISTANT;
+  }
+
   /**
    * [Description for prepareReadQuery]
    *
@@ -58,13 +72,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
       $userTeams[] = $team['id'] ?? 0;
     }
 
-    if (
-      $this->filterByActiveUser
-      && (
-        $authProvider->getUserType() == User::TYPE_MANAGER
-        || $authProvider->getUserType() == User::TYPE_CHIEF_OFFICER
-      )
-    ) {
+    if ($this->filterByActiveUser && $this->isActiveUserLimitedToOwnManagedAndTeamRecords()) {
       if ($hasIdOwner && $hasIdManager && $hasIdTeam) {
         $query = $query->where(function ($q) use ($idUser, $userTeams) {
           $q
@@ -105,11 +113,7 @@ class RecordManager extends \Hubleto\Framework\RecordManager
           }
         });
       }
-    } elseif (
-      $this->filterByActiveUser
-      && ($authProvider->getUserType() == User::TYPE_EMPLOYEE || $authProvider->getUserType() == User::TYPE_ASSISTANT)
-      && $hasIdOwner
-    ) {
+    } elseif ($this->filterByActiveUser && $this->isActiveUserLimitedToOwnRecords() && $hasIdOwner) {
       $query = $query->where(function($q) use ($idUser, $hasSharedWith) {
         $q->where($this->table . '.id_owner', $idUser);
         if ($hasSharedWith) {

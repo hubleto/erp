@@ -42,6 +42,31 @@ class Activity extends \Hubleto\Erp\Model
       'meeting_minutes_link' => (new Varchar($this, $this->translate('Long meeting minutes (link to external document)')))->setReactComponent('InputHyperlink'),
       'meeting_minutes' => (new Text($this, $this->translate('Short meeting minutes')))->setReactComponent('InputWysiwyg'),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
+      'attendees' => (new Json($this, $this->translate('Attendees')))->setReactComponent('InputMultipleUsers'),
     ]);
+  }
+
+  // Attendees may read the activity; whether they may change it follows "recordsModify".
+  public function getPermissions(array $record): array
+  {
+    // The permissions are [create, read, update, delete].
+    $permissions = parent::getPermissions($record);
+    $idUser = (int) $this->authProvider()->getUserId();
+    if ($this->isUserAttendee($record, $idUser)) {
+      $permissions[1] = true;
+    }
+    return $permissions;
+  }
+
+  // Attendees are a JSON list of user ids, stored as numbers or strings.
+  private function isUserAttendee(array $record, int $idUser): bool
+  {
+    $attendees = @json_decode((string) ($record['attendees'] ?? ''), true);
+    if (!is_array($attendees)) return false;
+
+    foreach ($attendees as $idAttendee) {
+      if ((int) $idAttendee == $idUser) return true;
+    }
+    return false;
   }
 }

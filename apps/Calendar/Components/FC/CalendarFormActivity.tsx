@@ -44,7 +44,7 @@ const expandRecurrenceDates = (recurrence: Recurrence): Array<string> => {
 
 }
 
-const T = new Translator('HubletoApp\\Community\\Calendar\\Loader', 'Components\\FormActivity');
+const T = new Translator('Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity');
 
 const Content = (props: FormActivityProps): React.JSX.Element => {
   const R = React.useContext(FormRecordStoreContext).getRecord();
@@ -101,114 +101,128 @@ const Content = (props: FormActivityProps): React.JSX.Element => {
         <Input field='subject' cssClass='text-primary text-2xl'></Input>
         <Input field='id_activity_type' customInputProps={{uiStyle: 'buttons'}} renderOnlyInputField></Input>
 
-        <Divider>{T.translate('Start - End - Repeat')}</Divider>
-        <div className='flex flex-col gap-2'>
-          <div className='flex-dyn'>
-            <Input renderOnlyInputField field='date_start' customInputProps={{
-              onChange: (input: any, value: any) => {
-                form.changeRecord({
-                  date_start: value,
-                  date_end: moment(value).add(daysDuration, 'days').format('YYYY-MM-DD')
-                })
-              }
+        {/* The attendees are next to the dates, place and link, so the form is not too long. */}
+        <div className='flex gap-4 flex-col md:flex-row'>
+          <div className='grow'>
+            <Divider>{T.translate('Start - End - Repeat')}</Divider>
+            <div className='flex flex-col gap-2'>
+              <div className='flex-dyn'>
+                <Input renderOnlyInputField field='date_start' customInputProps={{
+                  onChange: (input: any, value: any) => {
+                    form.changeRecord({
+                      date_start: value,
+                      date_end: moment(value).add(daysDuration, 'days').format('YYYY-MM-DD')
+                    })
+                  }
+                }}></Input>
+                {allDay ? null : <Input renderOnlyInputField field='time_start' customInputProps={{
+                  hideSeconds: true,
+                  onChange: (input: any, value: any) => {
+                    form.changeRecord({
+                      time_start: value,
+                      time_end: moment(R.date_end + ' ' + value + ':00').add(hoursDuration, 'hours').add(minutesDuration, 'minutes').format('HH:mm:ss')
+                    })
+                  }
+                }}></Input>}
+              </div>
+
+              <div className='flex-dyn'>
+                <Input renderOnlyInputField field='date_end' />
+                {allDay ? null : <Input renderOnlyInputField field='time_end' customInputProps={{
+                  hideSeconds: true,
+                }}/>}
+              </div>
+
+              <Input field='recurrence' content={<div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
+                {recurrenceParsed && recurrenceParsed.period == '' ?
+                  <select
+                    value={recurrenceParsed.period}
+                    className='w-full dark:bg-gray-800 dark:border-gray-600 dark:text-white'
+                    onChange={(event) => {
+                      let newR = R;
+                      //@ts-ignore
+                      recurrenceParsed.period = event.currentTarget.value;
+                      recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
+                      newR.recurrence = JSON.stringify(recurrenceParsed);
+                      form.changeRecord(newR);
+                    }}
+                  >
+                    <option value=''>{T.translate('Does not repeat','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                    <option value='day'>{T.translate('Configure custom recurrence','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                  </select>
+                : <>
+                  <div className='flex gap-1 items-center text-nowrap'>
+                    <span>{T.translate('Repeat every','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
+                    <input
+                      className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
+                      type='number'
+                      value={recurrenceParsed.periodEvery}
+                      style={{width: '4em'}}
+                      onChange={(event) => {
+                        let newR = R;
+                        recurrenceParsed.periodEvery = parseInt(event.currentTarget.value) ?? 1;
+                        newR.recurrence = JSON.stringify(recurrenceParsed);
+                        form.changeRecord(newR);
+                      }}
+                    ></input>
+                    <select
+                      className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
+                      value={recurrenceParsed.period}
+                      style={{width: '8em'}}
+                      onChange={(event) => {
+                        let newR = R;
+                        //@ts-ignore
+                        recurrenceParsed.period = event.currentTarget.value;
+                        recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
+                        newR.recurrence = JSON.stringify(recurrenceParsed);
+                        form.changeRecord(newR);
+                      }}
+                    >
+                      <option value=''>{T.translate('does not repeat','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                      <option value='day'>{T.translate('day','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                      <option value='week'>{T.translate('week','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                      <option value='month'>{T.translate('month','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                      <option value='year'>{T.translate('year','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
+                    </select>
+                  </div>
+                  <div className='flex gap-1 items-center text-nowrap'>
+                    <span>{T.translate('End after','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
+                    <input
+                      className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
+                      type='number'
+                      value={recurrenceParsed.periodCount}
+                      style={{width: '4em'}}
+                      onChange={(event) => {
+                        let newR = R;
+                        recurrenceParsed.periodCount = parseInt(event.currentTarget.value) ?? 1;
+                        recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
+                        newR.recurrence = JSON.stringify(recurrenceParsed);
+                        form.changeRecord(newR);
+                      }}
+                    ></input>
+                    <span>{T.translate('occurences.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
+                  </div>
+                  <div className='flex gap-1 text-nowrap'>
+                    {T.translate('Repeats from {{ dateFrom }} to {{ dateTo }}.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity').replace('{{ dateFrom }}', recurrenceParsed.dates[0]).replace('{{ dateTo }}', recurrenceParsed.dates[recurrenceParsed.dates.length - 1])}
+                  </div>
+                </>}
+              </div>}></Input>
+
+            </div>
+
+            <Input field='online_meeting_link'></Input>
+            <Input field='location'></Input>
+          </div>
+          <div className='md:w-1/3'>
+            {/* On wider screens the user list is as high as the dates, link and place next to it. */}
+            <Input field='attendees' customInputProps={{
+              searchPlaceholder: T.translate('Search attendees'),
+              emptyText: T.translate('No attendees'),
+              listCssClass: 'md:max-h-none md:h-[14.8rem]',
             }}></Input>
-            {allDay ? null : <Input renderOnlyInputField field='time_start' customInputProps={{
-              hideSeconds: true,
-              onChange: (input: any, value: any) => {
-                form.changeRecord({
-                  time_start: value,
-                  time_end: moment(R.date_end + ' ' + value + ':00').add(hoursDuration, 'hours').add(minutesDuration, 'minutes').format('HH:mm:ss')
-                })
-              }
-            }}></Input>}
           </div>
-
-          <div className='flex-dyn'>
-            <Input renderOnlyInputField field='date_end' />
-            {allDay ? null : <Input renderOnlyInputField field='time_end' customInputProps={{
-              hideSeconds: true,
-            }}/>}
-          </div>
-
-          <Input field='recurrence' content={<div className='hubleto component input flex flex-col items-start gap-2 dark:text-gray-200'>
-            {recurrenceParsed && recurrenceParsed.period == '' ?
-              <select
-                value={recurrenceParsed.period}
-                className='w-full dark:bg-gray-800 dark:border-gray-600 dark:text-white'
-                onChange={(event) => {
-                  let newR = R;
-                  //@ts-ignore
-                  recurrenceParsed.period = event.currentTarget.value;
-                  recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
-                  newR.recurrence = JSON.stringify(recurrenceParsed);
-                  form.changeRecord(newR);
-                }}
-              >
-                <option value=''>{T.translate('Does not repeat','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
-                <option value='day'>{T.translate('Configure custom recurrence','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
-              </select>
-            : <>
-              <div className='flex gap-1 items-center text-nowrap'>
-                <span>{T.translate('Repeat every','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
-                <input
-                  className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
-                  type='number'
-                  value={recurrenceParsed.periodEvery}
-                  style={{width: '4em'}}
-                  onChange={(event) => {
-                    let newR = R;
-                    recurrenceParsed.periodEvery = parseInt(event.currentTarget.value) ?? 1;
-                    newR.recurrence = JSON.stringify(recurrenceParsed);
-                    form.changeRecord(newR);
-                  }}
-                ></input>
-                <select
-                  className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
-                  value={recurrenceParsed.period}
-                  style={{width: '8em'}}
-                  onChange={(event) => {
-                    let newR = R;
-                    //@ts-ignore
-                    recurrenceParsed.period = event.currentTarget.value;
-                    recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
-                    newR.recurrence = JSON.stringify(recurrenceParsed);
-                    form.changeRecord(newR);
-                  }}
-                >
-                  <option value=''>{T.translate('does not repeat','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
-                  <option value='day'>{T.translate('day','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
-                  <option value='week'>{T.translate('week','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
-                  <option value='month'>{T.translate('month','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
-                  <option value='year'>{T.translate('year','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</option>
-                </select>
-              </div>
-              <div className='flex gap-1 items-center text-nowrap'>
-                <span>{T.translate('End after','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
-                <input
-                  className='dark:bg-gray-800 dark:border-gray-600 dark:text-white rounded border p-1'
-                  type='number'
-                  value={recurrenceParsed.periodCount}
-                  style={{width: '4em'}}
-                  onChange={(event) => {
-                    let newR = R;
-                    recurrenceParsed.periodCount = parseInt(event.currentTarget.value) ?? 1;
-                    recurrenceParsed.dates = expandRecurrenceDates(recurrenceParsed);
-                    newR.recurrence = JSON.stringify(recurrenceParsed);
-                    form.changeRecord(newR);
-                  }}
-                ></input>
-                <span>{T.translate('occurences.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity')}</span>
-              </div>
-              <div className='flex gap-1 text-nowrap'>
-                {T.translate('Repeats from {{ dateFrom }} to {{ dateTo }}.','Hubleto\\App\\Community\\Calendar\\Loader', 'Components\\FormActivity').replace('{{ dateFrom }}', recurrenceParsed.dates[0]).replace('{{ dateTo }}', recurrenceParsed.dates[recurrenceParsed.dates.length - 1])}
-              </div>
-            </>}
-          </div>}></Input>
-
         </div>
 
-        <Input field='online_meeting_link'></Input>
-        <Input field='location'></Input>
         <Input field='description'></Input>
       </div>
       {/* <div className='grow'>

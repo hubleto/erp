@@ -11,15 +11,19 @@ class GetUsers extends \Hubleto\Erp\Controllers\ApiController
 
   public function renderJson(): array
   {
+    // Inactive users are needed e.g. by InputMultipleUsers, which shows them while they are selected.
+    $includeInactive = $this->router()->urlParamAsBool('includeInactive');
+
     $mUser = $this->getModel(User::class);
-    $users = Helper::keyBy('id', $mUser->record
-      ->select(['id', 'login', 'email', 'first_name', 'last_name', 'nick', 'photo', 'position'])
+    $query = $mUser->record
+      ->select(['id', 'login', 'email', 'first_name', 'last_name', 'nick', 'photo', 'position', 'is_active'])
       ->with('TEAMS')
       ->with('ROLES')
-      ->where('is_active', true)
-      ->get()
-      ->toArray()
-    );
+    ;
+    if (!$includeInactive) {
+      $query = $query->where('is_active', true);
+    }
+    $users = Helper::keyBy('id', $query->get()->toArray());
 
     $authProvider = $this->authProvider();
     

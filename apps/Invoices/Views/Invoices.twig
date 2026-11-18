@@ -1,9 +1,27 @@
-<hblreact-invoices-table-invoices
-  string:tag="table-invoices"
-  string:view="{{ viewParams.view }}"
-  int:record-id="{{ viewParams.recordId }}"
-  string:fulltext-search='{{ viewParams.q }}'
-  json:column-search='{{ viewParams.search|json_encode }}'
-  json:filters='{{ viewParams.filters|json_encode }}'
-  string:form-active-tab-uid='{{ viewParams.tab }}'
-></hblreact-invoices-table-invoices>
+{% if viewParams.filters.fInboundOutbound == '' %}
+  <div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
+    <div class="card-header">
+      <h1 class="app-main-title">{{ translate('Invoices') }}</h1>
+    </div>
+    <div class="card-body flex-dyn justify-items-center">
+      <a href="?filters[fInboundOutbound]=1" class="btn btn-square btn-large btn-transparent">
+        <span class="icon"><i class="fas fa-arrow-right-to-bracket"></i></span>
+        <span class="text">{{ translate("Inbound") }}</span>
+      </a>
+      <a href="?filters[fInboundOutbound]=2" class="btn btn-square btn-large btn-transparent">
+        <span class="icon"><i class="fas fa-arrow-right-from-bracket"></i></span>
+        <span class="text">{{ translate("Outbound") }}</span>
+      </a>
+    </div>
+  </div>
+{% else %}
+  <hblreact-invoices-table-invoices
+    string:tag="table-invoices"
+    string:view="{{ viewParams.view }}"
+    int:record-id="{{ viewParams.recordId }}"
+    string:fulltext-search='{{ viewParams.q }}'
+    json:column-search='{{ viewParams.search|json_encode }}'
+    json:filters='{{ viewParams.filters|json_encode }}'
+    string:form-active-tab-uid='{{ viewParams.tab }}'
+  ></hblreact-invoices-table-invoices>
+{% endif %}

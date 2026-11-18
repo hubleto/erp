@@ -44,14 +44,14 @@ class Activity extends \Hubleto\Erp\RecordManager
     return $query->orderBy('date_start')->orderBy('time_start');
   }
 
-  // Activities the user owns or attends. Attendees are a JSON list of user ids, stored as numbers or strings.
+  // Activities the user owns or attends.
   public function whereUserOwnsOrAttends(mixed $query, int $idUser): mixed
   {
-    $attendeesJson = "coalesce(nullif({$this->table}.attendees, ''), '[]')";
-    return $query->where(function ($activitiesOfUser) use ($idUser, $attendeesJson) {
+    return $query->where(function ($activitiesOfUser) use ($idUser) {
       $activitiesOfUser->where($this->table . '.id_owner', $idUser);
-      $activitiesOfUser->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [(string) $idUser]);
-      $activitiesOfUser->orWhereRaw("JSON_CONTAINS({$attendeesJson}, ?)", [json_encode((string) $idUser)]);
+      $activitiesOfUser->orWhere(function ($attendedActivities) use ($idUser) {
+        $this->whereUserIdListContains($attendedActivities, 'attendees', $idUser);
+      });
     });
   }
 

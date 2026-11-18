@@ -41,6 +41,17 @@ class RecordManager extends \Hubleto\Framework\RecordManager
     return $userType == User::TYPE_EMPLOYEE || $userType == User::TYPE_ASSISTANT;
   }
 
+  // Records whose JSON list of user ids (e.g. attendees, passengers, watchers) contains the user.
+  // The ids may be stored as numbers or as strings ([8] or ["8"]).
+  public function whereUserIdListContains(mixed $query, string $column, int $idUser): mixed
+  {
+    $userIdsJson = "coalesce(nullif({$this->table}.{$column}, ''), '[]')";
+    return $query->where(function ($recordsOfUser) use ($userIdsJson, $idUser) {
+      $recordsOfUser->whereRaw("JSON_CONTAINS({$userIdsJson}, ?)", [(string) $idUser]);
+      $recordsOfUser->orWhereRaw("JSON_CONTAINS({$userIdsJson}, ?)", [json_encode((string) $idUser)]);
+    });
+  }
+
   /**
    * [Description for prepareReadQuery]
    *

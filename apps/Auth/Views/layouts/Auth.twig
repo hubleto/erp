@@ -44,6 +44,12 @@
               <div class="alert alert-danger">{{ translate("Email or password invalid. Try again.") }}</div>
             {% elseif viewParams.status == 'passwordReset' %}
               <div class="alert alert-success">{{ translate("Password successfully updated.") }}</div>
+            {% elseif viewParams.status == 'codeExpired' %}
+              <div class="alert alert-warning">{{ translate("The sign-in code has expired. Please sign in again.") }}</div>
+            {% elseif viewParams.status == 'tooManyAttempts' %}
+              <div class="alert alert-danger">{{ translate("Too many incorrect attempts. Please try again later.") }}</div>
+            {% elseif viewParams.status == 'sendFailed' %}
+              <div class="alert alert-danger">{{ translate("We could not send the sign-in code. Please contact your administrator.") }}</div>
             {% endif %}
           {% endblock %}
 

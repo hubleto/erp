@@ -27,6 +27,7 @@ class Loader extends \Hubleto\Erp\App
       '/^projects\/api\/create-from-order\/?$/' => Controllers\Api\CreateFromOrder::class,
       '/^projects\/api\/get-statistics\/?$/' => Controllers\Api\GetStatistics::class,
       '/^projects\/api\/set-parent-order\/?$/' => Controllers\Api\SetParentOrder::class,
+      '/^projects\/api\/get-monthly-overview\/?$/' => Controllers\Api\GetMonthlyOverview::class,
 
       '/^projects\/monthly-summary\/?$/' => Controllers\MonthlySummary::class,
     ]);

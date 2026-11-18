@@ -40,6 +40,15 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
 
   public array $user = [];
 
+  /** Name of the session variable holding the state of an unfinished (second step pending) sign-in. */
+  private const string SESSION_KEY_PENDING_2FA = 'pending2fa';
+
+  /**
+   * Result of the last two-factor operation (startTwoFactor, verifyTwoFactorCode, resendTwoFactorCode).
+   * Empty string, or one of: codeSent, codeResent, invalidCode, codeExpired, tooManyAttempts, sendFailed, resendTooSoon.
+   */
+  public string $twoFactorStatus = '';
+
   public function init(): void
   {
     $userLanguage = $this->getUserLanguage();
@@ -278,7 +287,11 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
   }
 
   /**
-   * [Description for authenticateRememberedUser]
+   * Signs in the user using the 'remember me' cookie.
+   *
+   * By design, this does NOT require the second authentication step (code from email):
+   * the 'remember me' cookie is issued only after the user has passed all authentication
+   * steps (see verifyTwoFactorCode()) and it acts as a trusted-device token.
    *
    * @return bool
    * 
@@ -342,6 +355,10 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
       }
 
       if (!empty($login) && !empty($password)) {
+        // a new sign-in attempt always replaces a previously started second step
+        $this->clearPendingTwoFactor();
+        $this->twoFactorStatus = '';
+
         $users = $userModel->findUsersByLogin($login);
 
         $successful = false;
@@ -350,13 +367,18 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
           $passwordMatch = $userModel->verifyPassword($user, $password);
 
           if ($passwordMatch) {
-            $authResult = $userModel->loadUser($user['id']);
-            $this->signIn($authResult);
-
             $successful = true;
 
-            if ($rememberLogin) {
-              $this->initiateRememberMe();
+            if ($this->isTwoFactorEnabled()) {
+              // first factor (password) is OK, the user is NOT signed in until the code from email is verified
+              $this->startTwoFactor($user, $rememberLogin);
+            } else {
+              $authResult = $userModel->loadUser($user['id']);
+              $this->signIn($authResult);
+
+              if ($rememberLogin) {
+                $this->initiateRememberMe();
+              }
             }
 
             break;
@@ -370,6 +392,342 @@ class AuthProvider extends \Hubleto\Framework\Services\AuthProvider
       }
     }
 
+  }
+
+  /**
+   * Signs in the user and discards any unfinished second step.
+   *
+   * @param array $user
+   *
+   * @return void
+   *
+   */
+  public function signIn(array $user)
+  {
+    parent::signIn($user);
+    $this->clearPendingTwoFactor();
+  }
+
+  // ---------------------------------------------------------------------------------------------
+  // Second authentication step: 6-digit code sent to user's email
+  //
+  // Configuration (all optional):
+  //   twoFactorEnabled          bool  Enables/disables the second step. If not set, it is enabled
+  //                                   only when SMTP is configured (otherwise nobody could sign in).
+  //   twoFactorCodeValidMinutes int   How long the code is valid (default 10).
+  //   twoFactorMaxAttempts      int   Max. number of wrong codes before the user is locked (default 5).
+  //   twoFactorResendCooldown   int   Min. seconds between two "resend code" requests (default 60).
+  // ---------------------------------------------------------------------------------------------
+
+  /**
+   * Returns true if the second authentication step (code from email) is required for signing in.
+   *
+   * @return bool
+   *
+   */
+  public function isTwoFactorEnabled(): bool
+  {
+    return $this->config()->getAsBool('twoFactorEnabled', false);
+  }
+
+  public function getTwoFactorCodeValidMinutes(): int
+  {
+    return max(1, $this->config()->getAsInteger('twoFactorCodeValidMinutes', 10));
+  }
+
+  public function getTwoFactorMaxAttempts(): int
+  {
+    return max(1, $this->config()->getAsInteger('twoFactorMaxAttempts', 5));
+  }
+
+  public function getTwoFactorResendCooldown(): int
+  {
+    return max(0, $this->config()->getAsInteger('twoFactorResendCooldown', 60));
+  }
+
+  /**
+   * Returns the state of the unfinished sign-in (password verified, code not yet verified) or null.
+   *
+   * @return array{id_user: int, email: string, remember: bool, started_at: int, last_sent_at: int, valid_until: int}|null
+   *
+   */
+  public function getPendingTwoFactor(): ?array
+  {
+    $pending = $this->sessionManager()->get(self::SESSION_KEY_PENDING_2FA);
+
+    if (!is_array($pending) || (int) ($pending['id_user'] ?? 0) <= 0) {
+      return null;
+    }
+
+    if ((int) ($pending['valid_until'] ?? 0) < time()) {
+      $this->clearPendingTwoFactor();
+      return null;
+    }
+
+    return $pending;
+  }
+
+  public function hasPendingTwoFactor(): bool
+  {
+    return $this->getPendingTwoFactor() !== null;
+  }
+
+  /**
+   * Email of the user with an unfinished sign-in, masked for displaying (j***@example.com).
+   *
+   * @return string
+   *
+   */
+  public function getPendingTwoFactorMaskedEmail(): string
+  {
+    return TwoFactorHelper::maskEmail((string) ($this->getPendingTwoFactor()['email'] ?? ''));
+  }
+
+  /**
+   * Forgets the unfinished sign-in. The issued code stays in the database until it expires,
+   * so the limit of failed attempts cannot be reset by starting over.
+   *
+   * @return void
+   *
+   */
+  public function clearPendingTwoFactor(): void
+  {
+    // Note: SessionManager::unset() does not persist the change, therefore null is stored instead.
+    if ($this->sessionManager()->get(self::SESSION_KEY_PENDING_2FA) !== null) {
+      $this->sessionManager()->set(self::SESSION_KEY_PENDING_2FA, null);
+    }
+  }
+
+  /**
+   * User gave up the second step and returns to the first one (email and password).
+   *
+   * @return void
+   *
+   */
+  public function cancelTwoFactor(): void
+  {
+    $this->twoFactorStatus = '';
+    $this->clearPendingTwoFactor();
+  }
+
+  /**
+   * Starts the second step for a user whose password has been verified: generates the code,
+   * stores it as a token, sends it by email and remembers the unfinished sign-in in the session.
+   * The user is NOT signed in.
+   *
+   * @param array $user Record of the user (as returned by User::findUsersByLogin()).
+   * @param bool $remember Whether to issue the 'remember me' cookie once the sign-in is completed.
+   *
+   * @return bool true if the code was sent. On failure see $twoFactorStatus.
+   *
+   */
+  protected function startTwoFactor(array $user, bool $remember): bool
+  {
+    $this->twoFactorStatus = '';
+
+    $validUntil = $this->issueAndSendTwoFactorCode($user);
+    if ($validUntil === null) {
+      return false;
+    }
+
+    $this->sessionManager()->set(self::SESSION_KEY_PENDING_2FA, [
+      'id_user' => (int) $user['id'],
+      'email' => (string) ($user['email'] ?? ''),
+      'remember' => $remember,
+      'started_at' => time(),
+      'last_sent_at' => time(),
+      'valid_until' => $validUntil,
+    ]);
+
+    $this->twoFactorStatus = 'codeSent';
+    return true;
+  }
+
+  /**
+   * Issues a new code for the user and sends it by email.
+   *
+   * @param array $user
+   *
+   * @return int|null Timestamp until the code is valid, or null on failure (see $twoFactorStatus).
+   *
+   */
+  private function issueAndSendTwoFactorCode(array $user): ?int
+  {
+    $idUser = (int) ($user['id'] ?? 0);
+
+    /** @var Token $mToken */
+    $mToken = $this->getModel(Token::class);
+
+    $issued = $mToken->issueSignInCode(
+      $idUser,
+      $this->getTwoFactorCodeValidMinutes(),
+      $this->getTwoFactorMaxAttempts()
+    );
+
+    if ($issued === false) {
+      $this->logger()->warning("Sign-in code not issued to user {$idUser}: too many failed attempts.");
+      $this->twoFactorStatus = 'tooManyAttempts';
+      return null;
+    }
+
+    try {
+      $email = trim((string) ($user['email'] ?? ''));
+      if ($email === '') {
+        throw new \Exception('The user has no email address.');
+      }
+
+      $name = trim(((string) ($user['first_name'] ?? '')) . ' ' . ((string) ($user['last_name'] ?? '')));
+
+      /** @var EmailProvider $emailProvider */
+      $emailProvider = $this->getService(EmailProvider::class);
+      $emailProvider->sendSignInCodeEmail(
+        $email,
+        $name,
+        (string) ($user['language'] ?? 'en'),
+        $issued['token'],
+        $this->getTwoFactorCodeValidMinutes()
+      );
+    } catch (\Throwable $e) {
+      $this->logger()->error("Cannot send sign-in code to user {$idUser}: " . $e->getMessage());
+      $mToken->deleteTokensWithLinks([$issued['id']]);
+      $this->twoFactorStatus = 'sendFailed';
+      return null;
+    }
+
+    $this->logger()->info("Sign-in code sent to user {$idUser}.");
+
+    return (int) strtotime($issued['valid_to']);
+  }
+
+  /**
+   * Verifies the code typed by the user. If it is valid, the user is signed in (stored in session).
+   *
+   * @param string $code
+   *
+   * @return bool true if the user has been signed in. On failure see $twoFactorStatus.
+   *
+   */
+  public function verifyTwoFactorCode(string $code): bool
+  {
+    $this->twoFactorStatus = '';
+
+    $pending = $this->getPendingTwoFactor();
+    if ($pending === null) {
+      $this->twoFactorStatus = 'codeExpired';
+      return false;
+    }
+
+    $code = TwoFactorHelper::normalizeCode($code);
+    if ($code === '') {
+      // malformed code (cannot be a correct guess, so it is not counted as an attempt)
+      $this->twoFactorStatus = 'invalidCode';
+      return false;
+    }
+
+    $idUser = (int) $pending['id_user'];
+
+    /** @var Token $mToken */
+    $mToken = $this->getModel(Token::class);
+
+    $result = $mToken->verifySignInCode($idUser, $code, $this->getTwoFactorMaxAttempts());
+
+    if ($result === Token::CODE_OK) {
+      $authResult = $this->loadActiveUser($idUser);
+
+      if (empty($authResult)) {
+        // the user has been deactivated or removed in the meantime
+        $this->clearPendingTwoFactor();
+        $this->twoFactorStatus = 'codeExpired';
+        return false;
+      }
+
+      $this->signIn($authResult); // also discards the pending state
+
+      if (!empty($pending['remember'])) {
+        $this->initiateRememberMe();
+      }
+
+      $this->logger()->info("User {$idUser} signed in using the code sent by email.");
+
+      return true;
+    }
+
+    if ($result === Token::CODE_INVALID) {
+      $this->logger()->warning("Invalid sign-in code entered for user {$idUser}.");
+      $this->twoFactorStatus = 'invalidCode';
+    } elseif ($result === Token::CODE_LOCKED) {
+      $this->logger()->warning("Sign-in code locked for user {$idUser}: too many failed attempts.");
+      $this->clearPendingTwoFactor();
+      $this->twoFactorStatus = 'tooManyAttempts';
+    } else {
+      $this->clearPendingTwoFactor();
+      $this->twoFactorStatus = 'codeExpired';
+    }
+
+    return false;
+  }
+
+  /**
+   * Sends a new code to the user with an unfinished sign-in. The failed attempts counter is preserved.
+   *
+   * @return bool true if a new code was sent. On failure see $twoFactorStatus.
+   *
+   */
+  public function resendTwoFactorCode(): bool
+  {
+    $this->twoFactorStatus = '';
+
+    $pending = $this->getPendingTwoFactor();
+    if ($pending === null) {
+      $this->twoFactorStatus = 'codeExpired';
+      return false;
+    }
+
+    if (time() - (int) ($pending['last_sent_at'] ?? 0) < $this->getTwoFactorResendCooldown()) {
+      $this->twoFactorStatus = 'resendTooSoon';
+      return false;
+    }
+
+    $user = $this->loadActiveUser((int) $pending['id_user']);
+    if (empty($user)) {
+      $this->clearPendingTwoFactor();
+      $this->twoFactorStatus = 'codeExpired';
+      return false;
+    }
+
+    $validUntil = $this->issueAndSendTwoFactorCode($user);
+    if ($validUntil === null) {
+      // no valid code exists any more (locked or not delivered), the user has to start over
+      $this->clearPendingTwoFactor();
+      return false;
+    }
+
+    $pending['last_sent_at'] = time();
+    $pending['valid_until'] = $validUntil;
+    $this->sessionManager()->set(self::SESSION_KEY_PENDING_2FA, $pending);
+
+    $this->twoFactorStatus = 'codeResent';
+    return true;
+  }
+
+  /**
+   * Loads the user together with roles, teams, ... Returns empty array if the user is not active.
+   *
+   * @param int $idUser
+   *
+   * @return array
+   *
+   */
+  private function loadActiveUser(int $idUser): array
+  {
+    /** @var Models\User $userModel */
+    $userModel = $this->createUserModel();
+
+    if ($userModel->record->where('id', $idUser)->where('is_active', '<>', 0)->count() == 0) {
+      return [];
+    }
+
+    return $userModel->loadUser($idUser);
   }
 
   /**

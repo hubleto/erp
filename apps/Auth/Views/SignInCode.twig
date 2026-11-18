@@ -1,0 +1,49 @@
+{% extends '@Hubleto:App:Community:Auth/layouts/Auth.twig' %}
+
+{# Second step of signing in: the user enters the code sent to his/her email. #}
+
+{% block status %}
+  {% if viewParams.status == 'invalidCode' %}
+    <div class="alert alert-danger">{{ translate("The code is not correct. Try again.") }}</div>
+  {% elseif viewParams.status == 'codeResent' %}
+    <div class="alert alert-success">{{ translate("A new code has been sent.") }}</div>
+  {% elseif viewParams.status == 'resendTooSoon' %}
+    <div class="alert alert-warning">{{ translate("Please wait a moment before requesting another code.") }}</div>
+  {% endif %}
+
+  <div class="text-center py-2">
+    {{ translate("We have sent a sign-in code to") }} <b>{{ viewParams.maskedEmail }}</b>.<br/>
+    {{ translate("The code is valid for a limited time.") }}
+  </div>
+{% endblock %}
+
+{% block inputs %}
+  <input type="hidden" name="twofa-step" value="1">
+  <input
+    type="text" name="code" placeholder="{{ translate("Sign-in code") }}"
+    inputmode="numeric" autocomplete="one-time-code" maxlength="12" autofocus required
+    class="text-center text-2xl"
+    style="letter-spacing: 0.3em;"
+    oninput="this.value = this.value.replace(/\D/g, '').slice(0, {{ viewParams.codeLength }});"
+  />
+{% endblock %}
+
+{% block button %}
+  <button type="submit" class="btn btn-large">
+    <span class="icon"><i class="fas fa-check"></i></span>
+    <span class="text">{{ translate("Verify and sign in") }}</span>
+  </button>
+{% endblock %}
+
+{% block links %}
+  <div class="flex flex-col items-end">
+    <button type="submit" name="twofa-action" value="resend" class="btn btn-transparent" formnovalidate>
+      <span class="icon"><i class="fas fa-paper-plane"></i></span>
+      <span class="text">{{ translate("Resend code") }}</span>
+    </button>
+    <button type="submit" name="twofa-action" value="cancel" class="btn btn-transparent" formnovalidate>
+      <span class="icon"><i class="fas fa-arrow-left"></i></span>
+      <span class="text">{{ translate("Back to sign in") }}</span>
+    </button>
+  </div>
+{% endblock %}

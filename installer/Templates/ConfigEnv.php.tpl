@@ -51,6 +51,12 @@ $config['smtpEncryption'] = '{{ smtpEncryption }}';
 $config['smtpLogin'] = '{{ smtpLogin }}';
 $config['smtpPassword'] = '{{ smtpPassword }}';
 
+// second authentication step: 6-digit code sent to user's email after entering the password
+// $config['twoFactorEnabled'] = true;
+// $config['twoFactorCodeValidMinutes'] = 10;
+// $config['twoFactorMaxAttempts'] = 5;
+// $config['twoFactorResendCooldown'] = 60;
+
 // misc
 $config['develMode'] = TRUE;
 $config['language'] = '{{ language }}';

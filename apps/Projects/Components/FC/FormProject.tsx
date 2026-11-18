@@ -347,6 +347,191 @@ const TabStatistics = (props: FormProjectProps) => {
   }
 }
 
+/** TabMonthlyOverview */
+const TabMonthlyOverview = (props: FormProjectProps) => {
+  const form = React.useContext(FormMetaContext);
+  const projectIdentifier: string = useRecordField('identifier', '');
+
+  const now = new Date();
+  const [month, setMonth] = useState<number>(now.getMonth() + 1);
+  const [year, setYear] = useState<number>(now.getFullYear());
+  const [yearInput, setYearInput] = useState<string>(String(now.getFullYear()));
+  const [view, setView] = useState<string>('worker');
+  const [overview, setOverview] = useState<any>(null);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    if (!(form.id > 0)) return;
+
+    let isCurrent = true; // ignores responses to outdated requests (e.g. when the month was changed in the meantime)
+
+    setOverview(null);
+    setError('');
+
+    request.get(
+      'projects/api/get-monthly-overview',
+      { idProject: form.id, month: month, year: year },
+      (data: any) => {
+        if (!isCurrent) return;
+
+        if (data.status == 'success') {
+          setOverview(data);
+        } else {
+          setError(data.error || T.translate('Failed to load the monthly overview.'));
+        }
+      }
+    );
+
+    return () => { isCurrent = false; };
+  }, [form.id, month, year]);
+
+  const getMonthName = (monthNumber: number): string => {
+    try {
+      return new Date(2000, monthNumber - 1, 1).toLocaleString(globalThis.hubleto.config.language || undefined, { month: 'long' });
+    } catch (e) {
+      return String(monthNumber);
+    }
+  }
+
+  if (!(form.id > 0)) {
+    return <div className="badge badge-info">{T.translate('First create the project, then you will see its monthly overview.')}</div>;
+  }
+
+  const views: { [key: string]: { title: string, rows: Array<any> } } = {
+    'worker': { title: T.translate('Worker'), rows: overview?.workedByWorker ?? [] },
+    'activity-type': { title: T.translate('Activity type'), rows: overview?.workedByActivityType ?? [] },
+    'task': { title: T.translate('Task'), rows: overview?.workedByTask ?? [] },
+  };
+
+  const rows: Array<any> = views[view].rows;
+  const totalHours: number = overview?.totalHours ?? 0;
+
+  const getRowName = (item: any): string => item.name || T.translate('(not set)');
+
+  const exportCsv = () => {
+    // the list separator follows the decimal separator, the same way spreadsheet apps do it
+    const decimalsSeparator: string = globalThis.hubleto.locale?.decimalsSeparator ?? '.';
+    const separator: string = (decimalsSeparator == ',' ? ';' : ',');
+
+    const formatText = (value: string): string => {
+      // cells starting with these characters could be evaluated as formulas in spreadsheet apps
+      if (/^[=+\-@\t\r]/.test(value)) value = "'" + value;
+      return '"' + value.replace(/"/g, '""') + '"';
+    };
+    const formatHours = (value: number): string => value.toFixed(2).replace('.', decimalsSeparator);
+
+    const lines = [
+      [formatText(views[view].title), formatText(T.translate('Worked hours'))],
+      ...rows.map((item: any) => [formatText(getRowName(item)), formatHours(item.worked_hours)]),
+      [formatText(T.translate('Total')), formatHours(totalHours)],
+    ].map((columns) => columns.join(separator));
+
+    const filename = [
+      'monthly-overview',
+      projectIdentifier || form.id,
+      year + '-' + String(month).padStart(2, '0'),
+      view,
+    ].join('-').replace(/[^A-Za-z0-9_.-]+/g, '-') + '.csv';
+
+    // BOM makes spreadsheet apps read the file as UTF-8
+    const blob = new Blob(['\uFEFF' + lines.join('\r\n') + '\r\n'], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  return <div className='flex flex-col gap-2'>
+    <div className='flex gap-2 items-end'>
+      <div>
+        <label className='font-bold'>{T.translate('Month')}</label>
+        <select
+          className='input'
+          value={month}
+          onChange={(e) => { setMonth(parseInt(e.currentTarget.value)); }}
+        >
+          {Array.from({ length: 12 }, (_, i) => i + 1).map((monthNumber) => <option key={monthNumber} value={monthNumber}>
+            {getMonthName(monthNumber)}
+          </option>)}
+        </select>
+      </div>
+      <div>
+        <label className='font-bold'>{T.translate('Year')}</label>
+        <input
+          className='input'
+          type='number'
+          style={{ width: '6em' }}
+          value={yearInput}
+          onChange={(e) => {
+            const value = e.currentTarget.value;
+            setYearInput(value);
+            if (/^\d{4}$/.test(value)) setYear(parseInt(value)); // reload only when the year is complete
+          }}
+        />
+      </div>
+      <button
+        className='btn btn-transparent'
+        onClick={exportCsv}
+        disabled={!overview || rows.length == 0}
+      >
+        <span className='icon'><i className='fas fa-download'></i></span>
+        <span className='text'>{T.translate('Export to CSV')}</span>
+      </button>
+    </div>
+
+    {error ? <div className='alert alert-danger'>{error}</div> : null}
+    {!overview && !error ? <Spinner></Spinner> : null}
+
+    {overview ? <>
+      <div className='bg-slate-50 p-2'>
+        <div className='text-sm text-gray-500'>{T.translate('Total worked hours')}: {getMonthName(month)} {year}</div>
+        <div className='text-[2em] font-bold'>{globalThis.hubleto.numberFormat(totalHours)} {T.translate('hours')}</div>
+      </div>
+
+      <div className='flex gap-2 items-center'>
+        <b>{T.translate('Group by')}</b>
+        <div className='list horizontal'>
+          {Object.keys(views).map((viewKey) => <button
+            key={viewKey}
+            className={'btn btn-small btn-list-item ' + (view == viewKey ? 'btn-primary' : 'btn-transparent')}
+            onClick={() => { setView(viewKey); }}
+          >
+            <span className='text'>{views[viewKey].title}</span>
+          </button>)}
+        </div>
+      </div>
+
+      {rows.length == 0
+        ? <div className='badge badge-info'>{T.translate('No hours were worked on this project in the selected month.')}</div>
+        : <table className='table-default dense'>
+          <thead>
+            <tr>
+              <th>{views[view].title}</th>
+              <th>{T.translate('Worked hours')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((item: any, key: number) => <tr key={key}>
+              <td>{getRowName(item)}</td>
+              <td>{globalThis.hubleto.numberFormat(item.worked_hours)} {T.translate('hours')}</td>
+            </tr>)}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td className='bg-primary text-white p-2'>{T.translate('Total')}</td>
+              <td className='bg-primary text-white p-2'>{globalThis.hubleto.numberFormat(totalHours)} {T.translate('hours')}</td>
+            </tr>
+          </tfoot>
+        </table>
+      }
+    </> : null}
+  </div>;
+}
+
 /** FormProject */
 const FormProject = (props: FormProjectProps) => {
   return <Form
@@ -363,6 +548,7 @@ const FormProject = (props: FormProjectProps) => {
       worksheet: {title: T.translate('Worksheet'), content: () => <TabWorksheet {...props} /> },
       expenses: {title: T.translate('Expenses'), content: () => <TabExpenses {...props} /> },
       statistics: {title: T.translate('Statistics'), content: () => <TabStatistics {...props} /> },
+      monthlyOverview: {title: T.translate('Monthly overview'), content: () => <TabMonthlyOverview {...props} /> },
     }}
     {...props}
   ></Form>;

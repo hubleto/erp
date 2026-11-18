@@ -22,6 +22,8 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
   private string $smtpEncryption;
   private string $smtpUsername;
   private string $smtpPassword;
+  private int $smtpDebug;
+  private string $smtpDebugOutput;
 
   public function __construct()
   {
@@ -30,6 +32,8 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
     $this->smtpEncryption = $this->config()->getAsString('smtpEncryption', '');
     $this->smtpUsername = $this->config()->getAsString('smtpLogin', '');
     $this->smtpPassword = $this->config()->getAsString('smtpPassword', '');
+    $this->smtpDebug = $this->config()->getAsInteger('smtpDebug', 0);
+    $this->smtpDebugOutput = $this->config()->getAsString('smtpDebugOutput', 'echo');
   }
 
   public function getFormattedBody(string $title, string $rawBody, string $template = ''): string
@@ -76,6 +80,8 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
       $mail->SMTPSecure = $this->smtpEncryption;
       $mail->Port = $this->smtpPort;
       $mail->CharSet = "UTF-8";
+      $mail->SMTPDebug = $this->smtpDebug;
+      $mail->Debugoutput = $this->smtpDebugOutput;
 
       $mail->setFrom($this->smtpUsername, $fromName);
 
@@ -85,8 +91,11 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
       $mail->Subject = $subject;
       $mail->Body = $this->getFormattedBody($subject, $rawBody, $template);
 
-      $mail->send();
-      return true;
+      if (!$mail->send()) {
+        throw new GeneralException("Mailer Error: " . $mail->ErrorInfo);
+      } else {
+        return true;
+      }
     } catch (Exception $e) {
       throw new GeneralException("Mailer Error: " . $mail->ErrorInfo);
     }
@@ -193,6 +202,41 @@ class EmailProvider extends Core implements Interfaces\EmailProviderInterface
     ';
 
     $this->sendEmail($login, $this->translate('Your Hubleto account has been created!'), $body);
+  }
+
+  /**
+   * Sends an email with a 6-digit code which must be entered as the second step of signing in.
+   *
+   * @param string $login Email address of the user.
+   * @param string $name Full name of the user (may be empty).
+   * @param string $language Language of the user.
+   * @param string $code The code.
+   * @param int $validMinutes For how long the code is valid.
+   *
+   * @return void
+   *
+   */
+  public function sendSignInCodeEmail(string $login, string $name, string $language, string $code, int $validMinutes = 10): void
+  {
+    $name = trim($name);
+    $greetings = $name === ''
+      ? $this->translate('Hello from Hubleto!')
+      : $this->translate('Dear {{ name }},', ['name' => htmlspecialchars($name, ENT_QUOTES, 'UTF-8')])
+    ;
+
+    $body = $greetings . '<br><br>
+    ' . $this->translate('Use the code below to finish signing in to your account:') . '
+
+    <p style="text-align: center; font-size: 32px; font-weight: bold; letter-spacing: 8px; margin: 24px 0;">
+      ' . htmlspecialchars($code, ENT_QUOTES, 'UTF-8') . '
+    </p>
+
+    ' . $this->translate('Code validity: {{ minutes }} min. Do not share this code with anyone.', ['minutes' => $validMinutes]) . '<br><br>
+
+    ' . $this->translate('If you did not try to sign in, someone may know your password. Please change it as soon as possible.') . '
+    ';
+
+    $this->send($login, $this->translate('Your sign-in code | Hubleto'), $body);
   }
 
 }

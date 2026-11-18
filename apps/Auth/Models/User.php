@@ -98,6 +98,10 @@ class User extends UserModel implements UserModelInterface
     if (!$tokenModel->isTokenTypeRegistered(Token::TOKEN_TYPE_USER_REMEMBER_ME)) {
       $tokenModel->registerTokenType(Token::TOKEN_TYPE_USER_REMEMBER_ME);
     }
+
+    if (!$tokenModel->isTokenTypeRegistered(Token::TOKEN_TYPE_USER_SIGN_IN_CODE)) {
+      $tokenModel->registerTokenType(Token::TOKEN_TYPE_USER_SIGN_IN_CODE);
+    }
   }
 
   public function describeColumns(): array

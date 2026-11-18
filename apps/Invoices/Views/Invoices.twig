@@ -1,4 +1,4 @@
-{% if viewParams.filters.fInboundOutbound == '' %}
+{% if viewParams.recordId <= 0 and viewParams.filters.fInboundOutbound == '' %}
   <div class="flex gap-2 flex-wrap flex-col m-auto card mt-24">
     <div class="card-header">
       <h1 class="app-main-title">{{ translate('Invoices') }}</h1>

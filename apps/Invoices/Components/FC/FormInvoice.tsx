@@ -143,6 +143,7 @@ const TabDefault = (props: FormInvoiceProps) => {
   const ITEMS: any = useRecordField('ITEMS', []);
   const CURRENCY: any = useRecordField('CURRENCY', {});
   const currencySymbol = CURRENCY.symbol ?? '';
+  const currencyIsoCode = CURRENCY.code ?? '';
 
   if (form.id <= 0) {
     return <div className='flex flex-col gap-2 max-w-120 m-auto'>
@@ -340,12 +341,12 @@ const TabDefault = (props: FormInvoiceProps) => {
                             </td>
                             <td>
                               <div className={'text-nowrap badge text-base ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                                {globalThis.hubleto.numberFormat(item.price_excl_vat, 2, ',', ' ')} {currencySymbol}
+                                {globalThis.hubleto.formatCurrency(item.price_excl_vat, currencyIsoCode)}
                               </div>
                             </td>
                             <td>
                               <div className={'text-nowrap badge text-base ' + (item.price_excl_vat < 0 ? 'badge-red' : 'badge-green')}>
-                                {globalThis.hubleto.numberFormat(item.price_incl_vat, 2, ',', ' ')} {currencySymbol}
+                                {globalThis.hubleto.formatCurrency(item.price_incl_vat, currencyIsoCode)}
                               </div>
                             </td>
                           </tr>
@@ -463,17 +464,17 @@ const TabDefault = (props: FormInvoiceProps) => {
         <div className='gap-2 flex-1'>
           <div className='p-2 grow text-nowrap bg-slate-50 text-slate-800'>
             <div className='text-sm'>
-              <b>{globalThis.hubleto.numberFormat(totalExclVat, 2, ',', ' ')} {currencySymbol}</b>
+              <b>{globalThis.hubleto.formatCurrency(totalExclVat, currencyIsoCode)}</b>
               <span className='ml-2'>{T.translate('excl. VAT')}</span>
             </div>
             <div className='mt-2'>
               <span className='text-2xl badge badge-yellow'>
-                {globalThis.hubleto.numberFormat(totalInclVat, 2, ',', ' ')} {currencySymbol}
+                {globalThis.hubleto.formatCurrency(totalInclVat, currencyIsoCode)}
               </span>
               <span className='text-sm ml-2'>{T.translate('incl. VAT')}</span>
             </div>
             <div className='text-sm mt-2'>
-              <b>{globalThis.hubleto.numberFormat(totalPayments, 2, ',', ' ')} {currencySymbol}</b>
+              <b>{globalThis.hubleto.formatCurrency(totalPayments, currencyIsoCode)}</b>
               <span className='ml-2'>{T.translate('paid')}</span>
             </div>
           </div>

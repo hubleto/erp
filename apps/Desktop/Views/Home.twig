@@ -127,7 +127,7 @@
   function udpateSidebarBadgeNumbers() {
     $('.notification-badge').removeClass('loaded');
     $.getJSON(
-      window.ConfigEnv.projectUrl + '/desktop/api/update-sidebar-badge-numbers',
+      globalThis.config.projectUrl + '/desktop/api/update-sidebar-badge-numbers',
       {},
       (data) => {
         const sbn = data.sidebarBadgeNumbers;
@@ -144,5 +144,8 @@
       }
     );
   }
-  setTimeout(function() { udpateSidebarBadgeNumbers(); }, 300);
+  setTimeout(function() {
+    udpateSidebarBadgeNumbers();
+    globalThis.hubleto.reloadLocale();
+  }, 400);
 </script>

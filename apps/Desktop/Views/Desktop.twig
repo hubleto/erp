@@ -42,7 +42,7 @@
   <title>{{ user.DEFAULT_COMPANY.name }} | {{ config.appTitle ?? "Hubleto | Business Application Hub" }}</title>
 
   <script>
-    window.ConfigEnv = {
+    globalThis.config = {
       'rewriteBase': '{{ hubleto.env().rewriteBase }}',
       'url': '{{ hubleto.env().projectUrl }}',
       'projectUrl': '{{ hubleto.env().projectUrl }}',
@@ -52,17 +52,8 @@
       'isPremium': {% if isPremium %} true {% else %} false {% endif %},
       'subscriptionPlan': '{{ subscriptionPlan }}',
       'language': '{{ user.language ?: "en" }}',
-      'locale': {
-        'currencySymbol': '{{ hubleto.locale().getCurrencySymbol() }}',
-        'decimalsSeparator': '{{ hubleto.locale().getDecimalsSeparator() }}',
-        'thousandsSeparator': '{{ hubleto.locale().getThousandsSeparator() }}',
-        'dateShortFormat': '{{ hubleto.locale().getDateShortFormat() }}',
-        'dateLongFormat': '{{ hubleto.locale().getDateLongFormat() }}',
-        'datetimeFormat': '{{ hubleto.locale().getDatetimeFormat() }}',
-        'timeFormat': '{{ hubleto.locale().getTimeFormat() }}',
-      }
     }
-    {% if config.debugTranslations %} window.configEnv.debugTranslations = true; {% endif %}
+    {% if config.debugTranslations %} globalThis.config.debugTranslations = true; {% endif %}
   </script>
 
   <script src='{{ hubleto.env().assetsUrl }}/js/jquery-3.5.1.js'></script>
@@ -472,6 +463,10 @@
 
   <script>
 
+    document.addEventListener('DOMContentLoaded', function() {
+      globalThis.hubleto.init();
+    });
+
     (function () {
       const getDropdowns = () => Array.from(document.querySelectorAll('.btn-dropdown'));
 
@@ -539,7 +534,7 @@
       else sg.removeClass('collapsed');
 
       $.get(
-        window.ConfigEnv.projectUrl + '/desktop/api/set-sidebar-group-collapsed',
+        globalThis.config.projectUrl + '/desktop/api/set-sidebar-group-collapsed',
         { group: sgid, isCollapsed: sg.data('is-collapsed') }
       );
     }

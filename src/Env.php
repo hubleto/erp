@@ -8,6 +8,14 @@ namespace Hubleto\Erp;
 class Env extends \Hubleto\Framework\Services\Env
 {
 
+  public string $accountUid = '';
+
+  public function __construct()
+  {
+    parent::__construct();
+    $this->accountUid = $this->config()->getAsString('accountUid');
+  }
+
   /**
    * Checks whether this Hubleto installation can use premium features.
    *

@@ -43,6 +43,7 @@
 
   <script>
     globalThis.config = {
+      'accountUid': '{{ hubleto.env().accountUid }}',
       'rewriteBase': '{{ hubleto.env().rewriteBase }}',
       'url': '{{ hubleto.env().projectUrl }}',
       'projectUrl': '{{ hubleto.env().projectUrl }}',
@@ -57,17 +58,11 @@
   </script>
 
   <script src='{{ hubleto.env().assetsUrl }}/js/jquery-3.5.1.js'></script>
-  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/runtime.js'></script>
-  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/modules.js'></script>
-  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/react-ui.js'></script>
-  <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/main.js'></script>
-  {# <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/community-apps.js'></script> #}
-  {# {% if viewParams.hasEnterpriseAppsEnabled %} <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/enterprise-apps.js'></script> {% endif %}
-  {% if viewParams.hasExternalAppsEnabled %} <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/external-apps.js'></script> {% endif %}
-  {% if viewParams.hasCustomAppsEnabled %} <script defer src='{{ hubleto.env().assetsCompiledUrl }}/js/custom-apps.js'></script> {% endif %} #}
-  {% for url in viewParams.assetsUrls %}
-    <script defer src='{{ url }}'></script>
-  {% endfor %}
+  <script src='{{ hubleto.env().assetsCompiledUrl }}/js/runtime.js'></script>
+  <script src='{{ hubleto.env().assetsCompiledUrl }}/js/modules.js'></script>
+  <script src='{{ hubleto.env().assetsCompiledUrl }}/js/react-ui.js'></script>
+  <script src='{{ hubleto.env().assetsCompiledUrl }}/js/main.js'></script>
+  {% for url in viewParams.assetsUrls %} <script defer src='{{ url }}'></script> {% endfor %}
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsCompiledUrl }}/css/main.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsUrl }}/css/fontawesome-6.6.css">
   <link rel="stylesheet" type="text/css" href="{{ hubleto.env().assetsThemesUrl }}/{{ viewParams.uiTheme }}.css">
@@ -540,7 +535,7 @@
     }
 
     function applyTheme() {
-      if (localStorage.theme == "dark") {
+      if (localStorage.getItem(globalThis.hubleto.accountUid + "_theme") == "dark") {
         $('*').addClass('dark');
         $('#theme-toggle-btn').find('.icon i').removeClass('fa-sun').addClass('fa-moon');
       } else {
@@ -550,7 +545,8 @@
     }
 
     function toggleTheme() {
-      localStorage.theme = (localStorage.theme == "dark" ? "light" : "dark");
+      const current = localStorage.getItem(globalThis.hubleto.accountUid + "_theme");
+      localStorage.setItem(globalThis.hubleto.accountUid + "_theme", current == "dark" ? "light" : "dark");
       applyTheme();
     }
 

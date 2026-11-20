@@ -55,6 +55,7 @@
       'language': '{{ user.language ?: "en" }}',
     }
     {% if config.debugTranslations %} globalThis.config.debugTranslations = true; {% endif %}
+    globalThis.dictionary = JSON.parse(atob('{{ viewParams.dictionaryString }}'));
   </script>
 
   <script src='{{ hubleto.env().assetsUrl }}/js/jquery-3.5.1.js'></script>
@@ -553,8 +554,6 @@
     applyTheme();
 
   </script>
-
-  <script> globalThis.dictionary = JSON.parse(atob('{{ viewParams.dictionaryString }}')); </script>
 
 </body>
 

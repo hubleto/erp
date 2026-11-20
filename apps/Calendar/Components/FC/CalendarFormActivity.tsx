@@ -284,6 +284,7 @@ const CalendarFormActivity = (props: FormActivityProps) => {
       <Input field='id_owner' renderOnlyInputField />
       <Input field='all_day' renderOnlyInputField customInputProps={{yesText: T.translate('All-day')}}></Input>
       <Input field='completed' renderOnlyInputField customInputProps={{yesText: T.translate('Completed')}}></Input>
+      <Input field='for_everyone' renderOnlyInputField customInputProps={{yesText: T.translate('For everyone')}}></Input>
     </div>}
     renderContent={() => <Content {...props}/>}
     onClose={() => { 

@@ -43,16 +43,19 @@ class Activity extends \Hubleto\Erp\Model
       'meeting_minutes' => (new Text($this, $this->translate('Short meeting minutes')))->setReactComponent('InputWysiwyg'),
       'id_owner' => (new Lookup($this, $this->translate('Owner'), User::class))->setReactComponent('InputUserSelect')->setDefaultValue($this->authProvider()->getUserId()),
       'attendees' => (new Json($this, $this->translate('Attendees')))->setReactComponent('InputMultipleUsers'),
+      'for_everyone' => (new Boolean($this, $this->translate('For everyone')))->setDefaultValue(0),
     ]);
   }
 
-  // Attendees may read the activity; whether they may change it follows "recordsModify".
+  // Attendees may read the activity, and everyone may read an activity for everyone.
+  // Whether they may change it follows "recordsModify".
   public function getPermissions(array $record): array
   {
     // The permissions are [create, read, update, delete].
     $permissions = parent::getPermissions($record);
     $idUser = (int) $this->authProvider()->getUserId();
-    if ($this->isUserAttendee($record, $idUser)) {
+    $isForEveryone = (bool) ($record['for_everyone'] ?? false);
+    if ($isForEveryone || $this->isUserAttendee($record, $idUser)) {
       $permissions[1] = true;
     }
     return $permissions;

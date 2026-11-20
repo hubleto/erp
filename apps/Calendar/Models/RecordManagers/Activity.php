@@ -24,8 +24,8 @@ class Activity extends \Hubleto\Erp\RecordManager
 
   public function prepareReadQuery(mixed $query = null, int $level = 0, array|null $includeRelations = null): mixed
   {
-    // The parent would limit the activities to the owned ones. It is turned off here,
-    // because the limit below also lets the attendees read the activity.
+    // The parent would limit the activities to the owned ones. It is turned off here, because
+    // the limit below also lets the attendees read the activity, and everyone an activity for everyone.
     $limitToActiveUser = $this->filterByActiveUser;
     $this->filterByActiveUser = false;
     try {
@@ -38,20 +38,21 @@ class Activity extends \Hubleto\Erp\RecordManager
     $isActiveUserLimited = $this->isActiveUserLimitedToOwnManagedAndTeamRecords() || $this->isActiveUserLimitedToOwnRecords();
     if ($limitToActiveUser && $isActiveUserLimited) {
       $authProvider = \Hubleto\Framework\Loader::getGlobalApp()->authProvider();
-      $query = $this->whereUserOwnsOrAttends($query, (int) $authProvider->getUserId());
+      $query = $this->whereActivityIsForUser($query, (int) $authProvider->getUserId());
     }
 
     return $query->orderBy('date_start')->orderBy('time_start');
   }
 
-  // Activities the user owns or attends.
-  public function whereUserOwnsOrAttends(mixed $query, int $idUser): mixed
+  // Activities the user owns or attends, and activities for everyone.
+  public function whereActivityIsForUser(mixed $query, int $idUser): mixed
   {
     return $query->where(function ($activitiesOfUser) use ($idUser) {
       $activitiesOfUser->where($this->table . '.id_owner', $idUser);
       $activitiesOfUser->orWhere(function ($attendedActivities) use ($idUser) {
         $this->whereUserIdListContains($attendedActivities, 'attendees', $idUser);
       });
+      $activitiesOfUser->orWhere($this->table . '.for_everyone', 1);
     });
   }
 

@@ -26,7 +26,8 @@
         "Long meeting minutes (link to external document)": "Podrobná zápisnica (odkaz na externý dokument)",
         "Short meeting minutes": "Stručná zápisnica",
         "Owner": "Vlastník",
-        "Attendees": "Účastníci"
+        "Attendees": "Účastníci",
+        "For everyone": "Pre všetkých"
     },
     "Controllers\\Boards\\Reminders": {
         "Open event details": "Zobraziť podrobnosti",
@@ -124,7 +125,8 @@
         "hours": "hodín",
         "minutes": "minút",
         "Search attendees": "Hľadať účastníkov",
-        "No attendees": "Bez účastníkov"
+        "No attendees": "Bez účastníkov",
+        "For everyone": "Pre všetkých"
     },
     "Components\\FormSharedCalendar": {
         "Shared calendar": "Zdieľaný kalendár",

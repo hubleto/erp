@@ -27,6 +27,7 @@ const TabDefault = (props: FormOrderProps) => {
   const [selectParentDeal, setSelectParentDeal] = useState(false);
 
   const purchaseSales: number = useRecordField('purchase_sales', 0);
+  const partnerField = purchaseSales == 1 ? 'id_supplier' : 'id_customer';
   const DEALS: any = useRecordField('DEALS', []);
   const ACTIVITIES: any = useRecordField('ACTIVITIES', []);
 
@@ -56,7 +57,7 @@ const TabDefault = (props: FormOrderProps) => {
     </div>
     <div className='flex-dyn'>
       <div className='grow'>
-        <Input field={purchaseSales == 1 ? 'id_supplier' : 'id_customer'} />
+        <Input key={partnerField} field={partnerField} />
         <Input title={T.translate('Deal')}>
           {selectParentDeal ? <LookupInput
             model='Hubleto/App/Community/Deals/Models/Deal'

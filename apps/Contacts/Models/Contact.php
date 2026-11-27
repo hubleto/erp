@@ -83,7 +83,8 @@ class Contact extends \Hubleto\Erp\Model
     $description->ui['addButtonText'] = $this->translate('Add contact');
 
     if ($idCustomer > 0) {
-      $description->hide(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
+      $description->show(['header']);
+      $description->hide(['fulltextSearch', 'columnSearch', 'moreActionsButton', 'footer']);
     } else {
       $description->show(['header', 'fulltextSearch', 'columnSearch', 'moreActionsButton']);
       $description->hide(['footer']);

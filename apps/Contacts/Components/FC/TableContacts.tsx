@@ -22,6 +22,10 @@ const TableContacts = (props: TableContactsProps) => {
     baseUrlSlug='contacts'
     formModalProps={{type: 'right wide'}}
     formDefaultValues={{id_customer: props.idCustomer}}
+    renderHeaderRight={(table: TableMeta) => {
+      if (props.idCustomer > 0) return <></>;
+      return table.renderDefaultHeaderRight();
+    }}
     // getRowClassName={(table: TableMeta, rowData: any): string => { return table.getDefaultRowClassName(rowData); }}
     renderCell={(table: TableMeta, columnName: string, column: any, data: any, options: any) => {
       if (columnName == "virt_tags") {
